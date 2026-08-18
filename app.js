@@ -85,7 +85,7 @@ function renderTeamSelector() {
     btn.className = `team-pill-btn ${key === state.currentTeamId ? 'active' : ''}`;
     btn.dataset.teamid = key;
     btn.innerHTML = `
-      <span>${team.emblem}</span>
+      <img src="${team.logoUrl}" alt="${team.shortName}" class="team-pill-logo-img">
       <span>${team.shortName}</span>
       <span class="team-pill-rank">${team.apRank}</span>
     `;
@@ -102,11 +102,11 @@ function selectTeam(teamId) {
   // Update Body Theme Class
   document.body.className = team.themeClass || `theme-${teamId}`;
 
-  // Update Navigation & Hero
-  document.getElementById('navLogoBadge').innerText = team.emblem;
-  document.getElementById('heroEmblem').innerText = team.emblem;
+  // Update Navigation & Hero with Official Logos
+  document.getElementById('navLogoBadge').innerHTML = `<img src="${team.logoUrl}" alt="${team.name}" class="nav-logo-img">`;
+  document.getElementById('heroEmblem').innerHTML = `<img src="${team.logoUrl}" alt="${team.name}" class="hero-logo-img">`;
   document.getElementById('heroTeamName').innerText = team.name;
-  document.getElementById('footerEmblem').innerText = team.emblem;
+  document.getElementById('footerEmblem').innerHTML = `<img src="${team.logoUrl}" alt="${team.name}" style="width: 28px; height: 28px; object-fit: contain;">`;
 
   document.getElementById('heroRank').innerText = `${team.apRank} POLL`;
   document.getElementById('heroCoach').innerText = `HC: ${team.headCoach}`;
@@ -275,8 +275,8 @@ function renderSchedule() {
 
       <div class="matchup-row">
         <div class="team-pill">
-          <div class="team-logo-circle" style="background: ${team.colors.primary}; color: ${team.colors.secondary};">
-            ${team.emblem}
+          <div class="team-logo-circle" style="background: ${team.colors.primary}; padding: 3px;">
+            <img src="${team.logoUrl}" alt="${team.abbr}" class="card-team-logo">
           </div>
           <div class="team-text">
             <span class="team-abbr">${team.abbr}</span>
@@ -298,8 +298,8 @@ function renderSchedule() {
             <span class="team-abbr">${game.oppAbbr}</span>
             <span class="team-ranking-sub">${game.oppRank}</span>
           </div>
-          <div class="team-logo-circle" style="background: ${game.oppColor}; color: ${game.oppSecondary};">
-            ${game.oppBadge || game.oppAbbr.slice(0, 2)}
+          <div class="team-logo-circle" style="background: ${game.oppColor}; padding: 3px;">
+            <img src="${game.oppLogoUrl || ESPN_LOGOS[game.oppAbbr]}" alt="${game.oppAbbr}" class="card-team-logo">
           </div>
         </div>
       </div>
@@ -460,8 +460,8 @@ function openSimModal(game) {
   // Scoreboard
   document.getElementById('modalScoreboard').innerHTML = `
     <div style="display: flex; align-items: center; gap: 0.75rem;">
-      <div class="team-logo-circle" style="width: 44px; height: 44px; background: ${team.colors.primary}; color: ${team.colors.secondary}; font-size: 1.4rem;">
-        ${team.emblem}
+      <div class="team-logo-circle" style="width: 44px; height: 44px; background: ${team.colors.primary}; padding: 4px;">
+        <img src="${team.logoUrl}" alt="${team.shortName}" class="modal-team-logo">
       </div>
       <div>
         <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${team.shortName}</div>
@@ -485,8 +485,8 @@ function openSimModal(game) {
         <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${game.oppAbbr}</div>
         <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${game.oppRank}</div>
       </div>
-      <div class="team-logo-circle" style="width: 44px; height: 44px; background: ${game.oppColor}; color: ${game.oppSecondary}; font-size: 1.4rem;">
-        ${game.oppBadge || game.oppAbbr.slice(0, 2)}
+      <div class="team-logo-circle" style="width: 44px; height: 44px; background: ${game.oppColor}; padding: 4px;">
+        <img src="${game.oppLogoUrl || ESPN_LOGOS[game.oppAbbr]}" alt="${game.oppAbbr}" class="modal-team-logo">
       </div>
     </div>
   `;

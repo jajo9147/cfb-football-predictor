@@ -270,6 +270,41 @@ body {
   font-size: 1.4rem;
   box-shadow: 0 0 16px var(--color-brand-glow);
   transition: var(--transition-smooth);
+  overflow: hidden;
+  padding: 4px;
+}
+
+.nav-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.hero-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+}
+
+.team-pill-logo-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.card-team-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.modal-team-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.7));
 }
 
 .brand-text {
@@ -460,16 +495,17 @@ body {
 }
 
 .team-emblem-large {
-  width: 72px;
-  height: 72px;
+  width: 76px;
+  height: 76px;
   border-radius: var(--radius-md);
   background: var(--color-brand-primary);
   border: 2px solid var(--color-brand-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  padding: 8px;
   box-shadow: 0 0 24px var(--color-brand-glow);
+  flex-shrink: 0;
 }
 
 .team-details h1 {
