@@ -1588,8 +1588,8 @@ var TEAMS_DATABASE = {
     "headCoach": "Kalen DeBoer",
     "defensiveCoordinator": "Kane Wommack",
     "offensiveCoordinator": "Nick Sheridan",
-    "starPlayer": "Ryan Williams (WR)",
-    "secondaryStar": "AK Dear (RB) / John Cooper (QB)",
+    "starPlayer": "Ryan Williams (WR) / Keelon Russell (QB)",
+    "secondaryStar": "Austin Mack (QB) / AK Dear (RB)",
     "stadium": "Bryant-Denny Stadium",
     "stadiumCity": "Tuscaloosa, AL",
     "stadiumCapacity": "100,077",
@@ -1605,7 +1605,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 25.4,
     "playoffContenderRank": 13,
     "sliderLabels": {
-      "qb": "John Cooper QB Execution",
+      "qb": "Keelon Russell QB Execution",
       "ground": "AK Dear Explosive Ground Attack",
       "defense": "Kane Wommack Swarm Defense",
       "turnover": "Turnover Margin Luck",
@@ -1945,7 +1945,7 @@ var TEAMS_DATABASE = {
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png",
     "badgeText": "BAMA",
-    "confirmedStarterQb": "John Cooper"
+    "confirmedStarterQb": "Keelon Russell"
   },
   "oregon": {
     "id": "oregon",
