@@ -34,14 +34,14 @@
     if ('caches' in window) {
       caches.keys().then(keys => {
         keys.forEach(key => {
-          if (key !== 'gridiron-oracle-v2026.11') {
+          if (key !== 'gridiron-oracle-v2026.12') {
             caches.delete(key);
           }
         });
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=2026.11">
+  <link rel="stylesheet" href="styles.css?v=2026.12">
 </head>
 <body class="theme-texas">
 
@@ -373,7 +373,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?v=2026.11"></script>
-  <script src="app.js?v=2026.11"></script>
+  <script src="data/teams.js?v=2026.12"></script>
+  <script src="app.js?v=2026.12"></script>
 </body>
 </html>

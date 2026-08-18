@@ -142,37 +142,48 @@ function selectTeam(teamId) {
 // SIMULATION ENGINE (10,000 MONTE CARLO DRIVES)
 // ==========================================================================
 
-function calculateAdjustedMatchup(game) {
-  const team = TEAMS_DATABASE[state.currentTeamId];
-  
-  // Check if Game has Custom Single-Game Overrides
-  const hasCustomGame = state.gameSliders[game.id] && state.gameSliders[game.id].isCustom;
-  const effectiveSliders = hasCustomGame ? state.gameSliders[game.id] : state.globalSliders;
+function findCounterpartMatchup(teamId, game) {
+  const keys = Object.keys(TEAMS_DATABASE);
+  let oppTeamEntry = null;
+  for (let i = 0; i < keys.length; i++) {
+    const k = keys[i];
+    const t = TEAMS_DATABASE[k];
+    if (t.abbr === game.oppAbbr || k === (game.oppAbbr || '').toLowerCase()) {
+      oppTeamEntry = [k, t];
+      break;
+    }
+  }
+  if (!oppTeamEntry) return null;
 
-  const qbVal = effectiveSliders.qbRating || 0;
-  const groundVal = effectiveSliders.groundAttack || 0;
-  const defVal = effectiveSliders.defenseHavoc || 0;
-  const toVal = effectiveSliders.turnoverLuck || 0;
-  const crowdVal = effectiveSliders.crowdNoise || 0;
+  const [oppTeamId, oppTeam] = oppTeamEntry;
+  const currentTeam = TEAMS_DATABASE[teamId];
+  if (!currentTeam || !oppTeam.schedule) return null;
+
+  const oppGame = oppTeam.schedule.find(g => g.oppAbbr === currentTeam.abbr);
+  if (!oppGame) return null;
+  return { oppTeamId, oppTeam, oppGame };
+}
+
+function calculateRawMatchup(game, teamId, sliders, userPick) {
+  const qbVal = sliders.qbRating || 0;
+  const groundVal = sliders.groundAttack || 0;
+  const defVal = sliders.defenseHavoc || 0;
+  const toVal = sliders.turnoverLuck || 0;
+  const crowdVal = sliders.crowdNoise || 0;
 
   // Realistic Physical Point Impacts
-  // 1. QB Impact (Highest individual leverage: +/-12 pts team, +/-2 opp)
   const qbTeamPts = qbVal * 0.24;
   const qbOppPts = -qbVal * 0.04;
 
-  // 2. Ground Attack (Clock control & physical drive sustaining: +/-8 team pts, -/+4 opp pts)
   const groundTeamPts = groundVal * 0.16;
   const groundOppPts = -groundVal * 0.08;
 
-  // 3. Defense Havoc (Sacks/stops vs blown coverages: +/-13 opp pts, +/-2 team short fields)
   const defTeamPts = defVal * 0.04;
   const defOppPts = -defVal * 0.26;
 
-  // 4. Turnover Margin (Each TO is ~4.5 pts; +/-3 TOs = +/-9 team pts, -/+9 opp pts)
   const toTeamPts = toVal * 0.18;
   const toOppPts = -toVal * 0.18;
 
-  // 5. Crowd & Environment (Home crowd gives false starts; Road composure avoids false starts/picks)
   let crowdTeamPts = 0;
   let crowdOppPts = 0;
   if (game.isHome) {
@@ -183,19 +194,14 @@ function calculateAdjustedMatchup(game) {
     crowdOppPts = -crowdVal * 0.06;
   }
 
-  // Calculate Net Adjusted Scores
   let adjUtScore = Math.max(3, Math.round(game.projScoreUt + qbTeamPts + groundTeamPts + defTeamPts + toTeamPts + crowdTeamPts));
   let adjOppScore = Math.max(0, Math.round(game.projScoreOpp + qbOppPts + groundOppPts + defOppPts + toOppPts + crowdOppPts));
 
-  // Gaussian Logistic Win Probability based on adjusted point differential
   const pointDiff = adjUtScore - adjOppScore;
   let adjWinProb = 1 / (1 + Math.pow(10, -pointDiff / 13.5)) * 100;
   adjWinProb = Math.min(99.9, Math.max(0.1, Math.round(adjWinProb * 10) / 10));
 
-  // If user has a manual pick toggle
-  const userPick = state.userPicks[game.id];
   let isWin = userPick ? (userPick === 'W') : (adjUtScore > adjOppScore);
-
   if (userPick === 'W' && adjUtScore <= adjOppScore) adjUtScore = adjOppScore + 3;
   if (userPick === 'L' && adjUtScore >= adjOppScore) adjOppScore = adjUtScore + 3;
 
@@ -203,8 +209,68 @@ function calculateAdjustedMatchup(game) {
     adjWinProb: Math.round(adjWinProb * 10) / 10,
     projUt: adjUtScore,
     projOpp: adjOppScore,
-    isWin,
-    isCustomTuned: hasCustomGame
+    isWin
+  };
+}
+
+function calculateAdjustedMatchup(game, targetTeamId) {
+  const teamId = targetTeamId || state.currentTeamId;
+  const team = TEAMS_DATABASE[teamId];
+  if (!team) return { adjWinProb: 50, projUt: 24, projOpp: 21, isWin: true, isCustomTuned: false, syncedFrom: null };
+
+  // 1. Direct custom tuning or manual pick on this game
+  const directSliders = state.gameSliders[game.id];
+  const directPick = state.userPicks[game.id];
+
+  if (directSliders && directSliders.isCustom) {
+    const raw = calculateRawMatchup(game, teamId, directSliders, directPick);
+    return {
+      ...raw,
+      isCustomTuned: true,
+      syncedFrom: null
+    };
+  }
+
+  if (directPick) {
+    const raw = calculateRawMatchup(game, teamId, state.globalSliders, directPick);
+    return {
+      ...raw,
+      isCustomTuned: true,
+      syncedFrom: null
+    };
+  }
+
+  // 2. Check counterpart game on opponent's side for cross-team synchronization
+  const counterpart = findCounterpartMatchup(teamId, game);
+  if (counterpart) {
+    const oppSliders = state.gameSliders[counterpart.oppGame.id];
+    const oppPick = state.userPicks[counterpart.oppGame.id];
+
+    if ((oppSliders && oppSliders.isCustom) || oppPick) {
+      const oppEffectiveSliders = (oppSliders && oppSliders.isCustom) ? oppSliders : state.globalSliders;
+      const oppRaw = calculateRawMatchup(counterpart.oppGame, counterpart.oppTeamId, oppEffectiveSliders, oppPick);
+
+      // Invert outcome and scores for current team
+      const invertedWin = !oppRaw.isWin;
+      const invertedProb = Math.min(99.9, Math.max(0.1, Math.round((100 - oppRaw.adjWinProb) * 10) / 10));
+
+      return {
+        adjWinProb: invertedProb,
+        projUt: oppRaw.projOpp,
+        projOpp: oppRaw.projUt,
+        isWin: invertedWin,
+        isCustomTuned: true,
+        syncedFrom: counterpart.oppTeam.shortName || counterpart.oppTeam.name
+      };
+    }
+  }
+
+  // 3. Fallback to global sliders
+  const raw = calculateRawMatchup(game, teamId, state.globalSliders, null);
+  return {
+    ...raw,
+    isCustomTuned: false,
+    syncedFrom: null
   };
 }
 
@@ -307,11 +373,22 @@ function renderSchedule() {
 
     const userPick = state.userPicks[game.id];
     const isWin = sim.isWin;
+    // Default the Pick to Win or Loss based off the projected score
+    const effectivePick = userPick || (isWin ? 'W' : 'L');
+
+    let badgeHtml = `<span>${game.isHome ? 'HOME' : 'AWAY'}</span>`;
+    if (sim.isCustomTuned) {
+      if (sim.syncedFrom) {
+        badgeHtml = `<span class="custom-tuned-badge"><i class="fa-solid fa-link"></i> SYNCED: ${sim.syncedFrom.toUpperCase()}</span>`;
+      } else {
+        badgeHtml = `<span class="custom-tuned-badge"><i class="fa-solid fa-bullseye"></i> CUSTOM TUNED</span>`;
+      }
+    }
 
     card.innerHTML = `
       <div class="card-top">
         <span>${game.week} • ${game.date}</span>
-        ${sim.isCustomTuned ? `<span class="custom-tuned-badge"><i class="fa-solid fa-bullseye"></i> CUSTOM TUNED</span>` : `<span>${game.isHome ? 'HOME' : 'AWAY'}</span>`}
+        ${badgeHtml}
       </div>
 
       <div class="matchup-row">
@@ -358,8 +435,8 @@ function renderSchedule() {
       <div class="card-actions">
         <div class="wl-toggle-wrap">
           <span>PICK:</span>
-          <button class="wl-toggle-btn ${userPick === 'W' ? 'win' : ''}" data-pick="W" data-gameid="${game.id}">W</button>
-          <button class="wl-toggle-btn ${userPick === 'L' ? 'loss' : ''}" data-pick="L" data-gameid="${game.id}">L</button>
+          <button class="wl-toggle-btn ${effectivePick === 'W' ? 'win' : ''}" data-pick="W" data-gameid="${game.id}">W</button>
+          <button class="wl-toggle-btn ${effectivePick === 'L' ? 'loss' : ''}" data-pick="L" data-gameid="${game.id}">L</button>
         </div>
         <button class="sim-btn-sm" data-simid="${game.id}">
           <i class="fa-solid fa-play"></i>
@@ -374,7 +451,24 @@ function renderSchedule() {
         e.stopPropagation();
         const pickType = btn.dataset.pick;
         const gId = btn.dataset.gameid;
-        state.userPicks[gId] = (state.userPicks[gId] === pickType) ? null : pickType;
+
+        // Toggle user pick
+        if (state.userPicks[gId] === pickType) {
+          delete state.userPicks[gId];
+        } else {
+          state.userPicks[gId] = pickType;
+        }
+
+        // Cross-sync counterpart pick if counterpart exists
+        const counterpart = findCounterpartMatchup(state.currentTeamId, game);
+        if (counterpart) {
+          if (state.userPicks[gId]) {
+            state.userPicks[counterpart.oppGame.id] = (state.userPicks[gId] === 'W') ? 'L' : 'W';
+          } else {
+            delete state.userPicks[counterpart.oppGame.id];
+          }
+        }
+
         recalculateSeason();
       });
     });
@@ -755,9 +849,19 @@ function initModalActions() {
   // Reset Game Tuning Button
   document.getElementById('resetGameTuningBtn').addEventListener('click', () => {
     if (!state.activeModalGame) return;
-    delete state.gameSliders[state.activeModalGame.id];
+    const game = state.activeModalGame;
+    delete state.gameSliders[game.id];
+    delete state.userPicks[game.id];
+
+    // Clear counterpart game tuning as well
+    const counterpart = findCounterpartMatchup(state.currentTeamId, game);
+    if (counterpart) {
+      delete state.gameSliders[counterpart.oppGame.id];
+      delete state.userPicks[counterpart.oppGame.id];
+    }
+
     recalculateSeason();
-    openSimModal(state.activeModalGame);
+    openSimModal(game);
   });
 
   // Game Presets Listeners
