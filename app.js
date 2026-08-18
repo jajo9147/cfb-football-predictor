@@ -1763,6 +1763,24 @@ function initMonteCarloEngine() {
       document.getElementById('monteCarloModal').classList.remove('open');
     });
   }
+
+  const mcModal = document.getElementById('monteCarloModal');
+  if (mcModal) {
+    mcModal.addEventListener('click', (e) => {
+      if (e.target === mcModal) {
+        mcModal.classList.remove('open');
+      }
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const mcModal = document.getElementById('monteCarloModal');
+      if (mcModal && mcModal.classList.contains('open')) {
+        mcModal.classList.remove('open');
+      }
+    }
+  });
 }
 
 

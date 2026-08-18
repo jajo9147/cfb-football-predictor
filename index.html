@@ -34,14 +34,14 @@
     if ('caches' in window) {
       caches.keys().then(keys => {
         keys.forEach(key => {
-          if (key !== 'gridiron-oracle-v2026.20') {
+          if (key !== 'gridiron-oracle-v2026.21') {
             caches.delete(key);
           }
         });
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=2026.20">
+  <link rel="stylesheet" href="styles.css?v=2026.21">
 </head>
 <body class="theme-texas">
 
@@ -336,6 +336,8 @@
         </button>
       </div>
     </div>
+  </div>
+
   <!-- 10,000 MONTE CARLO SEASON SIMULATION MODAL -->
   <div class="modal-backdrop" id="monteCarloModal">
     <div class="modal-dialog monte-carlo-modal-card">
@@ -446,7 +448,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?v=2026.20"></script>
-  <script src="app.js?v=2026.20"></script>
+  <script src="data/teams.js?v=2026.21"></script>
+  <script src="app.js?v=2026.21"></script>
 </body>
 </html>
