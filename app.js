@@ -72,12 +72,20 @@ function initPwaServiceWorker() {
 // TEAM SWITCHING & THEME INJECTION
 // ==========================================================================
 
+function getNumericRank(team) {
+  if (team.playoffContenderRank) return team.playoffContenderRank;
+  const match = (team.apRank || '').match(/\d+/);
+  return match ? parseInt(match[0], 10) : 99;
+}
+
 function renderTeamSelector() {
   const track = document.getElementById('teamSelectorTrack');
   if (!track) return;
 
   track.innerHTML = '';
-  const teamKeys = Object.keys(TEAMS_DATABASE);
+  const teamKeys = Object.keys(TEAMS_DATABASE).sort((a, b) => {
+    return getNumericRank(TEAMS_DATABASE[a]) - getNumericRank(TEAMS_DATABASE[b]);
+  });
 
   teamKeys.forEach(key => {
     const team = TEAMS_DATABASE[key];
