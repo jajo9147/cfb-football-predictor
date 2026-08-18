@@ -858,7 +858,15 @@ function initModalSubTabs() {
       tab.classList.add('active');
       const targetPane = tab.dataset.subtab;
       const pane = document.getElementById(`pane-${targetPane}`);
-      if (pane) pane.classList.add('active');
+      if (pane) {
+        pane.classList.add('active');
+        pane.scrollTop = 0;
+      }
+
+      const modalDialog = document.querySelector('#simModal .modal-dialog');
+      if (modalDialog) {
+        modalDialog.scrollTop = 0;
+      }
 
       const modalFooter = document.querySelector('#simModal .modal-footer');
       if (modalFooter) {

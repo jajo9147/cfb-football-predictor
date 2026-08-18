@@ -1306,24 +1306,29 @@ body {
 }
 
 .modal-sub-tabs {
-  display: flex;
-  background: rgba(0, 0, 0, 0.45);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: rgba(14, 18, 28, 0.96);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   padding: 0.35rem;
-  overflow-x: auto;
   gap: 0.35rem;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .sub-tab {
-  flex: 1;
   background: transparent;
   border: 1px solid transparent;
   color: var(--color-text-muted);
   font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 700;
-  padding: 0.55rem 0.85rem;
+  padding: 0.55rem 0.65rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
   display: flex;
@@ -1332,6 +1337,7 @@ body {
   gap: 0.4rem;
   white-space: nowrap;
   transition: var(--transition-fast);
+  min-width: 0;
 }
 
 .sub-tab:hover {
@@ -1354,6 +1360,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  max-height: 52vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 0.25rem;
 }
 
 /* Custom Game Tuning Panel inside Modal */
@@ -2133,11 +2143,12 @@ body {
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 0.25rem;
     padding: 0.25rem;
-    position: sticky;
-    top: -1rem;
-    z-index: 25;
-    background: rgba(10, 13, 20, 0.98);
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 30;
+    background: rgba(10, 13, 20, 0.98) !important;
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--color-border);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
   }
@@ -2164,6 +2175,13 @@ body {
     display: block;
     width: 100%;
     font-weight: 800;
+  }
+
+  .tab-pane.active {
+    max-height: 50vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 0.2rem;
   }
 }
 
@@ -2214,6 +2232,7 @@ body {
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 0.2rem;
     padding: 0.2rem;
+    top: 0 !important;
   }
 
   .sub-tab {
@@ -2227,6 +2246,10 @@ body {
   .sub-tab span {
     font-size: 0.56rem;
     letter-spacing: -0.2px;
+  }
+
+  .tab-pane.active {
+    max-height: 48vh !important;
   }
 }
 
