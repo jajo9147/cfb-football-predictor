@@ -1869,9 +1869,9 @@ body {
 
 .footer {
   border-top: 1px solid var(--color-border);
-  background: rgba(0, 0, 0, 0.6);
-  padding: 2rem 0;
-  margin-top: 3rem;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 2.5rem 1rem 4rem 1rem;
+  margin-top: 3.5rem;
   text-align: center;
   position: relative;
   z-index: 10;
@@ -1898,6 +1898,43 @@ body {
   color: var(--color-text-dim);
   max-width: 600px;
 }
+
+.footer-creator-badge {
+  margin-top: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.footer-creator-badge a.linkedin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #0077B5;
+  color: #FFFFFF !important;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 119, 181, 0.45);
+  transition: all 0.2s ease;
+}
+
+.footer-creator-badge a.linkedin-btn:hover {
+  background: #0088d1;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 119, 181, 0.6);
+}
+
 
 /* ==========================================================================
    MOBILE RESPONSIVENESS & TOUCH OPTIMIZATIONS

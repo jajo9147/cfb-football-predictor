@@ -34,14 +34,14 @@
     if ('caches' in window) {
       caches.keys().then(keys => {
         keys.forEach(key => {
-          if (key !== 'gridiron-oracle-v2026.24') {
+          if (key !== 'gridiron-oracle-v2026.50') {
             caches.delete(key);
           }
         });
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=2026.45">
+  <link rel="stylesheet" href="styles.css?v=2026.50">
 </head>
 <body class="theme-texas">
 
@@ -554,12 +554,21 @@
         <span>GRIDIRON ORACLE • COLLEGE FOOTBALL AI PREDICTOR</span>
       </div>
       <p class="footer-text">10,000 Monte Carlo drive-by-drive engine, real-time AP Poll telemetry, single-game AI scenario tuning, and 12-team CFP Playoff simulator.</p>
-      <p class="footer-text" style="margin-top: 0.5rem; font-size: 0.75rem; opacity: 0.75;">Built & Owned by <a href="https://www.linkedin.com/in/jake-johnson-/" target="_blank" rel="noopener noreferrer" style="color: var(--color-brand-accent); text-decoration: none; font-weight: 700; border-bottom: 1px dashed var(--color-brand-accent);"><i class="fa-brands fa-linkedin" style="margin-right: 4px;"></i>Jake Johnson</a> • © 2026 Gridiron Oracle</p>
+      
+      <div class="footer-creator-badge">
+        <span style="font-size: 0.85rem; color: #E2E8F0; font-weight: 500;">Architect & Owner:</span>
+        <a href="https://www.linkedin.com/in/jake-johnson-/" target="_blank" rel="noopener noreferrer" class="linkedin-btn" title="View Jake Johnson on LinkedIn">
+          <i class="fa-brands fa-linkedin" style="font-size: 1.05rem;"></i>
+          <span>Jake Johnson</span>
+          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.85; margin-left: 2px;"></i>
+        </a>
+        <span style="font-size: 0.8rem; color: #94A3B8;">• © 2026 Gridiron Oracle</span>
+      </div>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?v=2026.45"></script>
-  <script src="app.js?v=2026.45"></script>
+  <script src="data/teams.js?v=2026.50"></script>
+  <script src="app.js?v=2026.50"></script>
 </body>
 </html>
