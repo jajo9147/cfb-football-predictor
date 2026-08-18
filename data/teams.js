@@ -460,7 +460,7 @@ var TEAMS_DATABASE = {
     "conference": "Big Ten",
     "apRank": "#16 AP",
     "apPoints": "718 PTS",
-    "headCoach": "Sherrone Moore",
+    "headCoach": "Kyle Whittingham",
     "starPlayer": "Bryce Underwood (QB)",
     "secondaryStar": "Jordan Marshall (RB) / Derrick Moore (DE)",
     "stadium": "Michigan Stadium (The Big House)",
@@ -478,9 +478,9 @@ var TEAMS_DATABASE = {
     "baseSpRating": 22.8,
     "playoffContenderRank": 16,
     "sliderLabels": {
-      "qb": "Bryce Underwood Dual-Threat Form",
+      "qb": "Bryce Underwood Dual-Threat Playmaking",
       "ground": "Jordan Marshall Smashmouth Ground Game",
-      "defense": "Wink Martindale Pressure Defense",
+      "defense": "Whittingham / Martindale Physical D",
       "turnover": "Turnover Margin Luck",
       "crowd": "The Big House 110k Maize Wall"
     },
@@ -2310,7 +2310,7 @@ var TEAMS_DATABASE = {
     "conference": "Big Ten",
     "apRank": "#18 AP",
     "apPoints": "482 PTS",
-    "headCoach": "James Franklin",
+    "headCoach": "Matt Campbell",
     "starPlayer": "Nicholas Singleton (RB)",
     "secondaryStar": "Ethan Grunkemeyer (QB) / Tony Rojas (LB)",
     "stadium": "Beaver Stadium",
@@ -2328,9 +2328,9 @@ var TEAMS_DATABASE = {
     "baseSpRating": 26.2,
     "playoffContenderRank": 18,
     "sliderLabels": {
-      "qb": "Ethan Grunkemeyer QB Form",
+      "qb": "Ethan Grunkemeyer Passing Execution",
       "ground": "Singleton / Kaytron Allen Ground Attack",
-      "defense": "Tom Allen 'Husky' LBU Defense",
+      "defense": "D'Anton Lynn Stifling LBU Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Beaver Stadium 107k White Out"
     },
@@ -2665,7 +2665,7 @@ var TEAMS_DATABASE = {
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/213.png",
     "badgeText": "PSU",
-    "defensiveCoordinator": "Tom Allen",
+    "defensiveCoordinator": "D'Anton Lynn",
     "offensiveCoordinator": "Andy Kotelnicki"
   },
   "notredame": {
@@ -3048,7 +3048,7 @@ var TEAMS_DATABASE = {
     "conference": "SEC",
     "apRank": "#11 AP",
     "apPoints": "988 PTS",
-    "headCoach": "Brian Kelly",
+    "headCoach": "Lane Kiffin",
     "starPlayer": "Garrett Nussmeier (QB)",
     "secondaryStar": "Caden Durham (RB) / Whit Weeks (LB)",
     "stadium": "Tiger Stadium (Death Valley)",
@@ -3066,7 +3066,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 24.5,
     "playoffContenderRank": 11,
     "sliderLabels": {
-      "qb": "Garrett Nussmeier Arm Talent",
+      "qb": "Garrett Nussmeier / Kiffin Arm Talent",
       "ground": "Caden Durham / Kaleb Jackson Ground Game",
       "defense": "Blake Baker Aggressive Tiger Defense",
       "turnover": "Turnover Margin Luck",
@@ -4896,7 +4896,7 @@ var TEAMS_DATABASE = {
     "conference": "SEC",
     "apRank": "#9 AP",
     "apPoints": "1,102 PTS",
-    "headCoach": "Lane Kiffin",
+    "headCoach": "Pete Golding",
     "starPlayer": "Austin Simmons (QB)",
     "secondaryStar": "Cayden Lee (WR) / Suntarine Perkins (LB)",
     "stadium": "Vaught-Hemingway Stadium",
