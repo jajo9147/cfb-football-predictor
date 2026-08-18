@@ -1541,9 +1541,44 @@ const LiveSyncEngine = {
       const team = TEAMS_DATABASE[teamId];
       if (!team) return false;
 
-      // Update Head Coach if provided by live feed
+      // Update Head Coach from live ESPN feed
       if (data.coach && data.coach[0]) {
         team.headCoach = `${data.coach[0].firstName} ${data.coach[0].lastName}`;
+      }
+
+      // Extract Quarterbacks & Running Backs from live depth chart
+      const qbs = [];
+      const rbs = [];
+      if (data.athletes) {
+        data.athletes.forEach(group => {
+          if (group.items) {
+            group.items.forEach(player => {
+              const pos = player.position?.abbreviation;
+              const name = player.displayName || player.fullName;
+              const exp = player.experience?.displayValue || '';
+              if (pos === 'QB') qbs.push({ name, exp });
+              if (pos === 'RB') rbs.push({ name, exp });
+            });
+          }
+        });
+      }
+
+      // Update slider labels and stars dynamically from live depth chart
+      if (qbs.length > 0) {
+        const topQb = qbs.find(q => q.exp.includes('Senior') || q.exp.includes('Junior')) || qbs[0];
+        if (topQb && !team.starPlayer.includes('WR') && !team.starPlayer.includes('RB')) {
+          team.starPlayer = `${topQb.name} (QB)`;
+        }
+        if (topQb) {
+          team.sliderLabels.qb = `${topQb.name} QB Execution`;
+        }
+      }
+
+      if (rbs.length > 0) {
+        const topRb = rbs.find(r => r.exp.includes('Senior') || r.exp.includes('Junior')) || rbs[0];
+        if (topRb) {
+          team.sliderLabels.ground = `${topRb.name} Ground Attack`;
+        }
       }
 
       return true;
