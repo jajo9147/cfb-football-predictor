@@ -149,24 +149,52 @@ function calculateAdjustedMatchup(game) {
   const hasCustomGame = state.gameSliders[game.id] && state.gameSliders[game.id].isCustom;
   const effectiveSliders = hasCustomGame ? state.gameSliders[game.id] : state.globalSliders;
 
-  // Slider Weights
-  const qbImpact = (effectiveSliders.qbRating || 0) * 0.16;
-  const groundImpact = (effectiveSliders.groundAttack || 0) * 0.12;
-  const defImpact = (effectiveSliders.defenseHavoc || 0) * 0.15;
-  const toImpact = (effectiveSliders.turnoverLuck || 0) * 0.14;
-  const crowdImpact = (effectiveSliders.crowdNoise || 0) * 0.08 * (game.isHome ? 1 : -0.6);
+  const qbVal = effectiveSliders.qbRating || 0;
+  const groundVal = effectiveSliders.groundAttack || 0;
+  const defVal = effectiveSliders.defenseHavoc || 0;
+  const toVal = effectiveSliders.turnoverLuck || 0;
+  const crowdVal = effectiveSliders.crowdNoise || 0;
 
-  const totalPointsShift = qbImpact + groundImpact + defImpact + toImpact + crowdImpact;
-  const winProbShift = totalPointsShift * 1.35;
+  // Realistic Physical Point Impacts
+  // 1. QB Impact (Highest individual leverage: +/-12 pts team, +/-2 opp)
+  const qbTeamPts = qbVal * 0.24;
+  const qbOppPts = -qbVal * 0.04;
 
-  // Base Calculations
-  let adjWinProb = Math.min(99.8, Math.max(0.2, game.baseWinProb + winProbShift));
-  let adjUtScore = Math.round(Math.max(3, game.projScoreUt + (qbImpact * 0.7) + (groundImpact * 0.5) + (toImpact * 0.3) + (crowdImpact * 0.3)));
-  let adjOppScore = Math.round(Math.max(0, game.projScoreOpp - (defImpact * 0.6) - (toImpact * 0.4) - (crowdImpact * 0.3)));
+  // 2. Ground Attack (Clock control & physical drive sustaining: +/-8 team pts, -/+4 opp pts)
+  const groundTeamPts = groundVal * 0.16;
+  const groundOppPts = -groundVal * 0.08;
+
+  // 3. Defense Havoc (Sacks/stops vs blown coverages: +/-13 opp pts, +/-2 team short fields)
+  const defTeamPts = defVal * 0.04;
+  const defOppPts = -defVal * 0.26;
+
+  // 4. Turnover Margin (Each TO is ~4.5 pts; +/-3 TOs = +/-9 team pts, -/+9 opp pts)
+  const toTeamPts = toVal * 0.18;
+  const toOppPts = -toVal * 0.18;
+
+  // 5. Crowd & Environment (Home crowd gives false starts; Road composure avoids false starts/picks)
+  let crowdTeamPts = 0;
+  let crowdOppPts = 0;
+  if (game.isHome) {
+    crowdTeamPts = crowdVal * 0.06;
+    crowdOppPts = -crowdVal * 0.06;
+  } else {
+    crowdTeamPts = crowdVal * 0.08;
+    crowdOppPts = -crowdVal * 0.06;
+  }
+
+  // Calculate Net Adjusted Scores
+  let adjUtScore = Math.max(3, Math.round(game.projScoreUt + qbTeamPts + groundTeamPts + defTeamPts + toTeamPts + crowdTeamPts));
+  let adjOppScore = Math.max(0, Math.round(game.projScoreOpp + qbOppPts + groundOppPts + defOppPts + toOppPts + crowdOppPts));
+
+  // Gaussian Logistic Win Probability based on adjusted point differential
+  const pointDiff = adjUtScore - adjOppScore;
+  let adjWinProb = 1 / (1 + Math.pow(10, -pointDiff / 13.5)) * 100;
+  adjWinProb = Math.min(99.9, Math.max(0.1, Math.round(adjWinProb * 10) / 10));
 
   // If user has a manual pick toggle
   const userPick = state.userPicks[game.id];
-  let isWin = userPick ? (userPick === 'W') : (adjWinProb >= 50.0);
+  let isWin = userPick ? (userPick === 'W') : (adjUtScore > adjOppScore);
 
   if (userPick === 'W' && adjUtScore <= adjOppScore) adjUtScore = adjOppScore + 3;
   if (userPick === 'L' && adjUtScore >= adjOppScore) adjOppScore = adjUtScore + 3;
@@ -629,20 +657,16 @@ function renderGameSlidersInModal(game) {
     isCustom: false
   };
 
-  const labels = team.sliderLabels || {
-    qb: 'QB Execution',
-    ground: 'Ground Attack',
-    defense: 'Defense & Havoc',
-    turnover: 'Turnover Margin Luck',
-    crowd: 'Stadium Crowd Noise'
-  };
+  const crowdTitle = game.isHome 
+    ? (labels.crowd || `${game.stadium} Home Crowd`)
+    : `Road Environment (${game.stadium || 'Hostile Stadium'})`;
 
   const sliderList = [
     { key: 'qbRating', label: labels.qb, icon: 'fa-solid fa-crosshairs' },
     { key: 'groundAttack', label: labels.ground, icon: 'fa-solid fa-person-running' },
     { key: 'defenseHavoc', label: labels.defense, icon: 'fa-solid fa-shield-halved' },
     { key: 'turnoverLuck', label: labels.turnover, icon: 'fa-solid fa-dice' },
-    { key: 'crowdNoise', label: labels.crowd, icon: 'fa-solid fa-bullhorn' }
+    { key: 'crowdNoise', label: crowdTitle, icon: 'fa-solid fa-bullhorn' }
   ];
 
   container.innerHTML = '';
