@@ -657,6 +657,14 @@ function renderGameSlidersInModal(game) {
     isCustom: false
   };
 
+  const labels = (team && team.sliderLabels) || {
+    qb: 'QB Execution',
+    ground: 'Ground Attack',
+    defense: 'Defense & Havoc',
+    turnover: 'Turnover Margin Luck',
+    crowd: 'Stadium Crowd Noise'
+  };
+
   const crowdTitle = game.isHome 
     ? (labels.crowd || `${game.stadium} Home Crowd`)
     : `Road Environment (${game.stadium || 'Hostile Stadium'})`;
