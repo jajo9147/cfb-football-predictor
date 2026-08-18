@@ -6,9 +6,9 @@ const CACHE_NAME = 'gridiron-oracle-v2026.25';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './styles.css?v=2026.39',
-  './app.js?v=2026.39',
-  './data/teams.js?v=2026.39',
+  './styles.css?v=2026.40',
+  './app.js?v=2026.40',
+  './data/teams.js?v=2026.40',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'
