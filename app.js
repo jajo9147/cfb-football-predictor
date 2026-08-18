@@ -224,6 +224,9 @@ function calculateAdjustedMatchup(game, targetTeamId) {
   const team = TEAMS_DATABASE[teamId];
   if (!team) return { adjWinProb: 50, projUt: 24, projOpp: 21, isWin: true, isCustomTuned: false, syncedFrom: null };
 
+  const BASELINE_SETTINGS = GLOBAL_PRESETS['baseline'];
+  const teamGlobalSliders = (teamId === state.currentTeamId) ? state.globalSliders : BASELINE_SETTINGS;
+
   // 1. Direct custom tuning or manual pick on this game
   const directSliders = state.gameSliders[game.id];
   const directPick = state.userPicks[game.id];
@@ -238,7 +241,7 @@ function calculateAdjustedMatchup(game, targetTeamId) {
   }
 
   if (directPick) {
-    const raw = calculateRawMatchup(game, teamId, state.globalSliders, directPick);
+    const raw = calculateRawMatchup(game, teamId, teamGlobalSliders, directPick);
     return {
       ...raw,
       isCustomTuned: true,
@@ -253,7 +256,7 @@ function calculateAdjustedMatchup(game, targetTeamId) {
     const oppPick = state.userPicks[counterpart.oppGame.id];
 
     if ((oppSliders && oppSliders.isCustom) || oppPick) {
-      const oppEffectiveSliders = (oppSliders && oppSliders.isCustom) ? oppSliders : state.globalSliders;
+      const oppEffectiveSliders = (oppSliders && oppSliders.isCustom) ? oppSliders : ((counterpart.oppTeamId === state.currentTeamId) ? state.globalSliders : BASELINE_SETTINGS);
       const oppRaw = calculateRawMatchup(counterpart.oppGame, counterpart.oppTeamId, oppEffectiveSliders, oppPick);
 
       // Invert outcome and scores for current team
@@ -271,8 +274,8 @@ function calculateAdjustedMatchup(game, targetTeamId) {
     }
   }
 
-  // 3. Fallback to global sliders
-  const raw = calculateRawMatchup(game, teamId, state.globalSliders, null);
+  // 3. Fallback to active team sliders (or baseline for simulated background teams)
+  const raw = calculateRawMatchup(game, teamId, teamGlobalSliders, null);
   return {
     ...raw,
     isCustomTuned: false,
@@ -316,31 +319,27 @@ function recalculateSeason() {
   document.getElementById('kpiWinProb').innerText = `${avgWinProb}%`;
   document.getElementById('kpiMargin').innerText = avgMarginSign;
 
-  // Project CFP Seed
-  let cfpSeed = '#5 SEED';
-  let cfpStatus = 'First Round Host';
-  let nattyOdds = '+750';
+  // Real-time 12-team CFP Seeding for active team
+  const cfp = generate12TeamCfpField();
+  const currentSeedIdx = cfp.seeds.findIndex(s => s?.id === state.currentTeamId);
+  const currentSeedNum = currentSeedIdx !== -1 ? currentSeedIdx + 1 : 0;
 
-  if (totalWins >= 12) {
-    cfpSeed = '#1 SEED';
+  let cfpSeed = 'BUBBLE / OUT';
+  let cfpStatus = 'Missed 12-Team CFP';
+  let nattyOdds = '+8000';
+
+  if (currentSeedNum >= 1 && currentSeedNum <= 4) {
+    cfpSeed = `#${currentSeedNum} SEED`;
     cfpStatus = '1st Round Bye (Quarterfinals)';
-    nattyOdds = '+350';
-  } else if (totalWins === 11) {
-    cfpSeed = '#5 SEED';
-    cfpStatus = 'First Round Host Game';
-    nattyOdds = '+650';
-  } else if (totalWins === 10) {
-    cfpSeed = '#8 SEED';
-    cfpStatus = 'First Round Host Game';
-    nattyOdds = '+1200';
-  } else if (totalWins === 9) {
-    cfpSeed = '#11 SEED';
+    nattyOdds = (currentSeedNum === 1) ? '+350' : '+450';
+  } else if (currentSeedNum >= 5 && currentSeedNum <= 8) {
+    cfpSeed = `#${currentSeedNum} SEED`;
+    cfpStatus = `Hosts 1st Round (${team.stadiumCity || 'On Campus'})`;
+    nattyOdds = (currentSeedNum === 5) ? '+650' : '+950';
+  } else if (currentSeedNum >= 9 && currentSeedNum <= 12) {
+    cfpSeed = `#${currentSeedNum} SEED`;
     cfpStatus = 'First Round Road Game';
-    nattyOdds = '+2500';
-  } else {
-    cfpSeed = 'BUBBLE / OUT';
-    cfpStatus = 'Missed 12-Team CFP';
-    nattyOdds = '+8000';
+    nattyOdds = '+2200';
   }
 
   document.getElementById('kpiCfpSeed').innerText = cfpSeed;
@@ -935,7 +934,8 @@ function generate12TeamCfpField() {
       sumDiff += (sim.projUt - sim.projOpp);
     });
 
-    const apPts = parseInt((team.apPoints || '0').replace(/[^0-9]/g, ''), 10) || 500;
+    const apMatch = (team.apPoints || '').match(/^([0-9,]+)/);
+    const apPts = apMatch ? parseInt(apMatch[1].replace(/,/g, ''), 10) : 500;
     const undefeatedBonus = (wins >= 12 && losses === 0) ? 6000 : (wins >= 11 ? 2000 : 0);
     const score = (wins * 1500) - (losses * 800) + (confWins * 200) + (sumDiff * 3) + (apPts * 0.15) + undefeatedBonus;
 
@@ -957,7 +957,7 @@ function generate12TeamCfpField() {
 
   evaluatedTeams.sort((a, b) => b.score - a.score);
 
-  // Group by conference to award top 4 Conference Champion BYEs
+  // 1. Four Highest-Ranked Conference Champions (Seeds 1, 2, 3, 4 ONLY - FIRST ROUND BYES)
   const secTeams = evaluatedTeams.filter(t => t.conf === 'SEC');
   const b1gTeams = evaluatedTeams.filter(t => t.conf === 'Big Ten');
   const accTeams = evaluatedTeams.filter(t => t.conf === 'ACC');
@@ -966,18 +966,32 @@ function generate12TeamCfpField() {
   const b1gChamp = b1gTeams[0];
   const accChamp = accTeams[0];
 
-  const champs = [secChamp, b1gChamp, accChamp].filter(Boolean);
-  champs.sort((a, b) => b.score - a.score);
+  // 4th Champion: Group of 5 / Big 12 Champion (Boise State / Texas Tech)
+  const g5Champ = {
+    id: 'boisestate',
+    name: 'Boise State Broncos',
+    shortName: 'Boise State',
+    abbr: 'BSU',
+    logoUrl: ESPN_LOGOS['BSU'] || 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',
+    stadium: 'Albertsons Stadium',
+    conf: 'MWC (G5 Champ)',
+    wins: 11,
+    losses: 1,
+    score: 13500,
+    apRank: '#12 AP'
+  };
 
-  const seed1 = champs[0] || evaluatedTeams[0];
-  const seed2 = champs[1] || evaluatedTeams[1];
-  const seed3 = champs[2] || evaluatedTeams[2];
+  const confChamps = [secChamp, b1gChamp, accChamp, g5Champ].filter(Boolean);
+  confChamps.sort((a, b) => b.score - a.score);
 
-  const remainingFor4 = evaluatedTeams.filter(t => t.id !== seed1?.id && t.id !== seed2?.id && t.id !== seed3?.id);
-  const seed4 = remainingFor4.find(t => t.id === 'notredame') || remainingFor4[0];
+  const seed1 = confChamps[0];
+  const seed2 = confChamps[1];
+  const seed3 = confChamps[2];
+  const seed4 = confChamps[3];
 
-  const byeIds = new Set([seed1?.id, seed2?.id, seed3?.id, seed4?.id]);
-  const atLargeCandidates = evaluatedTeams.filter(t => !byeIds.has(t.id));
+  // 2. Eight At-Large Contenders (Seeds 5 through 12 - NEVER get a BYE)
+  const champIds = new Set([seed1?.id, seed2?.id, seed3?.id, seed4?.id]);
+  const atLargeCandidates = evaluatedTeams.filter(t => !champIds.has(t.id));
 
   const seed5 = atLargeCandidates[0];
   const seed6 = atLargeCandidates[1];
@@ -987,16 +1001,17 @@ function generate12TeamCfpField() {
   const seed10 = atLargeCandidates[5];
   const seed11 = atLargeCandidates[6];
   const seed12 = atLargeCandidates[7] || {
-    id: 'boisestate',
-    name: 'Boise State Broncos',
-    shortName: 'Boise State',
-    abbr: 'BSU',
-    logoUrl: ESPN_LOGOS['BSU'] || 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',
-    stadium: 'Albertsons Stadium',
-    conf: 'MWC',
-    wins: 11,
-    losses: 1,
-    apRank: '#17 AP'
+    id: 'smu',
+    name: 'SMU Mustangs',
+    shortName: 'SMU',
+    abbr: 'SMU',
+    logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2567.png',
+    stadium: 'Gerald J. Ford Stadium',
+    conf: 'ACC',
+    wins: 10,
+    losses: 2,
+    score: 11000,
+    apRank: '#18 AP'
   };
 
   const seeds = [seed1, seed2, seed3, seed4, seed5, seed6, seed7, seed8, seed9, seed10, seed11, seed12].filter(Boolean);
