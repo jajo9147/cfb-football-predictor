@@ -134,7 +134,11 @@ function selectTeam(teamId) {
 
   // Update Active State in Top Track
   document.querySelectorAll('.team-pill-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.teamid === teamId);
+    const isActive = btn.dataset.teamid === teamId;
+    btn.classList.toggle('active', isActive);
+    if (isActive && btn.scrollIntoView) {
+      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
   });
 
   // Re-render Dynamic Slider Labels
