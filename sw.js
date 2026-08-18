@@ -1,24 +1,25 @@
 // ==========================================================================
-// GRIDIRON ORACLE SERVICE WORKER (CACHE & OFFLINE ENGINE)
+// GRIDIRON ORACLE SERVICE WORKER (NETWORK-FIRST REALTIME ENGINE)
 // ==========================================================================
 
-const CACHE_NAME = 'gridiron-oracle-v2026.1';
+const CACHE_NAME = 'gridiron-oracle-v2026.5';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './styles.css?v=2026.1',
-  './app.js?v=2026.1',
-  './data/teams.js?v=2026.1',
+  './styles.css?v=2026.5',
+  './app.js?v=2026.5',
+  './data/teams.js?v=2026.5',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS_TO_CACHE);
-    }).then(() => self.skipWaiting())
+    })
   );
 });
 
@@ -36,10 +37,23 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Network-First Strategy: Always fetch fresh code when online
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
-    })
+    fetch(event.request)
+      .then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseClone);
+          });
+        }
+        return networkResponse;
+      })
+      .catch(() => {
+        return caches.match(event.request);
+      })
   );
 });
