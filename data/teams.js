@@ -106,9 +106,9 @@ var TEAMS_DATABASE = {
     "baseSpRating": 27.4,
     "playoffContenderRank": 5,
     "sliderLabels": {
-      "qb": "Arch Manning QB Form",
+      "qb": "Arch Manning QB Execution",
       "ground": "Smothers / Raleek Brown Ground Attack",
-      "defense": "Anthony Hill Jr. Havoc Defense",
+      "defense": "Will Muschamp 'Boom' Havoc Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "DKR 100k Burnt Orange Roar"
     },
@@ -447,7 +447,9 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png",
-    "badgeText": "TEX"
+    "badgeText": "TEX",
+    "defensiveCoordinator": "Will Muschamp",
+    "offensiveCoordinator": "Steve Sarkisian"
   },
   "michigan": {
     "id": "michigan",
@@ -478,7 +480,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Michigan QB Efficiency",
       "ground": "Jordan Marshall Smashmouth Ground Game",
-      "defense": "Wink Martindale Havoc Defense",
+      "defense": "Wink Martindale Pressure Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "The Big House 110k Maize Wall"
     },
@@ -816,7 +818,9 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/130.png",
-    "badgeText": "MICH"
+    "badgeText": "MICH",
+    "defensiveCoordinator": "Don Wink Martindale",
+    "offensiveCoordinator": "Kirk Campbell"
   },
   "ohiostate": {
     "id": "ohiostate",
@@ -847,7 +851,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Julian Sayin / Air Noland QB Form",
       "ground": "James Peoples / Bo Jackson Ground Attack",
-      "defense": "Caleb Downs Silver Bullet Defense",
+      "defense": "Jim Knowles Silver Bullet Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "The Horseshoe 105k Roar"
     },
@@ -1184,7 +1188,9 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
-    "badgeText": "OSU"
+    "badgeText": "OSU",
+    "defensiveCoordinator": "Jim Knowles",
+    "offensiveCoordinator": "Chip Kelly"
   },
   "georgia": {
     "id": "georgia",
@@ -1215,7 +1221,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Georgia QB Execution",
       "ground": "Nate Frazier Ground Power",
-      "defense": "Kirby Smart Junkyard Dawg Defense",
+      "defense": "Glenn Schumann Junkyard Dawg Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Sanford Stadium 93k Roar"
     },
@@ -1553,7 +1559,9 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png",
-    "badgeText": "UGA"
+    "badgeText": "UGA",
+    "defensiveCoordinator": "Glenn Schumann",
+    "offensiveCoordinator": "Mike Bobo"
   },
   "alabama": {
     "id": "alabama",
@@ -1584,7 +1592,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Ty Simpson Bama QB Execution",
       "ground": "Justice Haynes / Richard Young Ground Power",
-      "defense": "Jihaad Campbell Bama Defense",
+      "defense": "Kane Wommack 'Swarm' Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Bryant-Denny 100k Crimson Surge"
     },
@@ -1921,7 +1929,9 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png",
-    "badgeText": "BAMA"
+    "badgeText": "BAMA",
+    "defensiveCoordinator": "Kane Wommack",
+    "offensiveCoordinator": "Nick Sheridan"
   },
   "oregon": {
     "id": "oregon",
@@ -1952,7 +1962,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Dante Moore QB Form",
       "ground": "Jayden Limar / Dierre Hill Ground Attack",
-      "defense": "Dan Lanning Havoc Defense",
+      "defense": "Tosh Lupoi / Lanning Havoc Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Autzen 115dB Deafening Quack Attack"
     },
@@ -2287,7 +2297,9 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png",
-    "badgeText": "ORE"
+    "badgeText": "ORE",
+    "defensiveCoordinator": "Tosh Lupoi",
+    "offensiveCoordinator": "Will Stein"
   },
   "pennstate": {
     "id": "pennstate",
@@ -2318,7 +2330,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Penn State QB Execution",
       "ground": "Singleton / Kaytron Allen Ground Attack",
-      "defense": "Tony Rojas LBU Defense",
+      "defense": "Tom Allen 'Husky' LBU Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Beaver Stadium 107k White Out"
     },
@@ -2652,7 +2664,9 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/213.png",
-    "badgeText": "PSU"
+    "badgeText": "PSU",
+    "defensiveCoordinator": "Tom Allen",
+    "offensiveCoordinator": "Andy Kotelnicki"
   },
   "notredame": {
     "id": "notredame",
@@ -2683,7 +2697,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "CJ Carr QB Execution",
       "ground": "Jeremiyah Love / Jadarian Price Ground Attack",
-      "defense": "Marcus Freeman Irish Defense",
+      "defense": "Al Golden / Freeman Stifling Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Notre Dame Stadium Golden Echo"
     },
@@ -3021,7 +3035,9 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png",
-    "badgeText": "ND"
+    "badgeText": "ND",
+    "defensiveCoordinator": "Al Golden",
+    "offensiveCoordinator": "Mike Denbrock"
   },
   "lsu": {
     "id": "lsu",
@@ -3052,7 +3068,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Garrett Nussmeier QB Arm",
       "ground": "Caden Durham / Kaleb Jackson Ground Game",
-      "defense": "Whit Weeks Tiger Havoc Defense",
+      "defense": "Blake Baker Aggressive Tiger Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Death Valley 102k Saturday Night"
     },
@@ -3389,7 +3405,9 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png",
-    "badgeText": "LSU"
+    "badgeText": "LSU",
+    "defensiveCoordinator": "Blake Baker",
+    "offensiveCoordinator": "Joe Sloan"
   },
   "tennessee": {
     "id": "tennessee",
@@ -3420,7 +3438,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Nico Iamaleava Fast Tempo QB Form",
       "ground": "Cameron Seldon Ground Attack",
-      "defense": "Arion Carter / Boo Carter Vols Defense",
+      "defense": "Tim Banks Aggressive Vols Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Neyland 102k Rocky Top Roar"
     },
@@ -3759,7 +3777,9 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png",
-    "badgeText": "TENN"
+    "badgeText": "TENN",
+    "defensiveCoordinator": "Tim Banks",
+    "offensiveCoordinator": "Joey Halzle"
   },
   "indiana": {
     "id": "indiana",
@@ -3790,9 +3810,9 @@ var TEAMS_DATABASE = {
     "baseSpRating": 25.4,
     "playoffContenderRank": 6,
     "sliderLabels": {
-      "qb": "Cignetti QB Tempo",
+      "qb": "Cignetti / Shanahan QB Tempo",
       "ground": "Roman Hemby / Justice Ellison Ground Attack",
-      "defense": "Mikail Kamara Hoosier Havoc D",
+      "defense": "Bryant Haines Hoosier Havoc D",
       "turnover": "Turnover Margin Luck",
       "crowd": "Memorial Stadium Crimson Frenzy"
     },
@@ -4126,7 +4146,9 @@ var TEAMS_DATABASE = {
           "summary": "Rivalry finale in Bloomington."
         }
       }
-    ]
+    ],
+    "defensiveCoordinator": "Bryant Haines",
+    "offensiveCoordinator": "Mike Shanahan"
   },
   "miami": {
     "id": "miami",
@@ -4159,7 +4181,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Canes QB Execution",
       "ground": "Mark Fletcher Jr. Ground Attack",
-      "defense": "Rueben Bain Jr. Chain Defense",
+      "defense": "Lance Guidry Blitz Scheme Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Hard Rock Stadium 65k Surge"
     },
@@ -4492,7 +4514,9 @@ var TEAMS_DATABASE = {
           "summary": "Regular season finale in Syracuse."
         }
       }
-    ]
+    ],
+    "defensiveCoordinator": "Lance Guidry",
+    "offensiveCoordinator": "Shannon Dawson"
   },
   "texasam": {
     "id": "texasam",
@@ -4525,7 +4549,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Marcel Reed Dual-Threat QB Form",
       "ground": "Le'Veon Moss / Rueben Owens Ground Game",
-      "defense": "Mike Elko Wrecking Crew Defense",
+      "defense": "Mike Elko / Bateman Wrecking Crew Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Kyle Field 108k 12th Man Roar"
     },
@@ -4859,7 +4883,9 @@ var TEAMS_DATABASE = {
           "summary": "The most anticipated Thanksgiving rivalry in America."
         }
       }
-    ]
+    ],
+    "defensiveCoordinator": "Jay Bateman",
+    "offensiveCoordinator": "Collin Klein"
   },
   "olemiss": {
     "id": "olemiss",
@@ -4892,7 +4918,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Lane Kiffin High-Speed QB Form",
       "ground": "Logan Diggs Ground Attack",
-      "defense": "Suntarine Perkins Rebel Defense",
+      "defense": "Pete Golding Landshark Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Vaught-Hemingway Hotty Toddy Roar"
     },
@@ -5225,7 +5251,9 @@ var TEAMS_DATABASE = {
           "summary": "Thanksgiving weekend Egg Bowl in Oxford."
         }
       }
-    ]
+    ],
+    "defensiveCoordinator": "Pete Golding",
+    "offensiveCoordinator": "Charlie Weis Jr."
   },
   "oklahoma": {
     "id": "oklahoma",
@@ -5258,7 +5286,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Jackson Arnold QB Execution",
       "ground": "Taylor Tatum Ground Attack",
-      "defense": "Brent Venables Havoc Defense",
+      "defense": "Brent Venables / Alley Cheetah Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Owen Field 85k Sooner Schooner"
     },
@@ -5593,6 +5621,8 @@ var TEAMS_DATABASE = {
           "summary": "Electric regular season finale in Norman."
         }
       }
-    ]
+    ],
+    "defensiveCoordinator": "Zac Alley",
+    "offensiveCoordinator": "Joe Jon Finley"
   }
 };

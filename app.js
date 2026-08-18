@@ -123,6 +123,10 @@ function selectTeam(teamId) {
 
   document.getElementById('heroRank').innerText = `${team.apRank} POLL`;
   document.getElementById('heroCoach').innerText = `HC: ${team.headCoach}`;
+  const dcEl = document.getElementById('heroDC');
+  if (dcEl) {
+    dcEl.innerText = `DC: ${team.defensiveCoordinator || 'Staff'}`;
+  }
   document.getElementById('heroStarPlayer').innerText = `Star: ${team.starPlayer}`;
   document.getElementById('heroStadium').innerText = `${team.stadium} (${team.stadiumCapacity})`;
 
