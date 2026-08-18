@@ -41,7 +41,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=2026.34">
+  <link rel="stylesheet" href="styles.css?v=2026.35">
 </head>
 <body class="theme-texas">
 
@@ -403,33 +403,51 @@
   <!-- 1-Tap PWA Mobile Install Drawer -->
   <div class="pwa-drawer-backdrop" id="pwaInstallDrawer">
     <div class="pwa-drawer">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div style="display: flex; align-items: center; gap: 0.6rem;">
-          <div class="logo-badge" style="width: 34px; height: 34px; font-size: 1.1rem;">📱</div>
-          <span style="font-family: var(--font-display); font-size: 1.4rem; color: #FFFFFF;">INSTALL GRIDIRON ORACLE</span>
+      <div class="pwa-drawer-header">
+        <div class="pwa-drawer-title-wrap">
+          <div class="logo-badge" style="width: 36px; height: 36px;">
+            <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="App Icon" class="nav-logo-img" id="pwaDrawerLogo">
+          </div>
+          <div>
+            <div class="pwa-drawer-title">ADD TO HOME SCREEN</div>
+            <div class="pwa-drawer-sub">Instant full-screen launch • 100% Free</div>
+          </div>
         </div>
         <button class="modal-close" id="closePwaDrawerBtn" style="position: static;"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <p style="font-size: 0.84rem; color: var(--color-text-muted);">Install directly to your iPhone or Android home screen for instant fullscreen launch with no browser bar ($0 cost).</p>
-      
-      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-        <div class="pwa-step-item">
-          <span class="pwa-step-num">1</span>
-          <span>Tap the <strong>Share</strong> button <i class="fa-solid fa-arrow-up-from-bracket"></i> at the bottom of Safari (or <i class="fa-solid fa-ellipsis-vertical"></i> in Chrome).</span>
+
+      <div class="pwa-steps-container">
+        <div class="pwa-step-card">
+          <div class="pwa-step-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
+          <div class="pwa-step-text">
+            <strong>1. Tap Safari Share</strong>
+            <span>Tap the <strong>Share</strong> button at the bottom of your Safari browser.</span>
+          </div>
         </div>
-        <div class="pwa-step-item">
-          <span class="pwa-step-num">2</span>
-          <span>Scroll down and select <strong>"Add to Home Screen"</strong> <i class="fa-regular fa-square-plus"></i>.</span>
+        <div class="pwa-step-card">
+          <div class="pwa-step-icon"><i class="fa-regular fa-square-plus"></i></div>
+          <div class="pwa-step-text">
+            <strong>2. Add to Home Screen</strong>
+            <span>Scroll down and select <strong>"Add to Home Screen"</strong>.</span>
+          </div>
         </div>
-        <div class="pwa-step-item">
-          <span class="pwa-step-num">3</span>
-          <span>Tap <strong>Add</strong> in the top right. Launch the app right from your home screen!</span>
+        <div class="pwa-step-card">
+          <div class="pwa-step-icon"><i class="fa-solid fa-check"></i></div>
+          <div class="pwa-step-text">
+            <strong>3. Tap Add</strong>
+            <span>Tap <strong>Add</strong> in top-right. Launch directly anytime!</span>
+          </div>
         </div>
       </div>
 
+      <div class="pwa-bottom-pointer">
+        <i class="fa-solid fa-chevron-down pwa-bounce-arrow"></i>
+        <span>Tap the Share icon below in Safari</span>
+      </div>
+
       <button class="action-btn hype-btn" id="pwaNativePromptBtn" style="width: 100%; justify-content: center;">
-        <i class="fa-solid fa-download"></i>
-        <span>Add to Home Screen</span>
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Got It • Close</span>
       </button>
     </div>
   </div>
@@ -448,7 +466,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?v=2026.34"></script>
-  <script src="app.js?v=2026.34"></script>
+  <script src="data/teams.js?v=2026.35"></script>
+  <script src="app.js?v=2026.35"></script>
 </body>
 </html>

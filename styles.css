@@ -1709,27 +1709,98 @@ body {
   transform: translateY(0);
 }
 
-.pwa-step-item {
+.pwa-drawer-header {
   display: flex;
-  align-items: flex-start;
-  gap: 0.85rem;
-  font-size: 0.88rem;
-  color: var(--color-text-main);
+  justify-content: space-between;
+  align-items: center;
 }
 
-.pwa-step-num {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--color-brand-primary);
+.pwa-drawer-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pwa-drawer-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.5px;
   color: #FFFFFF;
+  line-height: 1.1;
+}
+
+.pwa-drawer-sub {
   font-family: var(--font-mono);
-  font-weight: 800;
-  font-size: 0.8rem;
+  font-size: 0.68rem;
+  color: var(--color-brand-accent);
+  font-weight: 700;
+}
+
+.pwa-steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 0.25rem 0;
+}
+
+.pwa-step-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.9rem;
+}
+
+.pwa-step-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-brand-border);
+  color: var(--color-brand-accent);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 0.95rem;
   flex-shrink: 0;
+}
+
+.pwa-step-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.8rem;
+  color: var(--color-text-main);
+}
+
+.pwa-step-text strong {
+  color: #FFFFFF;
+  font-size: 0.84rem;
+}
+
+.pwa-bottom-pointer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: var(--color-brand-accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.4rem 0 0.1rem;
+}
+
+.pwa-bounce-arrow {
+  animation: bounceDown 1.4s infinite;
+  font-size: 1.1rem;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
 }
 
 /* ==========================================================================

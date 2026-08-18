@@ -1481,6 +1481,14 @@ function initPwaInstall() {
   const openPwaBtn = document.getElementById('openPwaInstallBtn');
   const closePwaBtn = document.getElementById('closePwaDrawerBtn');
   const nativeBtn = document.getElementById('pwaNativePromptBtn');
+  const drawer = document.getElementById('pwaInstallDrawer');
+
+  // Check if app is already running in standalone PWA mode
+  const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+  if (isStandalone && openPwaBtn) {
+    openPwaBtn.style.display = 'none';
+    return;
+  }
 
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
@@ -1488,31 +1496,62 @@ function initPwaInstall() {
     if (openPwaBtn) openPwaBtn.style.display = 'inline-flex';
   });
 
+  // Top bar "Install App" button
   if (openPwaBtn) {
-    openPwaBtn.addEventListener('click', () => {
-      document.getElementById('pwaInstallDrawer').classList.add('open');
+    openPwaBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // If native browser prompt is available (Android, Chrome, Edge), trigger directly in 1-tap!
+      if (state.deferredPrompt) {
+        state.deferredPrompt.prompt();
+        state.deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            if (openPwaBtn) openPwaBtn.style.display = 'none';
+          }
+          state.deferredPrompt = null;
+        });
+        return;
+      }
+
+      // If on iOS / Safari or browser where prompt must be guided, open visual drawer
+      if (drawer) {
+        // Sync active team logo into drawer
+        const pwaLogo = document.getElementById('pwaDrawerLogo');
+        const team = TEAMS_DATABASE[state.currentTeamId];
+        if (pwaLogo && team) pwaLogo.src = team.logoUrl;
+        drawer.classList.add('open');
+      }
     });
   }
 
-  if (closePwaBtn) {
+  if (closePwaBtn && drawer) {
     closePwaBtn.addEventListener('click', () => {
-      document.getElementById('pwaInstallDrawer').classList.remove('open');
+      drawer.classList.remove('open');
     });
   }
 
-  if (nativeBtn) {
+  if (drawer) {
+    drawer.addEventListener('click', (e) => {
+      if (e.target === drawer) {
+        drawer.classList.remove('open');
+      }
+    });
+  }
+
+  // Inside the drawer: "Got It • Close" button
+  if (nativeBtn && drawer) {
     nativeBtn.addEventListener('click', () => {
       if (state.deferredPrompt) {
         state.deferredPrompt.prompt();
         state.deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted PWA installation');
+            if (openPwaBtn) openPwaBtn.style.display = 'none';
           }
           state.deferredPrompt = null;
-          document.getElementById('pwaInstallDrawer').classList.remove('open');
+          drawer.classList.remove('open');
         });
       } else {
-        alert('To install on iPhone:\n1. Tap the Share button in Safari\n2. Select "Add to Home Screen"');
+        // Smoothly close guide with zero alerts
+        drawer.classList.remove('open');
       }
     });
   }
