@@ -1764,9 +1764,11 @@ const LiveSyncEngine = {
       }
 
       if (rbs.length > 0) {
-        const topRb = rbs.find(r => r.exp.includes('Senior') || r.exp.includes('Junior')) || rbs[0];
-        if (topRb) {
-          team.sliderLabels.ground = `${topRb.name} Ground Attack`;
+        if (!team.sliderLabels.ground || team.sliderLabels.ground === 'Ground Attack') {
+          const topRb = rbs.find(r => r.exp.includes('Senior') || r.exp.includes('Junior')) || rbs[0];
+          if (topRb) {
+            team.sliderLabels.ground = `${topRb.name} Ground Attack`;
+          }
         }
       }
 
