@@ -899,8 +899,104 @@ function initModalActions() {
 }
 
 // ==========================================================================
-// 12-TEAM CFP BRACKET GENERATOR (DYNAMIC FIRST-ROUND WINS & LOSSES)
+// 12-TEAM CFP BRACKET GENERATOR (FULLY DYNAMIC REAL-TIME SEEDING)
 // ==========================================================================
+
+function generate12TeamCfpField() {
+  const teamKeys = Object.keys(TEAMS_DATABASE);
+  const evaluatedTeams = [];
+
+  teamKeys.forEach(teamId => {
+    const team = TEAMS_DATABASE[teamId];
+    let wins = 0;
+    let losses = 0;
+    let confWins = 0;
+    let sumDiff = 0;
+
+    team.schedule.forEach(g => {
+      const sim = calculateAdjustedMatchup(g, teamId);
+      if (sim.isWin) {
+        wins++;
+        if (g.isSec || g.isBigTen) confWins++;
+      } else {
+        losses++;
+      }
+      sumDiff += (sim.projUt - sim.projOpp);
+    });
+
+    const apPts = parseInt((team.apPoints || '0').replace(/[^0-9]/g, ''), 10) || 500;
+    const undefeatedBonus = (wins >= 12 && losses === 0) ? 6000 : (wins >= 11 ? 2000 : 0);
+    const score = (wins * 1500) - (losses * 800) + (confWins * 200) + (sumDiff * 3) + (apPts * 0.15) + undefeatedBonus;
+
+    evaluatedTeams.push({
+      id: teamId,
+      name: team.name,
+      shortName: team.shortName,
+      abbr: team.abbr,
+      logoUrl: team.logoUrl || ESPN_LOGOS[team.abbr],
+      stadium: team.stadium,
+      conf: team.conference,
+      wins,
+      losses,
+      confWins,
+      score,
+      apRank: team.apRank
+    });
+  });
+
+  evaluatedTeams.sort((a, b) => b.score - a.score);
+
+  // Group by conference to award top 4 Conference Champion BYEs
+  const secTeams = evaluatedTeams.filter(t => t.conf === 'SEC');
+  const b1gTeams = evaluatedTeams.filter(t => t.conf === 'Big Ten');
+  const accTeams = evaluatedTeams.filter(t => t.conf === 'ACC');
+
+  const secChamp = secTeams[0];
+  const b1gChamp = b1gTeams[0];
+  const accChamp = accTeams[0];
+
+  const champs = [secChamp, b1gChamp, accChamp].filter(Boolean);
+  champs.sort((a, b) => b.score - a.score);
+
+  const seed1 = champs[0] || evaluatedTeams[0];
+  const seed2 = champs[1] || evaluatedTeams[1];
+  const seed3 = champs[2] || evaluatedTeams[2];
+
+  const remainingFor4 = evaluatedTeams.filter(t => t.id !== seed1?.id && t.id !== seed2?.id && t.id !== seed3?.id);
+  const seed4 = remainingFor4.find(t => t.id === 'notredame') || remainingFor4[0];
+
+  const byeIds = new Set([seed1?.id, seed2?.id, seed3?.id, seed4?.id]);
+  const atLargeCandidates = evaluatedTeams.filter(t => !byeIds.has(t.id));
+
+  const seed5 = atLargeCandidates[0];
+  const seed6 = atLargeCandidates[1];
+  const seed7 = atLargeCandidates[2];
+  const seed8 = atLargeCandidates[3];
+  const seed9 = atLargeCandidates[4];
+  const seed10 = atLargeCandidates[5];
+  const seed11 = atLargeCandidates[6];
+  const seed12 = atLargeCandidates[7] || {
+    id: 'boisestate',
+    name: 'Boise State Broncos',
+    shortName: 'Boise State',
+    abbr: 'BSU',
+    logoUrl: ESPN_LOGOS['BSU'] || 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',
+    stadium: 'Albertsons Stadium',
+    conf: 'MWC',
+    wins: 11,
+    losses: 1,
+    apRank: '#17 AP'
+  };
+
+  const seeds = [seed1, seed2, seed3, seed4, seed5, seed6, seed7, seed8, seed9, seed10, seed11, seed12].filter(Boolean);
+
+  return {
+    seeds,
+    seed1, seed2, seed3, seed4,
+    seed5, seed6, seed7, seed8,
+    seed9, seed10, seed11, seed12
+  };
+}
 
 function renderPlayoffBracket(totalWins, cfpSeed) {
   const container = document.getElementById('playoffBracketGrid');
@@ -908,57 +1004,39 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
   const team = TEAMS_DATABASE[state.currentTeamId];
   const teamId = state.currentTeamId;
 
-  let summaryBannerHtml = '';
-  let m1Active = false, m2Active = false, m3Active = false, m4Active = false;
-  let qfActive = false, semiActive = false, nattyActive = false;
+  const cfp = generate12TeamCfpField();
+  const currentSeedIdx = cfp.seeds.findIndex(s => s?.id === teamId);
+  const currentSeedNum = currentSeedIdx !== -1 ? currentSeedIdx + 1 : 0;
 
-  if (totalWins >= 12) {
+  let summaryBannerHtml = '';
+
+  if (currentSeedNum >= 1 && currentSeedNum <= 4) {
     summaryBannerHtml = `
       <div class="cfp-summary-banner bye">
         <i class="fa-solid fa-trophy" style="font-size: 1.2rem;"></i>
         <div>
-          <strong>#1 NATIONAL SEED (FIRST-ROUND BYE)</strong>: Projected 12-0 dominance awards a direct bye to the Quarterfinals (Sugar/Rose Bowl) with path to the National Championship!
+          <strong>#${currentSeedNum} NATIONAL SEED (FIRST-ROUND BYE)</strong>: Projected ${totalWins}-${12 - totalWins} record awards ${team.name} a direct bye to the NY6 Quarterfinals (Sugar/Rose/Peach/Fiesta Bowl) with a clear path to the National Championship!
         </div>
       </div>
     `;
-    qfActive = true; semiActive = true; nattyActive = true;
-  } else if (totalWins === 11) {
+  } else if (currentSeedNum >= 5 && currentSeedNum <= 8) {
     summaryBannerHtml = `
       <div class="cfp-summary-banner host">
         <i class="fa-solid fa-shield-halved" style="font-size: 1.2rem;"></i>
         <div>
-          <strong>#5 SEED (HOSTS ON-CAMPUS FIRST ROUND)</strong>: Projected First-Round Win at home (38-17) ➔ Quarterfinal Fiesta Bowl Win (34-27) ➔ <strong>CFP SEMIFINALIST</strong>!
+          <strong>#${currentSeedNum} SEED (HOSTS ON-CAMPUS FIRST ROUND)</strong>: ${team.name} hosts on-campus First Round matchup at ${team.stadium} ➔ Advances to NY6 Quarterfinals!
         </div>
       </div>
     `;
-    m1Active = (teamId === 'texas' || teamId === 'ohiostate' || teamId === 'oregon' || teamId === 'georgia');
-    qfActive = true; semiActive = true;
-  } else if (totalWins === 10) {
-    summaryBannerHtml = `
-      <div class="cfp-summary-banner host">
-        <i class="fa-solid fa-star" style="font-size: 1.2rem;"></i>
-        <div>
-          <strong>#6 - #8 AT-LARGE SEED (ON-CAMPUS HOST)</strong>: Projected First-Round Win on home turf (28-20) ➔ <strong>CFP QUARTERFINALIST</strong> (Exits in New Year's Six Bowl vs #1/#2 Seed).
-        </div>
-      </div>
-    `;
-    if (teamId === 'alabama') m2Active = true;
-    if (teamId === 'notredame') m3Active = true;
-    if (teamId === 'tennessee') m4Active = true;
-    if (teamId === 'pennstate') m3Active = true;
-    qfActive = true;
-  } else if (totalWins === 9) {
+  } else if (currentSeedNum >= 9 && currentSeedNum <= 12) {
     summaryBannerHtml = `
       <div class="cfp-summary-banner loss">
         <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem;"></i>
         <div>
-          <strong>#11 - #12 BUBBLE SEED (ROAD FIRST-ROUND GAME)</strong>: <strong>PROJECTED FIRST-ROUND EXIT</strong> — Travels to hostile on-campus environment (@ #6 Seed) and suffers a projected 20-28 road loss.
+          <strong>#${currentSeedNum} AT-LARGE SEED (ROAD FIRST-ROUND GAME)</strong>: ${team.name} qualifies for the 12-Team CFP as an at-large contender and travels for a high-stakes First Round road clash.
         </div>
       </div>
     `;
-    if (teamId === 'michigan') m2Active = true;
-    if (teamId === 'lsu') m1Active = true;
-    if (teamId === 'pennstate') m3Active = true;
   } else {
     summaryBannerHtml = `
       <div class="cfp-summary-banner out">
@@ -970,7 +1048,60 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
     `;
   }
 
-  // Bracket Content
+  // Helper function to render a team row in the bracket
+  function teamRow(seedNum, tObj, score, isWinner, isHighlighted) {
+    const name = tObj ? tObj.shortName || tObj.name : `Seed #${seedNum}`;
+    const logo = tObj?.logoUrl || (tObj?.abbr ? ESPN_LOGOS[tObj.abbr] : '') || '';
+    const record = tObj ? `(${tObj.wins}-${tObj.losses})` : '';
+    const highlightStyle = isHighlighted ? 'color: var(--color-brand-accent); font-weight: 800;' : '';
+
+    return `
+      <div class="matchup-teams-row">
+        <div class="matchup-team-item">
+          <span class="matchup-team-logo-wrap"><img src="${logo}" class="matchup-team-logo" alt="${name}"></span>
+          <span style="${highlightStyle}">#${seedNum} ${name} <small style="opacity: 0.7; font-size: 0.68rem;">${record}</small></span>
+        </div>
+        <span style="${isWinner ? 'color: var(--color-success); font-weight: 800;' : 'color: var(--color-text-dim);'}">${score}</span>
+      </div>
+    `;
+  }
+
+  // Compute First Round winners & scores
+  const m1Winner = cfp.seed5;
+  const m2Winner = cfp.seed6;
+  const m3Winner = cfp.seed7;
+  const m4Winner = cfp.seed8;
+
+  // Compute Quarterfinal winners
+  const qf1Winner = (cfp.seed1?.score >= m4Winner?.score) ? cfp.seed1 : m4Winner;
+  const qf2Winner = (cfp.seed2?.score >= m3Winner?.score) ? cfp.seed2 : m3Winner;
+  const qf3Winner = (cfp.seed3?.score >= m2Winner?.score) ? cfp.seed3 : m2Winner;
+  const qf4Winner = (cfp.seed4?.score >= m1Winner?.score) ? cfp.seed4 : m1Winner;
+
+  // Compute Semifinal winners
+  const semi1Winner = (qf1Winner?.score >= qf4Winner?.score) ? qf1Winner : qf4Winner;
+  const semi2Winner = (qf2Winner?.score >= qf3Winner?.score) ? qf2Winner : qf3Winner;
+
+  // Compute National Champion
+  const nationalChampion = (semi1Winner?.score >= semi2Winner?.score) ? semi1Winner : semi2Winner;
+  const runnerUp = (nationalChampion?.id === semi1Winner?.id) ? semi2Winner : semi1Winner;
+
+  // Check which matchups include the active team
+  const isM1Active = cfp.seed5?.id === teamId || cfp.seed12?.id === teamId;
+  const isM2Active = cfp.seed6?.id === teamId || cfp.seed11?.id === teamId;
+  const isM3Active = cfp.seed7?.id === teamId || cfp.seed10?.id === teamId;
+  const isM4Active = cfp.seed8?.id === teamId || cfp.seed9?.id === teamId;
+
+  const isQF1Active = qf1Winner?.id === teamId || cfp.seed1?.id === teamId || m4Winner?.id === teamId;
+  const isQF2Active = qf2Winner?.id === teamId || cfp.seed2?.id === teamId || m3Winner?.id === teamId;
+  const isQF3Active = qf3Winner?.id === teamId || cfp.seed3?.id === teamId || m2Winner?.id === teamId;
+  const isQF4Active = qf4Winner?.id === teamId || cfp.seed4?.id === teamId || m1Winner?.id === teamId;
+
+  const isSemi1Active = semi1Winner?.id === teamId || qf1Winner?.id === teamId || qf4Winner?.id === teamId;
+  const isSemi2Active = semi2Winner?.id === teamId || qf2Winner?.id === teamId || qf3Winner?.id === teamId;
+  const isNattyActive = nationalChampion?.id === teamId || runnerUp?.id === teamId;
+
+  // Render Bracket HTML
   container.innerHTML = `
     <div style="grid-column: 1 / -1;">
       ${summaryBannerHtml}
@@ -983,95 +1114,43 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
         <span style="font-size: 0.68rem; opacity: 0.8;">DEC 18-19</span>
       </div>
 
-      <!-- M1: #12 G5 @ #5 Texas -->
-      <div class="playoff-matchup-box ${teamId === 'texas' || (teamId === 'lsu' && totalWins === 9) ? 'active-team-matchup' : ''}">
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['BSU'] || ''}" class="matchup-team-logo" alt="Boise State"></span>
-            <span>#12 Boise State</span>
-          </div>
-          <span style="color: var(--color-text-dim);">17</span>
-        </div>
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas"></span>
-            <span style="color: #FFFFFF; font-weight: 800;">#5 Texas</span>
-          </div>
-          <span style="color: var(--color-success); font-weight: 800;">38</span>
-        </div>
+      <!-- M1: #12 @ #5 -->
+      <div class="playoff-matchup-box ${isM1Active ? 'active-team-matchup' : ''}">
+        ${teamRow(12, cfp.seed12, 17, false, cfp.seed12?.id === teamId)}
+        ${teamRow(5, cfp.seed5, 35, true, cfp.seed5?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">DKR Memorial Stadium</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> TEXAS WINS (ADVANCES)</span>
+          <span style="color: var(--color-text-dim);">${cfp.seed5?.stadium || 'On Campus'}</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${cfp.seed5?.shortName?.toUpperCase() || 'HOST'} ADVANCES</span>
         </div>
       </div>
 
-      <!-- M2: #11 Michigan @ #6 Alabama -->
-      <div class="playoff-matchup-box ${(teamId === 'michigan' || teamId === 'alabama') ? 'active-team-matchup' : ''}">
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['MICH'] || ''}" class="matchup-team-logo" alt="Michigan"></span>
-            <span style="${teamId === 'michigan' ? 'color: var(--color-brand-accent); font-weight: 800;' : ''}">#11 Michigan</span>
-          </div>
-          <span style="color: var(--color-text-dim);">20</span>
-        </div>
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['BAMA'] || ''}" class="matchup-team-logo" alt="Alabama"></span>
-            <span style="color: #FFFFFF; font-weight: 800;">#6 Alabama</span>
-          </div>
-          <span style="color: var(--color-success); font-weight: 800;">28</span>
-        </div>
+      <!-- M2: #11 @ #6 -->
+      <div class="playoff-matchup-box ${isM2Active ? 'active-team-matchup' : ''}">
+        ${teamRow(11, cfp.seed11, 21, false, cfp.seed11?.id === teamId)}
+        ${teamRow(6, cfp.seed6, 28, true, cfp.seed6?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">Bryant-Denny Stadium</span>
-          ${teamId === 'michigan' && totalWins === 9 
-            ? `<span class="playoff-loss-tag"><i class="fa-solid fa-xmark"></i> MICH 1ST-ROUND EXIT</span>`
-            : `<span class="playoff-win-tag"><i class="fa-solid fa-check"></i> BAMA WINS (ADVANCES)</span>`}
+          <span style="color: var(--color-text-dim);">${cfp.seed6?.stadium || 'On Campus'}</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${cfp.seed6?.shortName?.toUpperCase() || 'HOST'} ADVANCES</span>
         </div>
       </div>
 
-      <!-- M3: #10 Penn State @ #7 Notre Dame -->
-      <div class="playoff-matchup-box ${(teamId === 'pennstate' || teamId === 'notredame') ? 'active-team-matchup' : ''}">
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['PSU'] || ''}" class="matchup-team-logo" alt="Penn State"></span>
-            <span style="${teamId === 'pennstate' ? 'color: var(--color-brand-accent); font-weight: 800;' : ''}">#10 Penn State</span>
-          </div>
-          <span style="color: var(--color-text-dim);">21</span>
-        </div>
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['ND'] || ''}" class="matchup-team-logo" alt="Notre Dame"></span>
-            <span style="color: #FFFFFF; font-weight: 800;">#7 Notre Dame</span>
-          </div>
-          <span style="color: var(--color-success); font-weight: 800;">24</span>
-        </div>
+      <!-- M3: #10 @ #7 -->
+      <div class="playoff-matchup-box ${isM3Active ? 'active-team-matchup' : ''}">
+        ${teamRow(10, cfp.seed10, 24, false, cfp.seed10?.id === teamId)}
+        ${teamRow(7, cfp.seed7, 31, true, cfp.seed7?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">Notre Dame Stadium</span>
-          ${teamId === 'pennstate' 
-            ? `<span class="playoff-loss-tag"><i class="fa-solid fa-xmark"></i> PSU 1ST-ROUND EXIT</span>`
-            : `<span class="playoff-win-tag"><i class="fa-solid fa-check"></i> IRISH WIN (ADVANCES)</span>`}
+          <span style="color: var(--color-text-dim);">${cfp.seed7?.stadium || 'On Campus'}</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${cfp.seed7?.shortName?.toUpperCase() || 'HOST'} ADVANCES</span>
         </div>
       </div>
 
-      <!-- M4: #9 Ole Miss @ #8 Tennessee -->
-      <div class="playoff-matchup-box ${teamId === 'tennessee' ? 'active-team-matchup' : ''}">
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['MISS'] || ''}" class="matchup-team-logo" alt="Ole Miss"></span>
-            <span>#9 Ole Miss</span>
-          </div>
-          <span style="color: var(--color-text-dim);">28</span>
-        </div>
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TENN'] || ''}" class="matchup-team-logo" alt="Tennessee"></span>
-            <span style="color: #FFFFFF; font-weight: 800;">#8 Tennessee</span>
-          </div>
-          <span style="color: var(--color-success); font-weight: 800;">31</span>
-        </div>
+      <!-- M4: #9 @ #8 -->
+      <div class="playoff-matchup-box ${isM4Active ? 'active-team-matchup' : ''}">
+        ${teamRow(9, cfp.seed9, 27, false, cfp.seed9?.id === teamId)}
+        ${teamRow(8, cfp.seed8, 30, true, cfp.seed8?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">Neyland Stadium</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> VOLS WIN (ADVANCES)</span>
+          <span style="color: var(--color-text-dim);">${cfp.seed8?.stadium || 'On Campus'}</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${cfp.seed8?.shortName?.toUpperCase() || 'HOST'} ADVANCES</span>
         </div>
       </div>
     </div>
@@ -1084,90 +1163,42 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       </div>
 
       <!-- QF1: Sugar Bowl -->
-      <div class="playoff-matchup-box ${teamId === 'georgia' || teamId === 'tennessee' ? 'active-team-matchup' : ''}">
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TENN'] || ''}" class="matchup-team-logo" alt="Tennessee"></span>
-            <span>#8 Tennessee</span>
-          </div>
-          <span style="color: var(--color-text-dim);">24</span>
-        </div>
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['UGA'] || ''}" class="matchup-team-logo" alt="Georgia"></span>
-            <span style="color: #FFFFFF; font-weight: 800;">#1 Georgia (BYE)</span>
-          </div>
-          <span style="color: var(--color-success); font-weight: 800;">31</span>
-        </div>
+      <div class="playoff-matchup-box ${isQF1Active ? 'active-team-matchup' : ''}">
+        ${teamRow(8, m4Winner, 24, false, m4Winner?.id === teamId)}
+        ${teamRow(1, cfp.seed1, 34, true, cfp.seed1?.id === teamId)}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Allstate Sugar Bowl</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> UGA ADVANCES</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${qf1Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
         </div>
       </div>
 
       <!-- QF2: Rose Bowl -->
-      <div class="playoff-matchup-box ${teamId === 'ohiostate' || teamId === 'notredame' ? 'active-team-matchup' : ''}">
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['ND'] || ''}" class="matchup-team-logo" alt="Notre Dame"></span>
-            <span>#7 Notre Dame</span>
-          </div>
-          <span style="color: var(--color-text-dim);">23</span>
-        </div>
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State"></span>
-            <span style="color: #FFFFFF; font-weight: 800;">#2 Ohio State (BYE)</span>
-          </div>
-          <span style="color: var(--color-success); font-weight: 800;">30</span>
-        </div>
+      <div class="playoff-matchup-box ${isQF2Active ? 'active-team-matchup' : ''}">
+        ${teamRow(7, m3Winner, 23, false, m3Winner?.id === teamId)}
+        ${teamRow(2, cfp.seed2, 31, true, cfp.seed2?.id === teamId)}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Rose Bowl Game</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> OSU ADVANCES</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${qf2Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
         </div>
       </div>
 
       <!-- QF3: Peach Bowl -->
-      <div class="playoff-matchup-box ${teamId === 'oregon' || teamId === 'alabama' ? 'active-team-matchup' : ''}">
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['BAMA'] || ''}" class="matchup-team-logo" alt="Alabama"></span>
-            <span>#6 Alabama</span>
-          </div>
-          <span style="color: var(--color-text-dim);">24</span>
-        </div>
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['ORE'] || ''}" class="matchup-team-logo" alt="Oregon"></span>
-            <span style="color: #FFFFFF; font-weight: 800;">#3 Oregon (BYE)</span>
-          </div>
-          <span style="color: var(--color-success); font-weight: 800;">27</span>
-        </div>
+      <div class="playoff-matchup-box ${isQF3Active ? 'active-team-matchup' : ''}">
+        ${teamRow(6, m2Winner, 24, false, m2Winner?.id === teamId)}
+        ${teamRow(3, cfp.seed3, 27, true, cfp.seed3?.id === teamId)}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Chick-fil-A Peach Bowl</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> OREGON ADVANCES</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${qf3Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
         </div>
       </div>
 
       <!-- QF4: Fiesta Bowl -->
-      <div class="playoff-matchup-box ${teamId === 'texas' ? 'active-team-matchup' : ''}">
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['MIA'] || ''}" class="matchup-team-logo" alt="Miami"></span>
-            <span>#4 Miami (ACC Champ)</span>
-          </div>
-          <span style="color: var(--color-text-dim);">27</span>
-        </div>
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas"></span>
-            <span style="color: #FFFFFF; font-weight: 800;">#5 Texas</span>
-          </div>
-          <span style="color: var(--color-success); font-weight: 800;">34</span>
-        </div>
+      <div class="playoff-matchup-box ${isQF4Active ? 'active-team-matchup' : ''}">
+        ${teamRow(5, m1Winner, 31, true, m1Winner?.id === teamId)}
+        ${teamRow(4, cfp.seed4, 27, false, cfp.seed4?.id === teamId)}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Vrbo Fiesta Bowl</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> TEXAS ADVANCES</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${qf4Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
         </div>
       </div>
     </div>
@@ -1180,46 +1211,22 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       </div>
 
       <!-- Semi 1: Orange Bowl -->
-      <div class="playoff-matchup-box ${teamId === 'texas' || teamId === 'georgia' ? 'active-team-matchup' : ''}">
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['UGA'] || ''}" class="matchup-team-logo" alt="Georgia"></span>
-            <span>#1 Georgia</span>
-          </div>
-          <span style="color: var(--color-text-dim);">27</span>
-        </div>
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas"></span>
-            <span style="color: #FFFFFF; font-weight: 800;">#5 Texas</span>
-          </div>
-          <span style="color: var(--color-success); font-weight: 800;">28</span>
-        </div>
+      <div class="playoff-matchup-box ${isSemi1Active ? 'active-team-matchup' : ''}">
+        ${teamRow(qf4Winner === cfp.seed4 ? 4 : 5, qf4Winner, 28, false, qf4Winner?.id === teamId)}
+        ${teamRow(1, qf1Winner, 31, true, qf1Winner?.id === teamId)}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Capital One Orange Bowl</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-fire"></i> TEXAS REACHES TITLE</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-fire"></i> ${semi1Winner?.shortName?.toUpperCase() || 'WINNER'} TO NATTY</span>
         </div>
       </div>
 
       <!-- Semi 2: Cotton Bowl -->
-      <div class="playoff-matchup-box ${teamId === 'ohiostate' || teamId === 'oregon' ? 'active-team-matchup' : ''}">
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['ORE'] || ''}" class="matchup-team-logo" alt="Oregon"></span>
-            <span>#3 Oregon</span>
-          </div>
-          <span style="color: var(--color-text-dim);">28</span>
-        </div>
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State"></span>
-            <span style="color: #FFFFFF; font-weight: 800;">#2 Ohio State</span>
-          </div>
-          <span style="color: var(--color-success); font-weight: 800;">31</span>
-        </div>
+      <div class="playoff-matchup-box ${isSemi2Active ? 'active-team-matchup' : ''}">
+        ${teamRow(qf3Winner === cfp.seed3 ? 3 : 6, qf3Winner, 27, false, qf3Winner?.id === teamId)}
+        ${teamRow(2, qf2Winner, 34, true, qf2Winner?.id === teamId)}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Goodyear Cotton Bowl</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-fire"></i> OSU REACHES TITLE</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-fire"></i> ${semi2Winner?.shortName?.toUpperCase() || 'WINNER'} TO NATTY</span>
         </div>
       </div>
     </div>
@@ -1231,24 +1238,12 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
         <span style="font-size: 0.68rem; opacity: 0.8;">JAN 18 • ATLANTA</span>
       </div>
 
-      <div class="playoff-matchup-box" style="border-color: var(--color-brand-border); background: linear-gradient(135deg, rgba(255,255,255,0.06), var(--color-brand-glow));">
-        <div class="matchup-teams-row" style="margin-bottom: 0.25rem;">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State"></span>
-            <span>#2 Ohio State</span>
-          </div>
-          <span style="color: var(--color-text-dim); font-size: 1.1rem;">28</span>
-        </div>
-        <div class="matchup-teams-row">
-          <div class="matchup-team-item">
-            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas"></span>
-            <span style="color: #FFFFFF; font-weight: 900; font-size: 1rem;">#5 Texas Longhorns</span>
-          </div>
-          <span style="color: var(--color-success); font-size: 1.1rem; font-weight: 900;">31</span>
-        </div>
+      <div class="playoff-matchup-box ${isNattyActive ? 'active-team-matchup' : ''}" style="border-color: var(--color-brand-border); background: linear-gradient(135deg, rgba(255,255,255,0.06), var(--color-brand-glow));">
+        ${teamRow(2, runnerUp, 28, false, runnerUp?.id === teamId)}
+        ${teamRow(1, nationalChampion, 35, true, nationalChampion?.id === teamId)}
         <div class="playoff-result-badge" style="margin-top: 0.4rem; padding-top: 0.4rem;">
           <span style="color: #FBBF24; font-weight: 800;"><i class="fa-solid fa-crown"></i> NATIONAL CHAMPION</span>
-          <span style="font-weight: 800; color: #FFFFFF;">TEXAS 31, OSU 28</span>
+          <span style="font-weight: 800; color: #FFFFFF;">${nationalChampion?.name?.toUpperCase()} (CFP CHAMP)</span>
         </div>
       </div>
     </div>
