@@ -432,7 +432,7 @@ function renderSchedule() {
             <span class="team-ranking-sub">${game.oppRank}</span>
           </div>
           <div class="team-logo-circle" style="border: 2px solid ${game.oppColor}; padding: 3px;">
-            <img src="${game.oppLogoUrl || ESPN_LOGOS[game.oppAbbr]}" alt="${game.oppAbbr}" class="card-team-logo">
+            <img src="${game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || ''}" alt="${game.oppAbbr}" class="card-team-logo">
           </div>
         </div>
       </div>
@@ -636,7 +636,7 @@ function openSimModal(game) {
         <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${game.oppRank}</div>
       </div>
       <div class="modal-team-logo-wrap" style="border: 2.5px solid ${game.oppColor};">
-        <img src="${game.oppLogoUrl || ESPN_LOGOS[game.oppAbbr]}" alt="${game.oppAbbr}" class="modal-team-logo">
+        <img src="${game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || ''}" alt="${game.oppAbbr}" class="modal-team-logo">
       </div>
     </div>
   `;
@@ -944,7 +944,7 @@ function generate12TeamCfpField() {
       name: team.name,
       shortName: team.shortName,
       abbr: team.abbr,
-      logoUrl: team.logoUrl || ESPN_LOGOS[team.abbr],
+      logoUrl: team.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[team.abbr] : '') || '',
       stadium: team.stadium,
       conf: team.conference,
       wins,
@@ -972,7 +972,7 @@ function generate12TeamCfpField() {
     name: 'Boise State Broncos',
     shortName: 'Boise State',
     abbr: 'BSU',
-    logoUrl: ESPN_LOGOS['BSU'] || 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',
+    logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['BSU'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',
     stadium: 'Albertsons Stadium',
     conf: 'MWC (G5 Champ)',
     wins: 11,
@@ -1077,7 +1077,7 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
   // Helper function to render a team row in the bracket
   function teamRow(seedNum, tObj, score, isWinner, isHighlighted) {
     const name = tObj ? tObj.shortName || tObj.name : `Seed #${seedNum}`;
-    const logo = tObj?.logoUrl || (tObj?.abbr ? ESPN_LOGOS[tObj.abbr] : '') || '';
+    const logo = tObj?.logoUrl || (tObj?.abbr && typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tObj.abbr] : '') || '';
     const record = tObj ? `(${tObj.wins}-${tObj.losses})` : '';
     const highlightStyle = isHighlighted ? 'color: var(--color-brand-accent); font-weight: 800;' : '';
 
