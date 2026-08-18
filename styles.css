@@ -1980,7 +1980,17 @@ body {
   }
 
   .countdown-badge {
-    display: none !important;
+    display: inline-flex !important;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.65rem;
+    gap: 0.3rem;
+    font-weight: 800;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    border: 1px solid var(--color-brand-border);
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 8px var(--color-brand-glow);
+    line-height: 1;
   }
 
   .live-feed-pill {
@@ -2237,6 +2247,17 @@ body {
     padding: 0.22rem 0.45rem;
   }
 
+  .countdown-badge {
+    padding: 0.22rem 0.42rem;
+    font-size: 0.62rem;
+    gap: 0.25rem;
+  }
+
+  .countdown-badge .pulse-dot {
+    width: 5px;
+    height: 5px;
+  }
+
   .install-pwa-btn {
     padding: 0.25rem 0.5rem;
   }
@@ -2452,5 +2473,24 @@ body {
   text-align: right;
   color: var(--color-brand-accent);
   font-weight: 800;
+}
+
+@media (max-width: 380px) {
+  .brand-title {
+    font-size: 0.92rem;
+  }
+  .live-feed-text {
+    display: none;
+  }
+  .install-pwa-btn span {
+    display: none;
+  }
+  .install-pwa-btn {
+    padding: 0.25rem 0.4rem;
+  }
+  .countdown-badge {
+    font-size: 0.58rem;
+    padding: 0.2rem 0.35rem;
+  }
 }
 
