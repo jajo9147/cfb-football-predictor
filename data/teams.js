@@ -458,7 +458,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png",
-    "badgeText": "TEX"
+    "badgeText": "TEX",
+    "confirmedStarterQb": "Arch Manning"
   },
   "michigan": {
     "id": "michigan",
@@ -830,7 +831,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/130.png",
-    "badgeText": "MICH"
+    "badgeText": "MICH",
+    "confirmedStarterQb": "Bryce Underwood"
   },
   "ohiostate": {
     "id": "ohiostate",
@@ -1200,7 +1202,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
-    "badgeText": "OSU"
+    "badgeText": "OSU",
+    "confirmedStarterQb": "Julian Sayin"
   },
   "georgia": {
     "id": "georgia",
@@ -1570,7 +1573,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png",
-    "badgeText": "UGA"
+    "badgeText": "UGA",
+    "confirmedStarterQb": "Gunner Stockton"
   },
   "alabama": {
     "id": "alabama",
@@ -1601,7 +1605,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 25.4,
     "playoffContenderRank": 13,
     "sliderLabels": {
-      "qb": "John Cooper / Gazzaniga Aerial Strike",
+      "qb": "John Cooper QB Execution",
       "ground": "AK Dear Explosive Ground Attack",
       "defense": "Kane Wommack Swarm Defense",
       "turnover": "Turnover Margin Luck",
@@ -1940,7 +1944,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png",
-    "badgeText": "BAMA"
+    "badgeText": "BAMA",
+    "confirmedStarterQb": "John Cooper"
   },
   "oregon": {
     "id": "oregon",
@@ -1971,7 +1976,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 28.8,
     "playoffContenderRank": 2,
     "sliderLabels": {
-      "qb": "Dante Moore Laser Precision",
+      "qb": "Dante Moore QB Execution",
       "ground": "Jordon Davison / Hill Speed Option",
       "defense": "Chris Hampton Defensive Havoc",
       "turnover": "Turnover Margin Luck",
@@ -2309,7 +2314,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png",
-    "badgeText": "ORE"
+    "badgeText": "ORE",
+    "confirmedStarterQb": "Dante Moore"
   },
   "pennstate": {
     "id": "pennstate",
@@ -2340,7 +2346,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 26.2,
     "playoffContenderRank": 18,
     "sliderLabels": {
-      "qb": "Rocco Becht Aerial Command",
+      "qb": "Rocco Becht QB Execution",
       "ground": "Carson Hansen / Quinton Martin Ground Attack",
       "defense": "Tom Allen 'Bull' Havoc Defense",
       "turnover": "Turnover Margin Luck",
@@ -2676,7 +2682,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/213.png",
-    "badgeText": "PSU"
+    "badgeText": "PSU",
+    "confirmedStarterQb": "Rocco Becht"
   },
   "notredame": {
     "id": "notredame",
@@ -2707,7 +2714,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 25.8,
     "playoffContenderRank": 4,
     "sliderLabels": {
-      "qb": "CJ Carr Precision Passing",
+      "qb": "CJ Carr QB Execution",
       "ground": "Aneyas Williams / Nolan James Ground Attack",
       "defense": "Chris Ash / Freeman Havoc Defense",
       "turnover": "Turnover Margin Luck",
@@ -3047,7 +3054,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png",
-    "badgeText": "ND"
+    "badgeText": "ND",
+    "confirmedStarterQb": "CJ Carr"
   },
   "lsu": {
     "id": "lsu",
@@ -3078,7 +3086,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 24.5,
     "playoffContenderRank": 11,
     "sliderLabels": {
-      "qb": "Sam Leavitt / Kiffin Explosive Air Raid",
+      "qb": "Sam Leavitt QB Execution",
       "ground": "Caden Durham / Harlem Berry Ground Game",
       "defense": "Blake Baker Aggressive Tiger Defense",
       "turnover": "Turnover Margin Luck",
@@ -3418,7 +3426,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png",
-    "badgeText": "LSU"
+    "badgeText": "LSU",
+    "confirmedStarterQb": "Sam Leavitt"
   },
   "tennessee": {
     "id": "tennessee",
@@ -3449,7 +3458,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 22.4,
     "playoffContenderRank": 20,
     "sliderLabels": {
-      "qb": "George MacIntyre Hyper-Tempo Air Raid",
+      "qb": "George MacIntyre QB Execution",
       "ground": "DeSean Bishop Physical Ground Attack",
       "defense": "Tim Banks Havoc Defense",
       "turnover": "Turnover Margin Luck",
@@ -3788,7 +3797,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png",
-    "badgeText": "TENN"
+    "badgeText": "TENN",
+    "confirmedStarterQb": "George MacIntyre"
   },
   "indiana": {
     "id": "indiana",
@@ -3819,7 +3829,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 26.5,
     "playoffContenderRank": 6,
     "sliderLabels": {
-      "qb": "Josh Hoover Precision Passing",
+      "qb": "Josh Hoover QB Execution",
       "ground": "Lee Beebe Jr. Ground Attack",
       "defense": "Bryant Haines Havoc Defense",
       "turnover": "Turnover Margin Luck",
@@ -4156,7 +4166,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png",
-    "badgeText": "IND"
+    "badgeText": "IND",
+    "confirmedStarterQb": "Josh Hoover"
   },
   "miami": {
     "id": "miami",
@@ -4187,7 +4198,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 27.1,
     "playoffContenderRank": 7,
     "sliderLabels": {
-      "qb": "Darian Mensah Precision Passing",
+      "qb": "Darian Mensah QB Execution",
       "ground": "Mark Fletcher Jr. Power Ground Attack",
       "defense": "Lance Guidry Blitz Pressure",
       "turnover": "Turnover Margin Luck",
@@ -4524,7 +4535,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png",
-    "badgeText": "MIA"
+    "badgeText": "MIA",
+    "confirmedStarterQb": "Darian Mensah"
   },
   "texasam": {
     "id": "texasam",
@@ -4555,7 +4567,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 26.5,
     "playoffContenderRank": 8,
     "sliderLabels": {
-      "qb": "Marcel Reed Dual-Threat Attack",
+      "qb": "Marcel Reed QB Execution",
       "ground": "Carsyn Baker / KJ Edwards Ground Game",
       "defense": "Mike Elko Wrecking Crew Defense",
       "turnover": "Turnover Margin Luck",
@@ -4895,7 +4907,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png",
-    "badgeText": "TAMU"
+    "badgeText": "TAMU",
+    "confirmedStarterQb": "Marcel Reed"
   },
   "olemiss": {
     "id": "olemiss",
@@ -4926,7 +4939,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 25.8,
     "playoffContenderRank": 9,
     "sliderLabels": {
-      "qb": "Trinidad Chambliss Tempo Passing",
+      "qb": "Trinidad Chambliss QB Execution",
       "ground": "Joshua Dye / Frazier Ground Attack",
       "defense": "Pete Golding / Brown Havoc Front",
       "turnover": "Turnover Margin Luck",
@@ -5264,7 +5277,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png",
-    "badgeText": "MISS"
+    "badgeText": "MISS",
+    "confirmedStarterQb": "Trinidad Chambliss"
   },
   "oklahoma": {
     "id": "oklahoma",
@@ -5295,7 +5309,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 25.6,
     "playoffContenderRank": 10,
     "sliderLabels": {
-      "qb": "John Mateer Dual-Threat Precision",
+      "qb": "John Mateer QB Execution",
       "ground": "Lloyd Avant Power Ground Attack",
       "defense": "Zac Alley / Venables Swarm Defense",
       "turnover": "Turnover Margin Luck",
@@ -5634,7 +5648,8 @@ var TEAMS_DATABASE = {
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/201.png",
-    "badgeText": "OU"
+    "badgeText": "OU",
+    "confirmedStarterQb": "John Mateer"
   }
 };
 

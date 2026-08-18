@@ -1744,13 +1744,22 @@ const LiveSyncEngine = {
       }
 
       // Update slider labels and stars dynamically from live depth chart
+      // BUT: if team has a confirmedStarterQb, always protect it from ESPN overwrite
       if (qbs.length > 0) {
-        const topQb = qbs.find(q => q.exp.includes('Senior') || q.exp.includes('Junior')) || qbs[0];
-        if (topQb && !team.starPlayer.includes('WR') && !team.starPlayer.includes('RB')) {
-          team.starPlayer = `${topQb.name} (QB)`;
-        }
-        if (topQb) {
-          team.sliderLabels.qb = `${topQb.name} QB Execution`;
+        if (team.confirmedStarterQb) {
+          // Manually verified starter — lock in QB slider and star player (unless WR/RB)
+          if (!team.starPlayer || (!team.starPlayer.includes('WR') && !team.starPlayer.includes('RB'))) {
+            team.starPlayer = `${team.confirmedStarterQb} (QB)`;
+          }
+          team.sliderLabels.qb = `${team.confirmedStarterQb} QB Execution`;
+        } else {
+          const topQb = qbs.find(q => q.exp.includes('Senior') || q.exp.includes('Junior')) || qbs[0];
+          if (topQb && !team.starPlayer.includes('WR') && !team.starPlayer.includes('RB')) {
+            team.starPlayer = `${topQb.name} (QB)`;
+          }
+          if (topQb) {
+            team.sliderLabels.qb = `${topQb.name} QB Execution`;
+          }
         }
       }
 
