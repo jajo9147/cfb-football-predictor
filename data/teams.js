@@ -470,8 +470,8 @@ var TEAMS_DATABASE = {
     "apRank": "#16 AP",
     "apPoints": "718 PTS",
     "headCoach": "Kyle Whittingham",
-    "defensiveCoordinator": "Don Wink Martindale",
-    "offensiveCoordinator": "Kirk Campbell",
+    "defensiveCoordinator": "Jay Hill",
+    "offensiveCoordinator": "Jason Beck",
     "starPlayer": "Brayden Fowler-Nicolosi (QB)",
     "secondaryStar": "Jonathan Brown (RB) / Savion Hiter (RB)",
     "stadium": "Michigan Stadium (The Big House)",
@@ -491,7 +491,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Brayden Fowler-Nicolosi Execution",
       "ground": "Jonathan Brown / Hiter Ground Attack",
-      "defense": "Whittingham / Martindale Physical D",
+      "defense": "Jay Hill Defensive Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "The Big House 110k Maize Wall"
     },
@@ -843,7 +843,7 @@ var TEAMS_DATABASE = {
     "apPoints": "1,672 PTS",
     "headCoach": "Ryan Day",
     "defensiveCoordinator": "Jim Knowles",
-    "offensiveCoordinator": "Chip Kelly",
+    "offensiveCoordinator": "Arthur Smith",
     "starPlayer": "Jeremiah Smith (WR)",
     "secondaryStar": "Bo Jackson (RB) / Justyn Martin (QB)",
     "stadium": "Ohio Stadium (The Horseshoe)",
@@ -1952,8 +1952,8 @@ var TEAMS_DATABASE = {
     "apRank": "#2 AP",
     "apPoints": "1,597 PTS (14 1st)",
     "headCoach": "Dan Lanning",
-    "defensiveCoordinator": "Tosh Lupoi",
-    "offensiveCoordinator": "Will Stein",
+    "defensiveCoordinator": "Chris Hampton",
+    "offensiveCoordinator": "Drew Mehringer",
     "starPlayer": "Dante Moore (QB)",
     "secondaryStar": "Jordon Davison (RB) / Matayo Uiagalelei (DE)",
     "stadium": "Autzen Stadium",
@@ -1973,7 +1973,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Dante Moore Laser Precision",
       "ground": "Jordon Davison / Hill Speed Option",
-      "defense": "Tosh Lupoi Havoc Defense",
+      "defense": "Chris Hampton Defensive Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "Autzen Stadium 54k Deafening Roar"
     },
