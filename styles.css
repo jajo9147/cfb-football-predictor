@@ -314,15 +314,14 @@ body {
 }
 
 .logo-badge {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-sm);
-  background: var(--color-brand-primary);
-  border: 1px solid var(--color-brand-accent);
+  background: #FFFFFF !important;
+  border: 2px solid var(--color-brand-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
   box-shadow: 0 0 16px var(--color-brand-glow);
   transition: var(--transition-smooth);
   overflow: hidden;
@@ -339,27 +338,64 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+}
+
+.team-pill-logo-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .team-pill-logo-img {
-  width: 20px;
-  height: 20px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  flex-shrink: 0;
 }
 
 .card-team-logo {
-  width: 32px;
-  height: 32px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
+.modal-team-logo-wrap {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #FFFFFF !important;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
 .modal-team-logo {
-  width: 44px;
-  height: 44px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.7));
+}
+
+.matchup-team-logo-wrap {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #FFFFFF !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .brand-text {
@@ -550,16 +586,16 @@ body {
 }
 
 .team-emblem-large {
-  width: 76px;
-  height: 76px;
+  width: 78px;
+  height: 78px;
   border-radius: var(--radius-md);
-  background: var(--color-brand-primary);
-  border: 2px solid var(--color-brand-accent);
+  background: #FFFFFF !important;
+  border: 2.5px solid var(--color-brand-accent);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
-  box-shadow: 0 0 24px var(--color-brand-glow);
+  box-shadow: 0 0 24px var(--color-brand-glow), 0 4px 12px rgba(0, 0, 0, 0.5);
   flex-shrink: 0;
 }
 
@@ -932,12 +968,14 @@ body {
   width: 38px;
   height: 38px;
   border-radius: 50%;
+  background: #FFFFFF !important;
+  border: 2px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem;
-  font-weight: 800;
+  padding: 3px;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 .team-text {

@@ -2,13 +2,13 @@
 // GRIDIRON ORACLE SERVICE WORKER (NETWORK-FIRST REALTIME ENGINE)
 // ==========================================================================
 
-const CACHE_NAME = 'gridiron-oracle-v2026.7';
+const CACHE_NAME = 'gridiron-oracle-v2026.8';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './styles.css?v=2026.7',
-  './app.js?v=2026.7',
-  './data/teams.js?v=2026.7',
+  './styles.css?v=2026.8',
+  './app.js?v=2026.8',
+  './data/teams.js?v=2026.8',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'

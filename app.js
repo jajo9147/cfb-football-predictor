@@ -96,7 +96,9 @@ function renderTeamSelector() {
     btn.className = `team-pill-btn ${key === state.currentTeamId ? 'active' : ''}`;
     btn.dataset.teamid = key;
     btn.innerHTML = `
-      <img src="${team.logoUrl}" alt="${team.shortName}" class="team-pill-logo-img">
+      <span class="team-pill-logo-badge">
+        <img src="${team.logoUrl}" alt="${team.shortName}" class="team-pill-logo-img">
+      </span>
       <span>${team.shortName}</span>
       <span class="team-pill-rank">${team.apRank}</span>
     `;
@@ -286,7 +288,7 @@ function renderSchedule() {
 
       <div class="matchup-row">
         <div class="team-pill">
-          <div class="team-logo-circle" style="background: ${team.colors.primary}; padding: 3px;">
+          <div class="team-logo-circle" style="border: 2px solid ${team.colors.primary}; padding: 3px;">
             <img src="${team.logoUrl}" alt="${team.abbr}" class="card-team-logo">
           </div>
           <div class="team-text">
@@ -309,7 +311,7 @@ function renderSchedule() {
             <span class="team-abbr">${game.oppAbbr}</span>
             <span class="team-ranking-sub">${game.oppRank}</span>
           </div>
-          <div class="team-logo-circle" style="background: ${game.oppColor}; padding: 3px;">
+          <div class="team-logo-circle" style="border: 2px solid ${game.oppColor}; padding: 3px;">
             <img src="${game.oppLogoUrl || ESPN_LOGOS[game.oppAbbr]}" alt="${game.oppAbbr}" class="card-team-logo">
           </div>
         </div>
@@ -471,7 +473,7 @@ function openSimModal(game) {
   // Scoreboard
   document.getElementById('modalScoreboard').innerHTML = `
     <div style="display: flex; align-items: center; gap: 0.75rem;">
-      <div class="team-logo-circle" style="width: 44px; height: 44px; background: ${team.colors.primary}; padding: 4px;">
+      <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team.colors.primary};">
         <img src="${team.logoUrl}" alt="${team.shortName}" class="modal-team-logo">
       </div>
       <div>
@@ -496,7 +498,7 @@ function openSimModal(game) {
         <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${game.oppAbbr}</div>
         <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${game.oppRank}</div>
       </div>
-      <div class="team-logo-circle" style="width: 44px; height: 44px; background: ${game.oppColor}; padding: 4px;">
+      <div class="modal-team-logo-wrap" style="border: 2.5px solid ${game.oppColor};">
         <img src="${game.oppLogoUrl || ESPN_LOGOS[game.oppAbbr]}" alt="${game.oppAbbr}" class="modal-team-logo">
       </div>
     </div>
@@ -844,14 +846,14 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       <div class="playoff-matchup-box ${teamId === 'texas' || (teamId === 'lsu' && totalWins === 9) ? 'active-team-matchup' : ''}">
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['BSU'] || ''}" class="matchup-team-logo" alt="Boise State">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['BSU'] || ''}" class="matchup-team-logo" alt="Boise State"></span>
             <span>#12 Boise State</span>
           </div>
           <span style="color: var(--color-text-dim);">17</span>
         </div>
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas"></span>
             <span style="color: #FFFFFF; font-weight: 800;">#5 Texas</span>
           </div>
           <span style="color: var(--color-success); font-weight: 800;">38</span>
@@ -866,14 +868,14 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       <div class="playoff-matchup-box ${(teamId === 'michigan' || teamId === 'alabama') ? 'active-team-matchup' : ''}">
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['MICH'] || ''}" class="matchup-team-logo" alt="Michigan">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['MICH'] || ''}" class="matchup-team-logo" alt="Michigan"></span>
             <span style="${teamId === 'michigan' ? 'color: var(--color-brand-accent); font-weight: 800;' : ''}">#11 Michigan</span>
           </div>
           <span style="color: var(--color-text-dim);">20</span>
         </div>
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['BAMA'] || ''}" class="matchup-team-logo" alt="Alabama">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['BAMA'] || ''}" class="matchup-team-logo" alt="Alabama"></span>
             <span style="color: #FFFFFF; font-weight: 800;">#6 Alabama</span>
           </div>
           <span style="color: var(--color-success); font-weight: 800;">28</span>
@@ -890,14 +892,14 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       <div class="playoff-matchup-box ${(teamId === 'pennstate' || teamId === 'notredame') ? 'active-team-matchup' : ''}">
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['PSU'] || ''}" class="matchup-team-logo" alt="Penn State">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['PSU'] || ''}" class="matchup-team-logo" alt="Penn State"></span>
             <span style="${teamId === 'pennstate' ? 'color: var(--color-brand-accent); font-weight: 800;' : ''}">#10 Penn State</span>
           </div>
           <span style="color: var(--color-text-dim);">21</span>
         </div>
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['ND'] || ''}" class="matchup-team-logo" alt="Notre Dame">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['ND'] || ''}" class="matchup-team-logo" alt="Notre Dame"></span>
             <span style="color: #FFFFFF; font-weight: 800;">#7 Notre Dame</span>
           </div>
           <span style="color: var(--color-success); font-weight: 800;">24</span>
@@ -914,14 +916,14 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       <div class="playoff-matchup-box ${teamId === 'tennessee' ? 'active-team-matchup' : ''}">
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['MISS'] || ''}" class="matchup-team-logo" alt="Ole Miss">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['MISS'] || ''}" class="matchup-team-logo" alt="Ole Miss"></span>
             <span>#9 Ole Miss</span>
           </div>
           <span style="color: var(--color-text-dim);">28</span>
         </div>
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['TENN'] || ''}" class="matchup-team-logo" alt="Tennessee">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TENN'] || ''}" class="matchup-team-logo" alt="Tennessee"></span>
             <span style="color: #FFFFFF; font-weight: 800;">#8 Tennessee</span>
           </div>
           <span style="color: var(--color-success); font-weight: 800;">31</span>
@@ -944,14 +946,14 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       <div class="playoff-matchup-box ${teamId === 'georgia' || teamId === 'tennessee' ? 'active-team-matchup' : ''}">
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['TENN'] || ''}" class="matchup-team-logo" alt="Tennessee">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TENN'] || ''}" class="matchup-team-logo" alt="Tennessee"></span>
             <span>#8 Tennessee</span>
           </div>
           <span style="color: var(--color-text-dim);">24</span>
         </div>
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['UGA'] || ''}" class="matchup-team-logo" alt="Georgia">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['UGA'] || ''}" class="matchup-team-logo" alt="Georgia"></span>
             <span style="color: #FFFFFF; font-weight: 800;">#1 Georgia (BYE)</span>
           </div>
           <span style="color: var(--color-success); font-weight: 800;">31</span>
@@ -966,14 +968,14 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       <div class="playoff-matchup-box ${teamId === 'ohiostate' || teamId === 'notredame' ? 'active-team-matchup' : ''}">
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['ND'] || ''}" class="matchup-team-logo" alt="Notre Dame">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['ND'] || ''}" class="matchup-team-logo" alt="Notre Dame"></span>
             <span>#7 Notre Dame</span>
           </div>
           <span style="color: var(--color-text-dim);">23</span>
         </div>
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State"></span>
             <span style="color: #FFFFFF; font-weight: 800;">#2 Ohio State (BYE)</span>
           </div>
           <span style="color: var(--color-success); font-weight: 800;">30</span>
@@ -988,14 +990,14 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       <div class="playoff-matchup-box ${teamId === 'oregon' || teamId === 'alabama' ? 'active-team-matchup' : ''}">
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['BAMA'] || ''}" class="matchup-team-logo" alt="Alabama">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['BAMA'] || ''}" class="matchup-team-logo" alt="Alabama"></span>
             <span>#6 Alabama</span>
           </div>
           <span style="color: var(--color-text-dim);">24</span>
         </div>
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['ORE'] || ''}" class="matchup-team-logo" alt="Oregon">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['ORE'] || ''}" class="matchup-team-logo" alt="Oregon"></span>
             <span style="color: #FFFFFF; font-weight: 800;">#3 Oregon (BYE)</span>
           </div>
           <span style="color: var(--color-success); font-weight: 800;">27</span>
@@ -1010,14 +1012,14 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       <div class="playoff-matchup-box ${teamId === 'texas' ? 'active-team-matchup' : ''}">
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['MIA'] || ''}" class="matchup-team-logo" alt="Miami">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['MIA'] || ''}" class="matchup-team-logo" alt="Miami"></span>
             <span>#4 Miami (ACC Champ)</span>
           </div>
           <span style="color: var(--color-text-dim);">27</span>
         </div>
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas"></span>
             <span style="color: #FFFFFF; font-weight: 800;">#5 Texas</span>
           </div>
           <span style="color: var(--color-success); font-weight: 800;">34</span>
@@ -1040,14 +1042,14 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       <div class="playoff-matchup-box ${teamId === 'texas' || teamId === 'georgia' ? 'active-team-matchup' : ''}">
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['UGA'] || ''}" class="matchup-team-logo" alt="Georgia">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['UGA'] || ''}" class="matchup-team-logo" alt="Georgia"></span>
             <span>#1 Georgia</span>
           </div>
           <span style="color: var(--color-text-dim);">27</span>
         </div>
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas"></span>
             <span style="color: #FFFFFF; font-weight: 800;">#5 Texas</span>
           </div>
           <span style="color: var(--color-success); font-weight: 800;">28</span>
@@ -1062,14 +1064,14 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       <div class="playoff-matchup-box ${teamId === 'ohiostate' || teamId === 'oregon' ? 'active-team-matchup' : ''}">
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['ORE'] || ''}" class="matchup-team-logo" alt="Oregon">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['ORE'] || ''}" class="matchup-team-logo" alt="Oregon"></span>
             <span>#3 Oregon</span>
           </div>
           <span style="color: var(--color-text-dim);">28</span>
         </div>
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State"></span>
             <span style="color: #FFFFFF; font-weight: 800;">#2 Ohio State</span>
           </div>
           <span style="color: var(--color-success); font-weight: 800;">31</span>
@@ -1091,14 +1093,14 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       <div class="playoff-matchup-box" style="border-color: var(--color-brand-border); background: linear-gradient(135deg, rgba(255,255,255,0.06), var(--color-brand-glow));">
         <div class="matchup-teams-row" style="margin-bottom: 0.25rem;">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State"></span>
             <span>#2 Ohio State</span>
           </div>
           <span style="color: var(--color-text-dim); font-size: 1.1rem;">28</span>
         </div>
         <div class="matchup-teams-row">
           <div class="matchup-team-item">
-            <img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas">
+            <span class="matchup-team-logo-wrap"><img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas"></span>
             <span style="color: #FFFFFF; font-weight: 900; font-size: 1rem;">#5 Texas Longhorns</span>
           </div>
           <span style="color: var(--color-success); font-size: 1.1rem; font-weight: 900;">31</span>
