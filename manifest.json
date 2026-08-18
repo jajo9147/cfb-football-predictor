@@ -1,0 +1,24 @@
+{
+  "name": "Gridiron Oracle: College Football AI Predictor",
+  "short_name": "Gridiron AI",
+  "description": "Simulate 10,000 drives, tune custom AI scenarios, and project CFP Playoff paths for top college football powerhouses.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07090E",
+  "theme_color": "#07090E",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

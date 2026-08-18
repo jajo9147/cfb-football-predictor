@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gridiron Oracle | College Football AI Predictor & Season Simulator</title>
+  
+  <!-- SEO & Social Sharing Metadata -->
+  <meta name="description" content="Simulate every top college football game drive-by-drive, tune custom AI scenarios for 10 powerhouses, and project CFP Playoff seeds.">
+  <meta name="theme-color" content="#07090E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Gridiron AI">
+  
+  <!-- PWA Manifest & Touch Icons -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  
+  <!-- Open Graph Protocol -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gridiron Oracle: College Football AI Predictor & Simulator">
+  <meta property="og:description" content="Simulate 10,000 drives, tune custom single-game scenarios, and calculate CFP Playoff paths for top college football powerhouses.">
+  <meta property="og:image" content="icons/icon-512.png">
+  
+  <!-- Fonts: Bebas Neue, Outfit, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="styles.css?v=2026.1">
+</head>
+<body class="theme-texas">
+
+  <!-- Ambient Stadium Glow Effects -->
+  <div class="ambient-glow glow-primary"></div>
+  <div class="ambient-glow glow-secondary"></div>
+  <div class="grid-overlay"></div>
+
+  <!-- Main Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand">
+        <div class="logo-badge" id="navLogoBadge">🤘</div>
+        <div class="brand-text">
+          <span class="brand-title">GRIDIRON ORACLE</span>
+          <span class="brand-subtitle">COLLEGE FOOTBALL AI SIMULATOR</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <div class="countdown-badge" id="countdownBadge">
+          <span class="pulse-dot"></span>
+          <span id="countdownText">KICKOFF: 18 DAYS</span>
+        </div>
+        <button class="install-pwa-btn" id="openPwaInstallBtn">
+          <i class="fa-solid fa-mobile-screen"></i>
+          <span>Install App</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Top Quick Team Selector Bar (10 Powerhouses) -->
+  <section class="team-selector-section">
+    <div class="container">
+      <div class="team-selector-track" id="teamSelectorTrack">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Active Team Hero Card -->
+  <header class="team-hero-section">
+    <div class="container">
+      <div class="hero-banner-card" id="teamHeroBanner">
+        <div class="team-identity">
+          <div class="team-emblem-large" id="heroEmblem">🤘</div>
+          <div class="team-details">
+            <h1 id="heroTeamName">Texas Longhorns</h1>
+            <div class="team-meta-pills" id="heroMetaPills">
+              <span class="meta-pill rank" id="heroRank">#5 AP POLL</span>
+              <span class="meta-pill" id="heroCoach">HC: Steve Sarkisian</span>
+              <span class="meta-pill" id="heroStarPlayer">Star: Arch Manning (QB)</span>
+              <span class="meta-pill" id="heroStadium">DKR Texas Memorial Stadium (100k)</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-quick-actions">
+          <button class="action-btn hype-btn" id="openHypeCardBtn">
+            <i class="fa-solid fa-camera-retro"></i>
+            <span>Export Hype Card</span>
+          </button>
+          <button class="action-btn secondary-btn" id="quickSimAllBtn">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Re-Sim Season</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="container">
+
+    <!-- KPI Season Overview Dashboard -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-label"><i class="fa-solid fa-trophy"></i> PROJECTED RECORD</span>
+        <span class="kpi-value" id="kpiRecord">11 - 1</span>
+        <span class="kpi-sub" id="kpiConfRecord">7-1 Conference</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label"><i class="fa-solid fa-chart-line"></i> WIN PROBABILITY</span>
+        <span class="kpi-value" id="kpiWinProb">88.4%</span>
+        <span class="kpi-sub">Season-long average</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label"><i class="fa-solid fa-gauge-high"></i> AVG SCORING MARGIN</span>
+        <span class="kpi-value" id="kpiMargin">+17.8</span>
+        <span class="kpi-sub">Points per game</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label"><i class="fa-solid fa-shield-halved"></i> 12-TEAM CFP SEED</span>
+        <span class="kpi-value" id="kpiCfpSeed">#5 SEED</span>
+        <span class="kpi-sub" id="kpiCfpStatus">First Round Host</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label"><i class="fa-solid fa-ring"></i> NATTY TITLE ODDS</span>
+        <span class="kpi-value" id="kpiNattyOdds">+750</span>
+        <span class="kpi-sub">14.2% Championship Sim</span>
+      </div>
+    </section>
+
+    <!-- Global AI Simulation Tuning Section -->
+    <section class="tuning-section">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fa-solid fa-sliders"></i>
+          <span>GLOBAL AI SIMULATION TUNING</span>
+        </div>
+        <div class="presets-container" id="globalPresetsContainer">
+          <button class="preset-btn active" data-preset="baseline">Season Baseline</button>
+          <button class="preset-btn" data-preset="qb-mvp">QB Heisman Mode</button>
+          <button class="preset-btn" data-preset="qb-slump">QB Slump</button>
+          <button class="preset-btn" data-preset="iron-defense">Iron Curtain D</button>
+          <button class="preset-btn" data-preset="chaos">CFB Chaos</button>
+        </div>
+      </div>
+      <div class="sliders-grid" id="globalSlidersGrid">
+        <!-- Dynamically injected sliders -->
+      </div>
+    </section>
+
+    <!-- 2026 Official Schedule Section -->
+    <section class="schedule-section">
+      <div class="schedule-header">
+        <div class="section-title">
+          <i class="fa-solid fa-calendar-days"></i>
+          <span>2026 OFFICIAL SCHEDULE & SIMULATED MATCHUPS</span>
+        </div>
+        <div class="filter-pills" id="scheduleFilterPills">
+          <button class="filter-btn active" data-filter="all">All 12 Games</button>
+          <button class="filter-btn" data-filter="marquee">🔥 Marquee & Rivalries</button>
+          <button class="filter-btn" data-filter="conf">Conference</button>
+          <button class="filter-btn" data-filter="home">Home</button>
+          <button class="filter-btn" data-filter="away">Away / Neutral</button>
+        </div>
+      </div>
+
+      <div class="schedule-grid" id="scheduleGrid">
+        <!-- Injected Game Cards -->
+      </div>
+    </section>
+
+    <!-- 12-Team CFP Playoff Bracket Section -->
+    <section class="playoff-section">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fa-solid fa-diagram-project"></i>
+          <span>12-TEAM COLLEGE FOOTBALL PLAYOFF PROJECTION</span>
+        </div>
+      </div>
+      <div class="playoff-bracket-grid" id="playoffBracketGrid">
+        <!-- Dynamically rendered bracket rounds -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Matchup Simulation Modal -->
+  <div class="modal-backdrop" id="simModal">
+    <div class="modal-dialog">
+      <button class="modal-close" id="closeSimModalBtn"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="modal-header">
+        <span class="matchup-tag" id="modalWeekTag">WEEK 2 • MARQUEE CLASH</span>
+        <h2 class="modal-title" id="modalMatchupTitle">Texas Longhorns vs Ohio State Buckeyes</h2>
+        <span class="modal-stadium" id="modalStadiumLocation">DKR Texas Memorial Stadium • Austin, TX</span>
+      </div>
+
+      <div class="modal-scoreboard" id="modalScoreboard">
+        <!-- Injected Scoreboard -->
+      </div>
+
+      <div class="modal-sub-tabs">
+        <button class="sub-tab active" data-subtab="drives">
+          <i class="fa-solid fa-list-ol"></i>
+          <span>Drive Log</span>
+        </button>
+        <button class="sub-tab" data-subtab="game-tuning">
+          <i class="fa-solid fa-sliders"></i>
+          <span>Game AI Tuning</span>
+        </button>
+        <button class="sub-tab" data-subtab="radar">
+          <i class="fa-solid fa-chart-radar"></i>
+          <span>Radar Stats</span>
+        </button>
+        <button class="sub-tab" data-subtab="scout">
+          <i class="fa-solid fa-binoculars"></i>
+          <span>Tactical Intel</span>
+        </button>
+      </div>
+
+      <div class="tab-pane active" id="pane-drives">
+        <div id="driveLogContainer" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 280px; overflow-y: auto;">
+          <!-- Drives injected -->
+        </div>
+      </div>
+
+      <div class="tab-pane" id="pane-game-tuning">
+        <div class="game-tuning-panel">
+          <div class="tuning-banner">
+            <span class="tuning-badge"><i class="fa-solid fa-bullseye"></i> SINGLE-GAME AI TUNING</span>
+            <span class="tuning-subtitle">Customize this specific matchup's weights. Changes will override global settings and recalculate scores and CFP paths.</span>
+          </div>
+
+          <div class="game-preset-row">
+            <span style="font-size: 0.78rem; font-weight: 700; color: var(--color-text-muted);">Quick Game Scenarios:</span>
+            <div class="game-preset-buttons">
+              <button class="game-preset-btn active" data-gamepreset="baseline">Season Baseline</button>
+              <button class="game-preset-btn" data-gamepreset="qb-slump">QB Slump</button>
+              <button class="game-preset-btn" data-gamepreset="blowout">Offensive Blowout</button>
+              <button class="game-preset-btn" data-gamepreset="turnover-trap">Turnover Trap</button>
+              <button class="game-preset-btn" data-gamepreset="ground-pound">Ground & Pound</button>
+            </div>
+          </div>
+
+          <div class="game-sliders-grid" id="modalGameSlidersGrid">
+            <!-- Injected single-game sliders -->
+          </div>
+
+          <div class="tuning-footer-actions">
+            <button class="action-btn secondary-btn" id="resetGameTuningBtn">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span>Reset Game</span>
+            </button>
+            <button class="action-btn hype-btn" id="applyAndSimGameBtn">
+              <i class="fa-solid fa-play"></i>
+              <span>Apply & Re-Simulate (10,000 Drives)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="pane-radar">
+        <div style="display: flex; justify-content: center; align-items: center; min-height: 220px;">
+          <canvas id="radarChartCanvas" width="380" height="240"></canvas>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="pane-scout">
+        <div id="scoutReportBox" style="background: rgba(0,0,0,0.3); border-radius: var(--radius-md); padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+          <!-- Scout info -->
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="card-export-btn" id="modalExportCardBtn">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Generate Group Chat Card</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Social Hype Card Generator Modal -->
+  <div class="modal-backdrop" id="hypeCardModal">
+    <div class="modal-dialog" style="max-width: 600px; text-align: center;">
+      <button class="modal-close" id="closeHypeCardBtn"><i class="fa-solid fa-xmark"></i></button>
+      <h2 class="modal-title" style="font-size: 1.6rem;">GROUP CHAT HYPE CARD</h2>
+      <p style="font-size: 0.8rem; color: var(--color-text-muted);">Save this image or copy to clipboard to flex on your group chat.</p>
+      
+      <div style="margin: 1rem 0; display: flex; justify-content: center;">
+        <canvas id="hypeCanvas" width="800" height="450" style="width: 100%; max-width: 480px; border-radius: var(--radius-md); border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);"></canvas>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        <button class="action-btn hype-btn" id="downloadHypeCardBtn">
+          <i class="fa-solid fa-download"></i>
+          <span>Save Image</span>
+        </button>
+        <button class="action-btn secondary-btn" id="copyHypeCardBtn">
+          <i class="fa-solid fa-copy"></i>
+          <span>Copy Image</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1-Tap PWA Mobile Install Drawer -->
+  <div class="pwa-drawer-backdrop" id="pwaInstallDrawer">
+    <div class="pwa-drawer">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <div class="logo-badge" style="width: 34px; height: 34px; font-size: 1.1rem;">📱</div>
+          <span style="font-family: var(--font-display); font-size: 1.4rem; color: #FFFFFF;">INSTALL GRIDIRON ORACLE</span>
+        </div>
+        <button class="modal-close" id="closePwaDrawerBtn" style="position: static;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <p style="font-size: 0.84rem; color: var(--color-text-muted);">Install directly to your iPhone or Android home screen for instant fullscreen launch with no browser bar ($0 cost).</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <div class="pwa-step-item">
+          <span class="pwa-step-num">1</span>
+          <span>Tap the <strong>Share</strong> button <i class="fa-solid fa-arrow-up-from-bracket"></i> at the bottom of Safari (or <i class="fa-solid fa-ellipsis-vertical"></i> in Chrome).</span>
+        </div>
+        <div class="pwa-step-item">
+          <span class="pwa-step-num">2</span>
+          <span>Scroll down and select <strong>"Add to Home Screen"</strong> <i class="fa-regular fa-square-plus"></i>.</span>
+        </div>
+        <div class="pwa-step-item">
+          <span class="pwa-step-num">3</span>
+          <span>Tap <strong>Add</strong> in the top right. Launch the app right from your home screen!</span>
+        </div>
+      </div>
+
+      <button class="action-btn hype-btn" id="pwaNativePromptBtn" style="width: 100%; justify-content: center;">
+        <i class="fa-solid fa-download"></i>
+        <span>Add to Home Screen</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <span id="footerEmblem">🤘</span>
+        <span>GRIDIRON ORACLE • COLLEGE FOOTBALL AI PREDICTOR</span>
+      </div>
+      <p class="footer-text">10,000 Monte Carlo drive-by-drive engine, real-time AP Poll telemetry, single-game AI scenario tuning, and 12-team CFP Playoff simulator.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/teams.js?v=2026.1"></script>
+  <script src="app.js?v=2026.1"></script>
+</body>
+</html>
