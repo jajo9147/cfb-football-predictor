@@ -1945,58 +1945,67 @@ body {
     padding: 0 0.85rem;
   }
 
-  /* Compact Single-Line Mobile Navbar */
+  /* Clean 2-Tier Mobile Broadcast Header */
   .navbar {
-    padding: 0.25rem 0;
+    padding: 0.4rem 0 0.35rem;
+    background: rgba(7, 9, 14, 0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .nav-container {
-    padding: 0.3rem 0;
-    gap: 0.4rem;
-  }
-
-  .logo-badge {
-    width: 32px;
-    height: 32px;
-    padding: 3px;
-    border-radius: var(--radius-sm);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.15rem 0.4rem 0.1rem;
+    gap: 0.35rem 0.45rem;
   }
 
   .brand {
-    gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    order: 1;
+  }
+
+  .logo-badge {
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+    border-radius: var(--radius-sm);
   }
 
   .brand-title {
-    font-size: 1.15rem;
+    font-size: 1.12rem;
     letter-spacing: 0.5px;
+    font-weight: 800;
   }
 
   .brand-subtitle {
     display: none !important;
   }
 
+  /* Nav Actions - Promoted via display: contents for flex layout */
   .nav-actions {
-    gap: 0.35rem;
-  }
-
-  .countdown-badge {
-    display: inline-flex !important;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.65rem;
-    gap: 0.3rem;
-    font-weight: 800;
-    border-radius: var(--radius-full);
-    white-space: nowrap;
-    border: 1px solid var(--color-brand-border);
-    background: rgba(0, 0, 0, 0.7);
-    box-shadow: 0 0 8px var(--color-brand-glow);
-    line-height: 1;
+    display: contents;
   }
 
   .live-feed-pill {
-    padding: 0.25rem 0.5rem;
+    order: 2;
+    margin-left: auto;
+    padding: 0.26rem 0.5rem;
     font-size: 0.65rem;
     gap: 0.3rem;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    border-radius: var(--radius-full);
+  }
+
+  .live-feed-text {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
   }
 
   .live-pulse-dot {
@@ -2010,9 +2019,37 @@ body {
   }
 
   .install-pwa-btn {
-    padding: 0.28rem 0.55rem;
+    order: 3;
+    padding: 0.26rem 0.6rem;
     font-size: 0.68rem;
     gap: 0.3rem;
+    border-radius: var(--radius-full);
+  }
+
+  /* Sleek Full-Width Broadcast Kickoff Ribbon (Row 2 on Mobile) */
+  .countdown-badge {
+    order: 4;
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid var(--color-brand-border);
+    padding: 0.32rem 0.75rem;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--color-brand-accent);
+    box-shadow: 0 0 10px var(--color-brand-glow);
+    letter-spacing: 0.5px;
+    margin-top: 0.15rem;
+  }
+
+  .countdown-badge .pulse-dot {
+    width: 6px;
+    height: 6px;
   }
 
   /* Native Mobile Team Selector Swimlane */
@@ -2233,6 +2270,11 @@ body {
 }
 
 @media (max-width: 480px) {
+  .nav-container {
+    padding: 0.1rem 0.25rem 0.1rem;
+    gap: 0.3rem 0.4rem;
+  }
+
   .brand-title {
     font-size: 1.05rem;
   }
@@ -2245,12 +2287,13 @@ body {
 
   .live-feed-pill {
     padding: 0.22rem 0.45rem;
+    font-size: 0.62rem;
   }
 
   .countdown-badge {
-    padding: 0.22rem 0.42rem;
-    font-size: 0.62rem;
-    gap: 0.25rem;
+    padding: 0.28rem 0.5rem;
+    font-size: 0.68rem;
+    gap: 0.35rem;
   }
 
   .countdown-badge .pulse-dot {
@@ -2259,7 +2302,8 @@ body {
   }
 
   .install-pwa-btn {
-    padding: 0.25rem 0.5rem;
+    padding: 0.22rem 0.52rem;
+    font-size: 0.65rem;
   }
 
   .team-pill-btn {
@@ -2477,7 +2521,7 @@ body {
 
 @media (max-width: 380px) {
   .brand-title {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
   }
   .live-feed-text {
     display: none;
@@ -2486,11 +2530,11 @@ body {
     display: none;
   }
   .install-pwa-btn {
-    padding: 0.25rem 0.4rem;
+    padding: 0.24rem 0.45rem;
   }
   .countdown-badge {
-    font-size: 0.58rem;
-    padding: 0.2rem 0.35rem;
+    font-size: 0.62rem;
+    padding: 0.25rem 0.4rem;
   }
 }
 
