@@ -2311,8 +2311,8 @@ var TEAMS_DATABASE = {
     "apRank": "#18 AP",
     "apPoints": "482 PTS",
     "headCoach": "Matt Campbell",
-    "starPlayer": "Nicholas Singleton (RB)",
-    "secondaryStar": "Ethan Grunkemeyer (QB) / Tony Rojas (LB)",
+    "starPlayer": "Rocco Becht (QB)",
+    "secondaryStar": "Carson Hansen (RB) / Abdul Carter (DE)",
     "stadium": "Beaver Stadium",
     "stadiumCity": "University Park, PA",
     "stadiumCapacity": "106,572",
@@ -2328,9 +2328,9 @@ var TEAMS_DATABASE = {
     "baseSpRating": 26.2,
     "playoffContenderRank": 18,
     "sliderLabels": {
-      "qb": "Ethan Grunkemeyer Passing Execution",
-      "ground": "Singleton / Kaytron Allen Ground Attack",
-      "defense": "D'Anton Lynn Stifling LBU Defense",
+      "qb": "Rocco Becht Aerial Command",
+      "ground": "Carson Hansen / Quinton Martin Ground Attack",
+      "defense": "Tom Allen 'Bull' Havoc Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Beaver Stadium 107k White Out"
     },
@@ -2665,7 +2665,7 @@ var TEAMS_DATABASE = {
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/213.png",
     "badgeText": "PSU",
-    "defensiveCoordinator": "D'Anton Lynn",
+    "defensiveCoordinator": "Tom Allen",
     "offensiveCoordinator": "Andy Kotelnicki"
   },
   "notredame": {
@@ -2679,16 +2679,16 @@ var TEAMS_DATABASE = {
     "apPoints": "1,510 PTS (6 1st)",
     "headCoach": "Marcus Freeman",
     "starPlayer": "CJ Carr (QB)",
-    "secondaryStar": "Jeremiyah Love (RB) / Drayk Bowen (LB)",
+    "secondaryStar": "Aneyas Williams (RB) / Leonard Moore (CB)",
     "stadium": "Notre Dame Stadium",
     "stadiumCity": "South Bend, IN",
     "stadiumCapacity": "77,622",
     "themeClass": "theme-notredame",
     "colors": {
       "primary": "#0C2340",
-      "secondary": "#C99700",
-      "accent": "#00843D",
-      "glow": "rgba(201, 151, 0, 0.45)",
+      "secondary": "#FEE123",
+      "accent": "#00FF7F",
+      "glow": "rgba(254, 225, 35, 0.45)",
       "bgSurface": "#0E1724",
       "bgBase": "#060B12"
     },
@@ -2696,8 +2696,8 @@ var TEAMS_DATABASE = {
     "playoffContenderRank": 4,
     "sliderLabels": {
       "qb": "CJ Carr Precision Passing",
-      "ground": "Jeremiyah Love / Jadarian Price Ground Attack",
-      "defense": "Al Golden / Freeman Stifling Defense",
+      "ground": "Aneyas Williams / Nolan James Ground Attack",
+      "defense": "Chris Ash / Freeman Havoc Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Notre Dame Stadium Golden Echo"
     },
@@ -2725,7 +2725,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Line control against physical SEC front.",
-          "keyMatchup": "Jeremiyah Love vs Texas A&M run D.",
+          "keyMatchup": "Aneyas Williams vs Texas A&M run D.",
           "summary": "Blockbuster opener in South Bend."
         },
         "oppLogoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png"
@@ -3036,7 +3036,7 @@ var TEAMS_DATABASE = {
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png",
     "badgeText": "ND",
-    "defensiveCoordinator": "Al Golden",
+    "defensiveCoordinator": "Chris Ash",
     "offensiveCoordinator": "Mike Denbrock"
   },
   "lsu": {
@@ -3049,8 +3049,8 @@ var TEAMS_DATABASE = {
     "apRank": "#11 AP",
     "apPoints": "988 PTS",
     "headCoach": "Lane Kiffin",
-    "starPlayer": "Garrett Nussmeier (QB)",
-    "secondaryStar": "Caden Durham (RB) / Whit Weeks (LB)",
+    "starPlayer": "Sam Leavitt (QB)",
+    "secondaryStar": "Caden Durham (RB) / Harlem Berry (RB)",
     "stadium": "Tiger Stadium (Death Valley)",
     "stadiumCity": "Baton Rouge, LA",
     "stadiumCapacity": "102,321",
@@ -3066,8 +3066,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 24.5,
     "playoffContenderRank": 11,
     "sliderLabels": {
-      "qb": "Garrett Nussmeier / Kiffin Arm Talent",
-      "ground": "Caden Durham / Kaleb Jackson Ground Game",
+      "qb": "Sam Leavitt / Kiffin Explosive Air Raid",
+      "ground": "Caden Durham / Harlem Berry Ground Game",
       "defense": "Blake Baker Aggressive Tiger Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Death Valley 102k Saturday Night"

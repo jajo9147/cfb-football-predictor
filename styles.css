@@ -126,10 +126,10 @@ body.theme-pennstate {
 /* 8. Notre Dame Fighting Irish */
 body.theme-notredame {
   --color-brand-primary: #0C2340;
-  --color-brand-secondary: #C99700;
-  --color-brand-accent: #00843D;
-  --color-brand-glow: rgba(201, 151, 0, 0.45);
-  --color-brand-border: rgba(201, 151, 0, 0.4);
+  --color-brand-secondary: #FEE123;
+  --color-brand-accent: #00FF7F;
+  --color-brand-glow: rgba(254, 225, 35, 0.45);
+  --color-brand-border: rgba(254, 225, 35, 0.4);
   --color-bg-base: #060B12;
   --color-bg-surface: #0E1724;
 }
@@ -690,9 +690,12 @@ body {
 }
 
 .meta-pill.rank {
-  background: var(--color-brand-glow);
-  border-color: var(--color-brand-accent);
-  color: var(--color-brand-accent);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--color-brand-secondary);
+  color: #FFFFFF;
+  font-weight: 800;
+  box-shadow: 0 0 12px var(--color-brand-glow);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .hero-quick-actions {
