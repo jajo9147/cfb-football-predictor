@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPwaInstall();
   startCountdownTicker();
   initLiveSyncEngine();
+  initMonteCarloEngine();
 });
 
 // ==========================================================================
@@ -345,6 +346,16 @@ function recalculateSeason() {
   document.getElementById('kpiCfpSeed').innerText = cfpSeed;
   document.getElementById('kpiCfpStatus').innerText = cfpStatus;
   document.getElementById('kpiNattyOdds').innerText = nattyOdds;
+
+  const mcQuick = runMonteCarloSeasonSim(state.currentTeamId, 1000);
+  const mcTopOutcomeEl = document.getElementById('kpiMonteCarloTopOutcome');
+  if (mcTopOutcomeEl) {
+    mcTopOutcomeEl.innerText = `${mcQuick.mostLikelyRecord} (${mcQuick.mostLikelyPct})`;
+  }
+  const nattyOddsSubEl = document.getElementById('kpiNattyOddsSub');
+  if (nattyOddsSubEl) {
+    nattyOddsSubEl.innerText = `${mcQuick.nattyOdds} Championship Sim`;
+  }
 
   // Render Schedule Grid & CFP Bracket
   renderSchedule();
@@ -1579,4 +1590,179 @@ function initLiveSyncEngine() {
     LiveSyncEngine.syncAll(false);
   }, 180000);
 }
+
+// ==========================================================================
+// 10,000 MONTE CARLO SEASON SIMULATION ENGINE
+// ==========================================================================
+
+function runMonteCarloSeasonSim(teamId, iterations = 10000) {
+  const team = TEAMS_DATABASE[teamId];
+  if (!team) return { iterations: 10000, avgWins: '0.0', winDistribution: {}, mostLikelyRecord: '0-0', mostLikelyPct: '0%', cfpOdds: '0%', nattyOdds: '0%' };
+
+  const schedule = team.schedule;
+  const gameProbs = schedule.map(g => {
+    const sim = calculateAdjustedMatchup(g, teamId);
+    return sim.adjWinProb / 100.0;
+  });
+
+  const winDistribution = { 12: 0, 11: 0, 10: 0, 9: 0, 8: 0, 7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: 0 };
+  let totalWinsSum = 0;
+  let playoffAppearances = 0;
+  let nationalTitles = 0;
+
+  for (let i = 0; i < iterations; i++) {
+    let simWins = 0;
+    for (let j = 0; j < gameProbs.length; j++) {
+      if (Math.random() < gameProbs[j]) {
+        simWins++;
+      }
+    }
+    winDistribution[simWins]++;
+    totalWinsSum += simWins;
+
+    if (simWins >= 10) playoffAppearances++;
+    else if (simWins === 9 && Math.random() < 0.35) playoffAppearances++;
+
+    if (simWins >= 12 && Math.random() < 0.38) nationalTitles++;
+    else if (simWins === 11 && Math.random() < 0.18) nationalTitles++;
+    else if (simWins === 10 && Math.random() < 0.05) nationalTitles++;
+  }
+
+  const distPct = {};
+  let maxPct = 0;
+  let mostLikely = '11-1';
+  let mostLikelyPct = '0.0%';
+
+  for (let w = 12; w >= 7; w--) {
+    const pct = (winDistribution[w] / iterations) * 100;
+    const label = `${w}-${12 - w}`;
+    distPct[label] = {
+      pct: pct.toFixed(1),
+      count: winDistribution[w]
+    };
+    if (pct > maxPct) {
+      maxPct = pct;
+      mostLikely = label;
+      mostLikelyPct = `${pct.toFixed(1)}%`;
+    }
+  }
+
+  let under7Sum = 0;
+  for (let w = 6; w >= 0; w--) {
+    under7Sum += winDistribution[w];
+  }
+  distPct['<=6-6'] = {
+    pct: ((under7Sum / iterations) * 100).toFixed(1),
+    count: under7Sum
+  };
+
+  return {
+    iterations,
+    avgWins: (totalWinsSum / iterations).toFixed(1),
+    winDistribution: distPct,
+    mostLikelyRecord: mostLikely,
+    mostLikelyPct,
+    cfpOdds: `${((playoffAppearances / iterations) * 100).toFixed(1)}%`,
+    nattyOdds: `${((nationalTitles / iterations) * 100).toFixed(1)}%`
+  };
+}
+
+function openMonteCarloModal() {
+  const modal = document.getElementById('monteCarloModal');
+  if (!modal) return;
+
+  const team = TEAMS_DATABASE[state.currentTeamId];
+  if (!team) return;
+
+  modal.classList.add('open');
+
+  const statusText = document.getElementById('mcStatusText');
+  const progressPct = document.getElementById('mcProgressPct');
+  const progressFill = document.getElementById('mcProgressFill');
+
+  if (statusText) statusText.innerHTML = `<i class="fa-solid fa-dice-d20 fa-spin" style="color: var(--color-brand-accent);"></i> SIMULATING 10,000 SEASONS...`;
+  if (progressPct) progressPct.innerText = '0%';
+  if (progressFill) progressFill.style.width = '0%';
+
+  document.getElementById('mcModalTitle').innerText = `10,000 MONTE CARLO SIMULATION: ${team.name.toUpperCase()}`;
+
+  let step = 0;
+  const animInterval = setInterval(() => {
+    step += 25;
+    if (progressPct) progressPct.innerText = `${Math.min(100, step)}%`;
+    if (progressFill) progressFill.style.width = `${Math.min(100, step)}%`;
+
+    if (step >= 100) {
+      clearInterval(animInterval);
+      if (statusText) statusText.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--color-success);"></i> 10,000 MONTE CARLO SEASONS SIMULATED`;
+
+      const mc = runMonteCarloSeasonSim(state.currentTeamId, 10000);
+
+      document.getElementById('mcAvgWins').innerText = mc.avgWins;
+      document.getElementById('mcMostLikelyRecord').innerText = `Most Likely: ${mc.mostLikelyRecord} (${mc.mostLikelyPct})`;
+      document.getElementById('mcCfpOdds').innerText = mc.cfpOdds;
+      document.getElementById('mcNattyOdds').innerText = mc.nattyOdds;
+
+      const barsContainer = document.getElementById('mcBarsList');
+      if (barsContainer) {
+        let barsHtml = '';
+        Object.keys(mc.winDistribution).forEach(recordKey => {
+          const item = mc.winDistribution[recordKey];
+          const pctVal = parseFloat(item.pct);
+          const isHighlight = recordKey === mc.mostLikelyRecord;
+          barsHtml += `
+            <div class="mc-bar-row">
+              <span class="mc-bar-label" style="${isHighlight ? 'color: var(--color-brand-accent);' : ''}">${recordKey}</span>
+              <div class="mc-bar-track">
+                <div class="mc-bar-fill" style="width: ${Math.min(100, pctVal * 2.2)}%; ${isHighlight ? 'background: linear-gradient(90deg, #F59E0B, #EF4444);' : ''}"></div>
+              </div>
+              <span class="mc-bar-val" style="${isHighlight ? 'color: #F59E0B;' : ''}">${item.pct}%</span>
+            </div>
+          `;
+        });
+        barsContainer.innerHTML = barsHtml;
+      }
+
+      recalculateSeason();
+    }
+  }, 75);
+}
+
+function initMonteCarloEngine() {
+  const quickSimBtn = document.getElementById('quickSimAllBtn');
+  if (quickSimBtn) {
+    quickSimBtn.addEventListener('click', () => {
+      openMonteCarloModal();
+    });
+  }
+
+  const mcKpiCard = document.getElementById('monteCarloKpiCard');
+  if (mcKpiCard) {
+    mcKpiCard.addEventListener('click', () => {
+      openMonteCarloModal();
+    });
+  }
+
+  const rerunBtn = document.getElementById('mcRerunBtn');
+  if (rerunBtn) {
+    rerunBtn.addEventListener('click', () => {
+      openMonteCarloModal();
+    });
+  }
+
+  const closeBtn = document.getElementById('closeMonteCarloModalBtn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      document.getElementById('monteCarloModal').classList.remove('open');
+    });
+  }
+
+  const applyCloseBtn = document.getElementById('mcApplyCloseBtn');
+  if (applyCloseBtn) {
+    applyCloseBtn.addEventListener('click', () => {
+      document.getElementById('monteCarloModal').classList.remove('open');
+    });
+  }
+}
+
 

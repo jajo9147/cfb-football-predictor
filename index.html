@@ -34,14 +34,14 @@
     if ('caches' in window) {
       caches.keys().then(keys => {
         keys.forEach(key => {
-          if (key !== 'gridiron-oracle-v2026.19') {
+          if (key !== 'gridiron-oracle-v2026.20') {
             caches.delete(key);
           }
         });
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=2026.19">
+  <link rel="stylesheet" href="styles.css?v=2026.20">
 </head>
 <body class="theme-texas">
 
@@ -115,9 +115,9 @@
             <i class="fa-solid fa-camera-retro"></i>
             <span>Export Hype Card</span>
           </button>
-          <button class="action-btn secondary-btn" id="quickSimAllBtn">
-            <i class="fa-solid fa-bolt"></i>
-            <span>Re-Sim Season</span>
+          <button class="action-btn secondary-btn" id="quickSimAllBtn" title="Run 10,000 Monte Carlo Season Iterations">
+            <i class="fa-solid fa-dice-d20"></i>
+            <span>10k Monte Carlo Re-Sim</span>
           </button>
         </div>
       </div>
@@ -152,7 +152,12 @@
       <div class="kpi-card">
         <span class="kpi-label"><i class="fa-solid fa-ring"></i> NATTY TITLE ODDS</span>
         <span class="kpi-value" id="kpiNattyOdds">+750</span>
-        <span class="kpi-sub">14.2% Championship Sim</span>
+        <span class="kpi-sub" id="kpiNattyOddsSub">14.2% Championship Sim</span>
+      </div>
+      <div class="kpi-card" id="monteCarloKpiCard" style="cursor: pointer;" title="Click to view 10,000 Monte Carlo simulation breakdown">
+        <span class="kpi-label"><i class="fa-solid fa-dice-d20"></i> MONTE CARLO ENGINE</span>
+        <span class="kpi-value" id="kpiMonteCarloRuns">10,000 SIMS</span>
+        <span class="kpi-sub" id="kpiMonteCarloTopOutcome">11-1 (44.2% Prob)</span>
       </div>
     </section>
 
@@ -331,6 +336,66 @@
         </button>
       </div>
     </div>
+  <!-- 10,000 MONTE CARLO SEASON SIMULATION MODAL -->
+  <div class="modal-backdrop" id="monteCarloModal">
+    <div class="modal-dialog monte-carlo-modal-card">
+      <button class="modal-close" id="closeMonteCarloModalBtn"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header">
+        <span class="matchup-tag"><i class="fa-solid fa-dice-d20"></i> STOCHASTIC SIMULATION ENGINE</span>
+        <h3 class="modal-title" id="mcModalTitle">10,000 MONTE CARLO SIMULATION</h3>
+        <p class="modal-stadium" id="mcModalSub">10,000 Full-Season Drives Iterations (Poisson / EPA Calibrated)</p>
+      </div>
+
+      <!-- Simulation Run Banner / Animation -->
+      <div class="mc-sim-banner" id="mcSimBanner">
+        <div class="mc-progress-header">
+          <span class="mc-status-text" id="mcStatusText"><i class="fa-solid fa-dice-d20 fa-spin" style="color: var(--color-brand-accent);"></i> SIMULATING 10,000 SEASONS...</span>
+          <span class="mc-progress-pct" id="mcProgressPct">100%</span>
+        </div>
+        <div class="mc-progress-bar">
+          <div class="mc-progress-fill" id="mcProgressFill" style="width: 100%;"></div>
+        </div>
+      </div>
+
+      <!-- Monte Carlo Top Summary Cards -->
+      <div class="mc-metrics-grid">
+        <div class="mc-metric-card">
+          <span class="mc-metric-label"><i class="fa-solid fa-trophy"></i> AVG WINS</span>
+          <span class="mc-metric-value" id="mcAvgWins">10.4</span>
+          <span class="mc-metric-sub" id="mcMostLikelyRecord">11-1 (38.2%)</span>
+        </div>
+        <div class="mc-metric-card">
+          <span class="mc-metric-label"><i class="fa-solid fa-shield-halved"></i> 12-TEAM CFP</span>
+          <span class="mc-metric-value" id="mcCfpOdds">84.6%</span>
+          <span class="mc-metric-sub" id="mcCfpSeedRange">Seed: #5 - #8</span>
+        </div>
+        <div class="mc-metric-card">
+          <span class="mc-metric-label"><i class="fa-solid fa-ring"></i> NATTY TITLE</span>
+          <span class="mc-metric-value" id="mcNattyOdds">14.8%</span>
+          <span class="mc-metric-sub" id="mcChampionshipProb">Top Contender</span>
+        </div>
+      </div>
+
+      <!-- Monte Carlo Win Probability Distribution Histogram -->
+      <div class="mc-distribution-section">
+        <h4 class="mc-section-title"><i class="fa-solid fa-chart-column"></i> 10,000-SEASON RECORD PROBABILITY DISTRIBUTION</h4>
+        <div class="mc-bars-list" id="mcBarsList">
+          <!-- Dynamically populated bars -->
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 0.5rem;">
+        <button class="action-btn secondary-btn" id="mcRerunBtn">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span>Re-Run 10,000 Sims</span>
+        </button>
+        <button class="action-btn hype-btn" id="mcApplyCloseBtn">
+          <i class="fa-solid fa-check"></i>
+          <span>Close & Apply</span>
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- 1-Tap PWA Mobile Install Drawer -->
@@ -381,7 +446,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?v=2026.19"></script>
-  <script src="app.js?v=2026.19"></script>
+  <script src="data/teams.js?v=2026.20"></script>
+  <script src="app.js?v=2026.20"></script>
 </body>
 </html>

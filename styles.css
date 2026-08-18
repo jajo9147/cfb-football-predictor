@@ -1763,3 +1763,168 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   MONTE CARLO SIMULATION STYLES
+   ========================================================================== */
+
+.monte-carlo-modal-card {
+  max-width: 700px;
+}
+
+.mc-sim-banner {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--color-brand-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.mc-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.mc-status-text {
+  color: var(--color-brand-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.mc-progress-pct {
+  color: var(--color-success);
+}
+
+.mc-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.mc-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-brand-primary), var(--color-brand-accent));
+  border-radius: var(--radius-full);
+  transition: width 0.35s ease;
+  box-shadow: 0 0 10px var(--color-brand-glow);
+}
+
+.mc-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 600px) {
+  .mc-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mc-metric-card {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.25rem;
+}
+
+.mc-metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--color-text-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.mc-metric-value {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.1;
+}
+
+.mc-metric-sub {
+  font-size: 0.72rem;
+  color: var(--color-brand-accent);
+  font-weight: 700;
+}
+
+.mc-distribution-section {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mc-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.mc-bars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mc-bar-row {
+  display: grid;
+  grid-template-columns: 55px 1fr 50px;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+}
+
+.mc-bar-label {
+  color: #FFFFFF;
+  font-weight: 800;
+}
+
+.mc-bar-track {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.mc-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-brand-primary), var(--color-brand-accent));
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease-out;
+}
+
+.mc-bar-val {
+  text-align: right;
+  color: var(--color-brand-accent);
+  font-weight: 800;
+}
+
