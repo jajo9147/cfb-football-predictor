@@ -1481,7 +1481,41 @@ function initPwaInstall() {
   const openPwaBtn = document.getElementById('openPwaInstallBtn');
   const closePwaBtn = document.getElementById('closePwaDrawerBtn');
   const nativeBtn = document.getElementById('pwaNativePromptBtn');
+  const promptBtnText = document.getElementById('pwaPromptBtnText');
   const drawer = document.getElementById('pwaInstallDrawer');
+
+  // Helper to detect current browser/platform
+  function detectBrowser() {
+    const ua = navigator.userAgent || '';
+    const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isAndroid = /Android/.test(ua);
+    const isChrome = /Chrome|CriOS/.test(ua) && !/Edg/.test(ua);
+    const isSafari = /Safari/.test(ua) && !/Chrome|CriOS/.test(ua);
+
+    if (isAndroid) return 'android';
+    if (isIOS && isChrome) return 'chrome';
+    if (isIOS) return 'safari';
+    if (isChrome) return 'chrome';
+    if (isSafari) return 'safari';
+    return 'desktop';
+  }
+
+  function switchTab(tabName) {
+    document.querySelectorAll('.pwa-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabName);
+    });
+    document.querySelectorAll('.pwa-tab-panel').forEach(panel => {
+      panel.classList.toggle('active', panel.id === `pwaPanel${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`);
+    });
+  }
+
+  // Bind tab click events
+  document.querySelectorAll('.pwa-tab-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchTab(btn.dataset.tab);
+    });
+  });
 
   // Check if app is already running in standalone PWA mode
   const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
@@ -1494,6 +1528,7 @@ function initPwaInstall() {
     e.preventDefault();
     state.deferredPrompt = e;
     if (openPwaBtn) openPwaBtn.style.display = 'inline-flex';
+    if (promptBtnText) promptBtnText.innerText = '⚡ 1-Tap Direct Install';
   });
 
   // Top bar "Install App" button
@@ -1512,12 +1547,20 @@ function initPwaInstall() {
         return;
       }
 
-      // If on iOS / Safari or browser where prompt must be guided, open visual drawer
+      // If on iOS / Chrome without deferred prompt, open the multi-browser drawer with matched default tab
       if (drawer) {
+        const detected = detectBrowser();
+        switchTab(detected);
+
         // Sync active team logo into drawer
         const pwaLogo = document.getElementById('pwaDrawerLogo');
         const team = TEAMS_DATABASE[state.currentTeamId];
         if (pwaLogo && team) pwaLogo.src = team.logoUrl;
+
+        if (promptBtnText) {
+          promptBtnText.innerText = state.deferredPrompt ? '⚡ 1-Tap Direct Install' : 'Got It • Close';
+        }
+
         drawer.classList.add('open');
       }
     });
@@ -1537,7 +1580,7 @@ function initPwaInstall() {
     });
   }
 
-  // Inside the drawer: "Got It • Close" button
+  // Inside the drawer: Action button
   if (nativeBtn && drawer) {
     nativeBtn.addEventListener('click', () => {
       if (state.deferredPrompt) {
@@ -1550,7 +1593,7 @@ function initPwaInstall() {
           drawer.classList.remove('open');
         });
       } else {
-        // Smoothly close guide with zero alerts
+        // Smoothly close guide
         drawer.classList.remove('open');
       }
     });

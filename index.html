@@ -41,7 +41,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=2026.35">
+  <link rel="stylesheet" href="styles.css?v=2026.36">
 </head>
 <body class="theme-texas">
 
@@ -409,45 +409,137 @@
             <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="App Icon" class="nav-logo-img" id="pwaDrawerLogo">
           </div>
           <div>
-            <div class="pwa-drawer-title">ADD TO HOME SCREEN</div>
+            <div class="pwa-drawer-title">INSTALL APP TO HOME SCREEN</div>
             <div class="pwa-drawer-sub">Instant full-screen launch • 100% Free</div>
           </div>
         </div>
         <button class="modal-close" id="closePwaDrawerBtn" style="position: static;"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <div class="pwa-steps-container">
-        <div class="pwa-step-card">
-          <div class="pwa-step-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
-          <div class="pwa-step-text">
-            <strong>1. Tap Safari Share</strong>
-            <span>Tap the <strong>Share</strong> button at the bottom of your Safari browser.</span>
+      <!-- Browser Selector Tabs -->
+      <div class="pwa-browser-tabs">
+        <button class="pwa-tab-btn active" id="pwaTabSafari" data-tab="safari">
+          <i class="fa-brands fa-safari"></i> Safari
+        </button>
+        <button class="pwa-tab-btn" id="pwaTabChrome" data-tab="chrome">
+          <i class="fa-brands fa-chrome"></i> Chrome
+        </button>
+        <button class="pwa-tab-btn" id="pwaTabAndroid" data-tab="android">
+          <i class="fa-brands fa-android"></i> Android
+        </button>
+        <button class="pwa-tab-btn" id="pwaTabDesktop" data-tab="desktop">
+          <i class="fa-solid fa-laptop"></i> Desktop
+        </button>
+      </div>
+
+      <!-- Safari Panel -->
+      <div class="pwa-tab-panel active" id="pwaPanelSafari">
+        <div class="pwa-steps-container">
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
+            <div class="pwa-step-text">
+              <strong>1. Tap Safari Share</strong>
+              <span>Tap the <strong>Share</strong> button at the bottom of your Safari browser.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-regular fa-square-plus"></i></div>
+            <div class="pwa-step-text">
+              <strong>2. Add to Home Screen</strong>
+              <span>Scroll down and select <strong>"Add to Home Screen"</strong>.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="pwa-step-text">
+              <strong>3. Tap Add</strong>
+              <span>Tap <strong>Add</strong> in top-right. Launch directly anytime!</span>
+            </div>
           </div>
         </div>
-        <div class="pwa-step-card">
-          <div class="pwa-step-icon"><i class="fa-regular fa-square-plus"></i></div>
-          <div class="pwa-step-text">
-            <strong>2. Add to Home Screen</strong>
-            <span>Scroll down and select <strong>"Add to Home Screen"</strong>.</span>
-          </div>
+        <div class="pwa-bottom-pointer">
+          <i class="fa-solid fa-chevron-down pwa-bounce-arrow"></i>
+          <span>Tap the Share icon below in Safari</span>
         </div>
-        <div class="pwa-step-card">
-          <div class="pwa-step-icon"><i class="fa-solid fa-check"></i></div>
-          <div class="pwa-step-text">
-            <strong>3. Tap Add</strong>
-            <span>Tap <strong>Add</strong> in top-right. Launch directly anytime!</span>
+      </div>
+
+      <!-- Chrome Panel -->
+      <div class="pwa-tab-panel" id="pwaPanelChrome">
+        <div class="pwa-steps-container">
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+            <div class="pwa-step-text">
+              <strong>1. Open Chrome Menu</strong>
+              <span>Tap the <strong>3 dots menu</strong> <i class="fa-solid fa-ellipsis-vertical"></i> or Share button in Chrome.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-download"></i></div>
+            <div class="pwa-step-text">
+              <strong>2. Select "Add to Home screen"</strong>
+              <span>Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong>.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="pwa-step-text">
+              <strong>3. Confirm Install</strong>
+              <span>Tap <strong>Install</strong> to add Gridiron Oracle to your phone.</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="pwa-bottom-pointer">
-        <i class="fa-solid fa-chevron-down pwa-bounce-arrow"></i>
-        <span>Tap the Share icon below in Safari</span>
+      <!-- Android Panel -->
+      <div class="pwa-tab-panel" id="pwaPanelAndroid">
+        <div class="pwa-steps-container">
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+            <div class="pwa-step-text">
+              <strong>1. Tap Browser Menu</strong>
+              <span>Tap the three dots <i class="fa-solid fa-ellipsis-vertical"></i> in the top-right corner of Chrome.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <div class="pwa-step-text">
+              <strong>2. Tap "Install App"</strong>
+              <span>Select <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="pwa-step-text">
+              <strong>3. Launch Instant Fullscreen</strong>
+              <span>The native app icon will be placed directly on your home screen.</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <button class="action-btn hype-btn" id="pwaNativePromptBtn" style="width: 100%; justify-content: center;">
+      <!-- Desktop Panel -->
+      <div class="pwa-tab-panel" id="pwaPanelDesktop">
+        <div class="pwa-steps-container">
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-download"></i></div>
+            <div class="pwa-step-text">
+              <strong>1. Address Bar Install Icon</strong>
+              <span>Click the <strong>Install</strong> icon in the right side of the browser URL bar.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="pwa-step-text">
+              <strong>2. Click "Install"</strong>
+              <span>Launch Gridiron Oracle in a dedicated standalone window with zero browser tabs.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="action-btn hype-btn" id="pwaNativePromptBtn" style="width: 100%; justify-content: center; margin-top: 0.25rem;">
         <i class="fa-solid fa-circle-check"></i>
-        <span>Got It • Close</span>
+        <span id="pwaPromptBtnText">Got It • Close</span>
       </button>
     </div>
   </div>
@@ -466,7 +558,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?v=2026.35"></script>
-  <script src="app.js?v=2026.35"></script>
+  <script src="data/teams.js?v=2026.36"></script>
+  <script src="app.js?v=2026.36"></script>
 </body>
 </html>
