@@ -1353,49 +1353,141 @@ body {
 
 .playoff-section {
   background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-brand-border);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   margin-bottom: 2.5rem;
   position: relative;
   z-index: 10;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), var(--shadow-glow);
+}
+
+.cfp-summary-banner {
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid;
+}
+
+.cfp-summary-banner.bye {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #6EE7B7;
+}
+
+.cfp-summary-banner.host {
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.4);
+  color: #93C5FD;
+}
+
+.cfp-summary-banner.loss {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #FCD34D;
+}
+
+.cfp-summary-banner.out {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #FCA5A5;
 }
 
 .playoff-bracket-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
-  margin-top: 1.25rem;
 }
 
 .playoff-round-card {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.45);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.75rem;
 }
 
 .round-header {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 800;
   color: var(--color-brand-accent);
   border-bottom: 1px solid var(--color-border);
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .playoff-matchup-box {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  padding: 0.6rem 0.8rem;
+  padding: 0.75rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  transition: var(--transition-fast);
+}
+
+.playoff-matchup-box.active-team-matchup {
+  border-color: var(--color-brand-accent);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 16px var(--color-brand-glow);
+}
+
+.matchup-teams-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.matchup-team-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.matchup-team-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.playoff-result-badge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.35rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.playoff-win-tag {
+  color: var(--color-success);
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.playoff-loss-tag {
+  color: #EF4444;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 /* ==========================================================================

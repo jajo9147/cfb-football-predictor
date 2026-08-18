@@ -756,75 +756,357 @@ function initModalActions() {
 }
 
 // ==========================================================================
-// 12-TEAM CFP BRACKET GENERATOR
+// 12-TEAM CFP BRACKET GENERATOR (DYNAMIC FIRST-ROUND WINS & LOSSES)
 // ==========================================================================
 
 function renderPlayoffBracket(totalWins, cfpSeed) {
   const container = document.getElementById('playoffBracketGrid');
   if (!container) return;
   const team = TEAMS_DATABASE[state.currentTeamId];
+  const teamId = state.currentTeamId;
 
-  container.innerHTML = `
-    <div class="playoff-round-card">
-      <div class="round-header">FIRST ROUND (DEC 18-19)</div>
-      <div class="playoff-matchup-box">
-        <span>#12 Boise State @ #5 ${team.shortName}</span>
-        <strong style="color: var(--color-success);">PROJ WIN</strong>
-      </div>
-      <div class="playoff-matchup-box">
-        <span>#11 Notre Dame @ #6 Alabama</span>
-        <strong>DEC 19</strong>
-      </div>
-      <div class="playoff-matchup-box">
-        <span>#10 Clemson @ #7 Penn State</span>
-        <strong>DEC 19</strong>
-      </div>
-      <div class="playoff-matchup-box">
-        <span>#9 Ole Miss @ #8 Tennessee</span>
-        <strong>DEC 18</strong>
-      </div>
-    </div>
+  let summaryBannerHtml = '';
+  let m1Active = false, m2Active = false, m3Active = false, m4Active = false;
+  let qfActive = false, semiActive = false, nattyActive = false;
 
-    <div class="playoff-round-card">
-      <div class="round-header">QUARTERFINALS (NEW YEAR'S)</div>
-      <div class="playoff-matchup-box">
-        <span>#1 Georgia vs #8/#9 Winner</span>
-        <span style="font-size: 0.7rem; color: var(--color-text-dim);">Sugar Bowl</span>
-      </div>
-      <div class="playoff-matchup-box">
-        <span>#4 ${team.shortName} vs #5/#12 Winner</span>
-        <span style="font-size: 0.7rem; color: var(--color-text-dim);">Rose Bowl</span>
-      </div>
-      <div class="playoff-matchup-box">
-        <span>#2 Ohio State vs #7/#10 Winner</span>
-        <span style="font-size: 0.7rem; color: var(--color-text-dim);">Fiesta Bowl</span>
-      </div>
-      <div class="playoff-matchup-box">
-        <span>#3 Oregon vs #6/#11 Winner</span>
-        <span style="font-size: 0.7rem; color: var(--color-text-dim);">Peach Bowl</span>
-      </div>
-    </div>
-
-    <div class="playoff-round-card">
-      <div class="round-header">SEMIFINALS (JAN 8-9)</div>
-      <div class="playoff-matchup-box">
-        <span>Orange Bowl Semifinal</span>
-        <strong style="color: var(--color-brand-accent);">Jan 8</strong>
-      </div>
-      <div class="playoff-matchup-box">
-        <span>Cotton Bowl Semifinal</span>
-        <strong style="color: var(--color-brand-accent);">Jan 9</strong>
-      </div>
-    </div>
-
-    <div class="playoff-round-card">
-      <div class="round-header">NATIONAL CHAMPIONSHIP</div>
-      <div class="playoff-matchup-box" style="border-color: var(--color-brand-border); background: var(--color-brand-glow);">
-        <div style="display: flex; flex-direction: column;">
-          <strong style="color: #FFFFFF;">${team.name}</strong>
-          <span style="font-size: 0.7rem; color: var(--color-brand-accent);">CFB National Title Game</span>
+  if (totalWins >= 12) {
+    summaryBannerHtml = `
+      <div class="cfp-summary-banner bye">
+        <i class="fa-solid fa-trophy" style="font-size: 1.2rem;"></i>
+        <div>
+          <strong>#1 NATIONAL SEED (FIRST-ROUND BYE)</strong>: Projected 12-0 dominance awards a direct bye to the Quarterfinals (Sugar/Rose Bowl) with path to the National Championship!
         </div>
-        <span style="font-size: 1.4rem;">🏆</span>
+      </div>
+    `;
+    qfActive = true; semiActive = true; nattyActive = true;
+  } else if (totalWins === 11) {
+    summaryBannerHtml = `
+      <div class="cfp-summary-banner host">
+        <i class="fa-solid fa-shield-halved" style="font-size: 1.2rem;"></i>
+        <div>
+          <strong>#5 SEED (HOSTS ON-CAMPUS FIRST ROUND)</strong>: Projected First-Round Win at home (38-17) ➔ Quarterfinal Fiesta Bowl Win (34-27) ➔ <strong>CFP SEMIFINALIST</strong>!
+        </div>
+      </div>
+    `;
+    m1Active = (teamId === 'texas' || teamId === 'ohiostate' || teamId === 'oregon' || teamId === 'georgia');
+    qfActive = true; semiActive = true;
+  } else if (totalWins === 10) {
+    summaryBannerHtml = `
+      <div class="cfp-summary-banner host">
+        <i class="fa-solid fa-star" style="font-size: 1.2rem;"></i>
+        <div>
+          <strong>#6 - #8 AT-LARGE SEED (ON-CAMPUS HOST)</strong>: Projected First-Round Win on home turf (28-20) ➔ <strong>CFP QUARTERFINALIST</strong> (Exits in New Year's Six Bowl vs #1/#2 Seed).
+        </div>
+      </div>
+    `;
+    if (teamId === 'alabama') m2Active = true;
+    if (teamId === 'notredame') m3Active = true;
+    if (teamId === 'tennessee') m4Active = true;
+    if (teamId === 'pennstate') m3Active = true;
+    qfActive = true;
+  } else if (totalWins === 9) {
+    summaryBannerHtml = `
+      <div class="cfp-summary-banner loss">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem;"></i>
+        <div>
+          <strong>#11 - #12 BUBBLE SEED (ROAD FIRST-ROUND GAME)</strong>: <strong>PROJECTED FIRST-ROUND EXIT</strong> — Travels to hostile on-campus environment (@ #6 Seed) and suffers a projected 20-28 road loss.
+        </div>
+      </div>
+    `;
+    if (teamId === 'michigan') m2Active = true;
+    if (teamId === 'lsu') m1Active = true;
+    if (teamId === 'pennstate') m3Active = true;
+  } else {
+    summaryBannerHtml = `
+      <div class="cfp-summary-banner out">
+        <i class="fa-solid fa-circle-xmark" style="font-size: 1.2rem;"></i>
+        <div>
+          <strong>MISSED 12-TEAM CFP PLAYOFF (${totalWins}-${12 - totalWins})</strong>: Falls below CFP at-large cutline. Projected destination: Florida Citrus Bowl / ReliaQuest Bowl.
+        </div>
+      </div>
+    `;
+  }
+
+  // Bracket Content
+  container.innerHTML = `
+    <div style="grid-column: 1 / -1;">
+      ${summaryBannerHtml}
+    </div>
+
+    <!-- FIRST ROUND -->
+    <div class="playoff-round-card">
+      <div class="round-header">
+        <span>FIRST ROUND (ON-CAMPUS)</span>
+        <span style="font-size: 0.68rem; opacity: 0.8;">DEC 18-19</span>
+      </div>
+
+      <!-- M1: #12 G5 @ #5 Texas -->
+      <div class="playoff-matchup-box ${teamId === 'texas' || (teamId === 'lsu' && totalWins === 9) ? 'active-team-matchup' : ''}">
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['BSU'] || ''}" class="matchup-team-logo" alt="Boise State">
+            <span>#12 Boise State</span>
+          </div>
+          <span style="color: var(--color-text-dim);">17</span>
+        </div>
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas">
+            <span style="color: #FFFFFF; font-weight: 800;">#5 Texas</span>
+          </div>
+          <span style="color: var(--color-success); font-weight: 800;">38</span>
+        </div>
+        <div class="playoff-result-badge">
+          <span style="color: var(--color-text-dim);">DKR Memorial Stadium</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> TEXAS WINS (ADVANCES)</span>
+        </div>
+      </div>
+
+      <!-- M2: #11 Michigan @ #6 Alabama -->
+      <div class="playoff-matchup-box ${(teamId === 'michigan' || teamId === 'alabama') ? 'active-team-matchup' : ''}">
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['MICH'] || ''}" class="matchup-team-logo" alt="Michigan">
+            <span style="${teamId === 'michigan' ? 'color: var(--color-brand-accent); font-weight: 800;' : ''}">#11 Michigan</span>
+          </div>
+          <span style="color: var(--color-text-dim);">20</span>
+        </div>
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['BAMA'] || ''}" class="matchup-team-logo" alt="Alabama">
+            <span style="color: #FFFFFF; font-weight: 800;">#6 Alabama</span>
+          </div>
+          <span style="color: var(--color-success); font-weight: 800;">28</span>
+        </div>
+        <div class="playoff-result-badge">
+          <span style="color: var(--color-text-dim);">Bryant-Denny Stadium</span>
+          ${teamId === 'michigan' && totalWins === 9 
+            ? `<span class="playoff-loss-tag"><i class="fa-solid fa-xmark"></i> MICH 1ST-ROUND EXIT</span>`
+            : `<span class="playoff-win-tag"><i class="fa-solid fa-check"></i> BAMA WINS (ADVANCES)</span>`}
+        </div>
+      </div>
+
+      <!-- M3: #10 Penn State @ #7 Notre Dame -->
+      <div class="playoff-matchup-box ${(teamId === 'pennstate' || teamId === 'notredame') ? 'active-team-matchup' : ''}">
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['PSU'] || ''}" class="matchup-team-logo" alt="Penn State">
+            <span style="${teamId === 'pennstate' ? 'color: var(--color-brand-accent); font-weight: 800;' : ''}">#10 Penn State</span>
+          </div>
+          <span style="color: var(--color-text-dim);">21</span>
+        </div>
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['ND'] || ''}" class="matchup-team-logo" alt="Notre Dame">
+            <span style="color: #FFFFFF; font-weight: 800;">#7 Notre Dame</span>
+          </div>
+          <span style="color: var(--color-success); font-weight: 800;">24</span>
+        </div>
+        <div class="playoff-result-badge">
+          <span style="color: var(--color-text-dim);">Notre Dame Stadium</span>
+          ${teamId === 'pennstate' 
+            ? `<span class="playoff-loss-tag"><i class="fa-solid fa-xmark"></i> PSU 1ST-ROUND EXIT</span>`
+            : `<span class="playoff-win-tag"><i class="fa-solid fa-check"></i> IRISH WIN (ADVANCES)</span>`}
+        </div>
+      </div>
+
+      <!-- M4: #9 Ole Miss @ #8 Tennessee -->
+      <div class="playoff-matchup-box ${teamId === 'tennessee' ? 'active-team-matchup' : ''}">
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['MISS'] || ''}" class="matchup-team-logo" alt="Ole Miss">
+            <span>#9 Ole Miss</span>
+          </div>
+          <span style="color: var(--color-text-dim);">28</span>
+        </div>
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['TENN'] || ''}" class="matchup-team-logo" alt="Tennessee">
+            <span style="color: #FFFFFF; font-weight: 800;">#8 Tennessee</span>
+          </div>
+          <span style="color: var(--color-success); font-weight: 800;">31</span>
+        </div>
+        <div class="playoff-result-badge">
+          <span style="color: var(--color-text-dim);">Neyland Stadium</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> VOLS WIN (ADVANCES)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUARTERFINALS -->
+    <div class="playoff-round-card">
+      <div class="round-header">
+        <span>QUARTERFINALS (NY6 BOWLS)</span>
+        <span style="font-size: 0.68rem; opacity: 0.8;">DEC 31 - JAN 1</span>
+      </div>
+
+      <!-- QF1: Sugar Bowl -->
+      <div class="playoff-matchup-box ${teamId === 'georgia' || teamId === 'tennessee' ? 'active-team-matchup' : ''}">
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['TENN'] || ''}" class="matchup-team-logo" alt="Tennessee">
+            <span>#8 Tennessee</span>
+          </div>
+          <span style="color: var(--color-text-dim);">24</span>
+        </div>
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['UGA'] || ''}" class="matchup-team-logo" alt="Georgia">
+            <span style="color: #FFFFFF; font-weight: 800;">#1 Georgia (BYE)</span>
+          </div>
+          <span style="color: var(--color-success); font-weight: 800;">31</span>
+        </div>
+        <div class="playoff-result-badge">
+          <span style="color: var(--color-text-dim);">Allstate Sugar Bowl</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> UGA ADVANCES</span>
+        </div>
+      </div>
+
+      <!-- QF2: Rose Bowl -->
+      <div class="playoff-matchup-box ${teamId === 'ohiostate' || teamId === 'notredame' ? 'active-team-matchup' : ''}">
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['ND'] || ''}" class="matchup-team-logo" alt="Notre Dame">
+            <span>#7 Notre Dame</span>
+          </div>
+          <span style="color: var(--color-text-dim);">23</span>
+        </div>
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State">
+            <span style="color: #FFFFFF; font-weight: 800;">#2 Ohio State (BYE)</span>
+          </div>
+          <span style="color: var(--color-success); font-weight: 800;">30</span>
+        </div>
+        <div class="playoff-result-badge">
+          <span style="color: var(--color-text-dim);">Rose Bowl Game</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> OSU ADVANCES</span>
+        </div>
+      </div>
+
+      <!-- QF3: Peach Bowl -->
+      <div class="playoff-matchup-box ${teamId === 'oregon' || teamId === 'alabama' ? 'active-team-matchup' : ''}">
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['BAMA'] || ''}" class="matchup-team-logo" alt="Alabama">
+            <span>#6 Alabama</span>
+          </div>
+          <span style="color: var(--color-text-dim);">24</span>
+        </div>
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['ORE'] || ''}" class="matchup-team-logo" alt="Oregon">
+            <span style="color: #FFFFFF; font-weight: 800;">#3 Oregon (BYE)</span>
+          </div>
+          <span style="color: var(--color-success); font-weight: 800;">27</span>
+        </div>
+        <div class="playoff-result-badge">
+          <span style="color: var(--color-text-dim);">Chick-fil-A Peach Bowl</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> OREGON ADVANCES</span>
+        </div>
+      </div>
+
+      <!-- QF4: Fiesta Bowl -->
+      <div class="playoff-matchup-box ${teamId === 'texas' ? 'active-team-matchup' : ''}">
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['MIA'] || ''}" class="matchup-team-logo" alt="Miami">
+            <span>#4 Miami (ACC Champ)</span>
+          </div>
+          <span style="color: var(--color-text-dim);">27</span>
+        </div>
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas">
+            <span style="color: #FFFFFF; font-weight: 800;">#5 Texas</span>
+          </div>
+          <span style="color: var(--color-success); font-weight: 800;">34</span>
+        </div>
+        <div class="playoff-result-badge">
+          <span style="color: var(--color-text-dim);">Vrbo Fiesta Bowl</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> TEXAS ADVANCES</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMIFINALS -->
+    <div class="playoff-round-card">
+      <div class="round-header">
+        <span>CFP SEMIFINALS</span>
+        <span style="font-size: 0.68rem; opacity: 0.8;">JAN 8-9</span>
+      </div>
+
+      <!-- Semi 1: Orange Bowl -->
+      <div class="playoff-matchup-box ${teamId === 'texas' || teamId === 'georgia' ? 'active-team-matchup' : ''}">
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['UGA'] || ''}" class="matchup-team-logo" alt="Georgia">
+            <span>#1 Georgia</span>
+          </div>
+          <span style="color: var(--color-text-dim);">27</span>
+        </div>
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas">
+            <span style="color: #FFFFFF; font-weight: 800;">#5 Texas</span>
+          </div>
+          <span style="color: var(--color-success); font-weight: 800;">28</span>
+        </div>
+        <div class="playoff-result-badge">
+          <span style="color: var(--color-text-dim);">Capital One Orange Bowl</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-fire"></i> TEXAS REACHES TITLE</span>
+        </div>
+      </div>
+
+      <!-- Semi 2: Cotton Bowl -->
+      <div class="playoff-matchup-box ${teamId === 'ohiostate' || teamId === 'oregon' ? 'active-team-matchup' : ''}">
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['ORE'] || ''}" class="matchup-team-logo" alt="Oregon">
+            <span>#3 Oregon</span>
+          </div>
+          <span style="color: var(--color-text-dim);">28</span>
+        </div>
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State">
+            <span style="color: #FFFFFF; font-weight: 800;">#2 Ohio State</span>
+          </div>
+          <span style="color: var(--color-success); font-weight: 800;">31</span>
+        </div>
+        <div class="playoff-result-badge">
+          <span style="color: var(--color-text-dim);">Goodyear Cotton Bowl</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-fire"></i> OSU REACHES TITLE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- NATIONAL CHAMPIONSHIP -->
+    <div class="playoff-round-card">
+      <div class="round-header">
+        <span>NATIONAL CHAMPIONSHIP</span>
+        <span style="font-size: 0.68rem; opacity: 0.8;">JAN 18 • ATLANTA</span>
+      </div>
+
+      <div class="playoff-matchup-box" style="border-color: var(--color-brand-border); background: linear-gradient(135deg, rgba(255,255,255,0.06), var(--color-brand-glow));">
+        <div class="matchup-teams-row" style="margin-bottom: 0.25rem;">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['OSU'] || ''}" class="matchup-team-logo" alt="Ohio State">
+            <span>#2 Ohio State</span>
+          </div>
+          <span style="color: var(--color-text-dim); font-size: 1.1rem;">28</span>
+        </div>
+        <div class="matchup-teams-row">
+          <div class="matchup-team-item">
+            <img src="${ESPN_LOGOS['TEX'] || ''}" class="matchup-team-logo" alt="Texas">
+            <span style="color: #FFFFFF; font-weight: 900; font-size: 1rem;">#5 Texas Longhorns</span>
+          </div>
+          <span style="color: var(--color-success); font-size: 1.1rem; font-weight: 900;">31</span>
+        </div>
+        <div class="playoff-result-badge" style="margin-top: 0.4rem; padding-top: 0.4rem;">
+          <span style="color: #FBBF24; font-weight: 800;"><i class="fa-solid fa-crown"></i> NATIONAL CHAMPION</span>
+          <span style="font-weight: 800; color: #FFFFFF;">TEXAS 31, OSU 28</span>
+        </div>
       </div>
     </div>
   `;
