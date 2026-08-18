@@ -3,7 +3,7 @@
 // ==========================================================================
 
 const state = {
-  currentTeamId: 'texas',
+  currentTeamId: null, // resolved dynamically on DOMContentLoaded
   filter: 'all',
   globalSliders: {
     qbRating: 0,
@@ -43,7 +43,11 @@ const GAME_PRESETS = {
 document.addEventListener('DOMContentLoaded', () => {
   initPwaServiceWorker();
   renderTeamSelector();
-  selectTeam('texas');
+
+  // Default to the #1 AP ranked team dynamically
+  const defaultTeamId = getTopRankedTeamId();
+  selectTeam(defaultTeamId);
+
   initGlobalSliders();
   initGlobalPresetButtons();
   initFilterButtons();
@@ -55,6 +59,20 @@ document.addEventListener('DOMContentLoaded', () => {
   initLiveSyncEngine();
   initMonteCarloEngine();
 });
+
+// Returns the team ID of the #1 AP ranked team from TEAMS_DATABASE
+function getTopRankedTeamId() {
+  let topId = null;
+  let topRank = Infinity;
+  for (const [id, team] of Object.entries(TEAMS_DATABASE)) {
+    const rank = parseInt((team.apRank || '').replace(/[^0-9]/g, ''), 10);
+    if (!isNaN(rank) && rank < topRank) {
+      topRank = rank;
+      topId = id;
+    }
+  }
+  return topId || Object.keys(TEAMS_DATABASE)[0];
+}
 
 // ==========================================================================
 // PWA SERVICE WORKER
