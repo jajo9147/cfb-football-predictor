@@ -29,3 +29,11 @@ Live App: **[https://jajo9147.github.io/cfb-football-predictor/](https://jajo914
 - **12-Team CFP Playoff Gauntlet**: Dynamically positions First Round hosts, Quarterfinal bowl seeds, and National Championship paths.
 - **Social Hype Card Generator**: Canvas-rendered social cards ready to copy/paste into group chats.
 - **Progressive Web App ($0 Install)**: 1-tap "Add to Home Screen" on iOS & Android for a fullscreen standalone app experience.
+
+---
+
+## 👨‍💻 Creator & Owner
+**Jake Johnson**
+- LinkedIn: [https://www.linkedin.com/in/jake-johnson-/](https://www.linkedin.com/in/jake-johnson-/)
+- GitHub Portfolio: [https://jajo9147.github.io/](https://jajo9147.github.io/)
+
