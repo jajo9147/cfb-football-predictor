@@ -104,7 +104,7 @@ function getTopRankedTeamId() {
 function initPwaServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=2026.79')
+      navigator.serviceWorker.register('sw.js?v=2026.80')
         .then(reg => {
           reg.update();
           console.log('PWA Service Worker registered:', reg.scope);
