@@ -1335,10 +1335,24 @@ function drawRadarChartBetween(team1, team2, score1, score2, isHome) {
 function renderGameSlidersInModal(game) {
   const container = document.getElementById('modalGameSlidersGrid');
   if (!container) return;
-  const teamId = (game.isPostseason && game.teamA) ? (game.teamA.id || state.currentTeamId) : state.currentTeamId;
-  const team = TEAMS_DATABASE[teamId] || TEAMS_DATABASE[state.currentTeamId];
-  if (!team) return;
-  const teamSliders = getTeamSliders(teamId);
+
+  // Determine focus team and opponent for this specific modal game
+  let focusTeam, oppTeam;
+  if (game.isPostseason && game.teamA && game.teamB) {
+    // If current active team is playing in this game, focus on current team; otherwise teamA
+    if (game.teamB.id === state.currentTeamId) {
+      focusTeam = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+      oppTeam = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+    } else {
+      focusTeam = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+      oppTeam = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+    }
+  } else {
+    focusTeam = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
+    oppTeam = { shortName: game.oppAbbr || 'Opponent', stadium: game.stadium };
+  }
+
+  const teamSliders = getTeamSliders(focusTeam.id || state.currentTeamId);
   const currentSliders = state.gameSliders[game.id] || {
     qbRating: teamSliders.qbRating || 0,
     groundAttack: teamSliders.groundAttack || 0,
@@ -1348,24 +1362,24 @@ function renderGameSlidersInModal(game) {
     isCustom: false
   };
 
-  const labels = (team && team.sliderLabels) || {
-    qb: 'QB Execution',
-    ground: 'Ground Attack',
+  const labels = (focusTeam && focusTeam.sliderLabels) || {
+    qb: `${focusTeam.confirmedStarterQb || focusTeam.shortName || 'QB'} Execution`,
+    ground: `${focusTeam.shortName || 'Ground'} Attack`,
     defense: 'Defense & Havoc',
     turnover: 'Turnover Margin Luck',
     crowd: 'Stadium Crowd Noise'
   };
 
-  const crowdTitle = game.isHome 
-    ? (labels.crowd || `${game.stadium} Home Crowd`)
-    : `Road Environment (${game.stadium || 'Hostile Stadium'})`;
+  const venueTitle = game.isPostseason 
+    ? `Neutral Venue Intensity (${game.stadium || 'Championship Stadium'})`
+    : (game.isHome ? (labels.crowd || `${game.stadium} Home Crowd`) : `Road Environment (${game.stadium || 'Hostile Stadium'})`);
 
   const sliderList = [
-    { key: 'qbRating', label: labels.qb, icon: 'fa-solid fa-crosshairs' },
-    { key: 'groundAttack', label: labels.ground, icon: 'fa-solid fa-person-running' },
-    { key: 'defenseHavoc', label: labels.defense, icon: 'fa-solid fa-shield-halved' },
-    { key: 'turnoverLuck', label: labels.turnover, icon: 'fa-solid fa-dice' },
-    { key: 'crowdNoise', label: crowdTitle, icon: 'fa-solid fa-bullhorn' }
+    { key: 'qbRating', label: labels.qb || `${focusTeam.shortName} QB Execution`, icon: 'fa-solid fa-crosshairs' },
+    { key: 'groundAttack', label: labels.ground || `${focusTeam.shortName} Ground Attack`, icon: 'fa-solid fa-person-running' },
+    { key: 'defenseHavoc', label: `${focusTeam.shortName} Defense & Havoc`, icon: 'fa-solid fa-shield-halved' },
+    { key: 'turnoverLuck', label: 'Turnover Margin Luck', icon: 'fa-solid fa-dice' },
+    { key: 'crowdNoise', label: venueTitle, icon: 'fa-solid fa-bullhorn' }
   ];
 
   container.innerHTML = '';
@@ -1455,9 +1469,19 @@ function initModalSubTabs() {
 window.applyAndSimulateModalGame = function() {
   if (!state.activeModalGame) return;
   const game = state.activeModalGame;
+  
+  if (!state.gameSliders[game.id]) {
+    const focusId = (game.isPostseason && game.teamA) ? (game.teamA.id || state.currentTeamId) : state.currentTeamId;
+    const teamSliders = getTeamSliders(focusId);
+    state.gameSliders[game.id] = { ...teamSliders };
+  }
+  state.gameSliders[game.id].isCustom = true;
+
   recalculateSeason();
-  openSimModal(game);
-  showToast(`⚡ Re-simulated ${game.opponent} matchup (10,000 drives)!`);
+  openSimModal(state.activeModalGame);
+  window.switchModalSubTab('drives');
+  const title = game.isPostseason ? game.week : `${game.opponent} matchup`;
+  showToast(`⚡ Re-simulated ${title} (10,000 Monte Carlo drives)!`);
 };
 
 window.resetCurrentGameTuning = function() {
@@ -1465,6 +1489,12 @@ window.resetCurrentGameTuning = function() {
   const game = state.activeModalGame;
   delete state.gameSliders[game.id];
   delete state.userPicks[game.id];
+  if (game.id && game.id.startsWith('ccg-')) {
+    delete state.ccgPicks[game.id];
+  }
+  if (game.id && game.id.startsWith('playoff-')) {
+    delete state.playoffPicks[game.id];
+  }
 
   const counterpart = findCounterpartMatchup(state.currentTeamId, game);
   if (counterpart) {
@@ -1475,7 +1505,7 @@ window.resetCurrentGameTuning = function() {
   recalculateSeason();
   openSimModal(game);
   window.switchModalSubTab('game-tuning');
-  showToast(`⚡ Reset ${game.opponent} matchup to team baseline!`);
+  showToast(`⚡ Reset matchup to baseline!`);
 };
 
 window.applyGameScenarioPreset = function(presetKey) {
@@ -1633,22 +1663,29 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
   if (dbA.conference === 'ACC') spA += 0.8;
   if (dbB.conference === 'ACC') spB += 0.8;
 
-  // Active Team User Slider Tuning
-  const activeId = state.currentTeamId;
-  const sliders = getTeamSliders(activeId);
-  if (teamA.id === activeId) {
-    const qb = sliders.qbRating || 0;
-    const def = sliders.defenseHavoc || 0;
-    const gnd = sliders.groundAttack || 0;
-    const to = sliders.turnoverLuck || 0;
-    spA += (qb * 0.16 + def * 0.16 + gnd * 0.12 + to * 0.10);
+  // Apply Team A base sliders
+  if (teamA.id && TEAMS_DATABASE[teamA.id]) {
+    const sA = getTeamSliders(teamA.id);
+    spA += ((sA.qbRating || 0) * 0.16 + (sA.defenseHavoc || 0) * 0.16 + (sA.groundAttack || 0) * 0.12 + (sA.turnoverLuck || 0) * 0.10);
   }
-  if (teamB.id === activeId) {
-    const qb = sliders.qbRating || 0;
-    const def = sliders.defenseHavoc || 0;
-    const gnd = sliders.groundAttack || 0;
-    const to = sliders.turnoverLuck || 0;
-    spB += (qb * 0.16 + def * 0.16 + gnd * 0.12 + to * 0.10);
+
+  // Apply Team B base sliders
+  if (teamB.id && TEAMS_DATABASE[teamB.id]) {
+    const sB = getTeamSliders(teamB.id);
+    spB += ((sB.qbRating || 0) * 0.16 + (sB.defenseHavoc || 0) * 0.16 + (sB.groundAttack || 0) * 0.12 + (sB.turnoverLuck || 0) * 0.10);
+  }
+
+  // Apply Single-Game Matchup Custom AI Tuning if present
+  if (options.gameId && state.gameSliders[options.gameId]) {
+    const gSliders = state.gameSliders[options.gameId];
+    if (gSliders.isCustom) {
+      const gQb = gSliders.qbRating || 0;
+      const gDef = gSliders.defenseHavoc || 0;
+      const gGnd = gSliders.groundAttack || 0;
+      const gTo = gSliders.turnoverLuck || 0;
+      const gCrowd = gSliders.crowdNoise || 0;
+      spA += (gQb * 0.18 + gDef * 0.18 + gGnd * 0.14 + gTo * 0.12 + gCrowd * 0.08);
+    }
   }
 
   // Home field advantage (e.g. First Round on-campus)
