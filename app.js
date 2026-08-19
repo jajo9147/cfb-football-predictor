@@ -5,13 +5,8 @@
 const state = {
   currentTeamId: null, // resolved dynamically on DOMContentLoaded
   filter: 'all',
-  globalSliders: {
-    qbRating: 0,
-    groundAttack: 0,
-    defenseHavoc: 0,
-    turnoverLuck: 0,
-    crowdNoise: 0
-  },
+  teamSliders: {}, // Map of teamId -> { qbRating, groundAttack, defenseHavoc, turnoverLuck, crowdNoise }
+  teamActivePresets: {}, // Map of teamId -> presetKey ('baseline', 'qb-mvp', etc.)
   gameSliders: {}, // Map of gameId -> { qbRating, groundAttack, defenseHavoc, turnoverLuck, crowdNoise, isCustom }
   userPicks: {},   // Map of gameId -> 'W' | 'L' | null
   activeModalGame: null,
@@ -35,6 +30,30 @@ const GAME_PRESETS = {
   'turnover-trap': { qbRating: -15, groundAttack: -10, defenseHavoc: -10, turnoverLuck: -35, crowdNoise: -15 },
   'ground-pound': { qbRating: -10, groundAttack: 30, defenseHavoc: 15, turnoverLuck: 5, crowdNoise: 10 }
 };
+
+function getTeamSliders(teamId) {
+  if (!teamId) return { ...GLOBAL_PRESETS['baseline'] };
+  if (!state.teamSliders[teamId]) {
+    state.teamSliders[teamId] = { ...GLOBAL_PRESETS['baseline'] };
+  }
+  return state.teamSliders[teamId];
+}
+
+function isSlidersCustom(s) {
+  if (!s) return false;
+  return (s.qbRating || 0) !== 0 || (s.groundAttack || 0) !== 0 || (s.defenseHavoc || 0) !== 0 || (s.turnoverLuck || 0) !== 0 || (s.crowdNoise || 0) !== 0;
+}
+
+function getOpponentTeamId(game) {
+  if (!game || !game.oppAbbr) return null;
+  const oppAbbr = game.oppAbbr.toUpperCase();
+  for (const [id, team] of Object.entries(TEAMS_DATABASE)) {
+    if (team.abbr.toUpperCase() === oppAbbr || id.toUpperCase() === oppAbbr) {
+      return id;
+    }
+  }
+  return null;
+}
 
 // ==========================================================================
 // INITIALIZATION & EVENT LISTENERS
@@ -81,7 +100,7 @@ function getTopRankedTeamId() {
 function initPwaServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=2026.52')
+      navigator.serviceWorker.register('sw.js?v=2026.55')
         .then(reg => {
           reg.update();
           console.log('PWA Service Worker registered:', reg.scope);
@@ -159,15 +178,16 @@ function selectTeam(teamId) {
     }
   });
 
-  // Re-render Dynamic Slider Labels
+  // Re-render Dynamic Slider Labels & sync slider values to THIS team's sliders
   updateGlobalSliderLabels(team);
+  syncSliderInputsToActiveTeam();
 
   // Recalculate & Re-render
   recalculateSeason();
 }
 
 // ==========================================================================
-// SIMULATION ENGINE (10,000 MONTE CARLO DRIVES)
+// SIMULATION ENGINE (TWO-WAY ZERO-SUM REALISTIC COLLISION ENGINE)
 // ==========================================================================
 
 function findCounterpartMatchup(teamId, game) {
@@ -192,38 +212,29 @@ function findCounterpartMatchup(teamId, game) {
   return { oppTeamId, oppTeam, oppGame };
 }
 
-function calculateRawMatchup(game, teamId, sliders, userPick) {
-  const qbVal = sliders.qbRating || 0;
-  const groundVal = sliders.groundAttack || 0;
-  const defVal = sliders.defenseHavoc || 0;
-  const toVal = sliders.turnoverLuck || 0;
-  const crowdVal = sliders.crowdNoise || 0;
+function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSliders, userPick) {
+  const tQb = teamSliders ? (teamSliders.qbRating || 0) : 0;
+  const tGround = teamSliders ? (teamSliders.groundAttack || 0) : 0;
+  const tDef = teamSliders ? (teamSliders.defenseHavoc || 0) : 0;
+  const tTo = teamSliders ? (teamSliders.turnoverLuck || 0) : 0;
+  const tCrowd = teamSliders ? (teamSliders.crowdNoise || 0) : 0;
 
-  // Realistic Physical Point Impacts
-  const qbTeamPts = qbVal * 0.24;
-  const qbOppPts = -qbVal * 0.04;
+  const oQb = oppSliders ? (oppSliders.qbRating || 0) : 0;
+  const oGround = oppSliders ? (oppSliders.groundAttack || 0) : 0;
+  const oDef = oppSliders ? (oppSliders.defenseHavoc || 0) : 0;
+  const oTo = oppSliders ? (oppSliders.turnoverLuck || 0) : 0;
+  const oCrowd = oppSliders ? (oppSliders.crowdNoise || 0) : 0;
 
-  const groundTeamPts = groundVal * 0.16;
-  const groundOppPts = -groundVal * 0.08;
+  // Points contributed by team's custom form
+  const teamOffPts = (tQb * 0.24) + (tGround * 0.16) + (tDef * 0.04) + (tTo * 0.18) + (game.isHome ? tCrowd * 0.06 : tCrowd * 0.08);
+  const teamDefPts = (-tQb * 0.04) - (tGround * 0.08) - (tDef * 0.26) - (tTo * 0.18) - (game.isHome ? tCrowd * 0.06 : tCrowd * 0.06);
 
-  const defTeamPts = defVal * 0.04;
-  const defOppPts = -defVal * 0.26;
+  // Points contributed by opponent's custom form
+  const oppOffPts = (oQb * 0.24) + (oGround * 0.16) + (oDef * 0.04) + (oTo * 0.18) + (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.08);
+  const oppDefPts = (-oQb * 0.04) - (oGround * 0.08) - (oDef * 0.26) - (oTo * 0.18) - (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.06);
 
-  const toTeamPts = toVal * 0.18;
-  const toOppPts = -toVal * 0.18;
-
-  let crowdTeamPts = 0;
-  let crowdOppPts = 0;
-  if (game.isHome) {
-    crowdTeamPts = crowdVal * 0.06;
-    crowdOppPts = -crowdVal * 0.06;
-  } else {
-    crowdTeamPts = crowdVal * 0.08;
-    crowdOppPts = -crowdVal * 0.06;
-  }
-
-  let adjUtScore = Math.max(3, Math.round(game.projScoreUt + qbTeamPts + groundTeamPts + defTeamPts + toTeamPts + crowdTeamPts));
-  let adjOppScore = Math.max(0, Math.round(game.projScoreOpp + qbOppPts + groundOppPts + defOppPts + toOppPts + crowdOppPts));
+  let adjUtScore = Math.max(3, Math.round(game.projScoreUt + teamOffPts + oppDefPts));
+  let adjOppScore = Math.max(0, Math.round(game.projScoreOpp + teamDefPts + oppOffPts));
 
   const pointDiff = adjUtScore - adjOppScore;
   let adjWinProb = 1 / (1 + Math.pow(10, -pointDiff / 13.5)) * 100;
@@ -246,24 +257,15 @@ function calculateAdjustedMatchup(game, targetTeamId) {
   const team = TEAMS_DATABASE[teamId];
   if (!team) return { adjWinProb: 50, projUt: 24, projOpp: 21, isWin: true, isCustomTuned: false, syncedFrom: null };
 
-  const BASELINE_SETTINGS = GLOBAL_PRESETS['baseline'];
-  const teamGlobalSliders = (teamId === state.currentTeamId) ? state.globalSliders : BASELINE_SETTINGS;
-
-  // 1. Direct custom tuning or manual pick on this game
   const directSliders = state.gameSliders[game.id];
   const directPick = state.userPicks[game.id];
 
-  if (directSliders && directSliders.isCustom) {
-    const raw = calculateRawMatchup(game, teamId, directSliders, directPick);
-    return {
-      ...raw,
-      isCustomTuned: true,
-      syncedFrom: null
-    };
-  }
-
+  // 1. Direct forced pick on this specific game
   if (directPick) {
-    const raw = calculateRawMatchup(game, teamId, teamGlobalSliders, directPick);
+    const teamEffSliders = (directSliders && directSliders.isCustom) ? directSliders : getTeamSliders(teamId);
+    const oppId = getOpponentTeamId(game);
+    const oppEffSliders = oppId ? getTeamSliders(oppId) : GLOBAL_PRESETS['baseline'];
+    const raw = calculateCombinedMatchup(game, teamId, teamEffSliders, oppId, oppEffSliders, directPick);
     return {
       ...raw,
       isCustomTuned: true,
@@ -271,15 +273,28 @@ function calculateAdjustedMatchup(game, targetTeamId) {
     };
   }
 
-  // 2. Check counterpart game on opponent's side for cross-team synchronization
+  // 2. Direct custom sliders on this specific game
+  if (directSliders && directSliders.isCustom) {
+    const oppId = getOpponentTeamId(game);
+    const oppEffSliders = oppId ? getTeamSliders(oppId) : GLOBAL_PRESETS['baseline'];
+    const raw = calculateCombinedMatchup(game, teamId, directSliders, oppId, oppEffSliders, null);
+    return {
+      ...raw,
+      isCustomTuned: true,
+      syncedFrom: null
+    };
+  }
+
+  // 3. Counterpart game on opponent's schedule if opponent has custom picks or single-game tuning
   const counterpart = findCounterpartMatchup(teamId, game);
   if (counterpart) {
-    const oppSliders = state.gameSliders[counterpart.oppGame.id];
+    const oppSingleSliders = state.gameSliders[counterpart.oppGame.id];
     const oppPick = state.userPicks[counterpart.oppGame.id];
 
-    if ((oppSliders && oppSliders.isCustom) || oppPick) {
-      const oppEffectiveSliders = (oppSliders && oppSliders.isCustom) ? oppSliders : ((counterpart.oppTeamId === state.currentTeamId) ? state.globalSliders : BASELINE_SETTINGS);
-      const oppRaw = calculateRawMatchup(counterpart.oppGame, counterpart.oppTeamId, oppEffectiveSliders, oppPick);
+    if (oppPick || (oppSingleSliders && oppSingleSliders.isCustom)) {
+      const oppEffSliders = (oppSingleSliders && oppSingleSliders.isCustom) ? oppSingleSliders : getTeamSliders(counterpart.oppTeamId);
+      const teamEffSliders = getTeamSliders(teamId);
+      const oppRaw = calculateCombinedMatchup(counterpart.oppGame, counterpart.oppTeamId, oppEffSliders, teamId, teamEffSliders, oppPick);
 
       // Invert outcome and scores for current team
       const invertedWin = !oppRaw.isWin;
@@ -296,12 +311,24 @@ function calculateAdjustedMatchup(game, targetTeamId) {
     }
   }
 
-  // 3. Fallback to active team sliders (or baseline for simulated background teams)
-  const raw = calculateRawMatchup(game, teamId, teamGlobalSliders, null);
+  // 4. Combined Team Sliders vs Opponent Sliders (Zero-Sum Realistic Tradeoff!)
+  const teamSliders = getTeamSliders(teamId);
+  const oppId = getOpponentTeamId(game);
+  const oppSliders = oppId ? getTeamSliders(oppId) : GLOBAL_PRESETS['baseline'];
+
+  const raw = calculateCombinedMatchup(game, teamId, teamSliders, oppId, oppSliders, null);
+  const teamIsCustom = isSlidersCustom(teamSliders);
+  const oppIsCustom = isSlidersCustom(oppSliders);
+
+  let syncedName = null;
+  if (oppIsCustom && oppId && oppId !== teamId) {
+    syncedName = TEAMS_DATABASE[oppId]?.shortName || null;
+  }
+
   return {
     ...raw,
-    isCustomTuned: false,
-    syncedFrom: null
+    isCustomTuned: teamIsCustom || oppIsCustom,
+    syncedFrom: syncedName
   };
 }
 
@@ -543,16 +570,21 @@ function updateGlobalSliderLabels(team) {
     { key: 'crowdNoise', label: labels.crowd, icon: 'fa-solid fa-bullhorn' }
   ];
 
+  const currentSliders = getTeamSliders(state.currentTeamId);
+
   container.innerHTML = '';
   sliderKeys.forEach(s => {
     const card = document.createElement('div');
     card.className = 'slider-card';
+    const val = currentSliders[s.key] || 0;
+    const sign = val > 0 ? '+' : '';
+
     card.innerHTML = `
       <div class="slider-top-row">
         <span class="slider-title"><i class="${s.icon}"></i> ${s.label}</span>
-        <span class="slider-val-readout" id="readout-${s.key}">0%</span>
+        <span class="slider-val-readout" id="readout-${s.key}">${sign}${val}%</span>
       </div>
-      <input type="range" class="custom-range-slider" id="slider-${s.key}" min="-50" max="50" value="${state.globalSliders[s.key] || 0}" step="5">
+      <input type="range" class="custom-range-slider" id="slider-${s.key}" min="-50" max="50" value="${val}" step="5">
       <div class="slider-hints-row">
         <span>-50% Slump</span>
         <span>Baseline</span>
@@ -562,12 +594,14 @@ function updateGlobalSliderLabels(team) {
 
     const range = card.querySelector('input');
     range.addEventListener('input', (e) => {
-      state.globalSliders[s.key] = parseInt(e.target.value, 10);
-      const sign = state.globalSliders[s.key] > 0 ? '+' : '';
-      card.querySelector('.slider-val-readout').innerText = `${sign}${state.globalSliders[s.key]}%`;
+      const teamSliders = getTeamSliders(state.currentTeamId);
+      teamSliders[s.key] = parseInt(e.target.value, 10);
+      const signStr = teamSliders[s.key] > 0 ? '+' : '';
+      card.querySelector('.slider-val-readout').innerText = `${signStr}${teamSliders[s.key]}%`;
       
-      // Remove active from presets
-      document.querySelectorAll('#globalPresetsContainer .preset-btn').forEach(b => b.classList.remove('active'));
+      // Remove active from presets since custom sliders are in use
+      state.teamActivePresets[state.currentTeamId] = 'custom';
+      document.querySelectorAll('#globalPresetsContainer .preset-btn:not(.reset-all-btn)').forEach(b => b.classList.remove('active'));
       recalculateSeason();
     });
 
@@ -575,34 +609,84 @@ function updateGlobalSliderLabels(team) {
   });
 }
 
+function syncSliderInputsToActiveTeam() {
+  const currentSliders = getTeamSliders(state.currentTeamId);
+  const activePreset = state.teamActivePresets[state.currentTeamId] || (isSlidersCustom(currentSliders) ? 'custom' : 'baseline');
+
+  Object.keys(currentSliders).forEach(k => {
+    const range = document.getElementById(`slider-${k}`);
+    const readout = document.getElementById(`readout-${k}`);
+    const val = currentSliders[k] || 0;
+    if (range) range.value = val;
+    if (readout) {
+      const sign = val > 0 ? '+' : '';
+      readout.innerText = `${sign}${val}%`;
+    }
+  });
+
+  document.querySelectorAll('#globalPresetsContainer .preset-btn:not(.reset-all-btn)').forEach(btn => {
+    const isMatching = btn.dataset.preset === activePreset;
+    btn.classList.toggle('active', isMatching);
+  });
+}
+
 function initGlobalSliders() {
   const team = TEAMS_DATABASE[state.currentTeamId];
   updateGlobalSliderLabels(team);
+  syncSliderInputsToActiveTeam();
 }
 
 function initGlobalPresetButtons() {
-  document.querySelectorAll('#globalPresetsContainer .preset-btn').forEach(btn => {
+  document.querySelectorAll('#globalPresetsContainer .preset-btn:not(.reset-all-btn)').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('#globalPresetsContainer .preset-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#globalPresetsContainer .preset-btn:not(.reset-all-btn)').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       const presetKey = btn.dataset.preset;
       const presetValues = GLOBAL_PRESETS[presetKey] || GLOBAL_PRESETS['baseline'];
 
-      Object.keys(presetValues).forEach(k => {
-        state.globalSliders[k] = presetValues[k];
-        const range = document.getElementById(`slider-${k}`);
-        const readout = document.getElementById(`readout-${k}`);
-        if (range) range.value = presetValues[k];
-        if (readout) {
-          const sign = presetValues[k] > 0 ? '+' : '';
-          readout.innerText = `${sign}${presetValues[k]}%`;
-        }
-      });
+      // Assign preset specifically to the current team
+      state.teamSliders[state.currentTeamId] = { ...presetValues };
+      state.teamActivePresets[state.currentTeamId] = presetKey;
 
+      syncSliderInputsToActiveTeam();
       recalculateSeason();
     });
   });
+
+  // Reset All to Baseline Button
+  const resetBtn = document.getElementById('resetAllAiBtn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', resetAllToBaseline);
+  }
+}
+
+function resetAllToBaseline() {
+  state.teamSliders = {};
+  state.teamActivePresets = {};
+  state.gameSliders = {};
+  state.userPicks = {};
+
+  syncSliderInputsToActiveTeam();
+  recalculateSeason();
+
+  showToast('⚡ Reset all 15 teams & custom AI overrides to authentic 2026 baselines!');
+}
+
+function showToast(message) {
+  let toast = document.getElementById('gridironToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'gridironToast';
+    toast.className = 'gridiron-toast';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--color-success); margin-right: 6px;"></i> ${message}`;
+  toast.classList.add('show');
+  clearTimeout(toast._timeout);
+  toast._timeout = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2800);
 }
 
 function initFilterButtons() {
@@ -777,14 +861,13 @@ function renderScoutReport(game) {
 function renderGameSlidersInModal(game) {
   const container = document.getElementById('modalGameSlidersGrid');
   if (!container) return;
-  const team = TEAMS_DATABASE[state.currentTeamId];
-
+  const teamSliders = getTeamSliders(state.currentTeamId);
   const currentSliders = state.gameSliders[game.id] || {
-    qbRating: state.globalSliders.qbRating,
-    groundAttack: state.globalSliders.groundAttack,
-    defenseHavoc: state.globalSliders.defenseHavoc,
-    turnoverLuck: state.globalSliders.turnoverLuck,
-    crowdNoise: state.globalSliders.crowdNoise,
+    qbRating: teamSliders.qbRating || 0,
+    groundAttack: teamSliders.groundAttack || 0,
+    defenseHavoc: teamSliders.defenseHavoc || 0,
+    turnoverLuck: teamSliders.turnoverLuck || 0,
+    crowdNoise: teamSliders.crowdNoise || 0,
     isCustom: false
   };
 
@@ -907,6 +990,7 @@ function initModalActions() {
 
     recalculateSeason();
     openSimModal(game);
+    showToast(`⚡ Reset ${game.opponent} matchup to team baseline!`);
   });
 
   // Game Presets Listeners
