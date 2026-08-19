@@ -412,6 +412,20 @@ function calculateAdjustedMatchup(game, targetTeamId) {
   const team = TEAMS_DATABASE[teamId];
   if (!team) return { adjWinProb: 50, projUt: 24, projOpp: 21, isWin: true, isCustomTuned: false, syncedFrom: null };
 
+  // 0. Live ESPN Locked-In Completed Game (Actual Final Score & Result)
+  if (game && game.isFinal && typeof game.actualScoreUt === 'number') {
+    const isWin = game.actualScoreUt > game.actualScoreOpp;
+    return {
+      adjWinProb: isWin ? 100 : 0,
+      projUt: game.actualScoreUt,
+      projOpp: game.actualScoreOpp,
+      isWin,
+      isFinal: true,
+      isCustomTuned: false,
+      syncedFrom: null
+    };
+  }
+
   const directSliders = state.gameSliders[game.id];
   const directPick = state.userPicks[game.id];
 
@@ -622,7 +636,9 @@ function renderSchedule() {
     const effectivePick = userPick || (isWin ? 'W' : 'L');
 
     let badgeHtml = `<span>${game.isHome ? 'HOME' : 'AWAY'}</span>`;
-    if (sim.isCustomTuned) {
+    if (sim.isFinal) {
+      badgeHtml = `<span class="custom-tuned-badge" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fa-solid fa-lock"></i> FINAL</span>`;
+    } else if (sim.isCustomTuned) {
       if (sim.syncedFrom) {
         badgeHtml = `<span class="custom-tuned-badge"><i class="fa-solid fa-link"></i> SYNCED: ${sim.syncedFrom.toUpperCase()}</span>`;
       } else {
@@ -2638,7 +2654,14 @@ const ESPN_TEAM_MAP = {
   '130': 'michigan',
   '213': 'pennstate',
   '2633': 'tennessee',
-  '99': 'lsu'
+  '99': 'lsu',
+  '2641': 'texastech',
+  '252': 'byu',
+  '30': 'usc',
+  '52': 'floridastate',
+  '228': 'clemson',
+  '2567': 'smu',
+  '68': 'boisestate'
 };
 
 const TEAM_TO_ESPN_ID = {
@@ -2656,7 +2679,14 @@ const TEAM_TO_ESPN_ID = {
   michigan: '130',
   pennstate: '213',
   tennessee: '2633',
-  lsu: '99'
+  lsu: '99',
+  texastech: '2641',
+  byu: '252',
+  usc: '30',
+  floridastate: '52',
+  clemson: '228',
+  smu: '2567',
+  boisestate: '68'
 };
 
 const LiveSyncEngine = {
@@ -2684,6 +2714,58 @@ const LiveSyncEngine = {
       return true;
     } catch (err) {
       console.warn('Live rankings sync notice (using baseline snapshot):', err);
+      return false;
+    }
+  },
+
+  async syncScoreboard() {
+    try {
+      const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard');
+      if (!res.ok) return false;
+      const data = await res.json();
+      if (!data.events || data.events.length === 0) return false;
+
+      let updatedCount = 0;
+      data.events.forEach(event => {
+        const comp = event.competitions?.[0];
+        if (!comp) return;
+
+        const isCompleted = event.status?.type?.completed === true;
+        const competitors = comp.competitors || [];
+        if (competitors.length < 2) return;
+
+        const homeComp = competitors.find(c => c.homeAway === 'home');
+        const awayComp = competitors.find(c => c.homeAway === 'away');
+        if (!homeComp || !awayComp) return;
+
+        const homeTeamId = ESPN_TEAM_MAP[homeComp.id];
+        const awayTeamId = ESPN_TEAM_MAP[awayComp.id];
+
+        // Match against TEAMS_DATABASE schedules
+        if (homeTeamId && TEAMS_DATABASE[homeTeamId]) {
+          const game = TEAMS_DATABASE[homeTeamId].schedule.find(g => g.oppAbbr === awayComp.team?.abbreviation || g.isHome);
+          if (game && isCompleted) {
+            game.isFinal = true;
+            game.actualScoreUt = parseInt(homeComp.score, 10);
+            game.actualScoreOpp = parseInt(awayComp.score, 10);
+            updatedCount++;
+          }
+        }
+
+        if (awayTeamId && TEAMS_DATABASE[awayTeamId]) {
+          const game = TEAMS_DATABASE[awayTeamId].schedule.find(g => g.oppAbbr === homeComp.team?.abbreviation || !g.isHome);
+          if (game && isCompleted) {
+            game.isFinal = true;
+            game.actualScoreUt = parseInt(awayComp.score, 10);
+            game.actualScoreOpp = parseInt(homeComp.score, 10);
+            updatedCount++;
+          }
+        }
+      });
+
+      return updatedCount > 0;
+    } catch (err) {
+      console.warn('Live scoreboard sync notice (using season projections):', err);
       return false;
     }
   },
@@ -2724,7 +2806,6 @@ const LiveSyncEngine = {
       // BUT: if team has a confirmedStarterQb, always protect it from ESPN overwrite
       if (qbs.length > 0) {
         if (team.confirmedStarterQb) {
-          // Manually verified starter — lock in QB slider and star player (unless WR/RB)
           if (!team.starPlayer || (!team.starPlayer.includes('WR') && !team.starPlayer.includes('RB'))) {
             team.starPlayer = `${team.confirmedStarterQb} (QB)`;
           }
@@ -2768,8 +2849,9 @@ const LiveSyncEngine = {
     if (textEl) textEl.innerText = 'SYNCING LIVE DATA...';
     if (syncBtn) syncBtn.classList.add('spinning');
 
-    const [rankingsOk, rosterOk] = await Promise.all([
+    const [rankingsOk, scoreboardOk, rosterOk] = await Promise.all([
       this.syncRankings(),
+      this.syncScoreboard(),
       this.syncTeamRoster(state.currentTeamId)
     ]);
 
@@ -2781,12 +2863,12 @@ const LiveSyncEngine = {
       if (pill) pill.classList.remove('syncing');
       if (syncBtn) syncBtn.classList.remove('spinning');
       if (textEl) {
-        textEl.innerText = (rankingsOk || rosterOk) ? `LIVE ESPN FEED • ${timeStr}` : 'LIVE FEED ACTIVE';
+        textEl.innerText = (rankingsOk || scoreboardOk || rosterOk) ? `LIVE ESPN FEED • ${timeStr}` : 'LIVE FEED ACTIVE';
       }
 
       // Re-render UI with synced live data
       renderTeamSelector();
-  initTeamSearch();
+      initTeamSearch();
       selectTeam(state.currentTeamId);
     }, 500);
   }
