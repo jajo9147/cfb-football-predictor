@@ -933,26 +933,93 @@ function initFilterButtons() {
 // SIMULATION MODAL & SINGLE-GAME CUSTOM SCENARIO TUNING
 // ==========================================================================
 
+
 function openSimModal(game) {
   if (!game) return;
   state.activeModalGame = game;
-  const team = TEAMS_DATABASE[state.currentTeamId];
-  if (!team) return;
-  const sim = calculateAdjustedMatchup(game);
+
+  let team1, team2;
+  let score1, score2, prob1, isTeam1Win;
+
+  if (game.isPostseason && game.teamA && game.teamB) {
+    // Postseason Game (CCG or Playoff Game)
+    const tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+    const tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+    
+    team1 = {
+      id: tA.id,
+      name: tA.name,
+      shortName: tA.shortName || tA.name,
+      abbr: tA.abbr || tA.shortName,
+      apRank: tA.apRank || '',
+      logoUrl: tA.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tA.abbr] : '') || '',
+      colors: tA.colors || { primary: '#333333', secondary: '#FFFFFF', accent: '#0062B8' },
+      starPlayer: tA.starPlayer || `${tA.shortName || tA.name} Star Playmaker`
+    };
+
+    team2 = {
+      id: tB.id,
+      name: tB.name,
+      shortName: tB.shortName || tB.name,
+      abbr: tB.abbr || tB.shortName,
+      apRank: tB.apRank || '',
+      logoUrl: tB.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tB.abbr] : '') || '',
+      colors: tB.colors || { primary: '#555555', secondary: '#FFFFFF', accent: '#CC0000' },
+      starPlayer: tB.starPlayer || `${tB.shortName || tB.name} Star Playmaker`
+    };
+
+    const sim = simulatePostseasonMatchup(tA, tB, { gameId: game.id, isHomeA: game.isHomeA });
+    score1 = sim.scoreA;
+    score2 = sim.scoreB;
+    prob1 = sim.winProbA;
+    isTeam1Win = sim.isAWinner;
+  } else {
+    // Regular season game for current active team
+    const tActive = TEAMS_DATABASE[state.currentTeamId];
+    if (!tActive) return;
+    
+    team1 = {
+      id: tActive.id,
+      name: tActive.name,
+      shortName: tActive.shortName,
+      abbr: tActive.abbr,
+      apRank: tActive.apRank,
+      logoUrl: tActive.logoUrl,
+      colors: tActive.colors,
+      starPlayer: tActive.starPlayer
+    };
+
+    team2 = {
+      id: game.oppAbbr,
+      name: game.opponent,
+      shortName: game.oppAbbr,
+      abbr: game.oppAbbr,
+      apRank: game.oppRank || 'NR',
+      logoUrl: game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || '',
+      colors: { primary: game.oppColor || '#333333', secondary: game.oppSecondary || '#FFFFFF', accent: game.oppColor || '#333333' },
+      starPlayer: `${game.oppAbbr} Key Playmakers`
+    };
+
+    const sim = calculateAdjustedMatchup(game);
+    score1 = sim.projUt;
+    score2 = sim.projOpp;
+    prob1 = sim.adjWinProb;
+    isTeam1Win = sim.isWin;
+  }
 
   const weekTagEl = document.getElementById('modalWeekTag');
   if (weekTagEl) {
-    weekTagEl.innerText = `${game.week} • ${game.isMarquee ? 'MARQUEE BATTLE' : (game.isHome ? 'HOME SHOWDOWN' : 'AWAY GAUNTLET')}`;
+    weekTagEl.innerText = `${game.week} • ${game.isPostseason ? 'CHAMPIONSHIP SHOWDOWN' : (game.isMarquee ? 'MARQUEE BATTLE' : (game.isHome ? 'HOME SHOWDOWN' : 'AWAY GAUNTLET'))}`;
   }
 
   const titleEl = document.getElementById('modalMatchupTitle');
   if (titleEl) {
-    titleEl.innerText = `${team.name} vs ${game.opponent}`;
+    titleEl.innerText = `${team1.name} vs ${team2.name}`;
   }
 
   const stadiumEl = document.getElementById('modalStadiumLocation');
   if (stadiumEl) {
-    stadiumEl.innerText = `${game.stadium || 'Campus Stadium'} • ${game.location || ''}`;
+    stadiumEl.innerText = `${game.stadium || 'Neutral Site Stadium'} • ${game.location || ''}`;
   }
 
   // Scoreboard
@@ -960,40 +1027,40 @@ function openSimModal(game) {
   if (scoreboardEl) {
     scoreboardEl.innerHTML = `
       <div style="display: flex; align-items: center; gap: 0.75rem;">
-        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team.colors.primary};">
-          <img src="${team.logoUrl}" alt="${team.shortName}" class="modal-team-logo">
+        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team1.colors?.primary || '#333'};">
+          <img src="${team1.logoUrl}" alt="${team1.shortName}" class="modal-team-logo">
         </div>
         <div>
-          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${team.shortName}</div>
-          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${team.apRank}</div>
+          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${team1.shortName}</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${team1.apRank}</div>
         </div>
       </div>
 
       <div style="display: flex; flex-direction: column; align-items: center;">
         <div style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: #FFFFFF;">
-          <span style="color: ${sim.isWin ? 'var(--color-success)' : 'var(--color-text-dim)'};">${sim.projUt}</span>
+          <span style="color: ${isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score1}</span>
           <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
-          <span style="color: ${!sim.isWin ? 'var(--color-danger)' : 'var(--color-text-dim)'};">${sim.projOpp}</span>
+          <span style="color: ${!isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score2}</span>
         </div>
         <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
-          WIN PROB: ${sim.adjWinProb}%
+          WIN PROB: ${prob1}% - ${100 - prob1}%
         </span>
       </div>
 
       <div style="display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end;">
         <div style="text-align: right;">
-          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${game.oppAbbr}</div>
-          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${game.oppRank}</div>
+          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${team2.shortName}</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${team2.apRank}</div>
         </div>
-        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${game.oppColor};">
-          <img src="${game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || ''}" alt="${game.oppAbbr}" class="modal-team-logo">
+        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team2.colors?.primary || '#333'};">
+          <img src="${team2.logoUrl}" alt="${team2.shortName}" class="modal-team-logo">
         </div>
       </div>
     `;
   }
 
   // Render Drive Log
-  renderDriveLog(game, sim);
+  renderDriveLogBetween(team1, team2, score1, score2);
 
   // Render Tactical Scout Intel
   renderScoutReport(game);
@@ -1002,7 +1069,7 @@ function openSimModal(game) {
   renderGameSlidersInModal(game);
 
   // Render Radar Chart
-  drawRadarChart(game, sim);
+  drawRadarChartBetween(team1, team2, score1, score2, game.isHome);
 
   // Sync Footer Display
   const activeSubTab = document.querySelector('#simModal .sub-tab.active');
@@ -1021,9 +1088,11 @@ function openSimModal(game) {
 window.openSimModal = openSimModal;
 
 window.openSimModalByGameId = function(gameId) {
+  let game = null;
   const team = TEAMS_DATABASE[state.currentTeamId];
-  if (!team) return;
-  let game = (team.schedule || []).find(g => g.id === gameId);
+  if (team && team.schedule) {
+    game = team.schedule.find(g => g.id === gameId);
+  }
   if (!game && state.postseasonGames && state.postseasonGames[gameId]) {
     game = state.postseasonGames[gameId];
   }
@@ -1032,13 +1101,12 @@ window.openSimModalByGameId = function(gameId) {
   }
 };
 
-function renderDriveLog(game, sim) {
+function renderDriveLogBetween(team1, team2, score1, score2) {
   const container = document.getElementById('driveLogContainer');
   if (!container) return;
-  const team = TEAMS_DATABASE[state.currentTeamId];
 
   container.innerHTML = '';
-  const drives = generateDriveSimulationLog(team, game, sim);
+  const drives = generateDriveSimulationLogBetween(team1, team2, score1, score2);
 
   drives.forEach((d, idx) => {
     const row = document.createElement('div');
@@ -1054,7 +1122,7 @@ function renderDriveLog(game, sim) {
     row.innerHTML = `
       <div style="display: flex; align-items: center; gap: 0.6rem;">
         <span style="font-family: var(--font-mono); font-weight: 800; color: var(--color-brand-accent);">Q${d.quarter} ${d.time}</span>
-        <span style="font-weight: 700; color: ${d.isTeam ? team.colors.accent : game.oppSecondary};">${d.possTeam}</span>
+        <span style="font-weight: 700; color: ${d.isTeam1 ? (team1.colors?.accent || team1.colors?.primary || '#FFF') : (team2.colors?.secondary || team2.colors?.primary || '#FFF')};">${d.possTeam}</span>
         <span>${d.event}</span>
       </div>
       <span style="font-family: var(--font-mono); font-weight: 800; color: ${d.points > 0 ? 'var(--color-success)' : 'var(--color-text-dim)'};">${d.scoreLine}</span>
@@ -1063,72 +1131,45 @@ function renderDriveLog(game, sim) {
   });
 }
 
-function generateDriveSimulationLog(team, game, sim) {
+function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
   const events = [];
-  let curUt = 0;
-  let curOpp = 0;
+  let cur1 = 0;
+  let cur2 = 0;
   const quarters = [1, 2, 3, 4];
 
   quarters.forEach(q => {
-    // Drive 1: Team
-    const utEventRoll = Math.random();
-    if (utEventRoll < 0.35 && curUt < sim.projUt) {
-      curUt += 7;
-      events.push({ quarter: q, time: '10:42', possTeam: team.abbr, isTeam: true, event: `Touchdown! ${team.starPlayer} explosive scoring drive`, points: 7, scoreLine: `${team.abbr} ${curUt} - ${game.oppAbbr} ${curOpp}` });
-    } else if (utEventRoll < 0.60 && curUt < sim.projUt) {
-      curUt += 3;
-      events.push({ quarter: q, time: '07:15', possTeam: team.abbr, isTeam: true, event: 'Field Goal through uprights', points: 3, scoreLine: `${team.abbr} ${curUt} - ${game.oppAbbr} ${curOpp}` });
+    // Drive 1: Team 1
+    const roll1 = Math.random();
+    if (roll1 < 0.35 && cur1 < score1) {
+      cur1 += 7;
+      events.push({ quarter: q, time: '10:42', possTeam: team1.abbr, isTeam1: true, event: `Touchdown! ${team1.starPlayer || team1.shortName} explosive scoring drive`, points: 7, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
+    } else if (roll1 < 0.60 && cur1 < score1) {
+      cur1 += 3;
+      events.push({ quarter: q, time: '07:15', possTeam: team1.abbr, isTeam1: true, event: 'Field Goal through uprights', points: 3, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
     } else {
-      events.push({ quarter: q, time: '05:30', possTeam: team.abbr, isTeam: true, event: 'Punt pinned inside the 20', points: 0, scoreLine: `${team.abbr} ${curUt} - ${game.oppAbbr} ${curOpp}` });
+      events.push({ quarter: q, time: '05:30', possTeam: team1.abbr, isTeam1: true, event: 'Punt pinned inside the 20', points: 0, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
     }
 
-    // Drive 2: Opponent
-    const oppEventRoll = Math.random();
-    if (oppEventRoll < 0.30 && curOpp < sim.projOpp) {
-      curOpp += 7;
-      events.push({ quarter: q, time: '03:10', possTeam: game.oppAbbr, isTeam: false, event: `Touchdown! ${game.oppAbbr} red zone pass`, points: 7, scoreLine: `${team.abbr} ${curUt} - ${game.oppAbbr} ${curOpp}` });
-    } else if (oppEventRoll < 0.55 && curOpp < sim.projOpp) {
-      curOpp += 3;
-      events.push({ quarter: q, time: '01:05', possTeam: game.oppAbbr, isTeam: false, event: `${game.oppAbbr} 44yd Field Goal`, points: 3, scoreLine: `${team.abbr} ${curUt} - ${game.oppAbbr} ${curOpp}` });
+    // Drive 2: Team 2
+    const roll2 = Math.random();
+    if (roll2 < 0.30 && cur2 < score2) {
+      cur2 += 7;
+      events.push({ quarter: q, time: '03:10', possTeam: team2.abbr, isTeam1: false, event: `Touchdown! ${team2.abbr} red zone strike`, points: 7, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
+    } else if (roll2 < 0.55 && cur2 < score2) {
+      cur2 += 3;
+      events.push({ quarter: q, time: '01:05', possTeam: team2.abbr, isTeam1: false, event: `${team2.abbr} 44yd Field Goal`, points: 3, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
     } else {
-      events.push({ quarter: q, time: '00:15', possTeam: game.oppAbbr, isTeam: false, event: `${team.name} defense forces 3-and-out punt`, points: 0, scoreLine: `${team.abbr} ${curUt} - ${game.oppAbbr} ${curOpp}` });
+      events.push({ quarter: q, time: '00:15', possTeam: team2.abbr, isTeam1: false, event: `${team1.name} defense forces 3-and-out punt`, points: 0, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
     }
   });
 
   return events;
 }
 
-function renderScoutReport(game) {
-  const box = document.getElementById('scoutReportBox');
-  if (!box) return;
-  const scout = game.scoutReport || {
-    xFactor: 'Line of scrimmage execution and turnover margin.',
-    keyMatchup: 'Quarterback poise under pressure.',
-    summary: 'Crucial regular season matchup.'
-  };
-
-  box.innerHTML = `
-    <div>
-      <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--color-brand-accent);">⚡ X-FACTOR:</span>
-      <p style="font-size: 0.84rem; color: var(--color-text-main); margin-top: 0.15rem;">${scout.xFactor}</p>
-    </div>
-    <div>
-      <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--color-gold);">🎯 KEY MATCHUP:</span>
-      <p style="font-size: 0.84rem; color: var(--color-text-main); margin-top: 0.15rem;">${scout.keyMatchup}</p>
-    </div>
-    <div>
-      <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--color-cyan);">📋 TACTICAL SUMMARY:</span>
-      <p style="font-size: 0.84rem; color: var(--color-text-main); margin-top: 0.15rem;">${scout.summary}</p>
-    </div>
-  `;
-}
-
-function drawRadarChart(game, sim) {
+function drawRadarChartBetween(team1, team2, score1, score2, isHome) {
   const canvas = document.getElementById('radarChartCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const team = TEAMS_DATABASE[state.currentTeamId];
-  if (!team) return;
 
   const w = canvas.width;
   const h = canvas.height;
@@ -1139,11 +1180,11 @@ function drawRadarChart(game, sim) {
   const radius = Math.min(centerX, centerY) - 25;
 
   const metrics = [
-    { label: 'OFFENSE', teamVal: Math.min(99, Math.max(50, 75 + (sim.projUt - 28) * 2)), oppVal: Math.min(99, Math.max(50, 75 + (sim.projOpp - 24) * 2)) },
-    { label: 'DEFENSE', teamVal: Math.min(99, Math.max(50, 80 - (sim.projOpp - 20) * 2)), oppVal: Math.min(99, Math.max(50, 80 - (sim.projUt - 24) * 2)) },
-    { label: 'QB PLAY', teamVal: Math.min(99, Math.max(50, 82 + (getTeamSliders(state.currentTeamId).qbRating || 0) * 0.4)), oppVal: Math.min(99, Math.max(50, 76 + (game.oppRank.includes('#') ? 10 : 0))) },
-    { label: 'GROUND', teamVal: Math.min(99, Math.max(50, 80 + (getTeamSliders(state.currentTeamId).groundAttack || 0) * 0.4)), oppVal: 74 },
-    { label: 'STADIUM', teamVal: game.isHome ? 92 : 55, oppVal: game.isHome ? 50 : 90 }
+    { label: 'OFFENSE', team1Val: Math.min(99, Math.max(50, 75 + (score1 - 28) * 2)), team2Val: Math.min(99, Math.max(50, 75 + (score2 - 24) * 2)) },
+    { label: 'DEFENSE', team1Val: Math.min(99, Math.max(50, 80 - (score2 - 20) * 2)), team2Val: Math.min(99, Math.max(50, 80 - (score1 - 24) * 2)) },
+    { label: 'QB PLAY', team1Val: Math.min(99, Math.max(50, 82 + (score1 > score2 ? 6 : -3))), team2Val: Math.min(99, Math.max(50, 80 + (score2 > score1 ? 6 : -3))) },
+    { label: 'GROUND', team1Val: Math.min(99, Math.max(50, 78 + (score1 > 30 ? 6 : 0))), team2Val: Math.min(99, Math.max(50, 76 + (score2 > 30 ? 6 : 0))) },
+    { label: 'STADIUM', team1Val: isHome ? 92 : 65, team2Val: isHome ? 50 : 65 }
   ];
 
   const totalAxes = metrics.length;
@@ -1187,37 +1228,37 @@ function drawRadarChart(game, sim) {
     ctx.fillText(metrics[i].label, labelX, labelY);
   }
 
-  // Draw Team Polygon
+  // Draw Team 1 Polygon
   ctx.beginPath();
   metrics.forEach((m, i) => {
     const angle = i * angleStep - Math.PI / 2;
-    const r = (m.teamVal / 100) * radius;
+    const r = (m.team1Val / 100) * radius;
     const x = centerX + Math.cos(angle) * r;
     const y = centerY + Math.sin(angle) * r;
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   });
   ctx.closePath();
-  ctx.fillStyle = `${team.colors.primary}55`;
+  ctx.fillStyle = `${team1.colors?.primary || '#333'}55`;
   ctx.fill();
-  ctx.strokeStyle = team.colors.accent || team.colors.primary;
+  ctx.strokeStyle = team1.colors?.accent || team1.colors?.primary || '#0062B8';
   ctx.lineWidth = 2.5;
   ctx.stroke();
 
-  // Draw Opponent Polygon
+  // Draw Team 2 Polygon
   ctx.beginPath();
   metrics.forEach((m, i) => {
     const angle = i * angleStep - Math.PI / 2;
-    const r = (m.oppVal / 100) * radius;
+    const r = (m.team2Val / 100) * radius;
     const x = centerX + Math.cos(angle) * r;
     const y = centerY + Math.sin(angle) * r;
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   });
   ctx.closePath();
-  ctx.fillStyle = `${game.oppColor}44`;
+  ctx.fillStyle = `${team2.colors?.primary || '#555'}44`;
   ctx.fill();
-  ctx.strokeStyle = game.oppColor;
+  ctx.strokeStyle = team2.colors?.primary || '#CC0000';
   ctx.lineWidth = 2;
   ctx.stroke();
 
@@ -1226,25 +1267,26 @@ function drawRadarChart(game, sim) {
   ctx.textAlign = 'left';
   ctx.font = 'bold 11px Outfit, sans-serif';
   
-  // Team legend
-  ctx.fillStyle = team.colors.accent || team.colors.primary;
+  // Team 1 legend
+  ctx.fillStyle = team1.colors?.accent || team1.colors?.primary || '#0062B8';
   ctx.fillRect(centerX - 90, legendY - 8, 10, 10);
   ctx.fillStyle = '#FFFFFF';
-  ctx.fillText(team.shortName, centerX - 75, legendY);
+  ctx.fillText(team1.shortName, centerX - 75, legendY);
 
-  // Opponent legend
-  ctx.fillStyle = game.oppColor;
+  // Team 2 legend
+  ctx.fillStyle = team2.colors?.primary || '#CC0000';
   ctx.fillRect(centerX + 25, legendY - 8, 10, 10);
   ctx.fillStyle = '#FFFFFF';
-  ctx.fillText(game.oppAbbr, centerX + 40, legendY);
+  ctx.fillText(team2.shortName, centerX + 40, legendY);
 }
 
 function renderGameSlidersInModal(game) {
   const container = document.getElementById('modalGameSlidersGrid');
   if (!container) return;
-  const team = TEAMS_DATABASE[state.currentTeamId];
+  const teamId = (game.isPostseason && game.teamA) ? (game.teamA.id || state.currentTeamId) : state.currentTeamId;
+  const team = TEAMS_DATABASE[teamId] || TEAMS_DATABASE[state.currentTeamId];
   if (!team) return;
-  const teamSliders = getTeamSliders(state.currentTeamId);
+  const teamSliders = getTeamSliders(teamId);
   const currentSliders = state.gameSliders[game.id] || {
     qbRating: teamSliders.qbRating || 0,
     groundAttack: teamSliders.groundAttack || 0,
@@ -1631,27 +1673,28 @@ function simulateConferenceChampionships(evaluatedTeams) {
 
   // Save game objects to state.postseasonGames for interactive modal
   const registerCcgGame = (id, weekName, teamA, teamB, sim, stadium, location) => {
-    const opp = (teamA.id === state.currentTeamId) ? teamB : teamA;
-    const isUtTeamA = (teamA.id === state.currentTeamId);
     state.postseasonGames[id] = {
       id,
       week: weekName,
-      opponent: opp.name,
-      oppAbbr: opp.abbr,
-      oppRank: opp.apRank || 'TOP 25',
-      oppColor: (TEAMS_DATABASE[opp.id] || {}).colors?.primary || '#333333',
-      oppLogoUrl: opp.logoUrl,
+      isPostseason: true,
+      teamA: teamA,
+      teamB: teamB,
+      opponent: teamB.name,
+      oppAbbr: teamB.abbr || teamB.shortName,
+      oppRank: teamB.apRank || 'TOP 25',
+      oppColor: (TEAMS_DATABASE[teamB.id] || {}).colors?.primary || '#333333',
+      oppLogoUrl: teamB.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[teamB.abbr] : '') || '',
       isHome: false,
       stadium,
       location,
       isMarquee: true,
-      projScoreUt: isUtTeamA ? sim.scoreA : sim.scoreB,
-      projScoreOpp: isUtTeamA ? sim.scoreB : sim.scoreA,
-      baseWinProb: isUtTeamA ? sim.winProbA : sim.winProbB,
+      projScoreUt: sim.scoreA,
+      projScoreOpp: sim.scoreB,
+      baseWinProb: sim.winProbA,
       scoutReport: {
         xFactor: `Championship intensity and automatic 12-Team CFP First-Round Bye stakes at ${stadium}.`,
         keyMatchup: `${teamA.shortName} offensive execution vs ${teamB.shortName} defensive front.`,
-        summary: `Epic Conference Championship Saturday battle to determine automatic CFP bye.`
+        summary: `Epic Conference Championship battle between ${teamA.name} and ${teamB.name} at ${stadium}.`
       }
     };
   };
@@ -1782,28 +1825,28 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
 function simulatePlayoffBracket(cfp) {
   // Helper to register playoff game for modal simulation
   const registerPlayoffGame = (id, roundName, bowlName, teamA, teamB, sim, stadium, location) => {
-    const activeTeamId = state.currentTeamId;
-    const opp = (teamA.id === activeTeamId) ? teamB : teamA;
-    const isUtTeamA = (teamA.id === activeTeamId);
     state.postseasonGames[id] = {
       id,
       week: roundName,
-      opponent: opp?.name || 'Playoff Challenger',
-      oppAbbr: opp?.abbr || 'CFP',
-      oppRank: opp?.apRank || 'TOP 12',
-      oppColor: (TEAMS_DATABASE[opp?.id] || {}).colors?.primary || '#333333',
-      oppLogoUrl: opp?.logoUrl || '',
+      isPostseason: true,
+      teamA: teamA,
+      teamB: teamB,
+      opponent: teamB?.name || 'Playoff Challenger',
+      oppAbbr: teamB?.abbr || teamB?.shortName || 'CFP',
+      oppRank: teamB?.apRank || 'TOP 12',
+      oppColor: (TEAMS_DATABASE[teamB?.id] || {}).colors?.primary || '#333333',
+      oppLogoUrl: teamB?.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[teamB?.abbr] : '') || '',
       isHome: false,
       stadium: bowlName ? `${bowlName} (${stadium})` : stadium,
       location,
       isMarquee: true,
-      projScoreUt: isUtTeamA ? sim.scoreA : sim.scoreB,
-      projScoreOpp: isUtTeamA ? sim.scoreB : sim.scoreA,
-      baseWinProb: isUtTeamA ? sim.winProbA : sim.winProbB,
+      projScoreUt: sim.scoreA,
+      projScoreOpp: sim.scoreB,
+      baseWinProb: sim.winProbA,
       scoutReport: {
         xFactor: `Championship survival and advancement at ${bowlName || stadium}.`,
         keyMatchup: `${teamA?.shortName} vs ${teamB?.shortName} high-stakes battle.`,
-        summary: `12-Team College Football Playoff knockout clash.`
+        summary: `12-Team College Football Playoff knockout clash between ${teamA?.name} and ${teamB?.name}.`
       }
     };
   };
