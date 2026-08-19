@@ -1832,13 +1832,26 @@ function renderConferenceChampionships(ccgResults) {
     const activeTeamId = state.currentTeamId;
     const isActiveMatchup = (d.team1.id === activeTeamId || d.team2.id === activeTeamId);
 
+    const isCustom = !!(state.gameSliders && state.gameSliders[d.id]?.isCustom);
+    const isUserPick = !!(state.ccgPicks && state.ccgPicks[d.id]);
+
+    let customBadgeHtml = '';
+    if (isUserPick) {
+      customBadgeHtml = `<span class="custom-tuned-badge"><i class="fa-solid fa-check"></i> USER PICK</span>`;
+    } else if (isCustom) {
+      customBadgeHtml = `<span class="custom-tuned-badge"><i class="fa-solid fa-bullseye"></i> CUSTOM TUNED</span>`;
+    }
+
     const card = document.createElement('div');
     card.className = `ccg-card ${isActiveMatchup ? 'active-team-card' : ''}`;
     card.onclick = () => window.openSimModalByGameId(d.id);
 
     card.innerHTML = `
       <div class="ccg-card-header">
-        <span class="ccg-conf-title"><i class="fa-solid fa-trophy" style="color: #FFD700; margin-right: 5px;"></i> ${g.title}</span>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span class="ccg-conf-title"><i class="fa-solid fa-trophy" style="color: #FFD700; margin-right: 5px;"></i> ${g.title}</span>
+          ${customBadgeHtml}
+        </div>
         <span class="ccg-venue-text">${d.venue}</span>
       </div>
 
@@ -1883,22 +1896,51 @@ function renderConferenceChampionships(ccgResults) {
 
 // 3. Generate 12-Team CFP Field from CCG Champions and At-Large Contenders
 function generate12TeamCfpField(confChamps, evaluatedTeams) {
-  const seed1 = confChamps[0];
-  const seed2 = confChamps[1];
-  const seed3 = confChamps[2];
-  const seed4 = confChamps[3];
+  // 1. Sort all 5 conference champions by resume/SP+
+  const sortedChamps = [...confChamps];
+  sortedChamps.sort((a, b) => {
+    const scoreA = evaluatedTeams.find(t => t.id === a?.id)?.score || (a?.baseSpRating ? a.baseSpRating * 500 : 10000);
+    const scoreB = evaluatedTeams.find(t => t.id === b?.id)?.score || (b?.baseSpRating ? b.baseSpRating * 500 : 10000);
+    return scoreB - scoreA;
+  });
 
-  const champIds = new Set([seed1?.id, seed2?.id, seed3?.id, seed4?.id]);
-  const atLargeCandidates = evaluatedTeams.filter(t => !champIds.has(t.id));
+  // Top 4 champions get seeds 1-4 (First Round Byes)
+  const seed1 = sortedChamps[0];
+  const seed2 = sortedChamps[1];
+  const seed3 = sortedChamps[2];
+  const seed4 = sortedChamps[3];
+  const fifthChamp = sortedChamps[4]; // 5th conference champion guaranteed auto-bid
 
-  const seed5 = atLargeCandidates[0];
-  const seed6 = atLargeCandidates[1];
-  const seed7 = atLargeCandidates[2];
-  const seed8 = atLargeCandidates[3];
-  const seed9 = atLargeCandidates[4];
-  const seed10 = atLargeCandidates[5];
-  const seed11 = atLargeCandidates[6];
-  const seed12 = atLargeCandidates[7];
+  // 2. All 5 champions have automatic bids
+  const autoChampIds = new Set(sortedChamps.map(c => c?.id).filter(Boolean));
+
+  // 3. 7 remaining At-Large bids go to top non-champions
+  const atLargePool = evaluatedTeams.filter(t => !autoChampIds.has(t.id));
+
+  const atLarge1 = atLargePool[0];
+  const atLarge2 = atLargePool[1];
+  const atLarge3 = atLargePool[2];
+  const atLarge4 = atLargePool[3];
+  const atLarge5 = atLargePool[4];
+  const atLarge6 = atLargePool[5];
+  const atLarge7 = atLargePool[6];
+
+  // 4. Seeds 5-12 sorted by merit (with 5th champion seeded into the field)
+  const nonByeField = [atLarge1, atLarge2, atLarge3, atLarge4, atLarge5, atLarge6, atLarge7, fifthChamp].filter(Boolean);
+  nonByeField.sort((a, b) => {
+    const scoreA = evaluatedTeams.find(t => t.id === a?.id)?.score || (a?.baseSpRating ? a.baseSpRating * 500 : 10000);
+    const scoreB = evaluatedTeams.find(t => t.id === b?.id)?.score || (b?.baseSpRating ? b.baseSpRating * 500 : 10000);
+    return scoreB - scoreA;
+  });
+
+  const seed5 = nonByeField[0];
+  const seed6 = nonByeField[1];
+  const seed7 = nonByeField[2];
+  const seed8 = nonByeField[3];
+  const seed9 = nonByeField[4];
+  const seed10 = nonByeField[5];
+  const seed11 = nonByeField[6];
+  const seed12 = nonByeField[7] || fifthChamp;
 
   const seeds = [seed1, seed2, seed3, seed4, seed5, seed6, seed7, seed8, seed9, seed10, seed11, seed12].filter(Boolean);
 
