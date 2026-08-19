@@ -313,6 +313,10 @@ function selectTeam(teamId) {
 
   document.getElementById('heroRank').innerText = `${team.apRank} POLL`;
   document.getElementById('heroCoach').innerText = `HC: ${team.headCoach}`;
+  const ocEl = document.getElementById('heroOC');
+  if (ocEl) {
+    ocEl.innerText = `OC: ${team.offensiveCoordinator || 'Coordinating Staff'}`;
+  }
   const dcEl = document.getElementById('heroDC');
   if (dcEl) {
     dcEl.innerText = `DC: ${team.defensiveCoordinator || 'Staff'}`;

@@ -826,8 +826,8 @@ var TEAMS_DATABASE = {
     "apRank": "#16 AP",
     "apPoints": "718 PTS",
     "headCoach": "Sherrone Moore",
-    "defensiveCoordinator": "Jay Hill",
-    "offensiveCoordinator": "Jason Beck",
+    "defensiveCoordinator": "Wink Martindale",
+    "offensiveCoordinator": "Kirk Campbell",
     "starPlayer": "Bryce Underwood (QB)",
     "secondaryStar": "Jordan Marshall (RB) / Savion Hiter (RB)",
     "stadium": "Michigan Stadium (The Big House)",
@@ -1199,8 +1199,8 @@ var TEAMS_DATABASE = {
     "apRank": "#1 AP",
     "apPoints": "1,672 PTS",
     "headCoach": "Ryan Day",
-    "defensiveCoordinator": "Jim Knowles",
-    "offensiveCoordinator": "Arthur Smith",
+    "defensiveCoordinator": "Matt Patricia",
+    "offensiveCoordinator": "Brian Hartline",
     "starPlayer": "Jeremiah Smith (WR) / Julian Sayin (QB)",
     "secondaryStar": "Bo Jackson (RB) / Jeremiah Smith (WR)",
     "stadium": "Ohio Stadium (The Horseshoe)",
@@ -2313,7 +2313,7 @@ var TEAMS_DATABASE = {
     "apPoints": "1,597 PTS (14 1st)",
     "headCoach": "Dan Lanning",
     "defensiveCoordinator": "Chris Hampton",
-    "offensiveCoordinator": "Drew Mehringer",
+    "offensiveCoordinator": "Will Stein",
     "starPlayer": "Dante Moore (QB)",
     "secondaryStar": "Jordon Davison (RB) / Matayo Uiagalelei (DE)",
     "stadium": "Autzen Stadium",
@@ -2682,7 +2682,7 @@ var TEAMS_DATABASE = {
     "apRank": "#18 AP",
     "apPoints": "482 PTS",
     "headCoach": "Matt Campbell",
-    "defensiveCoordinator": "Tom Allen",
+    "defensiveCoordinator": "D'Anton Lynn",
     "offensiveCoordinator": "Andy Kotelnicki",
     "starPlayer": "Rocco Becht (QB) / Nicholas Singleton (RB)",
     "secondaryStar": "Carson Hansen (RB) / James Peoples (RB)",
@@ -3423,7 +3423,7 @@ var TEAMS_DATABASE = {
     "apPoints": "988 PTS",
     "headCoach": "Brian Kelly",
     "defensiveCoordinator": "Blake Baker",
-    "offensiveCoordinator": "Charlie Weis Jr.",
+    "offensiveCoordinator": "Joe Sloan",
     "starPlayer": "Sam Leavitt (QB)",
     "secondaryStar": "Caden Durham (RB) / Harlem Berry (RB)",
     "stadium": "Tiger Stadium (Death Valley)",
@@ -3794,7 +3794,7 @@ var TEAMS_DATABASE = {
     "apRank": "#20 AP",
     "apPoints": "395 PTS",
     "headCoach": "Josh Heupel",
-    "defensiveCoordinator": "Tim Banks",
+    "defensiveCoordinator": "Jim Knowles",
     "offensiveCoordinator": "Joey Halzle",
     "starPlayer": "George MacIntyre (QB) / Faizon Brandon (QB)",
     "secondaryStar": "DeSean Bishop (RB) / Peyton Lewis (RB)",
@@ -4534,7 +4534,7 @@ var TEAMS_DATABASE = {
     "apRank": "#7 AP",
     "apPoints": "1,310 PTS (1 1st)",
     "headCoach": "Mario Cristobal",
-    "defensiveCoordinator": "Lance Guidry",
+    "defensiveCoordinator": "Corey Hetherman",
     "offensiveCoordinator": "Shannon Dawson",
     "starPlayer": "Darian Mensah (QB)",
     "secondaryStar": "Mark Fletcher Jr. (RB) / Rueben Bain Jr. (DE)",
@@ -4903,7 +4903,7 @@ var TEAMS_DATABASE = {
     "apRank": "#8 AP",
     "apPoints": "1,260 PTS",
     "headCoach": "Mike Elko",
-    "defensiveCoordinator": "Jay Bateman",
+    "defensiveCoordinator": "Lyle Hemphill",
     "offensiveCoordinator": "Collin Klein",
     "starPlayer": "Marcel Reed (QB)",
     "secondaryStar": "Rueben Owens II (RB) / Jamarion Morrow (RB)",
@@ -5276,7 +5276,7 @@ var TEAMS_DATABASE = {
     "apPoints": "1,180 PTS",
     "headCoach": "Lane Kiffin",
     "defensiveCoordinator": "Bryan Brown",
-    "offensiveCoordinator": "John David Baker",
+    "offensiveCoordinator": "Charlie Weis Jr",
     "starPlayer": "Trinidad Chambliss (QB)",
     "secondaryStar": "Kewan Lacy (RB) / Suntarine Perkins (LB)",
     "stadium": "Vaught-Hemingway Stadium",
@@ -5645,7 +5645,7 @@ var TEAMS_DATABASE = {
     "apRank": "#10 AP",
     "apPoints": "1,140 PTS",
     "headCoach": "Brent Venables",
-    "defensiveCoordinator": "Zac Alley",
+    "defensiveCoordinator": "Todd Bates",
     "offensiveCoordinator": "Joe Jon Finley",
     "starPlayer": "John Mateer (QB)",
     "secondaryStar": "Lloyd Avant (RB) / Xavier Robinson (RB)",
@@ -6374,7 +6374,9 @@ var TEAMS_DATABASE = {
         }
       }
     ],
-    "playoffContenderRank": 12
+    "playoffContenderRank": 12,
+    "defensiveCoordinator": "Erik Chinander",
+    "offensiveCoordinator": "Nate Potter"
   },
   "usc": {
     "name": "USC Trojans",
@@ -6744,7 +6746,9 @@ var TEAMS_DATABASE = {
         }
       }
     ],
-    "playoffContenderRank": 15
+    "playoffContenderRank": 15,
+    "defensiveCoordinator": "Gary Patterson",
+    "offensiveCoordinator": "Josh Henson"
   },
   "floridastate": {
     "name": "Florida State Seminoles",
@@ -7114,7 +7118,9 @@ var TEAMS_DATABASE = {
         }
       }
     ],
-    "playoffContenderRank": 16
+    "playoffContenderRank": 16,
+    "defensiveCoordinator": "Tony White",
+    "offensiveCoordinator": "Tim Harris Jr"
   },
   "clemson": {
     "name": "Clemson Tigers",
@@ -7484,7 +7490,9 @@ var TEAMS_DATABASE = {
         }
       }
     ],
-    "playoffContenderRank": 18
+    "playoffContenderRank": 18,
+    "defensiveCoordinator": "Tom Allen",
+    "offensiveCoordinator": "Garrett Riley"
   },
   "smu": {
     "name": "SMU Mustangs",
@@ -7854,7 +7862,9 @@ var TEAMS_DATABASE = {
         }
       }
     ],
-    "playoffContenderRank": 20
+    "playoffContenderRank": 20,
+    "defensiveCoordinator": "Maurice Crum Jr",
+    "offensiveCoordinator": "Casey Woods"
   }
 };
 
