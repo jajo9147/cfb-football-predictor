@@ -266,6 +266,18 @@ body.theme-smu {
   --color-bg-surface: #091322;
 }
 
+
+/* 21. BYU Cougars */
+body.theme-byu {
+  --color-brand-primary: #002E5D;
+  --color-brand-secondary: #0062B8;
+  --color-brand-accent: #0062B8;
+  --color-brand-glow: rgba(0, 98, 184, 0.5);
+  --color-brand-border: rgba(0, 46, 93, 0.45);
+  --color-bg-base: #030810;
+  --color-bg-surface: #071224;
+}
+
 /* ==========================================================================
    BASE STYLES & LAYOUT
    ========================================================================== */
