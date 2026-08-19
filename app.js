@@ -1896,26 +1896,50 @@ function renderConferenceChampionships(ccgResults) {
 
 // 3. Generate 12-Team CFP Field from CCG Champions and At-Large Contenders
 function generate12TeamCfpField(confChamps, evaluatedTeams) {
-  // 1. Sort all 5 conference champions by resume/SP+
-  const sortedChamps = [...confChamps];
-  sortedChamps.sort((a, b) => {
+  // 1. Resolve 5 conference champions
+  // Power 4 champions (SEC, Big Ten, Big 12, ACC)
+  const p4Champs = confChamps.filter(c => c && c.id !== 'boisestate' && c.id !== 'unlv' && c.conf !== 'Mountain West');
+  p4Champs.sort((a, b) => {
     const scoreA = evaluatedTeams.find(t => t.id === a?.id)?.score || (a?.baseSpRating ? a.baseSpRating * 500 : 10000);
     const scoreB = evaluatedTeams.find(t => t.id === b?.id)?.score || (b?.baseSpRating ? b.baseSpRating * 500 : 10000);
     return scoreB - scoreA;
   });
 
-  // Top 4 champions get seeds 1-4 (First Round Byes)
-  const seed1 = sortedChamps[0];
-  const seed2 = sortedChamps[1];
-  const seed3 = sortedChamps[2];
-  const seed4 = sortedChamps[3];
-  const fifthChamp = sortedChamps[4]; // 5th conference champion guaranteed auto-bid
+  const seed1 = p4Champs[0];
+  const seed2 = p4Champs[1];
+  const seed3 = p4Champs[2];
+  const seed4 = p4Champs[3];
 
-  // 2. All 5 champions have automatic bids
-  const autoChampIds = new Set(sortedChamps.map(c => c?.id).filter(Boolean));
+  // 5th G5 Conference Champion Auto-Bid
+  const mwcWinner = confChamps.find(c => c && (c.id === 'boisestate' || c.id === 'unlv' || c.conf === 'Mountain West'));
+  let fifthChamp;
+  if (mwcWinner && mwcWinner.id === 'boisestate') {
+    fifthChamp = mwcWinner;
+  } else {
+    // If Boise State loses MWC, G5 auto-bid passes to the AAC / G5 Champion Placeholder
+    fifthChamp = {
+      id: 'g5-autobid',
+      name: 'AAC / G5 Champion (Auto-Bid)',
+      shortName: 'AAC / G5 Champ',
+      abbr: 'G5',
+      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/ncaa.png',
+      apRank: 'AUTO-BID',
+      wins: 11,
+      losses: 2,
+      conf: 'G5 Auto-Bid',
+      baseSpRating: 14.0, // Baseline rating: expected to lose 1st round unless custom tuned
+      stadium: 'Host Campus Stadium',
+      stadiumCity: 'Neutral Site',
+      colors: { primary: '#4A5568', secondary: '#CBD5E0', accent: '#718096' },
+      starPlayer: 'AAC / G5 All-Conference Star'
+    };
+  }
 
-  // 3. 7 remaining At-Large bids go to top non-champions
-  const atLargePool = evaluatedTeams.filter(t => !autoChampIds.has(t.id));
+  // 2. All automatic bid champions
+  const autoChampIds = new Set([seed1?.id, seed2?.id, seed3?.id, seed4?.id, fifthChamp?.id].filter(Boolean));
+
+  // 3. 7 At-Large Bids: strictly Power 4 and Notre Dame (G5 unranked teams like Boise State cannot earn At-Large bids)
+  const atLargePool = evaluatedTeams.filter(t => t.conf !== 'Mountain West' && !autoChampIds.has(t.id) && t.id !== 'boisestate');
 
   const atLarge1 = atLargePool[0];
   const atLarge2 = atLargePool[1];
@@ -1925,22 +1949,22 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
   const atLarge6 = atLargePool[5];
   const atLarge7 = atLargePool[6];
 
-  // 4. Seeds 5-12 sorted by merit (with 5th champion seeded into the field)
-  const nonByeField = [atLarge1, atLarge2, atLarge3, atLarge4, atLarge5, atLarge6, atLarge7, fifthChamp].filter(Boolean);
-  nonByeField.sort((a, b) => {
+  // 4. Seeds 5-11 are the 7 At-Large teams sorted by resume; Seed 12 is the 5th G5 Champion
+  const sortedAtLarge = [atLarge1, atLarge2, atLarge3, atLarge4, atLarge5, atLarge6, atLarge7].filter(Boolean);
+  sortedAtLarge.sort((a, b) => {
     const scoreA = evaluatedTeams.find(t => t.id === a?.id)?.score || (a?.baseSpRating ? a.baseSpRating * 500 : 10000);
     const scoreB = evaluatedTeams.find(t => t.id === b?.id)?.score || (b?.baseSpRating ? b.baseSpRating * 500 : 10000);
     return scoreB - scoreA;
   });
 
-  const seed5 = nonByeField[0];
-  const seed6 = nonByeField[1];
-  const seed7 = nonByeField[2];
-  const seed8 = nonByeField[3];
-  const seed9 = nonByeField[4];
-  const seed10 = nonByeField[5];
-  const seed11 = nonByeField[6];
-  const seed12 = nonByeField[7] || fifthChamp;
+  const seed5 = sortedAtLarge[0];
+  const seed6 = sortedAtLarge[1];
+  const seed7 = sortedAtLarge[2];
+  const seed8 = sortedAtLarge[3];
+  const seed9 = sortedAtLarge[4];
+  const seed10 = sortedAtLarge[5];
+  const seed11 = sortedAtLarge[6];
+  const seed12 = fifthChamp;
 
   const seeds = [seed1, seed2, seed3, seed4, seed5, seed6, seed7, seed8, seed9, seed10, seed11, seed12].filter(Boolean);
 
