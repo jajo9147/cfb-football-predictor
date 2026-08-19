@@ -64,7 +64,7 @@ var ESPN_LOGOS = {
   "ARIZ": "https://a.espncdn.com/i/teamlogos/ncaa/500/12.png",
   "NAVY": "https://a.espncdn.com/i/teamlogos/ncaa/500/2426.png",
   "RICE": "https://a.espncdn.com/i/teamlogos/ncaa/500/242.png",
-  "TXST": "https://a.espncdn.com/i/teamlogos/ncaa/500/324.png",
+  "TXST": "https://a.espncdn.com/i/teamlogos/ncaa/500/326.png",
   "UTSA": "https://a.espncdn.com/i/teamlogos/ncaa/500/2636.png"
 };
 
@@ -489,7 +489,7 @@ var TEAMS_DATABASE = {
         "oppBadge": "TXST",
         "oppColor": "#501214",
         "oppSecondary": "#B4975A",
-        "oppLogoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/324.png",
+        "oppLogoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/326.png",
         "isHome": true,
         "stadium": "DKR Texas Memorial Stadium",
         "location": "Austin, TX",

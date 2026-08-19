@@ -393,14 +393,14 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
 
   const pointDiff = adjUtScore - adjOppScore;
   let adjWinProb = 1 / (1 + Math.pow(10, -pointDiff / 13.5)) * 100;
-  adjWinProb = Math.min(99.9, Math.max(0.1, Math.round(adjWinProb * 10) / 10));
+  adjWinProb = Math.min(99, Math.max(1, Math.round(adjWinProb)));
 
   let isWin = userPick ? (userPick === 'W') : (adjUtScore > adjOppScore);
   if (userPick === 'W' && adjUtScore <= adjOppScore) adjUtScore = adjOppScore + 3;
   if (userPick === 'L' && adjUtScore >= adjOppScore) adjOppScore = adjUtScore + 3;
 
   return {
-    adjWinProb: Math.round(adjWinProb * 10) / 10,
+    adjWinProb: Math.round(adjWinProb),
     projUt: adjUtScore,
     projOpp: adjOppScore,
     isWin
@@ -467,7 +467,7 @@ function calculateAdjustedMatchup(game, targetTeamId) {
 
       // Invert outcome and scores for current team
       const invertedWin = !oppRaw.isWin;
-      const invertedProb = Math.min(99.9, Math.max(0.1, Math.round((100 - oppRaw.adjWinProb) * 10) / 10));
+      const invertedProb = Math.min(99, Math.max(1, Math.round(100 - oppRaw.adjWinProb)));
 
       return {
         adjWinProb: invertedProb,
@@ -527,7 +527,7 @@ function recalculateSeason() {
     sumOppScore += sim.projOpp;
   });
 
-  const avgWinProb = (sumWinProb / team.schedule.length).toFixed(1);
+  const avgWinProb = Math.round(sumWinProb / team.schedule.length);
   const avgMargin = ((sumUtScore - sumOppScore) / team.schedule.length).toFixed(1);
   const avgMarginSign = avgMargin >= 0 ? `+${avgMargin}` : avgMargin;
 
@@ -1660,7 +1660,57 @@ function evaluateRegularSeasonAllTeams() {
   return evaluatedTeams;
 }
 
-// Postseason Matchup Engine
+// Calculate dynamic team momentum based on regular season performance & streak
+function getTeamMomentumScore(teamId) {
+  if (!teamId || !TEAMS_DATABASE[teamId]) return { spDelta: 0, wins: 10, losses: 2 };
+  const team = TEAMS_DATABASE[teamId];
+  let wins = 0;
+  let losses = 0;
+  let lastGameWon = true;
+
+  (team.schedule || []).forEach((g, idx) => {
+    const sim = calculateAdjustedMatchup(g, teamId);
+    if (sim.isWin) {
+      wins++;
+      if (idx === (team.schedule.length - 1)) lastGameWon = true;
+    } else {
+      losses++;
+      if (idx === (team.schedule.length - 1)) lastGameWon = false;
+    }
+  });
+
+  let spDelta = 0;
+  if (wins >= 12 && losses === 0) {
+    spDelta += 2.8; // Undefeated regular season momentum
+  } else if (wins === 11 && losses === 1) {
+    spDelta += 0.8; // Dominant 1-loss form
+  } else if (losses === 2) {
+    spDelta -= 2.2; // 2-loss vulnerability penalty
+  } else if (losses >= 3) {
+    spDelta -= 4.8; // Multi-loss slump penalty
+  }
+
+  if (!lastGameWon && losses > 0) {
+    spDelta -= 1.4; // Lost rivalry week / regular season finale cold streak
+  }
+
+  // CCG Winner / Loser momentum
+  if (state.postseasonGames) {
+    for (const gId of ['ccg-sec', 'ccg-b1g', 'ccg-big12', 'ccg-acc', 'ccg-mwc']) {
+      const g = state.postseasonGames[gId];
+      if (g && (g.teamA?.id === teamId || g.teamB?.id === teamId)) {
+        if (state.ccgPicks && state.ccgPicks[gId]) {
+          if (state.ccgPicks[gId] === teamId) spDelta += 1.6;
+          else spDelta -= 1.2;
+        }
+      }
+    }
+  }
+
+  return { spDelta, wins, losses };
+}
+
+// Postseason Matchup Engine with Dynamic Momentum & Resume Weighting
 function simulatePostseasonMatchup(teamA, teamB, options = {}) {
   if (!teamA && !teamB) return { winner: null, loser: null, scoreA: 0, scoreB: 0, isAWinner: true, winProbA: 50 };
   if (!teamA) return { winner: teamB, loser: null, scoreA: 17, scoreB: 28, isAWinner: false, winProbA: 20 };
@@ -1678,6 +1728,16 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
   if (dbB.conference === 'Big Ten') spB += 1.6;
   if (dbA.conference === 'ACC') spA += 0.8;
   if (dbB.conference === 'ACC') spB += 0.8;
+
+  // Apply Dynamic Season Momentum & Form (Upsets/Losses reduce postseason strength)
+  if (teamA.id && TEAMS_DATABASE[teamA.id]) {
+    const momA = getTeamMomentumScore(teamA.id);
+    spA += momA.spDelta;
+  }
+  if (teamB.id && TEAMS_DATABASE[teamB.id]) {
+    const momB = getTeamMomentumScore(teamB.id);
+    spB += momB.spDelta;
+  }
 
   // Apply Team A base sliders
   if (teamA.id && TEAMS_DATABASE[teamA.id]) {
