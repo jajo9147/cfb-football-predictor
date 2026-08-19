@@ -455,7 +455,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Steve Sarkisian",
     "defensiveCoordinator": "Will Muschamp",
     "offensiveCoordinator": "Kyle Flood",
-    "starPlayer": "Arch Manning (QB)",
+    "starPlayer": "Arch Manning (QB) / Ryan Wingo (WR)",
     "secondaryStar": "Hollywood Smothers (RB) / Ryan Wingo (WR)",
     "stadium": "DKR Texas Memorial Stadium",
     "stadiumCity": "Austin, TX",
@@ -472,8 +472,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 27.4,
     "playoffContenderRank": 5,
     "sliderLabels": {
-      "qb": "Arch Manning QB Execution",
-      "ground": "Hollywood Smothers / Raleek Brown Ground Attack",
+      "qb": "Arch Manning Execution",
+      "ground": "Jerrick Gibson / Tre Wisner Ground Attack",
       "defense": "Will Muschamp 'Boom' Havoc Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "DKR 100k Burnt Orange Roar"
@@ -828,7 +828,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Sherrone Moore",
     "defensiveCoordinator": "Wink Martindale",
     "offensiveCoordinator": "Kirk Campbell",
-    "starPlayer": "Bryce Underwood (QB)",
+    "starPlayer": "Bryce Underwood (QB) / Jordan Marshall (RB)",
     "secondaryStar": "Jordan Marshall (RB) / Savion Hiter (RB)",
     "stadium": "Michigan Stadium (The Big House)",
     "stadiumCity": "Ann Arbor, MI",
@@ -845,8 +845,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 22.8,
     "playoffContenderRank": 17,
     "sliderLabels": {
-      "qb": "Bryce Underwood QB Execution",
-      "ground": "Jordan Marshall / Savion Hiter Ground Attack",
+      "qb": "Bryce Underwood Execution",
+      "ground": "Jordan Marshall Ground Attack",
       "defense": "Jay Hill Defensive Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "The Big House 110k Maize Wall"
@@ -1218,8 +1218,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 30.5,
     "playoffContenderRank": 1,
     "sliderLabels": {
-      "qb": "Julian Sayin QB Execution",
-      "ground": "Bo Jackson / Isaiah West Ground Attack",
+      "qb": "Julian Sayin Execution",
+      "ground": "Bo Jackson / James Peoples Ground Attack",
       "defense": "Jim Knowles Silver Bullet Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "The Horseshoe 105k Roar"
@@ -1572,7 +1572,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Kirby Smart",
     "defensiveCoordinator": "Glenn Schumann",
     "offensiveCoordinator": "Mike Bobo",
-    "starPlayer": "Gunner Stockton (QB)",
+    "starPlayer": "Gunner Stockton (QB) / Nate Frazier (RB)",
     "secondaryStar": "Nate Frazier (RB) / Chauncey Bowens (RB)",
     "stadium": "Sanford Stadium (Between the Hedges)",
     "stadiumCity": "Athens, GA",
@@ -1589,8 +1589,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 28.5,
     "playoffContenderRank": 3,
     "sliderLabels": {
-      "qb": "Gunner Stockton QB Execution",
-      "ground": "Nate Frazier Physical Ground Attack",
+      "qb": "Gunner Stockton Execution",
+      "ground": "Nate Frazier Ground Attack",
       "defense": "Glenn Schumann / Kirby Stifling Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Sanford Stadium 93k Redcoat Roar"
@@ -1960,8 +1960,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 25.4,
     "playoffContenderRank": 13,
     "sliderLabels": {
-      "qb": "Keelon Russell QB Execution",
-      "ground": "Daniel Hill / Kevin Riley Ground Attack",
+      "qb": "Keelon Russell Execution",
+      "ground": "Daniel Hill / Richard Young Ground Attack",
       "defense": "Kane Wommack Swarm Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Bryant-Denny 100k Crimson Roar"
@@ -2314,7 +2314,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Dan Lanning",
     "defensiveCoordinator": "Chris Hampton",
     "offensiveCoordinator": "Will Stein",
-    "starPlayer": "Dante Moore (QB)",
+    "starPlayer": "Dante Moore (QB) / Jurrion Dickey (WR)",
     "secondaryStar": "Jordon Davison (RB) / Matayo Uiagalelei (DE)",
     "stadium": "Autzen Stadium",
     "stadiumCity": "Eugene, OR",
@@ -2331,8 +2331,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 28.8,
     "playoffContenderRank": 2,
     "sliderLabels": {
-      "qb": "Dante Moore QB Execution",
-      "ground": "Jordon Davison / Dierre Hill Speed Option",
+      "qb": "Dante Moore Execution",
+      "ground": "Dakorien Moore / Ground Attack",
       "defense": "Chris Hampton Defensive Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "Autzen Stadium 54k Deafening Roar"
@@ -2702,7 +2702,7 @@ var TEAMS_DATABASE = {
     "playoffContenderRank": 19,
     "sliderLabels": {
       "qb": "Rocco Becht Execution",
-      "ground": "Carson Hansen / James Peoples Ground Attack",
+      "ground": "Nicholas Singleton Ground Attack",
       "defense": "Tom Allen 'Bull' Havoc Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Beaver Stadium 107k White Out"
@@ -3052,7 +3052,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Marcus Freeman",
     "defensiveCoordinator": "Chris Ash",
     "offensiveCoordinator": "Mike Denbrock",
-    "starPlayer": "CJ Carr (QB)",
+    "starPlayer": "Jeremiyah Love (RB) / CJ Carr (QB)",
     "secondaryStar": "Aneyas Williams (RB) / Leonard Moore (CB)",
     "stadium": "Notre Dame Stadium",
     "stadiumCity": "South Bend, IN",
@@ -3069,8 +3069,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 25.8,
     "playoffContenderRank": 4,
     "sliderLabels": {
-      "qb": "CJ Carr QB Execution",
-      "ground": "Aneyas Williams / Nolan James Ground Attack",
+      "qb": "CJ Carr Execution",
+      "ground": "Jeremiyah Love Ground Attack",
       "defense": "Chris Ash / Freeman Havoc Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Notre Dame Stadium Golden Echo"
@@ -3424,7 +3424,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Brian Kelly",
     "defensiveCoordinator": "Blake Baker",
     "offensiveCoordinator": "Joe Sloan",
-    "starPlayer": "Sam Leavitt (QB)",
+    "starPlayer": "Sam Leavitt (QB) / Harlem Berry (RB) / Jayce Brown (WR)",
     "secondaryStar": "Caden Durham (RB) / Harlem Berry (RB)",
     "stadium": "Tiger Stadium (Death Valley)",
     "stadiumCity": "Baton Rouge, LA",
@@ -3441,8 +3441,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 24.5,
     "playoffContenderRank": 11,
     "sliderLabels": {
-      "qb": "Sam Leavitt QB Execution",
-      "ground": "Caden Durham / Harlem Berry Ground Game",
+      "qb": "Sam Leavitt Execution",
+      "ground": "Harlem Berry Ground Attack",
       "defense": "Blake Baker Aggressive Tiger Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Death Valley 102k Saturday Night"
@@ -3796,7 +3796,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Josh Heupel",
     "defensiveCoordinator": "Jim Knowles",
     "offensiveCoordinator": "Joey Halzle",
-    "starPlayer": "George MacIntyre (QB) / Faizon Brandon (QB)",
+    "starPlayer": "George MacIntyre (QB) / DeSean Bishop (RB) / Mike Matthews (WR)",
     "secondaryStar": "DeSean Bishop (RB) / Peyton Lewis (RB)",
     "stadium": "Neyland Stadium",
     "stadiumCity": "Knoxville, TN",
@@ -3813,8 +3813,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 22.4,
     "playoffContenderRank": 21,
     "sliderLabels": {
-      "qb": "George MacIntyre QB Execution",
-      "ground": "DeSean Bishop Physical Ground Attack",
+      "qb": "George MacIntyre Execution",
+      "ground": "DeSean Bishop Ground Attack",
       "defense": "Tim Banks Havoc Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Neyland Stadium 102k Rocky Top Roar"
@@ -4167,7 +4167,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Curt Cignetti",
     "defensiveCoordinator": "Bryant Haines",
     "offensiveCoordinator": "Mike Shanahan",
-    "starPlayer": "Josh Hoover (QB)",
+    "starPlayer": "Josh Hoover (QB) / Charlie Becker (WR) / Nick Marsh (WR)",
     "secondaryStar": "Lee Beebe Jr. (RB) / Mikail Kamara (DE)",
     "stadium": "Memorial Stadium",
     "stadiumCity": "Bloomington, IN",
@@ -4184,8 +4184,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 26.5,
     "playoffContenderRank": 6,
     "sliderLabels": {
-      "qb": "Josh Hoover QB Execution",
-      "ground": "Lee Beebe Jr. Ground Attack",
+      "qb": "Josh Hoover Execution",
+      "ground": "Turbo Richard / Khobie Martin Ground Attack",
       "defense": "Bryant Haines Havoc Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Memorial Stadium 53k Crimson Surge"
@@ -4536,7 +4536,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Mario Cristobal",
     "defensiveCoordinator": "Corey Hetherman",
     "offensiveCoordinator": "Shannon Dawson",
-    "starPlayer": "Darian Mensah (QB)",
+    "starPlayer": "Darian Mensah (QB) / Mark Fletcher Jr (RB)",
     "secondaryStar": "Mark Fletcher Jr. (RB) / Rueben Bain Jr. (DE)",
     "stadium": "Hard Rock Stadium",
     "stadiumCity": "Miami Gardens, FL",
@@ -4553,8 +4553,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 27.1,
     "playoffContenderRank": 7,
     "sliderLabels": {
-      "qb": "Darian Mensah QB Execution",
-      "ground": "Mark Fletcher Jr. Power Ground Attack",
+      "qb": "Darian Mensah Execution",
+      "ground": "Mark Fletcher Jr Ground Attack",
       "defense": "Lance Guidry Blitz Pressure",
       "turnover": "Turnover Margin Luck",
       "crowd": "Hard Rock Stadium 65k Turnout"
@@ -4905,7 +4905,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Mike Elko",
     "defensiveCoordinator": "Lyle Hemphill",
     "offensiveCoordinator": "Collin Klein",
-    "starPlayer": "Marcel Reed (QB)",
+    "starPlayer": "Marcel Reed (QB) / Rueben Owens II (RB) / Terry Bussey (WR)",
     "secondaryStar": "Rueben Owens II (RB) / Jamarion Morrow (RB)",
     "stadium": "Kyle Field (Home of the 12th Man)",
     "stadiumCity": "College Station, TX",
@@ -4922,8 +4922,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 26.5,
     "playoffContenderRank": 8,
     "sliderLabels": {
-      "qb": "Marcel Reed QB Execution",
-      "ground": "Rueben Owens II / Jamarion Morrow Ground Game",
+      "qb": "Marcel Reed Execution",
+      "ground": "Rueben Owens II Ground Attack",
       "defense": "Mike Elko Wrecking Crew Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Kyle Field 108k 12th Man Roar"
@@ -5277,7 +5277,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Lane Kiffin",
     "defensiveCoordinator": "Bryan Brown",
     "offensiveCoordinator": "Charlie Weis Jr",
-    "starPlayer": "Trinidad Chambliss (QB)",
+    "starPlayer": "Trinidad Chambliss (QB) / Kewan Lacy (RB) / Caleb Cunningham (WR)",
     "secondaryStar": "Kewan Lacy (RB) / Suntarine Perkins (LB)",
     "stadium": "Vaught-Hemingway Stadium",
     "stadiumCity": "Oxford, MS",
@@ -5294,8 +5294,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 25.8,
     "playoffContenderRank": 9,
     "sliderLabels": {
-      "qb": "Trinidad Chambliss QB Execution",
-      "ground": "Kewan Lacy All-American Ground Attack",
+      "qb": "Trinidad Chambliss Execution",
+      "ground": "Kewan Lacy Ground Attack",
       "defense": "Pete Golding / Brown Havoc Front",
       "turnover": "Turnover Margin Luck",
       "crowd": "The Grove & Vaught-Hemingway 64k Roar"
@@ -5647,7 +5647,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Brent Venables",
     "defensiveCoordinator": "Todd Bates",
     "offensiveCoordinator": "Joe Jon Finley",
-    "starPlayer": "John Mateer (QB)",
+    "starPlayer": "John Mateer (QB) / Xavier Robinson (RB) / Isaiah Sategna III (WR)",
     "secondaryStar": "Lloyd Avant (RB) / Xavier Robinson (RB)",
     "stadium": "Gaylord Family Oklahoma Memorial Stadium",
     "stadiumCity": "Norman, OK",
@@ -5664,8 +5664,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 25.6,
     "playoffContenderRank": 10,
     "sliderLabels": {
-      "qb": "John Mateer QB Execution",
-      "ground": "Lloyd Avant / Xavier Robinson Ground Attack",
+      "qb": "John Mateer Execution",
+      "ground": "Xavier Robinson Ground Attack",
       "defense": "Zac Alley / Venables Swarm Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Palace on the Prairie 86k Roar"
@@ -6025,8 +6025,8 @@ var TEAMS_DATABASE = {
       "text": "#FFFFFF"
     },
     "sliderLabels": {
-      "qb": "Maddux Madsen QB Execution",
-      "ground": "Sire Gaines Ground Attack",
+      "qb": "Maddux Madsen Execution",
+      "ground": "Sire Gaines / Dylan Riley Ground Attack",
       "defense": "Bronco Havoc Defense",
       "turnover": "Blue Turf Turnover Luck",
       "crowd": "Albertsons Stadium Blue Turf Roar"
@@ -6398,7 +6398,7 @@ var TEAMS_DATABASE = {
     },
     "sliderLabels": {
       "qb": "Jayden Maiava Execution",
-      "ground": "Woody Marks / Joyner Ground Attack",
+      "ground": "Waymond Jordan Ground Attack",
       "defense": "D'Anton Lynn Havoc Defense",
       "turnover": "Coliseum Turnover Margin Luck",
       "crowd": "LA Memorial Coliseum Roar"
@@ -6770,7 +6770,7 @@ var TEAMS_DATABASE = {
     },
     "sliderLabels": {
       "qb": "Ashton Daniels Execution",
-      "ground": "Kam Davis / Toafili Ground Attack",
+      "ground": "Kam Davis / Samuel Singleton Ground Attack",
       "defense": "Adam Fuller Havoc Defense",
       "turnover": "Doak Campbell Turnover Luck",
       "crowd": "Doak Campbell War Chant Roar"
@@ -7141,8 +7141,8 @@ var TEAMS_DATABASE = {
       "text": "#FFFFFF"
     },
     "sliderLabels": {
-      "qb": "Christopher Vizzina QB Execution",
-      "ground": "Jarvis Green / Mafah Legacy Ground Attack",
+      "qb": "Christopher Vizzina Execution",
+      "ground": "Keith Adams Jr / Ground Attack",
       "defense": "Wes Goodwin Death Valley Havoc Defense",
       "turnover": "Memorial Stadium Turnover Luck",
       "crowd": "Memorial Stadium (Death Valley) Roar"
@@ -7504,7 +7504,7 @@ var TEAMS_DATABASE = {
     "apPoints": "680 pts",
     "headCoach": "Rhett Lashlee",
     "confirmedStarterQb": "Kevin Jennings",
-    "starPlayer": "Kevin Jennings (QB) / Roderick Daniels Jr (WR)",
+    "starPlayer": "Kevin Jennings (QB) / Kendrick Raphael (RB) / Jalen Hale (WR)",
     "colors": {
       "primary": "#003366",
       "secondary": "#CC0000",
@@ -7514,7 +7514,7 @@ var TEAMS_DATABASE = {
     },
     "sliderLabels": {
       "qb": "Kevin Jennings Execution",
-      "ground": "Brashard Smith Explosive Ground Attack",
+      "ground": "Kendrick Raphael Ground Attack",
       "defense": "Scott Symons Havoc Defense",
       "turnover": "Ford Stadium Turnover Luck",
       "crowd": "Gerald J. Ford Stadium Roar"
