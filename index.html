@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Instant PWA Cache Purge & Fresh Asset Verification -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(regs) {
+        regs.forEach(function(r) { r.update(); });
+      });
+    }
+    if ('caches' in window) {
+      caches.keys().then(function(names) {
+        names.forEach(function(n) {
+          if (!n.includes('v2026.78')) caches.delete(n);
+        });
+      });
+    }
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Gridiron Oracle | College Football AI Predictor & Season Simulator</title>
@@ -44,7 +59,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260819_19">
+  <link rel="stylesheet" href="styles.css?t=20260819_20">
 </head>
 <body class="theme-texas">
 
@@ -601,7 +616,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260819_19"></script>
-  <script src="app.js?t=20260819_19"></script>
+  <script src="data/teams.js?t=20260819_20"></script>
+  <script src="app.js?t=20260819_20"></script>
 </body>
 </html>
