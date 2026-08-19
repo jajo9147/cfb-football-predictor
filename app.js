@@ -9,6 +9,9 @@ const state = {
   teamActivePresets: {}, // Map of teamId -> presetKey ('baseline', 'qb-mvp', etc.)
   gameSliders: {}, // Map of gameId -> { qbRating, groundAttack, defenseHavoc, turnoverLuck, crowdNoise, isCustom }
   userPicks: {},   // Map of gameId -> 'W' | 'L' | null
+  ccgPicks: {},    // Map of ccgId -> winnerTeamId
+  playoffPicks: {},// Map of playoffGameId -> winnerTeamId
+  postseasonGames: {}, // Map of gameId -> generated game object for modal
   activeModalGame: null,
   deferredPrompt: null
 };
@@ -348,10 +351,10 @@ function recalculateSeason() {
     const sim = calculateAdjustedMatchup(game);
     if (sim.isWin) {
       totalWins++;
-      if (game.isSec || game.isBigTen) confWins++;
+      if (game.isSec || game.isBigTen || game.isAcc || game.isConf) confWins++;
     } else {
       totalLosses++;
-      if (game.isSec || game.isBigTen) confLosses++;
+      if (game.isSec || game.isBigTen || game.isAcc || game.isConf) confLosses++;
     }
     sumWinProb += sim.adjWinProb;
     sumUtScore += sim.projUt;
@@ -362,16 +365,42 @@ function recalculateSeason() {
   const avgMargin = ((sumUtScore - sumOppScore) / team.schedule.length).toFixed(1);
   const avgMarginSign = avgMargin >= 0 ? `+${avgMargin}` : avgMargin;
 
-  // Update KPIs
-  document.getElementById('kpiRecord').innerText = `${totalWins} - ${totalLosses}`;
+  // 1. Evaluate all 20 teams across the country
+  const evaluatedTeams = evaluateRegularSeasonAllTeams();
+
+  // 2. Simulate Conference Championships
+  const ccgResults = simulateConferenceChampionships(evaluatedTeams);
+  renderConferenceChampionships(ccgResults);
+
+  // 3. Generate 12-Team CFP Field and simulate playoff bracket
+  const cfp = generate12TeamCfpField(ccgResults.confChamps, evaluatedTeams);
+  const currentSeedIdx = cfp.seeds.findIndex(s => s?.id === state.currentTeamId);
+  const currentSeedNum = currentSeedIdx !== -1 ? currentSeedIdx + 1 : 0;
+
+  const playoffResults = simulatePlayoffBracket(cfp);
+
+  // 4. Calculate Overall Season Total Record (Regular + CCG + CFP)
+  const fullSeason = calcActiveTeamTotalRecord(state.currentTeamId, totalWins, totalLosses, ccgResults, playoffResults);
+
+  // Update Hero & KPI Cards
+  const kpiTotalRecordEl = document.getElementById('kpiTotalRecord');
+  if (kpiTotalRecordEl) {
+    kpiTotalRecordEl.innerText = `${fullSeason.totalWins} - ${fullSeason.totalLosses}`;
+  }
+
+  const kpiRecordEl = document.getElementById('kpiRecord');
+  if (kpiRecordEl) {
+    kpiRecordEl.innerText = `${totalWins} - ${totalLosses}`;
+  }
+
+  const kpiPostseasonOutcomeEl = document.getElementById('kpiPostseasonOutcome');
+  if (kpiPostseasonOutcomeEl) {
+    kpiPostseasonOutcomeEl.innerText = fullSeason.outcomeTitle;
+  }
+
   document.getElementById('kpiConfRecord').innerText = `${confWins}-${confLosses} Conf`;
   document.getElementById('kpiWinProb').innerText = `${avgWinProb}%`;
   document.getElementById('kpiMargin').innerText = avgMarginSign;
-
-  // Real-time 12-team CFP Seeding for active team
-  const cfp = generate12TeamCfpField();
-  const currentSeedIdx = cfp.seeds.findIndex(s => s?.id === state.currentTeamId);
-  const currentSeedNum = currentSeedIdx !== -1 ? currentSeedIdx + 1 : 0;
 
   let cfpSeed = 'BUBBLE / OUT';
   let cfpStatus = 'Missed 12-Team CFP';
@@ -407,7 +436,7 @@ function recalculateSeason() {
 
   // Render Schedule Grid & CFP Bracket
   renderSchedule();
-  renderPlayoffBracket(totalWins, cfpSeed);
+  renderPlayoffBracket(totalWins, cfpSeed, playoffResults);
 }
 
 // ==========================================================================
@@ -841,8 +870,11 @@ window.openSimModal = openSimModal;
 
 window.openSimModalByGameId = function(gameId) {
   const team = TEAMS_DATABASE[state.currentTeamId];
-  if (!team || !team.schedule) return;
-  const game = team.schedule.find(g => g.id === gameId);
+  if (!team) return;
+  let game = (team.schedule || []).find(g => g.id === gameId);
+  if (!game && state.postseasonGames && state.postseasonGames[gameId]) {
+    game = state.postseasonGames[gameId];
+  }
   if (game) {
     openSimModal(game);
   }
@@ -1281,10 +1313,10 @@ function initModalActions() {
 }
 
 // ==========================================================================
-// 12-TEAM CFP BRACKET GENERATOR (FULLY DYNAMIC REAL-TIME SEEDING)
+// CONFERENCE CHAMPIONSHIPS & 12-TEAM CFP SIMULATION ENGINE
 // ==========================================================================
 
-function generate12TeamCfpField() {
+function evaluateRegularSeasonAllTeams() {
   const teamKeys = Object.keys(TEAMS_DATABASE);
   const evaluatedTeams = [];
 
@@ -1293,15 +1325,17 @@ function generate12TeamCfpField() {
     let wins = 0;
     let losses = 0;
     let confWins = 0;
+    let confLosses = 0;
     let sumDiff = 0;
 
     team.schedule.forEach(g => {
       const sim = calculateAdjustedMatchup(g, teamId);
       if (sim.isWin) {
         wins++;
-        if (g.isSec || g.isBigTen) confWins++;
+        if (g.isSec || g.isBigTen || g.isAcc || g.isConf) confWins++;
       } else {
         losses++;
+        if (g.isSec || g.isBigTen || g.isAcc || g.isConf) confLosses++;
       }
       sumDiff += (sim.projUt - sim.projOpp);
     });
@@ -1318,50 +1352,249 @@ function generate12TeamCfpField() {
       abbr: team.abbr,
       logoUrl: team.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[team.abbr] : '') || '',
       stadium: team.stadium,
+      stadiumCity: team.stadiumCity,
       conf: team.conference,
       wins,
       losses,
       confWins,
+      confLosses,
       score,
-      apRank: team.apRank
+      apRank: team.apRank,
+      baseSpRating: team.baseSpRating || 22.0
     });
   });
 
   evaluatedTeams.sort((a, b) => b.score - a.score);
+  return evaluatedTeams;
+}
 
-  // 1. Four Highest-Ranked Conference Champions (Seeds 1, 2, 3, 4 ONLY - FIRST ROUND BYES)
+// Postseason Matchup Engine
+function simulatePostseasonMatchup(teamA, teamB, options = {}) {
+  if (!teamA && !teamB) return { winner: null, loser: null, scoreA: 0, scoreB: 0, isAWinner: true, winProbA: 50 };
+  if (!teamA) return { winner: teamB, loser: null, scoreA: 17, scoreB: 28, isAWinner: false, winProbA: 20 };
+  if (!teamB) return { winner: teamA, loser: null, scoreA: 28, scoreB: 17, isAWinner: true, winProbA: 80 };
+
+  const dbA = TEAMS_DATABASE[teamA.id] || teamA;
+  const dbB = TEAMS_DATABASE[teamB.id] || teamB;
+
+  let spA = dbA.baseSpRating || 22.0;
+  let spB = dbB.baseSpRating || 22.0;
+
+  if (dbA.conference === 'SEC') spA += 2.2;
+  if (dbB.conference === 'SEC') spB += 2.2;
+  if (dbA.conference === 'Big Ten') spA += 1.6;
+  if (dbB.conference === 'Big Ten') spB += 1.6;
+  if (dbA.conference === 'ACC') spA += 0.8;
+  if (dbB.conference === 'ACC') spB += 0.8;
+
+  // Active Team User Slider Tuning
+  const activeId = state.currentTeamId;
+  const sliders = getTeamSliders(activeId);
+  if (teamA.id === activeId) {
+    const qb = sliders.qbRating || 0;
+    const def = sliders.defenseHavoc || 0;
+    const gnd = sliders.groundAttack || 0;
+    const to = sliders.turnoverLuck || 0;
+    spA += (qb * 0.16 + def * 0.16 + gnd * 0.12 + to * 0.10);
+  }
+  if (teamB.id === activeId) {
+    const qb = sliders.qbRating || 0;
+    const def = sliders.defenseHavoc || 0;
+    const gnd = sliders.groundAttack || 0;
+    const to = sliders.turnoverLuck || 0;
+    spB += (qb * 0.16 + def * 0.16 + gnd * 0.12 + to * 0.10);
+  }
+
+  // Home field advantage (e.g. First Round on-campus)
+  if (options.isHomeA) spA += 2.5;
+
+  const diff = spA - spB;
+  let scoreA = Math.max(10, Math.round(28 + diff * 0.65));
+  let scoreB = Math.max(10, Math.round(28 - diff * 0.65));
+
+  if (scoreA === scoreB) {
+    if (diff >= 0) scoreA += 3;
+    else scoreB += 3;
+  }
+
+  // Calculate Win Probability
+  let probA = Math.round(100 / (1 + Math.pow(10, -diff / 7.5)));
+  probA = Math.max(15, Math.min(85, probA));
+
+  // Check for User Pick Overrides
+  const overridePick = options.gameId ? (state.playoffPicks[options.gameId] || state.ccgPicks[options.gameId]) : null;
+  let isAWinner;
+  if (overridePick) {
+    isAWinner = (overridePick === teamA.id);
+  } else {
+    isAWinner = scoreA > scoreB;
+  }
+
+  return {
+    gameId: options.gameId,
+    teamA,
+    teamB,
+    winner: isAWinner ? teamA : teamB,
+    loser: isAWinner ? teamB : teamA,
+    scoreA: isAWinner && scoreA <= scoreB ? scoreB + 3 : scoreA,
+    scoreB: !isAWinner && scoreB <= scoreA ? scoreA + 3 : scoreB,
+    isAWinner,
+    winProbA: probA,
+    winProbB: 100 - probA
+  };
+}
+
+// 1. Simulate Conference Championships
+function simulateConferenceChampionships(evaluatedTeams) {
   const secTeams = evaluatedTeams.filter(t => t.conf === 'SEC');
   const b1gTeams = evaluatedTeams.filter(t => t.conf === 'Big Ten');
   const accTeams = evaluatedTeams.filter(t => t.conf === 'ACC');
+  const mwcTeams = evaluatedTeams.filter(t => t.conf === 'Mountain West');
 
-  const secChamp = secTeams[0];
-  const b1gChamp = b1gTeams[0];
-  const accChamp = accTeams[0];
+  // SEC Championship (Atlanta, GA)
+  const secTeam1 = secTeams[0] || { id: 'georgia', name: 'Georgia Bulldogs', shortName: 'Georgia', abbr: 'UGA', apRank: '#3 AP', wins: 11, losses: 1 };
+  const secTeam2 = secTeams[1] || { id: 'texas', name: 'Texas Longhorns', shortName: 'Texas', abbr: 'TEX', apRank: '#5 AP', wins: 11, losses: 1 };
+  const secSim = simulatePostseasonMatchup(secTeam1, secTeam2, { gameId: 'ccg-sec' });
 
-  // 4th Champion: Group of 5 / Big 12 Champion (Boise State / Texas Tech)
-  const g5Champ = {
-    id: 'boisestate',
-    name: 'Boise State Broncos',
-    shortName: 'Boise State',
-    abbr: 'BSU',
-    logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['BSU'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',
-    stadium: 'Albertsons Stadium',
-    conf: 'MWC (G5 Champ)',
-    wins: 11,
-    losses: 1,
-    score: 13500,
-    apRank: '#12 AP'
+  // Big Ten Championship (Indianapolis, IN)
+  const b1gTeam1 = b1gTeams[0] || { id: 'ohiostate', name: 'Ohio State Buckeyes', shortName: 'Ohio State', abbr: 'OSU', apRank: '#1 AP', wins: 12, losses: 0 };
+  const b1gTeam2 = b1gTeams[1] || { id: 'oregon', name: 'Oregon Ducks', shortName: 'Oregon', abbr: 'ORE', apRank: '#2 AP', wins: 11, losses: 1 };
+  const b1gSim = simulatePostseasonMatchup(b1gTeam1, b1gTeam2, { gameId: 'ccg-b1g' });
+
+  // ACC Championship (Charlotte, NC)
+  const accTeam1 = accTeams[0] || { id: 'clemson', name: 'Clemson Tigers', shortName: 'Clemson', abbr: 'CLEM', apRank: '#17 AP', wins: 10, losses: 2 };
+  const accTeam2 = accTeams[1] || { id: 'floridastate', name: 'Florida State Seminoles', shortName: 'Florida State', abbr: 'FSU', apRank: '#15 AP', wins: 10, losses: 2 };
+  const accSim = simulatePostseasonMatchup(accTeam1, accTeam2, { gameId: 'ccg-acc' });
+
+  // Mountain West / G5 Championship (Boise, ID)
+  const mwcTeam1 = mwcTeams[0] || { id: 'boisestate', name: 'Boise State Broncos', shortName: 'Boise State', abbr: 'BSU', apRank: '#12 AP', wins: 11, losses: 1 };
+  const mwcTeam2 = { id: 'unlv', name: 'UNLV Rebels', shortName: 'UNLV', abbr: 'UNLV', logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['UNLV'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png', apRank: 'RV', wins: 10, losses: 2, conf: 'Mountain West', baseSpRating: 18.5 };
+  const mwcSim = simulatePostseasonMatchup(mwcTeam1, mwcTeam2, { gameId: 'ccg-mwc', isHomeA: true });
+
+  // Save game objects to state.postseasonGames for interactive modal
+  const registerCcgGame = (id, weekName, teamA, teamB, sim, stadium, location) => {
+    const opp = (teamA.id === state.currentTeamId) ? teamB : teamA;
+    const isUtTeamA = (teamA.id === state.currentTeamId);
+    state.postseasonGames[id] = {
+      id,
+      week: weekName,
+      opponent: opp.name,
+      oppAbbr: opp.abbr,
+      oppRank: opp.apRank || 'TOP 20',
+      oppColor: (TEAMS_DATABASE[opp.id] || {}).colors?.primary || '#333333',
+      oppLogoUrl: opp.logoUrl,
+      isHome: false,
+      stadium,
+      location,
+      isMarquee: true,
+      projScoreUt: isUtTeamA ? sim.scoreA : sim.scoreB,
+      projScoreOpp: isUtTeamA ? sim.scoreB : sim.scoreA,
+      baseWinProb: isUtTeamA ? sim.winProbA : sim.winProbB,
+      scoutReport: {
+        xFactor: `Championship intensity and automatic 12-Team CFP First-Round Bye stakes at ${stadium}.`,
+        keyMatchup: `${teamA.shortName} offensive execution vs ${teamB.shortName} defensive front.`,
+        summary: `Epic Conference Championship Saturday battle to determine automatic CFP bye.`
+      }
+    };
   };
 
-  const confChamps = [secChamp, b1gChamp, accChamp, g5Champ].filter(Boolean);
-  confChamps.sort((a, b) => b.score - a.score);
+  registerCcgGame('ccg-sec', 'SEC CHAMPIONSHIP', secTeam1, secTeam2, secSim, 'Mercedes-Benz Stadium', 'Atlanta, GA');
+  registerCcgGame('ccg-b1g', 'BIG TEN CHAMPIONSHIP', b1gTeam1, b1gTeam2, b1gSim, 'Lucas Oil Stadium', 'Indianapolis, IN');
+  registerCcgGame('ccg-acc', 'ACC CHAMPIONSHIP', accTeam1, accTeam2, accSim, 'Bank of America Stadium', 'Charlotte, NC');
+  registerCcgGame('ccg-mwc', 'MWC / G5 CHAMPIONSHIP', mwcTeam1, mwcTeam2, mwcSim, 'Albertsons Stadium', 'Boise, ID');
 
+  const confChamps = [secSim.winner, b1gSim.winner, accSim.winner, mwcSim.winner].filter(Boolean);
+  // Sort champions by regular season score
+  confChamps.sort((a, b) => {
+    const scoreA = evaluatedTeams.find(t => t.id === a.id)?.score || 10000;
+    const scoreB = evaluatedTeams.find(t => t.id === b.id)?.score || 10000;
+    return scoreB - scoreA;
+  });
+
+  return {
+    sec: { team1: secTeam1, team2: secTeam2, sim: secSim, id: 'ccg-sec', venue: 'Mercedes-Benz Stadium (Atlanta, GA)' },
+    b1g: { team1: b1gTeam1, team2: b1gTeam2, sim: b1gSim, id: 'ccg-b1g', venue: 'Lucas Oil Stadium (Indianapolis, IN)' },
+    acc: { team1: accTeam1, team2: accTeam2, sim: accSim, id: 'ccg-acc', venue: 'Bank of America Stadium (Charlotte, NC)' },
+    mwc: { team1: mwcTeam1, team2: mwcTeam2, sim: mwcSim, id: 'ccg-mwc', venue: 'Albertsons Stadium (Boise, ID)' },
+    confChamps
+  };
+}
+
+// 2. Render Conference Championships Section
+function renderConferenceChampionships(ccgResults) {
+  const container = document.getElementById('ccgGrid');
+  if (!container) return;
+
+  container.innerHTML = '';
+  const games = [
+    { title: 'SEC CHAMPIONSHIP GAME', data: ccgResults.sec },
+    { title: 'BIG TEN CHAMPIONSHIP GAME', data: ccgResults.b1g },
+    { title: 'ACC CHAMPIONSHIP GAME', data: ccgResults.acc },
+    { title: 'MOUNTAIN WEST / G5 TITLE', data: ccgResults.mwc }
+  ];
+
+  games.forEach(g => {
+    const d = g.data;
+    const isTeam1Winner = d.sim.isAWinner;
+    const activeTeamId = state.currentTeamId;
+    const isActiveMatchup = (d.team1.id === activeTeamId || d.team2.id === activeTeamId);
+
+    const card = document.createElement('div');
+    card.className = `ccg-card ${isActiveMatchup ? 'active-team-card' : ''}`;
+    card.onclick = () => window.openSimModalByGameId(d.id);
+
+    card.innerHTML = `
+      <div class="ccg-card-header">
+        <span class="ccg-conf-title"><i class="fa-solid fa-trophy" style="color: #FFD700; margin-right: 5px;"></i> ${g.title}</span>
+        <span class="ccg-venue-text">${d.venue}</span>
+      </div>
+
+      <div class="ccg-matchup-row">
+        <div class="ccg-team-block">
+          <img src="${d.team1.logoUrl}" alt="${d.team1.name}" class="ccg-team-logo">
+          <span class="ccg-team-name" style="${isTeam1Winner ? 'color: var(--color-success); font-weight: 800;' : ''}">${d.team1.shortName}</span>
+          <span class="ccg-team-rec">${d.team1.apRank || ''} (${d.team1.wins}-${d.team1.losses})</span>
+        </div>
+
+        <div class="ccg-vs-pill">
+          <div class="ccg-score-box">
+            <span style="color: ${isTeam1Winner ? 'var(--color-success)' : 'var(--color-text-dim)'};">${d.sim.scoreA}</span>
+            <span style="color: var(--color-text-dim); font-size: 1rem;">-</span>
+            <span style="color: ${!isTeam1Winner ? 'var(--color-success)' : 'var(--color-text-dim)'};">${d.sim.scoreB}</span>
+          </div>
+          <span class="ccg-vs-text">${d.sim.winProbA}% - ${d.sim.winProbB}%</span>
+        </div>
+
+        <div class="ccg-team-block">
+          <img src="${d.team2.logoUrl}" alt="${d.team2.name}" class="ccg-team-logo">
+          <span class="ccg-team-name" style="${!isTeam1Winner ? 'color: var(--color-success); font-weight: 800;' : ''}">${d.team2.shortName}</span>
+          <span class="ccg-team-rec">${d.team2.apRank || ''} (${d.team2.wins}-${d.team2.losses})</span>
+        </div>
+      </div>
+
+      <div class="ccg-card-actions">
+        <div style="font-size: 0.72rem; font-family: var(--font-mono); font-weight: 800; color: #10B981; display: flex; align-items: center; gap: 4px;">
+          <i class="fa-solid fa-crown" style="color: #FFD700;"></i>
+          <span>${d.sim.winner.shortName.toUpperCase()} CHAMPION (BYE)</span>
+        </div>
+        <button class="ccg-sim-btn" onclick="event.stopPropagation(); window.openSimModalByGameId('${d.id}');">
+          <i class="fa-solid fa-play"></i>
+          <span>Simulate</span>
+        </button>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+// 3. Generate 12-Team CFP Field from CCG Champions and At-Large Contenders
+function generate12TeamCfpField(confChamps, evaluatedTeams) {
   const seed1 = confChamps[0];
   const seed2 = confChamps[1];
   const seed3 = confChamps[2];
   const seed4 = confChamps[3];
 
-  // 2. Eight At-Large Contenders (Seeds 5 through 12 - NEVER get a BYE)
   const champIds = new Set([seed1?.id, seed2?.id, seed3?.id, seed4?.id]);
   const atLargeCandidates = evaluatedTeams.filter(t => !champIds.has(t.id));
 
@@ -1372,19 +1605,7 @@ function generate12TeamCfpField() {
   const seed9 = atLargeCandidates[4];
   const seed10 = atLargeCandidates[5];
   const seed11 = atLargeCandidates[6];
-  const seed12 = atLargeCandidates[7] || {
-    id: 'smu',
-    name: 'SMU Mustangs',
-    shortName: 'SMU',
-    abbr: 'SMU',
-    logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2567.png',
-    stadium: 'Gerald J. Ford Stadium',
-    conf: 'ACC',
-    wins: 10,
-    losses: 2,
-    score: 11000,
-    apRank: '#18 AP'
-  };
+  const seed12 = atLargeCandidates[7];
 
   const seeds = [seed1, seed2, seed3, seed4, seed5, seed6, seed7, seed8, seed9, seed10, seed11, seed12].filter(Boolean);
 
@@ -1396,57 +1617,110 @@ function generate12TeamCfpField() {
   };
 }
 
-function renderPlayoffBracket(totalWins, cfpSeed) {
+// 4. Simulate Full 12-Team Playoff Bracket
+function simulatePlayoffBracket(cfp) {
+  // Helper to register playoff game for modal simulation
+  const registerPlayoffGame = (id, roundName, bowlName, teamA, teamB, sim, stadium, location) => {
+    const activeTeamId = state.currentTeamId;
+    const opp = (teamA.id === activeTeamId) ? teamB : teamA;
+    const isUtTeamA = (teamA.id === activeTeamId);
+    state.postseasonGames[id] = {
+      id,
+      week: roundName,
+      opponent: opp?.name || 'Playoff Challenger',
+      oppAbbr: opp?.abbr || 'CFP',
+      oppRank: opp?.apRank || 'TOP 12',
+      oppColor: (TEAMS_DATABASE[opp?.id] || {}).colors?.primary || '#333333',
+      oppLogoUrl: opp?.logoUrl || '',
+      isHome: false,
+      stadium: bowlName ? `${bowlName} (${stadium})` : stadium,
+      location,
+      isMarquee: true,
+      projScoreUt: isUtTeamA ? sim.scoreA : sim.scoreB,
+      projScoreOpp: isUtTeamA ? sim.scoreB : sim.scoreA,
+      baseWinProb: isUtTeamA ? sim.winProbA : sim.winProbB,
+      scoutReport: {
+        xFactor: `Championship survival and advancement at ${bowlName || stadium}.`,
+        keyMatchup: `${teamA?.shortName} vs ${teamB?.shortName} high-stakes battle.`,
+        summary: `12-Team College Football Playoff knockout clash.`
+      }
+    };
+  };
+
+  // 1. First Round (On-Campus)
+  const simFR1 = simulatePostseasonMatchup(cfp.seed5, cfp.seed12, { gameId: 'playoff-fr1', isHomeA: true });
+  const simFR2 = simulatePostseasonMatchup(cfp.seed6, cfp.seed11, { gameId: 'playoff-fr2', isHomeA: true });
+  const simFR3 = simulatePostseasonMatchup(cfp.seed7, cfp.seed10, { gameId: 'playoff-fr3', isHomeA: true });
+  const simFR4 = simulatePostseasonMatchup(cfp.seed8, cfp.seed9, { gameId: 'playoff-fr4', isHomeA: true });
+
+  registerPlayoffGame('playoff-fr1', 'CFP FIRST ROUND', '', cfp.seed5, cfp.seed12, simFR1, cfp.seed5?.stadium || 'Campus Stadium', cfp.seed5?.stadiumCity || 'On Campus');
+  registerPlayoffGame('playoff-fr2', 'CFP FIRST ROUND', '', cfp.seed6, cfp.seed11, simFR2, cfp.seed6?.stadium || 'Campus Stadium', cfp.seed6?.stadiumCity || 'On Campus');
+  registerPlayoffGame('playoff-fr3', 'CFP FIRST ROUND', '', cfp.seed7, cfp.seed10, simFR3, cfp.seed7?.stadium || 'Campus Stadium', cfp.seed7?.stadiumCity || 'On Campus');
+  registerPlayoffGame('playoff-fr4', 'CFP FIRST ROUND', '', cfp.seed8, cfp.seed9, simFR4, cfp.seed8?.stadium || 'Campus Stadium', cfp.seed8?.stadiumCity || 'On Campus');
+
+  const fr1Winner = simFR1.winner;
+  const fr2Winner = simFR2.winner;
+  const fr3Winner = simFR3.winner;
+  const fr4Winner = simFR4.winner;
+
+  // 2. Quarterfinals (NY6 Bowls)
+  const simQF1 = simulatePostseasonMatchup(cfp.seed1, fr4Winner, { gameId: 'playoff-qf1' }); // Sugar/Rose
+  const simQF2 = simulatePostseasonMatchup(cfp.seed2, fr3Winner, { gameId: 'playoff-qf2' }); // Rose/Sugar
+  const simQF3 = simulatePostseasonMatchup(cfp.seed3, fr2Winner, { gameId: 'playoff-qf3' }); // Peach
+  const simQF4 = simulatePostseasonMatchup(cfp.seed4, fr1Winner, { gameId: 'playoff-qf4' }); // Fiesta
+
+  registerPlayoffGame('playoff-qf1', 'CFP QUARTERFINAL', 'Allstate Sugar Bowl', cfp.seed1, fr4Winner, simQF1, 'Caesars Superdome', 'New Orleans, LA');
+  registerPlayoffGame('playoff-qf2', 'CFP QUARTERFINAL', 'Rose Bowl Game', cfp.seed2, fr3Winner, simQF2, 'Rose Bowl Stadium', 'Pasadena, CA');
+  registerPlayoffGame('playoff-qf3', 'CFP QUARTERFINAL', 'Chick-fil-A Peach Bowl', cfp.seed3, fr2Winner, simQF3, 'Mercedes-Benz Stadium', 'Atlanta, GA');
+  registerPlayoffGame('playoff-qf4', 'CFP QUARTERFINAL', 'Vrbo Fiesta Bowl', cfp.seed4, fr1Winner, simQF4, 'State Farm Stadium', 'Glendale, AZ');
+
+  const qf1Winner = simQF1.winner;
+  const qf2Winner = simQF2.winner;
+  const qf3Winner = simQF3.winner;
+  const qf4Winner = simQF4.winner;
+
+  // 3. Semifinals
+  const simSemi1 = simulatePostseasonMatchup(qf1Winner, qf4Winner, { gameId: 'playoff-sf1' }); // Orange Bowl
+  const simSemi2 = simulatePostseasonMatchup(qf2Winner, qf3Winner, { gameId: 'playoff-sf2' }); // Cotton Bowl
+
+  registerPlayoffGame('playoff-sf1', 'CFP SEMIFINAL', 'Capital One Orange Bowl', qf1Winner, qf4Winner, simSemi1, 'Hard Rock Stadium', 'Miami Gardens, FL');
+  registerPlayoffGame('playoff-sf2', 'CFP SEMIFINAL', 'Goodyear Cotton Bowl', qf2Winner, qf3Winner, simSemi2, 'AT&T Stadium', 'Arlington, TX');
+
+  const semi1Winner = simSemi1.winner;
+  const semi2Winner = simSemi2.winner;
+
+  // 4. National Championship
+  const simNatty = simulatePostseasonMatchup(semi1Winner, semi2Winner, { gameId: 'playoff-natty' });
+  registerPlayoffGame('playoff-natty', 'NATIONAL CHAMPIONSHIP', 'CFP National Championship', semi1Winner, semi2Winner, simNatty, 'Mercedes-Benz Stadium', 'Atlanta, GA');
+
+  return {
+    fr1: { teamA: cfp.seed5, teamB: cfp.seed12, sim: simFR1, id: 'playoff-fr1', label: 'First Round (On-Campus)' },
+    fr2: { teamA: cfp.seed6, teamB: cfp.seed11, sim: simFR2, id: 'playoff-fr2', label: 'First Round (On-Campus)' },
+    fr3: { teamA: cfp.seed7, teamB: cfp.seed10, sim: simFR3, id: 'playoff-fr3', label: 'First Round (On-Campus)' },
+    fr4: { teamA: cfp.seed8, teamB: cfp.seed9, sim: simFR4, id: 'playoff-fr4', label: 'First Round (On-Campus)' },
+
+    qf1: { teamA: cfp.seed1, teamB: fr4Winner, sim: simQF1, id: 'playoff-qf1', bowl: 'Allstate Sugar Bowl (New Orleans)' },
+    qf2: { teamA: cfp.seed2, teamB: fr3Winner, sim: simQF2, id: 'playoff-qf2', bowl: 'Rose Bowl Game (Pasadena)' },
+    qf3: { teamA: cfp.seed3, teamB: fr2Winner, sim: simQF3, id: 'playoff-qf3', bowl: 'Chick-fil-A Peach Bowl (Atlanta)' },
+    qf4: { teamA: cfp.seed4, teamB: fr1Winner, sim: simQF4, id: 'playoff-qf4', bowl: 'Vrbo Fiesta Bowl (Glendale)' },
+
+    sf1: { teamA: qf1Winner, teamB: qf4Winner, sim: simSemi1, id: 'playoff-sf1', bowl: 'Orange Bowl Semifinal (Miami)' },
+    sf2: { teamA: qf2Winner, teamB: qf3Winner, sim: simSemi2, id: 'playoff-sf2', bowl: 'Cotton Bowl Semifinal (Dallas)' },
+
+    natty: { teamA: semi1Winner, teamB: semi2Winner, sim: simNatty, id: 'playoff-natty', bowl: 'CFP National Championship' },
+
+    nationalChampion: simNatty.winner,
+    runnerUp: simNatty.loser
+  };
+}
+
+// 5. Render Playoff Bracket
+function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
   const container = document.getElementById('playoffBracketGrid');
-  if (!container) return;
-  const team = TEAMS_DATABASE[state.currentTeamId];
+  if (!container || !playoffData) return;
   const teamId = state.currentTeamId;
+  const team = TEAMS_DATABASE[teamId];
 
-  const cfp = generate12TeamCfpField();
-  const currentSeedIdx = cfp.seeds.findIndex(s => s?.id === teamId);
-  const currentSeedNum = currentSeedIdx !== -1 ? currentSeedIdx + 1 : 0;
-
-  let summaryBannerHtml = '';
-
-  if (currentSeedNum >= 1 && currentSeedNum <= 4) {
-    summaryBannerHtml = `
-      <div class="cfp-summary-banner bye">
-        <i class="fa-solid fa-trophy" style="font-size: 1.2rem;"></i>
-        <div>
-          <strong>#${currentSeedNum} NATIONAL SEED (FIRST-ROUND BYE)</strong>: Projected ${totalWins}-${12 - totalWins} record awards ${team.name} a direct bye to the NY6 Quarterfinals (Sugar/Rose/Peach/Fiesta Bowl) with a clear path to the National Championship!
-        </div>
-      </div>
-    `;
-  } else if (currentSeedNum >= 5 && currentSeedNum <= 8) {
-    summaryBannerHtml = `
-      <div class="cfp-summary-banner host">
-        <i class="fa-solid fa-shield-halved" style="font-size: 1.2rem;"></i>
-        <div>
-          <strong>#${currentSeedNum} SEED (HOSTS ON-CAMPUS FIRST ROUND)</strong>: ${team.name} hosts on-campus First Round matchup at ${team.stadium} ➔ Advances to NY6 Quarterfinals!
-        </div>
-      </div>
-    `;
-  } else if (currentSeedNum >= 9 && currentSeedNum <= 12) {
-    summaryBannerHtml = `
-      <div class="cfp-summary-banner loss">
-        <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem;"></i>
-        <div>
-          <strong>#${currentSeedNum} AT-LARGE SEED (ROAD FIRST-ROUND GAME)</strong>: ${team.name} qualifies for the 12-Team CFP as an at-large contender and travels for a high-stakes First Round road clash.
-        </div>
-      </div>
-    `;
-  } else {
-    summaryBannerHtml = `
-      <div class="cfp-summary-banner out">
-        <i class="fa-solid fa-circle-xmark" style="font-size: 1.2rem;"></i>
-        <div>
-          <strong>MISSED 12-TEAM CFP PLAYOFF (${totalWins}-${12 - totalWins})</strong>: Falls below CFP at-large cutline. Projected destination: Florida Citrus Bowl / ReliaQuest Bowl.
-        </div>
-      </div>
-    `;
-  }
-
-  // Helper function to render a team row in the bracket
   function teamRow(seedNum, tObj, score, isWinner, isHighlighted) {
     const name = tObj ? tObj.shortName || tObj.name : `Seed #${seedNum}`;
     const logo = tObj?.logoUrl || (tObj?.abbr && typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tObj.abbr] : '') || '';
@@ -1464,123 +1738,10 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
     `;
   }
 
-  // Dynamic Playoff Game Simulation Engine
-  function simulatePlayoffMatchup(teamA, teamB, isHomeA = false) {
-    if (!teamA && !teamB) return { winner: null, loser: null, scoreA: 0, scoreB: 0, isAWinner: true };
-    if (!teamA) return { winner: teamB, loser: null, scoreA: 17, scoreB: 28, isAWinner: false };
-    if (!teamB) return { winner: teamA, loser: null, scoreA: 28, scoreB: 17, isAWinner: true };
+  const p = playoffData;
+  const nattyChamp = p.nationalChampion;
 
-    const dbA = TEAMS_DATABASE[teamA.id] || teamA;
-    const dbB = TEAMS_DATABASE[teamB.id] || teamB;
-
-    let spA = dbA.baseSpRating || 24.0;
-    let spB = dbB.baseSpRating || 24.0;
-
-    // Gauntlet & Strength of Schedule Adjustments
-    if (dbA.conference === 'SEC') spA += 2.2;
-    if (dbB.conference === 'SEC') spB += 2.2;
-    if (dbA.conference === 'Big Ten') {
-      if (teamA.id === 'pennstate') spA -= 1.8;
-      else spA += 1.5;
-    }
-    if (dbB.conference === 'Big Ten') {
-      if (teamB.id === 'pennstate') spB -= 1.8;
-      else spB += 1.5;
-    }
-
-    // Active User Tuning adjustments
-    if (teamA.id === state.currentTeamId) {
-      const qb = state.globalSliders.qbRating || 0;
-      const def = state.globalSliders.defenseHavoc || 0;
-      const gnd = state.globalSliders.groundAttack || 0;
-      const to = state.globalSliders.turnoverLuck || 0;
-      spA += (qb * 0.16 + def * 0.16 + gnd * 0.12 + to * 0.10);
-    }
-    if (teamB.id === state.currentTeamId) {
-      const qb = state.globalSliders.qbRating || 0;
-      const def = state.globalSliders.defenseHavoc || 0;
-      const gnd = state.globalSliders.groundAttack || 0;
-      const to = state.globalSliders.turnoverLuck || 0;
-      spB += (qb * 0.16 + def * 0.16 + gnd * 0.12 + to * 0.10);
-    }
-
-    // Home Field Advantage for on-campus First Round (Seeds 5-8)
-    if (isHomeA) spA += 2.5;
-
-    const diff = spA - spB;
-    let scoreA = Math.max(10, Math.round(27 + diff * 0.7));
-    let scoreB = Math.max(10, Math.round(27 - diff * 0.7));
-
-    if (scoreA === scoreB) {
-      if (diff >= 0) scoreA += 3;
-      else scoreB += 3;
-    }
-
-    const isAWinner = scoreA > scoreB;
-    return {
-      winner: isAWinner ? teamA : teamB,
-      loser: isAWinner ? teamB : teamA,
-      scoreA,
-      scoreB,
-      isAWinner
-    };
-  }
-
-  // 1. Simulate First Round
-  const simM1 = simulatePlayoffMatchup(cfp.seed5, cfp.seed12, true);
-  const simM2 = simulatePlayoffMatchup(cfp.seed6, cfp.seed11, true);
-  const simM3 = simulatePlayoffMatchup(cfp.seed7, cfp.seed10, true);
-  const simM4 = simulatePlayoffMatchup(cfp.seed8, cfp.seed9, true);
-
-  const m1Winner = simM1.winner;
-  const m2Winner = simM2.winner;
-  const m3Winner = simM3.winner;
-  const m4Winner = simM4.winner;
-
-  // 2. Simulate Quarterfinals (Neutral NY6 Bowls)
-  const simQF1 = simulatePlayoffMatchup(cfp.seed1, m4Winner, false);
-  const simQF2 = simulatePlayoffMatchup(cfp.seed2, m3Winner, false);
-  const simQF3 = simulatePlayoffMatchup(cfp.seed3, m2Winner, false);
-  const simQF4 = simulatePlayoffMatchup(cfp.seed4, m1Winner, false);
-
-  const qf1Winner = simQF1.winner;
-  const qf2Winner = simQF2.winner;
-  const qf3Winner = simQF3.winner;
-  const qf4Winner = simQF4.winner;
-
-  // 3. Simulate Semifinals
-  const simSemi1 = simulatePlayoffMatchup(qf1Winner, qf4Winner, false);
-  const simSemi2 = simulatePlayoffMatchup(qf2Winner, qf3Winner, false);
-
-  const semi1Winner = simSemi1.winner;
-  const semi2Winner = simSemi2.winner;
-
-  // 4. Simulate National Championship
-  const simNatty = simulatePlayoffMatchup(semi1Winner, semi2Winner, false);
-  const nationalChampion = simNatty.winner;
-  const runnerUp = simNatty.loser;
-
-  // Check which matchups include the active team
-  const isM1Active = cfp.seed5?.id === teamId || cfp.seed12?.id === teamId;
-  const isM2Active = cfp.seed6?.id === teamId || cfp.seed11?.id === teamId;
-  const isM3Active = cfp.seed7?.id === teamId || cfp.seed10?.id === teamId;
-  const isM4Active = cfp.seed8?.id === teamId || cfp.seed9?.id === teamId;
-
-  const isQF1Active = qf1Winner?.id === teamId || cfp.seed1?.id === teamId || m4Winner?.id === teamId;
-  const isQF2Active = qf2Winner?.id === teamId || cfp.seed2?.id === teamId || m3Winner?.id === teamId;
-  const isQF3Active = qf3Winner?.id === teamId || cfp.seed3?.id === teamId || m2Winner?.id === teamId;
-  const isQF4Active = qf4Winner?.id === teamId || cfp.seed4?.id === teamId || m1Winner?.id === teamId;
-
-  const isSemi1Active = semi1Winner?.id === teamId || qf1Winner?.id === teamId || qf4Winner?.id === teamId;
-  const isSemi2Active = semi2Winner?.id === teamId || qf2Winner?.id === teamId || qf3Winner?.id === teamId;
-  const isNattyActive = nationalChampion?.id === teamId || runnerUp?.id === teamId;
-
-  // Render Bracket HTML
   container.innerHTML = `
-    <div style="grid-column: 1 / -1;">
-      ${summaryBannerHtml}
-    </div>
-
     <!-- FIRST ROUND -->
     <div class="playoff-round-card">
       <div class="round-header">
@@ -1588,43 +1749,43 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
         <span style="font-size: 0.68rem; opacity: 0.8;">DEC 18-19</span>
       </div>
 
-      <!-- M1: #12 @ #5 -->
-      <div class="playoff-matchup-box ${isM1Active ? 'active-team-matchup' : ''}">
-        ${teamRow(12, cfp.seed12, simM1.scoreB, !simM1.isAWinner, cfp.seed12?.id === teamId)}
-        ${teamRow(5, cfp.seed5, simM1.scoreA, simM1.isAWinner, cfp.seed5?.id === teamId)}
+      <!-- M1: 12 @ 5 -->
+      <div class="playoff-matchup-box ${p.fr1.teamA?.id === teamId || p.fr1.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr1.id}')">
+        ${teamRow(12, p.fr1.teamB, p.fr1.sim.scoreB, !p.fr1.sim.isAWinner, p.fr1.teamB?.id === teamId)}
+        ${teamRow(5, p.fr1.teamA, p.fr1.sim.scoreA, p.fr1.sim.isAWinner, p.fr1.teamA?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">${cfp.seed5?.stadium || 'On Campus'}</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${m1Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
+          <span style="color: var(--color-text-dim);">${p.fr1.teamA?.stadium || 'On Campus'}</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.fr1.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
         </div>
       </div>
 
-      <!-- M2: #11 @ #6 -->
-      <div class="playoff-matchup-box ${isM2Active ? 'active-team-matchup' : ''}">
-        ${teamRow(11, cfp.seed11, simM2.scoreB, !simM2.isAWinner, cfp.seed11?.id === teamId)}
-        ${teamRow(6, cfp.seed6, simM2.scoreA, simM2.isAWinner, cfp.seed6?.id === teamId)}
+      <!-- M2: 11 @ 6 -->
+      <div class="playoff-matchup-box ${p.fr2.teamA?.id === teamId || p.fr2.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr2.id}')">
+        ${teamRow(11, p.fr2.teamB, p.fr2.sim.scoreB, !p.fr2.sim.isAWinner, p.fr2.teamB?.id === teamId)}
+        ${teamRow(6, p.fr2.teamA, p.fr2.sim.scoreA, p.fr2.sim.isAWinner, p.fr2.teamA?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">${cfp.seed6?.stadium || 'On Campus'}</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${m2Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
+          <span style="color: var(--color-text-dim);">${p.fr2.teamA?.stadium || 'On Campus'}</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.fr2.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
         </div>
       </div>
 
-      <!-- M3: #10 @ #7 -->
-      <div class="playoff-matchup-box ${isM3Active ? 'active-team-matchup' : ''}">
-        ${teamRow(10, cfp.seed10, simM3.scoreB, !simM3.isAWinner, cfp.seed10?.id === teamId)}
-        ${teamRow(7, cfp.seed7, simM3.scoreA, simM3.isAWinner, cfp.seed7?.id === teamId)}
+      <!-- M3: 10 @ 7 -->
+      <div class="playoff-matchup-box ${p.fr3.teamA?.id === teamId || p.fr3.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr3.id}')">
+        ${teamRow(10, p.fr3.teamB, p.fr3.sim.scoreB, !p.fr3.sim.isAWinner, p.fr3.teamB?.id === teamId)}
+        ${teamRow(7, p.fr3.teamA, p.fr3.sim.scoreA, p.fr3.sim.isAWinner, p.fr3.teamA?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">${cfp.seed7?.stadium || 'On Campus'}</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${m3Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
+          <span style="color: var(--color-text-dim);">${p.fr3.teamA?.stadium || 'On Campus'}</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.fr3.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
         </div>
       </div>
 
-      <!-- M4: #9 @ #8 -->
-      <div class="playoff-matchup-box ${isM4Active ? 'active-team-matchup' : ''}">
-        ${teamRow(9, cfp.seed9, simM4.scoreB, !simM4.isAWinner, cfp.seed9?.id === teamId)}
-        ${teamRow(8, cfp.seed8, simM4.scoreA, simM4.isAWinner, cfp.seed8?.id === teamId)}
+      <!-- M4: 9 @ 8 -->
+      <div class="playoff-matchup-box ${p.fr4.teamA?.id === teamId || p.fr4.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr4.id}')">
+        ${teamRow(9, p.fr4.teamB, p.fr4.sim.scoreB, !p.fr4.sim.isAWinner, p.fr4.teamB?.id === teamId)}
+        ${teamRow(8, p.fr4.teamA, p.fr4.sim.scoreA, p.fr4.sim.isAWinner, p.fr4.teamA?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">${cfp.seed8?.stadium || 'On Campus'}</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${m4Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
+          <span style="color: var(--color-text-dim);">${p.fr4.teamA?.stadium || 'On Campus'}</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.fr4.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
         </div>
       </div>
     </div>
@@ -1637,42 +1798,42 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
       </div>
 
       <!-- QF1: Sugar Bowl -->
-      <div class="playoff-matchup-box ${isQF1Active ? 'active-team-matchup' : ''}">
-        ${teamRow(m4Winner?.id === cfp.seed8?.id ? 8 : 9, m4Winner, simQF1.scoreB, !simQF1.isAWinner, m4Winner?.id === teamId)}
-        ${teamRow(1, cfp.seed1, simQF1.scoreA, simQF1.isAWinner, cfp.seed1?.id === teamId)}
+      <div class="playoff-matchup-box ${p.qf1.teamA?.id === teamId || p.qf1.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf1.id}')">
+        ${teamRow(8, p.qf1.teamB, p.qf1.sim.scoreB, !p.qf1.sim.isAWinner, p.qf1.teamB?.id === teamId)}
+        ${teamRow(1, p.qf1.teamA, p.qf1.sim.scoreA, p.qf1.sim.isAWinner, p.qf1.teamA?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">Allstate Sugar Bowl</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${qf1Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
+          <span style="color: var(--color-text-dim);">Sugar Bowl (New Orleans)</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.qf1.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
         </div>
       </div>
 
       <!-- QF2: Rose Bowl -->
-      <div class="playoff-matchup-box ${isQF2Active ? 'active-team-matchup' : ''}">
-        ${teamRow(m3Winner?.id === cfp.seed7?.id ? 7 : 10, m3Winner, simQF2.scoreB, !simQF2.isAWinner, m3Winner?.id === teamId)}
-        ${teamRow(2, cfp.seed2, simQF2.scoreA, simQF2.isAWinner, cfp.seed2?.id === teamId)}
+      <div class="playoff-matchup-box ${p.qf2.teamA?.id === teamId || p.qf2.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf2.id}')">
+        ${teamRow(7, p.qf2.teamB, p.qf2.sim.scoreB, !p.qf2.sim.isAWinner, p.qf2.teamB?.id === teamId)}
+        ${teamRow(2, p.qf2.teamA, p.qf2.sim.scoreA, p.qf2.sim.isAWinner, p.qf2.teamA?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">Rose Bowl Game</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${qf2Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
+          <span style="color: var(--color-text-dim);">Rose Bowl Game (Pasadena)</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.qf2.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
         </div>
       </div>
 
       <!-- QF3: Peach Bowl -->
-      <div class="playoff-matchup-box ${isQF3Active ? 'active-team-matchup' : ''}">
-        ${teamRow(m2Winner?.id === cfp.seed6?.id ? 6 : 11, m2Winner, simQF3.scoreB, !simQF3.isAWinner, m2Winner?.id === teamId)}
-        ${teamRow(3, cfp.seed3, simQF3.scoreA, simQF3.isAWinner, cfp.seed3?.id === teamId)}
+      <div class="playoff-matchup-box ${p.qf3.teamA?.id === teamId || p.qf3.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf3.id}')">
+        ${teamRow(6, p.qf3.teamB, p.qf3.sim.scoreB, !p.qf3.sim.isAWinner, p.qf3.teamB?.id === teamId)}
+        ${teamRow(3, p.qf3.teamA, p.qf3.sim.scoreA, p.qf3.sim.isAWinner, p.qf3.teamA?.id === teamId)}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Chick-fil-A Peach Bowl</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${qf3Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.qf3.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
         </div>
       </div>
 
       <!-- QF4: Fiesta Bowl -->
-      <div class="playoff-matchup-box ${isQF4Active ? 'active-team-matchup' : ''}">
-        ${teamRow(m1Winner?.id === cfp.seed5?.id ? 5 : 12, m1Winner, simQF4.scoreA, simQF4.isAWinner, m1Winner?.id === teamId)}
-        ${teamRow(4, cfp.seed4, simQF4.scoreB, !simQF4.isAWinner, cfp.seed4?.id === teamId)}
+      <div class="playoff-matchup-box ${p.qf4.teamA?.id === teamId || p.qf4.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf4.id}')">
+        ${teamRow(5, p.qf4.teamB, p.qf4.sim.scoreB, !p.qf4.sim.isAWinner, p.qf4.teamB?.id === teamId)}
+        ${teamRow(4, p.qf4.teamA, p.qf4.sim.scoreA, p.qf4.sim.isAWinner, p.qf4.teamA?.id === teamId)}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Vrbo Fiesta Bowl</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${qf4Winner?.shortName?.toUpperCase() || 'WINNER'} ADVANCES</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.qf4.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
         </div>
       </div>
     </div>
@@ -1680,48 +1841,155 @@ function renderPlayoffBracket(totalWins, cfpSeed) {
     <!-- SEMIFINALS -->
     <div class="playoff-round-card">
       <div class="round-header">
-        <span>CFP SEMIFINALS</span>
+        <span>SEMIFINALS (COTTON / ORANGE)</span>
         <span style="font-size: 0.68rem; opacity: 0.8;">JAN 8-9</span>
       </div>
 
-      <!-- Semi 1: Orange Bowl -->
-      <div class="playoff-matchup-box ${isSemi1Active ? 'active-team-matchup' : ''}">
-        ${teamRow(qf4Winner?.id === cfp.seed4?.id ? 4 : 5, qf4Winner, simSemi1.scoreB, !simSemi1.isAWinner, qf4Winner?.id === teamId)}
-        ${teamRow(1, qf1Winner, simSemi1.scoreA, simSemi1.isAWinner, qf1Winner?.id === teamId)}
+      <!-- SF1: Orange Bowl -->
+      <div class="playoff-matchup-box ${p.sf1.teamA?.id === teamId || p.sf1.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.sf1.id}')">
+        ${teamRow(4, p.sf1.teamB, p.sf1.sim.scoreB, !p.sf1.sim.isAWinner, p.sf1.teamB?.id === teamId)}
+        ${teamRow(1, p.sf1.teamA, p.sf1.sim.scoreA, p.sf1.sim.isAWinner, p.sf1.teamA?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">Capital One Orange Bowl</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-fire"></i> ${semi1Winner?.shortName?.toUpperCase() || 'WINNER'} TO NATTY</span>
+          <span style="color: var(--color-text-dim);">Orange Bowl (Miami)</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.sf1.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
         </div>
       </div>
 
-      <!-- Semi 2: Cotton Bowl -->
-      <div class="playoff-matchup-box ${isSemi2Active ? 'active-team-matchup' : ''}">
-        ${teamRow(qf3Winner?.id === cfp.seed3?.id ? 3 : 6, qf3Winner, simSemi2.scoreB, !simSemi2.isAWinner, qf3Winner?.id === teamId)}
-        ${teamRow(2, qf2Winner, simSemi2.scoreA, simSemi2.isAWinner, qf2Winner?.id === teamId)}
+      <!-- SF2: Cotton Bowl -->
+      <div class="playoff-matchup-box ${p.sf2.teamA?.id === teamId || p.sf2.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.sf2.id}')">
+        ${teamRow(3, p.sf2.teamB, p.sf2.sim.scoreB, !p.sf2.sim.isAWinner, p.sf2.teamB?.id === teamId)}
+        ${teamRow(2, p.sf2.teamA, p.sf2.sim.scoreA, p.sf2.sim.isAWinner, p.sf2.teamA?.id === teamId)}
         <div class="playoff-result-badge">
-          <span style="color: var(--color-text-dim);">Goodyear Cotton Bowl</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-fire"></i> ${semi2Winner?.shortName?.toUpperCase() || 'WINNER'} TO NATTY</span>
+          <span style="color: var(--color-text-dim);">Cotton Bowl Classic (Dallas)</span>
+          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.sf2.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
         </div>
       </div>
     </div>
 
     <!-- NATIONAL CHAMPIONSHIP -->
-    <div class="playoff-round-card">
-      <div class="round-header">
-        <span>NATIONAL CHAMPIONSHIP</span>
-        <span style="font-size: 0.68rem; opacity: 0.8;">JAN 18 • ATLANTA</span>
+    <div class="playoff-round-card" style="border-color: #FFD700; background: linear-gradient(180deg, rgba(255, 215, 0, 0.08), rgba(0, 0, 0, 0.6));">
+      <div class="round-header" style="color: #FFD700;">
+        <span><i class="fa-solid fa-trophy"></i> NATIONAL CHAMPIONSHIP</span>
+        <span style="font-size: 0.68rem; opacity: 0.8;">JAN 18, 2027</span>
       </div>
 
-      <div class="playoff-matchup-box ${isNattyActive ? 'active-team-matchup' : ''}" style="border-color: var(--color-brand-border); background: linear-gradient(135deg, rgba(255,255,255,0.06), var(--color-brand-glow));">
-        ${teamRow(runnerUp?.id === semi1Winner?.id ? 1 : 2, runnerUp, simNatty.scoreB, false, runnerUp?.id === teamId)}
-        ${teamRow(nationalChampion?.id === semi1Winner?.id ? 1 : 2, nationalChampion, simNatty.scoreA, true, nationalChampion?.id === teamId)}
-        <div class="playoff-result-badge" style="margin-top: 0.4rem; padding-top: 0.4rem;">
-          <span style="color: #FBBF24; font-weight: 800;"><i class="fa-solid fa-crown"></i> NATIONAL CHAMPION</span>
-          <span style="font-weight: 800; color: #FFFFFF;">${nationalChampion?.name?.toUpperCase()} (CFP CHAMP)</span>
+      <!-- Natty Showdown -->
+      <div class="playoff-matchup-box ${p.natty.teamA?.id === teamId || p.natty.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.natty.id}')">
+        ${teamRow('SF1', p.natty.teamA, p.natty.sim.scoreA, p.natty.sim.isAWinner, p.natty.teamA?.id === teamId)}
+        ${teamRow('SF2', p.natty.teamB, p.natty.sim.scoreB, !p.natty.sim.isAWinner, p.natty.teamB?.id === teamId)}
+        <div class="playoff-result-badge">
+          <span style="color: var(--color-text-dim);">Mercedes-Benz Stadium (Atlanta)</span>
+          <span class="playoff-win-tag" style="color: #FFD700;"><i class="fa-solid fa-crown"></i> ${nattyChamp?.shortName?.toUpperCase()} NATIONAL CHAMPION</span>
+        </div>
+      </div>
+
+      <div style="margin-top: auto; padding: 0.75rem; background: rgba(0, 0, 0, 0.5); border-radius: var(--radius-sm); border: 1px solid rgba(255, 215, 0, 0.3); text-align: center;">
+        <div style="font-size: 0.68rem; font-family: var(--font-mono); color: #FFD700; font-weight: 800; text-transform: uppercase;">
+          👑 2026-27 NATIONAL CHAMPIONS
+        </div>
+        <div style="font-size: 1.15rem; font-weight: 900; color: #FFFFFF; margin-top: 2px;">
+          ${nattyChamp?.name || 'CHAMPION'}
         </div>
       </div>
     </div>
   `;
+}
+
+// 6. Calculate Overall Total Season Record for Active Team
+function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playoffData) {
+  let totalWins = regWins;
+  let totalLosses = regLosses;
+  let outcomeTitle = 'Regular Season';
+
+  // 1. Check Conference Championship
+  const ccgGames = [ccgResults.sec, ccgResults.b1g, ccgResults.acc, ccgResults.mwc];
+  const userCcg = ccgGames.find(g => g.team1?.id === teamId || g.team2?.id === teamId);
+  if (userCcg) {
+    const isWinner = (userCcg.sim.winner?.id === teamId);
+    if (isWinner) {
+      totalWins++;
+      outcomeTitle = 'Conference Champions';
+    } else {
+      totalLosses++;
+      outcomeTitle = 'Conference Runner-Up';
+    }
+  }
+
+  // 2. Check 12-Team CFP
+  const p = playoffData;
+  const isNationalChampion = (p.nationalChampion?.id === teamId);
+  const isRunnerUp = (p.runnerUp?.id === teamId);
+
+  // Check rounds
+  let inFR = false, wonFR = false;
+  let inQF = false, wonQF = false;
+  let inSF = false, wonSF = false;
+
+  [p.fr1, p.fr2, p.fr3, p.fr4].forEach(fr => {
+    if (fr.teamA?.id === teamId || fr.teamB?.id === teamId) {
+      inFR = true;
+      if (fr.sim.winner?.id === teamId) wonFR = true;
+    }
+  });
+
+  [p.qf1, p.qf2, p.qf3, p.qf4].forEach(qf => {
+    if (qf.teamA?.id === teamId || qf.teamB?.id === teamId) {
+      inQF = true;
+      if (qf.sim.winner?.id === teamId) wonQF = true;
+    }
+  });
+
+  [p.sf1, p.sf2].forEach(sf => {
+    if (sf.teamA?.id === teamId || sf.teamB?.id === teamId) {
+      inSF = true;
+      if (sf.sim.winner?.id === teamId) wonSF = true;
+    }
+  });
+
+  if (isNationalChampion) {
+    // Won National Championship!
+    // Add wins for each round played:
+    if (inFR && wonFR) totalWins++;
+    if (inQF && wonQF) totalWins++;
+    if (inSF && wonSF) totalWins++;
+    totalWins++; // Natty win
+    outcomeTitle = '🏆 National Champions';
+  } else if (isRunnerUp) {
+    if (inFR && wonFR) totalWins++;
+    if (inQF && wonQF) totalWins++;
+    if (inSF && wonSF) totalWins++;
+    totalLosses++; // Lost Natty
+    outcomeTitle = '🥈 CFP National Runner-Up';
+  } else if (inSF) {
+    if (inFR && wonFR) totalWins++;
+    if (inQF && wonQF) totalWins++;
+    totalLosses++; // Lost in SF
+    outcomeTitle = '🥉 CFP Semifinalist';
+  } else if (inQF) {
+    if (inFR && wonFR) totalWins++;
+    totalLosses++; // Lost in QF
+    outcomeTitle = 'CFP Quarterfinalist';
+  } else if (inFR) {
+    totalLosses++; // Lost in FR
+    outcomeTitle = 'CFP First Round';
+  } else {
+    // Missed CFP: Add Bowl game projection
+    if (regWins >= 8) {
+      totalWins++;
+      outcomeTitle = 'Florida Citrus Bowl Champions';
+    } else if (regWins >= 6) {
+      totalWins++;
+      outcomeTitle = 'ReliaQuest Bowl Champions';
+    } else {
+      outcomeTitle = 'Regular Season Finish';
+    }
+  }
+
+  return {
+    totalWins,
+    totalLosses,
+    outcomeTitle
+  };
 }
 
 // ==========================================================================

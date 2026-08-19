@@ -211,6 +211,61 @@ body.theme-oklahoma {
   --color-bg-surface: #190D0D;
 }
 
+/* 16. Boise State Broncos */
+body.theme-boisestate {
+  --color-brand-primary: #0033A0;
+  --color-brand-secondary: #D64309;
+  --color-brand-accent: #FF671F;
+  --color-brand-glow: rgba(0, 51, 160, 0.5);
+  --color-brand-border: rgba(214, 67, 9, 0.45);
+  --color-bg-base: #030814;
+  --color-bg-surface: #0A1329;
+}
+
+/* 17. USC Trojans */
+body.theme-usc {
+  --color-brand-primary: #990000;
+  --color-brand-secondary: #FFC72C;
+  --color-brand-accent: #FFC72C;
+  --color-brand-glow: rgba(153, 0, 0, 0.5);
+  --color-brand-border: rgba(255, 199, 44, 0.45);
+  --color-bg-base: #0E0303;
+  --color-bg-surface: #1C0909;
+}
+
+/* 18. Florida State Seminoles */
+body.theme-floridastate {
+  --color-brand-primary: #782F40;
+  --color-brand-secondary: #CEB888;
+  --color-brand-accent: #F3E5AB;
+  --color-brand-glow: rgba(120, 47, 64, 0.5);
+  --color-brand-border: rgba(206, 184, 136, 0.45);
+  --color-bg-base: #0A0305;
+  --color-bg-surface: #18080C;
+}
+
+/* 19. Clemson Tigers */
+body.theme-clemson {
+  --color-brand-primary: #F56600;
+  --color-brand-secondary: #522D80;
+  --color-brand-accent: #9A66CB;
+  --color-brand-glow: rgba(245, 102, 0, 0.5);
+  --color-brand-border: rgba(245, 102, 0, 0.45);
+  --color-bg-base: #0F0602;
+  --color-bg-surface: #200E06;
+}
+
+/* 20. SMU Mustangs */
+body.theme-smu {
+  --color-brand-primary: #003366;
+  --color-brand-secondary: #CC0000;
+  --color-brand-accent: #FF3B30;
+  --color-brand-glow: rgba(204, 0, 0, 0.5);
+  --color-brand-border: rgba(0, 51, 102, 0.45);
+  --color-bg-base: #040810;
+  --color-bg-surface: #091322;
+}
+
 /* ==========================================================================
    BASE STYLES & LAYOUT
    ========================================================================== */
@@ -1688,6 +1743,16 @@ body {
   box-shadow: 0 0 16px var(--color-brand-glow);
 }
 
+.playoff-matchup-box {
+  cursor: pointer;
+}
+
+.playoff-matchup-box:hover {
+  border-color: var(--color-brand-border);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
 .matchup-teams-row {
   display: flex;
   justify-content: space-between;
@@ -1732,6 +1797,153 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
+}
+
+/* ==========================================================================
+   CONFERENCE CHAMPIONSHIP GAMES (CCG) SECTION
+   ========================================================================== */
+
+.ccg-section {
+  margin-bottom: 2.5rem;
+}
+
+.ccg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.ccg-card {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-fast);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+
+.ccg-card:hover {
+  border-color: var(--color-brand-border);
+  box-shadow: 0 8px 24px var(--color-brand-glow);
+  transform: translateY(-2px);
+}
+
+.ccg-card.active-team-card {
+  border-color: var(--color-brand-accent);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  box-shadow: 0 0 20px var(--color-brand-glow);
+}
+
+.ccg-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.65rem;
+}
+
+.ccg-conf-title {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--color-brand-accent);
+  letter-spacing: 0.5px;
+}
+
+.ccg-venue-text {
+  font-size: 0.72rem;
+  color: var(--color-text-dim);
+}
+
+.ccg-matchup-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ccg-team-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 1;
+  text-align: center;
+}
+
+.ccg-team-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+}
+
+.ccg-team-name {
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.ccg-team-rec {
+  font-size: 0.72rem;
+  color: var(--color-text-dim);
+  font-family: var(--font-mono);
+}
+
+.ccg-vs-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ccg-vs-text {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--color-text-dim);
+}
+
+.ccg-score-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 900;
+  font-family: var(--font-mono);
+}
+
+.ccg-card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.ccg-sim-btn {
+  background: var(--color-brand-primary);
+  color: #FFFFFF;
+  border: 1px solid var(--color-brand-border);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--transition-fast);
+}
+
+.ccg-sim-btn:hover {
+  background: var(--color-brand-accent);
+  color: #000000;
 }
 
 /* ==========================================================================

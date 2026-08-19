@@ -44,7 +44,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260819_03">
+  <link rel="stylesheet" href="styles.css?t=20260819_04">
 </head>
 <body class="theme-texas">
 
@@ -133,14 +133,14 @@
     <!-- KPI Season Overview Dashboard -->
     <section class="kpi-grid">
       <div class="kpi-card">
-        <span class="kpi-label"><i class="fa-solid fa-trophy"></i> PROJECTED RECORD</span>
-        <span class="kpi-value" id="kpiRecord">11 - 1</span>
-        <span class="kpi-sub" id="kpiConfRecord">7-1 Conference</span>
+        <span class="kpi-label"><i class="fa-solid fa-trophy"></i> TOTAL PREDICTED RECORD</span>
+        <span class="kpi-value" id="kpiTotalRecord">16 - 0</span>
+        <span class="kpi-sub" id="kpiRecordSub"><span id="kpiRecord">12 - 0</span> Reg • <span id="kpiPostseasonOutcome" style="color: var(--color-brand-accent); font-weight: 700;">🏆 National Champions</span></span>
       </div>
       <div class="kpi-card">
         <span class="kpi-label"><i class="fa-solid fa-chart-line"></i> WIN PROBABILITY</span>
         <span class="kpi-value" id="kpiWinProb">88.4%</span>
-        <span class="kpi-sub">Season-long average</span>
+        <span class="kpi-sub" id="kpiConfRecord">8-0 Conference</span>
       </div>
       <div class="kpi-card">
         <span class="kpi-label"><i class="fa-solid fa-gauge-high"></i> AVG SCORING MARGIN</span>
@@ -149,13 +149,13 @@
       </div>
       <div class="kpi-card">
         <span class="kpi-label"><i class="fa-solid fa-shield-halved"></i> 12-TEAM CFP SEED</span>
-        <span class="kpi-value" id="kpiCfpSeed">#5 SEED</span>
-        <span class="kpi-sub" id="kpiCfpStatus">First Round Host</span>
+        <span class="kpi-value" id="kpiCfpSeed">#1 SEED</span>
+        <span class="kpi-sub" id="kpiCfpStatus">First Round Bye</span>
       </div>
       <div class="kpi-card">
         <span class="kpi-label"><i class="fa-solid fa-ring"></i> NATTY TITLE ODDS</span>
-        <span class="kpi-value" id="kpiNattyOdds">+750</span>
-        <span class="kpi-sub" id="kpiNattyOddsSub">14.2% Championship Sim</span>
+        <span class="kpi-value" id="kpiNattyOdds">+350</span>
+        <span class="kpi-sub" id="kpiNattyOddsSub">28.4% Championship Sim</span>
       </div>
       <div class="kpi-card" id="monteCarloKpiCard" style="cursor: pointer;" title="Click to view 10,000 Monte Carlo simulation breakdown">
         <span class="kpi-label"><i class="fa-solid fa-dice-d20"></i> MONTE CARLO ENGINE</span>
@@ -177,7 +177,7 @@
           <button class="preset-btn" data-preset="qb-slump" onclick="applyGlobalPreset('qb-slump')">QB Slump</button>
           <button class="preset-btn" data-preset="iron-defense" onclick="applyGlobalPreset('iron-defense')">Iron Curtain D</button>
           <button class="preset-btn" data-preset="chaos" onclick="applyGlobalPreset('chaos')">CFB Chaos</button>
-          <button class="preset-btn reset-all-btn" id="resetAllAiBtn" onclick="resetAllToBaseline()" title="Reset all 15 teams, custom sliders, and picks back to authentic 2026 baselines"><i class="fa-solid fa-rotate-left"></i> Reset to Baseline</button>
+          <button class="preset-btn reset-all-btn" id="resetAllAiBtn" onclick="resetAllToBaseline()" title="Reset all 20 teams, custom sliders, and picks back to authentic 2026 baselines"><i class="fa-solid fa-rotate-left"></i> Reset to Baseline</button>
         </div>
       </div>
       <div class="sliders-grid" id="globalSlidersGrid">
@@ -206,16 +206,33 @@
       </div>
     </section>
 
+    <!-- Conference Championship Games Section -->
+    <section class="ccg-section" id="ccgSection">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fa-solid fa-crown"></i>
+          <span>CONFERENCE CHAMPIONSHIP SATURDAY (DEC 5, 2026)</span>
+        </div>
+        <div class="section-badge" style="background: rgba(255, 215, 0, 0.15); border: 1px solid rgba(255, 215, 0, 0.4); color: #FFD700; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; font-family: var(--font-mono); display: flex; align-items: center; gap: 5px;">
+          <i class="fa-solid fa-bolt"></i>
+          <span>CFP TOP 4 AUTO-BYE QUALIFIERS</span>
+        </div>
+      </div>
+      <div class="ccg-grid" id="ccgGrid">
+        <!-- Dynamically rendered CCG Matchup Cards -->
+      </div>
+    </section>
+
     <!-- 12-Team CFP Playoff Bracket Section -->
-    <section class="playoff-section">
+    <section class="playoff-section" id="playoffSection">
       <div class="section-header">
         <div class="section-title">
           <i class="fa-solid fa-diagram-project"></i>
-          <span>12-TEAM COLLEGE FOOTBALL PLAYOFF PROJECTION</span>
+          <span>12-TEAM COLLEGE FOOTBALL PLAYOFF PROJECTION & LIVE SIMULATOR</span>
         </div>
       </div>
       <div class="playoff-bracket-grid" id="playoffBracketGrid">
-        <!-- Dynamically rendered bracket rounds -->
+        <!-- Dynamically rendered interactive bracket rounds -->
       </div>
     </section>
 
@@ -572,7 +589,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260819_03"></script>
-  <script src="app.js?t=20260819_03"></script>
+  <script src="data/teams.js?t=20260819_04"></script>
+  <script src="app.js?t=20260819_04"></script>
 </body>
 </html>
