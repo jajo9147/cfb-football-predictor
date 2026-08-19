@@ -59,7 +59,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260819_20">
+  <link rel="stylesheet" href="styles.css?t=20260819_21">
 </head>
 <body class="theme-texas">
 
@@ -159,7 +159,7 @@
 
     <!-- KPI Season Overview Dashboard -->
     <section class="kpi-grid">
-      <div class="kpi-card">
+      <div class="kpi-card" style="cursor: pointer;" onclick="document.getElementById('ccgSection').scrollIntoView({behavior:'smooth'});" title="Click to view Conference Championships">
         <span class="kpi-label"><i class="fa-solid fa-trophy"></i> TOTAL PREDICTED RECORD</span>
         <span class="kpi-value" id="kpiTotalRecord">16 - 0</span>
         <span class="kpi-sub" id="kpiRecordSub"><span id="kpiRecord">12 - 0</span> Reg • <span id="kpiPostseasonOutcome" style="color: var(--color-brand-accent); font-weight: 700;">🏆 National Champions</span></span>
@@ -174,7 +174,7 @@
         <span class="kpi-value" id="kpiMargin">+17.8</span>
         <span class="kpi-sub">Points per game</span>
       </div>
-      <div class="kpi-card">
+      <div class="kpi-card" style="cursor: pointer;" onclick="document.getElementById('playoffSection').scrollIntoView({behavior:'smooth'});" title="Click to view 12-Team CFP Bracket">
         <span class="kpi-label"><i class="fa-solid fa-shield-halved"></i> 12-TEAM CFP SEED</span>
         <span class="kpi-value" id="kpiCfpSeed">#1 SEED</span>
         <span class="kpi-sub" id="kpiCfpStatus">First Round Bye</span>
@@ -213,7 +213,7 @@
     </section>
 
     <!-- 2026 Official Schedule Section -->
-    <section class="schedule-section">
+    <section class="schedule-section" id="scheduleSection">
       <div class="schedule-header">
         <div class="section-title">
           <i class="fa-solid fa-calendar-days"></i>
@@ -616,7 +616,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260819_20"></script>
-  <script src="app.js?t=20260819_20"></script>
+  <script src="data/teams.js?t=20260819_21"></script>
+  <script src="app.js?t=20260819_21"></script>
 </body>
 </html>
