@@ -31,22 +31,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <script>
-    if ('caches' in window) {
-      caches.keys().then(keys => {
-        keys.forEach(key => {
-          if (key !== 'gridiron-oracle-v2026.58') {
-            caches.delete(key);
-          }
-        });
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
       });
     }
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(regs => {
-        regs.forEach(reg => reg.update());
+    if ('caches' in window) {
+      caches.keys().then(function(names) {
+        for (let name of names) caches.delete(name);
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=2026.58">
+  <link rel="stylesheet" href="styles.css?t=20260819_02">
 </head>
 <body class="theme-texas">
 
@@ -174,12 +172,12 @@
           <span>GLOBAL AI SIMULATION TUNING</span>
         </div>
         <div class="presets-container" id="globalPresetsContainer">
-          <button class="preset-btn active" data-preset="baseline">Season Baseline</button>
-          <button class="preset-btn" data-preset="qb-mvp">QB Heisman Mode</button>
-          <button class="preset-btn" data-preset="qb-slump">QB Slump</button>
-          <button class="preset-btn" data-preset="iron-defense">Iron Curtain D</button>
-          <button class="preset-btn" data-preset="chaos">CFB Chaos</button>
-          <button class="preset-btn reset-all-btn" id="resetAllAiBtn" title="Reset all 15 teams, custom sliders, and picks back to authentic 2026 baselines"><i class="fa-solid fa-rotate-left"></i> Reset to Baseline</button>
+          <button class="preset-btn active" data-preset="baseline" onclick="applyGlobalPreset('baseline')">Season Baseline</button>
+          <button class="preset-btn" data-preset="qb-mvp" onclick="applyGlobalPreset('qb-mvp')">QB Heisman Mode</button>
+          <button class="preset-btn" data-preset="qb-slump" onclick="applyGlobalPreset('qb-slump')">QB Slump</button>
+          <button class="preset-btn" data-preset="iron-defense" onclick="applyGlobalPreset('iron-defense')">Iron Curtain D</button>
+          <button class="preset-btn" data-preset="chaos" onclick="applyGlobalPreset('chaos')">CFB Chaos</button>
+          <button class="preset-btn reset-all-btn" id="resetAllAiBtn" onclick="resetAllToBaseline()" title="Reset all 15 teams, custom sliders, and picks back to authentic 2026 baselines"><i class="fa-solid fa-rotate-left"></i> Reset to Baseline</button>
         </div>
       </div>
       <div class="sliders-grid" id="globalSlidersGrid">
@@ -195,11 +193,11 @@
           <span>2026 OFFICIAL SCHEDULE & SIMULATED MATCHUPS</span>
         </div>
         <div class="filter-pills" id="scheduleFilterPills">
-          <button class="filter-btn active" data-filter="all">All 12 Games</button>
-          <button class="filter-btn" data-filter="marquee">🔥 Marquee & Rivalries</button>
-          <button class="filter-btn" data-filter="conf">Conference</button>
-          <button class="filter-btn" data-filter="home">Home</button>
-          <button class="filter-btn" data-filter="away">Away / Neutral</button>
+          <button class="filter-btn active" data-filter="all" onclick="applyScheduleFilter('all')">All 12 Games</button>
+          <button class="filter-btn" data-filter="marquee" onclick="applyScheduleFilter('marquee')">🔥 Marquee & Rivalries</button>
+          <button class="filter-btn" data-filter="conf" onclick="applyScheduleFilter('conf')">Conference</button>
+          <button class="filter-btn" data-filter="home" onclick="applyScheduleFilter('home')">Home</button>
+          <button class="filter-btn" data-filter="away" onclick="applyScheduleFilter('away')">Away / Neutral</button>
         </div>
       </div>
 
@@ -239,19 +237,19 @@
       </div>
 
       <div class="modal-sub-tabs">
-        <button class="sub-tab active" data-subtab="drives">
+        <button class="sub-tab active" data-subtab="drives" onclick="switchModalSubTab('drives')">
           <i class="fa-solid fa-list-ol"></i>
           <span>Drive Log</span>
         </button>
-        <button class="sub-tab" data-subtab="game-tuning">
+        <button class="sub-tab" data-subtab="game-tuning" onclick="switchModalSubTab('game-tuning')">
           <i class="fa-solid fa-sliders"></i>
           <span>Game AI Tuning</span>
         </button>
-        <button class="sub-tab" data-subtab="radar">
+        <button class="sub-tab" data-subtab="radar" onclick="switchModalSubTab('radar')">
           <i class="fa-solid fa-chart-radar"></i>
           <span>Radar Stats</span>
         </button>
-        <button class="sub-tab" data-subtab="scout">
+        <button class="sub-tab" data-subtab="scout" onclick="switchModalSubTab('scout')">
           <i class="fa-solid fa-binoculars"></i>
           <span>Tactical Intel</span>
         </button>
@@ -273,11 +271,11 @@
           <div class="game-preset-row">
             <span style="font-size: 0.78rem; font-weight: 700; color: var(--color-text-muted);">Quick Game Scenarios:</span>
             <div class="game-preset-buttons">
-              <button class="game-preset-btn active" data-gamepreset="baseline">Season Baseline</button>
-              <button class="game-preset-btn" data-gamepreset="qb-slump">QB Slump</button>
-              <button class="game-preset-btn" data-gamepreset="blowout">Offensive Blowout</button>
-              <button class="game-preset-btn" data-gamepreset="turnover-trap">Turnover Trap</button>
-              <button class="game-preset-btn" data-gamepreset="ground-pound">Ground & Pound</button>
+              <button class="game-preset-btn active" data-gamepreset="baseline" onclick="applyGameScenarioPreset('baseline')">Season Baseline</button>
+              <button class="game-preset-btn" data-gamepreset="qb-slump" onclick="applyGameScenarioPreset('qb-slump')">QB Slump</button>
+              <button class="game-preset-btn" data-gamepreset="blowout" onclick="applyGameScenarioPreset('blowout')">Offensive Blowout</button>
+              <button class="game-preset-btn" data-gamepreset="turnover-trap" onclick="applyGameScenarioPreset('turnover-trap')">Turnover Trap</button>
+              <button class="game-preset-btn" data-gamepreset="ground-pound" onclick="applyGameScenarioPreset('ground-pound')">Ground & Pound</button>
             </div>
           </div>
 
@@ -286,11 +284,11 @@
           </div>
 
           <div class="tuning-footer-actions">
-            <button class="action-btn secondary-btn" id="resetGameTuningBtn">
+            <button class="action-btn secondary-btn" id="resetGameTuningBtn" onclick="resetCurrentGameTuning()">
               <i class="fa-solid fa-rotate-left"></i>
               <span>Reset Game</span>
             </button>
-            <button class="action-btn hype-btn" id="applyAndSimGameBtn">
+            <button class="action-btn hype-btn" id="applyAndSimGameBtn" onclick="applyAndSimulateModalGame()">
               <i class="fa-solid fa-play"></i>
               <span>Apply & Re-Simulate (10,000 Drives)</span>
             </button>
@@ -574,7 +572,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?v=2026.58"></script>
-  <script src="app.js?v=2026.58"></script>
+  <script src="data/teams.js?t=20260819_02"></script>
+  <script src="app.js?t=20260819_02"></script>
 </body>
 </html>
