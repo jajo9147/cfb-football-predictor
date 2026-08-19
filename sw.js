@@ -2,7 +2,7 @@
 // GRIDIRON ORACLE SERVICE WORKER (REAL-TIME NETWORK-FIRST ENGINE)
 // ==========================================================================
 
-const CACHE_NAME = 'gridiron-oracle-v2026.62';
+const CACHE_NAME = 'gridiron-oracle-v2026.63';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();

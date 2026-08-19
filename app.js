@@ -65,6 +65,7 @@ function getOpponentTeamId(game) {
 document.addEventListener('DOMContentLoaded', () => {
   initPwaServiceWorker();
   renderTeamSelector();
+  initTeamSearch();
 
   // Default to the #1 AP ranked team dynamically
   const defaultTeamId = getTopRankedTeamId();
@@ -148,6 +149,153 @@ function renderTeamSelector() {
     track.appendChild(btn);
   });
 }
+
+function initTeamSearch() {
+  const input = document.getElementById('teamSearchInput');
+  const clearBtn = document.getElementById('teamSearchClearBtn');
+  const dropdown = document.getElementById('teamSearchResultsDropdown');
+  if (!input || !dropdown) return;
+
+  function performSearch(query) {
+    const q = (query || '').trim().toLowerCase();
+    if (!q) {
+      dropdown.style.display = 'none';
+      if (clearBtn) clearBtn.style.display = 'none';
+      document.querySelectorAll('.team-pill-btn').forEach(btn => {
+        btn.style.display = '';
+      });
+      return;
+    }
+
+    if (clearBtn) clearBtn.style.display = 'flex';
+
+    // Filter team pill buttons in the track
+    let firstMatchedKey = null;
+    document.querySelectorAll('.team-pill-btn').forEach(btn => {
+      const tid = btn.dataset.teamid;
+      const t = TEAMS_DATABASE[tid];
+      if (!t) return;
+      const match = t.name.toLowerCase().includes(q) ||
+                    t.shortName.toLowerCase().includes(q) ||
+                    t.abbr.toLowerCase().includes(q) ||
+                    (t.mascot && t.mascot.toLowerCase().includes(q)) ||
+                    t.headCoach.toLowerCase().includes(q) ||
+                    (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) ||
+                    t.conference.toLowerCase().includes(q) ||
+                    t.apRank.toLowerCase().includes(q);
+
+      btn.style.display = match ? '' : 'none';
+      if (match && !firstMatchedKey) firstMatchedKey = tid;
+    });
+
+    // Populate the rich dropdown
+    const matchedTeams = Object.keys(TEAMS_DATABASE).filter(tid => {
+      const t = TEAMS_DATABASE[tid];
+      return t.name.toLowerCase().includes(q) ||
+             t.shortName.toLowerCase().includes(q) ||
+             t.abbr.toLowerCase().includes(q) ||
+             (t.mascot && t.mascot.toLowerCase().includes(q)) ||
+             t.headCoach.toLowerCase().includes(q) ||
+             (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) ||
+             t.conference.toLowerCase().includes(q) ||
+             t.apRank.toLowerCase().includes(q);
+    });
+
+    if (matchedTeams.length === 0) {
+      dropdown.innerHTML = `
+        <div class="team-search-no-results">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>No teams found for "${query}"</span>
+        </div>
+      `;
+      dropdown.style.display = 'block';
+      return;
+    }
+
+    dropdown.innerHTML = '';
+    matchedTeams.forEach(tid => {
+      const t = TEAMS_DATABASE[tid];
+      const item = document.createElement('div');
+      item.className = `team-search-item ${tid === state.currentTeamId ? 'active' : ''}`;
+      item.innerHTML = `
+        <div class="search-item-left">
+          <img src="${t.logoUrl}" alt="${t.shortName}" class="search-item-logo">
+          <div class="search-item-info">
+            <div class="search-item-name">${t.name} <span class="search-item-badge">${t.apRank}</span></div>
+            <div class="search-item-sub">HC: ${t.headCoach} • QB: ${t.confirmedStarterQb || 'Starter'} • ${t.conference}</div>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-right search-item-arrow"></i>
+      `;
+      item.onclick = () => {
+        selectTeam(tid);
+        input.value = '';
+        performSearch('');
+        dropdown.style.display = 'none';
+      };
+      dropdown.appendChild(item);
+    });
+
+    dropdown.style.display = 'block';
+    return firstMatchedKey;
+  }
+
+  input.addEventListener('input', (e) => {
+    performSearch(e.target.value);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const q = input.value.trim().toLowerCase();
+      const matched = Object.keys(TEAMS_DATABASE).find(tid => {
+        const t = TEAMS_DATABASE[tid];
+        return t.name.toLowerCase().includes(q) ||
+               t.shortName.toLowerCase().includes(q) ||
+               t.abbr.toLowerCase().includes(q) ||
+               t.headCoach.toLowerCase().includes(q);
+      });
+      if (matched) {
+        selectTeam(matched);
+        input.value = '';
+        performSearch('');
+        dropdown.style.display = 'none';
+        input.blur();
+      }
+    } else if (e.key === 'Escape') {
+      dropdown.style.display = 'none';
+      input.blur();
+    }
+  });
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      performSearch('');
+      input.focus();
+    });
+  }
+
+  // Global Keyboard Shortcut: Press '/' or 'Cmd+K' / 'Ctrl+K' to focus search
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      input.focus();
+      input.select();
+    } else if (e.key === '/' && document.activeElement !== input && document.activeElement.tagName !== 'INPUT') {
+      e.preventDefault();
+      input.focus();
+      input.select();
+    }
+  });
+
+  // Close dropdown on click outside
+  document.addEventListener('click', (e) => {
+    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
+}
+
 
 function selectTeam(teamId) {
   if (!TEAMS_DATABASE[teamId]) return;
@@ -2427,6 +2575,7 @@ const LiveSyncEngine = {
 
       // Re-render UI with synced live data
       renderTeamSelector();
+  initTeamSearch();
       selectTeam(state.currentTeamId);
     }, 500);
   }

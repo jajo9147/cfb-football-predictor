@@ -44,7 +44,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260819_04">
+  <link rel="stylesheet" href="styles.css?t=20260819_05">
 </head>
 <body class="theme-texas">
 
@@ -85,9 +85,20 @@
     </div>
   </nav>
 
-  <!-- Top Quick Team Selector Bar (10 Powerhouses) -->
+  <!-- Top Quick Team Selector Bar & Search (20 AP Contenders) -->
   <section class="team-selector-section">
     <div class="container">
+      <div class="team-search-bar-wrap">
+        <div class="team-search-input-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="teamSearchInput" class="team-search-input" placeholder="Search any Top 20 team, coach, quarterback, or conference (e.g. Michigan, Sarkisian, SEC)..." autocomplete="off" spellcheck="false">
+          <button class="search-clear-btn" id="teamSearchClearBtn" style="display: none;" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
+          <kbd class="search-shortcut-badge">⌘K</kbd>
+        </div>
+        <div class="team-search-results-dropdown" id="teamSearchResultsDropdown" style="display: none;">
+          <!-- Dynamically injected matching teams -->
+        </div>
+      </div>
       <div class="team-selector-track" id="teamSelectorTrack">
         <!-- Injected via JavaScript -->
       </div>
@@ -589,7 +600,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260819_04"></script>
-  <script src="app.js?t=20260819_04"></script>
+  <script src="data/teams.js?t=20260819_05"></script>
+  <script src="app.js?t=20260819_05"></script>
 </body>
 </html>
