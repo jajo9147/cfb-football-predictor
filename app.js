@@ -497,12 +497,12 @@ function renderSchedule() {
       </div>
 
       <div class="card-actions">
-        <div class="wl-toggle-wrap">
+        <div class="wl-toggle-wrap" onclick="event.stopPropagation();">
           <span>PICK:</span>
-          <button class="wl-toggle-btn ${effectivePick === 'W' ? 'win' : ''}" data-pick="W" data-gameid="${game.id}">W</button>
-          <button class="wl-toggle-btn ${effectivePick === 'L' ? 'loss' : ''}" data-pick="L" data-gameid="${game.id}">L</button>
+          <button class="wl-toggle-btn ${effectivePick === 'W' ? 'win' : ''}" data-pick="W" data-gameid="${game.id}" onclick="event.stopPropagation();">W</button>
+          <button class="wl-toggle-btn ${effectivePick === 'L' ? 'loss' : ''}" data-pick="L" data-gameid="${game.id}" onclick="event.stopPropagation();">L</button>
         </div>
-        <button class="sim-btn-sm" data-simid="${game.id}">
+        <button class="sim-btn-sm" data-simid="${game.id}" onclick="event.stopPropagation(); window.openSimModalByGameId('${game.id}');">
           <i class="fa-solid fa-play"></i>
           <span>Simulate</span>
         </button>
@@ -537,8 +537,16 @@ function renderSchedule() {
       });
     });
 
-    card.querySelector('.sim-btn-sm').addEventListener('click', (e) => {
-      e.stopPropagation();
+    const simBtn = card.querySelector('.sim-btn-sm');
+    if (simBtn) {
+      simBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openSimModal(game);
+      });
+    }
+
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.wl-toggle-btn') || e.target.closest('.wl-toggle-wrap')) return;
       openSimModal(game);
     });
 
@@ -745,47 +753,63 @@ function initFilterButtons() {
 // ==========================================================================
 
 function openSimModal(game) {
+  if (!game) return;
   state.activeModalGame = game;
   const team = TEAMS_DATABASE[state.currentTeamId];
+  if (!team) return;
   const sim = calculateAdjustedMatchup(game);
 
-  document.getElementById('modalWeekTag').innerText = `${game.week} • ${game.isMarquee ? 'MARQUEE BATTLE' : (game.isHome ? 'HOME SHOWDOWN' : 'AWAY GAUNTLET')}`;
-  document.getElementById('modalMatchupTitle').innerText = `${team.name} vs ${game.opponent}`;
-  document.getElementById('modalStadiumLocation').innerText = `${game.stadium} • ${game.location}`;
+  const weekTagEl = document.getElementById('modalWeekTag');
+  if (weekTagEl) {
+    weekTagEl.innerText = `${game.week} • ${game.isMarquee ? 'MARQUEE BATTLE' : (game.isHome ? 'HOME SHOWDOWN' : 'AWAY GAUNTLET')}`;
+  }
+
+  const titleEl = document.getElementById('modalMatchupTitle');
+  if (titleEl) {
+    titleEl.innerText = `${team.name} vs ${game.opponent}`;
+  }
+
+  const stadiumEl = document.getElementById('modalStadiumLocation');
+  if (stadiumEl) {
+    stadiumEl.innerText = `${game.stadium || 'Campus Stadium'} • ${game.location || ''}`;
+  }
 
   // Scoreboard
-  document.getElementById('modalScoreboard').innerHTML = `
-    <div style="display: flex; align-items: center; gap: 0.75rem;">
-      <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team.colors.primary};">
-        <img src="${team.logoUrl}" alt="${team.shortName}" class="modal-team-logo">
+  const scoreboardEl = document.getElementById('modalScoreboard');
+  if (scoreboardEl) {
+    scoreboardEl.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team.colors.primary};">
+          <img src="${team.logoUrl}" alt="${team.shortName}" class="modal-team-logo">
+        </div>
+        <div>
+          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${team.shortName}</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${team.apRank}</div>
+        </div>
       </div>
-      <div>
-        <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${team.shortName}</div>
-        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${team.apRank}</div>
-      </div>
-    </div>
 
-    <div style="display: flex; flex-direction: column; align-items: center;">
-      <div style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: #FFFFFF;">
-        <span style="color: ${sim.isWin ? 'var(--color-success)' : 'var(--color-text-dim)'};">${sim.projUt}</span>
-        <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
-        <span style="color: ${!sim.isWin ? 'var(--color-danger)' : 'var(--color-text-dim)'};">${sim.projOpp}</span>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: #FFFFFF;">
+          <span style="color: ${sim.isWin ? 'var(--color-success)' : 'var(--color-text-dim)'};">${sim.projUt}</span>
+          <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
+          <span style="color: ${!sim.isWin ? 'var(--color-danger)' : 'var(--color-text-dim)'};">${sim.projOpp}</span>
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
+          WIN PROB: ${sim.adjWinProb}%
+        </span>
       </div>
-      <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
-        WIN PROB: ${sim.adjWinProb}%
-      </span>
-    </div>
 
-    <div style="display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end;">
-      <div style="text-align: right;">
-        <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${game.oppAbbr}</div>
-        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${game.oppRank}</div>
+      <div style="display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end;">
+        <div style="text-align: right;">
+          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${game.oppAbbr}</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${game.oppRank}</div>
+        </div>
+        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${game.oppColor};">
+          <img src="${game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || ''}" alt="${game.oppAbbr}" class="modal-team-logo">
+        </div>
       </div>
-      <div class="modal-team-logo-wrap" style="border: 2.5px solid ${game.oppColor};">
-        <img src="${game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || ''}" alt="${game.oppAbbr}" class="modal-team-logo">
-      </div>
-    </div>
-  `;
+    `;
+  }
 
   // Render Drive Log
   renderDriveLog(game, sim);
@@ -796,6 +820,9 @@ function openSimModal(game) {
   // Initialize Single-Game Sliders inside Modal
   renderGameSlidersInModal(game);
 
+  // Render Radar Chart
+  drawRadarChart(game, sim);
+
   // Sync Footer Display
   const activeSubTab = document.querySelector('#simModal .sub-tab.active');
   const activeTabName = activeSubTab ? activeSubTab.dataset.subtab : 'drives';
@@ -804,8 +831,22 @@ function openSimModal(game) {
     modalFooter.style.display = (activeTabName === 'game-tuning') ? 'none' : 'flex';
   }
 
-  document.getElementById('simModal').classList.add('open');
+  const modalEl = document.getElementById('simModal');
+  if (modalEl) {
+    modalEl.classList.add('open');
+  }
 }
+
+window.openSimModal = openSimModal;
+
+window.openSimModalByGameId = function(gameId) {
+  const team = TEAMS_DATABASE[state.currentTeamId];
+  if (!team || !team.schedule) return;
+  const game = team.schedule.find(g => g.id === gameId);
+  if (game) {
+    openSimModal(game);
+  }
+};
 
 function renderDriveLog(game, sim) {
   const container = document.getElementById('driveLogContainer');
@@ -898,9 +939,127 @@ function renderScoutReport(game) {
   `;
 }
 
+function drawRadarChart(game, sim) {
+  const canvas = document.getElementById('radarChartCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const team = TEAMS_DATABASE[state.currentTeamId];
+  if (!team) return;
+
+  const w = canvas.width;
+  const h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+
+  const centerX = w / 2;
+  const centerY = h / 2 - 10;
+  const radius = Math.min(centerX, centerY) - 25;
+
+  const metrics = [
+    { label: 'OFFENSE', teamVal: Math.min(99, Math.max(50, 75 + (sim.projUt - 28) * 2)), oppVal: Math.min(99, Math.max(50, 75 + (sim.projOpp - 24) * 2)) },
+    { label: 'DEFENSE', teamVal: Math.min(99, Math.max(50, 80 - (sim.projOpp - 20) * 2)), oppVal: Math.min(99, Math.max(50, 80 - (sim.projUt - 24) * 2)) },
+    { label: 'QB PLAY', teamVal: Math.min(99, Math.max(50, 82 + (getTeamSliders(state.currentTeamId).qbRating || 0) * 0.4)), oppVal: Math.min(99, Math.max(50, 76 + (game.oppRank.includes('#') ? 10 : 0))) },
+    { label: 'GROUND', teamVal: Math.min(99, Math.max(50, 80 + (getTeamSliders(state.currentTeamId).groundAttack || 0) * 0.4)), oppVal: 74 },
+    { label: 'STADIUM', teamVal: game.isHome ? 92 : 55, oppVal: game.isHome ? 50 : 90 }
+  ];
+
+  const totalAxes = metrics.length;
+  const angleStep = (Math.PI * 2) / totalAxes;
+
+  // Background Web Grids
+  const gridLevels = [0.25, 0.5, 0.75, 1.0];
+  ctx.lineWidth = 1;
+  gridLevels.forEach(level => {
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+    for (let i = 0; i < totalAxes; i++) {
+      const angle = i * angleStep - Math.PI / 2;
+      const x = centerX + Math.cos(angle) * (radius * level);
+      const y = centerY + Math.sin(angle) * (radius * level);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+  });
+
+  // Spokes
+  for (let i = 0; i < totalAxes; i++) {
+    const angle = i * angleStep - Math.PI / 2;
+    const x = centerX + Math.cos(angle) * radius;
+    const y = centerY + Math.sin(angle) * radius;
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+
+    // Axis Label
+    const labelX = centerX + Math.cos(angle) * (radius + 18);
+    const labelY = centerY + Math.sin(angle) * (radius + 18);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+    ctx.font = 'bold 10px JetBrains Mono, monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(metrics[i].label, labelX, labelY);
+  }
+
+  // Draw Team Polygon
+  ctx.beginPath();
+  metrics.forEach((m, i) => {
+    const angle = i * angleStep - Math.PI / 2;
+    const r = (m.teamVal / 100) * radius;
+    const x = centerX + Math.cos(angle) * r;
+    const y = centerY + Math.sin(angle) * r;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.closePath();
+  ctx.fillStyle = `${team.colors.primary}55`;
+  ctx.fill();
+  ctx.strokeStyle = team.colors.accent || team.colors.primary;
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  // Draw Opponent Polygon
+  ctx.beginPath();
+  metrics.forEach((m, i) => {
+    const angle = i * angleStep - Math.PI / 2;
+    const r = (m.oppVal / 100) * radius;
+    const x = centerX + Math.cos(angle) * r;
+    const y = centerY + Math.sin(angle) * r;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.closePath();
+  ctx.fillStyle = `${game.oppColor}44`;
+  ctx.fill();
+  ctx.strokeStyle = game.oppColor;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Legend at bottom
+  const legendY = h - 12;
+  ctx.textAlign = 'left';
+  ctx.font = 'bold 11px Outfit, sans-serif';
+  
+  // Team legend
+  ctx.fillStyle = team.colors.accent || team.colors.primary;
+  ctx.fillRect(centerX - 90, legendY - 8, 10, 10);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fillText(team.shortName, centerX - 75, legendY);
+
+  // Opponent legend
+  ctx.fillStyle = game.oppColor;
+  ctx.fillRect(centerX + 25, legendY - 8, 10, 10);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fillText(game.oppAbbr, centerX + 40, legendY);
+}
+
 function renderGameSlidersInModal(game) {
   const container = document.getElementById('modalGameSlidersGrid');
   if (!container) return;
+  const team = TEAMS_DATABASE[state.currentTeamId];
+  if (!team) return;
   const teamSliders = getTeamSliders(state.currentTeamId);
   const currentSliders = state.gameSliders[game.id] || {
     qbRating: teamSliders.qbRating || 0,
@@ -985,6 +1144,11 @@ window.switchModalSubTab = function(subtab) {
   if (pane) {
     pane.classList.add('active');
     pane.scrollTop = 0;
+  }
+
+  if (subtab === 'radar' && state.activeModalGame) {
+    const sim = calculateAdjustedMatchup(state.activeModalGame);
+    drawRadarChart(state.activeModalGame, sim);
   }
 
   const modalDialog = document.querySelector('#simModal .modal-dialog');
@@ -1072,6 +1236,15 @@ function initModalActions() {
     closeBtn.addEventListener('click', window.closeSimModal);
   }
 
+  const simModal = document.getElementById('simModal');
+  if (simModal) {
+    simModal.addEventListener('click', (e) => {
+      if (e.target === simModal) {
+        window.closeSimModal();
+      }
+    });
+  }
+
   const applyBtn = document.getElementById('applyAndSimGameBtn');
   if (applyBtn) {
     applyBtn.addEventListener('click', window.applyAndSimulateModalGame);
@@ -1099,6 +1272,12 @@ function initModalActions() {
       showToast('⚡ Re-simulated all matchups & CFP seeding!');
     });
   }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      window.closeSimModal();
+    }
+  });
 }
 
 // ==========================================================================
