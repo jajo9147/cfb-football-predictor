@@ -278,6 +278,17 @@ body.theme-byu {
   --color-bg-surface: #071224;
 }
 
+/* 22. Texas Tech Red Raiders */
+body.theme-texastech {
+  --color-brand-primary: #CC0000;
+  --color-brand-secondary: #000000;
+  --color-brand-accent: #E00404;
+  --color-brand-glow: rgba(204, 0, 0, 0.5);
+  --color-brand-border: rgba(204, 0, 0, 0.45);
+  --color-bg-base: #0D0505;
+  --color-bg-surface: #1A0A0A;
+}
+
 /* ==========================================================================
    BASE STYLES & LAYOUT
    ========================================================================== */

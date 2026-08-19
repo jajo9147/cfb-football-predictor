@@ -1746,18 +1746,18 @@ function simulateConferenceChampionships(evaluatedTeams) {
   const b1gSim = simulatePostseasonMatchup(b1gTeam1, b1gTeam2, { gameId: 'ccg-b1g' });
 
   // Big 12 Championship (Arlington, TX - AT&T Stadium)
-  const big12Team1 = big12Teams[0] || { id: 'byu', name: 'BYU Cougars', shortName: 'BYU', abbr: 'BYU', logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['BYU'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/252.png', apRank: '#24 AP', wins: 10, losses: 2, conf: 'Big 12', baseSpRating: 20.8, stadium: 'LaVell Edwards Stadium', stadiumCity: 'Provo, UT' };
-  const big12Team2 = big12Teams[1] || { id: 'utah', name: 'Utah Utes', shortName: 'Utah', abbr: 'UTAH', logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['UTAH'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/254.png', apRank: '#21 AP', wins: 10, losses: 2, conf: 'Big 12', baseSpRating: 20.5, stadium: 'Rice-Eccles Stadium', stadiumCity: 'Salt Lake City, UT' };
+  const big12Team1 = big12Teams[0] || TEAMS_DATABASE['texastech'] || { id: 'texastech', name: 'Texas Tech Red Raiders', shortName: 'Texas Tech', abbr: 'TTU', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png', apRank: '#12 AP', wins: 11, losses: 1, conf: 'Big 12', baseSpRating: 24.2, stadium: 'Jones AT&T Stadium', stadiumCity: 'Lubbock, TX' };
+  const big12Team2 = big12Teams[1] || TEAMS_DATABASE['byu'] || { id: 'byu', name: 'BYU Cougars', shortName: 'BYU', abbr: 'BYU', logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['BYU'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/252.png', apRank: '#14 AP', wins: 10, losses: 2, conf: 'Big 12', baseSpRating: 21.8, stadium: 'LaVell Edwards Stadium', stadiumCity: 'Provo, UT' };
   const big12Sim = simulatePostseasonMatchup(big12Team1, big12Team2, { gameId: 'ccg-big12' });
 
   // ACC Championship (Charlotte, NC)
-  const accTeam1 = accTeams[0] || { id: 'clemson', name: 'Clemson Tigers', shortName: 'Clemson', abbr: 'CLEM', apRank: '#17 AP', wins: 10, losses: 2, conf: 'ACC' };
-  const accTeam2 = accTeams[1] || { id: 'floridastate', name: 'Florida State Seminoles', shortName: 'Florida State', abbr: 'FSU', apRank: '#15 AP', wins: 10, losses: 2, conf: 'ACC' };
+  const accTeam1 = accTeams[0] || { id: 'miami', name: 'Miami Hurricanes', shortName: 'Miami', abbr: 'MIA', apRank: '#7 AP', wins: 11, losses: 1, conf: 'ACC' };
+  const accTeam2 = accTeams[1] || { id: 'clemson', name: 'Clemson Tigers', shortName: 'Clemson', abbr: 'CLEM', apRank: '#17 AP', wins: 10, losses: 2, conf: 'ACC' };
   const accSim = simulatePostseasonMatchup(accTeam1, accTeam2, { gameId: 'ccg-acc' });
 
   // Mountain West / G5 Championship (Boise, ID)
-  const mwcTeam1 = mwcTeams[0] || { id: 'boisestate', name: 'Boise State Broncos', shortName: 'Boise State', abbr: 'BSU', apRank: '#12 AP', wins: 11, losses: 1, conf: 'Mountain West' };
-  const mwcTeam2 = { id: 'unlv', name: 'UNLV Rebels', shortName: 'UNLV', abbr: 'UNLV', logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['UNLV'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png', apRank: 'RV', wins: 10, losses: 2, conf: 'Mountain West', baseSpRating: 18.5 };
+  const mwcTeam1 = mwcTeams[0] || { id: 'boisestate', name: 'Boise State Broncos', shortName: 'Boise State', abbr: 'BSU', apRank: 'NR', wins: 10, losses: 2, conf: 'Mountain West' };
+  const mwcTeam2 = { id: 'unlv', name: 'UNLV Rebels', shortName: 'UNLV', abbr: 'UNLV', logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['UNLV'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png', apRank: 'NR', wins: 9, losses: 3, conf: 'Mountain West', baseSpRating: 15.5 };
   const mwcSim = simulatePostseasonMatchup(mwcTeam1, mwcTeam2, { gameId: 'ccg-mwc', isHomeA: true });
 
   // Save game objects to state.postseasonGames for interactive modal
