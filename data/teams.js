@@ -82,8 +82,8 @@ var TEAMS_DATABASE = {
     "headCoach": "Kalani Sitake",
     "offensiveCoordinator": "Aaron Roderick",
     "defensiveCoordinator": "Jay Hill",
-    "confirmedStarterQb": "Jake Retzlaff",
-    "starPlayer": "Jake Retzlaff (QB) / LJ Martin (RB)",
+    "confirmedStarterQb": "Bear Bachmeier",
+    "starPlayer": "Bear Bachmeier (QB) / LJ Martin (RB)",
     "mascot": "Cosmo the Cougar",
     "stadium": "LaVell Edwards Stadium",
     "stadiumCapacity": "63,470",
@@ -98,7 +98,7 @@ var TEAMS_DATABASE = {
       "border": "rgba(0, 46, 93, 0.45)"
     },
     "sliderLabels": {
-      "qb": "Jake Retzlaff Execution",
+      "qb": "Bear Bachmeier Execution",
       "ground": "LJ Martin Ground Attack",
       "defense": "Jay Hill Defense & Havoc",
       "turnover": "Turnover Margin Luck",
@@ -128,7 +128,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 10,
         "baseWinProb": 98,
         "scoutReport": {
-          "xFactor": "Fast offensive start and rhythm for Jake Retzlaff.",
+          "xFactor": "Fast offensive start and rhythm for Bear Bachmeier.",
           "keyMatchup": "BYU offensive line vs Portland State defensive front.",
           "summary": "Non-conference opener at altitude in Provo."
         }
@@ -213,7 +213,7 @@ var TEAMS_DATABASE = {
         "baseWinProb": 64,
         "scoutReport": {
           "xFactor": "Turnover margin and red zone touchdown percentage.",
-          "keyMatchup": "Jake Retzlaff dual-threat play vs K-State disciplined defense.",
+          "keyMatchup": "Bear Bachmeier dual-threat play vs K-State disciplined defense.",
           "summary": "Crucial Big 12 conference opener under the lights in Provo."
         }
       },
@@ -325,7 +325,7 @@ var TEAMS_DATABASE = {
         "baseWinProb": 73,
         "scoutReport": {
           "xFactor": "Exploiting space in the intermediate passing lanes.",
-          "keyMatchup": "Jake Retzlaff vs UCF safety rotation.",
+          "keyMatchup": "Bear Bachmeier vs UCF safety rotation.",
           "summary": "Fast-paced Big 12 clash under the Wasatch Mountains."
         }
       },
@@ -443,7 +443,6 @@ var TEAMS_DATABASE = {
       }
     ]
   },
-
   "texas": {
     "id": "texas",
     "name": "Texas Longhorns",
@@ -844,7 +843,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#050D1A"
     },
     "baseSpRating": 22.8,
-    "playoffContenderRank": 16,
+    "playoffContenderRank": 17,
     "sliderLabels": {
       "qb": "Bryce Underwood QB Execution",
       "ground": "Jordan Marshall / Savion Hiter Ground Attack",
@@ -2682,10 +2681,10 @@ var TEAMS_DATABASE = {
     "conference": "Big Ten",
     "apRank": "#18 AP",
     "apPoints": "482 PTS",
-    "headCoach": "James Franklin",
+    "headCoach": "Matt Campbell",
     "defensiveCoordinator": "Tom Allen",
     "offensiveCoordinator": "Andy Kotelnicki",
-    "starPlayer": "Rocco Becht (QB)",
+    "starPlayer": "Rocco Becht (QB) / Nicholas Singleton (RB)",
     "secondaryStar": "Carson Hansen (RB) / James Peoples (RB)",
     "stadium": "Beaver Stadium",
     "stadiumCity": "University Park, PA",
@@ -2700,9 +2699,9 @@ var TEAMS_DATABASE = {
       "bgBase": "#050B14"
     },
     "baseSpRating": 26.2,
-    "playoffContenderRank": 18,
+    "playoffContenderRank": 19,
     "sliderLabels": {
-      "qb": "Rocco Becht QB Execution",
+      "qb": "Rocco Becht Execution",
       "ground": "Carson Hansen / James Peoples Ground Attack",
       "defense": "Tom Allen 'Bull' Havoc Defense",
       "turnover": "Turnover Margin Luck",
@@ -3797,7 +3796,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Josh Heupel",
     "defensiveCoordinator": "Tim Banks",
     "offensiveCoordinator": "Joey Halzle",
-    "starPlayer": "George MacIntyre (QB)",
+    "starPlayer": "George MacIntyre (QB) / Faizon Brandon (QB)",
     "secondaryStar": "DeSean Bishop (RB) / Peyton Lewis (RB)",
     "stadium": "Neyland Stadium",
     "stadiumCity": "Knoxville, TN",
@@ -3812,7 +3811,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#0D0803"
     },
     "baseSpRating": 22.4,
-    "playoffContenderRank": 20,
+    "playoffContenderRank": 21,
     "sliderLabels": {
       "qb": "George MacIntyre QB Execution",
       "ground": "DeSean Bishop Physical Ground Attack",
@@ -4154,7 +4153,7 @@ var TEAMS_DATABASE = {
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png",
     "badgeText": "TENN",
-    "confirmedStarterQb": "George MacIntyre"
+    "confirmedStarterQb": "Faizon Brandon / George MacIntyre"
   },
   "indiana": {
     "id": "indiana",
@@ -6374,7 +6373,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season finale in Pullman with 12-Team CFP bid on the line."
         }
       }
-    ]
+    ],
+    "playoffContenderRank": 12
   },
   "usc": {
     "name": "USC Trojans",
@@ -6382,11 +6382,11 @@ var TEAMS_DATABASE = {
     "mascot": "Trojans",
     "abbr": "USC",
     "conference": "Big Ten",
-    "apRank": "#14 AP",
+    "apRank": "#14T AP",
     "apPoints": "790 pts",
     "headCoach": "Lincoln Riley",
     "confirmedStarterQb": "Jayden Maiava",
-    "starPlayer": "Jayden Maiava (QB) / Zachariah Branch (WR)",
+    "starPlayer": "Jayden Maiava (QB) / Waymond Jordan (RB)",
     "colors": {
       "primary": "#990000",
       "secondary": "#FFC72C",
@@ -6395,7 +6395,7 @@ var TEAMS_DATABASE = {
       "text": "#FFFFFF"
     },
     "sliderLabels": {
-      "qb": "Jayden Maiava Air Raid Execution",
+      "qb": "Jayden Maiava Execution",
       "ground": "Woody Marks / Joyner Ground Attack",
       "defense": "D'Anton Lynn Havoc Defense",
       "turnover": "Coliseum Turnover Margin Luck",
@@ -6743,7 +6743,8 @@ var TEAMS_DATABASE = {
           "summary": "Historic intersectional rivalry regular season finale."
         }
       }
-    ]
+    ],
+    "playoffContenderRank": 15
   },
   "floridastate": {
     "name": "Florida State Seminoles",
@@ -6754,8 +6755,8 @@ var TEAMS_DATABASE = {
     "apRank": "#15 AP",
     "apPoints": "740 pts",
     "headCoach": "Mike Norvell",
-    "confirmedStarterQb": "Thomas Castellanos",
-    "starPlayer": "Thomas Castellanos (QB) / Landen Thomas (TE)",
+    "confirmedStarterQb": "Ashton Daniels",
+    "starPlayer": "Ashton Daniels (QB) / Landen Thomas (TE)",
     "colors": {
       "primary": "#782F40",
       "secondary": "#CEB888",
@@ -6764,7 +6765,7 @@ var TEAMS_DATABASE = {
       "text": "#FFFFFF"
     },
     "sliderLabels": {
-      "qb": "Thomas Castellanos Dual-Threat Poise",
+      "qb": "Ashton Daniels Execution",
       "ground": "Kam Davis / Toafili Ground Attack",
       "defense": "Adam Fuller Havoc Defense",
       "turnover": "Doak Campbell Turnover Luck",
@@ -6800,7 +6801,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Neutral-site offensive rhythm against Kirby Smart defense.",
-          "keyMatchup": "Thomas Castellanos scramble drill vs Georgia linebackers.",
+          "keyMatchup": "Ashton Daniels scramble drill vs Georgia linebackers.",
           "summary": "Blockbuster opening weekend matchup in Atlanta."
         }
       },
@@ -6912,7 +6913,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Road poise and converting on 3rd-and-short.",
-          "keyMatchup": "Thomas Castellanos vs Virginia defensive structure.",
+          "keyMatchup": "Ashton Daniels vs Virginia defensive structure.",
           "summary": "Conference road matchup in Virginia."
         }
       },
@@ -7024,7 +7025,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Surviving notoriously hostile Carter-Finley night atmosphere.",
-          "keyMatchup": "Thomas Castellanos poise under 3-3-5 blitz packages.",
+          "keyMatchup": "Ashton Daniels poise under 3-3-5 blitz packages.",
           "summary": "High-stakes ACC road clash in Raleigh."
         }
       },
@@ -7108,11 +7109,12 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Thriving in 90,000 Swamp noise on rivalry Saturday.",
-          "keyMatchup": "Thomas Castellanos vs Florida pass rush.",
+          "keyMatchup": "Ashton Daniels vs Florida pass rush.",
           "summary": "Historic annual Governor's Cup rivalry finale in Gainesville."
         }
       }
-    ]
+    ],
+    "playoffContenderRank": 16
   },
   "clemson": {
     "name": "Clemson Tigers",
@@ -7481,7 +7483,8 @@ var TEAMS_DATABASE = {
           "summary": "Fierce in-state Palmetto Bowl rivalry finale in Death Valley."
         }
       }
-    ]
+    ],
+    "playoffContenderRank": 18
   },
   "smu": {
     "name": "SMU Mustangs",
@@ -7493,7 +7496,7 @@ var TEAMS_DATABASE = {
     "apPoints": "680 pts",
     "headCoach": "Rhett Lashlee",
     "confirmedStarterQb": "Kevin Jennings",
-    "starPlayer": "Kevin Jennings (QB) / Brashard Smith (RB)",
+    "starPlayer": "Kevin Jennings (QB) / Roderick Daniels Jr (WR)",
     "colors": {
       "primary": "#003366",
       "secondary": "#CC0000",
@@ -7502,7 +7505,7 @@ var TEAMS_DATABASE = {
       "text": "#FFFFFF"
     },
     "sliderLabels": {
-      "qb": "Kevin Jennings Dual-Threat Air Raid",
+      "qb": "Kevin Jennings Execution",
       "ground": "Brashard Smith Explosive Ground Attack",
       "defense": "Scott Symons Havoc Defense",
       "turnover": "Ford Stadium Turnover Luck",
@@ -7850,7 +7853,8 @@ var TEAMS_DATABASE = {
           "summary": "Historic Texas matchup."
         }
       }
-    ]
+    ],
+    "playoffContenderRank": 20
   }
 };
 
