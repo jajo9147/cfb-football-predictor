@@ -34,14 +34,19 @@
     if ('caches' in window) {
       caches.keys().then(keys => {
         keys.forEach(key => {
-          if (key !== 'gridiron-oracle-v2026.55') {
+          if (key !== 'gridiron-oracle-v2026.58') {
             caches.delete(key);
           }
         });
       });
     }
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(regs => {
+        regs.forEach(reg => reg.update());
+      });
+    }
   </script>
-  <link rel="stylesheet" href="styles.css?v=2026.55">
+  <link rel="stylesheet" href="styles.css?v=2026.58">
 </head>
 <body class="theme-texas">
 
@@ -569,7 +574,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?v=2026.55"></script>
-  <script src="app.js?v=2026.55"></script>
+  <script src="data/teams.js?v=2026.58"></script>
+  <script src="app.js?v=2026.58"></script>
 </body>
 </html>

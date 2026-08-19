@@ -100,7 +100,7 @@ function getTopRankedTeamId() {
 function initPwaServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=2026.55')
+      navigator.serviceWorker.register('sw.js?v=2026.58')
         .then(reg => {
           reg.update();
           console.log('PWA Service Worker registered:', reg.scope);
@@ -624,10 +624,13 @@ function syncSliderInputsToActiveTeam() {
     }
   });
 
-  document.querySelectorAll('#globalPresetsContainer .preset-btn:not(.reset-all-btn)').forEach(btn => {
-    const isMatching = btn.dataset.preset === activePreset;
-    btn.classList.toggle('active', isMatching);
-  });
+  const container = document.getElementById('globalPresetsContainer');
+  if (container) {
+    container.querySelectorAll('.preset-btn[data-preset]').forEach(btn => {
+      const isMatching = btn.dataset.preset === activePreset;
+      btn.classList.toggle('active', isMatching);
+    });
+  }
 }
 
 function initGlobalSliders() {
@@ -637,12 +640,21 @@ function initGlobalSliders() {
 }
 
 function initGlobalPresetButtons() {
-  document.querySelectorAll('#globalPresetsContainer .preset-btn:not(.reset-all-btn)').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#globalPresetsContainer .preset-btn:not(.reset-all-btn)').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  const container = document.getElementById('globalPresetsContainer');
+  if (!container) return;
 
-      const presetKey = btn.dataset.preset;
+  container.addEventListener('click', (e) => {
+    const resetBtn = e.target.closest('#resetAllAiBtn');
+    if (resetBtn) {
+      e.preventDefault();
+      resetAllToBaseline();
+      return;
+    }
+
+    const presetBtn = e.target.closest('.preset-btn[data-preset]');
+    if (presetBtn) {
+      e.preventDefault();
+      const presetKey = presetBtn.dataset.preset;
       const presetValues = GLOBAL_PRESETS[presetKey] || GLOBAL_PRESETS['baseline'];
 
       // Assign preset specifically to the current team
@@ -651,14 +663,12 @@ function initGlobalPresetButtons() {
 
       syncSliderInputsToActiveTeam();
       recalculateSeason();
-    });
-  });
 
-  // Reset All to Baseline Button
-  const resetBtn = document.getElementById('resetAllAiBtn');
-  if (resetBtn) {
-    resetBtn.addEventListener('click', resetAllToBaseline);
-  }
+      const team = TEAMS_DATABASE[state.currentTeamId];
+      const presetName = presetBtn.innerText.trim();
+      showToast(`⚡ Applied "${presetName}" to ${team ? team.shortName : 'team'}!`);
+    }
+  });
 }
 
 function resetAllToBaseline() {
@@ -690,13 +700,18 @@ function showToast(message) {
 }
 
 function initFilterButtons() {
-  document.querySelectorAll('#scheduleFilterPills .filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#scheduleFilterPills .filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      state.filter = btn.dataset.filter;
-      renderSchedule();
-    });
+  const container = document.getElementById('scheduleFilterPills');
+  if (!container) return;
+
+  container.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    e.preventDefault();
+
+    container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.filter = btn.dataset.filter;
+    renderSchedule();
   });
 }
 
@@ -933,71 +948,93 @@ function renderGameSlidersInModal(game) {
 }
 
 function initModalSubTabs() {
-  document.querySelectorAll('#simModal .sub-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('#simModal .sub-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('#simModal .tab-pane').forEach(p => p.classList.remove('active'));
+  const tabsContainer = document.querySelector('#simModal .modal-sub-tabs');
+  if (!tabsContainer) return;
 
-      tab.classList.add('active');
-      const targetPane = tab.dataset.subtab;
-      const pane = document.getElementById(`pane-${targetPane}`);
-      if (pane) {
-        pane.classList.add('active');
-        pane.scrollTop = 0;
-      }
+  tabsContainer.addEventListener('click', (e) => {
+    const tab = e.target.closest('.sub-tab');
+    if (!tab) return;
+    e.preventDefault();
 
-      const modalDialog = document.querySelector('#simModal .modal-dialog');
-      if (modalDialog) {
-        modalDialog.scrollTop = 0;
-      }
+    tabsContainer.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('#simModal .tab-pane').forEach(p => p.classList.remove('active'));
 
-      const modalFooter = document.querySelector('#simModal .modal-footer');
-      if (modalFooter) {
-        modalFooter.style.display = (targetPane === 'game-tuning') ? 'none' : 'flex';
-      }
-    });
+    tab.classList.add('active');
+    const targetPane = tab.dataset.subtab;
+    const pane = document.getElementById(`pane-${targetPane}`);
+    if (pane) {
+      pane.classList.add('active');
+      pane.scrollTop = 0;
+    }
+
+    const modalDialog = document.querySelector('#simModal .modal-dialog');
+    if (modalDialog) {
+      modalDialog.scrollTop = 0;
+    }
+
+    const modalFooter = document.querySelector('#simModal .modal-footer');
+    if (modalFooter) {
+      modalFooter.style.display = (targetPane === 'game-tuning') ? 'none' : 'flex';
+    }
   });
 }
 
 function initModalActions() {
-  document.getElementById('closeSimModalBtn').addEventListener('click', () => {
-    document.getElementById('simModal').classList.remove('open');
-  });
+  const closeBtn = document.getElementById('closeSimModalBtn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      document.getElementById('simModal').classList.remove('open');
+    });
+  }
 
   // Apply & Re-simulate Game Button
-  document.getElementById('applyAndSimGameBtn').addEventListener('click', () => {
-    if (!state.activeModalGame) return;
-    const game = state.activeModalGame;
-    
-    // Recalculate whole season & update modal scoreboard
-    recalculateSeason();
-    openSimModal(game);
-  });
+  const applyBtn = document.getElementById('applyAndSimGameBtn');
+  if (applyBtn) {
+    applyBtn.addEventListener('click', () => {
+      if (!state.activeModalGame) return;
+      const game = state.activeModalGame;
+      
+      // Recalculate whole season & update modal scoreboard
+      recalculateSeason();
+      openSimModal(game);
+      showToast(`⚡ Re-simulated ${game.opponent} matchup (10,000 drives)!`);
+    });
+  }
 
   // Reset Game Tuning Button
-  document.getElementById('resetGameTuningBtn').addEventListener('click', () => {
-    if (!state.activeModalGame) return;
-    const game = state.activeModalGame;
-    delete state.gameSliders[game.id];
-    delete state.userPicks[game.id];
+  const resetGameBtn = document.getElementById('resetGameTuningBtn');
+  if (resetGameBtn) {
+    resetGameBtn.addEventListener('click', () => {
+      if (!state.activeModalGame) return;
+      const game = state.activeModalGame;
+      delete state.gameSliders[game.id];
+      delete state.userPicks[game.id];
 
-    // Clear counterpart game tuning as well
-    const counterpart = findCounterpartMatchup(state.currentTeamId, game);
-    if (counterpart) {
-      delete state.gameSliders[counterpart.oppGame.id];
-      delete state.userPicks[counterpart.oppGame.id];
-    }
+      // Clear counterpart game tuning as well
+      const counterpart = findCounterpartMatchup(state.currentTeamId, game);
+      if (counterpart) {
+        delete state.gameSliders[counterpart.oppGame.id];
+        delete state.userPicks[counterpart.oppGame.id];
+      }
 
-    recalculateSeason();
-    openSimModal(game);
-    showToast(`⚡ Reset ${game.opponent} matchup to team baseline!`);
-  });
+      recalculateSeason();
+      openSimModal(game);
+      
+      // Keep on game tuning tab
+      const tuningTab = document.querySelector('#simModal .sub-tab[data-subtab="game-tuning"]');
+      if (tuningTab) tuningTab.click();
 
-  // Game Presets Listeners
-  document.querySelectorAll('.game-preset-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.game-preset-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      showToast(`⚡ Reset ${game.opponent} matchup to team baseline!`);
+    });
+  }
+
+  // Game Presets Listeners (Instant Feedback on Tap)
+  const gamePresetsContainer = document.querySelector('.game-preset-buttons');
+  if (gamePresetsContainer) {
+    gamePresetsContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.game-preset-btn');
+      if (!btn) return;
+      e.preventDefault();
 
       const presetKey = btn.dataset.gamepreset;
       const presetValues = GAME_PRESETS[presetKey] || GAME_PRESETS['baseline'];
@@ -1009,15 +1046,24 @@ function initModalActions() {
         isCustom: (presetKey !== 'baseline')
       };
 
-      renderGameSlidersInModal(game);
+      // Recalculate & instantly update modal scoreboard and sliders
+      recalculateSeason();
+      openSimModal(game);
+      
+      // Switch back to game tuning tab so user sees their updated sliders
+      const tuningTab = document.querySelector('#simModal .sub-tab[data-subtab="game-tuning"]');
+      if (tuningTab) tuningTab.click();
+
+      showToast(`⚡ Applied "${btn.innerText.trim()}" to ${game.opponent} matchup!`);
     });
-  });
+  }
 
   // Quick Re-Simulate All Button
   const quickSimBtn = document.getElementById('quickSimAllBtn');
   if (quickSimBtn) {
     quickSimBtn.addEventListener('click', () => {
       recalculateSeason();
+      showToast('⚡ Re-simulated all matchups & CFP seeding!');
     });
   }
 }

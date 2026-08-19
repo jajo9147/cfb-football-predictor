@@ -813,6 +813,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .preset-btn {
@@ -826,6 +827,13 @@ body {
   color: #E5E7EB;
   cursor: pointer;
   transition: var(--transition-fast);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .preset-btn:hover {
@@ -843,20 +851,20 @@ body {
 }
 
 .preset-btn.reset-all-btn {
-  background: rgba(239, 68, 68, 0.14);
-  border: 1px solid rgba(239, 68, 68, 0.4);
-  color: #FCA5A5;
-  display: inline-flex;
+  background: rgba(239, 68, 68, 0.16) !important;
+  border: 1px solid rgba(239, 68, 68, 0.45) !important;
+  color: #FECACA !important;
+  display: inline-flex !important;
   align-items: center;
   gap: 0.35rem;
   margin-left: auto;
 }
 
 .preset-btn.reset-all-btn:hover {
-  background: rgba(239, 68, 68, 0.28);
-  border-color: #EF4444;
-  color: #FFFFFF;
-  box-shadow: 0 0 14px rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.32) !important;
+  border-color: #EF4444 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.4) !important;
   transform: translateY(-1px);
 }
 
