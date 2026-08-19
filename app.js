@@ -1596,26 +1596,32 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
 function simulateConferenceChampionships(evaluatedTeams) {
   const secTeams = evaluatedTeams.filter(t => t.conf === 'SEC');
   const b1gTeams = evaluatedTeams.filter(t => t.conf === 'Big Ten');
+  const big12Teams = evaluatedTeams.filter(t => t.conf === 'Big 12');
   const accTeams = evaluatedTeams.filter(t => t.conf === 'ACC');
   const mwcTeams = evaluatedTeams.filter(t => t.conf === 'Mountain West');
 
   // SEC Championship (Atlanta, GA)
-  const secTeam1 = secTeams[0] || { id: 'georgia', name: 'Georgia Bulldogs', shortName: 'Georgia', abbr: 'UGA', apRank: '#3 AP', wins: 11, losses: 1 };
-  const secTeam2 = secTeams[1] || { id: 'texas', name: 'Texas Longhorns', shortName: 'Texas', abbr: 'TEX', apRank: '#5 AP', wins: 11, losses: 1 };
+  const secTeam1 = secTeams[0] || { id: 'georgia', name: 'Georgia Bulldogs', shortName: 'Georgia', abbr: 'UGA', apRank: '#3 AP', wins: 11, losses: 1, conf: 'SEC' };
+  const secTeam2 = secTeams[1] || { id: 'texas', name: 'Texas Longhorns', shortName: 'Texas', abbr: 'TEX', apRank: '#5 AP', wins: 11, losses: 1, conf: 'SEC' };
   const secSim = simulatePostseasonMatchup(secTeam1, secTeam2, { gameId: 'ccg-sec' });
 
   // Big Ten Championship (Indianapolis, IN)
-  const b1gTeam1 = b1gTeams[0] || { id: 'ohiostate', name: 'Ohio State Buckeyes', shortName: 'Ohio State', abbr: 'OSU', apRank: '#1 AP', wins: 12, losses: 0 };
-  const b1gTeam2 = b1gTeams[1] || { id: 'oregon', name: 'Oregon Ducks', shortName: 'Oregon', abbr: 'ORE', apRank: '#2 AP', wins: 11, losses: 1 };
+  const b1gTeam1 = b1gTeams[0] || { id: 'ohiostate', name: 'Ohio State Buckeyes', shortName: 'Ohio State', abbr: 'OSU', apRank: '#1 AP', wins: 12, losses: 0, conf: 'Big Ten' };
+  const b1gTeam2 = b1gTeams[1] || { id: 'oregon', name: 'Oregon Ducks', shortName: 'Oregon', abbr: 'ORE', apRank: '#2 AP', wins: 11, losses: 1, conf: 'Big Ten' };
   const b1gSim = simulatePostseasonMatchup(b1gTeam1, b1gTeam2, { gameId: 'ccg-b1g' });
 
+  // Big 12 Championship (Arlington, TX - AT&T Stadium)
+  const big12Team1 = big12Teams[0] || { id: 'byu', name: 'BYU Cougars', shortName: 'BYU', abbr: 'BYU', logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['BYU'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/252.png', apRank: '#24 AP', wins: 10, losses: 2, conf: 'Big 12', baseSpRating: 20.8, stadium: 'LaVell Edwards Stadium', stadiumCity: 'Provo, UT' };
+  const big12Team2 = big12Teams[1] || { id: 'utah', name: 'Utah Utes', shortName: 'Utah', abbr: 'UTAH', logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['UTAH'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/254.png', apRank: '#21 AP', wins: 10, losses: 2, conf: 'Big 12', baseSpRating: 20.5, stadium: 'Rice-Eccles Stadium', stadiumCity: 'Salt Lake City, UT' };
+  const big12Sim = simulatePostseasonMatchup(big12Team1, big12Team2, { gameId: 'ccg-big12' });
+
   // ACC Championship (Charlotte, NC)
-  const accTeam1 = accTeams[0] || { id: 'clemson', name: 'Clemson Tigers', shortName: 'Clemson', abbr: 'CLEM', apRank: '#17 AP', wins: 10, losses: 2 };
-  const accTeam2 = accTeams[1] || { id: 'floridastate', name: 'Florida State Seminoles', shortName: 'Florida State', abbr: 'FSU', apRank: '#15 AP', wins: 10, losses: 2 };
+  const accTeam1 = accTeams[0] || { id: 'clemson', name: 'Clemson Tigers', shortName: 'Clemson', abbr: 'CLEM', apRank: '#17 AP', wins: 10, losses: 2, conf: 'ACC' };
+  const accTeam2 = accTeams[1] || { id: 'floridastate', name: 'Florida State Seminoles', shortName: 'Florida State', abbr: 'FSU', apRank: '#15 AP', wins: 10, losses: 2, conf: 'ACC' };
   const accSim = simulatePostseasonMatchup(accTeam1, accTeam2, { gameId: 'ccg-acc' });
 
   // Mountain West / G5 Championship (Boise, ID)
-  const mwcTeam1 = mwcTeams[0] || { id: 'boisestate', name: 'Boise State Broncos', shortName: 'Boise State', abbr: 'BSU', apRank: '#12 AP', wins: 11, losses: 1 };
+  const mwcTeam1 = mwcTeams[0] || { id: 'boisestate', name: 'Boise State Broncos', shortName: 'Boise State', abbr: 'BSU', apRank: '#12 AP', wins: 11, losses: 1, conf: 'Mountain West' };
   const mwcTeam2 = { id: 'unlv', name: 'UNLV Rebels', shortName: 'UNLV', abbr: 'UNLV', logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['UNLV'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png', apRank: 'RV', wins: 10, losses: 2, conf: 'Mountain West', baseSpRating: 18.5 };
   const mwcSim = simulatePostseasonMatchup(mwcTeam1, mwcTeam2, { gameId: 'ccg-mwc', isHomeA: true });
 
@@ -1628,7 +1634,7 @@ function simulateConferenceChampionships(evaluatedTeams) {
       week: weekName,
       opponent: opp.name,
       oppAbbr: opp.abbr,
-      oppRank: opp.apRank || 'TOP 20',
+      oppRank: opp.apRank || 'TOP 25',
       oppColor: (TEAMS_DATABASE[opp.id] || {}).colors?.primary || '#333333',
       oppLogoUrl: opp.logoUrl,
       isHome: false,
@@ -1648,20 +1654,22 @@ function simulateConferenceChampionships(evaluatedTeams) {
 
   registerCcgGame('ccg-sec', 'SEC CHAMPIONSHIP', secTeam1, secTeam2, secSim, 'Mercedes-Benz Stadium', 'Atlanta, GA');
   registerCcgGame('ccg-b1g', 'BIG TEN CHAMPIONSHIP', b1gTeam1, b1gTeam2, b1gSim, 'Lucas Oil Stadium', 'Indianapolis, IN');
+  registerCcgGame('ccg-big12', 'BIG 12 CHAMPIONSHIP', big12Team1, big12Team2, big12Sim, 'AT&T Stadium', 'Arlington, TX');
   registerCcgGame('ccg-acc', 'ACC CHAMPIONSHIP', accTeam1, accTeam2, accSim, 'Bank of America Stadium', 'Charlotte, NC');
   registerCcgGame('ccg-mwc', 'MWC / G5 CHAMPIONSHIP', mwcTeam1, mwcTeam2, mwcSim, 'Albertsons Stadium', 'Boise, ID');
 
-  const confChamps = [secSim.winner, b1gSim.winner, accSim.winner, mwcSim.winner].filter(Boolean);
+  const confChamps = [secSim.winner, b1gSim.winner, big12Sim.winner, accSim.winner, mwcSim.winner].filter(Boolean);
   // Sort champions by regular season score
   confChamps.sort((a, b) => {
-    const scoreA = evaluatedTeams.find(t => t.id === a.id)?.score || 10000;
-    const scoreB = evaluatedTeams.find(t => t.id === b.id)?.score || 10000;
+    const scoreA = evaluatedTeams.find(t => t.id === a.id)?.score || (a.baseSpRating ? a.baseSpRating * 500 : 10000);
+    const scoreB = evaluatedTeams.find(t => t.id === b.id)?.score || (b.baseSpRating ? b.baseSpRating * 500 : 10000);
     return scoreB - scoreA;
   });
 
   return {
     sec: { team1: secTeam1, team2: secTeam2, sim: secSim, id: 'ccg-sec', venue: 'Mercedes-Benz Stadium (Atlanta, GA)' },
     b1g: { team1: b1gTeam1, team2: b1gTeam2, sim: b1gSim, id: 'ccg-b1g', venue: 'Lucas Oil Stadium (Indianapolis, IN)' },
+    big12: { team1: big12Team1, team2: big12Team2, sim: big12Sim, id: 'ccg-big12', venue: 'AT&T Stadium (Arlington, TX)' },
     acc: { team1: accTeam1, team2: accTeam2, sim: accSim, id: 'ccg-acc', venue: 'Bank of America Stadium (Charlotte, NC)' },
     mwc: { team1: mwcTeam1, team2: mwcTeam2, sim: mwcSim, id: 'ccg-mwc', venue: 'Albertsons Stadium (Boise, ID)' },
     confChamps
@@ -1677,6 +1685,7 @@ function renderConferenceChampionships(ccgResults) {
   const games = [
     { title: 'SEC CHAMPIONSHIP GAME', data: ccgResults.sec },
     { title: 'BIG TEN CHAMPIONSHIP GAME', data: ccgResults.b1g },
+    { title: 'BIG 12 CHAMPIONSHIP GAME', data: ccgResults.big12 },
     { title: 'ACC CHAMPIONSHIP GAME', data: ccgResults.acc },
     { title: 'MOUNTAIN WEST / G5 TITLE', data: ccgResults.mwc }
   ];
@@ -1723,7 +1732,7 @@ function renderConferenceChampionships(ccgResults) {
       <div class="ccg-card-actions">
         <div style="font-size: 0.72rem; font-family: var(--font-mono); font-weight: 800; color: #10B981; display: flex; align-items: center; gap: 4px;">
           <i class="fa-solid fa-crown" style="color: #FFD700;"></i>
-          <span>${d.sim.winner.shortName.toUpperCase()} CHAMPION (BYE)</span>
+          <span>${d.sim.winner.shortName.toUpperCase()} CHAMPION</span>
         </div>
         <button class="ccg-sim-btn" onclick="event.stopPropagation(); window.openSimModalByGameId('${d.id}');">
           <i class="fa-solid fa-play"></i>
@@ -2050,7 +2059,7 @@ function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playo
   let outcomeTitle = 'Regular Season';
 
   // 1. Check Conference Championship
-  const ccgGames = [ccgResults.sec, ccgResults.b1g, ccgResults.acc, ccgResults.mwc];
+  const ccgGames = [ccgResults.sec, ccgResults.b1g, ccgResults.big12, ccgResults.acc, ccgResults.mwc];
   const userCcg = ccgGames.find(g => g.team1?.id === teamId || g.team2?.id === teamId);
   if (userCcg) {
     const isWinner = (userCcg.sim.winner?.id === teamId);
