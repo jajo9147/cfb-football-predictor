@@ -46,7 +46,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260819_28">
+  <link rel="stylesheet" href="styles.css?t=20260819_29">
 </head>
 <body class="theme-texas">
 
@@ -588,11 +588,11 @@
   </div>
 
   
-  <!-- ==========================================================================
+    <!-- ==========================================================================
        DREAM MATCHUP SANDBOX MODAL (COLLIDE ANY 2 TEAMS HEAD-TO-HEAD)
        ========================================================================== -->
   <div class="modal-backdrop" id="dreamSandboxModal">
-    <div class="modal-dialog sandbox-dialog">
+    <div class="modal-dialog">
       <button class="modal-close" onclick="closeDreamSandboxModal()"><i class="fa-solid fa-xmark"></i></button>
 
       <div class="modal-header">
@@ -612,7 +612,7 @@
 
         <div class="sandbox-venue-selector">
           <label class="sandbox-select-label"><i class="fa-solid fa-location-dot"></i> VENUE & ENVIRONMENT</label>
-          <select id="sandboxVenueSelect" class="sandbox-dropdown" onchange="recalculateSandboxMatchup()">
+          <select id="sandboxVenueSelect" class="sandbox-dropdown" onchange="recalculateSandboxMatchup(false)">
             <option value="neutral">🏆 Neutral Site / Bowl Game (Atlanta / Rose Bowl)</option>
             <option value="homeA">🏟️ Team A Home Campus Stadium</option>
             <option value="homeB">🏟️ Team B Home Campus Stadium</option>
@@ -635,122 +635,63 @@
       <!-- Sandbox Sliders & Tabs -->
       <div class="modal-sub-tabs">
         <button class="sub-tab active" data-sandboxtab="drives" onclick="switchSandboxTab('drives')">
-          <i class="fa-solid fa-list-ol"></i> Drive Simulation
+          <i class="fa-solid fa-list-ol"></i>
+          <span>Drive Log</span>
         </button>
-        <button class="sub-tab" data-sandboxtab="tuning" onclick="switchSandboxTab('tuning')">
-          <i class="fa-solid fa-sliders"></i> Head-to-Head AI Tuning
+        <button class="sub-tab" data-sandboxtab="game-tuning" onclick="switchSandboxTab('game-tuning')">
+          <i class="fa-solid fa-sliders"></i>
+          <span>Game AI Tuning</span>
         </button>
         <button class="sub-tab" data-sandboxtab="radar" onclick="switchSandboxTab('radar')">
-          <i class="fa-solid fa-chart-pie"></i> Matchup Radar
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Matchup Radar</span>
         </button>
       </div>
 
-      <div class="modal-tab-body">
-        <div class="sub-tab-panel active" id="sandboxPanelDrives">
-          <div class="drive-log-container" id="sandboxDriveLog"></div>
+      <div class="tab-pane active" id="pane-sandbox-drives">
+        <div id="sandboxDriveLog" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 280px; overflow-y: auto;">
+          <!-- Injected via JS -->
         </div>
+      </div>
 
-                <div class="sub-tab-panel" id="sandboxPanelTuning" style="display: none;">
-          <!-- Quick Presets -->
-          <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 0.75rem;">
-            <button class="preset-btn active" onclick="applySandboxPreset('baseline')">Baseline</button>
-            <button class="preset-btn" id="sbPresetBlowoutA" onclick="applySandboxPreset('blowoutA')">Texas Blowout</button>
-            <button class="preset-btn" id="sbPresetBlowoutB" onclick="applySandboxPreset('blowoutB')">Oregon Upset</button>
-            <button class="preset-btn" onclick="applySandboxPreset('defense')">Defensive Slugfest</button>
-            <button class="preset-btn" onclick="applySandboxPreset('shootout')">Air Raid Shootout</button>
+      <div class="tab-pane" id="pane-sandbox-game-tuning">
+        <div class="game-tuning-panel">
+          <div class="tuning-banner">
+            <span class="tuning-badge" style="background: rgba(245, 158, 11, 0.2); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.4);"><i class="fa-solid fa-bolt"></i> DREAM MATCHUP AI TUNING</span>
+            <span class="tuning-subtitle">Fine-tune QB execution, defense havoc, ground attack, and turnover luck for both teams. Changes update scores instantly.</span>
+          </div>
+
+          <div class="game-preset-row">
+            <span style="font-size: 0.78rem; font-weight: 700; color: var(--color-text-muted);">Quick Game Scenarios:</span>
+            <div class="game-preset-buttons">
+              <button class="game-preset-btn active" data-sbpreset="baseline" onclick="applySandboxPreset('baseline')">Baseline</button>
+              <button class="game-preset-btn" id="sbPresetBlowoutA" data-sbpreset="blowoutA" onclick="applySandboxPreset('blowoutA')">Team A Blowout</button>
+              <button class="game-preset-btn" id="sbPresetBlowoutB" data-sbpreset="blowoutB" onclick="applySandboxPreset('blowoutB')">Team B Upset</button>
+              <button class="game-preset-btn" data-sbpreset="defense" onclick="applySandboxPreset('defense')">Defensive Slugfest</button>
+              <button class="game-preset-btn" data-sbpreset="shootout" onclick="applySandboxPreset('shootout')">Air Raid Shootout</button>
+            </div>
           </div>
 
           <div class="game-sliders-grid" id="sandboxSlidersGrid">
-            <!-- Team A Section -->
-            <div id="sbTeamAHeader" style="grid-column: 1 / -1; font-family: var(--font-mono); font-size: 0.76rem; font-weight: 800; color: #FF7A00; padding: 4px 0; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 6px;">
-              <img id="sbTeamALogo" src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas" style="width: 18px; height: 18px; object-fit: contain;">
-              <span id="sbTeamATitle">TEXAS LONGHORNS AI TUNING</span>
-            </div>
+            <!-- Dynamically rendered single-game sliders for Team A and Team B -->
+          </div>
 
-            <div class="game-slider-card">
-              <div class="slider-top-row">
-                <span class="slider-title" style="font-size: 0.78rem;"><i class="fa-solid fa-crosshairs"></i> <span id="sbLabelA_qb">Arch Manning Execution</span></span>
-                <span class="slider-val-readout" id="sb-readout-a-qbRating">0%</span>
-              </div>
-              <input type="range" class="custom-range-slider" min="-50" max="50" value="0" step="5" oninput="onSandboxSliderChange('A', 'qbRating', this.value)">
-              <div class="slider-hints-row"><span>-50%</span><span>Baseline</span><span>+50%</span></div>
-            </div>
-
-            <div class="game-slider-card">
-              <div class="slider-top-row">
-                <span class="slider-title" style="font-size: 0.78rem;"><i class="fa-solid fa-person-running"></i> <span id="sbLabelA_ground">Texas Ground Attack</span></span>
-                <span class="slider-val-readout" id="sb-readout-a-groundAttack">0%</span>
-              </div>
-              <input type="range" class="custom-range-slider" min="-50" max="50" value="0" step="5" oninput="onSandboxSliderChange('A', 'groundAttack', this.value)">
-              <div class="slider-hints-row"><span>-50%</span><span>Baseline</span><span>+50%</span></div>
-            </div>
-
-            <div class="game-slider-card">
-              <div class="slider-top-row">
-                <span class="slider-title" style="font-size: 0.78rem;"><i class="fa-solid fa-shield-halved"></i> <span id="sbLabelA_def">Texas Defense & Havoc</span></span>
-                <span class="slider-val-readout" id="sb-readout-a-defenseHavoc">0%</span>
-              </div>
-              <input type="range" class="custom-range-slider" min="-50" max="50" value="0" step="5" oninput="onSandboxSliderChange('A', 'defenseHavoc', this.value)">
-              <div class="slider-hints-row"><span>-50%</span><span>Baseline</span><span>+50%</span></div>
-            </div>
-
-            <div class="game-slider-card">
-              <div class="slider-top-row">
-                <span class="slider-title" style="font-size: 0.78rem;"><i class="fa-solid fa-dice"></i> <span id="sbLabelA_to">Texas Turnover Luck</span></span>
-                <span class="slider-val-readout" id="sb-readout-a-turnoverLuck">0%</span>
-              </div>
-              <input type="range" class="custom-range-slider" min="-50" max="50" value="0" step="5" oninput="onSandboxSliderChange('A', 'turnoverLuck', this.value)">
-              <div class="slider-hints-row"><span>-50%</span><span>Baseline</span><span>+50%</span></div>
-            </div>
-
-            <!-- Team B Section -->
-            <div id="sbTeamBHeader" style="grid-column: 1 / -1; font-family: var(--font-mono); font-size: 0.76rem; font-weight: 800; color: #10B981; padding: 8px 0 4px; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 6px; margin-top: 0.5rem;">
-              <img id="sbTeamBLogo" src="https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png" alt="Oregon" style="width: 18px; height: 18px; object-fit: contain;">
-              <span id="sbTeamBTitle">OREGON DUCKS AI TUNING</span>
-            </div>
-
-            <div class="game-slider-card">
-              <div class="slider-top-row">
-                <span class="slider-title" style="font-size: 0.78rem;"><i class="fa-solid fa-crosshairs"></i> <span id="sbLabelB_qb">Dillon Gabriel Execution</span></span>
-                <span class="slider-val-readout" id="sb-readout-b-qbRating">0%</span>
-              </div>
-              <input type="range" class="custom-range-slider" min="-50" max="50" value="0" step="5" oninput="onSandboxSliderChange('B', 'qbRating', this.value)">
-              <div class="slider-hints-row"><span>-50%</span><span>Baseline</span><span>+50%</span></div>
-            </div>
-
-            <div class="game-slider-card">
-              <div class="slider-top-row">
-                <span class="slider-title" style="font-size: 0.78rem;"><i class="fa-solid fa-person-running"></i> <span id="sbLabelB_ground">Oregon Ground Attack</span></span>
-                <span class="slider-val-readout" id="sb-readout-b-groundAttack">0%</span>
-              </div>
-              <input type="range" class="custom-range-slider" min="-50" max="50" value="0" step="5" oninput="onSandboxSliderChange('B', 'groundAttack', this.value)">
-              <div class="slider-hints-row"><span>-50%</span><span>Baseline</span><span>+50%</span></div>
-            </div>
-
-            <div class="game-slider-card">
-              <div class="slider-top-row">
-                <span class="slider-title" style="font-size: 0.78rem;"><i class="fa-solid fa-shield-halved"></i> <span id="sbLabelB_def">Oregon Defense & Havoc</span></span>
-                <span class="slider-val-readout" id="sb-readout-b-defenseHavoc">0%</span>
-              </div>
-              <input type="range" class="custom-range-slider" min="-50" max="50" value="0" step="5" oninput="onSandboxSliderChange('B', 'defenseHavoc', this.value)">
-              <div class="slider-hints-row"><span>-50%</span><span>Baseline</span><span>+50%</span></div>
-            </div>
-
-            <div class="game-slider-card">
-              <div class="slider-top-row">
-                <span class="slider-title" style="font-size: 0.78rem;"><i class="fa-solid fa-dice"></i> <span id="sbLabelB_to">Oregon Turnover Luck</span></span>
-                <span class="slider-val-readout" id="sb-readout-b-turnoverLuck">0%</span>
-              </div>
-              <input type="range" class="custom-range-slider" min="-50" max="50" value="0" step="5" oninput="onSandboxSliderChange('B', 'turnoverLuck', this.value)">
-              <div class="slider-hints-row"><span>-50%</span><span>Baseline</span><span>+50%</span></div>
-            </div>
+          <div class="tuning-footer-actions">
+            <button class="action-btn secondary-btn" onclick="applySandboxPreset('baseline')">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span>Reset Baseline</span>
+            </button>
+            <button class="action-btn hype-btn" onclick="recalculateSandboxMatchup(true)">
+              <i class="fa-solid fa-play"></i>
+              <span>Apply & Re-Simulate (10,000 Drives)</span>
+            </button>
           </div>
         </div>
+      </div>
 
-        <div class="sub-tab-panel" id="sandboxPanelRadar" style="display: none;">
-          <div class="radar-chart-wrap">
-            <canvas id="sandboxRadarCanvas" width="340" height="240"></canvas>
-          </div>
+      <div class="tab-pane" id="pane-sandbox-radar">
+        <div style="display: flex; justify-content: center; align-items: center; min-height: 220px;">
+          <canvas id="sandboxRadarCanvas" width="380" height="240"></canvas>
         </div>
       </div>
 
@@ -916,7 +857,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/data/teams.js?t=20260819_28"></script>
-  <script src="app.js?t=20260819_28"></script>
+  <script src="data/data/teams.js?t=20260819_29"></script>
+  <script src="app.js?t=20260819_29"></script>
 </body>
 </html>

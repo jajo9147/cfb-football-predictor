@@ -107,7 +107,7 @@ function getTopRankedTeamId() {
 function initPwaServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=2026.86')
+      navigator.serviceWorker.register('sw.js?v=2026.87')
         .then(reg => {
           reg.update();
           console.log('PWA Service Worker registered:', reg.scope);
@@ -3182,8 +3182,7 @@ const sandboxState = {
   teamBId: 'oregon',
   venue: 'neutral',
   slidersA: { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 },
-  slidersB: { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 },
-  crowdNoise: 0
+  slidersB: { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 }
 };
 
 window.openDreamSandboxModal = function() {
@@ -3192,7 +3191,8 @@ window.openDreamSandboxModal = function() {
   
   populateSandboxDropdowns();
   renderSandboxSliders();
-  recalculateSandboxMatchup();
+  recalculateSandboxMatchup(false);
+  window.switchSandboxTab('drives');
   modal.classList.add('open');
 };
 
@@ -3232,72 +3232,160 @@ window.updateSandboxTeams = function() {
   if (selectA) sandboxState.teamAId = selectA.value;
   if (selectB) sandboxState.teamBId = selectB.value;
   renderSandboxSliders();
-  recalculateSandboxMatchup();
+  recalculateSandboxMatchup(false);
 };
 
-window.onSandboxSliderChange = function(teamLetter, key, val) {
-  const nVal = parseInt(val, 10);
-  const signStr = nVal > 0 ? '+' : '';
+window.switchSandboxTab = function(subtab) {
+  const modal = document.getElementById('dreamSandboxModal');
+  if (!modal) return;
 
-  if (teamLetter === 'A') {
-    sandboxState.slidersA[key] = nVal;
-    const readout = document.getElementById(`sb-readout-a-${key}`);
-    if (readout) readout.innerText = `${signStr}${nVal}%`;
-  } else {
-    sandboxState.slidersB[key] = nVal;
-    const readout = document.getElementById(`sb-readout-b-${key}`);
-    if (readout) readout.innerText = `${signStr}${nVal}%`;
+  modal.querySelectorAll('.modal-sub-tabs .sub-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.sandboxtab === subtab);
+  });
+
+  modal.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  const activePane = document.getElementById(`pane-sandbox-${subtab}`);
+  if (activePane) {
+    activePane.classList.add('active');
+    activePane.scrollTop = 0;
   }
 
-  recalculateSandboxMatchup();
+  if (subtab === 'game-tuning') {
+    renderSandboxSliders();
+  } else if (subtab === 'radar') {
+    const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
+    const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
+    drawRadarChartBetween(teamA, teamB, 28, 24, sandboxState.venue === 'homeA');
+  }
+
+  const footer = modal.querySelector('.modal-footer');
+  if (footer) {
+    footer.style.display = (subtab === 'game-tuning') ? 'none' : 'flex';
+  }
 };
 
 function renderSandboxSliders() {
+  const container = document.getElementById('sandboxSlidersGrid');
+  if (!container) return;
+
   const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
   const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
 
-  // Update Presets
+  // Update preset labels
   const btnBlowoutA = document.getElementById('sbPresetBlowoutA');
   if (btnBlowoutA) btnBlowoutA.innerText = `${teamA.shortName} Blowout`;
   const btnBlowoutB = document.getElementById('sbPresetBlowoutB');
   if (btnBlowoutB) btnBlowoutB.innerText = `${teamB.shortName} Upset`;
 
-  // Update Team A Section
-  const aHeader = document.getElementById('sbTeamAHeader');
-  if (aHeader) aHeader.style.color = teamA.colors?.accent || '#38BDF8';
-  const aTitle = document.getElementById('sbTeamATitle');
-  if (aTitle) aTitle.innerText = `${teamA.name.toUpperCase()} AI TUNING`;
-  const aLogo = document.getElementById('sbTeamALogo');
-  if (aLogo) aLogo.src = teamA.logoUrl;
+  const slidersListA = [
+    { key: 'qbRating', label: `${teamA.confirmedStarterQb || teamA.shortName} QB Execution`, icon: 'fa-solid fa-crosshairs' },
+    { key: 'groundAttack', label: `${teamA.shortName} Ground Attack`, icon: 'fa-solid fa-person-running' },
+    { key: 'defenseHavoc', label: `${teamA.shortName} Defense & Havoc`, icon: 'fa-solid fa-shield-halved' },
+    { key: 'turnoverLuck', label: `${teamA.shortName} Turnover Luck`, icon: 'fa-solid fa-dice' }
+  ];
 
-  const lblAq = document.getElementById('sbLabelA_qb');
-  if (lblAq) lblAq.innerText = `${teamA.confirmedStarterQb || teamA.shortName} QB Execution`;
-  const lblAg = document.getElementById('sbLabelA_ground');
-  if (lblAg) lblAg.innerText = `${teamA.shortName} Ground Attack`;
-  const lblAd = document.getElementById('sbLabelA_def');
-  if (lblAd) lblAd.innerText = `${teamA.shortName} Defense & Havoc`;
-  const lblAt = document.getElementById('sbLabelA_to');
-  if (lblAt) lblAt.innerText = `${teamA.shortName} Turnover Luck`;
+  const slidersListB = [
+    { key: 'qbRating', label: `${teamB.confirmedStarterQb || teamB.shortName} QB Execution`, icon: 'fa-solid fa-crosshairs' },
+    { key: 'groundAttack', label: `${teamB.shortName} Ground Attack`, icon: 'fa-solid fa-person-running' },
+    { key: 'defenseHavoc', label: `${teamB.shortName} Defense & Havoc`, icon: 'fa-solid fa-shield-halved' },
+    { key: 'turnoverLuck', label: `${teamB.shortName} Turnover Luck`, icon: 'fa-solid fa-dice' }
+  ];
 
-  // Update Team B Section
-  const bHeader = document.getElementById('sbTeamBHeader');
-  if (bHeader) bHeader.style.color = teamB.colors?.accent || '#F59E0B';
-  const bTitle = document.getElementById('sbTeamBTitle');
-  if (bTitle) bTitle.innerText = `${teamB.name.toUpperCase()} AI TUNING`;
-  const bLogo = document.getElementById('sbTeamBLogo');
-  if (bLogo) bLogo.src = teamB.logoUrl;
+  container.innerHTML = `
+    <!-- Team A Section -->
+    <div style="grid-column: 1 / -1; font-family: var(--font-mono); font-size: 0.76rem; font-weight: 800; color: ${teamA.colors?.accent || '#FF7A00'}; padding: 4px 0; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 6px;">
+      <img src="${teamA.logoUrl}" alt="${teamA.shortName}" style="width: 18px; height: 18px; object-fit: contain;">
+      <span>${teamA.name.toUpperCase()} AI TUNING</span>
+    </div>
+  `;
 
-  const lblBq = document.getElementById('sbLabelB_qb');
-  if (lblBq) lblBq.innerText = `${teamB.confirmedStarterQb || teamB.shortName} QB Execution`;
-  const lblBg = document.getElementById('sbLabelB_ground');
-  if (lblBg) lblBg.innerText = `${teamB.shortName} Ground Attack`;
-  const lblBd = document.getElementById('sbLabelB_def');
-  if (lblBd) lblBd.innerText = `${teamB.shortName} Defense & Havoc`;
-  const lblBt = document.getElementById('sbLabelB_to');
-  if (lblBt) lblBt.innerText = `${teamB.shortName} Turnover Luck`;
+  // Render Team A Sliders
+  slidersListA.forEach(s => {
+    const val = sandboxState.slidersA[s.key] || 0;
+    const sign = val > 0 ? '+' : '';
+    const card = document.createElement('div');
+    card.className = 'game-slider-card';
+    card.innerHTML = `
+      <div class="slider-top-row">
+        <span class="slider-title" style="font-size: 0.78rem;"><i class="${s.icon}"></i> ${s.label}</span>
+        <span class="slider-val-readout" id="sb-readout-a-${s.key}">${sign}${val}%</span>
+      </div>
+      <input type="range" class="custom-range-slider" min="-50" max="50" value="${val}" step="5">
+      <div class="slider-hints-row">
+        <span>-50%</span>
+        <span>Baseline</span>
+        <span>+50%</span>
+      </div>
+    `;
+
+    const input = card.querySelector('input');
+    input.addEventListener('input', (e) => {
+      const nVal = parseInt(e.target.value, 10);
+      sandboxState.slidersA[s.key] = nVal;
+      const sStr = nVal > 0 ? '+' : '';
+      card.querySelector('.slider-val-readout').innerText = `${sStr}${nVal}%`;
+      recalculateSandboxMatchup(false);
+    });
+
+    container.appendChild(card);
+  });
+
+  // Team B Column Header
+  const headerB = document.createElement('div');
+  headerB.style.gridColumn = '1 / -1';
+  headerB.style.fontFamily = 'var(--font-mono)';
+  headerB.style.fontSize = '0.76rem';
+  headerB.style.fontWeight = '800';
+  headerB.style.color = teamB.colors?.accent || '#10B981';
+  headerB.style.padding = '8px 0 4px';
+  headerB.style.borderBottom = '1px solid var(--color-border)';
+  headerB.style.display = 'flex';
+  headerB.style.alignItems = 'center';
+  headerB.style.gap = '6px';
+  headerB.style.marginTop = '0.5rem';
+  headerB.innerHTML = `
+    <img src="${teamB.logoUrl}" alt="${teamB.shortName}" style="width: 18px; height: 18px; object-fit: contain;">
+    <span>${teamB.name.toUpperCase()} AI TUNING</span>
+  `;
+  container.appendChild(headerB);
+
+  // Render Team B Sliders
+  slidersListB.forEach(s => {
+    const val = sandboxState.slidersB[s.key] || 0;
+    const sign = val > 0 ? '+' : '';
+    const card = document.createElement('div');
+    card.className = 'game-slider-card';
+    card.innerHTML = `
+      <div class="slider-top-row">
+        <span class="slider-title" style="font-size: 0.78rem;"><i class="${s.icon}"></i> ${s.label}</span>
+        <span class="slider-val-readout" id="sb-readout-b-${s.key}">${sign}${val}%</span>
+      </div>
+      <input type="range" class="custom-range-slider" min="-50" max="50" value="${val}" step="5">
+      <div class="slider-hints-row">
+        <span>-50%</span>
+        <span>Baseline</span>
+        <span>+50%</span>
+      </div>
+    `;
+
+    const input = card.querySelector('input');
+    input.addEventListener('input', (e) => {
+      const nVal = parseInt(e.target.value, 10);
+      sandboxState.slidersB[s.key] = nVal;
+      const sStr = nVal > 0 ? '+' : '';
+      card.querySelector('.slider-val-readout').innerText = `${sStr}${nVal}%`;
+      recalculateSandboxMatchup(false);
+    });
+
+    container.appendChild(card);
+  });
 }
 
 window.applySandboxPreset = function(presetKey) {
+  document.querySelectorAll('#dreamSandboxModal .game-preset-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.sbpreset === presetKey);
+  });
+
   if (presetKey === 'baseline') {
     sandboxState.slidersA = { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 };
     sandboxState.slidersB = { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 };
@@ -3316,7 +3404,7 @@ window.applySandboxPreset = function(presetKey) {
   }
 
   renderSandboxSliders();
-  recalculateSandboxMatchup();
+  recalculateSandboxMatchup(false);
   showToast(`⚡ Applied "${presetKey}" to Dream Matchup!`);
 };
 
@@ -3436,31 +3524,8 @@ window.recalculateSandboxMatchup = function(isResim = false) {
   drawRadarChartBetween(teamA, teamB, scoreA, scoreB, isHomeA);
 
   if (isResim) {
-    switchSandboxTab('drives');
+    window.switchSandboxTab('drives');
     showToast(`⚡ Re-simulated 10,000 Monte Carlo Drives: ${teamA.shortName} (${scoreA}) vs ${teamB.shortName} (${scoreB})!`);
-  }
-};
-
-window.switchSandboxTab = function(tabName) {
-  document.querySelectorAll('#dreamSandboxModal .sub-tab').forEach(b => {
-    b.classList.toggle('active', b.dataset.sandboxtab === tabName);
-  });
-  const pDrives = document.getElementById('sandboxPanelDrives');
-  const pTuning = document.getElementById('sandboxPanelTuning');
-  const pRadar = document.getElementById('sandboxPanelRadar');
-
-  if (pDrives) pDrives.style.display = (tabName === 'drives') ? 'block' : 'none';
-  if (pTuning) {
-    pTuning.style.display = (tabName === 'tuning') ? 'block' : 'none';
-    if (tabName === 'tuning') renderSandboxSliders();
-  }
-  if (pRadar) {
-    pRadar.style.display = (tabName === 'radar') ? 'block' : 'none';
-    if (tabName === 'radar') {
-      const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
-      const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
-      drawRadarChartBetween(teamA, teamB, 28, 24, sandboxState.venue === 'homeA');
-    }
   }
 };
 
@@ -3469,6 +3534,8 @@ window.exportSandboxHypeCard = function() {
   const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
   showToast(`📸 Exported High-Res Dream Matchup: ${teamA.shortName} vs ${teamB.shortName}!`);
 };
+
+
 
 // ==========================================================================
 // RECEIPTS & MODEL CALIBRATION HUB
