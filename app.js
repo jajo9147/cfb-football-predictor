@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const paramTeam = urlParams.get('team') ? urlParams.get('team').toLowerCase().trim() : null;
   const defaultTeamId = (paramTeam && TEAMS_DATABASE[paramTeam]) ? paramTeam : getTopRankedTeamId();
   selectTeam(defaultTeamId);
-  restoreScenarioFromUrl();
 
   initGlobalSliders();
   initGlobalPresetButtons();
@@ -84,6 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
   startCountdownTicker();
   initLiveSyncEngine();
   initMonteCarloEngine();
+
+  // Restore scenario from URL permalink hash (#sim=...) and listen for live hashchange
+  restoreScenarioFromUrl();
+  window.addEventListener('hashchange', restoreScenarioFromUrl);
 });
 
 // Returns the team ID of the #1 AP ranked team from TEAMS_DATABASE
@@ -3943,44 +3946,103 @@ window.loadSelectedArchiveSnapshot = function() {
 // ==========================================================================
 
 window.shareCustomScenario = function() {
-  const teamId = state.currentTeamId;
+  const teamId = state.currentTeamId || getTopRankedTeamId() || 'texas';
   const payload = {
-    teamId,
-    picks: state.userPicks,
-    ccgPicks: state.ccgPicks,
-    playoffPicks: state.playoffPicks,
-    sliders: state.teamSliders[teamId] || {}
+    v: 2,
+    teamId: teamId,
+    picks: state.userPicks || {},
+    ccgPicks: state.ccgPicks || {},
+    playoffPicks: state.playoffPicks || {},
+    teamSliders: state.teamSliders || {},
+    teamActivePresets: state.teamActivePresets || {},
+    gameSliders: state.gameSliders || {}
   };
 
-  const encoded = btoa(JSON.stringify(payload));
-  const shareUrl = window.location.origin + window.location.pathname + '#sim=' + encoded;
+  let encoded = '';
+  try {
+    const jsonStr = JSON.stringify(payload);
+    encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(jsonStr))));
+  } catch (e) {
+    console.error('Error encoding scenario:', e);
+    encoded = encodeURIComponent(btoa(JSON.stringify(payload)));
+  }
 
-  navigator.clipboard.writeText(shareUrl).then(() => {
-    showToast('📋 Scenario link copied to clipboard! Share on X, Reddit, or Discord.');
-  }).catch(() => {
+  const shareUrl = `${window.location.origin}${window.location.pathname}?team=${teamId}#sim=${encoded}`;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      showToast('📋 Custom Scenario link copied! All custom picks, tuned sliders & bracket saved.');
+    }).catch(() => {
+      prompt('Copy this link to share your custom scenario:', shareUrl);
+    });
+  } else {
     prompt('Copy this link to share your custom scenario:', shareUrl);
-  });
+  }
 };
 
 function restoreScenarioFromUrl() {
   try {
-    if (!window.location.hash || !window.location.hash.startsWith('#sim=')) return;
-    const raw = window.location.hash.replace('#sim=', '');
-    const decoded = JSON.parse(atob(raw));
+    let hash = window.location.hash || '';
+    if (!hash || !hash.includes('sim=')) return false;
+
+    const rawMatch = hash.match(/sim=([^&]+)/);
+    if (!rawMatch || !rawMatch[1]) return false;
+
+    const raw = decodeURIComponent(rawMatch[1]);
+    let jsonStr = '';
+    try {
+      jsonStr = decodeURIComponent(escape(atob(raw)));
+    } catch (e) {
+      jsonStr = atob(raw);
+    }
+    const decoded = JSON.parse(jsonStr);
+
+    let itemsRestored = 0;
 
     if (decoded.teamId && TEAMS_DATABASE[decoded.teamId]) {
       state.currentTeamId = decoded.teamId;
     }
-    if (decoded.picks) state.userPicks = { ...state.userPicks, ...decoded.picks };
-    if (decoded.ccgPicks) state.ccgPicks = { ...state.ccgPicks, ...decoded.ccgPicks };
-    if (decoded.playoffPicks) state.playoffPicks = { ...state.playoffPicks, ...decoded.playoffPicks };
-    if (decoded.sliders && decoded.teamId) {
+    if (decoded.picks && typeof decoded.picks === 'object') {
+      state.userPicks = { ...decoded.picks };
+      itemsRestored += Object.keys(decoded.picks).length;
+    }
+    if (decoded.ccgPicks && typeof decoded.ccgPicks === 'object') {
+      state.ccgPicks = { ...decoded.ccgPicks };
+      itemsRestored += Object.keys(decoded.ccgPicks).length;
+    }
+    if (decoded.playoffPicks && typeof decoded.playoffPicks === 'object') {
+      state.playoffPicks = { ...decoded.playoffPicks };
+      itemsRestored += Object.keys(decoded.playoffPicks).length;
+    }
+    if (decoded.teamSliders && typeof decoded.teamSliders === 'object') {
+      state.teamSliders = { ...decoded.teamSliders };
+      itemsRestored += Object.keys(decoded.teamSliders).length;
+    } else if (decoded.sliders && decoded.teamId) {
       state.teamSliders[decoded.teamId] = { ...decoded.sliders, isCustom: true };
+      itemsRestored += 1;
+    }
+    if (decoded.teamActivePresets && typeof decoded.teamActivePresets === 'object') {
+      state.teamActivePresets = { ...decoded.teamActivePresets };
+    }
+    if (decoded.gameSliders && typeof decoded.gameSliders === 'object') {
+      state.gameSliders = { ...decoded.gameSliders };
+      itemsRestored += Object.keys(decoded.gameSliders).length;
     }
 
-    showToast(`⚡ Loaded Shared Custom Scenario: ${TEAMS_DATABASE[state.currentTeamId]?.name}!`);
+    // Now actively re-render and synchronize UI
+    if (state.currentTeamId && TEAMS_DATABASE[state.currentTeamId]) {
+      selectTeam(state.currentTeamId);
+    } else {
+      syncSliderInputsToActiveTeam();
+      recalculateSeason();
+    }
+
+    const team = TEAMS_DATABASE[state.currentTeamId];
+    showToast(`⚡ Loaded Shared Custom Scenario: ${team ? team.name : 'Custom'} (${itemsRestored} custom modifications applied)!`);
+    return true;
   } catch (err) {
     console.warn('Notice parsing scenario hash:', err);
+    return false;
   }
 }
 
