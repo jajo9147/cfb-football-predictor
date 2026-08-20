@@ -107,7 +107,7 @@ function getTopRankedTeamId() {
 function initPwaServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=2026.85')
+      navigator.serviceWorker.register('sw.js?v=2026.86')
         .then(reg => {
           reg.update();
           console.log('PWA Service Worker registered:', reg.scope);
@@ -3235,124 +3235,66 @@ window.updateSandboxTeams = function() {
   recalculateSandboxMatchup();
 };
 
-function renderSandboxSliders() {
-  const container = document.getElementById('sandboxSlidersGrid');
-  if (!container) return;
+window.onSandboxSliderChange = function(teamLetter, key, val) {
+  const nVal = parseInt(val, 10);
+  const signStr = nVal > 0 ? '+' : '';
 
+  if (teamLetter === 'A') {
+    sandboxState.slidersA[key] = nVal;
+    const readout = document.getElementById(`sb-readout-a-${key}`);
+    if (readout) readout.innerText = `${signStr}${nVal}%`;
+  } else {
+    sandboxState.slidersB[key] = nVal;
+    const readout = document.getElementById(`sb-readout-b-${key}`);
+    if (readout) readout.innerText = `${signStr}${nVal}%`;
+  }
+
+  recalculateSandboxMatchup();
+};
+
+function renderSandboxSliders() {
   const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
   const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
 
-  const slidersListA = [
-    { key: 'qbRating', label: `${teamA.confirmedStarterQb || teamA.shortName} QB Execution`, icon: 'fa-solid fa-crosshairs' },
-    { key: 'groundAttack', label: `${teamA.shortName} Ground Attack`, icon: 'fa-solid fa-person-running' },
-    { key: 'defenseHavoc', label: `${teamA.shortName} Defense & Havoc`, icon: 'fa-solid fa-shield-halved' },
-    { key: 'turnoverLuck', label: `${teamA.shortName} Turnover Luck`, icon: 'fa-solid fa-dice' }
-  ];
+  // Update Presets
+  const btnBlowoutA = document.getElementById('sbPresetBlowoutA');
+  if (btnBlowoutA) btnBlowoutA.innerText = `${teamA.shortName} Blowout`;
+  const btnBlowoutB = document.getElementById('sbPresetBlowoutB');
+  if (btnBlowoutB) btnBlowoutB.innerText = `${teamB.shortName} Upset`;
 
-  const slidersListB = [
-    { key: 'qbRating', label: `${teamB.confirmedStarterQb || teamB.shortName} QB Execution`, icon: 'fa-solid fa-crosshairs' },
-    { key: 'groundAttack', label: `${teamB.shortName} Ground Attack`, icon: 'fa-solid fa-person-running' },
-    { key: 'defenseHavoc', label: `${teamB.shortName} Defense & Havoc`, icon: 'fa-solid fa-shield-halved' },
-    { key: 'turnoverLuck', label: `${teamB.shortName} Turnover Luck`, icon: 'fa-solid fa-dice' }
-  ];
+  // Update Team A Section
+  const aHeader = document.getElementById('sbTeamAHeader');
+  if (aHeader) aHeader.style.color = teamA.colors?.accent || '#38BDF8';
+  const aTitle = document.getElementById('sbTeamATitle');
+  if (aTitle) aTitle.innerText = `${teamA.name.toUpperCase()} AI TUNING`;
+  const aLogo = document.getElementById('sbTeamALogo');
+  if (aLogo) aLogo.src = teamA.logoUrl;
 
-  container.innerHTML = `
-    <!-- Preset Buttons -->
-    <div style="grid-column: 1 / -1; display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 0.5rem;">
-      <button class="preset-btn active" onclick="applySandboxPreset('baseline')">Baseline</button>
-      <button class="preset-btn" onclick="applySandboxPreset('blowoutA')">${teamA.shortName} Blowout</button>
-      <button class="preset-btn" onclick="applySandboxPreset('blowoutB')">${teamB.shortName} Upset</button>
-      <button class="preset-btn" onclick="applySandboxPreset('defense')">Defensive Slugfest</button>
-      <button class="preset-btn" onclick="applySandboxPreset('shootout')">Air Raid Shootout</button>
-    </div>
+  const lblAq = document.getElementById('sbLabelA_qb');
+  if (lblAq) lblAq.innerText = `${teamA.confirmedStarterQb || teamA.shortName} QB Execution`;
+  const lblAg = document.getElementById('sbLabelA_ground');
+  if (lblAg) lblAg.innerText = `${teamA.shortName} Ground Attack`;
+  const lblAd = document.getElementById('sbLabelA_def');
+  if (lblAd) lblAd.innerText = `${teamA.shortName} Defense & Havoc`;
+  const lblAt = document.getElementById('sbLabelA_to');
+  if (lblAt) lblAt.innerText = `${teamA.shortName} Turnover Luck`;
 
-    <!-- Team A Column Header -->
-    <div style="grid-column: 1 / -1; font-family: var(--font-mono); font-size: 0.76rem; font-weight: 800; color: ${teamA.colors?.accent || '#38BDF8'}; padding: 4px 0; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 6px;">
-      <img src="${teamA.logoUrl}" alt="${teamA.shortName}" style="width: 18px; height: 18px; object-fit: contain;">
-      <span>${teamA.name.toUpperCase()} AI TUNING</span>
-    </div>
-  `;
+  // Update Team B Section
+  const bHeader = document.getElementById('sbTeamBHeader');
+  if (bHeader) bHeader.style.color = teamB.colors?.accent || '#F59E0B';
+  const bTitle = document.getElementById('sbTeamBTitle');
+  if (bTitle) bTitle.innerText = `${teamB.name.toUpperCase()} AI TUNING`;
+  const bLogo = document.getElementById('sbTeamBLogo');
+  if (bLogo) bLogo.src = teamB.logoUrl;
 
-  // Render Team A Sliders
-  slidersListA.forEach(s => {
-    const val = sandboxState.slidersA[s.key] || 0;
-    const sign = val > 0 ? '+' : '';
-    const card = document.createElement('div');
-    card.className = 'game-slider-card';
-    card.innerHTML = `
-      <div class="slider-top-row">
-        <span class="slider-title" style="font-size: 0.78rem;"><i class="${s.icon}"></i> ${s.label}</span>
-        <span class="slider-val-readout" id="sb-readout-a-${s.key}">${sign}${val}%</span>
-      </div>
-      <input type="range" class="custom-range-slider" min="-50" max="50" value="${val}" step="5">
-      <div class="slider-hints-row">
-        <span>-50%</span>
-        <span>Baseline</span>
-        <span>+50%</span>
-      </div>
-    `;
-
-    const input = card.querySelector('input');
-    input.addEventListener('input', (e) => {
-      const nVal = parseInt(e.target.value, 10);
-      sandboxState.slidersA[s.key] = nVal;
-      const sStr = nVal > 0 ? '+' : '';
-      card.querySelector('.slider-val-readout').innerText = `${sStr}${nVal}%`;
-      recalculateSandboxMatchup();
-    });
-
-    container.appendChild(card);
-  });
-
-  // Team B Column Header
-  const headerB = document.createElement('div');
-  headerB.style.gridColumn = '1 / -1';
-  headerB.style.fontFamily = 'var(--font-mono)';
-  headerB.style.fontSize = '0.76rem';
-  headerB.style.fontWeight = '800';
-  headerB.style.color = teamB.colors?.accent || '#F59E0B';
-  headerB.style.padding = '8px 0 4px';
-  headerB.style.borderBottom = '1px solid var(--color-border)';
-  headerB.style.display = 'flex';
-  headerB.style.alignItems = 'center';
-  headerB.style.gap = '6px';
-  headerB.style.marginTop = '0.5rem';
-  headerB.innerHTML = `
-    <img src="${teamB.logoUrl}" alt="${teamB.shortName}" style="width: 18px; height: 18px; object-fit: contain;">
-    <span>${teamB.name.toUpperCase()} AI TUNING</span>
-  `;
-  container.appendChild(headerB);
-
-  // Render Team B Sliders
-  slidersListB.forEach(s => {
-    const val = sandboxState.slidersB[s.key] || 0;
-    const sign = val > 0 ? '+' : '';
-    const card = document.createElement('div');
-    card.className = 'game-slider-card';
-    card.innerHTML = `
-      <div class="slider-top-row">
-        <span class="slider-title" style="font-size: 0.78rem;"><i class="${s.icon}"></i> ${s.label}</span>
-        <span class="slider-val-readout" id="sb-readout-b-${s.key}">${sign}${val}%</span>
-      </div>
-      <input type="range" class="custom-range-slider" min="-50" max="50" value="${val}" step="5">
-      <div class="slider-hints-row">
-        <span>-50%</span>
-        <span>Baseline</span>
-        <span>+50%</span>
-      </div>
-    `;
-
-    const input = card.querySelector('input');
-    input.addEventListener('input', (e) => {
-      const nVal = parseInt(e.target.value, 10);
-      sandboxState.slidersB[s.key] = nVal;
-      const sStr = nVal > 0 ? '+' : '';
-      card.querySelector('.slider-val-readout').innerText = `${sStr}${nVal}%`;
-      recalculateSandboxMatchup();
-    });
-
-    container.appendChild(card);
-  });
+  const lblBq = document.getElementById('sbLabelB_qb');
+  if (lblBq) lblBq.innerText = `${teamB.confirmedStarterQb || teamB.shortName} QB Execution`;
+  const lblBg = document.getElementById('sbLabelB_ground');
+  if (lblBg) lblBg.innerText = `${teamB.shortName} Ground Attack`;
+  const lblBd = document.getElementById('sbLabelB_def');
+  if (lblBd) lblBd.innerText = `${teamB.shortName} Defense & Havoc`;
+  const lblBt = document.getElementById('sbLabelB_to');
+  if (lblBt) lblBt.innerText = `${teamB.shortName} Turnover Luck`;
 }
 
 window.applySandboxPreset = function(presetKey) {
