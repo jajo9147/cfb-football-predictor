@@ -986,42 +986,54 @@ function openSimModal(game) {
 
     if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
       // Postseason Game (CCG or Playoff Game) or Dream Matchup Collider
-      const tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
-      const tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+      let tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+      let tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+      let isHomeA = game.isHomeA || game.isHome || false;
+
+      // Ensure active team is always team1 (on the left) so sliders and scoreboards are intuitive
+      let primaryTeam = tA;
+      let secondaryTeam = tB;
+      let isPrimaryHome = isHomeA;
+
+      if (tB.id === state.currentTeamId && tA.id !== state.currentTeamId) {
+        primaryTeam = tB;
+        secondaryTeam = tA;
+        isPrimaryHome = game.isHomeB || false;
+      }
       
       team1 = {
-        id: tA.id || 'teamA',
-        name: tA.name || 'Team A',
-        shortName: tA.shortName || tA.name || 'Team A',
-        abbr: tA.abbr || tA.shortName || 'TMA',
-        apRank: tA.apRank || '',
-        logoUrl: tA.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tA.abbr] : '') || '',
-        colors: tA.colors || { primary: '#333333', secondary: '#FFFFFF', accent: '#0062B8' },
-        starPlayer: tA.starPlayer || `${tA.shortName || tA.name || 'Key'} Star Playmaker`,
-        headCoach: tA.headCoach,
-        offensiveCoordinator: tA.offensiveCoordinator,
-        defensiveCoordinator: tA.defensiveCoordinator,
-        confirmedStarterQb: tA.confirmedStarterQb,
-        baseSpRating: tA.baseSpRating
+        id: primaryTeam.id || 'teamA',
+        name: primaryTeam.name || 'Team A',
+        shortName: primaryTeam.shortName || primaryTeam.name || 'Team A',
+        abbr: primaryTeam.abbr || primaryTeam.shortName || 'TMA',
+        apRank: primaryTeam.apRank || '',
+        logoUrl: primaryTeam.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[primaryTeam.abbr] : '') || '',
+        colors: primaryTeam.colors || { primary: '#333333', secondary: '#FFFFFF', accent: '#0062B8' },
+        starPlayer: primaryTeam.starPlayer || `${primaryTeam.shortName || primaryTeam.name || 'Key'} Star Playmaker`,
+        headCoach: primaryTeam.headCoach,
+        offensiveCoordinator: primaryTeam.offensiveCoordinator,
+        defensiveCoordinator: primaryTeam.defensiveCoordinator,
+        confirmedStarterQb: primaryTeam.confirmedStarterQb,
+        baseSpRating: primaryTeam.baseSpRating
       };
 
       team2 = {
-        id: tB.id || 'teamB',
-        name: tB.name || 'Team B',
-        shortName: tB.shortName || tB.name || 'Team B',
-        abbr: tB.abbr || tB.shortName || 'TMB',
-        apRank: tB.apRank || '',
-        logoUrl: tB.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tB.abbr] : '') || '',
-        colors: tB.colors || { primary: '#555555', secondary: '#FFFFFF', accent: '#CC0000' },
-        starPlayer: tB.starPlayer || `${tB.shortName || tB.name || 'Key'} Star Playmaker`,
-        headCoach: tB.headCoach,
-        offensiveCoordinator: tB.offensiveCoordinator,
-        defensiveCoordinator: tB.defensiveCoordinator,
-        confirmedStarterQb: tB.confirmedStarterQb,
-        baseSpRating: tB.baseSpRating
+        id: secondaryTeam.id || 'teamB',
+        name: secondaryTeam.name || 'Team B',
+        shortName: secondaryTeam.shortName || secondaryTeam.name || 'Team B',
+        abbr: secondaryTeam.abbr || secondaryTeam.shortName || 'TMB',
+        apRank: secondaryTeam.apRank || '',
+        logoUrl: secondaryTeam.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[secondaryTeam.abbr] : '') || '',
+        colors: secondaryTeam.colors || { primary: '#555555', secondary: '#FFFFFF', accent: '#CC0000' },
+        starPlayer: secondaryTeam.starPlayer || `${secondaryTeam.shortName || secondaryTeam.name || 'Key'} Star Playmaker`,
+        headCoach: secondaryTeam.headCoach,
+        offensiveCoordinator: secondaryTeam.offensiveCoordinator,
+        defensiveCoordinator: secondaryTeam.defensiveCoordinator,
+        confirmedStarterQb: secondaryTeam.confirmedStarterQb,
+        baseSpRating: secondaryTeam.baseSpRating
       };
 
-      const sim = simulatePostseasonMatchup(tA, tB, { gameId: game.id, isHomeA: game.isHomeA || game.isHome });
+      const sim = simulatePostseasonMatchup(primaryTeam, secondaryTeam, { gameId: game.id, isHomeA: isPrimaryHome });
       score1 = sim.scoreA;
       score2 = sim.scoreB;
       prob1 = sim.winProbA;
