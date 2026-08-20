@@ -2611,9 +2611,9 @@ function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playo
 
   // 1. Check Conference Championship
   const ccgGames = [ccgResults.sec, ccgResults.b1g, ccgResults.big12, ccgResults.acc, ccgResults.mwc];
-  const userCcg = ccgGames.find(g => g.team1?.id === teamId || g.team2?.id === teamId);
+  const userCcg = ccgGames.find(g => g && (isTeamMatch(g.team1, teamId) || isTeamMatch(g.team2, teamId)));
   if (userCcg) {
-    const isWinner = (userCcg.sim.winner?.id === teamId);
+    const isWinner = isTeamMatch(userCcg.sim?.winner, teamId);
     if (isWinner) {
       totalWins++;
       outcomeTitle = 'Conference Champions';
@@ -2625,8 +2625,8 @@ function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playo
 
   // 2. Check 12-Team CFP
   const p = playoffData;
-  const isNationalChampion = (p.nationalChampion?.id === teamId);
-  const isRunnerUp = (p.runnerUp?.id === teamId);
+  const isNationalChampion = isTeamMatch(p.nationalChampion, teamId);
+  const isRunnerUp = isTeamMatch(p.runnerUp, teamId);
 
   // Check rounds
   let inFR = false, wonFR = false;
@@ -2634,29 +2634,28 @@ function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playo
   let inSF = false, wonSF = false;
 
   [p.fr1, p.fr2, p.fr3, p.fr4].forEach(fr => {
-    if (fr.teamA?.id === teamId || fr.teamB?.id === teamId) {
+    if (fr && (isTeamMatch(fr.teamA, teamId) || isTeamMatch(fr.teamB, teamId))) {
       inFR = true;
-      if (fr.sim.winner?.id === teamId) wonFR = true;
+      if (isTeamMatch(fr.sim?.winner, teamId)) wonFR = true;
     }
   });
 
   [p.qf1, p.qf2, p.qf3, p.qf4].forEach(qf => {
-    if (qf.teamA?.id === teamId || qf.teamB?.id === teamId) {
+    if (qf && (isTeamMatch(qf.teamA, teamId) || isTeamMatch(qf.teamB, teamId))) {
       inQF = true;
-      if (qf.sim.winner?.id === teamId) wonQF = true;
+      if (isTeamMatch(qf.sim?.winner, teamId)) wonQF = true;
     }
   });
 
   [p.sf1, p.sf2].forEach(sf => {
-    if (sf.teamA?.id === teamId || sf.teamB?.id === teamId) {
+    if (sf && (isTeamMatch(sf.teamA, teamId) || isTeamMatch(sf.teamB, teamId))) {
       inSF = true;
-      if (sf.sim.winner?.id === teamId) wonSF = true;
+      if (isTeamMatch(sf.sim?.winner, teamId)) wonSF = true;
     }
   });
 
   if (isNationalChampion) {
     // Won National Championship!
-    // Add wins for each round played:
     if (inFR && wonFR) totalWins++;
     if (inQF && wonQF) totalWins++;
     if (inSF && wonSF) totalWins++;
@@ -2678,8 +2677,13 @@ function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playo
     totalLosses++; // Lost in QF
     outcomeTitle = 'CFP Quarterfinalist';
   } else if (inFR) {
-    totalLosses++; // Lost in FR
-    outcomeTitle = 'CFP First Round';
+    if (wonFR) {
+      totalWins++;
+      outcomeTitle = 'CFP Quarterfinalist';
+    } else {
+      totalLosses++; // Lost in FR
+      outcomeTitle = 'CFP First Round';
+    }
   } else {
     // Missed CFP: Add Bowl game projection
     if (regWins >= 8) {
