@@ -386,13 +386,33 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
   const oTo = oppSliders ? (oppSliders.turnoverLuck || 0) : 0;
   const oCrowd = oppSliders ? (oppSliders.crowdNoise || 0) : 0;
 
+  // Weather & Environmental / Injury Multipliers
+  let weatherOffAdj = 0;
+  let weatherDefAdj = 0;
+  const gameSlider = game && game.id ? state.gameSliders[game.id] : null;
+  const weather = gameSlider?.weather || 'dome';
+  const hasInjury = !!gameSlider?.injury;
+
+  if (weather === 'rain') {
+    weatherOffAdj -= 2.5;
+    weatherDefAdj += 1.0;
+  } else if (weather === 'snow') {
+    weatherOffAdj -= 5.0;
+    weatherDefAdj += 2.5;
+  } else if (weather === 'wind') {
+    weatherOffAdj -= 3.5;
+    weatherDefAdj += 1.5;
+  }
+
+  const injuryPenalty = hasInjury ? -4.5 : 0;
+
   // Points contributed by team's custom form
-  const teamOffPts = (tQb * 0.24) + (tGround * 0.16) + (tDef * 0.04) + (tTo * 0.18) + (game.isHome ? tCrowd * 0.06 : tCrowd * 0.08);
-  const teamDefPts = (-tQb * 0.04) - (tGround * 0.08) - (tDef * 0.26) - (tTo * 0.18) - (game.isHome ? tCrowd * 0.06 : tCrowd * 0.06);
+  const teamOffPts = (tQb * 0.24) + (tGround * 0.16) + (tDef * 0.04) + (tTo * 0.18) + (game.isHome ? tCrowd * 0.06 : tCrowd * 0.08) + weatherOffAdj + injuryPenalty;
+  const teamDefPts = (-tQb * 0.04) - (tGround * 0.08) - (tDef * 0.26) - (tTo * 0.18) - (game.isHome ? tCrowd * 0.06 : tCrowd * 0.06) + weatherDefAdj;
 
   // Points contributed by opponent's custom form
-  const oppOffPts = (oQb * 0.24) + (oGround * 0.16) + (oDef * 0.04) + (oTo * 0.18) + (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.08);
-  const oppDefPts = (-oQb * 0.04) - (oGround * 0.08) - (oDef * 0.26) - (oTo * 0.18) - (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.06);
+  const oppOffPts = (oQb * 0.24) + (oGround * 0.16) + (oDef * 0.04) + (oTo * 0.18) + (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.08) + weatherOffAdj;
+  const oppDefPts = (-oQb * 0.04) - (oGround * 0.08) - (oDef * 0.26) - (oTo * 0.18) - (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.06) + weatherDefAdj;
 
   let adjUtScore = Math.max(3, Math.round(game.projScoreUt + teamOffPts + oppDefPts));
   let adjOppScore = Math.max(0, Math.round(game.projScoreOpp + teamDefPts + oppOffPts));
@@ -410,6 +430,40 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
     projUt: adjUtScore,
     projOpp: adjOppScore,
     isWin
+  };
+}
+
+function calculateVegasEdge(game, sim) {
+  if (!game || !sim || typeof game.vegasSpread !== 'number') return null;
+
+  const simSpread = sim.projUt - sim.projOpp;
+  const vegasExpectedDiff = -game.vegasSpread;
+  const spreadEdge = simSpread - vegasExpectedDiff;
+  const hasSpreadEdge = Math.abs(spreadEdge) >= 3.0;
+
+  const simTotal = sim.projUt + sim.projOpp;
+  const vegasTotal = game.overUnder || 52.5;
+  const totalEdge = simTotal - vegasTotal;
+  const hasTotalEdge = Math.abs(totalEdge) >= 4.5;
+
+  let badgeHtml = '';
+  if (hasSpreadEdge) {
+    badgeHtml = `<span class="vegas-edge-badge highlight" title="Sharp Market Edge: Model Spread deviates by ${Math.abs(spreadEdge).toFixed(1)} pts from Vegas"><i class="fa-solid fa-gem"></i> ${Math.abs(spreadEdge).toFixed(1)} PT SPREAD EDGE</span>`;
+  } else if (hasTotalEdge) {
+    const ouType = totalEdge > 0 ? 'OVER' : 'UNDER';
+    badgeHtml = `<span class="vegas-edge-badge" title="Total Edge vs Vegas ${vegasTotal} O/U"><i class="fa-solid fa-arrow-trend-up"></i> ${ouType} EDGE (${Math.abs(totalEdge).toFixed(1)} PTS)</span>`;
+  }
+
+  return {
+    simSpread,
+    vegasExpectedDiff,
+    spreadEdge,
+    hasSpreadEdge,
+    simTotal,
+    vegasTotal,
+    totalEdge,
+    hasTotalEdge,
+    badgeHtml
   };
 }
 
@@ -654,6 +708,7 @@ function renderSchedule() {
 
   filteredGames.forEach(game => {
     const sim = calculateAdjustedMatchup(game);
+    const vegasEdge = calculateVegasEdge(game, sim);
     const card = document.createElement('div');
     card.className = `game-card ${game.isMarquee ? 'marquee-border' : ''}`;
 
@@ -676,7 +731,10 @@ function renderSchedule() {
     card.innerHTML = `
       <div class="card-top">
         <span>${game.week} • ${game.date}</span>
-        ${badgeHtml}
+        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+          ${vegasEdge?.badgeHtml || ''}
+          ${badgeHtml}
+        </div>
       </div>
 
       <div class="matchup-row">
@@ -1137,7 +1195,7 @@ function openSimModal(game) {
           </div>
         </div>
 
-        <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
           <div style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: #FFFFFF;">
             <span style="color: ${isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score1}</span>
             <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
@@ -1146,6 +1204,10 @@ function openSimModal(game) {
           <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
             WIN PROB: ${prob1}% - ${100 - prob1}%
           </span>
+          ${(() => {
+            const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
+            return edge?.badgeHtml || '';
+          })()}
         </div>
 
         <div style="display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end;">
@@ -1670,7 +1732,76 @@ function renderGameSlidersInModal(game) {
 
     container.appendChild(card);
   });
+
+  // Sync Weather & Injury Chips
+  const activeWeather = currentSliders.weather || 'dome';
+  document.querySelectorAll('.weather-chip[data-weather]').forEach(chip => {
+    if (chip.dataset.weather === activeWeather) chip.classList.add('active');
+    else chip.classList.remove('active');
+  });
+
+  const injuryChip = document.getElementById('injuryChipBtn');
+  if (injuryChip) {
+    if (currentSliders.injury) injuryChip.classList.add('active');
+    else injuryChip.classList.remove('active');
+  }
 }
+
+window.setGameWeatherCondition = function(weatherType) {
+  const game = state.activeModalGame;
+  if (!game) return;
+
+  if (!state.gameSliders[game.id]) {
+    const focusId = game.isDreamMatchup ? game.teamA.id : state.currentTeamId;
+    const teamSliders = getTeamSliders(focusId);
+    state.gameSliders[game.id] = { ...teamSliders, targetTeamId: focusId };
+  }
+
+  state.gameSliders[game.id].weather = weatherType;
+  state.gameSliders[game.id].isCustom = true;
+
+  document.querySelectorAll('.weather-chip[data-weather]').forEach(chip => {
+    if (chip.dataset.weather === weatherType) chip.classList.add('active');
+    else chip.classList.remove('active');
+  });
+
+  recalculateSeason();
+  openSimModal(game);
+  window.switchModalSubTab('game-tuning');
+  const weatherLabels = {
+    'dome': '☀️ Clear / Dome (Optimal)',
+    'rain': '🌧️ Heavy Rain / Slick Turf',
+    'snow': '❄️ Blizzard / Freezing Snow',
+    'wind': '💨 25+ MPH High Winds'
+  };
+  showToast(`Applied ${weatherLabels[weatherType] || weatherType}!`);
+};
+
+window.toggleGameInjuryCondition = function() {
+  const game = state.activeModalGame;
+  if (!game) return;
+
+  if (!state.gameSliders[game.id]) {
+    const focusId = game.isDreamMatchup ? game.teamA.id : state.currentTeamId;
+    const teamSliders = getTeamSliders(focusId);
+    state.gameSliders[game.id] = { ...teamSliders, targetTeamId: focusId };
+  }
+
+  const currentInjury = !!state.gameSliders[game.id].injury;
+  state.gameSliders[game.id].injury = !currentInjury;
+  state.gameSliders[game.id].isCustom = true;
+
+  const chip = document.getElementById('injuryChipBtn');
+  if (chip) {
+    if (!currentInjury) chip.classList.add('active');
+    else chip.classList.remove('active');
+  }
+
+  recalculateSeason();
+  openSimModal(game);
+  window.switchModalSubTab('game-tuning');
+  showToast(!currentInjury ? `🩹 Key Starter Injury penalty applied (-4.5 SP+)!` : `🩹 Cleared injury penalty!`);
+};
 
 window.switchModalSubTab = function(subtab) {
   const tabsContainer = document.querySelector('#simModal .modal-sub-tabs');
@@ -4576,3 +4707,236 @@ function generateGameHypeCard(game) {
   document.getElementById('hypeCardModal').classList.add('open');
 }
 window.generateGameHypeCard = generateGameHypeCard;
+
+// ==========================================================================
+// 10,000-RUN CFP BUBBLE CHAOS PROBABILITY MATRIX & HEATMAP ENGINE
+// ==========================================================================
+
+let currentMatrixConfFilter = 'all';
+let currentMatrixSortCol = 'cfp';
+let currentMatrixSortAsc = false;
+
+function runCfpMonteCarloSeasonSims(numSims = 10000) {
+  const teamIds = Object.keys(TEAMS_DATABASE);
+  const stats = {};
+
+  teamIds.forEach(tid => {
+    const t = TEAMS_DATABASE[tid];
+    stats[tid] = {
+      id: tid,
+      name: t.name,
+      shortName: t.shortName,
+      conference: t.conference,
+      apRank: t.apRank,
+      logoUrl: t.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[t.abbr] : ''),
+      colors: t.colors,
+      nattyCount: 0,
+      byeCount: 0,
+      cfpCount: 0,
+      bubbleCount: 0,
+      totalWins: 0
+    };
+  });
+
+  const teamSimData = {};
+  teamIds.forEach(tid => {
+    const t = TEAMS_DATABASE[tid];
+    teamSimData[tid] = (t.schedule || []).map(g => {
+      const sim = calculateAdjustedMatchup(g, tid);
+      return {
+        prob: sim.adjWinProb / 100
+      };
+    });
+  });
+
+  for (let s = 0; s < numSims; s++) {
+    const seasonResults = [];
+
+    teamIds.forEach(tid => {
+      let wins = 0;
+      const games = teamSimData[tid] || [];
+      games.forEach(g => {
+        if (Math.random() < g.prob) wins++;
+      });
+      stats[tid].totalWins += wins;
+      seasonResults.push({ id: tid, wins, baseSp: TEAMS_DATABASE[tid]?.baseSpRating || 20 });
+    });
+
+    seasonResults.sort((a, b) => {
+      if (b.wins !== a.wins) return b.wins - a.wins;
+      return b.baseSp - a.baseSp;
+    });
+
+    // Top 4 Byes
+    for (let i = 0; i < 4 && i < seasonResults.length; i++) {
+      const tid = seasonResults[i].id;
+      stats[tid].byeCount++;
+      stats[tid].cfpCount++;
+    }
+
+    // At-Large (5-12)
+    for (let i = 4; i < 12 && i < seasonResults.length; i++) {
+      const tid = seasonResults[i].id;
+      stats[tid].cfpCount++;
+    }
+
+    // Bubble (13-16)
+    for (let i = 12; i < 16 && i < seasonResults.length; i++) {
+      const tid = seasonResults[i].id;
+      stats[tid].bubbleCount++;
+    }
+
+    // Simulate Natty Champion from top 12 weighted by SP+ and seeding
+    const top12 = seasonResults.slice(0, 12);
+    let totalWeight = 0;
+    const weights = top12.map((t, idx) => {
+      const seedBonus = (12 - idx) * 1.5;
+      const w = Math.max(1, (t.baseSp + seedBonus));
+      totalWeight += w;
+      return w;
+    });
+
+    let r = Math.random() * totalWeight;
+    for (let i = 0; i < top12.length; i++) {
+      r -= weights[i];
+      if (r <= 0) {
+        stats[top12[i].id].nattyCount++;
+        break;
+      }
+    }
+  }
+
+  const matrixList = teamIds.map(tid => {
+    const s = stats[tid];
+    return {
+      id: tid,
+      name: s.name,
+      shortName: s.shortName,
+      conference: s.conference,
+      apRank: s.apRank,
+      logoUrl: s.logoUrl,
+      colors: s.colors,
+      nattyPct: parseFloat(((s.nattyCount / numSims) * 100).toFixed(1)),
+      byePct: parseFloat(((s.byeCount / numSims) * 100).toFixed(1)),
+      cfpPct: parseFloat(((s.cfpCount / numSims) * 100).toFixed(1)),
+      bubblePct: parseFloat(((s.bubbleCount / numSims) * 100).toFixed(1)),
+      avgWins: parseFloat((s.totalWins / numSims).toFixed(1))
+    };
+  });
+
+  matrixList.sort((a, b) => b.cfpPct - a.cfpPct || b.nattyPct - a.nattyPct);
+  state.lastChaosMatrixResults = matrixList;
+  return matrixList;
+}
+
+window.openCfpMatrixModal = function() {
+  const modal = document.getElementById('cfpMatrixModal');
+  if (!modal) return;
+
+  if (!state.lastChaosMatrixResults || state.lastChaosMatrixResults.length === 0) {
+    runCfpMonteCarloSeasonSims(10000);
+  }
+  renderCfpMatrixModal();
+  modal.classList.add('open');
+};
+
+window.closeCfpMatrixModal = function() {
+  const modal = document.getElementById('cfpMatrixModal');
+  if (modal) modal.classList.remove('open');
+};
+
+window.filterCfpMatrix = function(conf) {
+  currentMatrixConfFilter = conf;
+  document.querySelectorAll('.conf-filter-btn').forEach(b => {
+    if (b.dataset.conf === conf) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  renderCfpMatrixModal();
+};
+
+window.sortCfpMatrix = function(col) {
+  if (currentMatrixSortCol === col) {
+    currentMatrixSortAsc = !currentMatrixSortAsc;
+  } else {
+    currentMatrixSortCol = col;
+    currentMatrixSortAsc = false;
+  }
+  renderCfpMatrixModal();
+};
+
+window.rerunCfpMatrixSims = function() {
+  showToast('🔥 Simulating 10,000 full seasons...');
+  setTimeout(() => {
+    runCfpMonteCarloSeasonSims(10000);
+    renderCfpMatrixModal();
+    showToast('⚡ 10,000 season simulations updated!');
+  }, 40);
+};
+
+function renderCfpMatrixModal() {
+  const tbody = document.getElementById('chaosMatrixBody');
+  if (!tbody) return;
+
+  let list = [...(state.lastChaosMatrixResults || runCfpMonteCarloSeasonSims(10000))];
+
+  // Filter by conference
+  if (currentMatrixConfFilter !== 'all') {
+    if (currentMatrixConfFilter === 'G5') {
+      list = list.filter(t => t.conference !== 'SEC' && t.conference !== 'Big Ten' && t.conference !== 'Big 12' && t.conference !== 'ACC');
+    } else {
+      list = list.filter(t => t.conference === currentMatrixConfFilter);
+    }
+  }
+
+  // Sort
+  list.sort((a, b) => {
+    let valA = a[currentMatrixSortCol] !== undefined ? a[currentMatrixSortCol] : a.cfpPct;
+    let valB = b[currentMatrixSortCol] !== undefined ? b[currentMatrixSortCol] : b.cfpPct;
+    if (currentMatrixSortCol === 'natty') { valA = a.nattyPct; valB = b.nattyPct; }
+    else if (currentMatrixSortCol === 'bye') { valA = a.byePct; valB = b.byePct; }
+    else if (currentMatrixSortCol === 'cfp') { valA = a.cfpPct; valB = b.cfpPct; }
+    else if (currentMatrixSortCol === 'bubble') { valA = a.bubblePct; valB = b.bubblePct; }
+    else if (currentMatrixSortCol === 'avgWins') { valA = a.avgWins; valB = b.avgWins; }
+
+    return currentMatrixSortAsc ? valA - valB : valB - valA;
+  });
+
+  tbody.innerHTML = '';
+
+  list.forEach((t, idx) => {
+    const tr = document.createElement('tr');
+    const isCurrent = t.id === state.currentTeamId;
+    if (isCurrent) {
+      tr.style.background = 'rgba(56, 189, 248, 0.12)';
+      tr.style.borderLeft = '3px solid #38BDF8';
+    }
+
+    const getHeatClass = (val) => {
+      if (val >= 60) return 'heat-super';
+      if (val >= 35) return 'heat-high';
+      if (val >= 15) return 'heat-med';
+      if (val > 0) return 'heat-low';
+      return 'heat-zero';
+    };
+
+    tr.innerHTML = `
+      <td style="padding: 0.6rem 0.8rem;">
+        <div class="matrix-team-cell">
+          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim); width: 16px;">#${idx + 1}</span>
+          <img src="${t.logoUrl}" alt="${t.name}" class="matrix-team-logo">
+          <div>
+            <div style="font-size: 0.85rem; color: ${isCurrent ? 'var(--color-brand-accent)' : '#FFF'}; font-weight: 800;">${t.shortName}</div>
+            <div style="font-size: 0.65rem; color: var(--color-text-dim); font-family: var(--font-mono);">${t.conference} • ${t.apRank || 'NR'}</div>
+          </div>
+        </div>
+      </td>
+      <td style="text-align: center;"><span class="heat-cell ${getHeatClass(t.nattyPct)}">${t.nattyPct}%</span></td>
+      <td style="text-align: center;"><span class="heat-cell ${getHeatClass(t.byePct)}">${t.byePct}%</span></td>
+      <td style="text-align: center;"><span class="heat-cell ${getHeatClass(t.cfpPct)}" style="font-weight: 900;">${t.cfpPct}%</span></td>
+      <td style="text-align: center;"><span class="heat-cell ${getHeatClass(t.bubblePct)}">${t.bubblePct}%</span></td>
+      <td style="text-align: center; font-weight: 700; color: #E2E8F0;">${t.avgWins}</td>
+    `;
+
+    tbody.appendChild(tr);
+  });
+}

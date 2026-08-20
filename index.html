@@ -50,7 +50,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260820_270">
+  <link rel="stylesheet" href="styles.css?t=20260820_280">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -249,6 +249,10 @@
             <i class="fa-solid fa-share-nodes"></i>
             <span>Share Scenario</span>
           </button>
+          <button class="action-btn chaos-matrix-btn" onclick="openCfpMatrixModal()" title="View 10,000-Run Monte Carlo CFP Chaos Probability Heatmap">
+            <i class="fa-solid fa-fire-flame-curved" style="color: #FF4444;"></i>
+            <span>CFP Chaos Matrix</span>
+          </button>
           <button class="action-btn sandbox-hero-btn" onclick="openDreamSandboxModal()" title="Simulate ANY 2 college football teams head-to-head">
             <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i>
             <span>Dream Matchup</span>
@@ -432,6 +436,18 @@
               <button class="game-preset-btn" data-gamepreset="blowout" onclick="applyGameScenarioPreset('blowout')">Offensive Blowout</button>
               <button class="game-preset-btn" data-gamepreset="turnover-trap" onclick="applyGameScenarioPreset('turnover-trap')">Turnover Trap</button>
               <button class="game-preset-btn" data-gamepreset="ground-pound" onclick="applyGameScenarioPreset('ground-pound')">Ground & Pound</button>
+            </div>
+          </div>
+
+          <!-- Weather & Environmental / Injury Condition Modifier Row -->
+          <div class="game-preset-row weather-mod-row" style="margin-top: 0.4rem;">
+            <span style="font-size: 0.76rem; font-weight: 700; color: #38BDF8;"><i class="fa-solid fa-cloud-bolt"></i> Weather & Injury Factors:</span>
+            <div class="game-preset-buttons weather-chips-wrap">
+              <button class="weather-chip active" data-weather="dome" onclick="setGameWeatherCondition('dome')">☀️ Clear / Dome</button>
+              <button class="weather-chip" data-weather="rain" onclick="setGameWeatherCondition('rain')">🌧️ Heavy Rain (-15% Pass, +25% Fumble)</button>
+              <button class="weather-chip" data-weather="snow" onclick="setGameWeatherCondition('snow')">❄️ Blizzard / Snow (-8 Pts, Heavy Run)</button>
+              <button class="weather-chip" data-weather="wind" onclick="setGameWeatherCondition('wind')">💨 25+ MPH Wind (-30% Deep/FG)</button>
+              <button class="weather-chip injury-chip" data-injury="true" id="injuryChipBtn" onclick="toggleGameInjuryCondition()">🩹 Key Starter Out (-4.5 SP+)</button>
             </div>
           </div>
 
@@ -753,6 +769,54 @@
     </div>
   </div>
 
+  <!-- 10,000-RUN CFP CHAOS MATRIX & BUBBLE HEATMAP MODAL -->
+  <div class="modal-backdrop" id="cfpMatrixModal">
+    <div class="modal-dialog" style="max-width: 960px; max-height: 90vh; display: flex; flex-direction: column;">
+      <button class="modal-close" onclick="closeCfpMatrixModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header" style="margin-bottom: 0.75rem;">
+        <span class="matchup-tag" style="background: rgba(239, 68, 68, 0.2); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.4);"><i class="fa-solid fa-fire-flame-curved"></i> 10,000 MONTE CARLO SEASONS</span>
+        <h2 class="modal-title" style="font-size: 1.6rem; margin-top: 0.25rem;">CFP Bubble Chaos & Title Heatmap</h2>
+        <span class="modal-stadium" style="font-size: 0.8rem;">Stochastic multi-season Monte Carlo simulation across all 20+ powerhouses (SP+ & schedule-calibrated)</span>
+      </div>
+
+      <!-- Filter / Sort Bar -->
+      <div class="matrix-filter-row" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+        <div class="matrix-conf-pills" style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+          <button class="conf-filter-btn active" data-conf="all" onclick="filterCfpMatrix('all')">ALL (TOP 20)</button>
+          <button class="conf-filter-btn" data-conf="SEC" onclick="filterCfpMatrix('SEC')">SEC</button>
+          <button class="conf-filter-btn" data-conf="Big Ten" onclick="filterCfpMatrix('Big Ten')">BIG TEN</button>
+          <button class="conf-filter-btn" data-conf="Big 12" onclick="filterCfpMatrix('Big 12')">BIG 12</button>
+          <button class="conf-filter-btn" data-conf="ACC" onclick="filterCfpMatrix('ACC')">ACC</button>
+          <button class="conf-filter-btn" data-conf="G5" onclick="filterCfpMatrix('G5')">G5 / IND</button>
+        </div>
+        <button class="action-btn hype-btn" onclick="rerunCfpMatrixSims()" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span>Re-Simulate 10k</span>
+        </button>
+      </div>
+
+      <!-- Matrix Table Scrollable Container -->
+      <div class="matrix-table-wrap" style="flex: 1; overflow-y: auto; max-height: 520px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: rgba(0,0,0,0.35);">
+        <table class="chaos-matrix-table" id="chaosMatrixTable" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+          <thead>
+            <tr style="background: rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim); text-align: right; position: sticky; top: 0; backdrop-filter: blur(10px); z-index: 2;">
+              <th style="text-align: left; padding: 0.65rem 0.8rem;">TEAM</th>
+              <th style="padding: 0.65rem 0.5rem; cursor: pointer; text-align: center;" onclick="sortCfpMatrix('natty')">👑 NATTY % <i class="fa-solid fa-sort"></i></th>
+              <th style="padding: 0.65rem 0.5rem; cursor: pointer; text-align: center;" onclick="sortCfpMatrix('bye')">🥇 TOP-4 BYE % <i class="fa-solid fa-sort"></i></th>
+              <th style="padding: 0.65rem 0.5rem; cursor: pointer; text-align: center;" onclick="sortCfpMatrix('cfp')">🎟️ TOTAL CFP % <i class="fa-solid fa-sort"></i></th>
+              <th style="padding: 0.65rem 0.5rem; cursor: pointer; text-align: center;" onclick="sortCfpMatrix('bubble')">⚠️ BUBBLE % <i class="fa-solid fa-sort"></i></th>
+              <th style="padding: 0.65rem 0.8rem; cursor: pointer; text-align: center;" onclick="sortCfpMatrix('avgWins')">📊 AVG WINS <i class="fa-solid fa-sort"></i></th>
+            </tr>
+          </thead>
+          <tbody id="chaosMatrixBody">
+            <!-- Dynamic Heatmap Rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <!-- ==========================================================================
        RECEIPTS & MODEL ACCURACY HUB MODAL (HISTORICAL TRACKING & CALIBRATION)
        ========================================================================== -->
@@ -937,7 +1001,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260820_270"></script>
-  <script src="app.js?t=20260820_270"></script>
+  <script src="data/teams.js?t=20260820_280"></script>
+  <script src="app.js?t=20260820_280"></script>
 </body>
 </html>

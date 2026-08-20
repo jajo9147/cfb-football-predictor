@@ -3608,3 +3608,179 @@ body.modal-open {
   }
 }
 
+/* ==========================================================================
+   WEATHER & ENVIRONMENTAL / INJURY MODIFIERS STYLING
+   ========================================================================== */
+
+.weather-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.weather-chip {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.weather-chip:hover {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: #38BDF8;
+  color: #FFFFFF;
+}
+
+.weather-chip.active {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: #38BDF8;
+  color: #38BDF8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+}
+
+.weather-chip.injury-chip {
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #FCA5A5;
+}
+
+.weather-chip.injury-chip.active {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #EF4444;
+  color: #EF4444;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.45);
+}
+
+/* ==========================================================================
+   LIVE VEGAS LINE VALUE & SHARP EDGE BADGE
+   ========================================================================== */
+
+.vegas-edge-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #10B981;
+  text-transform: uppercase;
+}
+
+.vegas-edge-badge.highlight {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #FCD34D;
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   10,000-RUN CFP CHAOS MATRIX & BUBBLE HEATMAP
+   ========================================================================== */
+
+.action-btn.chaos-matrix-btn {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(185, 28, 28, 0.3));
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #FFFFFF;
+}
+
+.action-btn.chaos-matrix-btn:hover {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.35), rgba(185, 28, 28, 0.5));
+  border-color: #EF4444;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.45);
+}
+
+.conf-filter-btn {
+  padding: 0.35rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-dim);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.conf-filter-btn:hover, .conf-filter-btn.active {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #EF4444;
+  color: #FFFFFF;
+}
+
+.chaos-matrix-table tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.15s ease;
+}
+
+.chaos-matrix-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.chaos-matrix-table td {
+  padding: 0.55rem 0.5rem;
+  font-family: var(--font-mono);
+}
+
+.matrix-team-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.matrix-team-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.heat-cell {
+  text-align: center;
+  font-weight: 800;
+  border-radius: 3px;
+  padding: 0.25rem 0.4rem;
+}
+
+.heat-super {
+  background: rgba(16, 185, 129, 0.35);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.heat-high {
+  background: rgba(56, 189, 248, 0.25);
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.heat-med {
+  background: rgba(245, 158, 11, 0.2);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.heat-low {
+  background: rgba(239, 68, 68, 0.15);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.heat-zero {
+  color: var(--color-text-dim);
+  opacity: 0.5;
+}
+
