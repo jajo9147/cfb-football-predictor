@@ -50,7 +50,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260819_70">
+  <link rel="stylesheet" href="styles.css?t=20260819_80">
 </head>
 <body class="theme-texas">
 
@@ -770,12 +770,17 @@
         <!-- Panel 3: Championship Stock Ticker -->
         <div class="sub-tab-panel" id="receiptsPanelOddsTicker" style="display: none;">
           <div class="odds-ticker-container">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.3rem;">
-              <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--color-text-dim);">NATIONAL TITLE ODDS EVOLUTION</span>
-              <span style="font-size: 0.74rem; color: var(--color-brand-accent); font-weight: 700;"><i class="fa-solid fa-fire"></i> Texas &amp; Oregon Surging</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 0.4rem;">
+              <div>
+                <span style="font-size: 0.82rem; font-family: var(--font-mono); font-weight: 800; color: #FFFFFF;"><i class="fa-solid fa-trophy" style="color: var(--color-gold);"></i> NATIONAL TITLE WIN PROBABILITY (%)</span>
+                <p style="font-size: 0.72rem; color: #94A3B8; margin-top: 2px;">Higher % = Higher likelihood to win the 12-Team CFP National Championship</p>
+              </div>
+              <div class="odds-legend-pills" id="oddsLegendPills" style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+                <!-- Legend injected via JS -->
+              </div>
             </div>
-            <div class="odds-chart-wrap">
-              <canvas id="oddsTickerCanvas" width="560" height="240"></canvas>
+            <div class="odds-chart-wrap" style="background: rgba(10, 14, 23, 0.95); border: 1px solid var(--color-border); border-radius: 8px; padding: 0.85rem;">
+              <canvas id="oddsTickerCanvas" width="640" height="280"></canvas>
             </div>
           </div>
         </div>
@@ -822,7 +827,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260819_70"></script>
-  <script src="app.js?t=20260819_70"></script>
+  <script src="data/teams.js?t=20260819_80"></script>
+  <script src="app.js?t=20260819_80"></script>
 </body>
 </html>

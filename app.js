@@ -3570,6 +3570,17 @@ function populateReceiptsFilterDropdowns() {
   if (currentVal) teamFilter.value = currentVal;
 }
 
+function getWeekSortNum(weekStr) {
+  if (!weekStr) return 99;
+  const upper = weekStr.toUpperCase().trim();
+  if (upper.includes('WEEK 0')) return 0;
+  const match = upper.match(/WEEK\s*(\d+)/);
+  if (match) return parseInt(match[1], 10);
+  if (upper.includes('CCG') || upper.includes('CHAMPIONSHIP')) return 14;
+  if (upper.includes('PLAYOFF') || upper.includes('BOWL')) return 15;
+  return 99;
+}
+
 window.renderFilteredReceiptsLedger = function() {
   const tbody = document.getElementById('settledGamesTableBody');
   if (!tbody) return;
@@ -3583,6 +3594,8 @@ window.renderFilteredReceiptsLedger = function() {
   // Build full ledger across all 22 teams in TEAMS_DATABASE
   Object.entries(TEAMS_DATABASE).forEach(([teamId, team]) => {
     if (teamFilter !== 'all' && teamId !== teamFilter) return;
+
+    const rankNum = parseInt(team.apRank?.replace(/[^0-9]/g, '') || '99', 10);
 
     (team.schedule || []).forEach(g => {
       const gWeek = (g.week || 'WEEK 1').toUpperCase().trim();
@@ -3609,6 +3622,8 @@ window.renderFilteredReceiptsLedger = function() {
 
       allLedgerGames.push({
         week: gWeek,
+        weekNum: getWeekSortNum(gWeek),
+        teamRank: rankNum,
         matchup: fullMatchup,
         pred: `${predWinner} (${Math.round(favProb)}%)`,
         probStr: `${Math.round(favProb)}%`,
@@ -3619,6 +3634,14 @@ window.renderFilteredReceiptsLedger = function() {
         isMarquee: g.isMarquee || false
       });
     });
+  });
+
+  // Sort Chronologically: Week 0 -> Week 1 -> Week 2 -> ... -> Week 13
+  // Within each week, sort by AP Rank of the favorite team
+  allLedgerGames.sort((a, b) => {
+    if (a.weekNum !== b.weekNum) return a.weekNum - b.weekNum;
+    if (a.teamRank !== b.teamRank) return a.teamRank - b.teamRank;
+    return a.matchup.localeCompare(b.matchup);
   });
 
   tbody.innerHTML = '';
@@ -3775,40 +3798,122 @@ function drawOddsTickerChart() {
 
   const w = canvas.width;
   const h = canvas.height;
-  const pad = 35;
+  const padLeft = 45;
+  const padRight = 100;
+  const padTop = 25;
+  const padBottom = 35;
 
   ctx.clearRect(0, 0, w, h);
 
+  // 5 Contenders with their authentic colors and Natty Win Probability (%) trajectories
   const series = [
-    { name: 'Texas', color: '#BF5700', values: [350, 340, 320, 260] },
-    { name: 'Georgia', color: '#BA0C2F', values: [380, 375, 360, 350] },
-    { name: 'Ohio State', color: '#BB0000', values: [350, 350, 340, 400] },
-    { name: 'Oregon', color: '#154733', values: [450, 440, 420, 410] }
+    { id: 'texas', name: 'Texas', color: '#BF5700', values: [20.5, 21.8, 23.4, 25.2] },
+    { id: 'georgia', name: 'Georgia', color: '#BA0C2F', values: [22.0, 21.4, 21.0, 20.8] },
+    { id: 'ohiostate', name: 'Ohio State', color: '#E11D48', values: [18.5, 18.0, 18.4, 18.2] },
+    { id: 'oregon', name: 'Oregon', color: '#10B981', values: [13.0, 14.2, 15.0, 16.5] },
+    { id: 'alabama', name: 'Alabama', color: '#9E1B32', values: [11.5, 11.2, 10.8, 10.5] }
   ];
 
+  // Render Legend Pills
+  const legendContainer = document.getElementById('oddsLegendPills');
+  if (legendContainer) {
+    legendContainer.innerHTML = '';
+    series.forEach(s => {
+      const pill = document.createElement('span');
+      pill.style.cssText = `font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; background: rgba(15, 23, 42, 0.8); border: 1px solid ${s.color}; color: #FFFFFF; padding: 2px 6px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px;`;
+      pill.innerHTML = `<span style="width: 7px; height: 7px; border-radius: 50%; background: ${s.color};"></span>${s.name}: ${s.values[3]}%`;
+      legendContainer.appendChild(pill);
+    });
+  }
+
+  // Y-Axis Range: 0% to 30%
+  const minY = 0;
+  const maxY = 30;
+
+  // Draw Horizontal Gridlines (every 5%)
+  const steps = [0, 5, 10, 15, 20, 25, 30];
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+  ctx.lineWidth = 1;
+
+  steps.forEach(val => {
+    const y = (h - padBottom) - ((val - minY) / (maxY - minY)) * (h - padTop - padBottom);
+    ctx.beginPath();
+    ctx.moveTo(padLeft, y);
+    ctx.lineTo(w - padRight, y);
+    ctx.stroke();
+
+    // Y-Axis Label
+    ctx.fillStyle = '#64748B';
+    ctx.font = 'bold 9px JetBrains Mono, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(`${val}%`, padLeft - 6, y + 3);
+  });
+
+  // X-Axis Checkpoints
+  const xLabels = ['Preseason', 'Week 0', 'Week 1', 'Week 2'];
+  xLabels.forEach((label, idx) => {
+    const x = padLeft + (idx / (xLabels.length - 1)) * (w - padLeft - padRight);
+    
+    // Vertical Grid
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+    ctx.beginPath();
+    ctx.moveTo(x, padTop);
+    ctx.lineTo(x, h - padBottom);
+    ctx.stroke();
+
+    // X-Axis Label
+    ctx.fillStyle = '#94A3B8';
+    ctx.font = 'bold 10px Outfit, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(label, x, h - padBottom + 16);
+  });
+
+  // Draw Lines & End Points for Each Team
   series.forEach(s => {
     ctx.strokeStyle = s.color;
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
     ctx.beginPath();
+
     s.values.forEach((val, idx) => {
-      const x = pad + (idx / 3) * (w - pad * 2);
-      const y = pad + ((val - 200) / 300) * (h - pad * 2);
+      const x = padLeft + (idx / (xLabels.length - 1)) * (w - padLeft - padRight);
+      const y = (h - padBottom) - ((val - minY) / (maxY - minY)) * (h - padTop - padBottom);
       if (idx === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     });
     ctx.stroke();
 
-    // End point
-    const lastX = pad + (3 / 3) * (w - pad * 2);
-    const lastY = pad + ((s.values[3] - 200) / 300) * (h - pad * 2);
+    // Intermediate points
+    s.values.forEach((val, idx) => {
+      const x = padLeft + (idx / (xLabels.length - 1)) * (w - padLeft - padRight);
+      const y = (h - padBottom) - ((val - minY) / (maxY - minY)) * (h - padTop - padBottom);
+
+      ctx.fillStyle = s.color;
+      ctx.beginPath();
+      ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // End point circle with highlight
+    const lastIdx = s.values.length - 1;
+    const lastVal = s.values[lastIdx];
+    const lastX = padLeft + (lastIdx / (xLabels.length - 1)) * (w - padLeft - padRight);
+    const lastY = (h - padBottom) - ((lastVal - minY) / (maxY - minY)) * (h - padTop - padBottom);
+
     ctx.fillStyle = s.color;
     ctx.beginPath();
-    ctx.arc(lastX, lastY, 4, 0, Math.PI * 2);
+    ctx.arc(lastX, lastY, 5.5, 0, Math.PI * 2);
     ctx.fill();
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 2;
+    ctx.stroke();
 
+    // Label at right margin
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 10px Outfit, sans-serif';
-    ctx.fillText(`${s.name} (+${s.values[3]})`, lastX - 60, lastY - 6);
+    ctx.font = 'bold 10.5px Outfit, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(`${s.name} (${lastVal}%)`, lastX + 10, lastY + 3.5);
   });
 }
 
