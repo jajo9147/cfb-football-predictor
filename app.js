@@ -2018,20 +2018,10 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
       const gTo = gSliders.turnoverLuck || 0;
       const gCrowd = gSliders.crowdNoise || 0;
       const sliderBonus = (gQb * 0.18 + gDef * 0.18 + gGnd * 0.14 + gTo * 0.12 + gCrowd * 0.08);
-
-      const isMatchTeam = (t, curId) => {
-        if (!t || !curId) return false;
-        const cur = curId.toLowerCase().trim();
-        const tid = (t.id || '').toLowerCase().trim();
-        const tabbr = (t.abbr || '').toLowerCase().trim();
-        const tshort = (t.shortName || '').toLowerCase().trim();
-        return tid === cur || tabbr === cur || tshort.includes(cur) || cur.includes(tshort);
-      };
-
       const targetId = gSliders.targetTeamId || state.currentTeamId;
-      if (isMatchTeam(teamA, targetId) && !isMatchTeam(teamB, targetId)) {
+      if (isTeamMatch(teamA, targetId) && !isTeamMatch(teamB, targetId)) {
         spA += sliderBonus;
-      } else if (isMatchTeam(teamB, targetId) && !isMatchTeam(teamA, targetId)) {
+      } else if (isTeamMatch(teamB, targetId) && !isTeamMatch(teamA, targetId)) {
         spB += sliderBonus;
       } else {
         spA += sliderBonus;
@@ -2262,14 +2252,15 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
   const seed4 = p4Champs[3];
 
   // 5th G5 Conference Champion Auto-Bid
+  const bsuEvaluated = evaluatedTeams.find(t => t.id === 'boisestate');
+  const bsuLosses = bsuEvaluated ? bsuEvaluated.losses : 1;
   const mwcWinner = confChamps.find(c => c && (c.id === 'boisestate' || c.id === 'unlv' || c.conf === 'Mountain West'));
+
   let fifthChamp;
-  if (state.currentTeamId === 'boisestate') {
-    fifthChamp = TEAMS_DATABASE['boisestate'] || mwcWinner;
-  } else if (mwcWinner && mwcWinner.id === 'boisestate') {
-    fifthChamp = TEAMS_DATABASE['boisestate'] || mwcWinner;
-  } else if (mwcWinner) {
-    fifthChamp = mwcWinner;
+  // Boise State only earns the #12 G5 Auto-Bid if they win the MWC AND have at most 1 regular season loss (<= 1 loss, e.g. losing only to Oregon).
+  // If they lose 2+ games (e.g. lose to Oregon AND New Mexico/Wyoming/etc.) or lose the MWC title game, the G5 bid goes to AAC / G5 champion and Boise State misses the CFP.
+  if (mwcWinner && isTeamMatch(mwcWinner, 'boisestate') && bsuLosses <= 1) {
+    fifthChamp = bsuEvaluated || TEAMS_DATABASE['boisestate'];
   } else {
     fifthChamp = {
       id: 'g5-autobid',
