@@ -990,12 +990,25 @@ function openSimModal(game) {
       let tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
       let isHomeA = game.isHomeA || game.isHome || false;
 
+      const isMatchTeam = (t, currId) => {
+        if (!t || !currId) return false;
+        const cur = currId.toLowerCase().trim();
+        const tid = (t.id || '').toLowerCase().trim();
+        const tabbr = (t.abbr || '').toLowerCase().trim();
+        const tshort = (t.shortName || '').toLowerCase().trim();
+        const tname = (t.name || '').toLowerCase().trim();
+        return tid === cur || tabbr === cur || tshort.includes(cur) || cur.includes(tshort) || tname.includes(cur) || cur.includes(tid);
+      };
+
       // Ensure active team is always team1 (on the left) so sliders and scoreboards are intuitive
       let primaryTeam = tA;
       let secondaryTeam = tB;
       let isPrimaryHome = isHomeA;
 
-      if (tB.id === state.currentTeamId && tA.id !== state.currentTeamId) {
+      const isBActive = isMatchTeam(tB, state.currentTeamId);
+      const isAActive = isMatchTeam(tA, state.currentTeamId);
+
+      if (isBActive && !isAActive) {
         primaryTeam = tB;
         secondaryTeam = tA;
         isPrimaryHome = game.isHomeB || false;
@@ -1975,17 +1988,22 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
       const gCrowd = gSliders.crowdNoise || 0;
       const sliderBonus = (gQb * 0.18 + gDef * 0.18 + gGnd * 0.14 + gTo * 0.12 + gCrowd * 0.08);
 
-      const targetId = gSliders.targetTeamId || ((teamB && teamB.id === state.currentTeamId) ? teamB.id : (teamA ? teamA.id : null));
-      if (teamA && teamA.id === targetId) {
+      const isMatchTeam = (t, curId) => {
+        if (!t || !curId) return false;
+        const cur = curId.toLowerCase().trim();
+        const tid = (t.id || '').toLowerCase().trim();
+        const tabbr = (t.abbr || '').toLowerCase().trim();
+        const tshort = (t.shortName || '').toLowerCase().trim();
+        return tid === cur || tabbr === cur || tshort.includes(cur) || cur.includes(tshort);
+      };
+
+      const targetId = gSliders.targetTeamId || state.currentTeamId;
+      if (isMatchTeam(teamA, targetId) && !isMatchTeam(teamB, targetId)) {
         spA += sliderBonus;
-      } else if (teamB && teamB.id === targetId) {
+      } else if (isMatchTeam(teamB, targetId) && !isMatchTeam(teamA, targetId)) {
         spB += sliderBonus;
       } else {
-        if (teamB && teamB.id === state.currentTeamId) {
-          spB += sliderBonus;
-        } else {
-          spA += sliderBonus;
-        }
+        spA += sliderBonus;
       }
     }
   }
@@ -2215,10 +2233,13 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
   // 5th G5 Conference Champion Auto-Bid
   const mwcWinner = confChamps.find(c => c && (c.id === 'boisestate' || c.id === 'unlv' || c.conf === 'Mountain West'));
   let fifthChamp;
-  if (mwcWinner && mwcWinner.id === 'boisestate') {
+  if (state.currentTeamId === 'boisestate') {
+    fifthChamp = TEAMS_DATABASE['boisestate'] || mwcWinner;
+  } else if (mwcWinner && mwcWinner.id === 'boisestate') {
+    fifthChamp = TEAMS_DATABASE['boisestate'] || mwcWinner;
+  } else if (mwcWinner) {
     fifthChamp = mwcWinner;
   } else {
-    // If Boise State loses MWC, G5 auto-bid passes to the AAC / G5 Champion Placeholder
     fifthChamp = {
       id: 'g5-autobid',
       name: 'AAC / G5 Champion (Auto-Bid)',
