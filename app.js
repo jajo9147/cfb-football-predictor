@@ -973,6 +973,16 @@ function initFilterButtons() {
 // SIMULATION MODAL & SINGLE-GAME CUSTOM SCENARIO TUNING
 // ==========================================================================
 
+function isTeamMatch(t, curId) {
+  if (!t || !curId) return false;
+  const cur = curId.toLowerCase().trim();
+  const tid = (t.id || '').toLowerCase().trim();
+  const tabbr = (t.abbr || '').toLowerCase().trim();
+  const tshort = (t.shortName || '').toLowerCase().trim();
+  const tname = (t.name || '').toLowerCase().trim();
+  return tid === cur || tabbr === cur || tshort.includes(cur) || cur.includes(tshort) || tname.includes(cur) || cur.includes(tid);
+}
+
 function openSimModal(game) {
   if (!game) return;
   state.activeModalGame = game;
@@ -990,28 +1000,22 @@ function openSimModal(game) {
       let tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
       let isHomeA = game.isHomeA || game.isHome || false;
 
-      const isMatchTeam = (t, currId) => {
-        if (!t || !currId) return false;
-        const cur = currId.toLowerCase().trim();
-        const tid = (t.id || '').toLowerCase().trim();
-        const tabbr = (t.abbr || '').toLowerCase().trim();
-        const tshort = (t.shortName || '').toLowerCase().trim();
-        const tname = (t.name || '').toLowerCase().trim();
-        return tid === cur || tabbr === cur || tshort.includes(cur) || cur.includes(tshort) || tname.includes(cur) || cur.includes(tid);
-      };
-
       // Ensure active team is always team1 (on the left) so sliders and scoreboards are intuitive
       let primaryTeam = tA;
       let secondaryTeam = tB;
       let isPrimaryHome = isHomeA;
 
-      const isBActive = isMatchTeam(tB, state.currentTeamId);
-      const isAActive = isMatchTeam(tA, state.currentTeamId);
+      const isBActive = isTeamMatch(tB, state.currentTeamId);
+      const isAActive = isTeamMatch(tA, state.currentTeamId);
 
       if (isBActive && !isAActive) {
-        primaryTeam = tB;
+        primaryTeam = TEAMS_DATABASE[state.currentTeamId] || tB;
         secondaryTeam = tA;
         isPrimaryHome = game.isHomeB || false;
+      } else if (isAActive) {
+        primaryTeam = TEAMS_DATABASE[state.currentTeamId] || tA;
+        secondaryTeam = tB;
+        isPrimaryHome = isHomeA;
       }
       
       team1 = {
@@ -1553,12 +1557,18 @@ function renderGameSlidersInModal(game) {
   // Determine focus team and opponent for this specific modal game
   let focusTeam, oppTeam;
   if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
-    if (game.teamB.id === state.currentTeamId) {
-      focusTeam = TEAMS_DATABASE[game.teamB.id] || game.teamB;
-      oppTeam = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+    let tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+    let tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+
+    if (isTeamMatch(tB, state.currentTeamId) && !isTeamMatch(tA, state.currentTeamId)) {
+      focusTeam = TEAMS_DATABASE[state.currentTeamId] || tB;
+      oppTeam = tA;
+    } else if (isTeamMatch(tA, state.currentTeamId)) {
+      focusTeam = TEAMS_DATABASE[state.currentTeamId] || tA;
+      oppTeam = tB;
     } else {
-      focusTeam = TEAMS_DATABASE[game.teamA.id] || game.teamA;
-      oppTeam = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+      focusTeam = tA;
+      oppTeam = tB;
     }
   } else {
     focusTeam = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
@@ -1700,7 +1710,15 @@ window.applyAndSimulateModalGame = function() {
   
   let focusId = state.currentTeamId;
   if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
-    focusId = (game.teamB.id === state.currentTeamId) ? game.teamB.id : (game.teamA.id || state.currentTeamId);
+    let tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+    let tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+    if (isTeamMatch(tB, state.currentTeamId) && !isTeamMatch(tA, state.currentTeamId)) {
+      focusId = (TEAMS_DATABASE[state.currentTeamId] || tB).id || state.currentTeamId;
+    } else if (isTeamMatch(tA, state.currentTeamId)) {
+      focusId = (TEAMS_DATABASE[state.currentTeamId] || tA).id || state.currentTeamId;
+    } else {
+      focusId = tA.id || state.currentTeamId;
+    }
   }
   if (!state.gameSliders[game.id]) {
     const teamSliders = getTeamSliders(focusId);
@@ -1749,7 +1767,15 @@ window.applyGameScenarioPreset = function(presetKey) {
 
   let focusId = state.currentTeamId;
   if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
-    focusId = (game.teamB.id === state.currentTeamId) ? game.teamB.id : (game.teamA.id || state.currentTeamId);
+    let tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+    let tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+    if (isTeamMatch(tB, state.currentTeamId) && !isTeamMatch(tA, state.currentTeamId)) {
+      focusId = (TEAMS_DATABASE[state.currentTeamId] || tB).id || state.currentTeamId;
+    } else if (isTeamMatch(tA, state.currentTeamId)) {
+      focusId = (TEAMS_DATABASE[state.currentTeamId] || tA).id || state.currentTeamId;
+    } else {
+      focusId = tA.id || state.currentTeamId;
+    }
   }
   state.gameSliders[game.id] = {
     ...presetValues,
