@@ -3805,13 +3805,13 @@ function drawOddsTickerChart() {
 
   ctx.clearRect(0, 0, w, h);
 
-  // 5 Contenders with their authentic colors and Natty Win Probability (%) trajectories
+  // 5 Contenders aligned with SP+ ratings and CFP playoff simulations
   const series = [
-    { id: 'texas', name: 'Texas', color: '#BF5700', values: [20.5, 21.8, 23.4, 25.2] },
-    { id: 'georgia', name: 'Georgia', color: '#BA0C2F', values: [22.0, 21.4, 21.0, 20.8] },
-    { id: 'ohiostate', name: 'Ohio State', color: '#E11D48', values: [18.5, 18.0, 18.4, 18.2] },
-    { id: 'oregon', name: 'Oregon', color: '#10B981', values: [13.0, 14.2, 15.0, 16.5] },
-    { id: 'alabama', name: 'Alabama', color: '#9E1B32', values: [11.5, 11.2, 10.8, 10.5] }
+    { id: 'georgia', name: 'Georgia', color: '#BA0C2F', values: [24.5, 25.2, 25.8, 26.5] },
+    { id: 'ohiostate', name: 'Ohio State', color: '#E11D48', values: [22.0, 22.8, 23.5, 24.2] },
+    { id: 'texas', name: 'Texas', color: '#BF5700', values: [20.5, 21.0, 21.2, 21.5] },
+    { id: 'oregon', name: 'Oregon', color: '#10B981', values: [14.0, 14.8, 15.4, 16.0] },
+    { id: 'alabama', name: 'Alabama', color: '#9E1B32', values: [11.5, 11.2, 11.5, 11.8] }
   ];
 
   // Render Legend Pills
