@@ -67,8 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTeamSelector();
   initTeamSearch();
 
-  // Default to the #1 AP ranked team dynamically
-  const defaultTeamId = getTopRankedTeamId();
+  // Default to URL query param (?team=texas, ?team=michigan, etc.) or #1 AP ranked team
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramTeam = urlParams.get('team') ? urlParams.get('team').toLowerCase().trim() : null;
+  const defaultTeamId = (paramTeam && TEAMS_DATABASE[paramTeam]) ? paramTeam : getTopRankedTeamId();
   selectTeam(defaultTeamId);
   restoreScenarioFromUrl();
 
