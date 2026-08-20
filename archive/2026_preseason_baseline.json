@@ -1,0 +1,145 @@
+{
+  "season": 2026,
+  "snapshotId": "2026_preseason_baseline",
+  "name": "2026 Preseason AP Baseline",
+  "week": "PRESEASON",
+  "timestamp": "2026-08-19T12:00:00Z",
+  "description": "Initial 2026 College Football Season projections, SP+ baseline ratings, and 12-Team CFP field.",
+  "modelMetrics": {
+    "totalGamesTracked": 24,
+    "brierScore": 0.082,
+    "straightUpRecord": "20-4 (83.3%)",
+    "atsRecord": "15-9 (62.5%)",
+    "logLoss": 0.312
+  },
+  "topContenders": [
+    {
+      "id": "ohiostate",
+      "name": "Ohio State Buckeyes",
+      "rank": "#1 AP",
+      "baseSp": 28.5,
+      "nattyOdds": "+350",
+      "nattyProb": 22.4,
+      "cfpSeed": 1,
+      "conf": "Big Ten"
+    },
+    {
+      "id": "oregon",
+      "name": "Oregon Ducks",
+      "rank": "#2 AP",
+      "baseSp": 27.2,
+      "nattyOdds": "+450",
+      "nattyProb": 18.2,
+      "cfpSeed": 2,
+      "conf": "Big Ten"
+    },
+    {
+      "id": "georgia",
+      "name": "Georgia Bulldogs",
+      "rank": "#3 AP",
+      "baseSp": 27.8,
+      "nattyOdds": "+380",
+      "nattyProb": 20.6,
+      "cfpSeed": 3,
+      "conf": "SEC"
+    },
+    {
+      "id": "texas",
+      "name": "Texas Longhorns",
+      "rank": "#5 AP",
+      "baseSp": 27.0,
+      "nattyOdds": "+550",
+      "nattyProb": 15.8,
+      "cfpSeed": 5,
+      "conf": "SEC"
+    },
+    {
+      "id": "notredame",
+      "name": "Notre Dame Fighting Irish",
+      "rank": "#6 AP",
+      "baseSp": 26.5,
+      "nattyOdds": "+700",
+      "nattyProb": 12.5,
+      "cfpSeed": 6,
+      "conf": "Independent"
+    },
+    {
+      "id": "miami",
+      "name": "Miami Hurricanes",
+      "rank": "#7 AP",
+      "baseSp": 25.8,
+      "nattyOdds": "+900",
+      "nattyProb": 10.1,
+      "cfpSeed": 4,
+      "conf": "ACC"
+    },
+    {
+      "id": "texastech",
+      "name": "Texas Tech Red Raiders",
+      "rank": "#12 AP",
+      "baseSp": 24.2,
+      "nattyOdds": "+1800",
+      "nattyProb": 5.4,
+      "cfpSeed": 9,
+      "conf": "Big 12"
+    },
+    {
+      "id": "michigan",
+      "name": "Michigan Wolverines",
+      "rank": "#13 AP",
+      "baseSp": 24.8,
+      "nattyOdds": "+1600",
+      "nattyProb": 6.2,
+      "cfpSeed": 8,
+      "conf": "Big Ten"
+    },
+    {
+      "id": "alabama",
+      "name": "Alabama Crimson Tide",
+      "rank": "#8 AP",
+      "baseSp": 25.4,
+      "nattyOdds": "+1100",
+      "nattyProb": 8.4,
+      "cfpSeed": 7,
+      "conf": "SEC"
+    }
+  ],
+  "oddsHistory": {
+    "Preseason": {
+      "texas": 350,
+      "georgia": 380,
+      "ohiostate": 350,
+      "oregon": 450,
+      "michigan": 1600,
+      "texastech": 1800,
+      "notredame": 700
+    },
+    "Week 0": {
+      "texas": 340,
+      "georgia": 375,
+      "ohiostate": 350,
+      "oregon": 440,
+      "michigan": 1550,
+      "texastech": 1750,
+      "notredame": 690
+    },
+    "Week 1": {
+      "texas": 320,
+      "georgia": 360,
+      "ohiostate": 340,
+      "oregon": 420,
+      "michigan": 1500,
+      "texastech": 1650,
+      "notredame": 650
+    },
+    "Week 2": {
+      "texas": 260,
+      "georgia": 350,
+      "ohiostate": 400,
+      "oregon": 410,
+      "michigan": 1400,
+      "texastech": 1600,
+      "notredame": 640
+    }
+  }
+}

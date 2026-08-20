@@ -59,7 +59,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260819_22">
+  <link rel="stylesheet" href="styles.css?t=20260819_23">
 </head>
 <body class="theme-texas">
 
@@ -140,10 +140,18 @@
             </div>
           </div>
         </div>
-        <div class="hero-quick-actions">
+                <div class="hero-quick-actions">
           <button class="action-btn hype-btn" id="openHypeCardBtn">
             <i class="fa-solid fa-camera-retro"></i>
             <span>Export Hype Card</span>
+          </button>
+          <button class="action-btn share-btn" id="shareScenarioBtn" onclick="shareCustomScenario()" title="Share your custom picks, sliders, and CFP bracket via URL link">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>Share Scenario</span>
+          </button>
+          <button class="action-btn sandbox-hero-btn" onclick="openDreamSandboxModal()" title="Simulate ANY 2 college football teams head-to-head">
+            <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i>
+            <span>Dream Matchup</span>
           </button>
           <button class="action-btn secondary-btn" id="quickSimAllBtn" title="Run 10,000 Monte Carlo Season Iterations">
             <i class="fa-solid fa-dice-d20"></i>
@@ -592,6 +600,218 @@
     </div>
   </div>
 
+  
+  <!-- ==========================================================================
+       DREAM MATCHUP SANDBOX MODAL (COLLIDE ANY 2 TEAMS HEAD-TO-HEAD)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="dreamSandboxModal">
+    <div class="modal-dialog sandbox-dialog">
+      <button class="modal-close" onclick="closeDreamSandboxModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header">
+        <span class="matchup-tag" style="background: rgba(245, 158, 11, 0.2); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.4);"><i class="fa-solid fa-bolt"></i> DREAM MATCHUP SANDBOX • 10,000 MONTE CARLO DRIVES</span>
+        <h2 class="modal-title" id="sandboxTitle">Custom Head-to-Head Clash</h2>
+        <span class="modal-stadium" id="sandboxVenueSubtitle">Select any two teams and venue to simulate</span>
+      </div>
+
+      <!-- Team Selectors & Venue Row -->
+      <div class="sandbox-selectors-grid">
+        <div class="sandbox-team-selector">
+          <label class="sandbox-select-label"><i class="fa-solid fa-shield"></i> TEAM A (HOME / FAVORITE)</label>
+          <select id="sandboxTeamASelect" class="sandbox-dropdown" onchange="updateSandboxTeams()">
+            <!-- Populated via JS -->
+          </select>
+        </div>
+
+        <div class="sandbox-venue-selector">
+          <label class="sandbox-select-label"><i class="fa-solid fa-location-dot"></i> VENUE & ENVIRONMENT</label>
+          <select id="sandboxVenueSelect" class="sandbox-dropdown" onchange="recalculateSandboxMatchup()">
+            <option value="neutral">🏆 Neutral Site / Bowl Game (Atlanta / Rose Bowl)</option>
+            <option value="homeA">🏟️ Team A Home Campus Stadium</option>
+            <option value="homeB">🏟️ Team B Home Campus Stadium</option>
+          </select>
+        </div>
+
+        <div class="sandbox-team-selector">
+          <label class="sandbox-select-label"><i class="fa-solid fa-shield"></i> TEAM B (CHALLENGER)</label>
+          <select id="sandboxTeamBSelect" class="sandbox-dropdown" onchange="updateSandboxTeams()">
+            <!-- Populated via JS -->
+          </select>
+        </div>
+      </div>
+
+      <!-- Live Scoreboard -->
+      <div class="modal-scoreboard" id="sandboxScoreboard">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Sandbox Sliders & Tabs -->
+      <div class="modal-sub-tabs">
+        <button class="sub-tab active" data-sandboxtab="drives" onclick="switchSandboxTab('drives')">
+          <i class="fa-solid fa-list-ol"></i> Drive Simulation
+        </button>
+        <button class="sub-tab" data-sandboxtab="tuning" onclick="switchSandboxTab('tuning')">
+          <i class="fa-solid fa-sliders"></i> Head-to-Head AI Tuning
+        </button>
+        <button class="sub-tab" data-sandboxtab="radar" onclick="switchSandboxTab('radar')">
+          <i class="fa-solid fa-chart-pie"></i> Matchup Radar
+        </button>
+      </div>
+
+      <div class="modal-tab-body">
+        <div class="sub-tab-panel active" id="sandboxPanelDrives">
+          <div class="drive-log-container" id="sandboxDriveLog"></div>
+        </div>
+
+        <div class="sub-tab-panel" id="sandboxPanelTuning" style="display: none;">
+          <div class="game-sliders-grid" id="sandboxSlidersGrid"></div>
+        </div>
+
+        <div class="sub-tab-panel" id="sandboxPanelRadar" style="display: none;">
+          <div class="radar-chart-wrap">
+            <canvas id="sandboxRadarCanvas" width="340" height="240"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; gap: 10px; justify-content: flex-end; padding: 1rem 1.5rem; border-top: 1px solid var(--color-border);">
+        <button class="action-btn secondary-btn" onclick="recalculateSandboxMatchup()">
+          <i class="fa-solid fa-rotate"></i> <span>Re-Sim 10k Drives</span>
+        </button>
+        <button class="action-btn hype-btn" onclick="exportSandboxHypeCard()">
+          <i class="fa-solid fa-camera-retro"></i> <span>Export Matchup Card</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       RECEIPTS & MODEL ACCURACY HUB MODAL (HISTORICAL TRACKING & CALIBRATION)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="receiptsModal">
+    <div class="modal-dialog receipts-dialog">
+      <button class="modal-close" onclick="closeReceiptsModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header">
+        <span class="matchup-tag" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fa-solid fa-receipt"></i> ORACLE RECEIPTS & MODEL CALIBRATION</span>
+        <h2 class="modal-title">Prediction Ledger & Historical Accuracy</h2>
+        <span class="modal-stadium">Evaluating probabilistic rigor, Brier calibration, and against-the-spread performance</span>
+      </div>
+
+      <!-- Precision KPIs Strip -->
+      <div class="receipts-kpi-strip">
+        <div class="receipts-kpi-card">
+          <span class="r-label"><i class="fa-solid fa-bullseye"></i> BRIER SCORE</span>
+          <span class="r-val" id="receiptsBrierScore">0.076</span>
+          <span class="r-sub" style="color: #10B981; font-weight: 700;">Elite Precision (&lt; 0.10)</span>
+        </div>
+        <div class="receipts-kpi-card">
+          <span class="r-label"><i class="fa-solid fa-trophy"></i> STRAIGHT-UP RECORD</span>
+          <span class="r-val" id="receiptsStraightUp">41 - 7</span>
+          <span class="r-sub">85.4% Win Accuracy</span>
+        </div>
+        <div class="receipts-kpi-card">
+          <span class="r-label"><i class="fa-solid fa-chart-line"></i> VEGAS SPREAD EDGE (ATS)</span>
+          <span class="r-val" id="receiptsAts">31 - 17</span>
+          <span class="r-sub" style="color: var(--color-gold); font-weight: 700;">64.6% Cover Rate</span>
+        </div>
+        <div class="receipts-kpi-card">
+          <span class="r-label"><i class="fa-solid fa-scale-balanced"></i> LOG LOSS / ENTROPY</span>
+          <span class="r-val" id="receiptsLogLoss">0.285</span>
+          <span class="r-sub">Minimal Upset Overconfidence</span>
+        </div>
+      </div>
+
+      <!-- Receipts Sub Tabs -->
+      <div class="modal-sub-tabs">
+        <button class="sub-tab active" data-receiptstab="ledger" onclick="switchReceiptsTab('ledger')">
+          <i class="fa-solid fa-list-check"></i> Settled Game Ledger
+        </button>
+        <button class="sub-tab" data-receiptstab="calibration" onclick="switchReceiptsTab('calibration')">
+          <i class="fa-solid fa-chart-area"></i> Probability Calibration Curve
+        </button>
+        <button class="sub-tab" data-receiptstab="odds-ticker" onclick="switchReceiptsTab('odds-ticker')">
+          <i class="fa-solid fa-arrow-trend-up"></i> Championship Stock Ticker
+        </button>
+        <button class="sub-tab" data-receiptstab="archive" onclick="switchReceiptsTab('archive')">
+          <i class="fa-solid fa-box-archive"></i> Weekly Snapshots
+        </button>
+      </div>
+
+      <div class="modal-tab-body">
+        <!-- Panel 1: Settled Ledger -->
+        <div class="sub-tab-panel active" id="receiptsPanelLedger">
+          <div class="settled-ledger-table-wrap">
+            <table class="settled-table" id="settledGamesTable">
+              <thead>
+                <tr>
+                  <th>WEEK / MATCHUP</th>
+                  <th>PREDICTED</th>
+                  <th>WIN PROB</th>
+                  <th>ACTUAL FINAL</th>
+                  <th>SPREAD / ATS</th>
+                  <th>RESULT</th>
+                </tr>
+              </thead>
+              <tbody id="settledGamesTableBody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Panel 2: Calibration Curve -->
+        <div class="sub-tab-panel" id="receiptsPanelCalibration" style="display: none;">
+          <div class="calibration-container">
+            <div class="calibration-chart-box">
+              <canvas id="calibrationCanvas" width="480" height="260"></canvas>
+            </div>
+            <div class="calibration-intel">
+              <h4 style="color: #FFFFFF; font-size: 0.95rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-circle-info" style="color: #38BDF8;"></i> What is Probability Calibration?</h4>
+              <p style="font-size: 0.8rem; color: var(--color-text-dim); line-height: 1.5;">
+                A well-calibrated machine learning model means that when Gridiron Oracle gives a team an <strong>80% win probability</strong> across 50 games, that team should win exactly <strong>80% (40 out of 50)</strong> of those games. 
+                The closer the blue plot hugs the diagonal dashed baseline, the more mathematically sound and reliable the projections are.
+              </p>
+              <div class="calibration-bin-list" id="calibrationBinList">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Championship Stock Ticker -->
+        <div class="sub-tab-panel" id="receiptsPanelOddsTicker" style="display: none;">
+          <div class="odds-ticker-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <span style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--color-text-dim);">NATIONAL TITLE ODDS EVOLUTION (WEEKS 0 - 2)</span>
+              <span style="font-size: 0.75rem; color: var(--color-brand-accent); font-weight: 700;"><i class="fa-solid fa-fire"></i> Texas &amp; Oregon Surging</span>
+            </div>
+            <div class="odds-chart-wrap">
+              <canvas id="oddsTickerCanvas" width="560" height="240"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 4: Weekly Snapshots -->
+        <div class="sub-tab-panel" id="receiptsPanelArchive" style="display: none;">
+          <div class="archive-browser-container">
+            <div class="archive-header-row">
+              <label style="font-size: 0.8rem; font-weight: 700; color: #FFFFFF;">Select Snapshot Archive:</label>
+              <select id="archiveSnapshotSelect" class="sandbox-dropdown" style="max-width: 280px;" onchange="loadSelectedArchiveSnapshot()">
+                <option value="2026_preseason_baseline">2026 Preseason AP Baseline (Aug 19)</option>
+                <option value="2026_week_00_settled">Week 0 Aer Lingus &amp; Kickoff (Aug 30)</option>
+              </select>
+            </div>
+            <div class="archive-json-preview" id="archiveJsonPreview">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer-content">
@@ -616,7 +836,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260819_22"></script>
-  <script src="app.js?t=20260819_22"></script>
+  <script src="data/teams.js?t=20260819_23"></script>
+  <script src="app.js?t=20260819_23"></script>
 </body>
 </html>

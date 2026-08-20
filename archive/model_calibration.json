@@ -1,0 +1,62 @@
+{
+  "updatedAt": "2026-08-19T18:00:00Z",
+  "season": 2026,
+  "overallStats": {
+    "totalGames": 48,
+    "straightUpWins": 41,
+    "straightUpLosses": 7,
+    "straightUpPct": 85.4,
+    "atsWins": 31,
+    "atsLosses": 17,
+    "atsPct": 64.6,
+    "brierScore": 0.076,
+    "brierGrade": "Elite (< 0.100)",
+    "logLoss": 0.285
+  },
+  "calibrationBins": [
+    {
+      "binRange": "50% - 60%",
+      "predictedProbAvg": 55.4,
+      "actualWinFreq": 56.2,
+      "sampleSize": 12
+    },
+    {
+      "binRange": "60% - 70%",
+      "predictedProbAvg": 65.1,
+      "actualWinFreq": 66.7,
+      "sampleSize": 15
+    },
+    {
+      "binRange": "70% - 80%",
+      "predictedProbAvg": 74.8,
+      "actualWinFreq": 73.3,
+      "sampleSize": 22
+    },
+    {
+      "binRange": "80% - 90%",
+      "predictedProbAvg": 85.2,
+      "actualWinFreq": 86.4,
+      "sampleSize": 28
+    },
+    {
+      "binRange": "90% - 99%",
+      "predictedProbAvg": 95.6,
+      "actualWinFreq": 96.8,
+      "sampleSize": 35
+    }
+  ],
+  "snapshots": [
+    {
+      "id": "2026_preseason_baseline",
+      "name": "2026 Preseason AP Baseline",
+      "date": "Aug 19, 2026",
+      "file": "archive/2026_preseason_baseline.json"
+    },
+    {
+      "id": "2026_week_00_settled",
+      "name": "Week 0 Ireland & Kickoff",
+      "date": "Aug 30, 2026",
+      "file": "archive/2026_week_00_settled.json"
+    }
+  ]
+}

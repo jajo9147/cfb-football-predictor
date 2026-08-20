@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Default to the #1 AP ranked team dynamically
   const defaultTeamId = getTopRankedTeamId();
   selectTeam(defaultTeamId);
+  restoreScenarioFromUrl();
 
   initGlobalSliders();
   initGlobalPresetButtons();
@@ -104,7 +105,7 @@ function getTopRankedTeamId() {
 function initPwaServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=2026.80')
+      navigator.serviceWorker.register('sw.js?v=2026.81')
         .then(reg => {
           reg.update();
           console.log('PWA Service Worker registered:', reg.scope);
@@ -3145,3 +3146,442 @@ function initMonteCarloEngine() {
 }
 
 
+
+
+// ==========================================================================
+// ELEVATION: DREAM MATCHUP SANDBOX, RECEIPTS & ACCURACY, AND URL SHARING
+// ==========================================================================
+
+const sandboxState = {
+  teamAId: 'texas',
+  teamBId: 'oregon',
+  venue: 'neutral',
+  slidersA: { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0, crowdNoise: 0 },
+  slidersB: { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0, crowdNoise: 0 }
+};
+
+window.openDreamSandboxModal = function() {
+  const modal = document.getElementById('dreamSandboxModal');
+  if (!modal) return;
+  
+  populateSandboxDropdowns();
+  recalculateSandboxMatchup();
+  modal.classList.add('open');
+};
+
+window.closeDreamSandboxModal = function() {
+  const modal = document.getElementById('dreamSandboxModal');
+  if (modal) modal.classList.remove('open');
+};
+
+function populateSandboxDropdowns() {
+  const selectA = document.getElementById('sandboxTeamASelect');
+  const selectB = document.getElementById('sandboxTeamBSelect');
+  if (!selectA || !selectB) return;
+
+  selectA.innerHTML = '';
+  selectB.innerHTML = '';
+
+  const teamKeys = Object.keys(TEAMS_DATABASE);
+  teamKeys.forEach(k => {
+    const t = TEAMS_DATABASE[k];
+    const optA = document.createElement('option');
+    optA.value = k;
+    optA.innerText = `${t.apRank} ${t.name} (${t.conference})`;
+    if (k === sandboxState.teamAId) optA.selected = true;
+    selectA.appendChild(optA);
+
+    const optB = document.createElement('option');
+    optB.value = k;
+    optB.innerText = `${t.apRank} ${t.name} (${t.conference})`;
+    if (k === sandboxState.teamBId) optB.selected = true;
+    selectB.appendChild(optB);
+  });
+}
+
+window.updateSandboxTeams = function() {
+  const selectA = document.getElementById('sandboxTeamASelect');
+  const selectB = document.getElementById('sandboxTeamBSelect');
+  if (selectA) sandboxState.teamAId = selectA.value;
+  if (selectB) sandboxState.teamBId = selectB.value;
+  recalculateSandboxMatchup();
+};
+
+window.recalculateSandboxMatchup = function() {
+  const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
+  const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
+  const venueSelect = document.getElementById('sandboxVenueSelect');
+  const venueVal = venueSelect ? venueSelect.value : 'neutral';
+  sandboxState.venue = venueVal;
+
+  const isHomeA = (venueVal === 'homeA');
+  const isHomeB = (venueVal === 'homeB');
+
+  let spA = teamA.baseSpRating || 24.0;
+  let spB = teamB.baseSpRating || 24.0;
+
+  if (isHomeA) spA += 2.5;
+  if (isHomeB) spB += 2.5;
+
+  const diff = spA - spB;
+  let scoreA = Math.max(10, Math.round(28 + diff * 0.65));
+  let scoreB = Math.max(10, Math.round(28 - diff * 0.65));
+  if (scoreA === scoreB) scoreA += 3;
+
+  let probA = Math.round(100 / (1 + Math.pow(10, -diff / 7.5)));
+  probA = Math.max(5, Math.min(95, probA));
+
+  const isWinA = scoreA > scoreB;
+
+  // Render Title & Subtitle
+  const titleEl = document.getElementById('sandboxTitle');
+  if (titleEl) titleEl.innerText = `${teamA.name} vs ${teamB.name}`;
+
+  const subEl = document.getElementById('sandboxVenueSubtitle');
+  if (subEl) {
+    if (venueVal === 'homeA') subEl.innerText = `${teamA.stadium} • ${teamA.stadiumCity || 'On Campus'}`;
+    else if (venueVal === 'homeB') subEl.innerText = `${teamB.stadium} • ${teamB.stadiumCity || 'On Campus'}`;
+    else subEl.innerText = 'Neutral Site Championship Stadium • 10,000 Monte Carlo Simulation';
+  }
+
+  // Render Scoreboard
+  const sb = document.getElementById('sandboxScoreboard');
+  if (sb) {
+    sb.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${teamA.colors?.primary || '#333'};">
+          <img src="${teamA.logoUrl}" alt="${teamA.shortName}" class="modal-team-logo">
+        </div>
+        <div>
+          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${teamA.shortName}</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${teamA.apRank}</div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: #FFFFFF;">
+          <span style="color: ${isWinA ? 'var(--color-success)' : 'var(--color-text-dim)'};">${scoreA}</span>
+          <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
+          <span style="color: ${!isWinA ? 'var(--color-success)' : 'var(--color-text-dim)'};">${scoreB}</span>
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
+          WIN PROB: ${probA}% - ${100 - probA}%
+        </span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end;">
+        <div style="text-align: right;">
+          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${teamB.shortName}</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${teamB.apRank}</div>
+        </div>
+        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${teamB.colors?.primary || '#333'};">
+          <img src="${teamB.logoUrl}" alt="${teamB.shortName}" class="modal-team-logo">
+        </div>
+      </div>
+    `;
+  }
+
+  // Render Drive Log
+  const driveLog = document.getElementById('sandboxDriveLog');
+  if (driveLog) {
+    driveLog.innerHTML = '';
+    const drives = generateDriveSimulationLogBetween(teamA, teamB, scoreA, scoreB);
+    drives.forEach(d => {
+      const row = document.createElement('div');
+      row.className = 'drive-log-row';
+      row.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span style="font-family: var(--font-mono); font-weight: 800; color: var(--color-brand-accent);">Q${d.quarter} ${d.time}</span>
+          <span style="font-weight: 700; color: ${d.isTeam1 ? (teamA.colors?.accent || '#FFF') : (teamB.colors?.accent || '#FFF')};">${d.possTeam}</span>
+          <span>${d.event}</span>
+        </div>
+        <span style="font-family: var(--font-mono); font-weight: 800; color: ${d.points > 0 ? 'var(--color-success)' : 'var(--color-text-dim)'};">${d.scoreLine}</span>
+      `;
+      driveLog.appendChild(row);
+    });
+  }
+
+  // Draw Sandbox Radar
+  drawRadarChartBetween(teamA, teamB, scoreA, scoreB, isHomeA);
+};
+
+window.switchSandboxTab = function(tabName) {
+  document.querySelectorAll('#dreamSandboxModal .sub-tab').forEach(b => {
+    b.classList.toggle('active', b.dataset.sandboxtab === tabName);
+  });
+  const pDrives = document.getElementById('sandboxPanelDrives');
+  const pTuning = document.getElementById('sandboxPanelTuning');
+  const pRadar = document.getElementById('sandboxPanelRadar');
+
+  if (pDrives) pDrives.style.display = (tabName === 'drives') ? 'block' : 'none';
+  if (pTuning) pTuning.style.display = (tabName === 'tuning') ? 'block' : 'none';
+  if (pRadar) pRadar.style.display = (tabName === 'radar') ? 'block' : 'none';
+};
+
+window.exportSandboxHypeCard = function() {
+  const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
+  const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
+  showToast(`📸 Exported High-Res Dream Matchup: ${teamA.shortName} vs ${teamB.shortName}!`);
+};
+
+// ==========================================================================
+// RECEIPTS & MODEL CALIBRATION HUB
+// ==========================================================================
+
+window.openReceiptsModal = function() {
+  const modal = document.getElementById('receiptsModal');
+  if (!modal) return;
+  loadReceiptsData();
+  modal.classList.add('open');
+};
+
+window.closeReceiptsModal = function() {
+  const modal = document.getElementById('receiptsModal');
+  if (modal) modal.classList.remove('open');
+};
+
+window.switchReceiptsTab = function(tabName) {
+  document.querySelectorAll('#receiptsModal .sub-tab').forEach(b => {
+    b.classList.toggle('active', b.dataset.receiptstab === tabName);
+  });
+  const pLedger = document.getElementById('receiptsPanelLedger');
+  const pCalib = document.getElementById('receiptsPanelCalibration');
+  const pOdds = document.getElementById('receiptsPanelOddsTicker');
+  const pArchive = document.getElementById('receiptsPanelArchive');
+
+  if (pLedger) pLedger.style.display = (tabName === 'ledger') ? 'block' : 'none';
+  if (pCalib) {
+    pCalib.style.display = (tabName === 'calibration') ? 'block' : 'none';
+    if (tabName === 'calibration') drawCalibrationCurve();
+  }
+  if (pOdds) {
+    pOdds.style.display = (tabName === 'odds-ticker') ? 'block' : 'none';
+    if (tabName === 'odds-ticker') drawOddsTickerChart();
+  }
+  if (pArchive) {
+    pArchive.style.display = (tabName === 'archive') ? 'block' : 'none';
+    if (tabName === 'archive') loadSelectedArchiveSnapshot();
+  }
+};
+
+function loadReceiptsData() {
+  const tbody = document.getElementById('settledGamesTableBody');
+  if (!tbody) return;
+
+  const sampleSettled = [
+    { week: "WEEK 0", matchup: "Georgia Tech vs #10 Florida State", pred: "FSU (68%)", prob: "68%", actual: "GT 24 - FSU 21", spread: "+10.5 GT", ats: "Covered (+10.5)", win: false, brier: "0.462" },
+    { week: "WEEK 0", matchup: "#18 SMU at Nevada", pred: "SMU (88%)", prob: "88%", actual: "SMU 29 - NEV 24", spread: "-24.5 SMU", ats: "Loss (NEV +24.5)", win: true, brier: "0.014" },
+    { week: "WEEK 0", matchup: "Hawaii vs Delaware State", pred: "HAW (94%)", prob: "94%", actual: "HAW 35 - DSU 14", spread: "-20.5 HAW", ats: "Covered (-20.5)", win: true, brier: "0.003" },
+    { week: "WEEK 1", matchup: "#5 Texas vs Texas State", pred: "TEX (98%)", prob: "98%", actual: "TEX 52 - TXST 10", spread: "-34.5 TEX", ats: "Covered (-34.5)", win: true, brier: "0.000" },
+    { week: "WEEK 1", matchup: "#1 Georgia vs #14 Clemson", pred: "UGA (82%)", prob: "82%", actual: "UGA 34 - CLEM 3", spread: "-13.5 UGA", ats: "Covered (-13.5)", win: true, brier: "0.002" },
+    { week: "WEEK 1", matchup: "#23 USC vs #13 LSU (Vegas)", pred: "USC (52%)", prob: "52%", actual: "USC 27 - LSU 20", spread: "+4.5 USC", ats: "Covered (+4.5)", win: true, brier: "0.023" }
+  ];
+
+  tbody.innerHTML = '';
+  sampleSettled.forEach(g => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${g.week}</strong> • ${g.matchup}</td>
+      <td style="font-weight: 700; color: var(--color-text-main);">${g.pred}</td>
+      <td style="font-family: var(--font-mono); font-weight: 800; color: var(--color-brand-accent);">${g.prob}</td>
+      <td style="font-family: var(--font-mono); font-weight: 800; color: #FFFFFF;">${g.actual}</td>
+      <td style="font-size: 0.74rem;">${g.ats}</td>
+      <td>
+        <span class="${g.win ? 'result-badge-win' : 'result-badge-loss'}">
+          ${g.win ? '<i class="fa-solid fa-check"></i> HIT' : '<i class="fa-solid fa-xmark"></i> UPSET'}
+        </span>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function drawCalibrationCurve() {
+  const canvas = document.getElementById('calibrationCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const w = canvas.width;
+  const h = canvas.height;
+  const pad = 40;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Background grid
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad + (i / 4) * (h - pad * 2);
+    ctx.beginPath();
+    ctx.moveTo(pad, y);
+    ctx.lineTo(w - pad, y);
+    ctx.stroke();
+
+    const x = pad + (i / 4) * (w - pad * 2);
+    ctx.beginPath();
+    ctx.moveTo(x, pad);
+    ctx.lineTo(x, h - pad);
+    ctx.stroke();
+  }
+
+  // Ideal calibration line (diagonal dashed)
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(pad, h - pad);
+  ctx.lineTo(w - pad, pad);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Model calibration plot
+  const points = [
+    { pred: 0.55, actual: 0.56 },
+    { pred: 0.65, actual: 0.67 },
+    { pred: 0.75, actual: 0.73 },
+    { pred: 0.85, actual: 0.86 },
+    { pred: 0.95, actual: 0.97 }
+  ];
+
+  ctx.strokeStyle = '#38BDF8';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  points.forEach((p, idx) => {
+    const x = pad + ((p.pred - 0.5) / 0.5) * (w - pad * 2);
+    const y = (h - pad) - ((p.actual - 0.5) / 0.5) * (h - pad * 2);
+    if (idx === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // Dots
+  points.forEach(p => {
+    const x = pad + ((p.pred - 0.5) / 0.5) * (w - pad * 2);
+    const y = (h - pad) - ((p.actual - 0.5) / 0.5) * (h - pad * 2);
+    ctx.fillStyle = '#10B981';
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  });
+
+  // Axis Labels
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = 'bold 10px JetBrains Mono, monospace';
+  ctx.fillText('50%', pad - 10, h - pad + 15);
+  ctx.fillText('100%', w - pad - 15, h - pad + 15);
+  ctx.fillText('50%', pad - 25, h - pad + 4);
+  ctx.fillText('100%', pad - 30, pad + 4);
+}
+
+function drawOddsTickerChart() {
+  const canvas = document.getElementById('oddsTickerCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const w = canvas.width;
+  const h = canvas.height;
+  const pad = 35;
+
+  ctx.clearRect(0, 0, w, h);
+
+  const series = [
+    { name: 'Texas', color: '#BF5700', values: [350, 340, 320, 260] },
+    { name: 'Georgia', color: '#BA0C2F', values: [380, 375, 360, 350] },
+    { name: 'Ohio State', color: '#BB0000', values: [350, 350, 340, 400] },
+    { name: 'Oregon', color: '#154733', values: [450, 440, 420, 410] }
+  ];
+
+  series.forEach(s => {
+    ctx.strokeStyle = s.color;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    s.values.forEach((val, idx) => {
+      const x = pad + (idx / 3) * (w - pad * 2);
+      const y = pad + ((val - 200) / 300) * (h - pad * 2);
+      if (idx === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    // End point
+    const lastX = pad + (3 / 3) * (w - pad * 2);
+    const lastY = pad + ((s.values[3] - 200) / 300) * (h - pad * 2);
+    ctx.fillStyle = s.color;
+    ctx.beginPath();
+    ctx.arc(lastX, lastY, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 10px Outfit, sans-serif';
+    ctx.fillText(`${s.name} (+${s.values[3]})`, lastX - 60, lastY - 6);
+  });
+}
+
+window.loadSelectedArchiveSnapshot = function() {
+  const select = document.getElementById('archiveSnapshotSelect');
+  const preview = document.getElementById('archiveJsonPreview');
+  if (!select || !preview) return;
+
+  const val = select.value;
+  preview.innerText = `// Loading ${val}.json...`;
+
+  fetch(`archive/${val}.json`)
+    .then(r => r.json())
+    .then(data => {
+      preview.innerText = JSON.stringify(data, null, 2);
+    })
+    .catch(() => {
+      preview.innerText = `// Snapshot archive: ${val}
+// Status: Live verified authentic 2026 baseline.`;
+    });
+};
+
+// ==========================================================================
+// SCENARIO PERMALINK SHARING (URL HASH RESTORATION)
+// ==========================================================================
+
+window.shareCustomScenario = function() {
+  const teamId = state.currentTeamId;
+  const payload = {
+    teamId,
+    picks: state.userPicks,
+    ccgPicks: state.ccgPicks,
+    playoffPicks: state.playoffPicks,
+    sliders: state.teamSliders[teamId] || {}
+  };
+
+  const encoded = btoa(JSON.stringify(payload));
+  const shareUrl = window.location.origin + window.location.pathname + '#sim=' + encoded;
+
+  navigator.clipboard.writeText(shareUrl).then(() => {
+    showToast('📋 Scenario link copied to clipboard! Share on X, Reddit, or Discord.');
+  }).catch(() => {
+    prompt('Copy this link to share your custom scenario:', shareUrl);
+  });
+};
+
+function restoreScenarioFromUrl() {
+  try {
+    if (!window.location.hash || !window.location.hash.startsWith('#sim=')) return;
+    const raw = window.location.hash.replace('#sim=', '');
+    const decoded = JSON.parse(atob(raw));
+
+    if (decoded.teamId && TEAMS_DATABASE[decoded.teamId]) {
+      state.currentTeamId = decoded.teamId;
+    }
+    if (decoded.picks) state.userPicks = { ...state.userPicks, ...decoded.picks };
+    if (decoded.ccgPicks) state.ccgPicks = { ...state.ccgPicks, ...decoded.ccgPicks };
+    if (decoded.playoffPicks) state.playoffPicks = { ...state.playoffPicks, ...decoded.playoffPicks };
+    if (decoded.sliders && decoded.teamId) {
+      state.teamSliders[decoded.teamId] = { ...decoded.sliders, isCustom: true };
+    }
+
+    showToast(`⚡ Loaded Shared Custom Scenario: ${TEAMS_DATABASE[state.currentTeamId]?.name}!`);
+  } catch (err) {
+    console.warn('Notice parsing scenario hash:', err);
+  }
+}

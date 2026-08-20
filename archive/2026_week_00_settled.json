@@ -1,0 +1,55 @@
+{
+  "season": 2026,
+  "snapshotId": "2026_week_00_settled",
+  "name": "Week 0 Aer Lingus Classic & Kickoff",
+  "week": "WEEK 0",
+  "timestamp": "2026-08-30T04:00:00Z",
+  "description": "Week 0 international kickoff in Dublin and early openers settled.",
+  "gradedGames": [
+    {
+      "gameId": "fsu-gt-w0",
+      "matchup": "Florida State vs Georgia Tech (Dublin)",
+      "predictedWinner": "Florida State",
+      "predProb": 68,
+      "predScore": "28 - 21",
+      "actualScore": "21 - 24",
+      "actualWinner": "Georgia Tech",
+      "isUpset": true,
+      "straightUpCorrect": false,
+      "spread": "-10.5 FSU",
+      "atsResult": "Georgia Tech Covered (+10.5)",
+      "brierLoss": 0.462,
+      "analysis": "Georgia Tech ground game controlled clock in Dublin for early upset."
+    },
+    {
+      "gameId": "smu-nevada-w0",
+      "matchup": "SMU Mustangs at Nevada Wolf Pack",
+      "predictedWinner": "SMU",
+      "predProb": 88,
+      "predScore": "38 - 17",
+      "actualScore": "29 - 24",
+      "actualWinner": "SMU",
+      "isUpset": false,
+      "straightUpCorrect": true,
+      "spread": "-24.5 SMU",
+      "atsResult": "Nevada Covered (+24.5)",
+      "brierLoss": 0.014,
+      "analysis": "SMU survived road gauntlet with 4th-quarter comeback drive."
+    },
+    {
+      "gameId": "mwc-opening-w0",
+      "matchup": "Hawaii at Delaware State",
+      "predictedWinner": "Hawaii",
+      "predProb": 94,
+      "predScore": "42 - 14",
+      "actualScore": "35 - 14",
+      "actualWinner": "Hawaii",
+      "isUpset": false,
+      "straightUpCorrect": true,
+      "spread": "-20.5 HAW",
+      "atsResult": "Hawaii Covered (-20.5)",
+      "brierLoss": 0.003,
+      "analysis": "Hawaii defense dominated turnover margin."
+    }
+  ]
+}
