@@ -3513,12 +3513,14 @@ window.openReceiptsModal = function() {
   const modal = document.getElementById('receiptsModal');
   if (!modal) return;
   loadReceiptsData();
+  document.body.classList.add('modal-open');
   modal.classList.add('open');
 };
 
 window.closeReceiptsModal = function() {
   const modal = document.getElementById('receiptsModal');
   if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
 };
 
 window.switchReceiptsTab = function(tabName) {
