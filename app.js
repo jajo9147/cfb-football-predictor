@@ -105,7 +105,7 @@ function getTopRankedTeamId() {
 function initPwaServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=2026.81')
+      navigator.serviceWorker.register('sw.js?v=2026.82')
         .then(reg => {
           reg.update();
           console.log('PWA Service Worker registered:', reg.scope);
@@ -1430,6 +1430,7 @@ function renderGameSlidersInModal(game) {
         state.gameSliders[game.id] = { ...currentSliders };
       }
       state.gameSliders[game.id][s.key] = newVal;
+      state.gameSliders[game.id].targetTeamId = focusTeam.id;
       state.gameSliders[game.id].isCustom = true;
 
       // Unset active preset
@@ -1487,11 +1488,15 @@ window.applyAndSimulateModalGame = function() {
   if (!state.activeModalGame) return;
   const game = state.activeModalGame;
   
+  let focusId = state.currentTeamId;
+  if (game.isPostseason && game.teamA && game.teamB) {
+    focusId = (game.teamB.id === state.currentTeamId) ? game.teamB.id : (game.teamA.id || state.currentTeamId);
+  }
   if (!state.gameSliders[game.id]) {
-    const focusId = (game.isPostseason && game.teamA) ? (game.teamA.id || state.currentTeamId) : state.currentTeamId;
     const teamSliders = getTeamSliders(focusId);
     state.gameSliders[game.id] = { ...teamSliders };
   }
+  state.gameSliders[game.id].targetTeamId = focusId;
   state.gameSliders[game.id].isCustom = true;
 
   recalculateSeason();
@@ -1530,8 +1535,13 @@ window.applyGameScenarioPreset = function(presetKey) {
   const game = state.activeModalGame;
   if (!game) return;
 
+  let focusId = state.currentTeamId;
+  if (game.isPostseason && game.teamA && game.teamB) {
+    focusId = (game.teamB.id === state.currentTeamId) ? game.teamB.id : (game.teamA.id || state.currentTeamId);
+  }
   state.gameSliders[game.id] = {
     ...presetValues,
+    targetTeamId: focusId,
     isCustom: (presetKey !== 'baseline')
   };
 
@@ -1761,7 +1771,20 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
       const gGnd = gSliders.groundAttack || 0;
       const gTo = gSliders.turnoverLuck || 0;
       const gCrowd = gSliders.crowdNoise || 0;
-      spA += (gQb * 0.18 + gDef * 0.18 + gGnd * 0.14 + gTo * 0.12 + gCrowd * 0.08);
+      const sliderBonus = (gQb * 0.18 + gDef * 0.18 + gGnd * 0.14 + gTo * 0.12 + gCrowd * 0.08);
+
+      const targetId = gSliders.targetTeamId || ((teamB && teamB.id === state.currentTeamId) ? teamB.id : (teamA ? teamA.id : null));
+      if (teamA && teamA.id === targetId) {
+        spA += sliderBonus;
+      } else if (teamB && teamB.id === targetId) {
+        spB += sliderBonus;
+      } else {
+        if (teamB && teamB.id === state.currentTeamId) {
+          spB += sliderBonus;
+        } else {
+          spA += sliderBonus;
+        }
+      }
     }
   }
 
