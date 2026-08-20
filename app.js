@@ -1894,6 +1894,7 @@ function evaluateRegularSeasonAllTeams() {
     const score = (wins * 1500) - (losses * 800) + (confWins * 200) + (sumDiff * 3) + (apPts * 0.15) + undefeatedBonus;
 
     evaluatedTeams.push({
+      ...team,
       id: teamId,
       name: team.name,
       shortName: team.shortName,
@@ -2436,7 +2437,24 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
   function teamRow(seedNum, tObj, score, isWinner, isHighlighted) {
     const name = tObj ? tObj.shortName || tObj.name : `Seed #${seedNum}`;
     const logo = tObj?.logoUrl || (tObj?.abbr && typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tObj.abbr] : '') || '';
-    const record = tObj ? `(${tObj.wins}-${tObj.losses})` : '';
+    let w = tObj?.wins;
+    let l = tObj?.losses;
+    if (w === undefined || l === undefined) {
+      const dbT = tObj?.id ? TEAMS_DATABASE[tObj.id] : null;
+      if (dbT && dbT.schedule) {
+        let cw = 0, cl = 0;
+        dbT.schedule.forEach(g => {
+          const sim = calculateAdjustedMatchup(g, dbT.id);
+          if (sim.isWin) cw++; else cl++;
+        });
+        w = cw;
+        l = cl;
+      } else {
+        w = 11;
+        l = 1;
+      }
+    }
+    const record = `(${w}-${l})`;
     const highlightStyle = isHighlighted ? 'color: var(--color-brand-accent); font-weight: 800;' : '';
 
     return `
@@ -2462,9 +2480,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- M1: 12 @ 5 -->
-      <div class="playoff-matchup-box ${p.fr1.teamA?.id === teamId || p.fr1.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr1.id}')">
-        ${teamRow(12, p.fr1.teamB, p.fr1.sim.scoreB, !p.fr1.sim.isAWinner, p.fr1.teamB?.id === teamId)}
-        ${teamRow(5, p.fr1.teamA, p.fr1.sim.scoreA, p.fr1.sim.isAWinner, p.fr1.teamA?.id === teamId)}
+      <div class="playoff-matchup-box ${isTeamMatch(p.fr1.teamA, teamId) || isTeamMatch(p.fr1.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr1.id}')">
+        ${teamRow(12, p.fr1.teamB, p.fr1.sim.scoreB, !p.fr1.sim.isAWinner, isTeamMatch(p.fr1.teamB, teamId))}
+        ${teamRow(5, p.fr1.teamA, p.fr1.sim.scoreA, p.fr1.sim.isAWinner, isTeamMatch(p.fr1.teamA, teamId))}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">${p.fr1.teamA?.stadium || 'On Campus'}</span>
           <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.fr1.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
@@ -2472,9 +2490,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- M2: 11 @ 6 -->
-      <div class="playoff-matchup-box ${p.fr2.teamA?.id === teamId || p.fr2.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr2.id}')">
-        ${teamRow(11, p.fr2.teamB, p.fr2.sim.scoreB, !p.fr2.sim.isAWinner, p.fr2.teamB?.id === teamId)}
-        ${teamRow(6, p.fr2.teamA, p.fr2.sim.scoreA, p.fr2.sim.isAWinner, p.fr2.teamA?.id === teamId)}
+      <div class="playoff-matchup-box ${isTeamMatch(p.fr2.teamA, teamId) || isTeamMatch(p.fr2.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr2.id}')">
+        ${teamRow(11, p.fr2.teamB, p.fr2.sim.scoreB, !p.fr2.sim.isAWinner, isTeamMatch(p.fr2.teamB, teamId))}
+        ${teamRow(6, p.fr2.teamA, p.fr2.sim.scoreA, p.fr2.sim.isAWinner, isTeamMatch(p.fr2.teamA, teamId))}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">${p.fr2.teamA?.stadium || 'On Campus'}</span>
           <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.fr2.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
@@ -2482,9 +2500,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- M3: 10 @ 7 -->
-      <div class="playoff-matchup-box ${p.fr3.teamA?.id === teamId || p.fr3.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr3.id}')">
-        ${teamRow(10, p.fr3.teamB, p.fr3.sim.scoreB, !p.fr3.sim.isAWinner, p.fr3.teamB?.id === teamId)}
-        ${teamRow(7, p.fr3.teamA, p.fr3.sim.scoreA, p.fr3.sim.isAWinner, p.fr3.teamA?.id === teamId)}
+      <div class="playoff-matchup-box ${isTeamMatch(p.fr3.teamA, teamId) || isTeamMatch(p.fr3.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr3.id}')">
+        ${teamRow(10, p.fr3.teamB, p.fr3.sim.scoreB, !p.fr3.sim.isAWinner, isTeamMatch(p.fr3.teamB, teamId))}
+        ${teamRow(7, p.fr3.teamA, p.fr3.sim.scoreA, p.fr3.sim.isAWinner, isTeamMatch(p.fr3.teamA, teamId))}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">${p.fr3.teamA?.stadium || 'On Campus'}</span>
           <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.fr3.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
@@ -2492,9 +2510,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- M4: 9 @ 8 -->
-      <div class="playoff-matchup-box ${p.fr4.teamA?.id === teamId || p.fr4.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr4.id}')">
-        ${teamRow(9, p.fr4.teamB, p.fr4.sim.scoreB, !p.fr4.sim.isAWinner, p.fr4.teamB?.id === teamId)}
-        ${teamRow(8, p.fr4.teamA, p.fr4.sim.scoreA, p.fr4.sim.isAWinner, p.fr4.teamA?.id === teamId)}
+      <div class="playoff-matchup-box ${isTeamMatch(p.fr4.teamA, teamId) || isTeamMatch(p.fr4.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.fr4.id}')">
+        ${teamRow(9, p.fr4.teamB, p.fr4.sim.scoreB, !p.fr4.sim.isAWinner, isTeamMatch(p.fr4.teamB, teamId))}
+        ${teamRow(8, p.fr4.teamA, p.fr4.sim.scoreA, p.fr4.sim.isAWinner, isTeamMatch(p.fr4.teamA, teamId))}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">${p.fr4.teamA?.stadium || 'On Campus'}</span>
           <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.fr4.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
@@ -2510,9 +2528,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- QF1: Sugar Bowl -->
-      <div class="playoff-matchup-box ${p.qf1.teamA?.id === teamId || p.qf1.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf1.id}')">
-        ${teamRow(8, p.qf1.teamB, p.qf1.sim.scoreB, !p.qf1.sim.isAWinner, p.qf1.teamB?.id === teamId)}
-        ${teamRow(1, p.qf1.teamA, p.qf1.sim.scoreA, p.qf1.sim.isAWinner, p.qf1.teamA?.id === teamId)}
+      <div class="playoff-matchup-box ${isTeamMatch(p.qf1.teamA, teamId) || isTeamMatch(p.qf1.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf1.id}')">
+        ${teamRow(8, p.qf1.teamB, p.qf1.sim.scoreB, !p.qf1.sim.isAWinner, isTeamMatch(p.qf1.teamB, teamId))}
+        ${teamRow(1, p.qf1.teamA, p.qf1.sim.scoreA, p.qf1.sim.isAWinner, isTeamMatch(p.qf1.teamA, teamId))}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Sugar Bowl (New Orleans)</span>
           <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.qf1.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
@@ -2520,9 +2538,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- QF2: Rose Bowl -->
-      <div class="playoff-matchup-box ${p.qf2.teamA?.id === teamId || p.qf2.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf2.id}')">
-        ${teamRow(7, p.qf2.teamB, p.qf2.sim.scoreB, !p.qf2.sim.isAWinner, p.qf2.teamB?.id === teamId)}
-        ${teamRow(2, p.qf2.teamA, p.qf2.sim.scoreA, p.qf2.sim.isAWinner, p.qf2.teamA?.id === teamId)}
+      <div class="playoff-matchup-box ${isTeamMatch(p.qf2.teamA, teamId) || isTeamMatch(p.qf2.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf2.id}')">
+        ${teamRow(7, p.qf2.teamB, p.qf2.sim.scoreB, !p.qf2.sim.isAWinner, isTeamMatch(p.qf2.teamB, teamId))}
+        ${teamRow(2, p.qf2.teamA, p.qf2.sim.scoreA, p.qf2.sim.isAWinner, isTeamMatch(p.qf2.teamA, teamId))}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Rose Bowl Game (Pasadena)</span>
           <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.qf2.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
@@ -2530,9 +2548,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- QF3: Peach Bowl -->
-      <div class="playoff-matchup-box ${p.qf3.teamA?.id === teamId || p.qf3.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf3.id}')">
-        ${teamRow(6, p.qf3.teamB, p.qf3.sim.scoreB, !p.qf3.sim.isAWinner, p.qf3.teamB?.id === teamId)}
-        ${teamRow(3, p.qf3.teamA, p.qf3.sim.scoreA, p.qf3.sim.isAWinner, p.qf3.teamA?.id === teamId)}
+      <div class="playoff-matchup-box ${isTeamMatch(p.qf3.teamA, teamId) || isTeamMatch(p.qf3.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf3.id}')">
+        ${teamRow(6, p.qf3.teamB, p.qf3.sim.scoreB, !p.qf3.sim.isAWinner, isTeamMatch(p.qf3.teamB, teamId))}
+        ${teamRow(3, p.qf3.teamA, p.qf3.sim.scoreA, p.qf3.sim.isAWinner, isTeamMatch(p.qf3.teamA, teamId))}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Chick-fil-A Peach Bowl</span>
           <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.qf3.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
@@ -2540,9 +2558,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- QF4: Fiesta Bowl -->
-      <div class="playoff-matchup-box ${p.qf4.teamA?.id === teamId || p.qf4.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf4.id}')">
-        ${teamRow(5, p.qf4.teamB, p.qf4.sim.scoreB, !p.qf4.sim.isAWinner, p.qf4.teamB?.id === teamId)}
-        ${teamRow(4, p.qf4.teamA, p.qf4.sim.scoreA, p.qf4.sim.isAWinner, p.qf4.teamA?.id === teamId)}
+      <div class="playoff-matchup-box ${isTeamMatch(p.qf4.teamA, teamId) || isTeamMatch(p.qf4.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.qf4.id}')">
+        ${teamRow(12, p.qf4.teamB, p.qf4.sim.scoreB, !p.qf4.sim.isAWinner, isTeamMatch(p.qf4.teamB, teamId))}
+        ${teamRow(4, p.qf4.teamA, p.qf4.sim.scoreA, p.qf4.sim.isAWinner, isTeamMatch(p.qf4.teamA, teamId))}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Vrbo Fiesta Bowl</span>
           <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.qf4.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
@@ -2558,9 +2576,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- SF1: Orange Bowl -->
-      <div class="playoff-matchup-box ${p.sf1.teamA?.id === teamId || p.sf1.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.sf1.id}')">
-        ${teamRow(4, p.sf1.teamB, p.sf1.sim.scoreB, !p.sf1.sim.isAWinner, p.sf1.teamB?.id === teamId)}
-        ${teamRow(1, p.sf1.teamA, p.sf1.sim.scoreA, p.sf1.sim.isAWinner, p.sf1.teamA?.id === teamId)}
+      <div class="playoff-matchup-box ${isTeamMatch(p.sf1.teamA, teamId) || isTeamMatch(p.sf1.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.sf1.id}')">
+        ${teamRow(4, p.sf1.teamB, p.sf1.sim.scoreB, !p.sf1.sim.isAWinner, isTeamMatch(p.sf1.teamB, teamId))}
+        ${teamRow(1, p.sf1.teamA, p.sf1.sim.scoreA, p.sf1.sim.isAWinner, isTeamMatch(p.sf1.teamA, teamId))}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Orange Bowl (Miami)</span>
           <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.sf1.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
@@ -2568,9 +2586,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- SF2: Cotton Bowl -->
-      <div class="playoff-matchup-box ${p.sf2.teamA?.id === teamId || p.sf2.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.sf2.id}')">
-        ${teamRow(3, p.sf2.teamB, p.sf2.sim.scoreB, !p.sf2.sim.isAWinner, p.sf2.teamB?.id === teamId)}
-        ${teamRow(2, p.sf2.teamA, p.sf2.sim.scoreA, p.sf2.sim.isAWinner, p.sf2.teamA?.id === teamId)}
+      <div class="playoff-matchup-box ${isTeamMatch(p.sf2.teamA, teamId) || isTeamMatch(p.sf2.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.sf2.id}')">
+        ${teamRow(3, p.sf2.teamB, p.sf2.sim.scoreB, !p.sf2.sim.isAWinner, isTeamMatch(p.sf2.teamB, teamId))}
+        ${teamRow(2, p.sf2.teamA, p.sf2.sim.scoreA, p.sf2.sim.isAWinner, isTeamMatch(p.sf2.teamA, teamId))}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Cotton Bowl Classic (Dallas)</span>
           <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${p.sf2.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
@@ -2586,9 +2604,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- Natty Showdown -->
-      <div class="playoff-matchup-box ${p.natty.teamA?.id === teamId || p.natty.teamB?.id === teamId ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.natty.id}')">
-        ${teamRow('SF1', p.natty.teamA, p.natty.sim.scoreA, p.natty.sim.isAWinner, p.natty.teamA?.id === teamId)}
-        ${teamRow('SF2', p.natty.teamB, p.natty.sim.scoreB, !p.natty.sim.isAWinner, p.natty.teamB?.id === teamId)}
+      <div class="playoff-matchup-box ${isTeamMatch(p.natty.teamA, teamId) || isTeamMatch(p.natty.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.natty.id}')">
+        ${teamRow('SF1', p.natty.teamA, p.natty.sim.scoreA, p.natty.sim.isAWinner, isTeamMatch(p.natty.teamA, teamId))}
+        ${teamRow('SF2', p.natty.teamB, p.natty.sim.scoreB, !p.natty.sim.isAWinner, isTeamMatch(p.natty.teamB, teamId))}
         <div class="playoff-result-badge">
           <span style="color: var(--color-text-dim);">Mercedes-Benz Stadium (Atlanta)</span>
           <span class="playoff-win-tag" style="color: #FFD700;"><i class="fa-solid fa-crown"></i> ${nattyChamp?.shortName?.toUpperCase()} NATIONAL CHAMPION</span>
