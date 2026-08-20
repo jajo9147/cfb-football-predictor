@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: setup-python@v5
@@ -31,8 +33,8 @@ jobs:
 
       - name: Commit and Push Archive Snapshots
         run: |
-          git config --global user.name "Gridiron Oracle Bot"
-          git config --global user.email "bot@gridironoracle.ai"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add archive/
           if git diff --staged --quiet; then
             echo "No archive changes to commit"
