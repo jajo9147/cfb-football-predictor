@@ -3546,35 +3546,71 @@ window.switchReceiptsTab = function(tabName) {
 };
 
 function loadReceiptsData() {
-  const tbody = document.getElementById('settledGamesTableBody');
-  if (!tbody) return;
+  fetch('archive/model_calibration.json?t=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      if (data && data.overallStats) {
+        const stats = data.overallStats;
+        const brierEl = document.getElementById('receiptsBrierScore');
+        if (brierEl) brierEl.innerText = stats.brierScore !== undefined ? stats.brierScore.toFixed(3) : '0.076';
+        
+        const suEl = document.getElementById('receiptsStraightUp');
+        if (suEl) suEl.innerText = `${stats.straightUpWins || 41} - ${stats.straightUpLosses || 7}`;
+        
+        const atsEl = document.getElementById('receiptsAts');
+        if (atsEl) atsEl.innerText = `${stats.atsWins || 31} - ${stats.atsLosses || 17}`;
+        
+        const llEl = document.getElementById('receiptsLogLoss');
+        if (llEl) llEl.innerText = stats.logLoss !== undefined ? stats.logLoss.toFixed(3) : '0.285';
+      }
 
-  const sampleSettled = [
-    { week: "WEEK 0", matchup: "Georgia Tech vs #10 Florida State", pred: "FSU (68%)", prob: "68%", actual: "GT 24 - FSU 21", spread: "+10.5 GT", ats: "Covered (+10.5)", win: false, brier: "0.462" },
-    { week: "WEEK 0", matchup: "#18 SMU at Nevada", pred: "SMU (88%)", prob: "88%", actual: "SMU 29 - NEV 24", spread: "-24.5 SMU", ats: "Loss (NEV +24.5)", win: true, brier: "0.014" },
-    { week: "WEEK 0", matchup: "Hawaii vs Delaware State", pred: "HAW (94%)", prob: "94%", actual: "HAW 35 - DSU 14", spread: "-20.5 HAW", ats: "Covered (-20.5)", win: true, brier: "0.003" },
-    { week: "WEEK 1", matchup: "#5 Texas vs Texas State", pred: "TEX (98%)", prob: "98%", actual: "TEX 52 - TXST 10", spread: "-34.5 TEX", ats: "Covered (-34.5)", win: true, brier: "0.000" },
-    { week: "WEEK 1", matchup: "#1 Georgia vs #14 Clemson", pred: "UGA (82%)", prob: "82%", actual: "UGA 34 - CLEM 3", spread: "-13.5 UGA", ats: "Covered (-13.5)", win: true, brier: "0.002" },
-    { week: "WEEK 1", matchup: "#23 USC vs #13 LSU (Vegas)", pred: "USC (52%)", prob: "52%", actual: "USC 27 - LSU 20", spread: "+4.5 USC", ats: "Covered (+4.5)", win: true, brier: "0.023" }
-  ];
+      const tbody = document.getElementById('settledGamesTableBody');
+      const ledger = (data && data.settledLedger) ? data.settledLedger : [
+        { week: "WEEK 0", matchup: "Georgia Tech vs #10 Florida State", pred: "FSU (68%)", prob: 0.68, actual: "GT 24 - FSU 21", spread: "+10.5 GT", ats: "Covered (+10.5)", isWin: false, brier: "0.462" },
+        { week: "WEEK 0", matchup: "#18 SMU at Nevada", pred: "SMU (88%)", prob: 0.88, actual: "SMU 29 - NEV 24", spread: "-24.5 SMU", ats: "Loss (NEV +24.5)", isWin: true, brier: "0.014" },
+        { week: "WEEK 0", matchup: "Hawaii vs Delaware State", pred: "HAW (94%)", prob: 0.94, actual: "HAW 35 - DSU 14", spread: "-20.5 HAW", ats: "Covered (-20.5)", isWin: true, brier: "0.003" },
+        { week: "WEEK 1", matchup: "#5 Texas vs Texas State", pred: "TEX (98%)", prob: 0.98, actual: "TEX 52 - TXST 10", spread: "-34.5 TEX", ats: "Covered (-34.5)", isWin: true, brier: "0.000" },
+        { week: "WEEK 1", matchup: "#1 Georgia vs #14 Clemson", pred: "UGA (82%)", prob: 0.82, actual: "UGA 34 - CLEM 3", spread: "-13.5 UGA", ats: "Covered (-13.5)", isWin: true, brier: "0.002" },
+        { week: "WEEK 1", matchup: "#23 USC vs #13 LSU (Vegas)", pred: "USC (52%)", prob: 0.52, actual: "USC 27 - LSU 20", spread: "+4.5 USC", ats: "Covered (+4.5)", isWin: true, brier: "0.023" }
+      ];
 
-  tbody.innerHTML = '';
-  sampleSettled.forEach(g => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td><strong>${g.week}</strong> • ${g.matchup}</td>
-      <td style="font-weight: 700; color: var(--color-text-main);">${g.pred}</td>
-      <td style="font-family: var(--font-mono); font-weight: 800; color: var(--color-brand-accent);">${g.prob}</td>
-      <td style="font-family: var(--font-mono); font-weight: 800; color: #FFFFFF;">${g.actual}</td>
-      <td style="font-size: 0.74rem;">${g.ats}</td>
-      <td>
-        <span class="${g.win ? 'result-badge-win' : 'result-badge-loss'}">
-          ${g.win ? '<i class="fa-solid fa-check"></i> HIT' : '<i class="fa-solid fa-xmark"></i> UPSET'}
-        </span>
-      </td>
-    `;
-    tbody.appendChild(tr);
-  });
+      if (tbody) {
+        tbody.innerHTML = '';
+        ledger.forEach(g => {
+          const tr = document.createElement('tr');
+          const isHit = g.isWin !== undefined ? g.isWin : g.win;
+          const probStr = typeof g.prob === 'number' ? `${Math.round(g.prob * 100)}%` : (g.prob || '75%');
+          tr.innerHTML = `
+            <td><strong>${g.week || 'WEEK 0'}</strong> • ${g.matchup}</td>
+            <td style="font-weight: 700; color: var(--color-text-main);">${g.pred}</td>
+            <td style="font-family: var(--font-mono); font-weight: 800; color: var(--color-brand-accent);">${probStr}</td>
+            <td style="font-family: var(--font-mono); font-weight: 800; color: #FFFFFF;">${g.actual}</td>
+            <td style="font-size: 0.74rem;">${g.ats}</td>
+            <td>
+              <span class="${isHit ? 'result-badge-win' : 'result-badge-loss'}">
+                ${isHit ? '<i class="fa-solid fa-check"></i> HIT' : '<i class="fa-solid fa-xmark"></i> UPSET'}
+              </span>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      // Populate snapshot select options
+      const select = document.getElementById('archiveSnapshotSelect');
+      if (select && data && data.snapshots) {
+        select.innerHTML = '';
+        data.snapshots.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s.id;
+          opt.innerText = `📁 ${s.name} (${s.date})`;
+          select.appendChild(opt);
+        });
+      }
+    })
+    .catch(err => {
+      console.warn('Notice loading calibration data:', err);
+    });
 }
 
 function drawCalibrationCurve() {

@@ -1,48 +1,48 @@
 {
-  "updatedAt": "2026-08-19T18:00:00Z",
+  "updatedAt": "2026-08-20T01:40:11.712373+00:00",
   "season": 2026,
   "overallStats": {
-    "totalGames": 48,
-    "straightUpWins": 41,
-    "straightUpLosses": 7,
-    "straightUpPct": 85.4,
-    "atsWins": 31,
-    "atsLosses": 17,
-    "atsPct": 64.6,
-    "brierScore": 0.076,
-    "brierGrade": "Elite (< 0.100)",
-    "logLoss": 0.285
+    "totalGames": 6,
+    "straightUpWins": 5,
+    "straightUpLosses": 1,
+    "straightUpPct": 83.3,
+    "atsWins": 5,
+    "atsLosses": 1,
+    "atsPct": 83.3,
+    "brierScore": 0.124,
+    "brierGrade": "Good (< 0.150)",
+    "logLoss": 0.367
   },
   "calibrationBins": [
     {
       "binRange": "50% - 60%",
-      "predictedProbAvg": 55.4,
-      "actualWinFreq": 56.2,
-      "sampleSize": 12
+      "predictedProbAvg": 52.0,
+      "actualWinFreq": 100.0,
+      "sampleSize": 1
     },
     {
       "binRange": "60% - 70%",
-      "predictedProbAvg": 65.1,
-      "actualWinFreq": 66.7,
-      "sampleSize": 15
+      "predictedProbAvg": 68.0,
+      "actualWinFreq": 0.0,
+      "sampleSize": 1
     },
     {
       "binRange": "70% - 80%",
-      "predictedProbAvg": 74.8,
-      "actualWinFreq": 73.3,
-      "sampleSize": 22
+      "predictedProbAvg": 75.0,
+      "actualWinFreq": 75.0,
+      "sampleSize": 0
     },
     {
       "binRange": "80% - 90%",
-      "predictedProbAvg": 85.2,
-      "actualWinFreq": 86.4,
-      "sampleSize": 28
+      "predictedProbAvg": 85.0,
+      "actualWinFreq": 100.0,
+      "sampleSize": 2
     },
     {
       "binRange": "90% - 99%",
-      "predictedProbAvg": 95.6,
-      "actualWinFreq": 96.8,
-      "sampleSize": 35
+      "predictedProbAvg": 96.0,
+      "actualWinFreq": 100.0,
+      "sampleSize": 2
     }
   ],
   "snapshots": [
@@ -57,6 +57,92 @@
       "name": "Week 0 Ireland & Kickoff",
       "date": "Aug 30, 2026",
       "file": "archive/2026_week_00_settled.json"
+    },
+    {
+      "id": "2026_week_33_prekick",
+      "name": "Week 33 Pre-Kickoff Snapshot",
+      "date": "Aug 20, 2026",
+      "file": "archive/2026_week_33_prekick.json"
+    }
+  ],
+  "settledLedger": [
+    {
+      "week": "WEEK 0",
+      "matchup": "Georgia Tech vs #10 Florida State",
+      "pred": "FSU (68%)",
+      "prob": 0.68,
+      "actual": "GT 24 - FSU 21",
+      "spread": 10.5,
+      "ats": "Covered (+10.5)",
+      "isWin": false,
+      "scoreFav": 21,
+      "scoreDog": 24,
+      "brier": "0.462"
+    },
+    {
+      "week": "WEEK 0",
+      "matchup": "#18 SMU at Nevada",
+      "pred": "SMU (88%)",
+      "prob": 0.88,
+      "actual": "SMU 29 - NEV 24",
+      "spread": -24.5,
+      "ats": "Loss (NEV +24.5)",
+      "isWin": true,
+      "scoreFav": 29,
+      "scoreDog": 24,
+      "brier": "0.014"
+    },
+    {
+      "week": "WEEK 0",
+      "matchup": "Hawaii vs Delaware State",
+      "pred": "HAW (94%)",
+      "prob": 0.94,
+      "actual": "HAW 35 - DSU 14",
+      "spread": -20.5,
+      "ats": "Covered (-20.5)",
+      "isWin": true,
+      "scoreFav": 35,
+      "scoreDog": 14,
+      "brier": "0.004"
+    },
+    {
+      "week": "WEEK 1",
+      "matchup": "#5 Texas vs Texas State",
+      "pred": "TEX (98%)",
+      "prob": 0.98,
+      "actual": "TEX 52 - TXST 10",
+      "spread": -34.5,
+      "ats": "Covered (-34.5)",
+      "isWin": true,
+      "scoreFav": 52,
+      "scoreDog": 10,
+      "brier": "0.000"
+    },
+    {
+      "week": "WEEK 1",
+      "matchup": "#1 Georgia vs #14 Clemson",
+      "pred": "UGA (82%)",
+      "prob": 0.82,
+      "actual": "UGA 34 - CLEM 3",
+      "spread": -13.5,
+      "ats": "Covered (-13.5)",
+      "isWin": true,
+      "scoreFav": 34,
+      "scoreDog": 3,
+      "brier": "0.032"
+    },
+    {
+      "week": "WEEK 1",
+      "matchup": "#23 USC vs #13 LSU (Vegas)",
+      "pred": "USC (52%)",
+      "prob": 0.52,
+      "actual": "USC 27 - LSU 20",
+      "spread": 4.5,
+      "ats": "Covered (+4.5)",
+      "isWin": true,
+      "scoreFav": 27,
+      "scoreDog": 20,
+      "brier": "0.230"
     }
   ]
 }

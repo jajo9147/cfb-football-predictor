@@ -1,0 +1,42 @@
+name: Weekly Archive & Model Calibration Sync
+
+on:
+  schedule:
+    # Saturday 15:00 UTC (11:00 AM ET) - Pre-kickoff snapshot
+    - cron: '0 15 * * 6'
+    # Sunday 08:00 UTC (4:00 AM ET) - Post-game settlement & Brier grading
+    - cron: '0 8 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive_and_calibrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Weekly Simulation Snapshot
+        run: python3 scripts/generate_snapshot.py
+
+      - name: Settle Accuracy & Calculate Brier Score
+        run: python3 scripts/settle_week_accuracy.py
+
+      - name: Commit and Push Archive Snapshots
+        run: |
+          git config --global user.name "Gridiron Oracle Bot"
+          git config --global user.email "bot@gridironoracle.ai"
+          git add archive/
+          if git diff --staged --quiet; then
+            echo "No archive changes to commit"
+          else
+            git commit -m "chore(archive): automated weekly snapshot and model calibration update [skip ci]"
+            git push origin main
+          fi
