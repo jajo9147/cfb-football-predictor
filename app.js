@@ -4226,19 +4226,22 @@ function serializeScenario(teamId) {
     }
   }
 
-  const champSlug = champ && champ.id ? `&champ=${champ.id}` : '';
+  const champId = (champ && champ.id && TEAMS_DATABASE[champ.id]) ? champ.id : (TEAMS_DATABASE[teamId] ? teamId : 'texas');
+  const basePath = window.location.pathname.replace(/\/champ\/[^/]+$/, '').replace(/\/index\.html$/, '').replace(/\/$/, '');
+  const champUrl = `${window.location.origin}${basePath}/champ/${champId}.html`;
+
   const hasCustomData = p.pk || p.cp || p.pp || p.ts || p.tp || p.gs;
   if (!hasCustomData) {
-    return `${window.location.origin}${window.location.pathname}?team=${teamId}${champSlug}`;
+    return champUrl;
   }
 
   try {
     const jsonStr = JSON.stringify(p);
     const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
-    return `${window.location.origin}${window.location.pathname}?team=${teamId}${champSlug}#s=${encodeURIComponent(b64)}`;
+    return `${champUrl}#s=${encodeURIComponent(b64)}`;
   } catch (e) {
     console.error('Error serializing scenario:', e);
-    return `${window.location.origin}${window.location.pathname}?team=${teamId}${champSlug}`;
+    return champUrl;
   }
 }
 
