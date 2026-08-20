@@ -3181,8 +3181,9 @@ const sandboxState = {
   teamAId: 'texas',
   teamBId: 'oregon',
   venue: 'neutral',
-  slidersA: { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0, crowdNoise: 0 },
-  slidersB: { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0, crowdNoise: 0 }
+  slidersA: { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 },
+  slidersB: { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 },
+  crowdNoise: 0
 };
 
 window.openDreamSandboxModal = function() {
@@ -3190,6 +3191,7 @@ window.openDreamSandboxModal = function() {
   if (!modal) return;
   
   populateSandboxDropdowns();
+  renderSandboxSliders();
   recalculateSandboxMatchup();
   modal.classList.add('open');
 };
@@ -3229,7 +3231,151 @@ window.updateSandboxTeams = function() {
   const selectB = document.getElementById('sandboxTeamBSelect');
   if (selectA) sandboxState.teamAId = selectA.value;
   if (selectB) sandboxState.teamBId = selectB.value;
+  renderSandboxSliders();
   recalculateSandboxMatchup();
+};
+
+function renderSandboxSliders() {
+  const container = document.getElementById('sandboxSlidersGrid');
+  if (!container) return;
+
+  const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
+  const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
+
+  const slidersListA = [
+    { key: 'qbRating', label: `${teamA.confirmedStarterQb || teamA.shortName} QB Execution`, icon: 'fa-solid fa-crosshairs' },
+    { key: 'groundAttack', label: `${teamA.shortName} Ground Attack`, icon: 'fa-solid fa-person-running' },
+    { key: 'defenseHavoc', label: `${teamA.shortName} Defense & Havoc`, icon: 'fa-solid fa-shield-halved' },
+    { key: 'turnoverLuck', label: `${teamA.shortName} Turnover Luck`, icon: 'fa-solid fa-dice' }
+  ];
+
+  const slidersListB = [
+    { key: 'qbRating', label: `${teamB.confirmedStarterQb || teamB.shortName} QB Execution`, icon: 'fa-solid fa-crosshairs' },
+    { key: 'groundAttack', label: `${teamB.shortName} Ground Attack`, icon: 'fa-solid fa-person-running' },
+    { key: 'defenseHavoc', label: `${teamB.shortName} Defense & Havoc`, icon: 'fa-solid fa-shield-halved' },
+    { key: 'turnoverLuck', label: `${teamB.shortName} Turnover Luck`, icon: 'fa-solid fa-dice' }
+  ];
+
+  container.innerHTML = `
+    <!-- Preset Buttons -->
+    <div style="grid-column: 1 / -1; display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 0.5rem;">
+      <button class="preset-btn active" onclick="applySandboxPreset('baseline')">Baseline</button>
+      <button class="preset-btn" onclick="applySandboxPreset('blowoutA')">${teamA.shortName} Blowout</button>
+      <button class="preset-btn" onclick="applySandboxPreset('blowoutB')">${teamB.shortName} Upset</button>
+      <button class="preset-btn" onclick="applySandboxPreset('defense')">Defensive Slugfest</button>
+      <button class="preset-btn" onclick="applySandboxPreset('shootout')">Air Raid Shootout</button>
+    </div>
+
+    <!-- Team A Column Header -->
+    <div style="grid-column: 1 / -1; font-family: var(--font-mono); font-size: 0.76rem; font-weight: 800; color: ${teamA.colors?.accent || '#38BDF8'}; padding: 4px 0; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 6px;">
+      <img src="${teamA.logoUrl}" alt="${teamA.shortName}" style="width: 18px; height: 18px; object-fit: contain;">
+      <span>${teamA.name.toUpperCase()} AI TUNING</span>
+    </div>
+  `;
+
+  // Render Team A Sliders
+  slidersListA.forEach(s => {
+    const val = sandboxState.slidersA[s.key] || 0;
+    const sign = val > 0 ? '+' : '';
+    const card = document.createElement('div');
+    card.className = 'game-slider-card';
+    card.innerHTML = `
+      <div class="slider-top-row">
+        <span class="slider-title" style="font-size: 0.78rem;"><i class="${s.icon}"></i> ${s.label}</span>
+        <span class="slider-val-readout" id="sb-readout-a-${s.key}">${sign}${val}%</span>
+      </div>
+      <input type="range" class="custom-range-slider" min="-50" max="50" value="${val}" step="5">
+      <div class="slider-hints-row">
+        <span>-50%</span>
+        <span>Baseline</span>
+        <span>+50%</span>
+      </div>
+    `;
+
+    const input = card.querySelector('input');
+    input.addEventListener('input', (e) => {
+      const nVal = parseInt(e.target.value, 10);
+      sandboxState.slidersA[s.key] = nVal;
+      const sStr = nVal > 0 ? '+' : '';
+      card.querySelector('.slider-val-readout').innerText = `${sStr}${nVal}%`;
+      recalculateSandboxMatchup();
+    });
+
+    container.appendChild(card);
+  });
+
+  // Team B Column Header
+  const headerB = document.createElement('div');
+  headerB.style.gridColumn = '1 / -1';
+  headerB.style.fontFamily = 'var(--font-mono)';
+  headerB.style.fontSize = '0.76rem';
+  headerB.style.fontWeight = '800';
+  headerB.style.color = teamB.colors?.accent || '#F59E0B';
+  headerB.style.padding = '8px 0 4px';
+  headerB.style.borderBottom = '1px solid var(--color-border)';
+  headerB.style.display = 'flex';
+  headerB.style.alignItems = 'center';
+  headerB.style.gap = '6px';
+  headerB.style.marginTop = '0.5rem';
+  headerB.innerHTML = `
+    <img src="${teamB.logoUrl}" alt="${teamB.shortName}" style="width: 18px; height: 18px; object-fit: contain;">
+    <span>${teamB.name.toUpperCase()} AI TUNING</span>
+  `;
+  container.appendChild(headerB);
+
+  // Render Team B Sliders
+  slidersListB.forEach(s => {
+    const val = sandboxState.slidersB[s.key] || 0;
+    const sign = val > 0 ? '+' : '';
+    const card = document.createElement('div');
+    card.className = 'game-slider-card';
+    card.innerHTML = `
+      <div class="slider-top-row">
+        <span class="slider-title" style="font-size: 0.78rem;"><i class="${s.icon}"></i> ${s.label}</span>
+        <span class="slider-val-readout" id="sb-readout-b-${s.key}">${sign}${val}%</span>
+      </div>
+      <input type="range" class="custom-range-slider" min="-50" max="50" value="${val}" step="5">
+      <div class="slider-hints-row">
+        <span>-50%</span>
+        <span>Baseline</span>
+        <span>+50%</span>
+      </div>
+    `;
+
+    const input = card.querySelector('input');
+    input.addEventListener('input', (e) => {
+      const nVal = parseInt(e.target.value, 10);
+      sandboxState.slidersB[s.key] = nVal;
+      const sStr = nVal > 0 ? '+' : '';
+      card.querySelector('.slider-val-readout').innerText = `${sStr}${nVal}%`;
+      recalculateSandboxMatchup();
+    });
+
+    container.appendChild(card);
+  });
+}
+
+window.applySandboxPreset = function(presetKey) {
+  if (presetKey === 'baseline') {
+    sandboxState.slidersA = { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 };
+    sandboxState.slidersB = { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 };
+  } else if (presetKey === 'blowoutA') {
+    sandboxState.slidersA = { qbRating: 30, groundAttack: 20, defenseHavoc: 25, turnoverLuck: 20 };
+    sandboxState.slidersB = { qbRating: -25, groundAttack: -15, defenseHavoc: -20, turnoverLuck: -20 };
+  } else if (presetKey === 'blowoutB') {
+    sandboxState.slidersA = { qbRating: -25, groundAttack: -15, defenseHavoc: -20, turnoverLuck: -20 };
+    sandboxState.slidersB = { qbRating: 30, groundAttack: 20, defenseHavoc: 25, turnoverLuck: 20 };
+  } else if (presetKey === 'defense') {
+    sandboxState.slidersA = { qbRating: -10, groundAttack: 10, defenseHavoc: 35, turnoverLuck: 10 };
+    sandboxState.slidersB = { qbRating: -10, groundAttack: 10, defenseHavoc: 35, turnoverLuck: 10 };
+  } else if (presetKey === 'shootout') {
+    sandboxState.slidersA = { qbRating: 40, groundAttack: 20, defenseHavoc: -20, turnoverLuck: 0 };
+    sandboxState.slidersB = { qbRating: 40, groundAttack: 20, defenseHavoc: -20, turnoverLuck: 0 };
+  }
+
+  renderSandboxSliders();
+  recalculateSandboxMatchup();
+  showToast(`⚡ Applied "${presetKey}" to Dream Matchup!`);
 };
 
 window.recalculateSandboxMatchup = function() {
@@ -3245,13 +3391,31 @@ window.recalculateSandboxMatchup = function() {
   let spA = teamA.baseSpRating || 24.0;
   let spB = teamB.baseSpRating || 24.0;
 
+  // Conference power adjustments
+  if (teamA.conference === 'SEC') spA += 2.2;
+  if (teamB.conference === 'SEC') spB += 2.2;
+  if (teamA.conference === 'Big Ten') spA += 1.6;
+  if (teamB.conference === 'Big Ten') spB += 1.6;
+
+  // Home field
   if (isHomeA) spA += 2.5;
   if (isHomeB) spB += 2.5;
 
+  // Apply Team A Sliders
+  const sA = sandboxState.slidersA;
+  spA += (sA.qbRating * 0.18 + sA.defenseHavoc * 0.18 + sA.groundAttack * 0.14 + sA.turnoverLuck * 0.12);
+
+  // Apply Team B Sliders
+  const sB = sandboxState.slidersB;
+  spB += (sB.qbRating * 0.18 + sB.defenseHavoc * 0.18 + sB.groundAttack * 0.14 + sB.turnoverLuck * 0.12);
+
   const diff = spA - spB;
-  let scoreA = Math.max(10, Math.round(28 + diff * 0.65));
-  let scoreB = Math.max(10, Math.round(28 - diff * 0.65));
-  if (scoreA === scoreB) scoreA += 3;
+  let scoreA = Math.max(7, Math.round(28 + diff * 0.65));
+  let scoreB = Math.max(7, Math.round(28 - diff * 0.65));
+  if (scoreA === scoreB) {
+    if (diff >= 0) scoreA += 3;
+    else scoreB += 3;
+  }
 
   let probA = Math.round(100 / (1 + Math.pow(10, -diff / 7.5)));
   probA = Math.max(5, Math.min(95, probA));
@@ -3339,8 +3503,18 @@ window.switchSandboxTab = function(tabName) {
   const pRadar = document.getElementById('sandboxPanelRadar');
 
   if (pDrives) pDrives.style.display = (tabName === 'drives') ? 'block' : 'none';
-  if (pTuning) pTuning.style.display = (tabName === 'tuning') ? 'block' : 'none';
-  if (pRadar) pRadar.style.display = (tabName === 'radar') ? 'block' : 'none';
+  if (pTuning) {
+    pTuning.style.display = (tabName === 'tuning') ? 'block' : 'none';
+    if (tabName === 'tuning') renderSandboxSliders();
+  }
+  if (pRadar) {
+    pRadar.style.display = (tabName === 'radar') ? 'block' : 'none';
+    if (tabName === 'radar') {
+      const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
+      const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
+      drawRadarChartBetween(teamA, teamB, 28, 24, sandboxState.venue === 'homeA');
+    }
+  }
 };
 
 window.exportSandboxHypeCard = function() {
