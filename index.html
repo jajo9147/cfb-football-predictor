@@ -50,7 +50,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260819_60">
+  <link rel="stylesheet" href="styles.css?t=20260819_70">
 </head>
 <body class="theme-texas">
 
@@ -704,16 +704,41 @@
       <div class="modal-tab-body" style="padding: 0.5rem 0 0;">
         <!-- Panel 1: Settled Ledger -->
         <div class="sub-tab-panel active" id="receiptsPanelLedger">
+          <!-- Filter & Search Bar for All 22 Powerhouse Teams -->
+          <div class="ledger-filter-bar" style="display: flex; gap: 0.45rem; margin-bottom: 0.6rem; flex-wrap: wrap;">
+            <select id="ledgerTeamFilter" class="sandbox-dropdown" style="padding: 0.4rem 0.65rem; font-size: 0.76rem; flex: 1.2; min-width: 140px;" onchange="renderFilteredReceiptsLedger()">
+              <option value="all">🏆 All 22 Powerhouse Teams</option>
+            </select>
+            <select id="ledgerWeekFilter" class="sandbox-dropdown" style="padding: 0.4rem 0.65rem; font-size: 0.76rem; width: 120px;" onchange="renderFilteredReceiptsLedger()">
+              <option value="all">📅 All Weeks</option>
+              <option value="WEEK 0">Week 0</option>
+              <option value="WEEK 1">Week 1</option>
+              <option value="WEEK 2">Week 2</option>
+              <option value="WEEK 3">Week 3</option>
+              <option value="WEEK 4">Week 4</option>
+              <option value="WEEK 5">Week 5</option>
+              <option value="WEEK 6">Week 6</option>
+              <option value="WEEK 7">Week 7</option>
+              <option value="WEEK 8">Week 8</option>
+              <option value="WEEK 9">Week 9</option>
+              <option value="WEEK 10">Week 10</option>
+              <option value="WEEK 11">Week 11</option>
+              <option value="WEEK 12">Week 12</option>
+              <option value="WEEK 13">Week 13</option>
+            </select>
+            <input type="text" id="ledgerSearchInput" class="team-search-input" placeholder="Search team or matchup..." style="padding: 0.4rem 0.65rem; font-size: 0.76rem; flex: 1.4; min-width: 140px; height: auto;" oninput="renderFilteredReceiptsLedger()">
+          </div>
+
           <div class="settled-ledger-table-wrap">
             <table class="settled-table" id="settledGamesTable">
               <thead>
                 <tr>
                   <th>WEEK / MATCHUP</th>
-                  <th>PREDICTED</th>
+                  <th>PREDICTED WINNER</th>
                   <th>WIN PROB</th>
-                  <th>ACTUAL FINAL</th>
-                  <th>SPREAD / ATS</th>
-                  <th>RESULT</th>
+                  <th>PROJECTED / FINAL</th>
+                  <th>VEGAS SPREAD</th>
+                  <th>STATUS</th>
                 </tr>
               </thead>
               <tbody id="settledGamesTableBody">
@@ -797,7 +822,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260819_60"></script>
-  <script src="app.js?t=20260819_60"></script>
+  <script src="data/teams.js?t=20260819_70"></script>
+  <script src="app.js?t=20260819_70"></script>
 </body>
 </html>

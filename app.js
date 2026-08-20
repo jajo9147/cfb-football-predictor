@@ -3545,7 +3545,113 @@ window.switchReceiptsTab = function(tabName) {
   }
 };
 
+function populateReceiptsFilterDropdowns() {
+  const teamFilter = document.getElementById('ledgerTeamFilter');
+  if (!teamFilter) return;
+
+  const currentVal = teamFilter.value;
+  teamFilter.innerHTML = '<option value="all">🏆 All 22 Powerhouse Teams (260+ Games)</option>';
+
+  const entries = Object.entries(TEAMS_DATABASE);
+  entries.sort((a, b) => {
+    const rankA = parseInt(a[1].apRank?.replace(/[^0-9]/g, '') || '99', 10);
+    const rankB = parseInt(b[1].apRank?.replace(/[^0-9]/g, '') || '99', 10);
+    if (rankA !== rankB) return rankA - rankB;
+    return a[1].name.localeCompare(b[1].name);
+  });
+
+  entries.forEach(([id, t]) => {
+    const opt = document.createElement('option');
+    opt.value = id;
+    opt.innerText = `${t.apRank || ''} ${t.name} (${t.conference})`;
+    teamFilter.appendChild(opt);
+  });
+
+  if (currentVal) teamFilter.value = currentVal;
+}
+
+window.renderFilteredReceiptsLedger = function() {
+  const tbody = document.getElementById('settledGamesTableBody');
+  if (!tbody) return;
+
+  const teamFilter = document.getElementById('ledgerTeamFilter')?.value || 'all';
+  const weekFilter = document.getElementById('ledgerWeekFilter')?.value || 'all';
+  const searchFilter = (document.getElementById('ledgerSearchInput')?.value || '').toLowerCase().trim();
+
+  const allLedgerGames = [];
+
+  // Build full ledger across all 22 teams in TEAMS_DATABASE
+  Object.entries(TEAMS_DATABASE).forEach(([teamId, team]) => {
+    if (teamFilter !== 'all' && teamId !== teamFilter) return;
+
+    (team.schedule || []).forEach(g => {
+      const gWeek = (g.week || 'WEEK 1').toUpperCase().trim();
+      if (weekFilter !== 'all' && !gWeek.includes(weekFilter)) return;
+
+      const oppName = g.opponent || 'Opponent';
+      const fullMatchup = `${team.apRank ? team.apRank + ' ' : ''}${team.shortName || team.name} ${g.isHome ? 'vs' : 'at'} ${g.oppRank ? g.oppRank + ' ' : ''}${g.oppAbbr || oppName}`;
+
+      if (searchFilter) {
+        const searchHaystack = `${fullMatchup} ${team.name} ${oppName} ${team.headCoach || ''} ${team.confirmedStarterQb || ''} ${gWeek}`.toLowerCase();
+        if (!searchHaystack.includes(searchFilter)) return;
+      }
+
+      const teamWinProb = g.baseWinProb || 50;
+      const isTeamFav = teamWinProb >= 50;
+      const favProb = Math.max(teamWinProb, 100 - teamWinProb);
+      const predWinner = isTeamFav ? (team.shortName || team.name) : (g.oppAbbr || oppName);
+      const projScore = `${g.projScoreUt || 28} - ${g.projScoreOpp || 24}`;
+      const spreadStr = `${g.vegasSpread > 0 ? '+' : ''}${g.vegasSpread || '-6.5'} ${isTeamFav ? team.shortName : (g.oppAbbr || 'OPP')}`;
+
+      // Status pill: Settled Hit vs Projected
+      const isSettled = g.isSettled || false;
+      const isWin = isSettled ? g.isWin : isTeamFav;
+
+      allLedgerGames.push({
+        week: gWeek,
+        matchup: fullMatchup,
+        pred: `${predWinner} (${Math.round(favProb)}%)`,
+        probStr: `${Math.round(favProb)}%`,
+        score: projScore,
+        spread: spreadStr,
+        isSettled: isSettled,
+        isWin: isWin,
+        isMarquee: g.isMarquee || false
+      });
+    });
+  });
+
+  tbody.innerHTML = '';
+  if (allLedgerGames.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #94A3B8; padding: 1.5rem;">No matchups found matching your filter criteria.</td></tr>';
+    return;
+  }
+
+  allLedgerGames.forEach(g => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>
+        <strong>${g.week}</strong> • ${g.matchup}
+        ${g.isMarquee ? '<span style="font-size: 0.62rem; color: #F59E0B; background: rgba(245, 158, 11, 0.15); padding: 1px 4px; border-radius: 3px; margin-left: 4px;">MARQUEE</span>' : ''}
+      </td>
+      <td style="font-weight: 700; color: var(--color-text-main);">${g.pred}</td>
+      <td style="font-family: var(--font-mono); font-weight: 800; color: var(--color-brand-accent);">${g.probStr}</td>
+      <td style="font-family: var(--font-mono); font-weight: 800; color: #FFFFFF;">${g.score}</td>
+      <td style="font-size: 0.74rem; color: #94A3B8;">${g.spread}</td>
+      <td>
+        <span class="${g.isWin ? 'result-badge-win' : 'result-badge-loss'}">
+          ${g.isSettled ? (g.isWin ? '<i class="fa-solid fa-check"></i> HIT' : '<i class="fa-solid fa-xmark"></i> UPSET') : '<i class="fa-solid fa-clock"></i> PROJECTED'}
+        </span>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+};
+
 function loadReceiptsData() {
+  populateReceiptsFilterDropdowns();
+  renderFilteredReceiptsLedger();
+
   fetch('archive/model_calibration.json?t=' + Date.now())
     .then(r => r.json())
     .then(data => {
@@ -3562,38 +3668,6 @@ function loadReceiptsData() {
         
         const llEl = document.getElementById('receiptsLogLoss');
         if (llEl) llEl.innerText = stats.logLoss !== undefined ? stats.logLoss.toFixed(3) : '0.285';
-      }
-
-      const tbody = document.getElementById('settledGamesTableBody');
-      const ledger = (data && data.settledLedger) ? data.settledLedger : [
-        { week: "WEEK 0", matchup: "Georgia Tech vs #10 Florida State", pred: "FSU (68%)", prob: 0.68, actual: "GT 24 - FSU 21", spread: "+10.5 GT", ats: "Covered (+10.5)", isWin: false, brier: "0.462" },
-        { week: "WEEK 0", matchup: "#18 SMU at Nevada", pred: "SMU (88%)", prob: 0.88, actual: "SMU 29 - NEV 24", spread: "-24.5 SMU", ats: "Loss (NEV +24.5)", isWin: true, brier: "0.014" },
-        { week: "WEEK 0", matchup: "Hawaii vs Delaware State", pred: "HAW (94%)", prob: 0.94, actual: "HAW 35 - DSU 14", spread: "-20.5 HAW", ats: "Covered (-20.5)", isWin: true, brier: "0.003" },
-        { week: "WEEK 1", matchup: "#5 Texas vs Texas State", pred: "TEX (98%)", prob: 0.98, actual: "TEX 52 - TXST 10", spread: "-34.5 TEX", ats: "Covered (-34.5)", isWin: true, brier: "0.000" },
-        { week: "WEEK 1", matchup: "#1 Georgia vs #14 Clemson", pred: "UGA (82%)", prob: 0.82, actual: "UGA 34 - CLEM 3", spread: "-13.5 UGA", ats: "Covered (-13.5)", isWin: true, brier: "0.002" },
-        { week: "WEEK 1", matchup: "#23 USC vs #13 LSU (Vegas)", pred: "USC (52%)", prob: 0.52, actual: "USC 27 - LSU 20", spread: "+4.5 USC", ats: "Covered (+4.5)", isWin: true, brier: "0.023" }
-      ];
-
-      if (tbody) {
-        tbody.innerHTML = '';
-        ledger.forEach(g => {
-          const tr = document.createElement('tr');
-          const isHit = g.isWin !== undefined ? g.isWin : g.win;
-          const probStr = typeof g.prob === 'number' ? `${Math.round(g.prob * 100)}%` : (g.prob || '75%');
-          tr.innerHTML = `
-            <td><strong>${g.week || 'WEEK 0'}</strong> • ${g.matchup}</td>
-            <td style="font-weight: 700; color: var(--color-text-main);">${g.pred}</td>
-            <td style="font-family: var(--font-mono); font-weight: 800; color: var(--color-brand-accent);">${probStr}</td>
-            <td style="font-family: var(--font-mono); font-weight: 800; color: #FFFFFF;">${g.actual}</td>
-            <td style="font-size: 0.74rem;">${g.ats}</td>
-            <td>
-              <span class="${isHit ? 'result-badge-win' : 'result-badge-loss'}">
-                ${isHit ? '<i class="fa-solid fa-check"></i> HIT' : '<i class="fa-solid fa-xmark"></i> UPSET'}
-              </span>
-            </td>
-          `;
-          tbody.appendChild(tr);
-        });
       }
 
       // Populate snapshot select options
