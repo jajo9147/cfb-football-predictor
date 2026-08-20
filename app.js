@@ -1003,22 +1003,24 @@ function openSimModal(game) {
       let tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
       let isHomeA = game.isHomeA || game.isHome || false;
 
-      // Ensure active team is always team1 (on the left) so sliders and scoreboards are intuitive
       let primaryTeam = tA;
       let secondaryTeam = tB;
       let isPrimaryHome = isHomeA;
 
-      const isBActive = isTeamMatch(tB, state.currentTeamId);
-      const isAActive = isTeamMatch(tA, state.currentTeamId);
+      // Only re-orient for regular postseason brackets if the current active team is participating
+      if (!game.isDreamMatchup) {
+        const isBActive = isTeamMatch(tB, state.currentTeamId);
+        const isAActive = isTeamMatch(tA, state.currentTeamId);
 
-      if (isBActive && !isAActive) {
-        primaryTeam = TEAMS_DATABASE[state.currentTeamId] || tB;
-        secondaryTeam = tA;
-        isPrimaryHome = game.isHomeB || false;
-      } else if (isAActive) {
-        primaryTeam = TEAMS_DATABASE[state.currentTeamId] || tA;
-        secondaryTeam = tB;
-        isPrimaryHome = isHomeA;
+        if (isBActive && !isAActive) {
+          primaryTeam = TEAMS_DATABASE[state.currentTeamId] || tB;
+          secondaryTeam = tA;
+          isPrimaryHome = game.isHomeB || false;
+        } else if (isAActive) {
+          primaryTeam = TEAMS_DATABASE[state.currentTeamId] || tA;
+          secondaryTeam = tB;
+          isPrimaryHome = isHomeA;
+        }
       }
       
       team1 = {
@@ -1559,7 +1561,10 @@ function renderGameSlidersInModal(game) {
 
   // Determine focus team and opponent for this specific modal game
   let focusTeam, oppTeam;
-  if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
+  if (game.isDreamMatchup && game.teamA && game.teamB) {
+    focusTeam = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+    oppTeam = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+  } else if (game.isPostseason && game.teamA && game.teamB) {
     let tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
     let tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
 
@@ -1715,7 +1720,9 @@ window.applyAndSimulateModalGame = function() {
   const game = state.activeModalGame;
   
   let focusId = state.currentTeamId;
-  if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
+  if (game.isDreamMatchup && game.teamA && game.teamB) {
+    focusId = game.teamA.id;
+  } else if (game.isPostseason && game.teamA && game.teamB) {
     let tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
     let tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
     if (isTeamMatch(tB, state.currentTeamId) && !isTeamMatch(tA, state.currentTeamId)) {
@@ -1772,7 +1779,9 @@ window.applyGameScenarioPreset = function(presetKey) {
   if (!game) return;
 
   let focusId = state.currentTeamId;
-  if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
+  if (game.isDreamMatchup && game.teamA && game.teamB) {
+    focusId = game.teamA.id;
+  } else if (game.isPostseason && game.teamA && game.teamB) {
     let tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
     let tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
     if (isTeamMatch(tB, state.currentTeamId) && !isTeamMatch(tA, state.currentTeamId)) {
@@ -3495,6 +3504,9 @@ function populateSandboxDropdowns() {
   const selectB = document.getElementById('sandboxTeamBSelect');
   if (!selectA || !selectB) return;
 
+  const currentValA = state.dreamTeamA || selectA.value || 'tennessee';
+  const currentValB = state.dreamTeamB || selectB.value || 'smu';
+
   selectA.innerHTML = '';
   selectB.innerHTML = '';
 
@@ -3511,15 +3523,18 @@ function populateSandboxDropdowns() {
     const optA = document.createElement('option');
     optA.value = k;
     optA.innerText = `${t.apRank || ''} ${t.name} (${t.conference})`;
-    if (k === (state.currentTeamId || 'texas')) optA.selected = true;
+    if (k === currentValA) optA.selected = true;
     selectA.appendChild(optA);
 
     const optB = document.createElement('option');
     optB.value = k;
     optB.innerText = `${t.apRank || ''} ${t.name} (${t.conference})`;
-    if (k === 'oregon' || (k === 'ohiostate' && state.currentTeamId !== 'ohiostate')) optB.selected = true;
+    if (k === currentValB) optB.selected = true;
     selectB.appendChild(optB);
   });
+
+  selectA.onchange = () => { state.dreamTeamA = selectA.value; };
+  selectB.onchange = () => { state.dreamTeamB = selectB.value; };
 }
 
 window.launchDreamMatchupInSimModal = function() {
@@ -3527,12 +3542,15 @@ window.launchDreamMatchupInSimModal = function() {
   const selectB = document.getElementById('sandboxTeamBSelect');
   const selectVenue = document.getElementById('sandboxVenueSelect');
 
-  const idA = selectA ? selectA.value : (state.currentTeamId || 'texas');
-  const idB = selectB ? selectB.value : 'oregon';
+  const idA = (selectA && selectA.value) ? selectA.value : (state.dreamTeamA || 'tennessee');
+  const idB = (selectB && selectB.value) ? selectB.value : (state.dreamTeamB || 'smu');
   const venue = selectVenue ? selectVenue.value : 'neutral';
 
-  const teamA = TEAMS_DATABASE[idA] || TEAMS_DATABASE['texas'];
-  const teamB = TEAMS_DATABASE[idB] || TEAMS_DATABASE['oregon'];
+  state.dreamTeamA = idA;
+  state.dreamTeamB = idB;
+
+  const teamA = TEAMS_DATABASE[idA] || TEAMS_DATABASE['tennessee'] || TEAMS_DATABASE['texas'];
+  const teamB = TEAMS_DATABASE[idB] || TEAMS_DATABASE['smu'] || TEAMS_DATABASE['oregon'];
 
   closeDreamSandboxModal();
 
