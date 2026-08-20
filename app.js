@@ -4018,36 +4018,116 @@ window.loadSelectedArchiveSnapshot = function() {
 };
 
 // ==========================================================================
-// SCENARIO PERMALINK SHARING (URL HASH RESTORATION)
+// SCENARIO PERMALINK SHARING (CLEAN, COMPACT URL ENCODING & WEB SHARE)
 // ==========================================================================
 
-window.shareCustomScenario = function() {
-  const teamId = state.currentTeamId || getTopRankedTeamId() || 'texas';
-  const payload = {
-    v: 2,
-    teamId: teamId,
-    picks: state.userPicks || {},
-    ccgPicks: state.ccgPicks || {},
-    playoffPicks: state.playoffPicks || {},
-    teamSliders: state.teamSliders || {},
-    teamActivePresets: state.teamActivePresets || {},
-    gameSliders: state.gameSliders || {}
-  };
+function serializeScenario(teamId) {
+  const p = { t: teamId };
 
-  let encoded = '';
-  try {
-    const jsonStr = JSON.stringify(payload);
-    encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(jsonStr))));
-  } catch (e) {
-    console.error('Error encoding scenario:', e);
-    encoded = encodeURIComponent(btoa(JSON.stringify(payload)));
+  // 1. Regular season picks (only non-empty)
+  if (state.userPicks && Object.keys(state.userPicks).length > 0) {
+    p.pk = { ...state.userPicks };
   }
 
-  const shareUrl = `${window.location.origin}${window.location.pathname}?team=${teamId}#sim=${encoded}`;
+  // 2. CCG picks (only non-empty)
+  if (state.ccgPicks && Object.keys(state.ccgPicks).length > 0) {
+    p.cp = { ...state.ccgPicks };
+  }
+
+  // 3. Playoff picks (only non-empty)
+  if (state.playoffPicks && Object.keys(state.playoffPicks).length > 0) {
+    p.pp = { ...state.playoffPicks };
+  }
+
+  // 4. Team Sliders (only teams with non-zero sliders)
+  if (state.teamSliders && typeof state.teamSliders === 'object') {
+    const customTeams = {};
+    Object.keys(state.teamSliders).forEach(tid => {
+      const s = state.teamSliders[tid];
+      if (s && (s.qbRating || s.groundAttack || s.defenseHavoc || s.turnoverLuck || s.crowdNoise)) {
+        customTeams[tid] = [s.qbRating || 0, s.groundAttack || 0, s.defenseHavoc || 0, s.turnoverLuck || 0, s.crowdNoise || 0];
+      }
+    });
+    if (Object.keys(customTeams).length > 0) {
+      p.ts = customTeams;
+    }
+  }
+
+  // 5. Team active presets (only non-baseline)
+  if (state.teamActivePresets && typeof state.teamActivePresets === 'object') {
+    const activePresets = {};
+    Object.keys(state.teamActivePresets).forEach(tid => {
+      const pr = state.teamActivePresets[tid];
+      if (pr && pr !== 'baseline') activePresets[tid] = pr;
+    });
+    if (Object.keys(activePresets).length > 0) {
+      p.tp = activePresets;
+    }
+  }
+
+  // 6. Single Game Matchup Sliders (only games with non-zero custom values)
+  if (state.gameSliders && typeof state.gameSliders === 'object') {
+    const customGames = {};
+    Object.keys(state.gameSliders).forEach(gid => {
+      const gs = state.gameSliders[gid];
+      if (gs && gs.isCustom && (gs.qbRating || gs.groundAttack || gs.defenseHavoc || gs.turnoverLuck || gs.crowdNoise || gs.targetTeamId)) {
+        customGames[gid] = [
+          gs.qbRating || 0,
+          gs.groundAttack || 0,
+          gs.defenseHavoc || 0,
+          gs.turnoverLuck || 0,
+          gs.crowdNoise || 0,
+          gs.targetTeamId || teamId
+        ];
+      }
+    });
+    if (Object.keys(customGames).length > 0) {
+      p.gs = customGames;
+    }
+  }
+
+  const hasCustomData = p.pk || p.cp || p.pp || p.ts || p.tp || p.gs;
+  if (!hasCustomData) {
+    return `${window.location.origin}${window.location.pathname}?team=${teamId}`;
+  }
+
+  try {
+    const jsonStr = JSON.stringify(p);
+    const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
+    return `${window.location.origin}${window.location.pathname}?team=${teamId}#s=${encodeURIComponent(b64)}`;
+  } catch (e) {
+    console.error('Error serializing scenario:', e);
+    return `${window.location.origin}${window.location.pathname}?team=${teamId}`;
+  }
+}
+
+window.shareCustomScenario = async function() {
+  const teamId = state.currentTeamId || getTopRankedTeamId() || 'texas';
+  const team = TEAMS_DATABASE[teamId] || { name: 'CFB', shortName: 'College Football' };
+  const shareUrl = serializeScenario(teamId);
+
+  const shareData = {
+    title: `${team.shortName || team.name} CFP Prediction | Gridiron Oracle`,
+    text: `Check out my custom 2026-27 College Football Playoff scenario for ${team.name}!`,
+    url: shareUrl
+  };
+
+  // Use native mobile share sheet when available for super-clean iMessage / SMS sharing
+  if (navigator.share && /mobile|android|iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase())) {
+    try {
+      await navigator.share(shareData);
+      showToast('⚡ Scenario shared successfully!');
+      return;
+    } catch (err) {
+      if (err.name === 'AbortError') {
+        return;
+      }
+    }
+  }
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(shareUrl).then(() => {
-      showToast('📋 Custom Scenario link copied! All custom picks, tuned sliders & bracket saved.');
+      showToast('📋 Clean Scenario link copied! All custom picks, sliders & bracket saved.');
     }).catch(() => {
       prompt('Copy this link to share your custom scenario:', shareUrl);
     });
@@ -4059,53 +4139,110 @@ window.shareCustomScenario = function() {
 function restoreScenarioFromUrl() {
   try {
     let hash = window.location.hash || '';
-    if (!hash || !hash.includes('sim=')) return false;
+    if (!hash || (!hash.includes('s=') && !hash.includes('sim='))) return false;
 
-    const rawMatch = hash.match(/sim=([^&]+)/);
-    if (!rawMatch || !rawMatch[1]) return false;
+    let encodedStr = '';
+    const sMatch = hash.match(/[#&]s=([^&]+)/);
+    const simMatch = hash.match(/[#&]sim=([^&]+)/);
 
-    const raw = decodeURIComponent(rawMatch[1]);
+    if (sMatch && sMatch[1]) {
+      encodedStr = decodeURIComponent(sMatch[1]);
+    } else if (simMatch && simMatch[1]) {
+      encodedStr = decodeURIComponent(simMatch[1]);
+    } else {
+      return false;
+    }
+
     let jsonStr = '';
     try {
-      jsonStr = decodeURIComponent(escape(atob(raw)));
+      jsonStr = decodeURIComponent(escape(atob(encodedStr)));
     } catch (e) {
-      jsonStr = atob(raw);
+      jsonStr = atob(encodedStr);
     }
     const decoded = JSON.parse(jsonStr);
 
     let itemsRestored = 0;
 
-    if (decoded.teamId && TEAMS_DATABASE[decoded.teamId]) {
-      state.currentTeamId = decoded.teamId;
+    // Support both compact format (v3) and legacy format (v1/v2)
+    const targetTeamId = decoded.t || decoded.teamId;
+    if (targetTeamId && TEAMS_DATABASE[targetTeamId]) {
+      state.currentTeamId = targetTeamId;
     }
-    if (decoded.picks && typeof decoded.picks === 'object') {
-      state.userPicks = { ...decoded.picks };
-      itemsRestored += Object.keys(decoded.picks).length;
+
+    // User picks
+    const rawPicks = decoded.pk || decoded.picks;
+    if (rawPicks && typeof rawPicks === 'object') {
+      state.userPicks = { ...rawPicks };
+      itemsRestored += Object.keys(rawPicks).length;
     }
-    if (decoded.ccgPicks && typeof decoded.ccgPicks === 'object') {
-      state.ccgPicks = { ...decoded.ccgPicks };
-      itemsRestored += Object.keys(decoded.ccgPicks).length;
+
+    // CCG picks
+    const rawCcg = decoded.cp || decoded.ccgPicks;
+    if (rawCcg && typeof rawCcg === 'object') {
+      state.ccgPicks = { ...rawCcg };
+      itemsRestored += Object.keys(rawCcg).length;
     }
-    if (decoded.playoffPicks && typeof decoded.playoffPicks === 'object') {
-      state.playoffPicks = { ...decoded.playoffPicks };
-      itemsRestored += Object.keys(decoded.playoffPicks).length;
+
+    // Playoff picks
+    const rawPlayoff = decoded.pp || decoded.playoffPicks;
+    if (rawPlayoff && typeof rawPlayoff === 'object') {
+      state.playoffPicks = { ...rawPlayoff };
+      itemsRestored += Object.keys(rawPlayoff).length;
     }
-    if (decoded.teamSliders && typeof decoded.teamSliders === 'object') {
-      state.teamSliders = { ...decoded.teamSliders };
-      itemsRestored += Object.keys(decoded.teamSliders).length;
+
+    // Team sliders
+    const rawTeamSliders = decoded.ts || decoded.teamSliders;
+    if (rawTeamSliders && typeof rawTeamSliders === 'object') {
+      Object.keys(rawTeamSliders).forEach(tid => {
+        const val = rawTeamSliders[tid];
+        if (Array.isArray(val)) {
+          state.teamSliders[tid] = {
+            qbRating: val[0] || 0,
+            groundAttack: val[1] || 0,
+            defenseHavoc: val[2] || 0,
+            turnoverLuck: val[3] || 0,
+            crowdNoise: val[4] || 0,
+            isCustom: true
+          };
+        } else if (typeof val === 'object') {
+          state.teamSliders[tid] = { ...val };
+        }
+        itemsRestored++;
+      });
     } else if (decoded.sliders && decoded.teamId) {
       state.teamSliders[decoded.teamId] = { ...decoded.sliders, isCustom: true };
       itemsRestored += 1;
     }
-    if (decoded.teamActivePresets && typeof decoded.teamActivePresets === 'object') {
-      state.teamActivePresets = { ...decoded.teamActivePresets };
-    }
-    if (decoded.gameSliders && typeof decoded.gameSliders === 'object') {
-      state.gameSliders = { ...decoded.gameSliders };
-      itemsRestored += Object.keys(decoded.gameSliders).length;
+
+    // Team active presets
+    const rawTeamPresets = decoded.tp || decoded.teamActivePresets;
+    if (rawTeamPresets && typeof rawTeamPresets === 'object') {
+      state.teamActivePresets = { ...rawTeamPresets };
     }
 
-    // Now actively re-render and synchronize UI
+    // Single-game sliders
+    const rawGameSliders = decoded.gs || decoded.gameSliders;
+    if (rawGameSliders && typeof rawGameSliders === 'object') {
+      Object.keys(rawGameSliders).forEach(gid => {
+        const val = rawGameSliders[gid];
+        if (Array.isArray(val)) {
+          state.gameSliders[gid] = {
+            qbRating: val[0] || 0,
+            groundAttack: val[1] || 0,
+            defenseHavoc: val[2] || 0,
+            turnoverLuck: val[3] || 0,
+            crowdNoise: val[4] || 0,
+            targetTeamId: val[5] || targetTeamId || state.currentTeamId,
+            isCustom: true
+          };
+        } else if (typeof val === 'object') {
+          state.gameSliders[gid] = { ...val };
+        }
+        itemsRestored++;
+      });
+    }
+
+    // Re-render and synchronize UI
     if (state.currentTeamId && TEAMS_DATABASE[state.currentTeamId]) {
       selectTeam(state.currentTeamId);
     } else {
@@ -4114,7 +4251,9 @@ function restoreScenarioFromUrl() {
     }
 
     const team = TEAMS_DATABASE[state.currentTeamId];
-    showToast(`⚡ Loaded Shared Custom Scenario: ${team ? team.name : 'Custom'} (${itemsRestored} custom modifications applied)!`);
+    if (itemsRestored > 0) {
+      showToast(`⚡ Loaded Shared Custom Scenario: ${team ? team.name : 'Custom'} (${itemsRestored} custom modifications applied)!`);
+    }
     return true;
   } catch (err) {
     console.warn('Notice parsing scenario hash:', err);
