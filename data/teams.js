@@ -455,8 +455,8 @@ var TEAMS_DATABASE = {
     "headCoach": "Steve Sarkisian",
     "defensiveCoordinator": "Will Muschamp",
     "offensiveCoordinator": "Kyle Flood",
-    "starPlayer": "Arch Manning (QB) / Ryan Wingo (WR) / Cam Coleman (WR)",
-    "secondaryStar": "Hollywood Smothers (RB) / Ryan Wingo (WR)",
+    "starPlayer": "Arch Manning (QB) / Hollywood Smothers (RB) / Ryan Wingo (WR)",
+    "secondaryStar": "Hollywood Smothers & Brown (Transfer RBs) / Ryan Wingo (WR)",
     "stadium": "DKR Texas Memorial Stadium",
     "stadiumCity": "Austin, TX",
     "stadiumCapacity": "100,119",
@@ -473,7 +473,7 @@ var TEAMS_DATABASE = {
     "playoffContenderRank": 5,
     "sliderLabels": {
       "qb": "Arch Manning Execution",
-      "ground": "James Simon Ground Attack",
+      "ground": "Smothers & Brown Ground Attack",
       "defense": "Will Muschamp 'Boom' Havoc Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "DKR 100k Burnt Orange Roar"
