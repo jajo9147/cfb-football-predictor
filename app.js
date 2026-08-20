@@ -1655,6 +1655,9 @@ function renderGameSlidersInModal(game) {
 
       // Unset active preset
       document.querySelectorAll('.game-preset-btn').forEach(b => b.classList.remove('active'));
+
+      // Keep bracket & schedule calculations in sync with custom tuning
+      recalculateSeason();
     });
 
     container.appendChild(card);
@@ -1804,6 +1807,7 @@ window.applyGameScenarioPreset = function(presetKey) {
 window.closeSimModal = function() {
   const modal = document.getElementById('simModal');
   if (modal) modal.classList.remove('open');
+  recalculateSeason();
 };
 
 function initModalActions() {
