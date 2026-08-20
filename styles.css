@@ -3332,3 +3332,23 @@ body {
   overflow-y: auto;
   white-space: pre-wrap;
 }
+
+
+/* Sandbox & Receipts Sub Tab Panels Scroll Container */
+.modal-tab-body {
+  padding: 0.75rem 1.25rem;
+}
+
+.sub-tab-panel {
+  max-height: 50vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 0.35rem;
+}
+
+.sandbox-dialog .game-sliders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}

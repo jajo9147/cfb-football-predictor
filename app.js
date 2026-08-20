@@ -3378,7 +3378,7 @@ window.applySandboxPreset = function(presetKey) {
   showToast(`⚡ Applied "${presetKey}" to Dream Matchup!`);
 };
 
-window.recalculateSandboxMatchup = function() {
+window.recalculateSandboxMatchup = function(isResim = false) {
   const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
   const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
   const venueSelect = document.getElementById('sandboxVenueSelect');
@@ -3492,6 +3492,11 @@ window.recalculateSandboxMatchup = function() {
 
   // Draw Sandbox Radar
   drawRadarChartBetween(teamA, teamB, scoreA, scoreB, isHomeA);
+
+  if (isResim) {
+    switchSandboxTab('drives');
+    showToast(`⚡ Re-simulated 10,000 Monte Carlo Drives: ${teamA.shortName} (${scoreA}) vs ${teamB.shortName} (${scoreB})!`);
+  }
 };
 
 window.switchSandboxTab = function(tabName) {
