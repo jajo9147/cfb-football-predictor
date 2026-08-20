@@ -568,6 +568,9 @@ function recalculateSeason() {
   const currentSeedNum = currentSeedIdx !== -1 ? currentSeedIdx + 1 : 0;
 
   const playoffResults = simulatePlayoffBracket(cfp);
+  state.lastPlayoffResults = playoffResults;
+  state.lastNationalChampion = playoffResults.nationalChampion;
+  updateSocialMetadataForChampion(playoffResults.nationalChampion);
 
   // 4. Calculate Overall Season Total Record (Regular + CCG + CFP)
   const fullSeason = calcActiveTeamTotalRecord(state.currentTeamId, totalWins, totalLosses, ccgResults, playoffResults);
@@ -4018,11 +4021,148 @@ window.loadSelectedArchiveSnapshot = function() {
 };
 
 // ==========================================================================
-// SCENARIO PERMALINK SHARING (CLEAN, COMPACT URL ENCODING & WEB SHARE)
+// SCENARIO PERMALINK SHARING & NATIONAL CHAMPION LOGO GRAPHICS
 // ==========================================================================
+
+function updateSocialMetadataForChampion(champ) {
+  if (!champ) return;
+  const champName = champ.shortName || champ.name || 'CFB Champion';
+  const champFullName = champ.name || champName;
+  const champLogo = champ.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[champ.abbr] : '') || 'icons/icon-512.png';
+
+  // Dynamic Title
+  document.title = `👑 ${champName} 2027 National Champion | Gridiron Oracle CFP Predictor`;
+
+  // Dynamic OpenGraph Metadata
+  const ogImg = document.getElementById('ogImage') || document.querySelector('meta[property="og:image"]');
+  if (ogImg && champLogo) ogImg.setAttribute('content', champLogo);
+
+  const ogTitle = document.getElementById('ogTitle') || document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.setAttribute('content', `🏆 ${champFullName} 2026-27 National Champion | Gridiron Oracle`);
+
+  const ogDesc = document.getElementById('ogDescription') || document.querySelector('meta[property="og:description"]');
+  if (ogDesc) ogDesc.setAttribute('content', `Custom CFP Simulation: ${champFullName} is predicted to win the 2027 College Football National Championship!`);
+
+  // Favicon & Apple Touch Icon
+  if (champLogo) {
+    const appleIcon = document.querySelector('link[rel="apple-touch-icon"]');
+    if (appleIcon) appleIcon.setAttribute('href', champLogo);
+    let favIcon = document.querySelector('link[rel="icon"]');
+    if (favIcon) favIcon.setAttribute('href', champLogo);
+  }
+}
+
+function createChampionShareFile(champ) {
+  return new Promise((resolve) => {
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = 800;
+      canvas.height = 800;
+      const ctx = canvas.getContext('2d');
+
+      const primaryColor = champ.colors?.primary || '#002B7F';
+      const accentColor = champ.colors?.accent || '#FFD700';
+
+      // 1. Dark Stadium Gradient Background
+      ctx.fillStyle = '#06080D';
+      ctx.fillRect(0, 0, 800, 800);
+
+      const grad = ctx.createRadialGradient(400, 360, 50, 400, 360, 440);
+      grad.addColorStop(0, primaryColor);
+      grad.addColorStop(0.65, '#080C14');
+      grad.addColorStop(1, '#020306');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 800, 800);
+
+      // 2. Gold Championship Frame
+      ctx.strokeStyle = '#FFD700';
+      ctx.lineWidth = 6;
+      ctx.strokeRect(18, 18, 764, 764);
+
+      // 3. Header
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 36px Bebas Neue, Outfit, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('GRIDIRON ORACLE • CUSTOM CFP SIMULATION', 400, 75);
+
+      ctx.fillStyle = '#FFD700';
+      ctx.font = 'bold 22px JetBrains Mono, monospace';
+      ctx.fillText('👑 2026-27 COLLEGE FOOTBALL NATIONAL CHAMPION 🏆', 400, 112);
+
+      // 4. Logo Ring Glow
+      ctx.beginPath();
+      ctx.arc(400, 360, 175, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = '#FFD700';
+      ctx.stroke();
+
+      const champLogoUrl = champ.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[champ.abbr] : '') || '';
+
+      const finalize = () => {
+        // 5. Champion Details
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 54px Bebas Neue, Outfit, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(champ.name.toUpperCase(), 400, 600);
+
+        ctx.fillStyle = '#FFD700';
+        ctx.font = 'bold 24px JetBrains Mono, monospace';
+        ctx.fillText(`${champ.shortName?.toUpperCase()} • NATIONAL CHAMPION`, 400, 642);
+
+        // 6. Verification
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.font = '16px JetBrains Mono, monospace';
+        ctx.fillText('10,000 MONTE CARLO DRIVES • OFFICIAL AI SIMULATION', 400, 715);
+
+        canvas.toBlob(blob => {
+          if (!blob) {
+            resolve(null);
+            return;
+          }
+          const file = new File([blob], `${champ.id || 'champion'}-national-champion.png`, { type: 'image/png' });
+          resolve(file);
+        }, 'image/png');
+      };
+
+      if (champLogoUrl) {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+          try {
+            ctx.drawImage(img, 260, 220, 280, 280);
+          } catch (e) {
+            console.warn('Canvas drawImage notice:', e);
+          }
+          finalize();
+        };
+        img.onerror = () => {
+          ctx.fillStyle = '#FFD700';
+          ctx.font = 'bold 84px Bebas Neue, sans-serif';
+          ctx.fillText(champ.abbr || champ.shortName, 400, 390);
+          finalize();
+        };
+        img.src = champLogoUrl;
+      } else {
+        ctx.fillStyle = '#FFD700';
+        ctx.font = 'bold 84px Bebas Neue, sans-serif';
+        ctx.fillText(champ.abbr || champ.shortName, 400, 390);
+        finalize();
+      }
+    } catch (e) {
+      console.warn('createChampionShareFile exception:', e);
+      resolve(null);
+    }
+  });
+}
 
 function serializeScenario(teamId) {
   const p = { t: teamId };
+  const champ = state.lastNationalChampion || (state.lastPlayoffResults && state.lastPlayoffResults.nationalChampion);
+  if (champ && champ.id) {
+    p.ch = champ.id;
+  }
 
   // 1. Regular season picks (only non-empty)
   if (state.userPicks && Object.keys(state.userPicks).length > 0) {
@@ -4086,38 +4226,63 @@ function serializeScenario(teamId) {
     }
   }
 
+  const champSlug = champ && champ.id ? `&champ=${champ.id}` : '';
   const hasCustomData = p.pk || p.cp || p.pp || p.ts || p.tp || p.gs;
   if (!hasCustomData) {
-    return `${window.location.origin}${window.location.pathname}?team=${teamId}`;
+    return `${window.location.origin}${window.location.pathname}?team=${teamId}${champSlug}`;
   }
 
   try {
     const jsonStr = JSON.stringify(p);
     const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
-    return `${window.location.origin}${window.location.pathname}?team=${teamId}#s=${encodeURIComponent(b64)}`;
+    return `${window.location.origin}${window.location.pathname}?team=${teamId}${champSlug}#s=${encodeURIComponent(b64)}`;
   } catch (e) {
     console.error('Error serializing scenario:', e);
-    return `${window.location.origin}${window.location.pathname}?team=${teamId}`;
+    return `${window.location.origin}${window.location.pathname}?team=${teamId}${champSlug}`;
   }
 }
 
 window.shareCustomScenario = async function() {
   const teamId = state.currentTeamId || getTopRankedTeamId() || 'texas';
   const team = TEAMS_DATABASE[teamId] || { name: 'CFB', shortName: 'College Football' };
+  const champ = state.lastNationalChampion || (state.lastPlayoffResults && state.lastPlayoffResults.nationalChampion) || team;
+  const champName = champ.shortName || champ.name || 'National Champion';
+  const champFullName = champ.name || champName;
+
   const shareUrl = serializeScenario(teamId);
 
+  // Update dynamic social & browser metadata
+  updateSocialMetadataForChampion(champ);
+
   const shareData = {
-    title: `${team.shortName || team.name} CFP Prediction | Gridiron Oracle`,
-    text: `Check out my custom 2026-27 College Football Playoff scenario for ${team.name}!`,
+    title: `🏆 ${champName} 2027 National Champion | Gridiron Oracle`,
+    text: `👑 Custom Prediction: ${champFullName} wins the 2027 CFP National Championship! Check out the full scenario:`,
     url: shareUrl
   };
 
-  // Use native mobile share sheet when available for super-clean iMessage / SMS sharing
+  // Generate National Champion Logo Graphic
+  let champShareFile = null;
+  try {
+    champShareFile = await createChampionShareFile(champ);
+  } catch (err) {
+    console.warn('Champion graphic generation skipped:', err);
+  }
+
+  // Native mobile share sheet with Champion Logo image attachment
   if (navigator.share && /mobile|android|iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase())) {
     try {
-      await navigator.share(shareData);
-      showToast('⚡ Scenario shared successfully!');
-      return;
+      if (champShareFile && navigator.canShare && navigator.canShare({ files: [champShareFile] })) {
+        await navigator.share({
+          ...shareData,
+          files: [champShareFile]
+        });
+        showToast(`⚡ Shared custom scenario with ${champName} Champion logo!`);
+        return;
+      } else {
+        await navigator.share(shareData);
+        showToast(`⚡ Shared custom scenario with ${champName} Champion prediction!`);
+        return;
+      }
     } catch (err) {
       if (err.name === 'AbortError') {
         return;
@@ -4125,9 +4290,10 @@ window.shareCustomScenario = async function() {
     }
   }
 
+  // Clipboard fallback
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(shareUrl).then(() => {
-      showToast('📋 Clean Scenario link copied! All custom picks, sliders & bracket saved.');
+      showToast(`📋 Custom Scenario link copied (${champName} National Champion)!`);
     }).catch(() => {
       prompt('Copy this link to share your custom scenario:', shareUrl);
     });
