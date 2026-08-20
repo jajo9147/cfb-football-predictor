@@ -107,7 +107,7 @@ function getTopRankedTeamId() {
 function initPwaServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=2026.87')
+      navigator.serviceWorker.register('sw.js?v=2026.88')
         .then(reg => {
           reg.update();
           console.log('PWA Service Worker registered:', reg.scope);
@@ -3174,25 +3174,14 @@ function initMonteCarloEngine() {
 
 
 // ==========================================================================
-// ELEVATION: DREAM MATCHUP SANDBOX, RECEIPTS & ACCURACY, AND URL SHARING
+// ELEVATION: DREAM MATCHUP COLLIDER (LAUNCHED IN PRIMARY SIM MODAL)
 // ==========================================================================
-
-const sandboxState = {
-  teamAId: 'texas',
-  teamBId: 'oregon',
-  venue: 'neutral',
-  slidersA: { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 },
-  slidersB: { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 }
-};
 
 window.openDreamSandboxModal = function() {
   const modal = document.getElementById('dreamSandboxModal');
   if (!modal) return;
   
   populateSandboxDropdowns();
-  renderSandboxSliders();
-  recalculateSandboxMatchup(false);
-  window.switchSandboxTab('drives');
   modal.classList.add('open');
 };
 
@@ -3210,330 +3199,66 @@ function populateSandboxDropdowns() {
   selectB.innerHTML = '';
 
   const teamKeys = Object.keys(TEAMS_DATABASE);
-  teamKeys.forEach(k => {
+  teamKeys.forEach((k, idx) => {
     const t = TEAMS_DATABASE[k];
     const optA = document.createElement('option');
     optA.value = k;
     optA.innerText = `${t.apRank} ${t.name} (${t.conference})`;
-    if (k === sandboxState.teamAId) optA.selected = true;
+    if (k === 'texas') optA.selected = true;
     selectA.appendChild(optA);
 
     const optB = document.createElement('option');
     optB.value = k;
     optB.innerText = `${t.apRank} ${t.name} (${t.conference})`;
-    if (k === sandboxState.teamBId) optB.selected = true;
+    if (k === 'oregon') optB.selected = true;
     selectB.appendChild(optB);
   });
 }
 
-window.updateSandboxTeams = function() {
+window.launchDreamMatchupInSimModal = function() {
   const selectA = document.getElementById('sandboxTeamASelect');
   const selectB = document.getElementById('sandboxTeamBSelect');
-  if (selectA) sandboxState.teamAId = selectA.value;
-  if (selectB) sandboxState.teamBId = selectB.value;
-  renderSandboxSliders();
-  recalculateSandboxMatchup(false);
+  const selectVenue = document.getElementById('sandboxVenueSelect');
+
+  const idA = selectA ? selectA.value : 'texas';
+  const idB = selectB ? selectB.value : 'oregon';
+  const venue = selectVenue ? selectVenue.value : 'neutral';
+
+  const teamA = TEAMS_DATABASE[idA] || TEAMS_DATABASE['texas'];
+  const teamB = TEAMS_DATABASE[idB] || TEAMS_DATABASE['oregon'];
+
+  closeDreamSandboxModal();
+
+  const isHomeA = (venue === 'homeA');
+  const isHomeB = (venue === 'homeB');
+  const stadiumName = (venue === 'homeA') ? (teamA.stadium || `${teamA.name} Stadium`) : ((venue === 'homeB') ? (teamB.stadium || `${teamB.name} Stadium`) : 'Championship Stadium (Neutral Site)');
+
+  const dreamGame = {
+    id: `dream-${idA}-${idB}`,
+    isPostseason: true,
+    isDreamMatchup: true,
+    week: 'DREAM MATCHUP',
+    teamA: { id: idA, name: teamA.name, shortName: teamA.shortName, apRank: teamA.apRank, logoUrl: teamA.logoUrl, colors: teamA.colors },
+    teamB: { id: idB, name: teamB.name, shortName: teamB.shortName, apRank: teamB.apRank, logoUrl: teamB.logoUrl, colors: teamB.colors },
+    stadium: stadiumName,
+    isHomeA: isHomeA,
+    isHome: isHomeA,
+    opponent: teamB.name,
+    oppAbbr: teamB.abbr || teamB.shortName,
+    oppRank: teamB.apRank,
+    oppLogoUrl: teamB.logoUrl,
+    oppColor: teamB.colors?.primary || '#333'
+  };
+
+  if (!state.postseasonGames) state.postseasonGames = {};
+  state.postseasonGames[dreamGame.id] = dreamGame;
+
+  openSimModal(dreamGame);
+  window.switchModalSubTab('drives');
+  showToast(`⚡ Loaded Dream Matchup: ${teamA.shortName} vs ${teamB.shortName}!`);
 };
 
-window.switchSandboxTab = function(subtab) {
-  const modal = document.getElementById('dreamSandboxModal');
-  if (!modal) return;
 
-  modal.querySelectorAll('.modal-sub-tabs .sub-tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.sandboxtab === subtab);
-  });
-
-  modal.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-  const activePane = document.getElementById(`pane-sandbox-${subtab}`);
-  if (activePane) {
-    activePane.classList.add('active');
-    activePane.scrollTop = 0;
-  }
-
-  if (subtab === 'game-tuning') {
-    renderSandboxSliders();
-  } else if (subtab === 'radar') {
-    const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
-    const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
-    drawRadarChartBetween(teamA, teamB, 28, 24, sandboxState.venue === 'homeA');
-  }
-
-  const footer = modal.querySelector('.modal-footer');
-  if (footer) {
-    footer.style.display = (subtab === 'game-tuning') ? 'none' : 'flex';
-  }
-};
-
-function renderSandboxSliders() {
-  const container = document.getElementById('sandboxSlidersGrid');
-  if (!container) return;
-
-  const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
-  const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
-
-  // Update preset labels
-  const btnBlowoutA = document.getElementById('sbPresetBlowoutA');
-  if (btnBlowoutA) btnBlowoutA.innerText = `${teamA.shortName} Blowout`;
-  const btnBlowoutB = document.getElementById('sbPresetBlowoutB');
-  if (btnBlowoutB) btnBlowoutB.innerText = `${teamB.shortName} Upset`;
-
-  const slidersListA = [
-    { key: 'qbRating', label: `${teamA.confirmedStarterQb || teamA.shortName} QB Execution`, icon: 'fa-solid fa-crosshairs' },
-    { key: 'groundAttack', label: `${teamA.shortName} Ground Attack`, icon: 'fa-solid fa-person-running' },
-    { key: 'defenseHavoc', label: `${teamA.shortName} Defense & Havoc`, icon: 'fa-solid fa-shield-halved' },
-    { key: 'turnoverLuck', label: `${teamA.shortName} Turnover Luck`, icon: 'fa-solid fa-dice' }
-  ];
-
-  const slidersListB = [
-    { key: 'qbRating', label: `${teamB.confirmedStarterQb || teamB.shortName} QB Execution`, icon: 'fa-solid fa-crosshairs' },
-    { key: 'groundAttack', label: `${teamB.shortName} Ground Attack`, icon: 'fa-solid fa-person-running' },
-    { key: 'defenseHavoc', label: `${teamB.shortName} Defense & Havoc`, icon: 'fa-solid fa-shield-halved' },
-    { key: 'turnoverLuck', label: `${teamB.shortName} Turnover Luck`, icon: 'fa-solid fa-dice' }
-  ];
-
-  container.innerHTML = `
-    <!-- Team A Section -->
-    <div style="grid-column: 1 / -1; font-family: var(--font-mono); font-size: 0.76rem; font-weight: 800; color: ${teamA.colors?.accent || '#FF7A00'}; padding: 4px 0; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 6px;">
-      <img src="${teamA.logoUrl}" alt="${teamA.shortName}" style="width: 18px; height: 18px; object-fit: contain;">
-      <span>${teamA.name.toUpperCase()} AI TUNING</span>
-    </div>
-  `;
-
-  // Render Team A Sliders
-  slidersListA.forEach(s => {
-    const val = sandboxState.slidersA[s.key] || 0;
-    const sign = val > 0 ? '+' : '';
-    const card = document.createElement('div');
-    card.className = 'game-slider-card';
-    card.innerHTML = `
-      <div class="slider-top-row">
-        <span class="slider-title" style="font-size: 0.78rem;"><i class="${s.icon}"></i> ${s.label}</span>
-        <span class="slider-val-readout" id="sb-readout-a-${s.key}">${sign}${val}%</span>
-      </div>
-      <input type="range" class="custom-range-slider" min="-50" max="50" value="${val}" step="5">
-      <div class="slider-hints-row">
-        <span>-50%</span>
-        <span>Baseline</span>
-        <span>+50%</span>
-      </div>
-    `;
-
-    const input = card.querySelector('input');
-    input.addEventListener('input', (e) => {
-      const nVal = parseInt(e.target.value, 10);
-      sandboxState.slidersA[s.key] = nVal;
-      const sStr = nVal > 0 ? '+' : '';
-      card.querySelector('.slider-val-readout').innerText = `${sStr}${nVal}%`;
-      recalculateSandboxMatchup(false);
-    });
-
-    container.appendChild(card);
-  });
-
-  // Team B Column Header
-  const headerB = document.createElement('div');
-  headerB.style.gridColumn = '1 / -1';
-  headerB.style.fontFamily = 'var(--font-mono)';
-  headerB.style.fontSize = '0.76rem';
-  headerB.style.fontWeight = '800';
-  headerB.style.color = teamB.colors?.accent || '#10B981';
-  headerB.style.padding = '8px 0 4px';
-  headerB.style.borderBottom = '1px solid var(--color-border)';
-  headerB.style.display = 'flex';
-  headerB.style.alignItems = 'center';
-  headerB.style.gap = '6px';
-  headerB.style.marginTop = '0.5rem';
-  headerB.innerHTML = `
-    <img src="${teamB.logoUrl}" alt="${teamB.shortName}" style="width: 18px; height: 18px; object-fit: contain;">
-    <span>${teamB.name.toUpperCase()} AI TUNING</span>
-  `;
-  container.appendChild(headerB);
-
-  // Render Team B Sliders
-  slidersListB.forEach(s => {
-    const val = sandboxState.slidersB[s.key] || 0;
-    const sign = val > 0 ? '+' : '';
-    const card = document.createElement('div');
-    card.className = 'game-slider-card';
-    card.innerHTML = `
-      <div class="slider-top-row">
-        <span class="slider-title" style="font-size: 0.78rem;"><i class="${s.icon}"></i> ${s.label}</span>
-        <span class="slider-val-readout" id="sb-readout-b-${s.key}">${sign}${val}%</span>
-      </div>
-      <input type="range" class="custom-range-slider" min="-50" max="50" value="${val}" step="5">
-      <div class="slider-hints-row">
-        <span>-50%</span>
-        <span>Baseline</span>
-        <span>+50%</span>
-      </div>
-    `;
-
-    const input = card.querySelector('input');
-    input.addEventListener('input', (e) => {
-      const nVal = parseInt(e.target.value, 10);
-      sandboxState.slidersB[s.key] = nVal;
-      const sStr = nVal > 0 ? '+' : '';
-      card.querySelector('.slider-val-readout').innerText = `${sStr}${nVal}%`;
-      recalculateSandboxMatchup(false);
-    });
-
-    container.appendChild(card);
-  });
-}
-
-window.applySandboxPreset = function(presetKey) {
-  document.querySelectorAll('#dreamSandboxModal .game-preset-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.sbpreset === presetKey);
-  });
-
-  if (presetKey === 'baseline') {
-    sandboxState.slidersA = { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 };
-    sandboxState.slidersB = { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0 };
-  } else if (presetKey === 'blowoutA') {
-    sandboxState.slidersA = { qbRating: 30, groundAttack: 20, defenseHavoc: 25, turnoverLuck: 20 };
-    sandboxState.slidersB = { qbRating: -25, groundAttack: -15, defenseHavoc: -20, turnoverLuck: -20 };
-  } else if (presetKey === 'blowoutB') {
-    sandboxState.slidersA = { qbRating: -25, groundAttack: -15, defenseHavoc: -20, turnoverLuck: -20 };
-    sandboxState.slidersB = { qbRating: 30, groundAttack: 20, defenseHavoc: 25, turnoverLuck: 20 };
-  } else if (presetKey === 'defense') {
-    sandboxState.slidersA = { qbRating: -10, groundAttack: 10, defenseHavoc: 35, turnoverLuck: 10 };
-    sandboxState.slidersB = { qbRating: -10, groundAttack: 10, defenseHavoc: 35, turnoverLuck: 10 };
-  } else if (presetKey === 'shootout') {
-    sandboxState.slidersA = { qbRating: 40, groundAttack: 20, defenseHavoc: -20, turnoverLuck: 0 };
-    sandboxState.slidersB = { qbRating: 40, groundAttack: 20, defenseHavoc: -20, turnoverLuck: 0 };
-  }
-
-  renderSandboxSliders();
-  recalculateSandboxMatchup(false);
-  showToast(`⚡ Applied "${presetKey}" to Dream Matchup!`);
-};
-
-window.recalculateSandboxMatchup = function(isResim = false) {
-  const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
-  const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
-  const venueSelect = document.getElementById('sandboxVenueSelect');
-  const venueVal = venueSelect ? venueSelect.value : 'neutral';
-  sandboxState.venue = venueVal;
-
-  const isHomeA = (venueVal === 'homeA');
-  const isHomeB = (venueVal === 'homeB');
-
-  let spA = teamA.baseSpRating || 24.0;
-  let spB = teamB.baseSpRating || 24.0;
-
-  // Conference power adjustments
-  if (teamA.conference === 'SEC') spA += 2.2;
-  if (teamB.conference === 'SEC') spB += 2.2;
-  if (teamA.conference === 'Big Ten') spA += 1.6;
-  if (teamB.conference === 'Big Ten') spB += 1.6;
-
-  // Home field
-  if (isHomeA) spA += 2.5;
-  if (isHomeB) spB += 2.5;
-
-  // Apply Team A Sliders
-  const sA = sandboxState.slidersA;
-  spA += (sA.qbRating * 0.18 + sA.defenseHavoc * 0.18 + sA.groundAttack * 0.14 + sA.turnoverLuck * 0.12);
-
-  // Apply Team B Sliders
-  const sB = sandboxState.slidersB;
-  spB += (sB.qbRating * 0.18 + sB.defenseHavoc * 0.18 + sB.groundAttack * 0.14 + sB.turnoverLuck * 0.12);
-
-  const diff = spA - spB;
-  let scoreA = Math.max(7, Math.round(28 + diff * 0.65));
-  let scoreB = Math.max(7, Math.round(28 - diff * 0.65));
-  if (scoreA === scoreB) {
-    if (diff >= 0) scoreA += 3;
-    else scoreB += 3;
-  }
-
-  let probA = Math.round(100 / (1 + Math.pow(10, -diff / 7.5)));
-  probA = Math.max(5, Math.min(95, probA));
-
-  const isWinA = scoreA > scoreB;
-
-  // Render Title & Subtitle
-  const titleEl = document.getElementById('sandboxTitle');
-  if (titleEl) titleEl.innerText = `${teamA.name} vs ${teamB.name}`;
-
-  const subEl = document.getElementById('sandboxVenueSubtitle');
-  if (subEl) {
-    if (venueVal === 'homeA') subEl.innerText = `${teamA.stadium} • ${teamA.stadiumCity || 'On Campus'}`;
-    else if (venueVal === 'homeB') subEl.innerText = `${teamB.stadium} • ${teamB.stadiumCity || 'On Campus'}`;
-    else subEl.innerText = 'Neutral Site Championship Stadium • 10,000 Monte Carlo Simulation';
-  }
-
-  // Render Scoreboard
-  const sb = document.getElementById('sandboxScoreboard');
-  if (sb) {
-    sb.innerHTML = `
-      <div style="display: flex; align-items: center; gap: 0.75rem;">
-        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${teamA.colors?.primary || '#333'};">
-          <img src="${teamA.logoUrl}" alt="${teamA.shortName}" class="modal-team-logo">
-        </div>
-        <div>
-          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${teamA.shortName}</div>
-          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${teamA.apRank}</div>
-        </div>
-      </div>
-
-      <div style="display: flex; flex-direction: column; align-items: center;">
-        <div style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: #FFFFFF;">
-          <span style="color: ${isWinA ? 'var(--color-success)' : 'var(--color-text-dim)'};">${scoreA}</span>
-          <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
-          <span style="color: ${!isWinA ? 'var(--color-success)' : 'var(--color-text-dim)'};">${scoreB}</span>
-        </div>
-        <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
-          WIN PROB: ${probA}% - ${100 - probA}%
-        </span>
-      </div>
-
-      <div style="display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end;">
-        <div style="text-align: right;">
-          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${teamB.shortName}</div>
-          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${teamB.apRank}</div>
-        </div>
-        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${teamB.colors?.primary || '#333'};">
-          <img src="${teamB.logoUrl}" alt="${teamB.shortName}" class="modal-team-logo">
-        </div>
-      </div>
-    `;
-  }
-
-  // Render Drive Log
-  const driveLog = document.getElementById('sandboxDriveLog');
-  if (driveLog) {
-    driveLog.innerHTML = '';
-    const drives = generateDriveSimulationLogBetween(teamA, teamB, scoreA, scoreB);
-    drives.forEach(d => {
-      const row = document.createElement('div');
-      row.className = 'drive-log-row';
-      row.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 0.6rem;">
-          <span style="font-family: var(--font-mono); font-weight: 800; color: var(--color-brand-accent);">Q${d.quarter} ${d.time}</span>
-          <span style="font-weight: 700; color: ${d.isTeam1 ? (teamA.colors?.accent || '#FFF') : (teamB.colors?.accent || '#FFF')};">${d.possTeam}</span>
-          <span>${d.event}</span>
-        </div>
-        <span style="font-family: var(--font-mono); font-weight: 800; color: ${d.points > 0 ? 'var(--color-success)' : 'var(--color-text-dim)'};">${d.scoreLine}</span>
-      `;
-      driveLog.appendChild(row);
-    });
-  }
-
-  // Draw Sandbox Radar
-  drawRadarChartBetween(teamA, teamB, scoreA, scoreB, isHomeA);
-
-  if (isResim) {
-    window.switchSandboxTab('drives');
-    showToast(`⚡ Re-simulated 10,000 Monte Carlo Drives: ${teamA.shortName} (${scoreA}) vs ${teamB.shortName} (${scoreB})!`);
-  }
-};
-
-window.exportSandboxHypeCard = function() {
-  const teamA = TEAMS_DATABASE[sandboxState.teamAId] || TEAMS_DATABASE['texas'];
-  const teamB = TEAMS_DATABASE[sandboxState.teamBId] || TEAMS_DATABASE['oregon'];
-  showToast(`📸 Exported High-Res Dream Matchup: ${teamA.shortName} vs ${teamB.shortName}!`);
-};
 
 
 
@@ -3797,4 +3522,108 @@ function restoreScenarioFromUrl() {
   } catch (err) {
     console.warn('Notice parsing scenario hash:', err);
   }
+}
+
+
+function generateGameHypeCard(game) {
+  const canvas = document.getElementById('hypeCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let teamA, teamB, scoreA, scoreB, probA;
+  if (game.isPostseason && game.teamA && game.teamB) {
+    teamA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+    teamB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+    const sim = simulatePostseasonMatchup(teamA, teamB, { gameId: game.id, isHomeA: game.isHomeA });
+    scoreA = sim.scoreA;
+    scoreB = sim.scoreB;
+    probA = sim.winProbA;
+  } else {
+    teamA = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
+    teamB = { 
+      shortName: game.oppAbbr || 'OPP', 
+      name: game.opponent || 'Opponent', 
+      apRank: game.oppRank || '', 
+      logoUrl: game.oppLogoUrl || ESPN_LOGOS[game.oppAbbr] || '', 
+      colors: { primary: game.oppColor || '#333' } 
+    };
+    const sim = calculateAdjustedMatchup(game);
+    scoreA = sim.projUt;
+    scoreB = sim.projOpp;
+    probA = sim.adjWinProb;
+  }
+
+  // Draw Background
+  ctx.fillStyle = '#07090E';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Gradient
+  const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  grad.addColorStop(0, teamA.colors?.primary || '#BF5700');
+  grad.addColorStop(1, teamB.colors?.primary || '#00274C');
+  ctx.fillStyle = grad;
+  ctx.globalAlpha = 0.35;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.globalAlpha = 1.0;
+
+  // Border
+  ctx.strokeStyle = '#F59E0B';
+  ctx.lineWidth = 4;
+  ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+
+  // Header Title
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 30px Bebas Neue, Outfit, sans-serif';
+  ctx.fillText('GRIDIRON ORACLE • MATCHUP SIMULATION', 30, 48);
+
+  ctx.fillStyle = '#F59E0B';
+  ctx.font = 'bold 14px JetBrains Mono, monospace';
+  ctx.fillText(`${(game.stadium || 'Championship Stadium').toUpperCase()} • 10,000 MONTE CARLO DRIVES`, 30, 75);
+
+  // Scoreboard Card
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.fillRect(30, 95, canvas.width - 60, 180);
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+  ctx.strokeRect(30, 95, canvas.width - 60, 180);
+
+  // Team A Column
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 28px Outfit, sans-serif';
+  ctx.fillText(teamA.shortName || teamA.name, 60, 160);
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = 'bold 16px JetBrains Mono, monospace';
+  ctx.fillText(teamA.apRank || '', 60, 190);
+
+  // Score Center
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 72px Bebas Neue, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(`${scoreA} - ${scoreB}`, canvas.width / 2, 195);
+
+  // Win Probability
+  ctx.fillStyle = '#38BDF8';
+  ctx.font = 'bold 18px JetBrains Mono, monospace';
+  ctx.fillText(`WIN PROB: ${probA}% - ${100 - probA}%`, canvas.width / 2, 245);
+  ctx.textAlign = 'left';
+
+  // Team B Column
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 28px Outfit, sans-serif';
+  ctx.fillText(teamB.shortName || teamB.name, canvas.width - 220, 160);
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = 'bold 16px JetBrains Mono, monospace';
+  ctx.fillText(teamB.apRank || '', canvas.width - 220, 190);
+
+  // Tactical Insight Note
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+  ctx.font = '14px Outfit, sans-serif';
+  const winTeamName = scoreA > scoreB ? teamA.name : teamB.name;
+  ctx.fillText(`Projected Winner: ${winTeamName} (${Math.max(probA, 100 - probA)}% confidence)`, 40, 320);
+
+  // Footer Tagline
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+  ctx.font = '12px JetBrains Mono, monospace';
+  ctx.fillText('Powered by Gridiron Oracle • https://jajo9147.github.io/cfb-football-predictor/', 30, 420);
+
+  document.getElementById('hypeCardModal').classList.add('open');
 }
