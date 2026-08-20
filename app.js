@@ -411,6 +411,24 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
 }
 
 function calculateAdjustedMatchup(game, targetTeamId) {
+  if (!game) return { adjWinProb: 50, projUt: 24, projOpp: 21, isWin: true, isCustomTuned: false, syncedFrom: null };
+
+  // 0a. Dynamic Dream Matchup or Postseason Game
+  if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
+    const tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+    const tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+    const sim = simulatePostseasonMatchup(tA, tB, { gameId: game.id, isHomeA: game.isHomeA || game.isHome });
+    return {
+      adjWinProb: sim.winProbA,
+      projUt: sim.scoreA,
+      projOpp: sim.scoreB,
+      isWin: sim.isAWinner,
+      isFinal: false,
+      isCustomTuned: !!(state.gameSliders[game.id] && state.gameSliders[game.id].isCustom),
+      syncedFrom: null
+    };
+  }
+
   const teamId = targetTeamId || state.currentTeamId;
   const team = TEAMS_DATABASE[teamId];
   if (!team) return { adjWinProb: 50, projUt: 24, projOpp: 21, isWin: true, isCustomTuned: false, syncedFrom: null };
@@ -963,8 +981,8 @@ function openSimModal(game) {
     let team1, team2;
     let score1, score2, prob1, isTeam1Win;
 
-    if (game.isPostseason && game.teamA && game.teamB) {
-      // Postseason Game (CCG or Playoff Game)
+    if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
+      // Postseason Game (CCG or Playoff Game) or Dream Matchup Collider
       const tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
       const tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
       
@@ -976,7 +994,12 @@ function openSimModal(game) {
         apRank: tA.apRank || '',
         logoUrl: tA.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tA.abbr] : '') || '',
         colors: tA.colors || { primary: '#333333', secondary: '#FFFFFF', accent: '#0062B8' },
-        starPlayer: tA.starPlayer || `${tA.shortName || tA.name || 'Key'} Star Playmaker`
+        starPlayer: tA.starPlayer || `${tA.shortName || tA.name || 'Key'} Star Playmaker`,
+        headCoach: tA.headCoach,
+        offensiveCoordinator: tA.offensiveCoordinator,
+        defensiveCoordinator: tA.defensiveCoordinator,
+        confirmedStarterQb: tA.confirmedStarterQb,
+        baseSpRating: tA.baseSpRating
       };
 
       team2 = {
@@ -987,10 +1010,15 @@ function openSimModal(game) {
         apRank: tB.apRank || '',
         logoUrl: tB.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tB.abbr] : '') || '',
         colors: tB.colors || { primary: '#555555', secondary: '#FFFFFF', accent: '#CC0000' },
-        starPlayer: tB.starPlayer || `${tB.shortName || tB.name || 'Key'} Star Playmaker`
+        starPlayer: tB.starPlayer || `${tB.shortName || tB.name || 'Key'} Star Playmaker`,
+        headCoach: tB.headCoach,
+        offensiveCoordinator: tB.offensiveCoordinator,
+        defensiveCoordinator: tB.defensiveCoordinator,
+        confirmedStarterQb: tB.confirmedStarterQb,
+        baseSpRating: tB.baseSpRating
       };
 
-      const sim = simulatePostseasonMatchup(tA, tB, { gameId: game.id, isHomeA: game.isHomeA });
+      const sim = simulatePostseasonMatchup(tA, tB, { gameId: game.id, isHomeA: game.isHomeA || game.isHome });
       score1 = sim.scoreA;
       score2 = sim.scoreB;
       prob1 = sim.winProbA;
@@ -1008,8 +1036,16 @@ function openSimModal(game) {
         apRank: tActive.apRank,
         logoUrl: tActive.logoUrl,
         colors: tActive.colors || { primary: '#333333', secondary: '#FFFFFF', accent: '#0062B8' },
-        starPlayer: tActive.starPlayer || `${tActive.shortName} Star Playmaker`
+        starPlayer: tActive.starPlayer || `${tActive.shortName} Star Playmaker`,
+        headCoach: tActive.headCoach,
+        offensiveCoordinator: tActive.offensiveCoordinator,
+        defensiveCoordinator: tActive.defensiveCoordinator,
+        confirmedStarterQb: tActive.confirmedStarterQb,
+        baseSpRating: tActive.baseSpRating
       };
+
+      const oppId = getOpponentTeamId(game);
+      const dbOpp = (oppId && TEAMS_DATABASE[oppId]) ? TEAMS_DATABASE[oppId] : null;
 
       team2 = {
         id: game.oppAbbr || 'OPP',
@@ -1019,7 +1055,12 @@ function openSimModal(game) {
         apRank: game.oppRank || 'NR',
         logoUrl: game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || '',
         colors: { primary: game.oppColor || '#333333', secondary: game.oppSecondary || '#FFFFFF', accent: game.oppColor || '#333333' },
-        starPlayer: `${game.oppAbbr || 'Opponent'} Key Playmakers`
+        starPlayer: dbOpp ? dbOpp.starPlayer : `${game.oppAbbr || 'Opponent'} Key Playmakers`,
+        headCoach: dbOpp ? dbOpp.headCoach : undefined,
+        offensiveCoordinator: dbOpp ? dbOpp.offensiveCoordinator : undefined,
+        defensiveCoordinator: dbOpp ? dbOpp.defensiveCoordinator : undefined,
+        confirmedStarterQb: dbOpp ? dbOpp.confirmedStarterQb : undefined,
+        baseSpRating: dbOpp ? dbOpp.baseSpRating : undefined
       };
 
       const sim = calculateAdjustedMatchup(game);
@@ -1031,7 +1072,8 @@ function openSimModal(game) {
 
     const weekTagEl = document.getElementById('modalWeekTag');
     if (weekTagEl) {
-      weekTagEl.innerText = `${game.week} • ${game.isPostseason ? 'CHAMPIONSHIP SHOWDOWN' : (game.isMarquee ? 'MARQUEE BATTLE' : (game.isHome ? 'HOME SHOWDOWN' : 'AWAY GAUNTLET'))}`;
+      const typeTag = game.isDreamMatchup ? 'DREAM MATCHUP SHOWDOWN' : (game.isPostseason ? 'CHAMPIONSHIP SHOWDOWN' : (game.isMarquee ? 'MARQUEE BATTLE' : (game.isHome ? 'HOME SHOWDOWN' : 'AWAY GAUNTLET')));
+      weekTagEl.innerText = `${game.week || 'MATCHUP'} • ${typeTag}`;
     }
 
     const titleEl = document.getElementById('modalMatchupTitle');
@@ -1156,7 +1198,7 @@ function renderDriveLogBetween(team1, team2, score1, score2) {
   container.innerHTML = '';
   const drives = generateDriveSimulationLogBetween(team1, team2, score1, score2);
 
-  drives.forEach((d, idx) => {
+  drives.forEach((d) => {
     const row = document.createElement('div');
     row.style.background = 'rgba(255, 255, 255, 0.04)';
     row.style.border = '1px solid var(--color-border)';
@@ -1180,39 +1222,164 @@ function renderDriveLogBetween(team1, team2, score1, score2) {
 }
 
 function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
+  const s1 = typeof score1 === 'number' ? score1 : 28;
+  const s2 = typeof score2 === 'number' ? score2 : 24;
+
   const events = [];
   let cur1 = 0;
   let cur2 = 0;
-  const quarters = [1, 2, 3, 4];
 
-  quarters.forEach(q => {
-    // Drive 1: Team 1
-    const roll1 = Math.random();
-    if (roll1 < 0.35 && cur1 < score1) {
-      cur1 += 7;
-      events.push({ quarter: q, time: '10:42', possTeam: team1.abbr, isTeam1: true, event: `Touchdown! ${team1.starPlayer || team1.shortName} explosive scoring drive`, points: 7, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
-    } else if (roll1 < 0.60 && cur1 < score1) {
-      cur1 += 3;
-      events.push({ quarter: q, time: '07:15', possTeam: team1.abbr, isTeam1: true, event: 'Field Goal through uprights', points: 3, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
-    } else {
-      events.push({ quarter: q, time: '05:30', possTeam: team1.abbr, isTeam1: true, event: 'Punt pinned inside the 20', points: 0, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
-    }
+  // Breakdown desired scores into 4-quarter increments
+  const q1_1 = Math.round(s1 * 0.25);
+  const q2_1 = Math.round(s1 * 0.50);
+  const q3_1 = Math.round(s1 * 0.75);
+  const q4_1 = s1;
 
-    // Drive 2: Team 2
-    const roll2 = Math.random();
-    if (roll2 < 0.30 && cur2 < score2) {
-      cur2 += 7;
-      events.push({ quarter: q, time: '03:10', possTeam: team2.abbr, isTeam1: false, event: `Touchdown! ${team2.abbr} red zone strike`, points: 7, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
-    } else if (roll2 < 0.55 && cur2 < score2) {
-      cur2 += 3;
-      events.push({ quarter: q, time: '01:05', possTeam: team2.abbr, isTeam1: false, event: `${team2.abbr} 44yd Field Goal`, points: 3, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
+  const q1_2 = Math.round(s2 * 0.25);
+  const q2_2 = Math.round(s2 * 0.50);
+  const q3_2 = Math.round(s2 * 0.75);
+  const q4_2 = s2;
+
+  const quarterTargets = [
+    { q: 1, t1: q1_1, t2: q1_2 },
+    { q: 2, t1: q2_1, t2: q2_2 },
+    { q: 3, t1: q3_1, t2: q3_2 },
+    { q: 4, t1: q4_1, t2: q4_2 }
+  ];
+
+  quarterTargets.forEach(tgt => {
+    // Drive Team 1
+    const p1 = Math.max(0, tgt.t1 - cur1);
+    cur1 += p1;
+    let desc1;
+    if (p1 >= 7) {
+      desc1 = `Touchdown! ${team1.starPlayer || team1.confirmedStarterQb || team1.shortName} explosive scoring drive (${p1} pts)`;
+    } else if (p1 > 0) {
+      desc1 = `Field Goal! ${team1.shortName} 38yd kick through the uprights (${p1} pts)`;
     } else {
-      events.push({ quarter: q, time: '00:15', possTeam: team2.abbr, isTeam1: false, event: `${team1.name} defense forces 3-and-out punt`, points: 0, scoreLine: `${team1.abbr} ${cur1} - ${team2.abbr} ${cur2}` });
+      desc1 = `${team2.shortName} defense brings heavy pressure for 3-and-out punt`;
     }
+    events.push({
+      quarter: tgt.q,
+      time: tgt.q === 4 ? '06:12' : '09:45',
+      possTeam: team1.abbr || team1.shortName,
+      isTeam1: true,
+      event: desc1,
+      points: p1,
+      scoreLine: `${team1.abbr || team1.shortName} ${cur1} - ${team2.abbr || team2.shortName} ${cur2}`
+    });
+
+    // Drive Team 2
+    const p2 = Math.max(0, tgt.t2 - cur2);
+    cur2 += p2;
+    let desc2;
+    if (p2 >= 7) {
+      desc2 = `Touchdown! ${team2.starPlayer || team2.confirmedStarterQb || team2.shortName} red zone connection (${p2} pts)`;
+    } else if (p2 > 0) {
+      desc2 = `Field Goal! ${team2.shortName} splits the uprights (${p2} pts)`;
+    } else {
+      desc2 = `${team1.shortName} defense forces turnover on downs / punt`;
+    }
+    events.push({
+      quarter: tgt.q,
+      time: tgt.q === 4 ? '00:00 (FINAL)' : '01:20',
+      possTeam: team2.abbr || team2.shortName,
+      isTeam1: false,
+      event: desc2,
+      points: p2,
+      scoreLine: `${team1.abbr || team1.shortName} ${cur1} - ${team2.abbr || team2.shortName} ${cur2}`
+    });
   });
 
   return events;
 }
+
+// Tactical Scout Intel & Matchup Breakdown
+function renderScoutReport(game) {
+  const container = document.getElementById('scoutReportBox');
+  if (!container || !game) return;
+
+  let team1, team2;
+  if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
+    team1 = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+    team2 = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+  } else {
+    team1 = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
+    const oppId = getOpponentTeamId(game);
+    team2 = (oppId && TEAMS_DATABASE[oppId]) ? TEAMS_DATABASE[oppId] : {
+      name: game.opponent || 'Opponent',
+      shortName: game.oppAbbr || 'OPP',
+      abbr: game.oppAbbr || 'OPP',
+      apRank: game.oppRank || '',
+      headCoach: 'Head Coach & Staff',
+      offensiveCoordinator: 'Multiple Pro-Spread',
+      defensiveCoordinator: 'Base 4-2-5 Defense',
+      confirmedStarterQb: `${game.oppAbbr || 'Opponent'} QB1`,
+      starPlayer: `${game.oppAbbr || 'Opponent'} Star Playmakers`,
+      colors: { primary: game.oppColor || '#333' },
+      baseSpRating: (team1.baseSpRating || 24.0) - 4.5
+    };
+  }
+
+  const scoutData = game.scoutReport || {};
+  const spA = team1.baseSpRating ? team1.baseSpRating.toFixed(1) : '24.0';
+  const spB = team2.baseSpRating ? team2.baseSpRating.toFixed(1) : '22.0';
+  const spDelta = ((team1.baseSpRating || 24.0) - (team2.baseSpRating || 22.0)).toFixed(1);
+  const edgeTeam = parseFloat(spDelta) >= 0 ? team1.shortName : team2.shortName;
+
+  const keyMatchupText = scoutData.keyMatchup || `${team1.shortName} offensive execution (${team1.confirmedStarterQb || 'QB1'}) vs ${team2.shortName} defensive front & havoc`;
+  const xFactorText = scoutData.xFactor || `Turnover margin & explosive chunk plays in ${game.stadium || 'the stadium'}`;
+  const summaryText = scoutData.summary || `Marquee collegiate clash between ${team1.name} (${team1.apRank || ''}) and ${team2.name} (${team2.apRank || ''}).`;
+
+  container.innerHTML = `
+    <div class="scout-summary-banner" style="background: rgba(255,255,255,0.03); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.75rem; display: flex; flex-direction: column; gap: 0.4rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.3rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--color-brand-accent);"><i class="fa-solid fa-microchip"></i> TACTICAL SCOUT INTEL</span>
+        <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: #10B981; background: rgba(16,185,129,0.12); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(16,185,129,0.25);">SP+ ADVANTAGE: ${edgeTeam} (${Math.abs(spDelta)} pts)</span>
+      </div>
+      <p style="font-size: 0.8rem; color: #E2E8F0; line-height: 1.4; margin: 0;">${summaryText}</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;">
+      <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.65rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 800; color: #38BDF8; display: block; margin-bottom: 0.3rem;"><i class="fa-solid fa-crosshairs"></i> KEY MATCHUP</span>
+        <p style="font-size: 0.75rem; color: var(--color-text-muted); margin: 0; line-height: 1.3;">${keyMatchupText}</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.65rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 800; color: #F59E0B; display: block; margin-bottom: 0.3rem;"><i class="fa-solid fa-bolt"></i> X-FACTOR</span>
+        <p style="font-size: 0.75rem; color: var(--color-text-muted); margin: 0; line-height: 1.3;">${xFactorText}</p>
+      </div>
+    </div>
+
+    <!-- Coaching & Coordinator Chess Match -->
+    <div style="background: rgba(0,0,0,0.25); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.65rem; display: flex; flex-direction: column; gap: 0.4rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 800; color: var(--color-text-dim);"><i class="fa-solid fa-user-tie"></i> COACHING STAFF & PLAYCALLERS</span>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.72rem;">
+        <div>
+          <div style="font-weight: 700; color: ${team1.colors?.accent || team1.colors?.primary || '#38BDF8'}; font-size: 0.78rem;">${team1.shortName}</div>
+          <div style="color: #CBD5E1;">HC: ${team1.headCoach || 'Head Coach'}</div>
+          <div style="color: var(--color-text-dim);">OC: ${team1.offensiveCoordinator || 'Coordinator'}</div>
+          <div style="color: var(--color-text-dim);">DC: ${team1.defensiveCoordinator || 'Coordinator'}</div>
+          <div style="color: #E2E8F0; margin-top: 0.2rem; font-weight: 600;">⭐ ${team1.starPlayer || team1.confirmedStarterQb || 'Key Star'}</div>
+        </div>
+        <div>
+          <div style="font-weight: 700; color: ${team2.colors?.primary || '#F59E0B'}; font-size: 0.78rem;">${team2.shortName}</div>
+          <div style="color: #CBD5E1;">HC: ${team2.headCoach || 'Head Coach'}</div>
+          <div style="color: var(--color-text-dim);">OC: ${team2.offensiveCoordinator || 'Coordinator'}</div>
+          <div style="color: var(--color-text-dim);">DC: ${team2.defensiveCoordinator || 'Coordinator'}</div>
+          <div style="color: #E2E8F0; margin-top: 0.2rem; font-weight: 600;">⭐ ${team2.starPlayer || team2.confirmedStarterQb || 'Key Star'}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stadium & Atmosphere -->
+    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.5rem 0.75rem; font-size: 0.72rem;">
+      <span style="color: var(--color-text-muted);"><i class="fa-solid fa-location-dot" style="color: var(--color-brand-accent);"></i> ${game.stadium || 'Championship Venue'}</span>
+      <span style="font-family: var(--font-mono); font-weight: 700; color: #94A3B8;">${team1.stadiumCapacity ? `Capacity: ${team1.stadiumCapacity}` : '10,000 Drives Engine'}</span>
+    </div>
+  `;
+}
+window.renderScoutReport = renderScoutReport;
 
 function drawRadarChart(game, sim) {
   if (!game) return;
@@ -1357,8 +1524,7 @@ function renderGameSlidersInModal(game) {
 
   // Determine focus team and opponent for this specific modal game
   let focusTeam, oppTeam;
-  if (game.isPostseason && game.teamA && game.teamB) {
-    // If current active team is playing in this game, focus on current team; otherwise teamA
+  if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
     if (game.teamB.id === state.currentTeamId) {
       focusTeam = TEAMS_DATABASE[game.teamB.id] || game.teamB;
       oppTeam = TEAMS_DATABASE[game.teamA.id] || game.teamA;
@@ -1381,22 +1547,36 @@ function renderGameSlidersInModal(game) {
     isCustom: false
   };
 
+  // Sync active preset highlight
+  const presetButtons = document.querySelectorAll('.game-preset-btn');
+  if (presetButtons.length > 0) {
+    presetButtons.forEach(b => {
+      const pKey = b.dataset.gamepreset;
+      const pVals = GAME_PRESETS[pKey];
+      if (pVals && currentSliders.qbRating === pVals.qbRating && currentSliders.groundAttack === pVals.groundAttack && currentSliders.defenseHavoc === pVals.defenseHavoc && currentSliders.turnoverLuck === pVals.turnoverLuck) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+  }
+
   const labels = (focusTeam && focusTeam.sliderLabels) || {
     qb: `${focusTeam.confirmedStarterQb || focusTeam.shortName || 'QB'} Execution`,
     ground: `${focusTeam.shortName || 'Ground'} Attack`,
-    defense: 'Defense & Havoc',
+    defense: `${focusTeam.shortName || 'Defense'} & Havoc`,
     turnover: 'Turnover Margin Luck',
     crowd: 'Stadium Crowd Noise'
   };
 
-  const venueTitle = game.isPostseason 
+  const venueTitle = (game.isPostseason || game.isDreamMatchup) 
     ? `Neutral Venue Intensity (${game.stadium || 'Championship Stadium'})`
     : (game.isHome ? (labels.crowd || `${game.stadium} Home Crowd`) : `Road Environment (${game.stadium || 'Hostile Stadium'})`);
 
   const sliderList = [
     { key: 'qbRating', label: labels.qb || `${focusTeam.shortName} QB Execution`, icon: 'fa-solid fa-crosshairs' },
     { key: 'groundAttack', label: labels.ground || `${focusTeam.shortName} Ground Attack`, icon: 'fa-solid fa-person-running' },
-    { key: 'defenseHavoc', label: `${focusTeam.shortName} Defense & Havoc`, icon: 'fa-solid fa-shield-halved' },
+    { key: 'defenseHavoc', label: labels.defense || `${focusTeam.shortName} Defense & Havoc`, icon: 'fa-solid fa-shield-halved' },
     { key: 'turnoverLuck', label: 'Turnover Margin Luck', icon: 'fa-solid fa-dice' },
     { key: 'crowdNoise', label: venueTitle, icon: 'fa-solid fa-bullhorn' }
   ];
@@ -1491,7 +1671,7 @@ window.applyAndSimulateModalGame = function() {
   const game = state.activeModalGame;
   
   let focusId = state.currentTeamId;
-  if (game.isPostseason && game.teamA && game.teamB) {
+  if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
     focusId = (game.teamB.id === state.currentTeamId) ? game.teamB.id : (game.teamA.id || state.currentTeamId);
   }
   if (!state.gameSliders[game.id]) {
@@ -1504,7 +1684,9 @@ window.applyAndSimulateModalGame = function() {
   recalculateSeason();
   openSimModal(state.activeModalGame);
   window.switchModalSubTab('drives');
-  const title = game.isPostseason ? game.week : `${game.opponent} matchup`;
+  const title = (game.isDreamMatchup && game.teamA && game.teamB) 
+    ? `${game.teamA.shortName} vs ${game.teamB.shortName}` 
+    : (game.isPostseason ? game.week : `${game.opponent} matchup`);
   showToast(`⚡ Re-simulated ${title} (10,000 Monte Carlo drives)!`);
 };
 
@@ -1538,7 +1720,7 @@ window.applyGameScenarioPreset = function(presetKey) {
   if (!game) return;
 
   let focusId = state.currentTeamId;
-  if (game.isPostseason && game.teamA && game.teamB) {
+  if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
     focusId = (game.teamB.id === state.currentTeamId) ? game.teamB.id : (game.teamA.id || state.currentTeamId);
   }
   state.gameSliders[game.id] = {
@@ -1559,7 +1741,10 @@ window.applyGameScenarioPreset = function(presetKey) {
     'ground-pound': 'Ground & Pound'
   };
   const label = presetLabels[presetKey] || presetKey;
-  showToast(`⚡ Applied "${label}" to ${game.opponent} matchup!`);
+  const matchupName = (game.isDreamMatchup && game.teamA && game.teamB) 
+    ? `${game.teamA.shortName} vs ${game.teamB.shortName}` 
+    : (game.opponent ? `${game.opponent} matchup` : 'matchup');
+  showToast(`⚡ Applied "${label}" to ${matchupName}!`);
 };
 
 window.closeSimModal = function() {
@@ -2467,7 +2652,11 @@ function initHypeCardExport() {
   if (openBtn) openBtn.addEventListener('click', generateHypeCard);
   if (modalExportBtn) modalExportBtn.addEventListener('click', () => {
     document.getElementById('simModal').classList.remove('open');
-    generateHypeCard();
+    if (state.activeModalGame) {
+      generateGameHypeCard(state.activeModalGame);
+    } else {
+      generateHypeCard();
+    }
   });
   if (closeBtn) closeBtn.addEventListener('click', () => {
     document.getElementById('hypeCardModal').classList.remove('open');
@@ -2477,9 +2666,14 @@ function initHypeCardExport() {
     downloadBtn.addEventListener('click', () => {
       const canvas = document.getElementById('hypeCanvas');
       const link = document.createElement('a');
-      link.download = `gridiron-oracle-${state.currentTeamId}-prediction.png`;
+      const g = state.activeModalGame;
+      const slug = (g && g.teamA && g.teamB) 
+        ? `${g.teamA.shortName || 'TeamA'}-vs-${g.teamB.shortName || 'TeamB'}` 
+        : (state.currentTeamId || 'season');
+      link.download = `gridiron-oracle-${slug}-matchup.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
+      showToast('📥 Hype Card downloaded successfully!');
     });
   }
 
@@ -2489,8 +2683,10 @@ function initHypeCardExport() {
       canvas.toBlob(blob => {
         if (navigator.clipboard && navigator.clipboard.write) {
           navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
-            .then(() => alert('Hype Card copied to clipboard! Paste it into your group chat.'))
-            .catch(() => alert('Download image using the Save button.'));
+            .then(() => showToast('📋 Hype Card copied to clipboard! Ready to paste into group chat.'))
+            .catch(() => showToast('💾 Use "Save Image" to download the Hype Card.'));
+        } else {
+          showToast('💾 Use "Save Image" to download the Hype Card.');
         }
       });
     });
@@ -3198,19 +3394,26 @@ function populateSandboxDropdowns() {
   selectA.innerHTML = '';
   selectB.innerHTML = '';
 
-  const teamKeys = Object.keys(TEAMS_DATABASE);
-  teamKeys.forEach((k, idx) => {
-    const t = TEAMS_DATABASE[k];
+  // Sort teams by rank/prestige
+  const teamEntries = Object.entries(TEAMS_DATABASE);
+  teamEntries.sort((a, b) => {
+    const rankNumA = parseInt(a[1].apRank?.replace(/[^0-9]/g, '') || '99', 10);
+    const rankNumB = parseInt(b[1].apRank?.replace(/[^0-9]/g, '') || '99', 10);
+    if (rankNumA !== rankNumB) return rankNumA - rankNumB;
+    return a[1].name.localeCompare(b[1].name);
+  });
+
+  teamEntries.forEach(([k, t]) => {
     const optA = document.createElement('option');
     optA.value = k;
-    optA.innerText = `${t.apRank} ${t.name} (${t.conference})`;
-    if (k === 'texas') optA.selected = true;
+    optA.innerText = `${t.apRank || ''} ${t.name} (${t.conference})`;
+    if (k === (state.currentTeamId || 'texas')) optA.selected = true;
     selectA.appendChild(optA);
 
     const optB = document.createElement('option');
     optB.value = k;
-    optB.innerText = `${t.apRank} ${t.name} (${t.conference})`;
-    if (k === 'oregon') optB.selected = true;
+    optB.innerText = `${t.apRank || ''} ${t.name} (${t.conference})`;
+    if (k === 'oregon' || (k === 'ohiostate' && state.currentTeamId !== 'ohiostate')) optB.selected = true;
     selectB.appendChild(optB);
   });
 }
@@ -3220,7 +3423,7 @@ window.launchDreamMatchupInSimModal = function() {
   const selectB = document.getElementById('sandboxTeamBSelect');
   const selectVenue = document.getElementById('sandboxVenueSelect');
 
-  const idA = selectA ? selectA.value : 'texas';
+  const idA = selectA ? selectA.value : (state.currentTeamId || 'texas');
   const idB = selectB ? selectB.value : 'oregon';
   const venue = selectVenue ? selectVenue.value : 'neutral';
 
@@ -3232,22 +3435,62 @@ window.launchDreamMatchupInSimModal = function() {
   const isHomeA = (venue === 'homeA');
   const isHomeB = (venue === 'homeB');
   const stadiumName = (venue === 'homeA') ? (teamA.stadium || `${teamA.name} Stadium`) : ((venue === 'homeB') ? (teamB.stadium || `${teamB.name} Stadium`) : 'Championship Stadium (Neutral Site)');
+  const locationName = (venue === 'homeA') ? (teamA.stadiumCity || '') : ((venue === 'homeB') ? (teamB.stadiumCity || '') : 'Atlanta / Neutral Site');
 
   const dreamGame = {
     id: `dream-${idA}-${idB}`,
     isPostseason: true,
     isDreamMatchup: true,
     week: 'DREAM MATCHUP',
-    teamA: { id: idA, name: teamA.name, shortName: teamA.shortName, apRank: teamA.apRank, logoUrl: teamA.logoUrl, colors: teamA.colors },
-    teamB: { id: idB, name: teamB.name, shortName: teamB.shortName, apRank: teamB.apRank, logoUrl: teamB.logoUrl, colors: teamB.colors },
+    date: '2026 COLLIDER',
+    teamA: {
+      id: idA,
+      name: teamA.name,
+      shortName: teamA.shortName,
+      abbr: teamA.abbr || teamA.shortName,
+      apRank: teamA.apRank,
+      logoUrl: teamA.logoUrl,
+      colors: teamA.colors,
+      starPlayer: teamA.starPlayer,
+      headCoach: teamA.headCoach,
+      offensiveCoordinator: teamA.offensiveCoordinator,
+      defensiveCoordinator: teamA.defensiveCoordinator,
+      confirmedStarterQb: teamA.confirmedStarterQb,
+      baseSpRating: teamA.baseSpRating,
+      stadium: teamA.stadium,
+      stadiumCapacity: teamA.stadiumCapacity
+    },
+    teamB: {
+      id: idB,
+      name: teamB.name,
+      shortName: teamB.shortName,
+      abbr: teamB.abbr || teamB.shortName,
+      apRank: teamB.apRank,
+      logoUrl: teamB.logoUrl,
+      colors: teamB.colors,
+      starPlayer: teamB.starPlayer,
+      headCoach: teamB.headCoach,
+      offensiveCoordinator: teamB.offensiveCoordinator,
+      defensiveCoordinator: teamB.defensiveCoordinator,
+      confirmedStarterQb: teamB.confirmedStarterQb,
+      baseSpRating: teamB.baseSpRating,
+      stadium: teamB.stadium,
+      stadiumCapacity: teamB.stadiumCapacity
+    },
     stadium: stadiumName,
+    location: locationName,
     isHomeA: isHomeA,
     isHome: isHomeA,
     opponent: teamB.name,
     oppAbbr: teamB.abbr || teamB.shortName,
     oppRank: teamB.apRank,
     oppLogoUrl: teamB.logoUrl,
-    oppColor: teamB.colors?.primary || '#333'
+    oppColor: teamB.colors?.primary || '#333',
+    scoutReport: {
+      summary: `Epic Dream Matchup collision between ${teamA.name} (${teamA.apRank || ''}) and ${teamB.name} (${teamB.apRank || ''}) at ${stadiumName}.`,
+      keyMatchup: `${teamA.shortName} offensive execution (${teamA.confirmedStarterQb || 'QB1'}) vs ${teamB.shortName} defense & front seven`,
+      xFactor: `Explosive plays, red-zone conversion, and turnover margin under 10,000 Monte Carlo drive stress-testing.`
+    }
   };
 
   if (!state.postseasonGames) state.postseasonGames = {};
@@ -3531,21 +3774,23 @@ function generateGameHypeCard(game) {
   const ctx = canvas.getContext('2d');
 
   let teamA, teamB, scoreA, scoreB, probA;
-  if (game.isPostseason && game.teamA && game.teamB) {
+  if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
     teamA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
     teamB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
-    const sim = simulatePostseasonMatchup(teamA, teamB, { gameId: game.id, isHomeA: game.isHomeA });
+    const sim = simulatePostseasonMatchup(teamA, teamB, { gameId: game.id, isHomeA: game.isHomeA || game.isHome });
     scoreA = sim.scoreA;
     scoreB = sim.scoreB;
     probA = sim.winProbA;
   } else {
     teamA = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
+    const oppId = getOpponentTeamId(game);
+    const dbOpp = (oppId && TEAMS_DATABASE[oppId]) ? TEAMS_DATABASE[oppId] : null;
     teamB = { 
       shortName: game.oppAbbr || 'OPP', 
       name: game.opponent || 'Opponent', 
       apRank: game.oppRank || '', 
-      logoUrl: game.oppLogoUrl || ESPN_LOGOS[game.oppAbbr] || '', 
-      colors: { primary: game.oppColor || '#333' } 
+      logoUrl: game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || '', 
+      colors: { primary: game.oppColor || (dbOpp?.colors?.primary) || '#333' } 
     };
     const sim = calculateAdjustedMatchup(game);
     scoreA = sim.projUt;
@@ -3557,7 +3802,7 @@ function generateGameHypeCard(game) {
   ctx.fillStyle = '#07090E';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Gradient
+  // Dynamic gradient between both teams
   const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
   grad.addColorStop(0, teamA.colors?.primary || '#BF5700');
   grad.addColorStop(1, teamB.colors?.primary || '#00274C');
@@ -3566,7 +3811,7 @@ function generateGameHypeCard(game) {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.globalAlpha = 1.0;
 
-  // Border
+  // Border & Glow
   ctx.strokeStyle = '#F59E0B';
   ctx.lineWidth = 4;
   ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
@@ -3627,3 +3872,4 @@ function generateGameHypeCard(game) {
 
   document.getElementById('hypeCardModal').classList.add('open');
 }
+window.generateGameHypeCard = generateGameHypeCard;
