@@ -3509,11 +3509,9 @@ function updateCountdownTickerForActiveTeam() {
 
   const badgeEl = document.getElementById('countdownBadge');
   const textEl = document.getElementById('countdownText');
-  const heroPillEl = document.getElementById('heroKickoffText');
 
   if (diff <= 0) {
     if (textEl) textEl.innerText = `${team.abbr} • 🔴 LIVE NOW`;
-    if (heroPillEl) heroPillEl.innerText = `Opener: 🔴 Game is Live!`;
     return;
   }
 
@@ -3526,9 +3524,6 @@ function updateCountdownTickerForActiveTeam() {
   }
   if (badgeEl) {
     badgeEl.title = `Next ${team.name} Kickoff: ${localFormatted} (Converted to your local timezone: ${tzAbbr})\nTV: ${kickoffInfo.tv || 'National Broadcast'}\nOpener: ${kickoffInfo.opponent || 'Week 1'}`;
-  }
-  if (heroPillEl) {
-    heroPillEl.innerText = `Opener Kickoff: ${days}D ${hours}H (${localFormatted})`;
   }
 }
 window.updateCountdownTickerForActiveTeam = updateCountdownTickerForActiveTeam;
@@ -5358,19 +5353,21 @@ window.scrollToTeamOverview = function() {
 };
 
 window.toggleMoreToolsMenu = function(e) {
-  if (e) e.stopPropagation();
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
   const menu = document.getElementById('moreToolsMenu');
   if (!menu) return;
-  const isShown = menu.style.display === 'flex';
-  menu.style.display = isShown ? 'none' : 'flex';
+  menu.classList.toggle('show');
 };
 
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('moreToolsMenu');
   const btn = document.getElementById('moreToolsBtn');
-  if (menu && menu.style.display === 'flex') {
+  if (menu && menu.classList.contains('show')) {
     if (!menu.contains(e.target) && (!btn || !btn.contains(e.target))) {
-      menu.style.display = 'none';
+      menu.classList.remove('show');
     }
   }
 });

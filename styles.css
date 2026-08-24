@@ -900,7 +900,7 @@ body.modal-open {
 .team-hero-section {
   padding: 2rem 0 1.25rem;
   position: relative;
-  z-index: 10;
+  z-index: 110;
 }
 
 .hero-banner-card {
@@ -915,7 +915,7 @@ body.modal-open {
   gap: 1.5rem;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), var(--shadow-glow);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero-banner-card::before {
@@ -925,6 +925,8 @@ body.modal-open {
   left: 0;
   width: 5px;
   height: 100%;
+  border-top-left-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-lg);
   background: var(--color-brand-primary);
   box-shadow: 0 0 12px var(--color-brand-accent);
 }
@@ -3853,20 +3855,24 @@ body.modal-open {
 
 .more-tools-menu {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% + 8px);
   right: 0;
-  z-index: 120;
-  min-width: 220px;
-  background: rgba(14, 18, 28, 0.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 9999;
+  min-width: 230px;
+  background: rgba(14, 18, 28, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius-md);
-  padding: 0.4rem;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
-  display: flex;
+  padding: 0.45rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+  display: none;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
+}
+
+.more-tools-menu.show {
+  display: flex !important;
 }
 
 .more-tools-menu .dropdown-item {
