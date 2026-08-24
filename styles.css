@@ -3784,3 +3784,238 @@ body.modal-open {
   opacity: 0.5;
 }
 
+/* ==========================================================================
+   OBSIDIAN GLASS & SEGMENTED INTUITIVE NAVIGATION (2026 OVERHAUL)
+   ========================================================================== */
+
+/* Sticky Segmented View Controller */
+.view-segment-nav {
+  position: sticky;
+  top: 56px;
+  z-index: 95;
+  background: rgba(7, 9, 14, 0.86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0.5rem 0;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: var(--transition-smooth);
+}
+
+.segment-pill-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0.25rem;
+  background: rgba(18, 23, 36, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+}
+
+.segment-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.segment-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.segment-btn.active {
+  background: var(--color-brand-primary);
+  color: #FFFFFF;
+  box-shadow: 0 2px 14px var(--color-brand-glow);
+}
+
+/* More Tools Dropdown Menu */
+.more-tools-dropdown-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.more-tools-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 120;
+  min-width: 220px;
+  background: rgba(14, 18, 28, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 0.4rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.more-tools-menu .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-main);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.more-tools-menu .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+}
+
+/* Mobile Playoff Round Segment Tabs */
+.mobile-playoff-round-tabs {
+  display: none;
+  overflow-x: auto;
+  gap: 0.4rem;
+  padding: 0.4rem 0.2rem 0.8rem 0.2rem;
+  margin-bottom: 0.75rem;
+  scrollbar-width: none;
+}
+
+.mobile-playoff-round-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.round-tab-btn {
+  flex-shrink: 0;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.round-tab-btn.active {
+  background: var(--color-brand-primary);
+  color: #FFFFFF;
+  border-color: var(--color-brand-primary);
+}
+
+/* Mobile Native Bottom Navigation Bar */
+.mobile-bottom-dock {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(7, 9, 14, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.35rem 0.5rem calc(0.35rem + env(safe-area-inset-bottom, 0px)) 0.5rem;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dock-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: transparent;
+  border: none;
+  color: var(--color-text-dim);
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: var(--transition-fast);
+}
+
+.dock-btn i {
+  font-size: 1.15rem;
+}
+
+.dock-btn.active {
+  color: var(--color-brand-accent);
+}
+
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+  .mobile-bottom-dock {
+    display: flex;
+  }
+  
+  body {
+    padding-bottom: 70px;
+  }
+  
+  .mobile-playoff-round-tabs {
+    display: flex;
+  }
+
+  .view-segment-nav {
+    top: 48px;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .segment-pill-container {
+    width: 100%;
+  }
+
+  .segment-btn {
+    padding: 0.45rem 0.45rem;
+    font-size: 0.75rem;
+  }
+
+  .segment-btn i {
+    font-size: 0.85rem;
+  }
+
+  .kpi-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+  }
+
+  .kpi-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .kpi-card {
+    min-width: 220px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+}
+

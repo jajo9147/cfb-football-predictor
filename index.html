@@ -50,7 +50,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260824_340">
+  <link rel="stylesheet" href="styles.css?t=20260824_350">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -242,34 +242,52 @@
           </div>
         </div>
                 <div class="hero-quick-actions">
-          <button class="action-btn hype-btn" id="openHypeCardBtn">
-            <i class="fa-solid fa-camera-retro"></i>
-            <span>Export Hype Card</span>
-          </button>
-          <button class="action-btn share-btn" id="shareScenarioBtn" onclick="shareCustomScenario()" title="Share your custom picks, sliders, and CFP bracket via URL link">
-            <i class="fa-solid fa-share-nodes"></i>
-            <span>Share Scenario</span>
+          <button class="action-btn sandbox-hero-btn" onclick="openDreamSandboxModal()" title="Simulate ANY 2 college football teams head-to-head">
+            <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i>
+            <span>Dream Matchup</span>
           </button>
           <button class="action-btn chaos-matrix-btn" onclick="openCfpMatrixModal()" title="View 10,000-Run Monte Carlo CFP Chaos Probability Heatmap">
             <i class="fa-solid fa-fire-flame-curved" style="color: #FF4444;"></i>
             <span>CFP Chaos Matrix</span>
           </button>
-          <button class="action-btn sandbox-hero-btn" onclick="openDreamSandboxModal()" title="Simulate ANY 2 college football teams head-to-head">
-            <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i>
-            <span>Dream Matchup</span>
-          </button>
-          <button class="action-btn secondary-btn" onclick="openReceiptsModal()" title="View Prediction Ledger, Brier Score, and Calibration Curve">
-            <i class="fa-solid fa-receipt" style="color: #10B981;"></i>
-            <span>Model Receipts</span>
-          </button>
-          <button class="action-btn secondary-btn" id="quickSimAllBtn" title="Run 10,000 Monte Carlo Season Iterations">
-            <i class="fa-solid fa-dice-d20"></i>
-            <span>10k Re-Sim</span>
-          </button>
+          <div class="more-tools-dropdown-wrap">
+            <button class="action-btn secondary-btn" id="moreToolsBtn" onclick="toggleMoreToolsMenu(event)" title="More Tools & Sharing">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+              <span>Tools & Intel ▾</span>
+            </button>
+            <div class="more-tools-menu" id="moreToolsMenu" style="display: none;">
+              <button class="dropdown-item" id="openHypeCardBtn" onclick="openHypeCardModal()"><i class="fa-solid fa-camera-retro"></i> Export Hype Card</button>
+              <button class="dropdown-item" id="shareScenarioBtn" onclick="shareCustomScenario()"><i class="fa-solid fa-share-nodes"></i> Share Scenario Link</button>
+              <button class="dropdown-item" onclick="openReceiptsModal()"><i class="fa-solid fa-receipt"></i> Model Receipts & Brier Curve</button>
+              <button class="dropdown-item" id="quickSimAllBtn" onclick="runMonteCarloRecalibration()"><i class="fa-solid fa-dice-d20"></i> 10k Monte Carlo Re-Sim</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </header>
+
+  <!-- Sticky Segmented View Controller -->
+  <nav class="view-segment-nav" id="viewSegmentNav">
+    <div class="segment-pill-container">
+      <button class="segment-btn active" data-view="schedule" onclick="switchAppView('schedule')">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>Schedule</span>
+      </button>
+      <button class="segment-btn" data-view="playoffs" onclick="switchAppView('playoffs')">
+        <i class="fa-solid fa-trophy"></i>
+        <span>12-Team CFP</span>
+      </button>
+      <button class="segment-btn" data-view="tuning" onclick="switchAppView('tuning')">
+        <i class="fa-solid fa-sliders"></i>
+        <span>AI Tuning</span>
+      </button>
+      <button class="segment-btn" data-view="dream" onclick="openDreamSandboxModal()">
+        <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i>
+        <span>Dream Sim</span>
+      </button>
+    </div>
+  </nav>
 
   <!-- Main Application Body -->
   <main class="container">
@@ -375,6 +393,16 @@
           <span>12-TEAM COLLEGE FOOTBALL PLAYOFF PROJECTION & LIVE SIMULATOR</span>
         </div>
       </div>
+      
+      <!-- Mobile Playoff Round Tabs -->
+      <div class="mobile-playoff-round-tabs" id="mobilePlayoffRoundTabs">
+        <button class="round-tab-btn active" data-round="all" onclick="switchMobilePlayoffRound('all')">All Rounds</button>
+        <button class="round-tab-btn" data-round="fr" onclick="switchMobilePlayoffRound('fr')">First Round (4)</button>
+        <button class="round-tab-btn" data-round="qf" onclick="switchMobilePlayoffRound('qf')">Quarterfinals (4)</button>
+        <button class="round-tab-btn" data-round="sf" onclick="switchMobilePlayoffRound('sf')">Semifinals (2)</button>
+        <button class="round-tab-btn" data-round="natty" onclick="switchMobilePlayoffRound('natty')">👑 Natty</button>
+      </div>
+
       <div class="playoff-bracket-grid" id="playoffBracketGrid">
         <!-- Dynamically rendered interactive bracket rounds -->
       </div>
@@ -1001,8 +1029,32 @@
     </div>
   </footer>
 
+  <!-- Mobile Native Bottom Navigation Dock -->
+  <nav class="mobile-bottom-dock" id="mobileBottomDock">
+    <button class="dock-btn active" data-dock="overview" onclick="scrollToTeamOverview()">
+      <i class="fa-solid fa-house"></i>
+      <span>Team</span>
+    </button>
+    <button class="dock-btn" data-dock="schedule" onclick="switchAppView('schedule')">
+      <i class="fa-solid fa-calendar-days"></i>
+      <span>Schedule</span>
+    </button>
+    <button class="dock-btn" data-dock="playoffs" onclick="switchAppView('playoffs')">
+      <i class="fa-solid fa-trophy"></i>
+      <span>Playoffs</span>
+    </button>
+    <button class="dock-btn" data-dock="tuning" onclick="switchAppView('tuning')">
+      <i class="fa-solid fa-sliders"></i>
+      <span>Tuning</span>
+    </button>
+    <button class="dock-btn" data-dock="dream" onclick="openDreamSandboxModal()">
+      <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i>
+      <span>Dream</span>
+    </button>
+  </nav>
+
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260824_340"></script>
-  <script src="app.js?t=20260824_340"></script>
+  <script src="data/teams.js?t=20260824_350"></script>
+  <script src="app.js?t=20260824_350"></script>
 </body>
 </html>

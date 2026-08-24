@@ -5319,3 +5319,100 @@ function renderCfpMatrixModal() {
     tbody.appendChild(tr);
   });
 }
+
+// ==========================================================================
+// VIEW SEGMENTED CONTROLLER & MOBILE ERGONOMICS HANDLERS
+// ==========================================================================
+
+window.switchAppView = function(viewName) {
+  // Update Segmented Nav buttons
+  document.querySelectorAll('.segment-btn[data-view]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.view === viewName);
+  });
+
+  // Update Mobile Bottom Dock buttons
+  document.querySelectorAll('.dock-btn[data-dock]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.dock === viewName);
+  });
+
+  if (viewName === 'schedule') {
+    const el = document.getElementById('scheduleSection');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (viewName === 'playoffs') {
+    const el = document.getElementById('playoffSection');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (viewName === 'tuning') {
+    const el = document.querySelector('.tuning-section');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (viewName === 'dream') {
+    if (typeof openDreamSandboxModal === 'function') openDreamSandboxModal();
+  }
+};
+
+window.scrollToTeamOverview = function() {
+  document.querySelectorAll('.dock-btn[data-dock]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.dock === 'overview');
+  });
+  const el = document.getElementById('teamHeroBanner');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+window.toggleMoreToolsMenu = function(e) {
+  if (e) e.stopPropagation();
+  const menu = document.getElementById('moreToolsMenu');
+  if (!menu) return;
+  const isShown = menu.style.display === 'flex';
+  menu.style.display = isShown ? 'none' : 'flex';
+};
+
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('moreToolsMenu');
+  const btn = document.getElementById('moreToolsBtn');
+  if (menu && menu.style.display === 'flex') {
+    if (!menu.contains(e.target) && (!btn || !btn.contains(e.target))) {
+      menu.style.display = 'none';
+    }
+  }
+});
+
+window.switchMobilePlayoffRound = function(roundKey) {
+  document.querySelectorAll('.round-tab-btn[data-round]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.round === roundKey);
+  });
+
+  const columns = document.querySelectorAll('#playoffBracketGrid .playoff-round-column');
+  if (!columns || columns.length === 0) return;
+
+  if (roundKey === 'all') {
+    columns.forEach(col => col.style.display = 'flex');
+    return;
+  }
+
+  const roundMap = {
+    'fr': 0, // First Round
+    'qf': 1, // Quarterfinals
+    'sf': 2, // Semifinals
+    'natty': 3 // National Championship
+  };
+
+  const targetIdx = roundMap[roundKey];
+  columns.forEach((col, idx) => {
+    if (idx === targetIdx) {
+      col.style.display = 'flex';
+      col.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    } else {
+      col.style.display = 'none';
+    }
+  });
+};
+
+window.openHypeCardModal = function() {
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
+  const nextGame = (currentTeam.schedule && currentTeam.schedule[0]) ? currentTeam.schedule[0] : null;
+  if (nextGame && typeof generateGameHypeCard === 'function') {
+    generateGameHypeCard(currentTeam, nextGame);
+  } else {
+    showToast('Exporting Hype Card...');
+  }
+};
+
