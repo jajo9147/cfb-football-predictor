@@ -580,6 +580,11 @@ function calculateAdjustedMatchup(game, targetTeamId) {
   };
 }
 
+function isConferenceGame(g) {
+  if (!g) return false;
+  return !!(g.isSec || g.isBigTen || g.isBig12 || g.isAcc || g.isConf);
+}
+
 function recalculateSeason() {
   const team = TEAMS_DATABASE[state.currentTeamId];
   if (!team) return;
@@ -596,10 +601,10 @@ function recalculateSeason() {
     const sim = calculateAdjustedMatchup(game);
     if (sim.isWin) {
       totalWins++;
-      if (game.isSec || game.isBigTen || game.isAcc || game.isConf) confWins++;
+      if (isConferenceGame(game)) confWins++;
     } else {
       totalLosses++;
-      if (game.isSec || game.isBigTen || game.isAcc || game.isConf) confLosses++;
+      if (isConferenceGame(game)) confLosses++;
     }
     sumWinProb += sim.adjWinProb;
     sumUtScore += sim.projUt;
@@ -646,7 +651,11 @@ function recalculateSeason() {
     kpiPostseasonOutcomeEl.innerText = fullSeason.outcomeTitle;
   }
 
-  document.getElementById('kpiConfRecord').innerText = `${confWins}-${confLosses} Conf`;
+  const confName = (team.conference && team.conference !== 'Independent') ? team.conference : 'Conf';
+  const kpiConfEl = document.getElementById('kpiConfRecord');
+  if (kpiConfEl) {
+    kpiConfEl.innerText = team.conference === 'Independent' ? 'Independent' : `${confWins}-${confLosses} ${confName}`;
+  }
   document.getElementById('kpiWinProb').innerText = `${avgWinProb}%`;
   document.getElementById('kpiMargin').innerText = avgMarginSign;
 
@@ -701,7 +710,7 @@ function renderSchedule() {
 
   const filteredGames = team.schedule.filter(game => {
     if (state.filter === 'marquee') return game.isMarquee;
-    if (state.filter === 'conf') return (game.isSec || game.isBigTen);
+    if (state.filter === 'conf') return isConferenceGame(game);
     if (state.filter === 'home') return game.isHome;
     if (state.filter === 'away') return !game.isHome;
     return true;
@@ -2057,10 +2066,10 @@ function evaluateRegularSeasonAllTeams() {
       const sim = calculateAdjustedMatchup(g, teamId);
       if (sim.isWin) {
         wins++;
-        if (g.isSec || g.isBigTen || g.isAcc || g.isConf) confWins++;
+        if (isConferenceGame(g)) confWins++;
       } else {
         losses++;
-        if (g.isSec || g.isBigTen || g.isAcc || g.isConf) confLosses++;
+        if (isConferenceGame(g)) confLosses++;
       }
       sumDiff += (sim.projUt - sim.projOpp);
     });
@@ -2162,6 +2171,8 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
   if (dbB.conference === 'Big Ten') spB += 1.6;
   if (dbA.conference === 'ACC') spA += 0.8;
   if (dbB.conference === 'ACC') spB += 0.8;
+  if (dbA.conference === 'Big 12') spA += 0.8;
+  if (dbB.conference === 'Big 12') spB += 0.8;
 
   // Apply Dynamic Season Momentum & Form (Upsets/Losses reduce postseason strength)
   if (teamA.id && TEAMS_DATABASE[teamA.id]) {
