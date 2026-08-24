@@ -3898,38 +3898,48 @@ body.modal-open {
   color: #FFFFFF;
 }
 
-/* Mobile Playoff Round Segment Tabs */
-.mobile-playoff-round-tabs {
-  display: none;
+/* Playoff Round Segment Tabs (Desktop + Mobile) */
+.playoff-round-tabs {
+  display: flex;
   overflow-x: auto;
-  gap: 0.4rem;
-  padding: 0.4rem 0.2rem 0.8rem 0.2rem;
-  margin-bottom: 0.75rem;
+  gap: 0.45rem;
+  padding: 0.4rem 0.2rem 0.85rem 0.2rem;
+  margin-bottom: 0.85rem;
   scrollbar-width: none;
 }
 
-.mobile-playoff-round-tabs::-webkit-scrollbar {
+.playoff-round-tabs::-webkit-scrollbar {
   display: none;
 }
 
 .round-tab-btn {
   flex-shrink: 0;
-  padding: 0.45rem 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1rem;
   border-radius: var(--radius-full);
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   color: var(--color-text-muted);
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
   transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.round-tab-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .round-tab-btn.active {
   background: var(--color-brand-primary);
   color: #FFFFFF;
   border-color: var(--color-brand-primary);
+  box-shadow: 0 2px 14px var(--color-brand-glow);
 }
 
 /* Mobile Native Bottom Navigation Bar */

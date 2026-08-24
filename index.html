@@ -50,7 +50,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260824_360">
+  <link rel="stylesheet" href="styles.css?t=20260824_370">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -393,13 +393,13 @@
         </div>
       </div>
       
-      <!-- Mobile Playoff Round Tabs -->
-      <div class="mobile-playoff-round-tabs" id="mobilePlayoffRoundTabs">
-        <button class="round-tab-btn active" data-round="all" onclick="switchMobilePlayoffRound('all')">All Rounds</button>
-        <button class="round-tab-btn" data-round="fr" onclick="switchMobilePlayoffRound('fr')">First Round (4)</button>
-        <button class="round-tab-btn" data-round="qf" onclick="switchMobilePlayoffRound('qf')">Quarterfinals (4)</button>
-        <button class="round-tab-btn" data-round="sf" onclick="switchMobilePlayoffRound('sf')">Semifinals (2)</button>
-        <button class="round-tab-btn" data-round="natty" onclick="switchMobilePlayoffRound('natty')">👑 Natty</button>
+      <!-- Playoff Round Filter Tabs -->
+      <div class="playoff-round-tabs" id="playoffRoundTabs">
+        <button class="round-tab-btn active" data-round="all" onclick="switchPlayoffRound('all')"><i class="fa-solid fa-layer-group"></i> All Rounds</button>
+        <button class="round-tab-btn" data-round="fr" onclick="switchPlayoffRound('fr')"><i class="fa-solid fa-shield-halved"></i> First Round (4)</button>
+        <button class="round-tab-btn" data-round="qf" onclick="switchPlayoffRound('qf')"><i class="fa-solid fa-bowl-food"></i> Quarterfinals (4)</button>
+        <button class="round-tab-btn" data-round="sf" onclick="switchPlayoffRound('sf')"><i class="fa-solid fa-trophy"></i> Semifinals (2)</button>
+        <button class="round-tab-btn" data-round="natty" onclick="switchPlayoffRound('natty')">👑 National Title (1)</button>
       </div>
 
       <div class="playoff-bracket-grid" id="playoffBracketGrid">
@@ -1053,7 +1053,7 @@
   </nav>
 
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260824_360"></script>
-  <script src="app.js?t=20260824_360"></script>
+  <script src="data/teams.js?t=20260824_370"></script>
+  <script src="app.js?t=20260824_370"></script>
 </body>
 </html>

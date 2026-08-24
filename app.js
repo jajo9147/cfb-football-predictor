@@ -2974,6 +2974,13 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
     </div>
   `;
+
+  // Preserve active round filter tab after re-render
+  const activeRoundBtn = document.querySelector('.round-tab-btn.active');
+  const activeRoundKey = activeRoundBtn ? activeRoundBtn.dataset.round : 'all';
+  if (activeRoundKey && activeRoundKey !== 'all') {
+    switchPlayoffRound(activeRoundKey);
+  }
 }
 
 // 6. Calculate Overall Total Season Record for Active Team
@@ -5372,36 +5379,39 @@ document.addEventListener('click', (e) => {
   }
 });
 
-window.switchMobilePlayoffRound = function(roundKey) {
+window.switchPlayoffRound = function(roundKey) {
   document.querySelectorAll('.round-tab-btn[data-round]').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.round === roundKey);
   });
 
-  const columns = document.querySelectorAll('#playoffBracketGrid .playoff-round-column');
-  if (!columns || columns.length === 0) return;
+  const cards = document.querySelectorAll('#playoffBracketGrid .playoff-round-card');
+  if (!cards || cards.length === 0) return;
 
   if (roundKey === 'all') {
-    columns.forEach(col => col.style.display = 'flex');
+    cards.forEach(card => {
+      card.style.display = '';
+    });
     return;
   }
 
   const roundMap = {
-    'fr': 0, // First Round
-    'qf': 1, // Quarterfinals
-    'sf': 2, // Semifinals
-    'natty': 3 // National Championship
+    'fr': 0,    // First Round (4)
+    'qf': 1,    // Quarterfinals (4)
+    'sf': 2,    // Semifinals (2)
+    'natty': 3  // National Championship (1)
   };
 
   const targetIdx = roundMap[roundKey];
-  columns.forEach((col, idx) => {
+  cards.forEach((card, idx) => {
     if (idx === targetIdx) {
-      col.style.display = 'flex';
-      col.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      card.style.display = 'flex';
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     } else {
-      col.style.display = 'none';
+      card.style.display = 'none';
     }
   });
 };
+window.switchMobilePlayoffRound = window.switchPlayoffRound;
 
 window.openHypeCardModal = function() {
   const currentTeam = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
