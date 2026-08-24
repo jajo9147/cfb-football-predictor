@@ -8066,7 +8066,7 @@ var TEAMS_DATABASE = {
         "date": "Oct 3, 2026",
         "opponent": "Colorado Buffaloes",
         "oppAbbr": "COLO",
-        "oppRank": "#25 AP",
+        "oppRank": "NR",
         "oppBadge": "COLO",
         "oppColor": "#CFB87C",
         "oppSecondary": "#000000",
