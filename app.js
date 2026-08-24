@@ -328,7 +328,8 @@ function selectTeam(teamId) {
     dcEl.innerText = `DC: ${team.defensiveCoordinator || 'Staff'}`;
   }
   document.getElementById('heroStarPlayer').innerText = `Star: ${team.starPlayer}`;
-  document.getElementById('heroStadium').innerText = `${team.stadium} (${team.stadiumCapacity})`;
+  const capacityStr = team.stadiumCapacity ? ` (${team.stadiumCapacity})` : '';
+  document.getElementById('heroStadium').innerText = `${team.stadium || 'Home Stadium'}${capacityStr}`;
 
   // Update Active State in Top Track
   document.querySelectorAll('.team-pill-btn').forEach(btn => {
@@ -1041,7 +1042,40 @@ function isTeamMatch(t, curId) {
   const tabbr = (t.abbr || '').toLowerCase().trim();
   const tshort = (t.shortName || '').toLowerCase().trim();
   const tname = (t.name || '').toLowerCase().trim();
-  return tid === cur || tabbr === cur || tshort.includes(cur) || cur.includes(tshort) || tname.includes(cur) || cur.includes(tid);
+
+  // Exact ID or abbreviation match
+  if (tid && (tid === cur || cur === tid)) return true;
+  if (tabbr && (tabbr === cur || cur === tabbr)) return true;
+  if (tshort && tshort === cur) return true;
+
+  // Specific canonical aliases mapping to prevent substring collisions (e.g. Texas vs Texas A&M vs Texas Tech)
+  const aliases = {
+    'texas': ['texas longhorns', 'texas', 'tex', 'ut'],
+    'texasam': ['texas a&m', 'texas a&m aggies', 'tamu', 'a&m'],
+    'texastech': ['texas tech', 'texas tech red raiders', 'ttu', 'tech'],
+    'ohiostate': ['ohio state', 'ohio state buckeyes', 'osu'],
+    'oregon': ['oregon', 'oregon ducks', 'uo', 'ore'],
+    'michigan': ['michigan', 'michigan wolverines', 'um', 'mich'],
+    'georgia': ['georgia', 'georgia bulldogs', 'uga', 'uga bulldogs'],
+    'alabama': ['alabama', 'alabama crimson tide', 'bama', 'ala'],
+    'pennstate': ['penn state', 'penn state nittany lions', 'psu'],
+    'notredame': ['notre dame', 'notre dame fighting irish', 'nd'],
+    'lsu': ['lsu', 'lsu tigers', 'louisiana state'],
+    'tennessee': ['tennessee', 'tennessee volunteers', 'vols', 'tenn'],
+    'indiana': ['indiana', 'indiana hoosiers', 'iu', 'ind'],
+    'miami': ['miami', 'miami hurricanes', 'the u', 'canes', 'mia'],
+    'olemiss': ['ole miss', 'ole miss rebels', 'mississippi', 'miss'],
+    'oklahoma': ['oklahoma', 'oklahoma sooners', 'ou'],
+    'boisestate': ['boise state', 'boise state broncos', 'bsu', 'boise'],
+    'usc': ['usc', 'usc trojans', 'southern cal', 'southern california'],
+    'floridastate': ['florida state', 'florida state seminoles', 'fsu', 'noles'],
+    'clemson': ['clemson', 'clemson tigers', 'clem'],
+    'smu': ['smu', 'smu mustangs', 'southern methodist'],
+    'byu': ['byu', 'byu cougars', 'brigham young']
+  };
+
+  const curAliases = aliases[cur] || [cur];
+  return curAliases.includes(tname) || curAliases.includes(tshort) || curAliases.includes(tabbr);
 }
 
 function openSimModal(game) {
@@ -2568,7 +2602,19 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
   const teamId = state.currentTeamId;
   const team = TEAMS_DATABASE[teamId];
 
-  function teamRow(seedNum, tObj, score, isWinner, isHighlighted) {
+  function getTeamSeed(tObj, fallbackSeed) {
+    if (!tObj) return fallbackSeed || '';
+    if (tObj.seed) return tObj.seed;
+    if (tObj.playoffSeed) return tObj.playoffSeed;
+    const evaluatedTeams = evaluateRegularSeasonAllTeams();
+    const cfp = determineCfpField(evaluatedTeams);
+    const idx = (cfp.seeds || []).findIndex(s => s && isTeamMatch(s, tObj.id || tObj.name));
+    if (idx !== -1) return idx + 1;
+    return fallbackSeed || '';
+  }
+
+  function teamRow(fallbackSeed, tObj, score, isWinner, isHighlighted) {
+    const seedNum = getTeamSeed(tObj, fallbackSeed);
     const name = tObj ? tObj.shortName || tObj.name : `Seed #${seedNum}`;
     const logo = tObj?.logoUrl || (tObj?.abbr && typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tObj.abbr] : '') || '';
     let w = tObj?.wins;

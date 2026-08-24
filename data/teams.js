@@ -84,6 +84,7 @@ var TEAMS_DATABASE = {
     "defensiveCoordinator": "Jay Hill",
     "confirmedStarterQb": "Bear Bachmeier",
     "starPlayer": "Bear Bachmeier (QB) / LJ Martin (RB)",
+    "secondaryStar": "LJ Martin (RB) / Chase Roberts (WR)",
     "mascot": "Cosmo the Cougar",
     "stadium": "LaVell Edwards Stadium",
     "stadiumCapacity": "63,470",
@@ -6007,6 +6008,7 @@ var TEAMS_DATABASE = {
     "confirmedStarterQb": "John Mateer"
   },
   "boisestate": {
+    "id": "boisestate",
     "name": "Boise State Broncos",
     "shortName": "Boise State",
     "mascot": "Broncos",
@@ -6015,8 +6017,15 @@ var TEAMS_DATABASE = {
     "apRank": "NR",
     "apPoints": "845 pts",
     "headCoach": "Spencer Danielson",
+    "offensiveCoordinator": "Nate Potter",
+    "defensiveCoordinator": "Erik Chinander",
     "confirmedStarterQb": "Maddux Madsen",
     "starPlayer": "Maddux Madsen (QB) / Sire Gaines (RB) / Dylan Riley (RB)",
+    "secondaryStar": "Sire Gaines (RB) / Prince Strachan (WR)",
+    "stadium": "Albertsons Stadium",
+    "stadiumCity": "Boise, ID",
+    "stadiumCapacity": "36,387",
+    "themeClass": "theme-boisestate",
     "colors": {
       "primary": "#0033A0",
       "secondary": "#D64309",
@@ -6379,6 +6388,7 @@ var TEAMS_DATABASE = {
     "offensiveCoordinator": "Nate Potter"
   },
   "usc": {
+    "id": "usc",
     "name": "USC Trojans",
     "shortName": "USC",
     "mascot": "Trojans",
@@ -6387,8 +6397,15 @@ var TEAMS_DATABASE = {
     "apRank": "#14T AP",
     "apPoints": "790 pts",
     "headCoach": "Lincoln Riley",
+    "offensiveCoordinator": "Josh Henson",
+    "defensiveCoordinator": "D'Anton Lynn",
     "confirmedStarterQb": "Jayden Maiava",
     "starPlayer": "Jayden Maiava (QB) / Waymond Jordan (RB) / Tanook Hines (WR)",
+    "secondaryStar": "Waymond Jordan (RB) / Makai Lemon (WR)",
+    "stadium": "Los Angeles Memorial Coliseum",
+    "stadiumCity": "Los Angeles, CA",
+    "stadiumCapacity": "77,500",
+    "themeClass": "theme-usc",
     "colors": {
       "primary": "#990000",
       "secondary": "#FFC72C",
@@ -6751,6 +6768,7 @@ var TEAMS_DATABASE = {
     "offensiveCoordinator": "Josh Henson"
   },
   "floridastate": {
+    "id": "floridastate",
     "name": "Florida State Seminoles",
     "shortName": "Florida State",
     "mascot": "Seminoles",
@@ -6759,8 +6777,15 @@ var TEAMS_DATABASE = {
     "apRank": "#15 AP",
     "apPoints": "740 pts",
     "headCoach": "Mike Norvell",
+    "offensiveCoordinator": "Tim Harris Jr",
+    "defensiveCoordinator": "Tony White",
     "confirmedStarterQb": "Ashton Daniels",
     "starPlayer": "Ashton Daniels (QB) / Landen Thomas (TE) / Micahi Danzy (WR)",
+    "secondaryStar": "Kam Davis (RB) / Hykeem Williams (WR)",
+    "stadium": "Doak Campbell Stadium",
+    "stadiumCity": "Tallahassee, FL",
+    "stadiumCapacity": "79,560",
+    "themeClass": "theme-floridastate",
     "colors": {
       "primary": "#782F40",
       "secondary": "#CEB888",
@@ -7123,6 +7148,7 @@ var TEAMS_DATABASE = {
     "offensiveCoordinator": "Tim Harris Jr"
   },
   "clemson": {
+    "id": "clemson",
     "name": "Clemson Tigers",
     "shortName": "Clemson",
     "mascot": "Tigers",
@@ -7131,8 +7157,15 @@ var TEAMS_DATABASE = {
     "apRank": "#17 AP",
     "apPoints": "710 pts",
     "headCoach": "Dabo Swinney",
+    "offensiveCoordinator": "Garrett Riley",
+    "defensiveCoordinator": "Tom Allen",
     "confirmedStarterQb": "Christopher Vizzina",
     "starPlayer": "Christopher Vizzina (QB) / T.J. Moore (WR) / Bryant Wesco Jr (WR)",
+    "secondaryStar": "David Eziomume (RB) / TJ Moore (WR)",
+    "stadium": "Memorial Stadium (Death Valley)",
+    "stadiumCity": "Clemson, SC",
+    "stadiumCapacity": "81,500",
+    "themeClass": "theme-clemson",
     "colors": {
       "primary": "#F56600",
       "secondary": "#522D80",
@@ -7495,6 +7528,7 @@ var TEAMS_DATABASE = {
     "offensiveCoordinator": "Garrett Riley"
   },
   "smu": {
+    "id": "smu",
     "name": "SMU Mustangs",
     "shortName": "SMU",
     "mascot": "Mustangs",
@@ -7503,8 +7537,15 @@ var TEAMS_DATABASE = {
     "apRank": "#19 AP",
     "apPoints": "680 pts",
     "headCoach": "Rhett Lashlee",
+    "offensiveCoordinator": "Casey Woods",
+    "defensiveCoordinator": "Maurice Crum Jr",
     "confirmedStarterQb": "Kevin Jennings",
     "starPlayer": "Kevin Jennings (QB) / Kendrick Raphael (RB) / Jalen Hale (WR)",
+    "secondaryStar": "LJ Johnson (RB) / Romello Brinson (WR)",
+    "stadium": "Gerald J. Ford Stadium",
+    "stadiumCity": "Dallas, TX",
+    "stadiumCapacity": "32,000",
+    "themeClass": "theme-smu",
     "colors": {
       "primary": "#003366",
       "secondary": "#CC0000",
@@ -7882,6 +7923,7 @@ var TEAMS_DATABASE = {
     "offensiveCoordinator": "Mack Leftwich",
     "confirmedStarterQb": "Will Hammond",
     "starPlayer": "Micah Hudson (WR) / Cameron Dickey (RB) / Will Hammond (QB)",
+    "secondaryStar": "Cameron Dickey (RB) / Micah Hudson (WR)",
     "stadium": "Jones AT&T Stadium",
     "stadiumCapacity": "60,454",
     "stadiumCity": "Lubbock, TX",
