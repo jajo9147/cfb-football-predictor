@@ -4235,7 +4235,11 @@ window.renderFilteredReceiptsLedger = function() {
 
     (team.schedule || []).forEach(g => {
       const gWeek = (g.week || 'WEEK 1').toUpperCase().trim();
-      if (weekFilter !== 'all' && !gWeek.includes(weekFilter)) return;
+      if (weekFilter !== 'all') {
+        const cleanGWeek = gWeek.replace(/\s+/g, ' ');
+        const cleanFilter = weekFilter.toUpperCase().trim().replace(/\s+/g, ' ');
+        if (cleanGWeek !== cleanFilter) return;
+      }
 
       const oppName = g.opponent || 'Opponent';
       const fullMatchup = `${team.apRank ? team.apRank + ' ' : ''}${team.shortName || team.name} ${g.isHome ? 'vs' : 'at'} ${g.oppRank ? g.oppRank + ' ' : ''}${g.oppAbbr || oppName}`;
