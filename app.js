@@ -2586,6 +2586,7 @@ function simulatePlayoffBracket(cfp) {
   registerPlayoffGame('playoff-natty', 'NATIONAL CHAMPIONSHIP', 'CFP National Championship', semi1Winner, semi2Winner, simNatty, 'Mercedes-Benz Stadium', 'Atlanta, GA');
 
   return {
+    cfp,
     fr1: { teamA: cfp.seed5, teamB: cfp.seed12, sim: simFR1, id: 'playoff-fr1', label: 'First Round (On-Campus)' },
     fr2: { teamA: cfp.seed6, teamB: cfp.seed11, sim: simFR2, id: 'playoff-fr2', label: 'First Round (On-Campus)' },
     fr3: { teamA: cfp.seed7, teamB: cfp.seed10, sim: simFR3, id: 'playoff-fr3', label: 'First Round (On-Campus)' },
@@ -2617,10 +2618,10 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
     if (!tObj) return fallbackSeed || '';
     if (tObj.seed) return tObj.seed;
     if (tObj.playoffSeed) return tObj.playoffSeed;
-    const evaluatedTeams = evaluateRegularSeasonAllTeams();
-    const cfp = determineCfpField(evaluatedTeams);
-    const idx = (cfp.seeds || []).findIndex(s => s && isTeamMatch(s, tObj.id || tObj.name));
-    if (idx !== -1) return idx + 1;
+    if (playoffData && playoffData.cfp && Array.isArray(playoffData.cfp.seeds)) {
+      const idx = playoffData.cfp.seeds.findIndex(s => s && isTeamMatch(s, tObj.id || tObj.name));
+      if (idx !== -1) return idx + 1;
+    }
     return fallbackSeed || '';
   }
 
