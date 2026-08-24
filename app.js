@@ -346,6 +346,7 @@ function selectTeam(teamId) {
 
   // Recalculate & Re-render
   recalculateSeason();
+  updateCountdownTickerForActiveTeam();
 }
 
 // ==========================================================================
@@ -3332,27 +3333,211 @@ function initPwaInstall() {
 }
 
 // ==========================================================================
-// COUNTDOWN TICKER
+// COUNTDOWN TICKER & LOCALIZED TIMEZONE KICKOFF ENGINE
 // ==========================================================================
 
-function startCountdownTicker() {
-  function updateCountdown() {
-    const kickoff = new Date('September 5, 2026 12:00:00 CDT').getTime();
-    const now = new Date().getTime();
-    const diff = kickoff - now;
+const TEAM_OPENER_KICKOFFS = {
+  'byu': {
+    utc: '2026-08-30T02:15:00Z', // Sat Aug 29 @ 8:15 PM MDT (Week 0 opener vs Portland State)
+    opponent: 'Portland State Vikings',
+    venue: 'LaVell Edwards Stadium (Provo, UT)',
+    tv: 'ESPN'
+  },
+  'miami': {
+    utc: '2026-09-05T00:00:00Z', // Fri Sep 4 @ 8:00 PM EDT (Stanford, CA)
+    opponent: 'Stanford Cardinal',
+    venue: 'Stanford Stadium (Stanford, CA)',
+    tv: 'ACC Network / ESPN'
+  },
+  'texas': {
+    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 11:00 AM CDT (Austin, TX)
+    opponent: 'Texas State Bobcats',
+    venue: 'DKR Texas Memorial Stadium (Austin, TX)',
+    tv: 'ABC / SEC Network'
+  },
+  'michigan': {
+    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 12:00 PM EDT (Ann Arbor, MI)
+    opponent: 'Western Michigan Broncos',
+    venue: 'Michigan Stadium (Ann Arbor, MI)',
+    tv: 'FOX Big Noon Kickoff'
+  },
+  'oklahoma': {
+    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 11:00 AM CDT (Norman, OK)
+    opponent: 'UTEP Miners',
+    venue: 'Gaylord Family Oklahoma Memorial Stadium (Norman, OK)',
+    tv: 'SEC Network'
+  },
+  'indiana': {
+    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 12:00 PM EDT (Bloomington, IN)
+    opponent: 'North Texas Mean Green',
+    venue: 'Memorial Stadium (Bloomington, IN)',
+    tv: 'Big Ten Network'
+  },
+  'tennessee': {
+    utc: '2026-09-05T16:45:00Z', // Sat Sep 5 @ 12:45 PM EDT (Knoxville, TN)
+    opponent: 'Furman Paladins',
+    venue: 'Neyland Stadium (Knoxville, TN)',
+    tv: 'SEC Network'
+  },
+  'ohiostate': {
+    utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 3:30 PM EDT (Columbus, OH)
+    opponent: 'Ball State Cardinals',
+    venue: 'Ohio Stadium (Columbus, OH)',
+    tv: 'CBS / Paramount+'
+  },
+  'pennstate': {
+    utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 3:30 PM EDT (State College, PA)
+    opponent: 'Marshall Thundering Herd',
+    venue: 'Beaver Stadium (State College, PA)',
+    tv: 'Big Ten Network'
+  },
+  'notredame': {
+    utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 2:30 PM CDT / 3:30 PM EDT (Green Bay, WI)
+    opponent: 'Wisconsin Badgers',
+    venue: 'Lambeau Field (Green Bay, WI)',
+    tv: 'NBC / Peacock'
+  },
+  'texastech': {
+    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 6:00 PM CDT (Lubbock, TX)
+    opponent: 'Abilene Christian Wildcats',
+    venue: 'Jones AT&T Stadium (Lubbock, TX)',
+    tv: 'FOX / FS1'
+  },
+  'alabama': {
+    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 6:00 PM CDT (Tuscaloosa, AL)
+    opponent: 'East Carolina Pirates',
+    venue: 'Bryant-Denny Stadium (Tuscaloosa, AL)',
+    tv: 'ESPN'
+  },
+  'texasam': {
+    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 6:00 PM CDT (College Station, TX)
+    opponent: 'Missouri State Bears',
+    venue: 'Kyle Field (College Station, TX)',
+    tv: 'SEC Network'
+  },
+  'georgia': {
+    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 7:30 PM EDT (Atlanta, GA)
+    opponent: 'Florida State Seminoles',
+    venue: 'Mercedes-Benz Stadium (Atlanta, GA)',
+    tv: 'ABC Saturday Night Football'
+  },
+  'floridastate': {
+    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 7:30 PM EDT (Atlanta, GA)
+    opponent: 'Georgia Bulldogs',
+    venue: 'Mercedes-Benz Stadium (Atlanta, GA)',
+    tv: 'ABC Saturday Night Football'
+  },
+  'lsu': {
+    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 6:30 PM CDT / 7:30 PM EDT (Baton Rouge, LA)
+    opponent: 'Clemson Tigers',
+    venue: 'Tiger Stadium (Baton Rouge, LA)',
+    tv: 'ABC / ESPN'
+  },
+  'clemson': {
+    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 7:30 PM EDT (Baton Rouge, LA)
+    opponent: 'LSU Tigers',
+    venue: 'Tiger Stadium (Baton Rouge, LA)',
+    tv: 'ABC / ESPN'
+  },
+  'smu': {
+    utc: '2026-09-06T00:00:00Z', // Sat Sep 5 @ 7:00 PM CDT (Dallas, TX)
+    opponent: 'Stephen F. Austin Lumberjacks',
+    venue: 'Gerald J. Ford Stadium (Dallas, TX)',
+    tv: 'ACC Network'
+  },
+  'boisestate': {
+    utc: '2026-09-06T01:00:00Z', // Sat Sep 5 @ 7:00 PM MDT / 9:00 PM EDT (Boise, ID)
+    opponent: 'South Florida Bulls',
+    venue: 'Albertsons Stadium (Boise, ID)',
+    tv: 'FS1'
+  },
+  'oregon': {
+    utc: '2026-09-06T02:30:00Z', // Sat Sep 5 @ 7:30 PM PDT / 10:30 PM EDT (Eugene, OR)
+    opponent: 'Boise State Broncos',
+    venue: 'Autzen Stadium (Eugene, OR)',
+    tv: 'NBC / Peacock'
+  },
+  'usc': {
+    utc: '2026-09-06T23:30:00Z', // Sun Sep 6 @ 4:30 PM PDT / 7:30 PM EDT (Las Vegas, NV)
+    opponent: 'Ole Miss Rebels',
+    venue: 'Allegiant Stadium (Las Vegas, NV)',
+    tv: 'ABC Vegas Kickoff Classic'
+  },
+  'olemiss': {
+    utc: '2026-09-06T23:30:00Z', // Sun Sep 6 @ 6:30 PM CDT / 7:30 PM EDT (Las Vegas, NV)
+    opponent: 'USC Trojans',
+    venue: 'Allegiant Stadium (Las Vegas, NV)',
+    tv: 'ABC Vegas Kickoff Classic'
+  }
+};
 
-    if (diff <= 0) {
-      document.getElementById('countdownText').innerText = '🔥 SEASON IS LIVE!';
-      return;
-    }
+function getUserTimezoneAbbr() {
+  try {
+    const parts = new Intl.DateTimeFormat('en-US', { timeZoneName: 'short' }).formatToParts(new Date());
+    const tzPart = parts.find(p => p.type === 'timeZoneName');
+    return tzPart ? tzPart.value : 'LOCAL';
+  } catch (e) {
+    return 'LOCAL';
+  }
+}
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    document.getElementById('countdownText').innerText = `KICKOFF: ${days}D ${hours}H`;
+function formatKickoffDateLocal(kickoffDate) {
+  try {
+    return new Intl.DateTimeFormat('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZoneName: 'short'
+    }).format(kickoffDate);
+  } catch (e) {
+    return kickoffDate.toLocaleString();
+  }
+}
+
+function updateCountdownTickerForActiveTeam() {
+  const teamId = state.currentTeamId || 'texas';
+  const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
+  const kickoffInfo = TEAM_OPENER_KICKOFFS[teamId] || { utc: '2026-09-05T16:00:00Z', tv: 'ABC / ESPN' };
+  const kickoffDate = new Date(kickoffInfo.utc);
+  const now = new Date().getTime();
+  const diff = kickoffDate.getTime() - now;
+
+  const localFormatted = formatKickoffDateLocal(kickoffDate);
+  const tzAbbr = getUserTimezoneAbbr();
+
+  const badgeEl = document.getElementById('countdownBadge');
+  const textEl = document.getElementById('countdownText');
+  const heroPillEl = document.getElementById('heroKickoffText');
+
+  if (diff <= 0) {
+    if (textEl) textEl.innerText = `${team.abbr} • 🔴 LIVE NOW`;
+    if (heroPillEl) heroPillEl.innerText = `Opener: 🔴 Game is Live!`;
+    return;
   }
 
-  updateCountdown();
-  setInterval(updateCountdown, 60000);
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+  if (textEl) {
+    textEl.innerText = `${team.abbr} KICKOFF: ${days}D ${hours}H • ${localFormatted}`;
+  }
+  if (badgeEl) {
+    badgeEl.title = `Next ${team.name} Kickoff: ${localFormatted} (Converted to your local timezone: ${tzAbbr})\nTV: ${kickoffInfo.tv || 'National Broadcast'}\nOpener: ${kickoffInfo.opponent || 'Week 1'}`;
+  }
+  if (heroPillEl) {
+    heroPillEl.innerText = `Opener Kickoff: ${days}D ${hours}H (${localFormatted})`;
+  }
+}
+window.updateCountdownTickerForActiveTeam = updateCountdownTickerForActiveTeam;
+
+function startCountdownTicker() {
+  updateCountdownTickerForActiveTeam();
+  if (!window._countdownInterval) {
+    window._countdownInterval = setInterval(updateCountdownTickerForActiveTeam, 30000);
+  }
 }
 
 // ==========================================================================
