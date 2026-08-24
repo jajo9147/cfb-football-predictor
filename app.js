@@ -388,35 +388,32 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
   const oCrowd = oppSliders ? (oppSliders.crowdNoise || 0) : 0;
 
   // Weather & Environmental / Injury Multipliers
-  let weatherOffAdj = 0;
-  let weatherDefAdj = 0;
+  let weatherScorePenalty = 0;
   const gameSlider = game && game.id ? state.gameSliders[game.id] : null;
   const weather = gameSlider?.weather || 'dome';
   const hasInjury = !!gameSlider?.injury;
 
   if (weather === 'rain') {
-    weatherOffAdj -= 2.5;
-    weatherDefAdj += 1.0;
+    weatherScorePenalty = -4.5; // Slick ball, dropped passes, conservative red zone play
   } else if (weather === 'snow') {
-    weatherOffAdj -= 5.0;
-    weatherDefAdj += 2.5;
+    weatherScorePenalty = -8.5; // Frozen conditions, low tempo, defensive gridlock
   } else if (weather === 'wind') {
-    weatherOffAdj -= 3.5;
-    weatherDefAdj += 1.5;
+    weatherScorePenalty = -6.0; // 25+ MPH wind disrupts deep passing & field goals
   }
 
-  const injuryPenalty = hasInjury ? -4.5 : 0;
+  // Key starter injury imposes a 6.5 pt deficit on the active team
+  const injuryPenalty = hasInjury ? -6.5 : 0;
 
   // Points contributed by team's custom form
-  const teamOffPts = (tQb * 0.24) + (tGround * 0.16) + (tDef * 0.04) + (tTo * 0.18) + (game.isHome ? tCrowd * 0.06 : tCrowd * 0.08) + weatherOffAdj + injuryPenalty;
-  const teamDefPts = (-tQb * 0.04) - (tGround * 0.08) - (tDef * 0.26) - (tTo * 0.18) - (game.isHome ? tCrowd * 0.06 : tCrowd * 0.06) + weatherDefAdj;
+  const teamOffPts = (tQb * 0.24) + (tGround * 0.16) + (tDef * 0.04) + (tTo * 0.18) + (game.isHome ? tCrowd * 0.06 : tCrowd * 0.08) + injuryPenalty;
+  const teamDefPts = (-tQb * 0.04) - (tGround * 0.08) - (tDef * 0.26) - (tTo * 0.18) - (game.isHome ? tCrowd * 0.06 : tCrowd * 0.06);
 
   // Points contributed by opponent's custom form
-  const oppOffPts = (oQb * 0.24) + (oGround * 0.16) + (oDef * 0.04) + (oTo * 0.18) + (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.08) + weatherOffAdj;
-  const oppDefPts = (-oQb * 0.04) - (oGround * 0.08) - (oDef * 0.26) - (oTo * 0.18) - (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.06) + weatherDefAdj;
+  const oppOffPts = (oQb * 0.24) + (oGround * 0.16) + (oDef * 0.04) + (oTo * 0.18) + (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.08);
+  const oppDefPts = (-oQb * 0.04) - (oGround * 0.08) - (oDef * 0.26) - (oTo * 0.18) - (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.06);
 
-  let adjUtScore = Math.max(3, Math.round(game.projScoreUt + teamOffPts + oppDefPts));
-  let adjOppScore = Math.max(0, Math.round(game.projScoreOpp + teamDefPts + oppOffPts));
+  let adjUtScore = Math.max(3, Math.round(game.projScoreUt + teamOffPts + oppDefPts + weatherScorePenalty));
+  let adjOppScore = Math.max(0, Math.round(game.projScoreOpp + teamDefPts + oppOffPts + weatherScorePenalty));
 
   const pointDiff = adjUtScore - adjOppScore;
   let adjWinProb = 1 / (1 + Math.pow(10, -pointDiff / 13.5)) * 100;
@@ -1086,6 +1083,108 @@ function isTeamMatch(t, curId) {
   const curAliases = aliases[cur] || [cur];
   return curAliases.includes(tname) || curAliases.includes(tshort) || curAliases.includes(tabbr);
 }
+
+function updateModalScoreboardLive() {
+  const game = state.activeModalGame;
+  if (!game) return;
+
+  let team1, team2;
+  let score1, score2, prob1, isTeam1Win;
+
+  if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
+    let tA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+    let tB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+    let isHomeA = game.isHomeA || game.isHome || false;
+    let primaryTeam = tA;
+    let secondaryTeam = tB;
+    let isPrimaryHome = isHomeA;
+
+    if (!game.isDreamMatchup) {
+      const isBActive = isTeamMatch(tB, state.currentTeamId);
+      const isAActive = isTeamMatch(tA, state.currentTeamId);
+      if (isBActive && !isAActive) {
+        primaryTeam = TEAMS_DATABASE[state.currentTeamId] || tB;
+        secondaryTeam = tA;
+        isPrimaryHome = game.isHomeB || false;
+      } else if (isAActive) {
+        primaryTeam = TEAMS_DATABASE[state.currentTeamId] || tA;
+        secondaryTeam = tB;
+        isPrimaryHome = isHomeA;
+      }
+    }
+
+    team1 = primaryTeam;
+    team2 = secondaryTeam;
+    const sim = simulatePostseasonMatchup(primaryTeam, secondaryTeam, { gameId: game.id, isHomeA: isPrimaryHome });
+    score1 = sim.scoreA;
+    score2 = sim.scoreB;
+    prob1 = sim.winProbA;
+    isTeam1Win = sim.isAWinner;
+  } else {
+    const tActive = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
+    team1 = tActive;
+    const oppId = getOpponentTeamId(game);
+    team2 = (oppId && TEAMS_DATABASE[oppId]) ? TEAMS_DATABASE[oppId] : { name: game.opponent, shortName: game.oppAbbr || 'OPP', apRank: game.oppRank || 'NR', logoUrl: game.oppLogoUrl };
+    const sim = calculateAdjustedMatchup(game);
+    score1 = sim.projUt;
+    score2 = sim.projOpp;
+    prob1 = sim.adjWinProb;
+    isTeam1Win = sim.isWin;
+  }
+
+  // Update Scoreboard DOM in-place without re-rendering slider controls
+  const scoreboardEl = document.getElementById('modalScoreboard');
+  if (scoreboardEl) {
+    scoreboardEl.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team1.colors?.primary || '#333'};">
+          <img src="${team1.logoUrl || ''}" alt="${team1.shortName || team1.name}" class="modal-team-logo">
+        </div>
+        <div>
+          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${team1.shortName || team1.name}</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${team1.apRank || ''}</div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+        <div style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: #FFFFFF;">
+          <span style="color: ${isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score1}</span>
+          <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
+          <span style="color: ${!isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score2}</span>
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
+          WIN PROB: ${prob1}% - ${100 - prob1}%
+        </span>
+        ${(() => {
+          const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
+          return edge?.badgeHtml || '';
+        })()}
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end;">
+        <div style="text-align: right;">
+          <div style="font-family: var(--font-display); font-size: 1.5rem; color: #FFFFFF;">${team2.shortName || team2.name}</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim);">${team2.apRank || ''}</div>
+        </div>
+        <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team2.colors?.primary || '#333'};">
+          <img src="${team2.logoUrl || ''}" alt="${team2.shortName || team2.name}" class="modal-team-logo">
+        </div>
+      </div>
+    `;
+  }
+
+  // Update drive log and radar chart in background
+  try {
+    renderDriveLogBetween(team1, team2, score1, score2);
+  } catch (e) {}
+  try {
+    drawRadarChartBetween(team1, team2, score1, score2, game.isHome);
+  } catch (e) {}
+
+  // Synchronize main page background calculations & cards
+  recalculateSeason();
+}
+window.updateModalScoreboardLive = updateModalScoreboardLive;
 
 function openSimModal(game) {
   if (!game) return;
@@ -1769,8 +1868,8 @@ function renderGameSlidersInModal(game) {
       // Unset active preset
       document.querySelectorAll('.game-preset-btn').forEach(b => b.classList.remove('active'));
 
-      // Keep bracket & schedule calculations in sync with custom tuning
-      recalculateSeason();
+      // Live update modal scoreboard & background season
+      updateModalScoreboardLive();
     });
 
     container.appendChild(card);
@@ -1808,9 +1907,8 @@ window.setGameWeatherCondition = function(weatherType) {
     else chip.classList.remove('active');
   });
 
-  recalculateSeason();
-  openSimModal(game);
-  window.switchModalSubTab('game-tuning');
+  updateModalScoreboardLive();
+
   const weatherLabels = {
     'dome': '☀️ Clear / Dome (Optimal)',
     'rain': '🌧️ Heavy Rain / Slick Turf',
@@ -1830,20 +1928,19 @@ window.toggleGameInjuryCondition = function() {
     state.gameSliders[game.id] = { ...teamSliders, targetTeamId: focusId };
   }
 
-  const currentInjury = !!state.gameSliders[game.id].injury;
-  state.gameSliders[game.id].injury = !currentInjury;
+  const currentInjury = !state.gameSliders[game.id].injury;
+  state.gameSliders[game.id].injury = currentInjury;
   state.gameSliders[game.id].isCustom = true;
 
   const chip = document.getElementById('injuryChipBtn');
   if (chip) {
-    if (!currentInjury) chip.classList.add('active');
+    if (currentInjury) chip.classList.add('active');
     else chip.classList.remove('active');
   }
 
-  recalculateSeason();
-  openSimModal(game);
-  window.switchModalSubTab('game-tuning');
-  showToast(!currentInjury ? `🩹 Key Starter Injury penalty applied (-4.5 SP+)!` : `🩹 Cleared injury penalty!`);
+  updateModalScoreboardLive();
+
+  showToast(currentInjury ? `🩹 Key Starter Injury penalty applied (-6.5 pts)!` : `🩹 Cleared injury penalty!`);
 };
 
 window.switchModalSubTab = function(subtab) {
@@ -1941,9 +2038,24 @@ window.resetCurrentGameTuning = function() {
     delete state.userPicks[counterpart.oppGame.id];
   }
 
-  recalculateSeason();
-  openSimModal(game);
-  window.switchModalSubTab('game-tuning');
+  // Reset slider UI inputs & chips in modal
+  document.querySelectorAll('.game-preset-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.gamepreset === 'baseline');
+  });
+  document.querySelectorAll('.weather-chip[data-weather]').forEach(chip => {
+    chip.classList.toggle('active', chip.dataset.weather === 'dome');
+  });
+  const injuryChip = document.getElementById('injuryChipBtn');
+  if (injuryChip) injuryChip.classList.remove('active');
+
+  ['qbRating', 'groundAttack', 'defenseHavoc', 'turnoverLuck', 'crowdNoise'].forEach(k => {
+    const inputEl = document.getElementById(`gameslider-${k}`);
+    const readoutEl = document.getElementById(`gameslider-readout-${k}`);
+    if (inputEl) inputEl.value = 0;
+    if (readoutEl) readoutEl.innerText = '0%';
+  });
+
+  updateModalScoreboardLive();
   showToast(`⚡ Reset matchup to baseline!`);
 };
 
@@ -1966,15 +2078,32 @@ window.applyGameScenarioPreset = function(presetKey) {
       focusId = tA.id || state.currentTeamId;
     }
   }
+
+  const prevWeather = state.gameSliders[game.id]?.weather || 'dome';
+  const prevInjury = !!state.gameSliders[game.id]?.injury;
+
   state.gameSliders[game.id] = {
     ...presetValues,
+    weather: prevWeather,
+    injury: prevInjury,
     targetTeamId: focusId,
-    isCustom: (presetKey !== 'baseline')
+    isCustom: (presetKey !== 'baseline') || (prevWeather !== 'dome') || prevInjury
   };
 
-  recalculateSeason();
-  openSimModal(game);
-  window.switchModalSubTab('game-tuning');
+  // Update slider UI inputs in the modal without closing or re-opening tab
+  document.querySelectorAll('.game-preset-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.gamepreset === presetKey);
+  });
+
+  ['qbRating', 'groundAttack', 'defenseHavoc', 'turnoverLuck', 'crowdNoise'].forEach(k => {
+    const inputEl = document.getElementById(`gameslider-${k}`);
+    const readoutEl = document.getElementById(`gameslider-readout-${k}`);
+    const val = presetValues[k] || 0;
+    if (inputEl) inputEl.value = val;
+    if (readoutEl) readoutEl.innerText = `${val > 0 ? '+' : ''}${val}%`;
+  });
+
+  updateModalScoreboardLive();
 
   const presetLabels = {
     'baseline': 'Season Baseline',
@@ -2196,24 +2325,31 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
     spB += ((sB.qbRating || 0) * 0.16 + (sB.defenseHavoc || 0) * 0.16 + (sB.groundAttack || 0) * 0.12 + (sB.turnoverLuck || 0) * 0.10);
   }
 
-  // Apply Single-Game Matchup Custom AI Tuning if present
+  // Apply Single-Game Matchup Custom AI Tuning & Weather/Injury if present
+  let weatherScorePenalty = 0;
   if (options.gameId && state.gameSliders[options.gameId]) {
     const gSliders = state.gameSliders[options.gameId];
-    if (gSliders.isCustom) {
-      const gQb = gSliders.qbRating || 0;
-      const gDef = gSliders.defenseHavoc || 0;
-      const gGnd = gSliders.groundAttack || 0;
-      const gTo = gSliders.turnoverLuck || 0;
-      const gCrowd = gSliders.crowdNoise || 0;
-      const sliderBonus = (gQb * 0.18 + gDef * 0.18 + gGnd * 0.14 + gTo * 0.12 + gCrowd * 0.08);
-      const targetId = gSliders.targetTeamId || state.currentTeamId;
-      if (isTeamMatch(teamA, targetId) && !isTeamMatch(teamB, targetId)) {
-        spA += sliderBonus;
-      } else if (isTeamMatch(teamB, targetId) && !isTeamMatch(teamA, targetId)) {
-        spB += sliderBonus;
-      } else {
-        spA += sliderBonus;
-      }
+    const gWeather = gSliders.weather || 'dome';
+    const gInjury = !!gSliders.injury;
+
+    if (gWeather === 'rain') weatherScorePenalty = -4.5;
+    else if (gWeather === 'snow') weatherScorePenalty = -8.5;
+    else if (gWeather === 'wind') weatherScorePenalty = -6.0;
+
+    const gQb = gSliders.qbRating || 0;
+    const gDef = gSliders.defenseHavoc || 0;
+    const gGnd = gSliders.groundAttack || 0;
+    const gTo = gSliders.turnoverLuck || 0;
+    const gCrowd = gSliders.crowdNoise || 0;
+    const injuryPenalty = gInjury ? -5.5 : 0;
+    const sliderBonus = (gQb * 0.18 + gDef * 0.18 + gGnd * 0.14 + gTo * 0.12 + gCrowd * 0.08) + injuryPenalty;
+    const targetId = gSliders.targetTeamId || state.currentTeamId;
+    if (isTeamMatch(teamA, targetId) && !isTeamMatch(teamB, targetId)) {
+      spA += sliderBonus;
+    } else if (isTeamMatch(teamB, targetId) && !isTeamMatch(teamA, targetId)) {
+      spB += sliderBonus;
+    } else {
+      spA += sliderBonus;
     }
   }
 
@@ -2221,8 +2357,8 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
   if (options.isHomeA) spA += 2.5;
 
   const diff = spA - spB;
-  let scoreA = Math.max(10, Math.round(28 + diff * 0.65));
-  let scoreB = Math.max(10, Math.round(28 - diff * 0.65));
+  let scoreA = Math.max(3, Math.round(28 + diff * 0.65 + weatherScorePenalty));
+  let scoreB = Math.max(0, Math.round(28 - diff * 0.65 + weatherScorePenalty));
 
   if (scoreA === scoreB) {
     if (diff >= 0) scoreA += 3;
