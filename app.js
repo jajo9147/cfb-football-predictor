@@ -379,7 +379,154 @@ function findCounterpartMatchup(teamId, game) {
   return { oppTeamId, oppTeam, oppGame };
 }
 
+const STADIUM_HFA_MAP = {
+  'DKR Texas Memorial Stadium': 3.0,
+  'Ohio Stadium (The Horseshoe)': 3.2,
+  'Ohio Stadium': 3.2,
+  'Beaver Stadium': 3.2,
+  'Sanford Stadium': 3.0,
+  'Kyle Field': 3.0,
+  'Bryant-Denny Stadium': 3.0,
+  'Tiger Stadium (Death Valley)': 3.0,
+  'Tiger Stadium': 3.0,
+  'Neyland Stadium': 3.0,
+  'Michigan Stadium (The Big House)': 3.0,
+  'Michigan Stadium': 3.0,
+  'Autzen Stadium': 2.8,
+  'Doak Campbell Stadium': 2.8,
+  'Memorial Stadium (Clemson)': 2.8,
+  'Notre Dame Stadium': 2.8,
+  'Gaylord Family Oklahoma Memorial Stadium': 2.8,
+  'Memorial Stadium': 2.8,
+  'Hard Rock Stadium': 2.5,
+  'LaVell Edwards Stadium': 2.8,
+  'Jones AT&T Stadium': 2.8,
+  'Rice-Eccles Stadium': 2.8,
+  'Kinnick Stadium': 2.8,
+  'Faurot Field': 2.5,
+  'Husky Stadium': 2.8,
+  'Memorial Stadium (Indiana)': 2.5,
+  'Albertsons Stadium': 2.5,
+  'Los Angeles Memorial Coliseum': 2.5,
+  'Gerald J. Ford Stadium': 2.5,
+  'TDECU Stadium': 2.5,
+  'L&N Federal Credit Union Stadium': 2.5,
+  'L&N Stadium': 2.5
+};
+
+const NON_DB_OPPONENT_RATINGS = {
+  'Texas State Bobcats': 3.5, 'TXST': 3.5,
+  'UTSA Roadrunners': 5.0, 'UTSA': 5.0,
+  'Florida Gators': 18.5, 'FLA': 18.5,
+  'Mississippi State Bulldogs': 14.5, 'MSST': 14.5,
+  'Arkansas Razorbacks': 17.5, 'ARK': 17.5,
+  'Ball State Cardinals': 1.0, 'BALL': 1.0,
+  'Boston College Eagles': 12.0, 'BC': 12.0,
+  'Illinois Fighting Illini': 18.0, 'ILL': 18.0,
+  'Northwestern Wildcats': 11.5, 'NU': 11.5,
+  'Nebraska Cornhuskers': 18.5, 'NEB': 18.5,
+  'Michigan State Spartans': 14.5, 'MSU': 14.5,
+  'Kentucky Wildcats': 16.5, 'UK': 16.5,
+  'South Carolina Gamecocks': 17.0, 'SC': 17.0,
+  'Auburn Tigers': 18.0, 'AUB': 18.0,
+  'Vanderbilt Commodores': 14.0, 'VANDY': 14.0,
+  'Western Michigan Broncos': 3.0, 'WMU': 3.0,
+  'Wisconsin Badgers': 18.0, 'WISC': 18.0,
+  'Minnesota Golden Gophers': 16.5, 'MINN': 16.5,
+  'Rutgers Scarlet Knights': 16.0, 'RUTG': 16.0,
+  'Maryland Terrapins': 15.0, 'MD': 15.0,
+  'Purdue Boilermakers': 12.0, 'PUR': 12.0,
+  'UCLA Bruins': 15.5, 'UCLA': 15.5,
+  'Kansas State Wildcats': 19.5, 'KSU': 19.5,
+  'Iowa State Cyclones': 19.0, 'ISU': 19.0,
+  'Colorado Buffaloes': 17.5, 'COL': 17.5,
+  'Arizona State Sun Devils': 18.0, 'ASU': 18.0,
+  'Kansas Jayhawks': 17.0, 'KU': 17.0,
+  'TCU Horned Frogs': 17.0, 'TCU': 17.0,
+  'Baylor Bears': 16.0, 'BAY': 16.0,
+  'West Virginia Mountaineers': 15.5, 'WVU': 15.5,
+  'UCF Knights': 16.5, 'UCF': 16.5,
+  'Oklahoma State Cowboys': 16.0, 'OKST': 16.0,
+  'Cincinnati Bearcats': 15.0, 'CIN': 15.0,
+  'North Carolina Tar Heels': 17.0, 'UNC': 17.0,
+  'Pittsburgh Panthers': 16.5, 'PITT': 16.5,
+  'Virginia Tech Hokies': 16.0, 'VT': 16.0,
+  'Duke Blue Devils': 15.5, 'DUKE': 15.5,
+  'Stanford Cardinal': 12.0, 'STAN': 12.0,
+  'Wake Forest Demon Deacons': 12.5, 'WAKE': 12.5,
+  'Syracuse Orange': 16.0, 'SYR': 16.0,
+  'Georgia Tech Yellow Jackets': 18.0, 'GT': 18.0,
+  'Virginia Cavaliers': 14.0, 'UVA': 14.0,
+  'NC State Wolfpack': 16.5, 'NCST': 16.5,
+  'California Golden Bears': 15.0, 'CAL': 15.0,
+  'Oregon State Beavers': 15.5, 'ORST': 15.5,
+  'Washington State Cougars': 15.5, 'WSU': 15.5,
+  'Memphis Tigers': 12.5, 'MEM': 12.5,
+  'Tulane Green Wave': 13.0, 'TUL': 13.0,
+  'UNLV Rebels': 13.0, 'UNLV': 13.0,
+  'App State Mountaineers': 8.0, 'APP': 8.0,
+  'James Madison Dukes': 11.0, 'JMU': 11.0,
+  'Liberty Flames': 10.0, 'LIB': 10.0,
+  'Navy Midshipmen': 7.0, 'NAVY': 7.0,
+  'Army Black Knights': 7.5, 'ARMY': 7.5,
+  'Wyoming Cowboys': 5.0, 'WYO': 5.0,
+  'Fresno State Bulldogs': 8.5, 'FRES': 8.5,
+  'San Diego State Aztecs': 6.5, 'SDSU': 6.5,
+  'San Jose State Spartans': 6.0, 'SJSU': 6.0,
+  'Hawaii Rainbow Warriors': 3.5, 'HAW': 3.5,
+  'Nevada Wolf Pack': 2.5, 'NEV': 2.5,
+  'New Mexico Lobos': 2.0, 'UNM': 2.0,
+  'Utah State Aggies': 4.0, 'USU': 4.0,
+  'UTEP Miners': 1.0, 'UTEP': 1.0,
+  'Rice Owls': 2.5, 'RICE': 2.5,
+  'North Texas Mean Green': 4.5, 'UNT': 4.5,
+  'Marshall Thundering Herd': 5.5, 'MRSH': 5.5,
+  'Georgia Southern Eagles': 4.5, 'GASO': 4.5,
+  'Troy Trojans': 4.0, 'TROY': 4.0,
+  'Louisiana Ragin Cajuns': 5.0, 'LA': 5.0,
+  'Portland State Vikings': -8.0,
+  'Stephen F. Austin Lumberjacks': -6.0,
+  'Houston Christian Huskies': -8.0,
+  'Missouri State Bears': -4.0,
+  'Villanova Wildcats': -3.0
+};
+
 function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSliders, userPick) {
+  const tTeam = TEAMS_DATABASE[teamId] || {};
+  let spA = tTeam.baseSpRating || 22.0;
+
+  // Resolve opponent SP rating dynamically
+  let spB = 5.0;
+  let oTeam = null;
+  if (oppTeamId && TEAMS_DATABASE[oppTeamId]) {
+    oTeam = TEAMS_DATABASE[oppTeamId];
+    spB = oTeam.baseSpRating || 22.0;
+  } else {
+    const oppName = game?.opponent || '';
+    const oppAbbr = game?.oppAbbr || '';
+    if (NON_DB_OPPONENT_RATINGS[oppName] !== undefined) spB = NON_DB_OPPONENT_RATINGS[oppName];
+    else if (NON_DB_OPPONENT_RATINGS[oppAbbr] !== undefined) spB = NON_DB_OPPONENT_RATINGS[oppAbbr];
+    else if (oppName.includes('FCS') || (oppName.includes('State') && game?.oppRank === 'NR')) spB = 0.0;
+  }
+
+  // Calculate dynamic venue HFA
+  const stadium = game?.stadium || '';
+  const location = game?.location || '';
+  const rivalry = game?.rivalryName || '';
+  const isNeutral = (stadium.includes('Cotton Bowl') || stadium.includes('Neutral') || (stadium.includes('Mercedes-Benz') && !stadium.includes('Georgia'))) || (location.includes('Dallas') && rivalry.toUpperCase().includes('RED RIVER')) || (location.includes('Neutral') || location.includes('Dublin'));
+
+  let hfa = 0.0;
+  if (isNeutral) {
+    hfa = 0.0;
+  } else if (game?.isHome) {
+    hfa = STADIUM_HFA_MAP[stadium] || STADIUM_HFA_MAP[tTeam.stadium] || 2.5;
+  } else {
+    const oppStadium = oTeam ? (oTeam.stadium || stadium) : stadium;
+    hfa = -(STADIUM_HFA_MAP[oppStadium] || 2.5);
+  }
+
+  const baseMargin = spA - spB + hfa;
+
   const tQb = teamSliders ? (teamSliders.qbRating || 0) : 0;
   const tGround = teamSliders ? (teamSliders.groundAttack || 0) : 0;
   const tDef = teamSliders ? (teamSliders.defenseHavoc || 0) : 0;
@@ -399,39 +546,47 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
   const hasInjury = !!gameSlider?.injury;
 
   if (weather === 'rain') {
-    weatherScorePenalty = -4.5; // Slick ball, dropped passes, conservative red zone play
+    weatherScorePenalty = -4.5;
   } else if (weather === 'snow') {
-    weatherScorePenalty = -8.5; // Frozen conditions, low tempo, defensive gridlock
+    weatherScorePenalty = -8.5;
   } else if (weather === 'wind') {
-    weatherScorePenalty = -6.0; // 25+ MPH wind disrupts deep passing & field goals
+    weatherScorePenalty = -6.0;
   }
 
-  // Key starter injury imposes a 6.5 pt deficit on the active team
   const injuryPenalty = hasInjury ? -6.5 : 0;
 
-  // Points contributed by team's custom form
-  const teamOffPts = (tQb * 0.24) + (tGround * 0.16) + (tDef * 0.04) + (tTo * 0.18) + (game.isHome ? tCrowd * 0.06 : tCrowd * 0.08) + injuryPenalty;
-  const teamDefPts = (-tQb * 0.04) - (tGround * 0.08) - (tDef * 0.26) - (tTo * 0.18) - (game.isHome ? tCrowd * 0.06 : tCrowd * 0.06);
+  // Points contributed by custom slider form
+  const teamOffPts = (tQb * 0.24) + (tGround * 0.16) + (tDef * 0.04) + (tTo * 0.18) + (game?.isHome ? tCrowd * 0.06 : tCrowd * 0.08) + injuryPenalty;
+  const teamDefPts = (-tQb * 0.04) - (tGround * 0.08) - (tDef * 0.26) - (tTo * 0.18) - (game?.isHome ? tCrowd * 0.06 : tCrowd * 0.06);
 
-  // Points contributed by opponent's custom form
-  const oppOffPts = (oQb * 0.24) + (oGround * 0.16) + (oDef * 0.04) + (oTo * 0.18) + (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.08);
-  const oppDefPts = (-oQb * 0.04) - (oGround * 0.08) - (oDef * 0.26) - (oTo * 0.18) - (!game.isHome ? oCrowd * 0.06 : oCrowd * 0.06);
+  const oppOffPts = (oQb * 0.24) + (oGround * 0.16) + (oDef * 0.04) + (oTo * 0.18) + (!game?.isHome ? oCrowd * 0.06 : oCrowd * 0.08);
+  const oppDefPts = (-oQb * 0.04) - (oGround * 0.08) - (oDef * 0.26) - (oTo * 0.18) - (!game?.isHome ? oCrowd * 0.06 : oCrowd * 0.06);
 
-  let adjUtScore = Math.max(3, Math.round(game.projScoreUt + teamOffPts + oppDefPts + weatherScorePenalty));
-  let adjOppScore = Math.max(0, Math.round(game.projScoreOpp + teamDefPts + oppOffPts + weatherScorePenalty));
+  const effectiveMargin = baseMargin + (teamOffPts - teamDefPts) - (oppOffPts - oppDefPts);
 
-  // Break accidental ties based on base win probability / margin
+  // Dynamic Pace Total
+  let baseTotal = 55.0;
+  if (spA >= 27.0 && spB >= 24.0) baseTotal = 59.0;
+  else if (spA >= 25.0 && spB <= 8.0) baseTotal = 56.0;
+  else if ((tTeam.name && tTeam.name.includes('Iowa')) || (oTeam && oTeam.name && oTeam.name.includes('Iowa'))) baseTotal = 44.0;
+  else if ((tTeam.name && tTeam.name.includes('Michigan')) || (oTeam && oTeam.name && oTeam.name.includes('Michigan'))) baseTotal = 51.0;
+
+  let adjUtScore = Math.max(6, Math.round((baseTotal + effectiveMargin + weatherScorePenalty) / 2.0));
+  let adjOppScore = Math.max(3, Math.round((baseTotal - effectiveMargin + weatherScorePenalty) / 2.0));
+
+  // Enforce decisive score separation for favorites
   if (adjUtScore === adjOppScore) {
-    if ((game.baseWinProb || 50) >= 50) {
-      adjUtScore += 3;
-    } else {
-      adjOppScore += 3;
-    }
+    if (effectiveMargin >= 0) adjUtScore += 3;
+    else adjOppScore += 3;
+  } else if (effectiveMargin > 0.3 && adjUtScore <= adjOppScore) {
+    adjUtScore = adjOppScore + 3;
+  } else if (effectiveMargin < -0.3 && adjOppScore <= adjUtScore) {
+    adjOppScore = adjUtScore + 3;
   }
 
   const pointDiff = adjUtScore - adjOppScore;
-  let adjWinProb = 1 / (1 + Math.pow(10, -pointDiff / 13.5)) * 100;
-  adjWinProb = Math.min(99, Math.max(1, Math.round(adjWinProb)));
+  let adjWinProb = Math.round(100 / (1 + Math.pow(10, -pointDiff / 13.5)));
+  adjWinProb = Math.min(99, Math.max(1, adjWinProb));
 
   let isWin = userPick ? (userPick === 'W') : (adjUtScore > adjOppScore);
   if (userPick === 'W' && adjUtScore <= adjOppScore) adjUtScore = adjOppScore + 3;

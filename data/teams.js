@@ -3515,7 +3515,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#191124",
       "bgBase": "#0E0914"
     },
-    "baseSpRating": 24.8,
+    "baseSpRating": 27.8,
     "playoffContenderRank": 11,
     "sliderLabels": {
       "qb": "Sam Leavitt Execution",
