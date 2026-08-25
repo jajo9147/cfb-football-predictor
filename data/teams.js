@@ -116,7 +116,7 @@ var TEAMS_DATABASE = {
     "themeClass": "theme-byu",
     "headCoach": "Kalani Sitake",
     "offensiveCoordinator": "Aaron Roderick",
-    "defensiveCoordinator": "Jay Hill",
+    "defensiveCoordinator": "Kelly Poppinga",
     "confirmedStarterQb": "Bear Bachmeier",
     "starPlayer": "Bear Bachmeier (QB) / LJ Martin (RB)",
     "secondaryStar": "LJ Martin (RB) / Chase Roberts (WR)",
@@ -136,7 +136,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Bear Bachmeier Execution",
       "ground": "LJ Martin Ground Attack",
-      "defense": "Jay Hill Defense & Havoc",
+      "defense": "Kelly Poppinga Defense & Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "LaVell Edwards Crowd Noise"
     },
@@ -550,7 +550,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Arch Manning Execution",
       "ground": "Smothers & Brown Ground Attack",
-      "defense": "Will Muschamp 'Boom' Havoc Defense",
+      "defense": "Will Muschamp Defense & Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "DKR 100k Burnt Orange Roar"
     },
@@ -901,9 +901,9 @@ var TEAMS_DATABASE = {
     "conference": "Big Ten",
     "apRank": "#16 AP",
     "apPoints": "680 PTS",
-    "headCoach": "Sherrone Moore",
-    "defensiveCoordinator": "Wink Martindale",
-    "offensiveCoordinator": "Kirk Campbell",
+    "headCoach": "Kyle Whittingham",
+    "defensiveCoordinator": "Jay Hill",
+    "offensiveCoordinator": "Jason Beck",
     "starPlayer": "Bryce Underwood (QB) / Jordan Marshall (RB) / Andrew Marsh (WR)",
     "secondaryStar": "Jordan Marshall (RB) / Savion Hiter (RB)",
     "stadium": "Michigan Stadium (The Big House)",
@@ -923,7 +923,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Bryce Underwood Execution",
       "ground": "Jordan Marshall Ground Attack",
-      "defense": "Jay Hill Defensive Havoc",
+      "defense": "Jay Hill Aggressive Defense & Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "The Big House 110k Maize Wall"
     },
@@ -3892,7 +3892,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "George MacIntyre Execution",
       "ground": "DeSean Bishop Ground Attack",
-      "defense": "Tim Banks Havoc Defense",
+      "defense": "Jim Knowles Aggressive Defense & Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "Neyland Stadium 102k Rocky Top Roar"
     },
@@ -6846,8 +6846,8 @@ var TEAMS_DATABASE = {
     "apRank": "RV",
     "apPoints": "718 pts",
     "headCoach": "Mike Norvell",
-    "offensiveCoordinator": "Alex Atkins / Tim Harris Jr.",
-    "defensiveCoordinator": "Adam Fuller",
+    "offensiveCoordinator": "Tim Harris Jr.",
+    "defensiveCoordinator": "Tony White",
     "confirmedStarterQb": "Ashton Daniels / Luke Kromenhoek",
     "starPlayer": "Kam Davis (RB) / Micahi Danzy (RB/WR) / Landen Thomas (TE)",
     "secondaryStar": "Patrick Payton (DE) / Hykeem Williams (WR)",
@@ -6865,7 +6865,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Ashton Daniels Execution",
       "ground": "Kam Davis & Micahi Danzy Speed Ground Attack",
-      "defense": "Adam Fuller Havoc Defense",
+      "defense": "Tony White 3-3-5 Defense & Havoc",
       "turnover": "Doak Campbell Turnover Luck",
       "crowd": "Doak Campbell War Chant Roar"
     },
@@ -7978,7 +7978,7 @@ var TEAMS_DATABASE = {
     "secondaryColor": "#000000",
     "accentColor": "#CC0000",
     "headCoach": "Joey McGuire",
-    "defensiveCoordinator": "Tim DeRuyter",
+    "defensiveCoordinator": "Shiel Wood",
     "offensiveCoordinator": "Mack Leftwich",
     "confirmedStarterQb": "Will Hammond",
     "starPlayer": "Micah Hudson (WR) / Cameron Dickey (RB) / Will Hammond (QB)",
@@ -8002,7 +8002,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Will Hammond Execution",
       "ground": "Cameron Dickey Ground Attack",
-      "defense": "Tim DeRuyter Havoc Defense",
+      "defense": "Shiel Wood Defense & Turnover Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "The Jones 60k Red Raider Crowd"
     },
@@ -8356,9 +8356,9 @@ var TEAMS_DATABASE = {
     "apPoints": "375 PTS",
     "playoffContenderRank": 21,
     "themeClass": "theme-utah",
-    "headCoach": "Kyle Whittingham",
-    "offensiveCoordinator": "Jason Beck",
-    "defensiveCoordinator": "Morgan Scalley",
+    "headCoach": "Morgan Scalley",
+    "offensiveCoordinator": "Kevin McGiven",
+    "defensiveCoordinator": "Colton Swan",
     "confirmedStarterQb": "Isaac Wilson",
     "starPlayer": "Isaac Wilson (QB) / Mike Washington (RB) / Dorian Singer (WR)",
     "secondaryStar": "Lander Barton (LB) / Van Fillinger (DE)",
@@ -8377,7 +8377,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Isaac Wilson Deep Accuracy",
       "ground": "Mike Washington & Utes Power Ground Attack",
-      "defense": "Morgan Scalley Havoc & Blitz Pressure",
+      "defense": "Colton Swan Swarm Defense & Havoc",
       "turnover": "Turnover Luck & Strip Sacks",
       "crowd": "Rice-Eccles Altitude & Noise"
     },
