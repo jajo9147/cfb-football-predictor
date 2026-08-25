@@ -6556,17 +6556,20 @@ function deleteSavedBracket(bracketId, e) {
     e.stopPropagation();
     e.preventDefault();
   }
-  const brackets = getSavedBrackets();
-  const target = brackets.find(b => b.id === bracketId);
-  if (!target) return;
+  const myBrackets = getSavedBrackets();
+  const target = myBrackets.find(b => b.id === bracketId);
+  if (!target) {
+    showCustomToast('⚠️ You can only delete brackets from "My Saved Brackets".');
+    return;
+  }
 
   if (target.id === 'bracket_baseline_chalk_2026') {
     showCustomToast('⚠️ Cannot delete the official model baseline chalk!');
     return;
   }
 
-  if (confirm(`Are you sure you want to delete "${target.name}"?`)) {
-    const updated = brackets.filter(b => b.id !== bracketId);
+  if (confirm(`Are you sure you want to delete your saved bracket "${target.name}"?`)) {
+    const updated = myBrackets.filter(b => b.id !== bracketId);
     try {
       localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(updated));
     } catch (e) {}
@@ -6933,8 +6936,8 @@ function renderSavedBracketsVault() {
         <button class="bracket-action-btn share-btn" onclick="copyBracketShareLink('${b.id}', event)" title="Copy Shareable Link">
           <i class="fa-solid fa-link"></i> Link
         </button>
-        ${!isBaseline && b.creator !== 'Gridiron Oracle AI' ? `
-          <button class="bracket-action-btn delete-btn" onclick="deleteSavedBracket('${b.id}', event)" title="Delete Bracket">
+        ${!isCommunity && !isBaseline && b.id !== 'bracket_baseline_chalk_2026' ? `
+          <button class="bracket-action-btn delete-btn" onclick="deleteSavedBracket('${b.id}', event)" title="Delete your saved bracket">
             <i class="fa-solid fa-trash-can"></i>
           </button>
         ` : ''}
