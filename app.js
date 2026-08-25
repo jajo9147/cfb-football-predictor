@@ -6932,6 +6932,11 @@ function renderSavedBracketsVault() {
         <button class="bracket-action-btn share-btn" onclick="copyBracketShareLink('${b.id}', event)" title="Copy Shareable Link">
           <i class="fa-solid fa-link"></i> Link
         </button>
+        ${isCommunity && !isMine ? `
+          <button class="bracket-action-btn" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);" onclick="copyCommunityBracketToMine('${b.id}', event)" title="Save a copy directly into My Saved Brackets">
+            <i class="fa-solid fa-bookmark"></i> Save
+          </button>
+        ` : ''}
         ${isMine ? `
           <button class="bracket-action-btn delete-btn" onclick="deleteSavedBracket('${b.id}', event)" title="Delete your saved bracket">
             <i class="fa-solid fa-trash-can"></i>
@@ -6942,6 +6947,31 @@ function renderSavedBracketsVault() {
     grid.appendChild(card);
   });
 }
+
+function copyCommunityBracketToMine(bracketId, e) {
+  if (e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  const allComm = getCommunityBrackets();
+  const target = allComm.find(b => b.id === bracketId);
+  if (!target) return;
+
+  const myBrackets = getSavedBrackets();
+  const clone = JSON.parse(JSON.stringify(target));
+  clone.id = `bracket_my_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
+  clone.createdAt = new Date().toISOString();
+  clone.mode = 'custom';
+  
+  myBrackets.unshift(clone);
+  try {
+    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
+  } catch (err) {}
+
+  showCustomToast(`⭐ Added "${clone.name}" to My Saved Brackets!`);
+  renderSavedBracketsVault();
+}
+window.copyCommunityBracketToMine = copyCommunityBracketToMine;
 
 
 function openSaveBracketModal(fromVault = false) {
