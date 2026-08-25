@@ -3458,18 +3458,27 @@ function initHypeCardExport() {
   const downloadBtn = document.getElementById('downloadHypeCardBtn');
   const copyBtn = document.getElementById('copyHypeCardBtn');
 
-  if (openBtn) openBtn.addEventListener('click', generateHypeCard);
-  if (modalExportBtn) modalExportBtn.addEventListener('click', () => {
-    document.getElementById('simModal').classList.remove('open');
-    if (state.activeModalGame) {
-      generateGameHypeCard(state.activeModalGame);
-    } else {
-      generateHypeCard();
-    }
-  });
-  if (closeBtn) closeBtn.addEventListener('click', () => {
-    document.getElementById('hypeCardModal').classList.remove('open');
-  });
+  if (openBtn) {
+    openBtn.onclick = (e) => {
+      e.stopPropagation();
+      openHypeCardModal();
+    };
+  }
+  if (modalExportBtn) {
+    modalExportBtn.onclick = () => {
+      document.getElementById('simModal').classList.remove('open');
+      if (state.activeModalGame) {
+        generateGameHypeCard(state.activeModalGame);
+      } else {
+        generateHypeCard();
+      }
+    };
+  }
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      document.getElementById('hypeCardModal').classList.remove('open');
+    };
+  }
 
   if (downloadBtn) {
     downloadBtn.addEventListener('click', () => {
@@ -6296,12 +6305,9 @@ window.switchPlayoffRound = function(roundKey) {
 window.switchMobilePlayoffRound = window.switchPlayoffRound;
 
 window.openHypeCardModal = function() {
-  const currentTeam = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
-  const nextGame = (currentTeam.schedule && currentTeam.schedule[0]) ? currentTeam.schedule[0] : null;
-  if (nextGame && typeof generateGameHypeCard === 'function') {
-    generateGameHypeCard(currentTeam, nextGame);
-  } else {
-    showToast('Exporting Hype Card...');
+  state.activeModalGame = null;
+  if (typeof generateHypeCard === 'function') {
+    generateHypeCard();
   }
 };
 
