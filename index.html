@@ -37,20 +37,28 @@
   <meta http-equiv="Expires" content="0">
 
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        for (let registration of registrations) {
-          registration.unregister();
+    (function() {
+      const CURRENT_VERSION = '20260825_500';
+      try {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for (let registration of registrations) registration.unregister();
+          });
         }
-      });
-    }
-    if ('caches' in window) {
-      caches.keys().then(function(names) {
-        for (let name of names) caches.delete(name);
-      });
-    }
+        if ('caches' in window) {
+          caches.keys().then(function(names) {
+            for (let name of names) caches.delete(name);
+          });
+        }
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('v') !== CURRENT_VERSION) {
+          urlParams.set('v', CURRENT_VERSION);
+          window.location.replace(window.location.pathname + '?' + urlParams.toString() + window.location.hash);
+        }
+      } catch (e) {}
+    })();
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260825_490">
+  <link rel="stylesheet" href="styles.css?t=20260825_500">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1052,7 +1060,7 @@
   </nav>
 
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260825_490"></script>
-  <script src="app.js?t=20260825_490"></script>
+  <script src="data/teams.js?t=20260825_500"></script>
+  <script src="app.js?t=20260825_500"></script>
 </body>
 </html>
