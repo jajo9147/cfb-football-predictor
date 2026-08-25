@@ -10183,8 +10183,8 @@ var TEAMS_DATABASE = {
     "offensiveCoordinator": "Slade Nagle",
     "defensiveCoordinator": "Austin Armstrong",
     "confirmedStarterQb": "Zeon Chriss",
-    "starPlayer": "Zeon Chriss (QB) / Re'Shaun Sanford II (RB) / Stephon Johnson (WR)",
-    "secondaryStar": "Stacy Sneed (RB) / Joseph Manjack IV (WR) / AJ Haulcy (DB)",
+    "starPlayer": "Makhi Hughes (RB) / Zeon Chriss (QB) / Stephon Johnson (WR)",
+    "secondaryStar": "Re'Shaun Sanford II (RB) / Joseph Manjack IV (WR) / AJ Haulcy (DB)",
     "stadium": "TDECU Stadium",
     "stadiumCapacity": "40,000",
     "stadiumCity": "Houston, TX",
@@ -10199,7 +10199,7 @@ var TEAMS_DATABASE = {
     },
     "sliderLabels": {
       "qb": "Zeon Chriss Dual-Threat Accuracy",
-      "ground": "Re'Shaun Sanford & Stacy Sneed Ground Attack",
+      "ground": "Makhi Hughes Bellcow Power Ground Attack",
       "defense": "Austin Armstrong 3rd-Down Havoc & Pressure",
       "turnover": "Turnover Margin & Red Zone Stops",
       "crowd": "TDECU Stadium Houston Heat & Noise"
@@ -10228,8 +10228,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 45,
         "projScoreOpp": 10,
         "scoutReport": {
-          "xFactor": "Fast offensive start and establishing ground game dominance.",
-          "keyMatchup": "Re'Shaun Sanford II vs SFA front seven.",
+          "xFactor": "Fast offensive start and Makhi Hughes establishing bellcow ground dominance.",
+          "keyMatchup": "Makhi Hughes vs SFA front seven.",
           "summary": "Season opener in Houston under Willie Fritz."
         }
       },
@@ -10368,8 +10368,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 33,
         "projScoreOpp": 28,
         "scoutReport": {
-          "xFactor": "Controlling the clock with power running in Lawrence.",
-          "keyMatchup": "Re'Shaun Sanford II vs Kansas linebackers.",
+          "xFactor": "Controlling the clock with Makhi Hughes power running in Lawrence.",
+          "keyMatchup": "Makhi Hughes vs Kansas linebackers.",
           "summary": "Midseason Big 12 road contest."
         }
       },
@@ -10481,7 +10481,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Forcing takeaways and executing in the red zone.",
-          "keyMatchup": "Stacy Sneed vs Cincinnati defensive tackles.",
+          "keyMatchup": "Makhi Hughes vs Cincinnati defensive front.",
           "summary": "November home game at TDECU Stadium."
         }
       },
