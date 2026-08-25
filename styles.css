@@ -366,6 +366,17 @@ body.theme-louisville {
   --color-bg-surface: #1C0808;
 }
 
+/* 30. Colorado Buffaloes */
+body.theme-colorado {
+  --color-brand-primary: #CFB87C;
+  --color-brand-secondary: #000000;
+  --color-brand-accent: #CFB87C;
+  --color-brand-glow: rgba(207, 184, 124, 0.55);
+  --color-brand-border: rgba(207, 184, 124, 0.45);
+  --color-bg-base: #0B0A08;
+  --color-bg-surface: #171510;
+}
+
 /* ==========================================================================
    BASE STYLES & LAYOUT
    ========================================================================== */
