@@ -2,7 +2,7 @@
   "season": 2026,
   "snapshotId": "2026_week_34_prekick",
   "name": "Week 34 Pre-Kickoff Projections",
-  "timestamp": "2026-08-25T14:05:28.439969+00:00",
+  "timestamp": "2026-08-25T14:18:58.730431+00:00",
   "totalTeams": 29,
   "teams": [
     {
@@ -858,7 +858,7 @@
       "baseSpRating": 25.4,
       "conference": "SEC",
       "headCoach": "Kalen DeBoer",
-      "starterQb": "Keelon Russell",
+      "starterQb": "Keelon Russell / Ty Simpson",
       "totalGames": 12,
       "schedule": [
         {
@@ -1195,8 +1195,8 @@
       "apRank": "#18 AP",
       "baseSpRating": 26.2,
       "conference": "Big Ten",
-      "headCoach": "Matt Campbell",
-      "starterQb": "Rocco Becht",
+      "headCoach": "James Franklin",
+      "starterQb": "Ethan Grunkemeyer / Jaxon Smolik",
       "totalGames": 12,
       "schedule": [
         {
@@ -2041,7 +2041,7 @@
       "baseSpRating": 27.1,
       "conference": "ACC",
       "headCoach": "Mario Cristobal",
-      "starterQb": "Darian Mensah",
+      "starterQb": "Darian Mensah / Emory Williams",
       "totalGames": 12,
       "schedule": [
         {
@@ -2379,7 +2379,7 @@
       "baseSpRating": 25.8,
       "conference": "SEC",
       "headCoach": "Lane Kiffin",
-      "starterQb": "Trinidad Chambliss",
+      "starterQb": "Trinidad Chambliss / Austin Simmons",
       "totalGames": 12,
       "schedule": [
         {
@@ -2548,7 +2548,7 @@
       "baseSpRating": 25.6,
       "conference": "SEC",
       "headCoach": "Brent Venables",
-      "starterQb": "John Mateer",
+      "starterQb": "John Mateer / Michael Hawkins Jr.",
       "totalGames": 12,
       "schedule": [
         {
@@ -2717,7 +2717,7 @@
       "baseSpRating": 16.5,
       "conference": "Mountain West",
       "headCoach": "Spencer Danielson",
-      "starterQb": "Maddux Madsen",
+      "starterQb": "Maddux Madsen / Malachi Nelson",
       "totalGames": 12,
       "schedule": [
         {
@@ -2886,7 +2886,7 @@
       "baseSpRating": 23.8,
       "conference": "Big Ten",
       "headCoach": "Lincoln Riley",
-      "starterQb": "Jayden Maiava",
+      "starterQb": "Jayden Maiava / Husan Longstreet",
       "totalGames": 12,
       "schedule": [
         {
@@ -3055,7 +3055,7 @@
       "baseSpRating": 23.4,
       "conference": "ACC",
       "headCoach": "Mike Norvell",
-      "starterQb": "Ashton Daniels",
+      "starterQb": "Ashton Daniels / Luke Kromenhoek",
       "totalGames": 12,
       "schedule": [
         {
@@ -4576,7 +4576,7 @@
       "baseSpRating": 21.0,
       "conference": "Big 12",
       "headCoach": "Willie Fritz",
-      "starterQb": "Zeon Chriss / Donovan Smith",
+      "starterQb": "Zeon Chriss",
       "totalGames": 12,
       "schedule": [
         {

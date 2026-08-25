@@ -1971,8 +1971,8 @@ var TEAMS_DATABASE = {
     "headCoach": "Kalen DeBoer",
     "defensiveCoordinator": "Kane Wommack",
     "offensiveCoordinator": "Nick Sheridan",
-    "starPlayer": "Ryan Williams (WR) / Keelon Russell (QB) / Daniel Hill (RB)",
-    "secondaryStar": "Daniel Hill (RB) / Austin Mack (QB)",
+    "starPlayer": "Keelon Russell (QB) / Ryan Williams (WR) / Justice Haynes (RB)",
+    "secondaryStar": "Richard Young (RB) / Jihaad Campbell (LB) / LT Overton (DE)",
     "stadium": "Bryant-Denny Stadium",
     "stadiumCity": "Tuscaloosa, AL",
     "stadiumCapacity": "100,077",
@@ -1988,8 +1988,8 @@ var TEAMS_DATABASE = {
     "baseSpRating": 25.4,
     "playoffContenderRank": 13,
     "sliderLabels": {
-      "qb": "Keelon Russell Execution",
-      "ground": "Daniel Hill Ground Attack",
+      "qb": "Keelon Russell & Nick Sheridan Pass Attack",
+      "ground": "Justice Haynes & Richard Young Ground Attack",
       "defense": "Kane Wommack Swarm Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Bryant-Denny 100k Crimson Roar"
@@ -2328,7 +2328,7 @@ var TEAMS_DATABASE = {
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png",
     "badgeText": "BAMA",
-    "confirmedStarterQb": "Keelon Russell"
+    "confirmedStarterQb": "Keelon Russell / Ty Simpson"
   },
   "oregon": {
     "id": "oregon",
@@ -2709,11 +2709,11 @@ var TEAMS_DATABASE = {
     "conference": "Big Ten",
     "apRank": "#18 AP",
     "apPoints": "540 PTS",
-    "headCoach": "Matt Campbell",
-    "defensiveCoordinator": "D'Anton Lynn",
+    "headCoach": "James Franklin",
+    "defensiveCoordinator": "Tom Allen",
     "offensiveCoordinator": "Andy Kotelnicki",
-    "starPlayer": "Rocco Becht (QB) / Quinton Martin Jr (RB) / James Peoples (RB)",
-    "secondaryStar": "Carson Hansen (RB) / James Peoples (RB)",
+    "starPlayer": "Nicholas Singleton (RB) / Kaytron Allen (RB)",
+    "secondaryStar": "Tony Rojas (LB) / Julian Fleming successor",
     "stadium": "Beaver Stadium",
     "stadiumCity": "University Park, PA",
     "stadiumCapacity": "106,572",
@@ -2731,7 +2731,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Rocco Becht Execution",
       "ground": "Quinton Martin Jr Ground Attack",
-      "defense": "Tom Allen 'Bull' Havoc Defense",
+      "defense": "Tom Allen Havoc & Blitz Package",
       "turnover": "Turnover Margin Luck",
       "crowd": "Beaver Stadium 107k White Out"
     },
@@ -3066,7 +3066,7 @@ var TEAMS_DATABASE = {
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/213.png",
     "badgeText": "PSU",
-    "confirmedStarterQb": "Rocco Becht"
+    "confirmedStarterQb": "Ethan Grunkemeyer / Jaxon Smolik"
   },
   "notredame": {
     "id": "notredame",
@@ -4564,8 +4564,8 @@ var TEAMS_DATABASE = {
     "headCoach": "Mario Cristobal",
     "defensiveCoordinator": "Corey Hetherman",
     "offensiveCoordinator": "Shannon Dawson",
-    "starPlayer": "Darian Mensah (QB) / Mark Fletcher Jr (RB) / Jordan Lyle (RB)",
-    "secondaryStar": "Mark Fletcher Jr. (RB) / Rueben Bain Jr. (DE)",
+    "starPlayer": "Darian Mensah (QB) / Mark Fletcher Jr. (RB) / Jordan Lyle (RB)",
+    "secondaryStar": "Rueben Bain Jr. (DE) / Isaiah Horton (WR)",
     "stadium": "Hard Rock Stadium",
     "stadiumCity": "Miami Gardens, FL",
     "stadiumCapacity": "65,326",
@@ -4583,7 +4583,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Darian Mensah Execution",
       "ground": "Mark Fletcher Jr Ground Attack",
-      "defense": "Lance Guidry Blitz Pressure",
+      "defense": "Corey Hetherman Havoc & Edge Pressure",
       "turnover": "Turnover Margin Luck",
       "crowd": "Hard Rock Stadium 65k Turnout"
     },
@@ -4919,7 +4919,7 @@ var TEAMS_DATABASE = {
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png",
     "badgeText": "MIA",
-    "confirmedStarterQb": "Darian Mensah"
+    "confirmedStarterQb": "Darian Mensah / Emory Williams"
   },
   "texasam": {
     "id": "texasam",
@@ -4931,10 +4931,10 @@ var TEAMS_DATABASE = {
     "apRank": "#8 AP",
     "apPoints": "1,260 PTS",
     "headCoach": "Mike Elko",
-    "defensiveCoordinator": "Lyle Hemphill",
+    "defensiveCoordinator": "Jay Bateman",
     "offensiveCoordinator": "Collin Klein",
     "starPlayer": "Marcel Reed (QB) / Rueben Owens II (RB) / Mario Craver (WR)",
-    "secondaryStar": "Rueben Owens II (RB) / Jamarion Morrow (RB)",
+    "secondaryStar": "Le'Veon Moss (RB) / Cashius Howell (EDGE)",
     "stadium": "Kyle Field (Home of the 12th Man)",
     "stadiumCity": "College Station, TX",
     "stadiumCapacity": "102,733",
@@ -4952,7 +4952,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Marcel Reed Execution",
       "ground": "Rueben Owens II Ground Attack",
-      "defense": "Mike Elko Wrecking Crew Defense",
+      "defense": "Mike Elko & Jay Bateman Wrecking Crew Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Kyle Field 108k 12th Man Roar"
     },
@@ -5303,10 +5303,10 @@ var TEAMS_DATABASE = {
     "apRank": "#9 AP",
     "apPoints": "1,180 PTS",
     "headCoach": "Lane Kiffin",
-    "defensiveCoordinator": "Bryan Brown",
-    "offensiveCoordinator": "Charlie Weis Jr",
-    "starPlayer": "Trinidad Chambliss (QB) / Kewan Lacy (RB) / Caleb Cunningham (WR)",
-    "secondaryStar": "Kewan Lacy (RB) / Suntarine Perkins (LB)",
+    "defensiveCoordinator": "Pete Golding",
+    "offensiveCoordinator": "Charlie Weis Jr.",
+    "starPlayer": "Trinidad Chambliss (QB) / Kewan Lacy (RB) / Cayden Lee (WR)",
+    "secondaryStar": "Suntarine Perkins (LB) / Ayden Williams (WR)",
     "stadium": "Vaught-Hemingway Stadium",
     "stadiumCity": "Oxford, MS",
     "stadiumCapacity": "64,038",
@@ -5324,7 +5324,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Trinidad Chambliss Execution",
       "ground": "Kewan Lacy Ground Attack",
-      "defense": "Pete Golding / Brown Havoc Front",
+      "defense": "Pete Golding Havoc Front",
       "turnover": "Turnover Margin Luck",
       "crowd": "The Grove & Vaught-Hemingway 64k Roar"
     },
@@ -5661,7 +5661,7 @@ var TEAMS_DATABASE = {
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png",
     "badgeText": "MISS",
-    "confirmedStarterQb": "Trinidad Chambliss"
+    "confirmedStarterQb": "Trinidad Chambliss / Austin Simmons"
   },
   "oklahoma": {
     "id": "oklahoma",
@@ -5673,10 +5673,10 @@ var TEAMS_DATABASE = {
     "apRank": "#10 AP",
     "apPoints": "1,140 PTS",
     "headCoach": "Brent Venables",
-    "defensiveCoordinator": "Todd Bates",
+    "defensiveCoordinator": "Zac Alley",
     "offensiveCoordinator": "Joe Jon Finley",
-    "starPlayer": "John Mateer (QB) / Xavier Robinson (RB) / Isaiah Sategna III (WR)",
-    "secondaryStar": "Lloyd Avant (RB) / Xavier Robinson (RB)",
+    "starPlayer": "John Mateer (QB) / Xavier Robinson (RB) / Isaiah Sategna (WR)",
+    "secondaryStar": "Kip Lewis (LB) / R Mason Thomas (DE)",
     "stadium": "Gaylord Family Oklahoma Memorial Stadium",
     "stadiumCity": "Norman, OK",
     "stadiumCapacity": "86,112",
@@ -6032,7 +6032,7 @@ var TEAMS_DATABASE = {
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/201.png",
     "badgeText": "OU",
-    "confirmedStarterQb": "John Mateer"
+    "confirmedStarterQb": "John Mateer / Michael Hawkins Jr."
   },
   "boisestate": {
     "id": "boisestate",
@@ -6046,9 +6046,9 @@ var TEAMS_DATABASE = {
     "headCoach": "Spencer Danielson",
     "offensiveCoordinator": "Nate Potter",
     "defensiveCoordinator": "Erik Chinander",
-    "confirmedStarterQb": "Maddux Madsen",
+    "confirmedStarterQb": "Maddux Madsen / Malachi Nelson",
     "starPlayer": "Maddux Madsen (QB) / Sire Gaines (RB) / Dylan Riley (RB)",
-    "secondaryStar": "Sire Gaines (RB) / Prince Strachan (WR)",
+    "secondaryStar": "Prince Strachan (WR) / Ahmed Hassanein (DE)",
     "stadium": "Albertsons Stadium",
     "stadiumCity": "Boise, ID",
     "stadiumCapacity": "36,387",
@@ -6062,8 +6062,8 @@ var TEAMS_DATABASE = {
     },
     "sliderLabels": {
       "qb": "Maddux Madsen Execution",
-      "ground": "Sire Gaines & Dylan Riley Attack",
-      "defense": "Bronco Havoc Defense",
+      "ground": "Sire Gaines & Dylan Riley Ground Attack",
+      "defense": "Erik Chinander Blue Turf Havoc Defense",
       "turnover": "Blue Turf Turnover Luck",
       "crowd": "Albertsons Stadium Blue Turf Roar"
     },
@@ -6421,10 +6421,10 @@ var TEAMS_DATABASE = {
     "apPoints": "740 pts",
     "headCoach": "Lincoln Riley",
     "offensiveCoordinator": "Josh Henson",
-    "defensiveCoordinator": "Gary Patterson",
-    "confirmedStarterQb": "Jayden Maiava",
-    "starPlayer": "Jayden Maiava (QB) / Waymond Jordan (RB) / Tanook Hines (WR)",
-    "secondaryStar": "Waymond Jordan (RB) / Makai Lemon (WR)",
+    "defensiveCoordinator": "D'Anton Lynn",
+    "confirmedStarterQb": "Jayden Maiava / Husan Longstreet",
+    "starPlayer": "Jayden Maiava (QB) / Quinten Joyner (RB) / Makai Lemon (WR)",
+    "secondaryStar": "Waymond Jordan (RB) / Kamari Ramsey (S)",
     "stadium": "Los Angeles Memorial Coliseum",
     "stadiumCity": "Los Angeles, CA",
     "stadiumCapacity": "77,500",
@@ -6796,11 +6796,11 @@ var TEAMS_DATABASE = {
     "apRank": "RV",
     "apPoints": "718 pts",
     "headCoach": "Mike Norvell",
-    "offensiveCoordinator": "Tim Harris Jr",
-    "defensiveCoordinator": "Tony White",
-    "confirmedStarterQb": "Ashton Daniels",
-    "starPlayer": "Ashton Daniels (QB) / Landen Thomas (TE) / Micahi Danzy (WR)",
-    "secondaryStar": "Kam Davis (RB) / Hykeem Williams (WR)",
+    "offensiveCoordinator": "Alex Atkins / Tim Harris Jr.",
+    "defensiveCoordinator": "Adam Fuller",
+    "confirmedStarterQb": "Ashton Daniels / Luke Kromenhoek",
+    "starPlayer": "Kam Davis (RB) / Micahi Danzy (RB/WR) / Landen Thomas (TE)",
+    "secondaryStar": "Patrick Payton (DE) / Hykeem Williams (WR)",
     "stadium": "Doak Campbell Stadium",
     "stadiumCity": "Tallahassee, FL",
     "stadiumCapacity": "79,560",
@@ -6814,7 +6814,7 @@ var TEAMS_DATABASE = {
     },
     "sliderLabels": {
       "qb": "Ashton Daniels Execution",
-      "ground": "Micahi Danzy Ground Attack",
+      "ground": "Kam Davis & Micahi Danzy Speed Ground Attack",
       "defense": "Adam Fuller Havoc Defense",
       "turnover": "Doak Campbell Turnover Luck",
       "crowd": "Doak Campbell War Chant Roar"
@@ -7173,10 +7173,10 @@ var TEAMS_DATABASE = {
     "apPoints": "620 pts",
     "headCoach": "Dabo Swinney",
     "offensiveCoordinator": "Garrett Riley",
-    "defensiveCoordinator": "Tom Allen",
+    "defensiveCoordinator": "Wes Goodwin",
     "confirmedStarterQb": "Christopher Vizzina",
-    "starPlayer": "Christopher Vizzina (QB) / T.J. Moore (WR) / Bryant Wesco Jr (WR)",
-    "secondaryStar": "David Eziomume (RB) / TJ Moore (WR)",
+    "starPlayer": "Christopher Vizzina (QB) / Bryant Wesco Jr. (WR) / T.J. Moore (WR)",
+    "secondaryStar": "David Eziomume (RB) / Peter Woods (DT/DE) / Sammy Brown (LB)",
     "stadium": "Memorial Stadium (Death Valley)",
     "stadiumCity": "Clemson, SC",
     "stadiumCapacity": "81,500",
@@ -7190,7 +7190,7 @@ var TEAMS_DATABASE = {
     },
     "sliderLabels": {
       "qb": "Christopher Vizzina Execution",
-      "ground": "Gideon Davidson Ground Attack",
+      "ground": "David Eziomume Power Ground Attack",
       "defense": "Wes Goodwin Death Valley Havoc Defense",
       "turnover": "Memorial Stadium Turnover Luck",
       "crowd": "Memorial Stadium (Death Valley) Roar"
@@ -7549,10 +7549,10 @@ var TEAMS_DATABASE = {
     "apPoints": "482 pts",
     "headCoach": "Rhett Lashlee",
     "offensiveCoordinator": "Casey Woods",
-    "defensiveCoordinator": "Maurice Crum Jr",
+    "defensiveCoordinator": "Scott Symons",
     "confirmedStarterQb": "Kevin Jennings",
-    "starPlayer": "Kevin Jennings (QB) / Kendrick Raphael (RB) / Jalen Hale (WR)",
-    "secondaryStar": "LJ Johnson (RB) / Romello Brinson (WR)",
+    "starPlayer": "Kevin Jennings (QB) / Brashard Smith (RB) / Romello Brinson (WR)",
+    "secondaryStar": "LJ Johnson Jr. (RB) / Kobe Wilson (LB)",
     "stadium": "Gerald J. Ford Stadium",
     "stadiumCity": "Dallas, TX",
     "stadiumCapacity": "32,000",
@@ -7566,7 +7566,7 @@ var TEAMS_DATABASE = {
     },
     "sliderLabels": {
       "qb": "Kevin Jennings Execution",
-      "ground": "Kendrick Raphael Ground Attack",
+      "ground": "Brashard Smith & LJ Johnson Explosive Ground Attack",
       "defense": "Scott Symons Havoc Defense",
       "turnover": "Ford Stadium Turnover Luck",
       "crowd": "Gerald J. Ford Stadium Roar"
@@ -7926,11 +7926,11 @@ var TEAMS_DATABASE = {
     "secondaryColor": "#000000",
     "accentColor": "#CC0000",
     "headCoach": "Joey McGuire",
-    "defensiveCoordinator": "Shiel Wood",
+    "defensiveCoordinator": "Tim DeRuyter",
     "offensiveCoordinator": "Mack Leftwich",
     "confirmedStarterQb": "Will Hammond",
     "starPlayer": "Micah Hudson (WR) / Cameron Dickey (RB) / Will Hammond (QB)",
-    "secondaryStar": "Cameron Dickey (RB) / Micah Hudson (WR)",
+    "secondaryStar": "J'Koby Williams (RB) / Jacob Rodriguez (LB)",
     "stadium": "Jones AT&T Stadium",
     "stadiumCapacity": "60,454",
     "stadiumCity": "Lubbock, TX",
@@ -7950,7 +7950,7 @@ var TEAMS_DATABASE = {
     "sliderLabels": {
       "qb": "Will Hammond Execution",
       "ground": "Cameron Dickey Ground Attack",
-      "defense": "Shiel Wood Havoc Defense",
+      "defense": "Tim DeRuyter Havoc Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "The Jones 60k Red Raider Crowd"
     },
@@ -8308,8 +8308,8 @@ var TEAMS_DATABASE = {
     "offensiveCoordinator": "Jason Beck",
     "defensiveCoordinator": "Morgan Scalley",
     "confirmedStarterQb": "Isaac Wilson",
-    "starPlayer": "Isaac Wilson (QB) / Devon Dampier (QB/ATH)",
-    "secondaryStar": "Mike Washington (RB) / Dorian Singer (WR)",
+    "starPlayer": "Isaac Wilson (QB) / Mike Washington (RB) / Dorian Singer (WR)",
+    "secondaryStar": "Lander Barton (LB) / Van Fillinger (DE)",
     "stadium": "Rice-Eccles Stadium",
     "stadiumCapacity": "51,444",
     "stadiumCity": "Salt Lake City, UT",
@@ -8324,7 +8324,7 @@ var TEAMS_DATABASE = {
     },
     "sliderLabels": {
       "qb": "Isaac Wilson Deep Accuracy",
-      "ground": "Utes Physical Power Ground Game",
+      "ground": "Mike Washington & Utes Power Ground Attack",
       "defense": "Morgan Scalley Havoc & Blitz Pressure",
       "turnover": "Turnover Luck & Strip Sacks",
       "crowd": "Rice-Eccles Altitude & Noise"
@@ -8683,8 +8683,8 @@ var TEAMS_DATABASE = {
     "offensiveCoordinator": "Tim Lester",
     "defensiveCoordinator": "Phil Parker",
     "confirmedStarterQb": "Marco Lainez / Jackson Stratton",
-    "starPlayer": "Kaleb Johnson (RB) / Aaron Graves (DT)",
-    "secondaryStar": "Xavier Nwankpa (DB) / Luke Lachey (TE)",
+    "starPlayer": "Kamari Moulton (RB) / Aaron Graves (DT)",
+    "secondaryStar": "Jaziun Patterson (RB) / Luke Lachey (TE) / Xavier Nwankpa (DB)",
     "stadium": "Kinnick Stadium",
     "stadiumCapacity": "69,250",
     "stadiumCity": "Iowa City, IA",
@@ -8699,7 +8699,7 @@ var TEAMS_DATABASE = {
     },
     "sliderLabels": {
       "qb": "QB Game Management & Accuracy",
-      "ground": "Kaleb Johnson Power Zone Rush",
+      "ground": "Kamari Moulton & Jaziun Patterson Power Zone Rush",
       "defense": "Phil Parker Lockdown Defense & Pick-6 Havoc",
       "turnover": "Turnover Margin & Field Position Magic",
       "crowd": "Kinnick Stadium Wave & Crowd Roar"
@@ -10180,11 +10180,11 @@ var TEAMS_DATABASE = {
     "playoffContenderRank": 23,
     "themeClass": "theme-houston",
     "headCoach": "Willie Fritz",
-    "offensiveCoordinator": "Kevin Barbay",
-    "defensiveCoordinator": "Doug Belk",
-    "confirmedStarterQb": "Zeon Chriss / Donovan Smith",
-    "starPlayer": "Parker Jenkins (RB) / Stephon Johnson (WR)",
-    "secondaryStar": "Maliq Carr (TE) / AJ Haulcy (DB)",
+    "offensiveCoordinator": "Slade Nagle",
+    "defensiveCoordinator": "Austin Armstrong",
+    "confirmedStarterQb": "Zeon Chriss",
+    "starPlayer": "Zeon Chriss (QB) / Re'Shaun Sanford II (RB) / Stephon Johnson (WR)",
+    "secondaryStar": "Stacy Sneed (RB) / Joseph Manjack IV (WR) / AJ Haulcy (DB)",
     "stadium": "TDECU Stadium",
     "stadiumCapacity": "40,000",
     "stadiumCity": "Houston, TX",
@@ -10198,9 +10198,9 @@ var TEAMS_DATABASE = {
       "border": "rgba(200, 16, 46, 0.45)"
     },
     "sliderLabels": {
-      "qb": "Zeon Chriss Dual-Threat Speed",
-      "ground": "Parker Jenkins Zone Stretch Rush",
-      "defense": "Doug Belk 3rd Down Havoc & Blitz",
+      "qb": "Zeon Chriss Dual-Threat Accuracy",
+      "ground": "Re'Shaun Sanford & Stacy Sneed Ground Attack",
+      "defense": "Austin Armstrong 3rd-Down Havoc & Pressure",
       "turnover": "Turnover Margin & Red Zone Stops",
       "crowd": "TDECU Stadium Houston Heat & Noise"
     },
@@ -10229,7 +10229,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Fast offensive start and establishing ground game dominance.",
-          "keyMatchup": "Parker Jenkins vs SFA front seven.",
+          "keyMatchup": "Re'Shaun Sanford II vs SFA front seven.",
           "summary": "Season opener in Houston under Willie Fritz."
         }
       },
@@ -10369,7 +10369,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Controlling the clock with power running in Lawrence.",
-          "keyMatchup": "Parker Jenkins vs Kansas linebackers.",
+          "keyMatchup": "Re'Shaun Sanford II vs Kansas linebackers.",
           "summary": "Midseason Big 12 road contest."
         }
       },
@@ -10397,7 +10397,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 34,
         "scoutReport": {
           "xFactor": "Containing Noah Fifita's intermediate passing game in Tucson.",
-          "keyMatchup": "Doug Belk defense vs Arizona wideouts.",
+          "keyMatchup": "Austin Armstrong defense vs Arizona wideouts.",
           "summary": "October road test in Arizona."
         }
       },
@@ -10481,7 +10481,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Forcing takeaways and executing in the red zone.",
-          "keyMatchup": "Parker Jenkins vs Cincinnati defensive tackles.",
+          "keyMatchup": "Stacy Sneed vs Cincinnati defensive tackles.",
           "summary": "November home game at TDECU Stadium."
         }
       },
