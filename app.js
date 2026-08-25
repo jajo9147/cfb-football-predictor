@@ -3430,13 +3430,20 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
         </div>
       </div>
 
-      <div style="margin-top: auto; padding: 0.75rem; background: rgba(0, 0, 0, 0.5); border-radius: var(--radius-sm); border: 1px solid rgba(255, 215, 0, 0.3); text-align: center;">
-        <div style="font-size: 0.68rem; font-family: var(--font-mono); color: #FFD700; font-weight: 800; text-transform: uppercase;">
-          👑 2026-27 NATIONAL CHAMPIONS
+      <div style="margin-top: auto; padding: 0.85rem 0.75rem; background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(245, 158, 11, 0.12)); border-radius: var(--radius-sm); border: 1px solid rgba(255, 215, 0, 0.35); text-align: center; display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+        <div>
+          <div style="font-size: 0.68rem; font-family: var(--font-mono); color: #FFD700; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">
+            👑 2026-27 NATIONAL CHAMPION
+          </div>
+          <div style="font-size: 1.2rem; font-weight: 900; color: #FFFFFF; margin-top: 2px;">
+            ${nattyChamp?.name || 'CHAMPION'}
+          </div>
         </div>
-        <div style="font-size: 1.15rem; font-weight: 900; color: #FFFFFF; margin-top: 2px;">
-          ${nattyChamp?.name || 'CHAMPION'}
-        </div>
+
+        <button class="action-btn" onclick="openSaveBracketModal()" style="width: 100%; background: linear-gradient(135deg, #10B981, #059669); color: #FFFFFF; font-weight: 800; font-size: 0.82rem; padding: 0.55rem 0.85rem; border-radius: var(--radius-md); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4); border: 1px solid rgba(255, 255, 255, 0.2); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem;" title="Submit and save your complete season and playoff bracket projection">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Submit Your Picks</span>
+        </button>
       </div>
     </div>
   `;
