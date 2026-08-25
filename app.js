@@ -472,6 +472,22 @@ const NON_DB_OPPONENT_RATINGS = {
 };
 
 function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSliders, userPick) {
+  // If baseline with no custom adjustments, return exact calibrated game values from database!
+  const isTeamCustom = isSlidersCustom(teamSliders);
+  const isOppCustom = isSlidersCustom(oppSliders);
+  const gameSlider = game && game.id ? state.gameSliders[game.id] : null;
+  const weather = gameSlider?.weather || 'dome';
+  const hasInjury = !!gameSlider?.injury;
+
+  if (!userPick && !isTeamCustom && !isOppCustom && !hasInjury && weather === 'dome' && game && typeof game.projScoreUt === 'number' && typeof game.projScoreOpp === 'number') {
+    return {
+      adjWinProb: typeof game.baseWinProb === 'number' ? game.baseWinProb : (game.projScoreUt > game.projScoreOpp ? 60 : 40),
+      projUt: game.projScoreUt,
+      projOpp: game.projScoreOpp,
+      isWin: game.projScoreUt > game.projScoreOpp
+    };
+  }
+
   const tTeam = TEAMS_DATABASE[teamId] || {};
   let spA = tTeam.baseSpRating || 22.0;
 
