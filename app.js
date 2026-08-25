@@ -6360,17 +6360,12 @@ function getSavedBrackets() {
     const raw = localStorage.getItem(BRACKET_STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      if (Array.isArray(parsed)) {
+        return parsed.filter(b => b.id !== 'bracket_baseline_chalk_2026');
+      }
     }
   } catch (e) {}
-
-  // Auto-seed Official Model Baseline Chalk if empty
-  const defaultBaseline = createBaselineBracketObject();
-  const initialList = [defaultBaseline];
-  try {
-    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(initialList));
-  } catch (e) {}
-  return initialList;
+  return [];
 }
 
 function createBaselineBracketObject() {
@@ -6559,12 +6554,7 @@ function deleteSavedBracket(bracketId, e) {
   const myBrackets = getSavedBrackets();
   const target = myBrackets.find(b => b.id === bracketId);
   if (!target) {
-    showCustomToast('⚠️ You can only delete brackets from "My Saved Brackets".');
-    return;
-  }
-
-  if (target.id === 'bracket_baseline_chalk_2026') {
-    showCustomToast('⚠️ Cannot delete the official model baseline chalk!');
+    showCustomToast('⚠️ You can only delete brackets you created.');
     return;
   }
 
@@ -6572,6 +6562,8 @@ function deleteSavedBracket(bracketId, e) {
     const updated = myBrackets.filter(b => b.id !== bracketId);
     try {
       localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(updated));
+      const localComm = getLocalCommunityBrackets().filter(b => b.id !== bracketId);
+      localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(localComm));
     } catch (e) {}
     renderSavedBracketsVault();
     showCustomToast(`🗑️ Deleted bracket: "${target.name}"`);
@@ -6852,6 +6844,9 @@ function renderSavedBracketsVault() {
     return;
   }
 
+  const myBrackets = getSavedBrackets();
+  const myBracketIds = new Set(myBrackets.map(b => b.id));
+
   grid.innerHTML = '';
   brackets.forEach((b, idx) => {
     const isBaseline = b.mode === 'baseline';
@@ -6859,6 +6854,7 @@ function renderSavedBracketsVault() {
     const champ = b.champion || { name: 'Champion', shortName: 'Champs', logoUrl: '' };
     const isActive = state.activeSavedBracketId === b.id;
     const acc = b.accuracy || calculateBracketAccuracy(b);
+    const isMine = myBracketIds.has(b.id);
 
     const rankNum = idx + 1;
     let rankMedal = `#${rankNum}`;
@@ -6936,7 +6932,7 @@ function renderSavedBracketsVault() {
         <button class="bracket-action-btn share-btn" onclick="copyBracketShareLink('${b.id}', event)" title="Copy Shareable Link">
           <i class="fa-solid fa-link"></i> Link
         </button>
-        ${!isCommunity && !isBaseline && b.id !== 'bracket_baseline_chalk_2026' ? `
+        ${isMine ? `
           <button class="bracket-action-btn delete-btn" onclick="deleteSavedBracket('${b.id}', event)" title="Delete your saved bracket">
             <i class="fa-solid fa-trash-can"></i>
           </button>
