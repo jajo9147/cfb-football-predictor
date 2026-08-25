@@ -3554,10 +3554,10 @@ const TEAM_OPENER_KICKOFFS = {
     tv: 'ABC Vegas Kickoff Classic'
   },
   'utah': {
-    utc: '2026-09-05T18:00:00Z', // Sat Sep 5 @ 12:00 PM MDT / 2:00 PM EDT (Salt Lake City, UT)
-    opponent: 'Southern Utah Thunderbirds',
+    utc: '2026-09-04T01:00:00Z', // Thu Sep 3 @ 7:00 PM MDT / 9:00 PM EDT (Salt Lake City, UT)
+    opponent: 'Idaho Vandals',
     venue: 'Rice-Eccles Stadium (Salt Lake City, UT)',
-    tv: 'ESPN+'
+    tv: 'ESPNU'
   },
   'iowa': {
     utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 11:00 AM CDT / 12:00 PM EDT (Iowa City, IA)
@@ -3566,34 +3566,34 @@ const TEAM_OPENER_KICKOFFS = {
     tv: 'Big Ten Network'
   },
   'missouri': {
-    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 6:30 PM CDT / 7:30 PM EDT (Columbia, MO)
-    opponent: 'Louisiana Ragin Cajuns',
+    utc: '2026-09-04T00:00:00Z', // Thu Sep 3 @ 7:00 PM CDT / 8:00 PM EDT (Columbia, MO)
+    opponent: 'Arkansas-Pine Bluff Golden Lions',
     venue: 'Faurot Field (Columbia, MO)',
     tv: 'SEC Network'
   },
   'arizona': {
     utc: '2026-09-06T02:30:00Z', // Sat Sep 5 @ 7:30 PM MST / 10:30 PM EDT (Tucson, AZ)
-    opponent: 'Hawaii Rainbow Warriors',
+    opponent: 'Northern Arizona Lumberjacks',
     venue: 'Arizona Stadium (Tucson, AZ)',
-    tv: 'FS1 / ESPN'
-  },
-  'washington': {
-    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 4:00 PM PDT / 7:00 PM EDT (Seattle, WA)
-    opponent: 'Eastern Washington Eagles',
-    venue: 'Husky Stadium (Seattle, WA)',
-    tv: 'Big Ten Network'
-  },
-  'houston': {
-    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 6:00 PM CDT (Houston, TX)
-    opponent: 'Stephen F. Austin Lumberjacks',
-    venue: 'TDECU Stadium (Houston, TX)',
     tv: 'ESPN+'
   },
+  'washington': {
+    utc: '2026-09-06T19:30:00Z', // Sun Sep 6 @ 12:30 PM PDT / 3:30 PM EDT (Seattle, WA)
+    opponent: 'Washington State Cougars (Apple Cup)',
+    venue: 'Husky Stadium (Seattle, WA)',
+    tv: 'FOX'
+  },
+  'houston': {
+    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 11:00 AM CDT / 12:00 PM EDT (Houston, TX)
+    opponent: 'Oregon State Beavers',
+    venue: 'TDECU Stadium (Houston, TX)',
+    tv: 'ESPN'
+  },
   'louisville': {
-    utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 3:30 PM EDT (Louisville, KY)
-    opponent: 'Austin Peay Governors',
-    venue: 'L&N Federal Credit Union Stadium (Louisville, KY)',
-    tv: 'ACC Network'
+    utc: '2026-09-06T23:30:00Z', // Sun Sep 6 @ 6:30 PM CDT / 7:30 PM EDT (Nashville, TN)
+    opponent: 'Ole Miss Rebels',
+    venue: 'Nissan Stadium (Nashville, TN)',
+    tv: 'ABC / ESPN'
   }
 };
 
