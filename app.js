@@ -6335,6 +6335,617 @@ window.openHypeCardModal = function() {
   }
 };
 
+
+// ==========================================================================
+// MARCH MADNESS 12-TEAM CFP BRACKET VAULT & EXPORT SYSTEM
+// ==========================================================================
+
+const BRACKET_STORAGE_KEY = 'gridiron_saved_brackets_v1';
+
+function getSavedBrackets() {
+  try {
+    const raw = localStorage.getItem(BRACKET_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (e) {}
+
+  // Auto-seed Official Model Baseline Chalk if empty
+  const defaultBaseline = createBaselineBracketObject();
+  const initialList = [defaultBaseline];
+  try {
+    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(initialList));
+  } catch (e) {}
+  return initialList;
+}
+
+function createBaselineBracketObject() {
+  const evaluated = evaluateRegularSeasonAllTeams();
+  const ccg = simulateConferenceChampionships(evaluated);
+  const cfp = generate12TeamCfpField(ccg.confChamps, evaluated);
+  const playoff = simulatePlayoffBracket(cfp);
+
+  const seeds = (cfp.seeds || []).map((s, idx) => ({
+    seed: idx + 1,
+    id: s?.id || 'texas',
+    name: s?.shortName || s?.name || 'Team',
+    logoUrl: s?.logoUrl || '',
+    wins: s?.wins || 11,
+    losses: s?.losses || 1
+  }));
+
+  const champTeam = playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE['texas'];
+
+  return {
+    id: 'bracket_baseline_chalk_2026',
+    name: '2026 Model Baseline Chalk',
+    creator: 'Gridiron Oracle AI',
+    notes: 'Official pre-season AI simulation baseline (10,000 Monte Carlo calibrated).',
+    createdAt: new Date().toISOString(),
+    mode: 'baseline',
+    champion: {
+      id: champTeam.id || 'texas',
+      name: champTeam.name || 'Texas Longhorns',
+      shortName: champTeam.shortName || 'Texas',
+      logoUrl: champTeam.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',
+      score: playoff.natty?.sim?.winnerScore || 34,
+      oppScore: playoff.natty?.sim?.loserScore || 28
+    },
+    runnerUp: {
+      id: playoff.runnerUp?.id || 'ohiostate',
+      name: playoff.runnerUp?.name || 'Ohio State Buckeyes',
+      shortName: playoff.runnerUp?.shortName || 'Ohio State'
+    },
+    seeds: seeds,
+    playoffSummary: {
+      fr: [
+        { label: '#5 vs #12', winner: playoff.fr1?.sim?.winner?.shortName || 'Texas', score: `${playoff.fr1?.sim?.scoreA || 35}-${playoff.fr1?.sim?.scoreB || 21}` },
+        { label: '#6 vs #11', winner: playoff.fr2?.sim?.winner?.shortName || 'Indiana', score: `${playoff.fr2?.sim?.scoreA || 31}-${playoff.fr2?.sim?.scoreB || 24}` },
+        { label: '#7 vs #10', winner: playoff.fr3?.sim?.winner?.shortName || 'Miami', score: `${playoff.fr3?.sim?.scoreA || 28}-${playoff.fr3?.sim?.scoreB || 24}` },
+        { label: '#8 vs #9', winner: playoff.fr4?.sim?.winner?.shortName || 'Texas A&M', score: `${playoff.fr4?.sim?.scoreA || 30}-${playoff.fr4?.sim?.scoreB || 27}` }
+      ],
+      qf: [
+        { bowl: 'Sugar Bowl', winner: playoff.qf1?.sim?.winner?.shortName || 'Ohio State' },
+        { bowl: 'Rose Bowl', winner: playoff.qf2?.sim?.winner?.shortName || 'Oregon' },
+        { bowl: 'Peach Bowl', winner: playoff.qf3?.sim?.winner?.shortName || 'Texas' },
+        { bowl: 'Fiesta Bowl', winner: playoff.qf4?.sim?.winner?.shortName || 'Georgia' }
+      ],
+      sf: [
+        { bowl: 'Orange Bowl', winner: playoff.sf1?.sim?.winner?.shortName || 'Ohio State' },
+        { bowl: 'Cotton Bowl', winner: playoff.sf2?.sim?.winner?.shortName || 'Texas' }
+      ]
+    },
+    simState: {
+      teamId: 'texas',
+      userPicks: {},
+      ccgPicks: {},
+      playoffPicks: {},
+      teamSliders: {},
+      gameSliders: {}
+    }
+  };
+}
+
+function saveCurrentProjectionAsBracket(bracketName, creatorName, notes) {
+  const name = (bracketName || '').trim() || `My CFP Bracket #${Math.floor(Math.random() * 900 + 100)}`;
+  const creator = (creatorName || '').trim() || 'Anonymous Coach';
+  const bracketNotes = (notes || '').trim();
+
+  // Evaluate current simulation
+  const evaluated = evaluateRegularSeasonAllTeams();
+  const ccg = simulateConferenceChampionships(evaluated);
+  const cfp = generate12TeamCfpField(ccg.confChamps, evaluated);
+  const playoff = simulatePlayoffBracket(cfp);
+
+  const isCustom = Object.keys(state.userPicks).length > 0 || 
+                   Object.keys(state.ccgPicks).length > 0 || 
+                   Object.keys(state.playoffPicks).length > 0 ||
+                   Object.keys(state.teamSliders).some(k => isSlidersCustom(state.teamSliders[k])) ||
+                   Object.keys(state.gameSliders).some(k => isSlidersCustom(state.gameSliders[k]));
+
+  const seeds = (cfp.seeds || []).map((s, idx) => ({
+    seed: idx + 1,
+    id: s?.id || 'texas',
+    name: s?.shortName || s?.name || 'Team',
+    logoUrl: s?.logoUrl || '',
+    wins: s?.wins || 11,
+    losses: s?.losses || 1
+  }));
+
+  const champId = playoff.nationalChampion?.id || state.lastNationalChampion?.id || 'texas';
+  const champTeam = TEAMS_DATABASE[champId] || playoff.nationalChampion || { name: 'National Champions', shortName: 'Champs', logoUrl: '' };
+
+  const bracketObj = {
+    id: `bracket_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+    name: name,
+    creator: creator,
+    notes: bracketNotes,
+    createdAt: new Date().toISOString(),
+    mode: isCustom ? 'custom' : 'baseline',
+    champion: {
+      id: champId,
+      name: champTeam.name || 'Texas Longhorns',
+      shortName: champTeam.shortName || 'Texas',
+      logoUrl: champTeam.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',
+      score: playoff.natty?.sim?.winnerScore || 34,
+      oppScore: playoff.natty?.sim?.loserScore || 28
+    },
+    runnerUp: {
+      id: playoff.runnerUp?.id || 'ohiostate',
+      name: playoff.runnerUp?.name || 'Ohio State Buckeyes',
+      shortName: playoff.runnerUp?.shortName || 'Ohio State'
+    },
+    seeds: seeds,
+    playoffSummary: {
+      fr: [
+        { label: '#5 vs #12', winner: playoff.fr1?.sim?.winner?.shortName || 'Team', score: `${playoff.fr1?.sim?.scoreA || 0}-${playoff.fr1?.sim?.scoreB || 0}` },
+        { label: '#6 vs #11', winner: playoff.fr2?.sim?.winner?.shortName || 'Team', score: `${playoff.fr2?.sim?.scoreA || 0}-${playoff.fr2?.sim?.scoreB || 0}` },
+        { label: '#7 vs #10', winner: playoff.fr3?.sim?.winner?.shortName || 'Team', score: `${playoff.fr3?.sim?.scoreA || 0}-${playoff.fr3?.sim?.scoreB || 0}` },
+        { label: '#8 vs #9', winner: playoff.fr4?.sim?.winner?.shortName || 'Team', score: `${playoff.fr4?.sim?.scoreA || 0}-${playoff.fr4?.sim?.scoreB || 0}` }
+      ],
+      qf: [
+        { bowl: 'Sugar Bowl', winner: playoff.qf1?.sim?.winner?.shortName || 'Team' },
+        { bowl: 'Rose Bowl', winner: playoff.qf2?.sim?.winner?.shortName || 'Team' },
+        { bowl: 'Peach Bowl', winner: playoff.qf3?.sim?.winner?.shortName || 'Team' },
+        { bowl: 'Fiesta Bowl', winner: playoff.qf4?.sim?.winner?.shortName || 'Team' }
+      ],
+      sf: [
+        { bowl: 'Orange Bowl', winner: playoff.sf1?.sim?.winner?.shortName || 'Team' },
+        { bowl: 'Cotton Bowl', winner: playoff.sf2?.sim?.winner?.shortName || 'Team' }
+      ]
+    },
+    simState: {
+      teamId: state.currentTeamId,
+      userPicks: { ...state.userPicks },
+      ccgPicks: { ...state.ccgPicks },
+      playoffPicks: { ...state.playoffPicks },
+      teamSliders: JSON.parse(JSON.stringify(state.teamSliders)),
+      gameSliders: JSON.parse(JSON.stringify(state.gameSliders))
+    }
+  };
+
+  const brackets = getSavedBrackets();
+  brackets.unshift(bracketObj);
+  try {
+    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(brackets));
+  } catch (e) {}
+
+  state.activeSavedBracketId = bracketObj.id;
+  return bracketObj;
+}
+
+function loadSavedBracket(bracketId) {
+  const brackets = getSavedBrackets();
+  const target = brackets.find(b => b.id === bracketId);
+  if (!target || !target.simState) return false;
+
+  state.userPicks = target.simState.userPicks ? { ...target.simState.userPicks } : {};
+  state.ccgPicks = target.simState.ccgPicks ? { ...target.simState.ccgPicks } : {};
+  state.playoffPicks = target.simState.playoffPicks ? { ...target.simState.playoffPicks } : {};
+  state.teamSliders = target.simState.teamSliders ? JSON.parse(JSON.stringify(target.simState.teamSliders)) : {};
+  state.gameSliders = target.simState.gameSliders ? JSON.parse(JSON.stringify(target.simState.gameSliders)) : {};
+
+  if (target.simState.teamId && TEAMS_DATABASE[target.simState.teamId]) {
+    selectTeam(target.simState.teamId);
+  } else {
+    recalculateSeason();
+  }
+
+  state.activeSavedBracketId = bracketId;
+  closeBracketVaultModal();
+  showCustomToast(`📂 Loaded Bracket: "${target.name}"`);
+  return true;
+}
+
+function deleteSavedBracket(bracketId, e) {
+  if (e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  const brackets = getSavedBrackets();
+  const target = brackets.find(b => b.id === bracketId);
+  if (!target) return;
+
+  if (target.id === 'bracket_baseline_chalk_2026') {
+    showCustomToast('⚠️ Cannot delete the official model baseline chalk!');
+    return;
+  }
+
+  if (confirm(`Are you sure you want to delete "${target.name}"?`)) {
+    const updated = brackets.filter(b => b.id !== bracketId);
+    try {
+      localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(updated));
+    } catch (e) {}
+    renderSavedBracketsVault();
+    showCustomToast(`🗑️ Deleted bracket: "${target.name}"`);
+  }
+}
+
+function renderSavedBracketsVault() {
+  const grid = document.getElementById('bracketVaultGrid');
+  if (!grid) return;
+
+  const brackets = getSavedBrackets();
+  if (brackets.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-vault-state">
+        <i class="fa-solid fa-folder-open"></i>
+        <h3>No Saved Brackets Yet</h3>
+        <p>Save your current simulation or baseline picks to track your CFP predictions throughout the season.</p>
+        <button class="save-bracket-btn" onclick="openSaveBracketModal()" style="margin-top: 0.5rem;">
+          <i class="fa-solid fa-plus"></i> Save Current Bracket
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = '';
+  brackets.forEach(b => {
+    const isBaseline = b.mode === 'baseline';
+    const dateStr = b.createdAt ? new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '2026 Pre-Season';
+    const champ = b.champion || { name: 'Champion', shortName: 'Champs', logoUrl: '' };
+    const isActive = state.activeSavedBracketId === b.id;
+
+    const seedPills = (b.seeds || []).slice(0, 8).map(s => `
+      <span class="bracket-seed-mini-pill" title="#${s.seed} ${s.name} (${s.wins}-${s.losses})">
+        <img src="${s.logoUrl}" alt="${s.name}">
+        <span>#${s.seed} ${s.name}</span>
+      </span>
+    `).join('');
+
+    const card = document.createElement('div');
+    card.className = `bracket-vault-card ${isActive ? 'active-bracket' : ''}`;
+    card.innerHTML = `
+      <div class="bracket-card-header">
+        <div>
+          <div class="bracket-card-title">${b.name}</div>
+          <div class="bracket-card-meta">
+            <span>By ${b.creator || 'Coach'}</span>
+            <span>•</span>
+            <span>${dateStr}</span>
+          </div>
+        </div>
+        <span class="bracket-mode-badge ${isBaseline ? 'baseline' : 'custom'}">
+          ${isBaseline ? '<i class="fa-solid fa-shield"></i> CHALK' : '<i class="fa-solid fa-sliders"></i> CUSTOM'}
+        </span>
+      </div>
+
+      <div class="bracket-champ-preview">
+        <img src="${champ.logoUrl}" class="bracket-champ-logo" alt="${champ.name}">
+        <div class="bracket-champ-info">
+          <span class="bracket-champ-label">🏆 PREDICTED NATIONAL CHAMPION</span>
+          <span class="bracket-champ-name">${champ.name}</span>
+        </div>
+      </div>
+
+      <div class="bracket-seeds-pill-row">
+        ${seedPills}
+      </div>
+
+      <div class="bracket-card-actions">
+        <button class="bracket-action-btn load-btn" onclick="loadSavedBracket('${b.id}')" title="Load this bracket into simulator">
+          <i class="fa-solid fa-play"></i> Load
+        </button>
+        <button class="bracket-action-btn export-btn" onclick="openCfpBracketCanvasModalForBracket('${b.id}')" title="Export March Madness Graphic">
+          <i class="fa-solid fa-camera-retro"></i> Graphic
+        </button>
+        <button class="bracket-action-btn share-btn" onclick="copyBracketShareLink('${b.id}', event)" title="Copy Shareable Link">
+          <i class="fa-solid fa-link"></i> Share
+        </button>
+        ${b.id !== 'bracket_baseline_chalk_2026' ? `
+          <button class="bracket-action-btn delete-btn" onclick="deleteSavedBracket('${b.id}', event)" title="Delete Bracket">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        ` : ''}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openSaveBracketModal() {
+  const modal = document.getElementById('saveBracketModal');
+  if (!modal) return;
+
+  const previewBox = document.getElementById('saveBracketPreviewBox');
+  const evaluated = evaluateRegularSeasonAllTeams();
+  const ccg = simulateConferenceChampionships(evaluated);
+  const cfp = generate12TeamCfpField(ccg.confChamps, evaluated);
+  const playoff = simulatePlayoffBracket(cfp);
+  const champTeam = playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE['texas'];
+
+  if (previewBox) {
+    previewBox.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <img src="${champTeam.logoUrl}" style="width: 40px; height: 40px; object-fit: contain;">
+        <div>
+          <div style="font-size: 0.72rem; color: #F59E0B; font-weight: 800; text-transform: uppercase;">🏆 PROJECTED NATIONAL CHAMPION</div>
+          <div style="font-size: 1.1rem; font-weight: 800; color: #FFFFFF;">${champTeam.name}</div>
+        </div>
+      </div>
+      <div style="font-size: 0.76rem; color: #94A3B8; margin-top: 0.25rem;">
+        <strong>#1-#4 Byes:</strong> #${cfp.seed1?.shortName || '1'}, #${cfp.seed2?.shortName || '2'}, #${cfp.seed3?.shortName || '3'}, #${cfp.seed4?.shortName || '4'}
+      </div>
+    `;
+  }
+
+  const nameInput = document.getElementById('bracketNameInput');
+  if (nameInput) {
+    nameInput.value = `${champTeam.shortName || 'CFB'} Natty Projection`;
+  }
+
+  modal.classList.add('open');
+  document.body.classList.add('modal-open');
+}
+
+function closeSaveBracketModal() {
+  const modal = document.getElementById('saveBracketModal');
+  if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+
+function handleConfirmSaveBracket() {
+  const name = document.getElementById('bracketNameInput')?.value;
+  const creator = document.getElementById('bracketCreatorInput')?.value;
+  const notes = document.getElementById('bracketNotesInput')?.value;
+
+  const saved = saveCurrentProjectionAsBracket(name, creator, notes);
+  closeSaveBracketModal();
+  showCustomToast(`🎉 Bracket "${saved.name}" successfully saved to Vault!`);
+  openBracketVaultModal();
+}
+
+function openBracketVaultModal() {
+  renderSavedBracketsVault();
+  const modal = document.getElementById('bracketVaultModal');
+  if (modal) modal.classList.add('open');
+  document.body.classList.add('modal-open');
+}
+
+function closeBracketVaultModal() {
+  const modal = document.getElementById('bracketVaultModal');
+  if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+
+// March Madness 12-Team CFP Bracket Canvas Graphic Generator
+function generateCfpBracketCanvas(bracketObj) {
+  const canvas = document.getElementById('cfpBracketCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const b = bracketObj || getSavedBrackets()[0] || createBaselineBracketObject();
+  const seeds = b.seeds || [];
+  const champ = b.champion || { name: 'Texas Longhorns', shortName: 'Texas', logoUrl: '' };
+
+  // Canvas Dimensions: 1200 x 675 (16:9 HD)
+  ctx.clearRect(0, 0, 1200, 675);
+
+  // Background Gradient
+  const bgGrad = ctx.createLinearGradient(0, 0, 1200, 675);
+  bgGrad.addColorStop(0, '#070A11');
+  bgGrad.addColorStop(0.5, '#0B0F19');
+  bgGrad.addColorStop(1, '#05070C');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, 1200, 675);
+
+  // Decorative Stadium Grid & Glow
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x <= 1200; x += 40) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 675); ctx.stroke();
+  }
+  for (let y = 0; y <= 675; y += 40) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(1200, y); ctx.stroke();
+  }
+
+  // Header Banner
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+  drawCanvasRoundedRect(ctx, 30, 20, 1140, 68, 14);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.stroke();
+
+  drawCanvasTextFitted(ctx, `🏆 2026 COLLEGE FOOTBALL PLAYOFF BRACKET`, 55, 52, 500, 'bold 24px "Bebas Neue", "Outfit", sans-serif', '#FFFFFF', 'left');
+  drawCanvasTextFitted(ctx, `BRACKET: "${b.name.toUpperCase()}" • BY ${b.creator.toUpperCase()}`, 55, 72, 600, 'bold 12px "JetBrains Mono", monospace', '#F59E0B', 'left');
+  drawCanvasTextFitted(ctx, `GRIDIRON ORACLE AI SIMULATOR`, 1145, 58, 300, '700 13px "JetBrains Mono", monospace', '#60A5FA', 'right');
+
+  // Left Column: First Round & Quarterfinals
+  const leftX = 45;
+  const colW = 240;
+
+  // Round Labels
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = 'bold 11px "JetBrains Mono", monospace';
+  ctx.fillText('FIRST ROUND (ON CAMPUS)', leftX, 115);
+  ctx.fillText('QUARTERFINALS (NY6 BOWLS)', leftX + 260, 115);
+  ctx.fillText('SEMIFINALS', leftX + 520, 115);
+  ctx.fillText('NATIONAL CHAMPIONSHIP', leftX + 760, 115);
+
+  function drawBracketMatchBox(x, y, w, h, seedA, nameA, seedB, nameB, winnerName, bowlLabel) {
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+    drawCanvasRoundedRect(ctx, x, y, w, h, 8);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+    ctx.stroke();
+
+    if (bowlLabel) {
+      ctx.fillStyle = '#64748B';
+      ctx.font = '600 9px "JetBrains Mono", monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText(bowlLabel.toUpperCase(), x + 8, y + 12);
+    }
+
+    const isWinA = winnerName && nameA && winnerName.toLowerCase().includes(nameA.toLowerCase());
+    const isWinB = winnerName && nameB && winnerName.toLowerCase().includes(nameB.toLowerCase());
+
+    ctx.fillStyle = isWinA ? '#F59E0B' : '#E2E8F0';
+    ctx.font = isWinA ? 'bold 12px "Outfit", sans-serif' : '500 12px "Outfit", sans-serif';
+    ctx.fillText(`${seedA ? '#' + seedA : ''} ${nameA}`, x + 8, y + (bowlLabel ? 26 : 18));
+
+    ctx.fillStyle = isWinB ? '#F59E0B' : '#94A3B8';
+    ctx.font = isWinB ? 'bold 12px "Outfit", sans-serif' : '500 12px "Outfit", sans-serif';
+    ctx.fillText(`${seedB ? '#' + seedB : ''} ${nameB}`, x + 8, y + (bowlLabel ? 42 : 34));
+  }
+
+  // First Round (4 games)
+  const fr = b.playoffSummary?.fr || [];
+  drawBracketMatchBox(leftX, 130, 220, 44, '5', seeds[4]?.name || 'Texas', '12', seeds[11]?.name || 'Boise St', fr[0]?.winner);
+  drawBracketMatchBox(leftX, 230, 220, 44, '6', seeds[5]?.name || 'Indiana', '11', seeds[10]?.name || 'LSU', fr[1]?.winner);
+  drawBracketMatchBox(leftX, 330, 220, 44, '7', seeds[6]?.name || 'Miami', '10', seeds[9]?.name || 'Oklahoma', fr[2]?.winner);
+  drawBracketMatchBox(leftX, 430, 220, 44, '8', seeds[7]?.name || 'Texas A&M', '9', seeds[8]?.name || 'Ole Miss', fr[3]?.winner);
+
+  // Quarterfinals (4 games)
+  const qf = b.playoffSummary?.qf || [];
+  drawBracketMatchBox(leftX + 260, 155, 220, 52, '1', seeds[0]?.name || 'Ohio St', '8/9', fr[3]?.winner || 'Texas A&M', qf[0]?.winner, 'Sugar Bowl');
+  drawBracketMatchBox(leftX + 260, 255, 220, 52, '2', seeds[1]?.name || 'Oregon', '7/10', fr[2]?.winner || 'Miami', qf[1]?.winner, 'Rose Bowl');
+  drawBracketMatchBox(leftX + 260, 355, 220, 52, '3', seeds[2]?.name || 'Texas', '6/11', fr[1]?.winner || 'Indiana', qf[2]?.winner, 'Peach Bowl');
+  drawBracketMatchBox(leftX + 260, 455, 220, 52, '4', seeds[3]?.name || 'Georgia', '5/12', fr[0]?.winner || 'Texas', qf[3]?.winner, 'Fiesta Bowl');
+
+  // Semifinals (2 games)
+  const sf = b.playoffSummary?.sf || [];
+  drawBracketMatchBox(leftX + 520, 205, 220, 52, 'QF1', qf[0]?.winner || 'Ohio St', 'QF4', qf[3]?.winner || 'Georgia', sf[0]?.winner, 'Orange Bowl');
+  drawBracketMatchBox(leftX + 520, 405, 220, 52, 'QF2', qf[1]?.winner || 'Oregon', 'QF3', qf[2]?.winner || 'Texas', sf[1]?.winner, 'Cotton Bowl');
+
+  // National Championship Box
+  drawBracketMatchBox(leftX + 760, 305, 240, 56, 'SF1', sf[0]?.winner || 'Ohio St', 'SF2', sf[1]?.winner || 'Texas', champ.shortName, 'Mercedes-Benz Stadium (Atlanta)');
+
+  // Trophy Pedestal in Center Right (X: 1040, Y: 220 to 520)
+  const pedX = 1030;
+  const pedY = 160;
+  ctx.fillStyle = 'rgba(245, 158, 11, 0.12)';
+  drawCanvasRoundedRect(ctx, pedX, pedY, 135, 340, 16);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
+  ctx.stroke();
+
+  ctx.fillStyle = '#F59E0B';
+  ctx.font = 'bold 12px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('🏆 NATIONAL', pedX + 67, pedY + 30);
+  ctx.fillText('CHAMPION', pedX + 67, pedY + 46);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 18px "Outfit", sans-serif';
+  ctx.fillText(champ.shortName || 'CHAMP', pedX + 67, pedY + 280);
+
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '600 11px "JetBrains Mono", monospace';
+  ctx.fillText(`${champ.score || 34} - ${champ.oppScore || 28}`, pedX + 67, pedY + 305);
+
+  // Footer Watermark
+  ctx.fillStyle = '#64748B';
+  ctx.font = '500 11px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(`SIMULATED ON GRIDIRON ORACLE • NCAA CFP 12-TEAM TOURNAMENT • OFFICIAL MODEL CALIBRATION`, 600, 650);
+}
+
+function openCfpBracketCanvasModal() {
+  const brackets = getSavedBrackets();
+  const currentBracket = brackets.find(b => b.id === state.activeSavedBracketId) || brackets[0] || createBaselineBracketObject();
+  openCfpBracketCanvasModalForBracket(currentBracket.id);
+}
+
+function openCfpBracketCanvasModalForBracket(bracketId) {
+  const brackets = getSavedBrackets();
+  const target = brackets.find(b => b.id === bracketId) || brackets[0] || createBaselineBracketObject();
+  
+  const modal = document.getElementById('bracketCanvasModal');
+  if (!modal) return;
+
+  generateCfpBracketCanvas(target);
+  modal.classList.add('open');
+  document.body.classList.add('modal-open');
+}
+
+function closeCfpBracketCanvasModal() {
+  const modal = document.getElementById('bracketCanvasModal');
+  if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+
+function downloadCfpBracketGraphic() {
+  const canvas = document.getElementById('cfpBracketCanvas');
+  if (!canvas) return;
+  const link = document.createElement('a');
+  link.download = `CFP_Bracket_${Date.now()}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  showCustomToast('📥 High-Res March Madness Bracket Downloaded!');
+}
+
+function copyCfpBracketGraphic() {
+  const canvas = document.getElementById('cfpBracketCanvas');
+  if (!canvas || !navigator.clipboard) return;
+  canvas.toBlob(blob => {
+    if (!blob) return;
+    try {
+      navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+        .then(() => showCustomToast('📋 Bracket Graphic Copied to Clipboard!'))
+        .catch(() => downloadCfpBracketGraphic());
+    } catch (e) {
+      downloadCfpBracketGraphic();
+    }
+  });
+}
+
+function copyBracketShareLink(bracketId, e) {
+  if (e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  const brackets = getSavedBrackets();
+  const target = brackets.find(b => b.id === bracketId);
+  if (!target) return;
+
+  const payload = {
+    t: target.simState?.teamId || 'texas',
+    pk: target.simState?.userPicks || {},
+    cp: target.simState?.ccgPicks || {},
+    pp: target.simState?.playoffPicks || {},
+    ts: target.simState?.teamSliders || {},
+    bn: target.name || 'CFP Bracket'
+  };
+
+  try {
+    const jsonStr = JSON.stringify(payload);
+    const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
+    const url = `${window.location.origin}${window.location.pathname}#s=${b64}`;
+    navigator.clipboard.writeText(url).then(() => {
+      showCustomToast(`🔗 Share Link for "${target.name}" copied to clipboard!`);
+    }).catch(() => {
+      prompt('Copy this shareable bracket link:', url);
+    });
+  } catch (err) {
+    showCustomToast('⚠️ Could not generate share link');
+  }
+}
+
+function copyActiveBracketShareLink() {
+  const brackets = getSavedBrackets();
+  const active = brackets.find(b => b.id === state.activeSavedBracketId) || brackets[0];
+  if (active) copyBracketShareLink(active.id);
+}
+
+window.openSaveBracketModal = openSaveBracketModal;
+window.closeSaveBracketModal = closeSaveBracketModal;
+window.handleConfirmSaveBracket = handleConfirmSaveBracket;
+window.openBracketVaultModal = openBracketVaultModal;
+window.closeBracketVaultModal = closeBracketVaultModal;
+window.openCfpBracketCanvasModal = openCfpBracketCanvasModal;
+window.openCfpBracketCanvasModalForBracket = openCfpBracketCanvasModalForBracket;
+window.closeCfpBracketCanvasModal = closeCfpBracketCanvasModal;
+window.downloadCfpBracketGraphic = downloadCfpBracketGraphic;
+window.copyCfpBracketGraphic = copyCfpBracketGraphic;
+window.copyBracketShareLink = copyBracketShareLink;
+window.copyActiveBracketShareLink = copyActiveBracketShareLink;
+window.loadSavedBracket = loadSavedBracket;
+window.deleteSavedBracket = deleteSavedBracket;
+
+
 // ==========================================================================
 // APPLICATION LAUNCHER (BOTTOM TO GUARANTEE ALL MODULES ARE INITIALIZED)
 // ==========================================================================

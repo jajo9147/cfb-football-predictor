@@ -4148,3 +4148,341 @@ body.modal-open {
   }
 }
 
+/* ==========================================================================
+   MARCH MADNESS CFP BRACKET VAULT & EXPORT SYSTEM
+   ========================================================================== */
+
+.vault-btn-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(239, 68, 68, 0.2));
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #FBBF24;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.vault-btn-badge:hover {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.35), rgba(239, 68, 68, 0.35));
+  border-color: #F59E0B;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Bracket Action Toolbar in CFP Section */
+.cfp-bracket-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.save-bracket-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-md);
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34D399;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.save-bracket-btn:hover {
+  background: rgba(16, 185, 129, 0.28);
+  border-color: #10B981;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+}
+
+/* Bracket Vault Modal Dialog */
+.bracket-vault-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.1rem;
+  margin-top: 1.25rem;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+}
+
+.bracket-vault-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  position: relative;
+  transition: var(--transition-normal);
+  backdrop-filter: blur(12px);
+}
+
+.bracket-vault-card:hover {
+  border-color: var(--color-brand-accent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px var(--color-brand-glow);
+  transform: translateY(-2px);
+}
+
+.bracket-vault-card.active-bracket {
+  border-color: #10B981;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.3);
+}
+
+.bracket-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.bracket-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+.bracket-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  color: #94A3B8;
+  font-family: var(--font-mono);
+  margin-top: 0.2rem;
+}
+
+.bracket-mode-badge {
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.68rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.bracket-mode-badge.baseline {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60A5FA;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+.bracket-mode-badge.custom {
+  background: rgba(245, 158, 11, 0.2);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.bracket-champ-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.85rem;
+}
+
+.bracket-champ-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+}
+
+.bracket-champ-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bracket-champ-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #F59E0B;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.bracket-champ-name {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.bracket-seeds-pill-row {
+  display: flex;
+  gap: 0.3rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scrollbar-width: none;
+}
+
+.bracket-seeds-pill-row::-webkit-scrollbar {
+  display: none;
+}
+
+.bracket-seed-mini-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.68rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: #E2E8F0;
+}
+
+.bracket-seed-mini-pill img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.bracket-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bracket-action-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.5rem;
+  border-radius: var(--radius-md);
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.bracket-action-btn.load-btn {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93C5FD;
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.bracket-action-btn.load-btn:hover {
+  background: rgba(59, 130, 246, 0.35);
+  border-color: #3B82F6;
+}
+
+.bracket-action-btn.export-btn {
+  background: rgba(245, 158, 11, 0.2);
+  color: #FCD34D;
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.bracket-action-btn.export-btn:hover {
+  background: rgba(245, 158, 11, 0.35);
+  border-color: #F59E0B;
+}
+
+.bracket-action-btn.share-btn {
+  background: rgba(168, 85, 247, 0.2);
+  color: #D8B4FE;
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+.bracket-action-btn.share-btn:hover {
+  background: rgba(168, 85, 247, 0.35);
+  border-color: #A855F7;
+}
+
+.bracket-action-btn.delete-btn {
+  flex: 0 0 32px;
+  background: rgba(239, 68, 68, 0.15);
+  color: #F87171;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.bracket-action-btn.delete-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: #EF4444;
+}
+
+/* Save Bracket Modal Form */
+.save-bracket-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.bracket-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.bracket-form-group label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+
+.bracket-form-input {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.85rem;
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.bracket-form-input:focus {
+  border-color: var(--color-brand-accent);
+  box-shadow: 0 0 12px var(--color-brand-glow);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bracket-preview-summary-box {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.empty-vault-state {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #94A3B8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.empty-vault-state i {
+  font-size: 2.5rem;
+  color: #475569;
+}
+

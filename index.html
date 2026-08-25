@@ -194,6 +194,7 @@
           <span class="pulse-dot"></span>
           <span id="countdownText">KICKOFF: 18 DAYS</span>
         </div>
+        <button class="vault-btn-badge" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="View & Manage your Saved March Madness-style CFP Brackets"><i class="fa-solid fa-folder-closed"></i> <span>Bracket Vault</span></button>
         <button class="install-pwa-btn" id="openPwaInstallBtn">
           <i class="fa-solid fa-mobile-screen"></i>
           <span>Install App</span>
@@ -417,10 +418,24 @@
 
     <!-- 12-Team CFP Playoff Bracket Section -->
     <section class="playoff-section" id="playoffSection">
-      <div class="section-header">
+      <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
         <div class="section-title">
           <i class="fa-solid fa-diagram-project"></i>
           <span>12-TEAM COLLEGE FOOTBALL PLAYOFF PROJECTION & LIVE SIMULATOR</span>
+        </div>
+        <div class="cfp-bracket-actions">
+          <button class="save-bracket-btn" onclick="openSaveBracketModal()" title="Save this projection as your own custom March Madness-style bracket">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>Save Bracket</span>
+          </button>
+          <button class="action-btn hype-btn" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;" onclick="openCfpBracketCanvasModal()" title="Export 12-Team March Madness CFP Tournament Bracket Graphic">
+            <i class="fa-solid fa-camera-retro"></i>
+            <span>Export Bracket</span>
+          </button>
+          <button class="vault-btn-badge" onclick="openBracketVaultModal()" title="Open Saved Brackets Vault">
+            <i class="fa-solid fa-folder-closed"></i>
+            <span>Vault</span>
+          </button>
         </div>
       </div>
       
@@ -1076,11 +1091,118 @@
       <i class="fa-solid fa-sliders"></i>
       <span>Tuning</span>
     </button>
+    <button class="dock-btn" data-dock="vault" onclick="openBracketVaultModal()">
+      <i class="fa-solid fa-folder-closed" style="color: #FBBF24;"></i>
+      <span>Vault</span>
+    </button>
     <button class="dock-btn" data-dock="dream" onclick="openDreamSandboxModal()">
       <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i>
       <span>Dream</span>
     </button>
   </nav>
+
+  
+  <!-- SAVE BRACKET PROJECTION MODAL -->
+  <div class="modal-backdrop" id="saveBracketModal">
+    <div class="modal-dialog" style="max-width: 580px;">
+      <button class="modal-close" onclick="closeSaveBracketModal()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="modal-header">
+        <span class="matchup-tag" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);">
+          <i class="fa-solid fa-trophy"></i> MARCH MADNESS CFP BRACKET VAULT
+        </span>
+        <h2 class="modal-title" style="font-size: 1.5rem;">SAVE PROJECTION AS BRACKET</h2>
+        <p style="font-size: 0.85rem; color: #94A3B8;">Lock in this 12-team CFP playoff bracket and season simulation so you can track how your picks perform all season long.</p>
+      </div>
+
+      <div class="save-bracket-form">
+        <div class="bracket-form-group">
+          <label for="bracketNameInput">Bracket Name</label>
+          <input type="text" id="bracketNameInput" class="bracket-form-input" placeholder="e.g. My 2026 Baseline Chalk, Texas Natty Run, Big 12 Chaos" maxlength="45">
+        </div>
+
+        <div class="bracket-form-group">
+          <label for="bracketCreatorInput">Creator / Handle</label>
+          <input type="text" id="bracketCreatorInput" class="bracket-form-input" placeholder="e.g. Jake, CFBFan_01" maxlength="30">
+        </div>
+
+        <div class="bracket-form-group">
+          <label for="bracketNotesInput">Notes / Rationale (Optional)</label>
+          <input type="text" id="bracketNotesInput" class="bracket-form-input" placeholder="e.g. Arch Manning MVP season + LSU road upset" maxlength="80">
+        </div>
+
+        <!-- Dynamic Bracket Preview Box -->
+        <div class="bracket-preview-summary-box" id="saveBracketPreviewBox">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 0.5rem;">
+          <button class="action-btn secondary-btn" onclick="closeSaveBracketModal()">Cancel</button>
+          <button class="action-btn" style="background: #10B981; color: #FFFFFF;" id="confirmSaveBracketBtn" onclick="handleConfirmSaveBracket()">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>Save to Bracket Vault</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAVED BRACKETS VAULT MODAL -->
+  <div class="modal-backdrop" id="bracketVaultModal">
+    <div class="modal-dialog" style="max-width: 880px;">
+      <button class="modal-close" onclick="closeBracketVaultModal()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <div>
+          <span class="matchup-tag" style="background: rgba(245, 158, 11, 0.2); color: #FBBF24; border-color: rgba(245, 158, 11, 0.4);">
+            <i class="fa-solid fa-folder-closed"></i> SAVED PROJECTIONS & BRACKETS
+          </span>
+          <h2 class="modal-title" style="font-size: 1.6rem; margin-top: 0.25rem;">CFP BRACKET VAULT</h2>
+        </div>
+        <button class="save-bracket-btn" onclick="openSaveBracketModal()" style="padding: 0.5rem 0.95rem;">
+          <i class="fa-solid fa-plus"></i>
+          <span>Save Current Simulation</span>
+        </button>
+      </div>
+
+      <p style="font-size: 0.85rem; color: #94A3B8; margin-top: -0.25rem;">Manage your saved 12-team CFP brackets, load custom simulations, and export March Madness graphics to share with the group chat.</p>
+
+      <!-- Vault Brackets List / Grid -->
+      <div class="bracket-vault-grid" id="bracketVaultGrid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MARCH MADNESS 12-TEAM CFP BRACKET CANVAS EXPORT MODAL -->
+  <div class="modal-backdrop" id="bracketCanvasModal">
+    <div class="modal-dialog" style="max-width: 780px; text-align: center;">
+      <button class="modal-close" onclick="closeCfpBracketCanvasModal()"><i class="fa-solid fa-xmark"></i></button>
+      <h2 class="modal-title" style="font-size: 1.6rem; letter-spacing: 0.05em;">
+        <i class="fa-solid fa-trophy" style="color: #F59E0B; margin-right: 0.4rem;"></i>12-TEAM CFP TOURNAMENT BRACKET
+      </h2>
+      <p style="font-size: 0.85rem; color: var(--color-text-muted);">March Madness style high-resolution graphic ready to download or drop into your group chat.</p>
+      
+      <div style="margin: 1.25rem 0; display: flex; justify-content: center;">
+        <canvas id="cfpBracketCanvas" width="1200" height="675" style="width: 100%; max-width: 720px; aspect-ratio: 16 / 9; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);"></canvas>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        <button class="action-btn hype-btn" id="downloadCfpBracketBtn" onclick="downloadCfpBracketGraphic()">
+          <i class="fa-solid fa-download"></i>
+          <span>Save High-Res Bracket</span>
+        </button>
+        <button class="action-btn secondary-btn" id="copyCfpBracketBtn" onclick="copyCfpBracketGraphic()">
+          <i class="fa-solid fa-copy"></i>
+          <span>Copy Image to Clipboard</span>
+        </button>
+        <button class="action-btn secondary-btn" id="shareCfpBracketLinkBtn" onclick="copyActiveBracketShareLink()">
+          <i class="fa-solid fa-link"></i>
+          <span>Copy Shareable Link</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="data/teams.js?v=20260825_mobile_perfect_v24"></script>
