@@ -531,8 +531,9 @@ var TEAMS_DATABASE = {
     "headCoach": "Steve Sarkisian",
     "defensiveCoordinator": "Will Muschamp",
     "offensiveCoordinator": "Kyle Flood",
-    "starPlayer": "Arch Manning (QB) / Hollywood Smothers (RB) / Ryan Wingo (WR)",
-    "secondaryStar": "Cam Coleman (WR) / Raleek Brown (RB)",
+    "confirmedStarterQb": "Arch Manning",
+    "starPlayer": "Arch Manning (QB) / Cam Coleman (WR) / Hollywood Smothers (RB)",
+    "secondaryStar": "Ryan Wingo (WR) / Raleek Brown (RB) / Colin Simmons (EDGE)",
     "stadium": "DKR Texas Memorial Stadium",
     "stadiumCity": "Austin, TX",
     "stadiumCapacity": "100,119",
@@ -548,7 +549,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 31.5,
     "playoffContenderRank": 5,
     "sliderLabels": {
-      "qb": "Arch Manning Execution",
+      "qb": "Arch Manning & Cam Coleman Passing Attack",
       "ground": "Hollywood Smothers & Raleek Brown Ground Attack",
       "defense": "Will Muschamp Defense & Havoc",
       "turnover": "Turnover Margin Luck",
@@ -9380,7 +9381,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Slowing down Arch Manning and Sarkisian's explosive playmakers.",
-          "keyMatchup": "Missouri secondary vs Ryan Wingo.",
+          "keyMatchup": "Missouri secondary vs Cam Coleman & Ryan Wingo.",
           "summary": "Blockbuster home matchup against #5 Texas."
         }
       },
