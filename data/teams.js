@@ -7903,7 +7903,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Senior Day offensive showcase in Dallas.",
-          "keyMatchup": "Brashard Smith vs Cal run defense.",
+          "keyMatchup": "Kendrick Raphael vs Cal run defense.",
           "summary": "Senior Day home finale at Ford Stadium."
         }
       },
@@ -8406,7 +8406,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Fast start and establishing the ground attack at Rice-Eccles.",
-          "keyMatchup": "Mike Washington vs Idaho front seven.",
+          "keyMatchup": "Wayshawn Parker vs Idaho front seven.",
           "summary": "Thursday night season opener in Salt Lake City."
         }
       },
@@ -8490,7 +8490,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Physical ground game and winning the turnover battle in Ames.",
-          "keyMatchup": "Mike Washington vs Iowa State 3-3-5 defense.",
+          "keyMatchup": "Wayshawn Parker vs Iowa State 3-3-5 defense.",
           "summary": "Brutal Big 12 road test in Ames."
         }
       },
@@ -8602,7 +8602,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Physical trench warfare at Nippert Stadium.",
-          "keyMatchup": "Dorian Singer vs Cincinnati secondary.",
+          "keyMatchup": "Braden Pegan vs Cincinnati secondary.",
           "summary": "Late October Big 12 road battle in Cincinnati."
         }
       },
@@ -8630,7 +8630,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Pure emotional intensity, turnover luck, and Big 12 title implications.",
-          "keyMatchup": "Isaac Wilson vs Jay Hill BYU defense.",
+          "keyMatchup": "Devon Dampier vs Kelly Poppinga BYU defense.",
           "summary": "Epic Holy War rivalry clash in Salt Lake City."
         }
       },
@@ -8686,7 +8686,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Road execution and stopping TCU explosive plays.",
-          "keyMatchup": "Mike Washington vs TCU front seven.",
+          "keyMatchup": "Wayshawn Parker vs TCU front seven.",
           "summary": "Crucial penultimate Big 12 road battle in Fort Worth."
         }
       },
@@ -8921,7 +8921,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Controlling time of possession in Seattle against Jedd Fisch.",
-          "keyMatchup": "Iowa defensive front vs Jonah Coleman.",
+          "keyMatchup": "Iowa defensive front vs Quaid Carr & Jayden Limar.",
           "summary": "Tough road test at Husky Stadium."
         }
       },
@@ -9933,8 +9933,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 38,
         "projScoreOpp": 17,
         "scoutReport": {
-          "xFactor": "Jonah Coleman establishing the power ground game early.",
-          "keyMatchup": "Jonah Coleman vs Utah State linebackers.",
+          "xFactor": "Quaid Carr establishing the ground game early.",
+          "keyMatchup": "Quaid Carr & Jayden Limar vs Utah State linebackers.",
           "summary": "Non-conference home contest on Lake Washington."
         }
       },
@@ -9962,7 +9962,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Dominating line of scrimmage and getting key reserves reps.",
-          "keyMatchup": "Denzel Boston vs EWU cornerbacks.",
+          "keyMatchup": "Dezmen Roebuck vs EWU cornerbacks.",
           "summary": "In-state FCS tune-up in Seattle."
         }
       },
@@ -10074,7 +10074,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Fast offensive start on the road in West Lafayette.",
-          "keyMatchup": "Jonah Coleman vs Purdue front seven.",
+          "keyMatchup": "Quaid Carr vs Purdue front seven.",
           "summary": "Friday night Big Ten road test at Ross-Ade Stadium."
         }
       },
@@ -10129,8 +10129,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 27,
         "projScoreOpp": 28,
         "scoutReport": {
-          "xFactor": "Husky Stadium crowd noise and stopping Penn State's two-headed backfield.",
-          "keyMatchup": "Steve Belichick run defense vs Singleton & Allen.",
+          "xFactor": "Husky Stadium crowd noise and containing Rocco Becht's air attack.",
+          "keyMatchup": "Steve Belichick run defense vs Quinton Martin Jr. & James Peoples.",
           "summary": "Massive Top 20 Big Ten clash in Seattle."
         }
       },
@@ -10158,7 +10158,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Cold weather execution and winning the turnover battle.",
-          "keyMatchup": "Jonah Coleman vs Michigan State linebackers.",
+          "keyMatchup": "Quaid Carr & Jayden Limar vs Michigan State linebackers.",
           "summary": "November Big Ten road game in East Lansing."
         }
       },
@@ -10186,7 +10186,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Senior Day energy and slowing down Curt Cignetti's offense.",
-          "keyMatchup": "Ephesians Prysock vs Elijah Sarratt.",
+          "keyMatchup": "Ephesians Prysock vs Charlie Becker.",
           "summary": "Blockbuster Big Ten clash against #6 Indiana in Seattle."
         }
       },
@@ -10309,7 +10309,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Executing offensive install and getting backup repetitions.",
-          "keyMatchup": "Zeon Chriss dual-threat keepers vs Southern defense.",
+          "keyMatchup": "Conner Weigman precision passing vs Southern defense.",
           "summary": "Non-conference home clash in Houston."
         }
       },
@@ -10589,7 +10589,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "In-state rivalry pride, Senior Day, and Big 12 bowl positioning.",
-          "keyMatchup": "Zeon Chriss & Makhi Hughes vs Baylor defense.",
+          "keyMatchup": "Conner Weigman & Makhi Hughes vs Baylor defense.",
           "summary": "Heated Battle on I-45 regular season finale in Houston."
         }
       }
@@ -10683,7 +10683,7 @@ var TEAMS_DATABASE = {
         "projScoreUt": 41,
         "projScoreOpp": 14,
         "scoutReport": {
-          "xFactor": "Establishing the ground attack and Miller Moss precision passing.",
+          "xFactor": "Establishing the ground attack with Isaac Brown and Lincoln Kienholz precision passing.",
           "keyMatchup": "Maurice Turner vs Villanova front seven.",
           "summary": "Friday night home opener at L&N Stadium."
         }
@@ -10852,7 +10852,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Controlling the line of scrimmage and pass protection.",
-          "keyMatchup": "Miller Moss vs Stanford secondary.",
+          "keyMatchup": "Lincoln Kienholz vs Stanford secondary.",
           "summary": "Halloween ACC home matchup in Louisville."
         }
       },
