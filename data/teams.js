@@ -124,7 +124,7 @@ var TEAMS_DATABASE = {
     "stadium": "LaVell Edwards Stadium",
     "stadiumCapacity": "63,470",
     "stadiumCity": "Provo, UT",
-    "baseSpRating": 21.2,
+    "baseSpRating": 21.5,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/252.png",
     "colors": {
       "primary": "#002E5D",
@@ -545,7 +545,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0E121C",
       "bgBase": "#07090E"
     },
-    "baseSpRating": 29.0,
+    "baseSpRating": 31.5,
     "playoffContenderRank": 5,
     "sliderLabels": {
       "qb": "Arch Manning Execution",
@@ -876,11 +876,11 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "THE LONE STAR SHOWDOWN (AT KYLE FIELD)",
-        "vegasSpread": 0.5,
-        "overUnder": 59.0,
-        "baseWinProb": 48.7,
-        "projScoreUt": 29,
-        "projScoreOpp": 30,
+        "vegasSpread": -2.0,
+        "overUnder": 58.0,
+        "baseWinProb": 58.0,
+        "projScoreUt": 30,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Handling 108,000 screaming 12th Man fans in College Station.",
           "keyMatchup": "Arch Manning vs Mike Elko Wrecking Crew defense.",
@@ -918,7 +918,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0B172A",
       "bgBase": "#050D1A"
     },
-    "baseSpRating": 24.0,
+    "baseSpRating": 24.8,
     "playoffContenderRank": 16,
     "sliderLabels": {
       "qb": "Bryce Underwood Execution",
@@ -1291,7 +1291,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#1A1010",
       "bgBase": "#0D0808"
     },
-    "baseSpRating": 30.2,
+    "baseSpRating": 32.5,
     "playoffContenderRank": 1,
     "sliderLabels": {
       "qb": "Julian Sayin Execution",
@@ -1662,7 +1662,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#170C0F",
       "bgBase": "#0A0507"
     },
-    "baseSpRating": 28.8,
+    "baseSpRating": 32.0,
     "playoffContenderRank": 3,
     "sliderLabels": {
       "qb": "Gunner Stockton Execution",
@@ -2033,7 +2033,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#180B0E",
       "bgBase": "#0C0507"
     },
-    "baseSpRating": 25.4,
+    "baseSpRating": 26.5,
     "playoffContenderRank": 13,
     "sliderLabels": {
       "qb": "Keelon Russell & Nick Sheridan Pass Attack",
@@ -2404,7 +2404,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0B1A12",
       "bgBase": "#050F0A"
     },
-    "baseSpRating": 28.8,
+    "baseSpRating": 31.0,
     "playoffContenderRank": 2,
     "sliderLabels": {
       "qb": "Dante Moore Execution",
@@ -2774,7 +2774,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0C1626",
       "bgBase": "#050B14"
     },
-    "baseSpRating": 26.4,
+    "baseSpRating": 27.2,
     "playoffContenderRank": 18,
     "sliderLabels": {
       "qb": "Rocco Becht Execution",
@@ -3142,7 +3142,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0E1724",
       "bgBase": "#060B12"
     },
-    "baseSpRating": 26.8,
+    "baseSpRating": 27.5,
     "playoffContenderRank": 4,
     "sliderLabels": {
       "qb": "CJ Carr Execution",
@@ -3515,7 +3515,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#191124",
       "bgBase": "#0E0914"
     },
-    "baseSpRating": 27.8,
+    "baseSpRating": 28.5,
     "playoffContenderRank": 11,
     "sliderLabels": {
       "qb": "Sam Leavitt Execution",
@@ -3887,7 +3887,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#1A1007",
       "bgBase": "#0D0803"
     },
-    "baseSpRating": 23.2,
+    "baseSpRating": 24.0,
     "playoffContenderRank": 20,
     "sliderLabels": {
       "qb": "George MacIntyre Execution",
@@ -4258,7 +4258,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#1A0A0A",
       "bgBase": "#0D0505"
     },
-    "baseSpRating": 26.5,
+    "baseSpRating": 25.5,
     "playoffContenderRank": 6,
     "sliderLabels": {
       "qb": "Josh Hoover Execution",
@@ -4627,7 +4627,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0B1710",
       "bgBase": "#050F0A"
     },
-    "baseSpRating": 27.2,
+    "baseSpRating": 27.0,
     "playoffContenderRank": 7,
     "sliderLabels": {
       "qb": "Darian Mensah Execution",
@@ -4996,7 +4996,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#140707",
       "bgBase": "#0A0404"
     },
-    "baseSpRating": 26.8,
+    "baseSpRating": 26.5,
     "playoffContenderRank": 8,
     "sliderLabels": {
       "qb": "Marcel Reed Execution",
@@ -5326,11 +5326,11 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "THE LONE STAR SHOWDOWN (AT KYLE FIELD)",
-        "vegasSpread": -0.5,
-        "overUnder": 59.0,
-        "baseWinProb": 51.3,
-        "projScoreUt": 30,
-        "projScoreOpp": 29,
+        "vegasSpread": 2.0,
+        "overUnder": 58.0,
+        "baseWinProb": 42.0,
+        "projScoreUt": 28,
+        "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "108,000 deafening 12th Man frenzy on Black Friday.",
           "keyMatchup": "Wrecking Crew defense vs Arch Manning and Texas offense.",
@@ -5368,7 +5368,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#140A0D",
       "bgBase": "#0A0507"
     },
-    "baseSpRating": 25.8,
+    "baseSpRating": 26.0,
     "playoffContenderRank": 9,
     "sliderLabels": {
       "qb": "Trinidad Chambliss Execution",
@@ -5738,7 +5738,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#140A0A",
       "bgBase": "#0A0505"
     },
-    "baseSpRating": 25.6,
+    "baseSpRating": 26.0,
     "playoffContenderRank": 10,
     "sliderLabels": {
       "qb": "John Mateer Execution",
@@ -6492,7 +6492,7 @@ var TEAMS_DATABASE = {
       "turnover": "Coliseum Turnover Margin Luck",
       "crowd": "LA Memorial Coliseum Roar"
     },
-    "baseSpRating": 23.8,
+    "baseSpRating": 24.5,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/30.png",
     "badgeText": "USC",
     "schedule": [
@@ -6869,7 +6869,7 @@ var TEAMS_DATABASE = {
       "turnover": "Doak Campbell Turnover Luck",
       "crowd": "Doak Campbell War Chant Roar"
     },
-    "baseSpRating": 23.4,
+    "baseSpRating": 23.5,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/52.png",
     "badgeText": "FSU",
     "schedule": [
@@ -7246,7 +7246,7 @@ var TEAMS_DATABASE = {
       "turnover": "Memorial Stadium Turnover Luck",
       "crowd": "Memorial Stadium (Death Valley) Roar"
     },
-    "baseSpRating": 23.4,
+    "baseSpRating": 23.8,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/228.png",
     "badgeText": "CLEM",
     "schedule": [
@@ -7989,7 +7989,7 @@ var TEAMS_DATABASE = {
     "conference": "Big 12",
     "apRank": "#12 AP",
     "apPoints": "890 pts",
-    "baseSpRating": 24.4,
+    "baseSpRating": 23.8,
     "playoffContenderRank": 12,
     "themeClass": "theme-texastech",
     "colors": {
@@ -8365,7 +8365,7 @@ var TEAMS_DATABASE = {
     "stadium": "Rice-Eccles Stadium",
     "stadiumCapacity": "51,444",
     "stadiumCity": "Salt Lake City, UT",
-    "baseSpRating": 21.8,
+    "baseSpRating": 22.5,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/254.png",
     "colors": {
       "primary": "#CC0000",
@@ -8740,7 +8740,7 @@ var TEAMS_DATABASE = {
     "stadium": "Kinnick Stadium",
     "stadiumCapacity": "69,250",
     "stadiumCity": "Iowa City, IA",
-    "baseSpRating": 22.0,
+    "baseSpRating": 21.0,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2294.png",
     "colors": {
       "primary": "#FFE100",
@@ -9115,7 +9115,7 @@ var TEAMS_DATABASE = {
     "stadium": "Faurot Field at Memorial Stadium",
     "stadiumCapacity": "62,621",
     "stadiumCity": "Columbia, MO",
-    "baseSpRating": 21.4,
+    "baseSpRating": 20.8,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/142.png",
     "colors": {
       "primary": "#F1B82D",
@@ -9490,7 +9490,7 @@ var TEAMS_DATABASE = {
     "stadium": "Arizona Stadium",
     "stadiumCapacity": "50,782",
     "stadiumCity": "Tucson, AZ",
-    "baseSpRating": 20.4,
+    "baseSpRating": 19.5,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/12.png",
     "colors": {
       "primary": "#CC0033",
@@ -9865,7 +9865,7 @@ var TEAMS_DATABASE = {
     "stadium": "Husky Stadium",
     "stadiumCapacity": "70,138",
     "stadiumCity": "Seattle, WA",
-    "baseSpRating": 22.8,
+    "baseSpRating": 22.5,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/264.png",
     "colors": {
       "primary": "#4B2E83",
@@ -10240,7 +10240,7 @@ var TEAMS_DATABASE = {
     "stadium": "TDECU Stadium",
     "stadiumCapacity": "40,000",
     "stadiumCity": "Houston, TX",
-    "baseSpRating": 20.8,
+    "baseSpRating": 20.0,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png",
     "colors": {
       "primary": "#C8102E",
@@ -10615,7 +10615,7 @@ var TEAMS_DATABASE = {
     "stadium": "L&N Federal Credit Union Stadium",
     "stadiumCapacity": "60,800",
     "stadiumCity": "Louisville, KY",
-    "baseSpRating": 21.0,
+    "baseSpRating": 20.5,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/97.png",
     "colors": {
       "primary": "#C90000",
