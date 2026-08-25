@@ -545,11 +545,16 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
   const effectiveMargin = baseMargin + (teamOffPts - teamDefPts) - (oppOffPts - oppDefPts);
 
   // Dynamic Pace Total
-  let baseTotal = 55.0;
-  if (spA >= 27.0 && spB >= 24.0) baseTotal = 59.0;
-  else if (spA >= 25.0 && spB <= 8.0) baseTotal = 56.0;
-  else if ((tTeam.name && tTeam.name.includes('Iowa')) || (oTeam && oTeam.name && oTeam.name.includes('Iowa'))) baseTotal = 44.0;
-  else if ((tTeam.name && tTeam.name.includes('Michigan')) || (oTeam && oTeam.name && oTeam.name.includes('Michigan'))) baseTotal = 51.0;
+  let baseTotal = (game && game.overUnder) ? game.overUnder : 55.0;
+  if (!game?.overUnder) {
+    if (spA >= 27.0 && spB >= 24.0) baseTotal = 59.0;
+    else if (spA >= 25.0 && spB <= 8.0) baseTotal = 56.0;
+    else if ((tTeam.name && tTeam.name.includes('Iowa')) || (oTeam && oTeam.name && oTeam.name.includes('Iowa'))) baseTotal = 42.0;
+    else if ((tTeam.name && tTeam.name.includes('Michigan')) || (oTeam && oTeam.name && oTeam.name.includes('Michigan'))) baseTotal = 46.0;
+    else if ((tTeam.name && tTeam.name.includes('Utah')) || (oTeam && oTeam.name && oTeam.name.includes('Utah'))) baseTotal = 45.0;
+    else if ((tTeam.name && tTeam.name.includes('Texas Tech')) || (oTeam && oTeam.name && oTeam.name.includes('Texas Tech'))) baseTotal = 62.0;
+    else if ((tTeam.name && tTeam.name.includes('Ole Miss')) || (oTeam && oTeam.name && oTeam.name.includes('Ole Miss'))) baseTotal = 63.0;
+  }
 
   let adjUtScore = Math.max(6, Math.round((baseTotal + effectiveMargin + weatherScorePenalty) / 2.0));
   let adjOppScore = Math.max(3, Math.round((baseTotal - effectiveMargin + weatherScorePenalty) / 2.0));
