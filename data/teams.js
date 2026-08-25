@@ -979,7 +979,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Trench dominance against Venables defense.",
-          "keyMatchup": "Michigan defense vs John Mateer dual-threat runs.",
+          "keyMatchup": "Michigan defense vs Michael Hawkins Jr. dual-threat runs.",
           "summary": "Massive non-conference top-15 showdown in The Big House."
         }
       },
@@ -1776,7 +1776,7 @@ var TEAMS_DATABASE = {
         "projScoreUt": 30,
         "projScoreOpp": 24,
         "scoutReport": {
-          "xFactor": "Sanford Stadium crowd noise against John Mateer.",
+          "xFactor": "Sanford Stadium crowd noise against Michael Hawkins Jr..",
           "keyMatchup": "Glenn Schumann defense vs Oklahoma spread offense.",
           "summary": "Massive SEC home battle in Athens."
         }
@@ -5724,7 +5724,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Brent Venables",
     "defensiveCoordinator": "Zac Alley",
     "offensiveCoordinator": "Joe Jon Finley",
-    "starPlayer": "John Mateer (QB) / Xavier Robinson (RB) / Isaiah Sategna (WR)",
+    "starPlayer": "Michael Hawkins Jr. (QB) / Xavier Robinson (RB) / Isaiah Sategna (WR)",
     "secondaryStar": "Lloyd Avant (RB) / Deion Burks (WR)",
     "stadium": "Gaylord Family Oklahoma Memorial Stadium",
     "stadiumCity": "Norman, OK",
@@ -5741,7 +5741,7 @@ var TEAMS_DATABASE = {
     "baseSpRating": 26.0,
     "playoffContenderRank": 10,
     "sliderLabels": {
-      "qb": "John Mateer Dual-Threat Execution",
+      "qb": "Michael Hawkins Jr. Dual-Threat Attack",
       "ground": "Xavier Robinson & Lloyd Avant Ground Attack",
       "defense": "Zac Alley / Venables Swarm Defense",
       "turnover": "Turnover Margin Luck",
@@ -5771,7 +5771,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Friday night opener in Norman.",
-          "keyMatchup": "John Mateer vs UTEP defense.",
+          "keyMatchup": "Michael Hawkins Jr. vs UTEP defense.",
           "summary": "Season opener in Norman."
         }
       },
@@ -5799,7 +5799,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Handling 110,000 in The Big House.",
-          "keyMatchup": "John Mateer vs Jay Hill defense.",
+          "keyMatchup": "Michael Hawkins Jr. vs Jay Hill defense.",
           "summary": "Blockbuster non-conference battle in Ann Arbor."
         }
       },
@@ -5854,7 +5854,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Weathering 93,000 between the hedges.",
-          "keyMatchup": "Mateer dual-threat vs Glenn Schumann defense.",
+          "keyMatchup": "Michael Hawkins Jr. dual-threat vs Glenn Schumann defense.",
           "summary": "Massive SEC road battle in Athens."
         }
       },
@@ -5936,7 +5936,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Silencing the cowbells in Starkville.",
-          "keyMatchup": "John Mateer vs Mississippi State defense.",
+          "keyMatchup": "Michael Hawkins Jr. vs Mississippi State defense.",
           "summary": "SEC road victory in Starkville."
         }
       },
@@ -6046,7 +6046,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Senior Day home frenzy in Norman.",
-          "keyMatchup": "John Mateer vs Mike Elko Wrecking Crew defense.",
+          "keyMatchup": "Michael Hawkins Jr. vs Mike Elko Wrecking Crew defense.",
           "summary": "Senior Day top-10 victory in Norman."
         }
       },
@@ -6081,7 +6081,7 @@ var TEAMS_DATABASE = {
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/201.png",
     "badgeText": "OU",
-    "confirmedStarterQb": "John Mateer"
+    "confirmedStarterQb": "Michael Hawkins Jr."
   },
   "boisestate": {
     "id": "boisestate",
