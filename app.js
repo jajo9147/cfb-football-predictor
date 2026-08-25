@@ -3719,32 +3719,89 @@ async function generateHypeCard() {
   ctx.fillStyle = '#FFFFFF';
   ctx.font = 'bold 20px "Bebas Neue", sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText('🔥 MARQUEE 2026 CLASHES & PROJECTIONS:', rightX + 25, rightY + 38);
+  ctx.fillText('🔥 SEASON-DEFINING MATCHUPS & PROJECTIONS:', rightX + 25, rightY + 38);
 
-  const marqueeGames = team.schedule.filter(g => g.isMarquee).slice(0, 3);
-  const marqueeLogos = await Promise.all(marqueeGames.map(g => loadCanvasImage(g.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[g.oppAbbr] : ''))));
+  // Dynamic game selection: Highlight all losses/stumbles + top signature wins
+  const allSims = (team.schedule || []).map(g => {
+    const sim = calculateAdjustedMatchup(g);
+    const oppRankNum = (g.oppRank && g.oppRank.startsWith('#')) ? parseInt(g.oppRank.replace('#', '').replace(' AP', '')) : 99;
+    return {
+      game: g,
+      sim: sim,
+      isLoss: !sim.isWin,
+      oppRankNum: oppRankNum,
+      margin: Math.abs(sim.projUt - sim.projOpp)
+    };
+  });
+
+  const simLosses = allSims.filter(s => s.isLoss);
+  const simWins = allSims.filter(s => !s.isLoss);
+  simLosses.sort((a, b) => a.oppRankNum - b.oppRankNum || a.margin - b.margin);
+  simWins.sort((a, b) => a.oppRankNum - b.oppRankNum || b.margin - a.margin);
+
+  let featuredMatchups = [];
+  if (simLosses.length === 1) {
+    // 1 Loss (e.g. 11-1 Oregon): Show the 1 Loss + Top 2 Signature Wins
+    featuredMatchups = [
+      { ...simLosses[0], tag: '🚨 ONLY LOSS', tagColor: '#EF4444' },
+      { ...(simWins[0] || simLosses[0]), tag: '🏆 SIGNATURE WIN', tagColor: '#10B981' },
+      { ...(simWins[1] || simWins[0]), tag: '🔥 MARQUEE CLASH', tagColor: '#F59E0B' }
+    ];
+  } else if (simLosses.length === 2) {
+    // 2 Losses (e.g. 10-2): Show both losses + Top 1 Signature Win
+    featuredMatchups = [
+      { ...simLosses[0], tag: '🚨 TOUGHEST ROAD TEST', tagColor: '#EF4444' },
+      { ...simLosses[1], tag: '⚠️ PIVOTAL LOSS', tagColor: '#F97316' },
+      { ...(simWins[0] || simLosses[0]), tag: '🏆 SIGNATURE WIN', tagColor: '#10B981' }
+    ];
+  } else if (simLosses.length >= 3) {
+    // 3+ Losses: Show toughest loss + closest loss + top signature win
+    featuredMatchups = [
+      { ...simLosses[0], tag: '🚨 TOUGHEST TEST', tagColor: '#EF4444' },
+      { ...(simLosses[1] || simLosses[0]), tag: '⚠️ ROAD STUMBLE', tagColor: '#F97316' },
+      { ...(simWins[0] || simLosses[0]), tag: '🏆 SIGNATURE WIN', tagColor: '#10B981' }
+    ];
+  } else {
+    // 0 Losses (12-0 Undefeated): Show Top 3 Marquee Wins
+    featuredMatchups = [
+      { ...(simWins[0] || allSims[0]), tag: '🏆 MARQUEE TEST #1', tagColor: '#10B981' },
+      { ...(simWins[1] || simWins[0]), tag: '🔥 MARQUEE TEST #2', tagColor: '#F59E0B' },
+      { ...(simWins[2] || simWins[0]), tag: '⚔️ RIVALRY CLASH', tagColor: '#38BDF8' }
+    ];
+  }
+
+  const marqueeLogos = await Promise.all(featuredMatchups.map(m => loadCanvasImage(m.game?.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[m.game?.oppAbbr] : ''))));
 
   let mY = rightY + 75;
-  marqueeGames.forEach((g, idx) => {
-    const sim = calculateAdjustedMatchup(g);
+  featuredMatchups.forEach((m, idx) => {
+    const g = m.game;
+    const sim = m.sim;
     const mLogo = marqueeLogos[idx];
 
     // Card Row
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+    ctx.fillStyle = m.isLoss ? 'rgba(239, 68, 68, 0.08)' : 'rgba(255, 255, 255, 0.04)';
     drawCanvasRoundedRect(ctx, rightX + 20, mY - 20, rightW - 40, 52, 10);
     ctx.fill();
+    ctx.strokeStyle = m.isLoss ? 'rgba(239, 68, 68, 0.3)' : 'rgba(255, 255, 255, 0.08)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
 
     // Opponent Logo
     if (mLogo) {
-      ctx.drawImage(mLogo, rightX + 35, mY - 14, 38, 38);
+      ctx.drawImage(mLogo, rightX + 32, mY - 14, 38, 38);
     }
 
-    // Matchup Text
-    drawCanvasTextFitted(ctx, `${g.week}: vs ${g.oppAbbr} (${g.oppRank})`, rightX + 85, mY + 12, 340, 'bold 16px "Outfit", sans-serif', '#FFFFFF', 'left');
+    // Matchup Tag Badge (e.g. 🚨 ONLY LOSS or 🏆 SIGNATURE WIN)
+    drawCanvasTextFitted(ctx, m.tag, rightX + 82, mY - 3, 160, 'bold 11px "JetBrains Mono", monospace', m.tagColor, 'left');
 
-    // Score & Win
-    const winColor = sim.isWin ? '#10B981' : '#EF4444';
-    drawCanvasTextFitted(ctx, `${sim.projUt} - ${sim.projOpp} (${sim.adjWinProb}% Win)`, rightX + rightW - 35, mY + 12, 220, 'bold 16px "JetBrains Mono", monospace', winColor, 'right');
+    // Matchup Text
+    const homeStr = g.isHome ? 'vs' : '@';
+    drawCanvasTextFitted(ctx, `${g.week}: ${homeStr} ${g.oppAbbr} (${g.oppRank})`, rightX + 82, mY + 18, 330, 'bold 15px "Outfit", sans-serif', '#FFFFFF', 'left');
+
+    // Score & Win / Loss Outcome
+    const outcomeStr = m.isLoss ? 'L' : 'W';
+    const scoreColor = m.isLoss ? '#EF4444' : '#10B981';
+    drawCanvasTextFitted(ctx, `${sim.projUt} - ${sim.projOpp} ${outcomeStr} (${sim.adjWinProb}% Win)`, rightX + rightW - 35, mY + 12, 230, 'bold 15px "JetBrains Mono", monospace', scoreColor, 'right');
 
     mY += 65;
   });
