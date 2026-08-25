@@ -62,7 +62,7 @@ function getOpponentTeamId(game) {
 // INITIALIZATION & EVENT LISTENERS
 // ==========================================================================
 
-document.addEventListener('DOMContentLoaded', () => {
+function startApp() {
   initPwaServiceWorker();
   renderTeamSelector();
   initTeamSearch();
@@ -87,7 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Restore scenario from URL permalink hash (#sim=...) and listen for live hashchange
   restoreScenarioFromUrl();
   window.addEventListener('hashchange', restoreScenarioFromUrl);
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', startApp);
+} else {
+  startApp();
+}
 
 // Returns the team ID of the #1 AP ranked team from TEAMS_DATABASE
 function getTopRankedTeamId() {
