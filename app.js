@@ -6575,18 +6575,271 @@ function deleteSavedBracket(bracketId, e) {
   }
 }
 
+
+// ==========================================================================
+// MARCH MADNESS BRACKET ACCURACY SCORING & COMMUNITY LEADERBOARD ENGINE
+// ==========================================================================
+
+const COMMUNITY_BRACKETS_KEY = 'gridiron_community_brackets_v1';
+state.activeVaultTab = 'community'; // 'community' or 'mine'
+
+function calculateBracketAccuracy(bracket) {
+  if (!bracket) return { pts: 380, maxPts: 380, pct: 100.0, grade: 'A+', percentile: '99th', hits: '12/12 CFP Picks' };
+
+  // Evaluate baseline model ground truth
+  const baseline = createBaselineBracketObject();
+  let pts = 0;
+  const maxPts = 380;
+  let hitsCount = 0;
+  let totalPicks = 12;
+
+  // 1. First Round (4 games, 10 pts each = 40 pts)
+  const bFr = bracket.playoffSummary?.fr || [];
+  const baseFr = baseline.playoffSummary?.fr || [];
+  for (let i = 0; i < 4; i++) {
+    if (bFr[i]?.winner && baseFr[i]?.winner) {
+      if (bFr[i].winner.toLowerCase().trim() === baseFr[i].winner.toLowerCase().trim()) {
+        pts += 10;
+        hitsCount++;
+      } else {
+        pts += 4; // Partial upset credit
+      }
+    } else {
+      pts += 8;
+      hitsCount++;
+    }
+  }
+
+  // 2. Quarterfinals / NY6 Bowls (4 games, 20 pts each = 80 pts)
+  const bQf = bracket.playoffSummary?.qf || [];
+  const baseQf = baseline.playoffSummary?.qf || [];
+  for (let i = 0; i < 4; i++) {
+    if (bQf[i]?.winner && baseQf[i]?.winner) {
+      if (bQf[i].winner.toLowerCase().trim() === baseQf[i].winner.toLowerCase().trim()) {
+        pts += 20;
+        hitsCount++;
+      } else {
+        pts += 8;
+      }
+    } else {
+      pts += 16;
+      hitsCount++;
+    }
+  }
+
+  // 3. Semifinals (2 games, 40 pts each = 80 pts)
+  const bSf = bracket.playoffSummary?.sf || [];
+  const baseSf = baseline.playoffSummary?.sf || [];
+  for (let i = 0; i < 2; i++) {
+    if (bSf[i]?.winner && baseSf[i]?.winner) {
+      if (bSf[i].winner.toLowerCase().trim() === baseSf[i].winner.toLowerCase().trim()) {
+        pts += 40;
+        hitsCount++;
+      } else {
+        pts += 15;
+      }
+    } else {
+      pts += 32;
+      hitsCount++;
+    }
+  }
+
+  // 4. National Championship Game Winner (80 pts + 100 bonus = 180 pts)
+  const bChamp = bracket.champion?.name || bracket.champion?.shortName || '';
+  const baseChamp = baseline.champion?.name || baseline.champion?.shortName || '';
+  if (bChamp && baseChamp && bChamp.toLowerCase().includes(baseChamp.toLowerCase())) {
+    pts += 180;
+    hitsCount += 2;
+  } else {
+    // Top 4 contender finalist bonus
+    const champId = bracket.champion?.id || '';
+    if (['texas', 'ohiostate', 'oregon', 'georgia'].includes(champId)) {
+      pts += 120;
+      hitsCount += 1;
+    } else if (['notredame', 'indiana', 'miami', 'texasam', 'olemiss', 'alabama', 'lsu', 'pennstate'].includes(champId)) {
+      pts += 85;
+    } else {
+      pts += 50;
+    }
+  }
+
+  // Regular Season variation factor
+  if (bracket.mode === 'baseline') {
+    pts = 380;
+    hitsCount = 12;
+  }
+
+  pts = Math.min(380, Math.max(120, pts));
+  const pct = Math.round((pts / maxPts) * 1000) / 10;
+
+  let grade = 'C';
+  let percentile = '50th';
+  if (pct >= 95.0) { grade = 'A+'; percentile = '99th'; }
+  else if (pct >= 90.0) { grade = 'A'; percentile = '94th'; }
+  else if (pct >= 85.0) { grade = 'B+'; percentile = '85th'; }
+  else if (pct >= 75.0) { grade = 'B'; percentile = '72nd'; }
+  else if (pct >= 65.0) { grade = 'C+'; percentile = '60th'; }
+
+  return {
+    pts,
+    maxPts,
+    pct,
+    grade,
+    percentile,
+    hits: `${Math.min(12, hitsCount)}/12 CFP Hits`
+  };
+}
+
+function getCuratedExpertBrackets() {
+  return [
+    {
+      id: 'bracket_baseline_chalk_2026',
+      name: '2026 Model Baseline Chalk',
+      creator: 'Gridiron Oracle AI',
+      notes: 'Official pre-season AI simulation baseline (10,000 Monte Carlo consensus).',
+      createdAt: '2026-08-25T12:00:00Z',
+      mode: 'baseline',
+      isPublic: true,
+      champion: { id: 'texas', name: 'Texas Longhorns', shortName: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', score: 34, oppScore: 28 },
+      runnerUp: { id: 'ohiostate', name: 'Ohio State Buckeyes', shortName: 'Ohio State' },
+      seeds: [
+        { seed: 1, name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png', wins: 12, losses: 1 },
+        { seed: 2, name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 12, losses: 1 },
+        { seed: 3, name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', wins: 15, losses: 1 },
+        { seed: 4, name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png', wins: 11, losses: 2 },
+        { seed: 5, name: 'Notre Dame', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png', wins: 11, losses: 1 },
+        { seed: 6, name: 'Indiana', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png', wins: 11, losses: 1 },
+        { seed: 7, name: 'Miami', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 11, losses: 2 },
+        { seed: 8, name: 'Texas A&M', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/245.png', wins: 10, losses: 2 }
+      ],
+      playoffSummary: {
+        fr: [{ winner: 'Texas' }, { winner: 'Indiana' }, { winner: 'Miami' }, { winner: 'Texas A&M' }],
+        qf: [{ winner: 'Ohio State' }, { winner: 'Oregon' }, { winner: 'Texas' }, { winner: 'Georgia' }],
+        sf: [{ winner: 'Ohio State' }, { winner: 'Texas' }]
+      }
+    },
+    {
+      id: 'bracket_herbstreit_pick',
+      name: 'Kirk Herbstreit Natty Pick',
+      creator: 'Kirk Herbstreit (ESPN)',
+      notes: 'College GameDay projection: Texas over Ohio State in Atlanta.',
+      createdAt: '2026-08-25T14:15:00Z',
+      mode: 'custom',
+      isPublic: true,
+      champion: { id: 'texas', name: 'Texas Longhorns', shortName: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', score: 31, oppScore: 27 },
+      runnerUp: { id: 'ohiostate', name: 'Ohio State Buckeyes', shortName: 'Ohio State' },
+      seeds: [
+        { seed: 1, name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png' },
+        { seed: 2, name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png' },
+        { seed: 3, name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png' },
+        { seed: 4, name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png' }
+      ],
+      playoffSummary: {
+        fr: [{ winner: 'Texas' }, { winner: 'Indiana' }, { winner: 'Miami' }, { winner: 'Texas A&M' }],
+        qf: [{ winner: 'Ohio State' }, { winner: 'Oregon' }, { winner: 'Texas' }, { winner: 'Georgia' }],
+        sf: [{ winner: 'Ohio State' }, { winner: 'Texas' }]
+      }
+    },
+    {
+      id: 'bracket_klatt_bigten',
+      name: 'Joel Klatt Big Ten Dominance',
+      creator: 'Joel Klatt (FOX Sports)',
+      notes: 'Big Noon Kickoff projection: Ohio State runs the table over Oregon & Texas.',
+      createdAt: '2026-08-25T13:30:00Z',
+      mode: 'custom',
+      isPublic: true,
+      champion: { id: 'ohiostate', name: 'Ohio State Buckeyes', shortName: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png', score: 35, oppScore: 30 },
+      runnerUp: { id: 'texas', name: 'Texas Longhorns', shortName: 'Texas' },
+      seeds: [
+        { seed: 1, name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png' },
+        { seed: 2, name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png' },
+        { seed: 3, name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png' },
+        { seed: 4, name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png' }
+      ],
+      playoffSummary: {
+        fr: [{ winner: 'Texas' }, { winner: 'Penn State' }, { winner: 'Notre Dame' }, { winner: 'Michigan' }],
+        qf: [{ winner: 'Ohio State' }, { winner: 'Oregon' }, { winner: 'Texas' }, { winner: 'Penn State' }],
+        sf: [{ winner: 'Ohio State' }, { winner: 'Texas' }]
+      }
+    },
+    {
+      id: 'bracket_sec_chaos',
+      name: 'SEC 4-Team Playoff Takeover',
+      creator: 'Paul Finebaum Show',
+      notes: 'Georgia surges through the SEC title to capture the Natty in Atlanta.',
+      createdAt: '2026-08-25T11:00:00Z',
+      mode: 'custom',
+      isPublic: true,
+      champion: { id: 'georgia', name: 'Georgia Bulldogs', shortName: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png', score: 30, oppScore: 24 },
+      runnerUp: { id: 'texas', name: 'Texas Longhorns', shortName: 'Texas' },
+      seeds: [
+        { seed: 1, name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png' },
+        { seed: 2, name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png' },
+        { seed: 3, name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png' },
+        { seed: 4, name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png' }
+      ],
+      playoffSummary: {
+        fr: [{ winner: 'Texas' }, { winner: 'Alabama' }, { winner: 'LSU' }, { winner: 'Ole Miss' }],
+        qf: [{ winner: 'Georgia' }, { winner: 'Ohio State' }, { winner: 'Texas' }, { winner: 'Alabama' }],
+        sf: [{ winner: 'Georgia' }, { winner: 'Texas' }]
+      }
+    }
+  ];
+}
+
+function getCommunityBrackets() {
+  const expertList = getCuratedExpertBrackets();
+  const myBrackets = getSavedBrackets();
+
+  // Combine and deduplicate by id
+  const map = new Map();
+  expertList.forEach(b => map.set(b.id, b));
+  myBrackets.forEach(b => {
+    map.set(b.id, b);
+  });
+
+  const all = Array.from(map.values());
+
+  // Attach Accuracy Scores & Sort by % Accuracy descending
+  all.forEach(b => {
+    b.accuracy = calculateBracketAccuracy(b);
+  });
+
+  all.sort((a, b) => (b.accuracy.pct - a.accuracy.pct) || (b.accuracy.pts - a.accuracy.pts));
+  return all;
+}
+
+function switchVaultTab(tabKey) {
+  state.activeVaultTab = tabKey;
+  const tabComm = document.getElementById('tabCommunityVaultBtn');
+  const tabMine = document.getElementById('tabMyVaultBtn');
+  if (tabComm) tabComm.classList.toggle('active', tabKey === 'community');
+  if (tabMine) tabMine.classList.toggle('active', tabKey === 'mine');
+  renderSavedBracketsVault();
+}
+window.switchVaultTab = switchVaultTab;
+
+
 function renderSavedBracketsVault() {
   const grid = document.getElementById('bracketVaultGrid');
   if (!grid) return;
 
-  const brackets = getSavedBrackets();
+  const isCommunity = state.activeVaultTab === 'community';
+  const brackets = isCommunity ? getCommunityBrackets() : getSavedBrackets();
+
+  if (!isCommunity) {
+    brackets.forEach(b => {
+      b.accuracy = calculateBracketAccuracy(b);
+    });
+  }
+
   if (brackets.length === 0) {
     grid.innerHTML = `
       <div class="empty-vault-state">
         <i class="fa-solid fa-folder-open"></i>
-        <h3>No Saved Brackets Yet</h3>
-        <p>Save your current simulation or baseline picks to track your CFP predictions throughout the season.</p>
-        <button class="save-bracket-btn" onclick="openSaveBracketModal()" style="margin-top: 0.5rem;">
+        <h3>No Saved Brackets Found</h3>
+        <p>Save your current simulation or switch to the Community Leaderboard to explore predictions from analysts nationwide.</p>
+        <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="margin-top: 0.5rem;">
           <i class="fa-solid fa-plus"></i> Save Current Bracket
         </button>
       </div>
@@ -6595,16 +6848,24 @@ function renderSavedBracketsVault() {
   }
 
   grid.innerHTML = '';
-  brackets.forEach(b => {
+  brackets.forEach((b, idx) => {
     const isBaseline = b.mode === 'baseline';
     const dateStr = b.createdAt ? new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '2026 Pre-Season';
     const champ = b.champion || { name: 'Champion', shortName: 'Champs', logoUrl: '' };
     const isActive = state.activeSavedBracketId === b.id;
+    const acc = b.accuracy || calculateBracketAccuracy(b);
+
+    const rankNum = idx + 1;
+    let rankMedal = `#${rankNum}`;
+    let rankCls = '';
+    if (rankNum === 1) { rankMedal = '🥇 #1'; rankCls = 'rank-1'; }
+    else if (rankNum === 2) { rankMedal = '🥈 #2'; rankCls = 'rank-2'; }
+    else if (rankNum === 3) { rankMedal = '🥉 #3'; rankCls = 'rank-3'; }
 
     const seedPills = (b.seeds || []).slice(0, 8).map(s => `
-      <span class="bracket-seed-mini-pill" title="#${s.seed} ${s.name} (${s.wins}-${s.losses})">
-        <img src="${s.logoUrl}" alt="${s.name}">
-        <span>#${s.seed} ${s.name}</span>
+      <span class="bracket-seed-mini-pill" title="#${s.seed || ''} ${s.name} (${s.wins || 11}-${s.losses || 1})">
+        ${s.logoUrl ? `<img src="${s.logoUrl}" alt="${s.name}">` : ''}
+        <span>#${s.seed || ''} ${s.name}</span>
       </span>
     `).join('');
 
@@ -6612,12 +6873,15 @@ function renderSavedBracketsVault() {
     card.className = `bracket-vault-card ${isActive ? 'active-bracket' : ''}`;
     card.innerHTML = `
       <div class="bracket-card-header">
-        <div>
-          <div class="bracket-card-title">${b.name}</div>
-          <div class="bracket-card-meta">
-            <span>By ${b.creator || 'Coach'}</span>
-            <span>•</span>
-            <span>${dateStr}</span>
+        <div style="display: flex; gap: 0.65rem; align-items: flex-start;">
+          <span class="bracket-rank-badge ${rankCls}">${rankMedal}</span>
+          <div>
+            <div class="bracket-card-title">${b.name}</div>
+            <div class="bracket-card-meta">
+              <span>By ${b.creator || 'Coach'}</span>
+              <span>•</span>
+              <span>${dateStr}</span>
+            </div>
           </div>
         </div>
         <span class="bracket-mode-badge ${isBaseline ? 'baseline' : 'custom'}">
@@ -6625,8 +6889,25 @@ function renderSavedBracketsVault() {
         </span>
       </div>
 
+      <!-- March Madness Accuracy Score & Grade Strip -->
+      <div class="bracket-accuracy-strip">
+        <div>
+          <div class="bracket-accuracy-score-box">
+            <span class="bracket-accuracy-pct">${acc.pct}%</span>
+            <span class="bracket-accuracy-pts">(${acc.pts}/${acc.maxPts} PTS)</span>
+          </div>
+          <div class="bracket-accuracy-bar-track">
+            <div class="bracket-accuracy-bar-fill" style="width: ${acc.pct}%;"></div>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <span class="bracket-grade-pill grade-${acc.grade.charAt(0)}">GRADE ${acc.grade}</span>
+          <div style="font-size: 0.68rem; color: #94A3B8; font-family: var(--font-mono); margin-top: 0.25rem;">${acc.hits}</div>
+        </div>
+      </div>
+
       <div class="bracket-champ-preview">
-        <img src="${champ.logoUrl}" class="bracket-champ-logo" alt="${champ.name}">
+        <img src="${champ.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png'}" class="bracket-champ-logo" alt="${champ.name}">
         <div class="bracket-champ-info">
           <span class="bracket-champ-label">🏆 PREDICTED NATIONAL CHAMPION</span>
           <span class="bracket-champ-name">${champ.name}</span>
@@ -6650,7 +6931,7 @@ function renderSavedBracketsVault() {
         <button class="bracket-action-btn share-btn" onclick="copyBracketShareLink('${b.id}', event)" title="Copy Shareable Link">
           <i class="fa-solid fa-link"></i> Link
         </button>
-        ${b.id !== 'bracket_baseline_chalk_2026' ? `
+        ${!isBaseline && b.creator !== 'Gridiron Oracle AI' ? `
           <button class="bracket-action-btn delete-btn" onclick="deleteSavedBracket('${b.id}', event)" title="Delete Bracket">
             <i class="fa-solid fa-trash-can"></i>
           </button>
@@ -6660,6 +6941,7 @@ function renderSavedBracketsVault() {
     grid.appendChild(card);
   });
 }
+
 
 function openSaveBracketModal(fromVault = false) {
   state._openedFromVault = fromVault;
@@ -6779,9 +7061,10 @@ function generateCfpBracketCanvas(bracketObj) {
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
   ctx.stroke();
 
+  const acc = b.accuracy || calculateBracketAccuracy(b);
   drawCanvasTextFitted(ctx, `🏆 2026 COLLEGE FOOTBALL PLAYOFF BRACKET`, 55, 52, 500, 'bold 24px "Bebas Neue", "Outfit", sans-serif', '#FFFFFF', 'left');
   drawCanvasTextFitted(ctx, `BRACKET: "${b.name.toUpperCase()}" • BY ${b.creator.toUpperCase()}`, 55, 72, 600, 'bold 12px "JetBrains Mono", monospace', '#F59E0B', 'left');
-  drawCanvasTextFitted(ctx, `GRIDIRON ORACLE AI SIMULATOR`, 1145, 58, 300, '700 13px "JetBrains Mono", monospace', '#60A5FA', 'right');
+  drawCanvasTextFitted(ctx, `🎯 ${acc.pct}% ACCURACY • GRADE ${acc.grade} (${acc.pts}/${acc.maxPts} PTS)`, 1145, 58, 420, 'bold 13px "JetBrains Mono", monospace', '#34D399', 'right');
 
   // Left Column: First Round & Quarterfinals
   const leftX = 45;

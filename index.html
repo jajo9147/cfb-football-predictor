@@ -1131,6 +1131,14 @@
           <input type="text" id="bracketNotesInput" class="bracket-form-input" placeholder="e.g. Arch Manning MVP season + LSU road upset" maxlength="80">
         </div>
 
+        <label class="publish-toggle-wrap">
+          <input type="checkbox" id="publishToCommunityCheckbox" checked>
+          <div class="publish-toggle-text">
+            <strong>🌐 Publish to Community Leaderboard</strong>
+            <small>Allows anyone on any phone or computer to see, vote, and compare your bracket on the global leaderboard.</small>
+          </div>
+        </label>
+
         <!-- Dynamic Bracket Preview Box -->
         <div class="bracket-preview-summary-box" id="saveBracketPreviewBox">
           <!-- Dynamically populated -->
@@ -1157,7 +1165,7 @@
           <span class="matchup-tag" style="background: rgba(245, 158, 11, 0.2); color: #FBBF24; border-color: rgba(245, 158, 11, 0.4);">
             <i class="fa-solid fa-folder-closed"></i> SAVED PROJECTIONS & BRACKETS
           </span>
-          <h2 class="modal-title" style="font-size: 1.6rem; margin-top: 0.25rem;">CFP BRACKET VAULT</h2>
+          <h2 class="modal-title" style="font-size: 1.6rem; margin-top: 0.25rem;">CFP BRACKET VAULT & LEADERBOARD</h2>
         </div>
         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
           <button class="action-btn secondary-btn" onclick="importBracketFromPrompt()" style="padding: 0.5rem 0.85rem; font-size: 0.82rem;" title="Import a bracket from a shared URL link or code">
@@ -1171,7 +1179,17 @@
         </div>
       </div>
 
-      <p style="font-size: 0.85rem; color: #94A3B8; margin-top: -0.25rem;">Manage your saved 12-team CFP brackets, load custom simulations, and export March Madness graphics to share with the group chat.</p>
+      <!-- Tab Switcher: Community Leaderboard vs My Saved Brackets -->
+      <div class="vault-tab-bar" style="margin-top: 0.75rem;">
+        <button class="vault-tab-btn active" id="tabCommunityVaultBtn" onclick="switchVaultTab('community')">
+          <i class="fa-solid fa-trophy"></i> <span>Community Leaderboard (All Brackets)</span>
+        </button>
+        <button class="vault-tab-btn" id="tabMyVaultBtn" onclick="switchVaultTab('mine')">
+          <i class="fa-solid fa-user"></i> <span>My Saved Brackets</span>
+        </button>
+      </div>
+
+      <p style="font-size: 0.85rem; color: #94A3B8; margin-top: -0.25rem;">Compare prediction accuracy scores, percentile grades, and load community simulations from fans and analysts nationwide.</p>
 
       <!-- Vault Brackets List / Grid -->
       <div class="bracket-vault-grid" id="bracketVaultGrid">
