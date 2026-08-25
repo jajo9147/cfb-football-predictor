@@ -3502,75 +3502,235 @@ function initHypeCardExport() {
   }
 }
 
-function generateHypeCard() {
+function drawCanvasRoundedRect(ctx, x, y, width, height, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}
+
+function loadCanvasImage(url) {
+  return new Promise((resolve) => {
+    if (!url) return resolve(null);
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = url;
+  });
+}
+
+async function generateHypeCard() {
   const canvas = document.getElementById('hypeCanvas');
   if (!canvas) return;
+  canvas.width = 1200;
+  canvas.height = 675;
   const ctx = canvas.getContext('2d');
-  const team = TEAMS_DATABASE[state.currentTeamId];
+  const team = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
 
-  // Draw Background
-  ctx.fillStyle = team.colors.bgBase || '#07090E';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  const logoImg = await loadCanvasImage(team.logoUrl);
 
-  // Gradient Overlay
-  const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  grad.addColorStop(0, team.colors.primary);
-  grad.addColorStop(1, '#000000');
-  ctx.fillStyle = grad;
-  ctx.globalAlpha = 0.35;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Background
+  ctx.fillStyle = '#080C14';
+  ctx.fillRect(0, 0, 1200, 675);
+
+  // Radial Glow
+  const glow = ctx.createRadialGradient(280, 260, 10, 280, 260, 450);
+  glow.addColorStop(0, team.colors?.primary || '#BF5700');
+  glow.addColorStop(1, 'rgba(8, 12, 20, 0)');
+  ctx.fillStyle = glow;
+  ctx.globalAlpha = 0.55;
+  ctx.fillRect(0, 0, 1200, 675);
   ctx.globalAlpha = 1.0;
 
-  // Border & Glow
-  ctx.strokeStyle = team.colors.accent;
-  ctx.lineWidth = 4;
-  ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+  // Grid texture
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+  ctx.lineWidth = 1;
+  for (let x = 80; x < 1200; x += 100) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, 675);
+    ctx.stroke();
+  }
 
-  // Header Title
+  // Outer Border
+  ctx.strokeStyle = team.colors?.accent || '#F59E0B';
+  ctx.lineWidth = 3;
+  drawCanvasRoundedRect(ctx, 16, 16, 1168, 643, 20);
+  ctx.stroke();
+
+  // Header Banner
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+  drawCanvasRoundedRect(ctx, 40, 32, 1120, 52, 14);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+  ctx.stroke();
+
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 36px Bebas Neue, Outfit, sans-serif';
-  ctx.fillText(`GRIDIRON ORACLE • ${team.name.toUpperCase()}`, 30, 55);
+  ctx.font = 'bold 24px "Bebas Neue", "Outfit", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(`🏈 GRIDIRON ORACLE • ${team.name.toUpperCase()}`, 60, 66);
 
-  ctx.fillStyle = team.colors.accent;
-  ctx.font = 'bold 16px JetBrains Mono, monospace';
-  ctx.fillText(`OFFICIAL 2026 AI SEASON PROJECTION • 10,000 MONTE CARLO DRIVES`, 30, 85);
+  ctx.fillStyle = team.colors?.accent || '#F59E0B';
+  ctx.font = 'bold 13px "JetBrains Mono", monospace';
+  ctx.textAlign = 'right';
+  ctx.fillText(`2026 OFFICIAL AI BLUEPRINT • 10,000 SIMULATIONS`, 1130, 64);
 
-  // Big Record & Seed Box
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
-  ctx.fillRect(30, 110, 350, 140);
-  ctx.strokeRect(30, 110, 350, 140);
+  // Left Column - Big Team Hero Card
+  const leftW = 420;
+  const leftH = 430;
+  const leftX = 40;
+  const leftY = 105;
+
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.8)';
+  drawCanvasRoundedRect(ctx, leftX, leftY, leftW, leftH, 18);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.stroke();
+
+  // Team Logo Circle
+  const logoCenterX = leftX + leftW / 2;
+  const logoCenterY = leftY + 95;
+  const logoRad = 65;
+
+  ctx.save();
+  ctx.shadowColor = team.colors?.primary || '#BF5700';
+  ctx.shadowBlur = 25;
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+  ctx.beginPath();
+  ctx.arc(logoCenterX, logoCenterY, logoRad, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.lineWidth = 3.5;
+  ctx.strokeStyle = team.colors?.primary || '#BF5700';
+  ctx.stroke();
+  ctx.restore();
+
+  if (logoImg) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(logoCenterX, logoCenterY, logoRad - 5, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.drawImage(logoImg, logoCenterX - (logoRad - 8), logoCenterY - (logoRad - 8), (logoRad - 8) * 2, (logoRad - 8) * 2);
+    ctx.restore();
+  }
+
+  // Predicted Record
+  const recStr = document.getElementById('kpiRecord')?.innerText || '11 - 1';
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 64px "Bebas Neue", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(recStr, logoCenterX, leftY + 235);
+
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = 'bold 14px "JetBrains Mono", monospace';
+  ctx.fillText('PROJECTED REGULAR SEASON', logoCenterX, leftY + 260);
+
+  // CFP Status Pill
+  const seedStr = document.getElementById('kpiCfpSeed')?.innerText || '#1 SEED';
+  const postStr = document.getElementById('kpiPostseasonOutcome')?.innerText || '🏆 National Champions';
+
+  ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
+  drawCanvasRoundedRect(ctx, leftX + 25, leftY + 285, leftW - 50, 42, 12);
+  ctx.fill();
+  ctx.strokeStyle = '#F59E0B';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  ctx.fillStyle = '#F59E0B';
+  ctx.font = 'bold 15px "JetBrains Mono", monospace';
+  ctx.fillText(`${seedStr} • ${postStr}`, logoCenterX, leftY + 312);
+
+  // Natty Odds Pill
+  const nattyOdds = document.getElementById('kpiNattyOdds')?.innerText || '+350';
+  ctx.fillStyle = '#38BDF8';
+  ctx.font = '600 13px "JetBrains Mono", monospace';
+  ctx.fillText(`NATTY TITLE ODDS: ${nattyOdds}`, logoCenterX, leftY + 360);
+
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = '500 13px "Outfit", sans-serif';
+  ctx.fillText(`📍 ${team.stadium || 'Stadium'} (${team.stadiumCapacity || '100k'})`, logoCenterX, leftY + 395);
+
+  // Right Column - Top Marquee Clashes & Personnel
+  const rightX = 480;
+  const rightW = 680;
+  const rightY = 105;
+
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.8)';
+  drawCanvasRoundedRect(ctx, rightX, rightY, rightW, 280, 18);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.stroke();
 
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 64px Bebas Neue, sans-serif';
-  ctx.fillText(document.getElementById('kpiRecord').innerText, 50, 180);
+  ctx.font = 'bold 20px "Bebas Neue", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('🔥 MARQUEE 2026 CLASHES & PROJECTIONS:', rightX + 25, rightY + 38);
 
-  ctx.fillStyle = team.colors.accent;
-  ctx.font = 'bold 20px JetBrains Mono, monospace';
-  ctx.fillText(`${document.getElementById('kpiCfpSeed').innerText} • CFP CONTENDER`, 50, 225);
+  const marqueeGames = team.schedule.filter(g => g.isMarquee).slice(0, 3);
+  const marqueeLogos = await Promise.all(marqueeGames.map(g => loadCanvasImage(g.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[g.oppAbbr] : ''))));
 
-  // Key Matchups Column
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 20px Bebas Neue, sans-serif';
-  ctx.fillText('MARQUEE BATTLES & SPREADS:', 410, 135);
-
-  let yOffset = 165;
-  team.schedule.filter(g => g.isMarquee).slice(0, 3).forEach(g => {
+  let mY = rightY + 75;
+  marqueeGames.forEach((g, idx) => {
     const sim = calculateAdjustedMatchup(g);
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-    ctx.font = '15px Outfit, sans-serif';
-    ctx.fillText(`${g.week}: vs ${g.oppAbbr} (${g.oppRank})`, 410, yOffset);
+    const mLogo = marqueeLogos[idx];
 
+    // Card Row
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+    drawCanvasRoundedRect(ctx, rightX + 20, mY - 20, rightW - 40, 52, 10);
+    ctx.fill();
+
+    // Opponent Logo
+    if (mLogo) {
+      ctx.drawImage(mLogo, rightX + 35, mY - 14, 38, 38);
+    }
+
+    // Matchup Text
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 16px "Outfit", sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(`${g.week}: vs ${g.oppAbbr} (${g.oppRank})`, rightX + 85, mY + 12);
+
+    // Score & Win
     ctx.fillStyle = sim.isWin ? '#10B981' : '#EF4444';
-    ctx.font = 'bold 15px JetBrains Mono, monospace';
-    ctx.fillText(`${sim.projUt}-${sim.projOpp} (${sim.adjWinProb}% Win)`, 630, yOffset);
+    ctx.font = 'bold 16px "JetBrains Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(`${sim.projUt} - ${sim.projOpp} (${sim.adjWinProb}% Win)`, rightX + rightW - 40, mY + 12);
 
-    yOffset += 35;
+    mY += 65;
   });
 
+  // Bottom Personnel Card
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+  drawCanvasRoundedRect(ctx, rightX, 400, rightW, 135, 16);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+  ctx.stroke();
+
+  ctx.fillStyle = '#F59E0B';
+  ctx.font = 'bold 14px "JetBrains Mono", monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText(`🎯 COACHING STAFF: HC ${team.headCoach.toUpperCase()} • OC ${team.offensiveCoordinator.toUpperCase()} • DC ${team.defensiveCoordinator.toUpperCase()}`, rightX + 25, 435);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = '600 15px "Outfit", sans-serif';
+  ctx.fillText(`⭐ PLAYMAKERS: ${team.starPlayer}`, rightX + 25, 470);
+
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '500 13px "Outfit", sans-serif';
+  ctx.fillText(`🛡️ SECONDARY CORE: ${team.secondaryStar || 'Consensus Top-Tier Depth'}`, rightX + 25, 502);
+
   // Footer Tagline
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-  ctx.font = '13px JetBrains Mono, monospace';
-  ctx.fillText('Powered by Gridiron Oracle • https://jajo9147.github.io/cfb-football-predictor/', 30, 420);
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+  ctx.font = '12px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('POWERED BY GRIDIRON ORACLE • https://jajo9147.github.io/cfb-football-predictor/', 600, 620);
 
   document.getElementById('hypeCardModal').classList.add('open');
 }
@@ -5406,12 +5566,14 @@ function restoreScenarioFromUrl() {
 }
 
 
-function generateGameHypeCard(game) {
+async function generateGameHypeCard(game) {
   const canvas = document.getElementById('hypeCanvas');
   if (!canvas) return;
+  canvas.width = 1200;
+  canvas.height = 675;
   const ctx = canvas.getContext('2d');
 
-  let teamA, teamB, scoreA, scoreB, probA;
+  let teamA, teamB, scoreA, scoreB, probA, spreadA, ou;
   if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
     teamA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
     teamB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
@@ -5419,94 +5581,285 @@ function generateGameHypeCard(game) {
     scoreA = sim.scoreA;
     scoreB = sim.scoreB;
     probA = sim.winProbA;
+    spreadA = sim.spreadA || (scoreB - scoreA);
+    ou = scoreA + scoreB;
   } else {
     teamA = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
     const oppId = getOpponentTeamId(game);
     const dbOpp = (oppId && TEAMS_DATABASE[oppId]) ? TEAMS_DATABASE[oppId] : null;
-    teamB = { 
+    teamB = dbOpp || { 
       shortName: game.oppAbbr || 'OPP', 
       name: game.opponent || 'Opponent', 
-      apRank: game.oppRank || '', 
+      apRank: game.oppRank || 'NR', 
       logoUrl: game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || '', 
-      colors: { primary: game.oppColor || (dbOpp?.colors?.primary) || '#333' } 
+      colors: { primary: game.oppColor || '#334155', accent: '#94A3B8' },
+      starPlayer: game.scoutReport?.keyMatchup || ''
     };
     const sim = calculateAdjustedMatchup(game);
     scoreA = sim.projUt;
     scoreB = sim.projOpp;
     probA = sim.adjWinProb;
+    spreadA = game.vegasSpread;
+    ou = game.overUnder || (scoreA + scoreB);
   }
 
-  // Draw Background
-  ctx.fillStyle = '#07090E';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Preload both team logos
+  const [logoA, logoB] = await Promise.all([
+    loadCanvasImage(teamA.logoUrl),
+    loadCanvasImage(teamB.logoUrl || game?.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game?.oppAbbr] : ''))
+  ]);
 
-  // Dynamic gradient between both teams
-  const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  grad.addColorStop(0, teamA.colors?.primary || '#BF5700');
-  grad.addColorStop(1, teamB.colors?.primary || '#00274C');
-  ctx.fillStyle = grad;
-  ctx.globalAlpha = 0.35;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Base background
+  ctx.fillStyle = '#080C14';
+  ctx.fillRect(0, 0, 1200, 675);
+
+  // Radial ambient team glow behind Team A (Left)
+  const glowA = ctx.createRadialGradient(240, 250, 10, 240, 250, 420);
+  glowA.addColorStop(0, teamA.colors?.primary || '#BF5700');
+  glowA.addColorStop(1, 'rgba(8, 12, 20, 0)');
+  ctx.fillStyle = glowA;
+  ctx.globalAlpha = 0.5;
+  ctx.fillRect(0, 0, 600, 675);
+
+  // Radial ambient team glow behind Team B (Right)
+  const glowB = ctx.createRadialGradient(960, 250, 10, 960, 250, 420);
+  glowB.addColorStop(0, teamB.colors?.primary || '#00274C');
+  glowB.addColorStop(1, 'rgba(8, 12, 20, 0)');
+  ctx.fillStyle = glowB;
+  ctx.globalAlpha = 0.5;
+  ctx.fillRect(600, 0, 600, 675);
   ctx.globalAlpha = 1.0;
 
-  // Border & Glow
-  ctx.strokeStyle = '#F59E0B';
-  ctx.lineWidth = 4;
-  ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+  // Subtle Yard Line Grid on canvas
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+  ctx.lineWidth = 1;
+  for (let x = 80; x < 1200; x += 100) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, 675);
+    ctx.stroke();
+  }
 
-  // Header Title
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 30px Bebas Neue, Outfit, sans-serif';
-  ctx.fillText('GRIDIRON ORACLE • MATCHUP SIMULATION', 30, 48);
+  // Outer Border & Glow
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.lineWidth = 2;
+  drawCanvasRoundedRect(ctx, 16, 16, 1168, 643, 20);
+  ctx.stroke();
+
+  // Header Banner Pill
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+  drawCanvasRoundedRect(ctx, 40, 32, 1120, 52, 14);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+  ctx.stroke();
 
   ctx.fillStyle = '#F59E0B';
-  ctx.font = 'bold 14px JetBrains Mono, monospace';
-  ctx.fillText(`${(game.stadium || 'Championship Stadium').toUpperCase()} • 10,000 MONTE CARLO DRIVES`, 30, 75);
-
-  // Scoreboard Card
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
-  ctx.fillRect(30, 95, canvas.width - 60, 180);
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-  ctx.strokeRect(30, 95, canvas.width - 60, 180);
-
-  // Team A Column
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 28px Outfit, sans-serif';
-  ctx.fillText(teamA.shortName || teamA.name, 60, 160);
-  ctx.fillStyle = '#94A3B8';
-  ctx.font = 'bold 16px JetBrains Mono, monospace';
-  ctx.fillText(teamA.apRank || '', 60, 190);
-
-  // Score Center
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 72px Bebas Neue, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText(`${scoreA} - ${scoreB}`, canvas.width / 2, 195);
-
-  // Win Probability
-  ctx.fillStyle = '#38BDF8';
-  ctx.font = 'bold 18px JetBrains Mono, monospace';
-  ctx.fillText(`WIN PROB: ${probA}% - ${100 - probA}%`, canvas.width / 2, 245);
+  ctx.font = 'bold 22px "Bebas Neue", "Outfit", sans-serif';
   ctx.textAlign = 'left';
+  ctx.fillText('🏈 GRIDIRON ORACLE • MATCHUP SIMULATION ENGINE', 60, 65);
 
-  // Team B Column
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 28px Outfit, sans-serif';
-  ctx.fillText(teamB.shortName || teamB.name, canvas.width - 220, 160);
   ctx.fillStyle = '#94A3B8';
-  ctx.font = 'bold 16px JetBrains Mono, monospace';
-  ctx.fillText(teamB.apRank || '', canvas.width - 220, 190);
+  ctx.font = '600 13px "JetBrains Mono", monospace';
+  ctx.textAlign = 'right';
+  const venueText = `${(game.week || 'WEEK 1')} • ${(game.stadium || teamA.stadium || 'STADIUM').toUpperCase()}`;
+  ctx.fillText(venueText, 1130, 64);
 
-  // Tactical Insight Note
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-  ctx.font = '14px Outfit, sans-serif';
-  const winTeamName = scoreA > scoreB ? teamA.name : teamB.name;
-  ctx.fillText(`Projected Winner: ${winTeamName} (${Math.max(probA, 100 - probA)}% confidence)`, 40, 320);
+  // ==========================================
+  // TEAM A (LEFT COLUMN)
+  // ==========================================
+  const centerAX = 240;
+  const logoRadius = 75;
+  const logoCenterY = 240;
 
-  // Footer Tagline
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
-  ctx.font = '12px JetBrains Mono, monospace';
-  ctx.fillText('Powered by Gridiron Oracle • https://jajo9147.github.io/cfb-football-predictor/', 30, 420);
+  ctx.save();
+  ctx.shadowColor = teamA.colors?.primary || '#BF5700';
+  ctx.shadowBlur = 30;
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+  ctx.beginPath();
+  ctx.arc(centerAX, logoCenterY, logoRadius, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = teamA.colors?.primary || '#BF5700';
+  ctx.stroke();
+  ctx.restore();
+
+  if (logoA) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(centerAX, logoCenterY, logoRadius - 6, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.drawImage(logoA, centerAX - (logoRadius - 10), logoCenterY - (logoRadius - 10), (logoRadius - 10) * 2, (logoRadius - 10) * 2);
+    ctx.restore();
+  } else {
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 36px "Bebas Neue", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(teamA.abbr || 'TEAM', centerAX, logoCenterY + 12);
+  }
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = teamA.colors?.accent || '#F59E0B';
+  ctx.font = 'bold 15px "JetBrains Mono", monospace';
+  ctx.fillText(teamA.apRank || '#1 AP', centerAX, 350);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 28px "Outfit", sans-serif';
+  ctx.fillText((teamA.name || teamA.shortName || 'Team A').toUpperCase(), centerAX, 385);
+
+  const starA = teamA.starPlayer ? teamA.starPlayer.split('/')[0].trim() : 'Offensive Starters';
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '500 13px "Outfit", sans-serif';
+  ctx.fillText(`⭐ ${starA}`, centerAX, 415);
+
+  // ==========================================
+  // TEAM B (RIGHT COLUMN)
+  // ==========================================
+  const centerBX = 960;
+
+  ctx.save();
+  ctx.shadowColor = teamB.colors?.primary || '#00274C';
+  ctx.shadowBlur = 30;
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+  ctx.beginPath();
+  ctx.arc(centerBX, logoCenterY, logoRadius, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = teamB.colors?.primary || '#00274C';
+  ctx.stroke();
+  ctx.restore();
+
+  if (logoB) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(centerBX, logoCenterY, logoRadius - 6, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.drawImage(logoB, centerBX - (logoRadius - 10), logoCenterY - (logoRadius - 10), (logoRadius - 10) * 2, (logoRadius - 10) * 2);
+    ctx.restore();
+  } else {
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 36px "Bebas Neue", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(teamB.shortName || 'OPP', centerBX, logoCenterY + 12);
+  }
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = teamB.colors?.accent || '#38BDF8';
+  ctx.font = 'bold 15px "JetBrains Mono", monospace';
+  ctx.fillText(teamB.apRank || 'NR', centerBX, 350);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 28px "Outfit", sans-serif';
+  ctx.fillText((teamB.name || teamB.shortName || 'Opponent').toUpperCase(), centerBX, 385);
+
+  const starB = teamB.starPlayer ? teamB.starPlayer.split('/')[0].trim() : 'Key Matchup Focus';
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '500 13px "Outfit", sans-serif';
+  ctx.fillText(`⭐ ${starB}`, centerBX, 415);
+
+  // ==========================================
+  // CENTER SCOREBOARD & ODDS CONSOLE
+  // ==========================================
+  const boxW = 380;
+  const boxH = 340;
+  const boxX = 600 - boxW / 2;
+  const boxY = 110;
+
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+  drawCanvasRoundedRect(ctx, boxX, boxY, boxW, boxH, 18);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  const isAWin = scoreA > scoreB;
+  const winTeamName = isAWin ? (teamA.shortName || teamA.name) : (teamB.shortName || teamB.name);
+
+  ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
+  drawCanvasRoundedRect(ctx, boxX + 30, boxY + 20, boxW - 60, 34, 17);
+  ctx.fill();
+  ctx.strokeStyle = '#10B981';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  ctx.fillStyle = '#10B981';
+  ctx.font = 'bold 14px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(`🏆 PROJECTED WINNER: ${winTeamName.toUpperCase()}`, 600, boxY + 42);
+
+  ctx.fillStyle = isAWin ? '#FFFFFF' : '#94A3B8';
+  ctx.font = 'bold 78px "Bebas Neue", sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText(scoreA, 560, boxY + 130);
+
+  ctx.fillStyle = '#F59E0B';
+  ctx.font = 'bold 50px "Bebas Neue", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('-', 600, boxY + 124);
+
+  ctx.fillStyle = !isAWin ? '#FFFFFF' : '#94A3B8';
+  ctx.font = 'bold 78px "Bebas Neue", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(scoreB, 640, boxY + 130);
+
+  const barW = 300;
+  const barH = 14;
+  const barX = 600 - barW / 2;
+  const barY = boxY + 155;
+
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+  drawCanvasRoundedRect(ctx, barX, barY, barW, barH, 7);
+  ctx.fill();
+
+  const fillW = Math.max(14, Math.min(barW - 14, (probA / 100) * barW));
+  ctx.fillStyle = isAWin ? '#10B981' : '#38BDF8';
+  drawCanvasRoundedRect(ctx, barX, barY, fillW, barH, 7);
+  ctx.fill();
+
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = 'bold 13px "JetBrains Mono", monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText(`${teamA.abbr || 'TEAM'} ${probA}%`, barX, barY + 34);
+
+  ctx.textAlign = 'right';
+  ctx.fillText(`${100 - probA}% ${teamB.shortName || 'OPP'}`, barX + barW, barY + 34);
+
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+  drawCanvasRoundedRect(ctx, boxX + 25, boxY + 215, boxW - 50, 48, 10);
+  ctx.fill();
+
+  ctx.fillStyle = '#F59E0B';
+  ctx.font = 'bold 14px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  const spreadSign = spreadA <= 0 ? `${teamA.abbr} ${spreadA}` : `${teamB.shortName} -${spreadA}`;
+  ctx.fillText(`VEGAS LINE: ${spreadSign} • O/U: ${ou}`, 600, boxY + 244);
+
+  const projectedMargin = Math.abs(scoreA - scoreB);
+  const spreadDiff = Math.abs(projectedMargin - Math.abs(spreadA));
+  ctx.fillStyle = '#38BDF8';
+  ctx.font = '600 12px "JetBrains Mono", monospace';
+  ctx.fillText(`🔥 MODEL COVER EDGE: ${spreadDiff.toFixed(1)} PTS`, 600, boxY + 285);
+
+  // Bottom Tactical Strip
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+  drawCanvasRoundedRect(ctx, 40, 475, 1120, 95, 14);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.stroke();
+
+  ctx.fillStyle = '#F59E0B';
+  ctx.font = 'bold 13px "JetBrains Mono", monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('⚡ 10,000 MONTE CARLO DRIVES • TACTICAL MATCHUP INSIGHT', 65, 506);
+
+  const scoutSummary = game.scoutReport?.xFactor || game.scoutReport?.keyMatchup || `High-stakes battle featuring ${teamA.name} vs ${teamB.name}.`;
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = '500 15px "Outfit", sans-serif';
+  ctx.fillText(scoutSummary, 65, 538);
+
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+  ctx.font = '12px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('POWERED BY GRIDIRON ORACLE • https://jajo9147.github.io/cfb-football-predictor/', 600, 620);
 
   document.getElementById('hypeCardModal').classList.add('open');
 }

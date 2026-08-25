@@ -522,23 +522,23 @@
 
   <!-- Social Hype Card Generator Modal -->
   <div class="modal-backdrop" id="hypeCardModal">
-    <div class="modal-dialog" style="max-width: 600px; text-align: center;">
+    <div class="modal-dialog" style="max-width: 680px; text-align: center;">
       <button class="modal-close" id="closeHypeCardBtn"><i class="fa-solid fa-xmark"></i></button>
-      <h2 class="modal-title" style="font-size: 1.6rem;">GROUP CHAT HYPE CARD</h2>
-      <p style="font-size: 0.8rem; color: var(--color-text-muted);">Save this image or copy to clipboard to flex on your group chat.</p>
+      <h2 class="modal-title" style="font-size: 1.6rem; letter-spacing: 0.05em;"><i class="fa-solid fa-fire" style="color: #F59E0B; margin-right: 0.4rem;"></i>GROUP CHAT HYPE CARD</h2>
+      <p style="font-size: 0.85rem; color: var(--color-text-muted);">High-res viral match graphic ready to download or copy directly into your boys group chat.</p>
       
-      <div style="margin: 1rem 0; display: flex; justify-content: center;">
-        <canvas id="hypeCanvas" width="800" height="450" style="width: 100%; max-width: 480px; border-radius: var(--radius-md); border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);"></canvas>
+      <div style="margin: 1.25rem 0; display: flex; justify-content: center;">
+        <canvas id="hypeCanvas" width="1200" height="675" style="width: 100%; max-width: 620px; aspect-ratio: 16 / 9; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);"></canvas>
       </div>
 
       <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
         <button class="action-btn hype-btn" id="downloadHypeCardBtn">
           <i class="fa-solid fa-download"></i>
-          <span>Save Image</span>
+          <span>Save High-Res Image</span>
         </button>
         <button class="action-btn secondary-btn" id="copyHypeCardBtn">
           <i class="fa-solid fa-copy"></i>
-          <span>Copy Image</span>
+          <span>Copy Image to Clipboard</span>
         </button>
       </div>
     </div>
