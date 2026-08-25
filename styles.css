@@ -4486,3 +4486,12 @@ body.modal-open {
   color: #475569;
 }
 
+#saveBracketModal {
+  z-index: 100005 !important;
+}
+
+#bracketCanvasModal {
+  z-index: 100006 !important;
+}
+
+

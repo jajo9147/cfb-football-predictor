@@ -6645,7 +6645,11 @@ function renderSavedBracketsVault() {
   });
 }
 
-function openSaveBracketModal() {
+function openSaveBracketModal(fromVault = false) {
+  state._openedFromVault = fromVault;
+  const vaultModal = document.getElementById('bracketVaultModal');
+  if (vaultModal) vaultModal.classList.remove('open');
+
   const modal = document.getElementById('saveBracketModal');
   if (!modal) return;
 
@@ -6678,12 +6682,20 @@ function openSaveBracketModal() {
 
   modal.classList.add('open');
   document.body.classList.add('modal-open');
+  setTimeout(() => {
+    if (nameInput) nameInput.focus();
+  }, 100);
 }
 
 function closeSaveBracketModal() {
   const modal = document.getElementById('saveBracketModal');
   if (modal) modal.classList.remove('open');
-  document.body.classList.remove('modal-open');
+  if (state._openedFromVault) {
+    state._openedFromVault = false;
+    openBracketVaultModal();
+  } else {
+    document.body.classList.remove('modal-open');
+  }
 }
 
 function handleConfirmSaveBracket() {
@@ -6692,7 +6704,9 @@ function handleConfirmSaveBracket() {
   const notes = document.getElementById('bracketNotesInput')?.value;
 
   const saved = saveCurrentProjectionAsBracket(name, creator, notes);
-  closeSaveBracketModal();
+  state._openedFromVault = false;
+  const modal = document.getElementById('saveBracketModal');
+  if (modal) modal.classList.remove('open');
   showCustomToast(`🎉 Bracket "${saved.name}" successfully saved to Vault!`);
   openBracketVaultModal();
 }
