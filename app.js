@@ -630,8 +630,8 @@ function recalculateSeason() {
   state.lastNationalChampion = playoffResults.nationalChampion;
   updateSocialMetadataForChampion(playoffResults.nationalChampion);
 
-  // 4. Calculate Overall Season Total Record (Regular + CCG + CFP)
-  const fullSeason = calcActiveTeamTotalRecord(state.currentTeamId, totalWins, totalLosses, ccgResults, playoffResults);
+  // 4. Calculate Overall Season Total Record (Regular + CCG + CFP / Non-CFP Bowl)
+  const fullSeason = calcActiveTeamTotalRecord(state.currentTeamId, totalWins, totalLosses, ccgResults, playoffResults, evaluatedTeams);
 
   // Update Hero & KPI Cards
   const kpiTotalRecordEl = document.getElementById('kpiTotalRecord');
@@ -3060,8 +3060,106 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
   }
 }
 
+// Non-CFP Bowl Matchup Simulator based on authentic NCAA Conference Tie-Ins
+function simulateNonCfpBowlMatchup(team, currentWins, currentLosses, evaluatedTeams) {
+  if (!team) return { totalWins: currentWins, totalLosses: currentLosses, outcomeTitle: 'Regular Season Finish' };
+  
+  if (currentWins < 6) {
+    return {
+      totalWins: currentWins,
+      totalLosses: currentLosses,
+      outcomeTitle: `No Bowl Game (Ineligible: ${currentWins}-${currentLosses})`
+    };
+  }
+
+  const conf = team.conference || 'SEC';
+  const BOWL_MATRIX = {
+    'SEC': [
+      { minW: 10, name: 'Vrbo Citrus Bowl', venue: 'Orlando, FL', oppConf: 'Big Ten', defRating: 24.5 },
+      { minW: 9,  name: 'ReliaQuest Bowl', venue: 'Tampa, FL', oppConf: 'Big Ten', defRating: 23.0 },
+      { minW: 8,  name: 'TaxSlayer Gator Bowl', venue: 'Jacksonville, FL', oppConf: 'ACC', defRating: 22.0 },
+      { minW: 7,  name: 'TaxAct Texas Bowl', venue: 'Houston, TX', oppConf: 'Big 12', defRating: 21.0 },
+      { minW: 6,  name: 'AutoZone Liberty Bowl', venue: 'Memphis, TN', oppConf: 'Big 12', defRating: 19.5 }
+    ],
+    'Big Ten': [
+      { minW: 10, name: 'Vrbo Citrus Bowl', venue: 'Orlando, FL', oppConf: 'SEC', defRating: 24.5 },
+      { minW: 9,  name: 'ReliaQuest Bowl', venue: 'Tampa, FL', oppConf: 'SEC', defRating: 23.0 },
+      { minW: 8,  name: 'TransPerfect Music City Bowl', venue: 'Nashville, TN', oppConf: 'SEC', defRating: 22.0 },
+      { minW: 7,  name: 'Bad Boy Mowers Pinstripe Bowl', venue: 'Yankee Stadium, NYC', oppConf: 'ACC', defRating: 20.5 },
+      { minW: 6,  name: 'Guaranteed Rate Bowl', venue: 'Phoenix, AZ', oppConf: 'Big 12', defRating: 19.5 }
+    ],
+    'Big 12': [
+      { minW: 10, name: 'Valero Alamo Bowl', venue: 'San Antonio, TX', oppConf: 'ACC', defRating: 23.5 },
+      { minW: 9,  name: 'Pop-Tarts Bowl', venue: 'Orlando, FL', oppConf: 'ACC', defRating: 22.5 },
+      { minW: 8,  name: 'TaxAct Texas Bowl', venue: 'Houston, TX', oppConf: 'SEC', defRating: 21.5 },
+      { minW: 7,  name: 'AutoZone Liberty Bowl', venue: 'Memphis, TN', oppConf: 'SEC', defRating: 20.5 },
+      { minW: 6,  name: 'Guaranteed Rate Bowl', venue: 'Phoenix, AZ', oppConf: 'Big Ten', defRating: 19.5 }
+    ],
+    'ACC': [
+      { minW: 10, name: 'Pop-Tarts Bowl', venue: 'Orlando, FL', oppConf: 'Big 12', defRating: 23.0 },
+      { minW: 9,  name: 'TaxSlayer Gator Bowl', venue: 'Jacksonville, FL', oppConf: 'SEC', defRating: 22.0 },
+      { minW: 8,  name: 'Tony the Tiger Sun Bowl', venue: 'El Paso, TX', oppConf: 'Big 12', defRating: 21.0 },
+      { minW: 7,  name: 'Duke\'s Mayo Bowl', venue: 'Charlotte, NC', oppConf: 'Big Ten', defRating: 20.0 },
+      { minW: 6,  name: 'Military Bowl', venue: 'Annapolis, MD', oppConf: 'AAC', defRating: 18.5 }
+    ],
+    'Mountain West': [
+      { minW: 10, name: 'LA Bowl Hosted by Gronk', venue: 'SoFi Stadium, Inglewood, CA', oppConf: 'Big 12', defRating: 21.5 },
+      { minW: 8,  name: 'Famous Idaho Potato Bowl', venue: 'Boise, ID', oppConf: 'MAC', defRating: 18.5 },
+      { minW: 6,  name: 'Snoop Dogg Arizona Bowl', venue: 'Tucson, AZ', oppConf: 'MAC', defRating: 17.0 }
+    ],
+    'Independent': [
+      { minW: 9,  name: 'Pop-Tarts Bowl', venue: 'Orlando, FL', oppConf: 'Big 12', defRating: 23.0 },
+      { minW: 7,  name: 'TaxSlayer Gator Bowl', venue: 'Jacksonville, FL', oppConf: 'SEC', defRating: 21.5 },
+      { minW: 6,  name: 'Tony the Tiger Sun Bowl', venue: 'El Paso, TX', oppConf: 'ACC', defRating: 20.0 }
+    ]
+  };
+
+  const tiers = BOWL_MATRIX[conf] || BOWL_MATRIX['SEC'];
+  const selectedBowl = tiers.find(t => currentWins >= t.minW) || tiers[tiers.length - 1];
+
+  // Resolve authentic non-CFP opponent from paired conference
+  let oppTeam = null;
+  if (Array.isArray(evaluatedTeams) && evaluatedTeams.length > 0) {
+    const pool = evaluatedTeams.filter(t => t && t.id !== team.id && !t.playoffSeed && (t.conf === selectedBowl.oppConf || t.conference === selectedBowl.oppConf));
+    if (pool.length > 0) {
+      pool.sort((a, b) => (b.wins || 8) - (a.wins || 8));
+      oppTeam = pool[0];
+    }
+  }
+
+  if (!oppTeam) {
+    oppTeam = {
+      id: 'bowl-opp',
+      name: `${selectedBowl.oppConf} Contender`,
+      shortName: `${selectedBowl.oppConf} Contender`,
+      baseSpRating: selectedBowl.defRating,
+      conference: selectedBowl.oppConf,
+      colors: { primary: '#4A5568', secondary: '#CBD5E0' }
+    };
+  }
+
+  // Simulate Bowl Matchup
+  const sim = simulatePostseasonMatchup(team, oppTeam, { gameId: `bowl-${team.id}` });
+  const won = isTeamMatch(sim.winner, team.id);
+  const oppLabel = oppTeam.shortName || oppTeam.name;
+
+  if (won) {
+    return {
+      totalWins: currentWins + 1,
+      totalLosses: currentLosses,
+      outcomeTitle: `🏆 ${selectedBowl.name} Champions (${sim.scoreA}-${sim.scoreB} vs ${oppLabel})`
+    };
+  } else {
+    return {
+      totalWins: currentWins,
+      totalLosses: currentLosses + 1,
+      outcomeTitle: `${selectedBowl.name} (${sim.scoreA}-${sim.scoreB} vs ${oppLabel})`
+    };
+  }
+}
+
 // 6. Calculate Overall Total Season Record for Active Team
-function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playoffData) {
+function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playoffData, evaluatedTeams) {
   let totalWins = regWins;
   let totalLosses = regLosses;
   let outcomeTitle = 'Regular Season';
@@ -3142,16 +3240,12 @@ function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playo
       outcomeTitle = 'CFP First Round';
     }
   } else {
-    // Missed CFP: Add Bowl game projection
-    if (regWins >= 8) {
-      totalWins++;
-      outcomeTitle = 'Florida Citrus Bowl Champions';
-    } else if (regWins >= 6) {
-      totalWins++;
-      outcomeTitle = 'ReliaQuest Bowl Champions';
-    } else {
-      outcomeTitle = 'Regular Season Finish';
-    }
+    // Missed CFP: Simulate authentic Non-CFP Bowl based on conference tie-in
+    const activeTeam = TEAMS_DATABASE[teamId];
+    const bowlResult = simulateNonCfpBowlMatchup(activeTeam, totalWins, totalLosses, evaluatedTeams);
+    totalWins = bowlResult.totalWins;
+    totalLosses = bowlResult.totalLosses;
+    outcomeTitle = bowlResult.outcomeTitle;
   }
 
   return {
