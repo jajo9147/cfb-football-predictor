@@ -1159,10 +1159,16 @@
           </span>
           <h2 class="modal-title" style="font-size: 1.6rem; margin-top: 0.25rem;">CFP BRACKET VAULT</h2>
         </div>
-        <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="padding: 0.5rem 0.95rem;">
-          <i class="fa-solid fa-plus"></i>
-          <span>Save Current Simulation</span>
-        </button>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="action-btn secondary-btn" onclick="importBracketFromPrompt()" style="padding: 0.5rem 0.85rem; font-size: 0.82rem;" title="Import a bracket from a shared URL link or code">
+            <i class="fa-solid fa-file-import"></i>
+            <span>Import Link</span>
+          </button>
+          <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="padding: 0.5rem 0.95rem;">
+            <i class="fa-solid fa-plus"></i>
+            <span>Save Current Simulation</span>
+          </button>
+        </div>
       </div>
 
       <p style="font-size: 0.85rem; color: #94A3B8; margin-top: -0.25rem;">Manage your saved 12-team CFP brackets, load custom simulations, and export March Madness graphics to share with the group chat.</p>
@@ -1199,6 +1205,37 @@
         <button class="action-btn secondary-btn" id="shareCfpBracketLinkBtn" onclick="copyActiveBracketShareLink()">
           <i class="fa-solid fa-link"></i>
           <span>Copy Shareable Link</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- SYNC TO PHONE / QR CODE MODAL -->
+  <div class="modal-backdrop" id="bracketQrModal" style="z-index: 100007 !important;">
+    <div class="modal-dialog" style="max-width: 480px; text-align: center;">
+      <button class="modal-close" onclick="closeBracketQrModal()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="modal-header">
+        <span class="matchup-tag" style="background: rgba(168, 85, 247, 0.2); color: #D8B4FE; border-color: rgba(168, 85, 247, 0.4);">
+          <i class="fa-solid fa-qrcode"></i> INSTANT DEVICE SYNC
+        </span>
+        <h2 class="modal-title" id="qrModalBracketTitle" style="font-size: 1.4rem; margin-top: 0.25rem;">SYNC TO SPOUSE / PHONE</h2>
+        <p style="font-size: 0.85rem; color: #94A3B8;">Point your spouse's phone or mobile camera at this QR code to instantly load and save this bracket into their phone's Vault!</p>
+      </div>
+
+      <div style="margin: 1.5rem 0; display: flex; justify-content: center; align-items: center; background: #FFFFFF; padding: 1.25rem; border-radius: var(--radius-lg); width: fit-content; margin-left: auto; margin-right: auto; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+        <img id="bracketQrImg" src="" alt="Bracket Sync QR Code" style="width: 220px; height: 220px; display: block;">
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+        <button class="action-btn secondary-btn" id="copyQrLinkBtn" onclick="copyActiveQrLink()">
+          <i class="fa-solid fa-copy"></i>
+          <span>Copy Direct Link</span>
+        </button>
+        <button class="action-btn" style="background: #A855F7; color: #FFFFFF;" onclick="closeBracketQrModal()">
+          <i class="fa-solid fa-check"></i>
+          <span>Done</span>
         </button>
       </div>
     </div>
