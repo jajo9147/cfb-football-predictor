@@ -6376,49 +6376,72 @@ function getSavedBrackets() {
 }
 
 function createBaselineBracketObject() {
+  // Temporary save current overrides
+  const tempUserPicks = state.userPicks;
+  const tempCcgPicks = state.ccgPicks;
+  const tempPlayoffPicks = state.playoffPicks;
+  const tempTeamSliders = state.teamSliders;
+  const tempGameSliders = state.gameSliders;
+
+  // Clear to evaluate pure baseline
+  state.userPicks = {};
+  state.ccgPicks = {};
+  state.playoffPicks = {};
+  state.teamSliders = {};
+  state.gameSliders = {};
+
   const evaluated = evaluateRegularSeasonAllTeams();
   const ccg = simulateConferenceChampionships(evaluated);
   const cfp = generate12TeamCfpField(ccg.confChamps, evaluated);
   const playoff = simulatePlayoffBracket(cfp);
 
+  // Restore state
+  state.userPicks = tempUserPicks;
+  state.ccgPicks = tempCcgPicks;
+  state.playoffPicks = tempPlayoffPicks;
+  state.teamSliders = tempTeamSliders;
+  state.gameSliders = tempGameSliders;
+
   const seeds = (cfp.seeds || []).map((s, idx) => ({
     seed: idx + 1,
-    id: s?.id || 'texas',
+    id: s?.id || 'ohiostate',
     name: s?.shortName || s?.name || 'Team',
     logoUrl: s?.logoUrl || '',
-    wins: s?.wins || 11,
-    losses: s?.losses || 1
+    wins: s?.wins !== undefined ? s.wins : (s?.totalWins || 11),
+    losses: s?.losses !== undefined ? s.losses : (s?.totalLosses || 1)
   }));
 
-  const champTeam = playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE['texas'];
+  const champTeam = playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE['ohiostate'];
+  const runnerTeam = playoff.runnerUp ? (TEAMS_DATABASE[playoff.runnerUp.id] || playoff.runnerUp) : TEAMS_DATABASE['oregon'];
 
   return {
     id: 'bracket_baseline_chalk_2026',
     name: '2026 Model Baseline Chalk',
     creator: 'Gridiron Oracle AI',
-    notes: 'Official pre-season AI simulation baseline (10,000 Monte Carlo calibrated).',
-    createdAt: new Date().toISOString(),
+    notes: 'Official pre-season AI simulation baseline (10,000 Monte Carlo consensus).',
+    createdAt: '2026-08-25T12:00:00Z',
     mode: 'baseline',
+    isPublic: true,
     champion: {
-      id: champTeam.id || 'texas',
-      name: champTeam.name || 'Texas Longhorns',
-      shortName: champTeam.shortName || 'Texas',
-      logoUrl: champTeam.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',
-      score: playoff.natty?.sim?.winnerScore || 34,
-      oppScore: playoff.natty?.sim?.loserScore || 28
+      id: champTeam.id || 'ohiostate',
+      name: champTeam.name || 'Ohio State Buckeyes',
+      shortName: champTeam.shortName || 'Ohio State',
+      logoUrl: champTeam.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',
+      score: playoff.natty?.sim?.winnerScore || playoff.natty?.sim?.scoreA || 35,
+      oppScore: playoff.natty?.sim?.loserScore || playoff.natty?.sim?.scoreB || 30
     },
     runnerUp: {
-      id: playoff.runnerUp?.id || 'ohiostate',
-      name: playoff.runnerUp?.name || 'Ohio State Buckeyes',
-      shortName: playoff.runnerUp?.shortName || 'Ohio State'
+      id: runnerTeam.id || 'oregon',
+      name: runnerTeam.name || 'Oregon Ducks',
+      shortName: runnerTeam.shortName || 'Oregon'
     },
     seeds: seeds,
     playoffSummary: {
       fr: [
-        { label: '#5 vs #12', winner: playoff.fr1?.sim?.winner?.shortName || 'Texas', score: `${playoff.fr1?.sim?.scoreA || 35}-${playoff.fr1?.sim?.scoreB || 21}` },
-        { label: '#6 vs #11', winner: playoff.fr2?.sim?.winner?.shortName || 'Indiana', score: `${playoff.fr2?.sim?.scoreA || 31}-${playoff.fr2?.sim?.scoreB || 24}` },
+        { label: '#5 vs #12', winner: playoff.fr1?.sim?.winner?.shortName || 'Texas', score: `${playoff.fr1?.sim?.scoreA || 31}-${playoff.fr1?.sim?.scoreB || 21}` },
+        { label: '#6 vs #11', winner: playoff.fr2?.sim?.winner?.shortName || 'Indiana', score: `${playoff.fr2?.sim?.scoreA || 28}-${playoff.fr2?.sim?.scoreB || 24}` },
         { label: '#7 vs #10', winner: playoff.fr3?.sim?.winner?.shortName || 'Miami', score: `${playoff.fr3?.sim?.scoreA || 28}-${playoff.fr3?.sim?.scoreB || 24}` },
-        { label: '#8 vs #9', winner: playoff.fr4?.sim?.winner?.shortName || 'Texas A&M', score: `${playoff.fr4?.sim?.scoreA || 30}-${playoff.fr4?.sim?.scoreB || 27}` }
+        { label: '#8 vs #9', winner: playoff.fr4?.sim?.winner?.shortName || 'Texas A&M', score: `${playoff.fr4?.sim?.scoreA || 27}-${playoff.fr4?.sim?.scoreB || 24}` }
       ],
       qf: [
         { bowl: 'Sugar Bowl', winner: playoff.qf1?.sim?.winner?.shortName || 'Ohio State' },
@@ -6428,11 +6451,11 @@ function createBaselineBracketObject() {
       ],
       sf: [
         { bowl: 'Orange Bowl', winner: playoff.sf1?.sim?.winner?.shortName || 'Ohio State' },
-        { bowl: 'Cotton Bowl', winner: playoff.sf2?.sim?.winner?.shortName || 'Texas' }
+        { bowl: 'Cotton Bowl', winner: playoff.sf2?.sim?.winner?.shortName || 'Oregon' }
       ]
     },
     simState: {
-      teamId: 'texas',
+      teamId: 'ohiostate',
       userPicks: {},
       ccgPicks: {},
       playoffPicks: {},
@@ -6634,32 +6657,7 @@ function calculateBracketAccuracy(bracket) {
 
 function getCuratedExpertBrackets() {
   return [
-    {
-      id: 'bracket_baseline_chalk_2026',
-      name: '2026 Model Baseline Chalk',
-      creator: 'Gridiron Oracle AI',
-      notes: 'Official pre-season AI simulation baseline (10,000 Monte Carlo consensus).',
-      createdAt: '2026-08-25T12:00:00Z',
-      mode: 'baseline',
-      isPublic: true,
-      champion: { id: 'texas', name: 'Texas Longhorns', shortName: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', score: 34, oppScore: 28 },
-      runnerUp: { id: 'ohiostate', name: 'Ohio State Buckeyes', shortName: 'Ohio State' },
-      seeds: [
-        { seed: 1, name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png', wins: 12, losses: 1 },
-        { seed: 2, name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 12, losses: 1 },
-        { seed: 3, name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', wins: 15, losses: 1 },
-        { seed: 4, name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png', wins: 11, losses: 2 },
-        { seed: 5, name: 'Notre Dame', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png', wins: 11, losses: 1 },
-        { seed: 6, name: 'Indiana', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png', wins: 11, losses: 1 },
-        { seed: 7, name: 'Miami', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 11, losses: 2 },
-        { seed: 8, name: 'Texas A&M', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/245.png', wins: 10, losses: 2 }
-      ],
-      playoffSummary: {
-        fr: [{ winner: 'Texas' }, { winner: 'Indiana' }, { winner: 'Miami' }, { winner: 'Texas A&M' }],
-        qf: [{ winner: 'Ohio State' }, { winner: 'Oregon' }, { winner: 'Texas' }, { winner: 'Georgia' }],
-        sf: [{ winner: 'Ohio State' }, { winner: 'Texas' }]
-      }
-    },
+    createBaselineBracketObject(),
     {
       id: 'bracket_herbstreit_pick',
       name: 'Kirk Herbstreit Natty Pick',
