@@ -144,7 +144,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g1",
         "week": "WEEK 1",
-        "date": "AUG 29",
+        "date": "Aug 29, 2026",
         "opponent": "Portland State Vikings",
         "oppAbbr": "PSU_VIC",
         "oppRank": "NR",
@@ -176,7 +176,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g2",
         "week": "WEEK 2",
-        "date": "SEP 05",
+        "date": "Sep 5, 2026",
         "opponent": "Arizona Wildcats",
         "oppAbbr": "ARIZ",
         "oppRank": "NR",
@@ -208,7 +208,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g3",
         "week": "WEEK 4",
-        "date": "SEP 19",
+        "date": "Sep 19, 2026",
         "opponent": "East Carolina Pirates",
         "oppAbbr": "ECU",
         "oppRank": "AAC",
@@ -238,7 +238,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g4",
         "week": "WEEK 5",
-        "date": "SEP 26",
+        "date": "Sep 26, 2026",
         "opponent": "Kansas State Wildcats",
         "oppAbbr": "KSU",
         "oppRank": "RV",
@@ -268,7 +268,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g5",
         "week": "WEEK 6",
-        "date": "OCT 03",
+        "date": "Oct 3, 2026",
         "opponent": "Baylor Bears",
         "oppAbbr": "BAY",
         "oppRank": "Big 12",
@@ -298,7 +298,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g6",
         "week": "WEEK 7",
-        "date": "OCT 10",
+        "date": "Oct 10, 2026",
         "opponent": "Notre Dame Fighting Irish",
         "oppAbbr": "ND",
         "oppRank": "#7 AP",
@@ -331,7 +331,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g7",
         "week": "WEEK 8",
-        "date": "OCT 17",
+        "date": "Oct 17, 2026",
         "opponent": "Texas Tech Red Raiders",
         "oppAbbr": "TTU",
         "oppRank": "#21 AP",
@@ -364,7 +364,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g8",
         "week": "WEEK 9",
-        "date": "OCT 24",
+        "date": "Oct 24, 2026",
         "opponent": "Houston Cougars",
         "oppAbbr": "HOU",
         "oppRank": "NR",
@@ -396,7 +396,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g9",
         "week": "WEEK 11",
-        "date": "NOV 07",
+        "date": "Nov 7, 2026",
         "opponent": "Utah Utes",
         "oppAbbr": "UTAH",
         "oppRank": "#21 AP",
@@ -426,7 +426,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g10",
         "week": "WEEK 12",
-        "date": "NOV 14",
+        "date": "Nov 14, 2026",
         "opponent": "Kansas Jayhawks",
         "oppAbbr": "KU",
         "oppRank": "Big 12",
@@ -456,7 +456,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g11",
         "week": "WEEK 13",
-        "date": "NOV 21",
+        "date": "Nov 21, 2026",
         "opponent": "Cincinnati Bearcats",
         "oppAbbr": "CIN",
         "oppRank": "NR",
@@ -488,7 +488,7 @@ var TEAMS_DATABASE = {
       {
         "id": "byu-g12",
         "week": "WEEK 14",
-        "date": "NOV 28",
+        "date": "Nov 28, 2026",
         "opponent": "UCF Knights",
         "oppAbbr": "UCF",
         "oppRank": "NR",
@@ -6095,7 +6095,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Spencer Danielson",
     "offensiveCoordinator": "Nate Potter",
     "defensiveCoordinator": "Erik Chinander",
-    "confirmedStarterQb": "Maddux Madsen / Malachi Nelson",
+    "confirmedStarterQb": "Maddux Madsen",
     "starPlayer": "Maddux Madsen (QB) / Sire Gaines (RB) / Dylan Riley (RB)",
     "secondaryStar": "Prince Strachan (WR) / Ahmed Hassanein (DE)",
     "stadium": "Albertsons Stadium",
@@ -6110,7 +6110,7 @@ var TEAMS_DATABASE = {
       "text": "#FFFFFF"
     },
     "sliderLabels": {
-      "qb": "Maddux Madsen Execution",
+      "qb": "Maddux Madsen Precision Air Attack",
       "ground": "Sire Gaines & Dylan Riley Ground Attack",
       "defense": "Erik Chinander Blue Turf Havoc Defense",
       "turnover": "Blue Turf Turnover Luck",
@@ -8734,7 +8734,7 @@ var TEAMS_DATABASE = {
     "headCoach": "Kirk Ferentz",
     "offensiveCoordinator": "Tim Lester",
     "defensiveCoordinator": "Phil Parker",
-    "confirmedStarterQb": "Jeremy Hecklinski / Hank Brown",
+    "confirmedStarterQb": "Jeremy Hecklinski",
     "starPlayer": "Kamari Moulton (RB) / Jeremy Hecklinski (QB) / Aaron Graves (DT)",
     "secondaryStar": "Jaziun Patterson (RB) / Luke Lachey (TE)",
     "stadium": "Kinnick Stadium",
@@ -8750,7 +8750,7 @@ var TEAMS_DATABASE = {
       "border": "rgba(255, 225, 0, 0.4)"
     },
     "sliderLabels": {
-      "qb": "Jeremy Hecklinski Game Management & Accuracy",
+      "qb": "Jeremy Hecklinski Pro-Style Efficiency",
       "ground": "Kamari Moulton & Jaziun Patterson Power Zone Rush",
       "defense": "Phil Parker Lockdown Defense & Pick-6 Havoc",
       "turnover": "Turnover Margin & Field Position Magic",
@@ -9875,7 +9875,7 @@ var TEAMS_DATABASE = {
       "border": "rgba(75, 46, 131, 0.45)"
     },
     "sliderLabels": {
-      "qb": "Demond Williams Dual-Threat Execution",
+      "qb": "Demond Williams Jr. Dual-Threat Attack",
       "ground": "Quaid Carr & Jayden Limar Ground Attack",
       "defense": "Steve Belichick NFL Blitz Schemes",
       "turnover": "Turnover Margin & Ball Security",
