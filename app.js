@@ -354,23 +354,27 @@ function selectTeam(teamId) {
 // ==========================================================================
 
 function findCounterpartMatchup(teamId, game) {
-  const keys = Object.keys(TEAMS_DATABASE);
-  let oppTeamEntry = null;
-  for (let i = 0; i < keys.length; i++) {
-    const k = keys[i];
-    const t = TEAMS_DATABASE[k];
-    if (t.abbr === game.oppAbbr || k === (game.oppAbbr || '').toLowerCase()) {
-      oppTeamEntry = [k, t];
+  if (!game || !teamId) return null;
+  const currentTeam = TEAMS_DATABASE[teamId];
+  if (!currentTeam) return null;
+
+  let oppTeamId = null;
+  let oppTeam = null;
+
+  for (const [k, t] of Object.entries(TEAMS_DATABASE)) {
+    if (t.abbr === game.oppAbbr || k === (game.oppAbbr || '').toLowerCase() || isTeamMatch(t, game.opponent) || isTeamMatch(t, game.oppBadge)) {
+      oppTeamId = k;
+      oppTeam = t;
       break;
     }
   }
-  if (!oppTeamEntry) return null;
 
-  const [oppTeamId, oppTeam] = oppTeamEntry;
-  const currentTeam = TEAMS_DATABASE[teamId];
-  if (!currentTeam || !oppTeam.schedule) return null;
+  if (!oppTeamId || !oppTeam || !Array.isArray(oppTeam.schedule)) return null;
 
-  const oppGame = oppTeam.schedule.find(g => g.oppAbbr === currentTeam.abbr);
+  const oppGame = oppTeam.schedule.find(g => {
+    return g.oppAbbr === currentTeam.abbr || isTeamMatch(currentTeam, g.opponent) || isTeamMatch(currentTeam, g.oppBadge);
+  });
+
   if (!oppGame) return null;
   return { oppTeamId, oppTeam, oppGame };
 }

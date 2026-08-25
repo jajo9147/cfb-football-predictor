@@ -2,7 +2,7 @@
   "season": 2026,
   "snapshotId": "2026_week_34_prekick",
   "name": "Week 34 Pre-Kickoff Projections",
-  "timestamp": "2026-08-25T14:28:08.487028+00:00",
+  "timestamp": "2026-08-25T14:30:40.047382+00:00",
   "totalTeams": 29,
   "teams": [
     {
@@ -90,9 +90,9 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "LaVell Edwards Stadium",
-          "baseWinProb": 71,
-          "projScoreUt": 34,
-          "projScoreOpp": 28
+          "baseWinProb": 72.1,
+          "projScoreUt": 30,
+          "projScoreOpp": 26
         },
         {
           "id": "byu-g7",
@@ -129,9 +129,9 @@
           "oppRank": "#21 AP",
           "isHome": false,
           "stadium": "Rice-Eccles Stadium",
-          "baseWinProb": 46,
-          "projScoreUt": 24,
-          "projScoreOpp": 27
+          "baseWinProb": 27.2,
+          "projScoreUt": 26,
+          "projScoreOpp": 30
         },
         {
           "id": "byu-g10",
@@ -207,9 +207,9 @@
           "oppRank": "#1 AP",
           "isHome": true,
           "stadium": "DKR Texas Memorial Stadium",
-          "baseWinProb": 43.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 27
+          "baseWinProb": 50.0,
+          "projScoreUt": 28,
+          "projScoreOpp": 31
         },
         {
           "id": "tex-w3",
@@ -233,9 +233,9 @@
           "oppRank": "#20 AP",
           "isHome": false,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 65.5,
-          "projScoreUt": 31,
-          "projScoreOpp": 23
+          "baseWinProb": 68.3,
+          "projScoreUt": 30,
+          "projScoreOpp": 26
         },
         {
           "id": "tex-w5",
@@ -246,9 +246,9 @@
           "oppRank": "#10 AP",
           "isHome": false,
           "stadium": "Cotton Bowl",
-          "baseWinProb": 74.2,
-          "projScoreUt": 34,
-          "projScoreOpp": 20
+          "baseWinProb": 44.6,
+          "projScoreUt": 28,
+          "projScoreOpp": 31
         },
         {
           "id": "tex-w6",
@@ -272,9 +272,9 @@
           "oppRank": "#9 AP",
           "isHome": true,
           "stadium": "DKR Texas Memorial Stadium",
-          "baseWinProb": 68.2,
-          "projScoreUt": 38,
-          "projScoreOpp": 31
+          "baseWinProb": 77.9,
+          "projScoreUt": 31,
+          "projScoreOpp": 25
         },
         {
           "id": "tex-w8",
@@ -298,9 +298,9 @@
           "oppRank": "#25 AP",
           "isHome": false,
           "stadium": "Faurot Field",
-          "baseWinProb": 76.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 17
+          "baseWinProb": 75.7,
+          "projScoreUt": 30,
+          "projScoreOpp": 26
         },
         {
           "id": "tex-w10",
@@ -311,9 +311,9 @@
           "oppRank": "#11 AP",
           "isHome": false,
           "stadium": "Tiger Stadium",
-          "baseWinProb": 53.5,
-          "projScoreUt": 34,
-          "projScoreOpp": 31
+          "baseWinProb": 53.1,
+          "projScoreUt": 31,
+          "projScoreOpp": 28
         },
         {
           "id": "tex-w11",
@@ -337,9 +337,9 @@
           "oppRank": "#8 AP",
           "isHome": false,
           "stadium": "Kyle Field",
-          "baseWinProb": 62.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 24
+          "baseWinProb": 38.0,
+          "projScoreUt": 27,
+          "projScoreOpp": 29
         }
       ]
     },
@@ -376,9 +376,9 @@
           "oppRank": "#10 AP",
           "isHome": true,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 58.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 23
+          "baseWinProb": 43.1,
+          "projScoreUt": 27,
+          "projScoreOpp": 29
         },
         {
           "id": "mic-w3",
@@ -402,9 +402,9 @@
           "oppRank": "#22 AP",
           "isHome": true,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 74.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 13
+          "baseWinProb": 78.9,
+          "projScoreUt": 31,
+          "projScoreOpp": 25
         },
         {
           "id": "mic-w5",
@@ -428,9 +428,9 @@
           "oppRank": "#18 AP",
           "isHome": true,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 61.2,
+          "baseWinProb": 43.1,
           "projScoreUt": 27,
-          "projScoreOpp": 20
+          "projScoreOpp": 29
         },
         {
           "id": "mic-w7",
@@ -441,9 +441,9 @@
           "oppRank": "#6 AP",
           "isHome": true,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 43.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 30
+          "baseWinProb": 40.9,
+          "projScoreUt": 27,
+          "projScoreOpp": 29
         },
         {
           "id": "mic-w8",
@@ -480,8 +480,8 @@
           "oppRank": "#2 AP",
           "isHome": false,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 28.5,
-          "projScoreUt": 21,
+          "baseWinProb": 6.9,
+          "projScoreUt": 22,
           "projScoreOpp": 34
         },
         {
@@ -506,9 +506,9 @@
           "oppRank": "#1 AP",
           "isHome": false,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 32.5,
-          "projScoreUt": 20,
-          "projScoreOpp": 31
+          "baseWinProb": 4.2,
+          "projScoreUt": 21,
+          "projScoreOpp": 35
         }
       ]
     },
@@ -545,9 +545,9 @@
           "oppRank": "#5 AP",
           "isHome": false,
           "stadium": "DKR Texas Memorial Stadium",
-          "baseWinProb": 56.5,
-          "projScoreUt": 27,
-          "projScoreOpp": 24
+          "baseWinProb": 50.0,
+          "projScoreUt": 31,
+          "projScoreOpp": 28
         },
         {
           "id": "osu-w3",
@@ -584,9 +584,9 @@
           "oppRank": "#22 AP",
           "isHome": false,
           "stadium": "Kinnick Stadium",
-          "baseWinProb": 81.2,
-          "projScoreUt": 28,
-          "projScoreOpp": 13
+          "baseWinProb": 89.6,
+          "projScoreUt": 33,
+          "projScoreOpp": 23
         },
         {
           "id": "osu-w6",
@@ -610,9 +610,9 @@
           "oppRank": "#6 AP",
           "isHome": false,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 68.5,
-          "projScoreUt": 35,
-          "projScoreOpp": 24
+          "baseWinProb": 61.3,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         },
         {
           "id": "osu-w8",
@@ -623,9 +623,9 @@
           "oppRank": "#15 AP",
           "isHome": false,
           "stadium": "Los Angeles Memorial Coliseum",
-          "baseWinProb": 71.4,
-          "projScoreUt": 38,
-          "projScoreOpp": 27
+          "baseWinProb": 78.4,
+          "projScoreUt": 31,
+          "projScoreOpp": 25
         },
         {
           "id": "osu-w9",
@@ -636,9 +636,9 @@
           "oppRank": "#2 AP",
           "isHome": true,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 61.5,
+          "baseWinProb": 78.4,
           "projScoreUt": 31,
-          "projScoreOpp": 27
+          "projScoreOpp": 25
         },
         {
           "id": "osu-w10",
@@ -675,9 +675,9 @@
           "oppRank": "#16 AP",
           "isHome": true,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 67.5,
-          "projScoreUt": 31,
-          "projScoreOpp": 20
+          "baseWinProb": 95.8,
+          "projScoreUt": 35,
+          "projScoreOpp": 21
         }
       ]
     },
@@ -740,9 +740,9 @@
           "oppRank": "#10 AP",
           "isHome": true,
           "stadium": "Sanford Stadium",
-          "baseWinProb": 75.8,
-          "projScoreUt": 34,
-          "projScoreOpp": 20
+          "baseWinProb": 84.0,
+          "projScoreUt": 32,
+          "projScoreOpp": 24
         },
         {
           "id": "uga-w5",
@@ -766,9 +766,9 @@
           "oppRank": "#13 AP",
           "isHome": false,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 43.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 27
+          "baseWinProb": 54.6,
+          "projScoreUt": 31,
+          "projScoreOpp": 28
         },
         {
           "id": "uga-w7",
@@ -805,9 +805,9 @@
           "oppRank": "#9 AP",
           "isHome": false,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 64.5,
+          "baseWinProb": 51.5,
           "projScoreUt": 31,
-          "projScoreOpp": 24
+          "projScoreOpp": 28
         },
         {
           "id": "uga-w10",
@@ -818,9 +818,9 @@
           "oppRank": "#25 AP",
           "isHome": true,
           "stadium": "Sanford Stadium",
-          "baseWinProb": 86.5,
-          "projScoreUt": 35,
-          "projScoreOpp": 17
+          "baseWinProb": 95.3,
+          "projScoreUt": 34,
+          "projScoreOpp": 22
         },
         {
           "id": "uga-w11",
@@ -935,9 +935,9 @@
           "oppRank": "#3 AP",
           "isHome": true,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 44.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 27
+          "baseWinProb": 45.4,
+          "projScoreUt": 28,
+          "projScoreOpp": 31
         },
         {
           "id": "bam-w7",
@@ -948,9 +948,9 @@
           "oppRank": "#20 AP",
           "isHome": false,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 54.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 24
+          "baseWinProb": 53.8,
+          "projScoreUt": 31,
+          "projScoreOpp": 28
         },
         {
           "id": "bam-w8",
@@ -961,9 +961,9 @@
           "oppRank": "#8 AP",
           "isHome": true,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 62.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 23
+          "baseWinProb": 60.6,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         },
         {
           "id": "bam-w9",
@@ -974,9 +974,9 @@
           "oppRank": "#11 AP",
           "isHome": false,
           "stadium": "Tiger Stadium",
-          "baseWinProb": 43.5,
+          "baseWinProb": 38.0,
           "projScoreUt": 27,
-          "projScoreOpp": 31
+          "projScoreOpp": 29
         },
         {
           "id": "bam-w10",
@@ -1039,9 +1039,9 @@
           "oppRank": "#12 AP",
           "isHome": true,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 79.5,
+          "baseWinProb": 99.0,
           "projScoreUt": 38,
-          "projScoreOpp": 24
+          "projScoreOpp": 18
         },
         {
           "id": "ore-w2",
@@ -1078,9 +1078,9 @@
           "oppRank": "#15 AP",
           "isHome": false,
           "stadium": "Los Angeles Memorial Coliseum",
-          "baseWinProb": 69.5,
-          "projScoreUt": 38,
-          "projScoreOpp": 28
+          "baseWinProb": 68.3,
+          "projScoreUt": 30,
+          "projScoreOpp": 26
         },
         {
           "id": "ore-w5",
@@ -1143,8 +1143,8 @@
           "oppRank": "#1 AP",
           "isHome": false,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 38.5,
-          "projScoreUt": 27,
+          "baseWinProb": 21.6,
+          "projScoreUt": 25,
           "projScoreOpp": 31
         },
         {
@@ -1156,9 +1156,9 @@
           "oppRank": "#16 AP",
           "isHome": true,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 71.5,
+          "baseWinProb": 93.1,
           "projScoreUt": 34,
-          "projScoreOpp": 21
+          "projScoreOpp": 22
         },
         {
           "id": "ore-w11",
@@ -1182,9 +1182,9 @@
           "oppRank": "#17 AP",
           "isHome": true,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 85.5,
-          "projScoreUt": 38,
-          "projScoreOpp": 21
+          "baseWinProb": 93.7,
+          "projScoreUt": 34,
+          "projScoreOpp": 22
         }
       ]
     },
@@ -1286,8 +1286,8 @@
           "oppRank": "#16 AP",
           "isHome": false,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 38.8,
-          "projScoreUt": 20,
+          "baseWinProb": 56.9,
+          "projScoreUt": 29,
           "projScoreOpp": 27
         },
         {
@@ -1312,8 +1312,8 @@
           "oppRank": "#17 AP",
           "isHome": false,
           "stadium": "Husky Stadium",
-          "baseWinProb": 44.5,
-          "projScoreUt": 24,
+          "baseWinProb": 59.1,
+          "projScoreUt": 29,
           "projScoreOpp": 27
         },
         {
@@ -1481,9 +1481,9 @@
           "oppRank": "#7 AP",
           "isHome": true,
           "stadium": "Notre Dame Stadium",
-          "baseWinProb": 58.5,
-          "projScoreUt": 31,
-          "projScoreOpp": 24
+          "baseWinProb": 56.9,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         },
         {
           "id": "nd-w10",
@@ -1546,9 +1546,9 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Tiger Stadium",
-          "baseWinProb": 64.5,
-          "projScoreUt": 30,
-          "projScoreOpp": 23
+          "baseWinProb": 83.2,
+          "projScoreUt": 31,
+          "projScoreOpp": 25
         },
         {
           "id": "lsu-w2",
@@ -1572,9 +1572,9 @@
           "oppRank": "#9 AP",
           "isHome": false,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 43.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 34
+          "baseWinProb": 23.7,
+          "projScoreUt": 26,
+          "projScoreOpp": 30
         },
         {
           "id": "lsu-w4",
@@ -1585,9 +1585,9 @@
           "oppRank": "#8 AP",
           "isHome": true,
           "stadium": "Tiger Stadium",
-          "baseWinProb": 57.5,
-          "projScoreUt": 27,
-          "projScoreOpp": 23
+          "baseWinProb": 53.8,
+          "projScoreUt": 31,
+          "projScoreOpp": 28
         },
         {
           "id": "lsu-w5",
@@ -1650,8 +1650,8 @@
           "oppRank": "#13 AP",
           "isHome": true,
           "stadium": "Tiger Stadium",
-          "baseWinProb": 56.5,
-          "projScoreUt": 31,
+          "baseWinProb": 62.0,
+          "projScoreUt": 29,
           "projScoreOpp": 27
         },
         {
@@ -1663,9 +1663,9 @@
           "oppRank": "#5 AP",
           "isHome": true,
           "stadium": "Tiger Stadium",
-          "baseWinProb": 46.5,
-          "projScoreUt": 31,
-          "projScoreOpp": 34
+          "baseWinProb": 46.9,
+          "projScoreUt": 28,
+          "projScoreOpp": 31
         },
         {
           "id": "lsu-w11",
@@ -1676,8 +1676,8 @@
           "oppRank": "#20 AP",
           "isHome": false,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 45.5,
-          "projScoreUt": 27,
+          "baseWinProb": 46.9,
+          "projScoreUt": 28,
           "projScoreOpp": 31
         },
         {
@@ -1754,9 +1754,9 @@
           "oppRank": "#5 AP",
           "isHome": true,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 36.5,
-          "projScoreUt": 23,
-          "projScoreOpp": 31
+          "baseWinProb": 31.7,
+          "projScoreUt": 26,
+          "projScoreOpp": 30
         },
         {
           "id": "ten-w5",
@@ -1793,9 +1793,9 @@
           "oppRank": "#13 AP",
           "isHome": true,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 45.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 28
+          "baseWinProb": 46.2,
+          "projScoreUt": 28,
+          "projScoreOpp": 31
         },
         {
           "id": "ten-w8",
@@ -1832,9 +1832,9 @@
           "oppRank": "#8 AP",
           "isHome": false,
           "stadium": "Kyle Field",
-          "baseWinProb": 39.5,
-          "projScoreUt": 20,
-          "projScoreOpp": 27
+          "baseWinProb": 11.6,
+          "projScoreUt": 24,
+          "projScoreOpp": 32
         },
         {
           "id": "ten-w11",
@@ -1845,9 +1845,9 @@
           "oppRank": "#11 AP",
           "isHome": true,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 54.5,
+          "baseWinProb": 53.1,
           "projScoreUt": 31,
-          "projScoreOpp": 27
+          "projScoreOpp": 28
         },
         {
           "id": "ten-w12",
@@ -1962,9 +1962,9 @@
           "oppRank": "#1 AP",
           "isHome": true,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 31.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 35
+          "baseWinProb": 38.7,
+          "projScoreUt": 27,
+          "projScoreOpp": 29
         },
         {
           "id": "ind-w8",
@@ -1975,9 +1975,9 @@
           "oppRank": "#16 AP",
           "isHome": false,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 56.5,
-          "projScoreUt": 30,
-          "projScoreOpp": 24
+          "baseWinProb": 59.1,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         },
         {
           "id": "ind-w9",
@@ -2014,9 +2014,9 @@
           "oppRank": "#17 AP",
           "isHome": false,
           "stadium": "Husky Stadium",
-          "baseWinProb": 63.8,
-          "projScoreUt": 30,
-          "projScoreOpp": 24
+          "baseWinProb": 61.3,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         },
         {
           "id": "ind-w12",
@@ -2118,8 +2118,8 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Hard Rock Stadium",
-          "baseWinProb": 68.5,
-          "projScoreUt": 34,
+          "baseWinProb": 87.0,
+          "projScoreUt": 32,
           "projScoreOpp": 24
         },
         {
@@ -2157,9 +2157,9 @@
           "oppRank": "#4 AP",
           "isHome": false,
           "stadium": "Notre Dame Stadium",
-          "baseWinProb": 41.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 31
+          "baseWinProb": 43.1,
+          "projScoreUt": 27,
+          "projScoreOpp": 29
         },
         {
           "id": "mia-w10",
@@ -2261,9 +2261,9 @@
           "oppRank": "#11 AP",
           "isHome": false,
           "stadium": "Tiger Stadium",
-          "baseWinProb": 41.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 28
+          "baseWinProb": 46.2,
+          "projScoreUt": 28,
+          "projScoreOpp": 31
         },
         {
           "id": "tam-w5",
@@ -2287,9 +2287,9 @@
           "oppRank": "#25 AP",
           "isHome": false,
           "stadium": "Faurot Field",
-          "baseWinProb": 64.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 21
+          "baseWinProb": 70.3,
+          "projScoreUt": 30,
+          "projScoreOpp": 26
         },
         {
           "id": "tam-w7",
@@ -2313,9 +2313,9 @@
           "oppRank": "#13 AP",
           "isHome": false,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 37.5,
-          "projScoreUt": 23,
-          "projScoreOpp": 28
+          "baseWinProb": 39.4,
+          "projScoreUt": 27,
+          "projScoreOpp": 29
         },
         {
           "id": "tam-w9",
@@ -2339,9 +2339,9 @@
           "oppRank": "#20 AP",
           "isHome": true,
           "stadium": "Kyle Field",
-          "baseWinProb": 60.5,
-          "projScoreUt": 27,
-          "projScoreOpp": 20
+          "baseWinProb": 88.4,
+          "projScoreUt": 32,
+          "projScoreOpp": 24
         },
         {
           "id": "tam-w11",
@@ -2352,9 +2352,9 @@
           "oppRank": "#10 AP",
           "isHome": false,
           "stadium": "Gaylord Family Oklahoma Memorial Stadium",
-          "baseWinProb": 42.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 27
+          "baseWinProb": 38.0,
+          "projScoreUt": 27,
+          "projScoreOpp": 29
         },
         {
           "id": "tam-w12",
@@ -2365,9 +2365,9 @@
           "oppRank": "#5 AP",
           "isHome": true,
           "stadium": "Kyle Field",
-          "baseWinProb": 37.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 28
+          "baseWinProb": 62.0,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         }
       ]
     },
@@ -2391,9 +2391,9 @@
           "oppRank": "#24 AP",
           "isHome": false,
           "stadium": "Nissan Stadium",
-          "baseWinProb": 73.5,
-          "projScoreUt": 35,
-          "projScoreOpp": 24
+          "baseWinProb": 75.7,
+          "projScoreUt": 30,
+          "projScoreOpp": 26
         },
         {
           "id": "ole-w2",
@@ -2417,9 +2417,9 @@
           "oppRank": "#11 AP",
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 51.8,
-          "projScoreUt": 34,
-          "projScoreOpp": 31
+          "baseWinProb": 76.3,
+          "projScoreUt": 30,
+          "projScoreOpp": 26
         },
         {
           "id": "ole-w4",
@@ -2456,9 +2456,9 @@
           "oppRank": "#25 AP",
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 73.5,
-          "projScoreUt": 34,
-          "projScoreOpp": 24
+          "baseWinProb": 89.8,
+          "projScoreUt": 33,
+          "projScoreOpp": 23
         },
         {
           "id": "ole-w7",
@@ -2469,9 +2469,9 @@
           "oppRank": "#5 AP",
           "isHome": false,
           "stadium": "DKR Texas Memorial Stadium",
-          "baseWinProb": 31.8,
-          "projScoreUt": 31,
-          "projScoreOpp": 38
+          "baseWinProb": 22.1,
+          "projScoreUt": 25,
+          "projScoreOpp": 31
         },
         {
           "id": "ole-w8",
@@ -2495,8 +2495,8 @@
           "oppRank": "#3 AP",
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 35.5,
-          "projScoreUt": 24,
+          "baseWinProb": 48.5,
+          "projScoreUt": 28,
           "projScoreOpp": 31
         },
         {
@@ -2508,9 +2508,9 @@
           "oppRank": "#10 AP",
           "isHome": false,
           "stadium": "Gaylord Family Oklahoma Memorial Stadium",
-          "baseWinProb": 39.5,
+          "baseWinProb": 33.0,
           "projScoreUt": 27,
-          "projScoreOpp": 31
+          "projScoreOpp": 29
         },
         {
           "id": "ole-w11",
@@ -2573,9 +2573,9 @@
           "oppRank": "#16 AP",
           "isHome": false,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 41.5,
-          "projScoreUt": 23,
-          "projScoreOpp": 28
+          "baseWinProb": 56.9,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         },
         {
           "id": "ou-w3",
@@ -2599,9 +2599,9 @@
           "oppRank": "#3 AP",
           "isHome": false,
           "stadium": "Sanford Stadium",
-          "baseWinProb": 24.2,
-          "projScoreUt": 20,
-          "projScoreOpp": 34
+          "baseWinProb": 16.0,
+          "projScoreUt": 24,
+          "projScoreOpp": 32
         },
         {
           "id": "ou-w5",
@@ -2612,9 +2612,9 @@
           "oppRank": "#5 AP",
           "isHome": false,
           "stadium": "Cotton Bowl",
-          "baseWinProb": 25.8,
-          "projScoreUt": 20,
-          "projScoreOpp": 34
+          "baseWinProb": 55.4,
+          "projScoreUt": 31,
+          "projScoreOpp": 28
         },
         {
           "id": "ou-w6",
@@ -2677,8 +2677,8 @@
           "oppRank": "#9 AP",
           "isHome": true,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 60.5,
-          "projScoreUt": 31,
+          "baseWinProb": 67.0,
+          "projScoreUt": 29,
           "projScoreOpp": 27
         },
         {
@@ -2690,9 +2690,9 @@
           "oppRank": "#8 AP",
           "isHome": true,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 57.5,
-          "projScoreUt": 27,
-          "projScoreOpp": 24
+          "baseWinProb": 62.0,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         },
         {
           "id": "ou-w12",
@@ -2703,9 +2703,9 @@
           "oppRank": "#25 AP",
           "isHome": false,
           "stadium": "Faurot Field",
-          "baseWinProb": 69.5,
-          "projScoreUt": 30,
-          "projScoreOpp": 21
+          "baseWinProb": 64.2,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         }
       ]
     },
@@ -2742,9 +2742,9 @@
           "oppRank": "#2 AP",
           "isHome": false,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 31.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 34
+          "baseWinProb": 1.0,
+          "projScoreUt": 18,
+          "projScoreOpp": 38
         },
         {
           "id": "bsu-w3",
@@ -2989,9 +2989,9 @@
           "oppRank": "#1 AP",
           "isHome": false,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 28.6,
-          "projScoreUt": 27,
-          "projScoreOpp": 38
+          "baseWinProb": 21.6,
+          "projScoreUt": 25,
+          "projScoreOpp": 31
         },
         {
           "id": "usc-w9",
@@ -3002,9 +3002,9 @@
           "oppRank": "#2 AP",
           "isHome": true,
           "stadium": "LA Memorial Coliseum",
-          "baseWinProb": 36.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 34
+          "baseWinProb": 31.7,
+          "projScoreUt": 26,
+          "projScoreOpp": 30
         },
         {
           "id": "usc-w10",
@@ -3015,9 +3015,9 @@
           "oppRank": "#17 AP",
           "isHome": false,
           "stadium": "Husky Stadium",
-          "baseWinProb": 66.5,
-          "projScoreUt": 31,
-          "projScoreOpp": 24
+          "baseWinProb": 40.9,
+          "projScoreUt": 27,
+          "projScoreOpp": 29
         },
         {
           "id": "usc-w11",
@@ -3093,9 +3093,9 @@
           "oppRank": "#24 AP",
           "isHome": false,
           "stadium": "L&N Federal Credit Union Stadium",
-          "baseWinProb": 62.5,
-          "projScoreUt": 31,
-          "projScoreOpp": 26
+          "baseWinProb": 49.2,
+          "projScoreUt": 28,
+          "projScoreOpp": 31
         },
         {
           "id": "fsu-w4",
@@ -3145,9 +3145,9 @@
           "oppRank": "#7 AP",
           "isHome": false,
           "stadium": "Hard Rock Stadium",
-          "baseWinProb": 36.5,
+          "baseWinProb": 13.0,
           "projScoreUt": 24,
-          "projScoreOpp": 31
+          "projScoreOpp": 32
         },
         {
           "id": "fsu-w8",
@@ -3197,9 +3197,9 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Doak Campbell Stadium",
-          "baseWinProb": 54.5,
-          "projScoreUt": 27,
-          "projScoreOpp": 24
+          "baseWinProb": 69.6,
+          "projScoreUt": 30,
+          "projScoreOpp": 26
         },
         {
           "id": "fsu-w12",
@@ -3236,8 +3236,8 @@
           "oppRank": "#11 AP",
           "isHome": false,
           "stadium": "Tiger Stadium",
-          "baseWinProb": 43.5,
-          "projScoreUt": 27,
+          "baseWinProb": 16.8,
+          "projScoreUt": 25,
           "projScoreOpp": 31
         },
         {
@@ -3340,9 +3340,9 @@
           "oppRank": "#19 AP",
           "isHome": false,
           "stadium": "Gerald J. Ford Stadium",
-          "baseWinProb": 55.5,
-          "projScoreUt": 34,
-          "projScoreOpp": 30
+          "baseWinProb": 34.4,
+          "projScoreUt": 27,
+          "projScoreOpp": 29
         },
         {
           "id": "clem-w10",
@@ -3366,9 +3366,9 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Doak Campbell Stadium",
-          "baseWinProb": 45.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 27
+          "baseWinProb": 30.4,
+          "projScoreUt": 26,
+          "projScoreOpp": 30
         },
         {
           "id": "clem-w12",
@@ -3496,9 +3496,9 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Gerald J. Ford Stadium",
-          "baseWinProb": 44.5,
-          "projScoreUt": 30,
-          "projScoreOpp": 34
+          "baseWinProb": 65.6,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         },
         {
           "id": "smu-w9",
@@ -3600,9 +3600,9 @@
           "oppRank": "#23 AP",
           "isHome": true,
           "stadium": "Jones AT&T Stadium",
-          "baseWinProb": 88.5,
-          "projScoreUt": 41,
-          "projScoreOpp": 20
+          "baseWinProb": 85.2,
+          "projScoreUt": 32,
+          "projScoreOpp": 24
         },
         {
           "id": "ttu-w4",
@@ -3665,9 +3665,9 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Jones AT&T Stadium",
-          "baseWinProb": 70.5,
-          "projScoreUt": 37,
-          "projScoreOpp": 28
+          "baseWinProb": 88.0,
+          "projScoreUt": 32,
+          "projScoreOpp": 24
         },
         {
           "id": "ttu-w9",
@@ -3821,9 +3821,9 @@
           "oppRank": "#23 AP",
           "isHome": true,
           "stadium": "Rice-Eccles Stadium",
-          "baseWinProb": 72.5,
-          "projScoreUt": 31,
-          "projScoreOpp": 21
+          "baseWinProb": 71.5,
+          "projScoreUt": 30,
+          "projScoreOpp": 26
         },
         {
           "id": "utah-w8",
@@ -3847,9 +3847,9 @@
           "oppRank": "#14 AP",
           "isHome": true,
           "stadium": "Rice-Eccles Stadium",
-          "baseWinProb": 60.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 24
+          "baseWinProb": 72.8,
+          "projScoreUt": 30,
+          "projScoreOpp": 26
         },
         {
           "id": "utah-w10",
@@ -3860,9 +3860,9 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Arizona Stadium",
-          "baseWinProb": 57.5,
-          "projScoreUt": 31,
-          "projScoreOpp": 27
+          "baseWinProb": 40.9,
+          "projScoreUt": 27,
+          "projScoreOpp": 29
         },
         {
           "id": "utah-w11",
@@ -3951,9 +3951,9 @@
           "oppRank": "#16 AP",
           "isHome": false,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 30.5,
-          "projScoreUt": 17,
-          "projScoreOpp": 24
+          "baseWinProb": 21.1,
+          "projScoreUt": 25,
+          "projScoreOpp": 31
         },
         {
           "id": "iowa-w5",
@@ -3964,9 +3964,9 @@
           "oppRank": "#1 AP",
           "isHome": true,
           "stadium": "Kinnick Stadium",
-          "baseWinProb": 18.5,
-          "projScoreUt": 16,
-          "projScoreOpp": 28
+          "baseWinProb": 10.4,
+          "projScoreUt": 23,
+          "projScoreOpp": 33
         },
         {
           "id": "iowa-w6",
@@ -3977,9 +3977,9 @@
           "oppRank": "#17 AP",
           "isHome": false,
           "stadium": "Husky Stadium",
-          "baseWinProb": 43.5,
-          "projScoreUt": 20,
-          "projScoreOpp": 23
+          "baseWinProb": 22.7,
+          "projScoreUt": 25,
+          "projScoreOpp": 31
         },
         {
           "id": "iowa-w7",
@@ -4146,9 +4146,9 @@
           "oppRank": "#8 AP",
           "isHome": true,
           "stadium": "Faurot Field at Memorial Stadium",
-          "baseWinProb": 39.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 28
+          "baseWinProb": 29.7,
+          "projScoreUt": 26,
+          "projScoreOpp": 30
         },
         {
           "id": "miz-w7",
@@ -4159,9 +4159,9 @@
           "oppRank": "#9 AP",
           "isHome": false,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 34.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 35
+          "baseWinProb": 10.2,
+          "projScoreUt": 23,
+          "projScoreOpp": 33
         },
         {
           "id": "miz-w8",
@@ -4185,9 +4185,9 @@
           "oppRank": "#5 AP",
           "isHome": true,
           "stadium": "Faurot Field at Memorial Stadium",
-          "baseWinProb": 30.5,
-          "projScoreUt": 23,
-          "projScoreOpp": 31
+          "baseWinProb": 24.3,
+          "projScoreUt": 26,
+          "projScoreOpp": 30
         },
         {
           "id": "miz-w10",
@@ -4198,8 +4198,8 @@
           "oppRank": "#3 AP",
           "isHome": false,
           "stadium": "Sanford Stadium",
-          "baseWinProb": 18.5,
-          "projScoreUt": 17,
+          "baseWinProb": 4.7,
+          "projScoreUt": 22,
           "projScoreOpp": 34
         },
         {
@@ -4224,9 +4224,9 @@
           "oppRank": "#10 AP",
           "isHome": true,
           "stadium": "Faurot Field at Memorial Stadium",
-          "baseWinProb": 43.5,
+          "baseWinProb": 35.8,
           "projScoreUt": 27,
-          "projScoreOpp": 30
+          "projScoreOpp": 29
         }
       ]
     },
@@ -4263,9 +4263,9 @@
           "oppRank": "#14 AP",
           "isHome": false,
           "stadium": "LaVell Edwards Stadium",
-          "baseWinProb": 32.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 31
+          "baseWinProb": 27.9,
+          "projScoreUt": 26,
+          "projScoreOpp": 30
         },
         {
           "id": "ariz-w3",
@@ -4341,9 +4341,9 @@
           "oppRank": "#12 AP",
           "isHome": false,
           "stadium": "Jones AT&T Stadium",
-          "baseWinProb": 24.5,
-          "projScoreUt": 26,
-          "projScoreOpp": 38
+          "baseWinProb": 12.0,
+          "projScoreUt": 24,
+          "projScoreOpp": 32
         },
         {
           "id": "ariz-w9",
@@ -4367,9 +4367,9 @@
           "oppRank": "#21 AP",
           "isHome": true,
           "stadium": "Arizona Stadium",
-          "baseWinProb": 42.5,
-          "projScoreUt": 27,
-          "projScoreOpp": 31
+          "baseWinProb": 59.1,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         },
         {
           "id": "ariz-w11",
@@ -4471,9 +4471,9 @@
           "oppRank": "#15 AP",
           "isHome": false,
           "stadium": "LA Memorial Coliseum",
-          "baseWinProb": 43.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 31
+          "baseWinProb": 59.1,
+          "projScoreUt": 29,
+          "projScoreOpp": 27
         },
         {
           "id": "wash-w6",
@@ -4484,9 +4484,9 @@
           "oppRank": "#22 AP",
           "isHome": true,
           "stadium": "Husky Stadium",
-          "baseWinProb": 56.5,
-          "projScoreUt": 23,
-          "projScoreOpp": 20
+          "baseWinProb": 77.3,
+          "projScoreUt": 31,
+          "projScoreOpp": 25
         },
         {
           "id": "wash-w7",
@@ -4523,9 +4523,9 @@
           "oppRank": "#18 AP",
           "isHome": true,
           "stadium": "Husky Stadium",
-          "baseWinProb": 56.5,
+          "baseWinProb": 40.9,
           "projScoreUt": 27,
-          "projScoreOpp": 24
+          "projScoreOpp": 29
         },
         {
           "id": "wash-w10",
@@ -4549,9 +4549,9 @@
           "oppRank": "#6 AP",
           "isHome": true,
           "stadium": "Husky Stadium",
-          "baseWinProb": 42.5,
-          "projScoreUt": 28,
-          "projScoreOpp": 31
+          "baseWinProb": 38.7,
+          "projScoreUt": 27,
+          "projScoreOpp": 29
         },
         {
           "id": "wash-w12",
@@ -4562,9 +4562,9 @@
           "oppRank": "#2 AP",
           "isHome": false,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 26.5,
-          "projScoreUt": 24,
-          "projScoreOpp": 35
+          "baseWinProb": 6.3,
+          "projScoreUt": 22,
+          "projScoreOpp": 34
         }
       ]
     },
@@ -4614,9 +4614,9 @@
           "oppRank": "#12 AP",
           "isHome": false,
           "stadium": "Jones AT&T Stadium",
-          "baseWinProb": 24.5,
-          "projScoreUt": 26,
-          "projScoreOpp": 37
+          "baseWinProb": 14.8,
+          "projScoreUt": 24,
+          "projScoreOpp": 32
         },
         {
           "id": "hou-w4",
@@ -4679,9 +4679,9 @@
           "oppRank": "#21 AP",
           "isHome": false,
           "stadium": "Rice-Eccles Stadium",
-          "baseWinProb": 27.5,
-          "projScoreUt": 21,
-          "projScoreOpp": 31
+          "baseWinProb": 28.5,
+          "projScoreUt": 26,
+          "projScoreOpp": 30
         },
         {
           "id": "hou-w9",
@@ -4757,9 +4757,9 @@
           "oppRank": "#9 AP",
           "isHome": false,
           "stadium": "Nissan Stadium",
-          "baseWinProb": 34.5,
-          "projScoreUt": 27,
-          "projScoreOpp": 34
+          "baseWinProb": 24.3,
+          "projScoreUt": 26,
+          "projScoreOpp": 30
         },
         {
           "id": "lou-w2",
@@ -4822,9 +4822,9 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "L&N Stadium",
-          "baseWinProb": 60.5,
-          "projScoreUt": 30,
-          "projScoreOpp": 26
+          "baseWinProb": 50.8,
+          "projScoreUt": 31,
+          "projScoreOpp": 28
         },
         {
           "id": "lou-w7",
@@ -4921,32 +4921,32 @@
       "teamName": "BYU Cougars",
       "oppName": "Utah Utes",
       "week": "WEEK 11",
-      "winProb": 46,
-      "projScore": "24-27"
+      "winProb": 27.2,
+      "projScore": "26-30"
     },
     {
       "teamId": "texas",
       "teamName": "Texas Longhorns",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 2",
-      "winProb": 43.5,
-      "projScore": "24-27"
+      "winProb": 50.0,
+      "projScore": "28-31"
     },
     {
       "teamId": "texas",
       "teamName": "Texas Longhorns",
       "oppName": "Tennessee Volunteers",
       "week": "WEEK 4",
-      "winProb": 65.5,
-      "projScore": "31-23"
+      "winProb": 68.3,
+      "projScore": "30-26"
     },
     {
       "teamId": "texas",
       "teamName": "Texas Longhorns",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 5",
-      "winProb": 74.2,
-      "projScore": "34-20"
+      "winProb": 44.6,
+      "projScore": "28-31"
     },
     {
       "teamId": "texas",
@@ -4961,24 +4961,24 @@
       "teamName": "Texas Longhorns",
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 7",
-      "winProb": 68.2,
-      "projScore": "38-31"
+      "winProb": 77.9,
+      "projScore": "31-25"
     },
     {
       "teamId": "texas",
       "teamName": "Texas Longhorns",
       "oppName": "Missouri Tigers",
       "week": "WEEK 9",
-      "winProb": 76.5,
-      "projScore": "28-17"
+      "winProb": 75.7,
+      "projScore": "30-26"
     },
     {
       "teamId": "texas",
       "teamName": "Texas Longhorns",
       "oppName": "LSU Tigers",
       "week": "WEEK 10",
-      "winProb": 53.5,
-      "projScore": "34-31"
+      "winProb": 53.1,
+      "projScore": "31-28"
     },
     {
       "teamId": "texas",
@@ -4993,40 +4993,40 @@
       "teamName": "Texas Longhorns",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 12",
-      "winProb": 62.5,
-      "projScore": "28-24"
+      "winProb": 38.0,
+      "projScore": "27-29"
     },
     {
       "teamId": "michigan",
       "teamName": "Michigan Wolverines",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 2",
-      "winProb": 58.5,
-      "projScore": "28-23"
+      "winProb": 43.1,
+      "projScore": "27-29"
     },
     {
       "teamId": "michigan",
       "teamName": "Michigan Wolverines",
       "oppName": "Iowa Hawkeyes",
       "week": "WEEK 4",
-      "winProb": 74.5,
-      "projScore": "24-13"
+      "winProb": 78.9,
+      "projScore": "31-25"
     },
     {
       "teamId": "michigan",
       "teamName": "Michigan Wolverines",
       "oppName": "Penn State Nittany Lions",
       "week": "WEEK 6",
-      "winProb": 61.2,
-      "projScore": "27-20"
+      "winProb": 43.1,
+      "projScore": "27-29"
     },
     {
       "teamId": "michigan",
       "teamName": "Michigan Wolverines",
       "oppName": "Indiana Hoosiers",
       "week": "WEEK 7",
-      "winProb": 43.5,
-      "projScore": "24-30"
+      "winProb": 40.9,
+      "projScore": "27-29"
     },
     {
       "teamId": "michigan",
@@ -5041,56 +5041,56 @@
       "teamName": "Michigan Wolverines",
       "oppName": "Oregon Ducks",
       "week": "WEEK 10",
-      "winProb": 28.5,
-      "projScore": "21-34"
+      "winProb": 6.9,
+      "projScore": "22-34"
     },
     {
       "teamId": "michigan",
       "teamName": "Michigan Wolverines",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 12",
-      "winProb": 32.5,
-      "projScore": "20-31"
+      "winProb": 4.2,
+      "projScore": "21-35"
     },
     {
       "teamId": "ohiostate",
       "teamName": "Ohio State Buckeyes",
       "oppName": "Texas Longhorns",
       "week": "WEEK 2",
-      "winProb": 56.5,
-      "projScore": "27-24"
+      "winProb": 50.0,
+      "projScore": "31-28"
     },
     {
       "teamId": "ohiostate",
       "teamName": "Ohio State Buckeyes",
       "oppName": "Iowa Hawkeyes",
       "week": "WEEK 5",
-      "winProb": 81.2,
-      "projScore": "28-13"
+      "winProb": 89.6,
+      "projScore": "33-23"
     },
     {
       "teamId": "ohiostate",
       "teamName": "Ohio State Buckeyes",
       "oppName": "Indiana Hoosiers",
       "week": "WEEK 7",
-      "winProb": 68.5,
-      "projScore": "35-24"
+      "winProb": 61.3,
+      "projScore": "29-27"
     },
     {
       "teamId": "ohiostate",
       "teamName": "Ohio State Buckeyes",
       "oppName": "USC Trojans",
       "week": "WEEK 8",
-      "winProb": 71.4,
-      "projScore": "38-27"
+      "winProb": 78.4,
+      "projScore": "31-25"
     },
     {
       "teamId": "ohiostate",
       "teamName": "Ohio State Buckeyes",
       "oppName": "Oregon Ducks",
       "week": "WEEK 9",
-      "winProb": 61.5,
-      "projScore": "31-27"
+      "winProb": 78.4,
+      "projScore": "31-25"
     },
     {
       "teamId": "ohiostate",
@@ -5105,24 +5105,24 @@
       "teamName": "Ohio State Buckeyes",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 12",
-      "winProb": 67.5,
-      "projScore": "31-20"
+      "winProb": 95.8,
+      "projScore": "35-21"
     },
     {
       "teamId": "georgia",
       "teamName": "Georgia Bulldogs",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 4",
-      "winProb": 75.8,
-      "projScore": "34-20"
+      "winProb": 84.0,
+      "projScore": "32-24"
     },
     {
       "teamId": "georgia",
       "teamName": "Georgia Bulldogs",
       "oppName": "Alabama Crimson Tide",
       "week": "WEEK 6",
-      "winProb": 43.5,
-      "projScore": "24-27"
+      "winProb": 54.6,
+      "projScore": "31-28"
     },
     {
       "teamId": "georgia",
@@ -5145,16 +5145,16 @@
       "teamName": "Georgia Bulldogs",
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 9",
-      "winProb": 64.5,
-      "projScore": "31-24"
+      "winProb": 51.5,
+      "projScore": "31-28"
     },
     {
       "teamId": "georgia",
       "teamName": "Georgia Bulldogs",
       "oppName": "Missouri Tigers",
       "week": "WEEK 10",
-      "winProb": 86.5,
-      "projScore": "35-17"
+      "winProb": 95.3,
+      "projScore": "34-22"
     },
     {
       "teamId": "georgia",
@@ -5177,32 +5177,32 @@
       "teamName": "Alabama Crimson Tide",
       "oppName": "Georgia Bulldogs",
       "week": "WEEK 6",
-      "winProb": 44.5,
-      "projScore": "24-27"
+      "winProb": 45.4,
+      "projScore": "28-31"
     },
     {
       "teamId": "alabama",
       "teamName": "Alabama Crimson Tide",
       "oppName": "Tennessee Volunteers",
       "week": "WEEK 7",
-      "winProb": 54.5,
-      "projScore": "28-24"
+      "winProb": 53.8,
+      "projScore": "31-28"
     },
     {
       "teamId": "alabama",
       "teamName": "Alabama Crimson Tide",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 8",
-      "winProb": 62.5,
-      "projScore": "28-23"
+      "winProb": 60.6,
+      "projScore": "29-27"
     },
     {
       "teamId": "alabama",
       "teamName": "Alabama Crimson Tide",
       "oppName": "LSU Tigers",
       "week": "WEEK 9",
-      "winProb": 43.5,
-      "projScore": "27-31"
+      "winProb": 38.0,
+      "projScore": "27-29"
     },
     {
       "teamId": "alabama",
@@ -5217,8 +5217,8 @@
       "teamName": "Oregon Ducks",
       "oppName": "Boise State Broncos",
       "week": "WEEK 1",
-      "winProb": 79.5,
-      "projScore": "38-24"
+      "winProb": 99.0,
+      "projScore": "38-18"
     },
     {
       "teamId": "oregon",
@@ -5233,32 +5233,32 @@
       "teamName": "Oregon Ducks",
       "oppName": "USC Trojans",
       "week": "WEEK 4",
-      "winProb": 69.5,
-      "projScore": "38-28"
+      "winProb": 68.3,
+      "projScore": "30-26"
     },
     {
       "teamId": "oregon",
       "teamName": "Oregon Ducks",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 9",
-      "winProb": 38.5,
-      "projScore": "27-31"
+      "winProb": 21.6,
+      "projScore": "25-31"
     },
     {
       "teamId": "oregon",
       "teamName": "Oregon Ducks",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 10",
-      "winProb": 71.5,
-      "projScore": "34-21"
+      "winProb": 93.1,
+      "projScore": "34-22"
     },
     {
       "teamId": "oregon",
       "teamName": "Oregon Ducks",
       "oppName": "Washington Huskies",
       "week": "WEEK 12",
-      "winProb": 85.5,
-      "projScore": "38-21"
+      "winProb": 93.7,
+      "projScore": "34-22"
     },
     {
       "teamId": "pennstate",
@@ -5281,16 +5281,16 @@
       "teamName": "Penn State Nittany Lions",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 7",
-      "winProb": 38.8,
-      "projScore": "20-27"
+      "winProb": 56.9,
+      "projScore": "29-27"
     },
     {
       "teamId": "pennstate",
       "teamName": "Penn State Nittany Lions",
       "oppName": "Washington Huskies",
       "week": "WEEK 9",
-      "winProb": 44.5,
-      "projScore": "24-27"
+      "winProb": 59.1,
+      "projScore": "29-27"
     },
     {
       "teamId": "notredame",
@@ -5345,8 +5345,8 @@
       "teamName": "Notre Dame Fighting Irish",
       "oppName": "Miami Hurricanes",
       "week": "WEEK 9",
-      "winProb": 58.5,
-      "projScore": "31-24"
+      "winProb": 56.9,
+      "projScore": "29-27"
     },
     {
       "teamId": "notredame",
@@ -5361,24 +5361,24 @@
       "teamName": "LSU Tigers",
       "oppName": "Clemson Tigers",
       "week": "WEEK 1",
-      "winProb": 64.5,
-      "projScore": "30-23"
+      "winProb": 83.2,
+      "projScore": "31-25"
     },
     {
       "teamId": "lsu",
       "teamName": "LSU Tigers",
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 3",
-      "winProb": 43.5,
-      "projScore": "28-34"
+      "winProb": 23.7,
+      "projScore": "26-30"
     },
     {
       "teamId": "lsu",
       "teamName": "LSU Tigers",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 4",
-      "winProb": 57.5,
-      "projScore": "27-23"
+      "winProb": 53.8,
+      "projScore": "31-28"
     },
     {
       "teamId": "lsu",
@@ -5393,24 +5393,24 @@
       "teamName": "LSU Tigers",
       "oppName": "Alabama Crimson Tide",
       "week": "WEEK 9",
-      "winProb": 56.5,
-      "projScore": "31-27"
+      "winProb": 62.0,
+      "projScore": "29-27"
     },
     {
       "teamId": "lsu",
       "teamName": "LSU Tigers",
       "oppName": "Texas Longhorns",
       "week": "WEEK 10",
-      "winProb": 46.5,
-      "projScore": "31-34"
+      "winProb": 46.9,
+      "projScore": "28-31"
     },
     {
       "teamId": "lsu",
       "teamName": "LSU Tigers",
       "oppName": "Tennessee Volunteers",
       "week": "WEEK 11",
-      "winProb": 45.5,
-      "projScore": "27-31"
+      "winProb": 46.9,
+      "projScore": "28-31"
     },
     {
       "teamId": "lsu",
@@ -5433,8 +5433,8 @@
       "teamName": "Tennessee Volunteers",
       "oppName": "Texas Longhorns",
       "week": "WEEK 4",
-      "winProb": 36.5,
-      "projScore": "23-31"
+      "winProb": 31.7,
+      "projScore": "26-30"
     },
     {
       "teamId": "tennessee",
@@ -5449,24 +5449,24 @@
       "teamName": "Tennessee Volunteers",
       "oppName": "Alabama Crimson Tide",
       "week": "WEEK 7",
-      "winProb": 45.5,
-      "projScore": "24-28"
+      "winProb": 46.2,
+      "projScore": "28-31"
     },
     {
       "teamId": "tennessee",
       "teamName": "Tennessee Volunteers",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 10",
-      "winProb": 39.5,
-      "projScore": "20-27"
+      "winProb": 11.6,
+      "projScore": "24-32"
     },
     {
       "teamId": "tennessee",
       "teamName": "Tennessee Volunteers",
       "oppName": "LSU Tigers",
       "week": "WEEK 11",
-      "winProb": 54.5,
-      "projScore": "31-27"
+      "winProb": 53.1,
+      "projScore": "31-28"
     },
     {
       "teamId": "indiana",
@@ -5481,16 +5481,16 @@
       "teamName": "Indiana Hoosiers",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 7",
-      "winProb": 31.5,
-      "projScore": "24-35"
+      "winProb": 38.7,
+      "projScore": "27-29"
     },
     {
       "teamId": "indiana",
       "teamName": "Indiana Hoosiers",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 8",
-      "winProb": 56.5,
-      "projScore": "30-24"
+      "winProb": 59.1,
+      "projScore": "29-27"
     },
     {
       "teamId": "indiana",
@@ -5505,8 +5505,8 @@
       "teamName": "Indiana Hoosiers",
       "oppName": "Washington Huskies",
       "week": "WEEK 11",
-      "winProb": 63.8,
-      "projScore": "30-24"
+      "winProb": 61.3,
+      "projScore": "29-27"
     },
     {
       "teamId": "indiana",
@@ -5529,16 +5529,16 @@
       "teamName": "Miami Hurricanes",
       "oppName": "Florida State Seminoles",
       "week": "WEEK 6",
-      "winProb": 68.5,
-      "projScore": "34-24"
+      "winProb": 87.0,
+      "projScore": "32-24"
     },
     {
       "teamId": "miami",
       "teamName": "Miami Hurricanes",
       "oppName": "Notre Dame Fighting Irish",
       "week": "WEEK 9",
-      "winProb": 41.5,
-      "projScore": "24-31"
+      "winProb": 43.1,
+      "projScore": "27-29"
     },
     {
       "teamId": "texasam",
@@ -5553,8 +5553,8 @@
       "teamName": "Texas A&M Aggies",
       "oppName": "LSU Tigers",
       "week": "WEEK 4",
-      "winProb": 41.5,
-      "projScore": "24-28"
+      "winProb": 46.2,
+      "projScore": "28-31"
     },
     {
       "teamId": "texasam",
@@ -5569,56 +5569,56 @@
       "teamName": "Texas A&M Aggies",
       "oppName": "Missouri Tigers",
       "week": "WEEK 6",
-      "winProb": 64.5,
-      "projScore": "28-21"
+      "winProb": 70.3,
+      "projScore": "30-26"
     },
     {
       "teamId": "texasam",
       "teamName": "Texas A&M Aggies",
       "oppName": "Alabama Crimson Tide",
       "week": "WEEK 8",
-      "winProb": 37.5,
-      "projScore": "23-28"
+      "winProb": 39.4,
+      "projScore": "27-29"
     },
     {
       "teamId": "texasam",
       "teamName": "Texas A&M Aggies",
       "oppName": "Tennessee Volunteers",
       "week": "WEEK 10",
-      "winProb": 60.5,
-      "projScore": "27-20"
+      "winProb": 88.4,
+      "projScore": "32-24"
     },
     {
       "teamId": "texasam",
       "teamName": "Texas A&M Aggies",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 11",
-      "winProb": 42.5,
-      "projScore": "24-27"
+      "winProb": 38.0,
+      "projScore": "27-29"
     },
     {
       "teamId": "texasam",
       "teamName": "Texas A&M Aggies",
       "oppName": "Texas Longhorns",
       "week": "WEEK 12",
-      "winProb": 37.5,
-      "projScore": "24-28"
+      "winProb": 62.0,
+      "projScore": "29-27"
     },
     {
       "teamId": "olemiss",
       "teamName": "Ole Miss Rebels",
       "oppName": "Louisville Cardinals",
       "week": "WEEK 1",
-      "winProb": 73.5,
-      "projScore": "35-24"
+      "winProb": 75.7,
+      "projScore": "30-26"
     },
     {
       "teamId": "olemiss",
       "teamName": "Ole Miss Rebels",
       "oppName": "LSU Tigers",
       "week": "WEEK 3",
-      "winProb": 51.8,
-      "projScore": "34-31"
+      "winProb": 76.3,
+      "projScore": "30-26"
     },
     {
       "teamId": "olemiss",
@@ -5633,16 +5633,16 @@
       "teamName": "Ole Miss Rebels",
       "oppName": "Missouri Tigers",
       "week": "WEEK 6",
-      "winProb": 73.5,
-      "projScore": "34-24"
+      "winProb": 89.8,
+      "projScore": "33-23"
     },
     {
       "teamId": "olemiss",
       "teamName": "Ole Miss Rebels",
       "oppName": "Texas Longhorns",
       "week": "WEEK 7",
-      "winProb": 31.8,
-      "projScore": "31-38"
+      "winProb": 22.1,
+      "projScore": "25-31"
     },
     {
       "teamId": "olemiss",
@@ -5657,16 +5657,16 @@
       "teamName": "Ole Miss Rebels",
       "oppName": "Georgia Bulldogs",
       "week": "WEEK 9",
-      "winProb": 35.5,
-      "projScore": "24-31"
+      "winProb": 48.5,
+      "projScore": "28-31"
     },
     {
       "teamId": "olemiss",
       "teamName": "Ole Miss Rebels",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 10",
-      "winProb": 39.5,
-      "projScore": "27-31"
+      "winProb": 33.0,
+      "projScore": "27-29"
     },
     {
       "teamId": "olemiss",
@@ -5681,24 +5681,24 @@
       "teamName": "Oklahoma Sooners",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 2",
-      "winProb": 41.5,
-      "projScore": "23-28"
+      "winProb": 56.9,
+      "projScore": "29-27"
     },
     {
       "teamId": "oklahoma",
       "teamName": "Oklahoma Sooners",
       "oppName": "Georgia Bulldogs",
       "week": "WEEK 4",
-      "winProb": 24.2,
-      "projScore": "20-34"
+      "winProb": 16.0,
+      "projScore": "24-32"
     },
     {
       "teamId": "oklahoma",
       "teamName": "Oklahoma Sooners",
       "oppName": "Texas Longhorns",
       "week": "WEEK 5",
-      "winProb": 25.8,
-      "projScore": "20-34"
+      "winProb": 55.4,
+      "projScore": "31-28"
     },
     {
       "teamId": "oklahoma",
@@ -5713,32 +5713,32 @@
       "teamName": "Oklahoma Sooners",
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 10",
-      "winProb": 60.5,
-      "projScore": "31-27"
+      "winProb": 67.0,
+      "projScore": "29-27"
     },
     {
       "teamId": "oklahoma",
       "teamName": "Oklahoma Sooners",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 11",
-      "winProb": 57.5,
-      "projScore": "27-24"
+      "winProb": 62.0,
+      "projScore": "29-27"
     },
     {
       "teamId": "oklahoma",
       "teamName": "Oklahoma Sooners",
       "oppName": "Missouri Tigers",
       "week": "WEEK 12",
-      "winProb": 69.5,
-      "projScore": "30-21"
+      "winProb": 64.2,
+      "projScore": "29-27"
     },
     {
       "teamId": "boisestate",
       "teamName": "Boise State Broncos",
       "oppName": "Oregon Ducks",
       "week": "WEEK 2",
-      "winProb": 31.5,
-      "projScore": "24-34"
+      "winProb": 1.0,
+      "projScore": "18-38"
     },
     {
       "teamId": "boisestate",
@@ -5793,24 +5793,24 @@
       "teamName": "USC Trojans",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 8",
-      "winProb": 28.6,
-      "projScore": "27-38"
+      "winProb": 21.6,
+      "projScore": "25-31"
     },
     {
       "teamId": "usc",
       "teamName": "USC Trojans",
       "oppName": "Oregon Ducks",
       "week": "WEEK 9",
-      "winProb": 36.5,
-      "projScore": "28-34"
+      "winProb": 31.7,
+      "projScore": "26-30"
     },
     {
       "teamId": "usc",
       "teamName": "USC Trojans",
       "oppName": "Washington Huskies",
       "week": "WEEK 10",
-      "winProb": 66.5,
-      "projScore": "31-24"
+      "winProb": 40.9,
+      "projScore": "27-29"
     },
     {
       "teamId": "usc",
@@ -5841,16 +5841,16 @@
       "teamName": "Florida State Seminoles",
       "oppName": "Louisville Cardinals",
       "week": "WEEK 3",
-      "winProb": 62.5,
-      "projScore": "31-26"
+      "winProb": 49.2,
+      "projScore": "28-31"
     },
     {
       "teamId": "floridastate",
       "teamName": "Florida State Seminoles",
       "oppName": "Miami Hurricanes",
       "week": "WEEK 7",
-      "winProb": 36.5,
-      "projScore": "24-31"
+      "winProb": 13.0,
+      "projScore": "24-32"
     },
     {
       "teamId": "floridastate",
@@ -5865,8 +5865,8 @@
       "teamName": "Florida State Seminoles",
       "oppName": "Clemson Tigers",
       "week": "WEEK 11",
-      "winProb": 54.5,
-      "projScore": "27-24"
+      "winProb": 69.6,
+      "projScore": "30-26"
     },
     {
       "teamId": "floridastate",
@@ -5881,8 +5881,8 @@
       "teamName": "Clemson Tigers",
       "oppName": "LSU Tigers",
       "week": "WEEK 1",
-      "winProb": 43.5,
-      "projScore": "27-31"
+      "winProb": 16.8,
+      "projScore": "25-31"
     },
     {
       "teamId": "clemson",
@@ -5905,8 +5905,8 @@
       "teamName": "Clemson Tigers",
       "oppName": "SMU Mustangs",
       "week": "WEEK 9",
-      "winProb": 55.5,
-      "projScore": "34-30"
+      "winProb": 34.4,
+      "projScore": "27-29"
     },
     {
       "teamId": "clemson",
@@ -5921,8 +5921,8 @@
       "teamName": "Clemson Tigers",
       "oppName": "Florida State Seminoles",
       "week": "WEEK 11",
-      "winProb": 45.5,
-      "projScore": "24-27"
+      "winProb": 30.4,
+      "projScore": "26-30"
     },
     {
       "teamId": "clemson",
@@ -5961,8 +5961,8 @@
       "teamName": "SMU Mustangs",
       "oppName": "Clemson Tigers",
       "week": "WEEK 8",
-      "winProb": 44.5,
-      "projScore": "30-34"
+      "winProb": 65.6,
+      "projScore": "29-27"
     },
     {
       "teamId": "smu",
@@ -5985,8 +5985,8 @@
       "teamName": "Texas Tech Red Raiders",
       "oppName": "Houston Cougars",
       "week": "WEEK 3",
-      "winProb": 88.5,
-      "projScore": "41-20"
+      "winProb": 85.2,
+      "projScore": "32-24"
     },
     {
       "teamId": "texastech",
@@ -6009,8 +6009,8 @@
       "teamName": "Texas Tech Red Raiders",
       "oppName": "Arizona Wildcats",
       "week": "WEEK 9",
-      "winProb": 70.5,
-      "projScore": "37-28"
+      "winProb": 88.0,
+      "projScore": "32-24"
     },
     {
       "teamId": "texastech",
@@ -6073,24 +6073,24 @@
       "teamName": "Utah Utes",
       "oppName": "Houston Cougars",
       "week": "WEEK 7",
-      "winProb": 72.5,
-      "projScore": "31-21"
+      "winProb": 71.5,
+      "projScore": "30-26"
     },
     {
       "teamId": "utah",
       "teamName": "Utah Utes",
       "oppName": "BYU Cougars",
       "week": "WEEK 9",
-      "winProb": 60.5,
-      "projScore": "28-24"
+      "winProb": 72.8,
+      "projScore": "30-26"
     },
     {
       "teamId": "utah",
       "teamName": "Utah Utes",
       "oppName": "Arizona Wildcats",
       "week": "WEEK 10",
-      "winProb": 57.5,
-      "projScore": "31-27"
+      "winProb": 40.9,
+      "projScore": "27-29"
     },
     {
       "teamId": "utah",
@@ -6113,24 +6113,24 @@
       "teamName": "Iowa Hawkeyes",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 4",
-      "winProb": 30.5,
-      "projScore": "17-24"
+      "winProb": 21.1,
+      "projScore": "25-31"
     },
     {
       "teamId": "iowa",
       "teamName": "Iowa Hawkeyes",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 5",
-      "winProb": 18.5,
-      "projScore": "16-28"
+      "winProb": 10.4,
+      "projScore": "23-33"
     },
     {
       "teamId": "iowa",
       "teamName": "Iowa Hawkeyes",
       "oppName": "Washington Huskies",
       "week": "WEEK 6",
-      "winProb": 43.5,
-      "projScore": "20-23"
+      "winProb": 22.7,
+      "projScore": "25-31"
     },
     {
       "teamId": "iowa",
@@ -6177,16 +6177,16 @@
       "teamName": "Missouri Tigers",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 6",
-      "winProb": 39.5,
-      "projScore": "24-28"
+      "winProb": 29.7,
+      "projScore": "26-30"
     },
     {
       "teamId": "missouri",
       "teamName": "Missouri Tigers",
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 7",
-      "winProb": 34.5,
-      "projScore": "28-35"
+      "winProb": 10.2,
+      "projScore": "23-33"
     },
     {
       "teamId": "missouri",
@@ -6201,32 +6201,32 @@
       "teamName": "Missouri Tigers",
       "oppName": "Texas Longhorns",
       "week": "WEEK 9",
-      "winProb": 30.5,
-      "projScore": "23-31"
+      "winProb": 24.3,
+      "projScore": "26-30"
     },
     {
       "teamId": "missouri",
       "teamName": "Missouri Tigers",
       "oppName": "Georgia Bulldogs",
       "week": "WEEK 10",
-      "winProb": 18.5,
-      "projScore": "17-34"
+      "winProb": 4.7,
+      "projScore": "22-34"
     },
     {
       "teamId": "missouri",
       "teamName": "Missouri Tigers",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 12",
-      "winProb": 43.5,
-      "projScore": "27-30"
+      "winProb": 35.8,
+      "projScore": "27-29"
     },
     {
       "teamId": "arizona",
       "teamName": "Arizona Wildcats",
       "oppName": "BYU Cougars",
       "week": "WEEK 2",
-      "winProb": 32.5,
-      "projScore": "24-31"
+      "winProb": 27.9,
+      "projScore": "26-30"
     },
     {
       "teamId": "arizona",
@@ -6241,8 +6241,8 @@
       "teamName": "Arizona Wildcats",
       "oppName": "Texas Tech Red Raiders",
       "week": "WEEK 8",
-      "winProb": 24.5,
-      "projScore": "26-38"
+      "winProb": 12.0,
+      "projScore": "24-32"
     },
     {
       "teamId": "arizona",
@@ -6257,8 +6257,8 @@
       "teamName": "Arizona Wildcats",
       "oppName": "Utah Utes",
       "week": "WEEK 10",
-      "winProb": 42.5,
-      "projScore": "27-31"
+      "winProb": 59.1,
+      "projScore": "29-27"
     },
     {
       "teamId": "arizona",
@@ -6289,16 +6289,16 @@
       "teamName": "Washington Huskies",
       "oppName": "USC Trojans",
       "week": "WEEK 5",
-      "winProb": 43.5,
-      "projScore": "28-31"
+      "winProb": 59.1,
+      "projScore": "29-27"
     },
     {
       "teamId": "washington",
       "teamName": "Washington Huskies",
       "oppName": "Iowa Hawkeyes",
       "week": "WEEK 6",
-      "winProb": 56.5,
-      "projScore": "23-20"
+      "winProb": 77.3,
+      "projScore": "31-25"
     },
     {
       "teamId": "washington",
@@ -6313,24 +6313,24 @@
       "teamName": "Washington Huskies",
       "oppName": "Penn State Nittany Lions",
       "week": "WEEK 9",
-      "winProb": 56.5,
-      "projScore": "27-24"
+      "winProb": 40.9,
+      "projScore": "27-29"
     },
     {
       "teamId": "washington",
       "teamName": "Washington Huskies",
       "oppName": "Indiana Hoosiers",
       "week": "WEEK 11",
-      "winProb": 42.5,
-      "projScore": "28-31"
+      "winProb": 38.7,
+      "projScore": "27-29"
     },
     {
       "teamId": "washington",
       "teamName": "Washington Huskies",
       "oppName": "Oregon Ducks",
       "week": "WEEK 12",
-      "winProb": 26.5,
-      "projScore": "24-35"
+      "winProb": 6.3,
+      "projScore": "22-34"
     },
     {
       "teamId": "houston",
@@ -6345,8 +6345,8 @@
       "teamName": "Houston Cougars",
       "oppName": "Texas Tech Red Raiders",
       "week": "WEEK 3",
-      "winProb": 24.5,
-      "projScore": "26-37"
+      "winProb": 14.8,
+      "projScore": "24-32"
     },
     {
       "teamId": "houston",
@@ -6369,8 +6369,8 @@
       "teamName": "Houston Cougars",
       "oppName": "Utah Utes",
       "week": "WEEK 8",
-      "winProb": 27.5,
-      "projScore": "21-31"
+      "winProb": 28.5,
+      "projScore": "26-30"
     },
     {
       "teamId": "houston",
@@ -6393,8 +6393,8 @@
       "teamName": "Louisville Cardinals",
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 1",
-      "winProb": 34.5,
-      "projScore": "27-34"
+      "winProb": 24.3,
+      "projScore": "26-30"
     },
     {
       "teamId": "louisville",
@@ -6417,8 +6417,8 @@
       "teamName": "Louisville Cardinals",
       "oppName": "Florida State Seminoles",
       "week": "WEEK 6",
-      "winProb": 60.5,
-      "projScore": "30-26"
+      "winProb": 50.8,
+      "projScore": "31-28"
     },
     {
       "teamId": "louisville",
