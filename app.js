@@ -3596,6 +3596,9 @@ async function generateHypeCard() {
   canvas.width = 1200;
   canvas.height = 675;
   const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1200, 675);
+  state.activeModalGame = null;
+
   const team = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
 
   try {
@@ -3690,7 +3693,7 @@ async function generateHypeCard() {
   // Team Name & AP Rank
   drawCanvasTextFitted(ctx, `${team.apRank || ''} ${team.name.toUpperCase()}`, leftCenterX, leftY + 145, leftW - 40, 'bold 22px "Outfit", sans-serif', '#FFFFFF', 'center');
 
-  // Predicted Record Card (Y: leftY + 160 to leftY + 250, Height: 90)
+  // Predicted Record Card (Y: leftY + 160 to leftY + 250, Height: 88)
   ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
   drawCanvasRoundedRect(ctx, leftX + 20, leftY + 162, leftW - 40, 88, 12);
   ctx.fill();
@@ -3705,7 +3708,7 @@ async function generateHypeCard() {
 
   drawCanvasTextFitted(ctx, 'PROJECTED REGULAR SEASON RECORD', leftCenterX, leftY + 242, leftW - 60, 'bold 11px "JetBrains Mono", monospace', '#94A3B8', 'center');
 
-  // Postseason / CFP Status Banner (Y: leftY + 262 to leftY + 312, Height: 50)
+  // Postseason / CFP Status Banner (Y: leftY + 262 to leftY + 312, Height: 48)
   const seedStr = document.getElementById('kpiCfpSeed')?.innerText || '#1 SEED';
   const postStr = document.getElementById('kpiPostseasonOutcome')?.innerText || '🏆 National Champions';
 
@@ -3734,24 +3737,24 @@ async function generateHypeCard() {
   drawCanvasTextFitted(ctx, `🛡️ Core: ${team.secondaryStar || 'Elite Roster Depth'}`, leftCenterX, leftY + 448, leftW - 50, '500 11px "Outfit", sans-serif', '#64748B', 'center');
 
   // ==========================================
-  // RIGHT COLUMN - SEASON-DEFINING MATCHUPS (X: 476, Width: 688, Y: 92 to 400, Height: 308)
+  // RIGHT COLUMN - 4 SEASON-DEFINING MATCHUPS (X: 476, Width: 688, Y: 92 to 460, Height: 368)
   // ==========================================
   const rightX = 476;
   const rightW = 688;
   const rightY = 92;
 
   ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-  drawCanvasRoundedRect(ctx, rightX, rightY, rightW, 308, 18);
+  drawCanvasRoundedRect(ctx, rightX, rightY, rightW, 368, 18);
   ctx.fill();
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
   ctx.stroke();
 
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 19px "Bebas Neue", sans-serif';
+  ctx.font = 'bold 18px "Bebas Neue", sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText('🔥 SEASON-DEFINING MATCHUPS & RESULTS', rightX + 24, rightY + 34);
+  ctx.fillText('🔥 SEASON-DEFINING MATCHUPS & RESULTS', rightX + 24, rightY + 32);
 
-  // Dynamic game selection: Highlight all losses/stumbles + top signature wins
+  // Dynamic game selection: Highlight all losses/stumbles + top marquee rivalry wins
   const allSims = (team.schedule || []).map(g => {
     const sim = calculateAdjustedMatchup(g);
     const oppRankNum = (g.oppRank && g.oppRank.startsWith('#')) ? parseInt(g.oppRank.replace('#', '').replace(' AP', '')) : 99;
@@ -3760,50 +3763,80 @@ async function generateHypeCard() {
       sim: sim,
       isLoss: !sim.isWin,
       oppRankNum: oppRankNum,
-      margin: Math.abs(sim.projUt - sim.projOpp)
+      margin: Math.abs(sim.projUt - sim.projOpp),
+      isMarquee: g.isMarquee || false,
+      rivalryName: g.rivalryName || ''
     };
   });
 
   const simLosses = allSims.filter(s => s.isLoss);
   const simWins = allSims.filter(s => !s.isLoss);
+
   simLosses.sort((a, b) => a.oppRankNum - b.oppRankNum || a.margin - b.margin);
-  simWins.sort((a, b) => a.oppRankNum - b.oppRankNum || b.margin - a.margin);
+
+  const getWinPriority = (w) => {
+    const riv = (w.rivalryName || '').toUpperCase();
+    const isNamedRivalry = /RED RIVER|LONE STAR|THE GAME|IRON BOWL|EGG BOWL|HOLY WAR|BEDLAM|CIVIL WAR|GAMEDAY/.test(riv) || ['OU', 'TAMU', 'MICH', 'AUB'].includes(w.game?.oppAbbr);
+    if (isNamedRivalry || w.oppRankNum <= 5) return 0;
+    if (w.isMarquee || w.oppRankNum <= 15) return 1;
+    return 2;
+  };
+
+  simWins.sort((a, b) => {
+    const prioDiff = getWinPriority(a) - getWinPriority(b);
+    if (prioDiff !== 0) return prioDiff;
+    return a.oppRankNum - b.oppRankNum || b.margin - a.margin;
+  });
 
   let featuredMatchups = [];
   if (simLosses.length === 1) {
-    featuredMatchups = [
-      { ...simLosses[0], tag: '🚨 ONLY LOSS', tagColor: '#EF4444' },
-      { ...(simWins[0] || simLosses[0]), tag: '🏆 SIGNATURE WIN', tagColor: '#10B981' },
-      { ...(simWins[1] || simWins[0]), tag: '🔥 MARQUEE CLASH', tagColor: '#F59E0B' }
-    ];
+    featuredMatchups.push({ ...simLosses[0], tag: '🚨 ONLY LOSS', tagColor: '#EF4444' });
+    simWins.slice(0, 3).forEach((w, idx) => {
+      const riv = (w.rivalryName || '').toUpperCase();
+      let tag = '🔥 MARQUEE CLASH';
+      if (/RED RIVER/.test(riv) || w.game?.oppAbbr === 'OU') tag = '🤠 RED RIVER RIVALRY';
+      else if (/LONE STAR/.test(riv) || w.game?.oppAbbr === 'TAMU') tag = '⚡ LONE STAR SHOWDOWN';
+      else if (/THE GAME/.test(riv)) tag = '⚔️ THE GAME';
+      else if (idx === 0 || w.oppRankNum <= 5) tag = '🏆 SIGNATURE WIN';
+      featuredMatchups.push({ ...w, tag, tagColor: tag.includes('WIN') ? '#10B981' : '#F59E0B' });
+    });
   } else if (simLosses.length === 2) {
-    featuredMatchups = [
-      { ...simLosses[0], tag: '🚨 TOUGHEST ROAD TEST', tagColor: '#EF4444' },
-      { ...simLosses[1], tag: '⚠️ PIVOTAL LOSS', tagColor: '#F97316' },
-      { ...(simWins[0] || simLosses[0]), tag: '🏆 SIGNATURE WIN', tagColor: '#10B981' }
-    ];
+    featuredMatchups.push({ ...simLosses[0], tag: '🚨 TOUGHEST ROAD TEST', tagColor: '#EF4444' });
+    featuredMatchups.push({ ...simLosses[1], tag: '⚠️ PIVOTAL LOSS', tagColor: '#F97316' });
+    simWins.slice(0, 2).forEach((w, idx) => {
+      const riv = (w.rivalryName || '').toUpperCase();
+      let tag = idx === 0 ? '🏆 SIGNATURE WIN' : '🔥 MARQUEE CLASH';
+      if (/RED RIVER/.test(riv) || w.game?.oppAbbr === 'OU') tag = '🤠 RED RIVER RIVALRY';
+      else if (/LONE STAR/.test(riv) || w.game?.oppAbbr === 'TAMU') tag = '⚡ LONE STAR SHOWDOWN';
+      featuredMatchups.push({ ...w, tag, tagColor: tag.includes('WIN') ? '#10B981' : '#F59E0B' });
+    });
   } else if (simLosses.length >= 3) {
-    featuredMatchups = [
-      { ...simLosses[0], tag: '🚨 TOUGHEST TEST', tagColor: '#EF4444' },
-      { ...(simLosses[1] || simLosses[0]), tag: '⚠️ ROAD STUMBLE', tagColor: '#F97316' },
-      { ...(simWins[0] || simLosses[0]), tag: '🏆 SIGNATURE WIN', tagColor: '#10B981' }
-    ];
+    featuredMatchups.push({ ...simLosses[0], tag: '🚨 TOUGHEST TEST', tagColor: '#EF4444' });
+    featuredMatchups.push({ ...(simLosses[1] || simLosses[0]), tag: '⚠️ ROAD STUMBLE', tagColor: '#F97316' });
+    simWins.slice(0, 2).forEach((w, idx) => {
+      featuredMatchups.push({ ...w, tag: idx === 0 ? '🏆 SIGNATURE WIN' : '🔥 KEY VICTORY', tagColor: '#10B981' });
+    });
   } else {
-    featuredMatchups = [
-      { ...(simWins[0] || allSims[0]), tag: '🏆 MARQUEE TEST #1', tagColor: '#10B981' },
-      { ...(simWins[1] || simWins[0]), tag: '🔥 MARQUEE TEST #2', tagColor: '#F59E0B' },
-      { ...(simWins[2] || simWins[0]), tag: '⚔️ RIVALRY CLASH', tagColor: '#38BDF8' }
-    ];
+    simWins.slice(0, 4).forEach((w, idx) => {
+      const riv = (w.rivalryName || '').toUpperCase();
+      let tag = idx === 0 ? '🏆 MARQUEE TEST #1' : `🔥 MARQUEE CLASH #${idx + 1}`;
+      if (/RED RIVER/.test(riv) || w.game?.oppAbbr === 'OU') tag = '🤠 RED RIVER RIVALRY';
+      else if (/LONE STAR/.test(riv) || w.game?.oppAbbr === 'TAMU') tag = '⚡ LONE STAR SHOWDOWN';
+      else if (/THE GAME/.test(riv)) tag = '⚔️ THE GAME';
+      featuredMatchups.push({ ...w, tag, tagColor: idx === 0 ? '#10B981' : '#F59E0B' });
+    });
   }
+
+  featuredMatchups = featuredMatchups.slice(0, 4);
 
   const marqueeLogos = await Promise.all(featuredMatchups.map(m => loadCanvasImage(m.game?.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[m.game?.oppAbbr] : ''))));
 
-  let mY = rightY + 54;
+  let mY = rightY + 46;
   featuredMatchups.forEach((m, idx) => {
     const g = m.game;
     const sim = m.sim;
     const mLogo = marqueeLogos[idx];
-    const rowH = 68;
+    const rowH = 64;
 
     // Card Row
     ctx.fillStyle = m.isLoss ? 'rgba(239, 68, 68, 0.08)' : 'rgba(255, 255, 255, 0.04)';
@@ -3814,63 +3847,58 @@ async function generateHypeCard() {
     ctx.stroke();
 
     // Opponent Logo in circular frame
-    const logoX = rightX + 44;
-    const logoY = mY + 34;
+    const logoX = rightX + 42;
+    const logoY = mY + 32;
     ctx.save();
     ctx.fillStyle = 'rgba(15, 23, 42, 0.8)';
     ctx.beginPath();
-    ctx.arc(logoX, logoY, 22, 0, Math.PI * 2);
+    ctx.arc(logoX, logoY, 20, 0, Math.PI * 2);
     ctx.fill();
     ctx.lineWidth = 1.5;
     ctx.strokeStyle = m.isLoss ? '#EF4444' : 'rgba(255, 255, 255, 0.2)';
     ctx.stroke();
     if (mLogo) {
       ctx.beginPath();
-      ctx.arc(logoX, logoY, 20, 0, Math.PI * 2);
+      ctx.arc(logoX, logoY, 18, 0, Math.PI * 2);
       ctx.clip();
-      ctx.drawImage(mLogo, logoX - 18, logoY - 18, 36, 36);
+      ctx.drawImage(mLogo, logoX - 16, logoY - 16, 32, 32);
     }
     ctx.restore();
 
     // Matchup Tag Badge
-    drawCanvasTextFitted(ctx, m.tag, rightX + 80, mY + 22, 170, 'bold 11px "JetBrains Mono", monospace', m.tagColor, 'left');
+    drawCanvasTextFitted(ctx, m.tag, rightX + 76, mY + 21, 180, 'bold 11px "JetBrains Mono", monospace', m.tagColor, 'left');
 
     // Matchup Text
     const homeStr = g.isHome ? 'vs' : '@';
-    drawCanvasTextFitted(ctx, `${g.week}: ${homeStr} ${g.opponent || g.oppAbbr} (${g.oppRank})`, rightX + 80, mY + 48, 350, 'bold 15px "Outfit", sans-serif', '#FFFFFF', 'left');
+    drawCanvasTextFitted(ctx, `${g.week}: ${homeStr} ${g.opponent || g.oppAbbr} (${g.oppRank})`, rightX + 76, mY + 46, 340, 'bold 14px "Outfit", sans-serif', '#FFFFFF', 'left');
 
     // Score & Win / Loss Outcome
     const outcomeStr = m.isLoss ? 'LOSS' : 'WIN';
     const scoreColor = m.isLoss ? '#EF4444' : '#10B981';
-    drawCanvasTextFitted(ctx, `${sim.projUt} - ${sim.projOpp} (${outcomeStr})`, rightX + rightW - 28, mY + 30, 200, 'bold 18px "JetBrains Mono", monospace', scoreColor, 'right');
-    drawCanvasTextFitted(ctx, `${sim.adjWinProb}% Win Prob`, rightX + rightW - 28, mY + 52, 160, '500 12px "JetBrains Mono", monospace', '#94A3B8', 'right');
+    drawCanvasTextFitted(ctx, `${sim.projUt} - ${sim.projOpp} (${outcomeStr})`, rightX + rightW - 28, mY + 28, 200, 'bold 17px "JetBrains Mono", monospace', scoreColor, 'right');
+    drawCanvasTextFitted(ctx, `${sim.adjWinProb}% Win Prob`, rightX + rightW - 28, mY + 49, 160, '500 11px "JetBrains Mono", monospace', '#94A3B8', 'right');
 
-    mY += 78;
+    mY += 74;
   });
 
   // ==========================================
-  // BOTTOM RIGHT - PLAYMAKERS & SCHEME (X: 476, Width: 688, Y: 416 to 565, Height: 149)
+  // BOTTOM RIGHT - PLAYMAKERS & SCHEME (X: 476, Width: 688, Y: 472 to 565, Height: 93)
   // ==========================================
   ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-  drawCanvasRoundedRect(ctx, rightX, 416, rightW, 149, 16);
+  drawCanvasRoundedRect(ctx, rightX, 472, rightW, 93, 14);
   ctx.fill();
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
   ctx.stroke();
 
-  ctx.fillStyle = '#F59E0B';
-  ctx.font = 'bold 14px "JetBrains Mono", monospace';
-  ctx.textAlign = 'left';
-  ctx.fillText('⭐ 2026 PLAYMAKERS & TACTICAL SCHEME', rightX + 24, 444);
-
-  // Playmakers & QB
+  // QB and Staff
   const qbName = team.confirmedStarterQb || (team.starPlayer ? team.starPlayer.split('/')[0].trim() : 'Quarterback Room');
-  drawCanvasTextFitted(ctx, `🎯 Starting QB: ${qbName}`, rightX + 24, 474, rightW - 48, '600 15px "Outfit", sans-serif', '#FFFFFF', 'left');
+  drawCanvasTextFitted(ctx, `🎯 STARTING QB: ${qbName.toUpperCase()} • DC: ${team.defensiveCoordinator.toUpperCase()}`, rightX + 22, 498, rightW - 44, 'bold 13px "JetBrains Mono", monospace', '#F59E0B', 'left');
 
-  const starStr = `⚡ Key Weapons: ${team.starPlayer || 'Consensus Starters'}`;
-  drawCanvasTextFitted(ctx, starStr, rightX + 24, 504, rightW - 48, '500 14px "Outfit", sans-serif', '#E2E8F0', 'left');
+  const starStr = `⚡ KEY PLAYMAKERS: ${team.starPlayer || 'Consensus Starters'}`;
+  drawCanvasTextFitted(ctx, starStr, rightX + 22, 526, rightW - 44, '500 13px "Outfit", sans-serif', '#E2E8F0', 'left');
 
-  const dcScheme = `🛡️ Defensive Coordinator: ${team.defensiveCoordinator} • Havoc & Pressure Matrix`;
-  drawCanvasTextFitted(ctx, dcScheme, rightX + 24, 534, rightW - 48, '500 13px "Outfit", sans-serif', '#94A3B8', 'left');
+  const dcScheme = `🛡️ DEFENSIVE UNIT: Will Muschamp Havoc & Pressure Matrix • ${team.secondaryStar || 'Elite Roster Depth'}`;
+  drawCanvasTextFitted(ctx, dcScheme, rightX + 22, 550, rightW - 44, '500 11px "Outfit", sans-serif', '#94A3B8', 'left');
 
   // Footer Tagline
   ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
