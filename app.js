@@ -331,8 +331,9 @@ function selectTeam(teamId) {
   const capacityStr = team.stadiumCapacity ? ` (${team.stadiumCapacity})` : '';
   document.getElementById('heroStadium').innerText = `${team.stadium || 'Home Stadium'}${capacityStr}`;
 
-  // Update Active State in Top Track
+  // Update Active State in Top Track & ensure all pills are visible
   document.querySelectorAll('.team-pill-btn').forEach(btn => {
+    btn.style.display = '';
     const isActive = btn.dataset.teamid === teamId;
     btn.classList.toggle('active', isActive);
     if (isActive && btn.scrollIntoView) {
