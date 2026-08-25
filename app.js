@@ -6436,15 +6436,17 @@ function createBaselineBracketObject() {
 }
 
 function saveCurrentProjectionAsBracket(bracketName, creatorName, notes) {
-  const name = (bracketName || '').trim() || `My CFP Bracket #${Math.floor(Math.random() * 900 + 100)}`;
-  const creator = (creatorName || '').trim() || 'Anonymous Coach';
-  const bracketNotes = (notes || '').trim();
-
-  // Evaluate current simulation
   const evaluated = evaluateRegularSeasonAllTeams();
   const ccg = simulateConferenceChampionships(evaluated);
-  const cfp = generate12TeamCfpField(ccg.confChamps, evaluated);
-  const playoff = simulatePlayoffBracket(cfp);
+  const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
+  const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
+
+  const champId = state.lastNationalChampion?.id || playoff.nationalChampion?.id || state.currentTeamId || 'texas';
+  const champTeam = TEAMS_DATABASE[champId] || state.lastNationalChampion || playoff.nationalChampion || { name: 'National Champions', shortName: 'Champs', logoUrl: '' };
+
+  const name = (bracketName || '').trim() || `${champTeam.shortName || 'CFB'} Natty Projection`;
+  const creator = (creatorName || '').trim() || 'Anonymous Coach';
+  const bracketNotes = (notes || '').trim();
 
   const isCustom = Object.keys(state.userPicks).length > 0 || 
                    Object.keys(state.ccgPicks).length > 0 || 
@@ -6457,12 +6459,9 @@ function saveCurrentProjectionAsBracket(bracketName, creatorName, notes) {
     id: s?.id || 'texas',
     name: s?.shortName || s?.name || 'Team',
     logoUrl: s?.logoUrl || '',
-    wins: s?.wins || 11,
-    losses: s?.losses || 1
+    wins: s?.wins !== undefined ? s.wins : (s?.totalWins || 11),
+    losses: s?.losses !== undefined ? s.losses : (s?.totalLosses || 1)
   }));
-
-  const champId = playoff.nationalChampion?.id || state.lastNationalChampion?.id || 'texas';
-  const champTeam = TEAMS_DATABASE[champId] || playoff.nationalChampion || { name: 'National Champions', shortName: 'Champs', logoUrl: '' };
 
   const bracketObj = {
     id: `bracket_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
@@ -6473,24 +6472,24 @@ function saveCurrentProjectionAsBracket(bracketName, creatorName, notes) {
     mode: isCustom ? 'custom' : 'baseline',
     champion: {
       id: champId,
-      name: champTeam.name || 'Texas Longhorns',
-      shortName: champTeam.shortName || 'Texas',
+      name: champTeam.name || 'National Champions',
+      shortName: champTeam.shortName || 'Champions',
       logoUrl: champTeam.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',
-      score: playoff.natty?.sim?.winnerScore || 34,
-      oppScore: playoff.natty?.sim?.loserScore || 28
+      score: playoff.natty?.sim?.winnerScore || playoff.natty?.sim?.scoreA || 34,
+      oppScore: playoff.natty?.sim?.loserScore || playoff.natty?.sim?.scoreB || 28
     },
     runnerUp: {
-      id: playoff.runnerUp?.id || 'ohiostate',
-      name: playoff.runnerUp?.name || 'Ohio State Buckeyes',
-      shortName: playoff.runnerUp?.shortName || 'Ohio State'
+      id: playoff.runnerUp?.id || (playoff.natty?.sim?.loser?.id) || 'ohiostate',
+      name: playoff.runnerUp?.name || (playoff.natty?.sim?.loser?.name) || 'Challenger',
+      shortName: playoff.runnerUp?.shortName || (playoff.natty?.sim?.loser?.shortName) || 'Opponent'
     },
     seeds: seeds,
     playoffSummary: {
       fr: [
-        { label: '#5 vs #12', winner: playoff.fr1?.sim?.winner?.shortName || 'Team', score: `${playoff.fr1?.sim?.scoreA || 0}-${playoff.fr1?.sim?.scoreB || 0}` },
-        { label: '#6 vs #11', winner: playoff.fr2?.sim?.winner?.shortName || 'Team', score: `${playoff.fr2?.sim?.scoreA || 0}-${playoff.fr2?.sim?.scoreB || 0}` },
-        { label: '#7 vs #10', winner: playoff.fr3?.sim?.winner?.shortName || 'Team', score: `${playoff.fr3?.sim?.scoreA || 0}-${playoff.fr3?.sim?.scoreB || 0}` },
-        { label: '#8 vs #9', winner: playoff.fr4?.sim?.winner?.shortName || 'Team', score: `${playoff.fr4?.sim?.scoreA || 0}-${playoff.fr4?.sim?.scoreB || 0}` }
+        { label: '#5 vs #12', winner: playoff.fr1?.sim?.winner?.shortName || playoff.fr1?.teamA?.shortName || 'Team', score: `${playoff.fr1?.sim?.scoreA || 0}-${playoff.fr1?.sim?.scoreB || 0}` },
+        { label: '#6 vs #11', winner: playoff.fr2?.sim?.winner?.shortName || playoff.fr2?.teamA?.shortName || 'Team', score: `${playoff.fr2?.sim?.scoreA || 0}-${playoff.fr2?.sim?.scoreB || 0}` },
+        { label: '#7 vs #10', winner: playoff.fr3?.sim?.winner?.shortName || playoff.fr3?.teamA?.shortName || 'Team', score: `${playoff.fr3?.sim?.scoreA || 0}-${playoff.fr3?.sim?.scoreB || 0}` },
+        { label: '#8 vs #9', winner: playoff.fr4?.sim?.winner?.shortName || playoff.fr4?.teamA?.shortName || 'Team', score: `${playoff.fr4?.sim?.scoreA || 0}-${playoff.fr4?.sim?.scoreB || 0}` }
       ],
       qf: [
         { bowl: 'Sugar Bowl', winner: playoff.qf1?.sim?.winner?.shortName || 'Team' },
@@ -6504,7 +6503,7 @@ function saveCurrentProjectionAsBracket(bracketName, creatorName, notes) {
       ]
     },
     simState: {
-      teamId: state.currentTeamId,
+      teamId: state.currentTeamId || champId,
       userPicks: { ...state.userPicks },
       ccgPicks: { ...state.ccgPicks },
       playoffPicks: { ...state.playoffPicks },
@@ -6731,7 +6730,7 @@ function getLocalCommunityBrackets() {
   return [];
 }
 
-async function syncCommunityBracketsFromCloud() {
+async function syncCommunityBracketsFromCloud(showFeedback = false) {
   try {
     const res = await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}/json?poll=1`, { cache: 'no-store' });
     if (!res.ok) return;
@@ -6739,11 +6738,16 @@ async function syncCommunityBracketsFromCloud() {
     const cloudBrackets = [];
     text.trim().split('\n').forEach(line => {
       try {
-        if (!line) return;
-        const json = JSON.parse(line);
+        if (!line || !line.trim()) return;
+        const json = JSON.parse(line.trim());
         if (json.message) {
-          const b = JSON.parse(json.message);
-          if (b && b.name && b.id) cloudBrackets.push(b);
+          let b = null;
+          try {
+            b = typeof json.message === 'string' ? JSON.parse(json.message) : json.message;
+          } catch(e) {}
+          if (b && b.name && b.id) {
+            cloudBrackets.push(b);
+          }
         }
       } catch (e) {}
     });
@@ -6753,15 +6757,23 @@ async function syncCommunityBracketsFromCloud() {
       const map = new Map();
       local.forEach(b => map.set(b.id, b));
       cloudBrackets.forEach(b => map.set(b.id, b));
-      localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(Array.from(map.values())));
+      const merged = Array.from(map.values());
+      localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(merged));
       if (state.activeVaultTab === 'community') {
         renderSavedBracketsVault();
       }
+      if (showFeedback) {
+        showCustomToast(`🔄 Synced ${cloudBrackets.length} community brackets from cloud!`);
+      }
+    } else if (showFeedback) {
+      showCustomToast('🔄 Community Leaderboard is up to date!');
     }
-  } catch (e) {}
+  } catch (e) {
+    if (showFeedback) showCustomToast('⚠️ Network sync offline.');
+  }
 }
 
-function publishBracketToCloud(bracketObj) {
+async function publishBracketToCloud(bracketObj) {
   if (!bracketObj) return;
   try {
     // 1. Save locally to community pool
@@ -6770,15 +6782,17 @@ function publishBracketToCloud(bracketObj) {
     filtered.unshift(bracketObj);
     localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(filtered));
 
-    // 2. Publish to cloud topic for spouses and other devices
-    fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}`, {
+    // 2. Publish to cloud topic with keepalive
+    await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}`, {
       method: 'POST',
       body: JSON.stringify(bracketObj),
+      keepalive: true,
       headers: {
-        'Title': bracketObj.name,
-        'Tags': 'trophy,football'
+        'Title': bracketObj.name || 'CFB Bracket',
+        'Tags': 'trophy,football',
+        'Priority': 'default'
       }
-    }).catch(() => {});
+    });
   } catch (e) {}
 }
 
@@ -6985,14 +6999,14 @@ function openSaveBracketModal(fromVault = false) {
   const previewBox = document.getElementById('saveBracketPreviewBox');
   const evaluated = evaluateRegularSeasonAllTeams();
   const ccg = simulateConferenceChampionships(evaluated);
-  const cfp = generate12TeamCfpField(ccg.confChamps, evaluated);
-  const playoff = simulatePlayoffBracket(cfp);
-  const champTeam = playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE['texas'];
+  const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
+  const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
+  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || 'texas']);
 
   if (previewBox) {
     previewBox.innerHTML = `
       <div style="display: flex; align-items: center; gap: 0.75rem;">
-        <img src="${champTeam.logoUrl}" style="width: 40px; height: 40px; object-fit: contain;">
+        <img src="${champTeam.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png'}" style="width: 40px; height: 40px; object-fit: contain;">
         <div>
           <div style="font-size: 0.72rem; color: #F59E0B; font-weight: 800; text-transform: uppercase;">🏆 PROJECTED NATIONAL CHAMPION</div>
           <div style="font-size: 1.1rem; font-weight: 800; color: #FFFFFF;">${champTeam.name}</div>
