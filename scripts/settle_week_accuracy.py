@@ -18,10 +18,12 @@ ESPN_SCOREBOARD_URL = "https://site.api.espn.com/apis/site/v2/sports/football/co
 
 def fetch_espn_scores():
     try:
-        req = urllib.request.Request(
-            ESPN_SCOREBOARD_URL,
-            headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'}
-        )
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+            'Accept': 'application/json',
+            'Referer': 'https://www.espn.com/'
+        }
+        req = urllib.request.Request(ESPN_SCOREBOARD_URL, headers=headers)
         with urllib.request.urlopen(req, timeout=10) as response:
             data = json.loads(response.read().decode('utf-8'))
             return data.get('events', [])

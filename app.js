@@ -420,6 +420,15 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
   let adjUtScore = Math.max(3, Math.round(game.projScoreUt + teamOffPts + oppDefPts + weatherScorePenalty));
   let adjOppScore = Math.max(0, Math.round(game.projScoreOpp + teamDefPts + oppOffPts + weatherScorePenalty));
 
+  // Break accidental ties based on base win probability / margin
+  if (adjUtScore === adjOppScore) {
+    if ((game.baseWinProb || 50) >= 50) {
+      adjUtScore += 3;
+    } else {
+      adjOppScore += 3;
+    }
+  }
+
   const pointDiff = adjUtScore - adjOppScore;
   let adjWinProb = 1 / (1 + Math.pow(10, -pointDiff / 13.5)) * 100;
   adjWinProb = Math.min(99, Math.max(1, Math.round(adjWinProb)));
@@ -2311,15 +2320,6 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
   let spA = dbA.baseSpRating || 22.0;
   let spB = dbB.baseSpRating || 22.0;
 
-  if (dbA.conference === 'SEC') spA += 2.2;
-  if (dbB.conference === 'SEC') spB += 2.2;
-  if (dbA.conference === 'Big Ten') spA += 1.6;
-  if (dbB.conference === 'Big Ten') spB += 1.6;
-  if (dbA.conference === 'ACC') spA += 0.8;
-  if (dbB.conference === 'ACC') spB += 0.8;
-  if (dbA.conference === 'Big 12') spA += 0.8;
-  if (dbB.conference === 'Big 12') spB += 0.8;
-
   // Apply Dynamic Season Momentum & Form (Upsets/Losses reduce postseason strength)
   if (teamA.id && TEAMS_DATABASE[teamA.id]) {
     const momA = getTeamMomentumScore(teamA.id);
@@ -2371,7 +2371,7 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
   }
 
   // Home field advantage (e.g. First Round on-campus)
-  if (options.isHomeA) spA += 2.5;
+  if (options.isHomeA) spA += 2.8;
 
   const diff = spA - spB;
   let scoreA = Math.max(3, Math.round(28 + diff * 0.65 + weatherScorePenalty));
@@ -2383,8 +2383,8 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
   }
 
   // Calculate Win Probability
-  let probA = Math.round(100 / (1 + Math.pow(10, -diff / 7.5)));
-  probA = Math.max(15, Math.min(85, probA));
+  let probA = Math.round(100 / (1 + Math.pow(10, -diff / 13.5)));
+  probA = Math.max(5, Math.min(95, probA));
 
   // Check for User Pick Overrides
   const overridePick = options.gameId ? (state.playoffPicks[options.gameId] || state.ccgPicks[options.gameId]) : null;
@@ -4465,7 +4465,7 @@ function populateReceiptsFilterDropdowns() {
   if (!teamFilter) return;
 
   const currentVal = teamFilter.value;
-  teamFilter.innerHTML = '<option value="all">🏆 All 26 Powerhouse Teams (Complete AP Top 25)</option>';
+  teamFilter.innerHTML = '<option value="all">🏆 All Powerhouse Teams (AP Top 25 & Contenders)</option>';
 
   const entries = Object.entries(TEAMS_DATABASE);
   entries.sort((a, b) => {
