@@ -1,13 +1,13 @@
 # 🏈 Gridiron Oracle — College Football AI Predictor & Season Simulator
 
-**Gridiron Oracle** is a high-performance college football simulation engine powering drive-by-drive Monte Carlo forecasts, dynamic single-game AI scenario tuning, conference championship outcomes, and real-time 12-team College Football Playoff (CFP) bracket cascading for 22 top powerhouse programs.
+**Gridiron Oracle** is a high-performance college football simulation engine powering drive-by-drive Monte Carlo forecasts, dynamic single-game AI scenario tuning, conference championship outcomes, and real-time 12-team College Football Playoff (CFP) bracket cascading for all 26 top powerhouse programs (Complete AP Top 25 & G5 Contender).
 
 ---
 
 ## 🚀 Key Elevation Features
 
 ### 1. ⚡ Dream Matchup Sandbox
-- Simulate **ANY two teams** in the 22-team database head-to-head (e.g. *Texas vs Oregon* in the Rose Bowl or *Michigan vs Texas Tech* in Atlanta).
+- Simulate **ANY two teams** in the 26-team database head-to-head (e.g. *Texas vs Oregon* in the Rose Bowl, *Utah vs BYU* in Salt Lake City, or *Michigan vs Texas Tech* in Atlanta).
 - Select venue environments: Neutral Championship, Team A Campus Stadium, or Team B Campus Stadium.
 - Full 10,000 drive Monte Carlo collision with interactive radar charts and drive logs.
 

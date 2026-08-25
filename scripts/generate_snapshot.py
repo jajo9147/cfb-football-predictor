@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Gridiron Oracle - Weekly Pre-Kickoff Simulation Snapshot Generator
-Generates a timestamped JSON snapshot of all 22 teams, CCG matchups, and CFP seeds before kickoff.
+Generates a timestamped JSON snapshot of all 26 teams (Complete AP Top 25 & G5 contender), CCG matchups, and CFP seeds before kickoff.
 """
 
 import json

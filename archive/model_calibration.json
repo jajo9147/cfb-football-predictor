@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T01:40:11.712373+00:00",
+  "updatedAt": "2026-08-25T13:12:35.752647+00:00",
   "season": 2026,
   "overallStats": {
     "totalGames": 6,
@@ -63,6 +63,12 @@
       "name": "Week 33 Pre-Kickoff Snapshot",
       "date": "Aug 20, 2026",
       "file": "archive/2026_week_33_prekick.json"
+    },
+    {
+      "id": "2026_week_34_prekick",
+      "name": "Week 34 Pre-Kickoff Snapshot",
+      "date": "Aug 25, 2026",
+      "file": "archive/2026_week_34_prekick.json"
     }
   ],
   "settledLedger": [

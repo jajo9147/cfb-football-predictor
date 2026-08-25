@@ -1078,7 +1078,11 @@ function isTeamMatch(t, curId) {
     'floridastate': ['florida state', 'florida state seminoles', 'fsu', 'noles'],
     'clemson': ['clemson', 'clemson tigers', 'clem'],
     'smu': ['smu', 'smu mustangs', 'southern methodist'],
-    'byu': ['byu', 'byu cougars', 'brigham young']
+    'byu': ['byu', 'byu cougars', 'brigham young'],
+    'utah': ['utah', 'utah utes', 'utes'],
+    'iowa': ['iowa', 'iowa hawkeyes', 'hawkeyes'],
+    'missouri': ['missouri', 'missouri tigers', 'mizzou', 'miz'],
+    'arizona': ['arizona', 'arizona wildcats', 'wildcats', 'ariz', 'ua', 'zona']
   };
 
   const curAliases = aliases[cur] || [cur];
@@ -3475,6 +3479,30 @@ const TEAM_OPENER_KICKOFFS = {
     opponent: 'USC Trojans',
     venue: 'Allegiant Stadium (Las Vegas, NV)',
     tv: 'ABC Vegas Kickoff Classic'
+  },
+  'utah': {
+    utc: '2026-09-05T18:00:00Z', // Sat Sep 5 @ 12:00 PM MDT / 2:00 PM EDT (Salt Lake City, UT)
+    opponent: 'Southern Utah Thunderbirds',
+    venue: 'Rice-Eccles Stadium (Salt Lake City, UT)',
+    tv: 'ESPN+'
+  },
+  'iowa': {
+    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 11:00 AM CDT / 12:00 PM EDT (Iowa City, IA)
+    opponent: 'Northern Illinois Huskies',
+    venue: 'Kinnick Stadium (Iowa City, IA)',
+    tv: 'Big Ten Network'
+  },
+  'missouri': {
+    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 6:30 PM CDT / 7:30 PM EDT (Columbia, MO)
+    opponent: 'Louisiana Ragin Cajuns',
+    venue: 'Faurot Field (Columbia, MO)',
+    tv: 'SEC Network'
+  },
+  'arizona': {
+    utc: '2026-09-06T02:30:00Z', // Sat Sep 5 @ 7:30 PM MST / 10:30 PM EDT (Tucson, AZ)
+    opponent: 'Hawaii Rainbow Warriors',
+    venue: 'Arizona Stadium (Tucson, AZ)',
+    tv: 'FS1 / ESPN'
   }
 };
 
@@ -3568,7 +3596,11 @@ const ESPN_TEAM_MAP = {
   '52': 'floridastate',
   '228': 'clemson',
   '2567': 'smu',
-  '68': 'boisestate'
+  '68': 'boisestate',
+  '254': 'utah',
+  '2294': 'iowa',
+  '142': 'missouri',
+  '12': 'arizona'
 };
 
 const TEAM_TO_ESPN_ID = {
@@ -3593,7 +3625,11 @@ const TEAM_TO_ESPN_ID = {
   floridastate: '52',
   clemson: '228',
   smu: '2567',
-  boisestate: '68'
+  boisestate: '68',
+  utah: '254',
+  iowa: '2294',
+  missouri: '142',
+  arizona: '12'
 };
 
 const LiveSyncEngine = {
@@ -4186,7 +4222,7 @@ function populateReceiptsFilterDropdowns() {
   if (!teamFilter) return;
 
   const currentVal = teamFilter.value;
-  teamFilter.innerHTML = '<option value="all">🏆 All 22 Powerhouse Teams (260+ Games)</option>';
+  teamFilter.innerHTML = '<option value="all">🏆 All 26 Powerhouse Teams (Complete AP Top 25)</option>';
 
   const entries = Object.entries(TEAMS_DATABASE);
   entries.sort((a, b) => {
@@ -4227,7 +4263,7 @@ window.renderFilteredReceiptsLedger = function() {
 
   const allLedgerGames = [];
 
-  // Build full ledger across all 22 teams in TEAMS_DATABASE
+  // Build full ledger across all 26 teams in TEAMS_DATABASE
   Object.entries(TEAMS_DATABASE).forEach(([teamId, team]) => {
     if (teamFilter !== 'all' && teamId !== teamFilter) return;
 

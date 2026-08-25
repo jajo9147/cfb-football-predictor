@@ -289,6 +289,50 @@ body.theme-texastech {
   --color-bg-surface: #1A0A0A;
 }
 
+/* 23. Utah Utes */
+body.theme-utah {
+  --color-brand-primary: #CC0000;
+  --color-brand-secondary: #000000;
+  --color-brand-accent: #808080;
+  --color-brand-glow: rgba(204, 0, 0, 0.5);
+  --color-brand-border: rgba(204, 0, 0, 0.45);
+  --color-bg-base: #0D0404;
+  --color-bg-surface: #1A0808;
+}
+
+/* 24. Iowa Hawkeyes */
+body.theme-iowa {
+  --color-brand-primary: #FFE100;
+  --color-brand-secondary: #000000;
+  --color-brand-accent: #FFCD00;
+  --color-brand-glow: rgba(255, 225, 0, 0.45);
+  --color-brand-border: rgba(255, 225, 0, 0.4);
+  --color-bg-base: #0A0A05;
+  --color-bg-surface: #171609;
+}
+
+/* 25. Missouri Tigers */
+body.theme-missouri {
+  --color-brand-primary: #F1B82D;
+  --color-brand-secondary: #000000;
+  --color-brand-accent: #F1B82D;
+  --color-brand-glow: rgba(241, 184, 45, 0.45);
+  --color-brand-border: rgba(241, 184, 45, 0.4);
+  --color-bg-base: #0C0A04;
+  --color-bg-surface: #191408;
+}
+
+/* 26. Arizona Wildcats */
+body.theme-arizona {
+  --color-brand-primary: #CC0033;
+  --color-brand-secondary: #003366;
+  --color-brand-accent: #003366;
+  --color-brand-glow: rgba(204, 0, 51, 0.45);
+  --color-brand-border: rgba(204, 0, 51, 0.4);
+  --color-bg-base: #0D0407;
+  --color-bg-surface: #1A080E;
+}
+
 /* ==========================================================================
    BASE STYLES & LAYOUT
    ========================================================================== */

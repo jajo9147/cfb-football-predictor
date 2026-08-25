@@ -50,7 +50,7 @@
       });
     }
   </script>
-  <link rel="stylesheet" href="styles.css?t=20260824_390">
+  <link rel="stylesheet" href="styles.css?t=20260825_400">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -200,13 +200,13 @@
     </div>
   </nav>
 
-  <!-- Top Quick Team Selector Bar & Search (21 AP Contenders) -->
+  <!-- Top Quick Team Selector Bar & Search (Complete AP Top 25 Contenders) -->
   <section class="team-selector-section">
     <div class="container">
       <div class="team-search-bar-wrap">
         <div class="team-search-input-box">
           <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" id="teamSearchInput" class="team-search-input" placeholder="Search any Top 20 team, coach, quarterback, or conference (e.g. Michigan, Sarkisian, SEC)..." autocomplete="off" spellcheck="false">
+          <input type="text" id="teamSearchInput" class="team-search-input" placeholder="Search any Top 25 team, coach, quarterback, or conference (e.g. Utah, Whittingham, Big 12)..." autocomplete="off" spellcheck="false">
           <button class="search-clear-btn" id="teamSearchClearBtn" style="display: none;" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
           <kbd class="search-shortcut-badge">⌘K</kbd>
         </div>
@@ -905,10 +905,10 @@
       <div class="modal-tab-body" style="padding: 0.5rem 0 0;">
         <!-- Panel 1: Settled Ledger -->
         <div class="sub-tab-panel active" id="receiptsPanelLedger">
-          <!-- Filter & Search Bar for All 22 Powerhouse Teams -->
+          <!-- Filter & Search Bar for All 26 Powerhouse Teams -->
           <div class="ledger-filter-bar" style="display: flex; gap: 0.45rem; margin-bottom: 0.6rem; flex-wrap: wrap;">
             <select id="ledgerTeamFilter" class="sandbox-dropdown" style="padding: 0.4rem 0.65rem; font-size: 0.76rem; flex: 1.2; min-width: 140px;" onchange="renderFilteredReceiptsLedger()">
-              <option value="all">🏆 All 22 Powerhouse Teams</option>
+              <option value="all">🏆 All 26 Powerhouse Teams (AP Top 25)</option>
             </select>
             <select id="ledgerWeekFilter" class="sandbox-dropdown" style="padding: 0.4rem 0.65rem; font-size: 0.76rem; width: 120px;" onchange="renderFilteredReceiptsLedger()">
               <option value="all">📅 All Weeks</option>
@@ -1052,7 +1052,7 @@
   </nav>
 
   <!-- Scripts -->
-  <script src="data/teams.js?t=20260824_390"></script>
-  <script src="app.js?t=20260824_390"></script>
+  <script src="data/teams.js?t=20260825_400"></script>
+  <script src="app.js?t=20260825_400"></script>
 </body>
 </html>
