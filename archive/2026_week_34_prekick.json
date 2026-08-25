@@ -2,7 +2,7 @@
   "season": 2026,
   "snapshotId": "2026_week_34_prekick",
   "name": "Week 34 Pre-Kickoff Projections",
-  "timestamp": "2026-08-25T14:36:10.864351+00:00",
+  "timestamp": "2026-08-25T14:44:04.110986+00:00",
   "totalTeams": 29,
   "teams": [
     {
@@ -337,9 +337,9 @@
           "oppRank": "#8 AP",
           "isHome": false,
           "stadium": "Kyle Field",
-          "baseWinProb": 38.0,
-          "projScoreUt": 27,
-          "projScoreOpp": 29
+          "baseWinProb": 59.5,
+          "projScoreUt": 31,
+          "projScoreOpp": 24
         }
       ]
     },
@@ -2365,9 +2365,9 @@
           "oppRank": "#5 AP",
           "isHome": true,
           "stadium": "Kyle Field",
-          "baseWinProb": 62.0,
-          "projScoreUt": 29,
-          "projScoreOpp": 27
+          "baseWinProb": 40.5,
+          "projScoreUt": 24,
+          "projScoreOpp": 31
         }
       ]
     },
@@ -4993,8 +4993,8 @@
       "teamName": "Texas Longhorns",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 12",
-      "winProb": 38.0,
-      "projScore": "27-29"
+      "winProb": 59.5,
+      "projScore": "31-24"
     },
     {
       "teamId": "michigan",
@@ -5601,8 +5601,8 @@
       "teamName": "Texas A&M Aggies",
       "oppName": "Texas Longhorns",
       "week": "WEEK 12",
-      "winProb": 62.0,
-      "projScore": "29-27"
+      "winProb": 40.5,
+      "projScore": "24-31"
     },
     {
       "teamId": "olemiss",
