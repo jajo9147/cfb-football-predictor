@@ -1,5 +1,12 @@
 # 🏈 Gridiron Oracle — College Football AI Predictor & Season Simulator
 
+[![Live App](https://img.shields.io/badge/Live_App-jajo9147.github.io%2Fcfb--football--predictor-blue?style=for-the-badge&logo=googlechrome&logoColor=white)](https://jajo9147.github.io/cfb-football-predictor/)
+[![AP Top 25](https://img.shields.io/badge/AP_Top_25-26_Programs_Calibrated-gold?style=for-the-badge)](https://jajo9147.github.io/cfb-football-predictor/)
+
+🔗 **Live Application**: [https://jajo9147.github.io/cfb-football-predictor/](https://jajo9147.github.io/cfb-football-predictor/)
+
+---
+
 **Gridiron Oracle** is a high-performance college football simulation engine powering drive-by-drive Monte Carlo forecasts, dynamic single-game AI scenario tuning, conference championship outcomes, and real-time 12-team College Football Playoff (CFP) bracket cascading for all 26 top powerhouse programs (Complete AP Top 25 & G5 Contender).
 
 ---
