@@ -634,8 +634,13 @@ function recalculateSeason() {
   state.lastNationalChampion = playoffResults.nationalChampion;
   updateSocialMetadataForChampion(playoffResults.nationalChampion);
 
-  // 4. Calculate Overall Season Total Record (Regular + CCG + CFP / Non-CFP Bowl)
-  const fullSeason = calcActiveTeamTotalRecord(state.currentTeamId, totalWins, totalLosses, ccgResults, playoffResults, evaluatedTeams);
+  // 4. Generate Single-Destination National Non-CFP Bowl Slate (No Duplicates!)
+  const nationalBowls = generateNationalPostseasonBowlSlate(evaluatedTeams, playoffResults);
+  state.nationalBowlSlate = nationalBowls.bowlGamesList;
+  state.teamBowlOutcomes = nationalBowls.teamBowlMap;
+
+  // 5. Calculate Overall Season Total Record (Regular + CCG + CFP / Single Non-CFP Bowl)
+  const fullSeason = calcActiveTeamTotalRecord(state.currentTeamId, totalWins, totalLosses, ccgResults, playoffResults, nationalBowls.teamBowlMap);
 
   // Update Hero & KPI Cards
   const kpiTotalRecordEl = document.getElementById('kpiTotalRecord');
@@ -3064,106 +3069,141 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
   }
 }
 
-// Non-CFP Bowl Matchup Simulator based on authentic NCAA Conference Tie-Ins
-function simulateNonCfpBowlMatchup(team, currentWins, currentLosses, evaluatedTeams) {
-  if (!team) return { totalWins: currentWins, totalLosses: currentLosses, outcomeTitle: 'Regular Season Finish' };
-  
-  if (currentWins < 6) {
-    return {
-      totalWins: currentWins,
-      totalLosses: currentLosses,
-      outcomeTitle: `No Bowl Game (Ineligible: ${currentWins}-${currentLosses})`
-    };
+// National Single-Selection Non-CFP Bowl Slate Generator (Guarantees Exactly One Bowl Per Program!)
+function generateNationalPostseasonBowlSlate(evaluatedTeams, playoffData) {
+  const cfpIds = new Set();
+  if (playoffData && playoffData.cfp && Array.isArray(playoffData.cfp.seeds)) {
+    playoffData.cfp.seeds.forEach(s => {
+      if (s && s.id) cfpIds.add(s.id);
+    });
   }
 
-  const conf = team.conference || 'SEC';
-  const BOWL_MATRIX = {
-    'SEC': [
-      { minW: 10, name: 'Vrbo Citrus Bowl', venue: 'Orlando, FL', oppConf: 'Big Ten', defRating: 24.5 },
-      { minW: 9,  name: 'ReliaQuest Bowl', venue: 'Tampa, FL', oppConf: 'Big Ten', defRating: 23.0 },
-      { minW: 8,  name: 'TaxSlayer Gator Bowl', venue: 'Jacksonville, FL', oppConf: 'ACC', defRating: 22.0 },
-      { minW: 7,  name: 'TaxAct Texas Bowl', venue: 'Houston, TX', oppConf: 'Big 12', defRating: 21.0 },
-      { minW: 6,  name: 'AutoZone Liberty Bowl', venue: 'Memphis, TN', oppConf: 'Big 12', defRating: 19.5 }
-    ],
-    'Big Ten': [
-      { minW: 10, name: 'Vrbo Citrus Bowl', venue: 'Orlando, FL', oppConf: 'SEC', defRating: 24.5 },
-      { minW: 9,  name: 'ReliaQuest Bowl', venue: 'Tampa, FL', oppConf: 'SEC', defRating: 23.0 },
-      { minW: 8,  name: 'TransPerfect Music City Bowl', venue: 'Nashville, TN', oppConf: 'SEC', defRating: 22.0 },
-      { minW: 7,  name: 'Bad Boy Mowers Pinstripe Bowl', venue: 'Yankee Stadium, NYC', oppConf: 'ACC', defRating: 20.5 },
-      { minW: 6,  name: 'Guaranteed Rate Bowl', venue: 'Phoenix, AZ', oppConf: 'Big 12', defRating: 19.5 }
-    ],
-    'Big 12': [
-      { minW: 10, name: 'Valero Alamo Bowl', venue: 'San Antonio, TX', oppConf: 'ACC', defRating: 23.5 },
-      { minW: 9,  name: 'Pop-Tarts Bowl', venue: 'Orlando, FL', oppConf: 'ACC', defRating: 22.5 },
-      { minW: 8,  name: 'TaxAct Texas Bowl', venue: 'Houston, TX', oppConf: 'SEC', defRating: 21.5 },
-      { minW: 7,  name: 'AutoZone Liberty Bowl', venue: 'Memphis, TN', oppConf: 'SEC', defRating: 20.5 },
-      { minW: 6,  name: 'Guaranteed Rate Bowl', venue: 'Phoenix, AZ', oppConf: 'Big Ten', defRating: 19.5 }
-    ],
-    'ACC': [
-      { minW: 10, name: 'Pop-Tarts Bowl', venue: 'Orlando, FL', oppConf: 'Big 12', defRating: 23.0 },
-      { minW: 9,  name: 'TaxSlayer Gator Bowl', venue: 'Jacksonville, FL', oppConf: 'SEC', defRating: 22.0 },
-      { minW: 8,  name: 'Tony the Tiger Sun Bowl', venue: 'El Paso, TX', oppConf: 'Big 12', defRating: 21.0 },
-      { minW: 7,  name: 'Duke\'s Mayo Bowl', venue: 'Charlotte, NC', oppConf: 'Big Ten', defRating: 20.0 },
-      { minW: 6,  name: 'Military Bowl', venue: 'Annapolis, MD', oppConf: 'AAC', defRating: 18.5 }
-    ],
-    'Mountain West': [
-      { minW: 10, name: 'LA Bowl Hosted by Gronk', venue: 'SoFi Stadium, Inglewood, CA', oppConf: 'Big 12', defRating: 21.5 },
-      { minW: 8,  name: 'Famous Idaho Potato Bowl', venue: 'Boise, ID', oppConf: 'MAC', defRating: 18.5 },
-      { minW: 6,  name: 'Snoop Dogg Arizona Bowl', venue: 'Tucson, AZ', oppConf: 'MAC', defRating: 17.0 }
-    ],
-    'Independent': [
-      { minW: 9,  name: 'Pop-Tarts Bowl', venue: 'Orlando, FL', oppConf: 'Big 12', defRating: 23.0 },
-      { minW: 7,  name: 'TaxSlayer Gator Bowl', venue: 'Jacksonville, FL', oppConf: 'SEC', defRating: 21.5 },
-      { minW: 6,  name: 'Tony the Tiger Sun Bowl', venue: 'El Paso, TX', oppConf: 'ACC', defRating: 20.0 }
-    ]
-  };
+  // Pool of all non-CFP bowl eligible teams (6+ wins)
+  const nonCfpEligible = (evaluatedTeams || []).filter(t => t && !cfpIds.has(t.id) && (t.totalWins !== undefined ? t.totalWins : t.wins) >= 6);
+  nonCfpEligible.sort((a, b) => {
+    const wA = a.totalWins !== undefined ? a.totalWins : a.wins;
+    const wB = b.totalWins !== undefined ? b.totalWins : b.wins;
+    if (wB !== wA) return wB - wA;
+    return (b.baseSpRating || 20) - (a.baseSpRating || 20);
+  });
 
-  const tiers = BOWL_MATRIX[conf] || BOWL_MATRIX['SEC'];
-  const selectedBowl = tiers.find(t => currentWins >= t.minW) || tiers[tiers.length - 1];
+  const MAJOR_BOWLS = [
+    { id: 'bowl-citrus', name: 'Vrbo Citrus Bowl', city: 'Orlando, FL', confA: 'SEC', confB: 'Big Ten', defRating: 24.5 },
+    { id: 'bowl-reliaquest', name: 'ReliaQuest Bowl', city: 'Tampa, FL', confA: 'SEC', confB: 'Big Ten', defRating: 23.5 },
+    { id: 'bowl-poptarts', name: 'Pop-Tarts Bowl', city: 'Orlando, FL', confA: 'Big 12', confB: 'ACC', defRating: 23.0 },
+    { id: 'bowl-gator', name: 'TaxSlayer Gator Bowl', city: 'Jacksonville, FL', confA: 'SEC', confB: 'ACC', defRating: 22.5 },
+    { id: 'bowl-alamo', name: 'Valero Alamo Bowl', city: 'San Antonio, TX', confA: 'Big 12', confB: 'Pac-12', defRating: 22.5 },
+    { id: 'bowl-texas', name: 'TaxAct Texas Bowl', city: 'Houston, TX', confA: 'SEC', confB: 'Big 12', defRating: 22.0 },
+    { id: 'bowl-musiccity', name: 'TransPerfect Music City Bowl', city: 'Nashville, TN', confA: 'SEC', confB: 'Big Ten', defRating: 21.5 },
+    { id: 'bowl-sun', name: 'Tony the Tiger Sun Bowl', city: 'El Paso, TX', confA: 'ACC', confB: 'Pac-12', defRating: 21.0 },
+    { id: 'bowl-dukesmayo', name: 'Duke\'s Mayo Bowl', city: 'Charlotte, NC', confA: 'ACC', confB: 'Big Ten', defRating: 20.5 },
+    { id: 'bowl-pinstripe', name: 'Bad Boy Mowers Pinstripe Bowl', city: 'Yankee Stadium, NYC', confA: 'ACC', confB: 'Big Ten', defRating: 20.0 },
+    { id: 'bowl-liberty', name: 'AutoZone Liberty Bowl', city: 'Memphis, TN', confA: 'SEC', confB: 'Big 12', defRating: 19.5 },
+    { id: 'bowl-rate', name: 'Guaranteed Rate Bowl', city: 'Phoenix, AZ', confA: 'Big 12', confB: 'Big Ten', defRating: 19.5 },
+    { id: 'bowl-labowl', name: 'LA Bowl Hosted by Gronk', city: 'SoFi Stadium, CA', confA: 'Mountain West', confB: 'Big 12', defRating: 19.0 },
+    { id: 'bowl-military', name: 'Military Bowl', city: 'Annapolis, MD', confA: 'ACC', confB: 'AAC', defRating: 18.5 }
+  ];
 
-  // Resolve authentic non-CFP opponent from paired conference
-  let oppTeam = null;
-  if (Array.isArray(evaluatedTeams) && evaluatedTeams.length > 0) {
-    const pool = evaluatedTeams.filter(t => t && t.id !== team.id && !t.playoffSeed && (t.conf === selectedBowl.oppConf || t.conference === selectedBowl.oppConf));
-    if (pool.length > 0) {
-      pool.sort((a, b) => (b.wins || 8) - (a.wins || 8));
-      oppTeam = pool[0];
+  const assignedTeamIds = new Set();
+  const teamBowlMap = {};
+  const bowlGamesList = [];
+
+  MAJOR_BOWLS.forEach(bowl => {
+    const poolA = nonCfpEligible.filter(t => !assignedTeamIds.has(t.id) && (t.conf === bowl.confA || t.conference === bowl.confA));
+    const poolB = nonCfpEligible.filter(t => !assignedTeamIds.has(t.id) && (t.conf === bowl.confB || t.conference === bowl.confB));
+
+    let teamA = poolA.length > 0 ? (TEAMS_DATABASE[poolA[0].id] || poolA[0]) : null;
+    let teamB = poolB.length > 0 ? (TEAMS_DATABASE[poolB[0].id] || poolB[0]) : null;
+
+    if (teamA || teamB) {
+      if (teamA && teamB) {
+        assignedTeamIds.add(teamA.id);
+        assignedTeamIds.add(teamB.id);
+      } else if (teamA) {
+        assignedTeamIds.add(teamA.id);
+        teamB = {
+          id: `gen-${bowl.id}-b`,
+          name: `${bowl.confB} Contender`,
+          shortName: `${bowl.confB} Contender`,
+          baseSpRating: bowl.defRating,
+          conference: bowl.confB,
+          colors: { primary: '#4A5568', secondary: '#CBD5E0' }
+        };
+      } else if (teamB) {
+        assignedTeamIds.add(teamB.id);
+        teamA = {
+          id: `gen-${bowl.id}-a`,
+          name: `${bowl.confA} Contender`,
+          shortName: `${bowl.confA} Contender`,
+          baseSpRating: bowl.defRating,
+          conference: bowl.confA,
+          colors: { primary: '#4A5568', secondary: '#CBD5E0' }
+        };
+      }
+
+      // Simulate the single bowl matchup
+      const sim = simulatePostseasonMatchup(teamA, teamB, { gameId: bowl.id });
+      const isWinnerA = isTeamMatch(sim.winner, teamA.id);
+
+      const gameObj = {
+        id: bowl.id,
+        week: 'NON-CFP BOWL',
+        isPostseason: true,
+        teamA,
+        teamB,
+        opponent: teamB.name,
+        oppAbbr: teamB.abbr || teamB.shortName,
+        oppRank: 'BOWL',
+        oppColor: teamB.colors?.primary || '#333333',
+        oppLogoUrl: teamB.logoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[teamB.abbr] : '') || '',
+        isHome: false,
+        stadium: `${bowl.name} (${bowl.city})`,
+        location: bowl.city,
+        isMarquee: true,
+        projScoreUt: sim.scoreA,
+        projScoreOpp: sim.scoreB,
+        baseWinProb: sim.winProbA,
+        scoutReport: {
+          xFactor: `Trench execution and bowl championship trophy at ${bowl.city}.`,
+          keyMatchup: `${teamA.shortName} vs ${teamB.shortName} postseason clash.`,
+          summary: `Official postseason ${bowl.name} matchup between ${teamA.name} and ${teamB.name}.`
+        }
+      };
+
+      state.postseasonGames[bowl.id] = gameObj;
+      bowlGamesList.push(gameObj);
+
+      if (teamA.id && !teamA.id.startsWith('gen-')) {
+        teamBowlMap[teamA.id] = {
+          bowlName: bowl.name,
+          city: bowl.city,
+          opponent: teamB.shortName || teamB.name,
+          isWinner: isWinnerA,
+          scoreFor: sim.scoreA,
+          scoreOpp: sim.scoreB,
+          title: isWinnerA ? `🏆 ${bowl.name} Champions (${sim.scoreA}-${sim.scoreB} vs ${teamB.shortName || teamB.name})` : `${bowl.name} (${sim.scoreA}-${sim.scoreB} vs ${teamB.shortName || teamB.name})`
+        };
+      }
+
+      if (teamB.id && !teamB.id.startsWith('gen-')) {
+        teamBowlMap[teamB.id] = {
+          bowlName: bowl.name,
+          city: bowl.city,
+          opponent: teamA.shortName || teamA.name,
+          isWinner: !isWinnerA,
+          scoreFor: sim.scoreB,
+          scoreOpp: sim.scoreA,
+          title: !isWinnerA ? `🏆 ${bowl.name} Champions (${sim.scoreB}-${sim.scoreA} vs ${teamA.shortName || teamA.name})` : `${bowl.name} (${sim.scoreB}-${sim.scoreA} vs ${teamA.shortName || teamA.name})`
+        };
+      }
     }
-  }
+  });
 
-  if (!oppTeam) {
-    oppTeam = {
-      id: 'bowl-opp',
-      name: `${selectedBowl.oppConf} Contender`,
-      shortName: `${selectedBowl.oppConf} Contender`,
-      baseSpRating: selectedBowl.defRating,
-      conference: selectedBowl.oppConf,
-      colors: { primary: '#4A5568', secondary: '#CBD5E0' }
-    };
-  }
-
-  // Simulate Bowl Matchup
-  const sim = simulatePostseasonMatchup(team, oppTeam, { gameId: `bowl-${team.id}` });
-  const won = isTeamMatch(sim.winner, team.id);
-  const oppLabel = oppTeam.shortName || oppTeam.name;
-
-  if (won) {
-    return {
-      totalWins: currentWins + 1,
-      totalLosses: currentLosses,
-      outcomeTitle: `🏆 ${selectedBowl.name} Champions (${sim.scoreA}-${sim.scoreB} vs ${oppLabel})`
-    };
-  } else {
-    return {
-      totalWins: currentWins,
-      totalLosses: currentLosses + 1,
-      outcomeTitle: `${selectedBowl.name} (${sim.scoreA}-${sim.scoreB} vs ${oppLabel})`
-    };
-  }
+  return { teamBowlMap, bowlGamesList };
 }
 
 // 6. Calculate Overall Total Season Record for Active Team
-function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playoffData, evaluatedTeams) {
+function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playoffData, teamBowlMap) {
   let totalWins = regWins;
   let totalLosses = regLosses;
   let outcomeTitle = 'Regular Season';
@@ -3244,12 +3284,20 @@ function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playo
       outcomeTitle = 'CFP First Round';
     }
   } else {
-    // Missed CFP: Simulate authentic Non-CFP Bowl based on conference tie-in
-    const activeTeam = TEAMS_DATABASE[teamId];
-    const bowlResult = simulateNonCfpBowlMatchup(activeTeam, totalWins, totalLosses, evaluatedTeams);
-    totalWins = bowlResult.totalWins;
-    totalLosses = bowlResult.totalLosses;
-    outcomeTitle = bowlResult.outcomeTitle;
+    // Missed CFP: Single assigned bowl outcome from global national slate
+    const bowlOutcome = teamBowlMap ? teamBowlMap[teamId] : null;
+    if (bowlOutcome) {
+      if (bowlOutcome.isWinner) {
+        totalWins++;
+      } else {
+        totalLosses++;
+      }
+      outcomeTitle = bowlOutcome.title;
+    } else if (regWins >= 6) {
+      outcomeTitle = 'Postseason Bowl Eligible';
+    } else {
+      outcomeTitle = `No Bowl Game (Ineligible: ${regWins}-${regLosses})`;
+    }
   }
 
   return {
