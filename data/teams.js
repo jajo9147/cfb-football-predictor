@@ -1090,7 +1090,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Stopping Matt Campbell / Rocco Becht offense in key 3rd down situations.",
-          "keyMatchup": "Wink Martindale pressure vs Penn State pass protection.",
+          "keyMatchup": "Jay Hill pressure vs Penn State pass protection.",
           "summary": "Electrifying Big Ten showdown in Ann Arbor."
         }
       },
@@ -1627,7 +1627,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "105,000 hostile crowd and revenge mindset in Columbus.",
-          "keyMatchup": "Jeremiah Smith and Justyn Martin vs Wink Martindale defense.",
+          "keyMatchup": "Jeremiah Smith and Julian Sayin vs Jay Hill defense.",
           "summary": "The greatest rivalry in sports in Columbus."
         }
       }
@@ -2972,7 +2972,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Weathering 110,000 in The Big House.",
-          "keyMatchup": "Andy Kotelnicki offense vs Wink Martindale pressure.",
+          "keyMatchup": "Andy Kotelnicki offense vs Jay Hill pressure.",
           "summary": "Massive Big Ten showdown in Ann Arbor."
         }
       },
@@ -3948,7 +3948,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 45,
         "scoutReport": {
           "xFactor": "Road poise in Atlanta and defending Haynes King.",
-          "keyMatchup": "Tim Banks defense vs Georgia Tech option attack.",
+          "keyMatchup": "Jim Knowles defense vs Georgia Tech option attack.",
           "summary": "Non-conference road victory in Atlanta."
         }
       },
@@ -4195,7 +4195,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Senior Day crowd noise and shootout tempo.",
-          "keyMatchup": "Tim Banks defense vs Lane Kiffin / Sam Leavitt air raid.",
+          "keyMatchup": "Jim Knowles defense vs Lane Kiffin / Sam Leavitt air raid.",
           "summary": "Senior Day primetime war in Knoxville."
         }
       },
@@ -4482,7 +4482,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "110,000 hostile crowd poise in Ann Arbor.",
-          "keyMatchup": "Josh Hoover precision vs Wink Martindale blitz packages.",
+          "keyMatchup": "Josh Hoover precision vs Jay Hill blitz packages.",
           "summary": "High-stakes Big Ten road victory at The Big House."
         }
       },
@@ -5799,7 +5799,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Handling 110,000 in The Big House.",
-          "keyMatchup": "John Mateer vs Wink Martindale defense.",
+          "keyMatchup": "John Mateer vs Jay Hill defense.",
           "summary": "Blockbuster non-conference battle in Ann Arbor."
         }
       },
@@ -9671,7 +9671,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Eastern time zone adjustment and stopping Mountaineer power rush.",
-          "keyMatchup": "Duane Akina defense vs WVU ground game.",
+          "keyMatchup": "Danny Gonzales defense vs WVU ground game.",
           "summary": "Long-distance Big 12 road battle in Morgantown."
         }
       },
