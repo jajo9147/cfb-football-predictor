@@ -3934,13 +3934,14 @@ async function generateHypeCard() {
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
   ctx.stroke();
 
-  const recStr = document.getElementById('kpiRecord')?.innerText || '11 - 1';
+  const totalRecStr = document.getElementById('kpiTotalRecord')?.innerText || '15 - 1';
+  const regRecStr = document.getElementById('kpiRecord')?.innerText || '11 - 1';
   ctx.fillStyle = '#FFFFFF';
   ctx.font = 'bold 56px "Bebas Neue", sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText(recStr, leftCenterX, leftY + 224);
+  ctx.fillText(totalRecStr, leftCenterX, leftY + 224);
 
-  drawCanvasTextFitted(ctx, 'PROJECTED REGULAR SEASON RECORD', leftCenterX, leftY + 242, leftW - 60, 'bold 11px "JetBrains Mono", monospace', '#94A3B8', 'center');
+  drawCanvasTextFitted(ctx, `TOTAL RECORD (${regRecStr} REGULAR SEASON)`, leftCenterX, leftY + 242, leftW - 60, 'bold 11px "JetBrains Mono", monospace', '#94A3B8', 'center');
 
   // Postseason / CFP Status Banner (Y: leftY + 262 to leftY + 312, Height: 48)
   const seedStr = document.getElementById('kpiCfpSeed')?.innerText || '#1 SEED';
