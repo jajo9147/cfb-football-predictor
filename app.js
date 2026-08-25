@@ -329,16 +329,22 @@ function getTopRankedTeamId() {
 // ==========================================================================
 
 function initPwaServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=2026.88')
-        .then(reg => {
-          reg.update();
-          console.log('PWA Service Worker registered:', reg.scope);
-        })
-        .catch(err => console.log('Service Worker registration failed:', err));
-    });
-  }
+  try {
+    if ('serviceWorker' in navigator && typeof navigator.serviceWorker.getRegistrations === 'function') {
+      navigator.serviceWorker.getRegistrations().then(registrations => {
+        for (const reg of registrations) {
+          reg.unregister();
+        }
+      }).catch(() => {});
+    }
+    if ('caches' in window && typeof caches.keys === 'function') {
+      caches.keys().then(keys => {
+        for (const key of keys) {
+          caches.delete(key);
+        }
+      }).catch(() => {});
+    }
+  } catch (e) {}
 }
 
 // ==========================================================================
