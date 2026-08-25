@@ -532,7 +532,7 @@ var TEAMS_DATABASE = {
     "defensiveCoordinator": "Will Muschamp",
     "offensiveCoordinator": "Kyle Flood",
     "starPlayer": "Arch Manning (QB) / Hollywood Smothers (RB) / Ryan Wingo (WR)",
-    "secondaryStar": "Hollywood Smothers & Raleek Brown (Transfer RBs) / Ryan Wingo (WR)",
+    "secondaryStar": "Cam Coleman (WR) / Raleek Brown (RB)",
     "stadium": "DKR Texas Memorial Stadium",
     "stadiumCity": "Austin, TX",
     "stadiumCapacity": "100,119",
@@ -2019,8 +2019,8 @@ var TEAMS_DATABASE = {
     "headCoach": "Kalen DeBoer",
     "defensiveCoordinator": "Kane Wommack",
     "offensiveCoordinator": "Nick Sheridan",
-    "starPlayer": "Ryan Williams (WR) / Keelon Russell (QB) / Justice Haynes (RB)",
-    "secondaryStar": "Justice Haynes (RB) / Richard Young (RB)",
+    "starPlayer": "Ryan Williams (WR) / Keelon Russell (QB) / Daniel Hill (RB)",
+    "secondaryStar": "Daniel Hill (RB) / Kevin Riley (RB)",
     "stadium": "Bryant-Denny Stadium",
     "stadiumCity": "Tuscaloosa, AL",
     "stadiumCapacity": "100,077",
@@ -2037,7 +2037,7 @@ var TEAMS_DATABASE = {
     "playoffContenderRank": 13,
     "sliderLabels": {
       "qb": "Keelon Russell Air Attack",
-      "ground": "Justice Haynes & Richard Young Ground Attack",
+      "ground": "Daniel Hill & Kevin Riley Physical Ground Attack",
       "defense": "Kane Wommack Swarm Defense",
       "turnover": "Turnover Margin Luck",
       "crowd": "Bryant-Denny 100k Crimson Roar"
@@ -10985,8 +10985,8 @@ var TEAMS_DATABASE = {
     "offensiveCoordinator": "Brennan Marion",
     "defensiveCoordinator": "Chris Marve",
     "confirmedStarterQb": "Julian \"JuJu\" Lewis",
-    "starPlayer": "Julian \"JuJu\" Lewis (QB) / Dallan Hayden (RB) / Omarion Miller (WR)",
-    "secondaryStar": "Jordan Seaton (OT) / D.J. McKinney (CB)",
+    "starPlayer": "Julian \"JuJu\" Lewis (QB) / Damian Henderson II (RB) / Danny Scudero (WR)",
+    "secondaryStar": "DeAndre Moore Jr. (WR) / Richard Young (RB) / Jordan Seaton (OT)",
     "stadium": "Folsom Field",
     "stadiumCity": "Boulder, CO",
     "stadiumCapacity": "50,183",
@@ -11003,8 +11003,8 @@ var TEAMS_DATABASE = {
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/38.png",
     "badgeText": "COL",
     "sliderLabels": {
-      "qb": "Julian \"JuJu\" Lewis Go-Go Attack",
-      "ground": "Dallan Hayden Ground Assault",
+      "qb": "Julian \"JuJu\" Lewis & Danny Scudero Air Attack",
+      "ground": "Damian Henderson II & Richard Young Ground Assault",
       "defense": "Chris Marve Defense & Havoc",
       "turnover": "Turnover Margin & Explosive Plays",
       "crowd": "Folsom Field 5,360-ft Altitude Noise"
@@ -11064,7 +11064,7 @@ var TEAMS_DATABASE = {
         "projScoreUt": 41,
         "projScoreOpp": 17,
         "scoutReport": {
-          "xFactor": "Explosive passing plays downfield to Omarion Miller.",
+          "xFactor": "Explosive passing plays downfield to Danny Scudero.",
           "keyMatchup": "Colorado offensive line vs Weber State front.",
           "summary": "Home opener in front of a sold-out Folsom Field."
         }
@@ -11122,7 +11122,7 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Protecting Julian Lewis against Dave Aranda blitz schemes.",
-          "keyMatchup": "Dallan Hayden vs Baylor interior defensive line.",
+          "keyMatchup": "Damian Henderson II vs Baylor interior defensive line.",
           "summary": "Big 12 conference opener in Waco."
         }
       },
