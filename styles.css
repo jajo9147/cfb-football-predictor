@@ -333,6 +333,39 @@ body.theme-arizona {
   --color-bg-surface: #1A080E;
 }
 
+/* 27. Washington Huskies */
+body.theme-washington {
+  --color-brand-primary: #4B2E83;
+  --color-brand-secondary: #B7A57A;
+  --color-brand-accent: #85754D;
+  --color-brand-glow: rgba(75, 46, 131, 0.5);
+  --color-brand-border: rgba(75, 46, 131, 0.45);
+  --color-bg-base: #07040D;
+  --color-bg-surface: #120A1F;
+}
+
+/* 28. Houston Cougars */
+body.theme-houston {
+  --color-brand-primary: #C8102E;
+  --color-brand-secondary: #FFFFFF;
+  --color-brand-accent: #76232F;
+  --color-brand-glow: rgba(200, 16, 46, 0.5);
+  --color-brand-border: rgba(200, 16, 46, 0.45);
+  --color-bg-base: #0D0406;
+  --color-bg-surface: #1A080C;
+}
+
+/* 29. Louisville Cardinals */
+body.theme-louisville {
+  --color-brand-primary: #C90000;
+  --color-brand-secondary: #000000;
+  --color-brand-accent: #FFC72C;
+  --color-brand-glow: rgba(201, 0, 0, 0.5);
+  --color-brand-border: rgba(201, 0, 0, 0.45);
+  --color-bg-base: #0D0303;
+  --color-bg-surface: #1C0808;
+}
+
 /* ==========================================================================
    BASE STYLES & LAYOUT
    ========================================================================== */

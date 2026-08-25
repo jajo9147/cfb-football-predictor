@@ -1082,7 +1082,10 @@ function isTeamMatch(t, curId) {
     'utah': ['utah', 'utah utes', 'utes'],
     'iowa': ['iowa', 'iowa hawkeyes', 'hawkeyes'],
     'missouri': ['missouri', 'missouri tigers', 'mizzou', 'miz'],
-    'arizona': ['arizona', 'arizona wildcats', 'wildcats', 'ariz', 'ua', 'zona']
+    'arizona': ['arizona', 'arizona wildcats', 'wildcats', 'ariz', 'ua', 'zona'],
+    'washington': ['washington', 'washington huskies', 'huskies', 'wash', 'uw'],
+    'houston': ['houston', 'houston cougars', 'cougars', 'hou', 'uh'],
+    'louisville': ['louisville', 'louisville cardinals', 'cardinals', 'lou', 'cards', 'uofl']
   };
 
   const curAliases = aliases[cur] || [cur];
@@ -3503,6 +3506,24 @@ const TEAM_OPENER_KICKOFFS = {
     opponent: 'Hawaii Rainbow Warriors',
     venue: 'Arizona Stadium (Tucson, AZ)',
     tv: 'FS1 / ESPN'
+  },
+  'washington': {
+    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 4:00 PM PDT / 7:00 PM EDT (Seattle, WA)
+    opponent: 'Eastern Washington Eagles',
+    venue: 'Husky Stadium (Seattle, WA)',
+    tv: 'Big Ten Network'
+  },
+  'houston': {
+    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 6:00 PM CDT (Houston, TX)
+    opponent: 'Stephen F. Austin Lumberjacks',
+    venue: 'TDECU Stadium (Houston, TX)',
+    tv: 'ESPN+'
+  },
+  'louisville': {
+    utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 3:30 PM EDT (Louisville, KY)
+    opponent: 'Austin Peay Governors',
+    venue: 'L&N Federal Credit Union Stadium (Louisville, KY)',
+    tv: 'ACC Network'
   }
 };
 
@@ -3600,7 +3621,10 @@ const ESPN_TEAM_MAP = {
   '254': 'utah',
   '2294': 'iowa',
   '142': 'missouri',
-  '12': 'arizona'
+  '12': 'arizona',
+  '264': 'washington',
+  '248': 'houston',
+  '97': 'louisville'
 };
 
 const TEAM_TO_ESPN_ID = {
@@ -3629,7 +3653,10 @@ const TEAM_TO_ESPN_ID = {
   utah: '254',
   iowa: '2294',
   missouri: '142',
-  arizona: '12'
+  arizona: '12',
+  washington: '264',
+  houston: '248',
+  louisville: '97'
 };
 
 const LiveSyncEngine = {
