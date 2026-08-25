@@ -3527,6 +3527,60 @@ function loadCanvasImage(url) {
   });
 }
 
+function drawCanvasTextFitted(ctx, text, x, y, maxWidth, font, color, align = 'center') {
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.textAlign = align;
+  ctx.font = font;
+  let textWidth = ctx.measureText(text).width;
+  if (textWidth > maxWidth && maxWidth > 0) {
+    const fontSizeMatch = font.match(/(\d+)px/);
+    if (fontSizeMatch) {
+      const origSize = parseInt(fontSizeMatch[1]);
+      const scale = Math.max(0.6, maxWidth / textWidth);
+      const newSize = Math.floor(origSize * scale);
+      ctx.font = font.replace(`${origSize}px`, `${newSize}px`);
+    }
+  }
+  ctx.fillText(text, x, y, maxWidth);
+  ctx.restore();
+}
+
+function drawCanvasTextWrapped(ctx, text, x, y, maxWidth, lineHeight, font, color, align = 'left', maxLines = 2) {
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.textAlign = align;
+  ctx.font = font;
+  const words = (text || '').split(' ');
+  let line = '';
+  let lineCount = 0;
+  
+  for (let n = 0; n < words.length; n++) {
+    const testLine = line + words[n] + ' ';
+    const metrics = ctx.measureText(testLine);
+    const testWidth = metrics.width;
+    if (testWidth > maxWidth && n > 0) {
+      ctx.fillText(line.trim(), x, y + (lineCount * lineHeight));
+      line = words[n] + ' ';
+      lineCount++;
+      if (lineCount >= maxLines - 1) {
+        const remaining = words.slice(n).join(' ');
+        let fitRemaining = remaining;
+        while (ctx.measureText(fitRemaining + '...').width > maxWidth && fitRemaining.length > 0) {
+          fitRemaining = fitRemaining.slice(0, -1);
+        }
+        ctx.fillText(fitRemaining.trim() + (fitRemaining.length < remaining.length ? '...' : ''), x, y + (lineCount * lineHeight));
+        ctx.restore();
+        return;
+      }
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line.trim(), x, y + (lineCount * lineHeight));
+  ctx.restore();
+}
+
 async function generateHypeCard() {
   const canvas = document.getElementById('hypeCanvas');
   if (!canvas) return;
@@ -3535,6 +3589,12 @@ async function generateHypeCard() {
   const ctx = canvas.getContext('2d');
   const team = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
 
+  try {
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
+    }
+  } catch (e) {}
+
   const logoImg = await loadCanvasImage(team.logoUrl);
 
   // Background
@@ -3542,7 +3602,7 @@ async function generateHypeCard() {
   ctx.fillRect(0, 0, 1200, 675);
 
   // Radial Glow
-  const glow = ctx.createRadialGradient(280, 260, 10, 280, 260, 450);
+  const glow = ctx.createRadialGradient(280, 260, 10, 280, 260, 480);
   glow.addColorStop(0, team.colors?.primary || '#BF5700');
   glow.addColorStop(1, 'rgba(8, 12, 20, 0)');
   ctx.fillStyle = glow;
@@ -3573,15 +3633,8 @@ async function generateHypeCard() {
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
   ctx.stroke();
 
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 24px "Bebas Neue", "Outfit", sans-serif';
-  ctx.textAlign = 'left';
-  ctx.fillText(`🏈 GRIDIRON ORACLE • ${team.name.toUpperCase()}`, 60, 66);
-
-  ctx.fillStyle = team.colors?.accent || '#F59E0B';
-  ctx.font = 'bold 13px "JetBrains Mono", monospace';
-  ctx.textAlign = 'right';
-  ctx.fillText(`2026 OFFICIAL AI BLUEPRINT • 10,000 SIMULATIONS`, 1130, 64);
+  drawCanvasTextFitted(ctx, `🏈 GRIDIRON ORACLE • ${team.name.toUpperCase()}`, 60, 66, 680, 'bold 24px "Bebas Neue", "Outfit", sans-serif', '#FFFFFF', 'left');
+  drawCanvasTextFitted(ctx, `2026 OFFICIAL AI BLUEPRINT • 10,000 SIMULATIONS`, 1130, 64, 420, 'bold 13px "JetBrains Mono", monospace', team.colors?.accent || '#F59E0B', 'right');
 
   // Left Column - Big Team Hero Card
   const leftW = 420;
@@ -3589,10 +3642,10 @@ async function generateHypeCard() {
   const leftX = 40;
   const leftY = 105;
 
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.8)';
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
   drawCanvasRoundedRect(ctx, leftX, leftY, leftW, leftH, 18);
   ctx.fill();
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
   ctx.stroke();
 
   // Team Logo Circle
@@ -3643,29 +3696,24 @@ async function generateHypeCard() {
   ctx.lineWidth = 1;
   ctx.stroke();
 
-  ctx.fillStyle = '#F59E0B';
-  ctx.font = 'bold 15px "JetBrains Mono", monospace';
-  ctx.fillText(`${seedStr} • ${postStr}`, logoCenterX, leftY + 312);
+  drawCanvasTextFitted(ctx, `${seedStr} • ${postStr}`, logoCenterX, leftY + 312, leftW - 70, 'bold 15px "JetBrains Mono", monospace', '#F59E0B', 'center');
 
   // Natty Odds Pill
   const nattyOdds = document.getElementById('kpiNattyOdds')?.innerText || '+350';
-  ctx.fillStyle = '#38BDF8';
-  ctx.font = '600 13px "JetBrains Mono", monospace';
-  ctx.fillText(`NATTY TITLE ODDS: ${nattyOdds}`, logoCenterX, leftY + 360);
+  drawCanvasTextFitted(ctx, `NATTY TITLE ODDS: ${nattyOdds}`, logoCenterX, leftY + 360, leftW - 60, '600 13px "JetBrains Mono", monospace', '#38BDF8', 'center');
 
-  ctx.fillStyle = '#E2E8F0';
-  ctx.font = '500 13px "Outfit", sans-serif';
-  ctx.fillText(`📍 ${team.stadium || 'Stadium'} (${team.stadiumCapacity || '100k'})`, logoCenterX, leftY + 395);
+  const venueCap = `${team.stadium || 'Stadium'} (${team.stadiumCapacity || '100k'})`;
+  drawCanvasTextFitted(ctx, `📍 ${venueCap}`, logoCenterX, leftY + 395, leftW - 40, '500 13px "Outfit", sans-serif', '#E2E8F0', 'center');
 
   // Right Column - Top Marquee Clashes & Personnel
   const rightX = 480;
   const rightW = 680;
   const rightY = 105;
 
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.8)';
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
   drawCanvasRoundedRect(ctx, rightX, rightY, rightW, 280, 18);
   ctx.fill();
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
   ctx.stroke();
 
   ctx.fillStyle = '#FFFFFF';
@@ -3692,16 +3740,11 @@ async function generateHypeCard() {
     }
 
     // Matchup Text
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 16px "Outfit", sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText(`${g.week}: vs ${g.oppAbbr} (${g.oppRank})`, rightX + 85, mY + 12);
+    drawCanvasTextFitted(ctx, `${g.week}: vs ${g.oppAbbr} (${g.oppRank})`, rightX + 85, mY + 12, 340, 'bold 16px "Outfit", sans-serif', '#FFFFFF', 'left');
 
     // Score & Win
-    ctx.fillStyle = sim.isWin ? '#10B981' : '#EF4444';
-    ctx.font = 'bold 16px "JetBrains Mono", monospace';
-    ctx.textAlign = 'right';
-    ctx.fillText(`${sim.projUt} - ${sim.projOpp} (${sim.adjWinProb}% Win)`, rightX + rightW - 40, mY + 12);
+    const winColor = sim.isWin ? '#10B981' : '#EF4444';
+    drawCanvasTextFitted(ctx, `${sim.projUt} - ${sim.projOpp} (${sim.adjWinProb}% Win)`, rightX + rightW - 35, mY + 12, 220, 'bold 16px "JetBrains Mono", monospace', winColor, 'right');
 
     mY += 65;
   });
@@ -3713,18 +3756,14 @@ async function generateHypeCard() {
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
   ctx.stroke();
 
-  ctx.fillStyle = '#F59E0B';
-  ctx.font = 'bold 14px "JetBrains Mono", monospace';
-  ctx.textAlign = 'left';
-  ctx.fillText(`🎯 COACHING STAFF: HC ${team.headCoach.toUpperCase()} • OC ${team.offensiveCoordinator.toUpperCase()} • DC ${team.defensiveCoordinator.toUpperCase()}`, rightX + 25, 435);
+  const coachStr = `🎯 COACHING STAFF: HC ${team.headCoach.toUpperCase()} • OC ${team.offensiveCoordinator.toUpperCase()} • DC ${team.defensiveCoordinator.toUpperCase()}`;
+  drawCanvasTextFitted(ctx, coachStr, rightX + 25, 435, rightW - 50, 'bold 14px "JetBrains Mono", monospace', '#F59E0B', 'left');
 
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = '600 15px "Outfit", sans-serif';
-  ctx.fillText(`⭐ PLAYMAKERS: ${team.starPlayer}`, rightX + 25, 470);
+  const starStr = `⭐ PLAYMAKERS: ${team.starPlayer}`;
+  drawCanvasTextFitted(ctx, starStr, rightX + 25, 470, rightW - 50, '600 15px "Outfit", sans-serif', '#FFFFFF', 'left');
 
-  ctx.fillStyle = '#94A3B8';
-  ctx.font = '500 13px "Outfit", sans-serif';
-  ctx.fillText(`🛡️ SECONDARY CORE: ${team.secondaryStar || 'Consensus Top-Tier Depth'}`, rightX + 25, 502);
+  const secStr = `🛡️ SECONDARY CORE: ${team.secondaryStar || 'Consensus Top-Tier Depth'}`;
+  drawCanvasTextFitted(ctx, secStr, rightX + 25, 502, rightW - 50, '500 13px "Outfit", sans-serif', '#94A3B8', 'left');
 
   // Footer Tagline
   ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
@@ -5573,6 +5612,12 @@ async function generateGameHypeCard(game) {
   canvas.height = 675;
   const ctx = canvas.getContext('2d');
 
+  try {
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
+    }
+  } catch (e) {}
+
   let teamA, teamB, scoreA, scoreB, probA, spreadA, ou;
   if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
     teamA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
@@ -5614,7 +5659,7 @@ async function generateGameHypeCard(game) {
   ctx.fillRect(0, 0, 1200, 675);
 
   // Radial ambient team glow behind Team A (Left)
-  const glowA = ctx.createRadialGradient(240, 250, 10, 240, 250, 420);
+  const glowA = ctx.createRadialGradient(210, 250, 10, 210, 250, 420);
   glowA.addColorStop(0, teamA.colors?.primary || '#BF5700');
   glowA.addColorStop(1, 'rgba(8, 12, 20, 0)');
   ctx.fillStyle = glowA;
@@ -5622,7 +5667,7 @@ async function generateGameHypeCard(game) {
   ctx.fillRect(0, 0, 600, 675);
 
   // Radial ambient team glow behind Team B (Right)
-  const glowB = ctx.createRadialGradient(960, 250, 10, 960, 250, 420);
+  const glowB = ctx.createRadialGradient(990, 250, 10, 990, 250, 420);
   glowB.addColorStop(0, teamB.colors?.primary || '#00274C');
   glowB.addColorStop(1, 'rgba(8, 12, 20, 0)');
   ctx.fillStyle = glowB;
@@ -5653,23 +5698,17 @@ async function generateGameHypeCard(game) {
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
   ctx.stroke();
 
-  ctx.fillStyle = '#F59E0B';
-  ctx.font = 'bold 22px "Bebas Neue", "Outfit", sans-serif';
-  ctx.textAlign = 'left';
-  ctx.fillText('🏈 GRIDIRON ORACLE • MATCHUP SIMULATION ENGINE', 60, 65);
+  drawCanvasTextFitted(ctx, '🏈 GRIDIRON ORACLE • MATCHUP SIMULATION ENGINE', 60, 65, 680, 'bold 22px "Bebas Neue", "Outfit", sans-serif', '#F59E0B', 'left');
 
-  ctx.fillStyle = '#94A3B8';
-  ctx.font = '600 13px "JetBrains Mono", monospace';
-  ctx.textAlign = 'right';
   const venueText = `${(game.week || 'WEEK 1')} • ${(game.stadium || teamA.stadium || 'STADIUM').toUpperCase()}`;
-  ctx.fillText(venueText, 1130, 64);
+  drawCanvasTextFitted(ctx, venueText, 1130, 64, 420, '600 13px "JetBrains Mono", monospace', '#94A3B8', 'right');
 
   // ==========================================
-  // TEAM A (LEFT COLUMN)
+  // TEAM A (LEFT COLUMN: center = 210, maxWidth = 320)
   // ==========================================
-  const centerAX = 240;
+  const centerAX = 210;
   const logoRadius = 75;
-  const logoCenterY = 240;
+  const logoCenterY = 230;
 
   ctx.save();
   ctx.shadowColor = teamA.colors?.primary || '#BF5700';
@@ -5697,24 +5736,16 @@ async function generateGameHypeCard(game) {
     ctx.fillText(teamA.abbr || 'TEAM', centerAX, logoCenterY + 12);
   }
 
-  ctx.textAlign = 'center';
-  ctx.fillStyle = teamA.colors?.accent || '#F59E0B';
-  ctx.font = 'bold 15px "JetBrains Mono", monospace';
-  ctx.fillText(teamA.apRank || '#1 AP', centerAX, 350);
-
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 28px "Outfit", sans-serif';
-  ctx.fillText((teamA.name || teamA.shortName || 'Team A').toUpperCase(), centerAX, 385);
+  drawCanvasTextFitted(ctx, teamA.apRank || '#1 AP', centerAX, 345, 280, 'bold 15px "JetBrains Mono", monospace', teamA.colors?.accent || '#F59E0B', 'center');
+  drawCanvasTextFitted(ctx, (teamA.name || teamA.shortName || 'Team A').toUpperCase(), centerAX, 380, 310, 'bold 26px "Outfit", sans-serif', '#FFFFFF', 'center');
 
   const starA = teamA.starPlayer ? teamA.starPlayer.split('/')[0].trim() : 'Offensive Starters';
-  ctx.fillStyle = '#94A3B8';
-  ctx.font = '500 13px "Outfit", sans-serif';
-  ctx.fillText(`⭐ ${starA}`, centerAX, 415);
+  drawCanvasTextFitted(ctx, `⭐ ${starA}`, centerAX, 412, 310, '500 13px "Outfit", sans-serif', '#94A3B8', 'center');
 
   // ==========================================
-  // TEAM B (RIGHT COLUMN)
+  // TEAM B (RIGHT COLUMN: center = 990, maxWidth = 320)
   // ==========================================
-  const centerBX = 960;
+  const centerBX = 990;
 
   ctx.save();
   ctx.shadowColor = teamB.colors?.primary || '#00274C';
@@ -5742,32 +5773,24 @@ async function generateGameHypeCard(game) {
     ctx.fillText(teamB.shortName || 'OPP', centerBX, logoCenterY + 12);
   }
 
-  ctx.textAlign = 'center';
-  ctx.fillStyle = teamB.colors?.accent || '#38BDF8';
-  ctx.font = 'bold 15px "JetBrains Mono", monospace';
-  ctx.fillText(teamB.apRank || 'NR', centerBX, 350);
-
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 28px "Outfit", sans-serif';
-  ctx.fillText((teamB.name || teamB.shortName || 'Opponent').toUpperCase(), centerBX, 385);
+  drawCanvasTextFitted(ctx, teamB.apRank || 'NR', centerBX, 345, 280, 'bold 15px "JetBrains Mono", monospace', teamB.colors?.accent || '#38BDF8', 'center');
+  drawCanvasTextFitted(ctx, (teamB.name || teamB.shortName || 'Opponent').toUpperCase(), centerBX, 380, 310, 'bold 26px "Outfit", sans-serif', '#FFFFFF', 'center');
 
   const starB = teamB.starPlayer ? teamB.starPlayer.split('/')[0].trim() : 'Key Matchup Focus';
-  ctx.fillStyle = '#94A3B8';
-  ctx.font = '500 13px "Outfit", sans-serif';
-  ctx.fillText(`⭐ ${starB}`, centerBX, 415);
+  drawCanvasTextFitted(ctx, `⭐ ${starB}`, centerBX, 412, 310, '500 13px "Outfit", sans-serif', '#94A3B8', 'center');
 
   // ==========================================
-  // CENTER SCOREBOARD & ODDS CONSOLE
+  // CENTER SCOREBOARD & ODDS CONSOLE (center = 600, width = 420)
   // ==========================================
-  const boxW = 380;
+  const boxW = 420;
   const boxH = 340;
   const boxX = 600 - boxW / 2;
-  const boxY = 110;
+  const boxY = 105;
 
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
   drawCanvasRoundedRect(ctx, boxX, boxY, boxW, boxH, 18);
   ctx.fill();
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
   ctx.lineWidth = 1.5;
   ctx.stroke();
 
@@ -5775,21 +5798,18 @@ async function generateGameHypeCard(game) {
   const winTeamName = isAWin ? (teamA.shortName || teamA.name) : (teamB.shortName || teamB.name);
 
   ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
-  drawCanvasRoundedRect(ctx, boxX + 30, boxY + 20, boxW - 60, 34, 17);
+  drawCanvasRoundedRect(ctx, boxX + 25, boxY + 20, boxW - 50, 34, 17);
   ctx.fill();
   ctx.strokeStyle = '#10B981';
   ctx.lineWidth = 1;
   ctx.stroke();
 
-  ctx.fillStyle = '#10B981';
-  ctx.font = 'bold 14px "JetBrains Mono", monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText(`🏆 PROJECTED WINNER: ${winTeamName.toUpperCase()}`, 600, boxY + 42);
+  drawCanvasTextFitted(ctx, `🏆 PROJECTED WINNER: ${winTeamName.toUpperCase()}`, 600, boxY + 42, boxW - 60, 'bold 14px "JetBrains Mono", monospace', '#10B981', 'center');
 
   ctx.fillStyle = isAWin ? '#FFFFFF' : '#94A3B8';
   ctx.font = 'bold 78px "Bebas Neue", sans-serif';
   ctx.textAlign = 'right';
-  ctx.fillText(scoreA, 560, boxY + 130);
+  ctx.fillText(scoreA, 555, boxY + 130);
 
   ctx.fillStyle = '#F59E0B';
   ctx.font = 'bold 50px "Bebas Neue", sans-serif';
@@ -5799,9 +5819,9 @@ async function generateGameHypeCard(game) {
   ctx.fillStyle = !isAWin ? '#FFFFFF' : '#94A3B8';
   ctx.font = 'bold 78px "Bebas Neue", sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText(scoreB, 640, boxY + 130);
+  ctx.fillText(scoreB, 645, boxY + 130);
 
-  const barW = 300;
+  const barW = 340;
   const barH = 14;
   const barX = 600 - barW / 2;
   const barY = boxY + 155;
@@ -5815,51 +5835,39 @@ async function generateGameHypeCard(game) {
   drawCanvasRoundedRect(ctx, barX, barY, fillW, barH, 7);
   ctx.fill();
 
-  ctx.fillStyle = '#E2E8F0';
-  ctx.font = 'bold 13px "JetBrains Mono", monospace';
-  ctx.textAlign = 'left';
-  ctx.fillText(`${teamA.abbr || 'TEAM'} ${probA}%`, barX, barY + 34);
-
-  ctx.textAlign = 'right';
-  ctx.fillText(`${100 - probA}% ${teamB.shortName || 'OPP'}`, barX + barW, barY + 34);
+  drawCanvasTextFitted(ctx, `${teamA.abbr || 'TEAM'} ${probA}%`, barX, barY + 34, 150, 'bold 13px "JetBrains Mono", monospace', '#E2E8F0', 'left');
+  drawCanvasTextFitted(ctx, `${100 - probA}% ${teamB.shortName || 'OPP'}`, barX + barW, barY + 34, 150, 'bold 13px "JetBrains Mono", monospace', '#E2E8F0', 'right');
 
   ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
   drawCanvasRoundedRect(ctx, boxX + 25, boxY + 215, boxW - 50, 48, 10);
   ctx.fill();
 
-  ctx.fillStyle = '#F59E0B';
-  ctx.font = 'bold 14px "JetBrains Mono", monospace';
-  ctx.textAlign = 'center';
   const spreadSign = spreadA <= 0 ? `${teamA.abbr} ${spreadA}` : `${teamB.shortName} -${spreadA}`;
-  ctx.fillText(`VEGAS LINE: ${spreadSign} • O/U: ${ou}`, 600, boxY + 244);
+  drawCanvasTextFitted(ctx, `VEGAS LINE: ${spreadSign} • O/U: ${ou}`, 600, boxY + 244, boxW - 60, 'bold 14px "JetBrains Mono", monospace', '#F59E0B', 'center');
 
   const projectedMargin = Math.abs(scoreA - scoreB);
   const spreadDiff = Math.abs(projectedMargin - Math.abs(spreadA));
-  ctx.fillStyle = '#38BDF8';
-  ctx.font = '600 12px "JetBrains Mono", monospace';
-  ctx.fillText(`🔥 MODEL COVER EDGE: ${spreadDiff.toFixed(1)} PTS`, 600, boxY + 285);
+  drawCanvasTextFitted(ctx, `🔥 MODEL COVER EDGE: ${spreadDiff.toFixed(1)} PTS`, 600, boxY + 285, boxW - 60, '600 12px "JetBrains Mono", monospace', '#38BDF8', 'center');
 
   // Bottom Tactical Strip
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
-  drawCanvasRoundedRect(ctx, 40, 475, 1120, 95, 14);
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+  drawCanvasRoundedRect(ctx, 40, 470, 1120, 105, 14);
   ctx.fill();
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
   ctx.stroke();
 
   ctx.fillStyle = '#F59E0B';
   ctx.font = 'bold 13px "JetBrains Mono", monospace';
   ctx.textAlign = 'left';
-  ctx.fillText('⚡ 10,000 MONTE CARLO DRIVES • TACTICAL MATCHUP INSIGHT', 65, 506);
+  ctx.fillText('⚡ 10,000 MONTE CARLO DRIVES • TACTICAL MATCHUP INSIGHT', 65, 502);
 
   const scoutSummary = game.scoutReport?.xFactor || game.scoutReport?.keyMatchup || `High-stakes battle featuring ${teamA.name} vs ${teamB.name}.`;
-  ctx.fillStyle = '#E2E8F0';
-  ctx.font = '500 15px "Outfit", sans-serif';
-  ctx.fillText(scoutSummary, 65, 538);
+  drawCanvasTextWrapped(ctx, scoutSummary, 65, 532, 1070, 24, '500 15px "Outfit", sans-serif', '#E2E8F0', 'left', 2);
 
   ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
   ctx.font = '12px "JetBrains Mono", monospace';
   ctx.textAlign = 'center';
-  ctx.fillText('POWERED BY GRIDIRON ORACLE • https://jajo9147.github.io/cfb-football-predictor/', 600, 620);
+  ctx.fillText('POWERED BY GRIDIRON ORACLE • https://jajo9147.github.io/cfb-football-predictor/', 600, 625);
 
   document.getElementById('hypeCardModal').classList.add('open');
 }
