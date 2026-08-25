@@ -2261,17 +2261,17 @@ function getTeamMomentumScore(teamId) {
 
   let spDelta = 0;
   if (wins >= 12 && losses === 0) {
-    spDelta += 2.8; // Undefeated regular season momentum
-  } else if (wins === 11 && losses === 1) {
-    spDelta += 0.8; // Dominant 1-loss form
+    spDelta += 0.6; // Undefeated regular season confidence
+  } else if (wins === 11 && losses <= 1) {
+    spDelta += 0.3; // Dominant 1-loss form
   } else if (losses === 2) {
-    spDelta -= 2.2; // 2-loss vulnerability penalty
+    spDelta -= 0.3; // Battle-tested 2-loss form
   } else if (losses >= 3) {
-    spDelta -= 4.8; // Multi-loss slump penalty
+    spDelta -= 1.0; // Multi-loss slump penalty
   }
 
   if (!lastGameWon && losses > 0) {
-    spDelta -= 1.4; // Lost rivalry week / regular season finale cold streak
+    spDelta -= 0.4; // Lost regular season finale
   }
 
   // CCG Winner / Loser momentum
@@ -2280,8 +2280,8 @@ function getTeamMomentumScore(teamId) {
       const g = state.postseasonGames[gId];
       if (g && (g.teamA?.id === teamId || g.teamB?.id === teamId)) {
         if (state.ccgPicks && state.ccgPicks[gId]) {
-          if (state.ccgPicks[gId] === teamId) spDelta += 1.6;
-          else spDelta -= 1.2;
+          if (state.ccgPicks[gId] === teamId) spDelta += 0.5;
+          else spDelta -= 0.4;
         }
       }
     }
