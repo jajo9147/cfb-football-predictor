@@ -6452,11 +6452,24 @@ function renderVaultWeekSelector() {
   }
   strip.style.display = 'flex';
 
-  strip.innerHTML = ALL_WEEKS_LIST.map(w => `
-    <button class="vault-week-pill-btn ${state.selectedVaultWeek === w.key ? 'active' : ''}" onclick="selectVaultWeek('${w.key}')">
-      ${w.label}
-    </button>
-  `).join('');
+  strip.innerHTML = `
+    <div class="vault-week-filter-bar">
+      <div class="vault-week-filter-label">
+        <i class="fa-solid fa-filter" style="color: #38BDF8;"></i>
+        <span>FILTER STANDINGS BY WEEK:</span>
+      </div>
+      <div class="vault-week-select-wrap">
+        <select class="vault-week-select" id="vaultWeekSelect" onchange="selectVaultWeek(this.value)">
+          ${ALL_WEEKS_LIST.map(w => `
+            <option value="${w.key}" ${state.selectedVaultWeek === w.key ? 'selected' : ''}>
+              ${w.label} ${w.key === 'all' ? '(Full Season Leaderboard)' : (w.key === 'W14' ? '(Rivalry Week)' : '')}
+            </option>
+          `).join('')}
+        </select>
+        <i class="fa-solid fa-chevron-down select-chevron"></i>
+      </div>
+    </div>
+  `;
 }
 
 function selectVaultWeek(weekKey) {
