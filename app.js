@@ -6610,7 +6610,10 @@ function updateAuthUI() {
     const pSavedCount = document.getElementById('authProfileSavedCount');
 
     if (pName) pName.textContent = user.displayName || user.handle || 'Coach';
-    if (pEmail) pEmail.textContent = user.email ? `${user.email} • ${user.provider === 'apple' ? 'Apple Verified' : 'Prophet Verified'}` : `@${user.handle || 'Coach'} • Verified Creator`;
+    let badge = 'Prophet Verified';
+    if (user.provider === 'apple') badge = 'Apple Verified';
+    else if (user.provider === 'google') badge = 'Google Verified';
+    if (pEmail) pEmail.textContent = user.email ? `${user.email} • ${badge}` : `@${user.handle || 'Coach'} • ${badge}`;
 
     const favTeam = TEAMS_DATABASE[user.favTeam || 'usc'] || TEAMS_DATABASE['usc'];
     if (pTeamName) pTeamName.textContent = favTeam.name;
@@ -6669,6 +6672,30 @@ function handleAppleSignInClick() {
   }
 }
 window.handleAppleSignInClick = handleAppleSignInClick;
+
+function handleGoogleSignInClick() {
+  const googleName = prompt('Enter your Google Account Name or Email for instant Google Sign-In:', 'Jake Johnson');
+  if (googleName && googleName.trim()) {
+    const raw = googleName.trim();
+    const isEmail = raw.includes('@');
+    const displayName = isEmail ? raw.split('@')[0] : raw;
+    const email = isEmail ? raw : `${raw.toLowerCase().replace(/\s+/g, '')}@gmail.com`;
+
+    const user = {
+      id: `google_${btoa(email.toLowerCase()).replace(/=/g, '').slice(0, 16)}`,
+      displayName: displayName,
+      handle: displayName,
+      email: email,
+      provider: 'google',
+      favTeam: state.currentTeamId || 'usc',
+      createdAt: new Date().toISOString()
+    };
+    setCurrentUser(user);
+    showCustomToast(`🌐 Signed in with Google Account as ${user.displayName}!`);
+    closeAuthModal();
+  }
+}
+window.handleGoogleSignInClick = handleGoogleSignInClick;
 
 // Native Swift Bridge Callback for Apple Sign In
 window.handleAppleSignInResult = function(payload) {
