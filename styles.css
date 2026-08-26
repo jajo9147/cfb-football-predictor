@@ -4687,40 +4687,56 @@ body.modal-open {
    CFB PROPHET WEEKLY SCORING, ALL-TEAMS MATRIX & IOS SHARE STYLES
    ========================================================================== */
 
+/* ==========================================================================
+   CFB PROPHET WEEKLY SCORING, ALL-TEAMS MATRIX & IOS SHARE STYLES
+   ========================================================================== */
+
 .vault-week-selector-strip {
-  display: flex;
-  gap: 0.35rem;
-  overflow-x: auto;
-  padding: 0.35rem 0 0.75rem 0;
-  scrollbar-width: thin;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.4rem 0.5rem !important;
+  padding: 0.75rem 0.65rem !important;
+  margin: 0.5rem 0 1rem 0 !important;
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: var(--radius-md) !important;
+  align-items: center !important;
+  overflow: visible !important;
+  max-height: none !important;
 }
 
 .vault-week-pill-btn {
-  padding: 0.35rem 0.75rem;
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  color: #94A3B8;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  white-space: nowrap;
-  flex-shrink: 0;
-  cursor: pointer;
-  transition: var(--transition-fast);
+  padding: 0.45rem 0.85rem !important;
+  border-radius: var(--radius-full) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: rgba(30, 41, 59, 0.8) !important;
+  color: #CBD5E1 !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  transition: var(--transition-fast) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 32px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
 .vault-week-pill-btn:hover {
-  color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF !important;
+  background: rgba(51, 65, 85, 1) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-1px) !important;
 }
 
 .vault-week-pill-btn.active {
-  background: linear-gradient(135deg, #0284C7, #0369A1);
-  color: #FFFFFF;
-  border-color: #38BDF8;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+  background: linear-gradient(135deg, #0284C7, #0369A1) !important;
+  color: #FFFFFF !important;
+  border-color: #38BDF8 !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5) !important;
+  font-weight: 800 !important;
 }
 
 /* All 30 Teams Matchup Inspector in Vault */

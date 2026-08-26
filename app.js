@@ -6656,75 +6656,7 @@ function calculateBracketAccuracy(bracket) {
 }
 
 function getCuratedExpertBrackets() {
-  return [
-    createBaselineBracketObject(),
-    {
-      id: 'bracket_herbstreit_pick',
-      name: 'Kirk Herbstreit Natty Pick',
-      creator: 'Kirk Herbstreit (ESPN)',
-      notes: 'College GameDay projection: Texas over Ohio State in Atlanta.',
-      createdAt: '2026-08-25T14:15:00Z',
-      mode: 'custom',
-      isPublic: true,
-      champion: { id: 'texas', name: 'Texas Longhorns', shortName: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', score: 31, oppScore: 27 },
-      runnerUp: { id: 'ohiostate', name: 'Ohio State Buckeyes', shortName: 'Ohio State' },
-      seeds: [
-        { seed: 1, name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png' },
-        { seed: 2, name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png' },
-        { seed: 3, name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png' },
-        { seed: 4, name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png' }
-      ],
-      playoffSummary: {
-        fr: [{ winner: 'Texas' }, { winner: 'Indiana' }, { winner: 'Miami' }, { winner: 'Texas A&M' }],
-        qf: [{ winner: 'Ohio State' }, { winner: 'Oregon' }, { winner: 'Texas' }, { winner: 'Georgia' }],
-        sf: [{ winner: 'Ohio State' }, { winner: 'Texas' }]
-      }
-    },
-    {
-      id: 'bracket_klatt_bigten',
-      name: 'Joel Klatt Big Ten Dominance',
-      creator: 'Joel Klatt (FOX Sports)',
-      notes: 'Big Noon Kickoff projection: Ohio State runs the table over Oregon & Texas.',
-      createdAt: '2026-08-25T13:30:00Z',
-      mode: 'custom',
-      isPublic: true,
-      champion: { id: 'ohiostate', name: 'Ohio State Buckeyes', shortName: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png', score: 35, oppScore: 30 },
-      runnerUp: { id: 'texas', name: 'Texas Longhorns', shortName: 'Texas' },
-      seeds: [
-        { seed: 1, name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png' },
-        { seed: 2, name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png' },
-        { seed: 3, name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png' },
-        { seed: 4, name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png' }
-      ],
-      playoffSummary: {
-        fr: [{ winner: 'Texas' }, { winner: 'Penn State' }, { winner: 'Notre Dame' }, { winner: 'Michigan' }],
-        qf: [{ winner: 'Ohio State' }, { winner: 'Oregon' }, { winner: 'Texas' }, { winner: 'Penn State' }],
-        sf: [{ winner: 'Ohio State' }, { winner: 'Texas' }]
-      }
-    },
-    {
-      id: 'bracket_sec_chaos',
-      name: 'SEC 4-Team Playoff Takeover',
-      creator: 'Paul Finebaum Show',
-      notes: 'Georgia surges through the SEC title to capture the Natty in Atlanta.',
-      createdAt: '2026-08-25T11:00:00Z',
-      mode: 'custom',
-      isPublic: true,
-      champion: { id: 'georgia', name: 'Georgia Bulldogs', shortName: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png', score: 30, oppScore: 24 },
-      runnerUp: { id: 'texas', name: 'Texas Longhorns', shortName: 'Texas' },
-      seeds: [
-        { seed: 1, name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png' },
-        { seed: 2, name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png' },
-        { seed: 3, name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png' },
-        { seed: 4, name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png' }
-      ],
-      playoffSummary: {
-        fr: [{ winner: 'Texas' }, { winner: 'Alabama' }, { winner: 'LSU' }, { winner: 'Ole Miss' }],
-        qf: [{ winner: 'Georgia' }, { winner: 'Ohio State' }, { winner: 'Texas' }, { winner: 'Alabama' }],
-        sf: [{ winner: 'Georgia' }, { winner: 'Texas' }]
-      }
-    }
-  ];
+  return [];
 }
 
 function getLocalCommunityBrackets() {
@@ -6824,14 +6756,17 @@ function getCommunityBrackets() {
 
 function switchVaultTab(tabKey) {
   state.activeVaultTab = tabKey;
+  const tabWeekly = document.getElementById('tabWeeklyVaultBtn');
   const tabComm = document.getElementById('tabCommunityVaultBtn');
+  const tabAllTeams = document.getElementById('tabAllTeamsVaultBtn');
   const tabMine = document.getElementById('tabMyVaultBtn');
+
+  if (tabWeekly) tabWeekly.classList.toggle('active', tabKey === 'weekly');
   if (tabComm) tabComm.classList.toggle('active', tabKey === 'community');
+  if (tabAllTeams) tabAllTeams.classList.toggle('active', tabKey === 'allteams');
   if (tabMine) tabMine.classList.toggle('active', tabKey === 'mine');
+
   renderSavedBracketsVault();
-  if (tabKey === 'community') {
-    syncCommunityBracketsFromCloud();
-  }
 }
 window.switchVaultTab = switchVaultTab;
 
