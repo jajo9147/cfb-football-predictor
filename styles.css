@@ -4334,14 +4334,11 @@ body.modal-open {
 
 .bracket-seeds-pill-row {
   display: flex;
-  gap: 0.3rem;
-  overflow-x: auto;
-  padding-bottom: 0.25rem;
-  scrollbar-width: none;
-}
-
-.bracket-seeds-pill-row::-webkit-scrollbar {
-  display: none;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.35rem;
+  padding-bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .bracket-seed-mini-pill {
@@ -4519,42 +4516,48 @@ body.modal-open {
    ========================================================================== */
 
 .vault-tab-bar {
-  display: flex;
-  gap: 0.5rem;
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-full);
-  padding: 0.25rem;
-  margin-bottom: 1rem;
-  width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.35rem;
+  background: rgba(10, 14, 23, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 0.35rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .vault-tab-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 1rem;
-  border-radius: var(--radius-full);
-  border: none;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
   background: transparent;
   color: #94A3B8;
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
   cursor: pointer;
   transition: var(--transition-fast);
+  white-space: nowrap;
+  text-align: center;
 }
 
 .vault-tab-btn:hover {
   color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .vault-tab-btn.active {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(239, 68, 68, 0.25));
-  border: 1px solid rgba(245, 158, 11, 0.45);
+  border: 1px solid rgba(245, 158, 11, 0.5);
   color: #FBBF24;
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
+  font-weight: 800;
 }
 
 /* Leaderboard Rank Badges */

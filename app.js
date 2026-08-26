@@ -6737,6 +6737,18 @@ function prepareCompactBracketPayload(b) {
 
 let _isCloudSyncing = false;
 
+function autoPublishAllLocalSavedBrackets() {
+  try {
+    const local = getSavedBrackets();
+    local.forEach(b => {
+      if (b && b.id && b.id !== 'bracket_prophet_ai_baseline') {
+        publishBracketToCloud(b);
+      }
+    });
+  } catch(e) {}
+}
+window.autoPublishAllLocalSavedBrackets = autoPublishAllLocalSavedBrackets;
+
 async function syncCommunityBracketsFromCloud(showFeedback = false) {
   if (_isCloudSyncing) return;
   _isCloudSyncing = true;
@@ -6770,6 +6782,7 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
     });
 
     if (cloudBrackets.length > 0) {
+      // 1. Merge into Community pool
       const local = getLocalCommunityBrackets();
       const map = new Map();
       local.forEach(b => map.set(b.id, b));
@@ -6777,19 +6790,33 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
       const merged = Array.from(map.values());
       localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(merged));
       
+      // 2. Merge into My Saved Brackets pool across all devices
+      const myLocal = getSavedBrackets();
+      const myMap = new Map();
+      myLocal.forEach(b => myMap.set(b.id, b));
+      cloudBrackets.forEach(b => {
+        if (b && b.id && b.id !== 'bracket_prophet_ai_baseline') {
+          myMap.set(b.id, b);
+        }
+      });
+      const myMerged = Array.from(myMap.values());
+      try {
+        localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myMerged));
+      } catch(e) {}
+
       // Update DOM only if modal is actively open to avoid unneeded redraws
       const modal = document.getElementById('bracketVaultModal');
       if (modal && modal.classList.contains('open')) {
         renderSavedBracketsVault();
       }
       if (showFeedback) {
-        showToast(`🔄 Synced ${cloudBrackets.length} community predictions from cloud!`);
+        showCustomToast(`🔄 Synced ${cloudBrackets.length} community predictions from cloud!`);
       }
     } else if (showFeedback) {
-      showToast('🔄 Leaderboard is up to date!');
+      showCustomToast('🔄 Leaderboard is up to date!');
     }
   } catch (e) {
-    if (showFeedback) showToast('⚠️ Network sync offline.');
+    if (showFeedback) showCustomToast('⚠️ Network sync offline.');
   } finally {
     _isCloudSyncing = false;
   }
@@ -7195,6 +7222,7 @@ function openBracketVaultModal() {
   const modal = document.getElementById('bracketVaultModal');
   if (modal) modal.classList.add('open');
   document.body.classList.add('modal-open');
+  autoPublishAllLocalSavedBrackets();
   renderSavedBracketsVault();
   syncCommunityBracketsFromCloud(false);
 }
@@ -7737,12 +7765,19 @@ window.triggerNativeShare = triggerNativeShare;
 // ==========================================================================
 
 function startApp() {
+  autoPublishAllLocalSavedBrackets();
   syncCommunityBracketsFromCloud();
   
   // Instant Auto-Sync when switching back to tab/phone screen
-  window.addEventListener('focus', () => syncCommunityBracketsFromCloud());
+  window.addEventListener('focus', () => {
+    autoPublishAllLocalSavedBrackets();
+    syncCommunityBracketsFromCloud();
+  });
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') syncCommunityBracketsFromCloud();
+    if (document.visibilityState === 'visible') {
+      autoPublishAllLocalSavedBrackets();
+      syncCommunityBracketsFromCloud();
+    }
   });
 
   syncCommunityBracketsFromCloud();
