@@ -6925,23 +6925,6 @@ function getSavedBrackets() {
 
 
 function createProphetAiBenchmarkBracket() {
-  const evaluated = evaluateRegularSeasonAllTeams();
-  const ccg = simulateConferenceChampionships(evaluated);
-  const cfp = generate12TeamCfpField(ccg.confChamps, evaluated);
-  const playoff = simulatePlayoffBracket(cfp);
-
-  const seeds = (cfp.seeds || []).slice(0, 12).map((s, idx) => ({
-    seed: idx + 1,
-    id: s?.id || 'ohiostate',
-    name: s?.shortName || s?.name || 'Team',
-    logoUrl: s?.logoUrl || '',
-    wins: s?.wins !== undefined ? s.wins : (s?.totalWins || 11),
-    losses: s?.losses !== undefined ? s.losses : (s?.totalLosses || 1)
-  }));
-
-  const champTeam = playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE['ohiostate'];
-  const runnerTeam = playoff.runnerUp ? (TEAMS_DATABASE[playoff.runnerUp.id] || playoff.runnerUp) : TEAMS_DATABASE['oregon'];
-
   return {
     id: 'bracket_prophet_ai_baseline',
     name: "Prophet AI's Picks",
@@ -6952,35 +6935,48 @@ function createProphetAiBenchmarkBracket() {
     isAdminBenchmark: true,
     isPublic: true,
     champion: {
-      id: champTeam.id || 'ohiostate',
-      name: champTeam.name || 'Ohio State Buckeyes',
-      shortName: champTeam.shortName || 'Ohio State',
-      logoUrl: champTeam.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',
-      score: playoff.natty?.sim?.winnerScore || playoff.natty?.sim?.scoreA || 35,
-      oppScore: playoff.natty?.sim?.loserScore || playoff.natty?.sim?.scoreB || 30
+      id: 'ohiostate',
+      name: 'Ohio State Buckeyes',
+      shortName: 'Ohio State',
+      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',
+      score: 35,
+      oppScore: 30
     },
     runnerUp: {
-      id: runnerTeam.id || 'oregon',
-      name: runnerTeam.name || 'Oregon Ducks',
-      shortName: runnerTeam.shortName || 'Oregon'
+      id: 'oregon',
+      name: 'Oregon Ducks',
+      shortName: 'Oregon'
     },
-    seeds: seeds,
+    seeds: [
+      { seed: 1, id: 'ohiostate', name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png', wins: 12, losses: 1 },
+      { seed: 2, id: 'georgia', name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png', wins: 12, losses: 1 },
+      { seed: 3, id: 'clemson', name: 'Clemson', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/228.png', wins: 11, losses: 2 },
+      { seed: 4, id: 'utah', name: 'Utah', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/254.png', wins: 11, losses: 2 },
+      { seed: 5, id: 'oregon', name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 11, losses: 1 },
+      { seed: 6, id: 'texas', name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', wins: 11, losses: 2 },
+      { seed: 7, id: 'pennstate', name: 'Penn State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/213.png', wins: 11, losses: 1 },
+      { seed: 8, id: 'notredame', name: 'Notre Dame', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png', wins: 11, losses: 1 },
+      { seed: 9, id: 'alabama', name: 'Alabama', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/333.png', wins: 10, losses: 2 },
+      { seed: 10, id: 'indiana', name: 'Indiana', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png', wins: 10, losses: 2 },
+      { seed: 11, id: 'miami', name: 'Miami', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 10, losses: 2 },
+      { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png', wins: 12, losses: 1 }
+    ],
     playoffSummary: {
       fr: [
-        { label: '#5 vs #12', winner: playoff.fr1?.sim?.winner?.shortName || 'Texas' },
-        { label: '#6 vs #11', winner: playoff.fr2?.sim?.winner?.shortName || 'Indiana' },
-        { label: '#7 vs #10', winner: playoff.fr3?.sim?.winner?.shortName || 'Miami' },
-        { label: '#8 vs #9', winner: playoff.fr4?.sim?.winner?.shortName || 'Texas A&M' }
+        { label: '#5 vs #12', winner: 'Oregon' },
+        { label: '#6 vs #11', winner: 'Texas' },
+        { label: '#7 vs #10', winner: 'Penn State' },
+        { label: '#8 vs #9', winner: 'Notre Dame' }
       ],
       qf: [
-        { bowl: 'Sugar Bowl', winner: playoff.qf1?.sim?.winner?.shortName || 'Ohio State' },
-        { bowl: 'Rose Bowl', winner: playoff.qf2?.sim?.winner?.shortName || 'Oregon' },
-        { bowl: 'Peach Bowl', winner: playoff.qf3?.sim?.winner?.shortName || 'Texas' },
-        { bowl: 'Fiesta Bowl', winner: playoff.qf4?.sim?.winner?.shortName || 'Georgia' }
+        { bowl: 'Sugar Bowl', winner: 'Ohio State' },
+        { bowl: 'Rose Bowl', winner: 'Oregon' },
+        { bowl: 'Peach Bowl', winner: 'Texas' },
+        { bowl: 'Fiesta Bowl', winner: 'Georgia' }
       ],
       sf: [
-        { bowl: 'Orange Bowl', winner: playoff.sf1?.sim?.winner?.shortName || 'Ohio State' },
-        { bowl: 'Cotton Bowl', winner: playoff.sf2?.sim?.winner?.shortName || 'Oregon' }
+        { bowl: 'Orange Bowl', winner: 'Ohio State' },
+        { bowl: 'Cotton Bowl', winner: 'Oregon' }
       ]
     },
     simState: {
