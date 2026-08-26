@@ -6674,6 +6674,53 @@ function getLocalCommunityBrackets() {
   return [];
 }
 
+function prepareCompactBracketPayload(b) {
+  if (!b) return null;
+  return {
+    id: b.id,
+    name: b.name,
+    creator: b.creator || 'Prophet',
+    notes: (b.notes || '').slice(0, 100),
+    createdAt: b.createdAt || new Date().toISOString(),
+    mode: b.mode || 'custom',
+    isPublic: true,
+    champion: {
+      id: b.champion?.id || 'ohiostate',
+      name: b.champion?.name || 'Ohio State Buckeyes',
+      shortName: b.champion?.shortName || 'Ohio State',
+      logoUrl: b.champion?.logoUrl || '',
+      score: b.champion?.score || 35,
+      oppScore: b.champion?.oppScore || 30
+    },
+    runnerUp: {
+      id: b.runnerUp?.id || 'oregon',
+      name: b.runnerUp?.name || 'Oregon Ducks',
+      shortName: b.runnerUp?.shortName || 'Oregon'
+    },
+    seeds: (b.seeds || []).slice(0, 12).map(s => ({
+      seed: s.seed,
+      id: s.id,
+      name: s.name,
+      logoUrl: s.logoUrl || '',
+      wins: s.wins !== undefined ? s.wins : 11,
+      losses: s.losses !== undefined ? s.losses : 1
+    })),
+    playoffSummary: {
+      fr: (b.playoffSummary?.fr || []).map(x => ({ winner: x.winner || 'Team' })),
+      qf: (b.playoffSummary?.qf || []).map(x => ({ winner: x.winner || 'Team' })),
+      sf: (b.playoffSummary?.sf || []).map(x => ({ winner: x.winner || 'Team' }))
+    },
+    simState: {
+      teamId: b.simState?.teamId || 'texas',
+      userPicks: b.simState?.userPicks || {},
+      ccgPicks: b.simState?.ccgPicks || {},
+      playoffPicks: b.simState?.playoffPicks || {},
+      teamSliders: b.simState?.teamSliders || {},
+      gameSliders: b.simState?.gameSliders || {}
+    }
+  };
+}
+
 async function syncCommunityBracketsFromCloud(showFeedback = false) {
   try {
     const res = await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}/json?poll=1&since=all`, { 
@@ -6693,7 +6740,7 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
           try {
             b = typeof json.message === 'string' ? JSON.parse(json.message) : json.message;
           } catch(e) {}
-          if (b && b.name && b.id) {
+          if (b && b.name && b.id && b.id !== 'bracket_prophet_ai_baseline') {
             cloudBrackets.push(b);
           }
         }
@@ -6708,9 +6755,7 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
       const merged = Array.from(map.values());
       localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(merged));
       
-      if (state.activeVaultTab === 'community' || state.activeVaultTab === 'weekly') {
-        renderSavedBracketsVault();
-      }
+      renderSavedBracketsVault();
       if (showFeedback) {
         showToast(`🔄 Synced ${cloudBrackets.length} community predictions from cloud!`);
       }
@@ -6725,20 +6770,23 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
 async function publishBracketToCloud(bracketObj) {
   if (!bracketObj) return;
   try {
+    const compact = prepareCompactBracketPayload(bracketObj);
+    if (!compact) return;
+
     // 1. Save locally to community pool
     const local = getLocalCommunityBrackets();
-    const filtered = local.filter(b => b.id !== bracketObj.id);
-    filtered.unshift(bracketObj);
+    const filtered = local.filter(b => b.id !== compact.id);
+    filtered.unshift(compact);
     localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(filtered));
 
-    // 2. Publish to cloud topic with guaranteed caching
-    const payload = JSON.stringify(bracketObj);
+    // 2. Publish to cloud topic with guaranteed caching (< 1.6 KB)
+    const payload = JSON.stringify(compact);
     await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}`, {
       method: 'POST',
       body: payload,
       keepalive: true,
       headers: {
-        'Title': bracketObj.name || 'CFB Prophet Prediction',
+        'Title': compact.name || 'CFB Prophet Prediction',
         'Tags': 'trophy,football',
         'Cache': 'yes',
         'X-Cache': 'yes',
