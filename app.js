@@ -6446,27 +6446,20 @@ function renderVaultWeekSelector() {
   const strip = document.getElementById('vaultWeekSelectorStrip');
   if (!strip) return;
 
-  if (state.activeVaultTab !== 'weekly') {
-    strip.style.display = 'none';
-    return;
-  }
   strip.style.display = 'flex';
 
   strip.innerHTML = `
     <div class="vault-week-filter-bar">
       <div class="vault-week-filter-label">
         <i class="fa-solid fa-filter" style="color: #38BDF8;"></i>
-        <span>FILTER STANDINGS BY WEEK:</span>
+        <span>WEEK FILTER:</span>
       </div>
-      <div class="vault-week-select-wrap">
-        <select class="vault-week-select" id="vaultWeekSelect" onchange="selectVaultWeek(this.value)">
-          ${ALL_WEEKS_LIST.map(w => `
-            <option value="${w.key}" ${state.selectedVaultWeek === w.key ? 'selected' : ''}>
-              ${w.label} ${w.key === 'all' ? '(Full Season Leaderboard)' : (w.key === 'W14' ? '(Rivalry Week)' : '')}
-            </option>
-          `).join('')}
-        </select>
-        <i class="fa-solid fa-chevron-down select-chevron"></i>
+      <div class="vault-week-buttons-wrap">
+        ${ALL_WEEKS_LIST.map(w => `
+          <button class="vault-week-pill-btn ${state.selectedVaultWeek === w.key ? 'active' : ''}" onclick="selectVaultWeek('${w.key}')" title="${w.label}">
+            ${w.key === 'all' ? 'All Weeks' : (w.key === 'CCG' ? 'CCG' : (w.key === 'CFP' ? 'CFP' : w.key))}
+          </button>
+        `).join('')}
       </div>
     </div>
   `;
@@ -7505,7 +7498,7 @@ function openBracketQrModal(bracketId, e) {
     e.preventDefault();
   }
   const allBrackets = getCommunityBrackets();
-  const target = allBrackets.find(b => b.id === bracketId) || allBrackets[0] || createProphetAiBenchmarkBracket();
+  const target = (bracketId ? allBrackets.find(b => b.id === bracketId) : null) || allBrackets[0] || createProphetAiBenchmarkBracket();
   if (!target) return;
 
   const modal = document.getElementById('bracketQrModal');
@@ -7518,7 +7511,7 @@ function openBracketQrModal(bracketId, e) {
   state._activeQrUrl = shareUrl;
 
   if (titleEl) {
-    titleEl.innerText = `SYNC "${target.name.toUpperCase()}"`;
+    titleEl.innerText = `SYNC "${(target.name || 'BRACKET').toUpperCase()}"`;
   }
 
   // Pure Client-Side Instant QR Generation (0ms latency, works 100% offline)
@@ -7536,13 +7529,15 @@ function openBracketQrModal(bracketId, e) {
       canvasEl.style.display = 'block';
       if (imgEl) imgEl.style.display = 'none';
       qrRendered = true;
-    } catch(err) {}
+    } catch(err) {
+      console.warn('QRious render error:', err);
+    }
   }
 
-  // Fallback to Google Charts image if QRious is unavailable
+  // Fallback to QR API image if QRious is unavailable
   if (!qrRendered && imgEl) {
     const encodedUrl = encodeURIComponent(shareUrl);
-    imgEl.src = `https://chart.googleapis.com/chart?chs=220x220&cht=qr&chl=${encodedUrl}&choe=UTF-8`;
+    imgEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=${encodedUrl}`;
     imgEl.style.display = 'block';
     if (canvasEl) canvasEl.style.display = 'none';
   }
@@ -7561,9 +7556,9 @@ function copyActiveQrLink() {
   const url = state._activeQrUrl || window.location.href;
   const btn = document.getElementById('copyQrLinkBtn');
   if (btn) {
-    const origText = btn.innerHTML;
-    btn.innerHTML = '<i class="fa-solid fa-check" style="color: #34D399;"></i> Copied!';
-    setTimeout(() => { btn.innerHTML = origText; }, 2000);
+    const origHtml = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-check" style="color: #34D399;"></i> <span>Copied!</span>';
+    setTimeout(() => { btn.innerHTML = origHtml; }, 2200);
   }
 
   if (navigator.clipboard) {
@@ -7597,7 +7592,6 @@ function importBracketFromPrompt() {
   }
 }
 
-
 window.openSaveBracketModal = openSaveBracketModal;
 window.closeSaveBracketModal = closeSaveBracketModal;
 window.handleConfirmSaveBracket = handleConfirmSaveBracket;
@@ -7612,105 +7606,6 @@ window.copyBracketShareLink = copyBracketShareLink;
 window.copyActiveBracketShareLink = copyActiveBracketShareLink;
 window.loadSavedBracket = loadSavedBracket;
 window.deleteSavedBracket = deleteSavedBracket;
-
-
-
-// ==========================================================================
-// CROSS-DEVICE SYNC & QR CODE GENERATION ENGINE
-// ==========================================================================
-
-function getBracketShareUrl(bracketId) {
-  const brackets = getSavedBrackets();
-  const target = brackets.find(b => b.id === bracketId) || brackets[0];
-  if (!target) return window.location.href;
-
-  const payload = {
-    t: target.simState?.teamId || 'texas',
-    pk: target.simState?.userPicks || {},
-    cp: target.simState?.ccgPicks || {},
-    pp: target.simState?.playoffPicks || {},
-    ts: target.simState?.teamSliders || {},
-    bn: target.name || 'CFB Bracket',
-    cr: target.creator || 'Coach',
-    nt: target.notes || ''
-  };
-
-  try {
-    const jsonStr = JSON.stringify(payload);
-    const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
-    return `${window.location.origin}${window.location.pathname}#s=${b64}`;
-  } catch (e) {
-    return window.location.href;
-  }
-}
-
-function openBracketQrModal(bracketId, e) {
-  if (e) {
-    e.stopPropagation();
-    e.preventDefault();
-  }
-  const brackets = getSavedBrackets();
-  const target = brackets.find(b => b.id === bracketId) || brackets[0];
-  if (!target) return;
-
-  const modal = document.getElementById('bracketQrModal');
-  const titleEl = document.getElementById('qrModalBracketTitle');
-  const imgEl = document.getElementById('bracketQrImg');
-  if (!modal || !imgEl) return;
-
-  const shareUrl = getBracketShareUrl(target.id);
-  state._activeQrUrl = shareUrl;
-
-  if (titleEl) {
-    titleEl.innerText = `SYNC "${target.name.toUpperCase()}"`;
-  }
-
-  // Generate QR Code via standard API
-  imgEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&data=${encodeURIComponent(shareUrl)}`;
-
-  modal.classList.add('open');
-  document.body.classList.add('modal-open');
-}
-
-function closeBracketQrModal() {
-  const modal = document.getElementById('bracketQrModal');
-  if (modal) modal.classList.remove('open');
-  document.body.classList.remove('modal-open');
-}
-
-function copyActiveQrLink() {
-  const url = state._activeQrUrl || window.location.href;
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => {
-      showCustomToast('🔗 Direct device sync link copied to clipboard!');
-    }).catch(() => {
-      prompt('Copy this sync link:', url);
-    });
-  } else {
-    prompt('Copy this sync link:', url);
-  }
-}
-
-function importBracketFromPrompt() {
-  const input = prompt('Paste a shared Bracket Link or Code below to import it into your Vault:');
-  if (!input) return;
-  try {
-    let hash = input.trim();
-    if (hash.includes('#')) hash = hash.substring(hash.indexOf('#'));
-    const sMatch = hash.match(/[#&]s=([^&]+)/);
-    if (sMatch && sMatch[1]) {
-      window.location.hash = hash;
-      restoreScenarioFromUrl();
-      openBracketVaultModal();
-      showCustomToast('🎉 Bracket imported successfully into your Vault!');
-    } else {
-      alert('Invalid bracket link format. Please paste a link containing #s=...');
-    }
-  } catch (e) {
-    alert('Could not import bracket from link.');
-  }
-}
-
 window.openBracketQrModal = openBracketQrModal;
 window.closeBracketQrModal = closeBracketQrModal;
 window.copyActiveQrLink = copyActiveQrLink;
