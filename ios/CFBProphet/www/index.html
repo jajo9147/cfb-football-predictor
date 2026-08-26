@@ -53,7 +53,7 @@
     })();
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=20260826_auth_google_onetap_v85">
+  <link rel="stylesheet" href="styles.css?v=20260826_auth_apple_onetap_v90">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1386,6 +1386,37 @@
         </div>
       </div>
 
+      <!-- INSTANT 1-TAP APPLE PREPOPULATED APPROVAL VIEW -->
+      <div id="authAppleApprovalView" style="display: none;">
+        <div class="modal-header" style="margin-bottom: 1.25rem;">
+          <span class="matchup-tag" style="background: rgba(255, 255, 255, 0.15); color: #FFFFFF; border-color: rgba(255, 255, 255, 0.3);">
+            <i class="fa-brands fa-apple" style="font-size: 0.95rem; margin-right: 4px;"></i> APPLE 1-TAP APPROVAL
+          </span>
+          <h2 class="modal-title" style="font-size: 1.35rem; margin-top: 0.25rem;">CONTINUE WITH APPLE ID</h2>
+          <p style="font-size: 0.82rem; color: #94A3B8;">Sign in to CFB Prophet with your verified Apple ID and private relay.</p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-md); padding: 1.15rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.85rem; text-align: left; cursor: pointer; transition: var(--transition-fast);" onclick="handleConfirmAppleApproval()" id="appleApprovalCard">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: #000000; flex-shrink: 0;" id="appleApprovalAvatar">
+            <i class="fa-brands fa-apple"></i>
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-weight: 800; font-size: 0.95rem; color: #FFFFFF;" id="appleApprovalName">Jake Johnson</div>
+            <div style="font-size: 0.78rem; color: #94A3B8; font-family: var(--font-mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="appleApprovalEmail">jake.johnson@privaterelay.appleid.com</div>
+          </div>
+          <i class="fa-solid fa-circle-check" style="color: #34D399; font-size: 1.25rem;"></i>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <button class="action-btn" style="background: #FFFFFF; color: #000000; font-weight: 800; padding: 0.75rem; border-radius: var(--radius-md); font-size: 0.95rem;" onclick="handleConfirmAppleApproval()">
+            <i class="fa-brands fa-apple"></i> <span id="appleApprovalBtnText">Approve & Continue with Apple ID</span>
+          </button>
+          <button class="action-btn secondary-btn" onclick="backToAuthHome()" style="font-size: 0.8rem; padding: 0.45rem;">
+            <span>Use a different Apple ID</span>
+          </button>
+        </div>
+      </div>
+
       <!-- LOGGED IN VIEW -->
       <div id="authLoggedInView" style="display: none;">
         <div class="modal-header" style="margin-bottom: 1rem;">
@@ -1429,9 +1460,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js?v=20260826_auth_google_onetap_v85"></script>
-  <script src="qrcode.min.js?v=20260826_auth_google_onetap_v85"></script>
-  <script src="data/teams.js?v=20260826_auth_google_onetap_v85"></script>
-  <script src="app.js?v=20260826_auth_google_onetap_v85"></script>
+  <script src="qrious.min.js?v=20260826_auth_apple_onetap_v90"></script>
+  <script src="qrcode.min.js?v=20260826_auth_apple_onetap_v90"></script>
+  <script src="data/teams.js?v=20260826_auth_apple_onetap_v90"></script>
+  <script src="app.js?v=20260826_auth_apple_onetap_v90"></script>
 </body>
 </html>

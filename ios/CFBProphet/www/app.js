@@ -6636,10 +6636,11 @@ function openAuthModal() {
   updateAuthUI();
   const loggedOutView = document.getElementById('authLoggedOutView');
   const googleApprovalView = document.getElementById('authGoogleApprovalView');
-  if (loggedOutView && googleApprovalView) {
-    loggedOutView.style.display = 'block';
-    googleApprovalView.style.display = 'none';
-  }
+  const appleApprovalView = document.getElementById('authAppleApprovalView');
+  if (loggedOutView) loggedOutView.style.display = 'block';
+  if (googleApprovalView) googleApprovalView.style.display = 'none';
+  if (appleApprovalView) appleApprovalView.style.display = 'none';
+
   const modal = document.getElementById('authModal');
   if (modal) modal.classList.add('open');
   document.body.classList.add('modal-open');
@@ -6660,32 +6661,44 @@ function handleAppleSignInClick() {
     return;
   }
 
-  // Web / PWA fallback: Simulated Apple ID prompt / biometric auth
-  const handle = prompt('Enter your Apple ID / Display Name for instant Apple verification:', 'Coach Jake');
-  if (handle && handle.trim()) {
-    const user = {
-      id: `apple_${btoa(handle.trim().toLowerCase()).replace(/=/g, '').slice(0, 16)}`,
-      displayName: handle.trim(),
-      handle: handle.trim(),
-      email: `${handle.trim().toLowerCase().replace(/\s+/g, '')}@privaterelay.appleid.com`,
-      provider: 'apple',
-      favTeam: state.currentTeamId || 'usc',
-      createdAt: new Date().toISOString()
-    };
-    setCurrentUser(user);
-    showCustomToast(`🍎 Signed in with Apple ID as ${user.displayName}!`);
-    closeAuthModal();
+  // Web / PWA 1-Tap Prepopulated Approval Sheet
+  const loggedOutView = document.getElementById('authLoggedOutView');
+  const appleApprovalView = document.getElementById('authAppleApprovalView');
+
+  if (loggedOutView && appleApprovalView) {
+    loggedOutView.style.display = 'none';
+    appleApprovalView.style.display = 'block';
+  } else {
+    handleConfirmAppleApproval();
   }
 }
 window.handleAppleSignInClick = handleAppleSignInClick;
 
+function handleConfirmAppleApproval() {
+  const user = {
+    id: `apple_${btoa('jake.johnson@privaterelay.appleid.com').replace(/=/g, '').slice(0, 16)}`,
+    displayName: 'Jake Johnson',
+    handle: 'Jake Johnson',
+    email: 'jake.johnson@privaterelay.appleid.com',
+    provider: 'apple',
+    favTeam: state.currentTeamId || 'usc',
+    createdAt: new Date().toISOString()
+  };
+  setCurrentUser(user);
+  showCustomToast(`🍎 Welcome back, ${user.displayName}! Signed in with Apple ID.`);
+  closeAuthModal();
+}
+window.handleConfirmAppleApproval = handleConfirmAppleApproval;
+
 function handleGoogleSignInClick() {
   const loggedOutView = document.getElementById('authLoggedOutView');
   const googleApprovalView = document.getElementById('authGoogleApprovalView');
+  const appleApprovalView = document.getElementById('authAppleApprovalView');
 
   if (loggedOutView && googleApprovalView) {
     loggedOutView.style.display = 'none';
     googleApprovalView.style.display = 'block';
+    if (appleApprovalView) appleApprovalView.style.display = 'none';
   } else {
     handleConfirmGoogleApproval();
   }
@@ -6711,10 +6724,10 @@ window.handleConfirmGoogleApproval = handleConfirmGoogleApproval;
 function backToAuthHome() {
   const loggedOutView = document.getElementById('authLoggedOutView');
   const googleApprovalView = document.getElementById('authGoogleApprovalView');
-  if (loggedOutView && googleApprovalView) {
-    loggedOutView.style.display = 'block';
-    googleApprovalView.style.display = 'none';
-  }
+  const appleApprovalView = document.getElementById('authAppleApprovalView');
+  if (loggedOutView) loggedOutView.style.display = 'block';
+  if (googleApprovalView) googleApprovalView.style.display = 'none';
+  if (appleApprovalView) appleApprovalView.style.display = 'none';
 }
 window.backToAuthHome = backToAuthHome;
 
