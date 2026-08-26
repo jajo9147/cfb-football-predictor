@@ -187,7 +187,7 @@
           <span class="pulse-dot"></span>
           <span id="countdownText">KICKOFF: 18 DAYS</span>
         </div>
-        <button class="vault-btn-badge" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="View & Manage your Saved March Madness-style CFP Brackets"><i class="fa-solid fa-folder-closed"></i> <span>Bracket Vault</span></button>
+        <button class="vault-btn-badge" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="Submit your picks and view weekly standings"><i class="fa-solid fa-paper-plane" style="color: #10B981;"></i> <span>Submit Picks & Standings</span></button>
 
       </div>
     </div>
@@ -1102,9 +1102,9 @@
       
       <div class="modal-header">
         <span class="matchup-tag" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);">
-          <i class="fa-solid fa-trophy"></i> MARCH MADNESS CFP BRACKET VAULT
+          <i class="fa-solid fa-trophy"></i> CFB PROPHET PICKS HUB
         </span>
-        <h2 class="modal-title" style="font-size: 1.5rem;">SAVE PROJECTION AS BRACKET</h2>
+        <h2 class="modal-title" style="font-size: 1.5rem;">SUBMIT YOUR PICKS & PROJECTIONS</h2>
         <p style="font-size: 0.85rem; color: #94A3B8;">Lock in this 12-team CFP playoff bracket and season simulation so you can track how your picks perform all season long.</p>
       </div>
 
@@ -1141,7 +1141,7 @@
           <button class="action-btn secondary-btn" onclick="closeSaveBracketModal()">Cancel</button>
           <button class="action-btn" style="background: #10B981; color: #FFFFFF;" id="confirmSaveBracketBtn" onclick="handleConfirmSaveBracket()">
             <i class="fa-solid fa-floppy-disk"></i>
-            <span>Save to Bracket Vault</span>
+            <span>Submit & Save Picks</span>
           </button>
         </div>
       </div>
@@ -1156,9 +1156,9 @@
       <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
         <div>
           <span class="matchup-tag" style="background: rgba(245, 158, 11, 0.2); color: #FBBF24; border-color: rgba(245, 158, 11, 0.4);">
-            <i class="fa-solid fa-folder-closed"></i> SAVED PROJECTIONS & BRACKETS
+            <i class="fa-solid fa-folder-closed"></i> PICKS HUB & WEEKLY STANDINGS
           </span>
-          <h2 class="modal-title" style="font-size: 1.6rem; margin-top: 0.25rem;">CFP BRACKET VAULT & LEADERBOARD</h2>
+          <h2 class="modal-title" style="font-size: 1.6rem; margin-top: 0.25rem;">CFB PROPHET PICKS & LEADERBOARD</h2>
         </div>
         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
           <button class="action-btn secondary-btn" onclick="syncCommunityBracketsFromCloud(true)" style="padding: 0.5rem 0.85rem; font-size: 0.82rem;" title="Fetch latest community brackets from cloud">
@@ -1171,7 +1171,7 @@
           </button>
           <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="padding: 0.5rem 0.95rem;">
             <i class="fa-solid fa-plus"></i>
-            <span>Save Current Simulation</span>
+            <span>Submit Current Picks</span>
           </button>
         </div>
       </div>
@@ -1179,7 +1179,7 @@
       <!-- Tab Switcher: Weekly Leaderboard, Full Season Brackets, All 30 Teams, My Predictions -->
       <div class="vault-tab-bar" style="margin-top: 0.75rem; flex-wrap: wrap;">
         <button class="vault-tab-btn active" id="tabWeeklyVaultBtn" onclick="switchVaultTab('weekly')">
-          <i class="fa-solid fa-calendar-week"></i> <span>Weekly Leaderboard</span>
+          <i class="fa-solid fa-calendar-week"></i> <span>Weekly Standings</span>
         </button>
         <button class="vault-tab-btn" id="tabCommunityVaultBtn" onclick="switchVaultTab('community')">
           <i class="fa-solid fa-trophy"></i> <span>Season CFP Brackets</span>
@@ -1188,7 +1188,7 @@
           <i class="fa-solid fa-shield-halved"></i> <span>All 30 Teams Game Matrix</span>
         </button>
         <button class="vault-tab-btn" id="tabMyVaultBtn" onclick="switchVaultTab('mine')">
-          <i class="fa-solid fa-user"></i> <span>My Predictions</span>
+          <i class="fa-solid fa-user"></i> <span>My Submitted Picks</span>
         </button>
       </div>
 

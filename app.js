@@ -7446,8 +7446,28 @@ const ALL_WEEKS_LIST = [
   { key: 'CFP', label: 'CFP Playoff' }
 ];
 
+function getTeamsOnByeForWeek(targetWeek = 'W1') {
+  if (targetWeek === 'all' || targetWeek === 'CCG' || targetWeek === 'CFP') return [];
+  const byeTeams = [];
+  const teamIds = Object.keys(TEAMS_DATABASE);
+
+  teamIds.forEach(tid => {
+    const t = TEAMS_DATABASE[tid];
+    const hasGame = (t.schedule || []).some(g => {
+      const gWeek = (g.week || 'WEEK 1').toUpperCase().replace('WEEK ', 'W');
+      return gWeek === targetWeek;
+    });
+    if (!hasGame) {
+      byeTeams.push(t);
+    }
+  });
+
+  return byeTeams;
+}
+
 function calculateWeeklyScoreForUser(bracket, targetWeek = 'W1') {
   // Weekly Point System: +10 pts per straight-up win, +15 pts for ATS upset pick
+  // Accurately factors in BYE weeks (only counts games actually scheduled and played in targetWeek)
   const weekGames = [];
   const teamIds = Object.keys(TEAMS_DATABASE);
   const seenGameKeys = new Set();
@@ -7468,7 +7488,6 @@ function calculateWeeklyScoreForUser(bracket, targetWeek = 'W1') {
 
   const totalPossible = weekGames.length * 10 || 100;
   const userPicks = bracket.simState?.userPicks || {};
-  const customCount = Object.keys(userPicks).length;
 
   // Undefeated pre-season standard (100% until real completed games)
   return {
@@ -7511,6 +7530,26 @@ function renderAll30TeamsVaultMatrix() {
 
   const teamIds = Object.keys(TEAMS_DATABASE);
   let html = `<div class="all-teams-vault-container">`;
+
+  // Check if a single week is selected or full season
+  const isSingleWeek = state.selectedVaultWeek && state.selectedVaultWeek !== 'all';
+  const byeTeams = isSingleWeek ? getTeamsOnByeForWeek(state.selectedVaultWeek) : [];
+
+  if (isSingleWeek && byeTeams.length > 0) {
+    html += `
+      <div style="background: rgba(30, 41, 59, 0.7); border: 1px dashed rgba(255, 255, 255, 0.15); border-radius: var(--radius-md); padding: 0.75rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #F59E0B; font-weight: 800; text-transform: uppercase;">
+          💤 TEAMS ON BYE THIS WEEK (${state.selectedVaultWeek}):
+        </span>
+        ${byeTeams.map(t => `
+          <span style="display: inline-flex; align-items: center; gap: 4px; background: rgba(0,0,0,0.4); padding: 0.2rem 0.5rem; border-radius: var(--radius-full); font-size: 0.72rem; color: #E2E8F0;">
+            <img src="${t.logoUrl || ''}" style="width: 16px; height: 16px; object-fit: contain;">
+            ${t.shortName}
+          </span>
+        `).join('')}
+      </div>
+    `;
+  }
 
   teamIds.forEach(tid => {
     const t = TEAMS_DATABASE[tid];
@@ -7565,7 +7604,6 @@ function renderAll30TeamsVaultMatrix() {
 }
 
 
-// ==========================================================================
 // APPLICATION LAUNCHER (BOTTOM TO GUARANTEE ALL MODULES ARE INITIALIZED)
 // ==========================================================================
 
