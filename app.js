@@ -6466,13 +6466,21 @@ function prepareCompactBracketPayload(b) {
   };
 }
 
+let _isCloudSyncing = false;
+
 async function syncCommunityBracketsFromCloud(showFeedback = false) {
+  if (_isCloudSyncing) return;
+  _isCloudSyncing = true;
+
   try {
     const res = await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}/json?poll=1&since=all`, { 
       cache: 'no-store',
       headers: { 'Accept': 'application/json' }
     });
-    if (!res.ok) return;
+    if (!res.ok) {
+      _isCloudSyncing = false;
+      return;
+    }
     const text = await res.text();
     const cloudBrackets = [];
 
@@ -6500,7 +6508,11 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
       const merged = Array.from(map.values());
       localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(merged));
       
-      renderSavedBracketsVault();
+      // Update DOM only if modal is actively open to avoid unneeded redraws
+      const modal = document.getElementById('bracketVaultModal');
+      if (modal && modal.classList.contains('open')) {
+        renderSavedBracketsVault();
+      }
       if (showFeedback) {
         showToast(`🔄 Synced ${cloudBrackets.length} community predictions from cloud!`);
       }
@@ -6509,8 +6521,11 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
     }
   } catch (e) {
     if (showFeedback) showToast('⚠️ Network sync offline.');
+  } finally {
+    _isCloudSyncing = false;
   }
 }
+
 
 async function publishBracketToCloud(bracketObj) {
   if (!bracketObj) return;
@@ -6581,7 +6596,6 @@ window.switchVaultTab = switchVaultTab;
 
 
 function renderSavedBracketsVault() {
-  syncCommunityBracketsFromCloud(false);
   renderVaultWeekSelector();
   const grid = document.getElementById('bracketVaultGrid');
   if (!grid) return;
@@ -6896,11 +6910,11 @@ function handleConfirmSaveBracket() {
 }
 
 function openBracketVaultModal() {
-  renderSavedBracketsVault();
   const modal = document.getElementById('bracketVaultModal');
   if (modal) modal.classList.add('open');
   document.body.classList.add('modal-open');
-  syncCommunityBracketsFromCloud();
+  renderSavedBracketsVault();
+  syncCommunityBracketsFromCloud(false);
 }
 
 function closeBracketVaultModal() {
