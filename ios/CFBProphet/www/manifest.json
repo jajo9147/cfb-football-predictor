@@ -1,24 +1,75 @@
 {
+  "id": "https://jajo9147.github.io/cfb-football-predictor/",
   "name": "CFB Prophet: College Football AI Predictor",
   "short_name": "CFB Prophet",
   "description": "Simulate 10,000 drives, tune custom AI scenarios, and project CFP Playoff paths for top college football powerhouses.",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#07090E",
   "theme_color": "#07090E",
   "orientation": "portrait-primary",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["sports", "entertainment", "games"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "icons/screenshot-desktop.jpg",
+      "sizes": "1376x768",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "CFB Prophet Desktop 12-Team CFP Simulator"
+    },
+    {
+      "src": "icons/screenshot-mobile.png",
+      "sizes": "1179x2556",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "CFB Prophet Mobile Schedule & Live Simulation"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "12-Team CFP Playoff",
+      "short_name": "Playoffs",
+      "description": "View live 12-Team Playoff Bracket and National Championship projections",
+      "url": "./index.html#playoffs",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Prophet AI's Picks",
+      "short_name": "AI Picks",
+      "description": "Compare your predictions against Prophet AI's Golden Standard",
+      "url": "./index.html#vault",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
