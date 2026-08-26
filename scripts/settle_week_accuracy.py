@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Gridiron Oracle - Post-Game Settlement & Brier Score Calculation Engine
+CFB Prophet - Post-Game Settlement & Brier Score Calculation Engine
 Grades predictions against live final box scores, computes Brier scores, and updates model calibration.
 """
 

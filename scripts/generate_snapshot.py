@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Gridiron Oracle - Weekly Pre-Kickoff Simulation Snapshot Generator
+CFB Prophet - Weekly Pre-Kickoff Simulation Snapshot Generator
 Generates a timestamped JSON snapshot of all 26 teams (Complete AP Top 25 & G5 contender), CCG matchups, and CFP seeds before kickoff.
 """
 

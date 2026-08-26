@@ -1,4 +1,4 @@
-# 🏈 Gridiron Oracle — College Football AI Predictor & Season Simulator
+# 🏈 CFB Prophet — College Football AI Predictor & Season Simulator
 
 [![Live App](https://img.shields.io/badge/Live_App-jajo9147.github.io%2Fcfb--football--predictor-blue?style=for-the-badge&logo=googlechrome&logoColor=white)](https://jajo9147.github.io/cfb-football-predictor/)
 [![AP Top 25](https://img.shields.io/badge/AP_Top_25-26_Programs_Calibrated-gold?style=for-the-badge)](https://jajo9147.github.io/cfb-football-predictor/)
@@ -7,7 +7,7 @@
 
 ---
 
-**Gridiron Oracle** is a high-performance college football simulation engine powering drive-by-drive Monte Carlo forecasts, dynamic single-game AI scenario tuning, conference championship outcomes, and real-time 12-team College Football Playoff (CFP) bracket cascading for all 26 top powerhouse programs (Complete AP Top 25 & G5 Contender).
+**CFB Prophet** is a high-performance college football simulation engine powering drive-by-drive Monte Carlo forecasts, dynamic single-game AI scenario tuning, conference championship outcomes, and real-time 12-team College Football Playoff (CFP) bracket cascading for all 26 top powerhouse programs (Complete AP Top 25 & G5 Contender).
 
 ---
 
@@ -35,16 +35,19 @@
 
 ## 🌐 Custom Domain Setup (100% Free Serverless on GitHub Pages)
 
-To point a custom domain (e.g. `gridironoracle.com` or `cfboracle.ai`) to your predictor:
+To point a custom domain (e.g. `cfbprophet.com` or `cfbprophet.ai`) to your predictor:
 
 1. **Configure DNS Records** at your registrar (Cloudflare, Namecheap, Route 53):
-   - **CNAME Record**: `www` $ightarrow$ `jajo9147.github.io`
+   - **CNAME Record**: `www` $
+ightarrow$ `jajo9147.github.io`
    - **Apex A Records** (`@`):
      - `185.199.108.153`
      - `185.199.109.153`
      - `185.199.110.153`
      - `185.199.111.153`
-2. **Add `CNAME` File**: Add your custom domain to a `CNAME` file in the repo root or in GitHub Repository Settings $ightarrow$ Pages $ightarrow$ Custom domain.
+2. **Add `CNAME` File**: Add your custom domain to a `CNAME` file in the repo root or in GitHub Repository Settings $
+ightarrow$ Pages $
+ightarrow$ Custom domain.
 3. GitHub will automatically provision an SSL certificate for HTTPS.
 
 ---
@@ -56,4 +59,4 @@ To point a custom domain (e.g. `gridironoracle.com` or `cfboracle.ai`) to your p
 - **PWA**: Installable standalone web application with offline caching and instant self-healing cache purges.
 
 ---
-*Created & Maintained by Jake Johnson • © 2026 Gridiron Oracle*
+*Created & Maintained by Jake Johnson • © 2026 CFB Prophet*

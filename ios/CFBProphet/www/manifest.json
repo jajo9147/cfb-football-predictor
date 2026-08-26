@@ -1,6 +1,6 @@
 {
-  "name": "Gridiron Oracle: College Football AI Predictor",
-  "short_name": "Gridiron AI",
+  "name": "CFB Prophet: College Football AI Predictor",
+  "short_name": "CFB Prophet",
   "description": "Simulate 10,000 drives, tune custom AI scenarios, and project CFP Playoff paths for top college football powerhouses.",
   "start_url": "./index.html",
   "display": "standalone",

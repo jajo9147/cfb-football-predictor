@@ -1,5 +1,5 @@
 // ==========================================================================
-// GRIDIRON ORACLE SERVICE WORKER PURGE & UNREGISTER ENGINE
+// CFB PROPHET SERVICE WORKER PURGE & UNREGISTER ENGINE
 // ==========================================================================
 
 self.addEventListener('install', (event) => {

@@ -1405,7 +1405,7 @@ function showToast(message) {
   if (!toast) {
     toast = document.createElement('div');
     toast.id = 'prophetToast';
-    toast.className = 'gridiron-toast';
+    toast.className = 'prophet-toast gridiron-toast';
     document.body.appendChild(toast);
   }
   toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--color-success); margin-right: 6px;"></i> ${message}`;
@@ -3740,7 +3740,7 @@ function initHypeCardExport() {
       const slug = (g && g.teamA && g.teamB) 
         ? `${g.teamA.shortName || 'TeamA'}-vs-${g.teamB.shortName || 'TeamB'}` 
         : (state.currentTeamId || 'season');
-      link.download = `gridiron-oracle-${slug}-matchup.png`;
+      link.download = `cfb-prophet-${slug}-matchup.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
       showToast('📥 Hype Card downloaded successfully!');

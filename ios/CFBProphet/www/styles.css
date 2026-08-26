@@ -1228,7 +1228,8 @@ body.modal-open {
   transform: translateY(-1px);
 }
 
-/* Gridiron Floating Toast Notification */
+/* CFB Prophet Floating Toast Notification */
+.prophet-toast,
 .gridiron-toast {
   position: fixed;
   bottom: 2.5rem;
@@ -1254,6 +1255,7 @@ body.modal-open {
   max-width: 90vw;
 }
 
+.prophet-toast.show,
 .gridiron-toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
