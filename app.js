@@ -6362,7 +6362,7 @@ window.openHypeCardModal = function() {
 
 
 // ==========================================================================
-// MARCH MADNESS 12-TEAM CFP BRACKET VAULT & EXPORT SYSTEM
+// 12-TEAM CFP BRACKET VAULT & EXPORT SYSTEM
 // CFB PROPHET WEEK-BY-WEEK PREDICTION & 30-TEAM VAULT MATRIX ENGINE
 // ==========================================================================
 
@@ -7199,7 +7199,7 @@ function closeBracketVaultModal() {
   document.body.classList.remove('modal-open');
 }
 
-// March Madness 12-Team CFP Bracket Canvas Graphic Generator
+// 12-Team CFP Bracket Canvas Graphic Generator
 function generateCfpBracketCanvas(bracketObj) {
   const canvas = document.getElementById('cfpBracketCanvas');
   if (!canvas) return;
@@ -7497,8 +7497,9 @@ function openBracketQrModal(bracketId, e) {
 
   const modal = document.getElementById('bracketQrModal');
   const titleEl = document.getElementById('qrModalBracketTitle');
+  const canvasEl = document.getElementById('bracketQrCanvas');
   const imgEl = document.getElementById('bracketQrImg');
-  if (!modal || !imgEl) return;
+  if (!modal) return;
 
   const shareUrl = getBracketShareUrl(target.id);
   state._activeQrUrl = shareUrl;
@@ -7507,12 +7508,31 @@ function openBracketQrModal(bracketId, e) {
     titleEl.innerText = `SYNC "${target.name.toUpperCase()}"`;
   }
 
-  // Dual Fallback QR Code Generation (Google Charts + QRServer)
-  const encodedUrl = encodeURIComponent(shareUrl);
-  imgEl.src = `https://chart.googleapis.com/chart?chs=240x240&cht=qr&chl=${encodedUrl}&choe=UTF-8`;
-  imgEl.onerror = () => {
-    imgEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&data=${encodedUrl}`;
-  };
+  // Pure Client-Side Instant QR Generation (0ms latency, works 100% offline)
+  let qrRendered = false;
+  if (typeof QRious !== 'undefined' && canvasEl) {
+    try {
+      new QRious({
+        element: canvasEl,
+        value: shareUrl,
+        size: 220,
+        level: 'M',
+        background: '#FFFFFF',
+        foreground: '#000000'
+      });
+      canvasEl.style.display = 'block';
+      if (imgEl) imgEl.style.display = 'none';
+      qrRendered = true;
+    } catch(err) {}
+  }
+
+  // Fallback to Google Charts image if QRious is unavailable
+  if (!qrRendered && imgEl) {
+    const encodedUrl = encodeURIComponent(shareUrl);
+    imgEl.src = `https://chart.googleapis.com/chart?chs=220x220&cht=qr&chl=${encodedUrl}&choe=UTF-8`;
+    imgEl.style.display = 'block';
+    if (canvasEl) canvasEl.style.display = 'none';
+  }
 
   modal.classList.add('open');
   document.body.classList.add('modal-open');

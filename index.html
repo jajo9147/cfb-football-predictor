@@ -414,11 +414,11 @@
           <span>12-TEAM COLLEGE FOOTBALL PLAYOFF PROJECTION & LIVE SIMULATOR</span>
         </div>
         <div class="cfp-bracket-actions">
-          <button class="save-bracket-btn" onclick="openSaveBracketModal()" title="Save this projection as your own custom March Madness-style bracket">
+          <button class="save-bracket-btn" onclick="openSaveBracketModal()" title="Save this projection as your custom bracket">
             <i class="fa-solid fa-floppy-disk"></i>
             <span>Save Bracket</span>
           </button>
-          <button class="action-btn hype-btn" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;" onclick="openCfpBracketCanvasModal()" title="Export 12-Team March Madness CFP Tournament Bracket Graphic">
+          <button class="action-btn hype-btn" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;" onclick="openCfpBracketCanvasModal()" title="Export 12-Team CFP Tournament Bracket Graphic">
             <i class="fa-solid fa-camera-retro"></i>
             <span>Export Bracket</span>
           </button>
@@ -1202,14 +1202,14 @@
     </div>
   </div>
 
-  <!-- MARCH MADNESS 12-TEAM CFP BRACKET CANVAS EXPORT MODAL -->
+  <!-- 12-TEAM CFP BRACKET CANVAS EXPORT MODAL -->
   <div class="modal-backdrop" id="bracketCanvasModal">
     <div class="modal-dialog" style="max-width: 780px; text-align: center;">
       <button class="modal-close" onclick="closeCfpBracketCanvasModal()"><i class="fa-solid fa-xmark"></i></button>
       <h2 class="modal-title" style="font-size: 1.6rem; letter-spacing: 0.05em;">
         <i class="fa-solid fa-trophy" style="color: #F59E0B; margin-right: 0.4rem;"></i>12-TEAM CFP TOURNAMENT BRACKET
       </h2>
-      <p style="font-size: 0.85rem; color: var(--color-text-muted);">March Madness style high-resolution graphic ready to download or drop into your group chat.</p>
+      <p style="font-size: 0.85rem; color: var(--color-text-muted);">High-resolution tournament bracket graphic ready to download or share.</p>
       
       <div style="margin: 1.25rem 0; display: flex; justify-content: center;">
         <canvas id="cfpBracketCanvas" width="1200" height="675" style="width: 100%; max-width: 720px; aspect-ratio: 16 / 9; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);"></canvas>
@@ -1246,12 +1246,13 @@
         <span class="matchup-tag" style="background: rgba(168, 85, 247, 0.2); color: #D8B4FE; border-color: rgba(168, 85, 247, 0.4);">
           <i class="fa-solid fa-qrcode"></i> INSTANT DEVICE SYNC
         </span>
-        <h2 class="modal-title" id="qrModalBracketTitle" style="font-size: 1.4rem; margin-top: 0.25rem;">SYNC TO SPOUSE / PHONE</h2>
-        <p style="font-size: 0.85rem; color: #94A3B8;">Point your spouse's phone or mobile camera at this QR code to instantly load and save this bracket into their phone's Vault!</p>
+        <h2 class="modal-title" id="qrModalBracketTitle" style="font-size: 1.4rem; margin-top: 0.25rem;">SYNC PICKS TO DEVICE</h2>
+        <p style="font-size: 0.85rem; color: #94A3B8;">Scan this QR code with your phone camera to load and save these predictions instantly.</p>
       </div>
 
       <div style="margin: 1.5rem 0; display: flex; justify-content: center; align-items: center; background: #FFFFFF; padding: 1.25rem; border-radius: var(--radius-lg); width: fit-content; margin-left: auto; margin-right: auto; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
-        <img id="bracketQrImg" src="" alt="Bracket Sync QR Code" style="width: 220px; height: 220px; display: block;">
+        <canvas id="bracketQrCanvas" width="220" height="220" style="display: block; width: 220px; height: 220px; border-radius: 4px;"></canvas>
+        <img id="bracketQrImg" src="" alt="Bracket Sync QR Code" style="width: 220px; height: 220px; display: none;">
       </div>
 
       <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
@@ -1268,6 +1269,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
   <script src="data/teams.js?v=20260826_buttons_fixed_v49"></script>
   <script src="app.js?v=20260826_buttons_fixed_v49"></script>
 </body>
