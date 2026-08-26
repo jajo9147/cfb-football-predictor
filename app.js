@@ -6558,6 +6558,24 @@ function renderAll30TeamsVaultMatrix() {
 const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v2';
 const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v2';
 const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v2';
+const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v1';
+
+function getDeletedBracketIds() {
+  try {
+    const raw = localStorage.getItem(DELETED_BRACKETS_KEY);
+    if (raw) return new Set(JSON.parse(raw) || []);
+  } catch (e) {}
+  return new Set();
+}
+
+function addDeletedBracketId(bracketId) {
+  if (!bracketId) return;
+  try {
+    const set = getDeletedBracketIds();
+    set.add(bracketId);
+    localStorage.setItem(DELETED_BRACKETS_KEY, JSON.stringify(Array.from(set)));
+  } catch (e) {}
+}
 
 function getSavedBrackets() {
   let myBrackets = [];
@@ -6566,17 +6584,21 @@ function getSavedBrackets() {
     if (raw) myBrackets = JSON.parse(raw) || [];
   } catch (e) {}
 
+  // Filter out any explicitly deleted brackets
+  const deletedIds = getDeletedBracketIds();
+  myBrackets = myBrackets.filter(b => b && b.id && !deletedIds.has(b.id));
+
   // If local list is empty on this device, check if any cloud brackets were submitted with user's handle
   const userHandle = (localStorage.getItem('cfb_prophet_user_handle') || '').trim().toLowerCase();
   const cloudBrackets = getLocalCommunityBrackets();
 
   if (userHandle && cloudBrackets.length > 0) {
-    const matchedCloud = cloudBrackets.filter(b => (b.creator || '').trim().toLowerCase() === userHandle);
+    const matchedCloud = cloudBrackets.filter(b => b && b.id && !deletedIds.has(b.id) && (b.creator || '').trim().toLowerCase() === userHandle);
     if (matchedCloud.length > 0) {
       const map = new Map();
       myBrackets.forEach(b => map.set(b.id, b));
       matchedCloud.forEach(b => map.set(b.id, b));
-      myBrackets = Array.from(map.values());
+      myBrackets = Array.from(map.values()).filter(b => !deletedIds.has(b.id));
       try {
         localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
       } catch (e) {}
@@ -6668,7 +6690,10 @@ function getCuratedExpertBrackets() {
 function getLocalCommunityBrackets() {
   try {
     const raw = localStorage.getItem(COMMUNITY_BRACKETS_KEY);
-    if (raw) return JSON.parse(raw) || [];
+    if (raw) {
+      const deletedIds = getDeletedBracketIds();
+      return (JSON.parse(raw) || []).filter(b => b && b.id && !deletedIds.has(b.id));
+    }
   } catch (e) {}
   return [];
 }
@@ -6739,9 +6764,10 @@ let _isCloudSyncing = false;
 
 function autoPublishAllLocalSavedBrackets() {
   try {
+    const deletedIds = getDeletedBracketIds();
     const local = getSavedBrackets();
     local.forEach(b => {
-      if (b && b.id && b.id !== 'bracket_prophet_ai_baseline') {
+      if (b && b.id && b.id !== 'bracket_prophet_ai_baseline' && !deletedIds.has(b.id)) {
         publishBracketToCloud(b);
       }
     });
@@ -6764,6 +6790,7 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
     }
     const text = await res.text();
     const cloudBrackets = [];
+    const deletedIds = getDeletedBracketIds();
 
     text.trim().split('\n').forEach(line => {
       try {
@@ -6774,7 +6801,7 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
           try {
             b = typeof json.message === 'string' ? JSON.parse(json.message) : json.message;
           } catch(e) {}
-          if (b && b.name && b.id && b.id !== 'bracket_prophet_ai_baseline') {
+          if (b && b.name && b.id && b.id !== 'bracket_prophet_ai_baseline' && !deletedIds.has(b.id)) {
             cloudBrackets.push(b);
           }
         }
@@ -6785,17 +6812,17 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
       // 1. Merge into Community pool
       const local = getLocalCommunityBrackets();
       const map = new Map();
-      local.forEach(b => map.set(b.id, b));
-      cloudBrackets.forEach(b => map.set(b.id, b));
+      local.forEach(b => { if (!deletedIds.has(b.id)) map.set(b.id, b); });
+      cloudBrackets.forEach(b => { if (!deletedIds.has(b.id)) map.set(b.id, b); });
       const merged = Array.from(map.values());
       localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(merged));
       
       // 2. Merge into My Saved Brackets pool across all devices
       const myLocal = getSavedBrackets();
       const myMap = new Map();
-      myLocal.forEach(b => myMap.set(b.id, b));
+      myLocal.forEach(b => { if (!deletedIds.has(b.id)) myMap.set(b.id, b); });
       cloudBrackets.forEach(b => {
-        if (b && b.id && b.id !== 'bracket_prophet_ai_baseline') {
+        if (b && b.id && b.id !== 'bracket_prophet_ai_baseline' && !deletedIds.has(b.id)) {
           myMap.set(b.id, b);
         }
       });
@@ -7441,20 +7468,20 @@ function deleteSavedBracket(bracketId, e) {
     e.stopPropagation();
     e.preventDefault();
   }
-  let myBrackets = getSavedBrackets();
-  myBrackets = myBrackets.filter(b => b.id !== bracketId);
+  addDeletedBracketId(bracketId);
+
+  let myBrackets = getSavedBrackets().filter(b => b.id !== bracketId);
   try {
     localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
   } catch (e) {}
 
-  let commBrackets = getLocalCommunityBrackets();
-  commBrackets = commBrackets.filter(b => b.id !== bracketId);
+  let commBrackets = getLocalCommunityBrackets().filter(b => b.id !== bracketId);
   try {
     localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(commBrackets));
   } catch (e) {}
 
   renderSavedBracketsVault();
-  showCustomToast('🗑️ Bracket removed.');
+  showCustomToast('🗑️ Bracket deleted permanently.');
 }
 
 function getBracketShareUrl(bracketId) {

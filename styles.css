@@ -4985,25 +4985,120 @@ body.modal-open {
 }
 
 /* ==========================================================================
-   MOBILE & RESPONSIVE POLISH FOR PICKS & STANDINGS VAULT MODAL
+   MOBILE & RESPONSIVE ARCHITECTURE FOR VAULT & LEADERBOARD
    ========================================================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   #bracketVaultModal .modal-dialog {
     max-width: 100vw !important;
     width: 100vw !important;
     margin: 0 !important;
-    max-height: 94vh !important;
-    height: 94vh !important;
+    max-height: 95vh !important;
+    height: 95vh !important;
     border-radius: 20px 20px 0 0 !important;
-    padding: 0.85rem 0.75rem !important;
+    padding: 0.95rem 0.8rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .vault-tab-bar {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.35rem !important;
+    padding: 0.35rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .vault-tab-btn {
+    padding: 0.55rem 0.45rem !important;
+    font-size: 0.76rem !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
+    text-align: center !important;
+  }
+
+  .vault-week-filter-bar {
+    padding: 0.5rem 0.65rem !important;
+    gap: 0.4rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .vault-week-buttons-wrap {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.25rem 0.35rem !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .vault-week-pill-btn {
+    padding: 0.35rem 0.55rem !important;
+    font-size: 0.72rem !important;
+    min-height: 28px !important;
+    border-radius: var(--radius-sm) !important;
+    flex-shrink: 0 !important;
   }
 
   .bracket-vault-grid {
     grid-template-columns: 1fr !important;
     gap: 0.85rem !important;
-    max-height: 72vh !important;
+    max-height: 68vh !important;
     padding-right: 0 !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .bracket-vault-card {
+    padding: 0.85rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .bracket-card-header {
+    gap: 0.4rem !important;
+    width: 100% !important;
+  }
+
+  .bracket-card-title {
+    font-size: 1.05rem !important;
+    word-break: break-word !important;
+  }
+
+  .bracket-mode-badge {
+    font-size: 0.62rem !important;
+    padding: 0.18rem 0.45rem !important;
+  }
+
+  .bracket-seeds-pill-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.25rem 0.35rem !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .bracket-card-actions {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.35rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .bracket-action-btn {
+    flex: unset !important;
+    min-width: unset !important;
+    padding: 0.5rem 0.25rem !important;
+    font-size: 0.72rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .bracket-action-btn.delete-btn {
+    grid-column: span 4 !important;
+    padding: 0.5rem !important;
   }
 
   .h2h-vs-ai-banner {
@@ -5011,6 +5106,8 @@ body.modal-open {
     align-items: flex-start !important;
     gap: 0.5rem !important;
     padding: 0.75rem 0.85rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .h2h-title {
@@ -5022,64 +5119,18 @@ body.modal-open {
     justify-content: space-between !important;
     font-size: 0.75rem !important;
   }
+}
 
-  .vault-week-filter-bar {
-    padding: 0.45rem 0.65rem !important;
-    gap: 0.4rem !important;
-  }
-
-  .vault-week-buttons-wrap {
-    gap: 0.25rem !important;
-    overflow-x: auto !important;
-    flex-wrap: nowrap !important;
-    padding-bottom: 0.25rem !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
-  }
-
-  .vault-week-buttons-wrap::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  .vault-week-pill-btn {
-    padding: 0.35rem 0.65rem !important;
+@media (max-width: 480px) {
+  .vault-tab-btn span {
     font-size: 0.72rem !important;
-    min-height: 28px !important;
-    flex-shrink: 0 !important;
   }
-
-  .bracket-vault-card {
-    padding: 0.85rem !important;
+  .vault-week-filter-label {
+    width: 100% !important;
+    margin-bottom: 2px !important;
   }
-
-  .bracket-card-header {
-    gap: 0.4rem !important;
-  }
-
-  .bracket-card-title {
-    font-size: 1.05rem !important;
-  }
-
-  .bracket-mode-badge {
-    font-size: 0.6rem !important;
-    padding: 0.18rem 0.45rem !important;
-  }
-
-  .bracket-card-actions {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 0.35rem !important;
-  }
-
   .bracket-action-btn {
-    flex: unset !important;
-    min-width: unset !important;
-    padding: 0.45rem 0.25rem !important;
-    font-size: 0.7rem !important;
-  }
-
-  .bracket-action-btn.delete-btn {
-    grid-column: span 4 !important;
-    padding: 0.45rem !important;
+    font-size: 0.68rem !important;
+    padding: 0.45rem 0.2rem !important;
   }
 }
