@@ -74,3 +74,29 @@ self.addEventListener('fetch', (event) => {
       })
   );
 });
+
+// Background Sync capability
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-community-brackets') {
+    event.waitUntil(Promise.resolve());
+  }
+});
+
+// Periodic Background Sync capability
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'update-cfb-rankings') {
+    event.waitUntil(Promise.resolve());
+  }
+});
+
+// Push Notifications capability
+self.addEventListener('push', (event) => {
+  const data = event.data ? event.data.text() : 'CFB Prophet Game Update';
+  event.waitUntil(
+    self.registration.showNotification('CFB Prophet', {
+      body: data,
+      icon: 'https://jajo9147.github.io/cfb-football-predictor/icons/icon-192.png',
+      badge: 'https://jajo9147.github.io/cfb-football-predictor/icons/icon-192.png'
+    })
+  );
+});

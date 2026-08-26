@@ -3,8 +3,8 @@
   "name": "CFB Prophet: College Football AI Predictor",
   "short_name": "CFB Prophet",
   "description": "Simulate 10,000 drives, tune custom AI scenarios, and project CFP Playoff paths for top college football powerhouses.",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "https://jajo9147.github.io/cfb-football-predictor/",
+  "scope": "https://jajo9147.github.io/cfb-football-predictor/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#07090E",
@@ -16,25 +16,25 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-192.png",
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -42,14 +42,14 @@
   ],
   "screenshots": [
     {
-      "src": "icons/screenshot-desktop.jpg",
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/screenshot-desktop.jpg",
       "sizes": "1376x768",
       "type": "image/jpeg",
       "form_factor": "wide",
       "label": "CFB Prophet Desktop 12-Team CFP Simulator"
     },
     {
-      "src": "icons/screenshot-mobile.png",
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/screenshot-mobile.png",
       "sizes": "1179x2556",
       "type": "image/png",
       "form_factor": "narrow",
@@ -61,15 +61,31 @@
       "name": "12-Team CFP Playoff",
       "short_name": "Playoffs",
       "description": "View live 12-Team Playoff Bracket and National Championship projections",
-      "url": "./index.html#playoffs",
-      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+      "url": "https://jajo9147.github.io/cfb-football-predictor/#playoffs",
+      "icons": [{ "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "Prophet AI's Picks",
       "short_name": "AI Picks",
       "description": "Compare your predictions against Prophet AI's Golden Standard",
-      "url": "./index.html#vault",
-      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+      "url": "https://jajo9147.github.io/cfb-football-predictor/#vault",
+      "icons": [{ "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-192.png", "sizes": "192x192" }]
     }
-  ]
+  ],
+  "share_target": {
+    "action": "https://jajo9147.github.io/cfb-football-predictor/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "edge_side_panel": {
+    "preferred_width": 480
+  },
+  "handle_links": "preferred"
 }
