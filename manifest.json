@@ -6,7 +6,7 @@
   "start_url": "https://jajo9147.github.io/cfb-football-predictor/",
   "scope": "https://jajo9147.github.io/cfb-football-predictor/",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui"],
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#07090E",
   "theme_color": "#07090E",
   "orientation": "any",
