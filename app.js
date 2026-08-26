@@ -6555,9 +6555,9 @@ function renderAll30TeamsVaultMatrix() {
 
 
 
-// ==========================================================================
-
 const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v2';
+const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v2';
+const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v2';
 
 function getSavedBrackets() {
   let myBrackets = [];
