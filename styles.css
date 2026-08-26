@@ -1,5 +1,5 @@
 /* ==========================================================================
-   GRIDIRON ORACLE - MULTI-TEAM COLLEGE FOOTBALL DESIGN SYSTEM (2026)
+   CFB PROPHET - MULTI-TEAM COLLEGE FOOTBALL DESIGN SYSTEM (2026)
    ========================================================================== */
 
 :root {
@@ -4681,5 +4681,114 @@ body.modal-open {
 .publish-toggle-text small {
   font-size: 0.72rem;
   color: #94A3B8;
+}
+
+/* ==========================================================================
+   CFB PROPHET WEEKLY SCORING, ALL-TEAMS MATRIX & IOS SHARE STYLES
+   ========================================================================== */
+
+.vault-week-selector-strip {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding: 0.35rem 0 0.75rem 0;
+  scrollbar-width: thin;
+}
+
+.vault-week-pill-btn {
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #94A3B8;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.vault-week-pill-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.vault-week-pill-btn.active {
+  background: linear-gradient(135deg, #0284C7, #0369A1);
+  color: #FFFFFF;
+  border-color: #38BDF8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+/* All 30 Teams Matchup Inspector in Vault */
+.all-teams-vault-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.team-season-matrix-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.team-season-matrix-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 0.5rem;
+}
+
+.team-season-matrix-games {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.4rem;
+}
+
+.matrix-game-chip {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+}
+
+.matrix-game-chip.win {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.matrix-game-chip.loss {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+/* iOS Share Sheet button */
+.ios-share-btn {
+  background: linear-gradient(135deg, #0284C7, #0369A1) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4) !important;
+}
+
+.ios-share-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
 }
 

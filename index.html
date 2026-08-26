@@ -5,14 +5,14 @@
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Gridiron Oracle | College Football AI Predictor & Season Simulator</title>
+  <title>CFB Prophet | College Football 2026 Prediction & AI Simulation Engine</title>
   
   <!-- SEO & Social Sharing Metadata -->
   <meta name="description" content="Simulate every top college football game drive-by-drive, tune custom AI scenarios for 10 powerhouses, and project CFP Playoff seeds.">
   <meta name="theme-color" content="#07090E">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Gridiron AI">
+  <meta name="apple-mobile-web-app-title" content="CFB Prophet">
   
   <!-- PWA Manifest & Touch Icons -->
   <link rel="manifest" href="manifest.json">
@@ -20,7 +20,7 @@
   
   <!-- Open Graph Protocol -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Gridiron Oracle: College Football AI Predictor & Simulator" id="ogTitle">
+  <meta property="og:title" content="CFB Prophet: College Football AI Prediction & Simulation Engine" id="ogTitle">
   <meta property="og:description" content="Simulate 10,000 drives, tune custom single-game scenarios, and calculate CFP Playoff paths for top college football powerhouses." id="ogDescription">
   <meta property="og:image" content="icons/icon-512.png" id="ogImage">
   
@@ -178,7 +178,7 @@
           <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas Longhorns" class="nav-logo-img">
         </div>
         <div class="brand-text">
-          <span class="brand-title">GRIDIRON ORACLE</span>
+          <span class="brand-title">CFB PROPHET</span>
           <span class="brand-subtitle">COLLEGE FOOTBALL AI SIMULATOR</span>
         </div>
       </a>
@@ -195,10 +195,7 @@
           <span id="countdownText">KICKOFF: 18 DAYS</span>
         </div>
         <button class="vault-btn-badge" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="View & Manage your Saved March Madness-style CFP Brackets"><i class="fa-solid fa-folder-closed"></i> <span>Bracket Vault</span></button>
-        <button class="install-pwa-btn" id="openPwaInstallBtn">
-          <i class="fa-solid fa-mobile-screen"></i>
-          <span>Install App</span>
-        </button>
+
       </div>
     </div>
   </nav>
@@ -576,13 +573,17 @@
       </div>
 
       <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        <button class="action-btn" style="background: linear-gradient(135deg, #0284C7, #0369A1); color: #FFFFFF;" id="shareHypeCardNativeBtn" onclick="shareActiveCanvasToNativeSheet('hypeCanvas', 'cfb_prophet_matchup.png', 'CFB Prophet Matchup Hype Card')">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          <span>Share to iMessage / Chat</span>
+        </button>
         <button class="action-btn hype-btn" id="downloadHypeCardBtn">
           <i class="fa-solid fa-download"></i>
-          <span>Save High-Res Image</span>
+          <span>Save Image</span>
         </button>
         <button class="action-btn secondary-btn" id="copyHypeCardBtn">
           <i class="fa-solid fa-copy"></i>
-          <span>Copy Image to Clipboard</span>
+          <span>Copy Image</span>
         </button>
       </div>
     </div>
@@ -734,7 +735,7 @@
             <div class="pwa-step-icon"><i class="fa-solid fa-check"></i></div>
             <div class="pwa-step-text">
               <strong>3. Confirm Install</strong>
-              <span>Tap <strong>Install</strong> to add Gridiron Oracle to your phone.</span>
+              <span>Tap <strong>Install</strong> to add CFB Prophet to your phone.</span>
             </div>
           </div>
         </div>
@@ -781,7 +782,7 @@
             <div class="pwa-step-icon"><i class="fa-solid fa-circle-check"></i></div>
             <div class="pwa-step-text">
               <strong>2. Click "Install"</strong>
-              <span>Launch Gridiron Oracle in a dedicated standalone window with zero browser tabs.</span>
+              <span>Launch CFB Prophet in a dedicated standalone window with zero browser tabs.</span>
             </div>
           </div>
         </div>
@@ -1003,7 +1004,7 @@
             <div class="calibration-intel">
               <h4 style="color: #FFFFFF; font-size: 0.9rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem;"><i class="fa-solid fa-circle-info" style="color: #38BDF8;"></i> What is Probability Calibration?</h4>
               <p style="font-size: 0.78rem; color: var(--color-text-dim); line-height: 1.45; margin-bottom: 0.5rem;">
-                A well-calibrated machine learning model means that when Gridiron Oracle gives a team an <strong>80% win probability</strong> across 50 games, that team should win exactly <strong>80% (40 out of 50)</strong> of those games. 
+                A well-calibrated machine learning model means that when CFB Prophet gives a team an <strong>80% win probability</strong> across 50 games, that team should win exactly <strong>80% (40 out of 50)</strong> of those games. 
                 The closer the blue plot hugs the diagonal dashed baseline, the more mathematically sound and reliable the projections are.
               </p>
               <div class="calibration-bin-list" id="calibrationBinList">
@@ -1057,7 +1058,7 @@
         <span id="footerEmblem">
           <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas Longhorns" style="width: 24px; height: 24px; object-fit: contain;">
         </span>
-        <span>GRIDIRON ORACLE • COLLEGE FOOTBALL AI PREDICTOR</span>
+        <span>CFB PROPHET • COLLEGE FOOTBALL AI PREDICTOR</span>
       </div>
       <p class="footer-text">10,000 Monte Carlo drive-by-drive engine, real-time AP Poll telemetry, single-game AI scenario tuning, and 12-team CFP Playoff simulator.</p>
       
@@ -1068,7 +1069,7 @@
           <span>Jake Johnson</span>
           <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.85; margin-left: 2px;"></i>
         </a>
-        <span style="font-size: 0.8rem; color: #94A3B8;">• © 2026 Gridiron Oracle</span>
+        <span style="font-size: 0.8rem; color: #94A3B8;">• © 2026 CFB Prophet</span>
       </div>
     </div>
   </footer>
@@ -1183,14 +1184,25 @@
         </div>
       </div>
 
-      <!-- Tab Switcher: Community Leaderboard vs My Saved Brackets -->
-      <div class="vault-tab-bar" style="margin-top: 0.75rem;">
-        <button class="vault-tab-btn active" id="tabCommunityVaultBtn" onclick="switchVaultTab('community')">
-          <i class="fa-solid fa-trophy"></i> <span>Community Leaderboard (All Brackets)</span>
+      <!-- Tab Switcher: Weekly Leaderboard, Full Season Brackets, All 30 Teams, My Predictions -->
+      <div class="vault-tab-bar" style="margin-top: 0.75rem; flex-wrap: wrap;">
+        <button class="vault-tab-btn active" id="tabWeeklyVaultBtn" onclick="switchVaultTab('weekly')">
+          <i class="fa-solid fa-calendar-week"></i> <span>Weekly Leaderboard</span>
+        </button>
+        <button class="vault-tab-btn" id="tabCommunityVaultBtn" onclick="switchVaultTab('community')">
+          <i class="fa-solid fa-trophy"></i> <span>Season CFP Brackets</span>
+        </button>
+        <button class="vault-tab-btn" id="tabAllTeamsVaultBtn" onclick="switchVaultTab('allteams')">
+          <i class="fa-solid fa-shield-halved"></i> <span>All 30 Teams Game Matrix</span>
         </button>
         <button class="vault-tab-btn" id="tabMyVaultBtn" onclick="switchVaultTab('mine')">
-          <i class="fa-solid fa-user"></i> <span>My Saved Brackets</span>
+          <i class="fa-solid fa-user"></i> <span>My Predictions</span>
         </button>
+      </div>
+
+      <!-- Weekly Selector Filter (Shown when Weekly tab is active) -->
+      <div class="vault-week-selector-strip" id="vaultWeekSelectorStrip" style="display: flex; gap: 0.35rem; overflow-x: auto; padding: 0.5rem 0; margin-bottom: 0.75rem;">
+        <!-- Injected via JavaScript (Week 0 to Week 14 + CCG + CFP) -->
       </div>
 
       <p style="font-size: 0.85rem; color: #94A3B8; margin-top: -0.25rem;">Compare prediction accuracy scores, percentile grades, and load community simulations from fans and analysts nationwide.</p>
@@ -1216,17 +1228,21 @@
       </div>
 
       <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        <button class="action-btn" style="background: linear-gradient(135deg, #0284C7, #0369A1); color: #FFFFFF;" onclick="shareActiveCanvasToNativeSheet('cfpBracketCanvas', 'cfb_prophet_bracket.png', 'CFB Prophet 12-Team CFP Bracket')">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          <span>Share to iMessage / Chat</span>
+        </button>
         <button class="action-btn hype-btn" id="downloadCfpBracketBtn" onclick="downloadCfpBracketGraphic()">
           <i class="fa-solid fa-download"></i>
-          <span>Save High-Res Bracket</span>
+          <span>Save Image</span>
         </button>
         <button class="action-btn secondary-btn" id="copyCfpBracketBtn" onclick="copyCfpBracketGraphic()">
           <i class="fa-solid fa-copy"></i>
-          <span>Copy Image to Clipboard</span>
+          <span>Copy Image</span>
         </button>
         <button class="action-btn secondary-btn" id="shareCfpBracketLinkBtn" onclick="copyActiveBracketShareLink()">
           <i class="fa-solid fa-link"></i>
-          <span>Copy Shareable Link</span>
+          <span>Copy Link</span>
         </button>
       </div>
     </div>
