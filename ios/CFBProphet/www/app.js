@@ -6559,11 +6559,11 @@ function renderAll30TeamsVaultMatrix() {
 // USER AUTHENTICATION & PROPHET CREATOR ID SYSTEM
 // ==========================================================================
 
-const AUTH_STORAGE_KEY = 'cfb_prophet_auth_user_v1';
-const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v2';
-const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v2';
-const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v2';
-const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v1';
+const AUTH_STORAGE_KEY = 'cfb_prophet_auth_user_v3';
+const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v3';
+const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v3';
+const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v3';
+const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v3';
 
 function getCurrentUser() {
   try {
@@ -6998,8 +6998,87 @@ function createBaselineBracketObject() {
   return createProphetAiBenchmarkBracket();
 }
 
+function createUscWinsOutBracket() {
+  return {
+    id: 'bracket_usc_wins_out_curated',
+    name: 'USC Wins Out',
+    creator: 'Jake',
+    creatorId: 'creator_jake_usc',
+    notes: 'USC sweeps regular season, claims Big Ten crown, and runs the 12-team CFP table!',
+    createdAt: '2026-08-26T12:00:00Z',
+    mode: 'custom',
+    isPublic: true,
+    champion: {
+      id: 'usc',
+      name: 'USC Trojans',
+      shortName: 'USC',
+      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/30.png',
+      score: 38,
+      oppScore: 27
+    },
+    runnerUp: {
+      id: 'georgia',
+      name: 'Georgia Bulldogs',
+      shortName: 'Georgia'
+    },
+    seeds: [
+      { seed: 1, id: 'usc', name: 'USC', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/30.png', wins: 13, losses: 0 },
+      { seed: 2, id: 'georgia', name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png', wins: 12, losses: 1 },
+      { seed: 3, id: 'clemson', name: 'Clemson', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/228.png', wins: 12, losses: 1 },
+      { seed: 4, id: 'utah', name: 'Utah', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/254.png', wins: 11, losses: 2 },
+      { seed: 5, id: 'ohiostate', name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png', wins: 11, losses: 1 },
+      { seed: 6, id: 'oregon', name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 11, losses: 1 },
+      { seed: 7, id: 'texas', name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', wins: 11, losses: 2 },
+      { seed: 8, id: 'alabama', name: 'Alabama', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/333.png', wins: 10, losses: 2 },
+      { seed: 9, id: 'notredame', name: 'Notre Dame', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png', wins: 10, losses: 2 },
+      { seed: 10, id: 'pennstate', name: 'Penn State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/213.png', wins: 10, losses: 2 },
+      { seed: 11, id: 'olemiss', name: 'Ole Miss', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/145.png', wins: 10, losses: 2 },
+      { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png', wins: 12, losses: 1 }
+    ],
+    playoffSummary: {
+      fr: [
+        { label: '#5 vs #12', winner: 'Ohio State' },
+        { label: '#6 vs #11', winner: 'Oregon' },
+        { label: '#7 vs #10', winner: 'Texas' },
+        { label: '#8 vs #9', winner: 'Alabama' }
+      ],
+      qf: [
+        { bowl: 'Sugar Bowl', winner: 'USC' },
+        { bowl: 'Rose Bowl', winner: 'Georgia' },
+        { bowl: 'Peach Bowl', winner: 'Ohio State' },
+        { bowl: 'Fiesta Bowl', winner: 'Texas' }
+      ],
+      sf: [
+        { bowl: 'Orange Bowl', winner: 'USC' },
+        { bowl: 'Cotton Bowl', winner: 'Georgia' }
+      ]
+    },
+    simState: {
+      teamId: 'usc',
+      userPicks: {
+        'game_usc_missouristate': 'usc',
+        'game_usc_georgiasouthern': 'usc',
+        'game_usc_purdue': 'usc',
+        'game_usc_wisconsin': 'usc',
+        'game_usc_minnesota': 'usc',
+        'game_usc_rutgers': 'usc',
+        'game_usc_michigan': 'usc',
+        'game_usc_nebraska': 'usc',
+        'game_usc_northwestern': 'usc',
+        'game_usc_iowa': 'usc',
+        'game_usc_oregon': 'usc',
+        'game_usc_notredame': 'usc'
+      },
+      ccgPicks: { 'bigten': 'usc' },
+      playoffPicks: { 'natty': 'usc' },
+      teamSliders: { 'usc': { talent: 92, coach: 90, offense: 94, defense: 88, discipline: 90, clutch: 92 } },
+      gameSliders: {}
+    }
+  };
+}
+
 function getCuratedExpertBrackets() {
-  return [createProphetAiBenchmarkBracket()];
+  return [createProphetAiBenchmarkBracket(), createUscWinsOutBracket()];
 }
 
 function getLocalCommunityBrackets() {
@@ -7007,7 +7086,7 @@ function getLocalCommunityBrackets() {
     const raw = localStorage.getItem(COMMUNITY_BRACKETS_KEY);
     if (raw) {
       const deletedIds = getDeletedBracketIds();
-      return (JSON.parse(raw) || []).filter(b => b && b.id && b.id !== 'bracket_prophet_ai_baseline' && !deletedIds.has(b.id));
+      return (JSON.parse(raw) || []).filter(b => b && b.id && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_usc_wins_out_curated' && !deletedIds.has(b.id));
     }
   } catch (e) {}
   return [];
@@ -7082,7 +7161,7 @@ function autoPublishAllLocalSavedBrackets() {
     const deletedIds = getDeletedBracketIds();
     const local = getSavedBrackets();
     local.forEach(b => {
-      if (b && b.id && b.id !== 'bracket_prophet_ai_baseline' && !deletedIds.has(b.id)) {
+      if (b && b.id && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_usc_wins_out_curated' && !deletedIds.has(b.id)) {
         publishBracketToCloud(b);
       }
     });
@@ -7123,8 +7202,8 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
                 addDeletedBracketId(delId);
                 deletedIds.add(delId);
               }
-            } else if (b.name && b.id && b.id !== 'bracket_prophet_ai_baseline' && !deletedIds.has(b.id)) {
-              if (!b.name.toLowerCase().includes('prophet ai')) {
+            } else if (b.name && b.id && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_usc_wins_out_curated' && !deletedIds.has(b.id)) {
+              if (!b.name.toLowerCase().includes('prophet ai') && !b.name.toLowerCase().includes('live sync test')) {
                 cloudBrackets.push(b);
               }
             }
@@ -7231,30 +7310,37 @@ function calculateBracketAccuracy(bracket) {
 }
 
 function getCommunityBrackets() {
-  const expert = createProphetAiBenchmarkBracket();
+  const curated = getCuratedExpertBrackets();
   const deletedIds = getDeletedBracketIds();
-  
+
   const rawMy = getSavedBrackets().filter(b => b && b.id && !deletedIds.has(b.id));
   const rawCloud = getLocalCommunityBrackets().filter(b => b && b.id && !deletedIds.has(b.id));
 
   // Strict deduplication by creator + normalized name
   const nameMap = new Map();
 
-  [...rawMy, ...rawCloud].forEach(b => {
-    if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline') return;
-    if (b.name && b.name.toLowerCase().includes('prophet ai')) return; // Ignore any duplicate baseline copies
+  // 1. Add curated baseline first (#1 Prophet AI, #2 USC Wins Out)
+  curated.forEach(b => {
+    if (!deletedIds.has(b.id)) {
+      nameMap.set(b.name.trim().toLowerCase(), b);
+    }
+  });
 
-    const normKey = `${(b.creator || 'you').trim().toLowerCase()}__${(b.name || '').trim().toLowerCase()}`;
+  // 2. Add custom submissions
+  [...rawCloud, ...rawMy].forEach(b => {
+    if (!b || !b.id || !b.name) return;
+    if (deletedIds.has(b.id)) return;
+    if (b.name.toLowerCase().includes('prophet ai')) return;
+    if (b.name.toLowerCase().includes('live sync test')) return;
+
+    const normKey = `${(b.creator || 'you').trim().toLowerCase()}__${b.name.trim().toLowerCase()}`;
     const existing = nameMap.get(normKey);
     if (!existing || new Date(b.createdAt || 0) >= new Date(existing.createdAt || 0)) {
       nameMap.set(normKey, b);
     }
   });
 
-  const uniqueCustom = Array.from(nameMap.values()).filter(b => !deletedIds.has(b.id));
-
-  // Exactly 1 single Prophet AI benchmark, followed by unique user predictions
-  const all = [expert, ...uniqueCustom];
+  const all = Array.from(nameMap.values());
 
   // Attach Accuracy Scores & Sort
   all.forEach(b => {
@@ -7853,11 +7939,13 @@ function loadSavedBracket(bracketId) {
   state.activeSavedBracketId = target.id;
   if (target.simState) {
     if (target.simState.teamId) state.currentTeamId = target.simState.teamId;
-    state.userPicks = { ...(target.simState.userPicks || {}) };
-    state.ccgPicks = { ...(target.simState.ccgPicks || {}) };
-    state.playoffPicks = { ...(target.simState.playoffPicks || {}) };
+    state.userPicks = JSON.parse(JSON.stringify(target.simState.userPicks || {}));
+    state.ccgPicks = JSON.parse(JSON.stringify(target.simState.ccgPicks || {}));
+    state.playoffPicks = JSON.parse(JSON.stringify(target.simState.playoffPicks || {}));
     state.teamSliders = JSON.parse(JSON.stringify(target.simState.teamSliders || {}));
     state.gameSliders = JSON.parse(JSON.stringify(target.simState.gameSliders || {}));
+  } else if (target.champion?.id) {
+    state.currentTeamId = target.champion.id;
   }
 
   closeBracketVaultModal();
