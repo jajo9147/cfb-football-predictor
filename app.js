@@ -6377,7 +6377,7 @@ function getSavedBrackets() {
   return [];
 }
 
-function createBaselineBracketObject() {
+function createProphetAiBenchmarkBracket() {
   // Temporary save current overrides
   const tempUserPicks = state.userPicks;
   const tempCcgPicks = state.ccgPicks;
@@ -6417,12 +6417,13 @@ function createBaselineBracketObject() {
   const runnerTeam = playoff.runnerUp ? (TEAMS_DATABASE[playoff.runnerUp.id] || playoff.runnerUp) : TEAMS_DATABASE['oregon'];
 
   return {
-    id: 'bracket_baseline_chalk_2026',
-    name: '2026 Model Baseline Chalk',
-    creator: 'CFB Prophet AI',
-    notes: 'Official pre-season AI simulation baseline (10,000 Monte Carlo consensus).',
-    createdAt: '2026-08-25T12:00:00Z',
+    id: 'bracket_prophet_ai_baseline',
+    name: "Prophet AI's Picks",
+    creator: 'Prophet AI (Model Benchmark)',
+    notes: 'The golden standard: 10,000 Monte Carlo simulation baseline. Can you beat the AI?',
+    createdAt: '2026-08-26T12:00:00Z',
     mode: 'baseline',
+    isAdminBenchmark: true,
     isPublic: true,
     champion: {
       id: champTeam.id || 'ohiostate',
@@ -6465,6 +6466,10 @@ function createBaselineBracketObject() {
       gameSliders: {}
     }
   };
+}
+
+function createBaselineBracketObject() {
+  return createProphetAiBenchmarkBracket();
 }
 
 function saveCurrentProjectionAsBracket(bracketName, creatorName, notes) {
@@ -6658,7 +6663,7 @@ function calculateBracketAccuracy(bracket) {
 }
 
 function getCuratedExpertBrackets() {
-  return [];
+  return [createProphetAiBenchmarkBracket()];
 }
 
 function getLocalCommunityBrackets() {
@@ -6791,11 +6796,11 @@ function renderSavedBracketsVault() {
   if (brackets.length === 0) {
     grid.innerHTML = `
       <div class="empty-vault-state">
-        <i class="fa-solid fa-folder-open"></i>
-        <h3>No Saved Predictions Found</h3>
-        <p>Save your current simulation picks or browse the Community & Weekly Leaderboards to see top predictions nationwide.</p>
+        <i class="fa-solid fa-clipboard-question"></i>
+        <h3>No Submitted Picks Found</h3>
+        <p>Make your custom game picks or tune sliders, then click "Submit Current Picks" to compete against Prophet AI!</p>
         <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="margin-top: 0.5rem;">
-          <i class="fa-solid fa-plus"></i> Save Current Predictions
+          <i class="fa-solid fa-plus"></i> Submit Current Picks
         </button>
       </div>
     `;
@@ -6804,9 +6809,69 @@ function renderSavedBracketsVault() {
 
   const myBrackets = getSavedBrackets();
   const myBracketIds = new Set(myBrackets.map(b => b.id));
+  const aiBracket = brackets.find(b => b.isAdminBenchmark || b.id === 'bracket_prophet_ai_baseline') || createProphetAiBenchmarkBracket();
+  const myTopBracket = myBrackets[0] || null;
 
-  grid.innerHTML = '';
+  // 1. Generate "YOU vs PROPHET AI" Head-to-Head Banner
+  let h2hBannerHtml = '';
+  const currentWeekLabel = state.selectedVaultWeek === 'all' ? 'FULL SEASON' : (state.selectedVaultWeek || 'WEEK 1');
+  const aiWeeklyScore = calculateWeeklyScoreForUser(aiBracket, state.selectedVaultWeek);
+
+  if (myTopBracket) {
+    const userWeeklyScore = calculateWeeklyScoreForUser(myTopBracket, state.selectedVaultWeek);
+    const pointDiff = userWeeklyScore.pts - aiWeeklyScore.pts;
+    let vsAiStatusBadge = '';
+    let vsAiCardClass = 'tied';
+
+    if (pointDiff > 0) {
+      vsAiStatusBadge = `<span class="vs-ai-badge win"><i class="fa-solid fa-crown"></i> BEATING PROPHET AI (+${pointDiff} PTS)</span>`;
+      vsAiCardClass = 'ahead';
+    } else if (pointDiff === 0) {
+      vsAiStatusBadge = `<span class="vs-ai-badge tie"><i class="fa-solid fa-handshake"></i> TIED WITH PROPHET AI (${userWeeklyScore.pts} PTS)</span>`;
+      vsAiCardClass = 'tied';
+    } else {
+      vsAiStatusBadge = `<span class="vs-ai-badge trail"><i class="fa-solid fa-fire"></i> ${Math.abs(pointDiff)} PTS BEHIND PROPHET AI</span>`;
+      vsAiCardClass = 'behind';
+    }
+
+    h2hBannerHtml = `
+      <div class="h2h-vs-ai-banner ${vsAiCardClass}">
+        <div class="h2h-main-info">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="h2h-tag">⚡ HEAD-TO-HEAD MATCHUP (${currentWeekLabel})</span>
+            ${vsAiStatusBadge}
+          </div>
+          <div class="h2h-title">
+            <span>👤 ${myTopBracket.name || 'Your Picks'}: <strong>${userWeeklyScore.pts} PTS</strong></span>
+            <span style="opacity: 0.5; margin: 0 6px;">vs</span>
+            <span>🤖 Prophet AI: <strong>${aiWeeklyScore.pts} PTS</strong></span>
+          </div>
+        </div>
+        <div class="h2h-stats-pill">
+          <span>Global Rank: <strong>#1 of ${brackets.length}</strong></span>
+        </div>
+      </div>
+    `;
+  } else {
+    h2hBannerHtml = `
+      <div class="h2h-vs-ai-banner invite">
+        <div class="h2h-main-info">
+          <span class="h2h-tag" style="color: #F59E0B;">🤖 CAN YOU BEAT PROPHET AI? (${currentWeekLabel})</span>
+          <div class="h2h-title" style="font-size: 0.95rem; color: #E2E8F0;">
+            Prophet AI set the golden standard with <strong>${aiWeeklyScore.pts} PTS</strong> in ${currentWeekLabel}. Submit your picks to see where you rank!
+          </div>
+        </div>
+        <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="padding: 0.45rem 0.85rem; font-size: 0.8rem; white-space: nowrap;">
+          <i class="fa-solid fa-paper-plane"></i> Submit Picks
+        </button>
+      </div>
+    `;
+  }
+
+  grid.innerHTML = h2hBannerHtml;
+
   brackets.forEach((b, idx) => {
+    const isAiBenchmark = b.isAdminBenchmark || b.id === 'bracket_prophet_ai_baseline';
     const isBaseline = b.mode === 'baseline';
     const dateStr = b.createdAt ? new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '2026 Season';
     const champ = b.champion || { name: 'Champion', shortName: 'Champs', logoUrl: '' };
@@ -6831,24 +6896,36 @@ function renderSavedBracketsVault() {
     `).join('');
 
     const card = document.createElement('div');
-    card.className = `bracket-vault-card ${isActive ? 'active-bracket' : ''}`;
+    card.className = `bracket-vault-card ${isActive ? 'active-bracket' : ''} ${isAiBenchmark ? 'ai-benchmark-card' : ''}`;
     card.innerHTML = `
       <div class="bracket-card-header">
         <div style="display: flex; gap: 0.65rem; align-items: flex-start;">
           <span class="bracket-rank-badge ${rankCls}">${rankMedal}</span>
           <div>
-            <div class="bracket-card-title">${b.name}</div>
+            <div class="bracket-card-title" style="${isAiBenchmark ? 'color: #38BDF8;' : ''}">
+              ${isAiBenchmark ? '<i class="fa-solid fa-robot" style="color: #38BDF8; margin-right: 4px;"></i>' : ''} ${b.name}
+            </div>
             <div class="bracket-card-meta">
               <span>By ${b.creator || 'Prophet'}</span>
               <span>•</span>
               <span>${dateStr}</span>
-              ${isWeekly ? `<span style="color: #38BDF8; font-weight: 700;">• ${state.selectedVaultWeek === 'all' ? 'Season Leaderboard' : state.selectedVaultWeek + ' Score'}</span>` : ''}
+              ${isWeekly ? `<span style="color: #38BDF8; font-weight: 700;">• ${state.selectedVaultWeek === 'all' ? 'Season Standings' : state.selectedVaultWeek + ' Score'}</span>` : ''}
             </div>
           </div>
         </div>
-        <span class="bracket-mode-badge ${isBaseline ? 'baseline' : 'custom'}">
-          ${isBaseline ? '<i class="fa-solid fa-shield"></i> CHALK' : '<i class="fa-solid fa-sliders"></i> CUSTOM'}
-        </span>
+        ${isAiBenchmark ? `
+          <span class="bracket-mode-badge" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8; border-color: rgba(56, 189, 248, 0.5); font-weight: 800;">
+            <i class="fa-solid fa-robot"></i> GOLDEN BENCHMARK
+          </span>
+        ` : (isMine ? `
+          <span class="bracket-mode-badge" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.5); font-weight: 800;">
+            <i class="fa-solid fa-user"></i> YOUR PICKS
+          </span>
+        ` : `
+          <span class="bracket-mode-badge ${isBaseline ? 'baseline' : 'custom'}">
+            ${isBaseline ? '<i class="fa-solid fa-shield"></i> CHALK' : '<i class="fa-solid fa-sliders"></i> CUSTOM'}
+          </span>
+        `)}
       </div>
 
       <!-- Weekly / Bracket Accuracy Score & Grade Strip -->
@@ -6893,7 +6970,7 @@ function renderSavedBracketsVault() {
         <button class="bracket-action-btn share-btn" onclick="copyBracketShareLink('${b.id}', event)" title="Copy Shareable Link">
           <i class="fa-solid fa-link"></i> Link
         </button>
-        ${!isMine && (state.activeVaultTab === 'community' || isWeekly) ? `
+        ${!isMine && !isAiBenchmark && (state.activeVaultTab === 'community' || isWeekly) ? `
           <button class="bracket-action-btn" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);" onclick="copyCommunityBracketToMine('${b.id}', event)" title="Save a copy directly into My Saved Predictions">
             <i class="fa-solid fa-bookmark"></i> Save
           </button>
