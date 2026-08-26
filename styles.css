@@ -4737,20 +4737,23 @@ body.modal-open {
 
 /* Enhanced Modal Dialog Dimensions & Card Visibility */
 #bracketVaultModal .modal-dialog {
-  max-width: 980px !important;
-  max-height: 90vh !important;
+  max-width: 1060px !important;
+  width: 95vw !important;
+  max-height: 92vh !important;
   display: flex;
   flex-direction: column;
+  padding: 1.15rem 1.4rem !important;
 }
 
 .bracket-vault-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.15rem;
-  margin-top: 0.75rem;
-  max-height: 65vh;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+  margin-top: 0.4rem;
+  flex: 1;
+  max-height: 72vh;
   overflow-y: auto;
-  padding-right: 0.4rem;
+  padding-right: 0.35rem;
 }
 
 

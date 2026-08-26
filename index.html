@@ -52,7 +52,7 @@
       } catch (e) {}
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=20260826_week_buttons_qr_v52">
+  <link rel="stylesheet" href="styles.css?v=20260826_week_buttons_qr_v53">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1150,22 +1150,22 @@
 
   <!-- SAVED BRACKETS VAULT MODAL -->
   <div class="modal-backdrop" id="bracketVaultModal">
-    <div class="modal-dialog" style="max-width: 880px;">
+    <div class="modal-dialog" style="max-width: 1060px; width: 95vw; max-height: 92vh; display: flex; flex-direction: column; padding: 1.15rem 1.4rem;">
       <button class="modal-close" onclick="closeBracketVaultModal()"><i class="fa-solid fa-xmark"></i></button>
       
-      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.2rem;">
         <div>
           <span class="matchup-tag" style="background: rgba(245, 158, 11, 0.2); color: #FBBF24; border-color: rgba(245, 158, 11, 0.4);">
             <i class="fa-solid fa-folder-closed"></i> PICKS HUB & WEEKLY STANDINGS
           </span>
-          <h2 class="modal-title" style="font-size: 1.6rem; margin-top: 0.25rem;">CFB PROPHET PICKS & LEADERBOARD</h2>
+          <h2 class="modal-title" style="font-size: 1.55rem; margin-top: 0.2rem;">CFB PROPHET PICKS & LEADERBOARD</h2>
         </div>
         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-          <button class="action-btn secondary-btn" onclick="importBracketFromPrompt()" style="padding: 0.5rem 0.85rem; font-size: 0.82rem;" title="Import a bracket from a shared URL link or code">
+          <button class="action-btn secondary-btn" onclick="importBracketFromPrompt()" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;" title="Import a bracket from a shared URL link or code">
             <i class="fa-solid fa-file-import"></i>
             <span>Import Link</span>
           </button>
-          <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="padding: 0.5rem 0.95rem;">
+          <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="padding: 0.45rem 0.95rem;">
             <i class="fa-solid fa-plus"></i>
             <span>Submit Current Picks</span>
           </button>
@@ -1173,7 +1173,7 @@
       </div>
 
       <!-- Tab Switcher: Weekly Leaderboard, Full Season Brackets, All 30 Teams, My Predictions -->
-      <div class="vault-tab-bar" style="margin-top: 0.75rem; flex-wrap: wrap;">
+      <div class="vault-tab-bar" style="margin-top: 0.4rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
         <button class="vault-tab-btn active" id="tabWeeklyVaultBtn" onclick="switchVaultTab('weekly')">
           <i class="fa-solid fa-calendar-week"></i> <span>Weekly Standings</span>
         </button>
@@ -1188,12 +1188,10 @@
         </button>
       </div>
 
-      <!-- Weekly Selector Filter (Shown when Weekly tab is active) -->
-      <div class="vault-week-selector-strip" id="vaultWeekSelectorStrip" style="display: flex; gap: 0.35rem; overflow-x: auto; padding: 0.5rem 0; margin-bottom: 0.75rem;">
+      <!-- Weekly Selector Filter (Shown across tabs for instant 1-click week filtering) -->
+      <div class="vault-week-selector-strip" id="vaultWeekSelectorStrip" style="display: flex; gap: 0.35rem; overflow-x: auto; padding: 0.2rem 0; margin-bottom: 0.45rem;">
         <!-- Injected via JavaScript (Week 0 to Week 14 + CCG + CFP) -->
       </div>
-
-      <p style="font-size: 0.85rem; color: #94A3B8; margin-top: -0.25rem;">Compare prediction accuracy scores, percentile grades, and load community simulations from fans and analysts nationwide.</p>
 
       <!-- Vault Brackets List / Grid -->
       <div class="bracket-vault-grid" id="bracketVaultGrid">
@@ -1269,8 +1267,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js?v=20260826_week_buttons_qr_v52"></script>
-  <script src="data/teams.js?v=20260826_week_buttons_qr_v52"></script>
-  <script src="app.js?v=20260826_week_buttons_qr_v52"></script>
+  <script src="qrious.min.js?v=20260826_week_buttons_qr_v53"></script>
+  <script src="qrcode.min.js?v=20260826_week_buttons_qr_v53"></script>
+  <script src="data/teams.js?v=20260826_week_buttons_qr_v53"></script>
+  <script src="app.js?v=20260826_week_buttons_qr_v53"></script>
 </body>
 </html>

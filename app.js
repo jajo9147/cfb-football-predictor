@@ -7516,9 +7516,12 @@ function openBracketQrModal(bracketId, e) {
 
   // Pure Client-Side Instant QR Generation (0ms latency, works 100% offline)
   let qrRendered = false;
-  if (typeof QRious !== 'undefined' && canvasEl) {
+
+  // Method 1: QRious on HTML5 Canvas
+  const QRiousClass = typeof QRious !== 'undefined' ? QRious : (window.QRious || null);
+  if (QRiousClass && canvasEl) {
     try {
-      new QRious({
+      new QRiousClass({
         element: canvasEl,
         value: shareUrl,
         size: 220,
@@ -7528,14 +7531,51 @@ function openBracketQrModal(bracketId, e) {
       });
       canvasEl.style.display = 'block';
       if (imgEl) imgEl.style.display = 'none';
+      const dynDiv = document.getElementById('dynamicQrBox');
+      if (dynDiv) dynDiv.style.display = 'none';
       qrRendered = true;
     } catch(err) {
       console.warn('QRious render error:', err);
     }
   }
 
-  // Fallback to QR API image if QRious is unavailable
+  // Method 2: QRCode.js fallback
+  const QRCodeClass = typeof QRCode !== 'undefined' ? QRCode : (window.QRCode || null);
+  if (!qrRendered && QRCodeClass && canvasEl) {
+    try {
+      const qrContainer = canvasEl.parentElement;
+      if (qrContainer) {
+        canvasEl.style.display = 'none';
+        let dynDiv = document.getElementById('dynamicQrBox');
+        if (!dynDiv) {
+          dynDiv = document.createElement('div');
+          dynDiv.id = 'dynamicQrBox';
+          dynDiv.style.width = '220px';
+          dynDiv.style.height = '220px';
+          qrContainer.appendChild(dynDiv);
+        }
+        dynDiv.innerHTML = '';
+        dynDiv.style.display = 'block';
+        new QRCodeClass(dynDiv, {
+          text: shareUrl,
+          width: 220,
+          height: 220,
+          colorDark: '#000000',
+          colorLight: '#FFFFFF',
+          correctLevel: QRCodeClass.CorrectLevel ? QRCodeClass.CorrectLevel.M : 0
+        });
+        if (imgEl) imgEl.style.display = 'none';
+        qrRendered = true;
+      }
+    } catch(err) {
+      console.warn('QRCode render error:', err);
+    }
+  }
+
+  // Method 3: Fallback to high-speed image QR if client-side libraries failed
   if (!qrRendered && imgEl) {
+    const dynDiv = document.getElementById('dynamicQrBox');
+    if (dynDiv) dynDiv.style.display = 'none';
     const encodedUrl = encodeURIComponent(shareUrl);
     imgEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=${encodedUrl}`;
     imgEl.style.display = 'block';
