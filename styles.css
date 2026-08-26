@@ -5193,35 +5193,72 @@ body.modal-open {
   }
 
   .bracket-vault-grid {
-    grid-template-columns: 1fr !important;
-    gap: 0.85rem !important;
-    max-height: 68vh !important;
-    padding-right: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.95rem !important;
+    max-height: calc(85vh - 170px) !important;
+    padding: 0.2rem 0.1rem 1.5rem 0.1rem !important;
+    overflow-y: auto !important;
     overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
 
   .bracket-vault-card {
-    padding: 0.85rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
     width: 100% !important;
+    min-width: 100% !important;
+    flex-shrink: 0 !important;
+    min-height: fit-content !important;
+    padding: 0.95rem 0.85rem !important;
+    border-radius: var(--radius-md) !important;
+    background: #0F172A !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
+    position: relative !important;
+    z-index: 5 !important;
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    pointer-events: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .bracket-vault-card:active {
+    background: #1E293B !important;
+    border-color: #38BDF8 !important;
   }
 
   .bracket-card-header {
     gap: 0.4rem !important;
     width: 100% !important;
+    pointer-events: auto !important;
   }
 
   .bracket-card-title {
     font-size: 1.05rem !important;
     word-break: break-word !important;
+    line-height: 1.2 !important;
   }
 
   .bracket-mode-badge {
     font-size: 0.62rem !important;
     padding: 0.18rem 0.45rem !important;
+  }
+
+  .bracket-accuracy-strip {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .bracket-champ-preview {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0.55rem 0.75rem !important;
   }
 
   .bracket-seeds-pill-row {
@@ -5235,22 +5272,41 @@ body.modal-open {
   .bracket-card-actions {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
-    gap: 0.35rem !important;
+    gap: 0.4rem !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    position: relative !important;
+    z-index: 10 !important;
+    pointer-events: auto !important;
+    margin-top: 0.25rem !important;
+    padding-top: 0.55rem !important;
   }
 
   .bracket-action-btn {
     flex: unset !important;
     min-width: unset !important;
-    padding: 0.5rem 0.25rem !important;
-    font-size: 0.72rem !important;
+    width: 100% !important;
+    min-height: 40px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    padding: 0.5rem 0.2rem !important;
+    font-size: 0.74rem !important;
+    font-weight: 800 !important;
+    border-radius: var(--radius-sm) !important;
     box-sizing: border-box !important;
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+    pointer-events: auto !important;
+    z-index: 15 !important;
   }
 
   .bracket-action-btn.delete-btn {
     grid-column: span 4 !important;
+    min-height: 40px !important;
     padding: 0.5rem !important;
+    font-size: 0.8rem !important;
   }
 
   .h2h-vs-ai-banner {

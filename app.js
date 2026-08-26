@@ -6675,11 +6675,14 @@ function handleAppleSignInClick() {
 window.handleAppleSignInClick = handleAppleSignInClick;
 
 function handleConfirmAppleApproval() {
+  const customName = document.getElementById('appleApprovalName')?.textContent?.trim() || 'Jake Johnson';
+  const customEmail = document.getElementById('appleApprovalEmail')?.textContent?.trim() || 'jake.johnson@privaterelay.appleid.com';
+
   const user = {
-    id: `apple_${btoa('jake.johnson@privaterelay.appleid.com').replace(/=/g, '').slice(0, 16)}`,
-    displayName: 'Jake Johnson',
-    handle: 'Jake Johnson',
-    email: 'jake.johnson@privaterelay.appleid.com',
+    id: `apple_${btoa(customEmail.toLowerCase()).replace(/=/g, '').slice(0, 16)}`,
+    displayName: customName,
+    handle: customName,
+    email: customEmail,
     provider: 'apple',
     favTeam: state.currentTeamId || 'usc',
     createdAt: new Date().toISOString()
@@ -6706,11 +6709,14 @@ function handleGoogleSignInClick() {
 window.handleGoogleSignInClick = handleGoogleSignInClick;
 
 function handleConfirmGoogleApproval() {
+  const customName = document.getElementById('googleApprovalName')?.textContent?.trim() || 'Jake Johnson';
+  const customEmail = document.getElementById('googleApprovalEmail')?.textContent?.trim() || 'jajo9147@gmail.com';
+
   const user = {
-    id: `google_${btoa('jajo9147@gmail.com').replace(/=/g, '').slice(0, 16)}`,
-    displayName: 'Jake Johnson',
-    handle: 'Jake Johnson',
-    email: 'jajo9147@gmail.com',
+    id: `google_${btoa(customEmail.toLowerCase()).replace(/=/g, '').slice(0, 16)}`,
+    displayName: customName,
+    handle: customName,
+    email: customEmail,
     provider: 'google',
     favTeam: state.currentTeamId || 'usc',
     createdAt: new Date().toISOString()
@@ -7364,7 +7370,7 @@ function renderSavedBracketsVault() {
     `).join('');
 
     html += `
-      <div class="bracket-vault-card ${isActive ? 'active-bracket' : ''} ${isAiBenchmark ? 'ai-benchmark-card' : ''}">
+      <div class="bracket-vault-card ${isActive ? 'active-bracket' : ''} ${isAiBenchmark ? 'ai-benchmark-card' : ''}" onclick="handleVaultCardClick('${b.id}', event)">
         <div class="bracket-card-header">
           <div style="display: flex; gap: 0.65rem; align-items: flex-start;">
             <span class="bracket-rank-badge ${rankCls}">${rankMedal}</span>
@@ -7424,26 +7430,26 @@ function renderSavedBracketsVault() {
           ${seedPills}
         </div>
 
-        <div class="bracket-card-actions">
-          <button class="bracket-action-btn load-btn" onclick="loadSavedBracket('${b.id}')" title="Load these predictions into the simulator">
+        <div class="bracket-card-actions" onclick="event.stopPropagation()">
+          <button class="bracket-action-btn load-btn" onclick="event.stopPropagation(); loadSavedBracket('${b.id}')" title="Load these predictions into the simulator">
             <i class="fa-solid fa-play"></i> Load
           </button>
-          <button class="bracket-action-btn export-btn" onclick="openCfpBracketCanvasModalForBracket('${b.id}')" title="Export Tournament Graphic">
+          <button class="bracket-action-btn export-btn" onclick="event.stopPropagation(); openCfpBracketCanvasModalForBracket('${b.id}')" title="Export Tournament Graphic">
             <i class="fa-solid fa-camera-retro"></i> Graphic
           </button>
-          <button class="bracket-action-btn" style="background: rgba(168, 85, 247, 0.2); color: #D8B4FE; border-color: rgba(168, 85, 247, 0.4);" onclick="openBracketQrModal('${b.id}', event)" title="Scan QR Code to Sync directly to Phone">
+          <button class="bracket-action-btn" style="background: rgba(168, 85, 247, 0.2); color: #D8B4FE; border-color: rgba(168, 85, 247, 0.4);" onclick="event.stopPropagation(); openBracketQrModal('${b.id}', event)" title="Scan QR Code to Sync directly to Phone">
             <i class="fa-solid fa-qrcode"></i> Sync
           </button>
-          <button class="bracket-action-btn share-btn" onclick="copyBracketShareLink('${b.id}', event)" title="Copy Shareable Link">
+          <button class="bracket-action-btn share-btn" onclick="event.stopPropagation(); copyBracketShareLink('${b.id}', event)" title="Copy Shareable Link">
             <i class="fa-solid fa-link"></i> Link
           </button>
           ${!isOwner && !isAiBenchmark ? `
-            <button class="bracket-action-btn" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);" onclick="copyCommunityBracketToMine('${b.id}', event)" title="Save a copy directly into My Saved Predictions">
+            <button class="bracket-action-btn" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);" onclick="event.stopPropagation(); copyCommunityBracketToMine('${b.id}', event)" title="Save a copy directly into My Saved Predictions">
               <i class="fa-solid fa-bookmark"></i> Copy
             </button>
           ` : ''}
           ${isOwner && !isAiBenchmark ? `
-            <button class="bracket-action-btn delete-btn" onclick="deleteSavedBracket('${b.id}', event)" title="Delete your prediction permanently">
+            <button class="bracket-action-btn delete-btn" onclick="event.stopPropagation(); deleteSavedBracket('${b.id}', event)" title="Delete your prediction permanently">
               <i class="fa-solid fa-trash-can"></i> Delete
             </button>
           ` : ''}
@@ -7454,6 +7460,14 @@ function renderSavedBracketsVault() {
 
   grid.innerHTML = html;
 }
+
+function handleVaultCardClick(bracketId, e) {
+  if (e && e.target && e.target.closest && e.target.closest('.bracket-action-btn')) {
+    return;
+  }
+  loadSavedBracket(bracketId);
+}
+window.handleVaultCardClick = handleVaultCardClick;
 
 
 function copyCommunityBracketToMine(bracketId, e) {
