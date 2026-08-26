@@ -1,10 +1,10 @@
 {
-  "id": "https://jajo9147.github.io/cfb-football-predictor/",
+  "id": "/cfb-football-predictor/",
   "name": "CFB Prophet: College Football AI Predictor",
   "short_name": "CFB Prophet",
   "description": "Simulate 10,000 drives, tune custom AI scenarios, and project CFP Playoff paths for top college football powerhouses.",
-  "start_url": "https://jajo9147.github.io/cfb-football-predictor/",
-  "scope": "https://jajo9147.github.io/cfb-football-predictor/",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#07090E",
@@ -14,81 +14,94 @@
   "dir": "ltr",
   "categories": ["sports", "entertainment", "games"],
   "prefer_related_applications": false,
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://jajo9147.github.io/cfb-football-predictor/manifest.json",
+      "id": "com.cfbprophet.app"
+    }
+  ],
+  "scope_extensions": [
+    {
+      "origin": "https://jajo9147.github.io"
+    }
+  ],
   "icons": [
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-48.png",
+      "src": "icons/icon-48.png",
       "sizes": "48x48",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-72.png",
+      "src": "icons/icon-72.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-96.png",
+      "src": "icons/icon-96.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-128.png",
+      "src": "icons/icon-128.png",
       "sizes": "128x128",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-144.png",
+      "src": "icons/icon-144.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-152.png",
+      "src": "icons/icon-152.png",
       "sizes": "152x152",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-192.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-192.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-384.png",
+      "src": "icons/icon-384.png",
       "sizes": "384x384",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-512.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-512.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-1024.png",
+      "src": "icons/icon-1024.png",
       "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-1024.png",
+      "src": "icons/icon-1024.png",
       "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "maskable"
@@ -96,14 +109,14 @@
   ],
   "screenshots": [
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/screenshot-desktop.jpg",
+      "src": "icons/screenshot-desktop.jpg",
       "sizes": "1376x768",
       "type": "image/jpeg",
       "form_factor": "wide",
       "label": "CFB Prophet Desktop 12-Team CFP Simulator"
     },
     {
-      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/screenshot-mobile.png",
+      "src": "icons/screenshot-mobile.png",
       "sizes": "1206x2622",
       "type": "image/png",
       "form_factor": "narrow",
@@ -115,19 +128,33 @@
       "name": "12-Team CFP Playoff",
       "short_name": "Playoffs",
       "description": "View live 12-Team Playoff Bracket and National Championship projections",
-      "url": "https://jajo9147.github.io/cfb-football-predictor/#playoffs",
-      "icons": [{ "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-192.png", "sizes": "192x192" }]
+      "url": "./index.html#playoffs",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ]
     },
     {
       "name": "Prophet AI's Picks",
       "short_name": "AI Picks",
       "description": "Compare your predictions against Prophet AI's Golden Standard",
-      "url": "https://jajo9147.github.io/cfb-football-predictor/#vault",
-      "icons": [{ "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-192.png", "sizes": "192x192" }]
+      "url": "./index.html#vault",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ]
     }
   ],
   "share_target": {
-    "action": "https://jajo9147.github.io/cfb-football-predictor/",
+    "action": "./index.html",
     "method": "GET",
     "params": {
       "title": "title",
