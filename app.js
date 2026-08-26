@@ -6365,319 +6365,32 @@ window.openHypeCardModal = function() {
 const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v2';
 
 function getSavedBrackets() {
+  let myBrackets = [];
   try {
     const raw = localStorage.getItem(BRACKET_STORAGE_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) {
-        return parsed.filter(b => b.id !== 'bracket_baseline_chalk_2026');
-      }
-    }
-  } catch (e) {}
-  return [];
-}
-
-function createProphetAiBenchmarkBracket() {
-  // Temporary save current overrides
-  const tempUserPicks = state.userPicks;
-  const tempCcgPicks = state.ccgPicks;
-  const tempPlayoffPicks = state.playoffPicks;
-  const tempTeamSliders = state.teamSliders;
-  const tempGameSliders = state.gameSliders;
-
-  // Clear to evaluate pure baseline
-  state.userPicks = {};
-  state.ccgPicks = {};
-  state.playoffPicks = {};
-  state.teamSliders = {};
-  state.gameSliders = {};
-
-  const evaluated = evaluateRegularSeasonAllTeams();
-  const ccg = simulateConferenceChampionships(evaluated);
-  const cfp = generate12TeamCfpField(ccg.confChamps, evaluated);
-  const playoff = simulatePlayoffBracket(cfp);
-
-  // Restore state
-  state.userPicks = tempUserPicks;
-  state.ccgPicks = tempCcgPicks;
-  state.playoffPicks = tempPlayoffPicks;
-  state.teamSliders = tempTeamSliders;
-  state.gameSliders = tempGameSliders;
-
-  const seeds = (cfp.seeds || []).map((s, idx) => ({
-    seed: idx + 1,
-    id: s?.id || 'ohiostate',
-    name: s?.shortName || s?.name || 'Team',
-    logoUrl: s?.logoUrl || '',
-    wins: s?.wins !== undefined ? s.wins : (s?.totalWins || 11),
-    losses: s?.losses !== undefined ? s.losses : (s?.totalLosses || 1)
-  }));
-
-  const champTeam = playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE['ohiostate'];
-  const runnerTeam = playoff.runnerUp ? (TEAMS_DATABASE[playoff.runnerUp.id] || playoff.runnerUp) : TEAMS_DATABASE['oregon'];
-
-  return {
-    id: 'bracket_prophet_ai_baseline',
-    name: "Prophet AI's Picks",
-    creator: 'Prophet AI (Model Benchmark)',
-    notes: 'The golden standard: 10,000 Monte Carlo simulation baseline. Can you beat the AI?',
-    createdAt: '2026-08-26T12:00:00Z',
-    mode: 'baseline',
-    isAdminBenchmark: true,
-    isPublic: true,
-    champion: {
-      id: champTeam.id || 'ohiostate',
-      name: champTeam.name || 'Ohio State Buckeyes',
-      shortName: champTeam.shortName || 'Ohio State',
-      logoUrl: champTeam.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',
-      score: playoff.natty?.sim?.winnerScore || playoff.natty?.sim?.scoreA || 35,
-      oppScore: playoff.natty?.sim?.loserScore || playoff.natty?.sim?.scoreB || 30
-    },
-    runnerUp: {
-      id: runnerTeam.id || 'oregon',
-      name: runnerTeam.name || 'Oregon Ducks',
-      shortName: runnerTeam.shortName || 'Oregon'
-    },
-    seeds: seeds,
-    playoffSummary: {
-      fr: [
-        { label: '#5 vs #12', winner: playoff.fr1?.sim?.winner?.shortName || 'Texas', score: `${playoff.fr1?.sim?.scoreA || 31}-${playoff.fr1?.sim?.scoreB || 21}` },
-        { label: '#6 vs #11', winner: playoff.fr2?.sim?.winner?.shortName || 'Indiana', score: `${playoff.fr2?.sim?.scoreA || 28}-${playoff.fr2?.sim?.scoreB || 24}` },
-        { label: '#7 vs #10', winner: playoff.fr3?.sim?.winner?.shortName || 'Miami', score: `${playoff.fr3?.sim?.scoreA || 28}-${playoff.fr3?.sim?.scoreB || 24}` },
-        { label: '#8 vs #9', winner: playoff.fr4?.sim?.winner?.shortName || 'Texas A&M', score: `${playoff.fr4?.sim?.scoreA || 27}-${playoff.fr4?.sim?.scoreB || 24}` }
-      ],
-      qf: [
-        { bowl: 'Sugar Bowl', winner: playoff.qf1?.sim?.winner?.shortName || 'Ohio State' },
-        { bowl: 'Rose Bowl', winner: playoff.qf2?.sim?.winner?.shortName || 'Oregon' },
-        { bowl: 'Peach Bowl', winner: playoff.qf3?.sim?.winner?.shortName || 'Texas' },
-        { bowl: 'Fiesta Bowl', winner: playoff.qf4?.sim?.winner?.shortName || 'Georgia' }
-      ],
-      sf: [
-        { bowl: 'Orange Bowl', winner: playoff.sf1?.sim?.winner?.shortName || 'Ohio State' },
-        { bowl: 'Cotton Bowl', winner: playoff.sf2?.sim?.winner?.shortName || 'Oregon' }
-      ]
-    },
-    simState: {
-      teamId: 'ohiostate',
-      userPicks: {},
-      ccgPicks: {},
-      playoffPicks: {},
-      teamSliders: {},
-      gameSliders: {}
-    }
-  };
-}
-
-function createBaselineBracketObject() {
-  return createProphetAiBenchmarkBracket();
-}
-
-function saveCurrentProjectionAsBracket(bracketName, creatorName, notes) {
-  const evaluated = evaluateRegularSeasonAllTeams();
-  const ccg = simulateConferenceChampionships(evaluated);
-  const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
-  const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
-
-  const champId = state.lastNationalChampion?.id || playoff.nationalChampion?.id || state.currentTeamId || 'texas';
-  const champTeam = TEAMS_DATABASE[champId] || state.lastNationalChampion || playoff.nationalChampion || { name: 'National Champions', shortName: 'Champs', logoUrl: '' };
-
-  const name = (bracketName || '').trim() || `${champTeam.shortName || 'CFB'} Natty Projection`;
-  const creator = (creatorName || '').trim() || 'Anonymous Coach';
-  const bracketNotes = (notes || '').trim();
-
-  const isCustom = Object.keys(state.userPicks).length > 0 || 
-                   Object.keys(state.ccgPicks).length > 0 || 
-                   Object.keys(state.playoffPicks).length > 0 ||
-                   Object.keys(state.teamSliders).some(k => isSlidersCustom(state.teamSliders[k])) ||
-                   Object.keys(state.gameSliders).some(k => isSlidersCustom(state.gameSliders[k]));
-
-  const seeds = (cfp.seeds || []).slice(0, 12).map((s, idx) => ({
-    seed: idx + 1,
-    id: s?.id || 'ohiostate',
-    name: s?.shortName || s?.name || 'Team',
-    logoUrl: s?.logoUrl || '',
-    wins: s?.wins !== undefined ? s.wins : (s?.totalWins || 11),
-    losses: s?.losses !== undefined ? s.losses : (s?.totalLosses || 1)
-  }));
-
-  // Clean sliders to strip out all non-custom zero entries (<1.2 KB total size)
-  const cleanTeamSliders = {};
-  if (state.teamSliders) {
-    Object.keys(state.teamSliders).forEach(tid => {
-      const s = state.teamSliders[tid];
-      if (s && isSlidersCustom(s)) cleanTeamSliders[tid] = s;
-    });
-  }
-
-  const cleanGameSliders = {};
-  if (state.gameSliders) {
-    Object.keys(state.gameSliders).forEach(gid => {
-      const s = state.gameSliders[gid];
-      if (s && isSlidersCustom(s)) cleanGameSliders[gid] = s;
-    });
-  }
-
-  const bracketObj = {
-    id: `bracket_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
-    name: name,
-    creator: creator,
-    notes: bracketNotes,
-    createdAt: new Date().toISOString(),
-    mode: isCustom ? 'custom' : 'baseline',
-    champion: {
-      id: champId,
-      name: champTeam.name || 'National Champions',
-      shortName: champTeam.shortName || 'Champions',
-      logoUrl: champTeam.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',
-      score: playoff.natty?.sim?.winnerScore || playoff.natty?.sim?.scoreA || 34,
-      oppScore: playoff.natty?.sim?.loserScore || playoff.natty?.sim?.scoreB || 28
-    },
-    runnerUp: {
-      id: playoff.runnerUp?.id || (playoff.natty?.sim?.loser?.id) || 'ohiostate',
-      name: playoff.runnerUp?.name || (playoff.natty?.sim?.loser?.name) || 'Challenger',
-      shortName: playoff.runnerUp?.shortName || (playoff.natty?.sim?.loser?.shortName) || 'Opponent'
-    },
-    seeds: seeds,
-    playoffSummary: {
-      fr: [
-        { winner: playoff.fr1?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.fr2?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.fr3?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.fr4?.sim?.winner?.shortName || 'Team' }
-      ],
-      qf: [
-        { winner: playoff.qf1?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.qf2?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.qf3?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.qf4?.sim?.winner?.shortName || 'Team' }
-      ],
-      sf: [
-        { winner: playoff.sf1?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.sf2?.sim?.winner?.shortName || 'Team' }
-      ]
-    },
-    simState: {
-      teamId: state.currentTeamId || champId,
-      userPicks: { ...state.userPicks },
-      ccgPicks: { ...state.ccgPicks },
-      playoffPicks: { ...state.playoffPicks },
-      teamSliders: cleanTeamSliders,
-      gameSliders: cleanGameSliders
-    }
-  };
-
-  const brackets = getSavedBrackets();
-  brackets.unshift(bracketObj);
-  try {
-    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(brackets));
+    if (raw) myBrackets = JSON.parse(raw) || [];
   } catch (e) {}
 
-  state.activeSavedBracketId = bracketObj.id;
-  return bracketObj;
+  // If local list is empty on this device, check if any cloud brackets were submitted with user's handle
+  const userHandle = (localStorage.getItem('cfb_prophet_user_handle') || '').trim().toLowerCase();
+  const cloudBrackets = getLocalCommunityBrackets();
+
+  if (userHandle && cloudBrackets.length > 0) {
+    const matchedCloud = cloudBrackets.filter(b => (b.creator || '').trim().toLowerCase() === userHandle);
+    if (matchedCloud.length > 0) {
+      const map = new Map();
+      myBrackets.forEach(b => map.set(b.id, b));
+      matchedCloud.forEach(b => map.set(b.id, b));
+      myBrackets = Array.from(map.values());
+      try {
+        localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
+      } catch (e) {}
+    }
+  }
+
+  return myBrackets;
 }
 
-function loadSavedBracket(bracketId) {
-  const brackets = getSavedBrackets();
-  const target = brackets.find(b => b.id === bracketId);
-  if (!target || !target.simState) return false;
-
-  state.userPicks = target.simState.userPicks ? { ...target.simState.userPicks } : {};
-  state.ccgPicks = target.simState.ccgPicks ? { ...target.simState.ccgPicks } : {};
-  state.playoffPicks = target.simState.playoffPicks ? { ...target.simState.playoffPicks } : {};
-  state.teamSliders = target.simState.teamSliders ? JSON.parse(JSON.stringify(target.simState.teamSliders)) : {};
-  state.gameSliders = target.simState.gameSliders ? JSON.parse(JSON.stringify(target.simState.gameSliders)) : {};
-
-  if (target.simState.teamId && TEAMS_DATABASE[target.simState.teamId]) {
-    selectTeam(target.simState.teamId);
-  } else {
-    recalculateSeason();
-  }
-
-  state.activeSavedBracketId = bracketId;
-  closeBracketVaultModal();
-  showCustomToast(`📂 Loaded Bracket: "${target.name}"`);
-  return true;
-}
-
-function deleteSavedBracket(bracketId, e) {
-  if (e) {
-    e.stopPropagation();
-    e.preventDefault();
-  }
-  const myBrackets = getSavedBrackets();
-  const target = myBrackets.find(b => b.id === bracketId);
-  if (!target) {
-    showCustomToast('⚠️ You can only delete brackets you created.');
-    return;
-  }
-
-  if (confirm(`Are you sure you want to delete your saved bracket "${target.name}"?`)) {
-    const updated = myBrackets.filter(b => b.id !== bracketId);
-    try {
-      localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(updated));
-      const localComm = getLocalCommunityBrackets().filter(b => b.id !== bracketId);
-      localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(localComm));
-    } catch (e) {}
-    renderSavedBracketsVault();
-    showCustomToast(`🗑️ Deleted bracket: "${target.name}"`);
-  }
-}
-
-
-
-// ==========================================================================
-// MARCH MADNESS BRACKET ACCURACY SCORING & COMMUNITY CLOUD SYNC ENGINE
-// ==========================================================================
-
-const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v2';
-const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_brackets_2026_prod';
-state.activeVaultTab = 'community'; // 'community' or 'mine'
-
-// 1. Calculate Bracket Accuracy (% Score, Points & Grade)
-function calculateBracketAccuracy(bracket) {
-  if (!bracket) return { pts: 380, maxPts: 380, pct: 100.0, grade: 'A+', percentile: '100th', hits: '12/12 Live Picks (0 Eliminated)' };
-
-  // Check if any real-world 2026 games have officially finished
-  const completedCount = typeof getCompletedGameCount === 'function' ? getCompletedGameCount() : 0;
-
-  if (completedCount === 0) {
-    // Before games are played, EVERY bracket is undefeated at 100% (380 / 380 Max PTS)
-    return {
-      pts: 380,
-      maxPts: 380,
-      pct: 100.0,
-      grade: 'A+',
-      percentile: '100th',
-      hits: '12/12 Live Picks • 0 Eliminated'
-    };
-  }
-
-  // Live in-season scoring logic against completed game results
-  let pts = 380;
-  let eliminatedCount = 0;
-  const maxPts = 380;
-
-  pts = Math.min(380, Math.max(0, pts));
-  const pct = Math.round((pts / maxPts) * 1000) / 10;
-
-  let grade = 'A+';
-  let percentile = '100th';
-  if (pct >= 95.0) { grade = 'A+'; percentile = '99th'; }
-  else if (pct >= 90.0) { grade = 'A'; percentile = '94th'; }
-  else if (pct >= 85.0) { grade = 'B+'; percentile = '85th'; }
-  else if (pct >= 75.0) { grade = 'B'; percentile = '72nd'; }
-  else if (pct >= 65.0) { grade = 'C+'; percentile = '60th'; }
-  else { grade = 'C'; percentile = '45th'; }
-
-  return {
-    pts,
-    maxPts,
-    pct,
-    grade,
-    percentile,
-    hits: `${12 - eliminatedCount}/12 Live Picks`
-  };
-}
 
 function getCuratedExpertBrackets() {
   return [createProphetAiBenchmarkBracket()];
@@ -6868,6 +6581,7 @@ window.switchVaultTab = switchVaultTab;
 
 
 function renderSavedBracketsVault() {
+  syncCommunityBracketsFromCloud(false);
   renderVaultWeekSelector();
   const grid = document.getElementById('bracketVaultGrid');
   if (!grid) return;
@@ -7161,6 +6875,12 @@ function handleConfirmSaveBracket() {
   const notes = document.getElementById('bracketNotesInput')?.value;
   const isPublic = document.getElementById('publishToCommunityCheckbox')?.checked !== false;
 
+  if (creator && creator.trim()) {
+    try {
+      localStorage.setItem('cfb_prophet_user_handle', creator.trim());
+    } catch(e) {}
+  }
+
   const saved = saveCurrentProjectionAsBracket(name, creator, notes);
   if (isPublic) {
     saved.isPublic = true;
@@ -7370,6 +7090,47 @@ function copyCfpBracketGraphic() {
       downloadCfpBracketGraphic();
     }
   });
+}
+
+function loadSavedBracket(bracketId) {
+  const allBrackets = getCommunityBrackets();
+  const target = allBrackets.find(b => b.id === bracketId);
+  if (!target) return;
+
+  state.activeSavedBracketId = target.id;
+  if (target.simState) {
+    if (target.simState.teamId) state.currentTeamId = target.simState.teamId;
+    state.userPicks = { ...(target.simState.userPicks || {}) };
+    state.ccgPicks = { ...(target.simState.ccgPicks || {}) };
+    state.playoffPicks = { ...(target.simState.playoffPicks || {}) };
+    state.teamSliders = JSON.parse(JSON.stringify(target.simState.teamSliders || {}));
+    state.gameSliders = JSON.parse(JSON.stringify(target.simState.gameSliders || {}));
+  }
+
+  closeBracketVaultModal();
+  updateTeamView(state.currentTeamId);
+  showCustomToast(`🎯 Loaded predictions: "${target.name}"`);
+}
+
+function deleteSavedBracket(bracketId, e) {
+  if (e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  let myBrackets = getSavedBrackets();
+  myBrackets = myBrackets.filter(b => b.id !== bracketId);
+  try {
+    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
+  } catch (e) {}
+
+  let commBrackets = getLocalCommunityBrackets();
+  commBrackets = commBrackets.filter(b => b.id !== bracketId);
+  try {
+    localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(commBrackets));
+  } catch (e) {}
+
+  renderSavedBracketsVault();
+  showCustomToast('🗑️ Bracket removed.');
 }
 
 function copyBracketShareLink(bracketId, e) {
