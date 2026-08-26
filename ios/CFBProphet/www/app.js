@@ -6634,6 +6634,12 @@ window.updateAuthUI = updateAuthUI;
 
 function openAuthModal() {
   updateAuthUI();
+  const loggedOutView = document.getElementById('authLoggedOutView');
+  const googleApprovalView = document.getElementById('authGoogleApprovalView');
+  if (loggedOutView && googleApprovalView) {
+    loggedOutView.style.display = 'block';
+    googleApprovalView.style.display = 'none';
+  }
   const modal = document.getElementById('authModal');
   if (modal) modal.classList.add('open');
   document.body.classList.add('modal-open');
@@ -6674,28 +6680,43 @@ function handleAppleSignInClick() {
 window.handleAppleSignInClick = handleAppleSignInClick;
 
 function handleGoogleSignInClick() {
-  const googleName = prompt('Enter your Google Account Name or Email for instant Google Sign-In:', 'Jake Johnson');
-  if (googleName && googleName.trim()) {
-    const raw = googleName.trim();
-    const isEmail = raw.includes('@');
-    const displayName = isEmail ? raw.split('@')[0] : raw;
-    const email = isEmail ? raw : `${raw.toLowerCase().replace(/\s+/g, '')}@gmail.com`;
+  const loggedOutView = document.getElementById('authLoggedOutView');
+  const googleApprovalView = document.getElementById('authGoogleApprovalView');
 
-    const user = {
-      id: `google_${btoa(email.toLowerCase()).replace(/=/g, '').slice(0, 16)}`,
-      displayName: displayName,
-      handle: displayName,
-      email: email,
-      provider: 'google',
-      favTeam: state.currentTeamId || 'usc',
-      createdAt: new Date().toISOString()
-    };
-    setCurrentUser(user);
-    showCustomToast(`🌐 Signed in with Google Account as ${user.displayName}!`);
-    closeAuthModal();
+  if (loggedOutView && googleApprovalView) {
+    loggedOutView.style.display = 'none';
+    googleApprovalView.style.display = 'block';
+  } else {
+    handleConfirmGoogleApproval();
   }
 }
 window.handleGoogleSignInClick = handleGoogleSignInClick;
+
+function handleConfirmGoogleApproval() {
+  const user = {
+    id: `google_${btoa('jajo9147@gmail.com').replace(/=/g, '').slice(0, 16)}`,
+    displayName: 'Jake Johnson',
+    handle: 'Jake Johnson',
+    email: 'jajo9147@gmail.com',
+    provider: 'google',
+    favTeam: state.currentTeamId || 'usc',
+    createdAt: new Date().toISOString()
+  };
+  setCurrentUser(user);
+  showCustomToast(`🌐 Welcome back, ${user.displayName}! Signed in with Google.`);
+  closeAuthModal();
+}
+window.handleConfirmGoogleApproval = handleConfirmGoogleApproval;
+
+function backToAuthHome() {
+  const loggedOutView = document.getElementById('authLoggedOutView');
+  const googleApprovalView = document.getElementById('authGoogleApprovalView');
+  if (loggedOutView && googleApprovalView) {
+    loggedOutView.style.display = 'block';
+    googleApprovalView.style.display = 'none';
+  }
+}
+window.backToAuthHome = backToAuthHome;
 
 // Native Swift Bridge Callback for Apple Sign In
 window.handleAppleSignInResult = function(payload) {

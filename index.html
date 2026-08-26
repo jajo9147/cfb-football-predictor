@@ -52,7 +52,8 @@
       } catch (e) {}
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=20260826_auth_google_apple_v80">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260826_auth_google_onetap_v85">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1286,10 +1287,6 @@
 
         <!-- Social Sign In (Apple + Google) -->
         <div class="social-auth-buttons" style="display: flex; flex-direction: column; gap: 0.5rem;">
-          <button class="apple-sign-in-btn" id="appleSignInBtn" onclick="handleAppleSignInClick()">
-            <i class="fa-brands fa-apple" style="font-size: 1.25rem;"></i>
-            <span>Sign in with Apple</span>
-          </button>
           <button class="google-sign-in-btn" id="googleSignInBtn" onclick="handleGoogleSignInClick()">
             <svg class="google-icon" width="18" height="18" viewBox="0 0 18 18">
               <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
@@ -1297,23 +1294,29 @@
               <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707 0-.59.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.347 2.825.957 4.039l3.007-2.332z"/>
               <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
             </svg>
-            <span>Sign in with Google</span>
+            <span>Continue with Google</span>
+          </button>
+          <button class="apple-sign-in-btn" id="appleSignInBtn" onclick="handleAppleSignInClick()">
+            <i class="fa-brands fa-apple" style="font-size: 1.25rem;"></i>
+            <span>Sign in with Apple</span>
           </button>
         </div>
 
+        <div id="g_id_signin_render" style="margin-top: 0.35rem; display: flex; justify-content: center;"></div>
+
         <div class="auth-divider">
-          <span>OR SIGN IN WITH HANDLE / EMAIL</span>
+          <span>OR SIGN IN WITH HANDLE & IN-APP PIN</span>
         </div>
 
         <form id="authForm" onsubmit="handleAuthFormSubmit(event)" style="display: flex; flex-direction: column; gap: 0.75rem; text-align: left;">
           <div class="auth-input-group">
-            <label for="authHandleInput">Prophet Handle or Email</label>
-            <input type="text" id="authHandleInput" class="auth-input" placeholder="e.g. CoachJake or coach@email.com" required autocomplete="username">
+            <label for="authHandleInput">Coach Handle</label>
+            <input type="text" id="authHandleInput" class="auth-input" placeholder="e.g. CoachJake" required autocomplete="username">
           </div>
 
           <div class="auth-input-group">
-            <label for="authPinInput">Security PIN or Password</label>
-            <input type="password" id="authPinInput" class="auth-input" placeholder="4-digit PIN or password" required autocomplete="current-password">
+            <label for="authPinInput">4-Digit In-App Passcode (Do NOT use email password)</label>
+            <input type="password" id="authPinInput" class="auth-input" placeholder="e.g. 1234" maxlength="8" required autocomplete="current-password">
           </div>
 
           <div class="auth-input-group">
@@ -1341,6 +1344,46 @@
             </button>
           </div>
         </form>
+
+        <div style="margin-top: 1rem; font-size: 0.72rem; color: #64748B; line-height: 1.4; text-align: center;">
+          <i class="fa-solid fa-shield-halved" style="color: #10B981;"></i> <strong>Zero-Password Exposure:</strong> Google and Apple OAuth never share your passwords. Passcodes are strictly for in-app bracket protection.
+        </div>
+      </div>
+
+      <!-- INSTANT 1-TAP GOOGLE PREPOPULATED APPROVAL VIEW -->
+      <div id="authGoogleApprovalView" style="display: none;">
+        <div class="modal-header" style="margin-bottom: 1.25rem;">
+          <span class="matchup-tag" style="background: rgba(66, 133, 244, 0.2); color: #60A5FA; border-color: rgba(66, 133, 244, 0.4);">
+            <svg class="google-icon" width="14" height="14" viewBox="0 0 18 18" style="margin-right: 4px; vertical-align: -2px;">
+              <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+              <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+              <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707 0-.59.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.347 2.825.957 4.039l3.007-2.332z"/>
+              <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+            </svg> GOOGLE 1-TAP APPROVAL
+          </span>
+          <h2 class="modal-title" style="font-size: 1.35rem; margin-top: 0.25rem;">CONTINUE WITH GOOGLE</h2>
+          <p style="font-size: 0.82rem; color: #94A3B8;">Sign in to CFB Prophet with your verified Google account.</p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-md); padding: 1.15rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.85rem; text-align: left; cursor: pointer; transition: var(--transition-fast);" onclick="handleConfirmGoogleApproval()" id="googleApprovalCard">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #4285F4, #34A853); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; color: #FFFFFF; flex-shrink: 0;" id="googleApprovalAvatar">
+            J
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-weight: 800; font-size: 0.95rem; color: #FFFFFF;" id="googleApprovalName">Jake Johnson</div>
+            <div style="font-size: 0.78rem; color: #94A3B8; font-family: var(--font-mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="googleApprovalEmail">jajo9147@gmail.com</div>
+          </div>
+          <i class="fa-solid fa-circle-check" style="color: #34D399; font-size: 1.25rem;"></i>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <button class="action-btn" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #FFFFFF; font-weight: 800; padding: 0.75rem; border-radius: var(--radius-md); font-size: 0.95rem;" onclick="handleConfirmGoogleApproval()">
+            <i class="fa-solid fa-check"></i> <span id="googleApprovalBtnText">Approve & Continue as Jake</span>
+          </button>
+          <button class="action-btn secondary-btn" onclick="backToAuthHome()" style="font-size: 0.8rem; padding: 0.45rem;">
+            <span>Use a different account</span>
+          </button>
+        </div>
       </div>
 
       <!-- LOGGED IN VIEW -->
@@ -1386,9 +1429,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js?v=20260826_auth_google_apple_v80"></script>
-  <script src="qrcode.min.js?v=20260826_auth_google_apple_v80"></script>
-  <script src="data/teams.js?v=20260826_auth_google_apple_v80"></script>
-  <script src="app.js?v=20260826_auth_google_apple_v80"></script>
+  <script src="qrious.min.js?v=20260826_auth_google_onetap_v85"></script>
+  <script src="qrcode.min.js?v=20260826_auth_google_onetap_v85"></script>
+  <script src="data/teams.js?v=20260826_auth_google_onetap_v85"></script>
+  <script src="app.js?v=20260826_auth_google_onetap_v85"></script>
 </body>
 </html>
