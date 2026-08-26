@@ -162,6 +162,48 @@
       "url": "url"
     }
   },
+  "file_handlers": [
+    {
+      "action": "./index.html",
+      "accept": {
+        "application/json": [".json"]
+      }
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+cfbprophet",
+      "url": "./index.html?s=%s"
+    }
+  ],
+  "widgets": [
+    {
+      "name": "CFB Prophet Standings Widget",
+      "short_name": "CFB Standings",
+      "description": "Live College Football Playoff rankings and Prophet AI benchmarks",
+      "tag": "cfb-standings",
+      "template": "widget-template",
+      "ms_ac_template": "widgets/standings.json",
+      "data": "data/teams.js",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "icons/screenshot-desktop.jpg",
+          "sizes": "1376x768",
+          "label": "CFB Prophet Standings Widget"
+        }
+      ],
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "note_taking": {
+    "new_note_url": "./index.html#vault"
+  },
   "launch_handler": {
     "client_mode": ["navigate-existing", "auto"]
   },
