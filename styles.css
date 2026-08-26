@@ -4576,17 +4576,29 @@ body.modal-open {
 }
 
 .bracket-action-btn.delete-btn {
-  flex: 0 0 32px;
-  min-width: 32px;
-  padding: 0.42rem 0.3rem;
-  background: rgba(239, 68, 68, 0.15);
-  color: #F87171;
-  border-color: rgba(239, 68, 68, 0.3);
+  flex: 1 1 auto;
+  min-width: 80px;
+  min-height: 36px;
+  padding: 0.45rem 0.95rem !important;
+  background: rgba(239, 68, 68, 0.18) !important;
+  color: #FCA5A5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.45) !important;
+  border-radius: var(--radius-md) !important;
+  font-weight: 800 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  transition: var(--transition-fast) !important;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.15) !important;
 }
 
 .bracket-action-btn.delete-btn:hover {
-  background: rgba(239, 68, 68, 0.3);
-  border-color: #EF4444;
+  background: rgba(239, 68, 68, 0.35) !important;
+  color: #FFFFFF !important;
+  border-color: #EF4444 !important;
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.45) !important;
+  transform: translateY(-1px) !important;
 }
 
 /* Save Bracket Modal Form */
@@ -5304,9 +5316,20 @@ body.modal-open {
 
   .bracket-action-btn.delete-btn {
     grid-column: span 4 !important;
-    min-height: 40px !important;
-    padding: 0.5rem !important;
-    font-size: 0.8rem !important;
+    width: 100% !important;
+    min-height: 44px !important;
+    padding: 0.65rem 1rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 800 !important;
+    border-radius: var(--radius-md) !important;
+    background: rgba(239, 68, 68, 0.2) !important;
+    border: 1px solid rgba(239, 68, 68, 0.45) !important;
+    color: #FCA5A5 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2) !important;
   }
 
   .h2h-vs-ai-banner {
