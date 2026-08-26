@@ -7334,14 +7334,14 @@ function generateCfpBracketCanvas(bracketObj) {
 }
 
 function openCfpBracketCanvasModal() {
-  const brackets = getSavedBrackets();
-  const currentBracket = brackets.find(b => b.id === state.activeSavedBracketId) || brackets[0] || createBaselineBracketObject();
+  const allBrackets = getCommunityBrackets();
+  const currentBracket = allBrackets.find(b => b.id === state.activeSavedBracketId) || allBrackets[0] || createProphetAiBenchmarkBracket();
   openCfpBracketCanvasModalForBracket(currentBracket.id);
 }
 
 function openCfpBracketCanvasModalForBracket(bracketId) {
-  const brackets = getSavedBrackets();
-  const target = brackets.find(b => b.id === bracketId) || brackets[0] || createBaselineBracketObject();
+  const allBrackets = getCommunityBrackets();
+  const target = allBrackets.find(b => b.id === bracketId) || allBrackets[0] || createProphetAiBenchmarkBracket();
   
   const modal = document.getElementById('bracketCanvasModal');
   if (!modal) return;
@@ -7361,10 +7361,10 @@ function downloadCfpBracketGraphic() {
   const canvas = document.getElementById('cfpBracketCanvas');
   if (!canvas) return;
   const link = document.createElement('a');
-  link.download = `CFP_Bracket_${Date.now()}.png`;
+  link.download = `CFB_Prophet_Bracket_${Date.now()}.png`;
   link.href = canvas.toDataURL('image/png');
   link.click();
-  showCustomToast('📥 High-Res March Madness Bracket Downloaded!');
+  showCustomToast('📥 Tournament Graphic Downloaded!');
 }
 
 function copyCfpBracketGraphic() {
@@ -7423,43 +7423,147 @@ function deleteSavedBracket(bracketId, e) {
   showCustomToast('🗑️ Bracket removed.');
 }
 
-function copyBracketShareLink(bracketId, e) {
-  if (e) {
-    e.stopPropagation();
-    e.preventDefault();
-  }
-  const brackets = getSavedBrackets();
-  const target = brackets.find(b => b.id === bracketId);
-  if (!target) return;
+function getBracketShareUrl(bracketId) {
+  const allBrackets = getCommunityBrackets();
+  const target = allBrackets.find(b => b.id === bracketId) || allBrackets[0] || createProphetAiBenchmarkBracket();
+  if (!target) return window.location.href;
 
   const payload = {
-    t: target.simState?.teamId || 'texas',
+    t: target.simState?.teamId || target.champion?.id || 'texas',
     pk: target.simState?.userPicks || {},
     cp: target.simState?.ccgPicks || {},
     pp: target.simState?.playoffPicks || {},
     ts: target.simState?.teamSliders || {},
-    bn: target.name || 'CFP Bracket'
+    bn: target.name || 'CFB Prophet Bracket'
   };
 
   try {
     const jsonStr = JSON.stringify(payload);
     const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
-    const url = `${window.location.origin}${window.location.pathname}#s=${b64}`;
+    return `${window.location.origin}${window.location.pathname}#s=${b64}`;
+  } catch (e) {
+    return window.location.href;
+  }
+}
+
+function copyBracketShareLink(bracketId, e) {
+  if (e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  const allBrackets = getCommunityBrackets();
+  const target = allBrackets.find(b => b.id === bracketId) || allBrackets[0] || createProphetAiBenchmarkBracket();
+  if (!target) return;
+
+  const url = getBracketShareUrl(target.id);
+  
+  // Instant Visual Feedback on Clicked Button
+  const btn = e?.currentTarget;
+  if (btn) {
+    const origHtml = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-check" style="color: #34D399;"></i> Copied!';
+    btn.classList.add('btn-copied-flash');
+    setTimeout(() => {
+      btn.innerHTML = origHtml;
+      btn.classList.remove('btn-copied-flash');
+    }, 2200);
+  }
+
+  if (navigator.clipboard) {
     navigator.clipboard.writeText(url).then(() => {
-      showCustomToast(`🔗 Share Link for "${target.name}" copied to clipboard!`);
+      showCustomToast(`🔗 Link for "${target.name}" copied!`);
     }).catch(() => {
-      prompt('Copy this shareable bracket link:', url);
+      prompt('Copy this bracket link:', url);
     });
-  } catch (err) {
-    showCustomToast('⚠️ Could not generate share link');
+  } else {
+    prompt('Copy this bracket link:', url);
   }
 }
 
 function copyActiveBracketShareLink() {
-  const brackets = getSavedBrackets();
-  const active = brackets.find(b => b.id === state.activeSavedBracketId) || brackets[0];
+  const allBrackets = getCommunityBrackets();
+  const active = allBrackets.find(b => b.id === state.activeSavedBracketId) || allBrackets[0];
   if (active) copyBracketShareLink(active.id);
 }
+
+function openBracketQrModal(bracketId, e) {
+  if (e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  const allBrackets = getCommunityBrackets();
+  const target = allBrackets.find(b => b.id === bracketId) || allBrackets[0] || createProphetAiBenchmarkBracket();
+  if (!target) return;
+
+  const modal = document.getElementById('bracketQrModal');
+  const titleEl = document.getElementById('qrModalBracketTitle');
+  const imgEl = document.getElementById('bracketQrImg');
+  if (!modal || !imgEl) return;
+
+  const shareUrl = getBracketShareUrl(target.id);
+  state._activeQrUrl = shareUrl;
+
+  if (titleEl) {
+    titleEl.innerText = `SYNC "${target.name.toUpperCase()}"`;
+  }
+
+  // Dual Fallback QR Code Generation (Google Charts + QRServer)
+  const encodedUrl = encodeURIComponent(shareUrl);
+  imgEl.src = `https://chart.googleapis.com/chart?chs=240x240&cht=qr&chl=${encodedUrl}&choe=UTF-8`;
+  imgEl.onerror = () => {
+    imgEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&data=${encodedUrl}`;
+  };
+
+  modal.classList.add('open');
+  document.body.classList.add('modal-open');
+}
+
+function closeBracketQrModal() {
+  const modal = document.getElementById('bracketQrModal');
+  if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+
+function copyActiveQrLink() {
+  const url = state._activeQrUrl || window.location.href;
+  const btn = document.getElementById('copyQrLinkBtn');
+  if (btn) {
+    const origText = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-check" style="color: #34D399;"></i> Copied!';
+    setTimeout(() => { btn.innerHTML = origText; }, 2000);
+  }
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => {
+      showCustomToast('🔗 Direct device sync link copied to clipboard!');
+    }).catch(() => {
+      prompt('Copy this sync link:', url);
+    });
+  } else {
+    prompt('Copy this sync link:', url);
+  }
+}
+
+function importBracketFromPrompt() {
+  const input = prompt('Paste a shared Bracket Link or Code below to import it into your Vault:');
+  if (!input) return;
+  try {
+    let hash = input.trim();
+    if (hash.includes('#')) hash = hash.substring(hash.indexOf('#'));
+    const sMatch = hash.match(/[#&]s=([^&]+)/);
+    if (sMatch && sMatch[1]) {
+      window.location.hash = hash;
+      restoreScenarioFromUrl();
+      openBracketVaultModal();
+      showCustomToast('🎉 Bracket imported successfully into your Vault!');
+    } else {
+      alert('Invalid bracket link format. Please paste a link containing #s=...');
+    }
+  } catch (e) {
+    alert('Failed to parse bracket link.');
+  }
+}
+
 
 window.openSaveBracketModal = openSaveBracketModal;
 window.closeSaveBracketModal = closeSaveBracketModal;
