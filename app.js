@@ -6676,10 +6676,14 @@ function getLocalCommunityBrackets() {
 
 async function syncCommunityBracketsFromCloud(showFeedback = false) {
   try {
-    const res = await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}/json?poll=1`, { cache: 'no-store' });
+    const res = await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}/json?poll=1&since=all`, { 
+      cache: 'no-store',
+      headers: { 'Accept': 'application/json' }
+    });
     if (!res.ok) return;
     const text = await res.text();
     const cloudBrackets = [];
+
     text.trim().split('\n').forEach(line => {
       try {
         if (!line || !line.trim()) return;
@@ -6703,17 +6707,18 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
       cloudBrackets.forEach(b => map.set(b.id, b));
       const merged = Array.from(map.values());
       localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(merged));
-      if (state.activeVaultTab === 'community') {
+      
+      if (state.activeVaultTab === 'community' || state.activeVaultTab === 'weekly') {
         renderSavedBracketsVault();
       }
       if (showFeedback) {
-        showCustomToast(`🔄 Synced ${cloudBrackets.length} community brackets from cloud!`);
+        showToast(`🔄 Synced ${cloudBrackets.length} community predictions from cloud!`);
       }
     } else if (showFeedback) {
-      showCustomToast('🔄 Community Leaderboard is up to date!');
+      showToast('🔄 Leaderboard is up to date!');
     }
   } catch (e) {
-    if (showFeedback) showCustomToast('⚠️ Network sync offline.');
+    if (showFeedback) showToast('⚠️ Network sync offline.');
   }
 }
 
@@ -6726,19 +6731,23 @@ async function publishBracketToCloud(bracketObj) {
     filtered.unshift(bracketObj);
     localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(filtered));
 
-    // 2. Publish to cloud topic with keepalive
+    // 2. Publish to cloud topic with guaranteed caching
+    const payload = JSON.stringify(bracketObj);
     await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}`, {
       method: 'POST',
-      body: JSON.stringify(bracketObj),
+      body: payload,
       keepalive: true,
       headers: {
-        'Title': bracketObj.name || 'CFB Bracket',
+        'Title': bracketObj.name || 'CFB Prophet Prediction',
         'Tags': 'trophy,football',
+        'Cache': 'yes',
+        'X-Cache': 'yes',
         'Priority': 'default'
       }
     });
   } catch (e) {}
 }
+
 
 function getCommunityBrackets() {
   const expertList = getCuratedExpertBrackets();
@@ -7687,6 +7696,7 @@ function renderAll30TeamsVaultMatrix() {
 // ==========================================================================
 
 function startApp() {
+  syncCommunityBracketsFromCloud();
   initPwaServiceWorker();
   renderTeamSelector();
   initTeamSearch();
