@@ -52,7 +52,7 @@
       } catch (e) {}
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=20260826_mobile_mastery_tombstone_v70">
+  <link rel="stylesheet" href="styles.css?v=20260826_auth_apple_signin_v75">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -188,7 +188,10 @@
           <span id="countdownText">KICKOFF: 18 DAYS</span>
         </div>
         <button class="vault-btn-badge" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="Submit your picks and view weekly standings"><i class="fa-solid fa-paper-plane" style="color: #10B981;"></i> <span>Submit Picks & Standings</span></button>
-
+        <button class="user-auth-btn-badge" id="navAuthBtn" onclick="openAuthModal()" title="Account & Creator Profile">
+          <i class="fa-solid fa-user-circle" id="navAuthIcon"></i>
+          <span id="navAuthLabel">Sign In</span>
+        </button>
       </div>
     </div>
   </nav>
@@ -1266,10 +1269,115 @@
     </div>
   </div>
 
+  <!-- USER AUTHENTICATION & PROFILE MODAL -->
+  <div class="modal-backdrop" id="authModal" style="z-index: 100008 !important;">
+    <div class="modal-dialog" style="max-width: 440px; text-align: center;">
+      <button class="modal-close" onclick="closeAuthModal()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <!-- LOGGED OUT VIEW -->
+      <div id="authLoggedOutView">
+        <div class="modal-header" style="margin-bottom: 1.25rem;">
+          <span class="matchup-tag" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8; border-color: rgba(56, 189, 248, 0.4);">
+            <i class="fa-solid fa-user-shield"></i> PROPHET IDENTITY & AUTH
+          </span>
+          <h2 class="modal-title" style="font-size: 1.45rem; margin-top: 0.25rem;">ACCOUNT & CREATOR ID</h2>
+          <p style="font-size: 0.82rem; color: #94A3B8;">Sign in to protect your predictions, claim your leaderboard rank, and sync picks across your iPhone and Mac.</p>
+        </div>
+
+        <!-- Apple Sign In Native / Web Button -->
+        <button class="apple-sign-in-btn" id="appleSignInBtn" onclick="handleAppleSignInClick()">
+          <i class="fa-brands fa-apple" style="font-size: 1.25rem;"></i>
+          <span>Sign in with Apple</span>
+        </button>
+
+        <div class="auth-divider">
+          <span>OR SIGN IN WITH HANDLE / EMAIL</span>
+        </div>
+
+        <form id="authForm" onsubmit="handleAuthFormSubmit(event)" style="display: flex; flex-direction: column; gap: 0.75rem; text-align: left;">
+          <div class="auth-input-group">
+            <label for="authHandleInput">Prophet Handle or Email</label>
+            <input type="text" id="authHandleInput" class="auth-input" placeholder="e.g. CoachJake or coach@email.com" required autocomplete="username">
+          </div>
+
+          <div class="auth-input-group">
+            <label for="authPinInput">Security PIN or Password</label>
+            <input type="password" id="authPinInput" class="auth-input" placeholder="4-digit PIN or password" required autocomplete="current-password">
+          </div>
+
+          <div class="auth-input-group">
+            <label for="authFavTeamSelect">Favorite Powerhouse Team</label>
+            <select id="authFavTeamSelect" class="auth-input" style="cursor: pointer;">
+              <option value="usc">USC Trojans</option>
+              <option value="ohiostate">Ohio State Buckeyes</option>
+              <option value="texas">Texas Longhorns</option>
+              <option value="oregon">Oregon Ducks</option>
+              <option value="georgia">Georgia Bulldogs</option>
+              <option value="alabama">Alabama Crimson Tide</option>
+              <option value="clemson">Clemson Tigers</option>
+              <option value="notredame">Notre Dame Fighting Irish</option>
+              <option value="pennstate">Penn State Nittany Lions</option>
+              <option value="michigan">Michigan Wolverines</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem;">
+            <button type="submit" class="action-btn" style="background: linear-gradient(135deg, #0284C7, #0369A1); color: #FFFFFF; font-weight: 800; border: 1px solid #38BDF8;">
+              <i class="fa-solid fa-right-to-bracket"></i> <span>Sign In</span>
+            </button>
+            <button type="button" class="action-btn secondary-btn" onclick="handleRegisterAccountClick()">
+              <i class="fa-solid fa-user-plus"></i> <span>Create Account</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- LOGGED IN VIEW -->
+      <div id="authLoggedInView" style="display: none;">
+        <div class="modal-header" style="margin-bottom: 1rem;">
+          <span class="matchup-tag" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);">
+            <i class="fa-solid fa-circle-check"></i> AUTHENTICATED CREATOR
+          </span>
+          <h2 class="modal-title" id="authProfileName" style="font-size: 1.45rem; margin-top: 0.25rem;">Coach Jake</h2>
+          <p id="authProfileEmail" style="font-size: 0.8rem; color: #94A3B8; font-family: var(--font-mono);">@CoachJake • Apple Verified</p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; text-align: left;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.65rem;">
+            <span style="font-size: 0.76rem; color: #94A3B8; font-family: var(--font-mono);">FAVORITE TEAM:</span>
+            <div style="display: flex; align-items: center; gap: 6px;" id="authProfileTeamWrap">
+              <img src="" id="authProfileTeamLogo" style="width: 20px; height: 20px; object-fit: contain;">
+              <span id="authProfileTeamName" style="font-weight: 800; font-size: 0.85rem; color: #FFFFFF;">USC Trojans</span>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.65rem;">
+            <span style="font-size: 0.76rem; color: #94A3B8; font-family: var(--font-mono);">SAVED PREDICTIONS:</span>
+            <span id="authProfileSavedCount" style="font-family: var(--font-mono); font-weight: 800; color: #38BDF8;">1 Active</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.76rem; color: #94A3B8; font-family: var(--font-mono);">LEADERBOARD ACCESS:</span>
+            <span style="font-size: 0.74rem; font-weight: 800; color: #34D399;"><i class="fa-solid fa-shield-halved"></i> Delete Protected</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; justify-content: center;">
+          <button class="action-btn secondary-btn" onclick="openBracketVaultModal()" style="flex: 1;">
+            <i class="fa-solid fa-list-ol"></i> <span>View My Standings</span>
+          </button>
+          <button class="action-btn" onclick="handleSignOutClick()" style="background: rgba(239, 68, 68, 0.2); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.4); flex: 1;">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sign Out</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="qrious.min.js?v=20260826_mobile_mastery_tombstone_v70"></script>
-  <script src="qrcode.min.js?v=20260826_mobile_mastery_tombstone_v70"></script>
-  <script src="data/teams.js?v=20260826_mobile_mastery_tombstone_v70"></script>
-  <script src="app.js?v=20260826_mobile_mastery_tombstone_v70"></script>
+  <script src="qrious.min.js?v=20260826_auth_apple_signin_v75"></script>
+  <script src="qrcode.min.js?v=20260826_auth_apple_signin_v75"></script>
+  <script src="data/teams.js?v=20260826_auth_apple_signin_v75"></script>
+  <script src="app.js?v=20260826_auth_apple_signin_v75"></script>
 </body>
 </html>

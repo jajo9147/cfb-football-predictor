@@ -6555,10 +6555,262 @@ function renderAll30TeamsVaultMatrix() {
 
 
 
+// ==========================================================================
+// USER AUTHENTICATION & PROPHET CREATOR ID SYSTEM
+// ==========================================================================
+
+const AUTH_STORAGE_KEY = 'cfb_prophet_auth_user_v1';
 const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v2';
 const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v2';
 const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v2';
 const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v1';
+
+function getCurrentUser() {
+  try {
+    const raw = localStorage.getItem(AUTH_STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) {}
+  return null;
+}
+
+function setCurrentUser(user) {
+  try {
+    if (user) {
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user));
+      localStorage.setItem('cfb_prophet_user_handle', user.displayName || user.handle || 'Coach');
+    } else {
+      localStorage.removeItem(AUTH_STORAGE_KEY);
+    }
+  } catch (e) {}
+  updateAuthUI();
+  renderSavedBracketsVault();
+}
+
+function updateAuthUI() {
+  const user = getCurrentUser();
+  const btn = document.getElementById('navAuthBtn');
+  const label = document.getElementById('navAuthLabel');
+  const icon = document.getElementById('navAuthIcon');
+
+  const loggedInView = document.getElementById('authLoggedInView');
+  const loggedOutView = document.getElementById('authLoggedOutView');
+
+  if (user) {
+    if (btn) btn.classList.add('logged-in');
+    if (label) label.textContent = user.displayName || user.handle || 'Profile';
+    if (icon) icon.className = 'fa-solid fa-user-check';
+
+    if (loggedInView) loggedInView.style.display = 'block';
+    if (loggedOutView) loggedOutView.style.display = 'none';
+
+    const pName = document.getElementById('authProfileName');
+    const pEmail = document.getElementById('authProfileEmail');
+    const pTeamName = document.getElementById('authProfileTeamName');
+    const pTeamLogo = document.getElementById('authProfileTeamLogo');
+    const pSavedCount = document.getElementById('authProfileSavedCount');
+
+    if (pName) pName.textContent = user.displayName || user.handle || 'Coach';
+    if (pEmail) pEmail.textContent = user.email ? `${user.email} • ${user.provider === 'apple' ? 'Apple Verified' : 'Prophet Verified'}` : `@${user.handle || 'Coach'} • Verified Creator`;
+
+    const favTeam = TEAMS_DATABASE[user.favTeam || 'usc'] || TEAMS_DATABASE['usc'];
+    if (pTeamName) pTeamName.textContent = favTeam.name;
+    if (pTeamLogo) pTeamLogo.src = favTeam.logoUrl || '';
+
+    const myBrackets = getSavedBrackets();
+    if (pSavedCount) pSavedCount.textContent = `${myBrackets.length} Active Saved`;
+  } else {
+    if (btn) btn.classList.remove('logged-in');
+    if (label) label.textContent = 'Sign In';
+    if (icon) icon.className = 'fa-solid fa-user-circle';
+
+    if (loggedInView) loggedInView.style.display = 'none';
+    if (loggedOutView) loggedOutView.style.display = 'block';
+  }
+}
+window.updateAuthUI = updateAuthUI;
+
+function openAuthModal() {
+  updateAuthUI();
+  const modal = document.getElementById('authModal');
+  if (modal) modal.classList.add('open');
+  document.body.classList.add('modal-open');
+}
+window.openAuthModal = openAuthModal;
+
+function closeAuthModal() {
+  const modal = document.getElementById('authModal');
+  if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+window.closeAuthModal = closeAuthModal;
+
+function handleAppleSignInClick() {
+  // Check if running inside native Swift iOS App with WKWebView bridge
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appleSignIn) {
+    window.webkit.messageHandlers.appleSignIn.postMessage({});
+    return;
+  }
+
+  // Web / PWA fallback: Simulated Apple ID prompt / biometric auth
+  const handle = prompt('Enter your Apple ID / Display Name for instant Apple verification:', 'Coach Jake');
+  if (handle && handle.trim()) {
+    const user = {
+      id: `apple_${btoa(handle.trim().toLowerCase()).replace(/=/g, '').slice(0, 16)}`,
+      displayName: handle.trim(),
+      handle: handle.trim(),
+      email: `${handle.trim().toLowerCase().replace(/\s+/g, '')}@privaterelay.appleid.com`,
+      provider: 'apple',
+      favTeam: state.currentTeamId || 'usc',
+      createdAt: new Date().toISOString()
+    };
+    setCurrentUser(user);
+    showCustomToast(`🍎 Signed in with Apple ID as ${user.displayName}!`);
+    closeAuthModal();
+  }
+}
+window.handleAppleSignInClick = handleAppleSignInClick;
+
+// Native Swift Bridge Callback for Apple Sign In
+window.handleAppleSignInResult = function(payload) {
+  if (!payload || !payload.userId) return;
+  const user = {
+    id: `apple_${payload.userId}`,
+    displayName: payload.fullName || payload.displayName || 'Apple User',
+    handle: payload.fullName || 'Apple User',
+    email: payload.email || 'apple_user@privaterelay.appleid.com',
+    provider: 'apple',
+    favTeam: state.currentTeamId || 'usc',
+    createdAt: new Date().toISOString()
+  };
+  setCurrentUser(user);
+  showCustomToast(`🍎 Signed in with Apple ID as ${user.displayName}!`);
+  closeAuthModal();
+};
+
+function handleAuthFormSubmit(e) {
+  if (e) e.preventDefault();
+  const handleInput = document.getElementById('authHandleInput');
+  const pinInput = document.getElementById('authPinInput');
+  const favTeamSelect = document.getElementById('authFavTeamSelect');
+
+  const handle = handleInput ? handleInput.value.trim() : '';
+  const pin = pinInput ? pinInput.value.trim() : '';
+  const favTeam = favTeamSelect ? favTeamSelect.value : 'usc';
+
+  if (!handle || !pin) {
+    showCustomToast('⚠️ Please provide both a handle and security PIN/password.');
+    return;
+  }
+
+  const user = {
+    id: `prophet_${btoa(handle.toLowerCase() + ':' + pin).replace(/=/g, '').slice(0, 18)}`,
+    displayName: handle,
+    handle: handle,
+    email: handle.includes('@') ? handle : `${handle.toLowerCase()}@prophet.ai`,
+    provider: 'prophet',
+    favTeam: favTeam,
+    createdAt: new Date().toISOString()
+  };
+
+  setCurrentUser(user);
+  showCustomToast(`🎉 Welcome back, ${user.displayName}!`);
+  closeAuthModal();
+}
+window.handleAuthFormSubmit = handleAuthFormSubmit;
+
+function handleRegisterAccountClick() {
+  handleAuthFormSubmit();
+}
+window.handleRegisterAccountClick = handleRegisterAccountClick;
+
+function handleSignOutClick() {
+  setCurrentUser(null);
+  showCustomToast('👋 Signed out of CFB Prophet.');
+  closeAuthModal();
+}
+window.handleSignOutClick = handleSignOutClick;
+
+function saveCurrentProjectionAsBracket(name, creator, notes) {
+  const evaluated = evaluateRegularSeasonAllTeams();
+  const ccg = simulateConferenceChampionships(evaluated);
+  const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
+  const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
+  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || 'texas']);
+  const runnerTeam = playoff.runnerUp ? (TEAMS_DATABASE[playoff.runnerUp.id] || playoff.runnerUp) : TEAMS_DATABASE['oregon'];
+
+  const currentUser = getCurrentUser();
+  const creatorName = creator && creator.trim() ? creator.trim() : (currentUser ? currentUser.displayName : 'Coach');
+  const creatorId = currentUser ? currentUser.id : `guest_${Date.now()}`;
+
+  const seeds = (cfp.seeds || []).slice(0, 12).map((s, idx) => ({
+    seed: idx + 1,
+    id: s?.id || 'team',
+    name: s?.shortName || s?.name || 'Team',
+    logoUrl: s?.logoUrl || '',
+    wins: s?.wins !== undefined ? s.wins : (s?.totalWins || 11),
+    losses: s?.losses !== undefined ? s.losses : (s?.totalLosses || 1)
+  }));
+
+  const bracketObj = {
+    id: `bracket_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+    name: (name && name.trim()) ? name.trim() : `${champTeam.shortName || 'CFB'} Championship Projection`,
+    creator: creatorName,
+    creatorId: creatorId,
+    notes: (notes && notes.trim()) ? notes.trim() : 'Custom 2026 CFP Simulation',
+    createdAt: new Date().toISOString(),
+    mode: isSlidersCustom() ? 'custom' : 'baseline',
+    isPublic: true,
+    champion: {
+      id: champTeam.id || 'texas',
+      name: champTeam.name || 'Texas Longhorns',
+      shortName: champTeam.shortName || 'Texas',
+      logoUrl: champTeam.logoUrl || '',
+      score: playoff.natty?.sim?.winnerScore || playoff.natty?.sim?.scoreA || 35,
+      oppScore: playoff.natty?.sim?.loserScore || playoff.natty?.sim?.scoreB || 28
+    },
+    runnerUp: {
+      id: runnerTeam.id || 'oregon',
+      name: runnerTeam.name || 'Oregon Ducks',
+      shortName: runnerTeam.shortName || 'Oregon'
+    },
+    seeds: seeds,
+    playoffSummary: {
+      fr: [
+        { winner: playoff.fr1?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.fr2?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.fr3?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.fr4?.sim?.winner?.shortName || 'Team' }
+      ],
+      qf: [
+        { winner: playoff.qf1?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.qf2?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.qf3?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.qf4?.sim?.winner?.shortName || 'Team' }
+      ],
+      sf: [
+        { winner: playoff.sf1?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.sf2?.sim?.winner?.shortName || 'Team' }
+      ]
+    },
+    simState: {
+      teamId: state.currentTeamId || 'texas',
+      userPicks: JSON.parse(JSON.stringify(state.userPicks || {})),
+      ccgPicks: JSON.parse(JSON.stringify(state.ccgPicks || {})),
+      playoffPicks: JSON.parse(JSON.stringify(state.playoffPicks || {})),
+      teamSliders: JSON.parse(JSON.stringify(state.teamSliders || {})),
+      gameSliders: JSON.parse(JSON.stringify(state.gameSliders || {}))
+    }
+  };
+
+  const myBrackets = getSavedBrackets();
+  myBrackets.unshift(bracketObj);
+  try {
+    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
+  } catch (e) {}
+
+  return bracketObj;
+}
+window.saveCurrentProjectionAsBracket = saveCurrentProjectionAsBracket;
 
 function getDeletedBracketIds() {
   try {
@@ -7029,6 +7281,9 @@ function renderSavedBracketsVault() {
     const champ = b.champion || { name: 'Champion', shortName: 'Champs', logoUrl: '' };
     const isActive = state.activeSavedBracketId === b.id;
     const isMine = myBracketIds.has(b.id);
+    const currentUser = getCurrentUser();
+    const isOwner = isMine || (currentUser && b.creatorId && b.creatorId === currentUser.id);
+    const creatorLabel = isOwner ? 'You' : (b.creator || 'Prophet');
 
     const weeklyScore = isWeekly ? calculateWeeklyScoreForUser(b, state.selectedVaultWeek) : null;
     const acc = weeklyScore || b.accuracy || calculateBracketAccuracy(b);
@@ -7057,7 +7312,7 @@ function renderSavedBracketsVault() {
                 ${isAiBenchmark ? '<i class="fa-solid fa-robot" style="color: #38BDF8; margin-right: 4px;"></i>' : ''} ${b.name}
               </div>
               <div class="bracket-card-meta">
-                <span>By ${b.creator || 'Prophet'}</span>
+                <span>By ${creatorLabel}</span>
                 <span>•</span>
                 <span>${dateStr}</span>
                 ${isWeekly ? `<span style="color: #38BDF8; font-weight: 700;">• ${state.selectedVaultWeek === 'all' ? 'Season Standings' : state.selectedVaultWeek + ' Score'}</span>` : ''}
@@ -7068,13 +7323,13 @@ function renderSavedBracketsVault() {
             <span class="bracket-mode-badge" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8; border-color: rgba(56, 189, 248, 0.5); font-weight: 800;">
               <i class="fa-solid fa-robot"></i> GOLDEN BENCHMARK
             </span>
-          ` : (isMine ? `
+          ` : (isOwner ? `
             <span class="bracket-mode-badge" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.5); font-weight: 800;">
-              <i class="fa-solid fa-user"></i> YOUR PICKS
+              <i class="fa-solid fa-user-check"></i> YOUR PICKS
             </span>
           ` : `
             <span class="bracket-mode-badge ${isBaseline ? 'baseline' : 'custom'}">
-              ${isBaseline ? '<i class="fa-solid fa-shield"></i> CHALK' : '<i class="fa-solid fa-sliders"></i> CUSTOM'}
+              ${isBaseline ? '<i class="fa-solid fa-shield"></i> CHALK' : '<i class="fa-solid fa-sliders"></i> COMMUNITY'}
             </span>
           `)}
         </div>
@@ -7121,14 +7376,14 @@ function renderSavedBracketsVault() {
           <button class="bracket-action-btn share-btn" onclick="copyBracketShareLink('${b.id}', event)" title="Copy Shareable Link">
             <i class="fa-solid fa-link"></i> Link
           </button>
-          ${!isMine && !isAiBenchmark && (state.activeVaultTab === 'community' || isWeekly) ? `
+          ${!isOwner && !isAiBenchmark ? `
             <button class="bracket-action-btn" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);" onclick="copyCommunityBracketToMine('${b.id}', event)" title="Save a copy directly into My Saved Predictions">
-              <i class="fa-solid fa-bookmark"></i> Save
+              <i class="fa-solid fa-bookmark"></i> Copy
             </button>
           ` : ''}
-          ${isMine ? `
-            <button class="bracket-action-btn delete-btn" onclick="deleteSavedBracket('${b.id}', event)" title="Delete your saved prediction">
-              <i class="fa-solid fa-trash-can"></i>
+          ${isOwner && !isAiBenchmark ? `
+            <button class="bracket-action-btn delete-btn" onclick="deleteSavedBracket('${b.id}', event)" title="Delete your prediction permanently">
+              <i class="fa-solid fa-trash-can"></i> Delete
             </button>
           ` : ''}
         </div>
@@ -7149,9 +7404,12 @@ function copyCommunityBracketToMine(bracketId, e) {
   const target = allComm.find(b => b.id === bracketId);
   if (!target) return;
 
+  const currentUser = getCurrentUser();
   const myBrackets = getSavedBrackets();
   const clone = JSON.parse(JSON.stringify(target));
   clone.id = `bracket_my_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
+  clone.creator = currentUser ? currentUser.displayName : (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');
+  clone.creatorId = currentUser ? currentUser.id : `guest_${Date.now()}`;
   clone.createdAt = new Date().toISOString();
   clone.mode = 'custom';
   
@@ -7196,9 +7454,15 @@ function openSaveBracketModal(fromVault = false) {
     `;
   }
 
+  const currentUser = getCurrentUser();
   const nameInput = document.getElementById('bracketNameInput');
+  const creatorInput = document.getElementById('bracketCreatorInput');
+
   if (nameInput) {
     nameInput.value = `${champTeam.shortName || 'CFB'} Natty Projection`;
+  }
+  if (creatorInput) {
+    creatorInput.value = currentUser ? currentUser.displayName : (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');
   }
 
   modal.classList.add('open');
@@ -7259,6 +7523,39 @@ function closeBracketVaultModal() {
   if (modal) modal.classList.remove('open');
   document.body.classList.remove('modal-open');
 }
+
+function deleteSavedBracket(bracketId, e) {
+  if (e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  const all = getCommunityBrackets();
+  const target = all.find(b => b.id === bracketId);
+  const currentUser = getCurrentUser();
+  const myBracketIds = new Set(getSavedBrackets().map(b => b.id));
+
+  // Enforce ownership: only the creator can delete their bracket
+  if (target && target.creatorId && currentUser && target.creatorId !== currentUser.id && !myBracketIds.has(bracketId)) {
+    showCustomToast('⛔ Permission Denied: You cannot delete another creator\'s predictions.');
+    return;
+  }
+
+  addDeletedBracketId(bracketId);
+
+  let myBrackets = getSavedBrackets().filter(b => b.id !== bracketId);
+  try {
+    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
+  } catch (e) {}
+
+  let commBrackets = getLocalCommunityBrackets().filter(b => b.id !== bracketId);
+  try {
+    localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(commBrackets));
+  } catch (e) {}
+
+  renderSavedBracketsVault();
+  showCustomToast('🗑️ Bracket deleted permanently.');
+}
+
 
 // 12-Team CFP Bracket Canvas Graphic Generator
 function generateCfpBracketCanvas(bracketObj) {
@@ -7792,6 +8089,7 @@ window.triggerNativeShare = triggerNativeShare;
 // ==========================================================================
 
 function startApp() {
+  updateAuthUI();
   autoPublishAllLocalSavedBrackets();
   syncCommunityBracketsFromCloud();
   

@@ -1,7 +1,8 @@
 import UIKit
 import WebKit
+import AuthenticationServices
 
-class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler, WKUIDelegate {
+class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler, WKUIDelegate, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
 
     private var webView: WKWebView!
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
@@ -24,6 +25,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         contentController.add(self, name: "haptic")
         contentController.add(self, name: "share")
         contentController.add(self, name: "toast")
+        contentController.add(self, name: "appleSignIn")
 
         let config = WKWebViewConfiguration()
         config.userContentController = contentController
@@ -59,10 +61,64 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         }
     }
 
+    // MARK: - Native Sign in with Apple
+
+    private func performAppleSignIn() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window ?? ASPresentationAnchor()
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            let userIdentifier = appleIDCredential.user
+            var fullNameStr = "Apple User"
+            if let fullName = appleIDCredential.fullName {
+                let given = fullName.givenName ?? ""
+                let family = fullName.familyName ?? ""
+                let combined = "\(given) \(family)".trimmingCharacters(in: .whitespaces)
+                if !combined.isEmpty {
+                    fullNameStr = combined
+                }
+            }
+            let emailStr = appleIDCredential.email ?? "\(userIdentifier.prefix(8))@privaterelay.appleid.com"
+
+            let payload: [String: Any] = [
+                "userId": userIdentifier,
+                "fullName": fullNameStr,
+                "email": emailStr
+            ]
+
+            if let jsonData = try? JSONSerialization.data(withJSONObject: payload, options: []),
+               let jsonString = String(data: jsonData, encoding: .utf8) {
+                DispatchQueue.main.async {
+                    self.webView.evaluateJavaScript("if (window.handleAppleSignInResult) { window.handleAppleSignInResult(\(jsonString)); }", completionHandler: nil)
+                }
+            }
+        }
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Apple Sign In didCompleteWithError: \(error.localizedDescription)")
+    }
+
     // MARK: - WKScriptMessageHandler
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == "haptic" {
+        if message.name == "appleSignIn" {
+            DispatchQueue.main.async {
+                self.performAppleSignIn()
+            }
+        } else if message.name == "haptic" {
             let type = message.body as? String ?? "medium"
             DispatchQueue.main.async {
                 switch type {
