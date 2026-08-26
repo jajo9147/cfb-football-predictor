@@ -1412,6 +1412,8 @@ function showToast(message) {
     toast.classList.remove('show');
   }, 2800);
 }
+window.showToast = showToast;
+window.showCustomToast = showToast;
 
 window.applyScheduleFilter = function(filterKey) {
   state.filter = filterKey;
