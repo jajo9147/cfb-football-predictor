@@ -6,15 +6,51 @@
   "start_url": "https://jajo9147.github.io/cfb-football-predictor/",
   "scope": "https://jajo9147.github.io/cfb-football-predictor/",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#07090E",
   "theme_color": "#07090E",
-  "orientation": "portrait-primary",
-  "lang": "en-US",
+  "orientation": "any",
+  "lang": "en",
   "dir": "ltr",
   "categories": ["sports", "entertainment", "games"],
   "prefer_related_applications": false,
   "icons": [
+    {
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-192.png",
       "sizes": "192x192",
@@ -26,6 +62,12 @@
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "https://jajo9147.github.io/cfb-football-predictor/icons/icon-512.png",
@@ -62,7 +104,7 @@
     },
     {
       "src": "https://jajo9147.github.io/cfb-football-predictor/icons/screenshot-mobile.png",
-      "sizes": "1179x2556",
+      "sizes": "1206x2622",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "CFB Prophet Mobile Schedule & Live Simulation"
