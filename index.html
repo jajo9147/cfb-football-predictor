@@ -53,7 +53,7 @@
     })();
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=20260826_dedup_tombstone_sync_v99">
+  <link rel="stylesheet" href="styles.css?v=20260826_dynamic_privacy_auth_v105">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1120,7 +1120,7 @@
 
         <div class="bracket-form-group">
           <label for="bracketCreatorInput">Creator / Handle</label>
-          <input type="text" id="bracketCreatorInput" class="bracket-form-input" placeholder="e.g. Jake, CFBFan_01" maxlength="30">
+          <input type="text" id="bracketCreatorInput" class="bracket-form-input" placeholder="e.g. Coach, CFBFan_01" maxlength="30">
         </div>
 
         <div class="bracket-form-group">
@@ -1311,7 +1311,7 @@
         <form id="authForm" onsubmit="handleAuthFormSubmit(event)" style="display: flex; flex-direction: column; gap: 0.75rem; text-align: left;">
           <div class="auth-input-group">
             <label for="authHandleInput">Coach Handle</label>
-            <input type="text" id="authHandleInput" class="auth-input" placeholder="e.g. CoachJake" required autocomplete="username">
+            <input type="text" id="authHandleInput" class="auth-input" placeholder="e.g. Coach_01, CFBFan" required autocomplete="username">
           </div>
 
           <div class="auth-input-group">
@@ -1350,7 +1350,7 @@
         </div>
       </div>
 
-      <!-- INSTANT 1-TAP GOOGLE PREPOPULATED APPROVAL VIEW -->
+      <!-- DYNAMIC GOOGLE SIGN-IN APPROVAL VIEW -->
       <div id="authGoogleApprovalView" style="display: none;">
         <div class="modal-header" style="margin-bottom: 1.25rem;">
           <span class="matchup-tag" style="background: rgba(66, 133, 244, 0.2); color: #60A5FA; border-color: rgba(66, 133, 244, 0.4);">
@@ -1359,52 +1359,52 @@
               <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
               <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707 0-.59.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.347 2.825.957 4.039l3.007-2.332z"/>
               <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
-            </svg> GOOGLE 1-TAP APPROVAL
+            </svg> GOOGLE 1-TAP SIGN IN
           </span>
           <h2 class="modal-title" style="font-size: 1.35rem; margin-top: 0.25rem;">CONTINUE WITH GOOGLE</h2>
           <p style="font-size: 0.82rem; color: #94A3B8;">Sign in to CFB Prophet with your verified Google account.</p>
         </div>
 
-        <div style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-md); padding: 1.15rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.85rem; text-align: left; cursor: pointer; transition: var(--transition-fast);" onclick="handleConfirmGoogleApproval()" id="googleApprovalCard">
-          <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #4285F4, #34A853); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; color: #FFFFFF; flex-shrink: 0;" id="googleApprovalAvatar">
-            J
+        <div style="display: flex; flex-direction: column; gap: 0.85rem; text-align: left; margin-bottom: 1.25rem;">
+          <div class="auth-input-group">
+            <label for="googleAuthNameInput">Google Display Name</label>
+            <input type="text" id="googleAuthNameInput" class="auth-input" placeholder="e.g. Coach, FootballFan" autocomplete="name">
           </div>
-          <div style="flex: 1; min-width: 0;">
-            <div style="font-weight: 800; font-size: 0.95rem; color: #FFFFFF;" id="googleApprovalName">Jake Johnson</div>
-            <div style="font-size: 0.78rem; color: #94A3B8; font-family: var(--font-mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="googleApprovalEmail">jajo9147@gmail.com</div>
+          <div class="auth-input-group">
+            <label for="googleAuthEmailInput">Google / Gmail Account</label>
+            <input type="email" id="googleAuthEmailInput" class="auth-input" placeholder="e.g. name@gmail.com" autocomplete="email">
           </div>
-          <i class="fa-solid fa-circle-check" style="color: #34D399; font-size: 1.25rem;"></i>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
           <button class="action-btn" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #FFFFFF; font-weight: 800; padding: 0.75rem; border-radius: var(--radius-md); font-size: 0.95rem;" onclick="handleConfirmGoogleApproval()">
-            <i class="fa-solid fa-check"></i> <span id="googleApprovalBtnText">Approve & Continue as Jake</span>
+            <i class="fa-solid fa-check"></i> <span id="googleApprovalBtnText">Approve & Continue with Google</span>
           </button>
           <button class="action-btn secondary-btn" onclick="backToAuthHome()" style="font-size: 0.8rem; padding: 0.45rem;">
-            <span>Use a different account</span>
+            <span>Back to Sign In options</span>
           </button>
         </div>
       </div>
 
-      <!-- INSTANT 1-TAP APPLE PREPOPULATED APPROVAL VIEW -->
+      <!-- DYNAMIC APPLE SIGN-IN APPROVAL VIEW -->
       <div id="authAppleApprovalView" style="display: none;">
         <div class="modal-header" style="margin-bottom: 1.25rem;">
           <span class="matchup-tag" style="background: rgba(255, 255, 255, 0.15); color: #FFFFFF; border-color: rgba(255, 255, 255, 0.3);">
-            <i class="fa-brands fa-apple" style="font-size: 0.95rem; margin-right: 4px;"></i> APPLE 1-TAP APPROVAL
+            <i class="fa-brands fa-apple" style="font-size: 0.95rem; margin-right: 4px;"></i> APPLE 1-TAP SIGN IN
           </span>
           <h2 class="modal-title" style="font-size: 1.35rem; margin-top: 0.25rem;">CONTINUE WITH APPLE ID</h2>
           <p style="font-size: 0.82rem; color: #94A3B8;">Sign in to CFB Prophet with your verified Apple ID and private relay.</p>
         </div>
 
-        <div style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-md); padding: 1.15rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.85rem; text-align: left; cursor: pointer; transition: var(--transition-fast);" onclick="handleConfirmAppleApproval()" id="appleApprovalCard">
-          <div style="width: 44px; height: 44px; border-radius: 50%; background: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: #000000; flex-shrink: 0;" id="appleApprovalAvatar">
-            <i class="fa-brands fa-apple"></i>
+        <div style="display: flex; flex-direction: column; gap: 0.85rem; text-align: left; margin-bottom: 1.25rem;">
+          <div class="auth-input-group">
+            <label for="appleAuthNameInput">Apple ID Display Name</label>
+            <input type="text" id="appleAuthNameInput" class="auth-input" placeholder="e.g. Coach, Apple User" autocomplete="name">
           </div>
-          <div style="flex: 1; min-width: 0;">
-            <div style="font-weight: 800; font-size: 0.95rem; color: #FFFFFF;" id="appleApprovalName">Jake Johnson</div>
-            <div style="font-size: 0.78rem; color: #94A3B8; font-family: var(--font-mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="appleApprovalEmail">jake.johnson@privaterelay.appleid.com</div>
+          <div class="auth-input-group">
+            <label for="appleAuthEmailInput">Apple ID / iCloud Email</label>
+            <input type="email" id="appleAuthEmailInput" class="auth-input" placeholder="e.g. name@privaterelay.appleid.com" autocomplete="email">
           </div>
-          <i class="fa-solid fa-circle-check" style="color: #34D399; font-size: 1.25rem;"></i>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -1412,7 +1412,7 @@
             <i class="fa-brands fa-apple"></i> <span id="appleApprovalBtnText">Approve & Continue with Apple ID</span>
           </button>
           <button class="action-btn secondary-btn" onclick="backToAuthHome()" style="font-size: 0.8rem; padding: 0.45rem;">
-            <span>Use a different Apple ID</span>
+            <span>Back to Sign In options</span>
           </button>
         </div>
       </div>
@@ -1423,8 +1423,8 @@
           <span class="matchup-tag" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);">
             <i class="fa-solid fa-circle-check"></i> AUTHENTICATED CREATOR
           </span>
-          <h2 class="modal-title" id="authProfileName" style="font-size: 1.45rem; margin-top: 0.25rem;">Coach Jake</h2>
-          <p id="authProfileEmail" style="font-size: 0.8rem; color: #94A3B8; font-family: var(--font-mono);">@CoachJake • Apple Verified</p>
+          <h2 class="modal-title" id="authProfileName" style="font-size: 1.45rem; margin-top: 0.25rem;">Coach Profile</h2>
+          <p id="authProfileEmail" style="font-size: 0.8rem; color: #94A3B8; font-family: var(--font-mono);">@Coach • Verified Creator</p>
         </div>
 
         <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; text-align: left;">
@@ -1460,9 +1460,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js?v=20260826_dedup_tombstone_sync_v99"></script>
-  <script src="qrcode.min.js?v=20260826_dedup_tombstone_sync_v99"></script>
-  <script src="data/teams.js?v=20260826_dedup_tombstone_sync_v99"></script>
-  <script src="app.js?v=20260826_dedup_tombstone_sync_v99"></script>
+  <script src="qrious.min.js?v=20260826_dynamic_privacy_auth_v105"></script>
+  <script src="qrcode.min.js?v=20260826_dynamic_privacy_auth_v105"></script>
+  <script src="data/teams.js?v=20260826_dynamic_privacy_auth_v105"></script>
+  <script src="app.js?v=20260826_dynamic_privacy_auth_v105"></script>
 </body>
 </html>

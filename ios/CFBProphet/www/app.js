@@ -6675,20 +6675,21 @@ function handleAppleSignInClick() {
 window.handleAppleSignInClick = handleAppleSignInClick;
 
 function handleConfirmAppleApproval() {
-  const customName = document.getElementById('appleApprovalName')?.textContent?.trim() || 'Jake Johnson';
-  const customEmail = document.getElementById('appleApprovalEmail')?.textContent?.trim() || 'jake.johnson@privaterelay.appleid.com';
+  const customName = document.getElementById('appleAuthNameInput')?.value?.trim() || (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');
+  const customEmail = document.getElementById('appleAuthEmailInput')?.value?.trim() || '';
 
+  const emailSafe = customEmail ? customEmail.toLowerCase() : `coach_${Date.now()}@privaterelay.appleid.com`;
   const user = {
-    id: `apple_${btoa(customEmail.toLowerCase()).replace(/=/g, '').slice(0, 16)}`,
+    id: `apple_${btoa(emailSafe).replace(/=/g, '').slice(0, 16)}`,
     displayName: customName,
     handle: customName,
-    email: customEmail,
+    email: customEmail || '',
     provider: 'apple',
     favTeam: state.currentTeamId || 'usc',
     createdAt: new Date().toISOString()
   };
   setCurrentUser(user);
-  showCustomToast(`🍎 Welcome back, ${user.displayName}! Signed in with Apple ID.`);
+  showCustomToast(`🍎 Welcome, ${user.displayName}! Signed in with Apple ID.`);
   closeAuthModal();
 }
 window.handleConfirmAppleApproval = handleConfirmAppleApproval;
@@ -6709,20 +6710,21 @@ function handleGoogleSignInClick() {
 window.handleGoogleSignInClick = handleGoogleSignInClick;
 
 function handleConfirmGoogleApproval() {
-  const customName = document.getElementById('googleApprovalName')?.textContent?.trim() || 'Jake Johnson';
-  const customEmail = document.getElementById('googleApprovalEmail')?.textContent?.trim() || 'jajo9147@gmail.com';
+  const customName = document.getElementById('googleAuthNameInput')?.value?.trim() || (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');
+  const customEmail = document.getElementById('googleAuthEmailInput')?.value?.trim() || '';
 
+  const emailSafe = customEmail ? customEmail.toLowerCase() : `coach_${Date.now()}@gmail.com`;
   const user = {
-    id: `google_${btoa(customEmail.toLowerCase()).replace(/=/g, '').slice(0, 16)}`,
+    id: `google_${btoa(emailSafe).replace(/=/g, '').slice(0, 16)}`,
     displayName: customName,
     handle: customName,
-    email: customEmail,
+    email: customEmail || '',
     provider: 'google',
     favTeam: state.currentTeamId || 'usc',
     createdAt: new Date().toISOString()
   };
   setCurrentUser(user);
-  showCustomToast(`🌐 Welcome back, ${user.displayName}! Signed in with Google.`);
+  showCustomToast(`🌐 Welcome, ${user.displayName}! Signed in with Google.`);
   closeAuthModal();
 }
 window.handleConfirmGoogleApproval = handleConfirmGoogleApproval;
