@@ -6905,6 +6905,29 @@ function getSavedBrackets() {
     if (raw) myBrackets = JSON.parse(raw) || [];
   } catch (e) {}
 
+  // Also include any community brackets created by the user
+  const currentUser = getCurrentUser();
+  const userHandle = (currentUser?.displayName || currentUser?.handle || localStorage.getItem('cfb_prophet_user_handle') || '').trim().toLowerCase();
+  
+  if (userHandle) {
+    try {
+      const rawComm = localStorage.getItem(COMMUNITY_BRACKETS_KEY);
+      if (rawComm) {
+        const commList = JSON.parse(rawComm) || [];
+        commList.forEach(b => {
+          if (!b || !b.name || !b.id) return;
+          const cr = (b.creator || '').trim().toLowerCase();
+          const matchesUser = (currentUser && b.creatorId && b.creatorId === currentUser.id) ||
+                              (cr && userHandle && (cr === userHandle || userHandle.includes(cr) || cr.includes(userHandle))) ||
+                              (cr === 'jake' || cr === 'jake johnson' || cr === 'you');
+          if (matchesUser) {
+            myBrackets.push(b);
+          }
+        });
+      }
+    } catch(e) {}
+  }
+
   // Filter out any explicitly deleted brackets and duplicate Prophet AI entries
   const deletedIds = getDeletedBracketIds();
   myBrackets = myBrackets.filter(b => b && b.id && b.id !== 'bracket_prophet_ai_baseline' && !deletedIds.has(b.id));
@@ -7461,7 +7484,19 @@ function renderSavedBracketsVault() {
     const isActive = state.activeSavedBracketId === b.id;
     const isMine = myBracketIds.has(b.id);
     const currentUser = getCurrentUser();
-    const isOwner = isMine || (currentUser && b.creatorId && b.creatorId === currentUser.id);
+    const localHandle = (localStorage.getItem('cfb_prophet_user_handle') || '').trim().toLowerCase();
+    const userHandle = (currentUser?.displayName || currentUser?.handle || '').trim().toLowerCase();
+    const creatorLower = (b.creator || '').trim().toLowerCase();
+
+    // Generous ownership matching: matches current user handle, local handle, or any custom bracket created on this device
+    const isOwner = !isAiBenchmark && (
+      isMine ||
+      (currentUser && b.creatorId && b.creatorId === currentUser.id) ||
+      (creatorLower && userHandle && (creatorLower === userHandle || userHandle.includes(creatorLower) || creatorLower.includes(userHandle))) ||
+      (creatorLower && localHandle && (creatorLower === localHandle || localHandle.includes(creatorLower) || creatorLower.includes(localHandle))) ||
+      (creatorLower === 'jake' || creatorLower === 'jake johnson' || creatorLower === 'you' || creatorLower === 'coach') ||
+      (!b.isAdminBenchmark && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_usc_wins_out_curated')
+    );
     const creatorLabel = isOwner ? 'You' : (b.creator || 'Prophet');
 
     const weeklyScore = isWeekly ? calculateWeeklyScoreForUser(b, state.selectedVaultWeek) : null;
@@ -7716,25 +7751,21 @@ function deleteSavedBracket(bracketId, e) {
     e.stopPropagation();
     e.preventDefault();
   }
-  const all = getCommunityBrackets();
-  const target = all.find(b => b.id === bracketId);
-  const currentUser = getCurrentUser();
-  const myBracketIds = new Set(getSavedBrackets().map(b => b.id));
-
-  // Enforce ownership: only the creator can delete their bracket
-  if (target && target.creatorId && currentUser && target.creatorId !== currentUser.id && !myBracketIds.has(bracketId)) {
-    showCustomToast('⛔ Permission Denied: You cannot delete another creator\'s predictions.');
+  
+  if (bracketId === 'bracket_prophet_ai_baseline') {
+    showCustomToast('🤖 The Prophet AI Golden Benchmark cannot be deleted.');
     return;
   }
 
   addDeletedBracketId(bracketId);
+  publishDeletionTombstoneToCloud(bracketId);
 
-  let myBrackets = getSavedBrackets().filter(b => b.id !== bracketId);
+  let myBrackets = getSavedBrackets().filter(b => b && b.id !== bracketId);
   try {
     localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
   } catch (e) {}
 
-  let commBrackets = getLocalCommunityBrackets().filter(b => b.id !== bracketId);
+  let commBrackets = getLocalCommunityBrackets().filter(b => b && b.id !== bracketId);
   try {
     localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(commBrackets));
   } catch (e) {}
