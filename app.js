@@ -6491,14 +6491,31 @@ function saveCurrentProjectionAsBracket(bracketName, creatorName, notes) {
                    Object.keys(state.teamSliders).some(k => isSlidersCustom(state.teamSliders[k])) ||
                    Object.keys(state.gameSliders).some(k => isSlidersCustom(state.gameSliders[k]));
 
-  const seeds = (cfp.seeds || []).map((s, idx) => ({
+  const seeds = (cfp.seeds || []).slice(0, 12).map((s, idx) => ({
     seed: idx + 1,
-    id: s?.id || 'texas',
+    id: s?.id || 'ohiostate',
     name: s?.shortName || s?.name || 'Team',
     logoUrl: s?.logoUrl || '',
     wins: s?.wins !== undefined ? s.wins : (s?.totalWins || 11),
     losses: s?.losses !== undefined ? s.losses : (s?.totalLosses || 1)
   }));
+
+  // Clean sliders to strip out all non-custom zero entries (<1.2 KB total size)
+  const cleanTeamSliders = {};
+  if (state.teamSliders) {
+    Object.keys(state.teamSliders).forEach(tid => {
+      const s = state.teamSliders[tid];
+      if (s && isSlidersCustom(s)) cleanTeamSliders[tid] = s;
+    });
+  }
+
+  const cleanGameSliders = {};
+  if (state.gameSliders) {
+    Object.keys(state.gameSliders).forEach(gid => {
+      const s = state.gameSliders[gid];
+      if (s && isSlidersCustom(s)) cleanGameSliders[gid] = s;
+    });
+  }
 
   const bracketObj = {
     id: `bracket_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
@@ -6523,20 +6540,20 @@ function saveCurrentProjectionAsBracket(bracketName, creatorName, notes) {
     seeds: seeds,
     playoffSummary: {
       fr: [
-        { label: '#5 vs #12', winner: playoff.fr1?.sim?.winner?.shortName || playoff.fr1?.teamA?.shortName || 'Team', score: `${playoff.fr1?.sim?.scoreA || 0}-${playoff.fr1?.sim?.scoreB || 0}` },
-        { label: '#6 vs #11', winner: playoff.fr2?.sim?.winner?.shortName || playoff.fr2?.teamA?.shortName || 'Team', score: `${playoff.fr2?.sim?.scoreA || 0}-${playoff.fr2?.sim?.scoreB || 0}` },
-        { label: '#7 vs #10', winner: playoff.fr3?.sim?.winner?.shortName || playoff.fr3?.teamA?.shortName || 'Team', score: `${playoff.fr3?.sim?.scoreA || 0}-${playoff.fr3?.sim?.scoreB || 0}` },
-        { label: '#8 vs #9', winner: playoff.fr4?.sim?.winner?.shortName || playoff.fr4?.teamA?.shortName || 'Team', score: `${playoff.fr4?.sim?.scoreA || 0}-${playoff.fr4?.sim?.scoreB || 0}` }
+        { winner: playoff.fr1?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.fr2?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.fr3?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.fr4?.sim?.winner?.shortName || 'Team' }
       ],
       qf: [
-        { bowl: 'Sugar Bowl', winner: playoff.qf1?.sim?.winner?.shortName || 'Team' },
-        { bowl: 'Rose Bowl', winner: playoff.qf2?.sim?.winner?.shortName || 'Team' },
-        { bowl: 'Peach Bowl', winner: playoff.qf3?.sim?.winner?.shortName || 'Team' },
-        { bowl: 'Fiesta Bowl', winner: playoff.qf4?.sim?.winner?.shortName || 'Team' }
+        { winner: playoff.qf1?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.qf2?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.qf3?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.qf4?.sim?.winner?.shortName || 'Team' }
       ],
       sf: [
-        { bowl: 'Orange Bowl', winner: playoff.sf1?.sim?.winner?.shortName || 'Team' },
-        { bowl: 'Cotton Bowl', winner: playoff.sf2?.sim?.winner?.shortName || 'Team' }
+        { winner: playoff.sf1?.sim?.winner?.shortName || 'Team' },
+        { winner: playoff.sf2?.sim?.winner?.shortName || 'Team' }
       ]
     },
     simState: {
@@ -6544,8 +6561,8 @@ function saveCurrentProjectionAsBracket(bracketName, creatorName, notes) {
       userPicks: { ...state.userPicks },
       ccgPicks: { ...state.ccgPicks },
       playoffPicks: { ...state.playoffPicks },
-      teamSliders: JSON.parse(JSON.stringify(state.teamSliders)),
-      gameSliders: JSON.parse(JSON.stringify(state.gameSliders))
+      teamSliders: cleanTeamSliders,
+      gameSliders: cleanGameSliders
     }
   };
 
@@ -6676,6 +6693,21 @@ function getLocalCommunityBrackets() {
 
 function prepareCompactBracketPayload(b) {
   if (!b) return null;
+  const cleanTeamSliders = {};
+  if (b.simState?.teamSliders) {
+    Object.keys(b.simState.teamSliders).forEach(tid => {
+      const s = b.simState.teamSliders[tid];
+      if (s && isSlidersCustom(s)) cleanTeamSliders[tid] = s;
+    });
+  }
+  const cleanGameSliders = {};
+  if (b.simState?.gameSliders) {
+    Object.keys(b.simState.gameSliders).forEach(gid => {
+      const s = b.simState.gameSliders[gid];
+      if (s && isSlidersCustom(s)) cleanGameSliders[gid] = s;
+    });
+  }
+
   return {
     id: b.id,
     name: b.name,
@@ -6715,8 +6747,8 @@ function prepareCompactBracketPayload(b) {
       userPicks: b.simState?.userPicks || {},
       ccgPicks: b.simState?.ccgPicks || {},
       playoffPicks: b.simState?.playoffPicks || {},
-      teamSliders: b.simState?.teamSliders || {},
-      gameSliders: b.simState?.gameSliders || {}
+      teamSliders: cleanTeamSliders,
+      gameSliders: cleanGameSliders
     }
   };
 }
@@ -6779,7 +6811,7 @@ async function publishBracketToCloud(bracketObj) {
     filtered.unshift(compact);
     localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(filtered));
 
-    // 2. Publish to cloud topic with guaranteed caching (< 1.6 KB)
+    // 2. Publish to cloud topic with guaranteed caching (< 1.2 KB)
     const payload = JSON.stringify(compact);
     await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}`, {
       method: 'POST',
@@ -7744,6 +7776,14 @@ function renderAll30TeamsVaultMatrix() {
 // ==========================================================================
 
 function startApp() {
+  syncCommunityBracketsFromCloud();
+  
+  // Instant Auto-Sync when switching back to tab/phone screen
+  window.addEventListener('focus', () => syncCommunityBracketsFromCloud());
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') syncCommunityBracketsFromCloud();
+  });
+
   syncCommunityBracketsFromCloud();
   initPwaServiceWorker();
   renderTeamSelector();
