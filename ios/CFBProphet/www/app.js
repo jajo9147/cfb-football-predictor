@@ -9102,10 +9102,17 @@ window.dismissChallengeBanner = dismissChallengeBanner;
 function startApp() {
   console.log('CFB Prophet Pro: Initializing application state...');
 
-  // 1. Determine Default Active Team and Render Games IMMEDIATELY (Ohio State #1 AP Golden Standard)
-  const urlParams = new URLSearchParams(window.location.search);
-  const paramTeam = urlParams.get('team') ? urlParams.get('team').toLowerCase().trim() : null;
-  const defaultTeamId = (paramTeam && TEAMS_DATABASE[paramTeam]) ? paramTeam : 'ohiostate';
+  // 1. Determine Default Active Team — always Ohio State on iOS (file://) to prevent
+  //    stale WKWebView query strings (e.g. ?team=texas) from overriding the baseline.
+  const isFileProtocol = window.location.protocol === 'file:';
+  let defaultTeamId = 'ohiostate';
+  if (!isFileProtocol) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramTeam = urlParams.get('team') ? urlParams.get('team').toLowerCase().trim() : null;
+    if (paramTeam && TEAMS_DATABASE[paramTeam]) {
+      defaultTeamId = paramTeam;
+    }
+  }
 
   try {
     renderTeamSelector();
@@ -9133,9 +9140,12 @@ function startApp() {
   try { syncCommunityBracketsFromCloud(); } catch (e) {}
   try { initPwaServiceWorker(); } catch (e) {}
 
-  // 3. Restore scenario from URL permalink hash (#sim=...) and listen for live hashchange
-  try { restoreScenarioFromUrl(); } catch (e) {}
-  window.addEventListener('hashchange', restoreScenarioFromUrl);
+  // 3. Restore scenario from URL permalink hash (#sim=...) — skip on file:// (iOS)
+  //    to prevent stale WKWebView hash state from loading wrong team
+  if (!isFileProtocol) {
+    try { restoreScenarioFromUrl(); } catch (e) {}
+    window.addEventListener('hashchange', restoreScenarioFromUrl);
+  }
 
   // Instant Auto-Sync when switching back to tab/phone screen
   window.addEventListener('focus', () => {
