@@ -37,6 +37,24 @@
   <meta http-equiv="Expires" content="0">
 
   <script>
+    (function() {
+      const CURRENT_VERSION = 'v298';
+      const storedVersion = localStorage.getItem('cfb_prophet_build_version');
+      if (storedVersion !== CURRENT_VERSION) {
+        localStorage.setItem('cfb_prophet_build_version', CURRENT_VERSION);
+        if ('caches' in window) {
+          caches.keys().then(function(keys) {
+            return Promise.all(keys.map(function(k) { return caches.delete(k); }));
+          });
+        }
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(regs) {
+            for (let reg of regs) reg.unregister();
+          });
+        }
+      }
+    })();
+
     if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
       navigator.serviceWorker.getRegistrations().then(function(registrations) {
         for (let registration of registrations) {
@@ -44,7 +62,7 @@
         }
       });
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js?v=297').then(function(reg) {
+        navigator.serviceWorker.register('./sw.js?v=298').then(function(reg) {
           reg.update();
         }).catch(function() {});
       });
@@ -55,9 +73,29 @@
         }
       });
     }
+
+    function forcePurgeCacheAndReload() {
+      if ('caches' in window) {
+        caches.keys().then(function(keys) {
+          return Promise.all(keys.map(function(k) { return caches.delete(k); }));
+        }).then(function() {
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(regs) {
+              return Promise.all(regs.map(function(r) { return r.unregister(); }));
+            }).then(function() {
+              window.location.href = window.location.pathname + '?v=298&t=' + Date.now();
+            });
+          } else {
+            window.location.href = window.location.pathname + '?v=298&t=' + Date.now();
+          }
+        });
+      } else {
+        window.location.href = window.location.pathname + '?v=298&t=' + Date.now();
+      }
+    }
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=297">
+  <link rel="stylesheet" href="styles.css?v=298">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -279,6 +317,7 @@
               <button class="dropdown-item" id="shareScenarioBtn" onclick="shareCustomScenario()"><i class="fa-solid fa-share-nodes"></i> Share Scenario Link</button>
               <button class="dropdown-item" onclick="openReceiptsModal()"><i class="fa-solid fa-receipt"></i> Model Receipts & Brier Curve</button>
               <button class="dropdown-item" id="quickSimAllBtn" onclick="runMonteCarloRecalibration()"><i class="fa-solid fa-dice-d20"></i> 10k Monte Carlo Re-Sim</button>
+              <button class="dropdown-item" onclick="forcePurgeCacheAndReload()"><i class="fa-solid fa-arrows-rotate" style="color: #10B981;"></i> Update App & Purge Cache</button>
             </div>
           </div>
         </div>
@@ -460,6 +499,10 @@
           <span>12-TEAM COLLEGE FOOTBALL PLAYOFF PROJECTION & LIVE SIMULATOR</span>
         </div>
         <div class="cfp-bracket-actions">
+          <button class="action-btn secondary-btn" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;" onclick="forcePurgeCacheAndReload()" title="Force Refresh Bracket & Clear Stored Cache">
+            <i class="fa-solid fa-arrows-rotate" style="color: #38BDF8;"></i>
+            <span>Refresh Bracket</span>
+          </button>
           <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" title="Submit your custom picks & see global rank">
             <i class="fa-solid fa-paper-plane" style="color: #10B981;"></i>
             <span>Submit / Save Bracket</span>
@@ -1544,9 +1587,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js?v=297"></script>
-  <script src="qrcode.min.js?v=297"></script>
-  <script src="data/teams.js?v=297"></script>
-  <script src="app.js?v=297"></script>
+  <script src="qrious.min.js?v=298"></script>
+  <script src="qrcode.min.js?v=298"></script>
+  <script src="data/teams.js?v=298"></script>
+  <script src="app.js?v=298"></script>
 </body>
 </html>
