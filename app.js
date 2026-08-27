@@ -7086,10 +7086,10 @@ function renderAll30TeamsVaultMatrix() {
 // ==========================================================================
 
 const AUTH_STORAGE_KEY = 'cfb_prophet_auth_user_v3';
-const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v3';
-const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v3';
-const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v3';
-const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v3';
+const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v4';
+const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v4';
+const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v4';
+const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v4';
 
 function getCurrentUser() {
   try {
