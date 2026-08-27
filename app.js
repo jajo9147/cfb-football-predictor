@@ -8905,47 +8905,57 @@ window.dismissChallengeBanner = dismissChallengeBanner;
 
 function startApp() {
   console.log('CFB Prophet Pro: Initializing application state...');
-  updateAuthUI();
-  autoPublishAllLocalSavedBrackets();
-  syncCommunityBracketsFromCloud();
-  
+
+  // 1. Determine Default Active Team and Render Games IMMEDIATELY
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramTeam = urlParams.get('team') ? urlParams.get('team').toLowerCase().trim() : null;
+  const defaultTeamId = (paramTeam && TEAMS_DATABASE[paramTeam]) ? paramTeam : (getTopRankedTeamId() || 'texas');
+
+  try {
+    renderTeamSelector();
+    initTeamSearch();
+    selectTeam(defaultTeamId);
+  } catch (err) {
+    console.error('Error selecting initial team:', err);
+    try { selectTeam('texas'); } catch (e) {}
+  }
+
+  // 2. Initialize secondary subsystems safely
+  try { updateAuthUI(); } catch (e) {}
+  try { initGlobalSliders(); } catch (e) {}
+  try { initGlobalPresetButtons(); } catch (e) {}
+  try { initFilterButtons(); } catch (e) {}
+  try { initModalSubTabs(); } catch (e) {}
+  try { initModalActions(); } catch (e) {}
+  try { initHypeCardExport(); } catch (e) {}
+  try { initPwaInstall(); } catch (e) {}
+  try { startCountdownTicker(); } catch (e) {}
+  try { initLiveSyncEngine(); } catch (e) {}
+  try { initMonteCarloEngine(); } catch (e) {}
+  try { checkIncomingChallengeParams(); } catch (e) {}
+  try { autoPublishAllLocalSavedBrackets(); } catch (e) {}
+  try { syncCommunityBracketsFromCloud(); } catch (e) {}
+  try { initPwaServiceWorker(); } catch (e) {}
+
+  // 3. Restore scenario from URL permalink hash (#sim=...) and listen for live hashchange
+  try { restoreScenarioFromUrl(); } catch (e) {}
+  window.addEventListener('hashchange', restoreScenarioFromUrl);
+
   // Instant Auto-Sync when switching back to tab/phone screen
   window.addEventListener('focus', () => {
-    autoPublishAllLocalSavedBrackets();
-    syncCommunityBracketsFromCloud();
+    try {
+      autoPublishAllLocalSavedBrackets();
+      syncCommunityBracketsFromCloud();
+    } catch (e) {}
   });
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
-      autoPublishAllLocalSavedBrackets();
-      syncCommunityBracketsFromCloud();
+      try {
+        autoPublishAllLocalSavedBrackets();
+        syncCommunityBracketsFromCloud();
+      } catch (e) {}
     }
   });
-
-  initPwaServiceWorker();
-  renderTeamSelector();
-  initTeamSearch();
-
-  // Default to URL query param (?team=texas, ?team=michigan, etc.) or #1 AP ranked team
-  const urlParams = new URLSearchParams(window.location.search);
-  const paramTeam = urlParams.get('team') ? urlParams.get('team').toLowerCase().trim() : null;
-  const defaultTeamId = (paramTeam && TEAMS_DATABASE[paramTeam]) ? paramTeam : getTopRankedTeamId();
-  selectTeam(defaultTeamId);
-
-  initGlobalSliders();
-  initGlobalPresetButtons();
-  initFilterButtons();
-  initModalSubTabs();
-  initModalActions();
-  initHypeCardExport();
-  initPwaInstall();
-  startCountdownTicker();
-  initLiveSyncEngine();
-  initMonteCarloEngine();
-  checkIncomingChallengeParams();
-
-  // Restore scenario from URL permalink hash (#sim=...) and listen for live hashchange
-  restoreScenarioFromUrl();
-  window.addEventListener('hashchange', restoreScenarioFromUrl);
 }
 
 if (document.readyState === 'loading') {
