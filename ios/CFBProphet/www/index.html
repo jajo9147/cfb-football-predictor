@@ -39,12 +39,12 @@
   <script>
     if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js').catch(function() {});
+        navigator.serviceWorker.register('./sw.js?v=270').catch(function() {});
       });
     }
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=270">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1475,9 +1475,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js"></script>
-  <script src="qrcode.min.js"></script>
-  <script src="data/teams.js"></script>
-  <script src="app.js"></script>
+  <script src="qrious.min.js?v=270"></script>
+  <script src="qrcode.min.js?v=270"></script>
+  <script src="data/teams.js?v=270"></script>
+  <script src="app.js?v=270"></script>
 </body>
 </html>
