@@ -39,12 +39,12 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js?v=20260826_pwa_100_v120').catch(function() {});
+        navigator.serviceWorker.register('./sw.js?v=20260826_v200').catch(function() {});
       });
     }
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=20260826_hype_hyperlink_v160">
+  <link rel="stylesheet" href="styles.css?v=20260826_v200">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -155,7 +155,7 @@
     }
   </style>
 </head>
-<body class="theme-texas">
+<body class="theme-ohiostate">
 
   <!-- Ambient Stadium Glow Effects -->
   <div class="ambient-glow glow-primary"></div>
@@ -167,7 +167,7 @@
     <div class="container nav-container">
       <a href="#" class="brand">
         <div class="logo-badge" id="navLogoBadge">
-          <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas Longhorns" class="nav-logo-img">
+          <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/194.png" alt="Ohio State Buckeyes" class="nav-logo-img">
         </div>
         <div class="brand-text">
           <span class="brand-title">CFB PROPHET</span>
@@ -202,11 +202,11 @@
         </div>
       </div>
       <div class="team-selector-track" id="teamSelectorTrack">
-        <button class="team-pill-btn" data-teamid="ohiostate" onclick="selectTeam('ohiostate')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/194.png" alt="Ohio State" class="team-pill-logo-img"></span><span>Ohio State</span><span class="team-pill-rank">#1 AP</span></button>
+        <button class="team-pill-btn active" data-teamid="ohiostate" onclick="selectTeam('ohiostate')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/194.png" alt="Ohio State" class="team-pill-logo-img"></span><span>Ohio State</span><span class="team-pill-rank">#1 AP</span></button>
         <button class="team-pill-btn" data-teamid="oregon" onclick="selectTeam('oregon')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png" alt="Oregon" class="team-pill-logo-img"></span><span>Oregon</span><span class="team-pill-rank">#2 AP</span></button>
         <button class="team-pill-btn" data-teamid="georgia" onclick="selectTeam('georgia')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/61.png" alt="Georgia" class="team-pill-logo-img"></span><span>Georgia</span><span class="team-pill-rank">#3 AP</span></button>
         <button class="team-pill-btn" data-teamid="notredame" onclick="selectTeam('notredame')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/87.png" alt="Notre Dame" class="team-pill-logo-img"></span><span>Notre Dame</span><span class="team-pill-rank">#4 AP</span></button>
-        <button class="team-pill-btn active" data-teamid="texas" onclick="selectTeam('texas')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas" class="team-pill-logo-img"></span><span>Texas</span><span class="team-pill-rank">#5 AP</span></button>
+        <button class="team-pill-btn" data-teamid="texas" onclick="selectTeam('texas')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas" class="team-pill-logo-img"></span><span>Texas</span><span class="team-pill-rank">#5 AP</span></button>
         <button class="team-pill-btn" data-teamid="indiana" onclick="selectTeam('indiana')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/84.png" alt="Indiana" class="team-pill-logo-img"></span><span>Indiana</span><span class="team-pill-rank">#6 AP</span></button>
         <button class="team-pill-btn" data-teamid="miami" onclick="selectTeam('miami')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png" alt="Miami" class="team-pill-logo-img"></span><span>Miami</span><span class="team-pill-rank">#7 AP</span></button>
         <button class="team-pill-btn" data-teamid="texasam" onclick="selectTeam('texasam')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/245.png" alt="Texas A&M" class="team-pill-logo-img"></span><span>Texas A&M</span><span class="team-pill-rank">#8 AP</span></button>
@@ -242,12 +242,12 @@
       <div class="hero-banner-card" id="teamHeroBanner">
         <div class="team-identity">
           <div class="team-emblem-large" id="heroEmblem">
-            <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas Longhorns" class="hero-logo-img">
+            <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/194.png" alt="Ohio State Buckeyes" class="hero-logo-img">
           </div>
           <div class="team-details">
-            <h1 id="heroTeamName">Texas Longhorns</h1>
+            <h1 id="heroTeamName">Ohio State Buckeyes</h1>
             <div class="team-meta-pills" id="heroMetaPills">
-              <span class="meta-pill rank" id="heroRank">#5 AP POLL</span>
+              <span class="meta-pill rank" id="heroRank">#1 AP POLL</span>
               <span class="meta-pill" id="heroNattyOdds" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.35); color: #38BDF8; font-weight: 700;">+350 Title Odds</span>
             </div>
           </div>
@@ -284,17 +284,17 @@
     <section class="kpi-grid">
       <div class="kpi-card" style="cursor: pointer;" onclick="document.getElementById('playoffSection').scrollIntoView({behavior:'smooth'});" title="Click to view Conference Championships & 12-Team CFP Bracket">
         <span class="kpi-label"><i class="fa-solid fa-trophy"></i> TOTAL PREDICTED RECORD</span>
-        <span class="kpi-value" id="kpiTotalRecord">15 - 1</span>
-        <span class="kpi-sub" id="kpiRecordSub"><span id="kpiRecord">11 - 1</span> Reg • <span id="kpiPostseasonOutcome" style="color: var(--color-brand-accent); font-weight: 700;">🏆 National Champions</span></span>
+        <span class="kpi-value" id="kpiTotalRecord">16 - 0</span>
+        <span class="kpi-sub" id="kpiRecordSub"><span id="kpiRecord">12 - 0</span> Reg • <span id="kpiPostseasonOutcome" style="color: var(--color-brand-accent); font-weight: 700;">🏆 National Champions</span></span>
       </div>
       <div class="kpi-card">
         <span class="kpi-label"><i class="fa-solid fa-chart-line"></i> WIN PROBABILITY</span>
-        <span class="kpi-value" id="kpiWinProb">88.4%</span>
-        <span class="kpi-sub" id="kpiConfRecord">8-0 Conference</span>
+        <span class="kpi-value" id="kpiWinProb">92.4%</span>
+        <span class="kpi-sub" id="kpiConfRecord">9-0 Conference</span>
       </div>
       <div class="kpi-card">
         <span class="kpi-label"><i class="fa-solid fa-gauge-high"></i> AVG SCORING MARGIN</span>
-        <span class="kpi-value" id="kpiMargin">+17.8</span>
+        <span class="kpi-value" id="kpiMargin">+22.4</span>
         <span class="kpi-sub">Points per game</span>
       </div>
       <div class="kpi-card" style="cursor: pointer;" onclick="document.getElementById('playoffSection').scrollIntoView({behavior:'smooth'});" title="Click to view 12-Team CFP Bracket">
@@ -305,12 +305,12 @@
       <div class="kpi-card">
         <span class="kpi-label"><i class="fa-solid fa-ring"></i> NATTY TITLE ODDS</span>
         <span class="kpi-value" id="kpiNattyOdds">+350</span>
-        <span class="kpi-sub" id="kpiNattyOddsSub">28.4% Championship Sim</span>
+        <span class="kpi-sub" id="kpiNattyOddsSub">34.8% Championship Sim</span>
       </div>
       <div class="kpi-card" id="monteCarloKpiCard" style="cursor: pointer;" title="Click to view 10,000 Monte Carlo simulation breakdown">
         <span class="kpi-label"><i class="fa-solid fa-dice-d20"></i> MONTE CARLO ENGINE</span>
         <span class="kpi-value" id="kpiMonteCarloRuns">10,000 SIMS</span>
-        <span class="kpi-sub" id="kpiMonteCarloTopOutcome">11-1 (44.2% Prob)</span>
+        <span class="kpi-sub" id="kpiMonteCarloTopOutcome">12-0 (48.6% Prob)</span>
       </div>
     </section>
 
@@ -1025,7 +1025,7 @@
     <div class="container footer-content">
       <div class="footer-brand">
         <span id="footerEmblem">
-          <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas Longhorns" style="width: 24px; height: 24px; object-fit: contain;">
+          <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/194.png" alt="Ohio State Buckeyes" style="width: 24px; height: 24px; object-fit: contain;">
         </span>
         <span>CFB PROPHET • COLLEGE FOOTBALL AI PREDICTOR</span>
       </div>
@@ -1150,7 +1150,7 @@
         <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1; min-width: 240px;">
           <select id="vaultTabSelect" class="schedule-filter-select" onchange="switchVaultTab(this.value)" style="flex: 1; max-width: 320px; font-size: 0.82rem;">
             <option value="weekly" selected>📅 Weekly Standings</option>
-            <option value="community">🏆 Season CFP Brackets</option>
+            <option value="community">🏆 Season Standings</option>
             <option value="allteams">🛡️ All 30 Teams Game Matrix</option>
             <option value="mine">👤 My Submitted Picks</option>
           </select>
@@ -1465,9 +1465,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js?v=20260826_hype_hyperlink_v160"></script>
-  <script src="qrcode.min.js?v=20260826_hype_hyperlink_v160"></script>
-  <script src="data/teams.js?v=20260826_hype_hyperlink_v160"></script>
-  <script src="app.js?v=20260826_hype_hyperlink_v160"></script>
+  <script src="qrious.min.js?v=20260826_v200"></script>
+  <script src="qrcode.min.js?v=20260826_v200"></script>
+  <script src="data/teams.js?v=20260826_v200"></script>
+  <script src="app.js?v=20260826_v200"></script>
 </body>
 </html>

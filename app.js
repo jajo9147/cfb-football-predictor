@@ -309,7 +309,7 @@ function updateCountdownTickerForActiveTeam() {
   const textEl = document.getElementById('countdownText');
   if (!badgeEl && !textEl) return;
 
-  const teamId = state.currentTeamId || 'texas';
+  const teamId = state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
   const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
   const kickoffInfo = TEAM_OPENER_KICKOFFS[teamId] || { utc: '2026-09-05T16:00:00Z', tv: 'ABC / ESPN' };
   const kickoffDate = new Date(kickoffInfo.utc);
@@ -1471,7 +1471,7 @@ function initGlobalPresetButtons() {
 window.applyGlobalPreset = function(presetKey) {
   const presetValues = GLOBAL_PRESETS[presetKey] || GLOBAL_PRESETS['baseline'];
   if (!state.currentTeamId) {
-    state.currentTeamId = getTopRankedTeamId() || 'texas';
+    state.currentTeamId = getTopRankedTeamId() || 'ohiostate';
   }
 
   // Assign preset specifically to active team
@@ -4318,7 +4318,7 @@ async function generateHypeCard() {
   drawCanvasTextFitted(ctx, dcScheme, rightX + 20, 548, bottomBoxW - 40, '500 11px "Outfit", sans-serif', '#94A3B8', 'left');
 
   // Direct Interactive QR Code Card (Embedded in canvas)
-  const canonicalTeamId = state.currentTeamId || 'texas';
+  const canonicalTeamId = state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
   const appUrl = `https://jajo9147.github.io/cfb-football-predictor/?team=${canonicalTeamId}`;
   const qrX = rightX + bottomBoxW + 12; // 1063
   const qrW = 101;
@@ -4900,11 +4900,20 @@ function openMonteCarloModal() {
   }, 75);
 }
 
+function runMonteCarloRecalibration() {
+  const menu = document.getElementById('moreToolsMenu');
+  if (menu) menu.classList.remove('show');
+  openMonteCarloModal();
+}
+window.runMonteCarloRecalibration = runMonteCarloRecalibration;
+window.openMonteCarloModal = openMonteCarloModal;
+
 function initMonteCarloEngine() {
   const quickSimBtn = document.getElementById('quickSimAllBtn');
   if (quickSimBtn) {
-    quickSimBtn.addEventListener('click', () => {
-      openMonteCarloModal();
+    quickSimBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      runMonteCarloRecalibration();
     });
   }
 
@@ -5746,7 +5755,7 @@ function serializeScenario(teamId) {
     }
   }
 
-  const champId = (champ && champ.id && TEAMS_DATABASE[champ.id]) ? champ.id : (TEAMS_DATABASE[teamId] ? teamId : 'texas');
+  const champId = (champ && champ.id && TEAMS_DATABASE[champ.id]) ? champ.id : (TEAMS_DATABASE[teamId] ? teamId : (getTopRankedTeamId() || 'ohiostate'));
   const basePath = window.location.pathname.replace(/\/champ\/[^/]+$/, '').replace(/\/index\.html$/, '').replace(/\/$/, '');
   const champUrl = `${window.location.origin}${basePath}/champ/${champId}.html`;
 
@@ -5766,7 +5775,7 @@ function serializeScenario(teamId) {
 }
 
 window.shareCustomScenario = async function() {
-  const teamId = state.currentTeamId || getTopRankedTeamId() || 'texas';
+  const teamId = state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
   const team = TEAMS_DATABASE[teamId] || { name: 'CFB', shortName: 'College Football' };
   const champ = state.lastNationalChampion || (state.lastPlayoffResults && state.lastPlayoffResults.nationalChampion) || team;
   const champName = champ.shortName || champ.name || 'National Champion';
@@ -6225,7 +6234,7 @@ async function generateGameHypeCard(game) {
   drawCanvasTextWrapped(ctx, scoutSummary, 65, 532, tactW - 50, 24, '500 15px "Outfit", sans-serif', '#E2E8F0', 'left', 2);
 
   // Embedded QR Code on Matchup Card
-  const canonicalTeamId = teamA.id || state.currentTeamId || 'texas';
+  const canonicalTeamId = teamA.id || state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
   const appUrl = `https://jajo9147.github.io/cfb-football-predictor/?team=${canonicalTeamId}`;
   const gQrX = 1050;
   const gQrW = 110;
@@ -7047,7 +7056,7 @@ function saveCurrentProjectionAsBracket(name, creator, notes) {
   const ccg = simulateConferenceChampionships(evaluated);
   const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
   const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
-  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || 'texas']);
+  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate']);
   const runnerTeam = playoff.runnerUp ? (TEAMS_DATABASE[playoff.runnerUp.id] || playoff.runnerUp) : TEAMS_DATABASE['oregon'];
 
   const currentUser = getCurrentUser();
@@ -7074,7 +7083,7 @@ function saveCurrentProjectionAsBracket(name, creator, notes) {
     mode: isSlidersCustom() ? 'custom' : 'baseline',
     isPublic: true,
     champion: {
-      id: champTeam.id || 'texas',
+      id: champTeam.id || getTopRankedTeamId() || 'ohiostate',
       name: champTeam.name || 'Texas Longhorns',
       shortName: champTeam.shortName || 'Texas',
       logoUrl: champTeam.logoUrl || '',
@@ -7106,7 +7115,7 @@ function saveCurrentProjectionAsBracket(name, creator, notes) {
       ]
     },
     simState: {
-      teamId: state.currentTeamId || 'texas',
+      teamId: state.currentTeamId || getTopRankedTeamId() || 'ohiostate',
       userPicks: JSON.parse(JSON.stringify(state.userPicks || {})),
       ccgPicks: JSON.parse(JSON.stringify(state.ccgPicks || {})),
       playoffPicks: JSON.parse(JSON.stringify(state.playoffPicks || {})),
@@ -7416,7 +7425,7 @@ function prepareCompactBracketPayload(b) {
       sf: (b.playoffSummary?.sf || []).map(x => ({ winner: x.winner || 'Team' }))
     },
     simState: {
-      teamId: b.simState?.teamId || 'texas',
+      teamId: b.simState?.teamId || getTopRankedTeamId() || 'ohiostate',
       userPicks: b.simState?.userPicks || {},
       ccgPicks: b.simState?.ccgPicks || {},
       playoffPicks: b.simState?.playoffPicks || {},
@@ -7934,7 +7943,7 @@ function openSaveBracketModal(fromVault = false) {
   const ccg = simulateConferenceChampionships(evaluated);
   const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
   const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
-  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || 'texas']);
+  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate']);
 
   if (previewBox) {
     previewBox.innerHTML = `
@@ -8310,7 +8319,7 @@ function fallbackCopyText(text, successMsg) {
 function getBracketShareUrl(bracketId) {
   const allBrackets = getCommunityBrackets();
   const target = allBrackets.find(b => b.id === bracketId) || allBrackets[0] || createProphetAiBenchmarkBracket();
-  const targetTeamId = target.simState?.teamId || target.champion?.id || 'texas';
+  const targetTeamId = target.simState?.teamId || target.champion?.id || getTopRankedTeamId() || 'ohiostate';
 
   const payload = {
     t: targetTeamId,
@@ -8531,7 +8540,7 @@ async function shareActiveCanvasToNativeSheet(canvasId, filename = 'cfb_prophet_
     return;
   }
 
-  const teamId = state.currentTeamId || 'texas';
+  const teamId = state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
   const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
   const appUrl = `https://jajo9147.github.io/cfb-football-predictor/?team=${teamId}`;
   const shareText = `Check out the App CFB Prophet, I project ${team.name} to win the national championship this year.\n\n${appUrl}`;
@@ -8609,7 +8618,7 @@ window.triggerNativeShare = triggerNativeShare;
 // ==========================================================================
 
 function triggerChaosUpsetSimulator() {
-  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate'];
   if (!currentTeam || !currentTeam.schedule) return;
 
   if (!state.userPicks) state.userPicks = {};
@@ -8661,7 +8670,7 @@ function triggerChaosUpsetSimulator() {
 window.triggerChaosUpsetSimulator = triggerChaosUpsetSimulator;
 
 function quickPickAllFavorites() {
-  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate'];
   if (!currentTeam || !currentTeam.schedule) return;
 
   if (!state.userPicks) state.userPicks = {};
@@ -8684,7 +8693,7 @@ function quickPickAllFavorites() {
 window.quickPickAllFavorites = quickPickAllFavorites;
 
 function resetCurrentTeamPicks() {
-  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate'];
   if (currentTeam && currentTeam.schedule && state.userPicks) {
     currentTeam.schedule.forEach(g => {
       delete state.userPicks[g.id];
@@ -8705,7 +8714,7 @@ function openShareChallengeModal() {
   const modal = document.getElementById('shareChallengeModal');
   if (!modal) return;
 
-  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate'];
   const currentUser = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
   const userName = currentUser ? currentUser.displayName : 'Coach';
 
@@ -8738,7 +8747,7 @@ window.closeShareChallengeModal = closeShareChallengeModal;
 
 function copyHypeCardAndLink() {
   const canvas = document.getElementById('hypeCanvas');
-  const teamId = state.currentTeamId || 'texas';
+  const teamId = state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
   const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
   const appUrl = `https://jajo9147.github.io/cfb-football-predictor/?team=${teamId}`;
   const shareText = `Check out the App CFB Prophet, I project ${team.name} to win the national championship this year.\n\n${appUrl}`;
@@ -8770,16 +8779,16 @@ function copyHypeCardAndLink() {
 window.copyHypeCardAndLink = copyHypeCardAndLink;
 
 function getChallengeShareUrl() {
-  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate'];
   const currentUser = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
   const userName = encodeURIComponent(currentUser ? currentUser.displayName : 'A Friend');
-  const teamId = currentTeam ? currentTeam.id : 'texas';
+  const teamId = currentTeam ? currentTeam.id : (getTopRankedTeamId() || 'ohiostate');
   const baseUrl = window.location.origin + window.location.pathname;
   return `${baseUrl}?challenge=${userName}&team=${teamId}`;
 }
 
 function handleNativeChallengeShare() {
-  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate'];
   const shareUrl = getChallengeShareUrl();
   const shareText = `🏈 I just simulated the 2026 College Football season on CFB Prophet and got ${currentTeam.name} winning it all! Think your team has a chance? Challenge my bracket: ${shareUrl}`;
 
@@ -8818,7 +8827,7 @@ function handleNativeChallengeShare() {
 window.handleNativeChallengeShare = handleNativeChallengeShare;
 
 function handleTwitterChallengeShare() {
-  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate'];
   const shareUrl = getChallengeShareUrl();
   const tweetText = `🏈 I just simulated the 2026 College Football Playoff on CFB Prophet and got ${currentTeam.name} winning it all! Think your team has a chance? Challenge my bracket: ${shareUrl}\n\n#CFBProphet #CFB #CollegeFootball`;
   const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
@@ -8849,7 +8858,7 @@ window.handleTwitterChallengeShare = handleTwitterChallengeShare;
 
 function handleCopyChallengeLink() {
   const shareUrl = getChallengeShareUrl();
-  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate'];
   const shareText = `🏈 I just simulated the 2026 College Football season on CFB Prophet and got ${currentTeam.name} winning it all! Think your team has a chance? Challenge my bracket: ${shareUrl}`;
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -8879,7 +8888,7 @@ function checkIncomingChallengeParams() {
       const banner = document.getElementById('incomingChallengeBanner');
       const challengerEl = document.getElementById('challengeChallengerName');
       const champEl = document.getElementById('challengeChampName');
-      const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+      const currentTeam = TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate'];
 
       if (banner) {
         if (challengerEl) challengerEl.textContent = decodeURIComponent(challenger);
@@ -8909,7 +8918,7 @@ function startApp() {
   // 1. Determine Default Active Team and Render Games IMMEDIATELY
   const urlParams = new URLSearchParams(window.location.search);
   const paramTeam = urlParams.get('team') ? urlParams.get('team').toLowerCase().trim() : null;
-  const defaultTeamId = (paramTeam && TEAMS_DATABASE[paramTeam]) ? paramTeam : 'texas';
+  const defaultTeamId = (paramTeam && TEAMS_DATABASE[paramTeam]) ? paramTeam : (getTopRankedTeamId() || 'ohiostate');
 
   try {
     renderTeamSelector();
@@ -8917,7 +8926,7 @@ function startApp() {
     selectTeam(defaultTeamId);
   } catch (err) {
     console.error('Error selecting initial team:', err);
-    try { selectTeam('texas'); } catch (e) {}
+    try { selectTeam(getTopRankedTeamId() || 'ohiostate'); } catch (e) {}
   }
 
   // 2. Initialize secondary subsystems safely

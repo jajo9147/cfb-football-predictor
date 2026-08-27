@@ -3,17 +3,17 @@
    ========================================================================== */
 
 :root {
-  /* Default Dynamic Brand Colors (Texas Baseline) */
-  --color-brand-primary: #BF5700;
-  --color-brand-secondary: #FFFFFF;
-  --color-brand-accent: #FF7A18;
-  --color-brand-glow: rgba(191, 87, 0, 0.4);
-  --color-brand-border: rgba(191, 87, 0, 0.35);
+  /* Default Dynamic Brand Colors (Ohio State Baseline #1 AP) */
+  --color-brand-primary: #BB0000;
+  --color-brand-secondary: #666666;
+  --color-brand-accent: #FF4D4D;
+  --color-brand-glow: rgba(187, 0, 0, 0.45);
+  --color-brand-border: rgba(187, 0, 0, 0.4);
 
-  --color-bg-base: #07090E;
-  --color-bg-surface: #0E121C;
-  --color-bg-card: rgba(18, 23, 36, 0.88);
-  --color-bg-elevated: rgba(28, 36, 56, 0.95);
+  --color-bg-base: #0D0709;
+  --color-bg-surface: #181113;
+  --color-bg-card: rgba(24, 17, 19, 0.88);
+  --color-bg-elevated: rgba(38, 27, 30, 0.95);
   --color-border: rgba(255, 255, 255, 0.08);
 
   /* Semantic Accents */
@@ -396,6 +396,10 @@ html {
   overflow-x: hidden !important;
   width: 100% !important;
   max-width: 100vw !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -409,6 +413,9 @@ body {
   min-height: 100vh;
   position: relative;
   transition: background-color 0.35s ease, color 0.35s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body.modal-open {
@@ -423,6 +430,58 @@ body.modal-open {
   margin: 0 auto;
   padding: 0 1.25rem;
   box-sizing: border-box;
+}
+
+
+/* ==========================================================================
+   SAFARI & WEBKIT ENGINE OPTIMIZATIONS (PARITY WITH CHROME)
+   ========================================================================== */
+
+button, select, input, textarea {
+  font-family: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type="text"], input[type="search"], input[type="email"], input[type="number"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-clip: padding-box;
+}
+
+select option {
+  background-color: #0E131F !important;
+  color: #F8FAFC !important;
+}
+
+.kpi-card,
+.game-card,
+.hero-banner-card,
+.ccg-card,
+.cfp-matchup-card,
+.modal-dialog,
+.modal-card,
+.bracket-vault-card,
+.vault-community-card,
+.tuning-section,
+.vault-h2h-banner,
+.team-search-input-box {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.hero-banner-card,
+.kpi-card,
+.tuning-section,
+.game-card,
+.modal-dialog,
+.bracket-vault-card,
+.vault-community-card {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 /* Ambient Stadium Glow */
@@ -873,6 +932,7 @@ body.modal-open {
   padding: 0.5rem 0.95rem;
   transition: var(--transition-fast);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .team-search-input-box:focus-within {
@@ -1345,6 +1405,7 @@ body.modal-open {
   position: relative;
   text-align: left;
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .primary-launch-btn:hover {
@@ -1740,6 +1801,7 @@ body.modal-open {
   font-weight: 700;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 20px var(--color-brand-glow);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   z-index: 9999;
   opacity: 0;
   pointer-events: none;
@@ -2640,6 +2702,7 @@ body.modal-open {
   overflow: hidden;
   transition: var(--transition-fast);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   cursor: pointer;
 }
 
@@ -2770,6 +2833,7 @@ body.modal-open {
   inset: 0;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 120;
   display: flex;
   align-items: flex-end;
@@ -2995,6 +3059,7 @@ body.modal-open {
   padding: 0.6rem 1.25rem;
   border-radius: 999px;
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
@@ -3027,113 +3092,6 @@ body.modal-open {
 @media (max-width: 768px) {
   .container {
     padding: 0 0.85rem;
-  }
-
-  /* Clean 2-Tier Mobile Broadcast Header */
-  .navbar {
-    padding: 0.4rem 0 0.35rem;
-    background: rgba(7, 9, 14, 0.96);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .nav-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.15rem 0.4rem 0.1rem;
-    gap: 0.35rem 0.45rem;
-  }
-
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    order: 1;
-  }
-
-  .logo-badge {
-    width: 30px;
-    height: 30px;
-    padding: 2px;
-    border-radius: var(--radius-sm);
-  }
-
-  .brand-title {
-    font-size: 1.12rem;
-    letter-spacing: 0.5px;
-    font-weight: 800;
-  }
-
-  .brand-subtitle {
-    display: none !important;
-  }
-
-  /* Nav Actions - Promoted via display: contents for flex layout */
-  .nav-actions {
-    display: contents;
-  }
-
-  .live-feed-pill {
-    order: 2;
-    margin-left: auto;
-    padding: 0.26rem 0.5rem;
-    font-size: 0.65rem;
-    gap: 0.3rem;
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.35);
-    border-radius: var(--radius-full);
-  }
-
-  .live-feed-text {
-    font-size: 0.62rem;
-    font-weight: 800;
-    letter-spacing: 0.3px;
-  }
-
-  .live-pulse-dot {
-    width: 6px;
-    height: 6px;
-  }
-
-  .live-sync-btn {
-    font-size: 0.68rem;
-    padding: 1px 2px;
-  }
-
-  .install-pwa-btn {
-    order: 3;
-    padding: 0.26rem 0.6rem;
-    font-size: 0.68rem;
-    gap: 0.3rem;
-    border-radius: var(--radius-full);
-  }
-
-  /* Sleek Full-Width Broadcast Kickoff Ribbon (Row 2 on Mobile) */
-  .countdown-badge {
-    order: 4;
-    width: 100%;
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    gap: 0.45rem;
-    background: rgba(0, 0, 0, 0.65);
-    border: 1px solid var(--color-brand-border);
-    padding: 0.32rem 0.75rem;
-    border-radius: 6px;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 800;
-    color: var(--color-brand-accent);
-    box-shadow: 0 0 10px var(--color-brand-glow);
-    letter-spacing: 0.5px;
-    margin-top: 0.15rem;
-  }
-
-  .countdown-badge .pulse-dot {
-    width: 6px;
-    height: 6px;
   }
 
   /* Native Mobile Team Selector Swimlane */
@@ -3805,6 +3763,7 @@ body.modal-open {
   flex-direction: column;
   justify-content: center;
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
 }
@@ -4908,6 +4867,7 @@ body {
   position: relative;
   transition: var(--transition-normal);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .bracket-vault-card:hover {
