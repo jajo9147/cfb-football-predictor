@@ -996,10 +996,7 @@ select option {
 }
 
 .team-search-results-dropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
+  position: fixed;
   background: #0B111E;
   border: 1px solid rgba(56, 189, 248, 0.4);
   border-radius: var(--radius-md);
@@ -1009,6 +1006,7 @@ select option {
   overflow-y: auto;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  min-width: 280px;
 }
 
 .team-search-item {

@@ -513,6 +513,14 @@ function initTeamSearch() {
   const dropdown = document.getElementById('teamSearchResultsDropdown');
   if (!input || !dropdown) return;
 
+  // position: fixed dropdown must be placed relative to the input's viewport rect
+  function positionDropdown() {
+    const rect = input.closest('.team-search-input-box')?.getBoundingClientRect() || input.getBoundingClientRect();
+    dropdown.style.top = (rect.bottom + 6) + 'px';
+    dropdown.style.left = rect.left + 'px';
+    dropdown.style.width = rect.width + 'px';
+  }
+
   function performSearch(query) {
     const q = (query || '').trim().toLowerCase();
     if (!q) {
@@ -553,6 +561,7 @@ function initTeamSearch() {
           <span>No teams found for "${query}"</span>
         </div>
       `;
+      positionDropdown();
       dropdown.style.display = 'block';
       return;
     }
@@ -581,6 +590,7 @@ function initTeamSearch() {
       dropdown.appendChild(item);
     });
 
+    positionDropdown();
     dropdown.style.display = 'block';
     return firstMatchedKey;
   }
@@ -628,6 +638,11 @@ function initTeamSearch() {
       input.select();
     }
   });
+
+  // Reposition dropdown on scroll or resize (needed for position:fixed)
+  const repositionOnScroll = () => { if (dropdown.style.display !== 'none') positionDropdown(); };
+  window.addEventListener('scroll', repositionOnScroll, { passive: true, capture: true });
+  window.addEventListener('resize', repositionOnScroll, { passive: true });
 
   // Close dropdown on click outside
   document.addEventListener('click', (e) => {
