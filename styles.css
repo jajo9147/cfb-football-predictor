@@ -2265,15 +2265,19 @@ body.modal-open {
 }
 
 .action-btn.hype-btn {
-  background: linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-accent));
-  border: 1px solid var(--color-brand-accent);
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.35), rgba(14, 165, 233, 0.25));
+  border: 1px solid rgba(56, 189, 248, 0.45);
   color: #FFFFFF;
-  box-shadow: 0 0 16px var(--color-brand-glow);
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
+  transition: all 0.2s ease;
 }
 
 .action-btn.hype-btn:hover {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.6), rgba(14, 165, 233, 0.45));
+  border-color: #38BDF8;
   transform: translateY(-1px);
-  box-shadow: 0 0 24px var(--color-brand-glow);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
 }
 
 /* ==========================================================================
