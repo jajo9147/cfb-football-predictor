@@ -147,12 +147,75 @@
     }
   }
 
-  // 1. Google OAuth
+  const GOOGLE_CLIENT_ID = '114317205490-ppqup25cuv5ibu5508pooqhjs188d8u.apps.googleusercontent.com';
+
+  function initGoogleIdentityServices() {
+    if (typeof window.google !== 'undefined' && window.google.accounts && window.google.accounts.id) {
+      try {
+        window.google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: async (response) => {
+            if (response && response.credential && supabaseClient) {
+              if (typeof window.showCustomToast === 'function') {
+                window.showCustomToast('🔄 Signing in with Google...');
+              }
+              const { data, error } = await supabaseClient.auth.signInWithIdToken({
+                provider: 'google',
+                token: response.credential
+              });
+              if (error) {
+                console.warn('[Supabase] GIS signInWithIdToken notice:', error.message);
+                signInWithGoogleOAuthFallback();
+              }
+            }
+          },
+          auto_select: false,
+          cancel_on_tap_outside: true
+        });
+
+        const btnEl = document.getElementById('googleGsiButtonContainer');
+        if (btnEl) {
+          btnEl.innerHTML = '';
+          window.google.accounts.id.renderButton(btnEl, {
+            theme: 'outline',
+            size: 'large',
+            type: 'standard',
+            shape: 'rectangular',
+            text: 'continue_with',
+            logo_alignment: 'left',
+            width: 280
+          });
+        }
+      } catch (e) {
+        console.warn('[Supabase] Google GIS init warning:', e);
+      }
+    }
+  }
+
+  // 1. Google OAuth with seamless GIS One-Tap & Popup
   async function signInWithGoogle() {
     if (!isSupabaseConfigured()) {
       showConfigModal('Google OAuth requires Supabase Project URL & Anon Key.');
       return { error: { message: 'Supabase project not yet connected.' } };
     }
+
+    if (typeof window.google !== 'undefined' && window.google.accounts && window.google.accounts.id) {
+      try {
+        window.google.accounts.id.prompt((notification) => {
+          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            signInWithGoogleOAuthFallback();
+          }
+        });
+        return { success: true };
+      } catch(err) {
+        return signInWithGoogleOAuthFallback();
+      }
+    }
+
+    return signInWithGoogleOAuthFallback();
+  }
+
+  async function signInWithGoogleOAuthFallback() {
     return await supabaseClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
@@ -367,6 +430,7 @@
     signInWithPassword: signInWithPassword,
     signUpWithPassword: signUpWithPassword,
     signOut: signOut,
+    initGIS: initGoogleIdentityServices,
     saveBracket: saveBracketToCloud,
     fetchCommunityBrackets: fetchCloudCommunityBrackets
   };
