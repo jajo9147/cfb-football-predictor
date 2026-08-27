@@ -8909,7 +8909,7 @@ function startApp() {
   // 1. Determine Default Active Team and Render Games IMMEDIATELY
   const urlParams = new URLSearchParams(window.location.search);
   const paramTeam = urlParams.get('team') ? urlParams.get('team').toLowerCase().trim() : null;
-  const defaultTeamId = (paramTeam && TEAMS_DATABASE[paramTeam]) ? paramTeam : (getTopRankedTeamId() || 'texas');
+  const defaultTeamId = (paramTeam && TEAMS_DATABASE[paramTeam]) ? paramTeam : 'texas';
 
   try {
     renderTeamSelector();
