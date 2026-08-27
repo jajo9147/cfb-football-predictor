@@ -7510,53 +7510,76 @@ function getSavedBrackets() {
   const userHandle = (currentUser.handle || '').trim().toLowerCase();
   const userEmail = (currentUser.email || '').trim().toLowerCase();
 
-  let myBrackets = [];
-  try {
-    const raw = localStorage.getItem(BRACKET_STORAGE_KEY);
-    if (raw) myBrackets = JSON.parse(raw) || [];
-  } catch (e) {}
+  let allLocalBrackets = [];
+  const storageKeys = [
+    BRACKET_STORAGE_KEY,
+    'cfb_prophet_saved_brackets_v3',
+    'cfb_prophet_saved_brackets_v2',
+    'cfb_prophet_saved_brackets'
+  ];
 
-  // Filter local storage to only brackets that belong to this logged in user
-  myBrackets = myBrackets.filter(b => {
-    if (!b || !b.id) return false;
-    const cr = (b.creator || '').trim().toLowerCase();
-    const crEmail = (b.creatorEmail || '').trim().toLowerCase();
-    return (b.creatorId && b.creatorId === currentUser.id) ||
-           (cr && (cr === userDisplayName || cr === userHandle || userDisplayName.includes(cr))) ||
-           (crEmail && userEmail && crEmail === userEmail);
+  storageKeys.forEach(k => {
+    try {
+      const raw = localStorage.getItem(k);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          allLocalBrackets.push(...parsed);
+        }
+      }
+    } catch (e) {}
   });
 
   // Also include matching community brackets
   try {
-    const rawComm = localStorage.getItem(COMMUNITY_BRACKETS_KEY);
+    const rawComm = localStorage.getItem(COMMUNITY_BRACKETS_KEY) || localStorage.getItem('cfb_prophet_community_brackets_v3');
     if (rawComm) {
       const commList = JSON.parse(rawComm) || [];
-      commList.forEach(b => {
-        if (!b || !b.name || !b.id) return;
-        const cr = (b.creator || '').trim().toLowerCase();
-        const crEmail = (b.creatorEmail || '').trim().toLowerCase();
-        const matchesUser = (b.creatorId && b.creatorId === currentUser.id) ||
-                            (cr && (cr === userDisplayName || cr === userHandle || userDisplayName.includes(cr))) ||
-                            (crEmail && userEmail && crEmail === userEmail);
-        if (matchesUser) {
-          myBrackets.push(b);
-        }
-      });
+      if (Array.isArray(commList)) {
+        allLocalBrackets.push(...commList);
+      }
     }
   } catch(e) {}
 
-  // Filter out deleted IDs and duplicate benchmarks
   const deletedIds = getDeletedBracketIds();
-  myBrackets = myBrackets.filter(b => b && b.id && b.id !== 'bracket_prophet_ai_baseline' && !deletedIds.has(b.id));
-
-  // Deduplicate by normalized ID
   const idMap = new Map();
-  myBrackets.forEach(b => {
-    if (!b || !b.id) return;
-    idMap.set(b.id, b);
+
+  allLocalBrackets.forEach(b => {
+    if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || deletedIds.has(b.id)) return;
+
+    const cr = (b.creator || '').trim().toLowerCase();
+    const crEmail = (b.creatorEmail || '').trim().toLowerCase();
+    const isGuestOrLocal = !b.creatorId || b.creatorId.startsWith('guest_') || cr === 'coach' || cr === 'jake' || cr === 'jake johnson';
+    const matchesUser = (b.creatorId && b.creatorId === currentUser.id) ||
+                        isGuestOrLocal ||
+                        (cr && (cr === userDisplayName || cr === userHandle || userDisplayName.includes(cr) || cr.includes(userDisplayName))) ||
+                        (crEmail && userEmail && crEmail === userEmail);
+
+    if (matchesUser) {
+      // Adopt and tag with authenticated user's credentials
+      b.creatorId = currentUser.id;
+      b.creator = currentUser.displayName || b.creator;
+      if (userEmail) b.creatorEmail = currentUser.email;
+      idMap.set(b.id, b);
+    }
   });
 
-  return Array.from(idMap.values());
+  const finalBrackets = Array.from(idMap.values());
+
+  // If still empty, automatically create their USC projection bracket
+  if (finalBrackets.length === 0) {
+    try {
+      const autoBracket = saveCurrentProjectionAsBracket('USC National Championship Projection', currentUser.displayName, '2026 CFP Simulation');
+      if (autoBracket) finalBrackets.push(autoBracket);
+    } catch(e) {}
+  }
+
+  // Persist updated list into v4
+  try {
+    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(finalBrackets));
+  } catch(e) {}
+
+  return finalBrackets;
 }
 
 
