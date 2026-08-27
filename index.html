@@ -165,19 +165,27 @@
   <!-- Main Navigation -->
   <nav class="navbar">
     <div class="container nav-container">
-      <a href="#" class="brand">
-        <div class="logo-badge" id="navLogoBadge">
-          <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas Longhorns" class="nav-logo-img">
-        </div>
-        <div class="brand-text">
-          <span class="brand-title">CFB PROPHET</span>
-          <span class="brand-subtitle">COLLEGE FOOTBALL AI SIMULATOR</span>
-        </div>
-      </a>
-      <button class="user-auth-btn-badge" id="navAuthBtn" onclick="openAuthModal()" title="Account & Creator Profile">
-        <i class="fa-solid fa-user-circle" id="navAuthIcon"></i>
-        <span id="navAuthLabel">Sign In</span>
-      </button>
+      <div class="nav-left-col">
+        <a href="#" class="brand">
+          <div class="logo-badge" id="navLogoBadge">
+            <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas Longhorns" class="nav-logo-img">
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">CFB PROPHET</span>
+            <span class="brand-subtitle">COLLEGE FOOTBALL AI SIMULATOR</span>
+          </div>
+        </a>
+        <button class="vault-btn-badge" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="Submit your picks and view weekly standings">
+          <i class="fa-solid fa-paper-plane" style="color: #10B981;"></i>
+          <span>Submit Picks & Standings</span>
+        </button>
+      </div>
+      <div class="nav-right-col">
+        <button class="user-auth-btn-badge" id="navAuthBtn" onclick="openAuthModal()" title="Account & Creator Profile">
+          <i class="fa-solid fa-user-circle" id="navAuthIcon"></i>
+          <span id="navAuthLabel">Sign In</span>
+        </button>
+      </div>
     </div>
   </nav>
 
