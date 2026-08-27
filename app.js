@@ -7489,57 +7489,57 @@ function createProphetAiBenchmarkBracket() {
     name: "Prophet AI's Picks",
     creator: 'Prophet AI (Model Benchmark)',
     notes: 'The golden standard: 10,000 Monte Carlo simulation baseline. Can you beat the AI?',
-    createdAt: '2026-08-26T12:00:00Z',
+    createdAt: '2026-08-27T12:00:00Z',
     mode: 'baseline',
     isAdminBenchmark: true,
     isPublic: true,
     champion: {
-      id: 'ohiostate',
-      name: 'Ohio State Buckeyes',
-      shortName: 'Ohio State',
-      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',
-      score: 35,
-      oppScore: 30
+      id: 'georgia',
+      name: 'Georgia Bulldogs',
+      shortName: 'Georgia',
+      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',
+      score: 34,
+      oppScore: 28
     },
     runnerUp: {
-      id: 'oregon',
-      name: 'Oregon Ducks',
-      shortName: 'Oregon'
+      id: 'ohiostate',
+      name: 'Ohio State Buckeyes',
+      shortName: 'Ohio State'
     },
     seeds: [
-      { seed: 1, id: 'ohiostate', name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png', wins: 12, losses: 1 },
-      { seed: 2, id: 'georgia', name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png', wins: 12, losses: 1 },
-      { seed: 3, id: 'clemson', name: 'Clemson', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/228.png', wins: 11, losses: 2 },
-      { seed: 4, id: 'utah', name: 'Utah', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/254.png', wins: 11, losses: 2 },
-      { seed: 5, id: 'oregon', name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 11, losses: 1 },
-      { seed: 6, id: 'texas', name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', wins: 11, losses: 2 },
-      { seed: 7, id: 'pennstate', name: 'Penn State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/213.png', wins: 11, losses: 1 },
-      { seed: 8, id: 'notredame', name: 'Notre Dame', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png', wins: 11, losses: 1 },
-      { seed: 9, id: 'alabama', name: 'Alabama', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/333.png', wins: 10, losses: 2 },
-      { seed: 10, id: 'indiana', name: 'Indiana', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png', wins: 10, losses: 2 },
-      { seed: 11, id: 'miami', name: 'Miami', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 10, losses: 2 },
-      { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png', wins: 12, losses: 1 }
+      { seed: 1,  id: 'georgia',    name: 'Georgia',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',   wins: 12, losses: 1 },
+      { seed: 2,  id: 'ohiostate',  name: 'Ohio State',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',  wins: 12, losses: 1 },
+      { seed: 3,  id: 'miami',      name: 'Miami',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 12, losses: 1 },
+      { seed: 4,  id: 'texastech',  name: 'Texas Tech',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png', wins: 10, losses: 3 },
+      { seed: 5,  id: 'oregon',     name: 'Oregon',      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 12, losses: 1 },
+      { seed: 6,  id: 'notredame',  name: 'Notre Dame',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png',   wins: 12, losses: 1 },
+      { seed: 7,  id: 'texas',      name: 'Texas',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',  wins: 11, losses: 2 },
+      { seed: 8,  id: 'olemiss',    name: 'Ole Miss',    logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/145.png',  wins: 11, losses: 2 },
+      { seed: 9,  id: 'indiana',    name: 'Indiana',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png',   wins: 11, losses: 2 },
+      { seed: 10, id: 'lsu',        name: 'LSU',         logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/99.png',   wins: 11, losses: 2 },
+      { seed: 11, id: 'alabama',    name: 'Alabama',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/333.png',  wins: 11, losses: 2 },
+      { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',   wins: 12, losses: 1 }
     ],
     playoffSummary: {
       fr: [
         { label: '#5 vs #12', winner: 'Oregon' },
-        { label: '#6 vs #11', winner: 'Texas' },
-        { label: '#7 vs #10', winner: 'Penn State' },
-        { label: '#8 vs #9', winner: 'Notre Dame' }
+        { label: '#6 vs #11', winner: 'Notre Dame' },
+        { label: '#7 vs #10', winner: 'Texas' },
+        { label: '#8 vs #9', winner: 'Ole Miss' }
       ],
       qf: [
-        { bowl: 'Sugar Bowl', winner: 'Ohio State' },
-        { bowl: 'Rose Bowl', winner: 'Oregon' },
-        { bowl: 'Peach Bowl', winner: 'Texas' },
-        { bowl: 'Fiesta Bowl', winner: 'Georgia' }
+        { bowl: 'Sugar Bowl', winner: 'Georgia' },
+        { bowl: 'Rose Bowl', winner: 'Ohio State' },
+        { bowl: 'Peach Bowl', winner: 'Oregon' },
+        { bowl: 'Fiesta Bowl', winner: 'Notre Dame' }
       ],
       sf: [
-        { bowl: 'Orange Bowl', winner: 'Ohio State' },
-        { bowl: 'Cotton Bowl', winner: 'Oregon' }
+        { bowl: 'Orange Bowl', winner: 'Georgia' },
+        { bowl: 'Cotton Bowl', winner: 'Ohio State' }
       ]
     },
     simState: {
-      teamId: 'ohiostate',
+      teamId: 'georgia',
       userPicks: {},
       ccgPicks: {},
       playoffPicks: {},
@@ -8417,17 +8417,17 @@ function generateCfpBracketCanvas(bracketObj) {
 
   // First Round (4 games)
   const fr = b.playoffSummary?.fr || [];
-  drawBracketMatchBox(leftX, 130, 220, 44, '5', seeds[4]?.name || 'Texas', '12', seeds[11]?.name || 'Boise St', fr[0]?.winner);
-  drawBracketMatchBox(leftX, 230, 220, 44, '6', seeds[5]?.name || 'Indiana', '11', seeds[10]?.name || 'LSU', fr[1]?.winner);
-  drawBracketMatchBox(leftX, 330, 220, 44, '7', seeds[6]?.name || 'Miami', '10', seeds[9]?.name || 'Oklahoma', fr[2]?.winner);
-  drawBracketMatchBox(leftX, 430, 220, 44, '8', seeds[7]?.name || 'Texas A&M', '9', seeds[8]?.name || 'Ole Miss', fr[3]?.winner);
+  drawBracketMatchBox(leftX, 130, 220, 44, '5', seeds[4]?.name || 'Oregon', '12', seeds[11]?.name || 'Boise St', fr[0]?.winner);
+  drawBracketMatchBox(leftX, 230, 220, 44, '6', seeds[5]?.name || 'Notre Dame', '11', seeds[10]?.name || 'Alabama', fr[1]?.winner);
+  drawBracketMatchBox(leftX, 330, 220, 44, '7', seeds[6]?.name || 'Texas', '10', seeds[9]?.name || 'LSU', fr[2]?.winner);
+  drawBracketMatchBox(leftX, 430, 220, 44, '8', seeds[7]?.name || 'Ole Miss', '9', seeds[8]?.name || 'Indiana', fr[3]?.winner);
 
   // Quarterfinals (4 games)
   const qf = b.playoffSummary?.qf || [];
-  drawBracketMatchBox(leftX + 260, 155, 220, 52, '1', seeds[0]?.name || 'Ohio St', '8/9', fr[3]?.winner || 'Texas A&M', qf[0]?.winner, 'Sugar Bowl');
-  drawBracketMatchBox(leftX + 260, 255, 220, 52, '2', seeds[1]?.name || 'Oregon', '7/10', fr[2]?.winner || 'Miami', qf[1]?.winner, 'Rose Bowl');
-  drawBracketMatchBox(leftX + 260, 355, 220, 52, '3', seeds[2]?.name || 'Texas', '6/11', fr[1]?.winner || 'Indiana', qf[2]?.winner, 'Peach Bowl');
-  drawBracketMatchBox(leftX + 260, 455, 220, 52, '4', seeds[3]?.name || 'Georgia', '5/12', fr[0]?.winner || 'Texas', qf[3]?.winner, 'Fiesta Bowl');
+  drawBracketMatchBox(leftX + 260, 155, 220, 52, '1', seeds[0]?.name || 'Georgia', '8/9', fr[3]?.winner || 'Indiana', qf[0]?.winner, 'Sugar Bowl');
+  drawBracketMatchBox(leftX + 260, 255, 220, 52, '2', seeds[1]?.name || 'Ohio St', '7/10', fr[2]?.winner || 'Texas', qf[1]?.winner, 'Rose Bowl');
+  drawBracketMatchBox(leftX + 260, 355, 220, 52, '3', seeds[2]?.name || 'Miami', '6/11', fr[1]?.winner || 'Notre Dame', qf[2]?.winner, 'Peach Bowl');
+  drawBracketMatchBox(leftX + 260, 455, 220, 52, '4', seeds[3]?.name || 'Texas Tech', '5/12', fr[0]?.winner || 'Oregon', qf[3]?.winner, 'Fiesta Bowl');
 
   // Semifinals (2 games)
   const sf = b.playoffSummary?.sf || [];
