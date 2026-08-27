@@ -66,7 +66,7 @@
     }
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=306">
+  <link rel="stylesheet" href="styles.css?v=307">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1498,8 +1498,8 @@
         </div>
 
         <div style="display: flex; gap: 0.5rem; justify-content: center;">
-          <button class="action-btn secondary-btn" onclick="openBracketVaultModal()" style="flex: 1;">
-            <i class="fa-solid fa-list-ol"></i> <span>View Brackets</span>
+          <button class="action-btn secondary-btn" onclick="closeAuthModal(); openBracketVaultModal();" style="flex: 1;">
+            <i class="fa-solid fa-list-ol"></i> <span>View My Brackets</span>
           </button>
           <button class="action-btn" onclick="handleSignOutClick()" style="background: rgba(239, 68, 68, 0.2); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.4); flex: 1;">
             <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sign Out</span>
@@ -1507,6 +1507,7 @@
         </div>
       </div>
     </div>
+  </div>
 
 
 
@@ -1562,10 +1563,10 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=306"></script>
-  <script src="qrious.min.js?v=306"></script>
-  <script src="qrcode.min.js?v=306"></script>
-  <script src="data/teams.js?v=306"></script>
-  <script src="app.js?v=306"></script>
+  <script src="supabase-client.js?v=307"></script>
+  <script src="qrious.min.js?v=307"></script>
+  <script src="qrcode.min.js?v=307"></script>
+  <script src="data/teams.js?v=307"></script>
+  <script src="app.js?v=307"></script>
 </body>
 </html>
