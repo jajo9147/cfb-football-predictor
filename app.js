@@ -3349,19 +3349,19 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
 
     // Severe loss tier penalties (Committee strictly separates 0/1/2/3 loss tiers)
     let lossPts = 0;
-    if (l === 0) lossPts = 14000;
-    else if (l === 1) lossPts = 10000;
-    else if (l === 2) lossPts = 6500;
-    else if (l === 3) lossPts = 2000; // Severe 3-loss bubble penalty
+    if (l === 0) lossPts = 20000;
+    else if (l === 1) lossPts = 15000;
+    else if (l === 2) lossPts = 10000;
+    else if (l === 3) lossPts = 1000; // Severe 3-loss penalty; never jumps 1/2 loss teams
     else lossPts = 0;
 
     // AP Poll prestige tier
     let rankPts = 0;
-    if (rNum <= 5) rankPts = 4500;
-    else if (rNum <= 10) rankPts = 3500;
-    else if (rNum <= 15) rankPts = 2500;
-    else if (rNum <= 20) rankPts = 1500;
-    else if (rNum <= 25) rankPts = 800;
+    if (rNum <= 5) rankPts = 3000;
+    else if (rNum <= 10) rankPts = 2200;
+    else if (rNum <= 15) rankPts = 1500;
+    else if (rNum <= 20) rankPts = 1000;
+    else if (rNum <= 25) rankPts = 500;
     else rankPts = 0;
 
     // Conference Strength & SOS weight
