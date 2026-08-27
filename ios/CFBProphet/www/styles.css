@@ -1085,6 +1085,285 @@ body.modal-open {
 }
 
 /* ==========================================================================
+   VIRAL INCOMING CHALLENGE BANNER & QUICK LAUNCH BAR
+   ========================================================================== */
+
+.incoming-challenge-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.25), rgba(15, 23, 42, 0.95));
+  border: 1.5px solid rgba(236, 72, 153, 0.5);
+  border-radius: var(--radius-lg);
+  padding: 0.85rem 1.25rem;
+  margin: 1rem 0 0.5rem;
+  box-shadow: 0 8px 24px rgba(236, 72, 153, 0.25);
+  animation: challengePulse 2.5s infinite;
+}
+
+@keyframes challengePulse {
+  0%, 100% { border-color: rgba(236, 72, 153, 0.5); box-shadow: 0 8px 24px rgba(236, 72, 153, 0.25); }
+  50% { border-color: rgba(236, 72, 153, 0.9); box-shadow: 0 10px 32px rgba(236, 72, 153, 0.45); }
+}
+
+.challenge-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 1;
+}
+
+.challenge-badge-pulse {
+  background: linear-gradient(135deg, #EC4899, #BE185D);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+  white-space: nowrap;
+}
+
+.challenge-text-wrap {
+  font-size: 0.92rem;
+  color: #F8FAFC;
+  line-height: 1.4;
+}
+
+.challenge-text-wrap strong {
+  color: #38BDF8;
+}
+
+.challenge-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.challenge-accept-btn {
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 0.84rem;
+  font-weight: 800;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  transition: all 0.2s ease;
+}
+
+.challenge-accept-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+}
+
+.challenge-dismiss-btn {
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.challenge-dismiss-btn:hover {
+  color: #FFFFFF;
+}
+
+/* Quick Launch Action Bar */
+.quick-launch-action-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.primary-launch-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  text-align: left;
+  backdrop-filter: blur(12px);
+}
+
+.primary-launch-btn:hover {
+  transform: translateY(-2px);
+  border-color: #38BDF8;
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.25);
+  background: rgba(30, 41, 59, 0.95);
+}
+
+.primary-launch-btn i {
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.launch-btn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.launch-btn-text .btn-main {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #F8FAFC;
+  line-height: 1.2;
+}
+
+.launch-btn-text .btn-sub {
+  font-size: 0.72rem;
+  color: #94A3B8;
+}
+
+.launch-pill {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.launch-pill.live-pill {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  animation: pulseLive 2s infinite;
+}
+
+@keyframes pulseLive {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Schedule Batch Actions */
+.schedule-batch-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.batch-pick-btn {
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: var(--radius-sm);
+  color: #E2E8F0;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.35rem 0.65rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+
+.batch-pick-btn:hover {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: #38BDF8;
+  color: #FFFFFF;
+}
+
+.batch-pick-btn.chaos {
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #FCD34D;
+}
+.batch-pick-btn.chaos:hover {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: #F59E0B;
+}
+
+.batch-pick-btn.reset {
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #FCA5A5;
+}
+.batch-pick-btn.reset:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #EF4444;
+}
+
+/* Challenge Preview Card in Modal */
+.challenge-preview-card {
+  background: rgba(15, 23, 42, 0.95);
+  border: 1.5px solid rgba(236, 72, 153, 0.4);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+}
+
+.challenge-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.challenge-preview-img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  background: #FFFFFF;
+  padding: 4px;
+  border-radius: 8px;
+  border: 2px solid #EC4899;
+}
+
+.challenge-preview-champ {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #F8FAFC;
+}
+
+.challenge-preview-sub {
+  font-size: 0.78rem;
+  color: #38BDF8;
+  font-family: var(--font-mono);
+}
+
+.challenge-quote-box {
+  background: rgba(0, 0, 0, 0.4);
+  border-left: 3px solid #EC4899;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  font-size: 0.86rem;
+  color: #E2E8F0;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.challenge-share-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+/* ==========================================================================
    KPI DASHBOARD (SEASON OVERVIEW METRICS)
    ========================================================================== */
 

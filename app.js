@@ -8432,6 +8432,207 @@ function startApp() {
   renderTeamSelector();
   initTeamSearch();
 
+// ==========================================================================
+// VIRAL GROWTH, CHAOS SIMULATOR & CHALLENGE ENGINE
+// ==========================================================================
+
+function triggerChaosUpsetSimulator() {
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  if (!currentTeam || !currentTeam.schedule) return;
+
+  if (!state.userCustomGamePicks) state.userCustomGamePicks = {};
+  if (!state.userCustomGamePicks[currentTeam.id]) state.userCustomGamePicks[currentTeam.id] = {};
+
+  let upsetCount = 0;
+  // Apply randomized underdog chaos upsets across the current team and marquee games
+  currentTeam.schedule.forEach((g) => {
+    const isUnderdog = (g.vegasSpread || 0) > 0 || (g.oppRank && !currentTeam.apRank);
+    const isTossUp = Math.abs(g.vegasSpread || 0) <= 7;
+    if ((isUnderdog || isTossUp) && Math.random() < 0.5) {
+      const currentPick = state.userCustomGamePicks[currentTeam.id][g.id] || (g.sim && g.sim.adjWinProb >= 50 ? 'W' : 'L');
+      const newPick = currentPick === 'W' ? 'L' : 'W';
+      state.userCustomGamePicks[currentTeam.id][g.id] = newPick;
+      upsetCount++;
+    }
+  });
+
+  if (upsetCount === 0 && currentTeam.schedule.length > 0) {
+    const randomIdx = Math.floor(Math.random() * currentTeam.schedule.length);
+    const g = currentTeam.schedule[randomIdx];
+    state.userCustomGamePicks[currentTeam.id][g.id] = 'W';
+    upsetCount = 1;
+  }
+
+  updateCalculations();
+  renderSchedule();
+  renderKpiCards();
+  renderPlayoffBracket();
+
+  showCustomToast(`🎲 CHAOS UNLEASHED: ${upsetCount} matchup upset${upsetCount > 1 ? 's' : ''} generated! Check your updated CFP bracket!`);
+  
+  const chaosBtn = document.querySelector('.chaos-mode-action');
+  if (chaosBtn) {
+    chaosBtn.style.transform = 'scale(1.06)';
+    setTimeout(() => { chaosBtn.style.transform = ''; }, 300);
+  }
+}
+window.triggerChaosUpsetSimulator = triggerChaosUpsetSimulator;
+
+function quickPickAllFavorites() {
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  if (!currentTeam || !currentTeam.schedule) return;
+
+  if (!state.userCustomGamePicks) state.userCustomGamePicks = {};
+  state.userCustomGamePicks[currentTeam.id] = {};
+
+  currentTeam.schedule.forEach(g => {
+    const winProb = g.sim ? (g.sim.adjWinProb !== undefined ? g.sim.adjWinProb : 50) : 50;
+    state.userCustomGamePicks[currentTeam.id][g.id] = winProb >= 50 ? 'W' : 'L';
+  });
+
+  updateCalculations();
+  renderSchedule();
+  renderKpiCards();
+  renderPlayoffBracket();
+
+  showCustomToast(`✅ Quick-filled all games with projected favorites!`);
+}
+window.quickPickAllFavorites = quickPickAllFavorites;
+
+function resetCurrentTeamPicks() {
+  if (state.userCustomGamePicks && state.userCustomGamePicks[state.currentTeamId]) {
+    delete state.userCustomGamePicks[state.currentTeamId];
+  }
+  updateCalculations();
+  renderSchedule();
+  renderKpiCards();
+  renderPlayoffBracket();
+
+  showCustomToast(`🔄 Picks reset to authentic 2026 baseline.`);
+}
+window.resetCurrentTeamPicks = resetCurrentTeamPicks;
+
+function openShareChallengeModal() {
+  const modal = document.getElementById('shareChallengeModal');
+  if (!modal) return;
+
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const currentUser = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+  const userName = currentUser ? currentUser.displayName : 'Coach';
+
+  const evaluated = typeof evaluateRegularSeasonAllTeams === 'function' ? evaluateRegularSeasonAllTeams() : {};
+  const teamEval = evaluated[currentTeam.id] || { totalWins: 11, totalLosses: 1 };
+  const champName = currentTeam ? currentTeam.name : 'Texas Longhorns';
+  const recordStr = `${teamEval.totalWins || 11}-${teamEval.totalLosses || 1}`;
+
+  const previewLogo = document.getElementById('challengePreviewLogo');
+  const previewChamp = document.getElementById('challengePreviewChamp');
+  const previewSub = document.getElementById('challengePreviewSub');
+  const quoteBox = document.getElementById('challengeQuoteBox');
+
+  if (previewLogo) previewLogo.src = currentTeam.logoUrl || '';
+  if (previewChamp) previewChamp.textContent = champName;
+  if (previewSub) previewSub.textContent = `${recordStr} Projected Record • CFP Contender • 2026 Simulation`;
+  if (quoteBox) {
+    quoteBox.textContent = `"${userName} is projecting ${currentTeam.shortName || champName} (${recordStr}) to dominate the 2026 season. Think your squad can beat them? Make your picks on CFB Prophet!"`;
+  }
+
+  modal.style.display = 'flex';
+}
+window.openShareChallengeModal = openShareChallengeModal;
+
+function closeShareChallengeModal() {
+  const modal = document.getElementById('shareChallengeModal');
+  if (modal) modal.style.display = 'none';
+}
+window.closeShareChallengeModal = closeShareChallengeModal;
+
+function getChallengeShareUrl() {
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const currentUser = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+  const userName = encodeURIComponent(currentUser ? currentUser.displayName : 'A Friend');
+  const teamId = currentTeam ? currentTeam.id : 'texas';
+  const baseUrl = window.location.origin + window.location.pathname;
+  return `${baseUrl}?challenge=${userName}&team=${teamId}`;
+}
+
+function handleNativeChallengeShare() {
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const shareUrl = getChallengeShareUrl();
+  const shareText = `🏈 I just simulated the 2026 College Football season on CFB Prophet and got ${currentTeam.name} winning it all! Think your team has a chance? Challenge my bracket: ${shareUrl}`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'CFB Prophet Challenge',
+      text: shareText,
+      url: shareUrl
+    }).catch(() => {});
+  } else {
+    handleCopyChallengeLink();
+  }
+}
+window.handleNativeChallengeShare = handleNativeChallengeShare;
+
+function handleTwitterChallengeShare() {
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const shareUrl = getChallengeShareUrl();
+  const text = encodeURIComponent(`🏈 I just simulated the 2026 College Football Playoff on CFB Prophet and got ${currentTeam.name} winning the National Championship! Can you beat my picks?\n\nChallenge my bracket here: ${shareUrl}\n\n#CFBProphet #CFB #CollegeFootball`);
+  window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+}
+window.handleTwitterChallengeShare = handleTwitterChallengeShare;
+
+function handleCopyChallengeLink() {
+  const shareUrl = getChallengeShareUrl();
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      showCustomToast(`📋 Challenge link copied to clipboard! Share it with your friends!`);
+      closeShareChallengeModal();
+    }).catch(() => {
+      showCustomToast(`📋 Share URL: ${shareUrl}`);
+    });
+  } else {
+    showCustomToast(`📋 Share URL: ${shareUrl}`);
+  }
+}
+window.handleCopyChallengeLink = handleCopyChallengeLink;
+
+function checkIncomingChallengeParams() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const challenger = params.get('challenge');
+    const teamParam = params.get('team');
+
+    if (teamParam && TEAMS_DATABASE[teamParam]) {
+      selectTeam(teamParam);
+    }
+
+    if (challenger) {
+      const banner = document.getElementById('incomingChallengeBanner');
+      const challengerEl = document.getElementById('challengeChallengerName');
+      const champEl = document.getElementById('challengeChampName');
+      const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+
+      if (banner) {
+        if (challengerEl) challengerEl.textContent = decodeURIComponent(challenger);
+        if (champEl) champEl.textContent = currentTeam ? currentTeam.name : 'Texas';
+        banner.style.display = 'flex';
+      }
+    }
+  } catch (e) {
+    console.error('Error parsing challenge params:', e);
+  }
+}
+window.checkIncomingChallengeParams = checkIncomingChallengeParams;
+
+function dismissChallengeBanner() {
+  const banner = document.getElementById('incomingChallengeBanner');
+  if (banner) banner.style.display = 'none';
+}
+window.dismissChallengeBanner = dismissChallengeBanner;
+
+function startApp() {
+  console.log('CFB Prophet Pro: Initializing application state...');
+
   // Default to URL query param (?team=texas, ?team=michigan, etc.) or #1 AP ranked team
   const urlParams = new URLSearchParams(window.location.search);
   const paramTeam = urlParams.get('team') ? urlParams.get('team').toLowerCase().trim() : null;
@@ -8448,6 +8649,7 @@ function startApp() {
   startCountdownTicker();
   initLiveSyncEngine();
   initMonteCarloEngine();
+  checkIncomingChallengeParams();
 
   // Restore scenario from URL permalink hash (#sim=...) and listen for live hashchange
   restoreScenarioFromUrl();
@@ -8459,4 +8661,5 @@ if (document.readyState === 'loading') {
 } else {
   startApp();
 }
+
 

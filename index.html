@@ -44,7 +44,7 @@
     }
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=20260826_cu_auth_filter_v140">
+  <link rel="stylesheet" href="styles.css?v=20260826_launch_growth_v150">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -308,6 +308,58 @@
   <!-- Main Application Body -->
   <main class="container">
 
+    <!-- Incoming Viral Challenge Banner (Displayed dynamically when opened via challenge link) -->
+    <div id="incomingChallengeBanner" class="incoming-challenge-banner" style="display: none;">
+      <div class="challenge-banner-content">
+        <div class="challenge-badge-pulse"><i class="fa-solid fa-fire"></i> CHALLENGE ACTIVE</div>
+        <div class="challenge-text-wrap">
+          <strong id="challengeChallengerName">A Coach</strong> challenged you to beat their <strong id="challengeChampName">Texas</strong> CFP projection!
+        </div>
+      </div>
+      <div class="challenge-banner-actions">
+        <button class="challenge-accept-btn" onclick="openSaveBracketModal(true)">
+          <i class="fa-solid fa-bolt"></i> Accept Challenge & Make Picks
+        </button>
+        <button class="challenge-dismiss-btn" onclick="dismissChallengeBanner()" title="Dismiss"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+
+    <!-- Quick Launch Action Bar (High-Impact 1-Click Launchpad) -->
+    <div class="quick-launch-action-bar">
+      <button class="primary-launch-btn submit-picks-action" onclick="openSaveBracketModal(true)" title="Submit your custom picks & see global rank">
+        <i class="fa-solid fa-paper-plane" style="color: #10B981;"></i>
+        <div class="launch-btn-text">
+          <span class="btn-main">Submit Picks & Vault</span>
+          <span class="btn-sub">Compete vs Prophet AI</span>
+        </div>
+        <span class="launch-pill live-pill">LIVE</span>
+      </button>
+
+      <button class="primary-launch-btn chaos-mode-action" onclick="triggerChaosUpsetSimulator()" title="Simulate exciting Top 25 underdog upsets & crazy CFP field">
+        <i class="fa-solid fa-dice-d20" style="color: #F59E0B;"></i>
+        <div class="launch-btn-text">
+          <span class="btn-main">🎲 Chaos / Upset Mode</span>
+          <span class="btn-sub">Generate Top 25 Upsets</span>
+        </div>
+      </button>
+
+      <button class="primary-launch-btn playoff-bracket-action" onclick="switchAppView('playoffs')" title="Jump straight to interactive 12-Team CFP field">
+        <i class="fa-solid fa-trophy" style="color: #38BDF8;"></i>
+        <div class="launch-btn-text">
+          <span class="btn-main">12-Team CFP Bracket</span>
+          <span class="btn-sub">View National Champ</span>
+        </div>
+      </button>
+
+      <button class="primary-launch-btn share-challenge-action" onclick="openShareChallengeModal()" title="Challenge your group chat with your CFP projection">
+        <i class="fa-solid fa-fire-flame-curved" style="color: #EC4899;"></i>
+        <div class="launch-btn-text">
+          <span class="btn-main">Challenge a Friend</span>
+          <span class="btn-sub">1-Click Share & Brag</span>
+        </div>
+      </button>
+    </div>
+
     <!-- KPI Season Overview Dashboard -->
     <section class="kpi-grid">
       <div class="kpi-card" style="cursor: pointer;" onclick="document.getElementById('playoffSection').scrollIntoView({behavior:'smooth'});" title="Click to view Conference Championships & 12-Team CFP Bracket">
@@ -369,6 +421,11 @@
         <div class="section-title">
           <i class="fa-solid fa-calendar-days"></i>
           <span>2026 OFFICIAL SCHEDULE & SIMULATED MATCHUPS</span>
+        </div>
+        <div class="schedule-batch-actions">
+          <button class="batch-pick-btn" onclick="quickPickAllFavorites()" title="Quick fill all games with projected favorites"><i class="fa-solid fa-check-double"></i> Pick All Favorites</button>
+          <button class="batch-pick-btn chaos" onclick="triggerChaosUpsetSimulator()" title="Roll for random upsets"><i class="fa-solid fa-dice"></i> Roll Chaos</button>
+          <button class="batch-pick-btn reset" onclick="resetCurrentTeamPicks()" title="Reset picks to baseline"><i class="fa-solid fa-rotate-left"></i> Reset Picks</button>
         </div>
         <div class="filter-pills" id="scheduleFilterPills">
           <button class="filter-btn active" data-filter="all" onclick="applyScheduleFilter('all')">All 12 Games</button>
@@ -1450,10 +1507,49 @@
     </div>
   </div>
 
+  <!-- Viral Challenge a Friend Modal -->
+  <div class="modal-overlay" id="shareChallengeModal" style="display: none;" onclick="if(event.target===this) closeShareChallengeModal()">
+    <div class="modal-dialog" style="max-width: 580px;">
+      <button class="modal-close" onclick="closeShareChallengeModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-header" style="text-align: center;">
+        <span class="matchup-tag" style="background: rgba(236, 72, 153, 0.2); color: #F472B6; border-color: rgba(236, 72, 153, 0.4);">
+          <i class="fa-solid fa-fire"></i> VIRAL GROUP CHAT CHALLENGE
+        </span>
+        <h2 class="modal-title" style="font-size: 1.4rem; margin-top: 0.35rem;">CHALLENGE YOUR FRIENDS</h2>
+        <p style="font-size: 0.84rem; color: #94A3B8;">Challenge your friends & group chats to beat your 2026 CFP National Championship prediction!</p>
+      </div>
+
+      <div class="challenge-preview-card" id="challengePreviewCard">
+        <div class="challenge-preview-header">
+          <img id="challengePreviewLogo" src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Champion" class="challenge-preview-img">
+          <div>
+            <div class="challenge-preview-champ" id="challengePreviewChamp">Texas Longhorns</div>
+            <div class="challenge-preview-sub" id="challengePreviewSub">15-1 Projected Record • #1 CFP Seed • National Champions</div>
+          </div>
+        </div>
+        <div class="challenge-quote-box" id="challengeQuoteBox">
+          "I'm projecting Texas (15-1) to win the 2026 National Championship. Think your squad has what it takes? Make your picks on CFB Prophet!"
+        </div>
+      </div>
+
+      <div class="challenge-share-actions">
+        <button class="action-btn" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #FFFFFF; font-weight: 800; padding: 0.75rem 1rem; border-radius: var(--radius-md); font-size: 0.92rem;" onclick="handleNativeChallengeShare()">
+          <i class="fa-solid fa-share-nodes"></i> <span>Share to Group Chat / iMessage</span>
+        </button>
+        <button class="action-btn" style="background: #000000; border: 1px solid rgba(255,255,255,0.25); color: #FFFFFF; font-weight: 700; padding: 0.75rem 1rem; border-radius: var(--radius-md); font-size: 0.92rem;" onclick="handleTwitterChallengeShare()">
+          <i class="fa-brands fa-x-twitter"></i> <span>Post on X / Twitter</span>
+        </button>
+        <button class="action-btn secondary-btn" onclick="handleCopyChallengeLink()" style="padding: 0.7rem 1rem; font-size: 0.88rem;">
+          <i class="fa-solid fa-copy"></i> <span>Copy Direct Challenge Link</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="qrious.min.js?v=20260826_cu_auth_filter_v140"></script>
-  <script src="qrcode.min.js?v=20260826_cu_auth_filter_v140"></script>
-  <script src="data/teams.js?v=20260826_cu_auth_filter_v140"></script>
-  <script src="app.js?v=20260826_cu_auth_filter_v140"></script>
+  <script src="qrious.min.js?v=20260826_launch_growth_v150"></script>
+  <script src="qrcode.min.js?v=20260826_launch_growth_v150"></script>
+  <script src="data/teams.js?v=20260826_launch_growth_v150"></script>
+  <script src="app.js?v=20260826_launch_growth_v150"></script>
 </body>
 </html>
