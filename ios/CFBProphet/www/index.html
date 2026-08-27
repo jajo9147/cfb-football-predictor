@@ -179,9 +179,6 @@
           <span class="pulse-dot"></span>
           <span id="countdownText">KICKOFF COUNTDOWN</span>
         </div>
-        <button class="vault-btn-badge" id="navChallengeBtn" onclick="openShareChallengeModal()" title="Challenge friends with your CFP prediction" style="background: rgba(236, 72, 153, 0.18); border: 1px solid rgba(236, 72, 153, 0.45); color: #F472B6;">
-          <i class="fa-solid fa-fire-flame-curved" style="color: #EC4899;"></i> <span>Challenge</span>
-        </button>
         <button class="vault-btn-badge" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="Submit your picks and view weekly standings"><i class="fa-solid fa-paper-plane" style="color: #10B981;"></i> <span>Submit Picks & Standings</span></button>
         <button class="user-auth-btn-badge" id="navAuthBtn" onclick="openAuthModal()" title="Account & Creator Profile">
           <i class="fa-solid fa-user-circle" id="navAuthIcon"></i>
@@ -240,7 +237,7 @@
     </div>
   </section>
 
-  <!-- Active Team Hero Card (Clean & Focused) -->
+  <!-- Active Team Hero Card (Clean & Focused: Hype Card + More) -->
   <header class="team-hero-section">
     <div class="container">
       <div class="hero-banner-card" id="teamHeroBanner">
@@ -257,17 +254,9 @@
           </div>
         </div>
         <div class="hero-quick-actions">
-          <button class="action-btn sandbox-hero-btn" onclick="openDreamSandboxModal()" title="Simulate ANY 2 college football teams head-to-head">
-            <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i>
-            <span>Dream Matchup</span>
-          </button>
           <button class="action-btn" id="heroHypeCardBtn" onclick="openHypeCardModal()" title="Export Matchup Hype Card for Group Chat" style="background: linear-gradient(135deg, #EC4899, #BE185D); color: #FFFFFF; font-weight: 700;">
             <i class="fa-solid fa-camera-retro"></i>
-            <span>Hype Card</span>
-          </button>
-          <button class="action-btn chaos-matrix-btn" onclick="openCfpMatrixModal()" title="View 10,000-Run Monte Carlo CFP Chaos Probability Heatmap">
-            <i class="fa-solid fa-fire-flame-curved" style="color: #FF4444;"></i>
-            <span>CFP Chaos Matrix</span>
+            <span>📸 Hype Card</span>
           </button>
           <div class="more-tools-dropdown-wrap">
             <button class="action-btn secondary-btn" id="moreToolsBtn" onclick="toggleMoreToolsMenu(event)" title="More Tools & Sharing">
@@ -275,7 +264,9 @@
               <span>More ▾</span>
             </button>
             <div class="more-tools-menu" id="moreToolsMenu">
-              <button class="dropdown-item" onclick="openShareChallengeModal()"><i class="fa-solid fa-fire-flame-curved" style="color: #EC4899;"></i> Challenge a Friend</button>
+              <button class="dropdown-item" onclick="openDreamSandboxModal()"><i class="fa-solid fa-bolt" style="color: #F59E0B;"></i> Dream Matchup Simulator</button>
+              <button class="dropdown-item" onclick="openCfpMatrixModal()"><i class="fa-solid fa-fire-flame-curved" style="color: #EF4444;"></i> CFP Chaos Matrix</button>
+              <button class="dropdown-item" onclick="openShareChallengeModal()"><i class="fa-solid fa-user-group" style="color: #EC4899;"></i> Challenge a Friend</button>
               <button class="dropdown-item" id="shareScenarioBtn" onclick="shareCustomScenario()"><i class="fa-solid fa-share-nodes"></i> Share Scenario Link</button>
               <button class="dropdown-item" onclick="openReceiptsModal()"><i class="fa-solid fa-receipt"></i> Model Receipts & Brier Curve</button>
               <button class="dropdown-item" id="quickSimAllBtn" onclick="runMonteCarloRecalibration()"><i class="fa-solid fa-dice-d20"></i> 10k Monte Carlo Re-Sim</button>
@@ -361,45 +352,47 @@
       </div>
     </section>
 
-    <!-- Global AI Simulation Tuning Section -->
+    <!-- Global AI Simulation Tuning Section (Clean Filter & Collapsible Sliders) -->
     <section class="tuning-section">
-      <div class="section-header">
+      <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
         <div class="section-title">
           <i class="fa-solid fa-sliders"></i>
           <span>GLOBAL AI SIMULATION TUNING</span>
         </div>
-        <div class="presets-container" id="globalPresetsContainer">
-          <button class="preset-btn active" data-preset="baseline" onclick="applyGlobalPreset('baseline')">Season Baseline</button>
-          <button class="preset-btn" data-preset="qb-mvp" onclick="applyGlobalPreset('qb-mvp')">QB Heisman Mode</button>
-          <button class="preset-btn" data-preset="qb-slump" onclick="applyGlobalPreset('qb-slump')">QB Slump</button>
-          <button class="preset-btn" data-preset="iron-defense" onclick="applyGlobalPreset('iron-defense')">Iron Curtain D</button>
-          <button class="preset-btn" data-preset="chaos" onclick="applyGlobalPreset('chaos')">CFB Chaos</button>
-          <button class="preset-btn reset-all-btn" id="resetAllAiBtn" onclick="resetAllToBaseline()" title="Reset all 20 teams, custom sliders, and picks back to authentic 2026 baselines"><i class="fa-solid fa-rotate-left"></i> Reset to Baseline</button>
+        <div class="tuning-filter-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+          <select id="globalPresetSelect" class="tuning-preset-select" onchange="applyGlobalPreset(this.value)" title="Choose AI simulation preset calibration">
+            <option value="baseline" selected>🎯 Season Baseline (Vegas & EPA)</option>
+            <option value="qb-mvp">🔥 QB Heisman Mode (+15% Pass EPA)</option>
+            <option value="qb-slump">📉 QB Slump (-15% Turnover Margin)</option>
+            <option value="iron-defense">🛡️ Iron Curtain Defense (+20% Havoc)</option>
+            <option value="chaos">🎲 CFB Chaos Upset Mode</option>
+          </select>
+          <button class="action-btn toggle-sliders-btn" id="toggleSlidersBtn" onclick="toggleCustomSlidersView()" title="Toggle granular custom tuning sliders">
+            <i class="fa-solid fa-sliders"></i>
+            <span id="toggleSlidersLabel">Custom Sliders ▾</span>
+          </button>
         </div>
       </div>
-      <div class="sliders-grid" id="globalSlidersGrid">
+      <div class="sliders-grid" id="globalSlidersGrid" style="display: none;">
         <!-- Dynamically injected sliders -->
       </div>
     </section>
 
-    <!-- 2026 Official Schedule Section -->
+    <!-- 2026 Official Schedule Section (Sleek Filter Dropdown) -->
     <section class="schedule-section" id="scheduleSection">
-      <div class="schedule-header">
+      <div class="schedule-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
         <div class="section-title">
           <i class="fa-solid fa-calendar-days"></i>
           <span>2026 OFFICIAL SCHEDULE & SIMULATED MATCHUPS</span>
         </div>
-        <div class="schedule-batch-actions">
-          <button class="batch-pick-btn" onclick="quickPickAllFavorites()" title="Quick fill all games with projected favorites"><i class="fa-solid fa-check-double"></i> Pick All Favorites</button>
-          <button class="batch-pick-btn chaos" onclick="triggerChaosUpsetSimulator()" title="Roll for random upsets"><i class="fa-solid fa-dice"></i> Roll Chaos</button>
-          <button class="batch-pick-btn reset" onclick="resetCurrentTeamPicks()" title="Reset picks to baseline"><i class="fa-solid fa-rotate-left"></i> Reset Picks</button>
-        </div>
-        <div class="filter-pills" id="scheduleFilterPills">
-          <button class="filter-btn active" data-filter="all" onclick="applyScheduleFilter('all')">All 12 Games</button>
-          <button class="filter-btn" data-filter="marquee" onclick="applyScheduleFilter('marquee')">🔥 Marquee & Rivalries</button>
-          <button class="filter-btn" data-filter="conf" onclick="applyScheduleFilter('conf')">Conference</button>
-          <button class="filter-btn" data-filter="home" onclick="applyScheduleFilter('home')">Home</button>
-          <button class="filter-btn" data-filter="away" onclick="applyScheduleFilter('away')">Away / Neutral</button>
+        <div class="schedule-filter-wrap">
+          <select id="scheduleFilterSelect" class="schedule-filter-select" onchange="applyScheduleFilter(this.value)" title="Filter games by type or venue">
+            <option value="all" selected>📅 All 12 Games</option>
+            <option value="marquee">🔥 Marquee & Rivalries</option>
+            <option value="conf">🏆 Conference Games</option>
+            <option value="home">🏟️ Home Games</option>
+            <option value="away">✈️ Away / Neutral</option>
+          </select>
         </div>
       </div>
 
@@ -425,7 +418,7 @@
       </div>
     </section>
 
-    <!-- 12-Team CFP Playoff Bracket Section -->
+    <!-- 12-Team CFP Playoff Bracket Section (Clean 2-Action Strip) -->
     <section class="playoff-section" id="playoffSection">
       <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
         <div class="section-title">
@@ -433,28 +426,15 @@
           <span>12-TEAM COLLEGE FOOTBALL PLAYOFF PROJECTION & LIVE SIMULATOR</span>
         </div>
         <div class="cfp-bracket-actions">
-          <button class="save-bracket-btn" onclick="openSaveBracketModal()" title="Save this projection as your custom bracket">
-            <i class="fa-solid fa-floppy-disk"></i>
-            <span>Save Bracket</span>
+          <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" title="Submit your custom picks & see global rank">
+            <i class="fa-solid fa-paper-plane" style="color: #10B981;"></i>
+            <span>Submit / Save Bracket</span>
           </button>
           <button class="action-btn hype-btn" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;" onclick="openCfpBracketCanvasModal()" title="Export 12-Team CFP Tournament Bracket Graphic">
             <i class="fa-solid fa-camera-retro"></i>
-            <span>Export Bracket</span>
-          </button>
-          <button class="vault-btn-badge" onclick="openBracketVaultModal()" title="Open Saved Brackets Vault">
-            <i class="fa-solid fa-folder-closed"></i>
-            <span>Vault</span>
+            <span>Export Bracket Graphic</span>
           </button>
         </div>
-      </div>
-      
-      <!-- Playoff Round Filter Tabs -->
-      <div class="playoff-round-tabs" id="playoffRoundTabs">
-        <button class="round-tab-btn active" data-round="all" onclick="switchPlayoffRound('all')"><i class="fa-solid fa-layer-group"></i> All Rounds</button>
-        <button class="round-tab-btn" data-round="fr" onclick="switchPlayoffRound('fr')"><i class="fa-solid fa-shield-halved"></i> First Round (4)</button>
-        <button class="round-tab-btn" data-round="qf" onclick="switchPlayoffRound('qf')"><i class="fa-solid fa-bowl-food"></i> Quarterfinals (4)</button>
-        <button class="round-tab-btn" data-round="sf" onclick="switchPlayoffRound('sf')"><i class="fa-solid fa-trophy"></i> Semifinals (2)</button>
-        <button class="round-tab-btn" data-round="natty" onclick="switchPlayoffRound('natty')">👑 National Title (1)</button>
       </div>
 
       <div class="playoff-bracket-grid" id="playoffBracketGrid">

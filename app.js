@@ -1443,6 +1443,11 @@ window.applyGlobalPreset = function(presetKey) {
   state.teamSliders[state.currentTeamId] = { ...presetValues };
   state.teamActivePresets[state.currentTeamId] = presetKey;
 
+  const selectEl = document.getElementById('globalPresetSelect');
+  if (selectEl && selectEl.value !== presetKey) {
+    selectEl.value = presetKey;
+  }
+
   syncSliderInputsToActiveTeam();
   recalculateSeason();
 
@@ -1458,16 +1463,34 @@ window.applyGlobalPreset = function(presetKey) {
   showToast(`⚡ Applied "${name}" to ${team ? team.shortName : 'team'}!`);
 };
 
+function toggleCustomSlidersView() {
+  const grid = document.getElementById('globalSlidersGrid');
+  const label = document.getElementById('toggleSlidersLabel');
+  if (!grid) return;
+  const isHidden = grid.style.display === 'none' || !grid.style.display;
+  if (isHidden) {
+    grid.style.display = 'grid';
+    if (label) label.innerText = 'Custom Sliders ▴';
+  } else {
+    grid.style.display = 'none';
+    if (label) label.innerText = 'Custom Sliders ▾';
+  }
+}
+window.toggleCustomSlidersView = toggleCustomSlidersView;
+
 window.resetAllToBaseline = function() {
   state.teamSliders = {};
   state.teamActivePresets = {};
   state.gameSliders = {};
   state.userPicks = {};
 
+  const selectEl = document.getElementById('globalPresetSelect');
+  if (selectEl) selectEl.value = 'baseline';
+
   syncSliderInputsToActiveTeam();
   recalculateSeason();
 
-  showToast('⚡ Reset all 15 teams & custom AI overrides to authentic 2026 baselines!');
+  showToast('⚡ Reset all 20 teams & custom AI overrides to authentic 2026 baselines!');
 };
 
 function resetAllToBaseline() {
@@ -1493,11 +1516,15 @@ window.showToast = showToast;
 window.showCustomToast = showToast;
 
 window.applyScheduleFilter = function(filterKey) {
-  state.filter = filterKey;
+  state.filter = filterKey || 'all';
+  const selectEl = document.getElementById('scheduleFilterSelect');
+  if (selectEl && selectEl.value !== state.filter) {
+    selectEl.value = state.filter;
+  }
   const container = document.getElementById('scheduleFilterPills');
   if (container) {
     container.querySelectorAll('.filter-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.filter === filterKey);
+      b.classList.toggle('active', b.dataset.filter === state.filter);
     });
   }
   renderSchedule();
@@ -1505,14 +1532,14 @@ window.applyScheduleFilter = function(filterKey) {
 
 function initFilterButtons() {
   const container = document.getElementById('scheduleFilterPills');
-  if (!container) return;
-
-  container.addEventListener('click', (e) => {
-    const btn = e.target.closest('.filter-btn');
-    if (!btn) return;
-    e.preventDefault();
-    window.applyScheduleFilter(btn.dataset.filter);
-  });
+  if (container) {
+    container.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      e.preventDefault();
+      window.applyScheduleFilter(btn.dataset.filter);
+    });
+  }
 }
 
 // ==========================================================================
@@ -4237,7 +4264,8 @@ async function generateHypeCard() {
   drawCanvasTextFitted(ctx, dcScheme, rightX + 20, 548, bottomBoxW - 40, '500 11px "Outfit", sans-serif', '#94A3B8', 'left');
 
   // Direct Interactive QR Code Card (Embedded in canvas)
-  const appUrl = `${window.location.origin}${window.location.pathname}?team=${state.currentTeamId || 'texas'}`;
+  const canonicalTeamId = state.currentTeamId || 'texas';
+  const appUrl = `https://jajo9147.github.io/cfb-football-predictor/?team=${canonicalTeamId}`;
   const qrX = rightX + bottomBoxW + 12; // 1063
   const qrW = 101;
   ctx.fillStyle = '#FFFFFF';
@@ -4248,12 +4276,16 @@ async function generateHypeCard() {
     if (typeof QRious !== 'undefined') {
       const qr = new QRious({
         value: appUrl,
-        size: 150,
+        size: 200,
         background: '#FFFFFF',
-        foreground: '#080C14',
-        level: 'M'
+        foreground: '#000000',
+        level: 'M',
+        padding: 4
       });
-      ctx.drawImage(qr.canvas, qrX + 15, 476, 71, 71);
+      ctx.save();
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(qr.canvas, qrX + 13, 475, 75, 75);
+      ctx.restore();
     }
   } catch (e) {
     console.error('QR code generation error:', e);
@@ -4262,7 +4294,7 @@ async function generateHypeCard() {
   ctx.fillStyle = '#080C14';
   ctx.font = 'bold 8px "JetBrains Mono", monospace';
   ctx.textAlign = 'center';
-  ctx.fillText('SCAN TO SIM', qrX + (qrW / 2), 558);
+  ctx.fillText('SCAN TO PLAY', qrX + (qrW / 2), 558);
 
   // Footer Tagline with direct app link
   ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
@@ -6139,7 +6171,8 @@ async function generateGameHypeCard(game) {
   drawCanvasTextWrapped(ctx, scoutSummary, 65, 532, tactW - 50, 24, '500 15px "Outfit", sans-serif', '#E2E8F0', 'left', 2);
 
   // Embedded QR Code on Matchup Card
-  const appUrl = `${window.location.origin}${window.location.pathname}?team=${teamA.id || state.currentTeamId || 'texas'}`;
+  const canonicalTeamId = teamA.id || state.currentTeamId || 'texas';
+  const appUrl = `https://jajo9147.github.io/cfb-football-predictor/?team=${canonicalTeamId}`;
   const gQrX = 1050;
   const gQrW = 110;
   ctx.fillStyle = '#FFFFFF';
@@ -6150,19 +6183,23 @@ async function generateGameHypeCard(game) {
     if (typeof QRious !== 'undefined') {
       const qr = new QRious({
         value: appUrl,
-        size: 150,
+        size: 200,
         background: '#FFFFFF',
-        foreground: '#080C14',
-        level: 'M'
+        foreground: '#000000',
+        level: 'M',
+        padding: 4
       });
+      ctx.save();
+      ctx.imageSmoothingEnabled = false;
       ctx.drawImage(qr.canvas, gQrX + 15, 475, 80, 80);
+      ctx.restore();
     }
   } catch (e) {}
 
   ctx.fillStyle = '#080C14';
   ctx.font = 'bold 8px "JetBrains Mono", monospace';
   ctx.textAlign = 'center';
-  ctx.fillText('SCAN TO SIM', gQrX + (gQrW / 2), 567);
+  ctx.fillText('SCAN TO PLAY', gQrX + (gQrW / 2), 567);
 
   ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
   ctx.font = '11px "JetBrains Mono", monospace';
