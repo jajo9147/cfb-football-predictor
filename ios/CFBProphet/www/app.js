@@ -6288,8 +6288,9 @@ async function generateGameHypeCard(game) {
   drawCanvasRoundedRect(ctx, barX, barY, fillW, barH, 7);
   ctx.fill();
 
+  const probB = Number((100 - probA).toFixed(1));
   drawCanvasTextFitted(ctx, `${teamA.abbr || 'TEAM'} ${probA}%`, barX, barY + 34, 150, 'bold 13px "JetBrains Mono", monospace', '#E2E8F0', 'left');
-  drawCanvasTextFitted(ctx, `${100 - probA}% ${teamB.shortName || 'OPP'}`, barX + barW, barY + 34, 150, 'bold 13px "JetBrains Mono", monospace', '#E2E8F0', 'right');
+  drawCanvasTextFitted(ctx, `${probB}% ${teamB.shortName || 'OPP'}`, barX + barW, barY + 34, 150, 'bold 13px "JetBrains Mono", monospace', '#E2E8F0', 'right');
 
   ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
   drawCanvasRoundedRect(ctx, boxX + 25, boxY + 215, boxW - 50, 48, 10);
@@ -6318,9 +6319,8 @@ async function generateGameHypeCard(game) {
   const scoutSummary = game.scoutReport?.xFactor || game.scoutReport?.keyMatchup || `High-stakes battle featuring ${teamA.name} vs ${teamB.name}.`;
   drawCanvasTextWrapped(ctx, scoutSummary, 65, 532, tactW - 50, 24, '500 15px "Outfit", sans-serif', '#E2E8F0', 'left', 2);
 
-  // Embedded QR Code on Matchup Card
-  const canonicalTeamId = teamA.id || state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
-  const appUrl = `https://jajo9147.github.io/cfb-football-predictor/?team=${canonicalTeamId}`;
+  // Embedded QR Code on Matchup Card (points to clean baseline app)
+  const appUrl = 'https://jajo9147.github.io/cfb-football-predictor/';
   const gQrX = 1050;
   const gQrW = 110;
   ctx.fillStyle = '#FFFFFF';
@@ -8658,17 +8658,67 @@ window.importBracketFromPrompt = importBracketFromPrompt;
 // IOS NATIVE SHARE SHEET ENGINE (iMessage, WhatsApp, AirDrop)
 // ==========================================================================
 
-async function shareActiveCanvasToNativeSheet(canvasId, filename = 'cfb_prophet_share.png', title = 'CFB Prophet') {
+function getActiveHypeShareData() {
+  const appUrl = 'https://jajo9147.github.io/cfb-football-predictor/';
+  const game = state.activeModalGame;
+
+  if (game) {
+    let teamA, teamB, scoreA, scoreB;
+    if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
+      teamA = TEAMS_DATABASE[game.teamA.id] || game.teamA;
+      teamB = TEAMS_DATABASE[game.teamB.id] || game.teamB;
+      const sim = simulatePostseasonMatchup(teamA, teamB, { gameId: game.id, isHomeA: game.isHomeA || game.isHome });
+      scoreA = sim.scoreA;
+      scoreB = sim.scoreB;
+    } else {
+      teamA = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
+      const oppId = getOpponentTeamId(game);
+      teamB = (oppId && TEAMS_DATABASE[oppId]) ? TEAMS_DATABASE[oppId] : { 
+        shortName: game.oppAbbr || 'Opponent', 
+        name: game.opponent || 'Opponent' 
+      };
+      const sim = calculateAdjustedMatchup(game);
+      scoreA = sim.projUt;
+      scoreB = sim.projOpp;
+    }
+
+    const isAWin = scoreA > scoreB;
+    const winner = isAWin ? teamA : teamB;
+    const loser = isAWin ? teamB : teamA;
+    const winScore = Math.max(scoreA, scoreB);
+    const loseScore = Math.min(scoreA, scoreB);
+    const weekLabel = game.week || 'Matchup';
+    const matchupName = `${teamA.shortName || teamA.name} vs ${teamB.shortName || teamB.name}`;
+
+    return {
+      title: `${matchupName} Prediction | CFB Prophet`,
+      text: `🏈 Check out CFB Prophet! I project ${winner.name} to win (${winScore}-${loseScore}) against ${loser.name} in ${weekLabel}.\n\n${appUrl}`,
+      url: appUrl,
+      filename: `cfb-prophet-${(teamA.shortName || 'matchup').toLowerCase()}-vs-${(teamB.shortName || 'opp').toLowerCase()}.png`
+    };
+  } else {
+    // Season Projection Card
+    const teamId = state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
+    const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
+
+    return {
+      title: `${team.name} 2026 Season Projection | CFB Prophet`,
+      text: `🏈 Check out CFB Prophet! I project ${team.name} to win the national championship this year.\n\n${appUrl}`,
+      url: appUrl,
+      filename: `cfb-prophet-${teamId}-season-projection.png`
+    };
+  }
+}
+window.getActiveHypeShareData = getActiveHypeShareData;
+
+async function shareActiveCanvasToNativeSheet(canvasId, defaultFilename = 'cfb_prophet_share.png', defaultTitle = 'CFB Prophet') {
   const canvas = document.getElementById(canvasId);
   if (!canvas) {
     showCustomToast('⚠️ Canvas graphic not ready.');
     return;
   }
 
-  const teamId = state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
-  const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
-  const appUrl = `https://jajo9147.github.io/cfb-football-predictor/?team=${teamId}`;
-  const shareText = `Check out the App CFB Prophet, I project ${team.name} to win the national championship this year.\n\n${appUrl}`;
+  const shareData = getActiveHypeShareData();
 
   // Convert canvas to Blob
   canvas.toBlob(async (blob) => {
@@ -8677,14 +8727,14 @@ async function shareActiveCanvasToNativeSheet(canvasId, filename = 'cfb_prophet_
       return;
     }
 
-    const file = new File([blob], filename, { type: 'image/png' });
+    const file = new File([blob], shareData.filename, { type: 'image/png' });
 
     if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
       try {
         await navigator.share({
           files: [file],
-          title: 'CFB Prophet',
-          text: shareText
+          title: shareData.title,
+          text: shareData.text
         });
         showCustomToast('🎉 Shared to iOS Share Sheet!');
         return;
@@ -8706,7 +8756,7 @@ async function shareActiveCanvasToNativeSheet(canvasId, filename = 'cfb_prophet_
     // Fallback: Download
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = filename;
+    a.download = shareData.filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -8872,10 +8922,7 @@ window.closeShareChallengeModal = closeShareChallengeModal;
 
 function copyHypeCardAndLink() {
   const canvas = document.getElementById('hypeCanvas');
-  const teamId = state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
-  const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
-  const appUrl = `https://jajo9147.github.io/cfb-football-predictor/?team=${teamId}`;
-  const shareText = `Check out the App CFB Prophet, I project ${team.name} to win the national championship this year.\n\n${appUrl}`;
+  const shareData = getActiveHypeShareData();
 
   if (canvas && canvas.toBlob) {
     canvas.toBlob(blob => {
@@ -8885,19 +8932,19 @@ function copyHypeCardAndLink() {
             'image/png': blob
           })
         ]).then(() => {
-          showCustomToast('📋 Hype Card copied! Live app link: ' + appUrl);
+          showCustomToast('📋 Hype Card copied! Live app link: ' + shareData.url);
         }).catch(() => {
           if (navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(shareText).then(() => {
-              showCustomToast('📋 Live App Hyperlink copied to clipboard!');
+            navigator.clipboard.writeText(shareData.text).then(() => {
+              showCustomToast('📋 Live prediction & link copied to clipboard!');
             });
           }
         });
       }
     });
   } else if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(shareText).then(() => {
-      showCustomToast('📋 Live App Hyperlink copied to clipboard!');
+    navigator.clipboard.writeText(shareData.text).then(() => {
+      showCustomToast('📋 Live prediction & link copied to clipboard!');
     });
   }
 }
