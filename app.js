@@ -3341,7 +3341,8 @@ function renderConferenceChampionships(ccgResults) {
 function generate12TeamCfpField(confChamps, evaluatedTeams) {
   // CFP Selection Committee Resume Grading Algorithm
   function calcCommitteeScore(t) {
-    const l = t.totalLosses !== undefined ? t.totalLosses : t.losses;
+    // Official CFP Protocol: Teams participating in CCGs are NOT penalized for an extra 13th game loss
+    const l = t.isCcgRunnerUp ? t.losses : (t.totalLosses !== undefined ? t.totalLosses : t.losses);
     const w = t.totalWins !== undefined ? t.totalWins : t.wins;
     const apRankStr = t.apRank || '';
     const rMatch = apRankStr.match(/\d+/);
@@ -3426,16 +3427,23 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
   const autoChampIds = new Set([seed1?.id, seed2?.id, seed3?.id, seed4?.id, fifthChamp?.id].filter(Boolean));
 
   // 3. 7 At-Large Bids: strictly Power 4 and Notre Dame (G5 unranked teams cannot earn At-Large bids)
-  const atLargePool = evaluatedTeams.filter(t => t.conf !== 'Mountain West' && !autoChampIds.has(t.id) && t.id !== 'boisestate');
+  // HARD RULE: No team with 3+ regular season losses (e.g. 9-3 TAMU) is eligible for an at-large bid
+  const atLargePool = evaluatedTeams.filter(t => {
+    const regLosses = t.losses !== undefined ? t.losses : t.totalLosses;
+    return t.conf !== 'Mountain West' &&
+           !autoChampIds.has(t.id) &&
+           t.id !== 'boisestate' &&
+           regLosses <= 2;  // 3-loss teams are categorically excluded
+  });
   atLargePool.sort((a, b) => calcCommitteeScore(b) - calcCommitteeScore(a));
 
-  const seed5 = atLargePool[0];
-  const seed6 = atLargePool[1];
-  const seed7 = atLargePool[2];
-  const seed8 = atLargePool[3];
-  const seed9 = atLargePool[4];
-  const seed10 = atLargePool[5];
-  const seed11 = atLargePool[6];
+  const seed5  = atLargePool[0] || null;
+  const seed6  = atLargePool[1] || null;
+  const seed7  = atLargePool[2] || null;
+  const seed8  = atLargePool[3] || null;
+  const seed9  = atLargePool[4] || null;
+  const seed10 = atLargePool[5] || null;
+  const seed11 = atLargePool[6] || null;
   const seed12 = fifthChamp;
 
   const seeds = [seed1, seed2, seed3, seed4, seed5, seed6, seed7, seed8, seed9, seed10, seed11, seed12].filter(Boolean);
