@@ -466,9 +466,13 @@ var TEAM_SEARCH_ALIASES = {
     "kenny dillingham",
     "marcus arroyo",
     "brian ward",
-    "jordyn tyson",
+    "cutter boley",
+    "boley",
     "kyson brown",
+    "miller",
+    "harris",
     "clayton smith",
+    "xavion alford",
     "forks up",
     "sparky",
     "sundevils"
@@ -12099,9 +12103,9 @@ var TEAMS_DATABASE = {
     "headCoach": "Kenny Dillingham",
     "offensiveCoordinator": "Marcus Arroyo",
     "defensiveCoordinator": "Brian Ward",
-    "confirmedStarterQb": "Jeff Sims",
-    "starPlayer": "Jordyn Tyson (WR) / Kyson Brown (RB) / Clayton Smith (EDGE)",
-    "secondaryStar": "Xavion Alford (DB) / Keith Abney II (CB) / Ben Coleman (OT)",
+    "confirmedStarterQb": "Cutter Boley",
+    "starPlayer": "Cutter Boley (QB) / Kyson Brown (RB) / Miller & Harris (WR)",
+    "secondaryStar": "Clayton Smith (EDGE) / Xavion Alford (DB) / Keith Abney II (CB)",
     "stadium": "Mountain America Stadium",
     "stadiumCity": "Tempe, AZ",
     "stadiumCapacity": "53,599",
@@ -12119,8 +12123,8 @@ var TEAMS_DATABASE = {
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/9.png",
     "badgeText": "ASU",
     "sliderLabels": {
-      "qb": "Jordyn Tyson & Air Attack Precision",
-      "ground": "Kyson Brown & Physical Ground Game",
+      "qb": "Cutter Boley Air Attack & Passing Precision",
+      "ground": "Kyson Brown Physical Zone Ground Game",
       "defense": "Brian Ward Defense & Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "Mountain America Stadium Tempe Heat"
@@ -12152,8 +12156,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 45,
         "projScoreOpp": 10,
         "scoutReport": {
-          "xFactor": "Jordyn Tyson and Kyson Brown establishing early tempo.",
-          "keyMatchup": "ASU offensive line vs NAU defensive front.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Season opener in Tempe against in-state FCS Lumberjacks."
         },
         "oppId": null
@@ -12184,8 +12188,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 20,
         "projScoreOpp": 38,
         "scoutReport": {
-          "xFactor": "ASU offensive line handling 102,000 Kyle Field noise.",
-          "keyMatchup": "Kyson Brown vs Texas A&M physical defensive front.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Marquee non-conference road test in College Station."
         },
         "oppId": "texasam"
@@ -12216,8 +12220,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 38,
         "projScoreOpp": 20,
         "scoutReport": {
-          "xFactor": "Brian Ward defense containing Texas State fast-break offense.",
-          "keyMatchup": "ASU secondary vs TXST spread passing attack.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Tricky road contest before entering Big 12 play."
         },
         "oppId": null
@@ -12248,8 +12252,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 26,
         "projScoreOpp": 36,
         "scoutReport": {
-          "xFactor": "Turnover margin in windy Lubbock environment.",
-          "keyMatchup": "ASU passing attack vs Texas Tech aggressive pass rush.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Big 12 conference road opener against explosive Red Raiders."
         },
         "oppId": "texastech"
@@ -12280,8 +12284,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 31,
         "projScoreOpp": 28,
         "scoutReport": {
-          "xFactor": "Tempe crowd noise and fourth-quarter execution.",
-          "keyMatchup": "Kyson Brown power runs vs TCU linebackers.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Big 12 home conference opener under the lights."
         },
         "oppId": null
@@ -12312,8 +12316,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 28,
         "projScoreOpp": 21,
         "scoutReport": {
-          "xFactor": "Red zone scoring efficiency on the road.",
-          "keyMatchup": "Brian Ward defensive line vs Cincinnati ground game.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Physical Big 12 road battle at Nippert Stadium."
         },
         "oppId": null
@@ -12344,8 +12348,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 31,
         "projScoreOpp": 28,
         "scoutReport": {
-          "xFactor": "Limiting UCF explosive perimeter plays.",
-          "keyMatchup": "ASU edge containment vs UCF option attack.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "High-scoring Big 12 contest in Tempe."
         },
         "oppId": null
@@ -12376,8 +12380,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 34,
         "projScoreOpp": 27,
         "scoutReport": {
-          "xFactor": "Third-down conversion rate in hostile Stillwater venue.",
-          "keyMatchup": "ASU passing attack playmaking vs Oklahoma State secondary.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Crucial late-October road test in Stillwater."
         },
         "oppId": null
@@ -12408,8 +12412,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 34,
         "projScoreOpp": 27,
         "scoutReport": {
-          "xFactor": "Kyson Brown clock control keeping Colorado offense off field.",
-          "keyMatchup": "Brian Ward pass rush vs Julian Lewis and Colorado WRs.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Primetime showdown in Tempe against Coach Prime and Colorado."
         },
         "oppId": "colorado"
@@ -12440,8 +12444,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 24,
         "projScoreOpp": 28,
         "scoutReport": {
-          "xFactor": "Special teams field position in chilly November wind.",
-          "keyMatchup": "ASU rushing defense vs K-State QB run game.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Tough late-season road battle in Manhattan."
         },
         "oppId": null
@@ -12472,8 +12476,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 35,
         "projScoreOpp": 24,
         "scoutReport": {
-          "xFactor": "Offensive balance with ASU passing and Kyson Brown rushing.",
-          "keyMatchup": "ASU defensive secondary vs Baylor deep vertical shots.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Senior day home finale in Tempe."
         },
         "oppId": null
@@ -12506,8 +12510,8 @@ var TEAMS_DATABASE = {
         "projScoreUt": 10,
         "projScoreOpp": 40,
         "scoutReport": {
-          "xFactor": "Rivalry emotion and early turnover margin.",
-          "keyMatchup": "ASU defense vs Arizona high-scoring offense in Tucson.",
+          "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
+          "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "The 99th edition of the historic Territorial Cup rivalry in Tucson."
         },
         "oppId": "arizona"
