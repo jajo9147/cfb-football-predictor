@@ -617,19 +617,23 @@ function selectTeam(teamId) {
   document.getElementById('heroTeamName').innerText = team.name;
   document.getElementById('footerEmblem').innerHTML = `<img src="${team.logoUrl}" alt="${team.name}" style="width: 28px; height: 28px; object-fit: contain;">`;
 
-  document.getElementById('heroRank').innerText = `${team.apRank} POLL`;
-  document.getElementById('heroCoach').innerText = `HC: ${team.headCoach}`;
+  const rankEl = document.getElementById('heroRank');
+  if (rankEl) rankEl.innerText = `${team.apRank} POLL`;
+  const nattyEl = document.getElementById('heroNattyOdds');
+  if (nattyEl) nattyEl.innerText = `${team.titleOdds || '+350'} Title Odds`;
+  const coachEl = document.getElementById('heroCoach');
+  if (coachEl) coachEl.innerText = `HC: ${team.headCoach}`;
   const ocEl = document.getElementById('heroOC');
-  if (ocEl) {
-    ocEl.innerText = `OC: ${team.offensiveCoordinator || 'Coordinating Staff'}`;
-  }
+  if (ocEl) ocEl.innerText = `OC: ${team.offensiveCoordinator || 'Coordinating Staff'}`;
   const dcEl = document.getElementById('heroDC');
-  if (dcEl) {
-    dcEl.innerText = `DC: ${team.defensiveCoordinator || 'Staff'}`;
+  if (dcEl) dcEl.innerText = `DC: ${team.defensiveCoordinator || 'Staff'}`;
+  const starEl = document.getElementById('heroStarPlayer');
+  if (starEl) starEl.innerText = `Star: ${team.starPlayer}`;
+  const stadiumEl = document.getElementById('heroStadium');
+  if (stadiumEl) {
+    const capacityStr = team.stadiumCapacity ? ` (${team.stadiumCapacity})` : '';
+    stadiumEl.innerText = `${team.stadium || 'Home Stadium'}${capacityStr}`;
   }
-  document.getElementById('heroStarPlayer').innerText = `Star: ${team.starPlayer}`;
-  const capacityStr = team.stadiumCapacity ? ` (${team.stadiumCapacity})` : '';
-  document.getElementById('heroStadium').innerText = `${team.stadium || 'Home Stadium'}${capacityStr}`;
 
   // Update Active State in Top Track & ensure all pills are visible
   document.querySelectorAll('.team-pill-btn').forEach(btn => {
@@ -4031,33 +4035,41 @@ async function generateHypeCard() {
 
   drawCanvasTextFitted(ctx, `TOTAL RECORD (${regRecStr} REGULAR SEASON)`, leftCenterX, leftY + 242, leftW - 60, 'bold 11px "JetBrains Mono", monospace', '#94A3B8', 'center');
 
-  // Postseason / CFP Status Banner (Y: leftY + 262 to leftY + 312, Height: 48)
+  // Postseason / CFP Status Banner (Y: leftY + 252 to leftY + 296, Height: 44)
   const seedStr = document.getElementById('kpiCfpSeed')?.innerText || '#1 SEED';
   const postStr = document.getElementById('kpiPostseasonOutcome')?.innerText || '🏆 National Champions';
 
   ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
-  drawCanvasRoundedRect(ctx, leftX + 20, leftY + 262, leftW - 40, 48, 12);
+  drawCanvasRoundedRect(ctx, leftX + 20, leftY + 252, leftW - 40, 44, 10);
   ctx.fill();
   ctx.strokeStyle = '#F59E0B';
   ctx.lineWidth = 1;
   ctx.stroke();
 
-  drawCanvasTextFitted(ctx, `${seedStr} • ${postStr}`, leftCenterX, leftY + 293, leftW - 60, 'bold 15px "JetBrains Mono", monospace', '#F59E0B', 'center');
+  drawCanvasTextFitted(ctx, `${seedStr} • ${postStr}`, leftCenterX, leftY + 280, leftW - 60, 'bold 14px "JetBrains Mono", monospace', '#F59E0B', 'center');
 
-  // Natty Odds Pill
+  // Natty Odds Pill (Y: leftY + 304 to leftY + 338, Height: 34)
   const nattyOdds = document.getElementById('kpiNattyOdds')?.innerText || '+350';
-  drawCanvasTextFitted(ctx, `NATTY TITLE ODDS: ${nattyOdds}`, leftCenterX, leftY + 342, leftW - 60, '600 13px "JetBrains Mono", monospace', '#38BDF8', 'center');
+  ctx.fillStyle = 'rgba(56, 189, 248, 0.12)';
+  drawCanvasRoundedRect(ctx, leftX + 20, leftY + 304, leftW - 40, 34, 8);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+  ctx.stroke();
+  drawCanvasTextFitted(ctx, `NATTY TITLE ODDS: ${nattyOdds}`, leftCenterX, leftY + 326, leftW - 60, 'bold 12px "JetBrains Mono", monospace', '#38BDF8', 'center');
 
   // Coaching Staff Line
-  const staffShort = `HC ${team.headCoach} • DC ${team.defensiveCoordinator}`;
-  drawCanvasTextFitted(ctx, `🎯 ${staffShort}`, leftCenterX, leftY + 382, leftW - 50, '600 13px "Outfit", sans-serif', '#E2E8F0', 'center');
+  const staffShort = `HC: ${team.headCoach} • DC: ${team.defensiveCoordinator}`;
+  drawCanvasTextFitted(ctx, `🎯 ${staffShort}`, leftCenterX, leftY + 365, leftW - 50, '600 12px "Outfit", sans-serif', '#E2E8F0', 'center');
 
   // Stadium & Capacity
   const venueCap = `${team.stadium || 'Stadium'} (${team.stadiumCapacity || '100k'})`;
-  drawCanvasTextFitted(ctx, `📍 ${venueCap}`, leftCenterX, leftY + 418, leftW - 50, '500 12px "Outfit", sans-serif', '#94A3B8', 'center');
+  drawCanvasTextFitted(ctx, `📍 ${venueCap}`, leftCenterX, leftY + 395, leftW - 50, '500 12px "Outfit", sans-serif', '#94A3B8', 'center');
+
+  // Key Roster Star
+  drawCanvasTextFitted(ctx, `⚡ STAR: ${team.starPlayer || 'Consensus Starters'}`, leftCenterX, leftY + 425, leftW - 50, '500 11px "Outfit", sans-serif', '#CBD5E1', 'center');
 
   // Secondary star
-  drawCanvasTextFitted(ctx, `🛡️ Core: ${team.secondaryStar || 'Elite Roster Depth'}`, leftCenterX, leftY + 448, leftW - 50, '500 11px "Outfit", sans-serif', '#64748B', 'center');
+  drawCanvasTextFitted(ctx, `🛡️ CORE: ${team.secondaryStar || 'Elite Roster Depth'}`, leftCenterX, leftY + 452, leftW - 50, '500 11px "Outfit", sans-serif', '#64748B', 'center');
 
   // ==========================================
   // RIGHT COLUMN - 4 SEASON-DEFINING MATCHUPS (X: 476, Width: 688, Y: 92 to 460, Height: 368)
@@ -4205,30 +4217,58 @@ async function generateHypeCard() {
   });
 
   // ==========================================
-  // BOTTOM RIGHT - PLAYMAKERS & SCHEME (X: 476, Width: 688, Y: 472 to 565, Height: 93)
+  // BOTTOM RIGHT - PLAYMAKERS, SCHEME & DIRECT QR CODE (Y: 472 to 565, Height: 93)
   // ==========================================
+  const bottomBoxW = 575;
   ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-  drawCanvasRoundedRect(ctx, rightX, 472, rightW, 93, 14);
+  drawCanvasRoundedRect(ctx, rightX, 472, bottomBoxW, 93, 14);
   ctx.fill();
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
   ctx.stroke();
 
   // QB and Staff
   const qbName = team.confirmedStarterQb || (team.starPlayer ? team.starPlayer.split('/')[0].trim() : 'Quarterback Room');
-  drawCanvasTextFitted(ctx, `🎯 STARTING QB: ${qbName.toUpperCase()} • DC: ${team.defensiveCoordinator.toUpperCase()}`, rightX + 22, 498, rightW - 44, 'bold 13px "JetBrains Mono", monospace', '#F59E0B', 'left');
+  drawCanvasTextFitted(ctx, `🎯 QB: ${qbName.toUpperCase()} • DC: ${team.defensiveCoordinator.toUpperCase()}`, rightX + 20, 498, bottomBoxW - 40, 'bold 12px "JetBrains Mono", monospace', '#F59E0B', 'left');
 
   const starStr = `⚡ KEY PLAYMAKERS: ${team.starPlayer || 'Consensus Starters'}`;
-  drawCanvasTextFitted(ctx, starStr, rightX + 22, 526, rightW - 44, '500 13px "Outfit", sans-serif', '#E2E8F0', 'left');
+  drawCanvasTextFitted(ctx, starStr, rightX + 20, 524, bottomBoxW - 40, '500 12px "Outfit", sans-serif', '#E2E8F0', 'left');
 
-  const dcScheme = `🛡️ DEFENSIVE UNIT: Will Muschamp Havoc & Pressure Matrix • ${team.secondaryStar || 'Elite Roster Depth'}`;
-  drawCanvasTextFitted(ctx, dcScheme, rightX + 22, 550, rightW - 44, '500 11px "Outfit", sans-serif', '#94A3B8', 'left');
+  const dcScheme = `🛡️ DEFENSIVE UNIT: ${team.secondaryStar || 'Elite Roster Depth & Pressure Matrix'}`;
+  drawCanvasTextFitted(ctx, dcScheme, rightX + 20, 548, bottomBoxW - 40, '500 11px "Outfit", sans-serif', '#94A3B8', 'left');
+
+  // Direct Interactive QR Code Card (Embedded in canvas)
+  const appUrl = `${window.location.origin}${window.location.pathname}?team=${state.currentTeamId || 'texas'}`;
+  const qrX = rightX + bottomBoxW + 12; // 1063
+  const qrW = 101;
+  ctx.fillStyle = '#FFFFFF';
+  drawCanvasRoundedRect(ctx, qrX, 472, qrW, 93, 10);
+  ctx.fill();
+
+  try {
+    if (typeof QRious !== 'undefined') {
+      const qr = new QRious({
+        value: appUrl,
+        size: 150,
+        background: '#FFFFFF',
+        foreground: '#080C14',
+        level: 'M'
+      });
+      ctx.drawImage(qr.canvas, qrX + 15, 476, 71, 71);
+    }
+  } catch (e) {
+    console.error('QR code generation error:', e);
+  }
+
+  ctx.fillStyle = '#080C14';
+  ctx.font = 'bold 8px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('SCAN TO SIM', qrX + (qrW / 2), 558);
 
   // Footer Tagline with direct app link
-  const appUrl = `${window.location.origin}${window.location.pathname}?team=${state.currentTeamId || 'texas'}`;
   ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-  ctx.font = '12px "JetBrains Mono", monospace';
+  ctx.font = '11px "JetBrains Mono", monospace';
   ctx.textAlign = 'center';
-  ctx.fillText(`POWERED BY CFB PROPHET • ${appUrl}`, 600, 620);
+  ctx.fillText(`POWERED BY CFB PROPHET • 2026 AI SIMULATOR • ${appUrl}`, 600, 620);
 
   const directLinkEl = document.getElementById('hypeDirectHyperlink');
   if (directLinkEl) {
@@ -6083,8 +6123,9 @@ async function generateGameHypeCard(game) {
   drawCanvasTextFitted(ctx, `🔥 MODEL COVER EDGE: ${spreadDiff.toFixed(1)} PTS`, 600, boxY + 285, boxW - 60, '600 12px "JetBrains Mono", monospace', '#38BDF8', 'center');
 
   // Bottom Tactical Strip
+  const tactW = 995;
   ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-  drawCanvasRoundedRect(ctx, 40, 470, 1120, 105, 14);
+  drawCanvasRoundedRect(ctx, 40, 470, tactW, 105, 14);
   ctx.fill();
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
   ctx.stroke();
@@ -6095,13 +6136,38 @@ async function generateGameHypeCard(game) {
   ctx.fillText('⚡ 10,000 MONTE CARLO DRIVES • TACTICAL MATCHUP INSIGHT', 65, 502);
 
   const scoutSummary = game.scoutReport?.xFactor || game.scoutReport?.keyMatchup || `High-stakes battle featuring ${teamA.name} vs ${teamB.name}.`;
-  drawCanvasTextWrapped(ctx, scoutSummary, 65, 532, 1070, 24, '500 15px "Outfit", sans-serif', '#E2E8F0', 'left', 2);
+  drawCanvasTextWrapped(ctx, scoutSummary, 65, 532, tactW - 50, 24, '500 15px "Outfit", sans-serif', '#E2E8F0', 'left', 2);
 
+  // Embedded QR Code on Matchup Card
   const appUrl = `${window.location.origin}${window.location.pathname}?team=${teamA.id || state.currentTeamId || 'texas'}`;
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-  ctx.font = '12px "JetBrains Mono", monospace';
+  const gQrX = 1050;
+  const gQrW = 110;
+  ctx.fillStyle = '#FFFFFF';
+  drawCanvasRoundedRect(ctx, gQrX, 470, gQrW, 105, 10);
+  ctx.fill();
+
+  try {
+    if (typeof QRious !== 'undefined') {
+      const qr = new QRious({
+        value: appUrl,
+        size: 150,
+        background: '#FFFFFF',
+        foreground: '#080C14',
+        level: 'M'
+      });
+      ctx.drawImage(qr.canvas, gQrX + 15, 475, 80, 80);
+    }
+  } catch (e) {}
+
+  ctx.fillStyle = '#080C14';
+  ctx.font = 'bold 8px "JetBrains Mono", monospace';
   ctx.textAlign = 'center';
-  ctx.fillText(`POWERED BY CFB PROPHET • ${appUrl}`, 600, 625);
+  ctx.fillText('SCAN TO SIM', gQrX + (gQrW / 2), 567);
+
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+  ctx.font = '11px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(`POWERED BY CFB PROPHET • 2026 AI SIMULATOR • ${appUrl}`, 600, 625);
 
   const directLinkEl = document.getElementById('hypeDirectHyperlink');
   if (directLinkEl) {
@@ -8599,12 +8665,34 @@ function handleNativeChallengeShare() {
   const shareUrl = getChallengeShareUrl();
   const shareText = `🏈 I just simulated the 2026 College Football season on CFB Prophet and got ${currentTeam.name} winning it all! Think your team has a chance? Challenge my bracket: ${shareUrl}`;
 
+  // 1. Native iOS App WebKit Bridge
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.share) {
+    try {
+      window.webkit.messageHandlers.share.postMessage({
+        title: 'CFB Prophet Challenge',
+        text: shareText,
+        url: shareUrl
+      });
+      showCustomToast('📲 Opening share sheet...');
+      return;
+    } catch (e) {
+      console.error('Native share error:', e);
+    }
+  }
+
+  // 2. Web Share API
   if (navigator.share) {
     navigator.share({
       title: 'CFB Prophet Challenge',
       text: shareText,
       url: shareUrl
-    }).catch(() => {});
+    }).then(() => {
+      showCustomToast('✅ Shared challenge successfully!');
+    }).catch((err) => {
+      if (err && err.name !== 'AbortError') {
+        handleCopyChallengeLink();
+      }
+    });
   } else {
     handleCopyChallengeLink();
   }
@@ -8614,22 +8702,47 @@ window.handleNativeChallengeShare = handleNativeChallengeShare;
 function handleTwitterChallengeShare() {
   const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
   const shareUrl = getChallengeShareUrl();
-  const text = encodeURIComponent(`🏈 I just simulated the 2026 College Football Playoff on CFB Prophet and got ${currentTeam.name} winning the National Championship! Can you beat my picks?\n\nChallenge my bracket here: ${shareUrl}\n\n#CFBProphet #CFB #CollegeFootball`);
-  window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+  const tweetText = `🏈 I just simulated the 2026 College Football Playoff on CFB Prophet and got ${currentTeam.name} winning it all! Think your team has a chance? Challenge my bracket: ${shareUrl}\n\n#CFBProphet #CFB #CollegeFootball`;
+  const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+
+  // 1. Native iOS App WebKit Bridge (opens share sheet or Safari)
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.share) {
+    try {
+      window.webkit.messageHandlers.share.postMessage({
+        title: 'CFB Prophet Challenge',
+        text: tweetText,
+        url: shareUrl
+      });
+      return;
+    } catch (e) {}
+  }
+
+  // 2. Direct Web Intent
+  try {
+    const win = window.open(tweetUrl, '_blank');
+    if (!win) {
+      window.location.href = tweetUrl;
+    }
+  } catch (e) {
+    window.location.href = tweetUrl;
+  }
 }
 window.handleTwitterChallengeShare = handleTwitterChallengeShare;
 
 function handleCopyChallengeLink() {
   const shareUrl = getChallengeShareUrl();
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  const shareText = `🏈 I just simulated the 2026 College Football season on CFB Prophet and got ${currentTeam.name} winning it all! Think your team has a chance? Challenge my bracket: ${shareUrl}`;
+
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(shareUrl).then(() => {
-      showCustomToast(`📋 Challenge link copied to clipboard! Share it with your friends!`);
+    navigator.clipboard.writeText(shareText).then(() => {
+      showCustomToast(`📋 Challenge link & message copied! Paste it into your group chat!`);
       closeShareChallengeModal();
     }).catch(() => {
-      showCustomToast(`📋 Share URL: ${shareUrl}`);
+      showCustomToast(`📋 Challenge URL: ${shareUrl}`);
     });
   } else {
-    showCustomToast(`📋 Share URL: ${shareUrl}`);
+    showCustomToast(`📋 Challenge URL: ${shareUrl}`);
   }
 }
 window.handleCopyChallengeLink = handleCopyChallengeLink;

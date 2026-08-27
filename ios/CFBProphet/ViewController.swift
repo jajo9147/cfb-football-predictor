@@ -142,7 +142,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
             guard let shareDict = message.body as? [String: Any] else { return }
             let title = shareDict["title"] as? String ?? "CFB Prophet Prediction"
             let text = shareDict["text"] as? String ?? "Check out my college football simulation on CFB Prophet!"
-            var items: [Any] = [title, text]
+            var items: [Any] = [text]
             if let urlStr = shareDict["url"] as? String, let url = URL(string: urlStr) {
                 items.append(url)
             }
@@ -158,6 +158,15 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         }
     }
 
+    // MARK: - WKUIDelegate
+
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if let url = navigationAction.request.url {
+            UIApplication.shared.open(url)
+        }
+        return nil
+    }
+
     // MARK: - WKNavigationDelegate
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -166,11 +175,9 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
                 decisionHandler(.allow)
                 return
             }
-            if navigationAction.navigationType == .linkActivated {
-                UIApplication.shared.open(url)
-                decisionHandler(.cancel)
-                return
-            }
+            UIApplication.shared.open(url)
+            decisionHandler(.cancel)
+            return
         }
         decisionHandler(.allow)
     }
