@@ -6507,8 +6507,7 @@ window.switchAppView = function(viewName) {
     const el = document.getElementById('playoffSection');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else if (viewName === 'tuning') {
-    const el = document.querySelector('.tuning-section');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (typeof openAiTuningModal === 'function') openAiTuningModal();
   } else if (viewName === 'dream') {
     if (typeof openDreamSandboxModal === 'function') openDreamSandboxModal();
   }
@@ -7607,6 +7606,10 @@ function getCommunityBrackets() {
 
 function switchVaultTab(tabKey) {
   state.activeVaultTab = tabKey;
+  const select = document.getElementById('vaultTabSelect');
+  if (select && select.value !== tabKey) {
+    select.value = tabKey;
+  }
   const tabWeekly = document.getElementById('tabWeeklyVaultBtn');
   const tabComm = document.getElementById('tabCommunityVaultBtn');
   const tabAllTeams = document.getElementById('tabAllTeamsVaultBtn');
@@ -8256,13 +8259,43 @@ function deleteSavedBracket(bracketId, e) {
   showCustomToast('🗑️ Bracket deleted permanently across all devices.');
 }
 
+function copyTextToClipboardSafe(text, successMsg = 'Copied to clipboard!') {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showCustomToast(successMsg);
+    }).catch(() => {
+      fallbackCopyText(text, successMsg);
+    });
+  } else {
+    fallbackCopyText(text, successMsg);
+  }
+}
+
+function fallbackCopyText(text, successMsg) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed";
+  textArea.style.left = "-999999px";
+  textArea.style.top = "-999999px";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    showCustomToast(successMsg);
+  } catch (err) {
+    prompt('Copy link:', text);
+  }
+  document.body.removeChild(textArea);
+}
+
 function getBracketShareUrl(bracketId) {
   const allBrackets = getCommunityBrackets();
   const target = allBrackets.find(b => b.id === bracketId) || allBrackets[0] || createProphetAiBenchmarkBracket();
-  if (!target) return window.location.href;
+  const targetTeamId = target.simState?.teamId || target.champion?.id || 'texas';
 
   const payload = {
-    t: target.simState?.teamId || target.champion?.id || 'texas',
+    t: targetTeamId,
     pk: target.simState?.userPicks || {},
     cp: target.simState?.ccgPicks || {},
     pp: target.simState?.playoffPicks || {},
@@ -8273,9 +8306,9 @@ function getBracketShareUrl(bracketId) {
   try {
     const jsonStr = JSON.stringify(payload);
     const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
-    return `${window.location.origin}${window.location.pathname}#s=${b64}`;
+    return `https://jajo9147.github.io/cfb-football-predictor/#s=${b64}`;
   } catch (e) {
-    return window.location.href;
+    return `https://jajo9147.github.io/cfb-football-predictor/?team=${targetTeamId}`;
   }
 }
 
@@ -8302,15 +8335,7 @@ function copyBracketShareLink(bracketId, e) {
     }, 2200);
   }
 
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => {
-      showCustomToast(`🔗 Link for "${target.name}" copied!`);
-    }).catch(() => {
-      prompt('Copy this bracket link:', url);
-    });
-  } else {
-    prompt('Copy this bracket link:', url);
-  }
+  copyTextToClipboardSafe(url, `🔗 Link for "${target.name}" copied!`);
 }
 
 function copyActiveBracketShareLink() {
@@ -8352,10 +8377,13 @@ function openBracketQrModal(bracketId, e) {
         element: canvasEl,
         value: shareUrl,
         size: 220,
+        padding: 4,
         level: 'M',
         background: '#FFFFFF',
         foreground: '#000000'
       });
+      const ctx = canvasEl.getContext('2d');
+      if (ctx) ctx.imageSmoothingEnabled = false;
       canvasEl.style.display = 'block';
       if (imgEl) imgEl.style.display = 'none';
       const dynDiv = document.getElementById('dynamicQrBox');
@@ -8428,43 +8456,37 @@ function copyActiveQrLink() {
     setTimeout(() => { btn.innerHTML = origHtml; }, 2200);
   }
 
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => {
-      showCustomToast('🔗 Direct device sync link copied to clipboard!');
-    }).catch(() => {
-      prompt('Copy this sync link:', url);
-    });
-  } else {
-    prompt('Copy this sync link:', url);
+  copyTextToClipboardSafe(url, '🔗 Direct device sync link copied to clipboard!');
+}
+
+function openAiTuningModal() {
+  const modal = document.getElementById('cfbAiTuningModal');
+  if (modal) {
+    modal.classList.add('open');
+    document.body.classList.add('modal-open');
+    syncSliderInputsToActiveTeam();
   }
 }
 
-function importBracketFromPrompt() {
-  const input = prompt('Paste a shared Bracket Link or Code below to import it into your Vault:');
-  if (!input) return;
-  try {
-    let hash = input.trim();
-    if (hash.includes('#')) hash = hash.substring(hash.indexOf('#'));
-    const sMatch = hash.match(/[#&]s=([^&]+)/);
-    if (sMatch && sMatch[1]) {
-      window.location.hash = hash;
-      restoreScenarioFromUrl();
-      openBracketVaultModal();
-      showCustomToast('🎉 Bracket imported successfully into your Vault!');
-    } else {
-      alert('Invalid bracket link format. Please paste a link containing #s=...');
-    }
-  } catch (e) {
-    alert('Failed to parse bracket link.');
+function closeAiTuningModal() {
+  const modal = document.getElementById('cfbAiTuningModal');
+  if (modal) {
+    modal.classList.remove('open');
+    document.body.classList.remove('modal-open');
   }
 }
 
+window.openAiTuningModal = openAiTuningModal;
+window.closeAiTuningModal = closeAiTuningModal;
 window.openSaveBracketModal = openSaveBracketModal;
 window.closeSaveBracketModal = closeSaveBracketModal;
 window.handleConfirmSaveBracket = handleConfirmSaveBracket;
 window.openBracketVaultModal = openBracketVaultModal;
 window.closeBracketVaultModal = closeBracketVaultModal;
 window.openCfpBracketCanvasModal = openCfpBracketCanvasModal;
+window.openCfpBracketCanvasModalForBracket = openCfpBracketCanvasModalForBracket;
+window.closeCfpBracketCanvasModal = closeCfpBracketCanvasModal;
+window.downloadCfpBracketGraphic = downloadCfpBracketGraphic;
 window.openCfpBracketCanvasModalForBracket = openCfpBracketCanvasModalForBracket;
 window.closeCfpBracketCanvasModal = closeCfpBracketCanvasModal;
 window.downloadCfpBracketGraphic = downloadCfpBracketGraphic;
