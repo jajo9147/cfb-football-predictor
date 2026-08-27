@@ -457,6 +457,48 @@ function teamMatchesSearchQuery(tid, t, query) {
 }
 window.teamMatchesSearchQuery = teamMatchesQuery = teamMatchesSearchQuery;
 
+function calculateTeamSearchRelevance(tid, t, query) {
+  if (!t || !query) return 0;
+  const q = query.trim().toLowerCase();
+  const normQ = q.replace(/[^a-z0-9]/g, '');
+  let score = 0;
+
+  const aliases = (window.TEAM_SEARCH_ALIASES && window.TEAM_SEARCH_ALIASES[tid]) || (typeof TEAM_SEARCH_ALIASES !== 'undefined' ? TEAM_SEARCH_ALIASES[tid] : null) || [];
+  
+  // 1. Exact alias match (e.g. 'cu' === 'cu' -> 5000 pts)
+  if (aliases.some(a => a.toLowerCase() === q || a.toLowerCase() === normQ)) {
+    score += 5000;
+  }
+
+  // 2. Exact match on shortName or name or abbr
+  if (t.shortName && t.shortName.toLowerCase() === q) score += 4000;
+  if (t.name && t.name.toLowerCase() === q) score += 4000;
+  if (t.abbr && t.abbr.toLowerCase() === q) score += 3500;
+
+  // 3. Starts with shortName or name
+  if (t.shortName && t.shortName.toLowerCase().startsWith(q)) score += 3000;
+  if (t.name && t.name.toLowerCase().startsWith(q)) score += 2500;
+
+  // 4. Mascot match
+  if (t.mascot && t.mascot.toLowerCase() === q) score += 2000;
+  if (t.mascot && t.mascot.toLowerCase().startsWith(q)) score += 1500;
+
+  // 5. Alias starts with query
+  if (aliases.some(a => a.toLowerCase().startsWith(q))) score += 1200;
+
+  // 6. Substring in shortName or name
+  if (t.shortName && t.shortName.toLowerCase().includes(q)) score += 800;
+  if (t.name && t.name.toLowerCase().includes(q)) score += 600;
+
+  // 7. Substring in coach or QB or conference
+  if (t.headCoach && t.headCoach.toLowerCase().includes(q)) score += 200;
+  if (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) score += 150;
+  if (t.conference && t.conference.toLowerCase().includes(q)) score += 100;
+
+  return score;
+}
+window.calculateTeamSearchRelevance = calculateTeamSearchRelevance;
+
 function initTeamSearch() {
   const input = document.getElementById('teamSearchInput');
   const clearBtn = document.getElementById('teamSearchClearBtn');
@@ -476,22 +518,24 @@ function initTeamSearch() {
 
     if (clearBtn) clearBtn.style.display = 'flex';
 
-    // Filter team pill buttons in the track
-    let firstMatchedKey = null;
+    // Populate and sort matched teams by highest relevance first
+    const matchedTeams = Object.keys(TEAMS_DATABASE)
+      .filter(tid => {
+        const t = TEAMS_DATABASE[tid];
+        return teamMatchesSearchQuery(tid, t, q);
+      })
+      .sort((a, b) => {
+        const scoreA = calculateTeamSearchRelevance(a, TEAMS_DATABASE[a], q);
+        const scoreB = calculateTeamSearchRelevance(b, TEAMS_DATABASE[b], q);
+        return scoreB - scoreA;
+      });
+
+    // Filter team pill buttons in the track (and highlight the #1 best match)
+    const firstMatchedKey = matchedTeams[0] || null;
+    const matchedSet = new Set(matchedTeams);
     document.querySelectorAll('.team-pill-btn').forEach(btn => {
       const tid = btn.dataset.teamid;
-      const t = TEAMS_DATABASE[tid];
-      if (!t) return;
-      const match = teamMatchesSearchQuery(tid, t, q);
-
-      btn.style.display = match ? '' : 'none';
-      if (match && !firstMatchedKey) firstMatchedKey = tid;
-    });
-
-    // Populate the rich dropdown
-    const matchedTeams = Object.keys(TEAMS_DATABASE).filter(tid => {
-      const t = TEAMS_DATABASE[tid];
-      return teamMatchesSearchQuery(tid, t, q);
+      btn.style.display = matchedSet.has(tid) ? '' : 'none';
     });
 
     if (matchedTeams.length === 0) {
@@ -540,10 +584,9 @@ function initTeamSearch() {
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const q = input.value.trim().toLowerCase();
-      const matched = Object.keys(TEAMS_DATABASE).find(tid => {
-        const t = TEAMS_DATABASE[tid];
-        return teamMatchesSearchQuery(tid, t, q);
-      });
+      const matched = Object.keys(TEAMS_DATABASE)
+        .filter(tid => teamMatchesSearchQuery(tid, TEAMS_DATABASE[tid], q))
+        .sort((a, b) => calculateTeamSearchRelevance(b, TEAMS_DATABASE[b], q) - calculateTeamSearchRelevance(a, TEAMS_DATABASE[a], q))[0];
       if (matched) {
         selectTeam(matched);
         input.value = '';
