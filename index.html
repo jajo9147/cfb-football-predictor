@@ -165,20 +165,25 @@
   <!-- Main Navigation -->
   <nav class="navbar">
     <div class="container nav-container">
-      <a href="#" class="brand">
-        <div class="logo-badge" id="navLogoBadge">
-          <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas Longhorns" class="nav-logo-img">
-        </div>
-        <div class="brand-text">
-          <span class="brand-title">CFB PROPHET</span>
-          <span class="brand-subtitle">COLLEGE FOOTBALL AI SIMULATOR</span>
-        </div>
-      </a>
-      <div class="nav-actions">
-        <button class="vault-btn-badge" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="Submit your picks and view weekly standings"><i class="fa-solid fa-paper-plane" style="color: #10B981;"></i> <span>Submit Picks & Standings</span></button>
+      <div class="nav-brand-row">
+        <a href="#" class="brand">
+          <div class="logo-badge" id="navLogoBadge">
+            <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas Longhorns" class="nav-logo-img">
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">CFB PROPHET</span>
+            <span class="brand-subtitle">COLLEGE FOOTBALL AI SIMULATOR</span>
+          </div>
+        </a>
         <button class="user-auth-btn-badge" id="navAuthBtn" onclick="openAuthModal()" title="Account & Creator Profile">
           <i class="fa-solid fa-user-circle" id="navAuthIcon"></i>
           <span id="navAuthLabel">Sign In</span>
+        </button>
+      </div>
+      <div class="nav-actions-row">
+        <button class="vault-btn-badge full-nav-btn" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="Submit your picks and view weekly standings">
+          <i class="fa-solid fa-paper-plane" style="color: #10B981;"></i>
+          <span>Submit Picks & Standings</span>
         </button>
       </div>
     </div>
@@ -190,7 +195,7 @@
       <div class="team-search-bar-wrap">
         <div class="team-search-input-box">
           <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" id="teamSearchInput" class="team-search-input" placeholder="Search any Top 25 team, coach, quarterback, or conference (e.g. Utah, Whittingham, Big 12)..." autocomplete="off" spellcheck="false">
+          <input type="text" id="teamSearchInput" class="team-search-input" placeholder="Search any Top 25 team..." autocomplete="off" spellcheck="false">
           <button class="search-clear-btn" id="teamSearchClearBtn" style="display: none;" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
           <kbd class="search-shortcut-badge">⌘K</kbd>
         </div>
@@ -262,7 +267,6 @@
             <div class="more-tools-menu" id="moreToolsMenu">
               <button class="dropdown-item" onclick="openDreamSandboxModal()"><i class="fa-solid fa-bolt" style="color: #F59E0B;"></i> Dream Matchup Simulator</button>
               <button class="dropdown-item" onclick="openCfpMatrixModal()"><i class="fa-solid fa-fire-flame-curved" style="color: #EF4444;"></i> CFP Chaos Matrix</button>
-              <button class="dropdown-item" onclick="openShareChallengeModal()"><i class="fa-solid fa-user-group" style="color: #EC4899;"></i> Challenge a Friend</button>
               <button class="dropdown-item" id="shareScenarioBtn" onclick="shareCustomScenario()"><i class="fa-solid fa-share-nodes"></i> Share Scenario Link</button>
               <button class="dropdown-item" onclick="openReceiptsModal()"><i class="fa-solid fa-receipt"></i> Model Receipts & Brier Curve</button>
               <button class="dropdown-item" id="quickSimAllBtn" onclick="runMonteCarloRecalibration()"><i class="fa-solid fa-dice-d20"></i> 10k Monte Carlo Re-Sim</button>
@@ -297,22 +301,6 @@
 
   <!-- Main Application Body -->
   <main class="container">
-
-    <!-- Incoming Viral Challenge Banner (Displayed dynamically when opened via challenge link) -->
-    <div id="incomingChallengeBanner" class="incoming-challenge-banner" style="display: none;">
-      <div class="challenge-banner-content">
-        <div class="challenge-badge-pulse"><i class="fa-solid fa-fire"></i> CHALLENGE ACTIVE</div>
-        <div class="challenge-text-wrap">
-          <strong id="challengeChallengerName">A Coach</strong> challenged you to beat their <strong id="challengeChampName">Texas</strong> CFP projection!
-        </div>
-      </div>
-      <div class="challenge-banner-actions">
-        <button class="challenge-accept-btn" onclick="openSaveBracketModal(true)">
-          <i class="fa-solid fa-bolt"></i> Accept Challenge & Make Picks
-        </button>
-        <button class="challenge-dismiss-btn" onclick="dismissChallengeBanner()" title="Dismiss"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-    </div>
 
     <!-- KPI Season Overview Dashboard -->
     <section class="kpi-grid">
@@ -353,7 +341,7 @@
       <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
         <div class="section-title">
           <i class="fa-solid fa-sliders"></i>
-          <span>GLOBAL AI SIMULATION TUNING</span>
+          <span>CFB AI TUNING</span>
         </div>
         <div class="tuning-filter-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
           <select id="globalPresetSelect" class="tuning-preset-select" onchange="applyGlobalPreset(this.value)" title="Choose AI simulation preset calibration">
@@ -1462,44 +1450,7 @@
     </div>
   </div>
 
-  <!-- Viral Challenge a Friend Modal -->
-  <div class="modal-backdrop" id="shareChallengeModal" onclick="if(event.target===this) closeShareChallengeModal()">
-    <div class="modal-dialog" style="max-width: 580px;">
-      <button class="modal-close" onclick="closeShareChallengeModal()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-header" style="text-align: center;">
-        <span class="matchup-tag" style="background: rgba(236, 72, 153, 0.2); color: #F472B6; border-color: rgba(236, 72, 153, 0.4);">
-          <i class="fa-solid fa-fire"></i> VIRAL GROUP CHAT CHALLENGE
-        </span>
-        <h2 class="modal-title" style="font-size: 1.4rem; margin-top: 0.35rem;">CHALLENGE YOUR FRIENDS</h2>
-        <p style="font-size: 0.84rem; color: #94A3B8;">Challenge your friends & group chats to beat your 2026 CFP National Championship prediction!</p>
-      </div>
 
-      <div class="challenge-preview-card" id="challengePreviewCard">
-        <div class="challenge-preview-header">
-          <img id="challengePreviewLogo" src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Champion" class="challenge-preview-img">
-          <div>
-            <div class="challenge-preview-champ" id="challengePreviewChamp">Texas Longhorns</div>
-            <div class="challenge-preview-sub" id="challengePreviewSub">15-1 Projected Record • #1 CFP Seed • National Champions</div>
-          </div>
-        </div>
-        <div class="challenge-quote-box" id="challengeQuoteBox">
-          "I'm projecting Texas (15-1) to win the 2026 National Championship. Think your squad has what it takes? Make your picks on CFB Prophet!"
-        </div>
-      </div>
-
-      <div class="challenge-share-actions">
-        <button class="action-btn" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #FFFFFF; font-weight: 800; padding: 0.75rem 1rem; border-radius: var(--radius-md); font-size: 0.92rem;" onclick="handleNativeChallengeShare()">
-          <i class="fa-solid fa-share-nodes"></i> <span>Share to Group Chat / iMessage</span>
-        </button>
-        <button class="action-btn" style="background: #000000; border: 1px solid rgba(255,255,255,0.25); color: #FFFFFF; font-weight: 700; padding: 0.75rem 1rem; border-radius: var(--radius-md); font-size: 0.92rem;" onclick="handleTwitterChallengeShare()">
-          <i class="fa-brands fa-x-twitter"></i> <span>Post on X / Twitter</span>
-        </button>
-        <button class="action-btn secondary-btn" onclick="handleCopyChallengeLink()" style="padding: 0.7rem 1rem; font-size: 0.88rem;">
-          <i class="fa-solid fa-copy"></i> <span>Copy Direct Challenge Link</span>
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- Scripts -->
   <script src="qrious.min.js?v=20260826_hype_hyperlink_v160"></script>

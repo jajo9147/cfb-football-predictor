@@ -8484,12 +8484,17 @@ window.importBracketFromPrompt = importBracketFromPrompt;
 // IOS NATIVE SHARE SHEET ENGINE (iMessage, WhatsApp, AirDrop)
 // ==========================================================================
 
-async function shareActiveCanvasToNativeSheet(canvasId, filename = 'cfb_prophet_share.png', title = 'CFB Prophet Matchup') {
+async function shareActiveCanvasToNativeSheet(canvasId, filename = 'cfb_prophet_share.png', title = 'CFB Prophet') {
   const canvas = document.getElementById(canvasId);
   if (!canvas) {
     showCustomToast('⚠️ Canvas graphic not ready.');
     return;
   }
+
+  const teamId = state.currentTeamId || 'texas';
+  const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
+  const appUrl = `https://jajo9147.github.io/cfb-football-predictor/?team=${teamId}`;
+  const shareText = `Check out the App CFB Prophet, I project ${team.name} to win the national championship this year.\n\n${appUrl}`;
 
   // Convert canvas to Blob
   canvas.toBlob(async (blob) => {
@@ -8504,8 +8509,8 @@ async function shareActiveCanvasToNativeSheet(canvasId, filename = 'cfb_prophet_
       try {
         await navigator.share({
           files: [file],
-          title: title,
-          text: 'Check out my simulation on CFB Prophet!'
+          title: 'CFB Prophet',
+          text: shareText
         });
         showCustomToast('🎉 Shared to iOS Share Sheet!');
         return;
@@ -8695,8 +8700,8 @@ function copyHypeCardAndLink() {
   const canvas = document.getElementById('hypeCanvas');
   const teamId = state.currentTeamId || 'texas';
   const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
-  const appUrl = `${window.location.origin}${window.location.pathname}?team=${teamId}`;
-  const shareText = `🏈 Check out this 2026 CFB Prophet Hype Card for ${team.name}!\n\nOpen & simulate in app: ${appUrl}`;
+  const appUrl = `https://jajo9147.github.io/cfb-football-predictor/?team=${teamId}`;
+  const shareText = `Check out the App CFB Prophet, I project ${team.name} to win the national championship this year.\n\n${appUrl}`;
 
   if (canvas && canvas.toBlob) {
     canvas.toBlob(blob => {
