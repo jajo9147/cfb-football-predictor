@@ -7566,14 +7566,6 @@ function getSavedBrackets() {
 
   const finalBrackets = Array.from(idMap.values());
 
-  // If still empty, automatically create their USC projection bracket
-  if (finalBrackets.length === 0) {
-    try {
-      const autoBracket = saveCurrentProjectionAsBracket('USC National Championship Projection', currentUser.displayName, '2026 CFP Simulation');
-      if (autoBracket) finalBrackets.push(autoBracket);
-    } catch(e) {}
-  }
-
   // Persist updated list into v4
   try {
     localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(finalBrackets));
@@ -8406,8 +8398,8 @@ function closeBracketVaultModal() {
 
 function deleteSavedBracket(bracketId, e) {
   if (e) {
-    e.stopPropagation();
-    e.preventDefault();
+    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    if (typeof e.preventDefault === 'function') e.preventDefault();
   }
   
   if (bracketId === 'bracket_prophet_ai_baseline') {
@@ -8418,17 +8410,49 @@ function deleteSavedBracket(bracketId, e) {
   addDeletedBracketId(bracketId);
   publishDeletionTombstoneToCloud(bracketId);
 
-  let myBrackets = getSavedBrackets().filter(b => b && b.id !== bracketId);
-  try {
-    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
-  } catch (e) {}
+  // Clean from all local storage buckets
+  const storageKeys = [
+    BRACKET_STORAGE_KEY,
+    'cfb_prophet_saved_brackets_v4',
+    'cfb_prophet_saved_brackets_v3',
+    'cfb_prophet_saved_brackets_v2',
+    'cfb_prophet_saved_brackets'
+  ];
 
-  let commBrackets = getLocalCommunityBrackets().filter(b => b && b.id !== bracketId);
-  try {
-    localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(commBrackets));
-  } catch (e) {}
+  storageKeys.forEach(k => {
+    try {
+      const raw = localStorage.getItem(k);
+      if (raw) {
+        let list = JSON.parse(raw);
+        if (Array.isArray(list)) {
+          list = list.filter(b => b && b.id !== bracketId);
+          localStorage.setItem(k, JSON.stringify(list));
+        }
+      }
+    } catch(err) {}
+  });
+
+  const commKeys = [
+    COMMUNITY_BRACKETS_KEY,
+    'cfb_prophet_community_brackets_v4',
+    'cfb_prophet_community_brackets_v3'
+  ];
+
+  commKeys.forEach(k => {
+    try {
+      const raw = localStorage.getItem(k);
+      if (raw) {
+        let list = JSON.parse(raw);
+        if (Array.isArray(list)) {
+          list = list.filter(b => b && b.id !== bracketId);
+          localStorage.setItem(k, JSON.stringify(list));
+        }
+      }
+    } catch(err) {}
+  });
 
   renderSavedBracketsVault();
+  updateAuthUI();
   showCustomToast('🗑️ Bracket deleted permanently.');
 }
 
@@ -8638,27 +8662,7 @@ function loadSavedBracket(bracketId) {
   showCustomToast(`🎯 Loaded predictions: "${target.name}"`);
 }
 
-function deleteSavedBracket(bracketId, e) {
-  if (e) {
-    e.stopPropagation();
-    e.preventDefault();
-  }
-  addDeletedBracketId(bracketId);
-  publishDeletionTombstoneToCloud(bracketId);
 
-  let myBrackets = getSavedBrackets().filter(b => b.id !== bracketId);
-  try {
-    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
-  } catch (e) {}
-
-  let commBrackets = getLocalCommunityBrackets().filter(b => b.id !== bracketId);
-  try {
-    localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(commBrackets));
-  } catch (e) {}
-
-  renderSavedBracketsVault();
-  showCustomToast('🗑️ Bracket deleted permanently across all devices.');
-}
 
 function copyTextToClipboardSafe(text, successMsg = 'Copied to clipboard!') {
   if (navigator.clipboard && navigator.clipboard.writeText) {
