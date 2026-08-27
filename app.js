@@ -427,34 +427,41 @@ function teamMatchesSearchQuery(tid, t, query) {
   const normQ = q.replace(/[^a-z0-9]/g, '');
   if (!q && !normQ) return true;
 
-  // 1. Direct standard field matching
-  if (t.name && t.name.toLowerCase().includes(q)) return true;
-  if (t.shortName && t.shortName.toLowerCase().includes(q)) return true;
-  if (t.abbr && t.abbr.toLowerCase().includes(q)) return true;
-  if (t.mascot && t.mascot.toLowerCase().includes(q)) return true;
-  if (t.headCoach && t.headCoach.toLowerCase().includes(q)) return true;
-  if (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) return true;
-  if (t.starPlayer && t.starPlayer.toLowerCase().includes(q)) return true;
-  if (t.secondaryStar && t.secondaryStar.toLowerCase().includes(q)) return true;
-  if (t.conference && t.conference.toLowerCase().includes(q)) return true;
-  if (t.stadium && t.stadium.toLowerCase().includes(q)) return true;
-  if (t.stadiumCity && t.stadiumCity.toLowerCase().includes(q)) return true;
-  if (t.apRank && t.apRank.toLowerCase().includes(q)) return true;
-
-  // 2. Comprehensive Aliases & Nicknames
+  // 1. Comprehensive Aliases & Nicknames
   const aliases = (window.TEAM_SEARCH_ALIASES && window.TEAM_SEARCH_ALIASES[tid]) || (typeof TEAM_SEARCH_ALIASES !== 'undefined' ? TEAM_SEARCH_ALIASES[tid] : null) || [];
   for (let i = 0; i < aliases.length; i++) {
     const a = aliases[i].toLowerCase();
     const normA = a.replace(/[^a-z0-9]/g, '');
-    if (a === q || a.includes(q) || q.includes(a) || (normA && normQ && (normA === normQ || normA.startsWith(normQ) || normQ.startsWith(normA) || normA.includes(normQ)))) {
+    if (a === q || normA === normQ || normA.startsWith(normQ) || (q.length > 2 && (a.includes(q) || normA.includes(normQ)))) {
       return true;
     }
   }
 
-  // 3. Name stripped match (e.g. "texasa&m" vs "tamu")
-  const normName = (t.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-  const normShort = (t.shortName || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-  if (normName.includes(normQ) || normShort.includes(normQ) || (normQ && normShort && normQ.includes(normShort))) return true;
+  // 2. Abbr match
+  const abbr = (t.abbr || '').toLowerCase();
+  if (abbr === q || (normQ && abbr === normQ)) return true;
+
+  // 3. Name & shortName match
+  const name = (t.name || '').toLowerCase();
+  const shortName = (t.shortName || '').toLowerCase();
+  const mascot = (t.mascot || '').toLowerCase();
+  const normName = name.replace(/[^a-z0-9]/g, '');
+  const normShort = shortName.replace(/[^a-z0-9]/g, '');
+
+  if (shortName.startsWith(q) || name.startsWith(q) || mascot.startsWith(q)) return true;
+  if (normShort.startsWith(normQ) || normName.startsWith(normQ)) return true;
+
+  // For queries longer than 2 characters, allow substring and personnel matches
+  if (q.length > 2) {
+    if (name.includes(q) || shortName.includes(q) || mascot.includes(q)) return true;
+    if (normName.includes(normQ) || normShort.includes(normQ)) return true;
+    if (t.headCoach && t.headCoach.toLowerCase().includes(q)) return true;
+    if (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) return true;
+    if (t.starPlayer && t.starPlayer.toLowerCase().includes(q)) return true;
+    if (t.conference && t.conference.toLowerCase().includes(q)) return true;
+    if (t.stadium && t.stadium.toLowerCase().includes(q)) return true;
+    if (t.stadiumCity && t.stadiumCity.toLowerCase().includes(q)) return true;
+  }
 
   return false;
 }
@@ -468,7 +475,7 @@ function calculateTeamSearchRelevance(tid, t, query) {
 
   const aliases = (window.TEAM_SEARCH_ALIASES && window.TEAM_SEARCH_ALIASES[tid]) || (typeof TEAM_SEARCH_ALIASES !== 'undefined' ? TEAM_SEARCH_ALIASES[tid] : null) || [];
   
-  // 1. Exact alias or normalized alias match (e.g. 'uofa' === 'uofa' -> 6000 pts)
+  // 1. Exact alias or normalized alias match (e.g. 'asu' === 'asu' -> 6000 pts)
   for (let i = 0; i < aliases.length; i++) {
     const a = aliases[i].toLowerCase();
     const normA = a.replace(/[^a-z0-9]/g, '');
@@ -481,24 +488,22 @@ function calculateTeamSearchRelevance(tid, t, query) {
     }
   }
 
-  // 2. Exact match on shortName or name or abbr
+  // 2. Exact match on abbr or shortName or name
+  if (t.abbr && t.abbr.toLowerCase() === q) score = Math.max(score, 5500);
   if (t.shortName && t.shortName.toLowerCase() === q) score = Math.max(score, 5000);
   if (t.name && t.name.toLowerCase() === q) score = Math.max(score, 5000);
-  if (t.abbr && t.abbr.toLowerCase() === q) score = Math.max(score, 4800);
 
-  // 3. Starts with shortName or name
+  // 3. Starts with shortName or name or mascot
   if (t.shortName && t.shortName.toLowerCase().startsWith(q)) score = Math.max(score, 3800);
   if (t.name && t.name.toLowerCase().startsWith(q)) score = Math.max(score, 3500);
-
-  // 4. Mascot match
-  if (t.mascot && t.mascot.toLowerCase() === q) score = Math.max(score, 3000);
+  if (t.mascot && t.mascot.toLowerCase() === q) score = Math.max(score, 3200);
   if (t.mascot && t.mascot.toLowerCase().startsWith(q)) score = Math.max(score, 2500);
 
-  // 5. Substring in shortName or name
+  // 4. Substring in shortName or name
   if (t.shortName && t.shortName.toLowerCase().includes(q)) score = Math.max(score, 1800);
   if (t.name && t.name.toLowerCase().includes(q)) score = Math.max(score, 1500);
 
-  // 6. Substring in coach or QB or conference
+  // 5. Substring in coach or QB or conference
   if (t.headCoach && t.headCoach.toLowerCase().includes(q)) score = Math.max(score, 400);
   if (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) score = Math.max(score, 300);
   if (t.conference && t.conference.toLowerCase().includes(q)) score = Math.max(score, 200);
@@ -513,7 +518,6 @@ function initTeamSearch() {
   if (!input) return;
 
   // --- PORTAL: Create/reuse dropdown as a direct <body> child ---
-  // This escapes ALL overflow:hidden and stacking-context clipping on parent elements.
   let dropdown = document.getElementById('teamSearchResultsDropdown');
   if (!dropdown) {
     dropdown = document.createElement('div');
@@ -525,7 +529,6 @@ function initTeamSearch() {
     document.body.appendChild(dropdown);
   }
 
-  // Position the fixed dropdown directly under the input box
   function positionDropdown() {
     const rect = input.closest('.team-search-input-box')?.getBoundingClientRect() || input.getBoundingClientRect();
     dropdown.style.top    = (rect.bottom + 6) + 'px';
@@ -558,7 +561,7 @@ function initTeamSearch() {
 
     if (matchedTeams.length === 0) {
       dropdown.innerHTML = `
-        <div class="team-search-no-results">
+        <div class="team-search-no-results" style="padding: 1rem; text-align: center; color: var(--color-text-dim, #94a3b8); font-size: 0.88rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
           <i class="fa-solid fa-circle-exclamation"></i>
           <span>No teams found for "${query}"</span>
         </div>
@@ -583,12 +586,16 @@ function initTeamSearch() {
         </div>
         <i class="fa-solid fa-chevron-right search-item-arrow"></i>
       `;
-      item.onclick = () => {
+      const chooseTeam = (e) => {
+        if (e) e.preventDefault();
         selectTeam(tid);
         input.value = '';
         performSearch('');
         dropdown.style.display = 'none';
+        input.blur();
       };
+      item.addEventListener('click', chooseTeam);
+      item.addEventListener('pointerdown', chooseTeam);
       dropdown.appendChild(item);
     });
 
@@ -597,6 +604,7 @@ function initTeamSearch() {
   }
 
   input.addEventListener('input', (e) => { performSearch(e.target.value); });
+  input.addEventListener('focus', () => { if (input.value.trim()) performSearch(input.value); });
 
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -8640,6 +8648,9 @@ function clearTeamSearch() {
   }
   if (clearBtn) clearBtn.style.display = 'none';
   if (dropdown) dropdown.style.display = 'none';
+  document.querySelectorAll('.team-pill-btn').forEach(btn => {
+    btn.style.display = '';
+  });
 }
 
 window.openAiTuningModal = openAiTuningModal;
@@ -8664,7 +8675,7 @@ window.deleteSavedBracket = deleteSavedBracket;
 window.openBracketQrModal = openBracketQrModal;
 window.closeBracketQrModal = closeBracketQrModal;
 window.copyActiveQrLink = copyActiveQrLink;
-window.importBracketFromPrompt = importBracketFromPrompt;
+// window.importBracketFromPrompt (cleaned)
 
 
 

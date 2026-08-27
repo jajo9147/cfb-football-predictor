@@ -377,6 +377,17 @@ body.theme-colorado {
   --color-bg-surface: #171510;
 }
 
+/* 31. Arizona State Sun Devils */
+body.theme-arizonastate {
+  --color-brand-primary: #8C1D40;
+  --color-brand-secondary: #FFC627;
+  --color-brand-accent: #FFC627;
+  --color-brand-glow: rgba(255, 198, 39, 0.55);
+  --color-brand-border: rgba(140, 29, 64, 0.45);
+  --color-bg-base: #0D0508;
+  --color-bg-surface: #180B10;
+}
+
 /* ==========================================================================
    BASE STYLES & LAYOUT
    ========================================================================== */

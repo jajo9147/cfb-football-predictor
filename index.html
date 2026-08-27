@@ -39,12 +39,12 @@
   <script>
     if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js?v=271').catch(function() {});
+        navigator.serviceWorker.register('./sw.js?v=280').catch(function() {});
       });
     }
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=272">
+  <link rel="stylesheet" href="styles.css?v=280">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -230,6 +230,7 @@
         <button class="team-pill-btn" data-teamid="floridastate" onclick="selectTeam('floridastate')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/52.png" alt="Florida State" class="team-pill-logo-img"></span><span>Florida State</span><span class="team-pill-rank">RV</span></button>
         <button class="team-pill-btn" data-teamid="colorado" onclick="selectTeam('colorado')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/38.png" alt="Colorado" class="team-pill-logo-img"></span><span>Colorado</span><span class="team-pill-rank">NR</span></button>
         <button class="team-pill-btn" data-teamid="arizona" onclick="selectTeam('arizona')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/12.png" alt="Arizona" class="team-pill-logo-img"></span><span>Arizona</span><span class="team-pill-rank">RV</span></button>
+        <button class="team-pill-btn" data-teamid="arizonastate" onclick="selectTeam('arizonastate')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/9.png" alt="Arizona State" class="team-pill-logo-img"></span><span>Arizona State</span><span class="team-pill-rank">RV</span></button>
       </div>
     </div>
   </section>
@@ -1473,9 +1474,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js?v=270"></script>
-  <script src="qrcode.min.js?v=270"></script>
-  <script src="data/teams_v3.js?v=272"></script>
-  <script src="app.js?v=272"></script>
+  <script src="qrious.min.js?v=280"></script>
+  <script src="qrcode.min.js?v=280"></script>
+  <script src="data/teams.js?v=280"></script>
+  <script src="app.js?v=280"></script>
 </body>
 </html>
