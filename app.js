@@ -2028,6 +2028,7 @@ function updateModalScoreboardLive() {
   // Update Scoreboard DOM in-place without re-rendering slider controls
   const scoreboardEl = document.getElementById('modalScoreboard');
   if (scoreboardEl) {
+    const isManual = !!(state.manualScores && state.manualScores[game.id]);
     scoreboardEl.innerHTML = `
       <div style="display: flex; align-items: center; gap: 0.75rem;">
         <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team1.colors?.primary || '#333'};">
@@ -2039,20 +2040,41 @@ function updateModalScoreboardLive() {
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-        <div style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: #FFFFFF;">
-          <span style="color: ${isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score1}</span>
-          <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
-          <span style="color: ${!isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score2}</span>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;" onclick="event.stopPropagation();">
+        <div class="editable-score-box" style="padding: 3px 8px; border-radius: var(--radius-md);" title="Click to manually project score">
+          <input type="number" min="0" max="99" 
+                 class="score-input ${isTeam1Win ? 'win-score' : ''}" 
+                 style="width: 52px; height: 38px; font-size: 1.6rem;"
+                 value="${score1}" 
+                 data-gameid="${game.id}" 
+                 data-side="team" 
+                 aria-label="${team1.shortName || team1.name} score"
+                 onchange="handleScoreInputChange('${game.id}', 'team', this.value); updateModalScoreboardLive();"
+                 onfocus="this.select();"
+                 onclick="event.stopPropagation();">
+          <span style="color: var(--color-text-dim); font-size: 1.4rem; margin: 0 3px;">-</span>
+          <input type="number" min="0" max="99" 
+                 class="score-input ${!isTeam1Win ? 'win-score' : ''}" 
+                 style="width: 52px; height: 38px; font-size: 1.6rem;"
+                 value="${score2}" 
+                 data-gameid="${game.id}" 
+                 data-side="opp" 
+                 aria-label="${team2.shortName || team2.name} score"
+                 onchange="handleScoreInputChange('${game.id}', 'opp', this.value); updateModalScoreboardLive();"
+                 onfocus="this.select();"
+                 onclick="event.stopPropagation();">
         </div>
         ${(() => {
           const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
           const rProb2 = 100 - rProb1;
           const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
           return `
-            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
-              WIN PROB: ${rProb1}% - ${rProb2}%
-            </span>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
+                WIN PROB: ${rProb1}% - ${rProb2}%
+              </span>
+              ${isManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event); updateModalScoreboardLive();" title="Reset score to AI baseline"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
+            </div>
             ${edge?.badgeHtml || ''}
           `;
         })()}
@@ -2224,6 +2246,7 @@ function openSimModal(game) {
     // Scoreboard
     const scoreboardEl = document.getElementById('modalScoreboard');
     if (scoreboardEl) {
+      const isManual = !!(state.manualScores && state.manualScores[game.id]);
       scoreboardEl.innerHTML = `
         <div style="display: flex; align-items: center; gap: 0.75rem;">
           <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team1.colors?.primary || '#333'};">
@@ -2235,20 +2258,41 @@ function openSimModal(game) {
           </div>
         </div>
 
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-          <div style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: #FFFFFF;">
-            <span style="color: ${isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score1}</span>
-            <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
-            <span style="color: ${!isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score2}</span>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;" onclick="event.stopPropagation();">
+          <div class="editable-score-box" style="padding: 3px 8px; border-radius: var(--radius-md);" title="Click to manually project score">
+            <input type="number" min="0" max="99" 
+                   class="score-input ${isTeam1Win ? 'win-score' : ''}" 
+                   style="width: 52px; height: 38px; font-size: 1.6rem;"
+                   value="${score1}" 
+                   data-gameid="${game.id}" 
+                   data-side="team" 
+                   aria-label="${team1.shortName || team1.name} score"
+                   onchange="handleScoreInputChange('${game.id}', 'team', this.value); updateModalScoreboardLive();"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
+            <span style="color: var(--color-text-dim); font-size: 1.4rem; margin: 0 3px;">-</span>
+            <input type="number" min="0" max="99" 
+                   class="score-input ${!isTeam1Win ? 'win-score' : ''}" 
+                   style="width: 52px; height: 38px; font-size: 1.6rem;"
+                   value="${score2}" 
+                   data-gameid="${game.id}" 
+                   data-side="opp" 
+                   aria-label="${team2.shortName || team2.name} score"
+                   onchange="handleScoreInputChange('${game.id}', 'opp', this.value); updateModalScoreboardLive();"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
           </div>
           ${(() => {
             const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
             const rProb2 = 100 - rProb1;
             const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
             return `
-              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
-                WIN PROB: ${rProb1}% - ${rProb2}%
-              </span>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
+                  WIN PROB: ${rProb1}% - ${rProb2}%
+                </span>
+                ${isManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event); updateModalScoreboardLive();" title="Reset score to AI baseline"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
+              </div>
               ${edge?.badgeHtml || ''}
             `;
           })()}
@@ -2927,6 +2971,9 @@ window.resetCurrentGameTuning = function() {
   const game = state.activeModalGame;
   delete state.gameSliders[game.id];
   delete state.userPicks[game.id];
+  if (state.manualScores) {
+    delete state.manualScores[game.id];
+  }
   if (game.id && game.id.startsWith('ccg-')) {
     delete state.ccgPicks[game.id];
   }
@@ -2938,6 +2985,9 @@ window.resetCurrentGameTuning = function() {
   if (counterpart) {
     delete state.gameSliders[counterpart.oppGame.id];
     delete state.userPicks[counterpart.oppGame.id];
+    if (state.manualScores) {
+      delete state.manualScores[counterpart.oppGame.id];
+    }
   }
 
   // Reset slider UI inputs & chips in modal
@@ -3197,6 +3247,26 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
   if (!teamA) return { winner: teamB, loser: null, scoreA: 17, scoreB: 28, isAWinner: false, winProbA: 20 };
   if (!teamB) return { winner: teamA, loser: null, scoreA: 28, scoreB: 17, isAWinner: true, winProbA: 80 };
 
+  // 0. Check for Direct Manual Score Override on this game
+  const manualScore = options.gameId ? (state.manualScores && state.manualScores[options.gameId]) : null;
+  if (manualScore && typeof manualScore.teamScore === 'number' && typeof manualScore.oppScore === 'number') {
+    const isAWinner = manualScore.teamScore > manualScore.oppScore;
+    const diff = Math.abs(manualScore.teamScore - manualScore.oppScore);
+    const probA = isAWinner ? Math.min(99, Math.max(51, Math.round(50 + diff * 3))) : Math.max(1, Math.min(49, Math.round(50 - diff * 3)));
+    return {
+      gameId: options.gameId,
+      teamA,
+      teamB,
+      winner: isAWinner ? teamA : teamB,
+      loser: isAWinner ? teamB : teamA,
+      scoreA: manualScore.teamScore,
+      scoreB: manualScore.oppScore,
+      isAWinner,
+      winProbA: probA,
+      winProbB: 100 - probA
+    };
+  }
+
   const dbA = TEAMS_DATABASE[teamA.id] || teamA;
   const dbB = TEAMS_DATABASE[teamB.id] || teamB;
 
@@ -3421,11 +3491,14 @@ function renderConferenceChampionships(ccgResults) {
     const activeTeamId = state.currentTeamId;
     const isActiveMatchup = (d.team1.id === activeTeamId || d.team2.id === activeTeamId);
 
+    const isManual = !!(state.manualScores && state.manualScores[d.id]);
     const isCustom = !!(state.gameSliders && state.gameSliders[d.id]?.isCustom);
     const isUserPick = !!(state.ccgPicks && state.ccgPicks[d.id]);
 
     let customBadgeHtml = '';
-    if (isUserPick) {
+    if (isManual) {
+      customBadgeHtml = `<span class="custom-tuned-badge manual-score-badge"><i class="fa-solid fa-pen-to-square"></i> CUSTOM SCORE</span>`;
+    } else if (isUserPick) {
       customBadgeHtml = `<span class="custom-tuned-badge"><i class="fa-solid fa-check"></i> USER PICK</span>`;
     } else if (isCustom) {
       customBadgeHtml = `<span class="custom-tuned-badge"><i class="fa-solid fa-bullseye"></i> CUSTOM TUNED</span>`;
@@ -3433,7 +3506,10 @@ function renderConferenceChampionships(ccgResults) {
 
     const card = document.createElement('div');
     card.className = `ccg-card ${isActiveMatchup ? 'active-team-card' : ''}`;
-    card.onclick = () => window.openSimModalByGameId(d.id);
+    card.onclick = (e) => {
+      if (e.target.closest('.score-input') || e.target.closest('.editable-score-box') || e.target.closest('.reset-score-mini-btn')) return;
+      window.openSimModalByGameId(d.id);
+    };
 
     card.innerHTML = `
       <div class="ccg-card-header">
@@ -3451,13 +3527,32 @@ function renderConferenceChampionships(ccgResults) {
           <span class="ccg-team-rec">${d.team1.apRank || ''} (${d.team1.wins}-${d.team1.losses})</span>
         </div>
 
-        <div class="ccg-vs-pill">
-          <div class="ccg-score-box">
-            <span style="color: ${isTeam1Winner ? 'var(--color-success)' : 'var(--color-text-dim)'};">${d.sim.scoreA}</span>
-            <span style="color: var(--color-text-dim); font-size: 1rem;">-</span>
-            <span style="color: ${!isTeam1Winner ? 'var(--color-success)' : 'var(--color-text-dim)'};">${d.sim.scoreB}</span>
+        <div class="ccg-vs-pill" onclick="event.stopPropagation();">
+          <div class="ccg-score-box editable-score-box" title="Type to project custom CCG score">
+            <input type="number" min="0" max="99" 
+                   class="score-input ${isTeam1Winner ? 'win-score' : ''}" 
+                   value="${d.sim.scoreA}" 
+                   data-gameid="${d.id}" 
+                   data-side="team" 
+                   aria-label="${d.team1.shortName} score"
+                   onchange="handleScoreInputChange('${d.id}', 'team', this.value)"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
+            <span class="score-divider">-</span>
+            <input type="number" min="0" max="99" 
+                   class="score-input ${!isTeam1Winner ? 'win-score' : ''}" 
+                   value="${d.sim.scoreB}" 
+                   data-gameid="${d.id}" 
+                   data-side="opp" 
+                   aria-label="${d.team2.shortName} score"
+                   onchange="handleScoreInputChange('${d.id}', 'opp', this.value)"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
           </div>
-          <span class="ccg-vs-text">${d.sim.winProbA}% - ${d.sim.winProbB}%</span>
+          <div style="display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+            <span class="ccg-vs-text">${d.sim.winProbA}% - ${d.sim.winProbB}%</span>
+            ${isManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${d.id}', event)" title="Reset to AI simulation"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
+          </div>
         </div>
 
         <div class="ccg-team-block">
@@ -3730,7 +3825,7 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
     return fallbackSeed || '';
   }
 
-  function teamRow(fallbackSeed, tObj, score, isWinner, isHighlighted) {
+  function teamRow(fallbackSeed, tObj, score, isWinner, isHighlighted, gameId, side) {
     const seedNum = getTeamSeed(tObj, fallbackSeed);
     const name = tObj ? tObj.shortName || tObj.name : `Seed #${seedNum}`;
     const logo = tObj?.logoUrl || (tObj?.abbr && typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tObj.abbr] : '') || '';
@@ -3764,12 +3859,27 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
     const highlightStyle = isHighlighted ? 'color: var(--color-brand-accent); font-weight: 800;' : '';
 
     return `
-      <div class="matchup-teams-row">
+      <div class="matchup-teams-row" onclick="event.stopPropagation();">
         <div class="matchup-team-item">
           <span class="matchup-team-logo-wrap"><img src="${logo}" class="matchup-team-logo" alt="${name}"></span>
           <span style="${highlightStyle}">#${seedNum} ${name} <small style="opacity: 0.7; font-size: 0.68rem;">${record}</small></span>
         </div>
-        <span style="${isWinner ? 'color: var(--color-success); font-weight: 800;' : 'color: var(--color-text-dim);'}">${score}</span>
+        <div style="display: flex; align-items: center; gap: 4px;">
+          ${gameId ? `
+            <input type="number" min="0" max="99" 
+                   class="score-input ${isWinner ? 'win-score' : ''}" 
+                   style="width: 38px; height: 26px; font-size: 1.15rem; padding: 0; line-height: 1;"
+                   value="${score}" 
+                   data-gameid="${gameId}" 
+                   data-side="${side}" 
+                   aria-label="${name} score"
+                   onchange="handleScoreInputChange('${gameId}', '${side}', this.value)"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
+          ` : `
+            <span style="${isWinner ? 'color: var(--color-success); font-weight: 800;' : 'color: var(--color-text-dim);'}">${score}</span>
+          `}
+        </div>
       </div>
     `;
   }
@@ -3777,11 +3887,14 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
   function renderPlayoffMatchupBox(m, seedA, seedB, defaultVenue) {
     if (!m) return '';
     const isActive = isTeamMatch(m.teamA, teamId) || isTeamMatch(m.teamB, teamId);
+    const isManual = !!(state.manualScores && state.manualScores[m.id]);
     const isCustom = !!(state.gameSliders && state.gameSliders[m.id]?.isCustom);
     const isUserPick = !!(state.playoffPicks && state.playoffPicks[m.id]);
 
     let customBadgeHtml = '';
-    if (isUserPick) {
+    if (isManual) {
+      customBadgeHtml = `<span class="custom-tuned-badge manual-score-badge"><i class="fa-solid fa-pen-to-square"></i> CUSTOM SCORE</span>`;
+    } else if (isUserPick) {
       customBadgeHtml = `<span class="custom-tuned-badge" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fa-solid fa-check"></i> USER PICK</span>`;
     } else if (isCustom) {
       const gs = state.gameSliders[m.id];
@@ -3801,13 +3914,16 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
     const venueText = m.teamA?.stadium || defaultVenue || 'Campus Stadium';
 
     return `
-      <div class="playoff-matchup-box ${isActive ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${m.id}')">
+      <div class="playoff-matchup-box ${isActive ? 'active-team-matchup' : ''}" onclick="if(!event.target.closest('.score-input') && !event.target.closest('.reset-score-mini-btn')) window.openSimModalByGameId('${m.id}')">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
           <span style="font-size: 0.65rem; font-family: var(--font-mono); color: var(--color-text-dim); text-transform: uppercase;">${m.label || defaultVenue || 'CFP MATCHUP'}</span>
-          ${customBadgeHtml}
+          <div style="display: flex; align-items: center; gap: 4px;">
+            ${customBadgeHtml}
+            ${isManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${m.id}', event)" title="Reset to AI baseline"><i class="fa-solid fa-rotate-left"></i></button>` : ''}
+          </div>
         </div>
-        ${teamRow(seedB, m.teamB, m.sim.scoreB, !m.sim.isAWinner, isTeamMatch(m.teamB, teamId))}
-        ${teamRow(seedA, m.teamA, m.sim.scoreA, m.sim.isAWinner, isTeamMatch(m.teamA, teamId))}
+        ${teamRow(seedB, m.teamB, m.sim.scoreB, !m.sim.isAWinner, isTeamMatch(m.teamB, teamId), m.id, 'opp')}
+        ${teamRow(seedA, m.teamA, m.sim.scoreA, m.sim.isAWinner, isTeamMatch(m.teamA, teamId), m.id, 'team')}
         
         <!-- Win Probability KPI Meter -->
         <div style="display: flex; flex-direction: column; gap: 3px; margin: 4px 0 2px 0;">
@@ -3835,11 +3951,14 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
 
   const p = playoffData;
   const nattyChamp = p.nationalChampion;
+  const isNattyManual = !!(state.manualScores && state.manualScores['playoff-natty']);
   const isNattyCustom = !!(state.gameSliders && state.gameSliders['playoff-natty']?.isCustom);
   const isNattyUserPick = !!(state.playoffPicks && state.playoffPicks['playoff-natty']);
 
   let nattyCustomBadgeHtml = '';
-  if (isNattyUserPick) {
+  if (isNattyManual) {
+    nattyCustomBadgeHtml = `<span class="custom-tuned-badge manual-score-badge"><i class="fa-solid fa-pen-to-square"></i> CUSTOM SCORE</span>`;
+  } else if (isNattyUserPick) {
     nattyCustomBadgeHtml = `<span class="custom-tuned-badge" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fa-solid fa-check"></i> USER PICK</span>`;
   } else if (isNattyCustom) {
     const gs = state.gameSliders['playoff-natty'];
@@ -3911,13 +4030,16 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- Natty Showdown -->
-      <div class="playoff-matchup-box ${isTeamMatch(p.natty.teamA, teamId) || isTeamMatch(p.natty.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.natty.id}')">
+      <div class="playoff-matchup-box ${isTeamMatch(p.natty.teamA, teamId) || isTeamMatch(p.natty.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="if(!event.target.closest('.score-input') && !event.target.closest('.reset-score-mini-btn')) window.openSimModalByGameId('${p.natty.id}')">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
           <span style="font-size: 0.65rem; font-family: var(--font-mono); color: #FFD700; font-weight: 800; text-transform: uppercase;">NATIONAL TITLE GAME</span>
-          ${nattyCustomBadgeHtml}
+          <div style="display: flex; align-items: center; gap: 4px;">
+            ${nattyCustomBadgeHtml}
+            ${isNattyManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('playoff-natty', event)" title="Reset to AI baseline"><i class="fa-solid fa-rotate-left"></i></button>` : ''}
+          </div>
         </div>
-        ${teamRow('SF1', p.natty.teamA, p.natty.sim.scoreA, p.natty.sim.isAWinner, isTeamMatch(p.natty.teamA, teamId))}
-        ${teamRow('SF2', p.natty.teamB, p.natty.sim.scoreB, !p.natty.sim.isAWinner, isTeamMatch(p.natty.teamB, teamId))}
+        ${teamRow('SF1', p.natty.teamA, p.natty.sim.scoreA, p.natty.sim.isAWinner, isTeamMatch(p.natty.teamA, teamId), 'playoff-natty', 'team')}
+        ${teamRow('SF2', p.natty.teamB, p.natty.sim.scoreB, !p.natty.sim.isAWinner, isTeamMatch(p.natty.teamB, teamId), 'playoff-natty', 'opp')}
         
         <!-- Win Probability KPI Meter -->
         <div style="display: flex; flex-direction: column; gap: 3px; margin: 4px 0 2px 0;">
