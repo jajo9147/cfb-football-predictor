@@ -7037,7 +7037,7 @@ var TEAMS_DATABASE = {
         "oppId": null
       }
     ],
-    "playoffContenderRank": 26
+    "playoffContenderRank": 30
   },
   "usc": {
     "id": "usc",
@@ -7815,7 +7815,7 @@ var TEAMS_DATABASE = {
         "oppId": null
       }
     ],
-    "playoffContenderRank": 28
+    "playoffContenderRank": 27
   },
   "clemson": {
     "id": "clemson",
@@ -8203,7 +8203,7 @@ var TEAMS_DATABASE = {
         "oppId": null
       }
     ],
-    "playoffContenderRank": 27
+    "playoffContenderRank": 26
   },
   "smu": {
     "id": "smu",
@@ -10155,7 +10155,7 @@ var TEAMS_DATABASE = {
     "conference": "Big 12",
     "apRank": "RV",
     "apPoints": "280 PTS",
-    "playoffContenderRank": 29,
+    "playoffContenderRank": 28,
     "themeClass": "theme-arizona",
     "headCoach": "Brent Brennan",
     "offensiveCoordinator": "Dino Babers",
@@ -11704,7 +11704,7 @@ var TEAMS_DATABASE = {
     "conference": "Big 12",
     "apRank": "NR",
     "apPoints": "115 PTS",
-    "playoffContenderRank": 28,
+    "playoffContenderRank": 31,
     "headCoach": "Deion Sanders",
     "offensiveCoordinator": "Brennan Marion",
     "defensiveCoordinator": "Chris Marve",
@@ -12099,7 +12099,7 @@ var TEAMS_DATABASE = {
     "conference": "Big 12",
     "apRank": "RV",
     "apPoints": "72 PTS",
-    "playoffContenderRank": 30,
+    "playoffContenderRank": 29,
     "headCoach": "Kenny Dillingham",
     "offensiveCoordinator": "Marcus Arroyo",
     "defensiveCoordinator": "Brian Ward",

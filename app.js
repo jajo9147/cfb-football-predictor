@@ -395,28 +395,62 @@ function getNumericRank(team) {
   return match ? parseInt(match[0], 10) : 99;
 }
 
+function getDynamicTeamRankOrder() {
+  if (typeof evaluateRegularSeasonAllTeams === 'function') {
+    try {
+      const evaluated = evaluateRegularSeasonAllTeams();
+      if (evaluated && evaluated.length > 0) {
+        return evaluated.map((t, idx) => ({
+          id: t.id,
+          team: TEAMS_DATABASE[t.id] || t,
+          evaluatedRank: idx + 1,
+          wins: t.wins,
+          losses: t.losses,
+          score: t.score
+        }));
+      }
+    } catch (e) {}
+  }
+
+  // Baseline fallback order
+  const teamKeys = Object.keys(TEAMS_DATABASE).sort((a, b) => {
+    return getNumericRank(TEAMS_DATABASE[a]) - getNumericRank(TEAMS_DATABASE[b]);
+  });
+  return teamKeys.map((key, idx) => ({
+    id: key,
+    team: TEAMS_DATABASE[key],
+    evaluatedRank: idx + 1,
+    wins: 0,
+    losses: 0,
+    score: 0
+  }));
+}
+
 function renderTeamSelector() {
   const track = document.getElementById('teamSelectorTrack');
   if (!track) return;
 
+  const rankedTeams = getDynamicTeamRankOrder();
   track.innerHTML = '';
-  const teamKeys = Object.keys(TEAMS_DATABASE).sort((a, b) => {
-    return getNumericRank(TEAMS_DATABASE[a]) - getNumericRank(TEAMS_DATABASE[b]);
-  });
 
-  teamKeys.forEach(key => {
-    const team = TEAMS_DATABASE[key];
+  const hasCustomOverrides = (state.userPicks && Object.keys(state.userPicks).length > 0) || (state.teamSliders && Object.keys(state.teamSliders).length > 0);
+
+  rankedTeams.forEach(({ id, team, evaluatedRank }) => {
+    if (!team) return;
     const btn = document.createElement('button');
-    btn.className = `team-pill-btn ${key === state.currentTeamId ? 'active' : ''}`;
-    btn.dataset.teamid = key;
+    btn.className = `team-pill-btn ${id === state.currentTeamId ? 'active' : ''}`;
+    btn.dataset.teamid = id;
+
+    const displayRank = hasCustomOverrides ? `#${evaluatedRank}` : (team.apRank || 'NR');
+
     btn.innerHTML = `
       <span class="team-pill-logo-badge">
         <img src="${team.logoUrl}" alt="${team.shortName}" class="team-pill-logo-img">
       </span>
       <span>${team.shortName}</span>
-      <span class="team-pill-rank">${team.apRank}</span>
+      <span class="team-pill-rank">${displayRank}</span>
     `;
-    btn.addEventListener('click', () => selectTeam(key));
+    btn.addEventListener('click', () => selectTeam(id));
     track.appendChild(btn);
   });
 }
@@ -1232,6 +1266,7 @@ function recalculateSeason() {
   // Render Schedule Grid & CFP Bracket
   renderSchedule();
   renderPlayoffBracket(totalWins, cfpSeed, playoffResults);
+  renderTeamSelector();
 }
 
 // ==========================================================================
