@@ -389,7 +389,8 @@ function renderTeamSelector() {
 function teamMatchesSearchQuery(tid, t, query) {
   if (!t || !query) return false;
   const q = query.trim().toLowerCase();
-  if (!q) return true;
+  const normQ = q.replace(/[^a-z0-9]/g, '');
+  if (!q && !normQ) return true;
 
   // 1. Direct standard field matching
   if (t.name && t.name.toLowerCase().includes(q)) return true;
@@ -409,49 +410,16 @@ function teamMatchesSearchQuery(tid, t, query) {
   const aliases = (window.TEAM_SEARCH_ALIASES && window.TEAM_SEARCH_ALIASES[tid]) || (typeof TEAM_SEARCH_ALIASES !== 'undefined' ? TEAM_SEARCH_ALIASES[tid] : null) || [];
   for (let i = 0; i < aliases.length; i++) {
     const a = aliases[i].toLowerCase();
-    if (a === q || a.includes(q) || q.includes(a)) {
+    const normA = a.replace(/[^a-z0-9]/g, '');
+    if (a === q || a.includes(q) || q.includes(a) || (normA && normQ && (normA === normQ || normA.startsWith(normQ) || normQ.startsWith(normA) || normA.includes(normQ)))) {
       return true;
     }
   }
 
-  // 3. Acronym / First letters match (e.g. "University of Colorado" -> "cu", "Texas A&M" -> "tamu")
-  const normQ = q.replace(/[^a-z0-9]/g, '');
-  if (normQ === 'cu' && (tid === 'colorado' || t.name.toLowerCase().includes('colorado'))) return true;
-  if (normQ === 'ou' && (tid === 'oklahoma' || t.name.toLowerCase().includes('oklahoma'))) return true;
-  if (normQ === 'ut' && (tid === 'texas' || tid === 'tennessee' || t.name.toLowerCase().includes('texas') || t.name.toLowerCase().includes('tennessee'))) return true;
-  if (normQ === 'iu' && (tid === 'indiana' || t.name.toLowerCase().includes('indiana'))) return true;
-  if (normQ === 'ku' && (tid === 'kansas' || t.name.toLowerCase().includes('kansas'))) return true;
-  if (normQ === 'bu' && (tid === 'baylor' || t.name.toLowerCase().includes('baylor'))) return true;
-  if (normQ === 'mu' && (tid === 'missouri' || t.name.toLowerCase().includes('missouri'))) return true;
-  if (normQ === 'au' && (tid === 'auburn' || t.name.toLowerCase().includes('auburn'))) return true;
-  if (normQ === 'ua' && (tid === 'alabama' || tid === 'arizona' || t.name.toLowerCase().includes('alabama') || t.name.toLowerCase().includes('arizona'))) return true;
-  if (normQ === 'uf' && (tid === 'florida' || t.name.toLowerCase().includes('florida'))) return true;
-  if (normQ === 'uk' && (tid === 'kentucky' || t.name.toLowerCase().includes('kentucky'))) return true;
-  if (normQ === 'um' && (tid === 'miami' || tid === 'michigan' || t.name.toLowerCase().includes('miami') || t.name.toLowerCase().includes('michigan'))) return true;
-  if (normQ === 'uga' && (tid === 'georgia' || t.name.toLowerCase().includes('georgia'))) return true;
-  if (normQ === 'lsu' && (tid === 'lsu' || t.name.toLowerCase().includes('lsu'))) return true;
-  if (normQ === 'fsu' && (tid === 'floridastate' || t.name.toLowerCase().includes('florida state'))) return true;
-  if (normQ === 'psu' && (tid === 'pennstate' || t.name.toLowerCase().includes('penn state'))) return true;
-  if (normQ === 'osu' && (tid === 'ohiostate' || tid === 'oklahomastate' || t.name.toLowerCase().includes('ohio state') || t.name.toLowerCase().includes('oklahoma state'))) return true;
-  if (normQ === 'tamu' && (tid === 'texasam' || t.name.toLowerCase().includes('texas a&m'))) return true;
-  if (normQ === 'ttu' && (tid === 'texastech' || t.name.toLowerCase().includes('texas tech'))) return true;
-  if (normQ === 'usc' && (tid === 'usc' || tid === 'southcarolina' || t.name.toLowerCase().includes('southern cal') || t.name.toLowerCase().includes('south carolina'))) return true;
-  if (normQ === 'nd' && (tid === 'notredame' || t.name.toLowerCase().includes('notre dame'))) return true;
-  if (normQ === 'byu' && (tid === 'byu' || t.name.toLowerCase().includes('brigham young'))) return true;
-  if (normQ === 'tcu' && (tid === 'tcu' || t.name.toLowerCase().includes('texas christian'))) return true;
-  if (normQ === 'smu' && (tid === 'smu' || t.name.toLowerCase().includes('southern methodist'))) return true;
-  if (normQ === 'ucf' && (tid === 'ucf' || t.name.toLowerCase().includes('central florida'))) return true;
-  if (normQ === 'bsu' && (tid === 'boisestate' || t.name.toLowerCase().includes('boise state'))) return true;
-  if (normQ === 'isu' && (tid === 'iowastate' || t.name.toLowerCase().includes('iowa state'))) return true;
-  if (normQ === 'ksu' && (tid === 'kansasstate' || t.name.toLowerCase().includes('kansas state'))) return true;
-  if (normQ === 'asu' && (tid === 'arizonastate' || t.name.toLowerCase().includes('arizona state'))) return true;
-  if (normQ === 'wvu' && (tid === 'westvirginia' || t.name.toLowerCase().includes('west virginia'))) return true;
-  if (normQ === 'unc' && (tid === 'northcarolina' || t.name.toLowerCase().includes('north carolina'))) return true;
-  if (normQ === 'ncsu' && (tid === 'ncstate' || t.name.toLowerCase().includes('nc state'))) return true;
-  if (normQ === 'vt' && (tid === 'virginiatech' || t.name.toLowerCase().includes('virginia tech'))) return true;
-  if (normQ === 'gt' && (tid === 'georgiatech' || t.name.toLowerCase().includes('georgia tech'))) return true;
-  if (normQ === 'uva' && (tid === 'virginia' || t.name.toLowerCase().includes('virginia'))) return true;
-  if (normQ === 'bc' && (tid === 'bostoncollege' || t.name.toLowerCase().includes('boston college'))) return true;
+  // 3. Name stripped match (e.g. "texasa&m" vs "tamu")
+  const normName = (t.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const normShort = (t.shortName || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (normName.includes(normQ) || normShort.includes(normQ) || (normQ && normShort && normQ.includes(normShort))) return true;
 
   return false;
 }
@@ -465,35 +433,40 @@ function calculateTeamSearchRelevance(tid, t, query) {
 
   const aliases = (window.TEAM_SEARCH_ALIASES && window.TEAM_SEARCH_ALIASES[tid]) || (typeof TEAM_SEARCH_ALIASES !== 'undefined' ? TEAM_SEARCH_ALIASES[tid] : null) || [];
   
-  // 1. Exact alias match (e.g. 'cu' === 'cu' -> 5000 pts)
-  if (aliases.some(a => a.toLowerCase() === q || a.toLowerCase() === normQ)) {
-    score += 5000;
+  // 1. Exact alias or normalized alias match (e.g. 'uofa' === 'uofa' -> 6000 pts)
+  for (let i = 0; i < aliases.length; i++) {
+    const a = aliases[i].toLowerCase();
+    const normA = a.replace(/[^a-z0-9]/g, '');
+    if (a === q || (normA && normQ && normA === normQ)) {
+      score = Math.max(score, 6000);
+    } else if (normA && normQ && normA.startsWith(normQ)) {
+      score = Math.max(score, 4500);
+    } else if (normA && normQ && normA.includes(normQ)) {
+      score = Math.max(score, 3000);
+    }
   }
 
   // 2. Exact match on shortName or name or abbr
-  if (t.shortName && t.shortName.toLowerCase() === q) score += 4000;
-  if (t.name && t.name.toLowerCase() === q) score += 4000;
-  if (t.abbr && t.abbr.toLowerCase() === q) score += 3500;
+  if (t.shortName && t.shortName.toLowerCase() === q) score = Math.max(score, 5000);
+  if (t.name && t.name.toLowerCase() === q) score = Math.max(score, 5000);
+  if (t.abbr && t.abbr.toLowerCase() === q) score = Math.max(score, 4800);
 
   // 3. Starts with shortName or name
-  if (t.shortName && t.shortName.toLowerCase().startsWith(q)) score += 3000;
-  if (t.name && t.name.toLowerCase().startsWith(q)) score += 2500;
+  if (t.shortName && t.shortName.toLowerCase().startsWith(q)) score = Math.max(score, 3800);
+  if (t.name && t.name.toLowerCase().startsWith(q)) score = Math.max(score, 3500);
 
   // 4. Mascot match
-  if (t.mascot && t.mascot.toLowerCase() === q) score += 2000;
-  if (t.mascot && t.mascot.toLowerCase().startsWith(q)) score += 1500;
+  if (t.mascot && t.mascot.toLowerCase() === q) score = Math.max(score, 3000);
+  if (t.mascot && t.mascot.toLowerCase().startsWith(q)) score = Math.max(score, 2500);
 
-  // 5. Alias starts with query
-  if (aliases.some(a => a.toLowerCase().startsWith(q))) score += 1200;
+  // 5. Substring in shortName or name
+  if (t.shortName && t.shortName.toLowerCase().includes(q)) score = Math.max(score, 1800);
+  if (t.name && t.name.toLowerCase().includes(q)) score = Math.max(score, 1500);
 
-  // 6. Substring in shortName or name
-  if (t.shortName && t.shortName.toLowerCase().includes(q)) score += 800;
-  if (t.name && t.name.toLowerCase().includes(q)) score += 600;
-
-  // 7. Substring in coach or QB or conference
-  if (t.headCoach && t.headCoach.toLowerCase().includes(q)) score += 200;
-  if (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) score += 150;
-  if (t.conference && t.conference.toLowerCase().includes(q)) score += 100;
+  // 6. Substring in coach or QB or conference
+  if (t.headCoach && t.headCoach.toLowerCase().includes(q)) score = Math.max(score, 400);
+  if (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) score = Math.max(score, 300);
+  if (t.conference && t.conference.toLowerCase().includes(q)) score = Math.max(score, 200);
 
   return score;
 }
