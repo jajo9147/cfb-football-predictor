@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="data/teams.js"></script>
+  <script src="app.js"></script>
+</head>
+<body>
+  <div class="team-search-input-box">
+    <input type="text" id="teamSearchInput">
+    <button id="teamSearchClearBtn" style="display:none;"></button>
+  </div>
+  <div id="teamSearchResultsDropdown"></div>
+  <script>
+    // Just a mock to see if errors occur
+    try {
+      window.initTeamSearch();
+      const input = document.getElementById('teamSearchInput');
+      input.value = "lsu";
+      input.dispatchEvent(new Event('input'));
+      console.log("Success. Dropdown display:", document.getElementById('teamSearchResultsDropdown').style.display);
+    } catch (e) {
+      console.error("Error:", e);
+    }
+  </script>
+</body>
+</html>
