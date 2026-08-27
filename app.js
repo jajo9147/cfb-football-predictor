@@ -9,6 +9,7 @@ const state = {
   teamActivePresets: {}, // Map of teamId -> presetKey ('baseline', 'qb-mvp', etc.)
   gameSliders: {}, // Map of gameId -> { qbRating, groundAttack, defenseHavoc, turnoverLuck, crowdNoise, isCustom }
   userPicks: {},   // Map of gameId -> 'W' | 'L' | null
+  manualScores: {}, // Map of gameId -> { teamScore, oppScore }
   ccgPicks: {},    // Map of ccgId -> winnerTeamId
   playoffPicks: {},// Map of playoffGameId -> winnerTeamId
   postseasonGames: {}, // Map of gameId -> generated game object for modal
@@ -1046,6 +1047,43 @@ function calculateAdjustedMatchup(game, targetTeamId) {
     };
   }
 
+  // 0b. Direct Manual Score Override on this game
+  const manualScore = state.manualScores && state.manualScores[game.id];
+  if (manualScore && typeof manualScore.teamScore === 'number' && typeof manualScore.oppScore === 'number') {
+    const isWin = manualScore.teamScore > manualScore.oppScore;
+    const diff = Math.abs(manualScore.teamScore - manualScore.oppScore);
+    const winProb = isWin ? Math.min(99, Math.max(51, Math.round(50 + diff * 3))) : Math.max(1, Math.min(49, Math.round(50 - diff * 3)));
+    return {
+      adjWinProb: winProb,
+      projUt: manualScore.teamScore,
+      projOpp: manualScore.oppScore,
+      isWin,
+      isFinal: false,
+      isCustomTuned: true,
+      isManualScore: true,
+      syncedFrom: null
+    };
+  }
+
+  // 0c. Counterpart Manual Score Override
+  const counterpartCheck = findCounterpartMatchup(teamId, game);
+  if (counterpartCheck && state.manualScores && state.manualScores[counterpartCheck.oppGame.id]) {
+    const oppManual = state.manualScores[counterpartCheck.oppGame.id];
+    const isWin = oppManual.oppScore > oppManual.teamScore;
+    const diff = Math.abs(oppManual.oppScore - oppManual.teamScore);
+    const winProb = isWin ? Math.min(99, Math.max(51, Math.round(50 + diff * 3))) : Math.max(1, Math.min(49, Math.round(50 - diff * 3)));
+    return {
+      adjWinProb: winProb,
+      projUt: oppManual.oppScore,
+      projOpp: oppManual.teamScore,
+      isWin,
+      isFinal: false,
+      isCustomTuned: true,
+      isManualScore: true,
+      syncedFrom: counterpartCheck.oppTeam.shortName || counterpartCheck.oppTeam.name
+    };
+  }
+
   const directSliders = state.gameSliders[game.id];
   const directPick = state.userPicks[game.id];
 
@@ -1277,6 +1315,8 @@ function renderSchedule() {
     let badgeHtml = `<span>${game.isHome ? 'HOME' : 'AWAY'}</span>`;
     if (sim.isFinal) {
       badgeHtml = `<span class="custom-tuned-badge" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fa-solid fa-lock"></i> FINAL</span>`;
+    } else if (sim.isManualScore) {
+      badgeHtml = `<span class="custom-tuned-badge manual-score-badge"><i class="fa-solid fa-pen-to-square"></i> CUSTOM SCORE</span>`;
     } else if (sim.isCustomTuned) {
       if (sim.syncedFrom) {
         badgeHtml = `<span class="custom-tuned-badge"><i class="fa-solid fa-link"></i> SYNCED: ${sim.syncedFrom.toUpperCase()}</span>`;
@@ -1305,13 +1345,32 @@ function renderSchedule() {
           </div>
         </div>
 
-        <div class="score-center">
-          <div class="proj-score-box">
-            <span style="color: ${isWin ? 'var(--color-success)' : 'var(--color-text-dim)'};">${sim.projUt}</span>
+        <div class="score-center" onclick="event.stopPropagation();">
+          <div class="proj-score-box editable-score-box" title="Type to project custom score">
+            <input type="number" min="0" max="99" 
+                   class="score-input ${isWin ? 'win-score' : ''}" 
+                   value="${sim.projUt}" 
+                   data-gameid="${game.id}" 
+                   data-side="team" 
+                   aria-label="${team.abbr} score projection"
+                   onchange="handleScoreInputChange('${game.id}', 'team', this.value)"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
             <span class="score-divider">-</span>
-            <span style="color: ${!isWin ? 'var(--color-danger)' : 'var(--color-text-dim)'};">${sim.projOpp}</span>
+            <input type="number" min="0" max="99" 
+                   class="score-input ${!isWin ? 'win-score' : ''}" 
+                   value="${sim.projOpp}" 
+                   data-gameid="${game.id}" 
+                   data-side="opp" 
+                   aria-label="${game.oppAbbr} score projection"
+                   onchange="handleScoreInputChange('${game.id}', 'opp', this.value)"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
           </div>
-          <span class="vegas-line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : `${game.oppAbbr} -${game.vegasSpread}`}</span>
+          <div class="score-sub-row">
+            <span class="vegas-line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : `${game.oppAbbr} -${game.vegasSpread}`}</span>
+            ${sim.isManualScore ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event)" title="Reset to AI baseline projection"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
+          </div>
         </div>
 
         <div class="team-pill" style="justify-content: flex-end; text-align: right;">
@@ -1385,13 +1444,99 @@ function renderSchedule() {
     }
 
     card.addEventListener('click', (e) => {
-      if (e.target.closest('.wl-toggle-btn') || e.target.closest('.wl-toggle-wrap')) return;
+      if (e.target.closest('.wl-toggle-btn') || e.target.closest('.wl-toggle-wrap') || e.target.closest('.score-input') || e.target.closest('.editable-score-box') || e.target.closest('.reset-score-mini-btn')) return;
       openSimModal(game);
     });
 
     grid.appendChild(card);
   });
 }
+
+function findGameById(gameId) {
+  if (!gameId) return null;
+  const team = TEAMS_DATABASE[state.currentTeamId];
+  if (team && team.schedule) {
+    const found = team.schedule.find(g => g.id === gameId);
+    if (found) return found;
+  }
+  if (state.postseasonGames && state.postseasonGames[gameId]) {
+    return state.postseasonGames[gameId];
+  }
+  for (const tid of Object.keys(TEAMS_DATABASE)) {
+    const g = (TEAMS_DATABASE[tid].schedule || []).find(x => x.id === gameId);
+    if (g) return g;
+  }
+  return null;
+}
+window.findGameById = findGameById;
+
+function handleScoreInputChange(gameId, side, value) {
+  const numVal = parseInt(value, 10);
+  if (isNaN(numVal) || numVal < 0) return;
+
+  if (!state.manualScores) state.manualScores = {};
+  
+  const gObj = findGameById(gameId) || { id: gameId };
+  const currentSim = calculateAdjustedMatchup(gObj);
+  let teamScore = state.manualScores[gameId]?.teamScore ?? currentSim.projUt;
+  let oppScore = state.manualScores[gameId]?.oppScore ?? currentSim.projOpp;
+
+  if (side === 'team') {
+    teamScore = Math.min(99, Math.max(0, numVal));
+  } else {
+    oppScore = Math.min(99, Math.max(0, numVal));
+  }
+
+  // Prevent ties in football simulation
+  if (teamScore === oppScore) {
+    if (side === 'team') teamScore += 1;
+    else oppScore += 1;
+  }
+
+  state.manualScores[gameId] = { teamScore, oppScore };
+  state.userPicks[gameId] = teamScore > oppScore ? 'W' : 'L';
+
+  // Cross-sync with counterpart game
+  if (gObj) {
+    const counterpart = findCounterpartMatchup(state.currentTeamId, gObj);
+    if (counterpart) {
+      if (!state.manualScores) state.manualScores = {};
+      state.manualScores[counterpart.oppGame.id] = {
+        teamScore: oppScore,
+        oppScore: teamScore
+      };
+      state.userPicks[counterpart.oppGame.id] = oppScore > teamScore ? 'W' : 'L';
+    }
+  }
+
+  recalculateSeason();
+  showCustomToast(`🎯 Projected score set: ${teamScore} - ${oppScore}`);
+}
+window.handleScoreInputChange = handleScoreInputChange;
+
+function resetManualScore(gameId, e) {
+  if (e) {
+    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    if (typeof e.preventDefault === 'function') e.preventDefault();
+  }
+  if (state.manualScores && state.manualScores[gameId]) {
+    delete state.manualScores[gameId];
+  }
+  delete state.userPicks[gameId];
+
+  const gObj = findGameById(gameId);
+  if (gObj) {
+    const counterpart = findCounterpartMatchup(state.currentTeamId, gObj);
+    if (counterpart && state.manualScores) {
+      delete state.manualScores[counterpart.oppGame.id];
+      delete state.userPicks[counterpart.oppGame.id];
+    }
+  }
+
+  recalculateSeason();
+  showCustomToast('↺ Score reset to AI simulation baseline.');
+}
+window.resetManualScore = resetManualScore;
 
 // ==========================================================================
 // GLOBAL SLIDERS & PRESETS
@@ -1642,6 +1787,7 @@ window.resetAllToBaseline = function() {
   state.teamActivePresets = {};
   state.gameSliders = {};
   state.userPicks = {};
+  state.manualScores = {};
 
   const selectEl = document.getElementById('globalPresetSelect');
   if (selectEl) selectEl.value = 'baseline';
@@ -7464,6 +7610,7 @@ function saveCurrentProjectionAsBracket(name, creator, notes) {
     simState: {
       teamId: state.currentTeamId || getTopRankedTeamId() || 'ohiostate',
       userPicks: JSON.parse(JSON.stringify(state.userPicks || {})),
+      manualScores: JSON.parse(JSON.stringify(state.manualScores || {})),
       ccgPicks: JSON.parse(JSON.stringify(state.ccgPicks || {})),
       playoffPicks: JSON.parse(JSON.stringify(state.playoffPicks || {})),
       teamSliders: JSON.parse(JSON.stringify(state.teamSliders || {})),
@@ -7586,53 +7733,54 @@ function createProphetAiBenchmarkBracket() {
     isAdminBenchmark: true,
     isPublic: true,
     champion: {
-      id: 'georgia',
-      name: 'Georgia Bulldogs',
-      shortName: 'Georgia',
-      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',
-      score: 34,
-      oppScore: 28
-    },
-    runnerUp: {
       id: 'ohiostate',
       name: 'Ohio State Buckeyes',
-      shortName: 'Ohio State'
+      shortName: 'Ohio State',
+      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',
+      score: 34,
+      oppScore: 24
+    },
+    runnerUp: {
+      id: 'oregon',
+      name: 'Oregon Ducks',
+      shortName: 'Oregon'
     },
     seeds: [
-      { seed: 1,  id: 'georgia',    name: 'Georgia',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',   wins: 12, losses: 1 },
-      { seed: 2,  id: 'ohiostate',  name: 'Ohio State',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',  wins: 12, losses: 1 },
+      { seed: 1,  id: 'ohiostate',  name: 'Ohio State',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',  wins: 13, losses: 0 },
+      { seed: 2,  id: 'texas',      name: 'Texas',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',  wins: 12, losses: 1 },
       { seed: 3,  id: 'miami',      name: 'Miami',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 12, losses: 1 },
       { seed: 4,  id: 'texastech',  name: 'Texas Tech',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png', wins: 10, losses: 3 },
-      { seed: 5,  id: 'oregon',     name: 'Oregon',      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 12, losses: 1 },
-      { seed: 6,  id: 'notredame',  name: 'Notre Dame',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png',   wins: 12, losses: 1 },
-      { seed: 7,  id: 'texas',      name: 'Texas',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',  wins: 11, losses: 2 },
-      { seed: 8,  id: 'olemiss',    name: 'Ole Miss',    logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/145.png',  wins: 11, losses: 2 },
-      { seed: 9,  id: 'indiana',    name: 'Indiana',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png',   wins: 11, losses: 2 },
-      { seed: 10, id: 'lsu',        name: 'LSU',         logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/99.png',   wins: 11, losses: 2 },
-      { seed: 11, id: 'alabama',    name: 'Alabama',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/333.png',  wins: 11, losses: 2 },
+      { seed: 5,  id: 'oregon',     name: 'Oregon',      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 11, losses: 2 },
+      { seed: 6,  id: 'georgia',    name: 'Georgia',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',   wins: 11, losses: 2 },
+      { seed: 7,  id: 'notredame',  name: 'Notre Dame',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png',   wins: 11, losses: 1 },
+      { seed: 8,  id: 'alabama',    name: 'Alabama',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/333.png',  wins: 10, losses: 2 },
+      { seed: 9,  id: 'olemiss',    name: 'Ole Miss',    logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/145.png',  wins: 10, losses: 2 },
+      { seed: 10, id: 'indiana',    name: 'Indiana',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png',   wins: 10, losses: 2 },
+      { seed: 11, id: 'lsu',        name: 'LSU',         logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/99.png',   wins: 10, losses: 2 },
       { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',   wins: 12, losses: 1 }
     ],
     playoffSummary: {
       fr: [
         { label: '#5 vs #12', winner: 'Oregon' },
-        { label: '#6 vs #11', winner: 'Notre Dame' },
-        { label: '#7 vs #10', winner: 'Texas' },
-        { label: '#8 vs #9', winner: 'Ole Miss' }
+        { label: '#6 vs #11', winner: 'Georgia' },
+        { label: '#7 vs #10', winner: 'Notre Dame' },
+        { label: '#8 vs #9', winner: 'Alabama' }
       ],
       qf: [
-        { bowl: 'Sugar Bowl', winner: 'Georgia' },
-        { bowl: 'Rose Bowl', winner: 'Ohio State' },
-        { bowl: 'Peach Bowl', winner: 'Oregon' },
-        { bowl: 'Fiesta Bowl', winner: 'Notre Dame' }
+        { bowl: 'Sugar Bowl', winner: 'Ohio State' },
+        { bowl: 'Rose Bowl', winner: 'Oregon' },
+        { bowl: 'Peach Bowl', winner: 'Texas' },
+        { bowl: 'Fiesta Bowl', winner: 'Georgia' }
       ],
       sf: [
-        { bowl: 'Orange Bowl', winner: 'Georgia' },
-        { bowl: 'Cotton Bowl', winner: 'Ohio State' }
+        { bowl: 'Orange Bowl', winner: 'Ohio State' },
+        { bowl: 'Cotton Bowl', winner: 'Oregon' }
       ]
     },
     simState: {
-      teamId: 'georgia',
+      teamId: 'ohiostate',
       userPicks: {},
+      manualScores: {},
       ccgPicks: {},
       playoffPicks: {},
       teamSliders: {},
@@ -8649,6 +8797,7 @@ function loadSavedBracket(bracketId) {
   if (target.simState) {
     if (target.simState.teamId) state.currentTeamId = target.simState.teamId;
     state.userPicks = JSON.parse(JSON.stringify(target.simState.userPicks || {}));
+    state.manualScores = JSON.parse(JSON.stringify(target.simState.manualScores || {}));
     state.ccgPicks = JSON.parse(JSON.stringify(target.simState.ccgPicks || {}));
     state.playoffPicks = JSON.parse(JSON.stringify(target.simState.playoffPicks || {}));
     state.teamSliders = JSON.parse(JSON.stringify(target.simState.teamSliders || {}));
