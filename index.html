@@ -38,13 +38,26 @@
 
   <script>
     if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.update();
+        }
+      });
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js?v=296').catch(function() {});
+        navigator.serviceWorker.register('./sw.js?v=297').then(function(reg) {
+          reg.update();
+        }).catch(function() {});
+      });
+      navigator.serviceWorker.addEventListener('controllerchange', function() {
+        if (!window._swReloading) {
+          window._swReloading = true;
+          window.location.reload();
+        }
       });
     }
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=296">
+  <link rel="stylesheet" href="styles.css?v=297">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1531,9 +1544,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js?v=296"></script>
-  <script src="qrcode.min.js?v=296"></script>
-  <script src="data/teams.js?v=296"></script>
-  <script src="app.js?v=296"></script>
+  <script src="qrious.min.js?v=297"></script>
+  <script src="qrcode.min.js?v=297"></script>
+  <script src="data/teams.js?v=297"></script>
+  <script src="app.js?v=297"></script>
 </body>
 </html>
