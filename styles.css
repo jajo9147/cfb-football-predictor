@@ -4479,9 +4479,9 @@ body.modal-open {
   box-shadow: 0 2px 14px var(--color-brand-glow);
 }
 
-/* Mobile Native Bottom Navigation Bar */
+/* Universal Bottom Navigation Dock */
 .mobile-bottom-dock {
-  display: none;
+  display: flex;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -4496,39 +4496,22 @@ body.modal-open {
   align-items: center;
 }
 
-.dock-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  background: transparent;
-  border: none;
-  color: var(--color-text-dim);
-  font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
-  transition: var(--transition-fast);
-}
-
-.dock-btn i {
-  font-size: 1.15rem;
-}
-
-.dock-btn.active {
-  color: var(--color-brand-accent);
-}
-
-/* Mobile View Adjustments */
-@media (max-width: 768px) {
+@media (min-width: 769px) {
   .mobile-bottom-dock {
-    display: flex;
+    max-width: 540px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1.25rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.15);
+    padding: 0.35rem 1.25rem;
   }
-  
-  body {
-    padding-bottom: 70px;
-  }
+}
+
+body {
+  padding-bottom: 80px;
+}
   
   .mobile-playoff-round-tabs {
     display: flex;
