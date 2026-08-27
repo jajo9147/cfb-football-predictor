@@ -4448,38 +4448,97 @@ select option {
   box-shadow: 0 2px 14px var(--color-brand-glow);
 }
 
-/* More Tools Dropdown Menu */
-.more-tools-dropdown-wrap {
+/* Unified High-Tech Custom Dropdowns (More Tools, AI Tuning Presets, Schedule Filters) */
+.more-tools-dropdown-wrap,
+.custom-dropdown-wrap {
   position: relative;
   display: inline-block;
 }
 
-.more-tools-menu {
+.more-tools-menu,
+.custom-dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
   z-index: 9999;
-  min-width: 230px;
+  min-width: 260px;
   background: rgba(14, 18, 28, 0.98);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius-md);
   padding: 0.45rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 20px rgba(56, 189, 248, 0.15);
   display: none;
   flex-direction: column;
   gap: 3px;
+  animation: dropdownFadeSlide 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.more-tools-menu.show {
+@keyframes dropdownFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.more-tools-menu.show,
+.custom-dropdown-menu.show {
   display: flex !important;
 }
 
-.more-tools-menu .dropdown-item {
+.dropdown-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.9);
+  color: #F8FAFC;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-full);
+  padding: 0.45rem 0.95rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.dropdown-trigger-btn:hover {
+  border-color: #38BDF8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+  background: rgba(30, 41, 59, 0.95);
+  color: #FFFFFF;
+}
+
+.dropdown-trigger-btn.active,
+.dropdown-trigger-btn[aria-expanded="true"] {
+  border-color: #38BDF8;
+  background: rgba(30, 41, 59, 1);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.dropdown-arrow-icon {
+  font-size: 0.7rem;
+  color: #38BDF8;
+  transition: transform 0.2s ease;
+}
+
+.custom-dropdown-wrap.open .dropdown-arrow-icon,
+.more-tools-dropdown-wrap.open .dropdown-arrow-icon {
+  transform: rotate(180deg);
+}
+
+.more-tools-menu .dropdown-item,
+.custom-dropdown-menu .dropdown-item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
   width: 100%;
   padding: 0.6rem 0.85rem;
   background: transparent;
@@ -4494,9 +4553,44 @@ select option {
   transition: var(--transition-fast);
 }
 
-.more-tools-menu .dropdown-item:hover {
+.more-tools-menu .dropdown-item:hover,
+.custom-dropdown-menu .dropdown-item:hover {
   background: rgba(255, 255, 255, 0.08);
   color: #FFFFFF;
+}
+
+.custom-dropdown-menu .dropdown-item.active {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38BDF8;
+  border-left: 3px solid #38BDF8;
+  font-weight: 700;
+}
+
+.custom-dropdown-menu .preset-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.custom-dropdown-menu .preset-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.custom-dropdown-menu .preset-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.custom-dropdown-menu .dropdown-item.active .preset-title {
+  color: #38BDF8;
+}
+
+.custom-dropdown-menu .preset-desc {
+  font-size: 0.68rem;
+  color: var(--color-text-dim, #94a3b8);
+  font-weight: 500;
 }
 
 /* Playoff Round Segment Tabs (Desktop + Mobile) */

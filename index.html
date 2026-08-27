@@ -39,12 +39,12 @@
   <script>
     if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js?v=281').catch(function() {});
+        navigator.serviceWorker.register('./sw.js?v=282').catch(function() {});
       });
     }
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=281">
+  <link rel="stylesheet" href="styles.css?v=282">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -320,13 +320,49 @@
           <span>CFB AI TUNING</span>
         </div>
         <div class="tuning-filter-wrap" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-          <select id="globalPresetSelect" class="tuning-preset-select" onchange="applyGlobalPreset(this.value)" title="Choose AI simulation preset calibration">
-            <option value="baseline" selected>🎯 Season Baseline (Vegas & EPA)</option>
-            <option value="qb-mvp">🔥 QB Heisman Mode (+15% Pass EPA)</option>
-            <option value="qb-slump">📉 QB Slump (-15% Turnover Margin)</option>
-            <option value="iron-defense">🛡️ Iron Curtain Defense (+20% Havoc)</option>
-            <option value="chaos">🎲 CFB Chaos Upset Mode</option>
-          </select>
+          <div class="custom-dropdown-wrap" id="presetDropdownWrap">
+            <button class="action-btn secondary-btn dropdown-trigger-btn" id="presetDropdownBtn" onclick="togglePresetDropdown(event)" title="Choose AI simulation preset calibration">
+              <span id="presetDropdownLabel">🎯 Season Baseline</span>
+              <i class="fa-solid fa-chevron-down dropdown-arrow-icon"></i>
+            </button>
+            <div class="custom-dropdown-menu" id="presetDropdownMenu">
+              <button class="dropdown-item active" data-preset="baseline" onclick="selectGlobalPreset('baseline', event)">
+                <span class="preset-icon">🎯</span>
+                <div class="preset-info">
+                  <span class="preset-title">Season Baseline</span>
+                  <span class="preset-desc">Vegas spreads & EPA consensus</span>
+                </div>
+              </button>
+              <button class="dropdown-item" data-preset="qb-mvp" onclick="selectGlobalPreset('qb-mvp', event)">
+                <span class="preset-icon">🔥</span>
+                <div class="preset-info">
+                  <span class="preset-title">QB Heisman Mode</span>
+                  <span class="preset-desc">+15% passing EPA efficiency</span>
+                </div>
+              </button>
+              <button class="dropdown-item" data-preset="qb-slump" onclick="selectGlobalPreset('qb-slump', event)">
+                <span class="preset-icon">📉</span>
+                <div class="preset-info">
+                  <span class="preset-title">QB Slump Mode</span>
+                  <span class="preset-desc">-15% turnover margin & accuracy</span>
+                </div>
+              </button>
+              <button class="dropdown-item" data-preset="iron-defense" onclick="selectGlobalPreset('iron-defense', event)">
+                <span class="preset-icon">🛡️</span>
+                <div class="preset-info">
+                  <span class="preset-title">Iron Curtain Defense</span>
+                  <span class="preset-desc">+20% havoc & sack generation</span>
+                </div>
+              </button>
+              <button class="dropdown-item" data-preset="chaos" onclick="selectGlobalPreset('chaos', event)">
+                <span class="preset-icon">🎲</span>
+                <div class="preset-info">
+                  <span class="preset-title">CFB Chaos Upset Mode</span>
+                  <span class="preset-desc">High volatility & wild variance</span>
+                </div>
+              </button>
+            </div>
+          </div>
           <button class="action-btn toggle-sliders-btn" id="toggleSlidersBtn" onclick="toggleCustomSlidersView()" title="Toggle granular custom tuning sliders">
             <i class="fa-solid fa-sliders"></i>
             <span id="toggleSlidersLabel">Custom Sliders ▾</span>
@@ -350,13 +386,34 @@
           <span>2026 OFFICIAL SCHEDULE & SIMULATED MATCHUPS</span>
         </div>
         <div class="schedule-filter-wrap">
-          <select id="scheduleFilterSelect" class="schedule-filter-select" onchange="applyScheduleFilter(this.value)" title="Filter games by type or venue">
-            <option value="all" selected>📅 All 12 Games</option>
-            <option value="marquee">🔥 Marquee & Rivalries</option>
-            <option value="conf">🏆 Conference Games</option>
-            <option value="home">🏟️ Home Games</option>
-            <option value="away">✈️ Away / Neutral</option>
-          </select>
+          <div class="custom-dropdown-wrap" id="scheduleFilterDropdownWrap">
+            <button class="action-btn secondary-btn dropdown-trigger-btn" id="scheduleFilterDropdownBtn" onclick="toggleScheduleFilterDropdown(event)" title="Filter games by type or venue">
+              <span id="scheduleFilterLabel">📅 All 12 Games</span>
+              <i class="fa-solid fa-chevron-down dropdown-arrow-icon"></i>
+            </button>
+            <div class="custom-dropdown-menu" id="scheduleFilterDropdownMenu" style="min-width: 220px;">
+              <button class="dropdown-item active" data-filter="all" onclick="selectScheduleFilter('all', event)">
+                <span class="preset-icon">📅</span>
+                <span class="preset-title">All 12 Games</span>
+              </button>
+              <button class="dropdown-item" data-filter="marquee" onclick="selectScheduleFilter('marquee', event)">
+                <span class="preset-icon">🔥</span>
+                <span class="preset-title">Marquee & Rivalries</span>
+              </button>
+              <button class="dropdown-item" data-filter="conf" onclick="selectScheduleFilter('conf', event)">
+                <span class="preset-icon">🏆</span>
+                <span class="preset-title">Conference Games</span>
+              </button>
+              <button class="dropdown-item" data-filter="home" onclick="selectScheduleFilter('home', event)">
+                <span class="preset-icon">🏟️</span>
+                <span class="preset-title">Home Games</span>
+              </button>
+              <button class="dropdown-item" data-filter="away" onclick="selectScheduleFilter('away', event)">
+                <span class="preset-icon">✈️</span>
+                <span class="preset-title">Away / Neutral</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1474,9 +1531,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js?v=281"></script>
-  <script src="qrcode.min.js?v=281"></script>
-  <script src="data/teams.js?v=281"></script>
-  <script src="app.js?v=281"></script>
+  <script src="qrious.min.js?v=282"></script>
+  <script src="qrcode.min.js?v=282"></script>
+  <script src="data/teams.js?v=282"></script>
+  <script src="app.js?v=282"></script>
 </body>
 </html>

@@ -1525,6 +1525,39 @@ function initGlobalPresetButtons() {
   });
 }
 
+window.togglePresetDropdown = function(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  const wrap = document.getElementById('presetDropdownWrap');
+  const menu = document.getElementById('presetDropdownMenu');
+  const otherWrap = document.getElementById('scheduleFilterDropdownWrap');
+  const otherMenu = document.getElementById('scheduleFilterDropdownMenu');
+  const moreMenu = document.getElementById('moreToolsMenu');
+  
+  if (otherMenu) otherMenu.classList.remove('show');
+  if (otherWrap) otherWrap.classList.remove('open');
+  if (moreMenu) moreMenu.classList.remove('show');
+
+  if (menu) {
+    menu.classList.toggle('show');
+    if (wrap) wrap.classList.toggle('open', menu.classList.contains('show'));
+  }
+};
+
+window.selectGlobalPreset = function(presetKey, e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  window.applyGlobalPreset(presetKey);
+  const wrap = document.getElementById('presetDropdownWrap');
+  const menu = document.getElementById('presetDropdownMenu');
+  if (menu) menu.classList.remove('show');
+  if (wrap) wrap.classList.remove('open');
+};
+
 window.applyGlobalPreset = function(presetKey) {
   const presetValues = GLOBAL_PRESETS[presetKey] || GLOBAL_PRESETS['baseline'];
   if (!state.currentTeamId) {
@@ -1534,6 +1567,24 @@ window.applyGlobalPreset = function(presetKey) {
   // Assign preset specifically to active team
   state.teamSliders[state.currentTeamId] = { ...presetValues };
   state.teamActivePresets[state.currentTeamId] = presetKey;
+
+  const presetLabels = {
+    'baseline': '🎯 Season Baseline',
+    'qb-mvp': '🔥 QB Heisman Mode',
+    'qb-slump': '📉 QB Slump Mode',
+    'iron-defense': '🛡️ Iron Curtain Defense',
+    'chaos': '🎲 CFB Chaos Mode'
+  };
+
+  const labelEl = document.getElementById('presetDropdownLabel');
+  if (labelEl) {
+    labelEl.innerText = presetLabels[presetKey] || '🎯 Season Baseline';
+  }
+
+  // Update active class on dropdown items
+  document.querySelectorAll('#presetDropdownMenu .dropdown-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.preset === presetKey);
+  });
 
   const selectEl = document.getElementById('globalPresetSelect');
   if (selectEl && selectEl.value !== presetKey) {
@@ -1625,8 +1676,60 @@ function showToast(message) {
 window.showToast = showToast;
 window.showCustomToast = showToast;
 
+window.toggleScheduleFilterDropdown = function(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  const wrap = document.getElementById('scheduleFilterDropdownWrap');
+  const menu = document.getElementById('scheduleFilterDropdownMenu');
+  const otherWrap = document.getElementById('presetDropdownWrap');
+  const otherMenu = document.getElementById('presetDropdownMenu');
+  const moreMenu = document.getElementById('moreToolsMenu');
+  
+  if (otherMenu) otherMenu.classList.remove('show');
+  if (otherWrap) otherWrap.classList.remove('open');
+  if (moreMenu) moreMenu.classList.remove('show');
+
+  if (menu) {
+    menu.classList.toggle('show');
+    if (wrap) wrap.classList.toggle('open', menu.classList.contains('show'));
+  }
+};
+
+window.selectScheduleFilter = function(filterKey, e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  window.applyScheduleFilter(filterKey);
+  const wrap = document.getElementById('scheduleFilterDropdownWrap');
+  const menu = document.getElementById('scheduleFilterDropdownMenu');
+  if (menu) menu.classList.remove('show');
+  if (wrap) wrap.classList.remove('open');
+};
+
 window.applyScheduleFilter = function(filterKey) {
   state.filter = filterKey || 'all';
+
+  const filterLabels = {
+    'all': '📅 All 12 Games',
+    'marquee': '🔥 Marquee & Rivalries',
+    'conf': '🏆 Conference Games',
+    'home': '🏟️ Home Games',
+    'away': '✈️ Away / Neutral'
+  };
+
+  const labelEl = document.getElementById('scheduleFilterLabel');
+  if (labelEl) {
+    labelEl.innerText = filterLabels[state.filter] || '📅 All 12 Games';
+  }
+
+  // Update active class on dropdown items
+  document.querySelectorAll('#scheduleFilterDropdownMenu .dropdown-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.filter === state.filter);
+  });
+
   const selectEl = document.getElementById('scheduleFilterSelect');
   if (selectEl && selectEl.value !== state.filter) {
     selectEl.value = state.filter;
@@ -6666,11 +6769,31 @@ window.toggleMoreToolsMenu = function(e) {
 };
 
 document.addEventListener('click', (e) => {
-  const menu = document.getElementById('moreToolsMenu');
-  const btn = document.getElementById('moreToolsBtn');
-  if (menu && menu.classList.contains('show')) {
-    if (!menu.contains(e.target) && (!btn || !btn.contains(e.target))) {
-      menu.classList.remove('show');
+  const moreMenu = document.getElementById('moreToolsMenu');
+  const moreBtn = document.getElementById('moreToolsBtn');
+  if (moreMenu && moreMenu.classList.contains('show')) {
+    if (!moreMenu.contains(e.target) && (!moreBtn || !moreBtn.contains(e.target))) {
+      moreMenu.classList.remove('show');
+    }
+  }
+
+  const presetMenu = document.getElementById('presetDropdownMenu');
+  const presetBtn = document.getElementById('presetDropdownBtn');
+  const presetWrap = document.getElementById('presetDropdownWrap');
+  if (presetMenu && presetMenu.classList.contains('show')) {
+    if (!presetMenu.contains(e.target) && (!presetBtn || !presetBtn.contains(e.target))) {
+      presetMenu.classList.remove('show');
+      if (presetWrap) presetWrap.classList.remove('open');
+    }
+  }
+
+  const filterMenu = document.getElementById('scheduleFilterDropdownMenu');
+  const filterBtn = document.getElementById('scheduleFilterDropdownBtn');
+  const filterWrap = document.getElementById('scheduleFilterDropdownWrap');
+  if (filterMenu && filterMenu.classList.contains('show')) {
+    if (!filterMenu.contains(e.target) && (!filterBtn || !filterBtn.contains(e.target))) {
+      filterMenu.classList.remove('show');
+      if (filterWrap) filterWrap.classList.remove('open');
     }
   }
 });
