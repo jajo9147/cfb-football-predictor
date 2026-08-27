@@ -37,39 +37,18 @@
   <meta http-equiv="Expires" content="0">
 
   <script>
-    (function() {
-      const CURRENT_VERSION = 'v298';
-      const storedVersion = localStorage.getItem('cfb_prophet_build_version');
-      if (storedVersion !== CURRENT_VERSION) {
-        localStorage.setItem('cfb_prophet_build_version', CURRENT_VERSION);
-        if ('caches' in window) {
-          caches.keys().then(function(keys) {
-            return Promise.all(keys.map(function(k) { return caches.delete(k); }));
-          });
-        }
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.getRegistrations().then(function(regs) {
-            for (let reg of regs) reg.unregister();
-          });
-        }
-      }
-    })();
-
-    if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+    // Cleanly unregister any stale service workers to prevent cache/reload loops
+    if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        for (let registration of registrations) {
-          registration.update();
+        for (let reg of registrations) {
+          reg.unregister();
         }
       });
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js?v=298').then(function(reg) {
-          reg.update();
-        }).catch(function() {});
-      });
-      navigator.serviceWorker.addEventListener('controllerchange', function() {
-        if (!window._swReloading) {
-          window._swReloading = true;
-          window.location.reload();
+    }
+    if ('caches' in window) {
+      caches.keys().then(function(names) {
+        for (let name of names) {
+          caches.delete(name);
         }
       });
     }
@@ -79,18 +58,10 @@
         caches.keys().then(function(keys) {
           return Promise.all(keys.map(function(k) { return caches.delete(k); }));
         }).then(function() {
-          if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function(regs) {
-              return Promise.all(regs.map(function(r) { return r.unregister(); }));
-            }).then(function() {
-              window.location.href = window.location.pathname + '?v=298&t=' + Date.now();
-            });
-          } else {
-            window.location.href = window.location.pathname + '?v=298&t=' + Date.now();
-          }
+          window.location.href = window.location.pathname + '?t=' + Date.now();
         });
       } else {
-        window.location.href = window.location.pathname + '?v=298&t=' + Date.now();
+        window.location.href = window.location.pathname + '?t=' + Date.now();
       }
     }
   </script>
