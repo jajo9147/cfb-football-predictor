@@ -2231,24 +2231,26 @@ select option {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.12);
   border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  cursor: pointer;
+  color: var(--color-text-main);
+  cursor: pointer !important;
+  pointer-events: auto !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
-  z-index: 10;
+  font-size: 1.1rem;
+  z-index: 500 !important;
   transition: var(--transition-fast);
 }
 
 .modal-close:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   color: #FFFFFF;
+  transform: scale(1.08);
 }
 
 .modal-header {

@@ -1359,6 +1359,9 @@ function renderSchedule() {
 // ==========================================================================
 
 function updateGlobalSliderLabels(team) {
+  if (!team) team = TEAMS_DATABASE[state.currentTeamId] || TEAMS_DATABASE['ohiostate'];
+  if (!team) return;
+
   const labels = team.sliderLabels || {
     qb: 'QB Execution',
     ground: 'Ground Attack',
@@ -1367,8 +1370,10 @@ function updateGlobalSliderLabels(team) {
     crowd: 'Home Stadium Roar'
   };
 
-  const container = document.getElementById('globalSlidersGrid');
-  if (!container) return;
+  const modalTitle = document.getElementById('modalTuningTeamTitle');
+  if (modalTitle) {
+    modalTitle.innerText = `${team.name.toUpperCase()} AI TUNING`;
+  }
 
   const sliderKeys = [
     { key: 'qbRating', label: labels.qb, icon: 'fa-solid fa-crosshairs' },
@@ -1379,41 +1384,55 @@ function updateGlobalSliderLabels(team) {
   ];
 
   const currentSliders = getTeamSliders(state.currentTeamId);
+  const containers = [
+    document.getElementById('globalSlidersGrid'),
+    document.getElementById('modalSlidersGrid')
+  ].filter(Boolean);
 
-  container.innerHTML = '';
-  sliderKeys.forEach(s => {
-    const card = document.createElement('div');
-    card.className = 'slider-card';
-    const val = currentSliders[s.key] || 0;
-    const sign = val > 0 ? '+' : '';
+  containers.forEach(container => {
+    container.innerHTML = '';
+    sliderKeys.forEach(s => {
+      const card = document.createElement('div');
+      card.className = 'slider-card';
+      const val = currentSliders[s.key] || 0;
+      const sign = val > 0 ? '+' : '';
 
-    card.innerHTML = `
-      <div class="slider-top-row">
-        <span class="slider-title"><i class="${s.icon}"></i> ${s.label}</span>
-        <span class="slider-val-readout" id="readout-${s.key}">${sign}${val}%</span>
-      </div>
-      <input type="range" class="custom-range-slider" id="slider-${s.key}" min="-50" max="50" value="${val}" step="5">
-      <div class="slider-hints-row">
-        <span>-50% Slump</span>
-        <span>Baseline</span>
-        <span>+50% Elite</span>
-      </div>
-    `;
+      card.innerHTML = `
+        <div class="slider-top-row">
+          <span class="slider-title"><i class="${s.icon}"></i> ${s.label}</span>
+          <span class="slider-val-readout readout-${s.key}" id="readout-${s.key}">${sign}${val}%</span>
+        </div>
+        <input type="range" class="custom-range-slider slider-${s.key}" id="slider-${s.key}" data-key="${s.key}" min="-50" max="50" value="${val}" step="5">
+        <div class="slider-hints-row">
+          <span>-50% Slump</span>
+          <span>Baseline</span>
+          <span>+50% Elite</span>
+        </div>
+      `;
 
-    const range = card.querySelector('input');
-    range.addEventListener('input', (e) => {
-      const teamSliders = getTeamSliders(state.currentTeamId);
-      teamSliders[s.key] = parseInt(e.target.value, 10);
-      const signStr = teamSliders[s.key] > 0 ? '+' : '';
-      card.querySelector('.slider-val-readout').innerText = `${signStr}${teamSliders[s.key]}%`;
-      
-      // Remove active from presets since custom sliders are in use
-      state.teamActivePresets[state.currentTeamId] = 'custom';
-      document.querySelectorAll('#globalPresetsContainer .preset-btn:not(.reset-all-btn)').forEach(b => b.classList.remove('active'));
-      recalculateSeason();
+      const range = card.querySelector('input');
+      range.addEventListener('input', (e) => {
+        const teamSliders = getTeamSliders(state.currentTeamId);
+        const newVal = parseInt(e.target.value, 10);
+        teamSliders[s.key] = newVal;
+        const signStr = newVal > 0 ? '+' : '';
+        
+        // Sync readouts and sliders across all containers
+        document.querySelectorAll(`.readout-${s.key}`).forEach(r => {
+          r.innerText = `${signStr}${newVal}%`;
+        });
+        document.querySelectorAll(`.slider-${s.key}`).forEach(input => {
+          if (input !== range) input.value = newVal;
+        });
+
+        // Remove active from presets since custom sliders are in use
+        state.teamActivePresets[state.currentTeamId] = 'custom';
+        document.querySelectorAll('#globalPresetsContainer .preset-btn:not(.reset-all-btn), #modalPresetsContainer .preset-btn:not(.reset-all-btn)').forEach(b => b.classList.remove('active'));
+        recalculateSeason();
+      });
+
+      container.appendChild(card);
     });
-
-    container.appendChild(card);
   });
 }
 
@@ -1422,22 +1441,31 @@ function syncSliderInputsToActiveTeam() {
   const activePreset = state.teamActivePresets[state.currentTeamId] || (isSlidersCustom(currentSliders) ? 'custom' : 'baseline');
 
   Object.keys(currentSliders).forEach(k => {
-    const range = document.getElementById(`slider-${k}`);
-    const readout = document.getElementById(`readout-${k}`);
     const val = currentSliders[k] || 0;
-    if (range) range.value = val;
-    if (readout) {
-      const sign = val > 0 ? '+' : '';
+    const sign = val > 0 ? '+' : '';
+    document.querySelectorAll(`.slider-${k}`).forEach(range => {
+      range.value = val;
+    });
+    document.querySelectorAll(`.readout-${k}`).forEach(readout => {
       readout.innerText = `${sign}${val}%`;
-    }
+    });
   });
 
-  const container = document.getElementById('globalPresetsContainer');
-  if (container) {
+  const containers = [
+    document.getElementById('globalPresetsContainer'),
+    document.getElementById('modalPresetsContainer')
+  ].filter(Boolean);
+
+  containers.forEach(container => {
     container.querySelectorAll('.preset-btn[data-preset]').forEach(btn => {
       const isMatching = btn.dataset.preset === activePreset;
       btn.classList.toggle('active', isMatching);
     });
+  });
+
+  const selectEl = document.getElementById('globalPresetSelect');
+  if (selectEl) {
+    selectEl.value = activePreset === 'custom' ? 'baseline' : activePreset;
   }
 }
 
@@ -2685,11 +2713,14 @@ window.applyGameScenarioPreset = function(presetKey) {
   showToast(`⚡ Applied "${label}" to ${matchupName}!`);
 };
 
-window.closeSimModal = function() {
+function closeSimModal() {
   const modal = document.getElementById('simModal');
   if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
   recalculateSeason();
-};
+}
+window.closeSimModal = closeSimModal;
+window.closeGameModal = closeSimModal;
 
 function initModalActions() {
   const closeBtn = document.getElementById('closeSimModalBtn');
@@ -2728,9 +2759,13 @@ function initModalActions() {
 
   const quickSimBtn = document.getElementById('quickSimAllBtn');
   if (quickSimBtn) {
-    quickSimBtn.addEventListener('click', () => {
-      recalculateSeason();
-      showToast('⚡ Re-simulated all matchups & CFP seeding!');
+    quickSimBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (typeof runMonteCarloRecalibration === 'function') {
+        runMonteCarloRecalibration();
+      } else {
+        recalculateSeason();
+      }
     });
   }
 
@@ -3858,6 +3893,43 @@ function calcActiveTeamTotalRecord(teamId, regWins, regLosses, ccgResults, playo
 // GROUP CHAT HYPE CARD CANVAS EXPORT
 // ==========================================================================
 
+function closeHypeCardModal() {
+  const modal = document.getElementById('hypeCardModal');
+  if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+window.closeHypeCardModal = closeHypeCardModal;
+
+function downloadHypeCardImage() {
+  const canvas = document.getElementById('hypeCanvas');
+  if (!canvas) return;
+  const link = document.createElement('a');
+  const g = state.activeModalGame;
+  const slug = (g && g.teamA && g.teamB) 
+    ? `${g.teamA.shortName || 'TeamA'}-vs-${g.teamB.shortName || 'TeamB'}` 
+    : (state.currentTeamId || 'season');
+  link.download = `cfb-prophet-${slug}-matchup.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  showToast('📥 Hype Card downloaded successfully!');
+}
+window.downloadHypeCardImage = downloadHypeCardImage;
+
+function copyHypeCardImage() {
+  const canvas = document.getElementById('hypeCanvas');
+  if (!canvas) return;
+  canvas.toBlob(blob => {
+    if (navigator.clipboard && navigator.clipboard.write) {
+      navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+        .then(() => showToast('📋 Hype Card copied to clipboard! Ready to paste into group chat.'))
+        .catch(() => showToast('💾 Use "Save Image" to download the Hype Card.'));
+    } else {
+      showToast('💾 Use "Save Image" to download the Hype Card.');
+    }
+  });
+}
+window.copyHypeCardImage = copyHypeCardImage;
+
 function initHypeCardExport() {
   const openBtn = document.getElementById('openHypeCardBtn');
   const modalExportBtn = document.getElementById('modalExportCardBtn');
@@ -3882,39 +3954,13 @@ function initHypeCardExport() {
     };
   }
   if (closeBtn) {
-    closeBtn.onclick = () => {
-      document.getElementById('hypeCardModal').classList.remove('open');
-    };
+    closeBtn.onclick = closeHypeCardModal;
   }
-
   if (downloadBtn) {
-    downloadBtn.addEventListener('click', () => {
-      const canvas = document.getElementById('hypeCanvas');
-      const link = document.createElement('a');
-      const g = state.activeModalGame;
-      const slug = (g && g.teamA && g.teamB) 
-        ? `${g.teamA.shortName || 'TeamA'}-vs-${g.teamB.shortName || 'TeamB'}` 
-        : (state.currentTeamId || 'season');
-      link.download = `cfb-prophet-${slug}-matchup.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-      showToast('📥 Hype Card downloaded successfully!');
-    });
+    downloadBtn.onclick = downloadHypeCardImage;
   }
-
   if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      const canvas = document.getElementById('hypeCanvas');
-      canvas.toBlob(blob => {
-        if (navigator.clipboard && navigator.clipboard.write) {
-          navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
-            .then(() => showToast('📋 Hype Card copied to clipboard! Ready to paste into group chat.'))
-            .catch(() => showToast('💾 Use "Save Image" to download the Hype Card.'));
-        } else {
-          showToast('💾 Use "Save Image" to download the Hype Card.');
-        }
-      });
-    });
+    copyBtn.onclick = copyHypeCardImage;
   }
 }
 
@@ -4900,6 +4946,14 @@ function openMonteCarloModal() {
   }, 75);
 }
 
+function closeMonteCarloModal() {
+  const modal = document.getElementById('monteCarloModal');
+  if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+  recalculateSeason();
+}
+window.closeMonteCarloModal = closeMonteCarloModal;
+
 function runMonteCarloRecalibration() {
   const menu = document.getElementById('moreToolsMenu');
   if (menu) menu.classList.remove('show');
@@ -4926,30 +4980,26 @@ function initMonteCarloEngine() {
 
   const rerunBtn = document.getElementById('mcRerunBtn');
   if (rerunBtn) {
-    rerunBtn.addEventListener('click', () => {
+    rerunBtn.onclick = () => {
       openMonteCarloModal();
-    });
+    };
   }
 
   const closeBtn = document.getElementById('closeMonteCarloModalBtn');
   if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      document.getElementById('monteCarloModal').classList.remove('open');
-    });
+    closeBtn.onclick = closeMonteCarloModal;
   }
 
   const applyCloseBtn = document.getElementById('mcApplyCloseBtn');
   if (applyCloseBtn) {
-    applyCloseBtn.addEventListener('click', () => {
-      document.getElementById('monteCarloModal').classList.remove('open');
-    });
+    applyCloseBtn.onclick = closeMonteCarloModal;
   }
 
   const mcModal = document.getElementById('monteCarloModal');
   if (mcModal) {
     mcModal.addEventListener('click', (e) => {
       if (e.target === mcModal) {
-        mcModal.classList.remove('open');
+        closeMonteCarloModal();
       }
     });
   }
@@ -4958,7 +5008,7 @@ function initMonteCarloEngine() {
     if (e.key === 'Escape') {
       const mcModal = document.getElementById('monteCarloModal');
       if (mcModal && mcModal.classList.contains('open')) {
-        mcModal.classList.remove('open');
+        closeMonteCarloModal();
       }
     }
   });
@@ -8489,9 +8539,11 @@ function copyActiveQrLink() {
 function openAiTuningModal() {
   const modal = document.getElementById('cfbAiTuningModal');
   if (modal) {
+    const team = TEAMS_DATABASE[state.currentTeamId] || TEAMS_DATABASE['ohiostate'];
+    updateGlobalSliderLabels(team);
+    syncSliderInputsToActiveTeam();
     modal.classList.add('open');
     document.body.classList.add('modal-open');
-    syncSliderInputsToActiveTeam();
   }
 }
 
@@ -8503,17 +8555,45 @@ function closeAiTuningModal() {
   }
 }
 
+function closePwaInstallDrawer() {
+  const drawer = document.getElementById('pwaInstallDrawer');
+  if (drawer) drawer.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+
+function switchPwaTab(tabName) {
+  const tabs = ['safari', 'chrome', 'android', 'desktop'];
+  tabs.forEach(t => {
+    const btn = document.getElementById(`pwaTab${t.charAt(0).toUpperCase() + t.slice(1)}`);
+    const panel = document.getElementById(`pwaPanel${t.charAt(0).toUpperCase() + t.slice(1)}`);
+    if (btn) btn.classList.toggle('active', t === tabName);
+    if (panel) panel.classList.toggle('active', t === tabName);
+  });
+}
+
+function clearTeamSearch() {
+  const input = document.getElementById('teamSearchInput');
+  const clearBtn = document.getElementById('teamSearchClearBtn');
+  const dropdown = document.getElementById('teamSearchResultsDropdown');
+  if (input) {
+    input.value = '';
+    input.focus();
+  }
+  if (clearBtn) clearBtn.style.display = 'none';
+  if (dropdown) dropdown.style.display = 'none';
+}
+
 window.openAiTuningModal = openAiTuningModal;
 window.closeAiTuningModal = closeAiTuningModal;
+window.closePwaInstallDrawer = closePwaInstallDrawer;
+window.switchPwaTab = switchPwaTab;
+window.clearTeamSearch = clearTeamSearch;
 window.openSaveBracketModal = openSaveBracketModal;
 window.closeSaveBracketModal = closeSaveBracketModal;
 window.handleConfirmSaveBracket = handleConfirmSaveBracket;
 window.openBracketVaultModal = openBracketVaultModal;
 window.closeBracketVaultModal = closeBracketVaultModal;
 window.openCfpBracketCanvasModal = openCfpBracketCanvasModal;
-window.openCfpBracketCanvasModalForBracket = openCfpBracketCanvasModalForBracket;
-window.closeCfpBracketCanvasModal = closeCfpBracketCanvasModal;
-window.downloadCfpBracketGraphic = downloadCfpBracketGraphic;
 window.openCfpBracketCanvasModalForBracket = openCfpBracketCanvasModalForBracket;
 window.closeCfpBracketCanvasModal = closeCfpBracketCanvasModal;
 window.downloadCfpBracketGraphic = downloadCfpBracketGraphic;

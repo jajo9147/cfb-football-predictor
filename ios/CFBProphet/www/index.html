@@ -39,12 +39,12 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js?v=20260826_v200').catch(function() {});
+        navigator.serviceWorker.register('./sw.js?v=20260826_v210').catch(function() {});
       });
     }
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=20260826_v200">
+  <link rel="stylesheet" href="styles.css?v=20260826_v210">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -194,7 +194,7 @@
         <div class="team-search-input-box">
           <i class="fa-solid fa-magnifying-glass search-icon"></i>
           <input type="text" id="teamSearchInput" class="team-search-input" placeholder="Search any Top 25 team..." autocomplete="off" spellcheck="false">
-          <button class="search-clear-btn" id="teamSearchClearBtn" style="display: none;" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
+          <button class="search-clear-btn" id="teamSearchClearBtn" onclick="clearTeamSearch()" style="display: none;" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
           <kbd class="search-shortcut-badge">⌘K</kbd>
         </div>
         <div class="team-search-results-dropdown" id="teamSearchResultsDropdown" style="display: none;">
@@ -254,7 +254,6 @@
         </div>
         <div class="hero-quick-actions">
           <button class="action-btn hype-btn" id="heroHypeCardBtn" onclick="openHypeCardModal()" title="Export Matchup Hype Card for Group Chat">
-            <i class="fa-solid fa-camera-retro" style="color: #38BDF8;"></i>
             <span>📸 Hype Card</span>
           </button>
           <div class="more-tools-dropdown-wrap">
@@ -411,9 +410,9 @@
   </main>
 
   <!-- Matchup Simulation Modal -->
-  <div class="modal-backdrop" id="simModal">
+  <div class="modal-backdrop" id="simModal" onclick="if(event.target===this) closeSimModal()">
     <div class="modal-dialog">
-      <button class="modal-close" id="closeSimModalBtn"><i class="fa-solid fa-xmark"></i></button>
+      <button class="modal-close" id="closeSimModalBtn" onclick="closeSimModal()"><i class="fa-solid fa-xmark"></i></button>
       
       <div class="modal-header">
         <span class="matchup-tag" id="modalWeekTag">WEEK 2 • MARQUEE CLASH</span>
@@ -510,7 +509,7 @@
       </div>
 
       <div class="modal-footer">
-        <button class="card-export-btn" id="modalExportCardBtn">
+        <button class="card-export-btn" id="modalExportCardBtn" onclick="openHypeCardModal()">
           <i class="fa-solid fa-share-nodes"></i>
           <span>Generate Group Chat Card</span>
         </button>
@@ -520,9 +519,9 @@
   </div>
 
   <!-- Social Hype Card Generator Modal -->
-  <div class="modal-backdrop" id="hypeCardModal">
+  <div class="modal-backdrop" id="hypeCardModal" onclick="if(event.target===this) closeHypeCardModal()">
     <div class="modal-dialog" style="max-width: 680px; text-align: center;">
-      <button class="modal-close" id="closeHypeCardBtn"><i class="fa-solid fa-xmark"></i></button>
+      <button class="modal-close" id="closeHypeCardBtn" onclick="closeHypeCardModal()"><i class="fa-solid fa-xmark"></i></button>
       <h2 class="modal-title" style="font-size: 1.6rem; letter-spacing: 0.05em;"><i class="fa-solid fa-fire" style="color: #F59E0B; margin-right: 0.4rem;"></i>GROUP CHAT HYPE CARD</h2>
       
       <div style="margin: 1.25rem 0; display: flex; justify-content: center;">
@@ -546,11 +545,11 @@
           <i class="fa-solid fa-copy"></i>
           <span>Copy Image & App Link</span>
         </button>
-        <button class="action-btn hype-btn" id="downloadHypeCardBtn">
+        <button class="action-btn hype-btn" id="downloadHypeCardBtn" onclick="downloadHypeCardImage()">
           <i class="fa-solid fa-download"></i>
           <span>Save Image</span>
         </button>
-        <button class="action-btn secondary-btn" id="copyHypeCardBtn">
+        <button class="action-btn secondary-btn" id="copyHypeCardBtn" onclick="copyHypeCardImage()">
           <i class="fa-regular fa-copy"></i>
           <span>Copy Image Only</span>
         </button>
@@ -559,9 +558,9 @@
   </div>
 
   <!-- 10,000 MONTE CARLO SEASON SIMULATION MODAL -->
-  <div class="modal-backdrop" id="monteCarloModal">
+  <div class="modal-backdrop" id="monteCarloModal" onclick="if(event.target===this) closeMonteCarloModal()">
     <div class="modal-dialog monte-carlo-modal-card">
-      <button class="modal-close" id="closeMonteCarloModalBtn"><i class="fa-solid fa-xmark"></i></button>
+      <button class="modal-close" id="closeMonteCarloModalBtn" onclick="closeMonteCarloModal()"><i class="fa-solid fa-xmark"></i></button>
 
       <div class="modal-header">
         <span class="matchup-tag"><i class="fa-solid fa-dice-d20"></i> STOCHASTIC SIMULATION ENGINE</span>
@@ -608,11 +607,11 @@
       </div>
 
       <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 0.5rem;">
-        <button class="action-btn secondary-btn" id="mcRerunBtn">
+        <button class="action-btn secondary-btn" id="mcRerunBtn" onclick="openMonteCarloModal()">
           <i class="fa-solid fa-rotate-right"></i>
           <span>Re-Run 10,000 Sims</span>
         </button>
-        <button class="action-btn hype-btn" id="mcApplyCloseBtn">
+        <button class="action-btn hype-btn" id="mcApplyCloseBtn" onclick="closeMonteCarloModal()">
           <i class="fa-solid fa-check"></i>
           <span>Close & Apply</span>
         </button>
@@ -621,33 +620,33 @@
   </div>
 
   <!-- 1-Tap PWA Mobile Install Drawer -->
-  <div class="pwa-drawer-backdrop" id="pwaInstallDrawer">
+  <div class="pwa-drawer-backdrop" id="pwaInstallDrawer" onclick="if(event.target===this) closePwaInstallDrawer()">
     <div class="pwa-drawer">
       <div class="pwa-drawer-header">
         <div class="pwa-drawer-title-wrap">
           <div class="logo-badge" style="width: 36px; height: 36px;">
-            <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="App Icon" class="nav-logo-img" id="pwaDrawerLogo">
+            <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/194.png" alt="App Icon" class="nav-logo-img" id="pwaDrawerLogo">
           </div>
           <div>
             <div class="pwa-drawer-title">INSTALL APP TO HOME SCREEN</div>
             <div class="pwa-drawer-sub">Instant full-screen launch • 100% Free</div>
           </div>
         </div>
-        <button class="modal-close" id="closePwaDrawerBtn" style="position: static;"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-close" id="closePwaDrawerBtn" onclick="closePwaInstallDrawer()" style="position: static;"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <!-- Browser Selector Tabs -->
       <div class="pwa-browser-tabs">
-        <button class="pwa-tab-btn active" id="pwaTabSafari" data-tab="safari">
+        <button class="pwa-tab-btn active" id="pwaTabSafari" data-tab="safari" onclick="switchPwaTab('safari')">
           <i class="fa-brands fa-safari"></i> Safari
         </button>
-        <button class="pwa-tab-btn" id="pwaTabChrome" data-tab="chrome">
+        <button class="pwa-tab-btn" id="pwaTabChrome" data-tab="chrome" onclick="switchPwaTab('chrome')">
           <i class="fa-brands fa-chrome"></i> Chrome
         </button>
-        <button class="pwa-tab-btn" id="pwaTabAndroid" data-tab="android">
+        <button class="pwa-tab-btn" id="pwaTabAndroid" data-tab="android" onclick="switchPwaTab('android')">
           <i class="fa-brands fa-android"></i> Android
         </button>
-        <button class="pwa-tab-btn" id="pwaTabDesktop" data-tab="desktop">
+        <button class="pwa-tab-btn" id="pwaTabDesktop" data-tab="desktop" onclick="switchPwaTab('desktop')">
           <i class="fa-solid fa-laptop"></i> Desktop
         </button>
       </div>
@@ -757,7 +756,7 @@
         </div>
       </div>
 
-      <button class="action-btn hype-btn" id="pwaNativePromptBtn" style="width: 100%; justify-content: center; margin-top: 0.25rem;">
+      <button class="action-btn hype-btn" id="pwaNativePromptBtn" onclick="closePwaInstallDrawer()" style="width: 100%; justify-content: center; margin-top: 0.25rem;">
         <i class="fa-solid fa-circle-check"></i>
         <span id="pwaPromptBtnText">Got It • Close</span>
       </button>
@@ -1426,7 +1425,7 @@
 
 
 
-  <!-- CFB AI SIMULATION TUNING MODAL -->
+  <!-- CFB AI SIMULATION TUNING MODAL (MOBILE & DESKTOP POPUP) -->
   <div class="modal-backdrop" id="cfbAiTuningModal" onclick="if(event.target===this) closeAiTuningModal()">
     <div class="modal-dialog" style="max-width: 640px; width: 95vw; max-height: 90vh; display: flex; flex-direction: column; padding: 1.25rem 1.4rem;">
       <button class="modal-close" onclick="closeAiTuningModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -1434,28 +1433,39 @@
         <span class="matchup-tag" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8; border-color: rgba(56, 189, 248, 0.4);">
           <i class="fa-solid fa-sliders"></i> SIMULATION CALIBRATION
         </span>
-        <h2 class="modal-title" style="font-size: 1.45rem; margin-top: 0.25rem;">CFB AI TUNING</h2>
-        <p style="font-size: 0.82rem; color: #94A3B8;">Adjust EPA weights, quarterback execution, defense havoc, and pace presets for real-time recalculations.</p>
+        <h2 class="modal-title" id="modalTuningTeamTitle" style="font-size: 1.45rem; margin-top: 0.25rem;">CFB AI TUNING</h2>
+        <p style="font-size: 0.82rem; color: #94A3B8;">Adjust EPA weights, quarterback execution, defense havoc, and custom sliders for real-time recalculations.</p>
       </div>
 
-      <div style="margin: 0.75rem 0 1rem;">
-        <label style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--color-text-muted); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 0.35rem;">Simulation Preset:</label>
-        <select id="globalPresetSelect" class="tuning-preset-select" onchange="applyGlobalPreset(this.value)" style="width: 100%; font-size: 0.86rem; padding: 0.55rem 1rem;">
-          <option value="baseline" selected>🎯 Season Baseline (Vegas & EPA)</option>
-          <option value="qb-mvp">🔥 QB Heisman Mode (+15% Pass EPA)</option>
-          <option value="qb-slump">📉 QB Slump (-15% Turnover Margin)</option>
-          <option value="iron-defense">🛡️ Iron Curtain Defense (+20% Havoc)</option>
-          <option value="chaos">🎲 CFB Chaos Upset Mode</option>
-        </select>
+      <!-- Quick Preset Buttons -->
+      <div style="margin: 0.5rem 0 0.75rem;">
+        <label style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--color-text-muted); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 0.35rem;">Quick Scenarios:</label>
+        <div class="preset-buttons-row" id="modalPresetsContainer" style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+          <button class="preset-btn active" data-preset="baseline" onclick="applyGlobalPreset('baseline')">🎯 Baseline</button>
+          <button class="preset-btn" data-preset="qb-mvp" onclick="applyGlobalPreset('qb-mvp')">🔥 QB Heisman</button>
+          <button class="preset-btn" data-preset="qb-slump" onclick="applyGlobalPreset('qb-slump')">📉 QB Slump</button>
+          <button class="preset-btn" data-preset="iron-defense" onclick="applyGlobalPreset('iron-defense')">🛡️ Iron D</button>
+          <button class="preset-btn" data-preset="chaos" onclick="applyGlobalPreset('chaos')">🎲 Chaos</button>
+          <button class="preset-btn reset-all-btn" onclick="resetAllToBaseline()" style="margin-left: auto;">↺ Reset</button>
+        </div>
       </div>
 
-      <div class="sliders-grid" id="globalSlidersGrid" style="display: grid; gap: 0.75rem; overflow-y: auto; max-height: 48vh; padding-right: 4px;">
+      <!-- Custom Sliders Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.74rem; color: #38BDF8; font-weight: 700; text-transform: uppercase;">
+          <i class="fa-solid fa-sliders"></i> Custom Team Sliders:
+        </span>
+        <span style="font-size: 0.72rem; color: #94A3B8;">Real-Time Recalibration</span>
+      </div>
+
+      <!-- Custom Sliders Grid -->
+      <div class="sliders-grid" id="modalSlidersGrid" style="display: grid; gap: 0.75rem; overflow-y: auto; max-height: 48vh; padding-right: 4px;">
         <!-- Dynamically injected team sliders -->
       </div>
 
-      <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem; justify-content: flex-end; padding-top: 0.75rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
-        <button class="action-btn secondary-btn" onclick="resetAllSliders()" style="font-size: 0.84rem; padding: 0.5rem 0.9rem;">
-          <i class="fa-solid fa-rotate-left"></i> Reset
+      <div style="margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: flex-end; padding-top: 0.75rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+        <button class="action-btn secondary-btn" onclick="resetAllToBaseline()" style="font-size: 0.84rem; padding: 0.5rem 0.9rem;">
+          <i class="fa-solid fa-rotate-left"></i> Reset All
         </button>
         <button class="action-btn hype-btn" onclick="closeAiTuningModal()" style="font-size: 0.84rem; padding: 0.5rem 1.2rem;">
           <i class="fa-solid fa-check"></i> Apply & Done
@@ -1465,9 +1475,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js?v=20260826_v200"></script>
-  <script src="qrcode.min.js?v=20260826_v200"></script>
-  <script src="data/teams.js?v=20260826_v200"></script>
-  <script src="app.js?v=20260826_v200"></script>
+  <script src="qrious.min.js?v=20260826_v210"></script>
+  <script src="qrcode.min.js?v=20260826_v210"></script>
+  <script src="data/teams.js?v=20260826_v210"></script>
+  <script src="app.js?v=20260826_v210"></script>
 </body>
 </html>
