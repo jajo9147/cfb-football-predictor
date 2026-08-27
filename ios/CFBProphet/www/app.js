@@ -3930,8 +3930,41 @@ function copyHypeCardImage() {
 }
 window.copyHypeCardImage = copyHypeCardImage;
 
+function openSeasonHypeCardModal() {
+  state.activeModalGame = null;
+  const hypeModal = document.getElementById('hypeCardModal');
+  if (hypeModal) {
+    hypeModal.classList.add('open');
+    document.body.classList.add('modal-open');
+  }
+  generateHypeCard();
+}
+window.openSeasonHypeCardModal = openSeasonHypeCardModal;
+
+function exportModalGameCard() {
+  const game = state.activeModalGame;
+  const simModal = document.getElementById('simModal');
+  if (simModal) simModal.classList.remove('open');
+
+  const hypeModal = document.getElementById('hypeCardModal');
+  if (hypeModal) {
+    hypeModal.classList.add('open');
+    document.body.classList.add('modal-open');
+  }
+
+  if (game) {
+    state.activeModalGame = game;
+    generateGameHypeCard(game);
+  } else {
+    state.activeModalGame = null;
+    generateHypeCard();
+  }
+}
+window.exportModalGameCard = exportModalGameCard;
+
 function initHypeCardExport() {
   const openBtn = document.getElementById('openHypeCardBtn');
+  const heroBtn = document.getElementById('heroHypeCardBtn');
   const modalExportBtn = document.getElementById('modalExportCardBtn');
   const closeBtn = document.getElementById('closeHypeCardBtn');
   const downloadBtn = document.getElementById('downloadHypeCardBtn');
@@ -3940,18 +3973,17 @@ function initHypeCardExport() {
   if (openBtn) {
     openBtn.onclick = (e) => {
       e.stopPropagation();
-      openHypeCardModal();
+      openSeasonHypeCardModal();
+    };
+  }
+  if (heroBtn) {
+    heroBtn.onclick = (e) => {
+      e.stopPropagation();
+      openSeasonHypeCardModal();
     };
   }
   if (modalExportBtn) {
-    modalExportBtn.onclick = () => {
-      document.getElementById('simModal').classList.remove('open');
-      if (state.activeModalGame) {
-        generateGameHypeCard(state.activeModalGame);
-      } else {
-        generateHypeCard();
-      }
-    };
+    modalExportBtn.onclick = exportModalGameCard;
   }
   if (closeBtn) {
     closeBtn.onclick = closeHypeCardModal;
@@ -6648,9 +6680,19 @@ window.switchPlayoffRound = function(roundKey) {
 };
 window.switchMobilePlayoffRound = window.switchPlayoffRound;
 
-window.openHypeCardModal = function() {
-  state.activeModalGame = null;
-  if (typeof generateHypeCard === 'function') {
+window.openHypeCardModal = function(game) {
+  const targetGame = game || state.activeModalGame;
+  const hypeModal = document.getElementById('hypeCardModal');
+  if (hypeModal) {
+    hypeModal.classList.add('open');
+    document.body.classList.add('modal-open');
+  }
+
+  if (targetGame) {
+    state.activeModalGame = targetGame;
+    generateGameHypeCard(targetGame);
+  } else {
+    state.activeModalGame = null;
     generateHypeCard();
   }
 };
