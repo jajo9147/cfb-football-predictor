@@ -44,7 +44,7 @@
     }
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=20260826_launch_growth_v150">
+  <link rel="stylesheet" href="styles.css?v=20260826_hype_hyperlink_v160">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -616,18 +616,30 @@
         <canvas id="hypeCanvas" width="1200" height="675" style="width: 100%; max-width: 620px; aspect-ratio: 16 / 9; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);"></canvas>
       </div>
 
+      <!-- Direct App Hyperlink Banner for Group Chat -->
+      <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: var(--radius-sm); padding: 0.55rem 0.85rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; font-size: 0.8rem;">
+        <span style="display: flex; align-items: center; gap: 6px; color: #94A3B8; font-family: var(--font-mono); white-space: nowrap;">
+          <i class="fa-solid fa-link" style="color: #38BDF8;"></i> <span>App Link:</span>
+        </span>
+        <a href="https://jajo9147.github.io/cfb-football-predictor/" id="hypeDirectHyperlink" target="_blank" style="color: #38BDF8; font-family: var(--font-mono); font-weight: 700; text-decoration: underline; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">https://jajo9147.github.io/cfb-football-predictor/</a>
+      </div>
+
       <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
         <button class="action-btn" style="background: linear-gradient(135deg, #0284C7, #0369A1); color: #FFFFFF;" id="shareHypeCardNativeBtn" onclick="shareActiveCanvasToNativeSheet('hypeCanvas', 'cfb_prophet_matchup.png', 'CFB Prophet Matchup Hype Card')">
           <i class="fa-solid fa-arrow-up-from-bracket"></i>
           <span>Share to iMessage / Chat</span>
+        </button>
+        <button class="action-btn" style="background: linear-gradient(135deg, #10B981, #059669); color: #FFFFFF; font-weight: 800;" onclick="copyHypeCardAndLink()">
+          <i class="fa-solid fa-copy"></i>
+          <span>Copy Image & App Link</span>
         </button>
         <button class="action-btn hype-btn" id="downloadHypeCardBtn">
           <i class="fa-solid fa-download"></i>
           <span>Save Image</span>
         </button>
         <button class="action-btn secondary-btn" id="copyHypeCardBtn">
-          <i class="fa-solid fa-copy"></i>
-          <span>Copy Image</span>
+          <i class="fa-regular fa-copy"></i>
+          <span>Copy Image Only</span>
         </button>
       </div>
     </div>
@@ -1508,7 +1520,7 @@
   </div>
 
   <!-- Viral Challenge a Friend Modal -->
-  <div class="modal-overlay" id="shareChallengeModal" style="display: none;" onclick="if(event.target===this) closeShareChallengeModal()">
+  <div class="modal-backdrop" id="shareChallengeModal" onclick="if(event.target===this) closeShareChallengeModal()">
     <div class="modal-dialog" style="max-width: 580px;">
       <button class="modal-close" onclick="closeShareChallengeModal()"><i class="fa-solid fa-xmark"></i></button>
       <div class="modal-header" style="text-align: center;">
@@ -1547,9 +1559,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="qrious.min.js?v=20260826_launch_growth_v150"></script>
-  <script src="qrcode.min.js?v=20260826_launch_growth_v150"></script>
-  <script src="data/teams.js?v=20260826_launch_growth_v150"></script>
-  <script src="app.js?v=20260826_launch_growth_v150"></script>
+  <script src="qrious.min.js?v=20260826_hype_hyperlink_v160"></script>
+  <script src="qrcode.min.js?v=20260826_hype_hyperlink_v160"></script>
+  <script src="data/teams.js?v=20260826_hype_hyperlink_v160"></script>
+  <script src="app.js?v=20260826_hype_hyperlink_v160"></script>
 </body>
 </html>

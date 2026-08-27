@@ -4223,11 +4223,18 @@ async function generateHypeCard() {
   const dcScheme = `🛡️ DEFENSIVE UNIT: Will Muschamp Havoc & Pressure Matrix • ${team.secondaryStar || 'Elite Roster Depth'}`;
   drawCanvasTextFitted(ctx, dcScheme, rightX + 22, 550, rightW - 44, '500 11px "Outfit", sans-serif', '#94A3B8', 'left');
 
-  // Footer Tagline
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+  // Footer Tagline with direct app link
+  const appUrl = `${window.location.origin}${window.location.pathname}?team=${state.currentTeamId || 'texas'}`;
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
   ctx.font = '12px "JetBrains Mono", monospace';
   ctx.textAlign = 'center';
-  ctx.fillText('POWERED BY CFB PROPHET • https://jajo9147.github.io/cfb-football-predictor/', 600, 620);
+  ctx.fillText(`POWERED BY CFB PROPHET • ${appUrl}`, 600, 620);
+
+  const directLinkEl = document.getElementById('hypeDirectHyperlink');
+  if (directLinkEl) {
+    directLinkEl.href = appUrl;
+    directLinkEl.textContent = appUrl;
+  }
 
   document.getElementById('hypeCardModal').classList.add('open');
 }
@@ -6090,10 +6097,17 @@ async function generateGameHypeCard(game) {
   const scoutSummary = game.scoutReport?.xFactor || game.scoutReport?.keyMatchup || `High-stakes battle featuring ${teamA.name} vs ${teamB.name}.`;
   drawCanvasTextWrapped(ctx, scoutSummary, 65, 532, 1070, 24, '500 15px "Outfit", sans-serif', '#E2E8F0', 'left', 2);
 
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+  const appUrl = `${window.location.origin}${window.location.pathname}?team=${teamA.id || state.currentTeamId || 'texas'}`;
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
   ctx.font = '12px "JetBrains Mono", monospace';
   ctx.textAlign = 'center';
-  ctx.fillText('POWERED BY CFB PROPHET • https://jajo9147.github.io/cfb-football-predictor/', 600, 625);
+  ctx.fillText(`POWERED BY CFB PROPHET • ${appUrl}`, 600, 625);
+
+  const directLinkEl = document.getElementById('hypeDirectHyperlink');
+  if (directLinkEl) {
+    directLinkEl.href = appUrl;
+    directLinkEl.textContent = appUrl;
+  }
 
   document.getElementById('hypeCardModal').classList.add('open');
 }
@@ -8414,18 +8428,23 @@ function triggerChaosUpsetSimulator() {
   const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
   if (!currentTeam || !currentTeam.schedule) return;
 
-  if (!state.userCustomGamePicks) state.userCustomGamePicks = {};
-  if (!state.userCustomGamePicks[currentTeam.id]) state.userCustomGamePicks[currentTeam.id] = {};
+  if (!state.userPicks) state.userPicks = {};
 
   let upsetCount = 0;
-  // Apply randomized underdog chaos upsets across the current team and marquee games
+  // Apply randomized underdog chaos upsets across the current team's schedule
   currentTeam.schedule.forEach((g) => {
     const isUnderdog = (g.vegasSpread || 0) > 0 || (g.oppRank && !currentTeam.apRank);
     const isTossUp = Math.abs(g.vegasSpread || 0) <= 7;
-    if ((isUnderdog || isTossUp) && Math.random() < 0.5) {
-      const currentPick = state.userCustomGamePicks[currentTeam.id][g.id] || (g.sim && g.sim.adjWinProb >= 50 ? 'W' : 'L');
+    if ((isUnderdog || isTossUp) && Math.random() < 0.6) {
+      const currentPick = state.userPicks[g.id] || (g.sim && g.sim.adjWinProb >= 50 ? 'W' : 'L');
       const newPick = currentPick === 'W' ? 'L' : 'W';
-      state.userCustomGamePicks[currentTeam.id][g.id] = newPick;
+      state.userPicks[g.id] = newPick;
+
+      // Sync counterpart if exists
+      const counterpart = typeof findCounterpartMatchup === 'function' ? findCounterpartMatchup(state.currentTeamId, g) : null;
+      if (counterpart && counterpart.oppGame) {
+        state.userPicks[counterpart.oppGame.id] = (newPick === 'W') ? 'L' : 'W';
+      }
       upsetCount++;
     }
   });
@@ -8433,14 +8452,19 @@ function triggerChaosUpsetSimulator() {
   if (upsetCount === 0 && currentTeam.schedule.length > 0) {
     const randomIdx = Math.floor(Math.random() * currentTeam.schedule.length);
     const g = currentTeam.schedule[randomIdx];
-    state.userCustomGamePicks[currentTeam.id][g.id] = 'W';
+    const newPick = 'W';
+    state.userPicks[g.id] = newPick;
+    const counterpart = typeof findCounterpartMatchup === 'function' ? findCounterpartMatchup(state.currentTeamId, g) : null;
+    if (counterpart && counterpart.oppGame) {
+      state.userPicks[counterpart.oppGame.id] = 'L';
+    }
     upsetCount = 1;
   }
 
-  updateCalculations();
-  renderSchedule();
-  renderKpiCards();
-  renderPlayoffBracket();
+  // Recalculate season outcomes, CCG, and 12-Team CFP field
+  if (typeof recalculateSeason === 'function') {
+    recalculateSeason();
+  }
 
   showCustomToast(`🎲 CHAOS UNLEASHED: ${upsetCount} matchup upset${upsetCount > 1 ? 's' : ''} generated! Check your updated CFP bracket!`);
   
@@ -8456,32 +8480,39 @@ function quickPickAllFavorites() {
   const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
   if (!currentTeam || !currentTeam.schedule) return;
 
-  if (!state.userCustomGamePicks) state.userCustomGamePicks = {};
-  state.userCustomGamePicks[currentTeam.id] = {};
+  if (!state.userPicks) state.userPicks = {};
 
   currentTeam.schedule.forEach(g => {
     const winProb = g.sim ? (g.sim.adjWinProb !== undefined ? g.sim.adjWinProb : 50) : 50;
-    state.userCustomGamePicks[currentTeam.id][g.id] = winProb >= 50 ? 'W' : 'L';
+    const pick = winProb >= 50 ? 'W' : 'L';
+    state.userPicks[g.id] = pick;
+    const counterpart = typeof findCounterpartMatchup === 'function' ? findCounterpartMatchup(state.currentTeamId, g) : null;
+    if (counterpart && counterpart.oppGame) {
+      state.userPicks[counterpart.oppGame.id] = (pick === 'W') ? 'L' : 'W';
+    }
   });
 
-  updateCalculations();
-  renderSchedule();
-  renderKpiCards();
-  renderPlayoffBracket();
-
+  if (typeof recalculateSeason === 'function') {
+    recalculateSeason();
+  }
   showCustomToast(`✅ Quick-filled all games with projected favorites!`);
 }
 window.quickPickAllFavorites = quickPickAllFavorites;
 
 function resetCurrentTeamPicks() {
-  if (state.userCustomGamePicks && state.userCustomGamePicks[state.currentTeamId]) {
-    delete state.userCustomGamePicks[state.currentTeamId];
+  const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
+  if (currentTeam && currentTeam.schedule && state.userPicks) {
+    currentTeam.schedule.forEach(g => {
+      delete state.userPicks[g.id];
+      const counterpart = typeof findCounterpartMatchup === 'function' ? findCounterpartMatchup(state.currentTeamId, g) : null;
+      if (counterpart && counterpart.oppGame) {
+        delete state.userPicks[counterpart.oppGame.id];
+      }
+    });
   }
-  updateCalculations();
-  renderSchedule();
-  renderKpiCards();
-  renderPlayoffBracket();
-
+  if (typeof recalculateSeason === 'function') {
+    recalculateSeason();
+  }
   showCustomToast(`🔄 Picks reset to authentic 2026 baseline.`);
 }
 window.resetCurrentTeamPicks = resetCurrentTeamPicks;
@@ -8495,7 +8526,7 @@ function openShareChallengeModal() {
   const userName = currentUser ? currentUser.displayName : 'Coach';
 
   const evaluated = typeof evaluateRegularSeasonAllTeams === 'function' ? evaluateRegularSeasonAllTeams() : {};
-  const teamEval = evaluated[currentTeam.id] || { totalWins: 11, totalLosses: 1 };
+  const teamEval = (currentTeam && evaluated[currentTeam.id]) ? evaluated[currentTeam.id] : { totalWins: 11, totalLosses: 1 };
   const champName = currentTeam ? currentTeam.name : 'Texas Longhorns';
   const recordStr = `${teamEval.totalWins || 11}-${teamEval.totalLosses || 1}`;
 
@@ -8504,22 +8535,55 @@ function openShareChallengeModal() {
   const previewSub = document.getElementById('challengePreviewSub');
   const quoteBox = document.getElementById('challengeQuoteBox');
 
-  if (previewLogo) previewLogo.src = currentTeam.logoUrl || '';
+  if (previewLogo && currentTeam) previewLogo.src = currentTeam.logoUrl || '';
   if (previewChamp) previewChamp.textContent = champName;
   if (previewSub) previewSub.textContent = `${recordStr} Projected Record • CFP Contender • 2026 Simulation`;
-  if (quoteBox) {
+  if (quoteBox && currentTeam) {
     quoteBox.textContent = `"${userName} is projecting ${currentTeam.shortName || champName} (${recordStr}) to dominate the 2026 season. Think your squad can beat them? Make your picks on CFB Prophet!"`;
   }
 
-  modal.style.display = 'flex';
+  modal.classList.add('open');
 }
 window.openShareChallengeModal = openShareChallengeModal;
 
 function closeShareChallengeModal() {
   const modal = document.getElementById('shareChallengeModal');
-  if (modal) modal.style.display = 'none';
+  if (modal) modal.classList.remove('open');
 }
 window.closeShareChallengeModal = closeShareChallengeModal;
+
+function copyHypeCardAndLink() {
+  const canvas = document.getElementById('hypeCanvas');
+  const teamId = state.currentTeamId || 'texas';
+  const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
+  const appUrl = `${window.location.origin}${window.location.pathname}?team=${teamId}`;
+  const shareText = `🏈 Check out this 2026 CFB Prophet Hype Card for ${team.name}!\n\nOpen & simulate in app: ${appUrl}`;
+
+  if (canvas && canvas.toBlob) {
+    canvas.toBlob(blob => {
+      if (navigator.clipboard && navigator.clipboard.write) {
+        navigator.clipboard.write([
+          new ClipboardItem({
+            'image/png': blob
+          })
+        ]).then(() => {
+          showCustomToast('📋 Hype Card copied! Live app link: ' + appUrl);
+        }).catch(() => {
+          if (navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareText).then(() => {
+              showCustomToast('📋 Live App Hyperlink copied to clipboard!');
+            });
+          }
+        });
+      }
+    });
+  } else if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(shareText).then(() => {
+      showCustomToast('📋 Live App Hyperlink copied to clipboard!');
+    });
+  }
+}
+window.copyHypeCardAndLink = copyHypeCardAndLink;
 
 function getChallengeShareUrl() {
   const currentTeam = TEAMS_DATABASE[state.currentTeamId || 'texas'];
