@@ -396,7 +396,10 @@ function getNumericRank(team) {
 }
 
 function getDynamicTeamRankOrder() {
-  if (typeof evaluateRegularSeasonAllTeams === 'function') {
+  const hasCustomOverrides = (state.userPicks && Object.keys(state.userPicks).length > 0) || (state.teamSliders && Object.keys(state.teamSliders).length > 0);
+
+  // If user has actively made custom picks/overrides, order by live simulated standing
+  if (hasCustomOverrides && typeof evaluateRegularSeasonAllTeams === 'function') {
     try {
       const evaluated = evaluateRegularSeasonAllTeams();
       if (evaluated && evaluated.length > 0) {
@@ -412,7 +415,8 @@ function getDynamicTeamRankOrder() {
     } catch (e) {}
   }
 
-  // Baseline fallback order
+  // Official Preseason AP Poll order (#1 Ohio State, #2 Oregon, #3 Georgia, #4 Notre Dame, #5 Texas, ...)
+  // followed by RVs (Clemson, FSU, Arizona, ASU) and non-ranked (Boise State, Colorado)
   const teamKeys = Object.keys(TEAMS_DATABASE).sort((a, b) => {
     return getNumericRank(TEAMS_DATABASE[a]) - getNumericRank(TEAMS_DATABASE[b]);
   });
