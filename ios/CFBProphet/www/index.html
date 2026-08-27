@@ -197,9 +197,7 @@
           <button class="search-clear-btn" id="teamSearchClearBtn" onclick="clearTeamSearch()" style="display: none;" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
           <kbd class="search-shortcut-badge">⌘K</kbd>
         </div>
-        <div class="team-search-results-dropdown" id="teamSearchResultsDropdown" style="display: none;">
-          <!-- Dynamically injected matching teams -->
-        </div>
+        <!-- #teamSearchResultsDropdown is portal-mounted to <body> by initTeamSearch() -->
       </div>
       <div class="team-selector-track" id="teamSelectorTrack">
         <button class="team-pill-btn active" data-teamid="ohiostate" onclick="selectTeam('ohiostate')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/194.png" alt="Ohio State" class="team-pill-logo-img"></span><span>Ohio State</span><span class="team-pill-rank">#1 AP</span></button>

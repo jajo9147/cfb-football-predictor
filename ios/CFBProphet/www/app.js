@@ -510,15 +510,27 @@ window.calculateTeamSearchRelevance = calculateTeamSearchRelevance;
 function initTeamSearch() {
   const input = document.getElementById('teamSearchInput');
   const clearBtn = document.getElementById('teamSearchClearBtn');
-  const dropdown = document.getElementById('teamSearchResultsDropdown');
-  if (!input || !dropdown) return;
+  if (!input) return;
 
-  // position: fixed dropdown must be placed relative to the input's viewport rect
+  // --- PORTAL: Create/reuse dropdown as a direct <body> child ---
+  // This escapes ALL overflow:hidden and stacking-context clipping on parent elements.
+  let dropdown = document.getElementById('teamSearchResultsDropdown');
+  if (!dropdown) {
+    dropdown = document.createElement('div');
+    dropdown.id = 'teamSearchResultsDropdown';
+    dropdown.className = 'team-search-results-dropdown';
+    dropdown.style.display = 'none';
+    document.body.appendChild(dropdown);
+  } else if (dropdown.parentElement !== document.body) {
+    document.body.appendChild(dropdown);
+  }
+
+  // Position the fixed dropdown directly under the input box
   function positionDropdown() {
     const rect = input.closest('.team-search-input-box')?.getBoundingClientRect() || input.getBoundingClientRect();
-    dropdown.style.top = (rect.bottom + 6) + 'px';
-    dropdown.style.left = rect.left + 'px';
-    dropdown.style.width = rect.width + 'px';
+    dropdown.style.top    = (rect.bottom + 6) + 'px';
+    dropdown.style.left   = rect.left + 'px';
+    dropdown.style.width  = rect.width + 'px';
   }
 
   function performSearch(query) {
@@ -534,24 +546,14 @@ function initTeamSearch() {
 
     if (clearBtn) clearBtn.style.display = 'flex';
 
-    // Populate and sort matched teams by highest relevance first
     const matchedTeams = Object.keys(TEAMS_DATABASE)
-      .filter(tid => {
-        const t = TEAMS_DATABASE[tid];
-        return teamMatchesSearchQuery(tid, t, q);
-      })
-      .sort((a, b) => {
-        const scoreA = calculateTeamSearchRelevance(a, TEAMS_DATABASE[a], q);
-        const scoreB = calculateTeamSearchRelevance(b, TEAMS_DATABASE[b], q);
-        return scoreB - scoreA;
-      });
+      .filter(tid => teamMatchesSearchQuery(tid, TEAMS_DATABASE[tid], q))
+      .sort((a, b) => calculateTeamSearchRelevance(b, TEAMS_DATABASE[b], q) - calculateTeamSearchRelevance(a, TEAMS_DATABASE[a], q));
 
-    // Filter team pill buttons in the track (and highlight the #1 best match)
-    const firstMatchedKey = matchedTeams[0] || null;
+    // Filter pill buttons in the track
     const matchedSet = new Set(matchedTeams);
     document.querySelectorAll('.team-pill-btn').forEach(btn => {
-      const tid = btn.dataset.teamid;
-      btn.style.display = matchedSet.has(tid) ? '' : 'none';
+      btn.style.display = matchedSet.has(btn.dataset.teamid) ? '' : 'none';
     });
 
     if (matchedTeams.length === 0) {
@@ -592,12 +594,9 @@ function initTeamSearch() {
 
     positionDropdown();
     dropdown.style.display = 'block';
-    return firstMatchedKey;
   }
 
-  input.addEventListener('input', (e) => {
-    performSearch(e.target.value);
-  });
+  input.addEventListener('input', (e) => { performSearch(e.target.value); });
 
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -626,7 +625,7 @@ function initTeamSearch() {
     });
   }
 
-  // Global Keyboard Shortcut: Press '/' or 'Cmd+K' / 'Ctrl+K' to focus search
+  // Global Keyboard Shortcut
   document.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
       e.preventDefault();
@@ -639,12 +638,12 @@ function initTeamSearch() {
     }
   });
 
-  // Reposition dropdown on scroll or resize (needed for position:fixed)
-  const repositionOnScroll = () => { if (dropdown.style.display !== 'none') positionDropdown(); };
-  window.addEventListener('scroll', repositionOnScroll, { passive: true, capture: true });
-  window.addEventListener('resize', repositionOnScroll, { passive: true });
+  // Reposition on scroll/resize (position:fixed needs manual tracking)
+  const reposition = () => { if (dropdown.style.display !== 'none') positionDropdown(); };
+  window.addEventListener('scroll', reposition, { passive: true, capture: true });
+  window.addEventListener('resize', reposition, { passive: true });
 
-  // Close dropdown on click outside
+  // Close dropdown on outside click
   document.addEventListener('click', (e) => {
     if (!input.contains(e.target) && !dropdown.contains(e.target)) {
       dropdown.style.display = 'none';
