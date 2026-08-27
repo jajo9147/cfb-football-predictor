@@ -2817,15 +2817,15 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "BIG TEN PHYSICAL SLUGFEST",
-        "vegasSpread": -3.5,
+        "vegasSpread": -1.5,
         "overUnder": 46.5,
-        "baseWinProb": 61.5,
-        "projScoreUt": 24,
+        "baseWinProb": 53.5,
+        "projScoreUt": 22,
         "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Stopping Wisconsin ground attack.",
           "keyMatchup": "Tom Allen defense vs Wisconsin offensive line.",
-          "summary": "Big Ten opener in Happy Valley."
+          "summary": "Tight Big Ten opener in Happy Valley."
         }
       },
       {
@@ -2844,15 +2844,15 @@ var TEAMS_DATABASE = {
         "location": "Evanston, IL",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -7.5,
-        "overUnder": 45.0,
-        "baseWinProb": 72.5,
-        "projScoreUt": 26,
+        "vegasSpread": -3.5,
+        "overUnder": 44.5,
+        "baseWinProb": 60.0,
+        "projScoreUt": 23,
         "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Friday night road discipline near Lake Michigan.",
           "keyMatchup": "Rocco Becht vs Northwestern defensive backs.",
-          "summary": "Friday night Big Ten road test in Evanston."
+          "summary": "Friday night Big Ten road grind in Evanston."
         }
       },
       {
@@ -2872,11 +2872,11 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "OFFICIAL 2026 PENN STATE WHITE OUT",
-        "vegasSpread": -2.0,
-        "overUnder": 56.5,
-        "baseWinProb": 55.5,
-        "projScoreUt": 28,
-        "projScoreOpp": 26,
+        "vegasSpread": 2.0,
+        "overUnder": 55.0,
+        "baseWinProb": 44.5,
+        "projScoreUt": 24,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "107,000 deafening White Out pandemonium.",
           "keyMatchup": "Tom Allen defense vs USC air raid.",
@@ -2927,11 +2927,11 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -14.0,
-        "overUnder": 48.0,
-        "baseWinProb": 87.5,
-        "projScoreUt": 31,
-        "projScoreOpp": 17,
+        "vegasSpread": -8.0,
+        "overUnder": 46.5,
+        "baseWinProb": 74.5,
+        "projScoreUt": 27,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Halloween afternoon execution at home.",
           "keyMatchup": "Penn State pass rush vs Purdue pocket.",
@@ -2981,15 +2981,15 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -6.5,
-        "overUnder": 46.0,
-        "baseWinProb": 70.5,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "vegasSpread": -3.0,
+        "overUnder": 44.5,
+        "baseWinProb": 58.0,
+        "projScoreUt": 24,
+        "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Physical ground game control in cold weather.",
           "keyMatchup": "Carson Hansen vs Minnesota run defense.",
-          "summary": "Home conference battle in Beaver Stadium."
+          "summary": "Grind-it-out home conference battle in Beaver Stadium."
         }
       },
       {
@@ -3008,11 +3008,11 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -8.0,
-        "overUnder": 46.0,
-        "baseWinProb": 74.0,
-        "projScoreUt": 27,
-        "projScoreOpp": 17,
+        "vegasSpread": -3.5,
+        "overUnder": 44.5,
+        "baseWinProb": 60.5,
+        "projScoreUt": 24,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Senior Day focus and defensive dominance.",
           "keyMatchup": "Tom Allen front vs Rutgers offensive line.",
@@ -3035,15 +3035,15 @@ var TEAMS_DATABASE = {
         "location": "College Park, MD",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -4.5,
-        "overUnder": 48.0,
-        "baseWinProb": 64.0,
-        "projScoreUt": 27,
-        "projScoreOpp": 22,
+        "vegasSpread": 1.5,
+        "overUnder": 46.5,
+        "baseWinProb": 47.5,
+        "projScoreUt": 22,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Finishing the regular season with clean road execution.",
           "keyMatchup": "Penn State defense vs Maryland speed.",
-          "summary": "Regular season road finale in College Park."
+          "summary": "Difficult road finale in College Park."
         }
       }
     ],
