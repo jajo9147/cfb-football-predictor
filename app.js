@@ -390,69 +390,39 @@ function initPwaServiceWorker() {
 // ==========================================================================
 
 function getNumericRank(team) {
-  if (team.playoffContenderRank) return team.playoffContenderRank;
+  if (!team) return 999;
+  if (typeof team.playoffContenderRank === 'number') return team.playoffContenderRank;
   const match = (team.apRank || '').match(/\d+/);
-  return match ? parseInt(match[0], 10) : 99;
-}
-
-function getDynamicTeamRankOrder() {
-  const hasCustomOverrides = (state.userPicks && Object.keys(state.userPicks).length > 0) || (state.teamSliders && Object.keys(state.teamSliders).length > 0);
-
-  // If user has actively made custom picks/overrides, order by live simulated standing
-  if (hasCustomOverrides && typeof evaluateRegularSeasonAllTeams === 'function') {
-    try {
-      const evaluated = evaluateRegularSeasonAllTeams();
-      if (evaluated && evaluated.length > 0) {
-        return evaluated.map((t, idx) => ({
-          id: t.id,
-          team: TEAMS_DATABASE[t.id] || t,
-          evaluatedRank: idx + 1,
-          wins: t.wins,
-          losses: t.losses,
-          score: t.score
-        }));
-      }
-    } catch (e) {}
-  }
-
-  // Official Preseason AP Poll order (#1 Ohio State, #2 Oregon, #3 Georgia, #4 Notre Dame, #5 Texas, ...)
-  // followed by RVs (Clemson, FSU, Arizona, ASU) and non-ranked (Boise State, Colorado)
-  const teamKeys = Object.keys(TEAMS_DATABASE).sort((a, b) => {
-    return getNumericRank(TEAMS_DATABASE[a]) - getNumericRank(TEAMS_DATABASE[b]);
-  });
-  return teamKeys.map((key, idx) => ({
-    id: key,
-    team: TEAMS_DATABASE[key],
-    evaluatedRank: idx + 1,
-    wins: 0,
-    losses: 0,
-    score: 0
-  }));
+  if (match) return parseInt(match[0], 10);
+  if (team.apRank === 'RV') return 100;
+  return 200;
 }
 
 function renderTeamSelector() {
   const track = document.getElementById('teamSelectorTrack');
   if (!track) return;
 
-  const rankedTeams = getDynamicTeamRankOrder();
   track.innerHTML = '';
 
-  const hasCustomOverrides = (state.userPicks && Object.keys(state.userPicks).length > 0) || (state.teamSliders && Object.keys(state.teamSliders).length > 0);
+  // Order teams strictly by official AP Poll ranking:
+  // #1-#25 (Top 25) -> Receiving Votes (RV) -> Non-Ranked at the end (Boise State #30 & Colorado #31)
+  const teamKeys = Object.keys(TEAMS_DATABASE).sort((a, b) => {
+    return getNumericRank(TEAMS_DATABASE[a]) - getNumericRank(TEAMS_DATABASE[b]);
+  });
 
-  rankedTeams.forEach(({ id, team, evaluatedRank }) => {
+  teamKeys.forEach(id => {
+    const team = TEAMS_DATABASE[id];
     if (!team) return;
     const btn = document.createElement('button');
     btn.className = `team-pill-btn ${id === state.currentTeamId ? 'active' : ''}`;
     btn.dataset.teamid = id;
-
-    const displayRank = hasCustomOverrides ? `#${evaluatedRank}` : (team.apRank || 'NR');
 
     btn.innerHTML = `
       <span class="team-pill-logo-badge">
         <img src="${team.logoUrl}" alt="${team.shortName}" class="team-pill-logo-img">
       </span>
       <span>${team.shortName}</span>
-      <span class="team-pill-rank">${displayRank}</span>
+      <span class="team-pill-rank">${team.apRank || 'NR'}</span>
     `;
     btn.addEventListener('click', () => selectTeam(id));
     track.appendChild(btn);
