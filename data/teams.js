@@ -12204,7 +12204,7 @@ var TEAMS_DATABASE = {
         "oppBadge": "TXST",
         "oppColor": "#501214",
         "oppSecondary": "#8D734A",
-        "oppLogoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/324.png",
+        "oppLogoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/326.png",
         "isHome": false,
         "stadium": "UFCU Stadium",
         "location": "San Marcos, TX",
