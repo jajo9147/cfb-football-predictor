@@ -464,11 +464,14 @@ var TEAM_SEARCH_ALIASES = {
     "tempe",
     "mountain america",
     "kenny dillingham",
-    "sam leavitt",
-    "cam skattebo",
+    "marcus arroyo",
     "brian ward",
+    "jordyn tyson",
+    "kyson brown",
+    "clayton smith",
     "forks up",
-    "sparky"
+    "sparky",
+    "sundevils"
   ]
 };
 
@@ -531,7 +534,7 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "projScoreUt": 38,
         "projScoreOpp": 6,
-        "baseWinProb": 99.5,
+        "baseWinProb": 100,
         "scoutReport": {
           "xFactor": "Fast offensive start and rhythm for Bear Bachmeier.",
           "keyMatchup": "BYU offensive line vs Portland State defensive front.",
@@ -564,7 +567,7 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "projScoreUt": 25,
         "projScoreOpp": 21,
-        "baseWinProb": 64.9,
+        "baseWinProb": 65,
         "scoutReport": {
           "xFactor": "Power run game efficiency with LJ Martin.",
           "keyMatchup": "BYU secondary vs Stanford passing attack.",
@@ -597,7 +600,7 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "projScoreUt": 33,
         "projScoreOpp": 12,
-        "baseWinProb": 97.1,
+        "baseWinProb": 97,
         "scoutReport": {
           "xFactor": "Defensive front disruption under Jay Hill.",
           "keyMatchup": "BYU pass rush vs ECU quick release.",
@@ -628,7 +631,7 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "projScoreUt": 26,
         "projScoreOpp": 21,
-        "baseWinProb": 68.3,
+        "baseWinProb": 68,
         "scoutReport": {
           "xFactor": "Turnover margin and red zone touchdown percentage.",
           "keyMatchup": "Bear Bachmeier dual-threat play vs K-State disciplined defense.",
@@ -659,7 +662,7 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "projScoreUt": 22,
         "projScoreOpp": 25,
-        "baseWinProb": 61.3,
+        "baseWinProb": 61,
         "scoutReport": {
           "xFactor": "Third down conversion rate in hostile Texas environment.",
           "keyMatchup": "BYU offensive tackles vs Baylor pass rushers.",
@@ -690,7 +693,7 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "projScoreUt": 22,
         "projScoreOpp": 25,
-        "baseWinProb": 38.3,
+        "baseWinProb": 38,
         "scoutReport": {
           "xFactor": "Altitude and 64,000 Cougar faithful hosting the Irish.",
           "keyMatchup": "BYU front seven vs Notre Dame power rushing attack.",
@@ -724,7 +727,7 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "projScoreUt": 26,
         "projScoreOpp": 32,
-        "baseWinProb": 26.4,
+        "baseWinProb": 26,
         "scoutReport": {
           "xFactor": "Handling the tortilla-throwing Lubbock crowd at night.",
           "keyMatchup": "BYU secondary vs Texas Tech fast-paced air raid attack.",
@@ -758,7 +761,7 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "projScoreUt": 22,
         "projScoreOpp": 19,
-        "baseWinProb": 63.3,
+        "baseWinProb": 63,
         "scoutReport": {
           "xFactor": "Physical line of scrimmage play in Provo.",
           "keyMatchup": "BYU offensive ground game vs Houston defensive front.",
@@ -791,7 +794,7 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "projScoreUt": 18,
         "projScoreOpp": 22,
-        "baseWinProb": 35.9,
+        "baseWinProb": 36,
         "scoutReport": {
           "xFactor": "Holy War rivalry intensity and red zone defense.",
           "keyMatchup": "BYU offensive line vs Utah physical front seven.",
@@ -822,7 +825,7 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "projScoreUt": 27,
         "projScoreOpp": 20,
-        "baseWinProb": 76.7,
+        "baseWinProb": 77,
         "scoutReport": {
           "xFactor": "Defensive discipline against option concepts.",
           "keyMatchup": "BYU edge containment vs Kansas misdirection.",
@@ -853,7 +856,7 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "projScoreUt": 25,
         "projScoreOpp": 22,
-        "baseWinProb": 65.3,
+        "baseWinProb": 65,
         "scoutReport": {
           "xFactor": "Field position and special teams execution in West Texas wind.",
           "keyMatchup": "BYU offensive efficiency vs Texas Tech pressure packages.",
@@ -886,7 +889,7 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "projScoreUt": 27,
         "projScoreOpp": 20,
-        "baseWinProb": 78.2,
+        "baseWinProb": 78,
         "scoutReport": {
           "xFactor": "Senior Day emotion and Big 12 Championship berth clincher.",
           "keyMatchup": "BYU ground game dominance vs Houston interior defense.",
@@ -955,7 +958,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -28.5,
         "overUnder": 56.0,
-        "baseWinProb": 99.2,
+        "baseWinProb": 99,
         "projScoreUt": 42,
         "projScoreOpp": 14,
         "scoutReport": {
@@ -984,7 +987,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "COLLEGE GAMEDAY MARQUEE BATTLE (#1 VS #5)",
         "vegasSpread": -2.0,
         "overUnder": 59.0,
-        "baseWinProb": 57.6,
+        "baseWinProb": 58,
         "projScoreUt": 30,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -1012,7 +1015,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -27.0,
         "overUnder": 56.0,
-        "baseWinProb": 99.0,
+        "baseWinProb": 99,
         "projScoreUt": 42,
         "projScoreOpp": 14,
         "scoutReport": {
@@ -1041,7 +1044,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "CHECKERED NEYLAND SEC OPENER",
         "vegasSpread": -3.0,
         "overUnder": 62.5,
-        "baseWinProb": 61.7,
+        "baseWinProb": 62,
         "projScoreUt": 33,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -1070,7 +1073,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "RED RIVER RIVALRY (GOLDEN HAT)",
         "vegasSpread": -3.5,
         "overUnder": 58.0,
-        "baseWinProb": 64.1,
+        "baseWinProb": 64,
         "projScoreUt": 31,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -1099,7 +1102,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEC HOMECOMING BATTLE",
         "vegasSpread": -13.5,
         "overUnder": 57.5,
-        "baseWinProb": 90.9,
+        "baseWinProb": 91,
         "projScoreUt": 36,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -1128,7 +1131,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-10 SEC SHOOTOUT",
         "vegasSpread": -6.0,
         "overUnder": 66.0,
-        "baseWinProb": 74.2,
+        "baseWinProb": 74,
         "projScoreUt": 36,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -1156,7 +1159,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -17.5,
         "overUnder": 57.5,
-        "baseWinProb": 95.2,
+        "baseWinProb": 95,
         "projScoreUt": 38,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -1184,7 +1187,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -5.0,
         "overUnder": 56.0,
-        "baseWinProb": 70.5,
+        "baseWinProb": 70,
         "projScoreUt": 30,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -1213,7 +1216,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "DEATH VALLEY SATURDAY NIGHT BLOCKBUSTER",
         "vegasSpread": 2.0,
         "overUnder": 58.5,
-        "baseWinProb": 42.5,
+        "baseWinProb": 42,
         "projScoreUt": 31,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -1242,7 +1245,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HISTORIC SOUTHWEST CONFERENCE RIVALRY",
         "vegasSpread": -14.5,
         "overUnder": 57.5,
-        "baseWinProb": 92.2,
+        "baseWinProb": 92,
         "projScoreUt": 36,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -1271,7 +1274,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE LONE STAR SHOWDOWN (AT KYLE FIELD)",
         "vegasSpread": -2.0,
         "overUnder": 58.0,
-        "baseWinProb": 57.6,
+        "baseWinProb": 58,
         "projScoreUt": 30,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -1339,7 +1342,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -24.0,
         "overUnder": 45.5,
-        "baseWinProb": 98.4,
+        "baseWinProb": 98,
         "projScoreUt": 11,
         "projScoreOpp": 11,
         "scoutReport": {
@@ -1368,7 +1371,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE BLUEBLOOD CLASH",
         "vegasSpread": -1.5,
         "overUnder": 47.5,
-        "baseWinProb": 55.9,
+        "baseWinProb": 56,
         "projScoreUt": 24,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -1396,7 +1399,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -26.0,
         "overUnder": 45.5,
-        "baseWinProb": 98.8,
+        "baseWinProb": 99,
         "projScoreUt": 36,
         "projScoreOpp": 10,
         "scoutReport": {
@@ -1425,7 +1428,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN PHYSICAL WAR",
         "vegasSpread": -5.0,
         "overUnder": 39.0,
-        "baseWinProb": 70.1,
+        "baseWinProb": 70,
         "projScoreUt": 22,
         "projScoreOpp": 17,
         "scoutReport": {
@@ -1454,7 +1457,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "LITTLE BROWN JUG BATTLE",
         "vegasSpread": -5.0,
         "overUnder": 47.0,
-        "baseWinProb": 70.1,
+        "baseWinProb": 70,
         "projScoreUt": 26,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -1483,7 +1486,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN EAST CLASSIC",
         "vegasSpread": -0.5,
         "overUnder": 43.5,
-        "baseWinProb": 52.6,
+        "baseWinProb": 53,
         "projScoreUt": 23,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -1512,7 +1515,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN TOP-15 BATTLE",
         "vegasSpread": -0.5,
         "overUnder": 48.0,
-        "baseWinProb": 52.1,
+        "baseWinProb": 52,
         "projScoreUt": 25,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -1540,7 +1543,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -5.5,
         "overUnder": 47.0,
-        "baseWinProb": 71.9,
+        "baseWinProb": 72,
         "projScoreUt": 26,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -1569,7 +1572,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BATTLE FOR PAUL BUNYAN TROPHY",
         "vegasSpread": -24.0,
         "overUnder": 45.5,
-        "baseWinProb": 98.4,
+        "baseWinProb": 98,
         "projScoreUt": 35,
         "projScoreOpp": 11,
         "scoutReport": {
@@ -1598,7 +1601,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "CROSS-COUNTRY BIG TEN CLASH IN AUTZEN",
         "vegasSpread": 7.5,
         "overUnder": 56.0,
-        "baseWinProb": 21.5,
+        "baseWinProb": 22,
         "projScoreUt": 24,
         "projScoreOpp": 32,
         "scoutReport": {
@@ -1626,7 +1629,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -11.5,
         "overUnder": 47.0,
-        "baseWinProb": 87.7,
+        "baseWinProb": 88,
         "projScoreUt": 29,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -1655,7 +1658,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE GAME (#1 BUCKEYES IN THE HORSESHOE)",
         "vegasSpread": 9.5,
         "overUnder": 48.5,
-        "baseWinProb": 16.8,
+        "baseWinProb": 17,
         "projScoreUt": 20,
         "projScoreOpp": 29,
         "scoutReport": {
@@ -1724,7 +1727,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -32.5,
         "overUnder": 53.0,
-        "baseWinProb": 99.5,
+        "baseWinProb": 100,
         "projScoreUt": 43,
         "projScoreOpp": 10,
         "scoutReport": {
@@ -1753,7 +1756,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE GAME OF THE YEAR (#1 VS #5)",
         "vegasSpread": 2.0,
         "overUnder": 59.0,
-        "baseWinProb": 42.4,
+        "baseWinProb": 42,
         "projScoreUt": 27,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -1781,7 +1784,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -21.5,
         "overUnder": 53.0,
-        "baseWinProb": 97.5,
+        "baseWinProb": 98,
         "projScoreUt": 37,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -1810,7 +1813,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ILLIBUCK TROPHY RIVALRY",
         "vegasSpread": -15.5,
         "overUnder": 54.5,
-        "baseWinProb": 93.3,
+        "baseWinProb": 93,
         "projScoreUt": 35,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -1838,7 +1841,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -5.5,
         "overUnder": 44.5,
-        "baseWinProb": 71.5,
+        "baseWinProb": 72,
         "projScoreUt": 25,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -1866,7 +1869,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -22.0,
         "overUnder": 53.0,
-        "baseWinProb": 97.7,
+        "baseWinProb": 98,
         "projScoreUt": 38,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -1895,7 +1898,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN TOP-10 ROAD WAR",
         "vegasSpread": -1.0,
         "overUnder": 55.5,
-        "baseWinProb": 53.8,
+        "baseWinProb": 54,
         "projScoreUt": 28,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -1924,7 +1927,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HISTORIC ROSE BOWL RIVALRY (IN LA)",
         "vegasSpread": -4.0,
         "overUnder": 62.0,
-        "baseWinProb": 66.0,
+        "baseWinProb": 66,
         "projScoreUt": 33,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -1953,7 +1956,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "COLOSSAL #1 VS #2 SHOWDOWN IN COLUMBUS",
         "vegasSpread": -4.5,
         "overUnder": 60.0,
-        "baseWinProb": 68.7,
+        "baseWinProb": 69,
         "projScoreUt": 32,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -1981,7 +1984,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -9.0,
         "overUnder": 54.5,
-        "baseWinProb": 82.8,
+        "baseWinProb": 83,
         "projScoreUt": 32,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -2009,7 +2012,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -9.5,
         "overUnder": 54.5,
-        "baseWinProb": 83.2,
+        "baseWinProb": 83,
         "projScoreUt": 32,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -2038,7 +2041,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE GAME: REVENGE IN THE HORSESHOE",
         "vegasSpread": -9.5,
         "overUnder": 48.5,
-        "baseWinProb": 83.2,
+        "baseWinProb": 83,
         "projScoreUt": 29,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -2107,7 +2110,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -31.5,
         "overUnder": 52.0,
-        "baseWinProb": 99.5,
+        "baseWinProb": 100,
         "projScoreUt": 42,
         "projScoreOpp": 10,
         "scoutReport": {
@@ -2135,7 +2138,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -25.5,
         "overUnder": 52.0,
-        "baseWinProb": 98.7,
+        "baseWinProb": 99,
         "projScoreUt": 39,
         "projScoreOpp": 13,
         "scoutReport": {
@@ -2163,7 +2166,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -9.0,
         "overUnder": 53.5,
-        "baseWinProb": 81.8,
+        "baseWinProb": 82,
         "projScoreUt": 31,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -2192,7 +2195,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-10 SEC MEGAMATCHUP",
         "vegasSpread": -5.5,
         "overUnder": 54.0,
-        "baseWinProb": 72.6,
+        "baseWinProb": 73,
         "projScoreUt": 30,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -2220,7 +2223,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -17.5,
         "overUnder": 53.5,
-        "baseWinProb": 95.0,
+        "baseWinProb": 95,
         "projScoreUt": 36,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -2249,7 +2252,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEC TITAN CLASH IN TUSCALOOSA",
         "vegasSpread": -0.5,
         "overUnder": 55.0,
-        "baseWinProb": 51.7,
+        "baseWinProb": 52,
         "projScoreUt": 28,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -2278,7 +2281,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "DEEP SOUTH'S OLDEST RIVALRY",
         "vegasSpread": -13.5,
         "overUnder": 53.5,
-        "baseWinProb": 90.6,
+        "baseWinProb": 91,
         "projScoreUt": 34,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -2307,7 +2310,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "WORLD'S LARGEST OUTDOOR COCKTAIL PARTY",
         "vegasSpread": -10.5,
         "overUnder": 53.5,
-        "baseWinProb": 85.3,
+        "baseWinProb": 85,
         "projScoreUt": 32,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -2336,7 +2339,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-10 SEC ROAD SHOWDOWN",
         "vegasSpread": -0.5,
         "overUnder": 62.0,
-        "baseWinProb": 52.1,
+        "baseWinProb": 52,
         "projScoreUt": 32,
         "projScoreOpp": 29,
         "scoutReport": {
@@ -2364,7 +2367,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -10.0,
         "overUnder": 52.0,
-        "baseWinProb": 84.4,
+        "baseWinProb": 84,
         "projScoreUt": 31,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -2392,7 +2395,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -9.5,
         "overUnder": 53.5,
-        "baseWinProb": 83.0,
+        "baseWinProb": 83,
         "projScoreUt": 32,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -2421,7 +2424,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "CLEAN, OLD-FASHIONED HATE",
         "vegasSpread": -13.5,
         "overUnder": 53.5,
-        "baseWinProb": 90.6,
+        "baseWinProb": 91,
         "projScoreUt": 34,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -2490,7 +2493,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -25.0,
         "overUnder": 52.5,
-        "baseWinProb": 98.6,
+        "baseWinProb": 99,
         "projScoreUt": 39,
         "projScoreOpp": 14,
         "scoutReport": {
@@ -2518,7 +2521,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -6.5,
         "overUnder": 54.5,
-        "baseWinProb": 74.9,
+        "baseWinProb": 75,
         "projScoreUt": 30,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -2547,7 +2550,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE MARQUEE CLASH",
         "vegasSpread": -5.0,
         "overUnder": 54.5,
-        "baseWinProb": 70.1,
+        "baseWinProb": 70,
         "projScoreUt": 30,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -2575,7 +2578,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -11.5,
         "overUnder": 54.5,
-        "baseWinProb": 87.5,
+        "baseWinProb": 88,
         "projScoreUt": 33,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -2603,7 +2606,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -8.5,
         "overUnder": 54.5,
-        "baseWinProb": 80.7,
+        "baseWinProb": 81,
         "projScoreUt": 32,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -2632,7 +2635,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TITAN CLASH: GEORGIA IN TUSCALOOSA",
         "vegasSpread": 0.5,
         "overUnder": 55.0,
-        "baseWinProb": 48.3,
+        "baseWinProb": 48,
         "projScoreUt": 25,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -2661,7 +2664,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE THIRD SATURDAY IN OCTOBER (IN KNOXVILLE)",
         "vegasSpread": 1.0,
         "overUnder": 59.0,
-        "baseWinProb": 46.6,
+        "baseWinProb": 47,
         "projScoreUt": 30,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -2690,7 +2693,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-10 SEC BATTLE IN T-TOWN",
         "vegasSpread": -1.5,
         "overUnder": 53.5,
-        "baseWinProb": 56.8,
+        "baseWinProb": 57,
         "projScoreUt": 28,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -2719,7 +2722,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "DEATH VALLEY TITAN CLASH",
         "vegasSpread": 2.5,
         "overUnder": 56.5,
-        "baseWinProb": 39.9,
+        "baseWinProb": 40,
         "projScoreUt": 27,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -2747,7 +2750,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -9.0,
         "overUnder": 54.5,
-        "baseWinProb": 82.0,
+        "baseWinProb": 82,
         "projScoreUt": 32,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -2775,7 +2778,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -32.5,
         "overUnder": 52.5,
-        "baseWinProb": 99.5,
+        "baseWinProb": 100,
         "projScoreUt": 42,
         "projScoreOpp": 10,
         "scoutReport": {
@@ -2804,7 +2807,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE IRON BOWL (IN TUSCALOOSA)",
         "vegasSpread": -10.5,
         "overUnder": 54.5,
-        "baseWinProb": 85.5,
+        "baseWinProb": 86,
         "projScoreUt": 32,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -2874,7 +2877,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MARQUEE NORTHWEST OPENER",
         "vegasSpread": -13.0,
         "overUnder": 60.5,
-        "baseWinProb": 90.3,
+        "baseWinProb": 90,
         "projScoreUt": 37,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -2902,7 +2905,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -10.5,
         "overUnder": 58.5,
-        "baseWinProb": 85.3,
+        "baseWinProb": 85,
         "projScoreUt": 34,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -2930,7 +2933,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -39.5,
         "overUnder": 57.0,
-        "baseWinProb": 99.5,
+        "baseWinProb": 100,
         "projScoreUt": 48,
         "projScoreOpp": 9,
         "scoutReport": {
@@ -2959,7 +2962,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "PAC-12 HERITAGE BIG TEN CLASH",
         "vegasSpread": -2.5,
         "overUnder": 66.5,
-        "baseWinProb": 60.5,
+        "baseWinProb": 60,
         "projScoreUt": 34,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -2987,7 +2990,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -16.0,
         "overUnder": 58.5,
-        "baseWinProb": 94.0,
+        "baseWinProb": 94,
         "projScoreUt": 37,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -3015,7 +3018,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -13.0,
         "overUnder": 58.5,
-        "baseWinProb": 90.3,
+        "baseWinProb": 90,
         "projScoreUt": 36,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -3043,7 +3046,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -8.5,
         "overUnder": 58.5,
-        "baseWinProb": 80.5,
+        "baseWinProb": 80,
         "projScoreUt": 34,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -3071,7 +3074,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -20.0,
         "overUnder": 57.5,
-        "baseWinProb": 96.9,
+        "baseWinProb": 97,
         "projScoreUt": 39,
         "projScoreOpp": 19,
         "scoutReport": {
@@ -3100,7 +3103,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "COLOSSAL #1 VS #2 SHOWDOWN IN COLUMBUS",
         "vegasSpread": 4.5,
         "overUnder": 60.0,
-        "baseWinProb": 31.3,
+        "baseWinProb": 31,
         "projScoreUt": 28,
         "projScoreOpp": 32,
         "scoutReport": {
@@ -3129,7 +3132,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "CROSS-COUNTRY BIG TEN CLASH IN AUTZEN",
         "vegasSpread": -7.5,
         "overUnder": 56.0,
-        "baseWinProb": 78.5,
+        "baseWinProb": 78,
         "projScoreUt": 32,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -3157,7 +3160,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -7.5,
         "overUnder": 58.5,
-        "baseWinProb": 78.5,
+        "baseWinProb": 78,
         "projScoreUt": 33,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -3186,7 +3189,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "PACIFIC NORTHWEST BORDER WAR",
         "vegasSpread": -9.0,
         "overUnder": 58.0,
-        "baseWinProb": 81.8,
+        "baseWinProb": 82,
         "projScoreUt": 34,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -3255,7 +3258,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -21.0,
         "overUnder": 47.5,
-        "baseWinProb": 95.0,
+        "baseWinProb": 95,
         "projScoreUt": 34,
         "projScoreOpp": 13,
         "scoutReport": {
@@ -3283,7 +3286,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -20.0,
         "overUnder": 48.0,
-        "baseWinProb": 94.5,
+        "baseWinProb": 94,
         "projScoreUt": 34,
         "projScoreOpp": 14,
         "scoutReport": {
@@ -3311,7 +3314,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -23.0,
         "overUnder": 47.5,
-        "baseWinProb": 96.0,
+        "baseWinProb": 96,
         "projScoreUt": 35,
         "projScoreOpp": 12,
         "scoutReport": {
@@ -3340,7 +3343,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN PHYSICAL SLUGFEST",
         "vegasSpread": -1.5,
         "overUnder": 46.5,
-        "baseWinProb": 53.5,
+        "baseWinProb": 54,
         "projScoreUt": 22,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -3368,7 +3371,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -3.5,
         "overUnder": 44.5,
-        "baseWinProb": 60.0,
+        "baseWinProb": 60,
         "projScoreUt": 23,
         "projScoreOpp": 19,
         "scoutReport": {
@@ -3397,7 +3400,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "OFFICIAL 2026 PENN STATE WHITE OUT",
         "vegasSpread": 2.0,
         "overUnder": 55.0,
-        "baseWinProb": 44.5,
+        "baseWinProb": 44,
         "projScoreUt": 24,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -3426,7 +3429,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN TOP-20 ROAD BATTLE",
         "vegasSpread": 6.5,
         "overUnder": 44.5,
-        "baseWinProb": 47.4,
+        "baseWinProb": 47,
         "projScoreUt": 20,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -3454,7 +3457,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -8.0,
         "overUnder": 46.5,
-        "baseWinProb": 74.5,
+        "baseWinProb": 74,
         "projScoreUt": 27,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -3482,7 +3485,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": 3.5,
         "overUnder": 47.5,
-        "baseWinProb": 41.5,
+        "baseWinProb": 42,
         "projScoreUt": 21,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -3510,7 +3513,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -3.0,
         "overUnder": 44.5,
-        "baseWinProb": 58.0,
+        "baseWinProb": 58,
         "projScoreUt": 24,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -3538,7 +3541,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -3.5,
         "overUnder": 44.5,
-        "baseWinProb": 60.5,
+        "baseWinProb": 60,
         "projScoreUt": 24,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -3566,7 +3569,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": 1.5,
         "overUnder": 46.5,
-        "baseWinProb": 47.5,
+        "baseWinProb": 48,
         "projScoreUt": 22,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -3636,7 +3639,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SHAMROCK SERIES AT LAMBEAU FIELD",
         "vegasSpread": -6.5,
         "overUnder": 53.0,
-        "baseWinProb": 74.5,
+        "baseWinProb": 74,
         "projScoreUt": 30,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -3664,7 +3667,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -27.0,
         "overUnder": 51.5,
-        "baseWinProb": 99.0,
+        "baseWinProb": 99,
         "projScoreUt": 39,
         "projScoreOpp": 12,
         "scoutReport": {
@@ -3693,7 +3696,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MEGAPHONE TROPHY RIVALRY RENEWAL",
         "vegasSpread": -15.0,
         "overUnder": 53.0,
-        "baseWinProb": 92.9,
+        "baseWinProb": 93,
         "projScoreUt": 34,
         "projScoreOpp": 19,
         "scoutReport": {
@@ -3722,7 +3725,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SHILLELAGH TROPHY IN-STATE CLASH",
         "vegasSpread": -12.5,
         "overUnder": 53.0,
-        "baseWinProb": 89.1,
+        "baseWinProb": 89,
         "projScoreUt": 33,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -3750,7 +3753,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -7.5,
         "overUnder": 53.0,
-        "baseWinProb": 77.6,
+        "baseWinProb": 78,
         "projScoreUt": 30,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -3779,7 +3782,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "LEGENDS TROPHY RIVALRY",
         "vegasSpread": -17.5,
         "overUnder": 53.0,
-        "baseWinProb": 95.3,
+        "baseWinProb": 95,
         "projScoreUt": 35,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -3807,7 +3810,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -3.0,
         "overUnder": 47.0,
-        "baseWinProb": 61.7,
+        "baseWinProb": 62,
         "projScoreUt": 25,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -3836,7 +3839,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HISTORIC NAVY-NOTRE DAME CLASH (IN BOSTON)",
         "vegasSpread": -17.5,
         "overUnder": 53.0,
-        "baseWinProb": 95.0,
+        "baseWinProb": 95,
         "projScoreUt": 35,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -3865,7 +3868,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "CATHOLICS VS CONVICTS RIVALRY RENEWAL (#4 VS #7)",
         "vegasSpread": -2.5,
         "overUnder": 59.0,
-        "baseWinProb": 60.1,
+        "baseWinProb": 60,
         "projScoreUt": 31,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -3894,7 +3897,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HOLY WAR RIVALRY CLASH",
         "vegasSpread": -17.5,
         "overUnder": 53.0,
-        "baseWinProb": 95.3,
+        "baseWinProb": 95,
         "projScoreUt": 35,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -3922,7 +3925,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -6.5,
         "overUnder": 60.0,
-        "baseWinProb": 75.5,
+        "baseWinProb": 76,
         "projScoreUt": 33,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -3950,7 +3953,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -0.5,
         "overUnder": 61.0,
-        "baseWinProb": 52.1,
+        "baseWinProb": 52,
         "projScoreUt": 31,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -4021,7 +4024,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BLOCKBUSTER SEASON OPENER (TIGER BOWL)",
         "vegasSpread": -4.5,
         "overUnder": 54.5,
-        "baseWinProb": 67.9,
+        "baseWinProb": 68,
         "projScoreUt": 30,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -4049,7 +4052,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -23.0,
         "overUnder": 53.5,
-        "baseWinProb": 98.0,
+        "baseWinProb": 98,
         "projScoreUt": 38,
         "projScoreOpp": 15,
         "scoutReport": {
@@ -4078,7 +4081,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MAGNOLIA BOWL RIVALRY CLASH",
         "vegasSpread": 3.5,
         "overUnder": 63.5,
-        "baseWinProb": 35.5,
+        "baseWinProb": 36,
         "projScoreUt": 30,
         "projScoreOpp": 34,
         "scoutReport": {
@@ -4107,7 +4110,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-10 SEC WEST RIVALRY",
         "vegasSpread": 1.0,
         "overUnder": 54.0,
-        "baseWinProb": 44.9,
+        "baseWinProb": 45,
         "projScoreUt": 28,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -4135,7 +4138,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -28.0,
         "overUnder": 53.0,
-        "baseWinProb": 99.1,
+        "baseWinProb": 99,
         "projScoreUt": 40,
         "projScoreOpp": 12,
         "scoutReport": {
@@ -4163,7 +4166,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -6.0,
         "overUnder": 55.0,
-        "baseWinProb": 72.9,
+        "baseWinProb": 73,
         "projScoreUt": 30,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -4191,7 +4194,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -13.5,
         "overUnder": 55.0,
-        "baseWinProb": 90.6,
+        "baseWinProb": 91,
         "projScoreUt": 34,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -4220,7 +4223,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TIGER BOWL AT JORDAN-HARE",
         "vegasSpread": -4.5,
         "overUnder": 55.0,
-        "baseWinProb": 67.6,
+        "baseWinProb": 68,
         "projScoreUt": 30,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -4249,7 +4252,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE BATTLE FOR THE SEC: ALABAMA AT DEATH VALLEY",
         "vegasSpread": -2.5,
         "overUnder": 56.5,
-        "baseWinProb": 60.1,
+        "baseWinProb": 60,
         "projScoreUt": 30,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -4278,7 +4281,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-10 SEC MEGAMATCHUP IN DEATH VALLEY",
         "vegasSpread": -2.0,
         "overUnder": 58.5,
-        "baseWinProb": 57.5,
+        "baseWinProb": 58,
         "projScoreUt": 28,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -4306,7 +4309,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -1.5,
         "overUnder": 57.0,
-        "baseWinProb": 54.2,
+        "baseWinProb": 54,
         "projScoreUt": 30,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -4335,7 +4338,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BATTLE FOR THE GOLDEN BOOT",
         "vegasSpread": -5.0,
         "overUnder": 55.0,
-        "baseWinProb": 69.4,
+        "baseWinProb": 69,
         "projScoreUt": 30,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -4404,7 +4407,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -21.0,
         "overUnder": 56.5,
-        "baseWinProb": 97.4,
+        "baseWinProb": 97,
         "projScoreUt": 39,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -4433,7 +4436,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "REGIONAL POWER SHOWDOWN IN ATLANTA",
         "vegasSpread": 31.5,
         "overUnder": 58.0,
-        "baseWinProb": 0.5,
+        "baseWinProb": 0,
         "projScoreUt": 13,
         "projScoreOpp": 45,
         "scoutReport": {
@@ -4461,7 +4464,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -27.0,
         "overUnder": 56.0,
-        "baseWinProb": 99.0,
+        "baseWinProb": 99,
         "projScoreUt": 42,
         "projScoreOpp": 14,
         "scoutReport": {
@@ -4490,7 +4493,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "CHECKER NEYLAND: #5 TEXAS IN KNOXVILLE",
         "vegasSpread": 3.0,
         "overUnder": 62.5,
-        "baseWinProb": 38.3,
+        "baseWinProb": 38,
         "projScoreUt": 30,
         "projScoreOpp": 33,
         "scoutReport": {
@@ -4518,7 +4521,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -8.0,
         "overUnder": 57.5,
-        "baseWinProb": 80.2,
+        "baseWinProb": 80,
         "projScoreUt": 33,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -4546,7 +4549,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -3.0,
         "overUnder": 57.5,
-        "baseWinProb": 63.3,
+        "baseWinProb": 63,
         "projScoreUt": 30,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -4575,7 +4578,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE THIRD SATURDAY IN OCTOBER (IN KNOXVILLE)",
         "vegasSpread": -1.0,
         "overUnder": 59.0,
-        "baseWinProb": 53.4,
+        "baseWinProb": 53,
         "projScoreUt": 27,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -4603,7 +4606,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -3.5,
         "overUnder": 57.5,
-        "baseWinProb": 65.3,
+        "baseWinProb": 65,
         "projScoreUt": 30,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -4632,7 +4635,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BATTLE FOR THE BEER BARREL",
         "vegasSpread": -9.5,
         "overUnder": 57.5,
-        "baseWinProb": 83.9,
+        "baseWinProb": 84,
         "projScoreUt": 34,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -4660,7 +4663,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": 3.0,
         "overUnder": 57.0,
-        "baseWinProb": 38.3,
+        "baseWinProb": 38,
         "projScoreUt": 27,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -4689,7 +4692,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-20 SEC SHOWDOWN IN NEYLAND",
         "vegasSpread": 1.5,
         "overUnder": 57.0,
-        "baseWinProb": 45.8,
+        "baseWinProb": 46,
         "projScoreUt": 27,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -4718,7 +4721,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "IN-STATE RIVALRY FINALE",
         "vegasSpread": -6.5,
         "overUnder": 57.5,
-        "baseWinProb": 75.8,
+        "baseWinProb": 76,
         "projScoreUt": 32,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -4787,7 +4790,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -25.0,
         "overUnder": 52.5,
-        "baseWinProb": 98.6,
+        "baseWinProb": 99,
         "projScoreUt": 39,
         "projScoreOpp": 14,
         "scoutReport": {
@@ -4815,7 +4818,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -24.5,
         "overUnder": 52.5,
-        "baseWinProb": 98.4,
+        "baseWinProb": 98,
         "projScoreUt": 38,
         "projScoreOpp": 14,
         "scoutReport": {
@@ -4843,7 +4846,7 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "vegasSpread": -23.5,
         "overUnder": 53.0,
-        "baseWinProb": 98.2,
+        "baseWinProb": 98,
         "projScoreUt": 38,
         "projScoreOpp": 15,
         "scoutReport": {
@@ -4871,7 +4874,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -18.0,
         "overUnder": 53.0,
-        "baseWinProb": 95.4,
+        "baseWinProb": 95,
         "projScoreUt": 36,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -4899,7 +4902,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -8.0,
         "overUnder": 54.0,
-        "baseWinProb": 79.6,
+        "baseWinProb": 80,
         "projScoreUt": 31,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -4927,7 +4930,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -5.5,
         "overUnder": 54.0,
-        "baseWinProb": 71.9,
+        "baseWinProb": 72,
         "projScoreUt": 30,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -4956,7 +4959,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN TOP-10 MEGASHOWDOWN (#1 IN BLOOMINGTON)",
         "vegasSpread": 1.0,
         "overUnder": 55.5,
-        "baseWinProb": 46.2,
+        "baseWinProb": 46,
         "projScoreUt": 25,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -4985,7 +4988,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN TOP-15 BATTLE AT THE BIG HOUSE",
         "vegasSpread": 0.5,
         "overUnder": 48.0,
-        "baseWinProb": 47.9,
+        "baseWinProb": 48,
         "projScoreUt": 22,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -5013,7 +5016,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -13.0,
         "overUnder": 54.0,
-        "baseWinProb": 89.9,
+        "baseWinProb": 90,
         "projScoreUt": 34,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -5042,7 +5045,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN TOP-15 SHOWDOWN IN BLOOMINGTON",
         "vegasSpread": -9.0,
         "overUnder": 54.0,
-        "baseWinProb": 82.3,
+        "baseWinProb": 82,
         "projScoreUt": 32,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -5070,7 +5073,7 @@ var TEAMS_DATABASE = {
         "isBigTen": true,
         "vegasSpread": -1.0,
         "overUnder": 53.5,
-        "baseWinProb": 53.8,
+        "baseWinProb": 54,
         "projScoreUt": 27,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -5099,7 +5102,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE OLD OAKEN BUCKET RIVALRY",
         "vegasSpread": -17.5,
         "overUnder": 54.0,
-        "baseWinProb": 95.0,
+        "baseWinProb": 95,
         "projScoreUt": 36,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -5168,7 +5171,7 @@ var TEAMS_DATABASE = {
         "isAcc": true,
         "vegasSpread": -12.5,
         "overUnder": 58.5,
-        "baseWinProb": 89.7,
+        "baseWinProb": 90,
         "projScoreUt": 36,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -5196,7 +5199,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -24.5,
         "overUnder": 57.0,
-        "baseWinProb": 98.5,
+        "baseWinProb": 98,
         "projScoreUt": 41,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -5224,7 +5227,7 @@ var TEAMS_DATABASE = {
         "isAcc": true,
         "vegasSpread": -12.0,
         "overUnder": 58.5,
-        "baseWinProb": 88.9,
+        "baseWinProb": 89,
         "projScoreUt": 35,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -5252,7 +5255,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -24.5,
         "overUnder": 57.0,
-        "baseWinProb": 98.5,
+        "baseWinProb": 98,
         "projScoreUt": 41,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -5281,7 +5284,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ACC TITLE RACE TITAN CLASH",
         "vegasSpread": -1.5,
         "overUnder": 58.5,
-        "baseWinProb": 55.5,
+        "baseWinProb": 56,
         "projScoreUt": 30,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -5310,7 +5313,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE SUNSHINE STATE SHOWDOWN",
         "vegasSpread": -6.5,
         "overUnder": 58.5,
-        "baseWinProb": 74.5,
+        "baseWinProb": 74,
         "projScoreUt": 32,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -5338,7 +5341,7 @@ var TEAMS_DATABASE = {
         "isAcc": true,
         "vegasSpread": -13.0,
         "overUnder": 58.5,
-        "baseWinProb": 90.5,
+        "baseWinProb": 90,
         "projScoreUt": 36,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -5366,7 +5369,7 @@ var TEAMS_DATABASE = {
         "isAcc": true,
         "vegasSpread": -7.5,
         "overUnder": 58.5,
-        "baseWinProb": 78.8,
+        "baseWinProb": 79,
         "projScoreUt": 33,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -5395,7 +5398,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "CATHOLICS VS CONVICTS RIVALRY RENEWAL (#4 VS #7)",
         "vegasSpread": 2.5,
         "overUnder": 59.0,
-        "baseWinProb": 39.9,
+        "baseWinProb": 40,
         "projScoreUt": 28,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -5423,7 +5426,7 @@ var TEAMS_DATABASE = {
         "isAcc": true,
         "vegasSpread": -14.0,
         "overUnder": 58.5,
-        "baseWinProb": 91.8,
+        "baseWinProb": 92,
         "projScoreUt": 36,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -5452,7 +5455,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SENIOR DAY HOME FINALE",
         "vegasSpread": -13.5,
         "overUnder": 58.5,
-        "baseWinProb": 91.2,
+        "baseWinProb": 91,
         "projScoreUt": 36,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -5480,7 +5483,7 @@ var TEAMS_DATABASE = {
         "isAcc": true,
         "vegasSpread": -17.5,
         "overUnder": 58.5,
-        "baseWinProb": 95.3,
+        "baseWinProb": 95,
         "projScoreUt": 38,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -5549,7 +5552,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -29.5,
         "overUnder": 50.5,
-        "baseWinProb": 99.3,
+        "baseWinProb": 99,
         "projScoreUt": 40,
         "projScoreOpp": 10,
         "scoutReport": {
@@ -5578,7 +5581,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE POWER CLASH",
         "vegasSpread": -11.5,
         "overUnder": 52.0,
-        "baseWinProb": 87.3,
+        "baseWinProb": 87,
         "projScoreUt": 38,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -5606,7 +5609,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -13.0,
         "overUnder": 52.0,
-        "baseWinProb": 89.9,
+        "baseWinProb": 90,
         "projScoreUt": 32,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -5635,7 +5638,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "DEATH VALLEY SATURDAY NIGHT CLASH",
         "vegasSpread": -1.0,
         "overUnder": 54.0,
-        "baseWinProb": 55.1,
+        "baseWinProb": 55,
         "projScoreUt": 25,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -5664,7 +5667,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SOUTHWEST CLASSIC (AT KYLE FIELD)",
         "vegasSpread": -12.0,
         "overUnder": 52.0,
-        "baseWinProb": 88.2,
+        "baseWinProb": 88,
         "projScoreUt": 32,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -5692,7 +5695,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -5.0,
         "overUnder": 50.5,
-        "baseWinProb": 70.5,
+        "baseWinProb": 70,
         "projScoreUt": 28,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -5720,7 +5723,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -24.5,
         "overUnder": 50.5,
-        "baseWinProb": 98.4,
+        "baseWinProb": 98,
         "projScoreUt": 38,
         "projScoreOpp": 13,
         "scoutReport": {
@@ -5749,7 +5752,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-15 SEC SHOWDOWN IN TUSCALOOSA",
         "vegasSpread": 1.5,
         "overUnder": 53.5,
-        "baseWinProb": 43.2,
+        "baseWinProb": 43,
         "projScoreUt": 26,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -5777,7 +5780,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -7.5,
         "overUnder": 52.0,
-        "baseWinProb": 77.6,
+        "baseWinProb": 78,
         "projScoreUt": 30,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -5806,7 +5809,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-20 SEC BATTLE IN COLLEGE STATION",
         "vegasSpread": -3.0,
         "overUnder": 57.0,
-        "baseWinProb": 61.7,
+        "baseWinProb": 62,
         "projScoreUt": 30,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -5835,7 +5838,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HISTORIC BIG 12 / SEC RIVALRY",
         "vegasSpread": -3.5,
         "overUnder": 52.5,
-        "baseWinProb": 64.1,
+        "baseWinProb": 64,
         "projScoreUt": 28,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -5864,7 +5867,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE LONE STAR SHOWDOWN (AT KYLE FIELD)",
         "vegasSpread": 2.0,
         "overUnder": 58.0,
-        "baseWinProb": 42.4,
+        "baseWinProb": 42,
         "projScoreUt": 27,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -5934,7 +5937,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SUNDAY NIGHT KICKOFF SHOWCASE",
         "vegasSpread": -7.5,
         "overUnder": 67.5,
-        "baseWinProb": 77.6,
+        "baseWinProb": 78,
         "projScoreUt": 38,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -5962,7 +5965,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -27.5,
         "overUnder": 59.5,
-        "baseWinProb": 99.1,
+        "baseWinProb": 99,
         "projScoreUt": 44,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -5991,7 +5994,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MAGNOLIA BOWL: KIFFIN RETURNS TO OXFORD",
         "vegasSpread": -3.5,
         "overUnder": 63.5,
-        "baseWinProb": 64.5,
+        "baseWinProb": 64,
         "projScoreUt": 34,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -6019,7 +6022,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -5.0,
         "overUnder": 61.5,
-        "baseWinProb": 69.4,
+        "baseWinProb": 69,
         "projScoreUt": 33,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -6047,7 +6050,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -9.5,
         "overUnder": 61.5,
-        "baseWinProb": 83.0,
+        "baseWinProb": 83,
         "projScoreUt": 36,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -6075,7 +6078,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -7.0,
         "overUnder": 59.5,
-        "baseWinProb": 76.4,
+        "baseWinProb": 76,
         "projScoreUt": 33,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -6104,7 +6107,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-10 SEC SHOOTOUT IN AUSTIN",
         "vegasSpread": 6.0,
         "overUnder": 66.0,
-        "baseWinProb": 25.8,
+        "baseWinProb": 26,
         "projScoreUt": 30,
         "projScoreOpp": 36,
         "scoutReport": {
@@ -6132,7 +6135,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -10.5,
         "overUnder": 61.5,
-        "baseWinProb": 85.3,
+        "baseWinProb": 85,
         "projScoreUt": 36,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -6161,7 +6164,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-10 SEC BLOCKBUSTER IN OXFORD",
         "vegasSpread": 0.5,
         "overUnder": 62.0,
-        "baseWinProb": 47.9,
+        "baseWinProb": 48,
         "projScoreUt": 29,
         "projScoreOpp": 32,
         "scoutReport": {
@@ -6189,7 +6192,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": 2.5,
         "overUnder": 61.5,
-        "baseWinProb": 39.1,
+        "baseWinProb": 39,
         "projScoreUt": 30,
         "projScoreOpp": 32,
         "scoutReport": {
@@ -6217,7 +6220,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -23.5,
         "overUnder": 60.0,
-        "baseWinProb": 98.2,
+        "baseWinProb": 98,
         "projScoreUt": 42,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -6246,7 +6249,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE EGG BOWL (ON BLACK FRIDAY)",
         "vegasSpread": -14.0,
         "overUnder": 61.5,
-        "baseWinProb": 91.3,
+        "baseWinProb": 91,
         "projScoreUt": 38,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -6315,7 +6318,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -27.5,
         "overUnder": 51.5,
-        "baseWinProb": 99.1,
+        "baseWinProb": 99,
         "projScoreUt": 40,
         "projScoreOpp": 12,
         "scoutReport": {
@@ -6344,7 +6347,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE BLUEBLOOD CLASH",
         "vegasSpread": 1.5,
         "overUnder": 47.5,
-        "baseWinProb": 44.1,
+        "baseWinProb": 44,
         "projScoreUt": 23,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -6372,7 +6375,7 @@ var TEAMS_DATABASE = {
         "isSec": false,
         "vegasSpread": -26.5,
         "overUnder": 51.5,
-        "baseWinProb": 98.9,
+        "baseWinProb": 99,
         "projScoreUt": 39,
         "projScoreOpp": 12,
         "scoutReport": {
@@ -6401,7 +6404,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-10 SEC MEGAMATCHUP IN ATHENS",
         "vegasSpread": 5.5,
         "overUnder": 54.0,
-        "baseWinProb": 27.4,
+        "baseWinProb": 27,
         "projScoreUt": 24,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -6430,7 +6433,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "RED RIVER RIVALRY (GOLDEN HAT)",
         "vegasSpread": 3.5,
         "overUnder": 58.0,
-        "baseWinProb": 35.9,
+        "baseWinProb": 36,
         "projScoreUt": 27,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -6458,7 +6461,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -12.0,
         "overUnder": 53.0,
-        "baseWinProb": 88.4,
+        "baseWinProb": 88,
         "projScoreUt": 32,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -6486,7 +6489,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -8.5,
         "overUnder": 53.0,
-        "baseWinProb": 81.3,
+        "baseWinProb": 81,
         "projScoreUt": 31,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -6514,7 +6517,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -11.5,
         "overUnder": 53.0,
-        "baseWinProb": 87.5,
+        "baseWinProb": 88,
         "projScoreUt": 32,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -6542,7 +6545,7 @@ var TEAMS_DATABASE = {
         "isSec": true,
         "vegasSpread": -4.5,
         "overUnder": 53.5,
-        "baseWinProb": 68.7,
+        "baseWinProb": 69,
         "projScoreUt": 29,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -6571,7 +6574,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP-10 SEC SHOWDOWN IN NORMAN",
         "vegasSpread": -2.5,
         "overUnder": 61.5,
-        "baseWinProb": 60.9,
+        "baseWinProb": 61,
         "projScoreUt": 32,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -6600,7 +6603,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HISTORIC BIG 12 / SEC RIVALRY (IN NORMAN)",
         "vegasSpread": 3.5,
         "overUnder": 52.5,
-        "baseWinProb": 35.9,
+        "baseWinProb": 36,
         "projScoreUt": 24,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -6629,7 +6632,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "OLD BIG EIGHT RIVALRY CLASH",
         "vegasSpread": -1.5,
         "overUnder": 51.5,
-        "baseWinProb": 57.2,
+        "baseWinProb": 57,
         "projScoreUt": 26,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -6700,7 +6703,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -16.0,
         "overUnder": 54.5,
-        "baseWinProb": 93.9,
+        "baseWinProb": 94,
         "projScoreUt": 35,
         "projScoreOpp": 19,
         "scoutReport": {
@@ -6729,7 +6732,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NORTHWEST SHOWDOWN (AT AUTZEN)",
         "vegasSpread": 13.0,
         "overUnder": 60.5,
-        "baseWinProb": 9.7,
+        "baseWinProb": 10,
         "projScoreUt": 24,
         "projScoreOpp": 37,
         "scoutReport": {
@@ -6758,7 +6761,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -29.0,
         "overUnder": 53.0,
-        "baseWinProb": 99.3,
+        "baseWinProb": 99,
         "projScoreUt": 41,
         "projScoreOpp": 12,
         "scoutReport": {
@@ -6787,7 +6790,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MOUNTAIN WEST ROAD TEST",
         "vegasSpread": -12.0,
         "overUnder": 54.5,
-        "baseWinProb": 88.6,
+        "baseWinProb": 89,
         "projScoreUt": 33,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -6816,7 +6819,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -10.0,
         "overUnder": 54.5,
-        "baseWinProb": 84.6,
+        "baseWinProb": 85,
         "projScoreUt": 32,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -6845,7 +6848,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MWC CHAMPIONSHIP REMATCH",
         "vegasSpread": -8.0,
         "overUnder": 54.5,
-        "baseWinProb": 79.6,
+        "baseWinProb": 80,
         "projScoreUt": 31,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -6874,7 +6877,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -11.0,
         "overUnder": 54.5,
-        "baseWinProb": 86.7,
+        "baseWinProb": 87,
         "projScoreUt": 33,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -6903,7 +6906,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BATTLE FOR THE MILK CAN",
         "vegasSpread": -12.5,
         "overUnder": 54.5,
-        "baseWinProb": 89.4,
+        "baseWinProb": 89,
         "projScoreUt": 34,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -6932,7 +6935,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -14.5,
         "overUnder": 54.5,
-        "baseWinProb": 92.2,
+        "baseWinProb": 92,
         "projScoreUt": 34,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -6961,7 +6964,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -13.5,
         "overUnder": 54.5,
-        "baseWinProb": 90.9,
+        "baseWinProb": 91,
         "projScoreUt": 34,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -6990,7 +6993,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -19.0,
         "overUnder": 53.5,
-        "baseWinProb": 96.2,
+        "baseWinProb": 96,
         "projScoreUt": 36,
         "projScoreOpp": 17,
         "scoutReport": {
@@ -7019,7 +7022,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "PAC-12 / MWC PACIFIC NORTHWEST CLASH",
         "vegasSpread": -0.5,
         "overUnder": 55.0,
-        "baseWinProb": 52.1,
+        "baseWinProb": 52,
         "projScoreUt": 25,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -7088,7 +7091,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "VEGAS KICKOFF CLASSIC (SEC vs B1G)",
         "vegasSpread": -26.5,
         "overUnder": 59.0,
-        "baseWinProb": 98.9,
+        "baseWinProb": 99,
         "projScoreUt": 43,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -7118,7 +7121,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -18.0,
         "overUnder": 59.5,
-        "baseWinProb": 95.4,
+        "baseWinProb": 95,
         "projScoreUt": 39,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -7147,7 +7150,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -20.5,
         "overUnder": 59.5,
-        "baseWinProb": 97.0,
+        "baseWinProb": 97,
         "projScoreUt": 40,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -7176,7 +7179,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -9.5,
         "overUnder": 60.5,
-        "baseWinProb": 83.0,
+        "baseWinProb": 83,
         "projScoreUt": 35,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -7205,7 +7208,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -8.5,
         "overUnder": 60.5,
-        "baseWinProb": 80.5,
+        "baseWinProb": 80,
         "projScoreUt": 34,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -7234,7 +7237,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE BIG HOUSE CROSS-COUNTRY GAUNTLET",
         "vegasSpread": -10.5,
         "overUnder": 60.5,
-        "baseWinProb": 85.3,
+        "baseWinProb": 85,
         "projScoreUt": 36,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -7263,7 +7266,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": 6.0,
         "overUnder": 60.0,
-        "baseWinProb": 55.5,
+        "baseWinProb": 56,
         "projScoreUt": 27,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -7292,7 +7295,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE HORSESHOE HALLOWEEN SHOWDOWN",
         "vegasSpread": 4.0,
         "overUnder": 62.0,
-        "baseWinProb": 34.0,
+        "baseWinProb": 34,
         "projScoreUt": 30,
         "projScoreOpp": 33,
         "scoutReport": {
@@ -7321,7 +7324,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "WEST COAST POWER CLASH",
         "vegasSpread": 2.5,
         "overUnder": 66.5,
-        "baseWinProb": 39.5,
+        "baseWinProb": 40,
         "projScoreUt": 31,
         "projScoreOpp": 34,
         "scoutReport": {
@@ -7350,7 +7353,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": 2.0,
         "overUnder": 60.0,
-        "baseWinProb": 42.4,
+        "baseWinProb": 42,
         "projScoreUt": 31,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -7379,7 +7382,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE BATTLE FOR THE VICTORY BELL",
         "vegasSpread": -11.0,
         "overUnder": 60.5,
-        "baseWinProb": 86.3,
+        "baseWinProb": 86,
         "projScoreUt": 36,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -7408,7 +7411,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE JEWELED SHILLELAGH (AT THE COLISEUM)",
         "vegasSpread": 0.5,
         "overUnder": 61.0,
-        "baseWinProb": 47.9,
+        "baseWinProb": 48,
         "projScoreUt": 28,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -7477,7 +7480,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "LABOR DAY KICKOFF CLASSIC",
         "vegasSpread": 5.0,
         "overUnder": 54.5,
-        "baseWinProb": 29.9,
+        "baseWinProb": 30,
         "projScoreUt": 25,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -7507,7 +7510,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -21.0,
         "overUnder": 51.5,
-        "baseWinProb": 97.4,
+        "baseWinProb": 97,
         "projScoreUt": 36,
         "projScoreOpp": 15,
         "scoutReport": {
@@ -7536,7 +7539,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ACC FRIDAY NIGHT SHOWDOWN",
         "vegasSpread": -1.5,
         "overUnder": 59.0,
-        "baseWinProb": 54.2,
+        "baseWinProb": 54,
         "projScoreUt": 31,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -7565,7 +7568,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -14.0,
         "overUnder": 53.0,
-        "baseWinProb": 91.8,
+        "baseWinProb": 92,
         "projScoreUt": 34,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -7594,7 +7597,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "JEFFERSON-EPPES TROPHY",
         "vegasSpread": -7.0,
         "overUnder": 53.0,
-        "baseWinProb": 76.4,
+        "baseWinProb": 76,
         "projScoreUt": 30,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -7623,7 +7626,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -10.5,
         "overUnder": 53.0,
-        "baseWinProb": 86.1,
+        "baseWinProb": 86,
         "projScoreUt": 32,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -7652,7 +7655,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE SUNSHINE STATE RIVALRY",
         "vegasSpread": 6.5,
         "overUnder": 58.5,
-        "baseWinProb": 25.5,
+        "baseWinProb": 26,
         "projScoreUt": 26,
         "projScoreOpp": 32,
         "scoutReport": {
@@ -7681,7 +7684,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -9.0,
         "overUnder": 53.0,
-        "baseWinProb": 82.8,
+        "baseWinProb": 83,
         "projScoreUt": 31,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -7710,7 +7713,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "CARTER-FINLEY TRAP GAME",
         "vegasSpread": -4.5,
         "overUnder": 53.0,
-        "baseWinProb": 67.9,
+        "baseWinProb": 68,
         "projScoreUt": 29,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -7739,7 +7742,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -13.5,
         "overUnder": 53.0,
-        "baseWinProb": 91.2,
+        "baseWinProb": 91,
         "projScoreUt": 33,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -7768,7 +7771,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ACC HEAVYWEIGHT BATTLE (AT DOAK)",
         "vegasSpread": -3.0,
         "overUnder": 52.5,
-        "baseWinProb": 61.7,
+        "baseWinProb": 62,
         "projScoreUt": 28,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -7797,7 +7800,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE SUNSHINE SHOWDOWN (AT THE SWAMP)",
         "vegasSpread": -2.5,
         "overUnder": 53.0,
-        "baseWinProb": 60.1,
+        "baseWinProb": 60,
         "projScoreUt": 25,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -7866,7 +7869,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "DEATH VALLEY vs DEATH VALLEY SHOWDOWN",
         "vegasSpread": 4.5,
         "overUnder": 54.5,
-        "baseWinProb": 32.1,
+        "baseWinProb": 32,
         "projScoreUt": 25,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -7895,7 +7898,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -21.0,
         "overUnder": 51.5,
-        "baseWinProb": 97.2,
+        "baseWinProb": 97,
         "projScoreUt": 36,
         "projScoreOpp": 15,
         "scoutReport": {
@@ -7924,7 +7927,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HISTORIC ACC REGIONAL RIVALRY",
         "vegasSpread": -3.0,
         "overUnder": 52.5,
-        "baseWinProb": 62.1,
+        "baseWinProb": 62,
         "projScoreUt": 28,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -7953,7 +7956,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -14.0,
         "overUnder": 52.5,
-        "baseWinProb": 91.5,
+        "baseWinProb": 92,
         "projScoreUt": 33,
         "projScoreOpp": 19,
         "scoutReport": {
@@ -7982,7 +7985,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ACC GAME OF THE YEAR IN DEATH VALLEY",
         "vegasSpread": 1.5,
         "overUnder": 58.5,
-        "baseWinProb": 44.5,
+        "baseWinProb": 44,
         "projScoreUt": 27,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -8011,7 +8014,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -12.0,
         "overUnder": 52.5,
-        "baseWinProb": 88.4,
+        "baseWinProb": 88,
         "projScoreUt": 32,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -8040,7 +8043,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -8.5,
         "overUnder": 52.5,
-        "baseWinProb": 80.7,
+        "baseWinProb": 81,
         "projScoreUt": 30,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -8069,7 +8072,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE TEXTILE BOWL",
         "vegasSpread": -9.5,
         "overUnder": 52.5,
-        "baseWinProb": 83.2,
+        "baseWinProb": 83,
         "projScoreUt": 31,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -8098,7 +8101,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ACC CHAMPIONSHIP ELIMINATOR",
         "vegasSpread": 2.0,
         "overUnder": 59.5,
-        "baseWinProb": 41.1,
+        "baseWinProb": 41,
         "projScoreUt": 31,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -8127,7 +8130,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -5.0,
         "overUnder": 59.0,
-        "baseWinProb": 69.8,
+        "baseWinProb": 70,
         "projScoreUt": 32,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -8156,7 +8159,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ACC TITLE RACE SHOWDOWN",
         "vegasSpread": 3.0,
         "overUnder": 52.5,
-        "baseWinProb": 38.3,
+        "baseWinProb": 38,
         "projScoreUt": 25,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -8185,7 +8188,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE PALMETTO BOWL (IN DEATH VALLEY)",
         "vegasSpread": -9.0,
         "overUnder": 52.5,
-        "baseWinProb": 82.0,
+        "baseWinProb": 82,
         "projScoreUt": 31,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -8254,7 +8257,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -31.5,
         "overUnder": 58.0,
-        "baseWinProb": 99.5,
+        "baseWinProb": 100,
         "projScoreUt": 45,
         "projScoreOpp": 13,
         "scoutReport": {
@@ -8283,7 +8286,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE REGIONAL BLOCKBUSTER",
         "vegasSpread": -20.5,
         "overUnder": 58.5,
-        "baseWinProb": 97.1,
+        "baseWinProb": 97,
         "projScoreUt": 40,
         "projScoreOpp": 19,
         "scoutReport": {
@@ -8313,7 +8316,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ACC OPENER AT FORD STADIUM",
         "vegasSpread": 0.5,
         "overUnder": 66.0,
-        "baseWinProb": 47.9,
+        "baseWinProb": 48,
         "projScoreUt": 34,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -8342,7 +8345,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE BATTLE FOR THE IRON SKILLET",
         "vegasSpread": -8.5,
         "overUnder": 59.5,
-        "baseWinProb": 81.0,
+        "baseWinProb": 81,
         "projScoreUt": 34,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -8371,7 +8374,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -8.5,
         "overUnder": 59.5,
-        "baseWinProb": 81.0,
+        "baseWinProb": 81,
         "projScoreUt": 34,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -8400,7 +8403,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -9.0,
         "overUnder": 59.5,
-        "baseWinProb": 82.3,
+        "baseWinProb": 82,
         "projScoreUt": 34,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -8429,7 +8432,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -8.5,
         "overUnder": 59.5,
-        "baseWinProb": 81.0,
+        "baseWinProb": 81,
         "projScoreUt": 34,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -8458,7 +8461,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ACC TITLE RACE CLASH IN DALLAS",
         "vegasSpread": -2.0,
         "overUnder": 59.5,
-        "baseWinProb": 58.9,
+        "baseWinProb": 59,
         "projScoreUt": 28,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -8487,7 +8490,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -6.5,
         "overUnder": 59.5,
-        "baseWinProb": 75.2,
+        "baseWinProb": 75,
         "projScoreUt": 33,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -8516,7 +8519,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": 6.5,
         "overUnder": 60.0,
-        "baseWinProb": 24.5,
+        "baseWinProb": 24,
         "projScoreUt": 27,
         "projScoreOpp": 33,
         "scoutReport": {
@@ -8545,7 +8548,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ACC REGULAR SEASON TITLE DECIDER",
         "vegasSpread": -10.5,
         "overUnder": 59.5,
-        "baseWinProb": 85.7,
+        "baseWinProb": 86,
         "projScoreUt": 35,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -8574,7 +8577,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE MAYOR'S CUP",
         "vegasSpread": -23.0,
         "overUnder": 58.5,
-        "baseWinProb": 98.1,
+        "baseWinProb": 98,
         "projScoreUt": 41,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -8647,7 +8650,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEASON OPENER",
         "vegasSpread": -34.0,
         "overUnder": 60.5,
-        "baseWinProb": 99.5,
+        "baseWinProb": 100,
         "projScoreUt": 47,
         "projScoreOpp": 13,
         "scoutReport": {
@@ -8676,7 +8679,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "PAC-12 / BIG 12 CHALLENGE",
         "vegasSpread": -6.5,
         "overUnder": 62.0,
-        "baseWinProb": 74.9,
+        "baseWinProb": 75,
         "projScoreUt": 34,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -8705,7 +8708,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG 12 TEXAS SHOWDOWN",
         "vegasSpread": -6.5,
         "overUnder": 59.0,
-        "baseWinProb": 74.9,
+        "baseWinProb": 75,
         "projScoreUt": 33,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -8734,7 +8737,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "IN-STATE NON-CONFERENCE",
         "vegasSpread": -24.0,
         "overUnder": 60.5,
-        "baseWinProb": 98.4,
+        "baseWinProb": 98,
         "projScoreUt": 42,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -8763,7 +8766,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG 12 ELEVATION BATTLE",
         "vegasSpread": -8.5,
         "overUnder": 67.0,
-        "baseWinProb": 72.4,
+        "baseWinProb": 72,
         "projScoreUt": 35,
         "projScoreOpp": 38,
         "scoutReport": {
@@ -8792,7 +8795,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "DESERT SHOWDOWN",
         "vegasSpread": -9.0,
         "overUnder": 62.0,
-        "baseWinProb": 82.8,
+        "baseWinProb": 83,
         "projScoreUt": 36,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -8821,7 +8824,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG 12 MIDWEST CLASH",
         "vegasSpread": -6.0,
         "overUnder": 59.0,
-        "baseWinProb": 73.6,
+        "baseWinProb": 74,
         "projScoreUt": 32,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -8850,7 +8853,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HALLOWEEN NIGHT IN LUBBOCK",
         "vegasSpread": -7.0,
         "overUnder": 61.5,
-        "baseWinProb": 76.1,
+        "baseWinProb": 76,
         "projScoreUt": 34,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -8879,7 +8882,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MOUNTAINEER BATTLE",
         "vegasSpread": -11.5,
         "overUnder": 62.0,
-        "baseWinProb": 88.0,
+        "baseWinProb": 88,
         "projScoreUt": 37,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -8908,7 +8911,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE DUST BOWL RIVALRY",
         "vegasSpread": -6.0,
         "overUnder": 62.0,
-        "baseWinProb": 73.2,
+        "baseWinProb": 73,
         "projScoreUt": 31,
         "projScoreOpp": 34,
         "scoutReport": {
@@ -8937,7 +8940,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE TEXAS SHOOTOUT",
         "vegasSpread": -6.0,
         "overUnder": 62.0,
-        "baseWinProb": 73.2,
+        "baseWinProb": 73,
         "projScoreUt": 34,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -8966,7 +8969,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE SADDLE TROPHY RIVALRY",
         "vegasSpread": -10.0,
         "overUnder": 62.0,
-        "baseWinProb": 85.1,
+        "baseWinProb": 85,
         "projScoreUt": 36,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -9034,7 +9037,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEASON OPENER",
         "vegasSpread": -28.5,
         "overUnder": 45.0,
-        "baseWinProb": 99.2,
+        "baseWinProb": 99,
         "projScoreUt": 37,
         "projScoreOpp": 8,
         "scoutReport": {
@@ -9063,7 +9066,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEC/BIG 12 SHOWDOWN",
         "vegasSpread": -7.0,
         "overUnder": 46.5,
-        "baseWinProb": 77.0,
+        "baseWinProb": 77,
         "projScoreUt": 27,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -9092,7 +9095,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BATTLE OF THE BROTHERS",
         "vegasSpread": -20.5,
         "overUnder": 45.0,
-        "baseWinProb": 97.1,
+        "baseWinProb": 97,
         "projScoreUt": 33,
         "projScoreOpp": 12,
         "scoutReport": {
@@ -9121,7 +9124,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG 12 ROAD OPENER",
         "vegasSpread": -0.5,
         "overUnder": 46.5,
-        "baseWinProb": 51.3,
+        "baseWinProb": 51,
         "projScoreUt": 21,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -9150,7 +9153,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MIDSEASON HOME TEST",
         "vegasSpread": -7.5,
         "overUnder": 46.5,
-        "baseWinProb": 78.5,
+        "baseWinProb": 78,
         "projScoreUt": 27,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -9179,7 +9182,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "RUMBLE IN THE ROCKIES RIVALRY",
         "vegasSpread": -7.0,
         "overUnder": 50.0,
-        "baseWinProb": 69.5,
+        "baseWinProb": 70,
         "projScoreUt": 28,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -9208,7 +9211,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP 25 BIG 12 SHOWDOWN",
         "vegasSpread": -4.0,
         "overUnder": 40.5,
-        "baseWinProb": 65.7,
+        "baseWinProb": 66,
         "projScoreUt": 22,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -9237,7 +9240,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HALLOWEEN ROAD TRIP",
         "vegasSpread": -4.5,
         "overUnder": 46.5,
-        "baseWinProb": 67.6,
+        "baseWinProb": 68,
         "projScoreUt": 26,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -9266,7 +9269,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE HOLY WAR",
         "vegasSpread": -3.5,
         "overUnder": 40.5,
-        "baseWinProb": 64.1,
+        "baseWinProb": 64,
         "projScoreUt": 22,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -9295,7 +9298,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "DESERT BIG 12 ROAD TEST",
         "vegasSpread": 1.0,
         "overUnder": 46.0,
-        "baseWinProb": 45.3,
+        "baseWinProb": 45,
         "projScoreUt": 24,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -9324,7 +9327,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TEXAS ROAD SHOWDOWN",
         "vegasSpread": -2.5,
         "overUnder": 46.5,
-        "baseWinProb": 59.7,
+        "baseWinProb": 60,
         "projScoreUt": 21,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -9353,7 +9356,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SENIOR NIGHT REGULAR SEASON FINALE",
         "vegasSpread": -9.0,
         "overUnder": 46.5,
-        "baseWinProb": 82.5,
+        "baseWinProb": 82,
         "projScoreUt": 28,
         "projScoreOpp": 19,
         "scoutReport": {
@@ -9421,7 +9424,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEASON OPENER",
         "vegasSpread": -20.5,
         "overUnder": 41.5,
-        "baseWinProb": 97.0,
+        "baseWinProb": 97,
         "projScoreUt": 31,
         "projScoreOpp": 10,
         "scoutReport": {
@@ -9450,7 +9453,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "CY-HAWK TROPHY",
         "vegasSpread": -6.0,
         "overUnder": 43.0,
-        "baseWinProb": 72.9,
+        "baseWinProb": 73,
         "projScoreUt": 24,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -9479,7 +9482,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "IN-STATE NON-CONFERENCE",
         "vegasSpread": -6.0,
         "overUnder": 43.0,
-        "baseWinProb": 72.9,
+        "baseWinProb": 73,
         "projScoreUt": 18,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -9508,7 +9511,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN SHOWDOWN",
         "vegasSpread": 5.0,
         "overUnder": 39.0,
-        "baseWinProb": 29.9,
+        "baseWinProb": 30,
         "projScoreUt": 17,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -9537,7 +9540,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "KINNICK VOODOO MARQUEE CLASH",
         "vegasSpread": 5.5,
         "overUnder": 44.5,
-        "baseWinProb": 28.5,
+        "baseWinProb": 28,
         "projScoreUt": 20,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -9566,7 +9569,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "PACIFIC NORTHWEST CROSS-COUNTRY TEST",
         "vegasSpread": 3.5,
         "overUnder": 42.0,
-        "baseWinProb": 35.1,
+        "baseWinProb": 35,
         "projScoreUt": 19,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -9595,7 +9598,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "FLOYD OF ROSEDALE",
         "vegasSpread": -3.0,
         "overUnder": 43.0,
-        "baseWinProb": 62.5,
+        "baseWinProb": 62,
         "projScoreUt": 23,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -9624,7 +9627,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HEARTLAND TROPHY",
         "vegasSpread": -7.0,
         "overUnder": 43.0,
-        "baseWinProb": 76.1,
+        "baseWinProb": 76,
         "projScoreUt": 25,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -9653,7 +9656,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN WEST BATTLE",
         "vegasSpread": -8.0,
         "overUnder": 43.0,
-        "baseWinProb": 79.6,
+        "baseWinProb": 80,
         "projScoreUt": 26,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -9682,7 +9685,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SENIOR MONTH HOME CLASH",
         "vegasSpread": -13.0,
         "overUnder": 43.0,
-        "baseWinProb": 89.9,
+        "baseWinProb": 90,
         "projScoreUt": 28,
         "projScoreOpp": 15,
         "scoutReport": {
@@ -9711,7 +9714,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BATTLE FOR MIDWEST TRENCHES",
         "vegasSpread": -1.5,
         "overUnder": 43.0,
-        "baseWinProb": 56.4,
+        "baseWinProb": 56,
         "projScoreUt": 19,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -9740,7 +9743,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HEROES TROPHY",
         "vegasSpread": -6.5,
         "overUnder": 43.0,
-        "baseWinProb": 74.5,
+        "baseWinProb": 74,
         "projScoreUt": 25,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -9808,7 +9811,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEASON OPENER",
         "vegasSpread": -36.0,
         "overUnder": 49.5,
-        "baseWinProb": 99.5,
+        "baseWinProb": 100,
         "projScoreUt": 43,
         "projScoreOpp": 7,
         "scoutReport": {
@@ -9837,7 +9840,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE BORDER WAR",
         "vegasSpread": -2.0,
         "overUnder": 51.0,
-        "baseWinProb": 58.0,
+        "baseWinProb": 58,
         "projScoreUt": 26,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -9866,7 +9869,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE FINALE",
         "vegasSpread": -20.0,
         "overUnder": 50.0,
-        "baseWinProb": 96.8,
+        "baseWinProb": 97,
         "projScoreUt": 35,
         "projScoreOpp": 15,
         "scoutReport": {
@@ -9895,7 +9898,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEC ROAD OPENER",
         "vegasSpread": -4.5,
         "overUnder": 51.0,
-        "baseWinProb": 67.9,
+        "baseWinProb": 68,
         "projScoreUt": 28,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -9924,7 +9927,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HOMECOMING IN COLUMBIA",
         "vegasSpread": -5.5,
         "overUnder": 51.0,
-        "baseWinProb": 71.5,
+        "baseWinProb": 72,
         "projScoreUt": 28,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -9953,7 +9956,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP 10 SEC SHOWDOWN",
         "vegasSpread": 5.0,
         "overUnder": 50.5,
-        "baseWinProb": 29.5,
+        "baseWinProb": 30,
         "projScoreUt": 23,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -9982,7 +9985,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEC ROAD SHOWDOWN",
         "vegasSpread": 7.0,
         "overUnder": 59.5,
-        "baseWinProb": 23.6,
+        "baseWinProb": 24,
         "projScoreUt": 26,
         "projScoreOpp": 33,
         "scoutReport": {
@@ -10011,7 +10014,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BATTLE LINE RIVALRY",
         "vegasSpread": -1.5,
         "overUnder": 51.0,
-        "baseWinProb": 55.9,
+        "baseWinProb": 56,
         "projScoreUt": 26,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -10040,7 +10043,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "OLD BIG 12 SEC CLASH",
         "vegasSpread": 5.0,
         "overUnder": 56.0,
-        "baseWinProb": 29.5,
+        "baseWinProb": 30,
         "projScoreUt": 26,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -10069,7 +10072,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BETWEEN THE HEDGES",
         "vegasSpread": 10.0,
         "overUnder": 52.0,
-        "baseWinProb": 15.6,
+        "baseWinProb": 16,
         "projScoreUt": 21,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -10098,7 +10101,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SENIOR DAY IN COLUMBIA",
         "vegasSpread": -7.5,
         "overUnder": 51.0,
-        "baseWinProb": 77.9,
+        "baseWinProb": 78,
         "projScoreUt": 29,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -10127,7 +10130,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "PEACE PIPE RIVALRY FINALE",
         "vegasSpread": 1.5,
         "overUnder": 51.5,
-        "baseWinProb": 42.8,
+        "baseWinProb": 43,
         "projScoreUt": 25,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -10195,7 +10198,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEASON OPENER",
         "vegasSpread": -30.0,
         "overUnder": 50.5,
-        "baseWinProb": 99.4,
+        "baseWinProb": 99,
         "projScoreUt": 40,
         "projScoreOpp": 10,
         "scoutReport": {
@@ -10224,7 +10227,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "EARLY BIG 12 ROAD TEST",
         "vegasSpread": 3.5,
         "overUnder": 46.0,
-        "baseWinProb": 35.1,
+        "baseWinProb": 35,
         "projScoreUt": 21,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -10253,7 +10256,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE FINALE",
         "vegasSpread": -18.5,
         "overUnder": 51.0,
-        "baseWinProb": 95.8,
+        "baseWinProb": 96,
         "projScoreUt": 35,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -10282,7 +10285,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "FORMER PAC-12 ROAD TRIP",
         "vegasSpread": -2.5,
         "overUnder": 52.5,
-        "baseWinProb": 60.1,
+        "baseWinProb": 60,
         "projScoreUt": 28,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -10311,7 +10314,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG 12 HOME CLASH",
         "vegasSpread": -8.0,
         "overUnder": 52.0,
-        "baseWinProb": 79.4,
+        "baseWinProb": 79,
         "projScoreUt": 30,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -10340,7 +10343,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "APPALACHIAN ROAD TEST",
         "vegasSpread": -2.5,
         "overUnder": 52.5,
-        "baseWinProb": 60.1,
+        "baseWinProb": 60,
         "projScoreUt": 28,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -10369,7 +10372,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HOMECOMING IN TUCSON",
         "vegasSpread": -4.0,
         "overUnder": 52.5,
-        "baseWinProb": 66.0,
+        "baseWinProb": 66,
         "projScoreUt": 28,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -10398,7 +10401,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HALLOWEEN IN LUBBOCK",
         "vegasSpread": 7.0,
         "overUnder": 61.5,
-        "baseWinProb": 23.9,
+        "baseWinProb": 24,
         "projScoreUt": 27,
         "projScoreOpp": 34,
         "scoutReport": {
@@ -10427,7 +10430,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "FRIDAY NIGHT LIGHTS",
         "vegasSpread": -6.0,
         "overUnder": 52.0,
-        "baseWinProb": 73.2,
+        "baseWinProb": 73,
         "projScoreUt": 29,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -10456,7 +10459,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "DESERT BIG 12 SHOWDOWN",
         "vegasSpread": -1.0,
         "overUnder": 46.0,
-        "baseWinProb": 54.7,
+        "baseWinProb": 55,
         "projScoreUt": 21,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -10485,7 +10488,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "WILDCAT CLASH IN MANHATTAN",
         "vegasSpread": 1.5,
         "overUnder": 52.5,
-        "baseWinProb": 43.2,
+        "baseWinProb": 43,
         "projScoreUt": 26,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -10514,7 +10517,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE TERRITORIAL CUP",
         "vegasSpread": -30.0,
         "overUnder": 50.5,
-        "baseWinProb": 99.4,
+        "baseWinProb": 99,
         "projScoreUt": 40,
         "projScoreOpp": 10,
         "scoutReport": {
@@ -10582,7 +10585,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE APPLE CUP",
         "vegasSpread": -10.0,
         "overUnder": 52.0,
-        "baseWinProb": 84.8,
+        "baseWinProb": 85,
         "projScoreUt": 31,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -10611,7 +10614,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE HOME CLASH",
         "vegasSpread": -21.5,
         "overUnder": 51.0,
-        "baseWinProb": 97.5,
+        "baseWinProb": 98,
         "projScoreUt": 36,
         "projScoreOpp": 15,
         "scoutReport": {
@@ -10640,7 +10643,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "IN-STATE NON-CONFERENCE",
         "vegasSpread": -10.0,
         "overUnder": 52.0,
-        "baseWinProb": 84.8,
+        "baseWinProb": 85,
         "projScoreUt": 21,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -10669,7 +10672,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG TEN HOME OPENER",
         "vegasSpread": -9.0,
         "overUnder": 52.0,
-        "baseWinProb": 82.5,
+        "baseWinProb": 82,
         "projScoreUt": 30,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -10698,7 +10701,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "PAC-12 HERITAGE BIG TEN CLASH",
         "vegasSpread": -2.0,
         "overUnder": 60.0,
-        "baseWinProb": 57.6,
+        "baseWinProb": 58,
         "projScoreUt": 28,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -10727,7 +10730,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "FRIDAY NIGHT ON LAKE WASHINGTON",
         "vegasSpread": -3.5,
         "overUnder": 42.0,
-        "baseWinProb": 64.9,
+        "baseWinProb": 65,
         "projScoreUt": 23,
         "projScoreOpp": 19,
         "scoutReport": {
@@ -10756,7 +10759,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MIDWEST ROAD TRIP",
         "vegasSpread": -8.5,
         "overUnder": 52.0,
-        "baseWinProb": 80.5,
+        "baseWinProb": 80,
         "projScoreUt": 30,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -10785,7 +10788,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HALLOWEEN IN LINCOLN",
         "vegasSpread": -2.0,
         "overUnder": 52.0,
-        "baseWinProb": 57.6,
+        "baseWinProb": 58,
         "projScoreUt": 24,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -10814,7 +10817,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP 20 BIG TEN SHOWDOWN",
         "vegasSpread": 1.0,
         "overUnder": 48.5,
-        "baseWinProb": 58.5,
+        "baseWinProb": 58,
         "projScoreUt": 24,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -10843,7 +10846,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "EAST LANSING ROAD TEST",
         "vegasSpread": -6.0,
         "overUnder": 52.0,
-        "baseWinProb": 72.9,
+        "baseWinProb": 73,
         "projScoreUt": 29,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -10872,7 +10875,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SENIOR DAY TOP 10 SHOWDOWN",
         "vegasSpread": 1.0,
         "overUnder": 53.5,
-        "baseWinProb": 46.2,
+        "baseWinProb": 46,
         "projScoreUt": 26,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -10901,7 +10904,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NORTHWEST CHAMPIONSHIP",
         "vegasSpread": 9.0,
         "overUnder": 58.0,
-        "baseWinProb": 18.2,
+        "baseWinProb": 18,
         "projScoreUt": 24,
         "projScoreOpp": 34,
         "scoutReport": {
@@ -10969,7 +10972,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEASON OPENER IN H-TOWN",
         "vegasSpread": -29.5,
         "overUnder": 45.5,
-        "baseWinProb": 99.3,
+        "baseWinProb": 99,
         "projScoreUt": 38,
         "projScoreOpp": 8,
         "scoutReport": {
@@ -10998,7 +11001,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE HOME GAME",
         "vegasSpread": -33.5,
         "overUnder": 45.5,
-        "baseWinProb": 99.5,
+        "baseWinProb": 100,
         "projScoreUt": 40,
         "projScoreOpp": 6,
         "scoutReport": {
@@ -11027,7 +11030,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "FRIDAY NIGHT IN LUBBOCK",
         "vegasSpread": 6.5,
         "overUnder": 59.0,
-        "baseWinProb": 25.1,
+        "baseWinProb": 25,
         "projScoreUt": 26,
         "projScoreOpp": 33,
         "scoutReport": {
@@ -11056,7 +11059,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE ROAD TRIP",
         "vegasSpread": -14.0,
         "overUnder": 47.0,
-        "baseWinProb": 91.3,
+        "baseWinProb": 91,
         "projScoreUt": 30,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -11085,7 +11088,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "FORMER AAC BIG 12 CLASH",
         "vegasSpread": -7.0,
         "overUnder": 47.0,
-        "baseWinProb": 76.1,
+        "baseWinProb": 76,
         "projScoreUt": 27,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -11114,7 +11117,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MANHATTAN ROAD TEST",
         "vegasSpread": 1.0,
         "overUnder": 47.0,
-        "baseWinProb": 44.9,
+        "baseWinProb": 45,
         "projScoreUt": 23,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -11143,7 +11146,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG 12 HOME CLASH",
         "vegasSpread": -7.5,
         "overUnder": 47.0,
-        "baseWinProb": 77.6,
+        "baseWinProb": 78,
         "projScoreUt": 27,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -11172,7 +11175,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SALT LAKE CITY ROAD TEST",
         "vegasSpread": 4.0,
         "overUnder": 40.5,
-        "baseWinProb": 34.3,
+        "baseWinProb": 34,
         "projScoreUt": 18,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -11201,7 +11204,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "NOVEMBER HOME TEST",
         "vegasSpread": 3.0,
         "overUnder": 41.0,
-        "baseWinProb": 36.7,
+        "baseWinProb": 37,
         "projScoreUt": 19,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -11230,7 +11233,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "FRIDAY NIGHT IN BOULDER",
         "vegasSpread": -2.5,
         "overUnder": 54.0,
-        "baseWinProb": 56.5,
+        "baseWinProb": 56,
         "projScoreUt": 27,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -11259,7 +11262,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MORGANTOWN ROAD CLASH",
         "vegasSpread": -3.0,
         "overUnder": 47.0,
-        "baseWinProb": 61.7,
+        "baseWinProb": 62,
         "projScoreUt": 25,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -11288,7 +11291,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BATTLE ON I-45 FINALE",
         "vegasSpread": -7.5,
         "overUnder": 47.0,
-        "baseWinProb": 77.6,
+        "baseWinProb": 78,
         "projScoreUt": 27,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -11356,7 +11359,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "MUSIC CITY KICKOFF SHOWDOWN",
         "vegasSpread": 7.5,
         "overUnder": 67.5,
-        "baseWinProb": 22.4,
+        "baseWinProb": 22,
         "projScoreUt": 30,
         "projScoreOpp": 38,
         "scoutReport": {
@@ -11385,7 +11388,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HOME OPENER UNDER FRIDAY LIGHTS",
         "vegasSpread": -26.5,
         "overUnder": 57.5,
-        "baseWinProb": 98.9,
+        "baseWinProb": 99,
         "projScoreUt": 42,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -11414,7 +11417,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "TOP 25 ACC CLASH",
         "vegasSpread": -0.5,
         "overUnder": 66.0,
-        "baseWinProb": 52.1,
+        "baseWinProb": 52,
         "projScoreUt": 31,
         "projScoreOpp": 34,
         "scoutReport": {
@@ -11443,7 +11446,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ACC HOME TEST",
         "vegasSpread": -11.0,
         "overUnder": 59.0,
-        "baseWinProb": 86.7,
+        "baseWinProb": 87,
         "projScoreUt": 35,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -11472,7 +11475,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ACC ROAD CHALLENGE",
         "vegasSpread": -2.0,
         "overUnder": 59.0,
-        "baseWinProb": 58.4,
+        "baseWinProb": 58,
         "projScoreUt": 30,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -11501,7 +11504,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "FRIDAY NIGHT ACC SHOWDOWN",
         "vegasSpread": 1.5,
         "overUnder": 59.0,
-        "baseWinProb": 45.8,
+        "baseWinProb": 46,
         "projScoreUt": 28,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -11530,7 +11533,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "DOME ROAD TRIP",
         "vegasSpread": -2.5,
         "overUnder": 59.0,
-        "baseWinProb": 60.5,
+        "baseWinProb": 60,
         "projScoreUt": 31,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -11559,7 +11562,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "HALLOWEEN ACC SHOWCASE",
         "vegasSpread": -11.5,
         "overUnder": 59.0,
-        "baseWinProb": 87.7,
+        "baseWinProb": 88,
         "projScoreUt": 35,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -11588,7 +11591,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "ATLANTA ACC ROAD TEST",
         "vegasSpread": -0.5,
         "overUnder": 59.0,
-        "baseWinProb": 52.1,
+        "baseWinProb": 52,
         "projScoreUt": 27,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -11617,7 +11620,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "CHAPEL HILL ROAD TEST",
         "vegasSpread": 5.0,
         "overUnder": 59.0,
-        "baseWinProb": 30.2,
+        "baseWinProb": 30,
         "projScoreUt": 27,
         "projScoreOpp": 32,
         "scoutReport": {
@@ -11647,7 +11650,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "SENIOR DAY AT L&N STADIUM",
         "vegasSpread": -7.0,
         "overUnder": 59.0,
-        "baseWinProb": 76.7,
+        "baseWinProb": 77,
         "projScoreUt": 33,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -11676,7 +11679,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "THE GOVERNOR'S CUP",
         "vegasSpread": -2.0,
         "overUnder": 59.0,
-        "baseWinProb": 58.4,
+        "baseWinProb": 58,
         "projScoreUt": 30,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -11749,7 +11752,7 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": 3.5,
         "overUnder": 63.0,
-        "baseWinProb": 41.2,
+        "baseWinProb": 41,
         "projScoreUt": 28,
         "projScoreOpp": 32,
         "scoutReport": {
@@ -11778,7 +11781,7 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -27.5,
         "overUnder": 56.0,
-        "baseWinProb": 98.9,
+        "baseWinProb": 99,
         "projScoreUt": 42,
         "projScoreOpp": 14,
         "scoutReport": {
@@ -11808,7 +11811,7 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -6.5,
         "overUnder": 48.0,
-        "baseWinProb": 71.4,
+        "baseWinProb": 71,
         "projScoreUt": 27,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -11837,7 +11840,7 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": 1.5,
         "overUnder": 51.0,
-        "baseWinProb": 45.8,
+        "baseWinProb": 46,
         "projScoreUt": 30,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -11867,7 +11870,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "BIG 12 MARQUEE CLASH IN BOULDER",
         "vegasSpread": 8.5,
         "overUnder": 67.0,
-        "baseWinProb": 27.6,
+        "baseWinProb": 28,
         "projScoreUt": 38,
         "projScoreOpp": 35,
         "scoutReport": {
@@ -11897,7 +11900,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "RUMBLE IN THE ROCKIES RIVALRY",
         "vegasSpread": 7.0,
         "overUnder": 50.0,
-        "baseWinProb": 30.5,
+        "baseWinProb": 30,
         "projScoreUt": 20,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -11926,7 +11929,7 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": 4.5,
         "overUnder": 59.0,
-        "baseWinProb": 37.8,
+        "baseWinProb": 38,
         "projScoreUt": 27,
         "projScoreOpp": 32,
         "scoutReport": {
@@ -11955,7 +11958,7 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": 3.5,
         "overUnder": 56.0,
-        "baseWinProb": 41.2,
+        "baseWinProb": 41,
         "projScoreUt": 26,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -11984,7 +11987,7 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": 5.5,
         "overUnder": 61.0,
-        "baseWinProb": 35.1,
+        "baseWinProb": 35,
         "projScoreUt": 27,
         "projScoreOpp": 34,
         "scoutReport": {
@@ -12013,7 +12016,7 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": 2.5,
         "overUnder": 54.0,
-        "baseWinProb": 43.5,
+        "baseWinProb": 44,
         "projScoreUt": 24,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -12042,7 +12045,7 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": -2.5,
         "overUnder": 52.0,
-        "baseWinProb": 56.5,
+        "baseWinProb": 56,
         "projScoreUt": 27,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -12071,7 +12074,7 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": -4.5,
         "overUnder": 64.0,
-        "baseWinProb": 62.2,
+        "baseWinProb": 62,
         "projScoreUt": 34,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -12096,9 +12099,9 @@ var TEAMS_DATABASE = {
     "headCoach": "Kenny Dillingham",
     "offensiveCoordinator": "Marcus Arroyo",
     "defensiveCoordinator": "Brian Ward",
-    "confirmedStarterQb": "Sam Leavitt",
-    "starPlayer": "Sam Leavitt (QB) / Cam Skattebo (RB) / Jordyn Tyson (WR)",
-    "secondaryStar": "Xavion Alford (DB) / Clayton Smith (DL) / Ben Coleman (OL)",
+    "confirmedStarterQb": "Jeff Sims",
+    "starPlayer": "Jordyn Tyson (WR) / Kyson Brown (RB) / Clayton Smith (EDGE)",
+    "secondaryStar": "Xavion Alford (DB) / Keith Abney II (CB) / Ben Coleman (OT)",
     "stadium": "Mountain America Stadium",
     "stadiumCity": "Tempe, AZ",
     "stadiumCapacity": "53,599",
@@ -12116,9 +12119,9 @@ var TEAMS_DATABASE = {
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/9.png",
     "badgeText": "ASU",
     "sliderLabels": {
-      "qb": "Sam Leavitt & Jordyn Tyson Air Attack",
-      "ground": "Cam Skattebo Physical Ground Attack",
-      "defense": "Brian Ward Havoc & Defensive Front",
+      "qb": "Jordyn Tyson & Air Attack Precision",
+      "ground": "Kyson Brown & Physical Ground Game",
+      "defense": "Brian Ward Defense & Havoc",
       "turnover": "Turnover Margin Luck",
       "crowd": "Mountain America Stadium Tempe Heat"
     },
@@ -12145,11 +12148,11 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -31.5,
         "overUnder": 52.5,
-        "baseWinProb": 98.2,
+        "baseWinProb": 98,
         "projScoreUt": 45,
         "projScoreOpp": 10,
         "scoutReport": {
-          "xFactor": "Sam Leavitt and Cam Skattebo establishing early tempo.",
+          "xFactor": "Jordyn Tyson and Kyson Brown establishing early tempo.",
           "keyMatchup": "ASU offensive line vs NAU defensive front.",
           "summary": "Season opener in Tempe against in-state FCS Lumberjacks."
         },
@@ -12177,12 +12180,12 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": 17.5,
         "overUnder": 58.0,
-        "baseWinProb": 18.5,
+        "baseWinProb": 18,
         "projScoreUt": 20,
         "projScoreOpp": 38,
         "scoutReport": {
           "xFactor": "ASU offensive line handling 102,000 Kyle Field noise.",
-          "keyMatchup": "Cam Skattebo vs Texas A&M physical defensive front.",
+          "keyMatchup": "Kyson Brown vs Texas A&M physical defensive front.",
           "summary": "Marquee non-conference road test in College Station."
         },
         "oppId": "texasam"
@@ -12209,7 +12212,7 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -14.5,
         "overUnder": 59.5,
-        "baseWinProb": 82.5,
+        "baseWinProb": 82,
         "projScoreUt": 38,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -12241,12 +12244,12 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": 7.5,
         "overUnder": 64.5,
-        "baseWinProb": 35.2,
+        "baseWinProb": 35,
         "projScoreUt": 26,
         "projScoreOpp": 36,
         "scoutReport": {
           "xFactor": "Turnover margin in windy Lubbock environment.",
-          "keyMatchup": "Sam Leavitt vs Texas Tech aggressive pass rush.",
+          "keyMatchup": "ASU passing attack vs Texas Tech aggressive pass rush.",
           "summary": "Big 12 conference road opener against explosive Red Raiders."
         },
         "oppId": "texastech"
@@ -12273,12 +12276,12 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": -2.5,
         "overUnder": 59.0,
-        "baseWinProb": 58.2,
+        "baseWinProb": 58,
         "projScoreUt": 31,
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Tempe crowd noise and fourth-quarter execution.",
-          "keyMatchup": "Cam Skattebo power runs vs TCU linebackers.",
+          "keyMatchup": "Kyson Brown power runs vs TCU linebackers.",
           "summary": "Big 12 home conference opener under the lights."
         },
         "oppId": null
@@ -12305,7 +12308,7 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": -4.5,
         "overUnder": 51.5,
-        "baseWinProb": 65.1,
+        "baseWinProb": 65,
         "projScoreUt": 28,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -12337,7 +12340,7 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": -2.5,
         "overUnder": 61.5,
-        "baseWinProb": 58.6,
+        "baseWinProb": 59,
         "projScoreUt": 31,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -12369,12 +12372,12 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": -3.5,
         "overUnder": 62.5,
-        "baseWinProb": 62.8,
+        "baseWinProb": 63,
         "projScoreUt": 34,
         "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Third-down conversion rate in hostile Stillwater venue.",
-          "keyMatchup": "Sam Leavitt playmaking vs Oklahoma State secondary.",
+          "keyMatchup": "ASU passing attack playmaking vs Oklahoma State secondary.",
           "summary": "Crucial late-October road test in Stillwater."
         },
         "oppId": null
@@ -12401,11 +12404,11 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": -4.5,
         "overUnder": 63.5,
-        "baseWinProb": 66.2,
+        "baseWinProb": 66,
         "projScoreUt": 34,
         "projScoreOpp": 27,
         "scoutReport": {
-          "xFactor": "Skattebo clock control keeping Colorado offense off field.",
+          "xFactor": "Kyson Brown clock control keeping Colorado offense off field.",
           "keyMatchup": "Brian Ward pass rush vs Julian Lewis and Colorado WRs.",
           "summary": "Primetime showdown in Tempe against Coach Prime and Colorado."
         },
@@ -12433,7 +12436,7 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": 3.5,
         "overUnder": 53.5,
-        "baseWinProb": 44.5,
+        "baseWinProb": 44,
         "projScoreUt": 24,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -12465,11 +12468,11 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": -7.5,
         "overUnder": 57.0,
-        "baseWinProb": 74.1,
+        "baseWinProb": 74,
         "projScoreUt": 35,
         "projScoreOpp": 24,
         "scoutReport": {
-          "xFactor": "Offensive balance with Leavitt passing and Skattebo rushing.",
+          "xFactor": "Offensive balance with ASU passing and Kyson Brown rushing.",
           "keyMatchup": "ASU defensive secondary vs Baylor deep vertical shots.",
           "summary": "Senior day home finale in Tempe."
         },
@@ -12499,7 +12502,7 @@ var TEAMS_DATABASE = {
         "rivalryName": "Territorial Cup",
         "vegasSpread": 14.5,
         "overUnder": 52.5,
-        "baseWinProb": 22.1,
+        "baseWinProb": 22,
         "projScoreUt": 10,
         "projScoreOpp": 40,
         "scoutReport": {

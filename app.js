@@ -849,8 +849,9 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
   const hasInjury = !!gameSlider?.injury;
 
   if (!userPick && !isTeamCustom && !isOppCustom && !hasInjury && weather === 'dome' && game && typeof game.projScoreUt === 'number' && typeof game.projScoreOpp === 'number') {
+    const rawProb = typeof game.baseWinProb === 'number' ? game.baseWinProb : (game.projScoreUt > game.projScoreOpp ? 60 : 40);
     return {
-      adjWinProb: typeof game.baseWinProb === 'number' ? game.baseWinProb : (game.projScoreUt > game.projScoreOpp ? 60 : 40),
+      adjWinProb: Math.min(99, Math.max(1, Math.round(rawProb))),
       projUt: game.projScoreUt,
       projOpp: game.projScoreOpp,
       isWin: game.projScoreUt > game.projScoreOpp
@@ -1877,12 +1878,16 @@ function updateModalScoreboardLive() {
           <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
           <span style="color: ${!isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score2}</span>
         </div>
-        <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
-          WIN PROB: ${prob1}% - ${100 - prob1}%
-        </span>
         ${(() => {
+          const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
+          const rProb2 = 100 - rProb1;
           const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
-          return edge?.badgeHtml || '';
+          return `
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
+              WIN PROB: ${rProb1}% - ${rProb2}%
+            </span>
+            ${edge?.badgeHtml || ''}
+          `;
         })()}
       </div>
 
@@ -2069,12 +2074,16 @@ function openSimModal(game) {
             <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
             <span style="color: ${!isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score2}</span>
           </div>
-          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
-            WIN PROB: ${prob1}% - ${100 - prob1}%
-          </span>
           ${(() => {
+            const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
+            const rProb2 = 100 - rProb1;
             const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
-            return edge?.badgeHtml || '';
+            return `
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
+                WIN PROB: ${rProb1}% - ${rProb2}%
+              </span>
+              ${edge?.badgeHtml || ''}
+            `;
           })()}
         </div>
 
