@@ -1522,13 +1522,31 @@ window.resetAllToBaseline = function() {
   const selectEl = document.getElementById('globalPresetSelect');
   if (selectEl) selectEl.value = 'baseline';
 
+  const modalSelectEl = document.getElementById('modalGlobalPresetSelect');
+  if (modalSelectEl) modalSelectEl.value = 'baseline';
+
+  // Reset range slider elements to 0
+  const sliderKeys = ['qbRating', 'groundAttack', 'defenseHavoc', 'turnoverLuck', 'crowdNoise'];
+  sliderKeys.forEach(k => {
+    document.querySelectorAll(`input[id^="slider-${k}"]`).forEach(range => { range.value = 0; });
+    document.querySelectorAll(`span[id^="readout-${k}"]`).forEach(ro => { ro.innerText = '+0%'; });
+  });
+
   syncSliderInputsToActiveTeam();
   recalculateSeason();
 
-  showToast('⚡ Reset all 20 teams & custom AI overrides to authentic 2026 baselines!');
+  showToast('⚡ Reset all simulation overrides, picks & sliders to authentic 2026 baselines!');
 };
 
 function resetAllToBaseline() {
+  window.resetAllToBaseline();
+}
+
+window.resetAllSliders = function() {
+  window.resetAllToBaseline();
+};
+
+function resetAllSliders() {
   window.resetAllToBaseline();
 }
 
