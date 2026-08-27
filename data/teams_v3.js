@@ -537,18 +537,19 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "isMarquee": false,
         "projScoreUt": 38,
-        "projScoreOpp": 6,
-        "baseWinProb": 100,
+        "projScoreOpp": 14,
+        "baseWinProb": 90,
         "scoutReport": {
           "xFactor": "Fast offensive start and rhythm for Bear Bachmeier.",
           "keyMatchup": "BYU offensive line vs Portland State defensive front.",
           "summary": "Non-conference opener at altitude in Provo."
         },
-        "vegasSpread": -32.0,
+        "vegasSpread": -21.5,
         "overUnder": 45.0,
         "oppBadge": "PSU",
         "isBig12": false,
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "byu-g2",
@@ -569,19 +570,20 @@ var TEAMS_DATABASE = {
         "isAcc": false,
         "isConf": false,
         "isMarquee": false,
-        "projScoreUt": 25,
-        "projScoreOpp": 21,
-        "baseWinProb": 65,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
+        "baseWinProb": 45,
         "scoutReport": {
           "xFactor": "Power run game efficiency with LJ Martin.",
           "keyMatchup": "BYU secondary vs Stanford passing attack.",
           "summary": "Power 4 non-conference road test in the Bay Area."
         },
-        "vegasSpread": -3.5,
+        "vegasSpread": 4.5,
         "overUnder": 46.0,
         "oppBadge": "ARIZ",
         "isBig12": true,
-        "oppId": "arizona"
+        "oppId": "arizona",
+        "is_tracked": true
       },
       {
         "id": "byu-g3",
@@ -602,17 +604,18 @@ var TEAMS_DATABASE = {
         "isAcc": false,
         "isConf": false,
         "isMarquee": false,
-        "projScoreUt": 33,
-        "projScoreOpp": 12,
-        "baseWinProb": 97,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
+        "baseWinProb": 90,
         "scoutReport": {
           "xFactor": "Defensive front disruption under Jay Hill.",
           "keyMatchup": "BYU pass rush vs ECU quick release.",
           "summary": "Final non-conference tune-up before the Big 12 grind."
         },
-        "vegasSpread": -20.5,
+        "vegasSpread": -21.5,
         "overUnder": 45.5,
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "byu-g4",
@@ -633,17 +636,18 @@ var TEAMS_DATABASE = {
         "isAcc": false,
         "isConf": true,
         "isMarquee": true,
-        "projScoreUt": 26,
-        "projScoreOpp": 21,
-        "baseWinProb": 68,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
+        "baseWinProb": 90,
         "scoutReport": {
           "xFactor": "Turnover margin and red zone touchdown percentage.",
           "keyMatchup": "Bear Bachmeier dual-threat play vs K-State disciplined defense.",
           "summary": "Crucial Big 12 conference opener under the lights in Provo."
         },
-        "vegasSpread": -4.5,
+        "vegasSpread": -14.5,
         "overUnder": 47.0,
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "byu-g5",
@@ -664,17 +668,18 @@ var TEAMS_DATABASE = {
         "isAcc": false,
         "isConf": true,
         "isMarquee": false,
-        "projScoreUt": 22,
-        "projScoreOpp": 25,
-        "baseWinProb": 61,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
+        "baseWinProb": 90,
         "scoutReport": {
           "xFactor": "Third down conversion rate in hostile Texas environment.",
           "keyMatchup": "BYU offensive tackles vs Baylor pass rushers.",
           "summary": "Physical Big 12 road battle on the Brazos River."
         },
-        "vegasSpread": -2.5,
+        "vegasSpread": -14.5,
         "overUnder": 47.0,
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "byu-g6",
@@ -695,20 +700,21 @@ var TEAMS_DATABASE = {
         "isAcc": false,
         "isConf": true,
         "isMarquee": true,
-        "projScoreUt": 22,
-        "projScoreOpp": 25,
-        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
+        "baseWinProb": 30,
         "scoutReport": {
           "xFactor": "Altitude and 64,000 Cougar faithful hosting the Irish.",
           "keyMatchup": "BYU front seven vs Notre Dame power rushing attack.",
           "summary": "Marquee non-conference clash in Provo."
         },
-        "vegasSpread": 3.0,
+        "vegasSpread": 4.5,
         "overUnder": 47.0,
         "oppBadge": "ND",
         "isBig12": false,
         "rivalryName": "HOLY WAR OF INDEPENDENTS",
-        "oppId": "notredame"
+        "oppId": "notredame",
+        "is_tracked": true
       },
       {
         "id": "byu-g7",
@@ -729,20 +735,21 @@ var TEAMS_DATABASE = {
         "isAcc": false,
         "isConf": true,
         "isMarquee": true,
-        "projScoreUt": 26,
-        "projScoreOpp": 32,
-        "baseWinProb": 26,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
+        "baseWinProb": 30,
         "scoutReport": {
           "xFactor": "Handling the tortilla-throwing Lubbock crowd at night.",
           "keyMatchup": "BYU secondary vs Texas Tech fast-paced air raid attack.",
           "summary": "Critical Big 12 title elimination game in Lubbock."
         },
-        "vegasSpread": 6.0,
+        "vegasSpread": 4.5,
         "overUnder": 59.0,
         "oppBadge": "TTU",
         "isBig12": true,
         "rivalryName": "BIG 12 SHOWDOWN IN LUBBOCK",
-        "oppId": "texastech"
+        "oppId": "texastech",
+        "is_tracked": true
       },
       {
         "id": "byu-g8",
@@ -763,19 +770,20 @@ var TEAMS_DATABASE = {
         "isAcc": false,
         "isConf": true,
         "isMarquee": false,
-        "projScoreUt": 22,
-        "projScoreOpp": 19,
-        "baseWinProb": 63,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
+        "baseWinProb": 55,
         "scoutReport": {
           "xFactor": "Physical line of scrimmage play in Provo.",
           "keyMatchup": "BYU offensive ground game vs Houston defensive front.",
           "summary": "Big 12 home conference battle in Provo."
         },
-        "vegasSpread": -3.0,
+        "vegasSpread": -4.5,
         "overUnder": 41.0,
         "oppBadge": "HOU",
         "isBig12": true,
-        "oppId": "houston"
+        "oppId": "houston",
+        "is_tracked": true
       },
       {
         "id": "byu-g9",
@@ -796,17 +804,18 @@ var TEAMS_DATABASE = {
         "isAcc": false,
         "isConf": true,
         "isMarquee": true,
-        "projScoreUt": 18,
-        "projScoreOpp": 22,
-        "baseWinProb": 36,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
+        "baseWinProb": 38,
         "scoutReport": {
           "xFactor": "Holy War rivalry intensity and red zone defense.",
           "keyMatchup": "BYU offensive line vs Utah physical front seven.",
           "summary": "The Holy War with Big 12 Championship and CFP stakes on the line."
         },
-        "vegasSpread": 3.5,
+        "vegasSpread": 4.5,
         "overUnder": 40.5,
-        "oppId": "utah"
+        "oppId": "utah",
+        "is_tracked": true
       },
       {
         "id": "byu-g10",
@@ -827,17 +836,18 @@ var TEAMS_DATABASE = {
         "isAcc": false,
         "isConf": true,
         "isMarquee": false,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
-        "baseWinProb": 77,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
+        "baseWinProb": 90,
         "scoutReport": {
           "xFactor": "Defensive discipline against option concepts.",
           "keyMatchup": "BYU edge containment vs Kansas misdirection.",
           "summary": "Key November conference game in Provo."
         },
-        "vegasSpread": -7.0,
+        "vegasSpread": -14.5,
         "overUnder": 46.5,
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "byu-g11",
@@ -858,19 +868,20 @@ var TEAMS_DATABASE = {
         "isAcc": false,
         "isConf": true,
         "isMarquee": false,
-        "projScoreUt": 25,
-        "projScoreOpp": 22,
-        "baseWinProb": 65,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
+        "baseWinProb": 90,
         "scoutReport": {
           "xFactor": "Field position and special teams execution in West Texas wind.",
           "keyMatchup": "BYU offensive efficiency vs Texas Tech pressure packages.",
           "summary": "Late-season high-stakes Big 12 road test."
         },
-        "vegasSpread": -3.5,
+        "vegasSpread": -14.5,
         "overUnder": 47.0,
         "oppBadge": "CIN",
         "isBig12": true,
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "byu-g12",
@@ -891,19 +902,20 @@ var TEAMS_DATABASE = {
         "isAcc": false,
         "isConf": true,
         "isMarquee": false,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
-        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
+        "baseWinProb": 90,
         "scoutReport": {
           "xFactor": "Senior Day emotion and Big 12 Championship berth clincher.",
           "keyMatchup": "BYU ground game dominance vs Houston interior defense.",
           "summary": "Regular season finale in Provo to punch ticket to Arlington."
         },
-        "vegasSpread": -7.5,
+        "vegasSpread": -14.5,
         "overUnder": 46.5,
         "oppBadge": "UCF",
         "isBig12": true,
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ]
   },
@@ -960,17 +972,18 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -28.5,
+        "vegasSpread": -10.5,
         "overUnder": 56.0,
-        "baseWinProb": 99,
-        "projScoreUt": 42,
-        "projScoreOpp": 14,
+        "baseWinProb": 98,
+        "projScoreUt": 35,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Arch Manning passing rhythm and first-quarter tempo in the season opener.",
           "keyMatchup": "Texas OL pass protection vs Texas State defensive front.",
           "summary": "Season opener in Austin against in-state Texas State."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "tex-w2",
@@ -991,15 +1004,16 @@ var TEAMS_DATABASE = {
         "rivalryName": "COLLEGE GAMEDAY MARQUEE BATTLE (#1 VS #5)",
         "vegasSpread": 3.5,
         "overUnder": 59.0,
-        "baseWinProb": 42,
+        "baseWinProb": 40,
         "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Red zone touchdown conversion efficiency and explosive perimeter plays.",
           "keyMatchup": "Arch Manning vs Ohio State Silver Bullet defense.",
           "summary": "Blockbuster non-conference battle of top-5 national title favorites in Austin."
         },
-        "oppId": "ohiostate"
+        "oppId": "ohiostate",
+        "is_tracked": true
       },
       {
         "id": "tex-w3",
@@ -1017,17 +1031,18 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -27.0,
+        "vegasSpread": -10.5,
         "overUnder": 56.0,
-        "baseWinProb": 99,
-        "projScoreUt": 42,
-        "projScoreOpp": 14,
+        "baseWinProb": 98,
+        "projScoreUt": 35,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Establishing the physical ground attack early before SEC play.",
           "keyMatchup": "Texas running back committee vs UTSA front seven.",
           "summary": "In-state non-conference finale at DKR."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "tex-w4",
@@ -1046,17 +1061,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "CHECKERED NEYLAND SEC OPENER",
-        "vegasSpread": -3.0,
+        "vegasSpread": -4.5,
         "overUnder": 62.5,
-        "baseWinProb": 62,
-        "projScoreUt": 33,
-        "projScoreOpp": 30,
+        "baseWinProb": 75,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Handling 102,000 hostile fans and fast Josh Heupel tempo.",
           "keyMatchup": "Texas secondary vs George MacIntyre deep vertical passes.",
           "summary": "Colossal SEC road opener in Knoxville."
         },
-        "oppId": "tennessee"
+        "oppId": "tennessee",
+        "is_tracked": true
       },
       {
         "id": "tex-w5",
@@ -1075,17 +1091,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "RED RIVER RIVALRY (GOLDEN HAT)",
-        "vegasSpread": -3.5,
+        "vegasSpread": 2.0,
         "overUnder": 58.0,
-        "baseWinProb": 64,
-        "projScoreUt": 31,
-        "projScoreOpp": 27,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover battle inside the 50/50 split Cotton Bowl stadium.",
           "keyMatchup": "Arch Manning vs Brent Venables disguise blitzes.",
           "summary": "Legendary Red River Rivalry clash at the State Fair of Texas."
         },
-        "oppId": "oklahoma"
+        "oppId": "oklahoma",
+        "is_tracked": true
       },
       {
         "id": "tex-w6",
@@ -1104,17 +1121,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "SEC HOMECOMING BATTLE",
-        "vegasSpread": -13.5,
+        "vegasSpread": -10.5,
         "overUnder": 57.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 22,
+        "baseWinProb": 98,
+        "projScoreUt": 35,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "DJ Lagway containment and red zone finish.",
           "keyMatchup": "Texas edge rushers vs Florida offensive tackles.",
           "summary": "High-profile SEC clash in Austin."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "tex-w7",
@@ -1133,17 +1151,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-10 SEC SHOOTOUT",
-        "vegasSpread": -6.0,
+        "vegasSpread": -6.5,
         "overUnder": 66.0,
-        "baseWinProb": 74,
-        "projScoreUt": 36,
-        "projScoreOpp": 30,
+        "baseWinProb": 72,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Defending Pete Golding high-speed tempo and explosive playmakers.",
           "keyMatchup": "Texas safeties vs Trinidad Chambliss deep passing attack.",
           "summary": "Top-10 SEC title race showdown in Austin."
         },
-        "oppId": "olemiss"
+        "oppId": "olemiss",
+        "is_tracked": true
       },
       {
         "id": "tex-w8",
@@ -1161,17 +1180,18 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -17.5,
+        "vegasSpread": -10.5,
         "overUnder": 57.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
+        "baseWinProb": 98,
+        "projScoreUt": 35,
         "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Halloween afternoon discipline and depth rotation.",
           "keyMatchup": "Texas front seven vs Mississippi State spread run game.",
           "summary": "SEC home victory in Austin."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "tex-w9",
@@ -1189,17 +1209,18 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isSec": true,
-        "vegasSpread": -5.0,
+        "vegasSpread": 2.0,
         "overUnder": 56.0,
-        "baseWinProb": 70,
-        "projScoreUt": 30,
-        "projScoreOpp": 26,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Cold weather road execution in Missouri.",
           "keyMatchup": "Texas DBs vs Mizzou perimeter passing game.",
           "summary": "Tough November SEC road test in Columbia."
         },
-        "oppId": "missouri"
+        "oppId": "missouri",
+        "is_tracked": true
       },
       {
         "id": "tex-w10",
@@ -1218,17 +1239,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "DEATH VALLEY SATURDAY NIGHT BLOCKBUSTER",
-        "vegasSpread": 2.0,
+        "vegasSpread": -3.5,
         "overUnder": 58.5,
-        "baseWinProb": 42,
+        "baseWinProb": 62,
         "projScoreUt": 31,
-        "projScoreOpp": 28,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Surviving 102,000 deafening Death Valley noise and late-game Tiger momentum.",
           "keyMatchup": "Arch Manning vs Blake Baker aggressive blitz packages.",
           "summary": "Epic Saturday night top-15 battle in Death Valley where LSU hands Texas their lone regular season loss."
         },
-        "oppId": "lsu"
+        "oppId": "lsu",
+        "is_tracked": true
       },
       {
         "id": "tex-w11",
@@ -1247,17 +1269,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "HISTORIC SOUTHWEST CONFERENCE RIVALRY",
-        "vegasSpread": -14.5,
+        "vegasSpread": -10.5,
         "overUnder": 57.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 22,
+        "baseWinProb": 98,
+        "projScoreUt": 35,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Trench control and physical tackling against hard-nosed Hogs.",
           "keyMatchup": "Texas offensive line vs Arkansas defensive line.",
           "summary": "Senior Day home finale at DKR."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "tex-w12",
@@ -1276,17 +1299,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "THE LONE STAR SHOWDOWN (AT KYLE FIELD)",
-        "vegasSpread": -2.5,
+        "vegasSpread": -3.5,
         "overUnder": 58.0,
-        "baseWinProb": 58,
+        "baseWinProb": 70,
         "projScoreUt": 31,
-        "projScoreOpp": 27,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Handling 108,000 screaming 12th Man fans in College Station.",
           "keyMatchup": "Arch Manning vs Mike Elko Wrecking Crew defense.",
           "summary": "Massive regular-season finale with SEC championship game on the line."
         },
-        "oppId": "texasam"
+        "oppId": "texasam",
+        "is_tracked": true
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png",
@@ -1344,17 +1368,18 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": false,
         "isBigTen": false,
-        "vegasSpread": -24.0,
+        "vegasSpread": -21.5,
         "overUnder": 45.5,
-        "baseWinProb": 98,
-        "projScoreUt": 11,
-        "projScoreOpp": 11,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Fast physical start and establishing Whittingham's physical identity.",
           "keyMatchup": "Michigan offensive line vs WMU defensive front.",
           "summary": "Season opener in Ann Arbor."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mic-w2",
@@ -1373,17 +1398,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": false,
         "rivalryName": "NON-CONFERENCE BLUEBLOOD CLASH",
-        "vegasSpread": -1.5,
+        "vegasSpread": -4.5,
         "overUnder": 47.5,
         "baseWinProb": 56,
-        "projScoreUt": 24,
-        "projScoreOpp": 23,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Trench dominance against Venables defense.",
           "keyMatchup": "Michigan defense vs John Mateer dual-threat runs.",
           "summary": "Massive non-conference top-15 showdown in The Big House."
         },
-        "oppId": "oklahoma"
+        "oppId": "oklahoma",
+        "is_tracked": true
       },
       {
         "id": "mic-w3",
@@ -1401,17 +1427,18 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": false,
         "isBigTen": false,
-        "vegasSpread": -26.0,
+        "vegasSpread": -21.5,
         "overUnder": 45.5,
-        "baseWinProb": 99,
-        "projScoreUt": 36,
-        "projScoreOpp": 10,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Dominating the point of attack before Big Ten play.",
           "keyMatchup": "Michigan run game vs UTEP front seven.",
           "summary": "Non-conference finale in Ann Arbor."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mic-w4",
@@ -1430,17 +1457,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "BIG TEN PHYSICAL WAR",
-        "vegasSpread": -5.0,
+        "vegasSpread": 4.5,
         "overUnder": 39.0,
-        "baseWinProb": 70,
-        "projScoreUt": 22,
-        "projScoreOpp": 17,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Field position battle and avoiding Iowa defensive takeaways.",
           "keyMatchup": "Michigan power run game vs Phil Parker disciplined Hawkeye defense.",
           "summary": "Big Ten conference opener in Ann Arbor."
         },
-        "oppId": "iowa"
+        "oppId": "iowa",
+        "is_tracked": true
       },
       {
         "id": "mic-w5",
@@ -1459,17 +1487,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBigTen": true,
         "rivalryName": "LITTLE BROWN JUG BATTLE",
-        "vegasSpread": -5.0,
+        "vegasSpread": -14.5,
         "overUnder": 47.0,
-        "baseWinProb": 70,
-        "projScoreUt": 26,
-        "projScoreOpp": 21,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Winning the time of possession battle on the road.",
           "keyMatchup": "Michigan front seven vs Minnesota ground game.",
           "summary": "Trophy battle for the Little Brown Jug in Minneapolis."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mic-w6",
@@ -1488,17 +1517,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "BIG TEN EAST CLASSIC",
-        "vegasSpread": -0.5,
+        "vegasSpread": 2.0,
         "overUnder": 43.5,
-        "baseWinProb": 53,
-        "projScoreUt": 23,
-        "projScoreOpp": 20,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Stopping Matt Campbell / Rocco Becht offense in key 3rd down situations.",
           "keyMatchup": "Jay Hill pressure vs Penn State pass protection.",
           "summary": "Electrifying Big Ten showdown in Ann Arbor."
         },
-        "oppId": "pennstate"
+        "oppId": "pennstate",
+        "is_tracked": true
       },
       {
         "id": "mic-w7",
@@ -1517,17 +1547,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "BIG TEN TOP-15 BATTLE",
-        "vegasSpread": -0.5,
+        "vegasSpread": 4.5,
         "overUnder": 48.0,
-        "baseWinProb": 52,
-        "projScoreUt": 25,
-        "projScoreOpp": 22,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Containing Curt Cignetti's explosive offense.",
           "keyMatchup": "Michigan secondary vs Josh Hoover passing precision.",
           "summary": "High-stakes Big Ten battle in The Big House."
         },
-        "oppId": "indiana"
+        "oppId": "indiana",
+        "is_tracked": true
       },
       {
         "id": "mic-w8",
@@ -1545,17 +1576,18 @@ var TEAMS_DATABASE = {
         "location": "Piscataway, NJ",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -5.5,
+        "vegasSpread": -14.5,
         "overUnder": 47.0,
-        "baseWinProb": 72,
-        "projScoreUt": 26,
-        "projScoreOpp": 21,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Halloween afternoon discipline in New Jersey.",
           "keyMatchup": "Michigan defensive tackles vs Rutgers physical run game.",
           "summary": "Big Ten road victory in Piscataway."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mic-w9",
@@ -1574,17 +1606,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "BATTLE FOR PAUL BUNYAN TROPHY",
-        "vegasSpread": -24.0,
+        "vegasSpread": -14.5,
         "overUnder": 45.5,
-        "baseWinProb": 98,
-        "projScoreUt": 35,
-        "projScoreOpp": 11,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Physical domination and turnover control in state rivalry.",
           "keyMatchup": "Michigan ground attack vs Michigan State defensive front.",
           "summary": "Intense rivalry showdown in Ann Arbor."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mic-w10",
@@ -1603,17 +1636,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "CROSS-COUNTRY BIG TEN CLASH IN AUTZEN",
-        "vegasSpread": 2.5,
+        "vegasSpread": -2.0,
         "overUnder": 56.0,
-        "baseWinProb": 42,
-        "projScoreUt": 24,
-        "projScoreOpp": 30,
+        "baseWinProb": 55,
+        "projScoreUt": 27,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Weathering 54,000 screaming fans in Autzen.",
           "keyMatchup": "Michigan secondary vs Dante Moore laser passing.",
           "summary": "Massive late-season road test in Eugene."
         },
-        "oppId": "oregon"
+        "oppId": "oregon",
+        "is_tracked": true
       },
       {
         "id": "mic-w11",
@@ -1631,17 +1665,18 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -11.5,
+        "vegasSpread": -14.5,
         "overUnder": 47.0,
-        "baseWinProb": 88,
-        "projScoreUt": 29,
-        "projScoreOpp": 18,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Senior Day focus and controlling line of scrimmage.",
           "keyMatchup": "Michigan pass rush vs UCLA quarterback.",
           "summary": "Senior Day home victory in Ann Arbor."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mic-w12",
@@ -1660,17 +1695,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "THE GAME (#1 BUCKEYES IN THE HORSESHOE)",
-        "vegasSpread": 9.5,
+        "vegasSpread": 4.5,
         "overUnder": 48.5,
-        "baseWinProb": 17,
-        "projScoreUt": 20,
-        "projScoreOpp": 29,
+        "baseWinProb": 25,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Fourth quarter execution in 105,000 hostile Columbus crowd.",
           "keyMatchup": "Martindale defense vs Jeremiah Smith and Ohio State firepower.",
           "summary": "The greatest rivalry in sports in Columbus."
         },
-        "oppId": "ohiostate"
+        "oppId": "ohiostate",
+        "is_tracked": true
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/130.png",
@@ -1729,17 +1765,18 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": false,
         "isBigTen": false,
-        "vegasSpread": -32.5,
+        "vegasSpread": -21.5,
         "overUnder": 53.0,
-        "baseWinProb": 100,
-        "projScoreUt": 43,
-        "projScoreOpp": 10,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Dominating from opening kickoff.",
           "keyMatchup": "Buckeye WRs vs Ball State secondary.",
           "summary": "Season opener in The Horseshoe."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "osu-w2",
@@ -1760,15 +1797,16 @@ var TEAMS_DATABASE = {
         "rivalryName": "NON-CONFERENCE GAME OF THE YEAR (#1 VS #5)",
         "vegasSpread": -3.5,
         "overUnder": 59.0,
-        "baseWinProb": 58,
-        "projScoreUt": 28,
+        "baseWinProb": 60,
+        "projScoreUt": 31,
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Handling 101,000 hostile fans in Austin and Arch Manning magic.",
           "keyMatchup": "Ohio State secondary vs Texas deep vertical pass attack.",
           "summary": "Blockbuster non-conference battle in Austin."
         },
-        "oppId": "texas"
+        "oppId": "texas",
+        "is_tracked": true
       },
       {
         "id": "osu-w3",
@@ -1789,14 +1827,15 @@ var TEAMS_DATABASE = {
         "vegasSpread": -21.5,
         "overUnder": 53.0,
         "baseWinProb": 98,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Offensive rhythm and red-zone finish in Columbus.",
           "keyMatchup": "Bo Jackson vs Boston College front seven.",
           "summary": "Non-conference finale in The Horseshoe."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "osu-w4",
@@ -1815,17 +1854,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBigTen": true,
         "rivalryName": "ILLIBUCK TROPHY RIVALRY",
-        "vegasSpread": -15.5,
+        "vegasSpread": -14.5,
         "overUnder": 54.5,
-        "baseWinProb": 93,
-        "projScoreUt": 35,
-        "projScoreOpp": 20,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Trench dominance in Big Ten opener.",
           "keyMatchup": "Silver Bullets vs Illinois run game.",
           "summary": "Big Ten home opener."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "osu-w5",
@@ -1843,17 +1883,18 @@ var TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": true,
         "isBigTen": true,
-        "vegasSpread": -5.5,
+        "vegasSpread": -4.5,
         "overUnder": 44.5,
-        "baseWinProb": 72,
-        "projScoreUt": 25,
-        "projScoreOpp": 20,
+        "baseWinProb": 75,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Kinnick Stadium atmosphere and turnover protection.",
           "keyMatchup": "Ohio State offensive line vs Iowa front seven.",
           "summary": "Big Ten road test in Iowa City."
         },
-        "oppId": "iowa"
+        "oppId": "iowa",
+        "is_tracked": true
       },
       {
         "id": "osu-w6",
@@ -1871,17 +1912,18 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -22.0,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
         "baseWinProb": 98,
         "projScoreUt": 38,
-        "projScoreOpp": 16,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Fast execution and backup player rotation.",
           "keyMatchup": "Jeremiah Smith vs Northwestern cornerbacks.",
           "summary": "October home victory in Columbus."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "osu-w7",
@@ -1900,17 +1942,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "BIG TEN TOP-10 ROAD WAR",
-        "vegasSpread": -1.0,
+        "vegasSpread": 2.5,
         "overUnder": 55.5,
-        "baseWinProb": 54,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Silencing 52,000 in Bloomington and winning 3rd downs.",
           "keyMatchup": "Silver Bullets defense vs Josh Hoover precision air attack.",
           "summary": "High-stakes Big Ten road showdown."
         },
-        "oppId": "indiana"
+        "oppId": "indiana",
+        "is_tracked": true
       },
       {
         "id": "osu-w8",
@@ -1929,17 +1972,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "HISTORIC ROSE BOWL RIVALRY (IN LA)",
-        "vegasSpread": -4.0,
+        "vegasSpread": -4.5,
         "overUnder": 62.0,
-        "baseWinProb": 66,
-        "projScoreUt": 33,
-        "projScoreOpp": 30,
+        "baseWinProb": 75,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "West Coast travel and electric LA Coliseum atmosphere.",
           "keyMatchup": "Ohio State pass rush vs USC explosive air raid.",
           "summary": "Hollywood blockbuster in Los Angeles."
         },
-        "oppId": "usc"
+        "oppId": "usc",
+        "is_tracked": true
       },
       {
         "id": "osu-w9",
@@ -1958,17 +2002,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "COLOSSAL #1 VS #2 SHOWDOWN IN COLUMBUS",
-        "vegasSpread": -2.5,
+        "vegasSpread": 2.5,
         "overUnder": 60.0,
-        "baseWinProb": 58,
-        "projScoreUt": 31,
-        "projScoreOpp": 27,
+        "baseWinProb": 45,
+        "projScoreUt": 28,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "105,000 Buckeye frenzy in prime-time.",
           "keyMatchup": "Bo Jackson and Jeremiah Smith vs Oregon elite defense.",
           "summary": "Game of the Century in Columbus."
         },
-        "oppId": "oregon"
+        "oppId": "oregon",
+        "is_tracked": true
       },
       {
         "id": "osu-w10",
@@ -1986,17 +2031,18 @@ var TEAMS_DATABASE = {
         "location": "Lincoln, NE",
         "isMarquee": true,
         "isBigTen": true,
-        "vegasSpread": -9.0,
+        "vegasSpread": -14.5,
         "overUnder": 54.5,
-        "baseWinProb": 83,
-        "projScoreUt": 32,
-        "projScoreOpp": 23,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "No letdown after Oregon megagame in front of 85,000 Husker fans.",
           "keyMatchup": "Silver Bullets front seven vs Nebraska ground game.",
           "summary": "Tough late-season Big Ten road victory."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "osu-w11",
@@ -2014,17 +2060,18 @@ var TEAMS_DATABASE = {
         "location": "East Lansing, MI",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -9.5,
+        "vegasSpread": -4.5,
         "overUnder": 54.5,
-        "baseWinProb": 83,
-        "projScoreUt": 32,
-        "projScoreOpp": 22,
+        "baseWinProb": 75,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Cold weather execution before The Game.",
           "keyMatchup": "Ohio State receivers vs MSU defensive backs.",
           "summary": "Big Ten road victory in East Lansing."
         },
-        "oppId": null
+        "oppId": "michigan",
+        "is_tracked": true
       },
       {
         "id": "osu-w12",
@@ -2043,17 +2090,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "THE GAME: REVENGE IN THE HORSESHOE",
-        "vegasSpread": -9.5,
+        "vegasSpread": -2.5,
         "overUnder": 48.5,
-        "baseWinProb": 83,
-        "projScoreUt": 29,
-        "projScoreOpp": 20,
+        "baseWinProb": 86,
+        "projScoreUt": 31,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "105,000 hostile crowd and revenge mindset in Columbus.",
           "keyMatchup": "Jeremiah Smith and Julian Sayin vs Jay Hill defense.",
           "summary": "The greatest rivalry in sports in Columbus."
         },
-        "oppId": "michigan"
+        "oppId": "michigan",
+        "is_tracked": true
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
@@ -2112,17 +2160,18 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -31.5,
+        "vegasSpread": 4.5,
         "overUnder": 52.0,
-        "baseWinProb": 100,
-        "projScoreUt": 42,
-        "projScoreOpp": 10,
+        "baseWinProb": 25,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Starting fast and establishing offensive rhythm.",
           "keyMatchup": "Georgia WRs vs Tennessee State secondary.",
           "summary": "Season opener Between the Hedges."
         },
-        "oppId": null
+        "oppId": "tennessee",
+        "is_tracked": true
       },
       {
         "id": "uga-w2",
@@ -2140,17 +2189,18 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -25.5,
+        "vegasSpread": -21.5,
         "overUnder": 52.0,
-        "baseWinProb": 99,
-        "projScoreUt": 39,
-        "projScoreOpp": 13,
+        "baseWinProb": 86,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Defensive secondary discipline against WKU air attack.",
           "keyMatchup": "Georgia pass rush vs WKU quick release.",
           "summary": "Athens home tune-up."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "uga-w3",
@@ -2168,17 +2218,18 @@ var TEAMS_DATABASE = {
         "location": "Fayetteville, AR",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -9.0,
+        "vegasSpread": -21.5,
         "overUnder": 53.5,
-        "baseWinProb": 82,
-        "projScoreUt": 31,
-        "projScoreOpp": 22,
+        "baseWinProb": 86,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Physical trench control in SEC road opener.",
           "keyMatchup": "Georgia defensive line vs Arkansas power run game.",
           "summary": "SEC road opener in Fayetteville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "uga-w4",
@@ -2197,17 +2248,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-10 SEC MEGAMATCHUP",
-        "vegasSpread": -5.5,
+        "vegasSpread": -4.5,
         "overUnder": 54.0,
-        "baseWinProb": 73,
-        "projScoreUt": 30,
+        "baseWinProb": 60,
+        "projScoreUt": 31,
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Sanford Stadium crowd noise against John Mateer.",
           "keyMatchup": "Glenn Schumann defense vs Oklahoma spread offense.",
           "summary": "Massive SEC home battle in Athens."
         },
-        "oppId": "oklahoma"
+        "oppId": "oklahoma",
+        "is_tracked": true
       },
       {
         "id": "uga-w5",
@@ -2225,17 +2277,18 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -17.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.5,
-        "baseWinProb": 95,
-        "projScoreUt": 36,
-        "projScoreOpp": 18,
+        "baseWinProb": 86,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Focus and mistake-free execution.",
           "keyMatchup": "Georgia backs vs Vanderbilt front.",
           "summary": "SEC home victory in Athens."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "uga-w6",
@@ -2254,17 +2307,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "SEC TITAN CLASH IN TUSCALOOSA",
-        "vegasSpread": 1.5,
+        "vegasSpread": -4.5,
         "overUnder": 55.0,
-        "baseWinProb": 48,
-        "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Weathering 101,000 hostile fans in Bryant-Denny.",
           "keyMatchup": "Kirby Smart defense vs Kalen DeBoer and Ryan Williams.",
           "summary": "Colossal SEC battle in Tuscaloosa."
         },
-        "oppId": "alabama"
+        "oppId": "alabama",
+        "is_tracked": true
       },
       {
         "id": "uga-w7",
@@ -2283,17 +2337,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "DEEP SOUTH'S OLDEST RIVALRY",
-        "vegasSpread": -13.5,
+        "vegasSpread": 4.5,
         "overUnder": 53.5,
-        "baseWinProb": 91,
-        "projScoreUt": 34,
-        "projScoreOpp": 20,
+        "baseWinProb": 35,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Stifling Auburn run game early.",
           "keyMatchup": "Georgia defensive tackles vs Auburn line.",
           "summary": "Historic rivalry between the hedges."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "uga-w8",
@@ -2312,17 +2367,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "WORLD'S LARGEST OUTDOOR COCKTAIL PARTY",
-        "vegasSpread": -10.5,
+        "vegasSpread": 4.5,
         "overUnder": 53.5,
-        "baseWinProb": 85,
-        "projScoreUt": 32,
-        "projScoreOpp": 22,
+        "baseWinProb": 35,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Neutral-site 50/50 stadium discipline and red zone scores.",
           "keyMatchup": "Georgia secondary vs DJ Lagway deep shots.",
           "summary": "Historic neutral site rivalry in Atlanta."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "uga-w9",
@@ -2341,17 +2397,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-10 SEC ROAD SHOWDOWN",
-        "vegasSpread": 1.5,
+        "vegasSpread": -4.5,
         "overUnder": 62.0,
-        "baseWinProb": 48,
-        "projScoreUt": 28,
-        "projScoreOpp": 31,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Silencing the Oxford crowd and controlling tempo.",
           "keyMatchup": "Schumann defense vs Trinidad Chambliss and Ole Miss speed.",
           "summary": "High-stakes SEC road test in Oxford."
         },
-        "oppId": "olemiss"
+        "oppId": "olemiss",
+        "is_tracked": true
       },
       {
         "id": "uga-w10",
@@ -2369,17 +2426,18 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": true,
         "isSec": true,
-        "vegasSpread": -10.0,
+        "vegasSpread": -4.5,
         "overUnder": 52.0,
-        "baseWinProb": 84,
+        "baseWinProb": 70,
         "projScoreUt": 31,
-        "projScoreOpp": 21,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Dominating line of scrimmage in late November.",
           "keyMatchup": "Georgia pass rush vs Mizzou protection.",
           "summary": "SEC home victory in Athens."
         },
-        "oppId": "missouri"
+        "oppId": "missouri",
+        "is_tracked": true
       },
       {
         "id": "uga-w11",
@@ -2397,17 +2455,18 @@ var TEAMS_DATABASE = {
         "location": "Columbia, SC",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -9.5,
+        "vegasSpread": 2.5,
         "overUnder": 53.5,
-        "baseWinProb": 83,
-        "projScoreUt": 32,
-        "projScoreOpp": 22,
+        "baseWinProb": 38,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Weathering Sandstorm in Columbia.",
           "keyMatchup": "Georgia ground attack vs South Carolina front.",
           "summary": "SEC road victory in Columbia."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "uga-w12",
@@ -2426,17 +2485,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "CLEAN, OLD-FASHIONED HATE",
-        "vegasSpread": -13.5,
+        "vegasSpread": 6.5,
         "overUnder": 53.5,
-        "baseWinProb": 91,
-        "projScoreUt": 34,
-        "projScoreOpp": 20,
+        "baseWinProb": 25,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "In-state rivalry dominance and playoff momentum.",
           "keyMatchup": "Georgia defensive front vs Haynes King option attack.",
           "summary": "In-state rivalry regular season finale in Athens."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png",
@@ -2495,17 +2555,18 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -25.0,
+        "vegasSpread": -21.5,
         "overUnder": 52.5,
-        "baseWinProb": 99,
-        "projScoreUt": 39,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
         "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Fast offensive start in season opener.",
           "keyMatchup": "Ryan Williams vs ECU secondary.",
           "summary": "Season opener in Tuscaloosa."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bam-w2",
@@ -2523,17 +2584,18 @@ var TEAMS_DATABASE = {
         "location": "Lexington, KY",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -6.5,
+        "vegasSpread": -21.5,
         "overUnder": 54.5,
-        "baseWinProb": 75,
-        "projScoreUt": 30,
-        "projScoreOpp": 24,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Physical trench control on SEC road opener.",
           "keyMatchup": "AK Dear vs Kentucky defensive front.",
           "summary": "Early SEC road opener in Lexington."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bam-w3",
@@ -2552,17 +2614,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "NON-CONFERENCE MARQUEE CLASH",
-        "vegasSpread": -5.0,
+        "vegasSpread": -4.5,
         "overUnder": 54.5,
-        "baseWinProb": 70,
-        "projScoreUt": 30,
-        "projScoreOpp": 25,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Explosive perimeter plays from Ryan Williams.",
           "keyMatchup": "Kane Wommack defense vs FSU offense.",
           "summary": "Blockbuster non-conference home battle."
         },
-        "oppId": "floridastate"
+        "oppId": "floridastate",
+        "is_tracked": true
       },
       {
         "id": "bam-w4",
@@ -2580,17 +2643,18 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -11.5,
+        "vegasSpread": -14.5,
         "overUnder": 54.5,
-        "baseWinProb": 88,
-        "projScoreUt": 33,
-        "projScoreOpp": 22,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Dominating line of scrimmage in Tuscaloosa.",
           "keyMatchup": "Alabama pass rush vs South Carolina QB.",
           "summary": "SEC home victory in Tuscaloosa."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bam-w5",
@@ -2608,17 +2672,18 @@ var TEAMS_DATABASE = {
         "location": "Starkville, MS",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -8.5,
+        "vegasSpread": -14.5,
         "overUnder": 54.5,
-        "baseWinProb": 81,
-        "projScoreUt": 32,
-        "projScoreOpp": 23,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Handling cowbells in Starkville.",
           "keyMatchup": "Alabama run game vs Mississippi State defense.",
           "summary": "SEC road victory in Starkville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bam-w6",
@@ -2637,17 +2702,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TITAN CLASH: GEORGIA IN TUSCALOOSA",
-        "vegasSpread": -1.5,
+        "vegasSpread": 4.5,
         "overUnder": 55.0,
-        "baseWinProb": 52,
-        "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "100,000 screaming Tide fans and explosive plays from Ryan Williams.",
           "keyMatchup": "DeBoer offense vs Kirby Smart / Schumann defense.",
           "summary": "Colossal SEC showdown in Tuscaloosa."
         },
-        "oppId": "georgia"
+        "oppId": "georgia",
+        "is_tracked": true
       },
       {
         "id": "bam-w7",
@@ -2666,17 +2732,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "THE THIRD SATURDAY IN OCTOBER (IN KNOXVILLE)",
-        "vegasSpread": 1.5,
+        "vegasSpread": -4.5,
         "overUnder": 59.0,
-        "baseWinProb": 48,
-        "projScoreUt": 27,
-        "projScoreOpp": 30,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Cigar rivalry frenzy in Neyland.",
           "keyMatchup": "Alabama secondary vs George MacIntyre and Tennessee tempo.",
           "summary": "Historic rivalry war in Knoxville."
         },
-        "oppId": "tennessee"
+        "oppId": "tennessee",
+        "is_tracked": true
       },
       {
         "id": "bam-w8",
@@ -2695,17 +2762,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-10 SEC BATTLE IN T-TOWN",
-        "vegasSpread": -2.5,
+        "vegasSpread": -4.5,
         "overUnder": 53.5,
         "baseWinProb": 55,
         "projScoreUt": 31,
-        "projScoreOpp": 27,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover control in tight SEC battle.",
           "keyMatchup": "Alabama offensive line vs Mike Elko pass rush.",
           "summary": "Massive SEC showdown in Tuscaloosa."
         },
-        "oppId": "texasam"
+        "oppId": "texasam",
+        "is_tracked": true
       },
       {
         "id": "bam-w9",
@@ -2724,17 +2792,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "DEATH VALLEY TITAN CLASH",
-        "vegasSpread": 2.5,
+        "vegasSpread": -4.5,
         "overUnder": 56.5,
-        "baseWinProb": 40,
-        "projScoreUt": 27,
-        "projScoreOpp": 30,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "102,000 hostile fans on Saturday night in Baton Rouge.",
           "keyMatchup": "Kane Wommack defense vs Lane Kiffin / Sam Leavitt air raid.",
           "summary": "Epic November SEC war in Death Valley."
         },
-        "oppId": "lsu"
+        "oppId": "lsu",
+        "is_tracked": true
       },
       {
         "id": "bam-w10",
@@ -2752,17 +2821,18 @@ var TEAMS_DATABASE = {
         "location": "Nashville, TN",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -9.0,
+        "vegasSpread": 4.5,
         "overUnder": 54.5,
-        "baseWinProb": 82,
-        "projScoreUt": 32,
-        "projScoreOpp": 23,
+        "baseWinProb": 37,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Discipline and physical finish in Nashville.",
           "keyMatchup": "Alabama defense vs Vanderbilt triple-option looks.",
           "summary": "SEC road victory in Nashville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bam-w11",
@@ -2780,17 +2850,18 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -32.5,
+        "vegasSpread": 2.5,
         "overUnder": 52.5,
-        "baseWinProb": 100,
-        "projScoreUt": 42,
-        "projScoreOpp": 10,
+        "baseWinProb": 40,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Senior Day celebration and young player reps.",
           "keyMatchup": "Alabama backups vs Chattanooga.",
           "summary": "Home tune-up before the Iron Bowl."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bam-w12",
@@ -2809,17 +2880,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "THE IRON BOWL (IN TUSCALOOSA)",
-        "vegasSpread": -10.5,
+        "vegasSpread": 6.5,
         "overUnder": 54.5,
-        "baseWinProb": 86,
-        "projScoreUt": 32,
-        "projScoreOpp": 22,
+        "baseWinProb": 27,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Iron Bowl passion and playoff positioning.",
           "keyMatchup": "Ryan Williams and AK Dear vs Auburn defense.",
           "summary": "The fiercest rivalry in college football in Tuscaloosa."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png",
@@ -2879,17 +2951,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": false,
         "rivalryName": "MARQUEE NORTHWEST OPENER",
-        "vegasSpread": -13.0,
+        "vegasSpread": 4.5,
         "overUnder": 60.5,
-        "baseWinProb": 90,
-        "projScoreUt": 37,
-        "projScoreOpp": 24,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Fast offensive tempo and stopping Boise State rushing attack.",
           "keyMatchup": "Oregon front seven vs Boise State running game.",
           "summary": "Blockbuster opener in Autzen Stadium."
         },
-        "oppId": "boisestate"
+        "oppId": "boisestate",
+        "is_tracked": true
       },
       {
         "id": "ore-w2",
@@ -2907,17 +2980,18 @@ var TEAMS_DATABASE = {
         "location": "Stillwater, OK",
         "isMarquee": true,
         "isBigTen": false,
-        "vegasSpread": -10.5,
+        "vegasSpread": -14.5,
         "overUnder": 58.5,
-        "baseWinProb": 85,
-        "projScoreUt": 34,
-        "projScoreOpp": 24,
+        "baseWinProb": 92,
+        "projScoreUt": 35,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Road poise in Stillwater.",
           "keyMatchup": "Dante Moore vs Oklahoma State secondary.",
           "summary": "Non-conference road victory in Stillwater."
         },
-        "oppId": null
+        "oppId": "oklahoma",
+        "is_tracked": true
       },
       {
         "id": "ore-w3",
@@ -2935,17 +3009,18 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": false,
         "isBigTen": false,
-        "vegasSpread": -39.5,
+        "vegasSpread": -21.5,
         "overUnder": 57.0,
-        "baseWinProb": 100,
-        "projScoreUt": 48,
-        "projScoreOpp": 9,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Dominating from opening kickoff.",
           "keyMatchup": "Oregon backups getting quality reps.",
           "summary": "Home non-conference finale in Eugene."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ore-w4",
@@ -2964,17 +3039,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "PAC-12 HERITAGE BIG TEN CLASH",
-        "vegasSpread": -2.5,
+        "vegasSpread": -4.5,
         "overUnder": 66.5,
-        "baseWinProb": 60,
-        "projScoreUt": 34,
-        "projScoreOpp": 31,
+        "baseWinProb": 68,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Weathering USC Coliseum hype and scoring in red zone.",
           "keyMatchup": "Tosh Lupoi defense vs USC air attack.",
           "summary": "High-profile Big Ten road opener in LA."
         },
-        "oppId": "usc"
+        "oppId": "usc",
+        "is_tracked": true
       },
       {
         "id": "ore-w5",
@@ -2992,17 +3068,18 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -16.0,
+        "vegasSpread": -21.5,
         "overUnder": 58.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 21,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Coming off bye week with sharp execution.",
           "keyMatchup": "Jordon Davison vs UCLA run defense.",
           "summary": "Big Ten home victory in Autzen."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ore-w6",
@@ -3020,17 +3097,18 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -13.0,
+        "vegasSpread": -14.5,
         "overUnder": 58.5,
-        "baseWinProb": 90,
-        "projScoreUt": 36,
-        "projScoreOpp": 23,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Trench control and preventing big plays.",
           "keyMatchup": "Oregon pass rush vs Nebraska pocket.",
           "summary": "Big Ten home clash in Eugene."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ore-w7",
@@ -3048,17 +3126,18 @@ var TEAMS_DATABASE = {
         "location": "Champaign, IL",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -8.5,
+        "vegasSpread": -14.5,
         "overUnder": 58.5,
-        "baseWinProb": 80,
-        "projScoreUt": 34,
-        "projScoreOpp": 25,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Road discipline and physical tackling in Champaign.",
           "keyMatchup": "Oregon offense vs Illinois secondary.",
           "summary": "Big Ten road victory in Champaign."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ore-w8",
@@ -3076,17 +3155,18 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -20.0,
+        "vegasSpread": -17.5,
         "overUnder": 57.5,
-        "baseWinProb": 97,
-        "projScoreUt": 39,
-        "projScoreOpp": 19,
+        "baseWinProb": 98,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Halloween afternoon tempo and depth rotation.",
           "keyMatchup": "Oregon speed vs Northwestern defense.",
           "summary": "Home victory in Autzen."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ore-w9",
@@ -3105,17 +3185,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "COLOSSAL #1 VS #2 SHOWDOWN IN COLUMBUS",
-        "vegasSpread": 2.5,
+        "vegasSpread": -2.5,
         "overUnder": 60.0,
-        "baseWinProb": 42,
-        "projScoreUt": 27,
-        "projScoreOpp": 31,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Weathering 105,000 hostile Buckeyes in The Horseshoe.",
           "keyMatchup": "Dante Moore vs Jim Knowles Silver Bullet defense.",
           "summary": "Game of the Century in Columbus."
         },
-        "oppId": "ohiostate"
+        "oppId": "ohiostate",
+        "is_tracked": true
       },
       {
         "id": "ore-w10",
@@ -3134,17 +3215,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "CROSS-COUNTRY BIG TEN CLASH IN AUTZEN",
-        "vegasSpread": -2.5,
+        "vegasSpread": 2.0,
         "overUnder": 56.0,
-        "baseWinProb": 58,
-        "projScoreUt": 30,
-        "projScoreOpp": 24,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Autzen noise and explosive offensive tempo.",
           "keyMatchup": "Oregon offensive line vs Whittingham / Martindale front.",
           "summary": "Massive top-15 Big Ten battle in Eugene."
         },
-        "oppId": "michigan"
+        "oppId": "michigan",
+        "is_tracked": true
       },
       {
         "id": "ore-w11",
@@ -3162,17 +3244,18 @@ var TEAMS_DATABASE = {
         "location": "East Lansing, MI",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -7.5,
+        "vegasSpread": -2.5,
         "overUnder": 58.5,
-        "baseWinProb": 78,
-        "projScoreUt": 33,
-        "projScoreOpp": 26,
+        "baseWinProb": 86,
+        "projScoreUt": 31,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Cold weather road focus before rivalry week.",
           "keyMatchup": "Oregon receivers vs MSU defensive backs.",
           "summary": "Big Ten road victory in East Lansing."
         },
-        "oppId": null
+        "oppId": "michigan",
+        "is_tracked": true
       },
       {
         "id": "ore-w12",
@@ -3191,17 +3274,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "PACIFIC NORTHWEST BORDER WAR",
-        "vegasSpread": -9.0,
+        "vegasSpread": -4.5,
         "overUnder": 58.0,
-        "baseWinProb": 82,
-        "projScoreUt": 34,
+        "baseWinProb": 68,
+        "projScoreUt": 31,
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Border War intensity and Big Ten championship berth on the line.",
           "keyMatchup": "Matayo Uiagalelei pass rush vs Demond Williams Jr.",
           "summary": "Fierce rivalry finale in Autzen Stadium."
         },
-        "oppId": "washington"
+        "oppId": "washington",
+        "is_tracked": true
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png",
@@ -3260,17 +3344,18 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isBigTen": false,
-        "vegasSpread": -21.0,
+        "vegasSpread": -21.5,
         "overUnder": 47.5,
-        "baseWinProb": 95,
-        "projScoreUt": 34,
-        "projScoreOpp": 13,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Matt Campbell era debut in front of 107,000.",
           "keyMatchup": "Rocco Becht vs Marshall secondary.",
           "summary": "Season opener at Beaver Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "psu-w2",
@@ -3288,17 +3373,18 @@ var TEAMS_DATABASE = {
         "location": "Philadelphia, PA",
         "isMarquee": false,
         "isBigTen": false,
-        "vegasSpread": -20.0,
+        "vegasSpread": -21.5,
         "overUnder": 48.0,
-        "baseWinProb": 94,
-        "projScoreUt": 34,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
         "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Dominating in-state road clash in Philadelphia.",
           "keyMatchup": "Carson Hansen vs Temple front seven.",
           "summary": "In-state road victory at Lincoln Financial Field."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "psu-w3",
@@ -3316,17 +3402,18 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isBigTen": false,
-        "vegasSpread": -23.0,
+        "vegasSpread": -14.5,
         "overUnder": 47.5,
-        "baseWinProb": 96,
-        "projScoreUt": 35,
-        "projScoreOpp": 12,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Trench dominance before Big Ten play.",
           "keyMatchup": "Penn State offensive line vs Buffalo front.",
           "summary": "Non-conference finale in Happy Valley."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "psu-w4",
@@ -3345,17 +3432,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "BIG TEN PHYSICAL SLUGFEST",
-        "vegasSpread": -1.5,
+        "vegasSpread": 1.5,
         "overUnder": 46.5,
-        "baseWinProb": 54,
-        "projScoreUt": 22,
-        "projScoreOpp": 20,
+        "baseWinProb": 46,
+        "projScoreUt": 20,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Stopping Wisconsin ground attack.",
           "keyMatchup": "Tom Allen defense vs Wisconsin offensive line.",
           "summary": "Tight Big Ten opener in Happy Valley."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "psu-w5",
@@ -3373,17 +3461,18 @@ var TEAMS_DATABASE = {
         "location": "Evanston, IL",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -3.5,
+        "vegasSpread": -14.5,
         "overUnder": 44.5,
-        "baseWinProb": 60,
-        "projScoreUt": 23,
-        "projScoreOpp": 19,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Friday night road discipline near Lake Michigan.",
           "keyMatchup": "Rocco Becht vs Northwestern defensive backs.",
           "summary": "Friday night Big Ten road grind in Evanston."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "psu-w6",
@@ -3402,17 +3491,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "OFFICIAL 2026 PENN STATE WHITE OUT",
-        "vegasSpread": 2.0,
+        "vegasSpread": 4.5,
         "overUnder": 55.0,
-        "baseWinProb": 44,
+        "baseWinProb": 38,
         "projScoreUt": 24,
-        "projScoreOpp": 27,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "107,000 deafening White Out pandemonium.",
           "keyMatchup": "Tom Allen defense vs USC air raid.",
           "summary": "Legendary White Out game at Beaver Stadium."
         },
-        "oppId": "usc"
+        "oppId": "usc",
+        "is_tracked": true
       },
       {
         "id": "psu-w7",
@@ -3431,17 +3521,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "BIG TEN TOP-20 ROAD BATTLE",
-        "vegasSpread": 0.5,
+        "vegasSpread": -2.0,
         "overUnder": 44.5,
-        "baseWinProb": 47,
-        "projScoreUt": 20,
-        "projScoreOpp": 23,
+        "baseWinProb": 55,
+        "projScoreUt": 28,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Weathering 110,000 in The Big House.",
           "keyMatchup": "Andy Kotelnicki offense vs Jay Hill pressure.",
           "summary": "Massive Big Ten showdown in Ann Arbor."
         },
-        "oppId": "michigan"
+        "oppId": "michigan",
+        "is_tracked": true
       },
       {
         "id": "psu-w8",
@@ -3459,17 +3550,18 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -8.0,
+        "vegasSpread": -14.5,
         "overUnder": 46.5,
-        "baseWinProb": 74,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Halloween afternoon execution at home.",
           "keyMatchup": "Penn State pass rush vs Purdue pocket.",
           "summary": "Home battle in Happy Valley."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "psu-w9",
@@ -3487,17 +3579,18 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isBigTen": true,
-        "vegasSpread": 3.5,
+        "vegasSpread": -4.5,
         "overUnder": 47.5,
-        "baseWinProb": 42,
-        "projScoreUt": 21,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Cross-country travel and Husky Stadium noise.",
           "keyMatchup": "Rocco Becht vs Washington secondary.",
           "summary": "Big Ten road test in Seattle."
         },
-        "oppId": "washington"
+        "oppId": "washington",
+        "is_tracked": true
       },
       {
         "id": "psu-w10",
@@ -3515,17 +3608,18 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -3.0,
+        "vegasSpread": -14.5,
         "overUnder": 44.5,
-        "baseWinProb": 58,
-        "projScoreUt": 24,
-        "projScoreOpp": 21,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Physical ground game control in cold weather.",
           "keyMatchup": "Carson Hansen vs Minnesota run defense.",
           "summary": "Grind-it-out home conference battle in Beaver Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "psu-w11",
@@ -3543,17 +3637,18 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -3.5,
+        "vegasSpread": 2.5,
         "overUnder": 44.5,
-        "baseWinProb": 60,
-        "projScoreUt": 24,
-        "projScoreOpp": 20,
+        "baseWinProb": 38,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Senior Day focus and defensive dominance.",
           "keyMatchup": "Tom Allen front vs Rutgers offensive line.",
           "summary": "Senior Day home finale in Happy Valley."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "psu-w12",
@@ -3571,17 +3666,18 @@ var TEAMS_DATABASE = {
         "location": "College Park, MD",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": 1.5,
+        "vegasSpread": 6.5,
         "overUnder": 46.5,
-        "baseWinProb": 48,
-        "projScoreUt": 22,
-        "projScoreOpp": 24,
+        "baseWinProb": 25,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Finishing the regular season with clean road execution.",
           "keyMatchup": "Penn State defense vs Maryland speed.",
           "summary": "Difficult road finale in College Park."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/213.png",
@@ -3641,17 +3737,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "SHAMROCK SERIES AT LAMBEAU FIELD",
-        "vegasSpread": -6.5,
+        "vegasSpread": -21.5,
         "overUnder": 53.0,
-        "baseWinProb": 74,
-        "projScoreUt": 30,
-        "projScoreOpp": 23,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Electric NFL Lambeau Field atmosphere and CJ Carr poise in season opener.",
           "keyMatchup": "Chris Ash defense vs Wisconsin run game.",
           "summary": "Blockbuster Shamrock Series opener in Green Bay."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "nd-w2",
@@ -3669,17 +3766,18 @@ var TEAMS_DATABASE = {
         "location": "South Bend, IN",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -27.0,
+        "vegasSpread": -21.5,
         "overUnder": 51.5,
-        "baseWinProb": 99,
-        "projScoreUt": 39,
-        "projScoreOpp": 12,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "First home game rhythm under Golden Dome.",
           "keyMatchup": "Aneyas Williams vs Rice defensive front.",
           "summary": "South Bend home opener."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "nd-w3",
@@ -3698,17 +3796,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "MEGAPHONE TROPHY RIVALRY RENEWAL",
-        "vegasSpread": -15.0,
+        "vegasSpread": 2.0,
         "overUnder": 53.0,
-        "baseWinProb": 93,
-        "projScoreUt": 34,
-        "projScoreOpp": 19,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Physical trench control against physical Big Ten opponent.",
           "keyMatchup": "Notre Dame offensive line vs Michigan State blitz packages.",
           "summary": "Historic rivalry renewal in South Bend."
         },
-        "oppId": null
+        "oppId": "michigan",
+        "is_tracked": true
       },
       {
         "id": "nd-w4",
@@ -3727,17 +3826,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isSec": false,
         "rivalryName": "SHILLELAGH TROPHY IN-STATE CLASH",
-        "vegasSpread": -12.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
-        "baseWinProb": 89,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Road poise in West Lafayette.",
           "keyMatchup": "CJ Carr passing precision vs Purdue defensive backs.",
           "summary": "In-state rivalry road game."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "nd-w5",
@@ -3755,17 +3855,18 @@ var TEAMS_DATABASE = {
         "location": "Chapel Hill, NC",
         "isMarquee": true,
         "isSec": false,
-        "vegasSpread": -7.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
-        "baseWinProb": 78,
-        "projScoreUt": 30,
-        "projScoreOpp": 23,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Handling Tar Heel tempo on the road.",
           "keyMatchup": "Chris Ash defense vs North Carolina air attack.",
           "summary": "ACC road challenge in Chapel Hill."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "nd-w6",
@@ -3784,17 +3885,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "LEGENDS TROPHY RIVALRY",
-        "vegasSpread": -17.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
-        "baseWinProb": 95,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Trench dominance in Legends Trophy game.",
           "keyMatchup": "Aneyas Williams and Nolan James vs Stanford front.",
           "summary": "Home victory in South Bend."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "nd-w7",
@@ -3812,17 +3914,18 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": true,
         "isSec": false,
-        "vegasSpread": -3.0,
+        "vegasSpread": -4.5,
         "overUnder": 47.0,
-        "baseWinProb": 62,
-        "projScoreUt": 25,
-        "projScoreOpp": 22,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "High elevation road poise in Provo.",
           "keyMatchup": "Notre Dame pass defense vs BYU aerial strike.",
           "summary": "Tough road test in the Rocky Mountains."
         },
-        "oppId": "byu"
+        "oppId": "byu",
+        "is_tracked": true
       },
       {
         "id": "nd-w8",
@@ -3841,17 +3944,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "HISTORIC NAVY-NOTRE DAME CLASH (IN BOSTON)",
-        "vegasSpread": -17.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
-        "baseWinProb": 95,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Discipline against triple option attack in NFL Gillette Stadium.",
           "keyMatchup": "Chris Ash defensive front vs Navy dive and pitch.",
           "summary": "Historic rivalry showcase at Gillette Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "nd-w9",
@@ -3870,17 +3974,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "CATHOLICS VS CONVICTS RIVALRY RENEWAL (#4 VS #7)",
-        "vegasSpread": 1.5,
+        "vegasSpread": 4.5,
         "overUnder": 59.0,
-        "baseWinProb": 48,
-        "projScoreUt": 27,
-        "projScoreOpp": 30,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "77,000 frenzy in South Bend and turnover battle.",
           "keyMatchup": "CJ Carr vs Lance Guidry Miami blitz packages.",
           "summary": "Colossal top-10 rivalry renewal in South Bend."
         },
-        "oppId": "miami"
+        "oppId": "miami",
+        "is_tracked": true
       },
       {
         "id": "nd-w10",
@@ -3899,17 +4004,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isSec": false,
         "rivalryName": "HOLY WAR RIVALRY CLASH",
-        "vegasSpread": -17.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
-        "baseWinProb": 95,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Cold weather execution and defensive dominance.",
           "keyMatchup": "Notre Dame ground attack vs Boston College defense.",
           "summary": "Home victory in South Bend."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "nd-w11",
@@ -3927,17 +4033,18 @@ var TEAMS_DATABASE = {
         "location": "South Bend, IN",
         "isMarquee": true,
         "isSec": false,
-        "vegasSpread": -6.5,
+        "vegasSpread": -4.5,
         "overUnder": 60.0,
-        "baseWinProb": 76,
-        "projScoreUt": 33,
-        "projScoreOpp": 27,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Senior Day focus against high-flying Mustangs.",
           "keyMatchup": "Leonard Moore and secondary vs SMU air attack.",
           "summary": "Senior Day home finale under Golden Dome."
         },
-        "oppId": "smu"
+        "oppId": "smu",
+        "is_tracked": true
       },
       {
         "id": "nd-w12",
@@ -3955,18 +4062,19 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": true,
         "isSec": false,
-        "vegasSpread": 1.5,
+        "vegasSpread": -4.5,
         "overUnder": 61.0,
-        "baseWinProb": 48,
-        "projScoreUt": 28,
-        "projScoreOpp": 31,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Historic rivalry battle with CFP implications in LA.",
           "keyMatchup": "Notre Dame defense vs USC explosive air raid passing game.",
           "summary": "Traditional regular season finale for the Jeweled Shillelagh."
         },
         "rivalryName": "JEWELED SHILLELAGH RIVALRY BATTLE",
-        "oppId": "usc"
+        "oppId": "usc",
+        "is_tracked": true
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png",
@@ -4028,15 +4136,16 @@ var TEAMS_DATABASE = {
         "rivalryName": "BLOCKBUSTER SEASON OPENER (TIGER BOWL)",
         "vegasSpread": -4.5,
         "overUnder": 54.5,
-        "baseWinProb": 68,
-        "projScoreUt": 30,
-        "projScoreOpp": 25,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "102,000 frenzy in Death Valley for Kiffin debut.",
           "keyMatchup": "Sam Leavitt vs Clemson defense.",
           "summary": "Blockbuster opening night in Tiger Stadium."
         },
-        "oppId": "clemson"
+        "oppId": "clemson",
+        "is_tracked": true
       },
       {
         "id": "lsu-w2",
@@ -4054,17 +4163,18 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -23.0,
+        "vegasSpread": -10.5,
         "overUnder": 53.5,
-        "baseWinProb": 98,
-        "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "baseWinProb": 90,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Offensive tempo and young player development.",
           "keyMatchup": "Caden Durham vs Louisiana Tech front.",
           "summary": "In-state home victory in Death Valley."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "lsu-w3",
@@ -4083,17 +4193,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "MAGNOLIA BOWL RIVALRY CLASH",
-        "vegasSpread": 3.5,
+        "vegasSpread": 4.5,
         "overUnder": 63.5,
-        "baseWinProb": 36,
-        "projScoreUt": 30,
-        "projScoreOpp": 34,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Hostile Oxford crowd as Lane Kiffin returns.",
           "keyMatchup": "LSU air raid vs Pete Golding defense.",
           "summary": "Electrifying SEC showdown in Oxford."
         },
-        "oppId": "olemiss"
+        "oppId": "olemiss",
+        "is_tracked": true
       },
       {
         "id": "lsu-w4",
@@ -4112,17 +4223,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-10 SEC WEST RIVALRY",
-        "vegasSpread": 2.5,
+        "vegasSpread": 3.5,
         "overUnder": 54.0,
-        "baseWinProb": 45,
+        "baseWinProb": 38,
         "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Death Valley Saturday night noise.",
           "keyMatchup": "Sam Leavitt vs Mike Elko defense.",
           "summary": "High-stakes SEC clash in Baton Rouge."
         },
-        "oppId": "texasam"
+        "oppId": "texasam",
+        "is_tracked": true
       },
       {
         "id": "lsu-w5",
@@ -4140,17 +4252,18 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -28.0,
+        "vegasSpread": -10.5,
         "overUnder": 53.0,
-        "baseWinProb": 99,
-        "projScoreUt": 40,
-        "projScoreOpp": 12,
+        "baseWinProb": 90,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Mistake-free execution and backup reps.",
           "keyMatchup": "LSU offense vs McNeese defense.",
           "summary": "In-state home tune-up."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "lsu-w6",
@@ -4168,17 +4281,18 @@ var TEAMS_DATABASE = {
         "location": "Lexington, KY",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -6.0,
+        "vegasSpread": -7.5,
         "overUnder": 55.0,
-        "baseWinProb": 73,
-        "projScoreUt": 30,
-        "projScoreOpp": 24,
+        "baseWinProb": 88,
+        "projScoreUt": 31,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Trench control in Lexington.",
           "keyMatchup": "Blake Baker defense vs Kentucky ground attack.",
           "summary": "SEC road victory in Lexington."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "lsu-w7",
@@ -4196,17 +4310,18 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -13.5,
+        "vegasSpread": -10.5,
         "overUnder": 55.0,
-        "baseWinProb": 91,
-        "projScoreUt": 34,
-        "projScoreOpp": 21,
+        "baseWinProb": 90,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "High-octane scoring in Tiger Stadium.",
           "keyMatchup": "Harlem Berry vs Mississippi State front.",
           "summary": "SEC home victory in Baton Rouge."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "lsu-w8",
@@ -4225,17 +4340,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TIGER BOWL AT JORDAN-HARE",
-        "vegasSpread": -4.5,
+        "vegasSpread": -14.5,
         "overUnder": 55.0,
-        "baseWinProb": 68,
-        "projScoreUt": 30,
-        "projScoreOpp": 25,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Overcoming Jordan-Hare stadium voodoo.",
           "keyMatchup": "Sam Leavitt vs Auburn secondary.",
           "summary": "Tough SEC road victory at Auburn."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "lsu-w9",
@@ -4254,17 +4370,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "THE BATTLE FOR THE SEC: ALABAMA AT DEATH VALLEY",
-        "vegasSpread": -2.5,
+        "vegasSpread": 4.5,
         "overUnder": 56.5,
-        "baseWinProb": 60,
-        "projScoreUt": 30,
-        "projScoreOpp": 27,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "102,000 fans creating earthquake conditions.",
           "keyMatchup": "Lane Kiffin offense vs Kane Wommack defense.",
           "summary": "Epic Saturday night battle in Death Valley."
         },
-        "oppId": "alabama"
+        "oppId": "alabama",
+        "is_tracked": true
       },
       {
         "id": "lsu-w10",
@@ -4283,17 +4400,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-10 SEC MEGAMATCHUP IN DEATH VALLEY",
-        "vegasSpread": -2.0,
+        "vegasSpread": 2.5,
         "overUnder": 58.5,
-        "baseWinProb": 58,
-        "projScoreUt": 28,
+        "baseWinProb": 42,
+        "projScoreUt": 27,
         "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "102,000 Death Valley crowd rattling Arch Manning on third down.",
           "keyMatchup": "Sam Leavitt / Harlem Berry ground-and-pound vs Will Muschamp defense.",
           "summary": "Signature Saturday night upset in Death Valley as LSU tops #5 Texas."
         },
-        "oppId": "texas"
+        "oppId": "texas",
+        "is_tracked": true
       },
       {
         "id": "lsu-w11",
@@ -4311,17 +4429,18 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isSec": true,
-        "vegasSpread": 1.5,
+        "vegasSpread": -4.5,
         "overUnder": 57.0,
-        "baseWinProb": 48,
-        "projScoreUt": 27,
-        "projScoreOpp": 31,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Neyland Stadium noise in late November.",
           "keyMatchup": "Sam Leavitt vs Tennessee secondary.",
           "summary": "High-stakes SEC road test in Knoxville."
         },
-        "oppId": "tennessee"
+        "oppId": "tennessee",
+        "is_tracked": true
       },
       {
         "id": "lsu-w12",
@@ -4340,17 +4459,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "BATTLE FOR THE GOLDEN BOOT",
-        "vegasSpread": -5.0,
+        "vegasSpread": -14.5,
         "overUnder": 55.0,
-        "baseWinProb": 69,
-        "projScoreUt": 30,
-        "projScoreOpp": 25,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Golden Boot rivalry focus and physical running.",
           "keyMatchup": "Caden Durham vs Arkansas front.",
           "summary": "Regular season road finale in Fayetteville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png",
@@ -4409,17 +4529,18 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -21.0,
+        "vegasSpread": -10.5,
         "overUnder": 56.5,
-        "baseWinProb": 97,
-        "projScoreUt": 39,
-        "projScoreOpp": 18,
+        "baseWinProb": 86,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Fast start for George MacIntyre era.",
           "keyMatchup": "Tennessee WRs vs Furman secondary.",
           "summary": "Season opener in Knoxville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ten-w2",
@@ -4438,17 +4559,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "REGIONAL POWER SHOWDOWN IN ATLANTA",
-        "vegasSpread": 31.5,
+        "vegasSpread": -4.5,
         "overUnder": 58.0,
-        "baseWinProb": 0,
-        "projScoreUt": 13,
-        "projScoreOpp": 45,
+        "baseWinProb": 75,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Road poise in Atlanta and defending Haynes King.",
           "keyMatchup": "Jim Knowles defense vs Georgia Tech option attack.",
           "summary": "Non-conference road victory in Atlanta."
         },
-        "oppId": null
+        "oppId": "georgia",
+        "is_tracked": true
       },
       {
         "id": "ten-w3",
@@ -4466,17 +4588,18 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -27.0,
+        "vegasSpread": -10.5,
         "overUnder": 56.0,
-        "baseWinProb": 99,
-        "projScoreUt": 42,
-        "projScoreOpp": 14,
+        "baseWinProb": 86,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Establishing ground rhythm before SEC play.",
           "keyMatchup": "DeSean Bishop vs Kennesaw State front.",
           "summary": "Home tune-up in Neyland."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ten-w4",
@@ -4495,17 +4618,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "CHECKER NEYLAND: #5 TEXAS IN KNOXVILLE",
-        "vegasSpread": 3.0,
+        "vegasSpread": 4.5,
         "overUnder": 62.5,
-        "baseWinProb": 38,
-        "projScoreUt": 30,
-        "projScoreOpp": 33,
+        "baseWinProb": 25,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "102,000 hostile fans and fast Heupel tempo.",
           "keyMatchup": "George MacIntyre vs Will Muschamp defense.",
           "summary": "Colossal SEC opener in Knoxville."
         },
-        "oppId": "texas"
+        "oppId": "texas",
+        "is_tracked": true
       },
       {
         "id": "ten-w5",
@@ -4523,17 +4647,18 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isSec": true,
-        "vegasSpread": -8.0,
+        "vegasSpread": -10.5,
         "overUnder": 57.5,
-        "baseWinProb": 80,
-        "projScoreUt": 33,
-        "projScoreOpp": 25,
+        "baseWinProb": 86,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Physical ground attack and turnover margin.",
           "keyMatchup": "Tennessee defensive front vs Auburn run game.",
           "summary": "SEC home victory in Neyland."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ten-w6",
@@ -4551,17 +4676,18 @@ var TEAMS_DATABASE = {
         "location": "Fayetteville, AR",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -3.0,
+        "vegasSpread": -10.5,
         "overUnder": 57.5,
-        "baseWinProb": 63,
-        "projScoreUt": 30,
-        "projScoreOpp": 27,
+        "baseWinProb": 86,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Road execution in Fayetteville.",
           "keyMatchup": "George MacIntyre vs Arkansas secondary.",
           "summary": "SEC road victory in Fayetteville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ten-w7",
@@ -4580,17 +4706,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "THE THIRD SATURDAY IN OCTOBER (IN KNOXVILLE)",
-        "vegasSpread": -1.5,
+        "vegasSpread": 4.5,
         "overUnder": 59.0,
-        "baseWinProb": 52,
-        "projScoreUt": 30,
-        "projScoreOpp": 27,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "102,000 orange frenzy and cigar smoke.",
           "keyMatchup": "Tennessee air raid vs Kane Wommack defense.",
           "summary": "Historic rivalry war in Knoxville."
         },
-        "oppId": "alabama"
+        "oppId": "alabama",
+        "is_tracked": true
       },
       {
         "id": "ten-w8",
@@ -4608,17 +4735,18 @@ var TEAMS_DATABASE = {
         "location": "Columbia, SC",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -3.5,
+        "vegasSpread": -14.5,
         "overUnder": 57.5,
-        "baseWinProb": 65,
-        "projScoreUt": 30,
-        "projScoreOpp": 27,
+        "baseWinProb": 86,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Silencing Williams-Brice crowd.",
           "keyMatchup": "Tennessee pass rush vs South Carolina QB.",
           "summary": "SEC road victory in Columbia."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ten-w9",
@@ -4637,17 +4765,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isSec": true,
         "rivalryName": "BATTLE FOR THE BEER BARREL",
-        "vegasSpread": -9.5,
+        "vegasSpread": -14.5,
         "overUnder": 57.5,
-        "baseWinProb": 84,
-        "projScoreUt": 34,
-        "projScoreOpp": 24,
+        "baseWinProb": 86,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Dominating line of scrimmage in November.",
           "keyMatchup": "DeSean Bishop vs Kentucky front.",
           "summary": "SEC home victory in Neyland."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ten-w10",
@@ -4665,17 +4794,18 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": true,
         "isSec": true,
-        "vegasSpread": 3.0,
+        "vegasSpread": 4.5,
         "overUnder": 57.0,
-        "baseWinProb": 38,
-        "projScoreUt": 27,
-        "projScoreOpp": 30,
+        "baseWinProb": 32,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "108,000 hostile 12th Man crowd in College Station.",
           "keyMatchup": "Tennessee OL vs Mike Elko pass rush.",
           "summary": "Tough SEC road test at Kyle Field."
         },
-        "oppId": "texasam"
+        "oppId": "texasam",
+        "is_tracked": true
       },
       {
         "id": "ten-w11",
@@ -4694,17 +4824,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-20 SEC SHOWDOWN IN NEYLAND",
-        "vegasSpread": -1.5,
+        "vegasSpread": 4.5,
         "overUnder": 57.0,
-        "baseWinProb": 52,
-        "projScoreUt": 31,
-        "projScoreOpp": 27,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Senior Day crowd noise and shootout tempo.",
           "keyMatchup": "Jim Knowles defense vs Lane Kiffin / Sam Leavitt air raid.",
           "summary": "Senior Day primetime war in Knoxville."
         },
-        "oppId": "lsu"
+        "oppId": "lsu",
+        "is_tracked": true
       },
       {
         "id": "ten-w12",
@@ -4723,17 +4854,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isSec": true,
         "rivalryName": "IN-STATE RIVALRY FINALE",
-        "vegasSpread": -6.5,
+        "vegasSpread": -14.5,
         "overUnder": 57.5,
-        "baseWinProb": 76,
-        "projScoreUt": 32,
-        "projScoreOpp": 26,
+        "baseWinProb": 86,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Taking over Nashville with Volunteer fans.",
           "keyMatchup": "Tennessee offense vs Vanderbilt defense.",
           "summary": "Regular season road finale in Nashville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png",
@@ -4792,17 +4924,18 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isBigTen": false,
-        "vegasSpread": -25.0,
+        "vegasSpread": 2.0,
         "overUnder": 52.5,
-        "baseWinProb": 99,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Cignetti offense starting fast at home.",
           "keyMatchup": "Josh Hoover vs North Texas secondary.",
           "summary": "Season opener in Bloomington."
         },
-        "oppId": null
+        "oppId": "texas",
+        "is_tracked": true
       },
       {
         "id": "ind-w2",
@@ -4820,7 +4953,7 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isBigTen": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -21.5,
         "overUnder": 52.5,
         "baseWinProb": 98,
         "projScoreUt": 38,
@@ -4830,7 +4963,8 @@ var TEAMS_DATABASE = {
           "keyMatchup": "Lee Beebe Jr. vs Howard defensive front.",
           "summary": "Non-conference home victory."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ind-w3",
@@ -4848,17 +4982,18 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isBigTen": false,
-        "vegasSpread": -23.5,
+        "vegasSpread": -21.5,
         "overUnder": 53.0,
         "baseWinProb": 98,
         "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Defending quick WKU air raid.",
           "keyMatchup": "Bryant Haines pass rush vs WKU pocket.",
           "summary": "Non-conference finale in Bloomington."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ind-w4",
@@ -4876,17 +5011,18 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -18.0,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
-        "baseWinProb": 95,
-        "projScoreUt": 36,
-        "projScoreOpp": 18,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Friday night Big Ten opener execution.",
           "keyMatchup": "Hoover passing rhythm vs Northwestern coverages.",
           "summary": "Friday night Big Ten opener in Bloomington."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ind-w5",
@@ -4904,17 +5040,18 @@ var TEAMS_DATABASE = {
         "location": "Piscataway, NJ",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -8.0,
+        "vegasSpread": -14.5,
         "overUnder": 54.0,
-        "baseWinProb": 80,
-        "projScoreUt": 31,
-        "projScoreOpp": 23,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Road discipline and stopping Rutgers ground game.",
           "keyMatchup": "Indiana front seven vs Rutgers physical backs.",
           "summary": "Big Ten road victory in Piscataway."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ind-w6",
@@ -4932,17 +5069,18 @@ var TEAMS_DATABASE = {
         "location": "Lincoln, NE",
         "isMarquee": true,
         "isBigTen": true,
-        "vegasSpread": -5.5,
+        "vegasSpread": -14.5,
         "overUnder": 54.0,
-        "baseWinProb": 72,
-        "projScoreUt": 30,
-        "projScoreOpp": 24,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Handling 85,000 hostile fans in Lincoln.",
           "keyMatchup": "Josh Hoover vs Nebraska pass defense.",
           "summary": "Big Ten road victory in Lincoln."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ind-w7",
@@ -4961,17 +5099,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "BIG TEN TOP-10 MEGASHOWDOWN (#1 IN BLOOMINGTON)",
-        "vegasSpread": 1.0,
+        "vegasSpread": -2.5,
         "overUnder": 55.5,
-        "baseWinProb": 46,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "53,000 electric crowd in Bloomington and turnover battle.",
           "keyMatchup": "Cignetti offense vs Jim Knowles Silver Bullet defense.",
           "summary": "Colossal top-10 Big Ten clash in Bloomington."
         },
-        "oppId": "ohiostate"
+        "oppId": "ohiostate",
+        "is_tracked": true
       },
       {
         "id": "ind-w8",
@@ -4990,17 +5129,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "BIG TEN TOP-15 BATTLE AT THE BIG HOUSE",
-        "vegasSpread": 0.5,
+        "vegasSpread": -4.5,
         "overUnder": 48.0,
-        "baseWinProb": 48,
-        "projScoreUt": 22,
-        "projScoreOpp": 25,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "110,000 hostile crowd poise in Ann Arbor.",
           "keyMatchup": "Josh Hoover precision vs Jay Hill blitz packages.",
           "summary": "High-stakes Big Ten road victory at The Big House."
         },
-        "oppId": "michigan"
+        "oppId": "michigan",
+        "is_tracked": true
       },
       {
         "id": "ind-w9",
@@ -5018,17 +5158,18 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isBigTen": true,
-        "vegasSpread": -13.0,
+        "vegasSpread": -14.5,
         "overUnder": 54.0,
-        "baseWinProb": 90,
-        "projScoreUt": 34,
-        "projScoreOpp": 20,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Halloween afternoon execution at home.",
           "keyMatchup": "Lee Beebe Jr. vs Minnesota run defense.",
           "summary": "Home conference victory in Bloomington."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ind-w10",
@@ -5047,17 +5188,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBigTen": true,
         "rivalryName": "BIG TEN TOP-15 SHOWDOWN IN BLOOMINGTON",
-        "vegasSpread": -9.0,
+        "vegasSpread": -14.5,
         "overUnder": 54.0,
-        "baseWinProb": 82,
-        "projScoreUt": 32,
-        "projScoreOpp": 22,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Curt Cignetti road discipline and turnover margin.",
           "keyMatchup": "Indiana offense vs Maryland secondary.",
           "summary": "Big Ten road battle in College Park."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ind-w11",
@@ -5075,17 +5217,18 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isBigTen": true,
-        "vegasSpread": -1.0,
+        "vegasSpread": -4.5,
         "overUnder": 53.5,
-        "baseWinProb": 54,
-        "projScoreUt": 27,
-        "projScoreOpp": 26,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Cross-country trip to Seattle and playoff momentum.",
           "keyMatchup": "Hoover passing attack vs Husky secondary.",
           "summary": "Massive late-season road test in Seattle."
         },
-        "oppId": "washington"
+        "oppId": "washington",
+        "is_tracked": true
       },
       {
         "id": "ind-w12",
@@ -5104,17 +5247,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "THE OLD OAKEN BUCKET RIVALRY",
-        "vegasSpread": -17.5,
+        "vegasSpread": 2.5,
         "overUnder": 54.0,
-        "baseWinProb": 95,
-        "projScoreUt": 36,
-        "projScoreOpp": 18,
+        "baseWinProb": 38,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Retaining the Old Oaken Bucket and sealing 12-Team CFP seed.",
           "keyMatchup": "Hoover and Beebe vs Purdue defense.",
           "summary": "Historic rivalry regular season finale in Bloomington."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png",
@@ -5173,17 +5317,18 @@ var TEAMS_DATABASE = {
         "location": "Stanford, CA",
         "isMarquee": false,
         "isAcc": true,
-        "vegasSpread": -12.5,
+        "vegasSpread": -21.5,
         "overUnder": 58.5,
-        "baseWinProb": 90,
-        "projScoreUt": 36,
-        "projScoreOpp": 23,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Friday night cross-country opener focus.",
           "keyMatchup": "Darian Mensah vs Stanford secondary.",
           "summary": "Friday night ACC opener in California."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mia-w2",
@@ -5201,17 +5346,18 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -21.5,
         "overUnder": 57.0,
         "baseWinProb": 98,
-        "projScoreUt": 41,
-        "projScoreOpp": 16,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Total dominance in home opener.",
           "keyMatchup": "Miami backups getting quality snaps.",
           "summary": "Thursday night home opener in Hard Rock Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mia-w3",
@@ -5229,17 +5375,18 @@ var TEAMS_DATABASE = {
         "location": "Winston-Salem, NC",
         "isMarquee": false,
         "isAcc": true,
-        "vegasSpread": -12.0,
+        "vegasSpread": -14.5,
         "overUnder": 58.5,
-        "baseWinProb": 89,
-        "projScoreUt": 35,
-        "projScoreOpp": 23,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Friday night road discipline in North Carolina.",
           "keyMatchup": "Mark Fletcher Jr. vs Wake Forest front.",
           "summary": "Friday night ACC road victory."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mia-w4",
@@ -5257,17 +5404,18 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": 2.0,
         "overUnder": 57.0,
-        "baseWinProb": 98,
-        "projScoreUt": 41,
-        "projScoreOpp": 16,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Fast execution and building offensive momentum.",
           "keyMatchup": "Miami wideouts vs CMU secondary.",
           "summary": "Home non-conference victory."
         },
-        "oppId": null
+        "oppId": "michigan",
+        "is_tracked": true
       },
       {
         "id": "mia-w5",
@@ -5286,17 +5434,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "ACC TITLE RACE TITAN CLASH",
-        "vegasSpread": -1.5,
+        "vegasSpread": -4.5,
         "overUnder": 58.5,
-        "baseWinProb": 56,
-        "projScoreUt": 30,
-        "projScoreOpp": 27,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Overcoming 81,000 hostile fans in Clemson Death Valley.",
           "keyMatchup": "Darian Mensah vs Clemson defensive front.",
           "summary": "Colossal ACC road showdown in Clemson."
         },
-        "oppId": "clemson"
+        "oppId": "clemson",
+        "is_tracked": true
       },
       {
         "id": "mia-w6",
@@ -5315,17 +5464,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "THE SUNSHINE STATE SHOWDOWN",
-        "vegasSpread": 1.5,
+        "vegasSpread": -4.5,
         "overUnder": 58.5,
-        "baseWinProb": 48,
-        "projScoreUt": 27,
-        "projScoreOpp": 28,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "In-state rivalry passion and turnover control.",
           "keyMatchup": "Rueben Bain Jr. pass rush vs FSU pocket.",
           "summary": "Fierce in-state rivalry clash in Miami Gardens."
         },
-        "oppId": "floridastate"
+        "oppId": "floridastate",
+        "is_tracked": true
       },
       {
         "id": "mia-w7",
@@ -5343,17 +5493,18 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": false,
         "isAcc": true,
-        "vegasSpread": -13.0,
+        "vegasSpread": -14.5,
         "overUnder": 58.5,
-        "baseWinProb": 90,
-        "projScoreUt": 36,
-        "projScoreOpp": 23,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Physical domination of Pitt defensive line.",
           "keyMatchup": "Mark Fletcher Jr. vs Pitt linebackers.",
           "summary": "ACC home victory in Hard Rock Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mia-w8",
@@ -5371,17 +5522,18 @@ var TEAMS_DATABASE = {
         "location": "Chapel Hill, NC",
         "isMarquee": false,
         "isAcc": true,
-        "vegasSpread": -7.5,
+        "vegasSpread": -14.5,
         "overUnder": 58.5,
-        "baseWinProb": 79,
-        "projScoreUt": 33,
-        "projScoreOpp": 26,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Handling Tar Heel tempo on the road.",
           "keyMatchup": "Lance Guidry blitz packages vs UNC QB.",
           "summary": "Halloween road victory in Chapel Hill."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mia-w9",
@@ -5400,17 +5552,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "CATHOLICS VS CONVICTS RIVALRY RENEWAL (#4 VS #7)",
-        "vegasSpread": -1.5,
+        "vegasSpread": -4.5,
         "overUnder": 59.0,
-        "baseWinProb": 52,
-        "projScoreUt": 30,
-        "projScoreOpp": 27,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Cold weather in South Bend and 77,000 Irish frenzy.",
           "keyMatchup": "Darian Mensah vs Chris Ash / Freeman defense.",
           "summary": "Colossal top-10 non-conference showdown in South Bend."
         },
-        "oppId": "notredame"
+        "oppId": "notredame",
+        "is_tracked": true
       },
       {
         "id": "mia-w10",
@@ -5428,17 +5581,18 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": false,
         "isAcc": true,
-        "vegasSpread": -14.0,
+        "vegasSpread": -14.5,
         "overUnder": 58.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 22,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Disciplined execution and red zone efficiency.",
           "keyMatchup": "Miami offensive line vs Duke front.",
           "summary": "ACC home victory in Hard Rock Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mia-w11",
@@ -5457,17 +5611,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "SENIOR DAY HOME FINALE",
-        "vegasSpread": -13.5,
+        "vegasSpread": -14.5,
         "overUnder": 58.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 22,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Senior Day focus and sealing ACC championship berth.",
           "keyMatchup": "Rueben Bain Jr. vs Virginia Tech tackles.",
           "summary": "Senior Day home victory in Miami Gardens."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "mia-w12",
@@ -5485,17 +5640,18 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": false,
         "isAcc": true,
-        "vegasSpread": -17.5,
+        "vegasSpread": 2.5,
         "overUnder": 58.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 20,
+        "baseWinProb": 38,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Finishing the regular season with clean execution.",
           "keyMatchup": "Miami ground attack vs Boston College defense.",
           "summary": "Regular season home finale in Miami Gardens."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png",
@@ -5554,17 +5710,18 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -29.5,
+        "vegasSpread": 2.0,
         "overUnder": 50.5,
-        "baseWinProb": 99,
-        "projScoreUt": 40,
-        "projScoreOpp": 10,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Establishing dominant offensive tempo in opener.",
           "keyMatchup": "Marcel Reed vs Missouri State defense.",
           "summary": "Season opener at Kyle Field."
         },
-        "oppId": null
+        "oppId": "missouri",
+        "is_tracked": true
       },
       {
         "id": "tam-w2",
@@ -5583,17 +5740,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "NON-CONFERENCE POWER CLASH",
-        "vegasSpread": -11.5,
+        "vegasSpread": -4.5,
         "overUnder": 52.0,
-        "baseWinProb": 87,
-        "projScoreUt": 38,
-        "projScoreOpp": 20,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "12th Man crowd noise against Big 12 challenger.",
           "keyMatchup": "Elko defense vs Arizona State quarterback.",
           "summary": "Power non-conference home victory in College Station."
         },
-        "oppId": "arizonastate"
+        "oppId": "arizonastate",
+        "is_tracked": true
       },
       {
         "id": "tam-w3",
@@ -5611,17 +5769,18 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -13.0,
+        "vegasSpread": -21.5,
         "overUnder": 52.0,
-        "baseWinProb": 90,
-        "projScoreUt": 32,
-        "projScoreOpp": 20,
+        "baseWinProb": 88,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Physical ground game control in SEC opener.",
           "keyMatchup": "Aggie offensive line vs Kentucky front seven.",
           "summary": "SEC home opener at Kyle Field."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "tam-w4",
@@ -5640,17 +5799,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "DEATH VALLEY SATURDAY NIGHT CLASH",
-        "vegasSpread": -2.5,
+        "vegasSpread": -3.5,
         "overUnder": 54.0,
-        "baseWinProb": 55,
-        "projScoreUt": 28,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Handling 102,000 hostile fans in Baton Rouge.",
           "keyMatchup": "Mike Elko defense vs Lane Kiffin / Sam Leavitt air raid.",
           "summary": "Massive SEC road test in Death Valley."
         },
-        "oppId": "lsu"
+        "oppId": "lsu",
+        "is_tracked": true
       },
       {
         "id": "tam-w5",
@@ -5669,17 +5829,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "SOUTHWEST CLASSIC (AT KYLE FIELD)",
-        "vegasSpread": -12.0,
+        "vegasSpread": -7.5,
         "overUnder": 52.0,
         "baseWinProb": 88,
-        "projScoreUt": 32,
+        "projScoreUt": 31,
         "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Dominating line of scrimmage at home.",
           "keyMatchup": "Marcel Reed dual-threat runs vs Arkansas linebackers.",
           "summary": "Southwest Classic home victory in College Station."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "tam-w6",
@@ -5697,17 +5858,18 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isSec": true,
-        "vegasSpread": -5.0,
+        "vegasSpread": -2.5,
         "overUnder": 50.5,
-        "baseWinProb": 70,
-        "projScoreUt": 28,
-        "projScoreOpp": 23,
+        "baseWinProb": 68,
+        "projScoreUt": 31,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Road poise and red-zone touchdown efficiency.",
           "keyMatchup": "Wrecking Crew defense vs Mizzou offense.",
           "summary": "Tough SEC road victory in Columbia."
         },
-        "oppId": "missouri"
+        "oppId": "missouri",
+        "is_tracked": true
       },
       {
         "id": "tam-w7",
@@ -5725,17 +5887,18 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -31.5,
         "overUnder": 50.5,
-        "baseWinProb": 98,
-        "projScoreUt": 38,
-        "projScoreOpp": 13,
+        "baseWinProb": 88,
+        "projScoreUt": 45,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Discipline against triple option and backup reps.",
           "keyMatchup": "Texas A&M backups vs Citadel.",
           "summary": "Home non-conference victory."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "tam-w8",
@@ -5754,17 +5917,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-15 SEC SHOWDOWN IN TUSCALOOSA",
-        "vegasSpread": 2.5,
+        "vegasSpread": 4.5,
         "overUnder": 53.5,
         "baseWinProb": 45,
-        "projScoreUt": 27,
+        "projScoreUt": 24,
         "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "100,000 hostile fans in Bryant-Denny and turnover margin.",
           "keyMatchup": "Mike Elko defense vs Ryan Williams and Kalen DeBoer.",
           "summary": "Massive SEC road test in Tuscaloosa."
         },
-        "oppId": "alabama"
+        "oppId": "alabama",
+        "is_tracked": true
       },
       {
         "id": "tam-w9",
@@ -5782,17 +5946,18 @@ var TEAMS_DATABASE = {
         "location": "Columbia, SC",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -7.5,
+        "vegasSpread": 1.5,
         "overUnder": 52.0,
-        "baseWinProb": 78,
-        "projScoreUt": 30,
-        "projScoreOpp": 22,
+        "baseWinProb": 46,
+        "projScoreUt": 24,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Trench dominance in Columbia.",
           "keyMatchup": "Marcel Reed vs South Carolina secondary.",
           "summary": "SEC road victory in Columbia."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "tam-w10",
@@ -5811,17 +5976,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-20 SEC BATTLE IN COLLEGE STATION",
-        "vegasSpread": -3.0,
+        "vegasSpread": -4.5,
         "overUnder": 57.0,
-        "baseWinProb": 62,
-        "projScoreUt": 30,
-        "projScoreOpp": 27,
+        "baseWinProb": 68,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "108,000 12th Man roar disrupting Heupel tempo.",
           "keyMatchup": "Wrecking Crew pass rush vs George MacIntyre.",
           "summary": "High-stakes SEC home victory at Kyle Field."
         },
-        "oppId": "tennessee"
+        "oppId": "tennessee",
+        "is_tracked": true
       },
       {
         "id": "tam-w11",
@@ -5840,17 +6006,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "HISTORIC BIG 12 / SEC RIVALRY",
-        "vegasSpread": 2.0,
+        "vegasSpread": -4.5,
         "overUnder": 52.5,
-        "baseWinProb": 46,
-        "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "baseWinProb": 68,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Weathering 86,000 in Norman and turnover battle.",
           "keyMatchup": "Collin Klein offense vs Brent Venables blitzes.",
           "summary": "Late-season top-10 SEC battle in Norman."
         },
-        "oppId": "oklahoma"
+        "oppId": "oklahoma",
+        "is_tracked": true
       },
       {
         "id": "tam-w12",
@@ -5869,17 +6036,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "THE LONE STAR SHOWDOWN (AT KYLE FIELD)",
-        "vegasSpread": 2.5,
+        "vegasSpread": 3.5,
         "overUnder": 58.0,
-        "baseWinProb": 42,
-        "projScoreUt": 27,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
         "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "108,000 deafening 12th Man frenzy on Black Friday.",
           "keyMatchup": "Wrecking Crew defense vs Arch Manning and Texas offense.",
           "summary": "Colossal regular-season finale with SEC title on the line."
         },
-        "oppId": "texas"
+        "oppId": "texas",
+        "is_tracked": true
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png",
@@ -5939,17 +6107,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "SUNDAY NIGHT KICKOFF SHOWCASE",
-        "vegasSpread": -7.5,
+        "vegasSpread": -4.5,
         "overUnder": 67.5,
-        "baseWinProb": 78,
-        "projScoreUt": 38,
-        "projScoreOpp": 30,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Pete Golding era opening night in Nashville.",
           "keyMatchup": "Trinidad Chambliss vs Louisville secondary.",
           "summary": "Sunday night neutral-site kickoff in Nashville."
         },
-        "oppId": "louisville"
+        "oppId": "louisville",
+        "is_tracked": true
       },
       {
         "id": "ole-w2",
@@ -5967,17 +6136,18 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -27.5,
+        "vegasSpread": -21.5,
         "overUnder": 59.5,
-        "baseWinProb": 99,
-        "projScoreUt": 44,
-        "projScoreOpp": 16,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Offensive tempo in Oxford home opener.",
           "keyMatchup": "Joshua Dye vs Charlotte front seven.",
           "summary": "Home opener in Vaught-Hemingway Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ole-w3",
@@ -5996,17 +6166,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "MAGNOLIA BOWL: KIFFIN RETURNS TO OXFORD",
-        "vegasSpread": -3.5,
+        "vegasSpread": -4.5,
         "overUnder": 63.5,
-        "baseWinProb": 64,
-        "projScoreUt": 34,
-        "projScoreOpp": 30,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "64,000 hostile fans welcoming back Lane Kiffin.",
           "keyMatchup": "Golding defense vs Sam Leavitt air raid.",
           "summary": "Colossal Magnolia Bowl in Oxford."
         },
-        "oppId": "lsu"
+        "oppId": "lsu",
+        "is_tracked": true
       },
       {
         "id": "ole-w4",
@@ -6024,17 +6195,18 @@ var TEAMS_DATABASE = {
         "location": "Gainesville, FL",
         "isMarquee": true,
         "isSec": true,
-        "vegasSpread": -5.0,
+        "vegasSpread": -21.5,
         "overUnder": 61.5,
-        "baseWinProb": 69,
-        "projScoreUt": 33,
-        "projScoreOpp": 28,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Handling The Swamp heat and hostile crowd.",
           "keyMatchup": "Ole Miss pass rush vs DJ Lagway.",
           "summary": "SEC road victory in Gainesville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ole-w5",
@@ -6052,17 +6224,18 @@ var TEAMS_DATABASE = {
         "location": "Nashville, TN",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -9.5,
+        "vegasSpread": -14.5,
         "overUnder": 61.5,
-        "baseWinProb": 83,
-        "projScoreUt": 36,
-        "projScoreOpp": 26,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Focus and mistake-free execution in Nashville.",
           "keyMatchup": "Rebel speed vs Vanderbilt defense.",
           "summary": "SEC road victory in Nashville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ole-w6",
@@ -6080,17 +6253,18 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": true,
         "isSec": true,
-        "vegasSpread": -7.0,
+        "vegasSpread": -4.5,
         "overUnder": 59.5,
-        "baseWinProb": 76,
-        "projScoreUt": 33,
-        "projScoreOpp": 26,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Winning 3rd down conversions at home.",
           "keyMatchup": "Chambliss passing vs Mizzou secondary.",
           "summary": "SEC home victory in Oxford."
         },
-        "oppId": "missouri"
+        "oppId": "missouri",
+        "is_tracked": true
       },
       {
         "id": "ole-w7",
@@ -6109,17 +6283,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-10 SEC SHOOTOUT IN AUSTIN",
-        "vegasSpread": 6.0,
+        "vegasSpread": 6.5,
         "overUnder": 66.0,
-        "baseWinProb": 26,
-        "projScoreUt": 30,
-        "projScoreOpp": 36,
+        "baseWinProb": 28,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "100,000 hostile fans in Austin.",
           "keyMatchup": "Ole Miss secondary vs Arch Manning deep ball.",
           "summary": "Colossal SEC showdown in Austin."
         },
-        "oppId": "texas"
+        "oppId": "texas",
+        "is_tracked": true
       },
       {
         "id": "ole-w8",
@@ -6137,17 +6312,18 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": true,
         "isSec": true,
-        "vegasSpread": -10.5,
+        "vegasSpread": -14.5,
         "overUnder": 61.5,
-        "baseWinProb": 85,
-        "projScoreUt": 36,
-        "projScoreOpp": 26,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Halloween morning intensity in Oxford.",
           "keyMatchup": "Golding front seven vs Auburn ground attack.",
           "summary": "SEC home victory in Vaught-Hemingway."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ole-w9",
@@ -6166,17 +6342,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-10 SEC BLOCKBUSTER IN OXFORD",
-        "vegasSpread": -1.5,
+        "vegasSpread": 4.5,
         "overUnder": 62.0,
-        "baseWinProb": 52,
-        "projScoreUt": 31,
-        "projScoreOpp": 28,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "64,000 roaring fans in Oxford giving energy.",
           "keyMatchup": "Trinidad Chambliss vs Kirby Smart / Schumann defense.",
           "summary": "Massive SEC home battle in Oxford."
         },
-        "oppId": "georgia"
+        "oppId": "georgia",
+        "is_tracked": true
       },
       {
         "id": "ole-w10",
@@ -6194,17 +6371,18 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": true,
         "isSec": true,
-        "vegasSpread": 2.5,
+        "vegasSpread": -4.5,
         "overUnder": 61.5,
-        "baseWinProb": 39,
-        "projScoreUt": 30,
-        "projScoreOpp": 32,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Road resilience in Norman.",
           "keyMatchup": "Ole Miss offensive line vs Oklahoma blitz packages.",
           "summary": "Top-10 SEC road showdown in Norman."
         },
-        "oppId": "oklahoma"
+        "oppId": "oklahoma",
+        "is_tracked": true
       },
       {
         "id": "ole-w11",
@@ -6222,17 +6400,18 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -23.5,
+        "vegasSpread": -14.5,
         "overUnder": 60.0,
         "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 18,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Senior Day celebration and young player development.",
           "keyMatchup": "Ole Miss backups vs Wofford.",
           "summary": "Home victory before the Egg Bowl."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ole-w12",
@@ -6251,17 +6430,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "THE EGG BOWL (ON BLACK FRIDAY)",
-        "vegasSpread": -14.0,
+        "vegasSpread": 2.5,
         "overUnder": 61.5,
-        "baseWinProb": 91,
-        "projScoreUt": 38,
-        "projScoreOpp": 24,
+        "baseWinProb": 40,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Egg Bowl passion and retaining the Golden Egg.",
           "keyMatchup": "Trinidad Chambliss vs Mississippi State secondary.",
           "summary": "Black Friday Egg Bowl victory in Oxford."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png",
@@ -6320,17 +6500,18 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -27.5,
+        "vegasSpread": -10.5,
         "overUnder": 51.5,
-        "baseWinProb": 99,
-        "projScoreUt": 40,
-        "projScoreOpp": 12,
+        "baseWinProb": 88,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Friday night opener in Norman.",
           "keyMatchup": "John Mateer vs UTEP defense.",
           "summary": "Season opener in Norman."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ou-w2",
@@ -6349,17 +6530,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "NON-CONFERENCE BLUEBLOOD CLASH",
-        "vegasSpread": 1.5,
+        "vegasSpread": 4.5,
         "overUnder": 47.5,
         "baseWinProb": 44,
-        "projScoreUt": 23,
-        "projScoreOpp": 24,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Handling 110,000 in The Big House.",
           "keyMatchup": "John Mateer vs Jay Hill defense.",
           "summary": "Blockbuster non-conference battle in Ann Arbor."
         },
-        "oppId": "michigan"
+        "oppId": "michigan",
+        "is_tracked": true
       },
       {
         "id": "ou-w3",
@@ -6377,17 +6559,18 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": false,
         "isSec": false,
-        "vegasSpread": -26.5,
+        "vegasSpread": -10.5,
         "overUnder": 51.5,
-        "baseWinProb": 99,
-        "projScoreUt": 39,
-        "projScoreOpp": 12,
+        "baseWinProb": 88,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Ground game explosion in Norman.",
           "keyMatchup": "Lloyd Avant vs New Mexico front seven.",
           "summary": "Non-conference home victory."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ou-w4",
@@ -6406,17 +6589,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-10 SEC MEGAMATCHUP IN ATHENS",
-        "vegasSpread": 5.5,
+        "vegasSpread": 4.5,
         "overUnder": 54.0,
-        "baseWinProb": 27,
+        "baseWinProb": 40,
         "projScoreUt": 24,
-        "projScoreOpp": 30,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Weathering 93,000 between the hedges.",
           "keyMatchup": "John Mateer dual-threat vs Glenn Schumann defense.",
           "summary": "Massive SEC road battle in Athens."
         },
-        "oppId": "georgia"
+        "oppId": "georgia",
+        "is_tracked": true
       },
       {
         "id": "ou-w5",
@@ -6435,17 +6619,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "RED RIVER RIVALRY (GOLDEN HAT)",
-        "vegasSpread": 3.5,
+        "vegasSpread": -2.0,
         "overUnder": 58.0,
-        "baseWinProb": 36,
-        "projScoreUt": 27,
-        "projScoreOpp": 31,
+        "baseWinProb": 55,
+        "projScoreUt": 28,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover battle inside the 50/50 split Cotton Bowl stadium.",
           "keyMatchup": "Brent Venables blitzes vs Arch Manning.",
           "summary": "Legendary Red River Rivalry clash at the State Fair of Texas."
         },
-        "oppId": "texas"
+        "oppId": "texas",
+        "is_tracked": true
       },
       {
         "id": "ou-w6",
@@ -6463,17 +6648,18 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -12.0,
+        "vegasSpread": -10.5,
         "overUnder": 53.0,
         "baseWinProb": 88,
-        "projScoreUt": 32,
-        "projScoreOpp": 20,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Trench dominance at home in Norman.",
           "keyMatchup": "Zac Alley defense vs Kentucky run game.",
           "summary": "SEC home victory in Norman."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ou-w7",
@@ -6491,17 +6677,18 @@ var TEAMS_DATABASE = {
         "location": "Starkville, MS",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -8.5,
+        "vegasSpread": -10.5,
         "overUnder": 53.0,
-        "baseWinProb": 81,
-        "projScoreUt": 31,
-        "projScoreOpp": 22,
+        "baseWinProb": 88,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Silencing the cowbells in Starkville.",
           "keyMatchup": "John Mateer vs Mississippi State defense.",
           "summary": "SEC road victory in Starkville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ou-w8",
@@ -6519,17 +6706,18 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": false,
         "isSec": true,
-        "vegasSpread": -11.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
         "baseWinProb": 88,
-        "projScoreUt": 32,
-        "projScoreOpp": 21,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Halloween afternoon discipline in Norman.",
           "keyMatchup": "Venables defense vs South Carolina QB.",
           "summary": "SEC home victory in Norman."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ou-w9",
@@ -6547,17 +6735,18 @@ var TEAMS_DATABASE = {
         "location": "Gainesville, FL",
         "isMarquee": true,
         "isSec": true,
-        "vegasSpread": -4.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.5,
-        "baseWinProb": 69,
-        "projScoreUt": 29,
-        "projScoreOpp": 24,
+        "baseWinProb": 88,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Road toughness in The Swamp.",
           "keyMatchup": "Oklahoma pass rush vs DJ Lagway.",
           "summary": "SEC road victory in Gainesville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ou-w10",
@@ -6576,17 +6765,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "TOP-10 SEC SHOWDOWN IN NORMAN",
-        "vegasSpread": -2.5,
+        "vegasSpread": 4.5,
         "overUnder": 61.5,
-        "baseWinProb": 61,
-        "projScoreUt": 32,
-        "projScoreOpp": 30,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "86,000 crowd energy disrupting Ole Miss tempo.",
           "keyMatchup": "Venables defense vs Trinidad Chambliss speed.",
           "summary": "Massive top-10 SEC victory in Norman."
         },
-        "oppId": "olemiss"
+        "oppId": "olemiss",
+        "is_tracked": true
       },
       {
         "id": "ou-w11",
@@ -6605,17 +6795,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "HISTORIC BIG 12 / SEC RIVALRY (IN NORMAN)",
-        "vegasSpread": -2.0,
+        "vegasSpread": 4.5,
         "overUnder": 52.5,
-        "baseWinProb": 54,
-        "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "baseWinProb": 32,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Senior Day home frenzy in Norman.",
           "keyMatchup": "John Mateer vs Mike Elko Wrecking Crew defense.",
           "summary": "Senior Day top-10 victory in Norman."
         },
-        "oppId": "texasam"
+        "oppId": "texasam",
+        "is_tracked": true
       },
       {
         "id": "ou-w12",
@@ -6634,17 +6825,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "OLD BIG EIGHT RIVALRY CLASH",
-        "vegasSpread": -1.5,
+        "vegasSpread": -4.5,
         "overUnder": 51.5,
-        "baseWinProb": 57,
-        "projScoreUt": 26,
-        "projScoreOpp": 25,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Cold weather road poise in Columbia to seal 12-Team CFP spot.",
           "keyMatchup": "Zac Alley defense vs Mizzou offense.",
           "summary": "Regular season road finale victory in Columbia."
         },
-        "oppId": "missouri"
+        "oppId": "missouri",
+        "is_tracked": true
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/201.png",
@@ -6705,17 +6897,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isConf": false,
         "rivalryName": "",
-        "vegasSpread": -16.0,
+        "vegasSpread": -21.5,
         "overUnder": 54.5,
-        "baseWinProb": 94,
-        "projScoreUt": 35,
-        "projScoreOpp": 19,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Fast offensive start on the Blue Turf.",
           "keyMatchup": "Maddux Madsen passing attack vs USF secondary.",
           "summary": "Season opener at Albertsons Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bsu-w2",
@@ -6734,17 +6927,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isConf": false,
         "rivalryName": "NORTHWEST SHOWDOWN (AT AUTZEN)",
-        "vegasSpread": 13.0,
+        "vegasSpread": -4.5,
         "overUnder": 60.5,
-        "baseWinProb": 10,
-        "projScoreUt": 24,
-        "projScoreOpp": 37,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Surviving Dante Moore and Autzen crowd pressure.",
           "keyMatchup": "Boise State pass protection vs Oregon edge rush.",
           "summary": "High-profile Pacific Northwest clash."
         },
-        "oppId": "oregon"
+        "oppId": "oregon",
+        "is_tracked": true
       },
       {
         "id": "bsu-w3",
@@ -6763,17 +6957,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isConf": false,
         "rivalryName": "",
-        "vegasSpread": -29.0,
+        "vegasSpread": -21.5,
         "overUnder": 53.0,
-        "baseWinProb": 99,
-        "projScoreUt": 41,
-        "projScoreOpp": 12,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Dominating line of scrimmage and building young depth.",
           "keyMatchup": "Boise ground game vs Portland State interior.",
           "summary": "Non-conference home tune-up."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bsu-w4",
@@ -6792,17 +6987,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isConf": true,
         "rivalryName": "MOUNTAIN WEST ROAD TEST",
-        "vegasSpread": -12.0,
+        "vegasSpread": -7.5,
         "overUnder": 54.5,
-        "baseWinProb": 89,
-        "projScoreUt": 33,
-        "projScoreOpp": 21,
+        "baseWinProb": 82,
+        "projScoreUt": 34,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Road poise in high-altitude Logan.",
           "keyMatchup": "Boise linebackers vs Utah State tempo.",
           "summary": "Mountain West conference opener."
         },
-        "oppId": null
+        "oppId": "utah",
+        "is_tracked": true
       },
       {
         "id": "bsu-w5",
@@ -6821,17 +7017,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isConf": true,
         "rivalryName": "",
-        "vegasSpread": -10.0,
+        "vegasSpread": -14.5,
         "overUnder": 54.5,
-        "baseWinProb": 85,
-        "projScoreUt": 32,
-        "projScoreOpp": 22,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Assignment football against the triple option.",
           "keyMatchup": "Interior defensive line vs fullback dive.",
           "summary": "Service Academy road challenge."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bsu-w6",
@@ -6850,17 +7047,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isConf": true,
         "rivalryName": "MWC CHAMPIONSHIP REMATCH",
-        "vegasSpread": -8.0,
+        "vegasSpread": -14.5,
         "overUnder": 54.5,
-        "baseWinProb": 80,
-        "projScoreUt": 31,
-        "projScoreOpp": 23,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Stopping the explosive Go-Go offense in space.",
           "keyMatchup": "Boise safeties vs UNLV deep crossing routes.",
           "summary": "Marquee MWC battle on the Blue Turf."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bsu-w7",
@@ -6879,17 +7077,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isConf": true,
         "rivalryName": "",
-        "vegasSpread": -11.0,
+        "vegasSpread": -14.5,
         "overUnder": 54.5,
-        "baseWinProb": 87,
-        "projScoreUt": 33,
-        "projScoreOpp": 22,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "7,220 ft altitude endurance and cold weather execution.",
           "keyMatchup": "Boise run offense vs Wyoming physical front seven.",
           "summary": "Tough Mountain division road game."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bsu-w8",
@@ -6908,17 +7107,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isConf": true,
         "rivalryName": "BATTLE FOR THE MILK CAN",
-        "vegasSpread": -12.5,
+        "vegasSpread": -14.5,
         "overUnder": 54.5,
-        "baseWinProb": 89,
-        "projScoreUt": 34,
-        "projScoreOpp": 21,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Rivalry emotion and red zone execution.",
           "keyMatchup": "Boise pass rush vs Fresno State quarterback.",
           "summary": "Historic Milk Can rivalry showdown."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bsu-w9",
@@ -6939,15 +7139,16 @@ var TEAMS_DATABASE = {
         "rivalryName": "",
         "vegasSpread": -14.5,
         "overUnder": 54.5,
-        "baseWinProb": 92,
-        "projScoreUt": 34,
-        "projScoreOpp": 20,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Limiting Aztec explosive run plays.",
           "keyMatchup": "Boise offensive line vs SDSU 3-3-5 defense.",
           "summary": "Late season conference home matchup."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bsu-w10",
@@ -6966,17 +7167,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isConf": true,
         "rivalryName": "",
-        "vegasSpread": -13.5,
+        "vegasSpread": 2.5,
         "overUnder": 54.5,
-        "baseWinProb": 91,
-        "projScoreUt": 34,
-        "projScoreOpp": 20,
+        "baseWinProb": 38,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Consistent offensive rhythm on the road.",
           "keyMatchup": "Maddux Madsen play-action passing vs Nevada corners.",
           "summary": "Reno road trip."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bsu-w11",
@@ -6995,17 +7197,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isConf": true,
         "rivalryName": "",
-        "vegasSpread": -19.0,
+        "vegasSpread": 6.5,
         "overUnder": 53.5,
-        "baseWinProb": 96,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "baseWinProb": 25,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Senior Day focus and dominant line of scrimmage.",
           "keyMatchup": "Boise red zone offense vs New Mexico defense.",
           "summary": "Final regular season home game."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "bsu-w12",
@@ -7024,17 +7227,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isConf": false,
         "rivalryName": "PAC-12 / MWC PACIFIC NORTHWEST CLASH",
-        "vegasSpread": -0.5,
+        "vegasSpread": -7.5,
         "overUnder": 55.0,
-        "baseWinProb": 52,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "baseWinProb": 82,
+        "projScoreUt": 34,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Freezing Pullman conditions and CFP G5 seeding stakes.",
           "keyMatchup": "Boise secondary vs Washington State air raid.",
           "summary": "Regular season finale in Pullman with 12-Team CFP bid on the line."
         },
-        "oppId": null
+        "oppId": "washington",
+        "is_tracked": true
       }
     ],
     "playoffContenderRank": 30
@@ -7093,18 +7297,19 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isSec": false,
         "rivalryName": "VEGAS KICKOFF CLASSIC (SEC vs B1G)",
-        "vegasSpread": -26.5,
+        "vegasSpread": 2.0,
         "overUnder": 59.0,
-        "baseWinProb": 99,
-        "projScoreUt": 43,
-        "projScoreOpp": 16,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Lincoln Riley offensive rhythm and quarterback execution.",
           "keyMatchup": "USC offensive line vs Missouri State defensive front.",
           "summary": "Season opener in the LA Coliseum."
         },
         "isBigTen": false,
-        "oppId": null
+        "oppId": "missouri",
+        "is_tracked": true
       },
       {
         "id": "usc-w2",
@@ -7123,17 +7328,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBigTen": false,
         "rivalryName": "",
-        "vegasSpread": -18.0,
+        "vegasSpread": -12.5,
         "overUnder": 59.5,
-        "baseWinProb": 95,
-        "projScoreUt": 39,
-        "projScoreOpp": 21,
+        "baseWinProb": 90,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Coliseum home opener rhythm and wide receiver separation.",
           "keyMatchup": "Zachariah Branch in space vs Fresno secondary.",
           "summary": "Home opener in Los Angeles."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "usc-w3",
@@ -7152,17 +7358,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBigTen": false,
         "rivalryName": "",
-        "vegasSpread": -20.5,
+        "vegasSpread": -12.5,
         "overUnder": 59.5,
-        "baseWinProb": 97,
-        "projScoreUt": 40,
-        "projScoreOpp": 20,
+        "baseWinProb": 90,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Defensive stops and turnover creation.",
           "keyMatchup": "USC front seven vs Spartan spread attack.",
           "summary": "Non-conference matchup at the Coliseum."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "usc-w4",
@@ -7181,17 +7388,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBigTen": true,
         "rivalryName": "",
-        "vegasSpread": -9.5,
+        "vegasSpread": -12.5,
         "overUnder": 60.5,
-        "baseWinProb": 83,
+        "baseWinProb": 90,
         "projScoreUt": 35,
-        "projScoreOpp": 26,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Midwest road travel adjustment.",
           "keyMatchup": "Lincoln Riley play-calling vs Purdue defense.",
           "summary": "Big Ten road opener."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "usc-w5",
@@ -7210,17 +7418,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "",
-        "vegasSpread": -8.5,
+        "vegasSpread": -12.5,
         "overUnder": 60.5,
-        "baseWinProb": 80,
-        "projScoreUt": 34,
-        "projScoreOpp": 26,
+        "baseWinProb": 90,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Physicality at line of scrimmage against Luke Fickell.",
           "keyMatchup": "USC offensive tackles vs Wisconsin pass rush.",
           "summary": "Big Ten battle at the Coliseum."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "usc-w6",
@@ -7239,17 +7448,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBigTen": true,
         "rivalryName": "THE BIG HOUSE CROSS-COUNTRY GAUNTLET",
-        "vegasSpread": -10.5,
+        "vegasSpread": -14.5,
         "overUnder": 60.5,
-        "baseWinProb": 85,
-        "projScoreUt": 36,
-        "projScoreOpp": 25,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive perimeter passing and offensive tempo at the Coliseum.",
           "keyMatchup": "USC offensive line vs Rutgers physical defense.",
           "summary": "Big Ten cross-country matchup in Los Angeles."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "usc-w7",
@@ -7268,17 +7478,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "",
-        "vegasSpread": -2.0,
+        "vegasSpread": -4.5,
         "overUnder": 60.0,
-        "baseWinProb": 56,
-        "projScoreUt": 27,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Stopping PJ Fleck ground control.",
           "keyMatchup": "USC defensive tackles vs Minnesota interior line.",
           "summary": "Coliseum conference matchup."
         },
-        "oppId": "pennstate"
+        "oppId": "pennstate",
+        "is_tracked": true
       },
       {
         "id": "usc-w8",
@@ -7297,17 +7508,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "THE HORSESHOE HALLOWEEN SHOWDOWN",
-        "vegasSpread": 4.0,
+        "vegasSpread": 4.5,
         "overUnder": 62.0,
-        "baseWinProb": 34,
-        "projScoreUt": 30,
-        "projScoreOpp": 33,
+        "baseWinProb": 25,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Slowing down Julian Sayin and Jeremiah Smith in Columbus.",
           "keyMatchup": "USC defensive backs vs Ohio State wide receivers.",
           "summary": "Monumental Big Ten road showdown at The Horseshoe."
         },
-        "oppId": "ohiostate"
+        "oppId": "ohiostate",
+        "is_tracked": true
       },
       {
         "id": "usc-w9",
@@ -7326,17 +7538,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "WEST COAST POWER CLASH",
-        "vegasSpread": 2.5,
+        "vegasSpread": 4.5,
         "overUnder": 66.5,
-        "baseWinProb": 40,
-        "projScoreUt": 31,
-        "projScoreOpp": 34,
+        "baseWinProb": 32,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Home Coliseum energy vs Dan Lanning powerhouse.",
           "keyMatchup": "USC secondary vs Dante Moore deep ball.",
           "summary": "Top-15 Big Ten mega-matchup in LA."
         },
-        "oppId": "oregon"
+        "oppId": "oregon",
+        "is_tracked": true
       },
       {
         "id": "usc-w10",
@@ -7355,17 +7568,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "",
-        "vegasSpread": 1.5,
+        "vegasSpread": -4.5,
         "overUnder": 60.0,
-        "baseWinProb": 48,
-        "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Wet weather ball security at Husky Stadium.",
           "keyMatchup": "Jayden Maiava decision making vs Washington secondary.",
           "summary": "Pacific Northwest road battle."
         },
-        "oppId": "washington"
+        "oppId": "washington",
+        "is_tracked": true
       },
       {
         "id": "usc-w11",
@@ -7384,17 +7598,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": true,
         "rivalryName": "THE BATTLE FOR THE VICTORY BELL",
-        "vegasSpread": -11.0,
+        "vegasSpread": -14.5,
         "overUnder": 60.5,
-        "baseWinProb": 86,
-        "projScoreUt": 36,
-        "projScoreOpp": 25,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "City bragging rights and Victory Bell motivation.",
           "keyMatchup": "USC offensive line vs UCLA front.",
           "summary": "Annual crosstown rivalry clash at the Coliseum."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "usc-w12",
@@ -7413,17 +7628,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBigTen": false,
         "rivalryName": "THE JEWELED SHILLELAGH (AT THE COLISEUM)",
-        "vegasSpread": -1.5,
+        "vegasSpread": 4.5,
         "overUnder": 61.0,
-        "baseWinProb": 52,
-        "projScoreUt": 31,
-        "projScoreOpp": 28,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Late-season CFP qualification clash under Coliseum lights.",
           "keyMatchup": "USC rush defense vs Jeremiyah Love.",
           "summary": "Historic intersectional rivalry regular season finale."
         },
-        "oppId": "notredame"
+        "oppId": "notredame",
+        "is_tracked": true
       }
     ],
     "playoffContenderRank": 15
@@ -7482,18 +7698,19 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": true,
         "rivalryName": "LABOR DAY KICKOFF CLASSIC",
-        "vegasSpread": 5.0,
+        "vegasSpread": 4.5,
         "overUnder": 54.5,
-        "baseWinProb": 30,
-        "projScoreUt": 25,
-        "projScoreOpp": 30,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Doak Campbell roar under the lights against Kalen DeBoer and the Tide.",
           "keyMatchup": "FSU offensive tempo vs Alabama front seven.",
           "summary": "Blockbuster Labor Day national opener in Tallahassee."
         },
         "isAcc": false,
-        "oppId": "alabama"
+        "oppId": "alabama",
+        "is_tracked": true
       },
       {
         "id": "fsu-w2",
@@ -7512,17 +7729,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": false,
         "rivalryName": "",
-        "vegasSpread": -21.0,
+        "vegasSpread": 2.0,
         "overUnder": 51.5,
-        "baseWinProb": 97,
-        "projScoreUt": 36,
-        "projScoreOpp": 15,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Home opener energy and executing clean offensive drives.",
           "keyMatchup": "FSU young skill players getting valuable live reps.",
           "summary": "Doak Campbell Stadium home opener."
         },
-        "oppId": null
+        "oppId": "texasam",
+        "is_tracked": true
       },
       {
         "id": "fsu-w3",
@@ -7541,17 +7759,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "ACC FRIDAY NIGHT SHOWDOWN",
-        "vegasSpread": -1.5,
+        "vegasSpread": -4.5,
         "overUnder": 59.0,
-        "baseWinProb": 54,
+        "baseWinProb": 70,
         "projScoreUt": 31,
-        "projScoreOpp": 28,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Handling Jeff Brohm's aggressive pass schemes.",
           "keyMatchup": "FSU secondary vs Louisville downfield passing.",
           "summary": "Crucial ACC road test in Louisville."
         },
-        "oppId": "louisville"
+        "oppId": "louisville",
+        "is_tracked": true
       },
       {
         "id": "fsu-w4",
@@ -7570,17 +7789,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -14.0,
+        "vegasSpread": -21.5,
         "overUnder": 53.0,
-        "baseWinProb": 92,
-        "projScoreUt": 34,
-        "projScoreOpp": 20,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Dominating the red zone and time of possession.",
           "keyMatchup": "FSU offensive line vs BC defensive front.",
           "summary": "ACC home matchup at Doak."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "fsu-w5",
@@ -7599,17 +7819,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "JEFFERSON-EPPES TROPHY",
-        "vegasSpread": -7.0,
+        "vegasSpread": -21.5,
         "overUnder": 53.0,
-        "baseWinProb": 76,
-        "projScoreUt": 30,
-        "projScoreOpp": 23,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Road poise and converting on 3rd-and-short.",
           "keyMatchup": "Ashton Daniels vs Virginia defensive structure.",
           "summary": "Conference road matchup in Virginia."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "fsu-w6",
@@ -7628,17 +7849,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -10.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
-        "baseWinProb": 86,
-        "projScoreUt": 32,
-        "projScoreOpp": 21,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Capitalizing on Duke defensive miscues.",
           "keyMatchup": "FSU defensive ends vs Duke pass protection.",
           "summary": "ACC home clash in Tallahassee."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "fsu-w7",
@@ -7657,17 +7879,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "THE SUNSHINE STATE RIVALRY",
-        "vegasSpread": -1.5,
+        "vegasSpread": 4.5,
         "overUnder": 58.5,
-        "baseWinProb": 52,
-        "projScoreUt": 28,
-        "projScoreOpp": 27,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Limiting turnovers in intense Hard Rock environment.",
           "keyMatchup": "FSU offensive line vs Miami ferocious pass rush.",
           "summary": "Historic rivalry showdown in South Florida."
         },
-        "oppId": "miami"
+        "oppId": "miami",
+        "is_tracked": true
       },
       {
         "id": "fsu-w8",
@@ -7686,17 +7909,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -9.0,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
-        "baseWinProb": 83,
-        "projScoreUt": 31,
-        "projScoreOpp": 22,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Exploiting Tar Heel secondary with explosive play-action.",
           "keyMatchup": "Landen Thomas tight end mismatch in red zone.",
           "summary": "Halloween home matchup at Doak."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "fsu-w9",
@@ -7715,17 +7939,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "CARTER-FINLEY TRAP GAME",
-        "vegasSpread": -4.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
-        "baseWinProb": 68,
-        "projScoreUt": 29,
-        "projScoreOpp": 24,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Surviving notoriously hostile Carter-Finley night atmosphere.",
           "keyMatchup": "Ashton Daniels poise under 3-3-5 blitz packages.",
           "summary": "High-stakes ACC road clash in Raleigh."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "fsu-w10",
@@ -7744,17 +7969,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -13.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
-        "baseWinProb": 91,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Disrupting the slow mesh option in the backfield.",
           "keyMatchup": "FSU defensive line penetration vs Wake mesh read.",
           "summary": "ACC home contest at Doak."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "fsu-w11",
@@ -7773,17 +7999,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "ACC HEAVYWEIGHT BATTLE (AT DOAK)",
-        "vegasSpread": -3.0,
+        "vegasSpread": -4.5,
         "overUnder": 52.5,
         "baseWinProb": 62,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Championship atmosphere at Doak to clinch ACC title game berth.",
           "keyMatchup": "FSU run game vs Clemson defensive tackles.",
           "summary": "Massive ACC conference heavyweight clash."
         },
-        "oppId": "clemson"
+        "oppId": "clemson",
+        "is_tracked": true
       },
       {
         "id": "fsu-w12",
@@ -7802,17 +8029,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "THE SUNSHINE SHOWDOWN (AT THE SWAMP)",
-        "vegasSpread": -2.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.0,
-        "baseWinProb": 60,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Thriving in 90,000 Swamp noise on rivalry Saturday.",
           "keyMatchup": "Ashton Daniels vs Florida pass rush.",
           "summary": "Historic annual Governor's Cup rivalry finale in Gainesville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ],
     "playoffContenderRank": 27
@@ -7873,15 +8101,16 @@ var TEAMS_DATABASE = {
         "rivalryName": "DEATH VALLEY vs DEATH VALLEY SHOWDOWN",
         "vegasSpread": 4.5,
         "overUnder": 54.5,
-        "baseWinProb": 32,
-        "projScoreUt": 25,
-        "projScoreOpp": 30,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Surviving 102,000 Death Valley noise in Baton Rouge.",
           "keyMatchup": "Christopher Vizzina vs LSU secondary.",
           "summary": "Blockbuster opening weekend clash between national powerhouses."
         },
-        "oppId": "lsu"
+        "oppId": "lsu",
+        "is_tracked": true
       },
       {
         "id": "clem-w2",
@@ -7900,17 +8129,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": false,
         "rivalryName": "",
-        "vegasSpread": -21.0,
+        "vegasSpread": -17.5,
         "overUnder": 51.5,
-        "baseWinProb": 97,
-        "projScoreUt": 36,
-        "projScoreOpp": 15,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Executing fundamentals and running the hill.",
           "keyMatchup": "Clemson reserve quarterbacks getting game experience.",
           "summary": "Home opener in Death Valley."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "clem-w3",
@@ -7929,17 +8159,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "HISTORIC ACC REGIONAL RIVALRY",
-        "vegasSpread": -3.0,
+        "vegasSpread": -7.5,
         "overUnder": 52.5,
-        "baseWinProb": 62,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "baseWinProb": 85,
+        "projScoreUt": 31,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Stopping Haynes King / GT dual-threat offense in Atlanta.",
           "keyMatchup": "Clemson defensive line vs Georgia Tech zone read.",
           "summary": "ACC conference road opener in Atlanta."
         },
-        "oppId": null
+        "oppId": "georgia",
+        "is_tracked": true
       },
       {
         "id": "clem-w4",
@@ -7958,17 +8189,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -14.0,
+        "vegasSpread": -8.5,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 33,
-        "projScoreOpp": 19,
+        "baseWinProb": 90,
+        "projScoreUt": 34,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Dominating line of scrimmage on both sides of the ball.",
           "keyMatchup": "Antonio Williams vs Stanford cornerbacks.",
           "summary": "Cross-country ACC matchup at Death Valley."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "clem-w5",
@@ -7987,17 +8219,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "ACC GAME OF THE YEAR IN DEATH VALLEY",
-        "vegasSpread": 1.5,
+        "vegasSpread": 4.5,
         "overUnder": 58.5,
-        "baseWinProb": 44,
-        "projScoreUt": 27,
-        "projScoreOpp": 30,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Death Valley 81,000 deafening roar vs Miami high-powered offense.",
           "keyMatchup": "Clemson defensive line vs Miami quarterback and pass protection.",
           "summary": "Top-10 ACC heavyweight collision in Clemson."
         },
-        "oppId": "miami"
+        "oppId": "miami",
+        "is_tracked": true
       },
       {
         "id": "clem-w6",
@@ -8016,17 +8249,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -12.0,
+        "vegasSpread": -8.5,
         "overUnder": 52.5,
-        "baseWinProb": 88,
-        "projScoreUt": 32,
+        "baseWinProb": 90,
+        "projScoreUt": 34,
         "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Explosive plays on first down.",
           "keyMatchup": "Clemson pass rush vs Virginia protection.",
           "summary": "ACC home clash in Death Valley."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "clem-w7",
@@ -8045,17 +8279,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -8.5,
+        "vegasSpread": -14.5,
         "overUnder": 52.5,
-        "baseWinProb": 81,
-        "projScoreUt": 30,
-        "projScoreOpp": 22,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Disciplined gap control against slow mesh.",
           "keyMatchup": "Clemson defensive ends setting hard edges.",
           "summary": "Division road test in Winston-Salem."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "clem-w8",
@@ -8074,17 +8309,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "THE TEXTILE BOWL",
-        "vegasSpread": -9.5,
+        "vegasSpread": -8.5,
         "overUnder": 52.5,
-        "baseWinProb": 83,
+        "baseWinProb": 90,
         "projScoreUt": 31,
-        "projScoreOpp": 22,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Textile Bowl rivalry intensity in Death Valley.",
           "keyMatchup": "Clemson offensive line vs NC State front seven.",
           "summary": "Historic Textile Bowl showdown."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "clem-w9",
@@ -8103,17 +8339,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "ACC CHAMPIONSHIP ELIMINATOR",
-        "vegasSpread": 2.0,
+        "vegasSpread": 4.5,
         "overUnder": 59.5,
-        "baseWinProb": 41,
-        "projScoreUt": 31,
-        "projScoreOpp": 28,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Keeping pace with Kevin Jennings in Dallas shootout.",
           "keyMatchup": "Christopher Vizzina vs SMU opportunistic secondary.",
           "summary": "Top-20 ACC clash with CFP implications in Dallas."
         },
-        "oppId": "smu"
+        "oppId": "smu",
+        "is_tracked": true
       },
       {
         "id": "clem-w10",
@@ -8132,17 +8369,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -5.0,
+        "vegasSpread": -4.5,
         "overUnder": 59.0,
-        "baseWinProb": 70,
-        "projScoreUt": 32,
-        "projScoreOpp": 27,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Red zone efficiency and third-down conversions.",
           "keyMatchup": "Clemson cornerbacks vs Louisville receivers.",
           "summary": "Late season ACC clash at Death Valley."
         },
-        "oppId": "louisville"
+        "oppId": "louisville",
+        "is_tracked": true
       },
       {
         "id": "clem-w11",
@@ -8161,17 +8399,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "ACC TITLE RACE SHOWDOWN",
-        "vegasSpread": 3.0,
+        "vegasSpread": 4.5,
         "overUnder": 52.5,
         "baseWinProb": 38,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Hostile War Chant atmosphere and fourth quarter execution.",
           "keyMatchup": "Clemson defense vs Thomas Castellanos dual-threat ability.",
           "summary": "Massive ACC collision in Tallahassee."
         },
-        "oppId": "floridastate"
+        "oppId": "floridastate",
+        "is_tracked": true
       },
       {
         "id": "clem-w12",
@@ -8190,17 +8429,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isSec": false,
         "rivalryName": "THE PALMETTO BOWL (IN DEATH VALLEY)",
-        "vegasSpread": -9.0,
+        "vegasSpread": -14.5,
         "overUnder": 52.5,
-        "baseWinProb": 82,
-        "projScoreUt": 31,
-        "projScoreOpp": 22,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Palmetto State pride and aggressive trench warfare.",
           "keyMatchup": "Clemson pass rush vs South Carolina offensive line.",
           "summary": "Fierce in-state Palmetto Bowl rivalry finale in Death Valley."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ],
     "playoffContenderRank": 26
@@ -8259,17 +8499,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": false,
         "rivalryName": "",
-        "vegasSpread": -31.5,
+        "vegasSpread": -21.5,
         "overUnder": 58.0,
-        "baseWinProb": 100,
-        "projScoreUt": 45,
-        "projScoreOpp": 13,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "High-tempo offensive execution and building starter chemistry.",
           "keyMatchup": "Kevin Jennings timing with wide receiver corps.",
           "summary": "Season opener in Dallas."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "smu-w2",
@@ -8288,18 +8529,19 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isSec": false,
         "rivalryName": "NON-CONFERENCE REGIONAL BLOCKBUSTER",
-        "vegasSpread": -20.5,
+        "vegasSpread": 2.0,
         "overUnder": 58.5,
-        "baseWinProb": 97,
-        "projScoreUt": 40,
-        "projScoreOpp": 19,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Quarterback timing and rhythm at Ford Stadium.",
           "keyMatchup": "SMU wideouts vs HCU secondary.",
           "summary": "Non-conference home clash in Dallas."
         },
         "isAcc": false,
-        "oppId": null
+        "oppId": "houston",
+        "is_tracked": true
       },
       {
         "id": "smu-w3",
@@ -8318,17 +8560,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "ACC OPENER AT FORD STADIUM",
-        "vegasSpread": 0.5,
+        "vegasSpread": -4.5,
         "overUnder": 66.0,
-        "baseWinProb": 48,
-        "projScoreUt": 34,
-        "projScoreOpp": 31,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "ACC opener explosive plays and red-zone execution.",
           "keyMatchup": "SMU offensive line vs Louisville defensive pressure.",
           "summary": "High-stakes ACC conference opener in Dallas."
         },
-        "oppId": "louisville"
+        "oppId": "louisville",
+        "is_tracked": true
       },
       {
         "id": "smu-w4",
@@ -8347,17 +8590,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": false,
         "rivalryName": "THE BATTLE FOR THE IRON SKILLET",
-        "vegasSpread": -8.5,
+        "vegasSpread": -21.5,
         "overUnder": 59.5,
-        "baseWinProb": 81,
-        "projScoreUt": 34,
-        "projScoreOpp": 26,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Iron Skillet rivalry pride and third-down conversions.",
           "keyMatchup": "Rhett Lashlee offense vs TCU secondary.",
           "summary": "Historic 100-year Iron Skillet rivalry in Dallas."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "smu-w5",
@@ -8376,17 +8620,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -8.5,
+        "vegasSpread": -14.5,
         "overUnder": 59.5,
-        "baseWinProb": 81,
-        "projScoreUt": 34,
-        "projScoreOpp": 26,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "West Coast road trip focus and early scoring drives.",
           "keyMatchup": "Kevin Jennings deep passing vs Stanford safeties.",
           "summary": "ACC conference road matchup in California."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "smu-w6",
@@ -8405,17 +8650,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -9.0,
+        "vegasSpread": -14.5,
         "overUnder": 59.5,
-        "baseWinProb": 82,
-        "projScoreUt": 34,
-        "projScoreOpp": 25,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Neutralizing Pat Narduzzi aggressive press-man defense.",
           "keyMatchup": "SMU offensive tackles vs Pitt blitz packages.",
           "summary": "High-profile ACC matchup in Dallas."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "smu-w7",
@@ -8434,17 +8680,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -8.5,
+        "vegasSpread": -14.5,
         "overUnder": 59.5,
-        "baseWinProb": 81,
-        "projScoreUt": 34,
-        "projScoreOpp": 26,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Handling chilly Northeast road conditions.",
           "keyMatchup": "SMU defense vs Boston College physical run game.",
           "summary": "ACC road trip to Boston."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "smu-w8",
@@ -8463,17 +8710,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": true,
         "rivalryName": "ACC TITLE RACE CLASH IN DALLAS",
-        "vegasSpread": -2.0,
+        "vegasSpread": -4.5,
         "overUnder": 59.5,
-        "baseWinProb": 59,
-        "projScoreUt": 28,
-        "projScoreOpp": 31,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Electrifying Ford Stadium home crowd against Dabo Swinney.",
           "keyMatchup": "Kevin Jennings vs Clemson talented secondary.",
           "summary": "Blockbuster ACC showdown in Dallas."
         },
-        "oppId": "clemson"
+        "oppId": "clemson",
+        "is_tracked": true
       },
       {
         "id": "smu-w9",
@@ -8492,17 +8740,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "",
-        "vegasSpread": -6.5,
+        "vegasSpread": -14.5,
         "overUnder": 59.5,
-        "baseWinProb": 75,
-        "projScoreUt": 33,
-        "projScoreOpp": 26,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Staying disciplined against trap plays on the road.",
           "keyMatchup": "SMU defensive line vs Virginia pass protection.",
           "summary": "ACC road game in Virginia."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "smu-w10",
@@ -8521,17 +8770,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isAcc": false,
         "rivalryName": "",
-        "vegasSpread": 6.5,
+        "vegasSpread": 4.5,
         "overUnder": 60.0,
-        "baseWinProb": 24,
-        "projScoreUt": 27,
-        "projScoreOpp": 33,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Senior Day offensive showcase in Dallas.",
           "keyMatchup": "Kendrick Raphael vs Cal run defense.",
           "summary": "Senior Day home finale at Ford Stadium."
         },
-        "oppId": "notredame"
+        "oppId": "notredame",
+        "is_tracked": true
       },
       {
         "id": "smu-w11",
@@ -8550,17 +8800,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": true,
         "rivalryName": "ACC REGULAR SEASON TITLE DECIDER",
-        "vegasSpread": -10.5,
+        "vegasSpread": -14.5,
         "overUnder": 59.5,
-        "baseWinProb": 86,
-        "projScoreUt": 35,
-        "projScoreOpp": 24,
+        "baseWinProb": 94,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "High-stakes ACC finale with 12-Team CFP spot on the line.",
           "keyMatchup": "SMU pass protection vs Miami defensive line.",
           "summary": "Regular season road finale at Hard Rock Stadium in Miami."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "smu-w12",
@@ -8579,17 +8830,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isAcc": false,
         "rivalryName": "THE MAYOR'S CUP",
-        "vegasSpread": -23.0,
+        "vegasSpread": 2.5,
         "overUnder": 58.5,
-        "baseWinProb": 98,
-        "projScoreUt": 41,
-        "projScoreOpp": 18,
+        "baseWinProb": 38,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Historic Mayor's Cup in-state matchup.",
           "keyMatchup": "Kevin Jennings efficiency vs Rice secondary.",
           "summary": "Historic Texas matchup."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ],
     "playoffContenderRank": 19
@@ -8652,17 +8904,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "SEASON OPENER",
-        "vegasSpread": -34.0,
+        "vegasSpread": 4.5,
         "overUnder": 60.5,
-        "baseWinProb": 100,
-        "projScoreUt": 47,
-        "projScoreOpp": 13,
+        "baseWinProb": 35,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Will Hammond early rhythm and deep passing connection with Micah Hudson.",
           "keyMatchup": "Texas Tech offensive tempo vs ACU secondary.",
           "summary": "Season opener in Lubbock to establish offensive rhythm."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ttu-w2",
@@ -8681,17 +8934,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "PAC-12 / BIG 12 CHALLENGE",
-        "vegasSpread": -6.5,
+        "vegasSpread": 2.0,
         "overUnder": 62.0,
-        "baseWinProb": 75,
-        "projScoreUt": 34,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Pacific Northwest road trip execution and ground game balance.",
           "keyMatchup": "Texas Tech offensive line vs Oregon State defensive edge rush.",
           "summary": "Tricky non-conference road battle at Reser Stadium."
         },
-        "oppId": null
+        "oppId": "oregon",
+        "is_tracked": true
       },
       {
         "id": "ttu-w3",
@@ -8710,17 +8964,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "BIG 12 TEXAS SHOWDOWN",
-        "vegasSpread": -6.5,
+        "vegasSpread": -4.5,
         "overUnder": 59.0,
-        "baseWinProb": 75,
-        "projScoreUt": 33,
-        "projScoreOpp": 26,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Friday night lights in Lubbock under Jones AT&T Stadium atmosphere.",
           "keyMatchup": "Micah Hudson explosive route-running vs Houston secondary.",
           "summary": "Big 12 conference opener under the Friday lights."
         },
-        "oppId": "houston"
+        "oppId": "houston",
+        "is_tracked": true
       },
       {
         "id": "ttu-w4",
@@ -8739,17 +8994,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "IN-STATE NON-CONFERENCE",
-        "vegasSpread": -24.0,
+        "vegasSpread": -2.5,
         "overUnder": 60.5,
-        "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 18,
+        "baseWinProb": 58,
+        "projScoreUt": 31,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Defensive front havoc and turnover generation.",
           "keyMatchup": "Cameron Dickey efficiency vs Sam Houston front seven.",
           "summary": "Final non-conference tune-up before full Big 12 slate."
         },
-        "oppId": null
+        "oppId": "houston",
+        "is_tracked": true
       },
       {
         "id": "ttu-w5",
@@ -8768,17 +9024,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "BIG 12 ELEVATION BATTLE",
-        "vegasSpread": -8.5,
+        "vegasSpread": -4.5,
         "overUnder": 67.0,
-        "baseWinProb": 72,
-        "projScoreUt": 35,
-        "projScoreOpp": 38,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Altitude conditioning and red zone touchdown execution.",
           "keyMatchup": "Shiel Wood secondary vs Colorado passing attack.",
           "summary": "High-octane road battle at Folsom Field in Boulder."
         },
-        "oppId": "colorado"
+        "oppId": "colorado",
+        "is_tracked": true
       },
       {
         "id": "ttu-w6",
@@ -8797,17 +9054,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "DESERT SHOWDOWN",
-        "vegasSpread": -9.0,
+        "vegasSpread": -4.5,
         "overUnder": 62.0,
-        "baseWinProb": 83,
-        "projScoreUt": 36,
-        "projScoreOpp": 26,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Home crowd energy after the bye week.",
           "keyMatchup": "Will Hammond pass protection vs ASU blitz packages.",
           "summary": "Key Big 12 home test following the open week."
         },
-        "oppId": "arizonastate"
+        "oppId": "arizonastate",
+        "is_tracked": true
       },
       {
         "id": "ttu-w7",
@@ -8826,17 +9084,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "BIG 12 MIDWEST CLASH",
-        "vegasSpread": -6.0,
+        "vegasSpread": -4.5,
         "overUnder": 59.0,
-        "baseWinProb": 74,
-        "projScoreUt": 32,
-        "projScoreOpp": 26,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Fast start on the road in a hostile Nippert Stadium environment.",
           "keyMatchup": "Texas Tech ground game vs Cincinnati defensive tackles.",
           "summary": "Midseason road trip to Ohio."
         },
-        "oppId": "byu"
+        "oppId": "byu",
+        "is_tracked": true
       },
       {
         "id": "ttu-w8",
@@ -8855,17 +9114,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "HALLOWEEN NIGHT IN LUBBOCK",
-        "vegasSpread": -7.0,
+        "vegasSpread": -2.5,
         "overUnder": 61.5,
-        "baseWinProb": 76,
-        "projScoreUt": 34,
+        "baseWinProb": 58,
+        "projScoreUt": 31,
         "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Halloween night blackout in Lubbock; red zone defense.",
           "keyMatchup": "Micah Hudson vs Arizona cornerback tandem.",
           "summary": "Critical Big 12 title race battle on Halloween night."
         },
-        "oppId": "arizona"
+        "oppId": "arizona",
+        "is_tracked": true
       },
       {
         "id": "ttu-w9",
@@ -8884,17 +9144,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "rivalryName": "MOUNTAINEER BATTLE",
-        "vegasSpread": -11.5,
+        "vegasSpread": 4.5,
         "overUnder": 62.0,
-        "baseWinProb": 88,
-        "projScoreUt": 37,
-        "projScoreOpp": 25,
+        "baseWinProb": 35,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Stopping WVU physical rushing attack.",
           "keyMatchup": "Texas Tech defensive line vs WVU offensive line.",
           "summary": "November home contest in Lubbock."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ttu-w10",
@@ -8913,17 +9174,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "THE DUST BOWL RIVALRY",
-        "vegasSpread": -6.0,
+        "vegasSpread": -7.5,
         "overUnder": 62.0,
-        "baseWinProb": 73,
-        "projScoreUt": 31,
-        "projScoreOpp": 34,
+        "baseWinProb": 82,
+        "projScoreUt": 34,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Fourth-quarter turnover margin in Stillwater.",
           "keyMatchup": "Will Hammond decision-making in the two-minute drill.",
           "summary": "Historic rivalry showdown with Big 12 Championship berth at stake."
         },
-        "oppId": null
+        "oppId": "oklahoma",
+        "is_tracked": true
       },
       {
         "id": "ttu-w11",
@@ -8942,17 +9204,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "THE TEXAS SHOOTOUT",
-        "vegasSpread": -6.0,
+        "vegasSpread": 4.5,
         "overUnder": 62.0,
-        "baseWinProb": 73,
-        "projScoreUt": 34,
-        "projScoreOpp": 28,
+        "baseWinProb": 35,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "In-state rivalry intensity on the Brazos River.",
           "keyMatchup": "Cameron Dickey ground control vs Baylor run defense.",
           "summary": "Penultimate regular season rivalry game in Waco."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ttu-w12",
@@ -8971,17 +9234,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "THE SADDLE TROPHY RIVALRY",
-        "vegasSpread": -10.0,
+        "vegasSpread": 2.5,
         "overUnder": 62.0,
-        "baseWinProb": 85,
-        "projScoreUt": 36,
-        "projScoreOpp": 26,
+        "baseWinProb": 38,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Thanksgiving primetime showdown for the Saddle Trophy and Big 12 CCG spot.",
           "keyMatchup": "Micah Hudson vs TCU lockdown cornerbacks.",
           "summary": "Regular season finale on Thanksgiving in Lubbock."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ]
   },
@@ -9039,17 +9303,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "SEASON OPENER",
-        "vegasSpread": -28.5,
+        "vegasSpread": -21.5,
         "overUnder": 45.0,
-        "baseWinProb": 99,
-        "projScoreUt": 37,
-        "projScoreOpp": 8,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Fast start and establishing the ground attack at Rice-Eccles.",
           "keyMatchup": "Wayshawn Parker vs Idaho front seven.",
           "summary": "Thursday night season opener in Salt Lake City."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "utah-w2",
@@ -9068,17 +9333,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "SEC/BIG 12 SHOWDOWN",
-        "vegasSpread": -7.0,
+        "vegasSpread": -21.5,
         "overUnder": 46.5,
-        "baseWinProb": 77,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Morgan Scalley defense containing SEC speed and leveraging altitude.",
           "keyMatchup": "Isaac Wilson vs Arkansas secondary.",
           "summary": "Marquee SEC non-conference clash in Salt Lake City."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "utah-w3",
@@ -9097,17 +9363,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "BATTLE OF THE BROTHERS",
-        "vegasSpread": -20.5,
+        "vegasSpread": -14.5,
         "overUnder": 45.0,
-        "baseWinProb": 97,
-        "projScoreUt": 33,
-        "projScoreOpp": 12,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Trench dominance in in-state rivalry showdown.",
           "keyMatchup": "Utah defensive front vs Utah State offensive line.",
           "summary": "Historic Battle of the Brothers in-state clash."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "utah-w4",
@@ -9126,17 +9393,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "BIG 12 ROAD OPENER",
-        "vegasSpread": -0.5,
+        "vegasSpread": 2.0,
         "overUnder": 46.5,
-        "baseWinProb": 51,
-        "projScoreUt": 21,
-        "projScoreOpp": 24,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Physical ground game and winning the turnover battle in Ames.",
           "keyMatchup": "Wayshawn Parker vs Iowa State 3-3-5 defense.",
           "summary": "Brutal Big 12 road test in Ames."
         },
-        "oppId": null
+        "oppId": "iowa",
+        "is_tracked": true
       },
       {
         "id": "utah-w5",
@@ -9155,17 +9423,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "rivalryName": "MIDSEASON HOME TEST",
-        "vegasSpread": -7.5,
+        "vegasSpread": -14.5,
         "overUnder": 46.5,
-        "baseWinProb": 78,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Containing dynamic Kansas offense and red zone execution.",
           "keyMatchup": "Lander Barton vs Kansas option concepts.",
           "summary": "October Big 12 home clash at Rice-Eccles."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "utah-w6",
@@ -9184,17 +9453,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "RUMBLE IN THE ROCKIES RIVALRY",
-        "vegasSpread": -7.0,
+        "vegasSpread": -4.5,
         "overUnder": 50.0,
         "baseWinProb": 70,
-        "projScoreUt": 28,
-        "projScoreOpp": 20,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Pressure on Colorado QB and silencing Folsom Field.",
           "keyMatchup": "Van Fillinger vs Colorado pass protection.",
           "summary": "Historic Rumble in the Rockies in Boulder."
         },
-        "oppId": "colorado"
+        "oppId": "colorado",
+        "is_tracked": true
       },
       {
         "id": "utah-w7",
@@ -9213,17 +9483,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "TOP 25 BIG 12 SHOWDOWN",
-        "vegasSpread": -4.0,
+        "vegasSpread": -4.5,
         "overUnder": 40.5,
-        "baseWinProb": 66,
-        "projScoreUt": 22,
-        "projScoreOpp": 18,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Stopping Makhi Hughes and Willie Fritz's ground attack.",
           "keyMatchup": "Utah defensive tackles vs Makhi Hughes.",
           "summary": "Key Big 12 showdown against ranked Houston in Salt Lake."
         },
-        "oppId": "houston"
+        "oppId": "houston",
+        "is_tracked": true
       },
       {
         "id": "utah-w8",
@@ -9242,17 +9513,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "rivalryName": "HALLOWEEN ROAD TRIP",
-        "vegasSpread": -4.5,
+        "vegasSpread": -14.5,
         "overUnder": 46.5,
-        "baseWinProb": 68,
-        "projScoreUt": 26,
-        "projScoreOpp": 21,
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Physical trench warfare at Nippert Stadium.",
           "keyMatchup": "Braden Pegan vs Cincinnati secondary.",
           "summary": "Late October Big 12 road battle in Cincinnati."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "utah-w9",
@@ -9271,17 +9543,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "THE HOLY WAR",
-        "vegasSpread": -3.5,
+        "vegasSpread": -4.5,
         "overUnder": 40.5,
-        "baseWinProb": 64,
-        "projScoreUt": 22,
-        "projScoreOpp": 18,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Pure emotional intensity, turnover luck, and Big 12 title implications.",
           "keyMatchup": "Devon Dampier vs Kelly Poppinga BYU defense.",
           "summary": "Epic Holy War rivalry clash in Salt Lake City."
         },
-        "oppId": "byu"
+        "oppId": "byu",
+        "is_tracked": true
       },
       {
         "id": "utah-w10",
@@ -9300,17 +9573,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "DESERT BIG 12 ROAD TEST",
-        "vegasSpread": 2.0,
+        "vegasSpread": -4.5,
         "overUnder": 46.0,
-        "baseWinProb": 46,
-        "projScoreUt": 24,
-        "projScoreOpp": 27,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Containing Noah Fifita in Tucson.",
           "keyMatchup": "Morgan Scalley secondary vs Arizona receivers.",
           "summary": "High-stakes November road game in Tucson."
         },
-        "oppId": "arizona"
+        "oppId": "arizona",
+        "is_tracked": true
       },
       {
         "id": "utah-w11",
@@ -9329,17 +9603,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "TEXAS ROAD SHOWDOWN",
-        "vegasSpread": -2.5,
+        "vegasSpread": 2.5,
         "overUnder": 46.5,
-        "baseWinProb": 60,
-        "projScoreUt": 21,
-        "projScoreOpp": 24,
+        "baseWinProb": 40,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Road execution and stopping TCU explosive plays.",
           "keyMatchup": "Wayshawn Parker vs TCU front seven.",
           "summary": "Crucial penultimate Big 12 road battle in Fort Worth."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "utah-w12",
@@ -9358,17 +9633,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "rivalryName": "SENIOR NIGHT REGULAR SEASON FINALE",
-        "vegasSpread": -9.0,
+        "vegasSpread": 6.5,
         "overUnder": 46.5,
-        "baseWinProb": 82,
-        "projScoreUt": 28,
-        "projScoreOpp": 19,
+        "baseWinProb": 27,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Senior Night emotion and locking up Big 12 Championship berth.",
           "keyMatchup": "Utah defense vs WVU power rushing.",
           "summary": "Friday night regular season finale in Salt Lake City."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ]
   },
@@ -9426,17 +9702,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "SEASON OPENER",
-        "vegasSpread": -20.5,
+        "vegasSpread": -21.5,
         "overUnder": 41.5,
-        "baseWinProb": 97,
-        "projScoreUt": 31,
-        "projScoreOpp": 10,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Establishing the Kamari Moulton power ground game at Kinnick.",
           "keyMatchup": "Iowa offensive line vs NIU defensive front.",
           "summary": "Season opener in Iowa City."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "iowa-w2",
@@ -9455,17 +9732,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "CY-HAWK TROPHY",
-        "vegasSpread": -6.0,
+        "vegasSpread": -2.5,
         "overUnder": 43.0,
-        "baseWinProb": 73,
-        "projScoreUt": 24,
-        "projScoreOpp": 18,
+        "baseWinProb": 58,
+        "projScoreUt": 31,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Field position, special teams, and Phil Parker defensive turnovers.",
           "keyMatchup": "Iowa front seven vs Iowa State run game.",
           "summary": "Brutal Cy-Hawk in-state rivalry at Kinnick Stadium."
         },
-        "oppId": null
+        "oppId": "iowa",
+        "is_tracked": true
       },
       {
         "id": "iowa-w3",
@@ -9484,17 +9762,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "IN-STATE NON-CONFERENCE",
-        "vegasSpread": 6.0,
+        "vegasSpread": -2.5,
         "overUnder": 43.0,
-        "baseWinProb": 27,
-        "projScoreUt": 18,
-        "projScoreOpp": 18,
+        "baseWinProb": 58,
+        "projScoreUt": 31,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Dominating the line of scrimmage and getting QB reps.",
           "keyMatchup": "Kamari Moulton & Jaziun Patterson vs UNI front seven.",
           "summary": "Final non-conference tune-up at Kinnick."
         },
-        "oppId": "iowa"
+        "oppId": "iowa",
+        "is_tracked": true
       },
       {
         "id": "iowa-w4",
@@ -9513,17 +9792,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "BIG TEN SHOWDOWN",
-        "vegasSpread": 5.0,
+        "vegasSpread": -4.5,
         "overUnder": 39.0,
-        "baseWinProb": 30,
-        "projScoreUt": 17,
-        "projScoreOpp": 22,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Phil Parker defense containing Bryce Underwood in Ann Arbor.",
           "keyMatchup": "Iowa front seven vs Michigan power rushing.",
           "summary": "Massive Big Ten road clash at the Big House."
         },
-        "oppId": "michigan"
+        "oppId": "michigan",
+        "is_tracked": true
       },
       {
         "id": "iowa-w5",
@@ -9542,17 +9822,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "KINNICK VOODOO MARQUEE CLASH",
-        "vegasSpread": 5.5,
+        "vegasSpread": 4.5,
         "overUnder": 44.5,
-        "baseWinProb": 28,
-        "projScoreUt": 20,
-        "projScoreOpp": 25,
+        "baseWinProb": 25,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Kinnick night voodoo, turnover margin, and red zone goal line stands.",
           "keyMatchup": "Xavier Nwankpa vs Jeremiah Smith.",
           "summary": "Blockbuster Big Ten home clash against #1 Ohio State."
         },
-        "oppId": "ohiostate"
+        "oppId": "ohiostate",
+        "is_tracked": true
       },
       {
         "id": "iowa-w6",
@@ -9571,17 +9852,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "PACIFIC NORTHWEST CROSS-COUNTRY TEST",
-        "vegasSpread": 3.5,
+        "vegasSpread": -4.5,
         "overUnder": 42.0,
-        "baseWinProb": 35,
-        "projScoreUt": 19,
-        "projScoreOpp": 23,
+        "baseWinProb": 62,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Controlling time of possession in Seattle against Jedd Fisch.",
           "keyMatchup": "Iowa defensive front vs Quaid Carr & Jayden Limar.",
           "summary": "Tough road test at Husky Stadium."
         },
-        "oppId": "washington"
+        "oppId": "washington",
+        "is_tracked": true
       },
       {
         "id": "iowa-w7",
@@ -9600,17 +9882,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "FLOYD OF ROSEDALE",
-        "vegasSpread": -3.0,
+        "vegasSpread": -21.5,
         "overUnder": 43.0,
-        "baseWinProb": 62,
-        "projScoreUt": 23,
-        "projScoreOpp": 20,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Physical trench warfare for the bronze pig trophy.",
           "keyMatchup": "Aaron Graves vs Minnesota interior line.",
           "summary": "Historic Floyd of Rosedale rivalry game in Minneapolis."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "iowa-w8",
@@ -9629,17 +9912,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "HEARTLAND TROPHY",
-        "vegasSpread": -7.0,
+        "vegasSpread": -14.5,
         "overUnder": 43.0,
-        "baseWinProb": 76,
-        "projScoreUt": 25,
-        "projScoreOpp": 18,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Stopping Wisconsin power run and winning the field position battle.",
           "keyMatchup": "Kamari Moulton vs Wisconsin linebackers.",
           "summary": "Halloween clash for the Heartland Trophy at Kinnick."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "iowa-w9",
@@ -9658,17 +9942,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "BIG TEN WEST BATTLE",
-        "vegasSpread": -8.0,
+        "vegasSpread": 4.5,
         "overUnder": 43.0,
-        "baseWinProb": 80,
-        "projScoreUt": 26,
-        "projScoreOpp": 18,
+        "baseWinProb": 37,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Disciplined execution and avoiding special teams miscues.",
           "keyMatchup": "Iowa secondary vs Northwestern quick pass game.",
           "summary": "November Big Ten road game in Evanston."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "iowa-w10",
@@ -9687,17 +9972,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "SENIOR MONTH HOME CLASH",
-        "vegasSpread": -13.0,
+        "vegasSpread": 2.5,
         "overUnder": 43.0,
-        "baseWinProb": 90,
-        "projScoreUt": 28,
-        "projScoreOpp": 15,
+        "baseWinProb": 40,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Dominating the trenches and third-down defensive stops.",
           "keyMatchup": "Iowa pass rush vs Purdue pass protection.",
           "summary": "Mid-November home game at Kinnick."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "iowa-w11",
@@ -9716,17 +10002,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "BATTLE FOR MIDWEST TRENCHES",
-        "vegasSpread": -1.5,
+        "vegasSpread": 6.5,
         "overUnder": 43.0,
-        "baseWinProb": 56,
-        "projScoreUt": 19,
-        "projScoreOpp": 22,
+        "baseWinProb": 27,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Physical defense and controlling Illinois rushing attack.",
           "keyMatchup": "Luke Lachey vs Illinois linebackers.",
           "summary": "Tough road test in Champaign."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "iowa-w12",
@@ -9745,17 +10032,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "HEROES TROPHY",
-        "vegasSpread": -6.5,
+        "vegasSpread": 6.5,
         "overUnder": 43.0,
-        "baseWinProb": 74,
-        "projScoreUt": 25,
-        "projScoreOpp": 18,
+        "baseWinProb": 27,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Late-game execution, fourth quarter defense, and Heroes Trophy pride.",
           "keyMatchup": "Phil Parker defense vs Nebraska quarterback.",
           "summary": "Thanksgiving weekend rivalry clash at Kinnick Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ]
   },
@@ -9813,17 +10101,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "SEASON OPENER",
-        "vegasSpread": -36.0,
+        "vegasSpread": -21.5,
         "overUnder": 49.5,
-        "baseWinProb": 100,
-        "projScoreUt": 43,
-        "projScoreOpp": 7,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Fast offensive start and Matt Zollers deep passing rhythm.",
           "keyMatchup": "Brett Norfleet vs UAPB linebackers.",
           "summary": "Thursday night season opener at Faurot Field."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "miz-w2",
@@ -9842,17 +10131,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "THE BORDER WAR",
-        "vegasSpread": -2.0,
+        "vegasSpread": -21.5,
         "overUnder": 51.0,
-        "baseWinProb": 58,
-        "projScoreUt": 26,
-        "projScoreOpp": 24,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Border War intensity and explosive pass plays downfield.",
           "keyMatchup": "Marquis Johnson vs Kansas secondary.",
           "summary": "Historic Friday night Border War rivalry game."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "miz-w3",
@@ -9871,17 +10161,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "NON-CONFERENCE FINALE",
-        "vegasSpread": -20.0,
+        "vegasSpread": -14.5,
         "overUnder": 50.0,
-        "baseWinProb": 97,
-        "projScoreUt": 35,
-        "projScoreOpp": 15,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Trench domination and defensive pressure from Corey Batoon's unit.",
           "keyMatchup": "Missouri defensive line vs Troy pass protection.",
           "summary": "Final non-conference game in Columbia."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "miz-w4",
@@ -9900,17 +10191,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "SEC ROAD OPENER",
-        "vegasSpread": -4.5,
+        "vegasSpread": -14.5,
         "overUnder": 51.0,
-        "baseWinProb": 68,
-        "projScoreUt": 28,
-        "projScoreOpp": 23,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Handling the Cowbells in Starkville and converting in the red zone.",
           "keyMatchup": "Jamal Roberts vs Mississippi State front seven.",
           "summary": "SEC conference opener on the road."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "miz-w5",
@@ -9929,17 +10221,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "HOMECOMING IN COLUMBIA",
-        "vegasSpread": -5.5,
+        "vegasSpread": -14.5,
         "overUnder": 51.0,
-        "baseWinProb": 72,
-        "projScoreUt": 28,
-        "projScoreOpp": 23,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Homecoming energy, tight end mismatches with Brett Norfleet.",
           "keyMatchup": "Brett Norfleet vs Florida safeties.",
           "summary": "Marquee Homecoming clash at Faurot Field."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "miz-w6",
@@ -9958,17 +10251,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "TOP 10 SEC SHOWDOWN",
-        "vegasSpread": 5.0,
+        "vegasSpread": -2.0,
         "overUnder": 50.5,
-        "baseWinProb": 30,
-        "projScoreUt": 23,
-        "projScoreOpp": 28,
+        "baseWinProb": 55,
+        "projScoreUt": 28,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Protecting the pocket against Mike Elko's pass rush.",
           "keyMatchup": "Missouri offensive tackles vs Cashius Howell.",
           "summary": "Huge Top 10 SEC battle in Columbia."
         },
-        "oppId": "texasam"
+        "oppId": "texasam",
+        "is_tracked": true
       },
       {
         "id": "miz-w7",
@@ -9987,17 +10281,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "SEC ROAD SHOWDOWN",
-        "vegasSpread": 7.0,
+        "vegasSpread": 4.5,
         "overUnder": 59.5,
-        "baseWinProb": 24,
-        "projScoreUt": 26,
-        "projScoreOpp": 33,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Containing Lane Kiffin's high-octane offense in Oxford.",
           "keyMatchup": "Marvin Burks Jr. vs Ole Miss deep passing attack.",
           "summary": "High-scoring SEC shootout in Oxford."
         },
-        "oppId": "olemiss"
+        "oppId": "olemiss",
+        "is_tracked": true
       },
       {
         "id": "miz-w8",
@@ -10016,17 +10311,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "BATTLE LINE RIVALRY",
-        "vegasSpread": -1.5,
+        "vegasSpread": -14.5,
         "overUnder": 51.0,
-        "baseWinProb": 56,
-        "projScoreUt": 26,
-        "projScoreOpp": 25,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Battle Line trophy pride, power running, and red zone efficiency.",
           "keyMatchup": "Jamal Roberts vs Arkansas linebackers.",
           "summary": "Fierce Battle Line Rivalry in Fayetteville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "miz-w9",
@@ -10045,17 +10341,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "OLD BIG 12 SEC CLASH",
-        "vegasSpread": 5.0,
+        "vegasSpread": 2.5,
         "overUnder": 56.0,
-        "baseWinProb": 30,
-        "projScoreUt": 26,
-        "projScoreOpp": 30,
+        "baseWinProb": 42,
+        "projScoreUt": 27,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Slowing down Arch Manning and Sarkisian's explosive playmakers.",
           "keyMatchup": "Missouri secondary vs Cam Coleman & Ryan Wingo.",
           "summary": "Blockbuster home matchup against #5 Texas."
         },
-        "oppId": "texas"
+        "oppId": "texas",
+        "is_tracked": true
       },
       {
         "id": "miz-w10",
@@ -10074,17 +10371,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "BETWEEN THE HEDGES",
-        "vegasSpread": 10.0,
+        "vegasSpread": 4.5,
         "overUnder": 52.0,
-        "baseWinProb": 16,
-        "projScoreUt": 21,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
         "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Surviving Sanford Stadium hostile atmosphere and Glenn Schumann defense.",
           "keyMatchup": "Missouri front seven vs Nate Frazier.",
           "summary": "Extreme SEC road test in Athens."
         },
-        "oppId": "georgia"
+        "oppId": "georgia",
+        "is_tracked": true
       },
       {
         "id": "miz-w11",
@@ -10103,17 +10401,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "SENIOR DAY IN COLUMBIA",
-        "vegasSpread": -7.5,
+        "vegasSpread": -14.5,
         "overUnder": 51.0,
         "baseWinProb": 78,
-        "projScoreUt": 29,
-        "projScoreOpp": 22,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Controlling the trenches and stopping Kentucky power rush.",
           "keyMatchup": "Brett Norfleet vs Kentucky defense.",
           "summary": "Senior Day SEC clash in Columbia."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "miz-w12",
@@ -10132,17 +10431,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "PEACE PIPE RIVALRY FINALE",
-        "vegasSpread": 1.5,
+        "vegasSpread": 4.5,
         "overUnder": 51.5,
-        "baseWinProb": 43,
-        "projScoreUt": 25,
-        "projScoreOpp": 26,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Historic Big 8 / SEC rivalry finale and playoff positioning.",
           "keyMatchup": "Matt Zollers vs Zac Alley swarm defense.",
           "summary": "Epic regular season finale against Oklahoma in Columbia."
         },
-        "oppId": "oklahoma"
+        "oppId": "oklahoma",
+        "is_tracked": true
       }
     ]
   },
@@ -10200,17 +10500,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "SEASON OPENER",
-        "vegasSpread": -30.0,
+        "vegasSpread": -21.5,
         "overUnder": 50.5,
-        "baseWinProb": 99,
-        "projScoreUt": 40,
-        "projScoreOpp": 10,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Noah Fifita finding early rhythm in Brent Brennan's scheme.",
           "keyMatchup": "Quali Conley vs NAU front seven.",
           "summary": "Season opener in Tucson."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ariz-w2",
@@ -10229,17 +10530,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "EARLY BIG 12 ROAD TEST",
-        "vegasSpread": 3.5,
+        "vegasSpread": -4.5,
         "overUnder": 46.0,
-        "baseWinProb": 35,
-        "projScoreUt": 21,
-        "projScoreOpp": 25,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Handling Provo crowd noise and converting on third down.",
           "keyMatchup": "Noah Fifita vs Jay Hill BYU defense.",
           "summary": "Huge early Big 12 road clash in Provo."
         },
-        "oppId": "byu"
+        "oppId": "byu",
+        "is_tracked": true
       },
       {
         "id": "ariz-w3",
@@ -10258,17 +10560,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "NON-CONFERENCE FINALE",
-        "vegasSpread": -18.5,
+        "vegasSpread": -21.5,
         "overUnder": 51.0,
-        "baseWinProb": 96,
-        "projScoreUt": 35,
-        "projScoreOpp": 16,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Dominating the perimeter and red zone scoring.",
           "keyMatchup": "Montana Lemonious-Craig vs NIU cornerbacks.",
           "summary": "Non-conference home matchup in Tucson."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ariz-w4",
@@ -10287,17 +10590,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "FORMER PAC-12 ROAD TRIP",
-        "vegasSpread": -2.5,
+        "vegasSpread": 2.0,
         "overUnder": 52.5,
-        "baseWinProb": 60,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Fast start in the Palouse and winning turnover margin.",
           "keyMatchup": "Quali Conley vs WSU front seven.",
           "summary": "Non-conference road trip to Pullman."
         },
-        "oppId": null
+        "oppId": "washington",
+        "is_tracked": true
       },
       {
         "id": "ariz-w5",
@@ -10316,17 +10620,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "rivalryName": "BIG 12 HOME CLASH",
-        "vegasSpread": -8.0,
+        "vegasSpread": -14.5,
         "overUnder": 52.0,
-        "baseWinProb": 79,
-        "projScoreUt": 30,
-        "projScoreOpp": 22,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Desert heat advantage and air attack precision.",
           "keyMatchup": "Noah Fifita vs Cincinnati secondary.",
           "summary": "October Big 12 game in Tucson."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ariz-w6",
@@ -10345,17 +10650,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "rivalryName": "APPALACHIAN ROAD TEST",
-        "vegasSpread": -2.5,
+        "vegasSpread": -14.5,
         "overUnder": 52.5,
-        "baseWinProb": 60,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Eastern time zone adjustment and stopping Mountaineer power rush.",
           "keyMatchup": "Danny Gonzales defense vs WVU ground game.",
           "summary": "Long-distance Big 12 road battle in Morgantown."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ariz-w7",
@@ -10374,17 +10680,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "HOMECOMING IN TUCSON",
-        "vegasSpread": -4.0,
+        "vegasSpread": 2.0,
         "overUnder": 52.5,
-        "baseWinProb": 66,
-        "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Homecoming energy and breaking through Iowa State's 3-3-5 scheme.",
           "keyMatchup": "Noah Fifita vs Iowa State secondary.",
           "summary": "Key Big 12 Homecoming matchup in Tucson."
         },
-        "oppId": null
+        "oppId": "iowa",
+        "is_tracked": true
       },
       {
         "id": "ariz-w8",
@@ -10403,17 +10710,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "HALLOWEEN IN LUBBOCK",
-        "vegasSpread": 7.0,
+        "vegasSpread": 4.5,
         "overUnder": 61.5,
-        "baseWinProb": 24,
-        "projScoreUt": 27,
-        "projScoreOpp": 34,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Surviving the 60k Red Raider crowd and limiting Micah Hudson big plays.",
           "keyMatchup": "Tacario Davis vs Micah Hudson.",
           "summary": "Tough Halloween Big 12 road battle in Lubbock."
         },
-        "oppId": "texastech"
+        "oppId": "texastech",
+        "is_tracked": true
       },
       {
         "id": "ariz-w9",
@@ -10432,17 +10740,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "FRIDAY NIGHT LIGHTS",
-        "vegasSpread": -6.0,
+        "vegasSpread": -14.5,
         "overUnder": 52.0,
-        "baseWinProb": 73,
-        "projScoreUt": 29,
-        "projScoreOpp": 23,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Friday night home atmosphere and winning explosive play margin.",
           "keyMatchup": "Quali Conley vs TCU linebackers.",
           "summary": "Friday night Big 12 showcase in Tucson."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ariz-w10",
@@ -10461,17 +10770,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "DESERT BIG 12 SHOWDOWN",
-        "vegasSpread": -2.0,
+        "vegasSpread": 4.5,
         "overUnder": 46.0,
-        "baseWinProb": 54,
-        "projScoreUt": 27,
-        "projScoreOpp": 24,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Stopping Utah's physical ground game and protecting Fifita.",
           "keyMatchup": "Arizona offensive line vs Morgan Scalley blitzes.",
           "summary": "Massive Top 25 Big 12 battle in Tucson."
         },
-        "oppId": "utah"
+        "oppId": "utah",
+        "is_tracked": true
       },
       {
         "id": "ariz-w11",
@@ -10490,17 +10800,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "WILDCAT CLASH IN MANHATTAN",
-        "vegasSpread": 1.5,
+        "vegasSpread": -14.5,
         "overUnder": 52.5,
-        "baseWinProb": 43,
-        "projScoreUt": 26,
-        "projScoreOpp": 27,
+        "baseWinProb": 90,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Handling the wind and physical defense in Manhattan.",
           "keyMatchup": "Treydan Stukes vs K-State option keepers.",
           "summary": "Tough November road trip to Kansas State."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "ariz-w12",
@@ -10519,17 +10830,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "THE TERRITORIAL CUP",
-        "vegasSpread": -30.0,
+        "vegasSpread": -4.5,
         "overUnder": 50.5,
-        "baseWinProb": 99,
-        "projScoreUt": 40,
-        "projScoreOpp": 10,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Oldest rivalry trophy in America, intense emotion and state bragging rights.",
           "keyMatchup": "Noah Fifita vs ASU secondary.",
           "summary": "Heated Territorial Cup rivalry finale in Tucson."
         },
-        "oppId": "arizonastate"
+        "oppId": "arizonastate",
+        "is_tracked": true
       }
     ]
   },
@@ -10587,17 +10899,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "THE APPLE CUP",
-        "vegasSpread": -10.0,
+        "vegasSpread": -2.5,
         "overUnder": 52.0,
-        "baseWinProb": 85,
+        "baseWinProb": 58,
         "projScoreUt": 31,
-        "projScoreOpp": 21,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Sunday season opener Apple Cup energy at Husky Stadium.",
           "keyMatchup": "Demond Williams Jr. vs WSU secondary.",
           "summary": "Historic Apple Cup rivalry to kick off the 2026 season in Seattle."
         },
-        "oppId": null
+        "oppId": "washington",
+        "is_tracked": true
       },
       {
         "id": "wash-w2",
@@ -10616,17 +10929,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "NON-CONFERENCE HOME CLASH",
-        "vegasSpread": -21.5,
+        "vegasSpread": -14.5,
         "overUnder": 51.0,
-        "baseWinProb": 98,
-        "projScoreUt": 36,
-        "projScoreOpp": 15,
+        "baseWinProb": 92,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Quaid Carr establishing the ground game early.",
           "keyMatchup": "Quaid Carr & Jayden Limar vs Utah State linebackers.",
           "summary": "Non-conference home contest on Lake Washington."
         },
-        "oppId": null
+        "oppId": "utah",
+        "is_tracked": true
       },
       {
         "id": "wash-w3",
@@ -10645,17 +10959,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "IN-STATE NON-CONFERENCE",
-        "vegasSpread": 10.0,
+        "vegasSpread": -2.5,
         "overUnder": 52.0,
-        "baseWinProb": 15,
-        "projScoreUt": 21,
-        "projScoreOpp": 21,
+        "baseWinProb": 58,
+        "projScoreUt": 31,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Dominating line of scrimmage and getting key reserves reps.",
           "keyMatchup": "Dezmen Roebuck vs EWU cornerbacks.",
           "summary": "In-state FCS tune-up in Seattle."
         },
-        "oppId": "washington"
+        "oppId": "washington",
+        "is_tracked": true
       },
       {
         "id": "wash-w4",
@@ -10674,17 +10989,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "BIG TEN HOME OPENER",
-        "vegasSpread": -9.0,
+        "vegasSpread": -9.5,
         "overUnder": 52.0,
-        "baseWinProb": 82,
-        "projScoreUt": 30,
-        "projScoreOpp": 22,
+        "baseWinProb": 86,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Stopping Minnesota power rush and converting third-and-mediums.",
           "keyMatchup": "Steve Belichick defense vs Minnesota rushing attack.",
           "summary": "Big Ten conference opener at Husky Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "wash-w5",
@@ -10703,17 +11019,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "PAC-12 HERITAGE BIG TEN CLASH",
-        "vegasSpread": -1.5,
+        "vegasSpread": 4.5,
         "overUnder": 60.0,
-        "baseWinProb": 52,
-        "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Slowing down Lincoln Riley's pass attack at the Coliseum.",
           "keyMatchup": "Ephesians Prysock vs Makai Lemon.",
           "summary": "High-profile Big Ten road game in Los Angeles."
         },
-        "oppId": "usc"
+        "oppId": "usc",
+        "is_tracked": true
       },
       {
         "id": "wash-w6",
@@ -10732,17 +11049,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "FRIDAY NIGHT ON LAKE WASHINGTON",
-        "vegasSpread": -3.5,
+        "vegasSpread": 4.5,
         "overUnder": 42.0,
-        "baseWinProb": 65,
-        "projScoreUt": 23,
-        "projScoreOpp": 19,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Friday night stadium noise and breaking through Phil Parker's defense.",
           "keyMatchup": "Demond Williams Jr. vs Iowa secondary.",
           "summary": "Friday night Big Ten clash against #22 Iowa in Seattle."
         },
-        "oppId": "iowa"
+        "oppId": "iowa",
+        "is_tracked": true
       },
       {
         "id": "wash-w7",
@@ -10761,17 +11079,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "MIDWEST ROAD TRIP",
-        "vegasSpread": -8.5,
+        "vegasSpread": -9.5,
         "overUnder": 52.0,
-        "baseWinProb": 80,
-        "projScoreUt": 30,
-        "projScoreOpp": 22,
+        "baseWinProb": 86,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Fast offensive start on the road in West Lafayette.",
           "keyMatchup": "Quaid Carr vs Purdue front seven.",
           "summary": "Friday night Big Ten road test at Ross-Ade Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "wash-w8",
@@ -10790,17 +11109,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "HALLOWEEN IN LINCOLN",
-        "vegasSpread": -2.0,
+        "vegasSpread": -9.5,
         "overUnder": 52.0,
-        "baseWinProb": 58,
-        "projScoreUt": 24,
-        "projScoreOpp": 27,
+        "baseWinProb": 86,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Silencing 85k red-clad fans in Lincoln on Halloween.",
           "keyMatchup": "Demond Williams Jr. vs Nebraska defense.",
           "summary": "Atmospheric Big Ten road clash in Lincoln."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "wash-w9",
@@ -10819,17 +11139,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "TOP 20 BIG TEN SHOWDOWN",
-        "vegasSpread": -3.5,
+        "vegasSpread": 4.5,
         "overUnder": 48.5,
-        "baseWinProb": 58,
+        "baseWinProb": 38,
         "projScoreUt": 24,
-        "projScoreOpp": 21,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Husky Stadium crowd noise and containing Rocco Becht's air attack.",
           "keyMatchup": "Steve Belichick run defense vs Quinton Martin Jr. & James Peoples.",
           "summary": "Massive Top 20 Big Ten clash in Seattle."
         },
-        "oppId": "pennstate"
+        "oppId": "pennstate",
+        "is_tracked": true
       },
       {
         "id": "wash-w10",
@@ -10848,17 +11169,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "EAST LANSING ROAD TEST",
-        "vegasSpread": -6.0,
+        "vegasSpread": -7.5,
         "overUnder": 52.0,
-        "baseWinProb": 73,
-        "projScoreUt": 29,
-        "projScoreOpp": 23,
+        "baseWinProb": 82,
+        "projScoreUt": 34,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Cold weather execution and winning the turnover battle.",
           "keyMatchup": "Quaid Carr & Jayden Limar vs Michigan State linebackers.",
           "summary": "November Big Ten road game in East Lansing."
         },
-        "oppId": null
+        "oppId": "michigan",
+        "is_tracked": true
       },
       {
         "id": "wash-w11",
@@ -10877,17 +11199,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "SENIOR DAY TOP 10 SHOWDOWN",
-        "vegasSpread": 1.0,
+        "vegasSpread": 4.5,
         "overUnder": 53.5,
-        "baseWinProb": 46,
-        "projScoreUt": 26,
-        "projScoreOpp": 27,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Senior Day energy and slowing down Curt Cignetti's offense.",
           "keyMatchup": "Ephesians Prysock vs Charlie Becker.",
           "summary": "Blockbuster Big Ten clash against #6 Indiana in Seattle."
         },
-        "oppId": "indiana"
+        "oppId": "indiana",
+        "is_tracked": true
       },
       {
         "id": "wash-w12",
@@ -10906,17 +11229,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "NORTHWEST CHAMPIONSHIP",
-        "vegasSpread": 9.0,
+        "vegasSpread": 4.5,
         "overUnder": 58.0,
-        "baseWinProb": 18,
+        "baseWinProb": 32,
         "projScoreUt": 24,
-        "projScoreOpp": 34,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Rivalry hatred, Autzen noise, and Big Ten Championship berth on the line.",
           "keyMatchup": "Demond Williams Jr. vs Dan Lanning defense.",
           "summary": "Fierce Northwest Championship regular season finale in Eugene."
         },
-        "oppId": "oregon"
+        "oppId": "oregon",
+        "is_tracked": true
       }
     ]
   },
@@ -10974,17 +11298,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "SEASON OPENER IN H-TOWN",
-        "vegasSpread": -29.5,
+        "vegasSpread": -10.5,
         "overUnder": 45.5,
-        "baseWinProb": 99,
-        "projScoreUt": 38,
-        "projScoreOpp": 8,
+        "baseWinProb": 86,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Establishing the offensive tempo in the season opener.",
           "keyMatchup": "Houston front seven vs SFA offense.",
           "summary": "Season opening non-conference matchup in Houston."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "hou-w2",
@@ -11003,17 +11328,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "NON-CONFERENCE HOME GAME",
-        "vegasSpread": -33.5,
+        "vegasSpread": -10.5,
         "overUnder": 45.5,
-        "baseWinProb": 100,
-        "projScoreUt": 40,
-        "projScoreOpp": 6,
+        "baseWinProb": 86,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Executing offensive install and getting backup repetitions.",
           "keyMatchup": "Conner Weigman precision passing vs Southern defense.",
           "summary": "Non-conference home clash in Houston."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "hou-w3",
@@ -11032,17 +11358,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "FRIDAY NIGHT IN LUBBOCK",
-        "vegasSpread": 6.5,
+        "vegasSpread": 4.5,
         "overUnder": 59.0,
-        "baseWinProb": 25,
-        "projScoreUt": 26,
-        "projScoreOpp": 33,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Friday night road intensity and stopping Joey McGuire's tempo.",
           "keyMatchup": "AJ Haulcy vs Micah Hudson.",
           "summary": "Friday night Big 12 in-state opener in Lubbock."
         },
-        "oppId": "texastech"
+        "oppId": "texastech",
+        "is_tracked": true
       },
       {
         "id": "hou-w4",
@@ -11061,17 +11388,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "NON-CONFERENCE ROAD TRIP",
-        "vegasSpread": -14.0,
+        "vegasSpread": -11.5,
         "overUnder": 47.0,
-        "baseWinProb": 91,
-        "projScoreUt": 30,
-        "projScoreOpp": 16,
+        "baseWinProb": 84,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Clock control, power running, and taking care of the football.",
           "keyMatchup": "Makhi Hughes vs Georgia Southern linebackers.",
           "summary": "Non-conference road trip to Statesboro."
         },
-        "oppId": null
+        "oppId": "georgia",
+        "is_tracked": true
       },
       {
         "id": "hou-w5",
@@ -11090,17 +11418,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "FORMER AAC BIG 12 CLASH",
-        "vegasSpread": -7.0,
+        "vegasSpread": -10.5,
         "overUnder": 47.0,
-        "baseWinProb": 76,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "baseWinProb": 86,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Home crowd noise and winning the red zone touchdown battle.",
           "keyMatchup": "Stephon Johnson vs UCF cornerbacks.",
           "summary": "Key Big 12 home showdown in Houston."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "hou-w6",
@@ -11119,17 +11448,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "MANHATTAN ROAD TEST",
-        "vegasSpread": 1.0,
+        "vegasSpread": -10.5,
         "overUnder": 47.0,
-        "baseWinProb": 45,
-        "projScoreUt": 23,
-        "projScoreOpp": 24,
+        "baseWinProb": 86,
+        "projScoreUt": 35,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Slowing down K-State physical option attack.",
           "keyMatchup": "Austin Armstrong front seven vs K-State offensive line.",
           "summary": "Tough Big 12 road battle in Manhattan."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "hou-w7",
@@ -11148,17 +11478,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "rivalryName": "BIG 12 HOME CLASH",
-        "vegasSpread": -7.5,
+        "vegasSpread": 2.0,
         "overUnder": 47.0,
-        "baseWinProb": 78,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Makhi Hughes power running opening up deep play-action.",
           "keyMatchup": "Makhi Hughes vs Oklahoma State defense.",
           "summary": "October Big 12 home game in Houston."
         },
-        "oppId": null
+        "oppId": "oklahoma",
+        "is_tracked": true
       },
       {
         "id": "hou-w8",
@@ -11177,17 +11508,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "SALT LAKE CITY ROAD TEST",
-        "vegasSpread": 4.0,
+        "vegasSpread": 4.5,
         "overUnder": 40.5,
-        "baseWinProb": 34,
-        "projScoreUt": 18,
-        "projScoreOpp": 22,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Handling Rice-Eccles altitude and Morgan Scalley blitzes.",
           "keyMatchup": "Houston offensive line vs Utah defensive tackles.",
           "summary": "Crucial Top 25 Big 12 showdown in Salt Lake City."
         },
-        "oppId": "utah"
+        "oppId": "utah",
+        "is_tracked": true
       },
       {
         "id": "hou-w9",
@@ -11206,17 +11538,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "rivalryName": "NOVEMBER HOME TEST",
-        "vegasSpread": 3.0,
+        "vegasSpread": 4.5,
         "overUnder": 41.0,
-        "baseWinProb": 37,
-        "projScoreUt": 19,
-        "projScoreOpp": 22,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Forcing turnovers and controlling third down conversions.",
           "keyMatchup": "Makhi Hughes vs Cincinnati front seven.",
           "summary": "November home game at TDECU Stadium."
         },
-        "oppId": "byu"
+        "oppId": "byu",
+        "is_tracked": true
       },
       {
         "id": "hou-w10",
@@ -11235,17 +11568,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "FRIDAY NIGHT IN BOULDER",
-        "vegasSpread": -2.5,
+        "vegasSpread": -4.5,
         "overUnder": 54.0,
-        "baseWinProb": 56,
-        "projScoreUt": 27,
+        "baseWinProb": 70,
+        "projScoreUt": 31,
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Friday night national TV spotlight and power ground attack in the cold.",
           "keyMatchup": "Austin Armstrong pass rush vs Colorado pass protection.",
           "summary": "Friday night Big 12 showdown in Boulder on ESPN."
         },
-        "oppId": "colorado"
+        "oppId": "colorado",
+        "is_tracked": true
       },
       {
         "id": "hou-w11",
@@ -11264,17 +11598,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "rivalryName": "MORGANTOWN ROAD CLASH",
-        "vegasSpread": -3.0,
+        "vegasSpread": -14.5,
         "overUnder": 47.0,
-        "baseWinProb": 62,
-        "projScoreUt": 25,
-        "projScoreOpp": 22,
+        "baseWinProb": 86,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Cold weather toughness and red zone defense in Morgantown.",
           "keyMatchup": "Makhi Hughes vs WVU front seven.",
           "summary": "Late season Big 12 road battle in West Virginia."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "hou-w12",
@@ -11293,17 +11628,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "rivalryName": "BATTLE ON I-45 FINALE",
-        "vegasSpread": -7.5,
+        "vegasSpread": -14.5,
         "overUnder": 47.0,
-        "baseWinProb": 78,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "baseWinProb": 86,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "In-state rivalry pride, Senior Day, and Big 12 bowl positioning.",
           "keyMatchup": "Conner Weigman & Makhi Hughes vs Baylor defense.",
           "summary": "Heated Battle on I-45 regular season finale in Houston."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ]
   },
@@ -11361,17 +11697,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "MUSIC CITY KICKOFF SHOWDOWN",
-        "vegasSpread": 7.5,
+        "vegasSpread": 4.5,
         "overUnder": 67.5,
-        "baseWinProb": 22,
-        "projScoreUt": 30,
-        "projScoreOpp": 38,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Jeff Brohm scheme vs Lane Kiffin high-scoring attack in Nashville.",
           "keyMatchup": "Chris Bell vs Ole Miss secondary.",
           "summary": "Sunday marquee non-conference opener at Nissan Stadium."
         },
-        "oppId": "olemiss"
+        "oppId": "olemiss",
+        "is_tracked": true
       },
       {
         "id": "lou-w2",
@@ -11390,17 +11727,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "HOME OPENER UNDER FRIDAY LIGHTS",
-        "vegasSpread": -26.5,
+        "vegasSpread": -21.5,
         "overUnder": 57.5,
-        "baseWinProb": 99,
-        "projScoreUt": 42,
-        "projScoreOpp": 16,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Establishing the ground attack with Isaac Brown and Lincoln Kienholz precision passing.",
           "keyMatchup": "Maurice Turner vs Villanova front seven.",
           "summary": "Friday night home opener at L&N Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "lou-w3",
@@ -11419,17 +11757,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "TOP 25 ACC CLASH",
-        "vegasSpread": -0.5,
+        "vegasSpread": 4.5,
         "overUnder": 66.0,
-        "baseWinProb": 52,
-        "projScoreUt": 31,
-        "projScoreOpp": 34,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Home crowd energy and containing Kevin Jennings' scrambles.",
           "keyMatchup": "TJ Capers vs Kevin Jennings.",
           "summary": "Early Top 25 ACC battle in Louisville."
         },
-        "oppId": "smu"
+        "oppId": "smu",
+        "is_tracked": true
       },
       {
         "id": "lou-w4",
@@ -11448,17 +11787,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "ACC HOME TEST",
-        "vegasSpread": -11.0,
+        "vegasSpread": -21.5,
         "overUnder": 59.0,
-        "baseWinProb": 87,
-        "projScoreUt": 35,
-        "projScoreOpp": 24,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive pass plays against Wake Forest secondary.",
           "keyMatchup": "Chris Bell vs Wake Forest cornerbacks.",
           "summary": "September ACC clash at L&N Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "lou-w5",
@@ -11477,17 +11817,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "ACC ROAD CHALLENGE",
-        "vegasSpread": -2.0,
+        "vegasSpread": -14.5,
         "overUnder": 59.0,
-        "baseWinProb": 58,
-        "projScoreUt": 30,
-        "projScoreOpp": 28,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Silencing Carter-Finley Stadium and avoiding red zone turnovers.",
           "keyMatchup": "Louisville offensive line vs NC State defensive front.",
           "summary": "Tough October ACC road test in Raleigh."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "lou-w6",
@@ -11506,17 +11847,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "FRIDAY NIGHT ACC SHOWDOWN",
-        "vegasSpread": 1.5,
+        "vegasSpread": 4.5,
         "overUnder": 59.0,
-        "baseWinProb": 46,
-        "projScoreUt": 28,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
         "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Friday night national TV blackout in Louisville.",
           "keyMatchup": "Ron English defense vs Ashton Daniels & Kam Davis.",
           "summary": "Blockbuster Friday night ACC game on ESPN."
         },
-        "oppId": "floridastate"
+        "oppId": "floridastate",
+        "is_tracked": true
       },
       {
         "id": "lou-w7",
@@ -11535,17 +11877,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "DOME ROAD TRIP",
-        "vegasSpread": -2.5,
+        "vegasSpread": -14.5,
         "overUnder": 59.0,
-        "baseWinProb": 60,
-        "projScoreUt": 31,
-        "projScoreOpp": 28,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Dome acoustics and explosive play execution.",
           "keyMatchup": "Maurice Turner vs Syracuse linebackers.",
           "summary": "Mid-October ACC road clash at the JMA Dome."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "lou-w8",
@@ -11564,17 +11907,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "HALLOWEEN ACC SHOWCASE",
-        "vegasSpread": -11.5,
+        "vegasSpread": -14.5,
         "overUnder": 59.0,
-        "baseWinProb": 88,
-        "projScoreUt": 35,
-        "projScoreOpp": 24,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Controlling the line of scrimmage and pass protection.",
           "keyMatchup": "Lincoln Kienholz vs Stanford secondary.",
           "summary": "Halloween ACC home matchup in Louisville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "lou-w9",
@@ -11593,17 +11937,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "ATLANTA ACC ROAD TEST",
-        "vegasSpread": -0.5,
+        "vegasSpread": 2.0,
         "overUnder": 59.0,
-        "baseWinProb": 52,
-        "projScoreUt": 27,
-        "projScoreOpp": 30,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Stopping Georgia Tech option rush and winning third downs.",
           "keyMatchup": "TJ Capers vs Georgia Tech offensive line.",
           "summary": "November ACC road contest in Atlanta."
         },
-        "oppId": null
+        "oppId": "georgia",
+        "is_tracked": true
       },
       {
         "id": "lou-w10",
@@ -11622,18 +11967,19 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "CHAPEL HILL ROAD TEST",
-        "vegasSpread": 5.0,
+        "vegasSpread": 4.5,
         "overUnder": 59.0,
-        "baseWinProb": 30,
-        "projScoreUt": 27,
-        "projScoreOpp": 32,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Winning the shootout in Chapel Hill and forcing red zone field goals.",
           "keyMatchup": "Quincy Riley vs UNC wide receivers.",
           "summary": "Late-season ACC road trip to Kenan Stadium."
         },
         "isAcc": true,
-        "oppId": "clemson"
+        "oppId": "clemson",
+        "is_tracked": true
       },
       {
         "id": "lou-w11",
@@ -11652,17 +11998,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "SENIOR DAY AT L&N STADIUM",
-        "vegasSpread": -7.0,
+        "vegasSpread": -14.5,
         "overUnder": 59.0,
-        "baseWinProb": 77,
-        "projScoreUt": 33,
-        "projScoreOpp": 26,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Senior Day energy and pass protection against Pitt blitz packages.",
           "keyMatchup": "Maurice Turner vs Pitt aggressive front seven.",
           "summary": "Final regular season home game in Louisville."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "lou-w12",
@@ -11681,17 +12028,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": false,
         "rivalryName": "THE GOVERNOR'S CUP",
-        "vegasSpread": -2.0,
+        "vegasSpread": -14.5,
         "overUnder": 59.0,
-        "baseWinProb": 58,
-        "projScoreUt": 30,
-        "projScoreOpp": 28,
+        "baseWinProb": 78,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "State supremacy, Governor's Cup trophy pride, and stopping the power run.",
           "keyMatchup": "Ron English front seven vs Kentucky rushing attack.",
           "summary": "Heated Governor's Cup rivalry finale in Lexington."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ]
   },
@@ -11754,17 +12102,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": true,
         "isConf": false,
-        "vegasSpread": 3.5,
+        "vegasSpread": 2.0,
         "overUnder": 63.0,
-        "baseWinProb": 41,
-        "projScoreUt": 28,
-        "projScoreOpp": 32,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Julian Lewis opening debut executing Brennan Marion's Go-Go offense in Atlanta.",
           "keyMatchup": "Colorado defensive front vs Georgia Tech option attack.",
           "summary": "High-profile Thursday night non-conference road opener."
         },
-        "oppId": null
+        "oppId": "georgia",
+        "is_tracked": true
       },
       {
         "id": "col-w2",
@@ -11783,17 +12132,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "isConf": false,
-        "vegasSpread": -27.5,
+        "vegasSpread": -21.5,
         "overUnder": 56.0,
-        "baseWinProb": 99,
-        "projScoreUt": 42,
+        "baseWinProb": 66,
+        "projScoreUt": 38,
         "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive passing plays downfield to Danny Scudero.",
           "keyMatchup": "Colorado offensive line vs Weber State front.",
           "summary": "Home opener in front of a sold-out Folsom Field."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "col-w3",
@@ -11813,17 +12163,18 @@ var TEAMS_DATABASE = {
         "isBig12": false,
         "isBigTen": true,
         "isConf": false,
-        "vegasSpread": -6.5,
+        "vegasSpread": -21.5,
         "overUnder": 48.0,
-        "baseWinProb": 71,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "baseWinProb": 66,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Tempo advantage against physical Big Ten defense.",
           "keyMatchup": "D.J. McKinney vs Northwestern outside receivers.",
           "summary": "Power 4 road trip to Lake Michigan."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "col-w4",
@@ -11842,17 +12193,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "isConf": true,
-        "vegasSpread": 1.5,
+        "vegasSpread": -14.5,
         "overUnder": 51.0,
-        "baseWinProb": 46,
-        "projScoreUt": 30,
-        "projScoreOpp": 27,
+        "baseWinProb": 66,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Protecting Julian Lewis against Dave Aranda blitz schemes.",
           "keyMatchup": "Damian Henderson II vs Baylor interior defensive line.",
           "summary": "Big 12 conference opener in Waco."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "col-w5",
@@ -11872,17 +12224,18 @@ var TEAMS_DATABASE = {
         "isBig12": true,
         "isConf": true,
         "rivalryName": "BIG 12 MARQUEE CLASH IN BOULDER",
-        "vegasSpread": 8.5,
+        "vegasSpread": 4.5,
         "overUnder": 67.0,
-        "baseWinProb": 28,
-        "projScoreUt": 38,
-        "projScoreOpp": 35,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "High-altitude crowd noise disrupting Joey McGuire's tempo.",
           "keyMatchup": "Colorado secondary vs Texas Tech air raid attack.",
           "summary": "Top-15 Big 12 showdown at Folsom Field."
         },
-        "oppId": "texastech"
+        "oppId": "texastech",
+        "is_tracked": true
       },
       {
         "id": "col-w7",
@@ -11902,17 +12255,18 @@ var TEAMS_DATABASE = {
         "isBig12": true,
         "isConf": true,
         "rivalryName": "RUMBLE IN THE ROCKIES RIVALRY",
-        "vegasSpread": 7.0,
+        "vegasSpread": 4.5,
         "overUnder": 50.0,
         "baseWinProb": 30,
-        "projScoreUt": 20,
-        "projScoreOpp": 28,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Matching Utah's physical line of scrimmage in the trenches.",
           "keyMatchup": "Jordan Seaton vs Utah edge rushers.",
           "summary": "Historic Rumble in the Rockies battle in Boulder."
         },
-        "oppId": "utah"
+        "oppId": "utah",
+        "is_tracked": true
       },
       {
         "id": "col-w8",
@@ -11931,17 +12285,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "isConf": true,
-        "vegasSpread": 4.5,
+        "vegasSpread": 2.0,
         "overUnder": 59.0,
-        "baseWinProb": 38,
-        "projScoreUt": 27,
-        "projScoreOpp": 32,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Red-zone execution in a hostile Stillwater atmosphere.",
           "keyMatchup": "Chris Marve defense vs Mike Gundy offense.",
           "summary": "Physical Big 12 road test at Boone Pickens."
         },
-        "oppId": null
+        "oppId": "oklahoma",
+        "is_tracked": true
       },
       {
         "id": "col-w9",
@@ -11960,17 +12315,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "isConf": true,
-        "vegasSpread": 3.5,
+        "vegasSpread": -14.5,
         "overUnder": 56.0,
-        "baseWinProb": 41,
-        "projScoreUt": 26,
-        "projScoreOpp": 30,
+        "baseWinProb": 66,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Halloween night game energy at Folsom Field.",
           "keyMatchup": "Colorado run defense vs K-State quarterback run game.",
           "summary": "Crucial Big 12 battle under the Flatirons."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "col-w10",
@@ -11989,17 +12345,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "isConf": true,
-        "vegasSpread": 5.5,
+        "vegasSpread": 4.5,
         "overUnder": 61.0,
-        "baseWinProb": 35,
-        "projScoreUt": 27,
-        "projScoreOpp": 34,
+        "baseWinProb": 45,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Desert road conditions and fast offensive tempo.",
           "keyMatchup": "Julian Lewis vs Kenny Dillingham secondary.",
           "summary": "Desert Big 12 matchup in Tempe."
         },
-        "oppId": "arizonastate"
+        "oppId": "arizonastate",
+        "is_tracked": true
       },
       {
         "id": "col-w11",
@@ -12018,17 +12375,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "isConf": true,
-        "vegasSpread": 2.5,
+        "vegasSpread": 4.5,
         "overUnder": 54.0,
-        "baseWinProb": 44,
+        "baseWinProb": 30,
         "projScoreUt": 24,
-        "projScoreOpp": 27,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Friday night lights in Boulder with bowl eligibility on the line.",
           "keyMatchup": "Colorado front vs Willie Fritz power run scheme.",
           "summary": "Friday night primetime clash at Folsom Field."
         },
-        "oppId": "houston"
+        "oppId": "houston",
+        "is_tracked": true
       },
       {
         "id": "col-w12",
@@ -12047,17 +12405,18 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": true,
         "isConf": true,
-        "vegasSpread": -2.5,
+        "vegasSpread": -14.5,
         "overUnder": 52.0,
-        "baseWinProb": 56,
-        "projScoreUt": 27,
-        "projScoreOpp": 24,
+        "baseWinProb": 66,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Late November Midwest cold weather preparation.",
           "keyMatchup": "Julian Lewis accuracy vs Cincinnati defensive backs.",
           "summary": "Late season road test at Nippert Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "col-w13",
@@ -12076,17 +12435,18 @@ var TEAMS_DATABASE = {
         "isMarquee": true,
         "isBig12": true,
         "isConf": true,
-        "vegasSpread": -4.5,
+        "vegasSpread": -14.5,
         "overUnder": 64.0,
-        "baseWinProb": 62,
-        "projScoreUt": 34,
-        "projScoreOpp": 28,
+        "baseWinProb": 66,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Senior Day atmosphere and Ralphie's final run of the season.",
           "keyMatchup": "Colorado perimeter speed vs UCF athletic defense.",
           "summary": "Regular season finale under the Flatirons at Folsom Field."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       }
     ]
   },
@@ -12150,17 +12510,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": false,
-        "vegasSpread": -31.5,
+        "vegasSpread": 4.5,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 45,
-        "projScoreOpp": 10,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Season opener in Tempe against in-state FCS Lumberjacks."
         },
-        "oppId": null
+        "oppId": "arizona",
+        "is_tracked": true
       },
       {
         "id": "asu-w2",
@@ -12182,17 +12543,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": false,
-        "vegasSpread": 11.5,
+        "vegasSpread": 4.5,
         "overUnder": 58.0,
-        "baseWinProb": 13,
-        "projScoreUt": 20,
-        "projScoreOpp": 38,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Marquee non-conference road test in College Station."
         },
-        "oppId": "texasam"
+        "oppId": "texasam",
+        "is_tracked": true
       },
       {
         "id": "asu-w3",
@@ -12214,17 +12576,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": false,
-        "vegasSpread": -14.5,
+        "vegasSpread": 2.0,
         "overUnder": 59.5,
-        "baseWinProb": 82,
-        "projScoreUt": 38,
-        "projScoreOpp": 20,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Tricky road contest before entering Big 12 play."
         },
-        "oppId": null
+        "oppId": "texas",
+        "is_tracked": true
       },
       {
         "id": "asu-w4",
@@ -12246,17 +12609,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": true,
-        "vegasSpread": 9.0,
+        "vegasSpread": 4.5,
         "overUnder": 64.5,
-        "baseWinProb": 17,
-        "projScoreUt": 26,
-        "projScoreOpp": 36,
+        "baseWinProb": 30,
+        "projScoreUt": 24,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Big 12 conference road opener against explosive Red Raiders."
         },
-        "oppId": "texastech"
+        "oppId": "texastech",
+        "is_tracked": true
       },
       {
         "id": "asu-w5",
@@ -12278,17 +12642,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": true,
-        "vegasSpread": 2.5,
+        "vegasSpread": -21.5,
         "overUnder": 59.0,
-        "baseWinProb": 45,
-        "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "baseWinProb": 70,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Big 12 home conference opener under the lights."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "asu-w6",
@@ -12310,17 +12675,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": true,
-        "vegasSpread": -4.5,
+        "vegasSpread": -21.5,
         "overUnder": 51.5,
-        "baseWinProb": 65,
-        "projScoreUt": 28,
-        "projScoreOpp": 21,
+        "baseWinProb": 70,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Physical Big 12 road battle at Nippert Stadium."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "asu-w7",
@@ -12342,17 +12708,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": true,
-        "vegasSpread": 1.5,
+        "vegasSpread": -14.5,
         "overUnder": 61.5,
-        "baseWinProb": 47,
-        "projScoreUt": 26,
-        "projScoreOpp": 28,
+        "baseWinProb": 70,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "High-scoring Big 12 contest in Tempe."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "asu-w8",
@@ -12374,17 +12741,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": true,
-        "vegasSpread": -3.5,
+        "vegasSpread": 2.0,
         "overUnder": 62.5,
-        "baseWinProb": 63,
-        "projScoreUt": 34,
-        "projScoreOpp": 27,
+        "baseWinProb": 44,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Crucial late-October road test in Stillwater."
         },
-        "oppId": null
+        "oppId": "oklahoma",
+        "is_tracked": true
       },
       {
         "id": "asu-w9",
@@ -12406,17 +12774,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": true,
-        "vegasSpread": -5.5,
+        "vegasSpread": -4.5,
         "overUnder": 63.5,
-        "baseWinProb": 65,
-        "projScoreUt": 34,
-        "projScoreOpp": 27,
+        "baseWinProb": 55,
+        "projScoreUt": 31,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Primetime showdown in Tempe against Coach Prime and Colorado."
         },
-        "oppId": "colorado"
+        "oppId": "colorado",
+        "is_tracked": true
       },
       {
         "id": "asu-w10",
@@ -12438,17 +12807,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": true,
-        "vegasSpread": 3.5,
+        "vegasSpread": -14.5,
         "overUnder": 53.5,
-        "baseWinProb": 44,
-        "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "baseWinProb": 70,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Tough late-season road battle in Manhattan."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "asu-w11",
@@ -12470,17 +12840,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": true,
-        "vegasSpread": -7.5,
+        "vegasSpread": -14.5,
         "overUnder": 57.0,
-        "baseWinProb": 74,
-        "projScoreUt": 35,
-        "projScoreOpp": 24,
+        "baseWinProb": 70,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Senior day home finale in Tempe."
         },
-        "oppId": null
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "asu-w12",
@@ -12504,17 +12875,18 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "isRivalry": true,
         "rivalryName": "Territorial Cup",
-        "vegasSpread": 30.0,
+        "vegasSpread": 2.5,
         "overUnder": 52.5,
-        "baseWinProb": 1,
-        "projScoreUt": 10,
-        "projScoreOpp": 40,
+        "baseWinProb": 42,
+        "projScoreUt": 27,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "The 99th edition of the historic Territorial Cup rivalry in Tucson."
         },
-        "oppId": "arizona"
+        "oppId": "arizona",
+        "is_tracked": true
       }
     ]
   }
