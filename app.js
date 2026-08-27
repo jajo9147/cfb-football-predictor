@@ -7362,10 +7362,10 @@ function renderAll30TeamsVaultMatrix() {
 // ==========================================================================
 
 const AUTH_STORAGE_KEY = 'cfb_prophet_auth_user_v4';
-const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v4';
-const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v4';
-const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v4';
-const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v4';
+const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v5';
+const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v5';
+const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v5';
+const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v5';
 
 function getCurrentUser() {
   try {
@@ -7776,15 +7776,14 @@ function getSavedBrackets() {
   if (!currentUser) return [];
 
   const userDisplayName = (currentUser.displayName || '').trim().toLowerCase();
-  const userHandle = (currentUser.handle || '').trim().toLowerCase();
   const userEmail = (currentUser.email || '').trim().toLowerCase();
+  const userId = currentUser.id;
 
   let allLocalBrackets = [];
   const storageKeys = [
     BRACKET_STORAGE_KEY,
-    'cfb_prophet_saved_brackets_v3',
-    'cfb_prophet_saved_brackets_v2',
-    'cfb_prophet_saved_brackets'
+    'cfb_prophet_saved_brackets_v5',
+    'cfb_prophet_saved_brackets_v4'
   ];
 
   storageKeys.forEach(k => {
@@ -7799,43 +7798,43 @@ function getSavedBrackets() {
     } catch (e) {}
   });
 
-  // Also include matching community brackets
-  try {
-    const rawComm = localStorage.getItem(COMMUNITY_BRACKETS_KEY) || localStorage.getItem('cfb_prophet_community_brackets_v3');
-    if (rawComm) {
-      const commList = JSON.parse(rawComm) || [];
-      if (Array.isArray(commList)) {
-        allLocalBrackets.push(...commList);
-      }
-    }
-  } catch(e) {}
-
   const deletedIds = getDeletedBracketIds();
   const idMap = new Map();
 
   allLocalBrackets.forEach(b => {
     if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || deletedIds.has(b.id)) return;
 
-    const cr = (b.creator || '').trim().toLowerCase();
     const crEmail = (b.creatorEmail || '').trim().toLowerCase();
-    const isGuestOrLocal = !b.creatorId || b.creatorId.startsWith('guest_') || cr === 'coach' || cr === 'jake' || cr === 'jake johnson';
-    const matchesUser = (b.creatorId && b.creatorId === currentUser.id) ||
-                        isGuestOrLocal ||
-                        (cr && (cr === userDisplayName || cr === userHandle || userDisplayName.includes(cr) || cr.includes(userDisplayName))) ||
-                        (crEmail && userEmail && crEmail === userEmail);
+    const crId = b.creatorId;
 
-    if (matchesUser) {
-      // Adopt and tag with authenticated user's credentials
-      b.creatorId = currentUser.id;
-      b.creator = currentUser.displayName || b.creator;
-      if (userEmail) b.creatorEmail = currentUser.email;
+    // Strict account ownership:
+    let isOwner = false;
+    if (crId && userId && crId === userId) {
+      isOwner = true;
+    } else if (crEmail && userEmail && crEmail === userEmail) {
+      isOwner = true;
+    }
+
+    if (isOwner) {
       idMap.set(b.id, b);
     }
   });
 
-  const finalBrackets = Array.from(idMap.values());
+  // Personal Jake Johnson account owns USC Wins Out by default
+  const isWorkAccount = userDisplayName.includes('jake t') || (userEmail && userEmail.includes('work'));
+  const isPersonalJake = !isWorkAccount && (userDisplayName === 'jake johnson' || userDisplayName === 'jake' || (userEmail && (userEmail.includes('jajo9147') || userEmail.includes('jakejohnson'))));
+  
+  if (isPersonalJake) {
+    const uscCurated = createUscWinsOutBracket();
+    if (!deletedIds.has(uscCurated.id) && !idMap.has(uscCurated.id)) {
+      uscCurated.creatorId = userId;
+      uscCurated.creator = currentUser.displayName || 'Jake Johnson';
+      if (userEmail) uscCurated.creatorEmail = currentUser.email;
+      idMap.set(uscCurated.id, uscCurated);
+    }
+  }
 
-  // Persist updated list into v4
+  const finalBrackets = Array.from(idMap.values());
   try {
     localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(finalBrackets));
   } catch(e) {}
@@ -7919,8 +7918,9 @@ function createUscWinsOutBracket() {
   return {
     id: 'bracket_usc_wins_out_curated',
     name: 'USC Wins Out',
-    creator: 'Jake',
-    creatorId: 'creator_jake_usc',
+    creator: 'Jake Johnson',
+    creatorId: 'jake_johnson_personal',
+    creatorEmail: 'jakejohnson@usc.edu',
     notes: 'USC sweeps regular season, claims Big Ten crown, and runs the 12-team CFP table!',
     createdAt: '2026-08-26T12:00:00Z',
     mode: 'custom',
@@ -7972,23 +7972,11 @@ function createUscWinsOutBracket() {
     },
     simState: {
       teamId: 'usc',
-      userPicks: {
-        'game_usc_missouristate': 'usc',
-        'game_usc_georgiasouthern': 'usc',
-        'game_usc_purdue': 'usc',
-        'game_usc_wisconsin': 'usc',
-        'game_usc_minnesota': 'usc',
-        'game_usc_rutgers': 'usc',
-        'game_usc_michigan': 'usc',
-        'game_usc_nebraska': 'usc',
-        'game_usc_northwestern': 'usc',
-        'game_usc_iowa': 'usc',
-        'game_usc_oregon': 'usc',
-        'game_usc_notredame': 'usc'
-      },
+      userPicks: {},
+      manualScores: {},
       ccgPicks: { 'bigten': 'usc' },
       playoffPicks: { 'natty': 'usc' },
-      teamSliders: { 'usc': { talent: 92, coach: 90, offense: 94, defense: 88, discipline: 90, clutch: 92 } },
+      teamSliders: { 'usc': { qbRating: 25, groundAttack: 20, defenseHavoc: 15, turnoverLuck: 10, crowdNoise: 15 } },
       gameSliders: {}
     }
   };
@@ -8030,6 +8018,8 @@ function prepareCompactBracketPayload(b) {
     id: b.id,
     name: b.name,
     creator: b.creator || 'Prophet',
+    creatorId: b.creatorId || '',
+    creatorEmail: b.creatorEmail || '',
     notes: (b.notes || '').slice(0, 100),
     createdAt: b.createdAt || new Date().toISOString(),
     mode: b.mode || 'custom',
@@ -8063,6 +8053,7 @@ function prepareCompactBracketPayload(b) {
     simState: {
       teamId: b.simState?.teamId || getTopRankedTeamId() || 'ohiostate',
       userPicks: b.simState?.userPicks || {},
+      manualScores: b.simState?.manualScores || {},
       ccgPicks: b.simState?.ccgPicks || {},
       playoffPicks: b.simState?.playoffPicks || {},
       teamSliders: cleanTeamSliders,
@@ -8233,35 +8224,43 @@ function getCommunityBrackets() {
   const rawMy = getSavedBrackets().filter(b => b && b.id && !deletedIds.has(b.id));
   const rawCloud = getLocalCommunityBrackets().filter(b => b && b.id && !deletedIds.has(b.id));
 
-  // Strict deduplication by creator + normalized name
-  const nameMap = new Map();
+  const map = new Map();
 
-  // 1. Add curated baseline first (#1 Prophet AI, #2 USC Wins Out)
+  // 1. Curated benchmark & Jake Johnson's USC bracket
   curated.forEach(b => {
-    if (!deletedIds.has(b.id)) {
-      nameMap.set(b.name.trim().toLowerCase(), b);
+    if (b && b.id && !deletedIds.has(b.id)) {
+      map.set(b.id, b);
     }
   });
 
-  // 2. Add custom submissions
+  // 2. Any additional custom submitted community brackets
   [...rawCloud, ...rawMy].forEach(b => {
     if (!b || !b.id || !b.name) return;
     if (deletedIds.has(b.id)) return;
-    if (b.name.toLowerCase().includes('prophet ai')) return;
-    if (b.name.toLowerCase().includes('live sync test')) return;
+    if (b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_usc_wins_out_curated') return;
+    if (b.name.toLowerCase().includes('prophet ai') || b.name.toLowerCase().includes('live sync test')) return;
 
     const normKey = `${(b.creator || 'you').trim().toLowerCase()}__${b.name.trim().toLowerCase()}`;
-    const existing = nameMap.get(normKey);
+    const existing = map.get(b.id) || map.get(normKey);
     if (!existing || new Date(b.createdAt || 0) >= new Date(existing.createdAt || 0)) {
-      nameMap.set(normKey, b);
+      map.set(b.id, b);
     }
   });
 
-  const all = Array.from(nameMap.values());
+  const all = Array.from(map.values());
 
   // Attach Accuracy Scores & Sort
   all.forEach(b => {
     b.accuracy = calculateBracketAccuracy(b);
+  });
+
+  // Prophet AI and Jake Johnson's USC bracket always at top, then by accuracy
+  all.sort((a, b) => {
+    if (a.isAdminBenchmark || a.id === 'bracket_prophet_ai_baseline') return -1;
+    if (b.isAdminBenchmark || b.id === 'bracket_prophet_ai_baseline') return 1;
+    if (a.id === 'bracket_usc_wins_out_curated') return -1;
+    if (b.id === 'bracket_usc_wins_out_curated') return 1;
+    return (b.accuracy?.pts || 0) - (a.accuracy?.pts || 0);
   });
 
   return all;
@@ -8683,6 +8682,7 @@ function deleteSavedBracket(bracketId, e) {
   // Clean from all local storage buckets
   const storageKeys = [
     BRACKET_STORAGE_KEY,
+    'cfb_prophet_saved_brackets_v5',
     'cfb_prophet_saved_brackets_v4',
     'cfb_prophet_saved_brackets_v3',
     'cfb_prophet_saved_brackets_v2',
@@ -8704,6 +8704,7 @@ function deleteSavedBracket(bracketId, e) {
 
   const commKeys = [
     COMMUNITY_BRACKETS_KEY,
+    'cfb_prophet_community_brackets_v5',
     'cfb_prophet_community_brackets_v4',
     'cfb_prophet_community_brackets_v3'
   ];
