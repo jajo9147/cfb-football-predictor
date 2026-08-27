@@ -7168,13 +7168,8 @@ window.updateAuthUI = updateAuthUI;
 
 function openAuthModal() {
   updateAuthUI();
-  const loggedOutView = document.getElementById('authLoggedOutView');
-  const googleApprovalView = document.getElementById('authGoogleApprovalView');
-  const appleApprovalView = document.getElementById('authAppleApprovalView');
-  if (loggedOutView) loggedOutView.style.display = 'block';
-  if (googleApprovalView) googleApprovalView.style.display = 'none';
-  if (appleApprovalView) appleApprovalView.style.display = 'none';
-
+  hideAuthAlert();
+  switchAuthTab('oauth');
   const modal = document.getElementById('authModal');
   if (modal) modal.classList.add('open');
   document.body.classList.add('modal-open');
@@ -7188,90 +7183,159 @@ function closeAuthModal() {
 }
 window.closeAuthModal = closeAuthModal;
 
-function handleAppleSignInClick() {
-  // Check if running inside native Swift iOS App with WKWebView bridge
-  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appleSignIn) {
-    window.webkit.messageHandlers.appleSignIn.postMessage({});
+let currentAuthPasswordMode = 'signin'; // 'signin' or 'signup'
+
+function switchAuthTab(tab) {
+  const tabs = ['oauth', 'password', 'magic'];
+  tabs.forEach(t => {
+    const btn = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}Btn`);
+    const content = document.getElementById(`auth${t.charAt(0).toUpperCase() + t.slice(1)}Tab`);
+    if (btn) btn.classList.toggle('active', t === tab);
+    if (content) content.style.display = (t === tab) ? 'block' : 'none';
+  });
+  hideAuthAlert();
+}
+window.switchAuthTab = switchAuthTab;
+
+function toggleAuthPasswordMode() {
+  currentAuthPasswordMode = (currentAuthPasswordMode === 'signin') ? 'signup' : 'signin';
+  const isReg = (currentAuthPasswordMode === 'signup');
+
+  const nameGroup = document.getElementById('authRegNameGroup');
+  const teamGroup = document.getElementById('authRegTeamGroup');
+  const submitLabel = document.getElementById('supaPasswordSubmitLabel');
+  const toggleBtn = document.getElementById('togglePasswordModeBtn');
+
+  if (nameGroup) nameGroup.style.display = isReg ? 'flex' : 'none';
+  if (teamGroup) teamGroup.style.display = isReg ? 'flex' : 'none';
+  if (submitLabel) submitLabel.textContent = isReg ? 'Create Account' : 'Sign In';
+  if (toggleBtn) toggleBtn.textContent = isReg ? 'Already have an account? Sign in' : "Don't have an account? Create one";
+  hideAuthAlert();
+}
+window.toggleAuthPasswordMode = toggleAuthPasswordMode;
+
+function showAuthAlert(msg, type = 'error') {
+  const banner = document.getElementById('authAlertBanner');
+  if (!banner) return;
+  banner.className = `auth-alert-banner ${type}`;
+  let icon = '<i class="fa-solid fa-circle-exclamation"></i>';
+  if (type === 'success') icon = '<i class="fa-solid fa-circle-check"></i>';
+  else if (type === 'info') icon = '<i class="fa-solid fa-circle-info"></i>';
+  banner.innerHTML = `${icon} <span>${msg}</span>`;
+  banner.style.display = 'flex';
+}
+window.showAuthAlert = showAuthAlert;
+
+function hideAuthAlert() {
+  const banner = document.getElementById('authAlertBanner');
+  if (banner) banner.style.display = 'none';
+}
+window.hideAuthAlert = hideAuthAlert;
+
+async function handleSupabaseGoogleSignIn() {
+  hideAuthAlert();
+  if (window.CFBProphetSupabase) {
+    const res = await window.CFBProphetSupabase.signInWithGoogle();
+    if (res && res.error) {
+      showAuthAlert(res.error.message || 'Google sign-in error.', 'error');
+    }
+  }
+}
+window.handleSupabaseGoogleSignIn = handleSupabaseGoogleSignIn;
+
+async function handleSupabaseAppleSignIn() {
+  hideAuthAlert();
+  if (window.CFBProphetSupabase) {
+    const res = await window.CFBProphetSupabase.signInWithApple();
+    if (res && res.error) {
+      showAuthAlert(res.error.message || 'Apple sign-in error.', 'error');
+    }
+  }
+}
+window.handleSupabaseAppleSignIn = handleSupabaseAppleSignIn;
+
+async function handleSupabaseMagicLinkAuth(e) {
+  if (e) e.preventDefault();
+  hideAuthAlert();
+  const emailInput = document.getElementById('supaMagicEmailInput');
+  const email = emailInput ? emailInput.value.trim() : '';
+
+  if (!email || !email.includes('@')) {
+    showAuthAlert('Please enter a valid email address.', 'error');
     return;
   }
 
-  // Web / PWA 1-Tap Prepopulated Approval Sheet
-  const loggedOutView = document.getElementById('authLoggedOutView');
-  const appleApprovalView = document.getElementById('authAppleApprovalView');
-
-  if (loggedOutView && appleApprovalView) {
-    loggedOutView.style.display = 'none';
-    appleApprovalView.style.display = 'block';
-  } else {
-    handleConfirmAppleApproval();
+  showAuthAlert('Sending magic login link...', 'info');
+  if (window.CFBProphetSupabase) {
+    const res = await window.CFBProphetSupabase.signInWithMagicLink(email);
+    if (res && res.error) {
+      showAuthAlert(res.error.message || 'Error sending magic link.', 'error');
+    } else {
+      showAuthAlert('⚡ Magic login link sent! Check your inbox to sign in.', 'success');
+    }
   }
 }
-window.handleAppleSignInClick = handleAppleSignInClick;
+window.handleSupabaseMagicLinkAuth = handleSupabaseMagicLinkAuth;
 
-function handleConfirmAppleApproval() {
-  const customName = document.getElementById('appleAuthNameInput')?.value?.trim() || (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');
-  const customEmail = document.getElementById('appleAuthEmailInput')?.value?.trim() || '';
+async function handleSupabasePasswordAuth(e) {
+  if (e) e.preventDefault();
+  hideAuthAlert();
+  const email = document.getElementById('supaEmailInput')?.value?.trim();
+  const password = document.getElementById('supaPasswordInput')?.value?.trim();
+  const displayName = document.getElementById('supaNameInput')?.value?.trim();
+  const favTeam = document.getElementById('supaFavTeamSelect')?.value || 'usc';
 
-  const emailSafe = customEmail ? customEmail.toLowerCase() : `coach_${Date.now()}@privaterelay.appleid.com`;
-  const user = {
-    id: `apple_${btoa(emailSafe).replace(/=/g, '').slice(0, 16)}`,
-    displayName: customName,
-    handle: customName,
-    email: customEmail || '',
-    provider: 'apple',
-    favTeam: state.currentTeamId || 'usc',
-    createdAt: new Date().toISOString()
-  };
-  setCurrentUser(user);
-  showCustomToast(`🍎 Welcome, ${user.displayName}! Signed in with Apple ID.`);
-  closeAuthModal();
-}
-window.handleConfirmAppleApproval = handleConfirmAppleApproval;
+  if (!email || !password) {
+    showAuthAlert('Please provide both email and password.', 'error');
+    return;
+  }
 
-function handleGoogleSignInClick() {
-  const loggedOutView = document.getElementById('authLoggedOutView');
-  const googleApprovalView = document.getElementById('authGoogleApprovalView');
-  const appleApprovalView = document.getElementById('authAppleApprovalView');
-
-  if (loggedOutView && googleApprovalView) {
-    loggedOutView.style.display = 'none';
-    googleApprovalView.style.display = 'block';
-    if (appleApprovalView) appleApprovalView.style.display = 'none';
+  if (currentAuthPasswordMode === 'signup') {
+    showAuthAlert('Creating your Supabase account...', 'info');
+    if (window.CFBProphetSupabase) {
+      const res = await window.CFBProphetSupabase.signUpWithPassword(email, password, displayName, favTeam);
+      if (res && res.error) {
+        showAuthAlert(res.error.message || 'Registration failed.', 'error');
+      } else {
+        showAuthAlert('🎉 Account created! Check your email to confirm registration.', 'success');
+        setTimeout(() => closeAuthModal(), 2000);
+      }
+    }
   } else {
-    handleConfirmGoogleApproval();
+    showAuthAlert('Signing in...', 'info');
+    if (window.CFBProphetSupabase) {
+      const res = await window.CFBProphetSupabase.signInWithPassword(email, password);
+      if (res && res.error) {
+        showAuthAlert(res.error.message || 'Invalid email or password.', 'error');
+      } else {
+        showCustomToast('🎉 Signed in successfully!');
+        closeAuthModal();
+      }
+    }
   }
 }
-window.handleGoogleSignInClick = handleGoogleSignInClick;
+window.handleSupabasePasswordAuth = handleSupabasePasswordAuth;
 
-function handleConfirmGoogleApproval() {
-  const customName = document.getElementById('googleAuthNameInput')?.value?.trim() || (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');
-  const customEmail = document.getElementById('googleAuthEmailInput')?.value?.trim() || '';
-
-  const emailSafe = customEmail ? customEmail.toLowerCase() : `coach_${Date.now()}@gmail.com`;
-  const user = {
-    id: `google_${btoa(emailSafe).replace(/=/g, '').slice(0, 16)}`,
-    displayName: customName,
-    handle: customName,
-    email: customEmail || '',
-    provider: 'google',
-    favTeam: state.currentTeamId || 'usc',
-    createdAt: new Date().toISOString()
-  };
-  setCurrentUser(user);
-  showCustomToast(`🌐 Welcome, ${user.displayName}! Signed in with Google.`);
-  closeAuthModal();
+function toggleSupabaseConfigDrawer() {
+  const drawer = document.getElementById('supabaseConfigDrawer');
+  if (drawer) {
+    drawer.style.display = drawer.style.display === 'none' ? 'block' : 'none';
+  }
 }
-window.handleConfirmGoogleApproval = handleConfirmGoogleApproval;
+window.toggleSupabaseConfigDrawer = toggleSupabaseConfigDrawer;
 
-function backToAuthHome() {
-  const loggedOutView = document.getElementById('authLoggedOutView');
-  const googleApprovalView = document.getElementById('authGoogleApprovalView');
-  const appleApprovalView = document.getElementById('authAppleApprovalView');
-  if (loggedOutView) loggedOutView.style.display = 'block';
-  if (googleApprovalView) googleApprovalView.style.display = 'none';
-  if (appleApprovalView) appleApprovalView.style.display = 'none';
+function saveSupabaseConfigInputs() {
+  const url = document.getElementById('cfgSupabaseUrl')?.value?.trim();
+  const key = document.getElementById('cfgSupabaseKey')?.value?.trim();
+  if (url && key && window.CFBProphetSupabase) {
+    window.CFBProphetSupabase.setConfig(url, key);
+    showAuthAlert('✅ Supabase project connected successfully!', 'success');
+    toggleSupabaseConfigDrawer();
+  } else {
+    showAuthAlert('Please enter both Supabase URL and Anon Key.', 'error');
+  }
 }
-window.backToAuthHome = backToAuthHome;
+window.saveSupabaseConfigInputs = saveSupabaseConfigInputs;
 
 // Native Swift Bridge Callback for Apple Sign In
 window.handleAppleSignInResult = function(payload) {
@@ -7290,43 +7354,10 @@ window.handleAppleSignInResult = function(payload) {
   closeAuthModal();
 };
 
-function handleAuthFormSubmit(e) {
-  if (e) e.preventDefault();
-  const handleInput = document.getElementById('authHandleInput');
-  const pinInput = document.getElementById('authPinInput');
-  const favTeamSelect = document.getElementById('authFavTeamSelect');
-
-  const handle = handleInput ? handleInput.value.trim() : '';
-  const pin = pinInput ? pinInput.value.trim() : '';
-  const favTeam = favTeamSelect ? favTeamSelect.value : 'usc';
-
-  if (!handle || !pin) {
-    showCustomToast('⚠️ Please provide both a handle and security PIN/password.');
-    return;
-  }
-
-  const user = {
-    id: `prophet_${btoa(handle.toLowerCase() + ':' + pin).replace(/=/g, '').slice(0, 18)}`,
-    displayName: handle,
-    handle: handle,
-    email: handle.includes('@') ? handle : `${handle.toLowerCase()}@prophet.ai`,
-    provider: 'prophet',
-    favTeam: favTeam,
-    createdAt: new Date().toISOString()
-  };
-
-  setCurrentUser(user);
-  showCustomToast(`🎉 Welcome back, ${user.displayName}!`);
-  closeAuthModal();
-}
-window.handleAuthFormSubmit = handleAuthFormSubmit;
-
-function handleRegisterAccountClick() {
-  handleAuthFormSubmit();
-}
-window.handleRegisterAccountClick = handleRegisterAccountClick;
-
 function handleSignOutClick() {
+  if (window.CFBProphetSupabase) {
+    window.CFBProphetSupabase.signOut();
+  }
   setCurrentUser(null);
   showCustomToast('👋 Signed out of CFB Prophet.');
   closeAuthModal();
@@ -7411,6 +7442,10 @@ function saveCurrentProjectionAsBracket(name, creator, notes) {
   try {
     localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
   } catch (e) {}
+
+  if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.saveBracket === 'function') {
+    window.CFBProphetSupabase.saveBracket(bracketObj);
+  }
 
   return bracketObj;
 }

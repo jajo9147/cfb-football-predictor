@@ -4814,13 +4814,65 @@ body {
 
 /* Authentication Modal & Profile Card */
 #authModal .modal-dialog {
-  max-width: 440px;
+  max-width: 460px;
   width: 95vw;
-  padding: 1.5rem;
+  padding: 1.75rem;
   border-radius: var(--radius-lg);
-  background: #0B0F19;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  background: radial-gradient(120% 100% at 50% 0%, #131D31 0%, #080D1A 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(56, 189, 248, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+#authModal .modal-dialog::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #38BDF8, #818CF8, transparent);
+}
+
+.auth-tab-bar {
+  display: flex;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  margin-bottom: 1.25rem;
+  gap: 3px;
+}
+
+.auth-tab-btn {
+  flex: 1;
+  padding: 0.55rem 0.65rem;
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius-md) - 2px);
+  color: #94A3B8;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.auth-tab-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.auth-tab-btn.active {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.2));
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .apple-sign-in-btn {
@@ -4833,7 +4885,7 @@ body {
   color: #000000;
   border: none;
   border-radius: var(--radius-md);
-  padding: 0.72rem 1rem;
+  padding: 0.75rem 1rem;
   font-size: 0.92rem;
   font-weight: 700;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -4845,6 +4897,7 @@ body {
 .apple-sign-in-btn:hover {
   background: #E2E8F0;
   transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2);
 }
 
 .google-sign-in-btn {
@@ -4857,7 +4910,7 @@ body {
   color: #F8FAFC;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-md);
-  padding: 0.72rem 1rem;
+  padding: 0.75rem 1rem;
   font-size: 0.92rem;
   font-weight: 700;
   font-family: var(--font-body);
@@ -4870,6 +4923,7 @@ body {
   background: rgba(51, 65, 85, 1);
   border-color: rgba(255, 255, 255, 0.35);
   transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(66, 133, 244, 0.25);
 }
 
 .google-icon {
@@ -4883,7 +4937,7 @@ body {
   text-align: center;
   margin: 1.15rem 0;
   color: #64748B;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-family: var(--font-mono);
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -4916,21 +4970,53 @@ body {
 }
 
 .auth-input {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(10, 16, 30, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-md);
-  padding: 0.65rem 0.85rem;
+  padding: 0.7rem 0.9rem;
   color: #FFFFFF;
   font-family: var(--font-body);
   font-size: 0.88rem;
   width: 100%;
   box-sizing: border-box;
+  transition: var(--transition-fast);
 }
 
 .auth-input:focus {
   outline: none;
   border-color: #38BDF8;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.auth-alert-banner {
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.auth-alert-banner.error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #FCA5A5;
+}
+
+.auth-alert-banner.success {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #6EE7B7;
+}
+
+.auth-alert-banner.info {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #7DD3FC;
 }
 
 /* Bracket Action Toolbar in CFP Section */
