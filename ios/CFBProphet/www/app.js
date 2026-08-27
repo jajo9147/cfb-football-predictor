@@ -3,7 +3,7 @@
 // ==========================================================================
 
 const state = {
-  currentTeamId: null, // resolved dynamically on DOMContentLoaded
+  currentTeamId: 'ohiostate', // default golden standard #1 AP champion
   filter: 'all',
   teamSliders: {}, // Map of teamId -> { qbRating, groundAttack, defenseHavoc, turnoverLuck, crowdNoise }
   teamActivePresets: {}, // Map of teamId -> presetKey ('baseline', 'qb-mvp', etc.)
@@ -9144,5 +9144,14 @@ if (document.readyState === 'loading') {
 } else {
   startApp();
 }
+
+// Bulletproof rendering insurance on window load
+window.addEventListener('load', () => {
+  const grid = document.getElementById('scheduleGrid');
+  if (grid && !grid.hasChildNodes()) {
+    console.log('CFB Prophet: Ensuring schedule grid render on window load...');
+    selectTeam(state.currentTeamId || 'ohiostate');
+  }
+});
 
 
