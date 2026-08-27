@@ -7243,6 +7243,17 @@ async function handleSupabaseGoogleSignIn() {
 }
 window.handleSupabaseGoogleSignIn = handleSupabaseGoogleSignIn;
 
+async function handleSupabaseGitHubSignIn() {
+  hideAuthAlert();
+  if (window.CFBProphetSupabase) {
+    const res = await window.CFBProphetSupabase.signInWithGitHub();
+    if (res && res.error) {
+      showAuthAlert(res.error.message || 'GitHub sign-in error.', 'error');
+    }
+  }
+}
+window.handleSupabaseGitHubSignIn = handleSupabaseGitHubSignIn;
+
 async function handleSupabaseAppleSignIn() {
   hideAuthAlert();
   if (window.CFBProphetSupabase) {

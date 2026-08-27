@@ -8,8 +8,8 @@
 
   // Default / Configurable Supabase credentials
   // Users can override via localStorage or environment config
-  const DEFAULT_SUPABASE_URL = localStorage.getItem('cfb_prophet_supabase_url') || 'https://xyzcompany.supabase.co';
-  const DEFAULT_SUPABASE_KEY = localStorage.getItem('cfb_prophet_supabase_anon_key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByb2plY3QiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTY4MDAwMDAwMCwiZXhwIjoxOTk1NTU1NTU1fQ.placeholder';
+  const DEFAULT_SUPABASE_URL = localStorage.getItem('cfb_prophet_supabase_url') || 'https://lkzitjcpyyjgpolqbibe.supabase.co';
+  const DEFAULT_SUPABASE_KEY = localStorage.getItem('cfb_prophet_supabase_anon_key') || 'sb_publishable_kaBsPNpLFejytiqPqKDHrQ_99z0dExA';
 
   let supabaseClient = null;
 
@@ -20,7 +20,7 @@
         const key = localStorage.getItem('cfb_prophet_supabase_anon_key') || DEFAULT_SUPABASE_KEY;
         
         // Only initialize client if valid URL pattern
-        if (url && url.startsWith('http') && !url.includes('xyzcompany')) {
+        if (url && url.startsWith('http')) {
           supabaseClient = window.supabase.createClient(url, key, {
             auth: {
               persistSession: true,
@@ -38,7 +38,7 @@
 
   function isSupabaseConfigured() {
     const url = localStorage.getItem('cfb_prophet_supabase_url') || DEFAULT_SUPABASE_URL;
-    return !!(supabaseClient && url && url.startsWith('http') && !url.includes('xyzcompany'));
+    return !!(supabaseClient && url && url.startsWith('http'));
   }
 
   function getClient() {
@@ -127,6 +127,20 @@
     }
     return await supabaseClient.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        redirectTo: window.location.origin + window.location.pathname
+      }
+    });
+  }
+
+  // 1b. GitHub OAuth
+  async function signInWithGitHub() {
+    if (!isSupabaseConfigured()) {
+      showConfigModal('GitHub OAuth requires Supabase Project URL & Anon Key.');
+      return { error: { message: 'Supabase project not yet connected.' } };
+    }
+    return await supabaseClient.auth.signInWithOAuth({
+      provider: 'github',
       options: {
         redirectTo: window.location.origin + window.location.pathname
       }
@@ -319,6 +333,7 @@
     setConfig: setSupabaseConfig,
     showConfig: showConfigModal,
     signInWithGoogle: signInWithGoogle,
+    signInWithGitHub: signInWithGitHub,
     signInWithApple: signInWithApple,
     signInWithMagicLink: signInWithMagicLink,
     signInWithPassword: signInWithPassword,

@@ -66,7 +66,7 @@
     }
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="styles.css?v=302">
+  <link rel="stylesheet" href="styles.css?v=304">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1348,7 +1348,7 @@
           </button>
         </div>
 
-        <!-- TAB 1: 1-Tap OAuth (Google & Apple) -->
+        <!-- TAB 1: 1-Tap OAuth (Google, GitHub & Apple) -->
         <div id="authOAuthTab" class="auth-tab-content">
           <div class="social-auth-buttons" style="display: flex; flex-direction: column; gap: 0.65rem;">
             <button class="google-sign-in-btn" id="supabaseGoogleBtn" onclick="handleSupabaseGoogleSignIn()">
@@ -1359,6 +1359,10 @@
                 <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
               </svg>
               <span>Continue with Google</span>
+            </button>
+            <button class="google-sign-in-btn" id="supabaseGitHubBtn" onclick="handleSupabaseGitHubSignIn()" style="background: rgba(36, 41, 47, 0.95); border-color: rgba(255, 255, 255, 0.25);">
+              <i class="fa-brands fa-github" style="font-size: 1.15rem;"></i>
+              <span>Continue with GitHub</span>
             </button>
             <button class="apple-sign-in-btn" id="supabaseAppleBtn" onclick="handleSupabaseAppleSignIn()">
               <i class="fa-brands fa-apple" style="font-size: 1.25rem;"></i>
@@ -1558,10 +1562,10 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=303"></script>
-  <script src="qrious.min.js?v=303"></script>
-  <script src="qrcode.min.js?v=303"></script>
-  <script src="data/teams.js?v=303"></script>
-  <script src="app.js?v=303"></script>
+  <script src="supabase-client.js?v=304"></script>
+  <script src="qrious.min.js?v=304"></script>
+  <script src="qrcode.min.js?v=304"></script>
+  <script src="data/teams.js?v=304"></script>
+  <script src="app.js?v=304"></script>
 </body>
 </html>
