@@ -7237,7 +7237,10 @@ async function handleSupabaseGoogleSignIn() {
   if (window.CFBProphetSupabase) {
     const res = await window.CFBProphetSupabase.signInWithGoogle();
     if (res && res.error) {
-      showAuthAlert(res.error.message || 'Google sign-in error.', 'error');
+      const msg = res.error.message?.includes('provider') 
+        ? "Google OAuth isn't enabled in Supabase Dashboard yet (Auth -> Providers). You can sign in right now with Email & Pass or Magic Link!" 
+        : (res.error.message || 'Google sign-in error.');
+      showAuthAlert(msg, 'error');
     }
   }
 }
@@ -7248,7 +7251,10 @@ async function handleSupabaseGitHubSignIn() {
   if (window.CFBProphetSupabase) {
     const res = await window.CFBProphetSupabase.signInWithGitHub();
     if (res && res.error) {
-      showAuthAlert(res.error.message || 'GitHub sign-in error.', 'error');
+      const msg = res.error.message?.includes('provider') 
+        ? "GitHub OAuth isn't enabled in Supabase Dashboard yet (Auth -> Providers). You can sign in right now with Email & Pass or Magic Link!" 
+        : (res.error.message || 'GitHub sign-in error.');
+      showAuthAlert(msg, 'error');
     }
   }
 }
@@ -7259,7 +7265,10 @@ async function handleSupabaseAppleSignIn() {
   if (window.CFBProphetSupabase) {
     const res = await window.CFBProphetSupabase.signInWithApple();
     if (res && res.error) {
-      showAuthAlert(res.error.message || 'Apple sign-in error.', 'error');
+      const msg = res.error.message?.includes('provider') 
+        ? "Apple Sign-In isn't enabled in Supabase Dashboard yet (Auth -> Providers). You can sign in right now with Email & Pass or Magic Link!" 
+        : (res.error.message || 'Apple sign-in error.');
+      showAuthAlert(msg, 'error');
     }
   }
 }
