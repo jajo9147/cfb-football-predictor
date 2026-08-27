@@ -5836,6 +5836,19 @@ window.shareCustomScenario = async function() {
   // Update dynamic social & browser metadata
   updateSocialMetadataForChampion(champ);
 
+  // Instant Visual Feedback on button: Change text to "Copied!"
+  const btn = document.getElementById('shareScenarioBtn');
+  if (btn) {
+    const origHtml = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-check" style="color: #34D399;"></i> Copied!';
+    setTimeout(() => {
+      btn.innerHTML = origHtml;
+    }, 2500);
+  }
+
+  // Copy to clipboard immediately with multi-method safety
+  copyTextToClipboardSafe(shareUrl, `📋 Custom Scenario link copied (${champName} National Champion)!`);
+
   const shareData = {
     title: `🏆 ${champName} 2027 National Champion | CFB Prophet`,
     text: `👑 Custom Prediction: ${champFullName} wins the 2027 CFP National Championship! Check out the full scenario:`,
@@ -5850,7 +5863,7 @@ window.shareCustomScenario = async function() {
     console.warn('Champion graphic generation skipped:', err);
   }
 
-  // Native mobile share sheet with Champion Logo image attachment
+  // Native mobile share sheet if supported
   if (navigator.share && /mobile|android|iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase())) {
     try {
       if (champShareFile && navigator.canShare && navigator.canShare({ files: [champShareFile] })) {
@@ -5858,29 +5871,12 @@ window.shareCustomScenario = async function() {
           ...shareData,
           files: [champShareFile]
         });
-        showToast(`⚡ Shared custom scenario with ${champName} Champion logo!`);
-        return;
       } else {
         await navigator.share(shareData);
-        showToast(`⚡ Shared custom scenario with ${champName} Champion prediction!`);
-        return;
       }
     } catch (err) {
-      if (err.name === 'AbortError') {
-        return;
-      }
+      if (err.name === 'AbortError') return;
     }
-  }
-
-  // Clipboard fallback
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(shareUrl).then(() => {
-      showToast(`📋 Custom Scenario link copied (${champName} National Champion)!`);
-    }).catch(() => {
-      prompt('Copy this link to share your custom scenario:', shareUrl);
-    });
-  } else {
-    prompt('Copy this link to share your custom scenario:', shareUrl);
   }
 };
 
