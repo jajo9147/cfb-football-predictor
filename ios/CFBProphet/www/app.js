@@ -386,6 +386,77 @@ function renderTeamSelector() {
   });
 }
 
+function teamMatchesSearchQuery(tid, t, query) {
+  if (!t || !query) return false;
+  const q = query.trim().toLowerCase();
+  if (!q) return true;
+
+  // 1. Direct standard field matching
+  if (t.name && t.name.toLowerCase().includes(q)) return true;
+  if (t.shortName && t.shortName.toLowerCase().includes(q)) return true;
+  if (t.abbr && t.abbr.toLowerCase().includes(q)) return true;
+  if (t.mascot && t.mascot.toLowerCase().includes(q)) return true;
+  if (t.headCoach && t.headCoach.toLowerCase().includes(q)) return true;
+  if (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) return true;
+  if (t.starPlayer && t.starPlayer.toLowerCase().includes(q)) return true;
+  if (t.secondaryStar && t.secondaryStar.toLowerCase().includes(q)) return true;
+  if (t.conference && t.conference.toLowerCase().includes(q)) return true;
+  if (t.stadium && t.stadium.toLowerCase().includes(q)) return true;
+  if (t.stadiumCity && t.stadiumCity.toLowerCase().includes(q)) return true;
+  if (t.apRank && t.apRank.toLowerCase().includes(q)) return true;
+
+  // 2. Comprehensive Aliases & Nicknames
+  const aliases = (window.TEAM_SEARCH_ALIASES && window.TEAM_SEARCH_ALIASES[tid]) || (typeof TEAM_SEARCH_ALIASES !== 'undefined' ? TEAM_SEARCH_ALIASES[tid] : null) || [];
+  for (let i = 0; i < aliases.length; i++) {
+    const a = aliases[i].toLowerCase();
+    if (a === q || a.includes(q) || q.includes(a)) {
+      return true;
+    }
+  }
+
+  // 3. Acronym / First letters match (e.g. "University of Colorado" -> "cu", "Texas A&M" -> "tamu")
+  const normQ = q.replace(/[^a-z0-9]/g, '');
+  if (normQ === 'cu' && (tid === 'colorado' || t.name.toLowerCase().includes('colorado'))) return true;
+  if (normQ === 'ou' && (tid === 'oklahoma' || t.name.toLowerCase().includes('oklahoma'))) return true;
+  if (normQ === 'ut' && (tid === 'texas' || tid === 'tennessee' || t.name.toLowerCase().includes('texas') || t.name.toLowerCase().includes('tennessee'))) return true;
+  if (normQ === 'iu' && (tid === 'indiana' || t.name.toLowerCase().includes('indiana'))) return true;
+  if (normQ === 'ku' && (tid === 'kansas' || t.name.toLowerCase().includes('kansas'))) return true;
+  if (normQ === 'bu' && (tid === 'baylor' || t.name.toLowerCase().includes('baylor'))) return true;
+  if (normQ === 'mu' && (tid === 'missouri' || t.name.toLowerCase().includes('missouri'))) return true;
+  if (normQ === 'au' && (tid === 'auburn' || t.name.toLowerCase().includes('auburn'))) return true;
+  if (normQ === 'ua' && (tid === 'alabama' || tid === 'arizona' || t.name.toLowerCase().includes('alabama') || t.name.toLowerCase().includes('arizona'))) return true;
+  if (normQ === 'uf' && (tid === 'florida' || t.name.toLowerCase().includes('florida'))) return true;
+  if (normQ === 'uk' && (tid === 'kentucky' || t.name.toLowerCase().includes('kentucky'))) return true;
+  if (normQ === 'um' && (tid === 'miami' || tid === 'michigan' || t.name.toLowerCase().includes('miami') || t.name.toLowerCase().includes('michigan'))) return true;
+  if (normQ === 'uga' && (tid === 'georgia' || t.name.toLowerCase().includes('georgia'))) return true;
+  if (normQ === 'lsu' && (tid === 'lsu' || t.name.toLowerCase().includes('lsu'))) return true;
+  if (normQ === 'fsu' && (tid === 'floridastate' || t.name.toLowerCase().includes('florida state'))) return true;
+  if (normQ === 'psu' && (tid === 'pennstate' || t.name.toLowerCase().includes('penn state'))) return true;
+  if (normQ === 'osu' && (tid === 'ohiostate' || tid === 'oklahomastate' || t.name.toLowerCase().includes('ohio state') || t.name.toLowerCase().includes('oklahoma state'))) return true;
+  if (normQ === 'tamu' && (tid === 'texasam' || t.name.toLowerCase().includes('texas a&m'))) return true;
+  if (normQ === 'ttu' && (tid === 'texastech' || t.name.toLowerCase().includes('texas tech'))) return true;
+  if (normQ === 'usc' && (tid === 'usc' || tid === 'southcarolina' || t.name.toLowerCase().includes('southern cal') || t.name.toLowerCase().includes('south carolina'))) return true;
+  if (normQ === 'nd' && (tid === 'notredame' || t.name.toLowerCase().includes('notre dame'))) return true;
+  if (normQ === 'byu' && (tid === 'byu' || t.name.toLowerCase().includes('brigham young'))) return true;
+  if (normQ === 'tcu' && (tid === 'tcu' || t.name.toLowerCase().includes('texas christian'))) return true;
+  if (normQ === 'smu' && (tid === 'smu' || t.name.toLowerCase().includes('southern methodist'))) return true;
+  if (normQ === 'ucf' && (tid === 'ucf' || t.name.toLowerCase().includes('central florida'))) return true;
+  if (normQ === 'bsu' && (tid === 'boisestate' || t.name.toLowerCase().includes('boise state'))) return true;
+  if (normQ === 'isu' && (tid === 'iowastate' || t.name.toLowerCase().includes('iowa state'))) return true;
+  if (normQ === 'ksu' && (tid === 'kansasstate' || t.name.toLowerCase().includes('kansas state'))) return true;
+  if (normQ === 'asu' && (tid === 'arizonastate' || t.name.toLowerCase().includes('arizona state'))) return true;
+  if (normQ === 'wvu' && (tid === 'westvirginia' || t.name.toLowerCase().includes('west virginia'))) return true;
+  if (normQ === 'unc' && (tid === 'northcarolina' || t.name.toLowerCase().includes('north carolina'))) return true;
+  if (normQ === 'ncsu' && (tid === 'ncstate' || t.name.toLowerCase().includes('nc state'))) return true;
+  if (normQ === 'vt' && (tid === 'virginiatech' || t.name.toLowerCase().includes('virginia tech'))) return true;
+  if (normQ === 'gt' && (tid === 'georgiatech' || t.name.toLowerCase().includes('georgia tech'))) return true;
+  if (normQ === 'uva' && (tid === 'virginia' || t.name.toLowerCase().includes('virginia'))) return true;
+  if (normQ === 'bc' && (tid === 'bostoncollege' || t.name.toLowerCase().includes('boston college'))) return true;
+
+  return false;
+}
+window.teamMatchesSearchQuery = teamMatchesQuery = teamMatchesSearchQuery;
+
 function initTeamSearch() {
   const input = document.getElementById('teamSearchInput');
   const clearBtn = document.getElementById('teamSearchClearBtn');
@@ -411,14 +482,7 @@ function initTeamSearch() {
       const tid = btn.dataset.teamid;
       const t = TEAMS_DATABASE[tid];
       if (!t) return;
-      const match = t.name.toLowerCase().includes(q) ||
-                    t.shortName.toLowerCase().includes(q) ||
-                    t.abbr.toLowerCase().includes(q) ||
-                    (t.mascot && t.mascot.toLowerCase().includes(q)) ||
-                    t.headCoach.toLowerCase().includes(q) ||
-                    (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) ||
-                    t.conference.toLowerCase().includes(q) ||
-                    t.apRank.toLowerCase().includes(q);
+      const match = teamMatchesSearchQuery(tid, t, q);
 
       btn.style.display = match ? '' : 'none';
       if (match && !firstMatchedKey) firstMatchedKey = tid;
@@ -427,14 +491,7 @@ function initTeamSearch() {
     // Populate the rich dropdown
     const matchedTeams = Object.keys(TEAMS_DATABASE).filter(tid => {
       const t = TEAMS_DATABASE[tid];
-      return t.name.toLowerCase().includes(q) ||
-             t.shortName.toLowerCase().includes(q) ||
-             t.abbr.toLowerCase().includes(q) ||
-             (t.mascot && t.mascot.toLowerCase().includes(q)) ||
-             t.headCoach.toLowerCase().includes(q) ||
-             (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) ||
-             t.conference.toLowerCase().includes(q) ||
-             t.apRank.toLowerCase().includes(q);
+      return teamMatchesSearchQuery(tid, t, q);
     });
 
     if (matchedTeams.length === 0) {
@@ -485,10 +542,7 @@ function initTeamSearch() {
       const q = input.value.trim().toLowerCase();
       const matched = Object.keys(TEAMS_DATABASE).find(tid => {
         const t = TEAMS_DATABASE[tid];
-        return t.name.toLowerCase().includes(q) ||
-               t.shortName.toLowerCase().includes(q) ||
-               t.abbr.toLowerCase().includes(q) ||
-               t.headCoach.toLowerCase().includes(q);
+        return teamMatchesSearchQuery(tid, t, q);
       });
       if (matched) {
         selectTeam(matched);
@@ -6449,17 +6503,20 @@ function renderVaultWeekSelector() {
   strip.style.display = 'flex';
 
   strip.innerHTML = `
-    <div class="vault-week-filter-bar">
-      <div class="vault-week-filter-label">
-        <i class="fa-solid fa-filter" style="color: #38BDF8;"></i>
-        <span>WEEK FILTER:</span>
+    <div class="vault-week-filter-bar compact-filter">
+      <div class="vault-week-filter-left">
+        <i class="fa-solid fa-calendar-days" style="color: #38BDF8;"></i>
+        <span>SLATE:</span>
       </div>
-      <div class="vault-week-buttons-wrap">
-        ${ALL_WEEKS_LIST.map(w => `
-          <button class="vault-week-pill-btn ${state.selectedVaultWeek === w.key ? 'active' : ''}" onclick="selectVaultWeek('${w.key}')" title="${w.label}">
-            ${w.key === 'all' ? 'All Weeks' : (w.key === 'CCG' ? 'CCG' : (w.key === 'CFP' ? 'CFP' : w.key))}
-          </button>
-        `).join('')}
+      <div class="vault-week-select-wrapper">
+        <select id="vaultWeekSelectDropdown" class="vault-week-dropdown" onchange="selectVaultWeek(this.value)" aria-label="Select Game Slate Week">
+          ${ALL_WEEKS_LIST.map(w => `
+            <option value="${w.key}" ${state.selectedVaultWeek === w.key ? 'selected' : ''}>
+              ${w.key === 'all' ? '🏆 Full 2026 Season Standings' : (w.key === 'CCG' ? '🏆 Conference Championship Slate' : (w.key === 'CFP' ? '🏈 12-Team CFP Playoff Bracket' : `${w.label} Slate Predictions`))}
+            </option>
+          `).join('')}
+        </select>
+        <i class="fa-solid fa-chevron-down vault-dropdown-chevron"></i>
       </div>
     </div>
   `;
@@ -6825,6 +6882,7 @@ function saveCurrentProjectionAsBracket(name, creator, notes) {
     name: (name && name.trim()) ? name.trim() : `${champTeam.shortName || 'CFB'} Championship Projection`,
     creator: creatorName,
     creatorId: creatorId,
+    creatorEmail: currentUser ? (currentUser.email || '') : '',
     notes: (notes && notes.trim()) ? notes.trim() : 'Custom 2026 CFP Simulation',
     createdAt: new Date().toISOString(),
     mode: isSlidersCustom() ? 'custom' : 'baseline',
@@ -6899,51 +6957,60 @@ function addDeletedBracketId(bracketId) {
 }
 
 function getSavedBrackets() {
+  const currentUser = getCurrentUser();
+  if (!currentUser) return [];
+
+  const userDisplayName = (currentUser.displayName || '').trim().toLowerCase();
+  const userHandle = (currentUser.handle || '').trim().toLowerCase();
+  const userEmail = (currentUser.email || '').trim().toLowerCase();
+
   let myBrackets = [];
   try {
     const raw = localStorage.getItem(BRACKET_STORAGE_KEY);
     if (raw) myBrackets = JSON.parse(raw) || [];
   } catch (e) {}
 
-  // Also include any community brackets created by the user
-  const currentUser = getCurrentUser();
-  const userHandle = (currentUser?.displayName || currentUser?.handle || localStorage.getItem('cfb_prophet_user_handle') || '').trim().toLowerCase();
-  
-  if (userHandle) {
-    try {
-      const rawComm = localStorage.getItem(COMMUNITY_BRACKETS_KEY);
-      if (rawComm) {
-        const commList = JSON.parse(rawComm) || [];
-        commList.forEach(b => {
-          if (!b || !b.name || !b.id) return;
-          const cr = (b.creator || '').trim().toLowerCase();
-          const matchesUser = (currentUser && b.creatorId && b.creatorId === currentUser.id) ||
-                              (cr && userHandle && (cr === userHandle || userHandle.includes(cr) || cr.includes(userHandle))) ||
-                              (cr === 'jake' || cr === 'jake johnson' || cr === 'you');
-          if (matchesUser) {
-            myBrackets.push(b);
-          }
-        });
-      }
-    } catch(e) {}
-  }
+  // Filter local storage to only brackets that belong to this logged in user
+  myBrackets = myBrackets.filter(b => {
+    if (!b || !b.id) return false;
+    const cr = (b.creator || '').trim().toLowerCase();
+    const crEmail = (b.creatorEmail || '').trim().toLowerCase();
+    return (b.creatorId && b.creatorId === currentUser.id) ||
+           (cr && (cr === userDisplayName || cr === userHandle || userDisplayName.includes(cr))) ||
+           (crEmail && userEmail && crEmail === userEmail);
+  });
 
-  // Filter out any explicitly deleted brackets and duplicate Prophet AI entries
+  // Also include matching community brackets
+  try {
+    const rawComm = localStorage.getItem(COMMUNITY_BRACKETS_KEY);
+    if (rawComm) {
+      const commList = JSON.parse(rawComm) || [];
+      commList.forEach(b => {
+        if (!b || !b.name || !b.id) return;
+        const cr = (b.creator || '').trim().toLowerCase();
+        const crEmail = (b.creatorEmail || '').trim().toLowerCase();
+        const matchesUser = (b.creatorId && b.creatorId === currentUser.id) ||
+                            (cr && (cr === userDisplayName || cr === userHandle || userDisplayName.includes(cr))) ||
+                            (crEmail && userEmail && crEmail === userEmail);
+        if (matchesUser) {
+          myBrackets.push(b);
+        }
+      });
+    }
+  } catch(e) {}
+
+  // Filter out deleted IDs and duplicate benchmarks
   const deletedIds = getDeletedBracketIds();
   myBrackets = myBrackets.filter(b => b && b.id && b.id !== 'bracket_prophet_ai_baseline' && !deletedIds.has(b.id));
 
-  // Strict deduplication by normalized name
-  const nameMap = new Map();
+  // Deduplicate by normalized ID
+  const idMap = new Map();
   myBrackets.forEach(b => {
-    if (!b || !b.name) return;
-    const normName = b.name.trim().toLowerCase();
-    const existing = nameMap.get(normName);
-    if (!existing || new Date(b.createdAt || 0) >= new Date(existing.createdAt || 0)) {
-      nameMap.set(normName, b);
-    }
+    if (!b || !b.id) return;
+    idMap.set(b.id, b);
   });
 
-  return Array.from(nameMap.values());
+  return Array.from(idMap.values());
 }
 
 
@@ -7399,6 +7466,25 @@ function renderSavedBracketsVault() {
 
   const isWeekly = state.activeVaultTab === 'weekly';
   const isCommunity = state.activeVaultTab === 'community' || isWeekly;
+  const currentUser = getCurrentUser();
+
+  // If user clicked "My Saved" tab while logged out, prompt them to sign in
+  if (state.activeVaultTab === 'mine' && !currentUser) {
+    grid.innerHTML = `
+      <div class="empty-vault-state">
+        <i class="fa-solid fa-user-lock" style="font-size: 2.4rem; color: #38BDF8; margin-bottom: 0.75rem;"></i>
+        <h3 style="color: #F8FAFC; font-size: 1.15rem;">Sign In to View Your Picks</h3>
+        <p style="color: #94A3B8; max-width: 420px; margin: 0.5rem auto 1.25rem; line-height: 1.5; font-size: 0.88rem;">
+          Sign in with Google, Apple, or your Coach Account to save, manage, and sync your predictions across all your devices.
+        </p>
+        <button class="save-bracket-btn" onclick="openAuthModal()" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); padding: 0.65rem 1.35rem; font-size: 0.9rem; margin: 0 auto; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In / Register
+        </button>
+      </div>
+    `;
+    return;
+  }
+
   const brackets = isCommunity ? getCommunityBrackets() : getSavedBrackets();
 
   if (brackets.length === 0) {
@@ -7483,19 +7569,18 @@ function renderSavedBracketsVault() {
     const champ = b.champion || { name: 'Champion', shortName: 'Champs', logoUrl: '' };
     const isActive = state.activeSavedBracketId === b.id;
     const isMine = myBracketIds.has(b.id);
-    const currentUser = getCurrentUser();
-    const localHandle = (localStorage.getItem('cfb_prophet_user_handle') || '').trim().toLowerCase();
-    const userHandle = (currentUser?.displayName || currentUser?.handle || '').trim().toLowerCase();
+    
+    const userDisplayName = (currentUser?.displayName || '').trim().toLowerCase();
+    const userHandle = (currentUser?.handle || '').trim().toLowerCase();
+    const userEmail = (currentUser?.email || '').trim().toLowerCase();
     const creatorLower = (b.creator || '').trim().toLowerCase();
+    const creatorEmail = (b.creatorEmail || '').trim().toLowerCase();
 
-    // Generous ownership matching: matches current user handle, local handle, or any custom bracket created on this device
-    const isOwner = !isAiBenchmark && (
-      isMine ||
-      (currentUser && b.creatorId && b.creatorId === currentUser.id) ||
-      (creatorLower && userHandle && (creatorLower === userHandle || userHandle.includes(creatorLower) || creatorLower.includes(userHandle))) ||
-      (creatorLower && localHandle && (creatorLower === localHandle || localHandle.includes(creatorLower) || creatorLower.includes(localHandle))) ||
-      (creatorLower === 'jake' || creatorLower === 'jake johnson' || creatorLower === 'you' || creatorLower === 'coach') ||
-      (!b.isAdminBenchmark && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_usc_wins_out_curated')
+    // Strict Ownership: ONLY active when user is signed in AND is the genuine creator
+    const isOwner = !isAiBenchmark && !!currentUser && (
+      (b.creatorId && b.creatorId === currentUser.id) ||
+      (creatorEmail && userEmail && creatorEmail === userEmail) ||
+      (creatorLower && (creatorLower === userDisplayName || creatorLower === userHandle))
     );
     const creatorLabel = isOwner ? 'You' : (b.creator || 'Prophet');
 

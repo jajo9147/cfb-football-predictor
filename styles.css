@@ -4901,6 +4901,77 @@ body.modal-open {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+.vault-week-filter-bar.compact-filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-md);
+  padding: 0.45rem 0.85rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.vault-week-filter-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #38BDF8;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.vault-week-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 420px;
+}
+
+.vault-week-dropdown {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: var(--radius-sm);
+  color: #F8FAFC;
+  font-family: var(--font-display, inherit);
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 0.42rem 2.2rem 0.42rem 0.75rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.vault-week-dropdown:hover,
+.vault-week-dropdown:focus {
+  background: rgba(30, 41, 59, 1);
+  border-color: #38BDF8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.vault-week-dropdown option {
+  background: #0F172A;
+  color: #F8FAFC;
+  font-weight: 600;
+}
+
+.vault-dropdown-chevron {
+  position: absolute;
+  right: 0.75rem;
+  pointer-events: none;
+  color: #38BDF8;
+  font-size: 0.75rem;
+}
+
 .vault-week-filter-label {
   font-family: var(--font-mono);
   font-size: 0.76rem;

@@ -1,6 +1,42 @@
 // ==========================================================================
-// 2026 COLLEGE FOOTBALL PREDICTOR - MASTER TEAMS DATABASE
+// 2026 COLLEGE FOOTBALL PREDICTOR - MASTER TEAMS DATABASE & SEARCH ALIASES
 // ==========================================================================
+
+var TEAM_SEARCH_ALIASES = {
+  "colorado": ["cu", "university of colorado", "colorado", "colorado buffaloes", "buffs", "buffaloes", "coach prime", "deion", "deion sanders", "boulder", "folsom", "juju lewis"],
+  "byu": ["byu", "brigham young", "brigham young university", "cougars", "cosmo", "provo", "the y"],
+  "texas": ["ut", "university of texas", "texas", "texas longhorns", "longhorns", "horns", "austin", "hook em", "bevo", "arch", "arch manning", "sark", "steve sarkisian"],
+  "michigan": ["um", "u of m", "university of michigan", "michigan", "michigan wolverines", "wolverines", "ann arbor", "go blue", "big house", "sherrone moore"],
+  "ohiostate": ["osu", "ohio state", "the ohio state", "the ohio state university", "tosu", "buckeyes", "ohio state buckeyes", "columbus", "ryan day", "the shoe", "brutus"],
+  "georgia": ["uga", "georgia", "university of georgia", "georgia bulldogs", "bulldogs", "dawgs", "athens", "kirby", "kirby smart", "between the hedges", "sanford stadium", "sic em"],
+  "alabama": ["bama", "alabama", "university of alabama", "alabama crimson tide", "crimson tide", "tide", "roll tide", "tuscaloosa", "ua", "kalen deboer", "bryant denny"],
+  "oregon": ["uo", "oregon", "university of oregon", "oregon ducks", "ducks", "scoducks", "eugene", "autzen", "dan lanning", "nike", "phil knight"],
+  "pennstate": ["psu", "penn state", "pennsylvania state", "penn state nittany lions", "nittany lions", "lions", "we are", "happy valley", "state college", "james franklin", "white out", "beaver stadium"],
+  "notredame": ["nd", "notre dame", "university of notre dame", "notre dame fighting irish", "fighting irish", "irish", "south bend", "marcus freeman", "touchdown jesus", "golden domers"],
+  "lsu": ["lsu", "louisiana state", "louisiana state university", "lsu tigers", "tigers", "bayou bengals", "geaux tigers", "baton rouge", "death valley", "brian kelly", "mike the tiger"],
+  "tennessee": ["ut", "tennessee", "university of tennessee", "tennessee volunteers", "volunteers", "vols", "rocky top", "knoxville", "josh heupel", "neyland stadium", "smokey"],
+  "indiana": ["iu", "indiana", "indiana university", "indiana hoosiers", "hoosiers", "bloomington", "curt cignetti", "memorial stadium"],
+  "miami": ["the u", "canes", "hurricanes", "miami", "miami hurricanes", "university of miami", "coral gables", "mario cristobal", "hard rock stadium", "turnover chain"],
+  "texasam": ["tamu", "a&m", "texas a&m", "texas a and m", "texas a&m aggies", "aggies", "gig em", "college station", "kyle field", "12th man", "mike elko", "reveille"],
+  "olemiss": ["ole miss", "mississippi", "university of mississippi", "ole miss rebels", "rebels", "hotty toddy", "oxford", "lane kiffin", "the grove", "vaught hemingway"],
+  "oklahoma": ["ou", "oklahoma", "university of oklahoma", "oklahoma sooners", "sooners", "boomer sooner", "norman", "brent venables", "sooner schooner", "owen field"],
+  "boisestate": ["bsu", "boise state", "boise", "boise state broncos", "broncos", "blue turf", "albertsons stadium", "spencer danielson", "ashton jeanty"],
+  "usc": ["usc", "southern cal", "southern california", "university of southern california", "usc trojans", "trojans", "fight on", "los angeles", "la", "lincoln riley", "la coliseum", "traveler"],
+  "floridastate": ["fsu", "florida state", "florida state university", "florida state seminoles", "seminoles", "noles", "tallahassee", "mike norvell", "doak campbell", "osceola", "renegade", "war chant"],
+  "clemson": ["clemson", "clemson university", "clemson tigers", "tigers", "dabo", "dabo swinney", "death valley", "howard rock", "memorial stadium"],
+  "smu": ["smu", "southern methodist", "southern methodist university", "smu mustangs", "mustangs", "pony up", "dallas", "rhett lashlee", "ford stadium", "peruna"],
+  "texastech": ["ttu", "tech", "texas tech", "texas tech university", "texas tech red raiders", "red raiders", "wreck em", "guns up", "lubbock", "joey mcguire", "jones at&t stadium", "raider red"],
+  "utah": ["utah", "university of utah", "utah utes", "utes", "u of u", "salt lake city", "kyle whittingham", "rice eccles", "swoop"],
+  "iowa": ["iowa", "university of iowa", "iowa hawkeyes", "hawkeyes", "iowa city", "kirk ferentz", "kinnick stadium", "kinnick wave", "herky"],
+  "missouri": ["mizzou", "missouri", "university of missouri", "missouri tigers", "tigers", "columbia", "eli drinkwitz", "faurot field", "truman"],
+  "arizona": ["arizona", "university of arizona", "arizona wildcats", "u of a", "wildcats", "bear down", "tucson", "brent brennan", "arizona stadium", "wilbur"],
+  "washington": ["uw", "washington", "university of washington", "washington huskies", "huskies", "u-dub", "seattle", "jedd fisch", "husky stadium", "sailgating", "harry the husky"],
+  "houston": ["houston", "university of houston", "houston cougars", "uh", "cougars", "coogs", "third ward", "willie fritz", "tdecu stadium", "shasta"],
+  "louisville": ["louisville", "university of louisville", "louisville cardinals", "u of l", "cards", "cardinals", "jeff brohm", "l&n stadium", "louie the cardinal"]
+};
+if (typeof window !== 'undefined') {
+  window.TEAM_SEARCH_ALIASES = TEAM_SEARCH_ALIASES;
+}
 
 var TEAMS_DATABASE = {
   "byu": {
