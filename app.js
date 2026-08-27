@@ -267,7 +267,48 @@ function formatKickoffDateLocal(kickoffDate) {
   }
 }
 
+function formatGameDateWithTime(game) {
+  if (!game) return '';
+  const rawDate = game.date || '';
+  
+  // Explicit kickoff time on the game
+  let timeStr = game.kickoffTime || game.time;
+  
+  // Canonical kickoff times for marquee 2026 games if not explicitly set
+  if (!timeStr) {
+    const opp = (game.oppAbbr || game.opponent || '').toUpperCase();
+    const riv = (game.rivalryName || '').toUpperCase();
+    const week = (game.week || '').toUpperCase();
+
+    if (/RED RIVER/i.test(riv) || opp === 'OU') {
+      timeStr = '3:30 PM ET';
+    } else if (/THE GAME/i.test(riv) || (opp === 'MICH' && week.includes('14'))) {
+      timeStr = '12:00 PM ET';
+    } else if (/LONE STAR/i.test(riv) || opp === 'TAMU') {
+      timeStr = '7:30 PM ET';
+    } else if (/IRON BOWL/i.test(riv) || opp === 'AUB') {
+      timeStr = '3:30 PM ET';
+    } else if (game.isMarquee && (week.includes('1') || week.includes('2'))) {
+      timeStr = '12:00 PM ET';
+    } else if (game.isMarquee) {
+      timeStr = '7:30 PM ET';
+    } else {
+      timeStr = 'TBD';
+    }
+  }
+
+  if (rawDate) {
+    return `${rawDate} • ${timeStr}`;
+  }
+  return timeStr;
+}
+window.formatGameDateWithTime = formatGameDateWithTime;
+
 function updateCountdownTickerForActiveTeam() {
+  const badgeEl = document.getElementById('countdownBadge');
+  const textEl = document.getElementById('countdownText');
+  if (!badgeEl && !textEl) return;
+
   const teamId = state.currentTeamId || 'texas';
   const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
   const kickoffInfo = TEAM_OPENER_KICKOFFS[teamId] || { utc: '2026-09-05T16:00:00Z', tv: 'ABC / ESPN' };
@@ -277,9 +318,6 @@ function updateCountdownTickerForActiveTeam() {
 
   const localFormatted = formatKickoffDateLocal(kickoffDate);
   const tzAbbr = getUserTimezoneAbbr();
-
-  const badgeEl = document.getElementById('countdownBadge');
-  const textEl = document.getElementById('countdownText');
 
   if (diff <= 0) {
     if (textEl) textEl.innerText = `${team.abbr} • 🔴 LIVE NOW`;
@@ -301,9 +339,6 @@ window.updateCountdownTickerForActiveTeam = updateCountdownTickerForActiveTeam;
 
 function startCountdownTicker() {
   updateCountdownTickerForActiveTeam();
-  if (!window._countdownInterval) {
-    window._countdownInterval = setInterval(updateCountdownTickerForActiveTeam, 30000);
-  }
 }
 
 
@@ -1213,7 +1248,7 @@ function renderSchedule() {
 
     card.innerHTML = `
       <div class="card-top">
-        <span>${game.week} • ${game.date}</span>
+        <span>${game.week} • ${formatGameDateWithTime(game)}</span>
         <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
           ${vegasEdge?.badgeHtml || ''}
           ${badgeHtml}
@@ -1832,7 +1867,8 @@ function openSimModal(game) {
 
     const stadiumEl = document.getElementById('modalStadiumLocation');
     if (stadiumEl) {
-      stadiumEl.innerText = `${game.stadium || 'Neutral Site Stadium'} • ${game.location || ''}`;
+      const dtStr = formatGameDateWithTime(game);
+      stadiumEl.innerText = `${dtStr ? dtStr + ' • ' : ''}${game.stadium || 'Stadium'}${game.location ? ' • ' + game.location : ''}`;
     }
 
     // Scoreboard
