@@ -2,7 +2,7 @@
 // CFB PROPHET PWA SERVICE WORKER (Network-First with Offline Fallback)
 // ==========================================================================
 
-const CACHE_NAME = 'cfb-prophet-cache-v20260826-v230';
+const CACHE_NAME = 'cfb-prophet-cache-v20260826-v240';
 const OFFLINE_URL = './index.html';
 
 const ASSETS_TO_CACHE = [

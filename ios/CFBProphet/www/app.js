@@ -643,6 +643,13 @@ function selectTeam(teamId) {
   state.currentTeamId = teamId;
   const team = TEAMS_DATABASE[teamId];
 
+  // If user actively selects another team, clean any lingering scenario hash so fresh team baseline is used
+  if (window.location.hash && (window.location.hash.includes('s=') || window.location.hash.includes('sim='))) {
+    try {
+      history.replaceState(null, document.title, window.location.pathname + (window.location.search ? window.location.search : ''));
+    } catch (e) {}
+  }
+
   // Update Body Theme Class
   document.body.className = team.themeClass || `theme-${teamId}`;
 
@@ -9033,10 +9040,10 @@ window.dismissChallengeBanner = dismissChallengeBanner;
 function startApp() {
   console.log('CFB Prophet Pro: Initializing application state...');
 
-  // 1. Determine Default Active Team and Render Games IMMEDIATELY
+  // 1. Determine Default Active Team and Render Games IMMEDIATELY (Ohio State #1 AP Golden Standard)
   const urlParams = new URLSearchParams(window.location.search);
   const paramTeam = urlParams.get('team') ? urlParams.get('team').toLowerCase().trim() : null;
-  const defaultTeamId = (paramTeam && TEAMS_DATABASE[paramTeam]) ? paramTeam : (getTopRankedTeamId() || 'ohiostate');
+  const defaultTeamId = (paramTeam && TEAMS_DATABASE[paramTeam]) ? paramTeam : 'ohiostate';
 
   try {
     renderTeamSelector();
@@ -9044,7 +9051,7 @@ function startApp() {
     selectTeam(defaultTeamId);
   } catch (err) {
     console.error('Error selecting initial team:', err);
-    try { selectTeam(getTopRankedTeamId() || 'ohiostate'); } catch (e) {}
+    try { selectTeam('ohiostate'); } catch (e) {}
   }
 
   // 2. Initialize secondary subsystems safely
