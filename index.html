@@ -165,23 +165,17 @@
   <!-- Main Navigation -->
   <nav class="navbar">
     <div class="container nav-container">
-      <div class="nav-brand-group">
-        <a href="#" class="brand">
-          <div class="logo-badge" id="navLogoBadge">
-            <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas Longhorns" class="nav-logo-img">
-          </div>
-          <div class="brand-text">
-            <span class="brand-title">CFB PROPHET</span>
-            <span class="brand-subtitle">COLLEGE FOOTBALL AI SIMULATOR</span>
-          </div>
-        </a>
-        <button class="vault-btn-badge mobile-nav-vault-btn" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="Submit your picks and view weekly standings">
-          <i class="fa-solid fa-paper-plane" style="color: #10B981;"></i>
-          <span>Submit Picks & Standings</span>
-        </button>
-      </div>
-      <div class="nav-actions-group">
-        <button class="vault-btn-badge desktop-nav-vault-btn" onclick="openBracketVaultModal()" title="Submit your picks and view weekly standings">
+      <a href="#" class="brand">
+        <div class="logo-badge" id="navLogoBadge">
+          <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas Longhorns" class="nav-logo-img">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">CFB PROPHET</span>
+          <span class="brand-subtitle">COLLEGE FOOTBALL AI SIMULATOR</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <button class="vault-btn-badge" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="Submit your picks and view weekly standings">
           <i class="fa-solid fa-paper-plane" style="color: #10B981;"></i>
           <span>Submit Picks & Standings</span>
         </button>
@@ -318,6 +312,8 @@
         <span class="kpi-value" id="kpiMonteCarloRuns">10,000 SIMS</span>
         <span class="kpi-sub" id="kpiMonteCarloTopOutcome">11-1 (44.2% Prob)</span>
       </div>
+    </section>
+
     <!-- CFB AI Simulation Tuning Section (Compact Filter & Collapsible Sliders) -->
     <section class="tuning-section" id="tuningSection">
       <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.6rem;">
