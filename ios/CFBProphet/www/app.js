@@ -8407,32 +8407,6 @@ window.triggerNativeShare = triggerNativeShare;
 
 
 // ==========================================================================
-// APPLICATION LAUNCHER (BOTTOM TO GUARANTEE ALL MODULES ARE INITIALIZED)
-// ==========================================================================
-
-function startApp() {
-  updateAuthUI();
-  autoPublishAllLocalSavedBrackets();
-  syncCommunityBracketsFromCloud();
-  
-  // Instant Auto-Sync when switching back to tab/phone screen
-  window.addEventListener('focus', () => {
-    autoPublishAllLocalSavedBrackets();
-    syncCommunityBracketsFromCloud();
-  });
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      autoPublishAllLocalSavedBrackets();
-      syncCommunityBracketsFromCloud();
-    }
-  });
-
-  syncCommunityBracketsFromCloud();
-  initPwaServiceWorker();
-  renderTeamSelector();
-  initTeamSearch();
-
-// ==========================================================================
 // VIRAL GROWTH, CHAOS SIMULATOR & CHALLENGE ENGINE
 // ==========================================================================
 
@@ -8630,8 +8604,31 @@ function dismissChallengeBanner() {
 }
 window.dismissChallengeBanner = dismissChallengeBanner;
 
+// ==========================================================================
+// APPLICATION LAUNCHER (BOTTOM TO GUARANTEE ALL MODULES ARE INITIALIZED)
+// ==========================================================================
+
 function startApp() {
   console.log('CFB Prophet Pro: Initializing application state...');
+  updateAuthUI();
+  autoPublishAllLocalSavedBrackets();
+  syncCommunityBracketsFromCloud();
+  
+  // Instant Auto-Sync when switching back to tab/phone screen
+  window.addEventListener('focus', () => {
+    autoPublishAllLocalSavedBrackets();
+    syncCommunityBracketsFromCloud();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      autoPublishAllLocalSavedBrackets();
+      syncCommunityBracketsFromCloud();
+    }
+  });
+
+  initPwaServiceWorker();
+  renderTeamSelector();
+  initTeamSearch();
 
   // Default to URL query param (?team=texas, ?team=michigan, etc.) or #1 AP ranked team
   const urlParams = new URLSearchParams(window.location.search);
