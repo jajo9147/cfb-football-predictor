@@ -7093,7 +7093,7 @@ function renderAll30TeamsVaultMatrix() {
 // USER AUTHENTICATION & PROPHET CREATOR ID SYSTEM
 // ==========================================================================
 
-const AUTH_STORAGE_KEY = 'cfb_prophet_auth_user_v3';
+const AUTH_STORAGE_KEY = 'cfb_prophet_auth_user_v4';
 const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v4';
 const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v4';
 const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v4';
@@ -7101,7 +7101,7 @@ const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v4';
 
 function getCurrentUser() {
   try {
-    const raw = localStorage.getItem(AUTH_STORAGE_KEY);
+    const raw = localStorage.getItem(AUTH_STORAGE_KEY) || localStorage.getItem('cfb_prophet_auth_user_v3');
     if (raw) return JSON.parse(raw);
   } catch (e) {}
   return null;
@@ -7111,9 +7111,11 @@ function setCurrentUser(user) {
   try {
     if (user) {
       localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user));
+      localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(user));
       localStorage.setItem('cfb_prophet_user_handle', user.displayName || user.handle || 'Coach');
     } else {
       localStorage.removeItem(AUTH_STORAGE_KEY);
+      localStorage.removeItem('cfb_prophet_auth_user_v3');
     }
   } catch (e) {}
   updateAuthUI();
@@ -7132,7 +7134,15 @@ function updateAuthUI() {
   if (user) {
     if (btn) btn.classList.add('logged-in');
     if (label) label.textContent = user.displayName || user.handle || 'Profile';
-    if (icon) icon.className = 'fa-solid fa-user-check';
+    if (icon) {
+      if (user.avatarUrl) {
+        icon.className = '';
+        icon.innerHTML = `<img src="${user.avatarUrl}" style="width: 18px; height: 18px; border-radius: 50%; object-fit: cover; vertical-align: middle;" alt="avatar">`;
+      } else {
+        icon.className = 'fa-solid fa-user-check';
+        icon.innerHTML = '';
+      }
+    }
 
     if (loggedInView) loggedInView.style.display = 'block';
     if (loggedOutView) loggedOutView.style.display = 'none';
@@ -7144,9 +7154,10 @@ function updateAuthUI() {
     const pSavedCount = document.getElementById('authProfileSavedCount');
 
     if (pName) pName.textContent = user.displayName || user.handle || 'Coach';
-    let badge = 'Prophet Verified';
+    let badge = 'Supabase Verified';
     if (user.provider === 'apple') badge = 'Apple Verified';
     else if (user.provider === 'google') badge = 'Google Verified';
+    else if (user.provider === 'github') badge = 'GitHub Verified';
     if (pEmail) pEmail.textContent = user.email ? `${user.email} • ${badge}` : `@${user.handle || 'Coach'} • ${badge}`;
 
     const favTeam = TEAMS_DATABASE[user.favTeam || 'usc'] || TEAMS_DATABASE['usc'];
@@ -7158,7 +7169,10 @@ function updateAuthUI() {
   } else {
     if (btn) btn.classList.remove('logged-in');
     if (label) label.textContent = 'Sign In';
-    if (icon) icon.className = 'fa-solid fa-user-circle';
+    if (icon) {
+      icon.className = 'fa-solid fa-user-circle';
+      icon.innerHTML = '';
+    }
 
     if (loggedInView) loggedInView.style.display = 'none';
     if (loggedOutView) loggedOutView.style.display = 'block';

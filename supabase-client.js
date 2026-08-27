@@ -49,28 +49,38 @@
   function setupAuthListener() {
     if (!supabaseClient) return;
 
-    supabaseClient.auth.onAuthStateChange(async (event, session) => {
-      console.log('[Supabase Auth Event]:', event, session?.user?.email);
-
+    const processSession = (session, event) => {
       if (session && session.user) {
         const user = session.user;
-        const profile = await fetchOrCreateProfile(user);
-        
+        const meta = user.user_metadata || {};
+        const fullName = meta.full_name || 
+                         meta.name || 
+                         (meta.given_name ? `${meta.given_name} ${meta.family_name || ''}`.trim() : '') ||
+                         (user.email ? user.email.split('@')[0] : 'Coach');
+
         const localUserObj = {
           id: user.id,
           email: user.email,
-          displayName: profile?.display_name || user.user_metadata?.full_name || user.user_metadata?.name || (user.email ? user.email.split('@')[0] : 'Coach'),
-          handle: profile?.handle || (user.email ? user.email.split('@')[0] : 'Coach'),
-          avatarUrl: profile?.avatar_url || user.user_metadata?.avatar_url || '',
-          favTeam: profile?.favorite_team || localStorage.getItem('cfb_prophet_fav_team') || 'usc',
-          provider: user.app_metadata?.provider || 'supabase',
+          displayName: fullName,
+          handle: fullName,
+          avatarUrl: meta.avatar_url || meta.picture || '',
+          favTeam: localStorage.getItem('cfb_prophet_fav_team') || 'usc',
+          provider: user.app_metadata?.provider || 'google',
           createdAt: user.created_at
         };
 
         localStorage.setItem('cfb_prophet_auth_user_v4', JSON.stringify(localUserObj));
+        localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(localUserObj));
         localStorage.setItem('cfb_prophet_user_handle', localUserObj.displayName);
+
+        if (event === 'SIGNED_IN') {
+          if (typeof window.showCustomToast === 'function') {
+            window.showCustomToast(`🎉 Welcome, ${localUserObj.displayName}! Signed in.`);
+          }
+        }
       } else if (event === 'SIGNED_OUT') {
         localStorage.removeItem('cfb_prophet_auth_user_v4');
+        localStorage.removeItem('cfb_prophet_auth_user_v3');
       }
 
       if (typeof window.updateAuthUI === 'function') {
@@ -79,7 +89,25 @@
       if (typeof window.renderSavedBracketsVault === 'function') {
         window.renderSavedBracketsVault();
       }
+    };
+
+    // 1. Listen for dynamic changes
+    supabaseClient.auth.onAuthStateChange(async (event, session) => {
+      console.log('[Supabase Auth Event]:', event, session?.user?.email);
+      processSession(session, event);
+
+      if (session && session.user) {
+        // Attempt cloud profile sync in background
+        fetchOrCreateProfile(session.user).catch(() => {});
+      }
     });
+
+    // 2. Immediately check current session
+    supabaseClient.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        processSession(session, 'INITIAL_SESSION');
+      }
+    }).catch(() => {});
   }
 
   // Profile Fetch & Upsert in public.profiles
