@@ -1533,17 +1533,21 @@ window.togglePresetDropdown = function(e) {
   }
   const wrap = document.getElementById('presetDropdownWrap');
   const menu = document.getElementById('presetDropdownMenu');
+  const tuningSection = document.getElementById('tuningSection');
   const otherWrap = document.getElementById('scheduleFilterDropdownWrap');
   const otherMenu = document.getElementById('scheduleFilterDropdownMenu');
+  const scheduleSection = document.getElementById('scheduleSection');
   const moreMenu = document.getElementById('moreToolsMenu');
   
   if (otherMenu) otherMenu.classList.remove('show');
   if (otherWrap) otherWrap.classList.remove('open');
+  if (scheduleSection) scheduleSection.classList.remove('has-open-dropdown');
   if (moreMenu) moreMenu.classList.remove('show');
 
   if (menu) {
-    menu.classList.toggle('show');
-    if (wrap) wrap.classList.toggle('open', menu.classList.contains('show'));
+    const isShowing = menu.classList.toggle('show');
+    if (wrap) wrap.classList.toggle('open', isShowing);
+    if (tuningSection) tuningSection.classList.toggle('has-open-dropdown', isShowing);
   }
 };
 
@@ -1555,8 +1559,10 @@ window.selectGlobalPreset = function(presetKey, e) {
   window.applyGlobalPreset(presetKey);
   const wrap = document.getElementById('presetDropdownWrap');
   const menu = document.getElementById('presetDropdownMenu');
+  const tuningSection = document.getElementById('tuningSection');
   if (menu) menu.classList.remove('show');
   if (wrap) wrap.classList.remove('open');
+  if (tuningSection) tuningSection.classList.remove('has-open-dropdown');
 };
 
 window.applyGlobalPreset = function(presetKey) {
@@ -1684,17 +1690,21 @@ window.toggleScheduleFilterDropdown = function(e) {
   }
   const wrap = document.getElementById('scheduleFilterDropdownWrap');
   const menu = document.getElementById('scheduleFilterDropdownMenu');
+  const scheduleSection = document.getElementById('scheduleSection');
   const otherWrap = document.getElementById('presetDropdownWrap');
   const otherMenu = document.getElementById('presetDropdownMenu');
+  const tuningSection = document.getElementById('tuningSection');
   const moreMenu = document.getElementById('moreToolsMenu');
   
   if (otherMenu) otherMenu.classList.remove('show');
   if (otherWrap) otherWrap.classList.remove('open');
+  if (tuningSection) tuningSection.classList.remove('has-open-dropdown');
   if (moreMenu) moreMenu.classList.remove('show');
 
   if (menu) {
-    menu.classList.toggle('show');
-    if (wrap) wrap.classList.toggle('open', menu.classList.contains('show'));
+    const isShowing = menu.classList.toggle('show');
+    if (wrap) wrap.classList.toggle('open', isShowing);
+    if (scheduleSection) scheduleSection.classList.toggle('has-open-dropdown', isShowing);
   }
 };
 
@@ -1706,8 +1716,10 @@ window.selectScheduleFilter = function(filterKey, e) {
   window.applyScheduleFilter(filterKey);
   const wrap = document.getElementById('scheduleFilterDropdownWrap');
   const menu = document.getElementById('scheduleFilterDropdownMenu');
+  const scheduleSection = document.getElementById('scheduleSection');
   if (menu) menu.classList.remove('show');
   if (wrap) wrap.classList.remove('open');
+  if (scheduleSection) scheduleSection.classList.remove('has-open-dropdown');
 };
 
 window.applyScheduleFilter = function(filterKey) {
@@ -6789,20 +6801,24 @@ document.addEventListener('click', (e) => {
   const presetMenu = document.getElementById('presetDropdownMenu');
   const presetBtn = document.getElementById('presetDropdownBtn');
   const presetWrap = document.getElementById('presetDropdownWrap');
+  const tuningSection = document.getElementById('tuningSection');
   if (presetMenu && presetMenu.classList.contains('show')) {
     if (!presetMenu.contains(e.target) && (!presetBtn || !presetBtn.contains(e.target))) {
       presetMenu.classList.remove('show');
       if (presetWrap) presetWrap.classList.remove('open');
+      if (tuningSection) tuningSection.classList.remove('has-open-dropdown');
     }
   }
 
   const filterMenu = document.getElementById('scheduleFilterDropdownMenu');
   const filterBtn = document.getElementById('scheduleFilterDropdownBtn');
   const filterWrap = document.getElementById('scheduleFilterDropdownWrap');
+  const scheduleSection = document.getElementById('scheduleSection');
   if (filterMenu && filterMenu.classList.contains('show')) {
     if (!filterMenu.contains(e.target) && (!filterBtn || !filterBtn.contains(e.target))) {
       filterMenu.classList.remove('show');
       if (filterWrap) filterWrap.classList.remove('open');
+      if (scheduleSection) scheduleSection.classList.remove('has-open-dropdown');
     }
   }
 });
