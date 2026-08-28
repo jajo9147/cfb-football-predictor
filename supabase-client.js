@@ -174,17 +174,21 @@
         });
 
         const btnEl = document.getElementById('googleGsiButtonContainer');
+        const manualBtn = document.getElementById('supabaseGoogleBtn');
         if (btnEl) {
           btnEl.innerHTML = '';
           window.google.accounts.id.renderButton(btnEl, {
-            theme: 'outline',
+            theme: 'filled_black',
             size: 'large',
             type: 'standard',
-            shape: 'rectangular',
+            shape: 'pill',
             text: 'continue_with',
             logo_alignment: 'left',
-            width: 280
+            width: 320
           });
+          if (manualBtn) {
+            manualBtn.style.display = 'none';
+          }
         }
       } catch (e) {
         console.warn('[Supabase] Google GIS init warning:', e);
