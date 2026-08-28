@@ -171,7 +171,17 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url {
-            if url.scheme == "file" || url.host == "jajo9147.github.io" || url.host == "cdn.jsdelivr.net" || url.host == "cdnjs.cloudflare.com" || url.host == "fonts.googleapis.com" || url.host == "fonts.gstatic.com" || url.host == "a.espncdn.com" {
+            let host = url.host?.lowercased() ?? ""
+            if url.scheme == "file" || url.scheme == "about" ||
+               host.contains("github.io") ||
+               host.contains("supabase.co") ||
+               host.contains("google.com") ||
+               host.contains("googleapis.com") ||
+               host.contains("gstatic.com") ||
+               host.contains("espncdn.com") ||
+               host.contains("jsdelivr.net") ||
+               host.contains("cloudflare.com") ||
+               host.contains("ntfy.sh") {
                 decisionHandler(.allow)
                 return
             }

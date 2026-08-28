@@ -9,6 +9,7 @@ const state = {
   teamActivePresets: {}, // Map of teamId -> presetKey ('baseline', 'qb-mvp', etc.)
   gameSliders: {}, // Map of gameId -> { qbRating, groundAttack, defenseHavoc, turnoverLuck, crowdNoise, isCustom }
   userPicks: {},   // Map of gameId -> 'W' | 'L' | null
+  manualScores: {}, // Map of gameId -> { teamScore, oppScore }
   ccgPicks: {},    // Map of ccgId -> winnerTeamId
   playoffPicks: {},// Map of playoffGameId -> winnerTeamId
   postseasonGames: {}, // Map of gameId -> generated game object for modal
@@ -390,9 +391,12 @@ function initPwaServiceWorker() {
 // ==========================================================================
 
 function getNumericRank(team) {
-  if (team.playoffContenderRank) return team.playoffContenderRank;
+  if (!team) return 999;
+  if (typeof team.playoffContenderRank === 'number') return team.playoffContenderRank;
   const match = (team.apRank || '').match(/\d+/);
-  return match ? parseInt(match[0], 10) : 99;
+  if (match) return parseInt(match[0], 10);
+  if (team.apRank === 'RV') return 100;
+  return 200;
 }
 
 function renderTeamSelector() {
@@ -400,23 +404,28 @@ function renderTeamSelector() {
   if (!track) return;
 
   track.innerHTML = '';
+
+  // Order teams strictly by official AP Poll ranking:
+  // #1-#25 (Top 25) -> Receiving Votes (RV) -> Non-Ranked at the end (Boise State #30 & Colorado #31)
   const teamKeys = Object.keys(TEAMS_DATABASE).sort((a, b) => {
     return getNumericRank(TEAMS_DATABASE[a]) - getNumericRank(TEAMS_DATABASE[b]);
   });
 
-  teamKeys.forEach(key => {
-    const team = TEAMS_DATABASE[key];
+  teamKeys.forEach(id => {
+    const team = TEAMS_DATABASE[id];
+    if (!team) return;
     const btn = document.createElement('button');
-    btn.className = `team-pill-btn ${key === state.currentTeamId ? 'active' : ''}`;
-    btn.dataset.teamid = key;
+    btn.className = `team-pill-btn ${id === state.currentTeamId ? 'active' : ''}`;
+    btn.dataset.teamid = id;
+
     btn.innerHTML = `
       <span class="team-pill-logo-badge">
         <img src="${team.logoUrl}" alt="${team.shortName}" class="team-pill-logo-img">
       </span>
       <span>${team.shortName}</span>
-      <span class="team-pill-rank">${team.apRank}</span>
+      <span class="team-pill-rank">${team.apRank || 'NR'}</span>
     `;
-    btn.addEventListener('click', () => selectTeam(key));
+    btn.addEventListener('click', () => selectTeam(id));
     track.appendChild(btn);
   });
 }
@@ -427,34 +436,41 @@ function teamMatchesSearchQuery(tid, t, query) {
   const normQ = q.replace(/[^a-z0-9]/g, '');
   if (!q && !normQ) return true;
 
-  // 1. Direct standard field matching
-  if (t.name && t.name.toLowerCase().includes(q)) return true;
-  if (t.shortName && t.shortName.toLowerCase().includes(q)) return true;
-  if (t.abbr && t.abbr.toLowerCase().includes(q)) return true;
-  if (t.mascot && t.mascot.toLowerCase().includes(q)) return true;
-  if (t.headCoach && t.headCoach.toLowerCase().includes(q)) return true;
-  if (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) return true;
-  if (t.starPlayer && t.starPlayer.toLowerCase().includes(q)) return true;
-  if (t.secondaryStar && t.secondaryStar.toLowerCase().includes(q)) return true;
-  if (t.conference && t.conference.toLowerCase().includes(q)) return true;
-  if (t.stadium && t.stadium.toLowerCase().includes(q)) return true;
-  if (t.stadiumCity && t.stadiumCity.toLowerCase().includes(q)) return true;
-  if (t.apRank && t.apRank.toLowerCase().includes(q)) return true;
-
-  // 2. Comprehensive Aliases & Nicknames
+  // 1. Comprehensive Aliases & Nicknames
   const aliases = (window.TEAM_SEARCH_ALIASES && window.TEAM_SEARCH_ALIASES[tid]) || (typeof TEAM_SEARCH_ALIASES !== 'undefined' ? TEAM_SEARCH_ALIASES[tid] : null) || [];
   for (let i = 0; i < aliases.length; i++) {
     const a = aliases[i].toLowerCase();
     const normA = a.replace(/[^a-z0-9]/g, '');
-    if (a === q || a.includes(q) || q.includes(a) || (normA && normQ && (normA === normQ || normA.startsWith(normQ) || normQ.startsWith(normA) || normA.includes(normQ)))) {
+    if (a === q || normA === normQ || normA.startsWith(normQ) || (q.length > 2 && (a.includes(q) || normA.includes(normQ)))) {
       return true;
     }
   }
 
-  // 3. Name stripped match (e.g. "texasa&m" vs "tamu")
-  const normName = (t.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-  const normShort = (t.shortName || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-  if (normName.includes(normQ) || normShort.includes(normQ) || (normQ && normShort && normQ.includes(normShort))) return true;
+  // 2. Abbr match
+  const abbr = (t.abbr || '').toLowerCase();
+  if (abbr === q || (normQ && abbr === normQ)) return true;
+
+  // 3. Name & shortName match
+  const name = (t.name || '').toLowerCase();
+  const shortName = (t.shortName || '').toLowerCase();
+  const mascot = (t.mascot || '').toLowerCase();
+  const normName = name.replace(/[^a-z0-9]/g, '');
+  const normShort = shortName.replace(/[^a-z0-9]/g, '');
+
+  if (shortName.startsWith(q) || name.startsWith(q) || mascot.startsWith(q)) return true;
+  if (normShort.startsWith(normQ) || normName.startsWith(normQ)) return true;
+
+  // For queries longer than 2 characters, allow substring and personnel matches
+  if (q.length > 2) {
+    if (name.includes(q) || shortName.includes(q) || mascot.includes(q)) return true;
+    if (normName.includes(normQ) || normShort.includes(normQ)) return true;
+    if (t.headCoach && t.headCoach.toLowerCase().includes(q)) return true;
+    if (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) return true;
+    if (t.starPlayer && t.starPlayer.toLowerCase().includes(q)) return true;
+    if (t.conference && t.conference.toLowerCase().includes(q)) return true;
+    if (t.stadium && t.stadium.toLowerCase().includes(q)) return true;
+    if (t.stadiumCity && t.stadiumCity.toLowerCase().includes(q)) return true;
+  }
 
   return false;
 }
@@ -468,7 +484,7 @@ function calculateTeamSearchRelevance(tid, t, query) {
 
   const aliases = (window.TEAM_SEARCH_ALIASES && window.TEAM_SEARCH_ALIASES[tid]) || (typeof TEAM_SEARCH_ALIASES !== 'undefined' ? TEAM_SEARCH_ALIASES[tid] : null) || [];
   
-  // 1. Exact alias or normalized alias match (e.g. 'uofa' === 'uofa' -> 6000 pts)
+  // 1. Exact alias or normalized alias match (e.g. 'asu' === 'asu' -> 6000 pts)
   for (let i = 0; i < aliases.length; i++) {
     const a = aliases[i].toLowerCase();
     const normA = a.replace(/[^a-z0-9]/g, '');
@@ -481,24 +497,22 @@ function calculateTeamSearchRelevance(tid, t, query) {
     }
   }
 
-  // 2. Exact match on shortName or name or abbr
+  // 2. Exact match on abbr or shortName or name
+  if (t.abbr && t.abbr.toLowerCase() === q) score = Math.max(score, 5500);
   if (t.shortName && t.shortName.toLowerCase() === q) score = Math.max(score, 5000);
   if (t.name && t.name.toLowerCase() === q) score = Math.max(score, 5000);
-  if (t.abbr && t.abbr.toLowerCase() === q) score = Math.max(score, 4800);
 
-  // 3. Starts with shortName or name
+  // 3. Starts with shortName or name or mascot
   if (t.shortName && t.shortName.toLowerCase().startsWith(q)) score = Math.max(score, 3800);
   if (t.name && t.name.toLowerCase().startsWith(q)) score = Math.max(score, 3500);
-
-  // 4. Mascot match
-  if (t.mascot && t.mascot.toLowerCase() === q) score = Math.max(score, 3000);
+  if (t.mascot && t.mascot.toLowerCase() === q) score = Math.max(score, 3200);
   if (t.mascot && t.mascot.toLowerCase().startsWith(q)) score = Math.max(score, 2500);
 
-  // 5. Substring in shortName or name
+  // 4. Substring in shortName or name
   if (t.shortName && t.shortName.toLowerCase().includes(q)) score = Math.max(score, 1800);
   if (t.name && t.name.toLowerCase().includes(q)) score = Math.max(score, 1500);
 
-  // 6. Substring in coach or QB or conference
+  // 5. Substring in coach or QB or conference
   if (t.headCoach && t.headCoach.toLowerCase().includes(q)) score = Math.max(score, 400);
   if (t.confirmedStarterQb && t.confirmedStarterQb.toLowerCase().includes(q)) score = Math.max(score, 300);
   if (t.conference && t.conference.toLowerCase().includes(q)) score = Math.max(score, 200);
@@ -513,7 +527,6 @@ function initTeamSearch() {
   if (!input) return;
 
   // --- PORTAL: Create/reuse dropdown as a direct <body> child ---
-  // This escapes ALL overflow:hidden and stacking-context clipping on parent elements.
   let dropdown = document.getElementById('teamSearchResultsDropdown');
   if (!dropdown) {
     dropdown = document.createElement('div');
@@ -525,7 +538,6 @@ function initTeamSearch() {
     document.body.appendChild(dropdown);
   }
 
-  // Position the fixed dropdown directly under the input box
   function positionDropdown() {
     const rect = input.closest('.team-search-input-box')?.getBoundingClientRect() || input.getBoundingClientRect();
     dropdown.style.top    = (rect.bottom + 6) + 'px';
@@ -558,7 +570,7 @@ function initTeamSearch() {
 
     if (matchedTeams.length === 0) {
       dropdown.innerHTML = `
-        <div class="team-search-no-results">
+        <div class="team-search-no-results" style="padding: 1rem; text-align: center; color: var(--color-text-dim, #94a3b8); font-size: 0.88rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
           <i class="fa-solid fa-circle-exclamation"></i>
           <span>No teams found for "${query}"</span>
         </div>
@@ -583,12 +595,16 @@ function initTeamSearch() {
         </div>
         <i class="fa-solid fa-chevron-right search-item-arrow"></i>
       `;
-      item.onclick = () => {
+      const chooseTeam = (e) => {
+        if (e) e.preventDefault();
         selectTeam(tid);
         input.value = '';
         performSearch('');
         dropdown.style.display = 'none';
+        input.blur();
       };
+      item.addEventListener('click', chooseTeam);
+      item.addEventListener('pointerdown', chooseTeam);
       dropdown.appendChild(item);
     });
 
@@ -597,6 +613,7 @@ function initTeamSearch() {
   }
 
   input.addEventListener('input', (e) => { performSearch(e.target.value); });
+  input.addEventListener('focus', () => { if (input.value.trim()) performSearch(input.value); });
 
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -841,8 +858,9 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
   const hasInjury = !!gameSlider?.injury;
 
   if (!userPick && !isTeamCustom && !isOppCustom && !hasInjury && weather === 'dome' && game && typeof game.projScoreUt === 'number' && typeof game.projScoreOpp === 'number') {
+    const rawProb = typeof game.baseWinProb === 'number' ? game.baseWinProb : (game.projScoreUt > game.projScoreOpp ? 60 : 40);
     return {
-      adjWinProb: typeof game.baseWinProb === 'number' ? game.baseWinProb : (game.projScoreUt > game.projScoreOpp ? 60 : 40),
+      adjWinProb: Math.min(99, Math.max(1, Math.round(rawProb))),
       projUt: game.projScoreUt,
       projOpp: game.projScoreOpp,
       isWin: game.projScoreUt > game.projScoreOpp
@@ -1026,6 +1044,43 @@ function calculateAdjustedMatchup(game, targetTeamId) {
       isFinal: true,
       isCustomTuned: false,
       syncedFrom: null
+    };
+  }
+
+  // 0b. Direct Manual Score Override on this game
+  const manualScore = state.manualScores && state.manualScores[game.id];
+  if (manualScore && typeof manualScore.teamScore === 'number' && typeof manualScore.oppScore === 'number') {
+    const isWin = manualScore.teamScore > manualScore.oppScore;
+    const diff = Math.abs(manualScore.teamScore - manualScore.oppScore);
+    const winProb = isWin ? Math.min(99, Math.max(51, Math.round(50 + diff * 3))) : Math.max(1, Math.min(49, Math.round(50 - diff * 3)));
+    return {
+      adjWinProb: winProb,
+      projUt: manualScore.teamScore,
+      projOpp: manualScore.oppScore,
+      isWin,
+      isFinal: false,
+      isCustomTuned: true,
+      isManualScore: true,
+      syncedFrom: null
+    };
+  }
+
+  // 0c. Counterpart Manual Score Override
+  const counterpartCheck = findCounterpartMatchup(teamId, game);
+  if (counterpartCheck && state.manualScores && state.manualScores[counterpartCheck.oppGame.id]) {
+    const oppManual = state.manualScores[counterpartCheck.oppGame.id];
+    const isWin = oppManual.oppScore > oppManual.teamScore;
+    const diff = Math.abs(oppManual.oppScore - oppManual.teamScore);
+    const winProb = isWin ? Math.min(99, Math.max(51, Math.round(50 + diff * 3))) : Math.max(1, Math.min(49, Math.round(50 - diff * 3)));
+    return {
+      adjWinProb: winProb,
+      projUt: oppManual.oppScore,
+      projOpp: oppManual.teamScore,
+      isWin,
+      isFinal: false,
+      isCustomTuned: true,
+      isManualScore: true,
+      syncedFrom: counterpartCheck.oppTeam.shortName || counterpartCheck.oppTeam.name
     };
   }
 
@@ -1223,6 +1278,7 @@ function recalculateSeason() {
   // Render Schedule Grid & CFP Bracket
   renderSchedule();
   renderPlayoffBracket(totalWins, cfpSeed, playoffResults);
+  renderTeamSelector();
 }
 
 // ==========================================================================
@@ -1259,6 +1315,8 @@ function renderSchedule() {
     let badgeHtml = `<span>${game.isHome ? 'HOME' : 'AWAY'}</span>`;
     if (sim.isFinal) {
       badgeHtml = `<span class="custom-tuned-badge" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fa-solid fa-lock"></i> FINAL</span>`;
+    } else if (sim.isManualScore) {
+      badgeHtml = `<span class="custom-tuned-badge manual-score-badge"><i class="fa-solid fa-pen-to-square"></i> CUSTOM SCORE</span>`;
     } else if (sim.isCustomTuned) {
       if (sim.syncedFrom) {
         badgeHtml = `<span class="custom-tuned-badge"><i class="fa-solid fa-link"></i> SYNCED: ${sim.syncedFrom.toUpperCase()}</span>`;
@@ -1287,13 +1345,32 @@ function renderSchedule() {
           </div>
         </div>
 
-        <div class="score-center">
-          <div class="proj-score-box">
-            <span style="color: ${isWin ? 'var(--color-success)' : 'var(--color-text-dim)'};">${sim.projUt}</span>
+        <div class="score-center" onclick="event.stopPropagation();">
+          <div class="proj-score-box editable-score-box" title="Type to project custom score">
+            <input type="number" min="0" max="99" 
+                   class="score-input ${isWin ? 'win-score' : ''}" 
+                   value="${sim.projUt}" 
+                   data-gameid="${game.id}" 
+                   data-side="team" 
+                   aria-label="${team.abbr} score projection"
+                   onchange="handleScoreInputChange('${game.id}', 'team', this.value)"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
             <span class="score-divider">-</span>
-            <span style="color: ${!isWin ? 'var(--color-danger)' : 'var(--color-text-dim)'};">${sim.projOpp}</span>
+            <input type="number" min="0" max="99" 
+                   class="score-input ${!isWin ? 'win-score' : ''}" 
+                   value="${sim.projOpp}" 
+                   data-gameid="${game.id}" 
+                   data-side="opp" 
+                   aria-label="${game.oppAbbr} score projection"
+                   onchange="handleScoreInputChange('${game.id}', 'opp', this.value)"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
           </div>
-          <span class="vegas-line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : `${game.oppAbbr} -${game.vegasSpread}`}</span>
+          <div class="score-sub-row">
+            <span class="vegas-line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : `${game.oppAbbr} -${game.vegasSpread}`}</span>
+            ${sim.isManualScore ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event)" title="Reset to AI baseline projection"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
+          </div>
         </div>
 
         <div class="team-pill" style="justify-content: flex-end; text-align: right;">
@@ -1367,13 +1444,99 @@ function renderSchedule() {
     }
 
     card.addEventListener('click', (e) => {
-      if (e.target.closest('.wl-toggle-btn') || e.target.closest('.wl-toggle-wrap')) return;
+      if (e.target.closest('.wl-toggle-btn') || e.target.closest('.wl-toggle-wrap') || e.target.closest('.score-input') || e.target.closest('.editable-score-box') || e.target.closest('.reset-score-mini-btn')) return;
       openSimModal(game);
     });
 
     grid.appendChild(card);
   });
 }
+
+function findGameById(gameId) {
+  if (!gameId) return null;
+  const team = TEAMS_DATABASE[state.currentTeamId];
+  if (team && team.schedule) {
+    const found = team.schedule.find(g => g.id === gameId);
+    if (found) return found;
+  }
+  if (state.postseasonGames && state.postseasonGames[gameId]) {
+    return state.postseasonGames[gameId];
+  }
+  for (const tid of Object.keys(TEAMS_DATABASE)) {
+    const g = (TEAMS_DATABASE[tid].schedule || []).find(x => x.id === gameId);
+    if (g) return g;
+  }
+  return null;
+}
+window.findGameById = findGameById;
+
+function handleScoreInputChange(gameId, side, value) {
+  const numVal = parseInt(value, 10);
+  if (isNaN(numVal) || numVal < 0) return;
+
+  if (!state.manualScores) state.manualScores = {};
+  
+  const gObj = findGameById(gameId) || { id: gameId };
+  const currentSim = calculateAdjustedMatchup(gObj);
+  let teamScore = state.manualScores[gameId]?.teamScore ?? currentSim.projUt;
+  let oppScore = state.manualScores[gameId]?.oppScore ?? currentSim.projOpp;
+
+  if (side === 'team') {
+    teamScore = Math.min(99, Math.max(0, numVal));
+  } else {
+    oppScore = Math.min(99, Math.max(0, numVal));
+  }
+
+  // Prevent ties in football simulation
+  if (teamScore === oppScore) {
+    if (side === 'team') teamScore += 1;
+    else oppScore += 1;
+  }
+
+  state.manualScores[gameId] = { teamScore, oppScore };
+  state.userPicks[gameId] = teamScore > oppScore ? 'W' : 'L';
+
+  // Cross-sync with counterpart game
+  if (gObj) {
+    const counterpart = findCounterpartMatchup(state.currentTeamId, gObj);
+    if (counterpart) {
+      if (!state.manualScores) state.manualScores = {};
+      state.manualScores[counterpart.oppGame.id] = {
+        teamScore: oppScore,
+        oppScore: teamScore
+      };
+      state.userPicks[counterpart.oppGame.id] = oppScore > teamScore ? 'W' : 'L';
+    }
+  }
+
+  recalculateSeason();
+  showCustomToast(`🎯 Projected score set: ${teamScore} - ${oppScore}`);
+}
+window.handleScoreInputChange = handleScoreInputChange;
+
+function resetManualScore(gameId, e) {
+  if (e) {
+    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    if (typeof e.preventDefault === 'function') e.preventDefault();
+  }
+  if (state.manualScores && state.manualScores[gameId]) {
+    delete state.manualScores[gameId];
+  }
+  delete state.userPicks[gameId];
+
+  const gObj = findGameById(gameId);
+  if (gObj) {
+    const counterpart = findCounterpartMatchup(state.currentTeamId, gObj);
+    if (counterpart && state.manualScores) {
+      delete state.manualScores[counterpart.oppGame.id];
+      delete state.userPicks[counterpart.oppGame.id];
+    }
+  }
+
+  recalculateSeason();
+  showCustomToast('↺ Score reset to AI simulation baseline.');
+}
+window.resetManualScore = resetManualScore;
 
 // ==========================================================================
 // GLOBAL SLIDERS & PRESETS
@@ -1517,6 +1680,45 @@ function initGlobalPresetButtons() {
   });
 }
 
+window.togglePresetDropdown = function(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  const wrap = document.getElementById('presetDropdownWrap');
+  const menu = document.getElementById('presetDropdownMenu');
+  const tuningSection = document.getElementById('tuningSection');
+  const otherWrap = document.getElementById('scheduleFilterDropdownWrap');
+  const otherMenu = document.getElementById('scheduleFilterDropdownMenu');
+  const scheduleSection = document.getElementById('scheduleSection');
+  const moreMenu = document.getElementById('moreToolsMenu');
+  
+  if (otherMenu) otherMenu.classList.remove('show');
+  if (otherWrap) otherWrap.classList.remove('open');
+  if (scheduleSection) scheduleSection.classList.remove('has-open-dropdown');
+  if (moreMenu) moreMenu.classList.remove('show');
+
+  if (menu) {
+    const isShowing = menu.classList.toggle('show');
+    if (wrap) wrap.classList.toggle('open', isShowing);
+    if (tuningSection) tuningSection.classList.toggle('has-open-dropdown', isShowing);
+  }
+};
+
+window.selectGlobalPreset = function(presetKey, e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  window.applyGlobalPreset(presetKey);
+  const wrap = document.getElementById('presetDropdownWrap');
+  const menu = document.getElementById('presetDropdownMenu');
+  const tuningSection = document.getElementById('tuningSection');
+  if (menu) menu.classList.remove('show');
+  if (wrap) wrap.classList.remove('open');
+  if (tuningSection) tuningSection.classList.remove('has-open-dropdown');
+};
+
 window.applyGlobalPreset = function(presetKey) {
   const presetValues = GLOBAL_PRESETS[presetKey] || GLOBAL_PRESETS['baseline'];
   if (!state.currentTeamId) {
@@ -1526,6 +1728,24 @@ window.applyGlobalPreset = function(presetKey) {
   // Assign preset specifically to active team
   state.teamSliders[state.currentTeamId] = { ...presetValues };
   state.teamActivePresets[state.currentTeamId] = presetKey;
+
+  const presetLabels = {
+    'baseline': '🎯 Season Baseline',
+    'qb-mvp': '🔥 QB Heisman Mode',
+    'qb-slump': '📉 QB Slump Mode',
+    'iron-defense': '🛡️ Iron Curtain Defense',
+    'chaos': '🎲 CFB Chaos Mode'
+  };
+
+  const labelEl = document.getElementById('presetDropdownLabel');
+  if (labelEl) {
+    labelEl.innerText = presetLabels[presetKey] || '🎯 Season Baseline';
+  }
+
+  // Update active class on dropdown items
+  document.querySelectorAll('#presetDropdownMenu .dropdown-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.preset === presetKey);
+  });
 
   const selectEl = document.getElementById('globalPresetSelect');
   if (selectEl && selectEl.value !== presetKey) {
@@ -1567,6 +1787,7 @@ window.resetAllToBaseline = function() {
   state.teamActivePresets = {};
   state.gameSliders = {};
   state.userPicks = {};
+  state.manualScores = {};
 
   const selectEl = document.getElementById('globalPresetSelect');
   if (selectEl) selectEl.value = 'baseline';
@@ -1617,8 +1838,66 @@ function showToast(message) {
 window.showToast = showToast;
 window.showCustomToast = showToast;
 
+window.toggleScheduleFilterDropdown = function(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  const wrap = document.getElementById('scheduleFilterDropdownWrap');
+  const menu = document.getElementById('scheduleFilterDropdownMenu');
+  const scheduleSection = document.getElementById('scheduleSection');
+  const otherWrap = document.getElementById('presetDropdownWrap');
+  const otherMenu = document.getElementById('presetDropdownMenu');
+  const tuningSection = document.getElementById('tuningSection');
+  const moreMenu = document.getElementById('moreToolsMenu');
+  
+  if (otherMenu) otherMenu.classList.remove('show');
+  if (otherWrap) otherWrap.classList.remove('open');
+  if (tuningSection) tuningSection.classList.remove('has-open-dropdown');
+  if (moreMenu) moreMenu.classList.remove('show');
+
+  if (menu) {
+    const isShowing = menu.classList.toggle('show');
+    if (wrap) wrap.classList.toggle('open', isShowing);
+    if (scheduleSection) scheduleSection.classList.toggle('has-open-dropdown', isShowing);
+  }
+};
+
+window.selectScheduleFilter = function(filterKey, e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  window.applyScheduleFilter(filterKey);
+  const wrap = document.getElementById('scheduleFilterDropdownWrap');
+  const menu = document.getElementById('scheduleFilterDropdownMenu');
+  const scheduleSection = document.getElementById('scheduleSection');
+  if (menu) menu.classList.remove('show');
+  if (wrap) wrap.classList.remove('open');
+  if (scheduleSection) scheduleSection.classList.remove('has-open-dropdown');
+};
+
 window.applyScheduleFilter = function(filterKey) {
   state.filter = filterKey || 'all';
+
+  const filterLabels = {
+    'all': '📅 All 12 Games',
+    'marquee': '🔥 Marquee & Rivalries',
+    'conf': '🏆 Conference Games',
+    'home': '🏟️ Home Games',
+    'away': '✈️ Away / Neutral'
+  };
+
+  const labelEl = document.getElementById('scheduleFilterLabel');
+  if (labelEl) {
+    labelEl.innerText = filterLabels[state.filter] || '📅 All 12 Games';
+  }
+
+  // Update active class on dropdown items
+  document.querySelectorAll('#scheduleFilterDropdownMenu .dropdown-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.filter === state.filter);
+  });
+
   const selectEl = document.getElementById('scheduleFilterSelect');
   if (selectEl && selectEl.value !== state.filter) {
     selectEl.value = state.filter;
@@ -1749,6 +2028,7 @@ function updateModalScoreboardLive() {
   // Update Scoreboard DOM in-place without re-rendering slider controls
   const scoreboardEl = document.getElementById('modalScoreboard');
   if (scoreboardEl) {
+    const isManual = !!(state.manualScores && state.manualScores[game.id]);
     scoreboardEl.innerHTML = `
       <div style="display: flex; align-items: center; gap: 0.75rem;">
         <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team1.colors?.primary || '#333'};">
@@ -1760,18 +2040,43 @@ function updateModalScoreboardLive() {
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-        <div style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: #FFFFFF;">
-          <span style="color: ${isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score1}</span>
-          <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
-          <span style="color: ${!isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score2}</span>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;" onclick="event.stopPropagation();">
+        <div class="editable-score-box" style="padding: 3px 8px; border-radius: var(--radius-md);" title="Click to manually project score">
+          <input type="number" min="0" max="99" 
+                 class="score-input ${isTeam1Win ? 'win-score' : ''}" 
+                 style="width: 52px; height: 38px; font-size: 1.6rem;"
+                 value="${score1}" 
+                 data-gameid="${game.id}" 
+                 data-side="team" 
+                 aria-label="${team1.shortName || team1.name} score"
+                 onchange="handleScoreInputChange('${game.id}', 'team', this.value); updateModalScoreboardLive();"
+                 onfocus="this.select();"
+                 onclick="event.stopPropagation();">
+          <span style="color: var(--color-text-dim); font-size: 1.4rem; margin: 0 3px;">-</span>
+          <input type="number" min="0" max="99" 
+                 class="score-input ${!isTeam1Win ? 'win-score' : ''}" 
+                 style="width: 52px; height: 38px; font-size: 1.6rem;"
+                 value="${score2}" 
+                 data-gameid="${game.id}" 
+                 data-side="opp" 
+                 aria-label="${team2.shortName || team2.name} score"
+                 onchange="handleScoreInputChange('${game.id}', 'opp', this.value); updateModalScoreboardLive();"
+                 onfocus="this.select();"
+                 onclick="event.stopPropagation();">
         </div>
-        <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
-          WIN PROB: ${prob1}% - ${100 - prob1}%
-        </span>
         ${(() => {
+          const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
+          const rProb2 = 100 - rProb1;
           const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
-          return edge?.badgeHtml || '';
+          return `
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
+                WIN PROB: ${rProb1}% - ${rProb2}%
+              </span>
+              ${isManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event); updateModalScoreboardLive();" title="Reset score to AI baseline"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
+            </div>
+            ${edge?.badgeHtml || ''}
+          `;
         })()}
       </div>
 
@@ -1941,6 +2246,7 @@ function openSimModal(game) {
     // Scoreboard
     const scoreboardEl = document.getElementById('modalScoreboard');
     if (scoreboardEl) {
+      const isManual = !!(state.manualScores && state.manualScores[game.id]);
       scoreboardEl.innerHTML = `
         <div style="display: flex; align-items: center; gap: 0.75rem;">
           <div class="modal-team-logo-wrap" style="border: 2.5px solid ${team1.colors?.primary || '#333'};">
@@ -1952,18 +2258,43 @@ function openSimModal(game) {
           </div>
         </div>
 
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-          <div style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: #FFFFFF;">
-            <span style="color: ${isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score1}</span>
-            <span style="color: var(--color-text-dim); font-size: 1.4rem;">-</span>
-            <span style="color: ${!isTeam1Win ? 'var(--color-success)' : 'var(--color-text-dim)'};">${score2}</span>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;" onclick="event.stopPropagation();">
+          <div class="editable-score-box" style="padding: 3px 8px; border-radius: var(--radius-md);" title="Click to manually project score">
+            <input type="number" min="0" max="99" 
+                   class="score-input ${isTeam1Win ? 'win-score' : ''}" 
+                   style="width: 52px; height: 38px; font-size: 1.6rem;"
+                   value="${score1}" 
+                   data-gameid="${game.id}" 
+                   data-side="team" 
+                   aria-label="${team1.shortName || team1.name} score"
+                   onchange="handleScoreInputChange('${game.id}', 'team', this.value); updateModalScoreboardLive();"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
+            <span style="color: var(--color-text-dim); font-size: 1.4rem; margin: 0 3px;">-</span>
+            <input type="number" min="0" max="99" 
+                   class="score-input ${!isTeam1Win ? 'win-score' : ''}" 
+                   style="width: 52px; height: 38px; font-size: 1.6rem;"
+                   value="${score2}" 
+                   data-gameid="${game.id}" 
+                   data-side="opp" 
+                   aria-label="${team2.shortName || team2.name} score"
+                   onchange="handleScoreInputChange('${game.id}', 'opp', this.value); updateModalScoreboardLive();"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
           </div>
-          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
-            WIN PROB: ${prob1}% - ${100 - prob1}%
-          </span>
           ${(() => {
+            const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
+            const rProb2 = 100 - rProb1;
             const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
-            return edge?.badgeHtml || '';
+            return `
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
+                  WIN PROB: ${rProb1}% - ${rProb2}%
+                </span>
+                ${isManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event); updateModalScoreboardLive();" title="Reset score to AI baseline"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
+              </div>
+              ${edge?.badgeHtml || ''}
+            `;
           })()}
         </div>
 
@@ -2640,6 +2971,9 @@ window.resetCurrentGameTuning = function() {
   const game = state.activeModalGame;
   delete state.gameSliders[game.id];
   delete state.userPicks[game.id];
+  if (state.manualScores) {
+    delete state.manualScores[game.id];
+  }
   if (game.id && game.id.startsWith('ccg-')) {
     delete state.ccgPicks[game.id];
   }
@@ -2651,6 +2985,9 @@ window.resetCurrentGameTuning = function() {
   if (counterpart) {
     delete state.gameSliders[counterpart.oppGame.id];
     delete state.userPicks[counterpart.oppGame.id];
+    if (state.manualScores) {
+      delete state.manualScores[counterpart.oppGame.id];
+    }
   }
 
   // Reset slider UI inputs & chips in modal
@@ -2910,6 +3247,26 @@ function simulatePostseasonMatchup(teamA, teamB, options = {}) {
   if (!teamA) return { winner: teamB, loser: null, scoreA: 17, scoreB: 28, isAWinner: false, winProbA: 20 };
   if (!teamB) return { winner: teamA, loser: null, scoreA: 28, scoreB: 17, isAWinner: true, winProbA: 80 };
 
+  // 0. Check for Direct Manual Score Override on this game
+  const manualScore = options.gameId ? (state.manualScores && state.manualScores[options.gameId]) : null;
+  if (manualScore && typeof manualScore.teamScore === 'number' && typeof manualScore.oppScore === 'number') {
+    const isAWinner = manualScore.teamScore > manualScore.oppScore;
+    const diff = Math.abs(manualScore.teamScore - manualScore.oppScore);
+    const probA = isAWinner ? Math.min(99, Math.max(51, Math.round(50 + diff * 3))) : Math.max(1, Math.min(49, Math.round(50 - diff * 3)));
+    return {
+      gameId: options.gameId,
+      teamA,
+      teamB,
+      winner: isAWinner ? teamA : teamB,
+      loser: isAWinner ? teamB : teamA,
+      scoreA: manualScore.teamScore,
+      scoreB: manualScore.oppScore,
+      isAWinner,
+      winProbA: probA,
+      winProbB: 100 - probA
+    };
+  }
+
   const dbA = TEAMS_DATABASE[teamA.id] || teamA;
   const dbB = TEAMS_DATABASE[teamB.id] || teamB;
 
@@ -3134,11 +3491,14 @@ function renderConferenceChampionships(ccgResults) {
     const activeTeamId = state.currentTeamId;
     const isActiveMatchup = (d.team1.id === activeTeamId || d.team2.id === activeTeamId);
 
+    const isManual = !!(state.manualScores && state.manualScores[d.id]);
     const isCustom = !!(state.gameSliders && state.gameSliders[d.id]?.isCustom);
     const isUserPick = !!(state.ccgPicks && state.ccgPicks[d.id]);
 
     let customBadgeHtml = '';
-    if (isUserPick) {
+    if (isManual) {
+      customBadgeHtml = `<span class="custom-tuned-badge manual-score-badge"><i class="fa-solid fa-pen-to-square"></i> CUSTOM SCORE</span>`;
+    } else if (isUserPick) {
       customBadgeHtml = `<span class="custom-tuned-badge"><i class="fa-solid fa-check"></i> USER PICK</span>`;
     } else if (isCustom) {
       customBadgeHtml = `<span class="custom-tuned-badge"><i class="fa-solid fa-bullseye"></i> CUSTOM TUNED</span>`;
@@ -3146,7 +3506,10 @@ function renderConferenceChampionships(ccgResults) {
 
     const card = document.createElement('div');
     card.className = `ccg-card ${isActiveMatchup ? 'active-team-card' : ''}`;
-    card.onclick = () => window.openSimModalByGameId(d.id);
+    card.onclick = (e) => {
+      if (e.target.closest('.score-input') || e.target.closest('.editable-score-box') || e.target.closest('.reset-score-mini-btn')) return;
+      window.openSimModalByGameId(d.id);
+    };
 
     card.innerHTML = `
       <div class="ccg-card-header">
@@ -3164,13 +3527,32 @@ function renderConferenceChampionships(ccgResults) {
           <span class="ccg-team-rec">${d.team1.apRank || ''} (${d.team1.wins}-${d.team1.losses})</span>
         </div>
 
-        <div class="ccg-vs-pill">
-          <div class="ccg-score-box">
-            <span style="color: ${isTeam1Winner ? 'var(--color-success)' : 'var(--color-text-dim)'};">${d.sim.scoreA}</span>
-            <span style="color: var(--color-text-dim); font-size: 1rem;">-</span>
-            <span style="color: ${!isTeam1Winner ? 'var(--color-success)' : 'var(--color-text-dim)'};">${d.sim.scoreB}</span>
+        <div class="ccg-vs-pill" onclick="event.stopPropagation();">
+          <div class="ccg-score-box editable-score-box" title="Type to project custom CCG score">
+            <input type="number" min="0" max="99" 
+                   class="score-input ${isTeam1Winner ? 'win-score' : ''}" 
+                   value="${d.sim.scoreA}" 
+                   data-gameid="${d.id}" 
+                   data-side="team" 
+                   aria-label="${d.team1.shortName} score"
+                   onchange="handleScoreInputChange('${d.id}', 'team', this.value)"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
+            <span class="score-divider">-</span>
+            <input type="number" min="0" max="99" 
+                   class="score-input ${!isTeam1Winner ? 'win-score' : ''}" 
+                   value="${d.sim.scoreB}" 
+                   data-gameid="${d.id}" 
+                   data-side="opp" 
+                   aria-label="${d.team2.shortName} score"
+                   onchange="handleScoreInputChange('${d.id}', 'opp', this.value)"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
           </div>
-          <span class="ccg-vs-text">${d.sim.winProbA}% - ${d.sim.winProbB}%</span>
+          <div style="display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+            <span class="ccg-vs-text">${d.sim.winProbA}% - ${d.sim.winProbB}%</span>
+            ${isManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${d.id}', event)" title="Reset to AI simulation"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
+          </div>
         </div>
 
         <div class="ccg-team-block">
@@ -3200,7 +3582,8 @@ function renderConferenceChampionships(ccgResults) {
 function generate12TeamCfpField(confChamps, evaluatedTeams) {
   // CFP Selection Committee Resume Grading Algorithm
   function calcCommitteeScore(t) {
-    const l = t.totalLosses !== undefined ? t.totalLosses : t.losses;
+    // Official CFP Protocol: Teams participating in CCGs are NOT penalized for an extra 13th game loss
+    const l = t.isCcgRunnerUp ? t.losses : (t.totalLosses !== undefined ? t.totalLosses : t.losses);
     const w = t.totalWins !== undefined ? t.totalWins : t.wins;
     const apRankStr = t.apRank || '';
     const rMatch = apRankStr.match(/\d+/);
@@ -3208,19 +3591,19 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
 
     // Severe loss tier penalties (Committee strictly separates 0/1/2/3 loss tiers)
     let lossPts = 0;
-    if (l === 0) lossPts = 14000;
-    else if (l === 1) lossPts = 10000;
-    else if (l === 2) lossPts = 6500;
-    else if (l === 3) lossPts = 2000; // Severe 3-loss bubble penalty
+    if (l === 0) lossPts = 20000;
+    else if (l === 1) lossPts = 15000;
+    else if (l === 2) lossPts = 10000;
+    else if (l === 3) lossPts = 1000; // Severe 3-loss penalty; never jumps 1/2 loss teams
     else lossPts = 0;
 
     // AP Poll prestige tier
     let rankPts = 0;
-    if (rNum <= 5) rankPts = 4500;
-    else if (rNum <= 10) rankPts = 3500;
-    else if (rNum <= 15) rankPts = 2500;
-    else if (rNum <= 20) rankPts = 1500;
-    else if (rNum <= 25) rankPts = 800;
+    if (rNum <= 5) rankPts = 3000;
+    else if (rNum <= 10) rankPts = 2200;
+    else if (rNum <= 15) rankPts = 1500;
+    else if (rNum <= 20) rankPts = 1000;
+    else if (rNum <= 25) rankPts = 500;
     else rankPts = 0;
 
     // Conference Strength & SOS weight
@@ -3285,16 +3668,23 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
   const autoChampIds = new Set([seed1?.id, seed2?.id, seed3?.id, seed4?.id, fifthChamp?.id].filter(Boolean));
 
   // 3. 7 At-Large Bids: strictly Power 4 and Notre Dame (G5 unranked teams cannot earn At-Large bids)
-  const atLargePool = evaluatedTeams.filter(t => t.conf !== 'Mountain West' && !autoChampIds.has(t.id) && t.id !== 'boisestate');
+  // HARD RULE: No team with 3+ regular season losses (e.g. 9-3 TAMU) is eligible for an at-large bid
+  const atLargePool = evaluatedTeams.filter(t => {
+    const regLosses = t.losses !== undefined ? t.losses : t.totalLosses;
+    return t.conf !== 'Mountain West' &&
+           !autoChampIds.has(t.id) &&
+           t.id !== 'boisestate' &&
+           regLosses <= 2;  // 3-loss teams are categorically excluded
+  });
   atLargePool.sort((a, b) => calcCommitteeScore(b) - calcCommitteeScore(a));
 
-  const seed5 = atLargePool[0];
-  const seed6 = atLargePool[1];
-  const seed7 = atLargePool[2];
-  const seed8 = atLargePool[3];
-  const seed9 = atLargePool[4];
-  const seed10 = atLargePool[5];
-  const seed11 = atLargePool[6];
+  const seed5  = atLargePool[0] || null;
+  const seed6  = atLargePool[1] || null;
+  const seed7  = atLargePool[2] || null;
+  const seed8  = atLargePool[3] || null;
+  const seed9  = atLargePool[4] || null;
+  const seed10 = atLargePool[5] || null;
+  const seed11 = atLargePool[6] || null;
   const seed12 = fifthChamp;
 
   const seeds = [seed1, seed2, seed3, seed4, seed5, seed6, seed7, seed8, seed9, seed10, seed11, seed12].filter(Boolean);
@@ -3435,7 +3825,7 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
     return fallbackSeed || '';
   }
 
-  function teamRow(fallbackSeed, tObj, score, isWinner, isHighlighted) {
+  function teamRow(fallbackSeed, tObj, score, isWinner, isHighlighted, gameId, side) {
     const seedNum = getTeamSeed(tObj, fallbackSeed);
     const name = tObj ? tObj.shortName || tObj.name : `Seed #${seedNum}`;
     const logo = tObj?.logoUrl || (tObj?.abbr && typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tObj.abbr] : '') || '';
@@ -3469,12 +3859,27 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
     const highlightStyle = isHighlighted ? 'color: var(--color-brand-accent); font-weight: 800;' : '';
 
     return `
-      <div class="matchup-teams-row">
+      <div class="matchup-teams-row" onclick="event.stopPropagation();">
         <div class="matchup-team-item">
           <span class="matchup-team-logo-wrap"><img src="${logo}" class="matchup-team-logo" alt="${name}"></span>
           <span style="${highlightStyle}">#${seedNum} ${name} <small style="opacity: 0.7; font-size: 0.68rem;">${record}</small></span>
         </div>
-        <span style="${isWinner ? 'color: var(--color-success); font-weight: 800;' : 'color: var(--color-text-dim);'}">${score}</span>
+        <div style="display: flex; align-items: center; gap: 4px;">
+          ${gameId ? `
+            <input type="number" min="0" max="99" 
+                   class="score-input ${isWinner ? 'win-score' : ''}" 
+                   style="width: 38px; height: 26px; font-size: 1.15rem; padding: 0; line-height: 1;"
+                   value="${score}" 
+                   data-gameid="${gameId}" 
+                   data-side="${side}" 
+                   aria-label="${name} score"
+                   onchange="handleScoreInputChange('${gameId}', '${side}', this.value)"
+                   onfocus="this.select();"
+                   onclick="event.stopPropagation();">
+          ` : `
+            <span style="${isWinner ? 'color: var(--color-success); font-weight: 800;' : 'color: var(--color-text-dim);'}">${score}</span>
+          `}
+        </div>
       </div>
     `;
   }
@@ -3482,11 +3887,14 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
   function renderPlayoffMatchupBox(m, seedA, seedB, defaultVenue) {
     if (!m) return '';
     const isActive = isTeamMatch(m.teamA, teamId) || isTeamMatch(m.teamB, teamId);
+    const isManual = !!(state.manualScores && state.manualScores[m.id]);
     const isCustom = !!(state.gameSliders && state.gameSliders[m.id]?.isCustom);
     const isUserPick = !!(state.playoffPicks && state.playoffPicks[m.id]);
 
     let customBadgeHtml = '';
-    if (isUserPick) {
+    if (isManual) {
+      customBadgeHtml = `<span class="custom-tuned-badge manual-score-badge"><i class="fa-solid fa-pen-to-square"></i> CUSTOM SCORE</span>`;
+    } else if (isUserPick) {
       customBadgeHtml = `<span class="custom-tuned-badge" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fa-solid fa-check"></i> USER PICK</span>`;
     } else if (isCustom) {
       const gs = state.gameSliders[m.id];
@@ -3506,13 +3914,16 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
     const venueText = m.teamA?.stadium || defaultVenue || 'Campus Stadium';
 
     return `
-      <div class="playoff-matchup-box ${isActive ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${m.id}')">
+      <div class="playoff-matchup-box ${isActive ? 'active-team-matchup' : ''}" onclick="if(!event.target.closest('.score-input') && !event.target.closest('.reset-score-mini-btn')) window.openSimModalByGameId('${m.id}')">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
           <span style="font-size: 0.65rem; font-family: var(--font-mono); color: var(--color-text-dim); text-transform: uppercase;">${m.label || defaultVenue || 'CFP MATCHUP'}</span>
-          ${customBadgeHtml}
+          <div style="display: flex; align-items: center; gap: 4px;">
+            ${customBadgeHtml}
+            ${isManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${m.id}', event)" title="Reset to AI baseline"><i class="fa-solid fa-rotate-left"></i></button>` : ''}
+          </div>
         </div>
-        ${teamRow(seedB, m.teamB, m.sim.scoreB, !m.sim.isAWinner, isTeamMatch(m.teamB, teamId))}
-        ${teamRow(seedA, m.teamA, m.sim.scoreA, m.sim.isAWinner, isTeamMatch(m.teamA, teamId))}
+        ${teamRow(seedB, m.teamB, m.sim.scoreB, !m.sim.isAWinner, isTeamMatch(m.teamB, teamId), m.id, 'opp')}
+        ${teamRow(seedA, m.teamA, m.sim.scoreA, m.sim.isAWinner, isTeamMatch(m.teamA, teamId), m.id, 'team')}
         
         <!-- Win Probability KPI Meter -->
         <div style="display: flex; flex-direction: column; gap: 3px; margin: 4px 0 2px 0;">
@@ -3540,11 +3951,14 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
 
   const p = playoffData;
   const nattyChamp = p.nationalChampion;
+  const isNattyManual = !!(state.manualScores && state.manualScores['playoff-natty']);
   const isNattyCustom = !!(state.gameSliders && state.gameSliders['playoff-natty']?.isCustom);
   const isNattyUserPick = !!(state.playoffPicks && state.playoffPicks['playoff-natty']);
 
   let nattyCustomBadgeHtml = '';
-  if (isNattyUserPick) {
+  if (isNattyManual) {
+    nattyCustomBadgeHtml = `<span class="custom-tuned-badge manual-score-badge"><i class="fa-solid fa-pen-to-square"></i> CUSTOM SCORE</span>`;
+  } else if (isNattyUserPick) {
     nattyCustomBadgeHtml = `<span class="custom-tuned-badge" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fa-solid fa-check"></i> USER PICK</span>`;
   } else if (isNattyCustom) {
     const gs = state.gameSliders['playoff-natty'];
@@ -3616,13 +4030,16 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
       </div>
 
       <!-- Natty Showdown -->
-      <div class="playoff-matchup-box ${isTeamMatch(p.natty.teamA, teamId) || isTeamMatch(p.natty.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="window.openSimModalByGameId('${p.natty.id}')">
+      <div class="playoff-matchup-box ${isTeamMatch(p.natty.teamA, teamId) || isTeamMatch(p.natty.teamB, teamId) ? 'active-team-matchup' : ''}" onclick="if(!event.target.closest('.score-input') && !event.target.closest('.reset-score-mini-btn')) window.openSimModalByGameId('${p.natty.id}')">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
           <span style="font-size: 0.65rem; font-family: var(--font-mono); color: #FFD700; font-weight: 800; text-transform: uppercase;">NATIONAL TITLE GAME</span>
-          ${nattyCustomBadgeHtml}
+          <div style="display: flex; align-items: center; gap: 4px;">
+            ${nattyCustomBadgeHtml}
+            ${isNattyManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('playoff-natty', event)" title="Reset to AI baseline"><i class="fa-solid fa-rotate-left"></i></button>` : ''}
+          </div>
         </div>
-        ${teamRow('SF1', p.natty.teamA, p.natty.sim.scoreA, p.natty.sim.isAWinner, isTeamMatch(p.natty.teamA, teamId))}
-        ${teamRow('SF2', p.natty.teamB, p.natty.sim.scoreB, !p.natty.sim.isAWinner, isTeamMatch(p.natty.teamB, teamId))}
+        ${teamRow('SF1', p.natty.teamA, p.natty.sim.scoreA, p.natty.sim.isAWinner, isTeamMatch(p.natty.teamA, teamId), 'playoff-natty', 'team')}
+        ${teamRow('SF2', p.natty.teamB, p.natty.sim.scoreB, !p.natty.sim.isAWinner, isTeamMatch(p.natty.teamB, teamId), 'playoff-natty', 'opp')}
         
         <!-- Win Probability KPI Meter -->
         <div style="display: flex; flex-direction: column; gap: 3px; margin: 4px 0 2px 0;">
@@ -6658,11 +7075,35 @@ window.toggleMoreToolsMenu = function(e) {
 };
 
 document.addEventListener('click', (e) => {
-  const menu = document.getElementById('moreToolsMenu');
-  const btn = document.getElementById('moreToolsBtn');
-  if (menu && menu.classList.contains('show')) {
-    if (!menu.contains(e.target) && (!btn || !btn.contains(e.target))) {
-      menu.classList.remove('show');
+  const moreMenu = document.getElementById('moreToolsMenu');
+  const moreBtn = document.getElementById('moreToolsBtn');
+  if (moreMenu && moreMenu.classList.contains('show')) {
+    if (!moreMenu.contains(e.target) && (!moreBtn || !moreBtn.contains(e.target))) {
+      moreMenu.classList.remove('show');
+    }
+  }
+
+  const presetMenu = document.getElementById('presetDropdownMenu');
+  const presetBtn = document.getElementById('presetDropdownBtn');
+  const presetWrap = document.getElementById('presetDropdownWrap');
+  const tuningSection = document.getElementById('tuningSection');
+  if (presetMenu && presetMenu.classList.contains('show')) {
+    if (!presetMenu.contains(e.target) && (!presetBtn || !presetBtn.contains(e.target))) {
+      presetMenu.classList.remove('show');
+      if (presetWrap) presetWrap.classList.remove('open');
+      if (tuningSection) tuningSection.classList.remove('has-open-dropdown');
+    }
+  }
+
+  const filterMenu = document.getElementById('scheduleFilterDropdownMenu');
+  const filterBtn = document.getElementById('scheduleFilterDropdownBtn');
+  const filterWrap = document.getElementById('scheduleFilterDropdownWrap');
+  const scheduleSection = document.getElementById('scheduleSection');
+  if (filterMenu && filterMenu.classList.contains('show')) {
+    if (!filterMenu.contains(e.target) && (!filterBtn || !filterBtn.contains(e.target))) {
+      filterMenu.classList.remove('show');
+      if (filterWrap) filterWrap.classList.remove('open');
+      if (scheduleSection) scheduleSection.classList.remove('has-open-dropdown');
     }
   }
 });
@@ -6920,15 +7361,15 @@ function renderAll30TeamsVaultMatrix() {
 // USER AUTHENTICATION & PROPHET CREATOR ID SYSTEM
 // ==========================================================================
 
-const AUTH_STORAGE_KEY = 'cfb_prophet_auth_user_v3';
-const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v3';
-const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v3';
-const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v3';
-const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v3';
+const AUTH_STORAGE_KEY = 'cfb_prophet_auth_user_v4';
+const BRACKET_STORAGE_KEY = 'cfb_prophet_saved_brackets_v5';
+const COMMUNITY_BRACKETS_KEY = 'cfb_prophet_community_brackets_v5';
+const COMMUNITY_CLOUD_TOPIC = 'cfb_prophet_community_2026_v5';
+const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v5';
 
 function getCurrentUser() {
   try {
-    const raw = localStorage.getItem(AUTH_STORAGE_KEY);
+    const raw = localStorage.getItem(AUTH_STORAGE_KEY) || localStorage.getItem('cfb_prophet_auth_user_v3');
     if (raw) return JSON.parse(raw);
   } catch (e) {}
   return null;
@@ -6938,9 +7379,11 @@ function setCurrentUser(user) {
   try {
     if (user) {
       localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user));
+      localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(user));
       localStorage.setItem('cfb_prophet_user_handle', user.displayName || user.handle || 'Coach');
     } else {
       localStorage.removeItem(AUTH_STORAGE_KEY);
+      localStorage.removeItem('cfb_prophet_auth_user_v3');
     }
   } catch (e) {}
   updateAuthUI();
@@ -6959,7 +7402,15 @@ function updateAuthUI() {
   if (user) {
     if (btn) btn.classList.add('logged-in');
     if (label) label.textContent = user.displayName || user.handle || 'Profile';
-    if (icon) icon.className = 'fa-solid fa-user-check';
+    if (icon) {
+      if (user.avatarUrl) {
+        icon.className = '';
+        icon.innerHTML = `<img src="${user.avatarUrl}" style="width: 18px; height: 18px; border-radius: 50%; object-fit: cover; vertical-align: middle;" alt="avatar">`;
+      } else {
+        icon.className = 'fa-solid fa-user-check';
+        icon.innerHTML = '';
+      }
+    }
 
     if (loggedInView) loggedInView.style.display = 'block';
     if (loggedOutView) loggedOutView.style.display = 'none';
@@ -6971,9 +7422,10 @@ function updateAuthUI() {
     const pSavedCount = document.getElementById('authProfileSavedCount');
 
     if (pName) pName.textContent = user.displayName || user.handle || 'Coach';
-    let badge = 'Prophet Verified';
+    let badge = 'Supabase Verified';
     if (user.provider === 'apple') badge = 'Apple Verified';
     else if (user.provider === 'google') badge = 'Google Verified';
+    else if (user.provider === 'github') badge = 'GitHub Verified';
     if (pEmail) pEmail.textContent = user.email ? `${user.email} • ${badge}` : `@${user.handle || 'Coach'} • ${badge}`;
 
     const favTeam = TEAMS_DATABASE[user.favTeam || 'usc'] || TEAMS_DATABASE['usc'];
@@ -6985,7 +7437,10 @@ function updateAuthUI() {
   } else {
     if (btn) btn.classList.remove('logged-in');
     if (label) label.textContent = 'Sign In';
-    if (icon) icon.className = 'fa-solid fa-user-circle';
+    if (icon) {
+      icon.className = 'fa-solid fa-user-circle';
+      icon.innerHTML = '';
+    }
 
     if (loggedInView) loggedInView.style.display = 'none';
     if (loggedOutView) loggedOutView.style.display = 'block';
@@ -6995,16 +7450,14 @@ window.updateAuthUI = updateAuthUI;
 
 function openAuthModal() {
   updateAuthUI();
-  const loggedOutView = document.getElementById('authLoggedOutView');
-  const googleApprovalView = document.getElementById('authGoogleApprovalView');
-  const appleApprovalView = document.getElementById('authAppleApprovalView');
-  if (loggedOutView) loggedOutView.style.display = 'block';
-  if (googleApprovalView) googleApprovalView.style.display = 'none';
-  if (appleApprovalView) appleApprovalView.style.display = 'none';
-
+  hideAuthAlert();
+  switchAuthTab('oauth');
   const modal = document.getElementById('authModal');
   if (modal) modal.classList.add('open');
   document.body.classList.add('modal-open');
+  if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.initGIS === 'function') {
+    window.CFBProphetSupabase.initGIS();
+  }
 }
 window.openAuthModal = openAuthModal;
 
@@ -7015,90 +7468,179 @@ function closeAuthModal() {
 }
 window.closeAuthModal = closeAuthModal;
 
-function handleAppleSignInClick() {
-  // Check if running inside native Swift iOS App with WKWebView bridge
-  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appleSignIn) {
-    window.webkit.messageHandlers.appleSignIn.postMessage({});
+let currentAuthPasswordMode = 'signin'; // 'signin' or 'signup'
+
+function switchAuthTab(tab) {
+  const tabs = ['oauth', 'password', 'magic'];
+  tabs.forEach(t => {
+    const btn = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}Btn`);
+    const content = document.getElementById(`auth${t.charAt(0).toUpperCase() + t.slice(1)}Tab`);
+    if (btn) btn.classList.toggle('active', t === tab);
+    if (content) content.style.display = (t === tab) ? 'block' : 'none';
+  });
+  hideAuthAlert();
+}
+window.switchAuthTab = switchAuthTab;
+
+function toggleAuthPasswordMode() {
+  currentAuthPasswordMode = (currentAuthPasswordMode === 'signin') ? 'signup' : 'signin';
+  const isReg = (currentAuthPasswordMode === 'signup');
+
+  const nameGroup = document.getElementById('authRegNameGroup');
+  const teamGroup = document.getElementById('authRegTeamGroup');
+  const submitLabel = document.getElementById('supaPasswordSubmitLabel');
+  const toggleBtn = document.getElementById('togglePasswordModeBtn');
+
+  if (nameGroup) nameGroup.style.display = isReg ? 'flex' : 'none';
+  if (teamGroup) teamGroup.style.display = isReg ? 'flex' : 'none';
+  if (submitLabel) submitLabel.textContent = isReg ? 'Create Account' : 'Sign In';
+  if (toggleBtn) toggleBtn.textContent = isReg ? 'Already have an account? Sign in' : "Don't have an account? Create one";
+  hideAuthAlert();
+}
+window.toggleAuthPasswordMode = toggleAuthPasswordMode;
+
+function showAuthAlert(msg, type = 'error') {
+  const banner = document.getElementById('authAlertBanner');
+  if (!banner) return;
+  banner.className = `auth-alert-banner ${type}`;
+  let icon = '<i class="fa-solid fa-circle-exclamation"></i>';
+  if (type === 'success') icon = '<i class="fa-solid fa-circle-check"></i>';
+  else if (type === 'info') icon = '<i class="fa-solid fa-circle-info"></i>';
+  banner.innerHTML = `${icon} <span>${msg}</span>`;
+  banner.style.display = 'flex';
+}
+window.showAuthAlert = showAuthAlert;
+
+function hideAuthAlert() {
+  const banner = document.getElementById('authAlertBanner');
+  if (banner) banner.style.display = 'none';
+}
+window.hideAuthAlert = hideAuthAlert;
+
+async function handleSupabaseGoogleSignIn() {
+  hideAuthAlert();
+  if (window.CFBProphetSupabase) {
+    const res = await window.CFBProphetSupabase.signInWithGoogle();
+    if (res && res.error) {
+      const msg = res.error.message?.includes('provider') 
+        ? "Google OAuth isn't enabled in Supabase Dashboard yet (Auth -> Providers). You can sign in right now with Email & Pass or Magic Link!" 
+        : (res.error.message || 'Google sign-in error.');
+      showAuthAlert(msg, 'error');
+    }
+  }
+}
+window.handleSupabaseGoogleSignIn = handleSupabaseGoogleSignIn;
+
+async function handleSupabaseGitHubSignIn() {
+  hideAuthAlert();
+  if (window.CFBProphetSupabase) {
+    const res = await window.CFBProphetSupabase.signInWithGitHub();
+    if (res && res.error) {
+      const msg = res.error.message?.includes('provider') 
+        ? "GitHub OAuth isn't enabled in Supabase Dashboard yet (Auth -> Providers). You can sign in right now with Email & Pass or Magic Link!" 
+        : (res.error.message || 'GitHub sign-in error.');
+      showAuthAlert(msg, 'error');
+    }
+  }
+}
+window.handleSupabaseGitHubSignIn = handleSupabaseGitHubSignIn;
+
+async function handleSupabaseAppleSignIn() {
+  hideAuthAlert();
+  if (window.CFBProphetSupabase) {
+    const res = await window.CFBProphetSupabase.signInWithApple();
+    if (res && res.error) {
+      const msg = res.error.message?.includes('provider') 
+        ? "Apple Sign-In isn't enabled in Supabase Dashboard yet (Auth -> Providers). You can sign in right now with Email & Pass or Magic Link!" 
+        : (res.error.message || 'Apple sign-in error.');
+      showAuthAlert(msg, 'error');
+    }
+  }
+}
+window.handleSupabaseAppleSignIn = handleSupabaseAppleSignIn;
+
+async function handleSupabaseMagicLinkAuth(e) {
+  if (e) e.preventDefault();
+  hideAuthAlert();
+  const emailInput = document.getElementById('supaMagicEmailInput');
+  const email = emailInput ? emailInput.value.trim() : '';
+
+  if (!email || !email.includes('@')) {
+    showAuthAlert('Please enter a valid email address.', 'error');
     return;
   }
 
-  // Web / PWA 1-Tap Prepopulated Approval Sheet
-  const loggedOutView = document.getElementById('authLoggedOutView');
-  const appleApprovalView = document.getElementById('authAppleApprovalView');
-
-  if (loggedOutView && appleApprovalView) {
-    loggedOutView.style.display = 'none';
-    appleApprovalView.style.display = 'block';
-  } else {
-    handleConfirmAppleApproval();
+  showAuthAlert('Sending magic login link...', 'info');
+  if (window.CFBProphetSupabase) {
+    const res = await window.CFBProphetSupabase.signInWithMagicLink(email);
+    if (res && res.error) {
+      showAuthAlert(res.error.message || 'Error sending magic link.', 'error');
+    } else {
+      showAuthAlert('⚡ Magic login link sent! Check your inbox to sign in.', 'success');
+    }
   }
 }
-window.handleAppleSignInClick = handleAppleSignInClick;
+window.handleSupabaseMagicLinkAuth = handleSupabaseMagicLinkAuth;
 
-function handleConfirmAppleApproval() {
-  const customName = document.getElementById('appleAuthNameInput')?.value?.trim() || (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');
-  const customEmail = document.getElementById('appleAuthEmailInput')?.value?.trim() || '';
+async function handleSupabasePasswordAuth(e) {
+  if (e) e.preventDefault();
+  hideAuthAlert();
+  const email = document.getElementById('supaEmailInput')?.value?.trim();
+  const password = document.getElementById('supaPasswordInput')?.value?.trim();
+  const displayName = document.getElementById('supaNameInput')?.value?.trim();
+  const favTeam = document.getElementById('supaFavTeamSelect')?.value || 'usc';
 
-  const emailSafe = customEmail ? customEmail.toLowerCase() : `coach_${Date.now()}@privaterelay.appleid.com`;
-  const user = {
-    id: `apple_${btoa(emailSafe).replace(/=/g, '').slice(0, 16)}`,
-    displayName: customName,
-    handle: customName,
-    email: customEmail || '',
-    provider: 'apple',
-    favTeam: state.currentTeamId || 'usc',
-    createdAt: new Date().toISOString()
-  };
-  setCurrentUser(user);
-  showCustomToast(`🍎 Welcome, ${user.displayName}! Signed in with Apple ID.`);
-  closeAuthModal();
-}
-window.handleConfirmAppleApproval = handleConfirmAppleApproval;
+  if (!email || !password) {
+    showAuthAlert('Please provide both email and password.', 'error');
+    return;
+  }
 
-function handleGoogleSignInClick() {
-  const loggedOutView = document.getElementById('authLoggedOutView');
-  const googleApprovalView = document.getElementById('authGoogleApprovalView');
-  const appleApprovalView = document.getElementById('authAppleApprovalView');
-
-  if (loggedOutView && googleApprovalView) {
-    loggedOutView.style.display = 'none';
-    googleApprovalView.style.display = 'block';
-    if (appleApprovalView) appleApprovalView.style.display = 'none';
+  if (currentAuthPasswordMode === 'signup') {
+    showAuthAlert('Creating your Supabase account...', 'info');
+    if (window.CFBProphetSupabase) {
+      const res = await window.CFBProphetSupabase.signUpWithPassword(email, password, displayName, favTeam);
+      if (res && res.error) {
+        showAuthAlert(res.error.message || 'Registration failed.', 'error');
+      } else {
+        showAuthAlert('🎉 Account created! Check your email to confirm registration.', 'success');
+        setTimeout(() => closeAuthModal(), 2000);
+      }
+    }
   } else {
-    handleConfirmGoogleApproval();
+    showAuthAlert('Signing in...', 'info');
+    if (window.CFBProphetSupabase) {
+      const res = await window.CFBProphetSupabase.signInWithPassword(email, password);
+      if (res && res.error) {
+        showAuthAlert(res.error.message || 'Invalid email or password.', 'error');
+      } else {
+        showCustomToast('🎉 Signed in successfully!');
+        closeAuthModal();
+      }
+    }
   }
 }
-window.handleGoogleSignInClick = handleGoogleSignInClick;
+window.handleSupabasePasswordAuth = handleSupabasePasswordAuth;
 
-function handleConfirmGoogleApproval() {
-  const customName = document.getElementById('googleAuthNameInput')?.value?.trim() || (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');
-  const customEmail = document.getElementById('googleAuthEmailInput')?.value?.trim() || '';
-
-  const emailSafe = customEmail ? customEmail.toLowerCase() : `coach_${Date.now()}@gmail.com`;
-  const user = {
-    id: `google_${btoa(emailSafe).replace(/=/g, '').slice(0, 16)}`,
-    displayName: customName,
-    handle: customName,
-    email: customEmail || '',
-    provider: 'google',
-    favTeam: state.currentTeamId || 'usc',
-    createdAt: new Date().toISOString()
-  };
-  setCurrentUser(user);
-  showCustomToast(`🌐 Welcome, ${user.displayName}! Signed in with Google.`);
-  closeAuthModal();
+function toggleSupabaseConfigDrawer() {
+  const drawer = document.getElementById('supabaseConfigDrawer');
+  if (drawer) {
+    drawer.style.display = drawer.style.display === 'none' ? 'block' : 'none';
+  }
 }
-window.handleConfirmGoogleApproval = handleConfirmGoogleApproval;
+window.toggleSupabaseConfigDrawer = toggleSupabaseConfigDrawer;
 
-function backToAuthHome() {
-  const loggedOutView = document.getElementById('authLoggedOutView');
-  const googleApprovalView = document.getElementById('authGoogleApprovalView');
-  const appleApprovalView = document.getElementById('authAppleApprovalView');
-  if (loggedOutView) loggedOutView.style.display = 'block';
-  if (googleApprovalView) googleApprovalView.style.display = 'none';
-  if (appleApprovalView) appleApprovalView.style.display = 'none';
+function saveSupabaseConfigInputs() {
+  const url = document.getElementById('cfgSupabaseUrl')?.value?.trim();
+  const key = document.getElementById('cfgSupabaseKey')?.value?.trim();
+  if (url && key && window.CFBProphetSupabase) {
+    window.CFBProphetSupabase.setConfig(url, key);
+    showAuthAlert('✅ Supabase project connected successfully!', 'success');
+    toggleSupabaseConfigDrawer();
+  } else {
+    showAuthAlert('Please enter both Supabase URL and Anon Key.', 'error');
+  }
 }
-window.backToAuthHome = backToAuthHome;
+window.saveSupabaseConfigInputs = saveSupabaseConfigInputs;
 
 // Native Swift Bridge Callback for Apple Sign In
 window.handleAppleSignInResult = function(payload) {
@@ -7117,43 +7659,10 @@ window.handleAppleSignInResult = function(payload) {
   closeAuthModal();
 };
 
-function handleAuthFormSubmit(e) {
-  if (e) e.preventDefault();
-  const handleInput = document.getElementById('authHandleInput');
-  const pinInput = document.getElementById('authPinInput');
-  const favTeamSelect = document.getElementById('authFavTeamSelect');
-
-  const handle = handleInput ? handleInput.value.trim() : '';
-  const pin = pinInput ? pinInput.value.trim() : '';
-  const favTeam = favTeamSelect ? favTeamSelect.value : 'usc';
-
-  if (!handle || !pin) {
-    showCustomToast('⚠️ Please provide both a handle and security PIN/password.');
-    return;
-  }
-
-  const user = {
-    id: `prophet_${btoa(handle.toLowerCase() + ':' + pin).replace(/=/g, '').slice(0, 18)}`,
-    displayName: handle,
-    handle: handle,
-    email: handle.includes('@') ? handle : `${handle.toLowerCase()}@prophet.ai`,
-    provider: 'prophet',
-    favTeam: favTeam,
-    createdAt: new Date().toISOString()
-  };
-
-  setCurrentUser(user);
-  showCustomToast(`🎉 Welcome back, ${user.displayName}!`);
-  closeAuthModal();
-}
-window.handleAuthFormSubmit = handleAuthFormSubmit;
-
-function handleRegisterAccountClick() {
-  handleAuthFormSubmit();
-}
-window.handleRegisterAccountClick = handleRegisterAccountClick;
-
 function handleSignOutClick() {
+  if (window.CFBProphetSupabase) {
+    window.CFBProphetSupabase.signOut();
+  }
   setCurrentUser(null);
   showCustomToast('👋 Signed out of CFB Prophet.');
   closeAuthModal();
@@ -7226,6 +7735,7 @@ function saveCurrentProjectionAsBracket(name, creator, notes) {
     simState: {
       teamId: state.currentTeamId || getTopRankedTeamId() || 'ohiostate',
       userPicks: JSON.parse(JSON.stringify(state.userPicks || {})),
+      manualScores: JSON.parse(JSON.stringify(state.manualScores || {})),
       ccgPicks: JSON.parse(JSON.stringify(state.ccgPicks || {})),
       playoffPicks: JSON.parse(JSON.stringify(state.playoffPicks || {})),
       teamSliders: JSON.parse(JSON.stringify(state.teamSliders || {})),
@@ -7238,6 +7748,10 @@ function saveCurrentProjectionAsBracket(name, creator, notes) {
   try {
     localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
   } catch (e) {}
+
+  if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.saveBracket === 'function') {
+    window.CFBProphetSupabase.saveBracket(bracketObj);
+  }
 
   return bracketObj;
 }
@@ -7265,56 +7779,70 @@ function getSavedBrackets() {
   if (!currentUser) return [];
 
   const userDisplayName = (currentUser.displayName || '').trim().toLowerCase();
-  const userHandle = (currentUser.handle || '').trim().toLowerCase();
   const userEmail = (currentUser.email || '').trim().toLowerCase();
+  const userId = currentUser.id;
 
-  let myBrackets = [];
-  try {
-    const raw = localStorage.getItem(BRACKET_STORAGE_KEY);
-    if (raw) myBrackets = JSON.parse(raw) || [];
-  } catch (e) {}
+  let allLocalBrackets = [];
+  const storageKeys = [
+    BRACKET_STORAGE_KEY,
+    'cfb_prophet_saved_brackets_v5',
+    'cfb_prophet_saved_brackets_v4'
+  ];
 
-  // Filter local storage to only brackets that belong to this logged in user
-  myBrackets = myBrackets.filter(b => {
-    if (!b || !b.id) return false;
-    const cr = (b.creator || '').trim().toLowerCase();
-    const crEmail = (b.creatorEmail || '').trim().toLowerCase();
-    return (b.creatorId && b.creatorId === currentUser.id) ||
-           (cr && (cr === userDisplayName || cr === userHandle || userDisplayName.includes(cr))) ||
-           (crEmail && userEmail && crEmail === userEmail);
+  storageKeys.forEach(k => {
+    try {
+      const raw = localStorage.getItem(k);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          allLocalBrackets.push(...parsed);
+        }
+      }
+    } catch (e) {}
   });
 
-  // Also include matching community brackets
-  try {
-    const rawComm = localStorage.getItem(COMMUNITY_BRACKETS_KEY);
-    if (rawComm) {
-      const commList = JSON.parse(rawComm) || [];
-      commList.forEach(b => {
-        if (!b || !b.name || !b.id) return;
-        const cr = (b.creator || '').trim().toLowerCase();
-        const crEmail = (b.creatorEmail || '').trim().toLowerCase();
-        const matchesUser = (b.creatorId && b.creatorId === currentUser.id) ||
-                            (cr && (cr === userDisplayName || cr === userHandle || userDisplayName.includes(cr))) ||
-                            (crEmail && userEmail && crEmail === userEmail);
-        if (matchesUser) {
-          myBrackets.push(b);
-        }
-      });
+  const deletedIds = getDeletedBracketIds();
+  const idMap = new Map();
+
+  allLocalBrackets.forEach(b => {
+    if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || deletedIds.has(b.id)) return;
+
+    const crEmail = (b.creatorEmail || '').trim().toLowerCase();
+    const crId = b.creatorId;
+
+    // Strict account ownership:
+    let isOwner = false;
+    if (crId && userId && crId === userId) {
+      isOwner = true;
+    } else if (crEmail && userEmail && crEmail === userEmail) {
+      isOwner = true;
     }
+
+    if (isOwner) {
+      idMap.set(b.id, b);
+    }
+  });
+
+  // Personal Jake Johnson account owns USC Wins Out by default
+  const isWorkAccount = userDisplayName.includes('jake t') || (userEmail && userEmail.includes('work'));
+  const isPersonalJake = !isWorkAccount && (userDisplayName === 'jake johnson' || userDisplayName === 'jake' || (userEmail && (userEmail.includes('jajo9147') || userEmail.includes('jakejohnson'))));
+  
+  if (isPersonalJake) {
+    const uscCurated = createUscWinsOutBracket();
+    if (!deletedIds.has(uscCurated.id) && !idMap.has(uscCurated.id)) {
+      uscCurated.creatorId = userId;
+      uscCurated.creator = currentUser.displayName || 'Jake Johnson';
+      if (userEmail) uscCurated.creatorEmail = currentUser.email;
+      idMap.set(uscCurated.id, uscCurated);
+    }
+  }
+
+  const finalBrackets = Array.from(idMap.values());
+  try {
+    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(finalBrackets));
   } catch(e) {}
 
-  // Filter out deleted IDs and duplicate benchmarks
-  const deletedIds = getDeletedBracketIds();
-  myBrackets = myBrackets.filter(b => b && b.id && b.id !== 'bracket_prophet_ai_baseline' && !deletedIds.has(b.id));
-
-  // Deduplicate by normalized ID
-  const idMap = new Map();
-  myBrackets.forEach(b => {
-    if (!b || !b.id) return;
-    idMap.set(b.id, b);
-  });
-
-  return Array.from(idMap.values());
+  return finalBrackets;
 }
 
 
@@ -7324,7 +7852,7 @@ function createProphetAiBenchmarkBracket() {
     name: "Prophet AI's Picks",
     creator: 'Prophet AI (Model Benchmark)',
     notes: 'The golden standard: 10,000 Monte Carlo simulation baseline. Can you beat the AI?',
-    createdAt: '2026-08-26T12:00:00Z',
+    createdAt: '2026-08-27T12:00:00Z',
     mode: 'baseline',
     isAdminBenchmark: true,
     isPublic: true,
@@ -7333,8 +7861,8 @@ function createProphetAiBenchmarkBracket() {
       name: 'Ohio State Buckeyes',
       shortName: 'Ohio State',
       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',
-      score: 35,
-      oppScore: 30
+      score: 34,
+      oppScore: 24
     },
     runnerUp: {
       id: 'oregon',
@@ -7342,25 +7870,25 @@ function createProphetAiBenchmarkBracket() {
       shortName: 'Oregon'
     },
     seeds: [
-      { seed: 1, id: 'ohiostate', name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png', wins: 12, losses: 1 },
-      { seed: 2, id: 'georgia', name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png', wins: 12, losses: 1 },
-      { seed: 3, id: 'clemson', name: 'Clemson', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/228.png', wins: 11, losses: 2 },
-      { seed: 4, id: 'utah', name: 'Utah', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/254.png', wins: 11, losses: 2 },
-      { seed: 5, id: 'oregon', name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 11, losses: 1 },
-      { seed: 6, id: 'texas', name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', wins: 11, losses: 2 },
-      { seed: 7, id: 'pennstate', name: 'Penn State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/213.png', wins: 11, losses: 1 },
-      { seed: 8, id: 'notredame', name: 'Notre Dame', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png', wins: 11, losses: 1 },
-      { seed: 9, id: 'alabama', name: 'Alabama', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/333.png', wins: 10, losses: 2 },
-      { seed: 10, id: 'indiana', name: 'Indiana', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png', wins: 10, losses: 2 },
-      { seed: 11, id: 'miami', name: 'Miami', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 10, losses: 2 },
-      { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png', wins: 12, losses: 1 }
+      { seed: 1,  id: 'ohiostate',  name: 'Ohio State',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',  wins: 13, losses: 0 },
+      { seed: 2,  id: 'texas',      name: 'Texas',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',  wins: 12, losses: 1 },
+      { seed: 3,  id: 'miami',      name: 'Miami',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 12, losses: 1 },
+      { seed: 4,  id: 'texastech',  name: 'Texas Tech',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png', wins: 10, losses: 3 },
+      { seed: 5,  id: 'oregon',     name: 'Oregon',      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 11, losses: 2 },
+      { seed: 6,  id: 'georgia',    name: 'Georgia',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',   wins: 11, losses: 2 },
+      { seed: 7,  id: 'notredame',  name: 'Notre Dame',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png',   wins: 11, losses: 1 },
+      { seed: 8,  id: 'alabama',    name: 'Alabama',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/333.png',  wins: 10, losses: 2 },
+      { seed: 9,  id: 'olemiss',    name: 'Ole Miss',    logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/145.png',  wins: 10, losses: 2 },
+      { seed: 10, id: 'indiana',    name: 'Indiana',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png',   wins: 10, losses: 2 },
+      { seed: 11, id: 'lsu',        name: 'LSU',         logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/99.png',   wins: 10, losses: 2 },
+      { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',   wins: 12, losses: 1 }
     ],
     playoffSummary: {
       fr: [
         { label: '#5 vs #12', winner: 'Oregon' },
-        { label: '#6 vs #11', winner: 'Texas' },
-        { label: '#7 vs #10', winner: 'Penn State' },
-        { label: '#8 vs #9', winner: 'Notre Dame' }
+        { label: '#6 vs #11', winner: 'Georgia' },
+        { label: '#7 vs #10', winner: 'Notre Dame' },
+        { label: '#8 vs #9', winner: 'Alabama' }
       ],
       qf: [
         { bowl: 'Sugar Bowl', winner: 'Ohio State' },
@@ -7376,6 +7904,7 @@ function createProphetAiBenchmarkBracket() {
     simState: {
       teamId: 'ohiostate',
       userPicks: {},
+      manualScores: {},
       ccgPicks: {},
       playoffPicks: {},
       teamSliders: {},
@@ -7392,8 +7921,9 @@ function createUscWinsOutBracket() {
   return {
     id: 'bracket_usc_wins_out_curated',
     name: 'USC Wins Out',
-    creator: 'Jake',
-    creatorId: 'creator_jake_usc',
+    creator: 'Jake Johnson',
+    creatorId: 'jake_johnson_personal',
+    creatorEmail: 'jakejohnson@usc.edu',
     notes: 'USC sweeps regular season, claims Big Ten crown, and runs the 12-team CFP table!',
     createdAt: '2026-08-26T12:00:00Z',
     mode: 'custom',
@@ -7445,23 +7975,11 @@ function createUscWinsOutBracket() {
     },
     simState: {
       teamId: 'usc',
-      userPicks: {
-        'game_usc_missouristate': 'usc',
-        'game_usc_georgiasouthern': 'usc',
-        'game_usc_purdue': 'usc',
-        'game_usc_wisconsin': 'usc',
-        'game_usc_minnesota': 'usc',
-        'game_usc_rutgers': 'usc',
-        'game_usc_michigan': 'usc',
-        'game_usc_nebraska': 'usc',
-        'game_usc_northwestern': 'usc',
-        'game_usc_iowa': 'usc',
-        'game_usc_oregon': 'usc',
-        'game_usc_notredame': 'usc'
-      },
+      userPicks: {},
+      manualScores: {},
       ccgPicks: { 'bigten': 'usc' },
       playoffPicks: { 'natty': 'usc' },
-      teamSliders: { 'usc': { talent: 92, coach: 90, offense: 94, defense: 88, discipline: 90, clutch: 92 } },
+      teamSliders: { 'usc': { qbRating: 25, groundAttack: 20, defenseHavoc: 15, turnoverLuck: 10, crowdNoise: 15 } },
       gameSliders: {}
     }
   };
@@ -7503,6 +8021,8 @@ function prepareCompactBracketPayload(b) {
     id: b.id,
     name: b.name,
     creator: b.creator || 'Prophet',
+    creatorId: b.creatorId || '',
+    creatorEmail: b.creatorEmail || '',
     notes: (b.notes || '').slice(0, 100),
     createdAt: b.createdAt || new Date().toISOString(),
     mode: b.mode || 'custom',
@@ -7536,6 +8056,7 @@ function prepareCompactBracketPayload(b) {
     simState: {
       teamId: b.simState?.teamId || getTopRankedTeamId() || 'ohiostate',
       userPicks: b.simState?.userPicks || {},
+      manualScores: b.simState?.manualScores || {},
       ccgPicks: b.simState?.ccgPicks || {},
       playoffPicks: b.simState?.playoffPicks || {},
       teamSliders: cleanTeamSliders,
@@ -7706,35 +8227,43 @@ function getCommunityBrackets() {
   const rawMy = getSavedBrackets().filter(b => b && b.id && !deletedIds.has(b.id));
   const rawCloud = getLocalCommunityBrackets().filter(b => b && b.id && !deletedIds.has(b.id));
 
-  // Strict deduplication by creator + normalized name
-  const nameMap = new Map();
+  const map = new Map();
 
-  // 1. Add curated baseline first (#1 Prophet AI, #2 USC Wins Out)
+  // 1. Curated benchmark & Jake Johnson's USC bracket
   curated.forEach(b => {
-    if (!deletedIds.has(b.id)) {
-      nameMap.set(b.name.trim().toLowerCase(), b);
+    if (b && b.id && !deletedIds.has(b.id)) {
+      map.set(b.id, b);
     }
   });
 
-  // 2. Add custom submissions
+  // 2. Any additional custom submitted community brackets
   [...rawCloud, ...rawMy].forEach(b => {
     if (!b || !b.id || !b.name) return;
     if (deletedIds.has(b.id)) return;
-    if (b.name.toLowerCase().includes('prophet ai')) return;
-    if (b.name.toLowerCase().includes('live sync test')) return;
+    if (b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_usc_wins_out_curated') return;
+    if (b.name.toLowerCase().includes('prophet ai') || b.name.toLowerCase().includes('live sync test')) return;
 
     const normKey = `${(b.creator || 'you').trim().toLowerCase()}__${b.name.trim().toLowerCase()}`;
-    const existing = nameMap.get(normKey);
+    const existing = map.get(b.id) || map.get(normKey);
     if (!existing || new Date(b.createdAt || 0) >= new Date(existing.createdAt || 0)) {
-      nameMap.set(normKey, b);
+      map.set(b.id, b);
     }
   });
 
-  const all = Array.from(nameMap.values());
+  const all = Array.from(map.values());
 
   // Attach Accuracy Scores & Sort
   all.forEach(b => {
     b.accuracy = calculateBracketAccuracy(b);
+  });
+
+  // Prophet AI and Jake Johnson's USC bracket always at top, then by accuracy
+  all.sort((a, b) => {
+    if (a.isAdminBenchmark || a.id === 'bracket_prophet_ai_baseline') return -1;
+    if (b.isAdminBenchmark || b.id === 'bracket_prophet_ai_baseline') return 1;
+    if (a.id === 'bracket_usc_wins_out_curated') return -1;
+    if (b.id === 'bracket_usc_wins_out_curated') return 1;
+    return (b.accuracy?.pts || 0) - (a.accuracy?.pts || 0);
   });
 
   return all;
@@ -8141,8 +8670,8 @@ function closeBracketVaultModal() {
 
 function deleteSavedBracket(bracketId, e) {
   if (e) {
-    e.stopPropagation();
-    e.preventDefault();
+    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    if (typeof e.preventDefault === 'function') e.preventDefault();
   }
   
   if (bracketId === 'bracket_prophet_ai_baseline') {
@@ -8153,17 +8682,51 @@ function deleteSavedBracket(bracketId, e) {
   addDeletedBracketId(bracketId);
   publishDeletionTombstoneToCloud(bracketId);
 
-  let myBrackets = getSavedBrackets().filter(b => b && b.id !== bracketId);
-  try {
-    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
-  } catch (e) {}
+  // Clean from all local storage buckets
+  const storageKeys = [
+    BRACKET_STORAGE_KEY,
+    'cfb_prophet_saved_brackets_v5',
+    'cfb_prophet_saved_brackets_v4',
+    'cfb_prophet_saved_brackets_v3',
+    'cfb_prophet_saved_brackets_v2',
+    'cfb_prophet_saved_brackets'
+  ];
 
-  let commBrackets = getLocalCommunityBrackets().filter(b => b && b.id !== bracketId);
-  try {
-    localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(commBrackets));
-  } catch (e) {}
+  storageKeys.forEach(k => {
+    try {
+      const raw = localStorage.getItem(k);
+      if (raw) {
+        let list = JSON.parse(raw);
+        if (Array.isArray(list)) {
+          list = list.filter(b => b && b.id !== bracketId);
+          localStorage.setItem(k, JSON.stringify(list));
+        }
+      }
+    } catch(err) {}
+  });
+
+  const commKeys = [
+    COMMUNITY_BRACKETS_KEY,
+    'cfb_prophet_community_brackets_v5',
+    'cfb_prophet_community_brackets_v4',
+    'cfb_prophet_community_brackets_v3'
+  ];
+
+  commKeys.forEach(k => {
+    try {
+      const raw = localStorage.getItem(k);
+      if (raw) {
+        let list = JSON.parse(raw);
+        if (Array.isArray(list)) {
+          list = list.filter(b => b && b.id !== bracketId);
+          localStorage.setItem(k, JSON.stringify(list));
+        }
+      }
+    } catch(err) {}
+  });
 
   renderSavedBracketsVault();
+  updateAuthUI();
   showCustomToast('🗑️ Bracket deleted permanently.');
 }
 
@@ -8252,17 +8815,17 @@ function generateCfpBracketCanvas(bracketObj) {
 
   // First Round (4 games)
   const fr = b.playoffSummary?.fr || [];
-  drawBracketMatchBox(leftX, 130, 220, 44, '5', seeds[4]?.name || 'Texas', '12', seeds[11]?.name || 'Boise St', fr[0]?.winner);
-  drawBracketMatchBox(leftX, 230, 220, 44, '6', seeds[5]?.name || 'Indiana', '11', seeds[10]?.name || 'LSU', fr[1]?.winner);
-  drawBracketMatchBox(leftX, 330, 220, 44, '7', seeds[6]?.name || 'Miami', '10', seeds[9]?.name || 'Oklahoma', fr[2]?.winner);
-  drawBracketMatchBox(leftX, 430, 220, 44, '8', seeds[7]?.name || 'Texas A&M', '9', seeds[8]?.name || 'Ole Miss', fr[3]?.winner);
+  drawBracketMatchBox(leftX, 130, 220, 44, '5', seeds[4]?.name || 'Oregon', '12', seeds[11]?.name || 'Boise St', fr[0]?.winner);
+  drawBracketMatchBox(leftX, 230, 220, 44, '6', seeds[5]?.name || 'Notre Dame', '11', seeds[10]?.name || 'Alabama', fr[1]?.winner);
+  drawBracketMatchBox(leftX, 330, 220, 44, '7', seeds[6]?.name || 'Texas', '10', seeds[9]?.name || 'LSU', fr[2]?.winner);
+  drawBracketMatchBox(leftX, 430, 220, 44, '8', seeds[7]?.name || 'Ole Miss', '9', seeds[8]?.name || 'Indiana', fr[3]?.winner);
 
   // Quarterfinals (4 games)
   const qf = b.playoffSummary?.qf || [];
-  drawBracketMatchBox(leftX + 260, 155, 220, 52, '1', seeds[0]?.name || 'Ohio St', '8/9', fr[3]?.winner || 'Texas A&M', qf[0]?.winner, 'Sugar Bowl');
-  drawBracketMatchBox(leftX + 260, 255, 220, 52, '2', seeds[1]?.name || 'Oregon', '7/10', fr[2]?.winner || 'Miami', qf[1]?.winner, 'Rose Bowl');
-  drawBracketMatchBox(leftX + 260, 355, 220, 52, '3', seeds[2]?.name || 'Texas', '6/11', fr[1]?.winner || 'Indiana', qf[2]?.winner, 'Peach Bowl');
-  drawBracketMatchBox(leftX + 260, 455, 220, 52, '4', seeds[3]?.name || 'Georgia', '5/12', fr[0]?.winner || 'Texas', qf[3]?.winner, 'Fiesta Bowl');
+  drawBracketMatchBox(leftX + 260, 155, 220, 52, '1', seeds[0]?.name || 'Georgia', '8/9', fr[3]?.winner || 'Indiana', qf[0]?.winner, 'Sugar Bowl');
+  drawBracketMatchBox(leftX + 260, 255, 220, 52, '2', seeds[1]?.name || 'Ohio St', '7/10', fr[2]?.winner || 'Texas', qf[1]?.winner, 'Rose Bowl');
+  drawBracketMatchBox(leftX + 260, 355, 220, 52, '3', seeds[2]?.name || 'Miami', '6/11', fr[1]?.winner || 'Notre Dame', qf[2]?.winner, 'Peach Bowl');
+  drawBracketMatchBox(leftX + 260, 455, 220, 52, '4', seeds[3]?.name || 'Texas Tech', '5/12', fr[0]?.winner || 'Oregon', qf[3]?.winner, 'Fiesta Bowl');
 
   // Semifinals (2 games)
   const sf = b.playoffSummary?.sf || [];
@@ -8360,6 +8923,7 @@ function loadSavedBracket(bracketId) {
   if (target.simState) {
     if (target.simState.teamId) state.currentTeamId = target.simState.teamId;
     state.userPicks = JSON.parse(JSON.stringify(target.simState.userPicks || {}));
+    state.manualScores = JSON.parse(JSON.stringify(target.simState.manualScores || {}));
     state.ccgPicks = JSON.parse(JSON.stringify(target.simState.ccgPicks || {}));
     state.playoffPicks = JSON.parse(JSON.stringify(target.simState.playoffPicks || {}));
     state.teamSliders = JSON.parse(JSON.stringify(target.simState.teamSliders || {}));
@@ -8373,27 +8937,7 @@ function loadSavedBracket(bracketId) {
   showCustomToast(`🎯 Loaded predictions: "${target.name}"`);
 }
 
-function deleteSavedBracket(bracketId, e) {
-  if (e) {
-    e.stopPropagation();
-    e.preventDefault();
-  }
-  addDeletedBracketId(bracketId);
-  publishDeletionTombstoneToCloud(bracketId);
 
-  let myBrackets = getSavedBrackets().filter(b => b.id !== bracketId);
-  try {
-    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
-  } catch (e) {}
-
-  let commBrackets = getLocalCommunityBrackets().filter(b => b.id !== bracketId);
-  try {
-    localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(commBrackets));
-  } catch (e) {}
-
-  renderSavedBracketsVault();
-  showCustomToast('🗑️ Bracket deleted permanently across all devices.');
-}
 
 function copyTextToClipboardSafe(text, successMsg = 'Copied to clipboard!') {
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -8640,6 +9184,9 @@ function clearTeamSearch() {
   }
   if (clearBtn) clearBtn.style.display = 'none';
   if (dropdown) dropdown.style.display = 'none';
+  document.querySelectorAll('.team-pill-btn').forEach(btn => {
+    btn.style.display = '';
+  });
 }
 
 window.openAiTuningModal = openAiTuningModal;
@@ -8664,7 +9211,7 @@ window.deleteSavedBracket = deleteSavedBracket;
 window.openBracketQrModal = openBracketQrModal;
 window.closeBracketQrModal = closeBracketQrModal;
 window.copyActiveQrLink = copyActiveQrLink;
-window.importBracketFromPrompt = importBracketFromPrompt;
+// window.importBracketFromPrompt (cleaned)
 
 
 

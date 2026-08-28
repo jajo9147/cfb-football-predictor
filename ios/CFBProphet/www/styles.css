@@ -377,6 +377,17 @@ body.theme-colorado {
   --color-bg-surface: #171510;
 }
 
+/* 31. Arizona State Sun Devils */
+body.theme-arizonastate {
+  --color-brand-primary: #8C1D40;
+  --color-brand-secondary: #FFC627;
+  --color-brand-accent: #FFC627;
+  --color-brand-glow: rgba(255, 198, 39, 0.55);
+  --color-brand-border: rgba(140, 29, 64, 0.45);
+  --color-bg-base: #0D0508;
+  --color-bg-surface: #180B10;
+}
+
 /* ==========================================================================
    BASE STYLES & LAYOUT
    ========================================================================== */
@@ -2070,6 +2081,93 @@ select option {
   display: flex;
   align-items: center;
   gap: 0.35rem;
+}
+
+.editable-score-box {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 3px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all var(--transition-fast);
+}
+
+.editable-score-box:hover,
+.editable-score-box:focus-within {
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.2);
+}
+
+.score-input {
+  width: 44px;
+  height: 34px;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #F8FAFC;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  transition: all var(--transition-fast);
+  -moz-appearance: textfield;
+}
+
+.score-input::-webkit-outer-spin-button,
+.score-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.score-input:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(51, 65, 85, 0.9);
+}
+
+.score-input:focus {
+  border-color: #38BDF8;
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+}
+
+.score-input.win-score {
+  color: #34D399;
+}
+
+.score-sub-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.reset-score-mini-btn {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #F87171;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.65rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: all var(--transition-fast);
+}
+
+.reset-score-mini-btn:hover {
+  background: rgba(239, 68, 68, 0.35);
+  color: #FFFFFF;
+}
+
+.manual-score-badge {
+  background: rgba(56, 189, 248, 0.2) !important;
+  color: #38BDF8 !important;
+  border-color: rgba(56, 189, 248, 0.4) !important;
 }
 
 .score-divider {
@@ -4437,38 +4535,109 @@ select option {
   box-shadow: 0 2px 14px var(--color-brand-glow);
 }
 
-/* More Tools Dropdown Menu */
-.more-tools-dropdown-wrap {
+/* Unified High-Tech Custom Dropdowns (More Tools, AI Tuning Presets, Schedule Filters) */
+.more-tools-dropdown-wrap,
+.custom-dropdown-wrap {
   position: relative;
   display: inline-block;
+  z-index: 100;
 }
 
-.more-tools-menu {
+.more-tools-dropdown-wrap.open,
+.custom-dropdown-wrap.open {
+  z-index: 999999 !important;
+}
+
+.tuning-section.has-open-dropdown,
+.schedule-section.has-open-dropdown {
+  position: relative !important;
+  z-index: 99999 !important;
+}
+
+.more-tools-menu,
+.custom-dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  z-index: 9999;
-  min-width: 230px;
+  z-index: 9999999 !important;
+  min-width: 260px;
   background: rgba(14, 18, 28, 0.98);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-md);
   padding: 0.45rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(56, 189, 248, 0.25);
   display: none;
   flex-direction: column;
   gap: 3px;
+  animation: dropdownFadeSlide 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.more-tools-menu.show {
+@keyframes dropdownFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.more-tools-menu.show,
+.custom-dropdown-menu.show {
   display: flex !important;
 }
 
-.more-tools-menu .dropdown-item {
+.dropdown-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.9);
+  color: #F8FAFC;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-full);
+  padding: 0.45rem 0.95rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.dropdown-trigger-btn:hover {
+  border-color: #38BDF8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+  background: rgba(30, 41, 59, 0.95);
+  color: #FFFFFF;
+}
+
+.dropdown-trigger-btn.active,
+.dropdown-trigger-btn[aria-expanded="true"] {
+  border-color: #38BDF8;
+  background: rgba(30, 41, 59, 1);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.dropdown-arrow-icon {
+  font-size: 0.7rem;
+  color: #38BDF8;
+  transition: transform 0.2s ease;
+}
+
+.custom-dropdown-wrap.open .dropdown-arrow-icon,
+.more-tools-dropdown-wrap.open .dropdown-arrow-icon {
+  transform: rotate(180deg);
+}
+
+.more-tools-menu .dropdown-item,
+.custom-dropdown-menu .dropdown-item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
   width: 100%;
   padding: 0.6rem 0.85rem;
   background: transparent;
@@ -4483,9 +4652,44 @@ select option {
   transition: var(--transition-fast);
 }
 
-.more-tools-menu .dropdown-item:hover {
+.more-tools-menu .dropdown-item:hover,
+.custom-dropdown-menu .dropdown-item:hover {
   background: rgba(255, 255, 255, 0.08);
   color: #FFFFFF;
+}
+
+.custom-dropdown-menu .dropdown-item.active {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38BDF8;
+  border-left: 3px solid #38BDF8;
+  font-weight: 700;
+}
+
+.custom-dropdown-menu .preset-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.custom-dropdown-menu .preset-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.custom-dropdown-menu .preset-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.custom-dropdown-menu .dropdown-item.active .preset-title {
+  color: #38BDF8;
+}
+
+.custom-dropdown-menu .preset-desc {
+  font-size: 0.68rem;
+  color: var(--color-text-dim, #94a3b8);
+  font-weight: 500;
 }
 
 /* Playoff Round Segment Tabs (Desktop + Mobile) */
@@ -4697,13 +4901,65 @@ body {
 
 /* Authentication Modal & Profile Card */
 #authModal .modal-dialog {
-  max-width: 440px;
+  max-width: 460px;
   width: 95vw;
-  padding: 1.5rem;
+  padding: 1.75rem;
   border-radius: var(--radius-lg);
-  background: #0B0F19;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  background: radial-gradient(120% 100% at 50% 0%, #131D31 0%, #080D1A 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(56, 189, 248, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+#authModal .modal-dialog::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #38BDF8, #818CF8, transparent);
+}
+
+.auth-tab-bar {
+  display: flex;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  margin-bottom: 1.25rem;
+  gap: 3px;
+}
+
+.auth-tab-btn {
+  flex: 1;
+  padding: 0.55rem 0.65rem;
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius-md) - 2px);
+  color: #94A3B8;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.auth-tab-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.auth-tab-btn.active {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.2));
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .apple-sign-in-btn {
@@ -4716,7 +4972,7 @@ body {
   color: #000000;
   border: none;
   border-radius: var(--radius-md);
-  padding: 0.72rem 1rem;
+  padding: 0.75rem 1rem;
   font-size: 0.92rem;
   font-weight: 700;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -4728,6 +4984,7 @@ body {
 .apple-sign-in-btn:hover {
   background: #E2E8F0;
   transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2);
 }
 
 .google-sign-in-btn {
@@ -4740,7 +4997,7 @@ body {
   color: #F8FAFC;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-md);
-  padding: 0.72rem 1rem;
+  padding: 0.75rem 1rem;
   font-size: 0.92rem;
   font-weight: 700;
   font-family: var(--font-body);
@@ -4753,6 +5010,7 @@ body {
   background: rgba(51, 65, 85, 1);
   border-color: rgba(255, 255, 255, 0.35);
   transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(66, 133, 244, 0.25);
 }
 
 .google-icon {
@@ -4766,7 +5024,7 @@ body {
   text-align: center;
   margin: 1.15rem 0;
   color: #64748B;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-family: var(--font-mono);
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -4799,21 +5057,53 @@ body {
 }
 
 .auth-input {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(10, 16, 30, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-md);
-  padding: 0.65rem 0.85rem;
+  padding: 0.7rem 0.9rem;
   color: #FFFFFF;
   font-family: var(--font-body);
   font-size: 0.88rem;
   width: 100%;
   box-sizing: border-box;
+  transition: var(--transition-fast);
 }
 
 .auth-input:focus {
   outline: none;
   border-color: #38BDF8;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.auth-alert-banner {
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.auth-alert-banner.error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #FCA5A5;
+}
+
+.auth-alert-banner.success {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #6EE7B7;
+}
+
+.auth-alert-banner.info {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #7DD3FC;
 }
 
 /* Bracket Action Toolbar in CFP Section */
