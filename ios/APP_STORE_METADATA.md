@@ -33,28 +33,28 @@ college football,cfb,playoff simulator,12 team bracket,cfp,bowl games,football a
 
 ### Full App Store Description:
 ```
-Welcome to CFB Prophet — the ultimate College Football AI Predictor and 12-Team CFP Playoff Simulator for the 2026 season.
+Welcome to CFB Prophet - the ultimate College Football AI Predictor and 12-Team CFP Playoff Simulator for the 2026 season.
 
 Powered by a drive-by-drive Monte Carlo simulation engine, CFB Prophet lets you simulate every matchup, test custom offensive and defensive sliders, and forecast conference championships and the 12-team College Football Playoff tournament field with unprecedented accuracy.
 
-🏈 KEY FEATURES:
+KEY FEATURES:
 
-• 10,000+ MONTE CARLO SIMULATIONS
+* 10,000+ MONTE CARLO SIMULATIONS
 Simulate full games drive-by-drive factoring in tempo, turnover luck, red-zone efficiency, home-field advantage, and special teams variance.
 
-• 12-TEAM CFP TOURNAMENT BRACKET GENERATOR
+* 12-TEAM CFP TOURNAMENT BRACKET GENERATOR
 Automatically project the 4 first-round byes (#1 to #4 conference champions), on-campus first-round clashes (#5-#12), New Year's Six bowl matchups, and the National Championship Game.
 
-• PROPHET AI'S PICKS & GLOBAL LEADERBOARD
+* PROPHET AI'S PICKS AND GLOBAL LEADERBOARD
 Compete against Prophet AI's official 10,000-simulation golden standard benchmark. Submit your season picks or weekly forecasts and see your percentile rank and grading score.
 
-• 1-CLICK WEEKLY STANDINGS FILTER
+* 1-CLICK WEEKLY STANDINGS FILTER
 Filter matchups, results, and accuracy scores seamlessly from Week 0 through Rivalry Week 14, Conference Championships (CCG), and the CFP Playoff.
 
-• ALL 30 FBS TEAMS GAME MATRIX
+* ALL 30 FBS TEAMS GAME MATRIX
 Explore full 12-game 2026 schedules, projected win-loss records, and BYE-week analysis for top powerhouses nationwide.
 
-• INSTANT DEVICE SYNC & HD BRACKET EXPORTS
+* INSTANT DEVICE SYNC AND HD BRACKET EXPORTS
 Sync predictions instantly between your iPhone, iPad, and desktop with offline client-side QR codes. Export 1200x675 HD tournament graphics with 1-click sharing to iMessage, WhatsApp, and social feeds.
 
 Take control of the 2026 college football season with CFB Prophet!
