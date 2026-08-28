@@ -7455,6 +7455,9 @@ function openAuthModal() {
   const modal = document.getElementById('authModal');
   if (modal) modal.classList.add('open');
   document.body.classList.add('modal-open');
+  if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.initGIS === 'function') {
+    window.CFBProphetSupabase.initGIS();
+  }
 }
 window.openAuthModal = openAuthModal;
 
