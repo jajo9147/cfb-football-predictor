@@ -147,76 +147,13 @@
     }
   }
 
-  const GOOGLE_CLIENT_ID = '114317205490-ppqup25cuv5ibu5508pooaqhjs188d8u.apps.googleusercontent.com';
-
-  function initGoogleIdentityServices() {
-    if (typeof window.google !== 'undefined' && window.google.accounts && window.google.accounts.id) {
-      try {
-        window.google.accounts.id.initialize({
-          client_id: GOOGLE_CLIENT_ID,
-          callback: async (response) => {
-            if (response && response.credential && supabaseClient) {
-              if (typeof window.showCustomToast === 'function') {
-                window.showCustomToast('🔄 Signing in with Google...');
-              }
-              const { data, error } = await supabaseClient.auth.signInWithIdToken({
-                provider: 'google',
-                token: response.credential
-              });
-              if (error) {
-                console.warn('[Supabase] GIS signInWithIdToken notice:', error.message);
-                signInWithGoogleOAuthFallback();
-              }
-            }
-          },
-          auto_select: false,
-          cancel_on_tap_outside: true
-        });
-
-        const btnEl = document.getElementById('googleGsiButtonContainer');
-        const manualBtn = document.getElementById('supabaseGoogleBtn');
-        if (btnEl) {
-          btnEl.innerHTML = '';
-          window.google.accounts.id.renderButton(btnEl, {
-            theme: 'filled_black',
-            size: 'large',
-            type: 'standard',
-            shape: 'pill',
-            text: 'continue_with',
-            logo_alignment: 'left',
-            width: 300
-          });
-          if (manualBtn) {
-            manualBtn.style.display = 'none';
-          }
-        }
-      } catch (e) {
-        console.warn('[Supabase] Google GIS init warning:', e);
-      }
-    }
-  }
-
-  // 1. Google OAuth with seamless in-page GIS One-Tap & Popup
+  // 1. Direct Supabase Google OAuth
   async function signInWithGoogle() {
     if (!isSupabaseConfigured()) {
       showConfigModal('Google OAuth requires Supabase Project URL & Anon Key.');
       return { error: { message: 'Supabase project not yet connected.' } };
     }
-
-    if (typeof window.google !== 'undefined' && window.google.accounts && window.google.accounts.id) {
-      try {
-        window.google.accounts.id.prompt((notification) => {
-          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-            signInWithGoogleOAuthFallback();
-          }
-        });
-        return { success: true };
-      } catch(err) {
-        return signInWithGoogleOAuthFallback();
-      }
-    }
-
-    return signInWithGoogleOAuthFallback();
+    return await signInWithGoogleOAuthFallback();
   }
 
   async function signInWithGoogleOAuthFallback() {
