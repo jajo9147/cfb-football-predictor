@@ -2853,6 +2853,17 @@ function renderGameSlidersInModal(game) {
       state.gameSliders[game.id].targetTeamId = focusTeam.id;
       state.gameSliders[game.id].isCustom = true;
 
+      // Unlock manual score so AI slider tuning immediately updates score live
+      if (state.manualScores && state.manualScores[game.id]) {
+        delete state.manualScores[game.id];
+      }
+      delete state.userPicks[game.id];
+      const counterpart = findCounterpartMatchup(state.currentTeamId, game);
+      if (counterpart && state.manualScores && state.manualScores[counterpart.oppGame.id]) {
+        delete state.manualScores[counterpart.oppGame.id];
+        delete state.userPicks[counterpart.oppGame.id];
+      }
+
       // Unset active preset
       document.querySelectorAll('.game-preset-btn').forEach(b => b.classList.remove('active'));
 
@@ -2890,6 +2901,17 @@ window.setGameWeatherCondition = function(weatherType) {
   state.gameSliders[game.id].weather = weatherType;
   state.gameSliders[game.id].isCustom = true;
 
+  // Unlock manual score so weather modifier calculates live
+  if (state.manualScores && state.manualScores[game.id]) {
+    delete state.manualScores[game.id];
+  }
+  delete state.userPicks[game.id];
+  const counterpart = findCounterpartMatchup(state.currentTeamId, game);
+  if (counterpart && state.manualScores && state.manualScores[counterpart.oppGame.id]) {
+    delete state.manualScores[counterpart.oppGame.id];
+    delete state.userPicks[counterpart.oppGame.id];
+  }
+
   document.querySelectorAll('.weather-chip[data-weather]').forEach(chip => {
     if (chip.dataset.weather === weatherType) chip.classList.add('active');
     else chip.classList.remove('active');
@@ -2919,6 +2941,17 @@ window.toggleGameInjuryCondition = function() {
   const currentInjury = !state.gameSliders[game.id].injury;
   state.gameSliders[game.id].injury = currentInjury;
   state.gameSliders[game.id].isCustom = true;
+
+  // Unlock manual score so injury penalty calculates live
+  if (state.manualScores && state.manualScores[game.id]) {
+    delete state.manualScores[game.id];
+  }
+  delete state.userPicks[game.id];
+  const counterpart = findCounterpartMatchup(state.currentTeamId, game);
+  if (counterpart && state.manualScores && state.manualScores[counterpart.oppGame.id]) {
+    delete state.manualScores[counterpart.oppGame.id];
+    delete state.userPicks[counterpart.oppGame.id];
+  }
 
   const chip = document.getElementById('injuryChipBtn');
   if (chip) {
@@ -2998,6 +3031,17 @@ window.applyAndSimulateModalGame = function() {
   }
   state.gameSliders[game.id].targetTeamId = focusId;
   state.gameSliders[game.id].isCustom = true;
+
+  // Clear manual score lock so AI simulation calculates live with sliders
+  if (state.manualScores && state.manualScores[game.id]) {
+    delete state.manualScores[game.id];
+  }
+  delete state.userPicks[game.id];
+  const counterpart = findCounterpartMatchup(state.currentTeamId, game);
+  if (counterpart && state.manualScores && state.manualScores[counterpart.oppGame.id]) {
+    delete state.manualScores[counterpart.oppGame.id];
+    delete state.userPicks[counterpart.oppGame.id];
+  }
 
   recalculateSeason();
   openSimModal(state.activeModalGame);
@@ -3083,6 +3127,17 @@ window.applyGameScenarioPreset = function(presetKey) {
     targetTeamId: focusId,
     isCustom: (presetKey !== 'baseline') || (prevWeather !== 'dome') || prevInjury
   };
+
+  // Clear manual score lock so the AI scenario preset takes effect
+  if (state.manualScores && state.manualScores[game.id]) {
+    delete state.manualScores[game.id];
+  }
+  delete state.userPicks[game.id];
+  const counterpart = findCounterpartMatchup(state.currentTeamId, game);
+  if (counterpart && state.manualScores && state.manualScores[counterpart.oppGame.id]) {
+    delete state.manualScores[counterpart.oppGame.id];
+    delete state.userPicks[counterpart.oppGame.id];
+  }
 
   // Update slider UI inputs in the modal without closing or re-opening tab
   document.querySelectorAll('.game-preset-btn').forEach(b => {
