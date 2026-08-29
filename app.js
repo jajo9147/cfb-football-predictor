@@ -7858,10 +7858,6 @@ function addDeletedBracketId(bracketId) {
 
 function getSavedBrackets() {
   const currentUser = getCurrentUser();
-  const userDisplayName = (currentUser?.displayName || '').trim().toLowerCase();
-  const userEmail = (currentUser?.email || '').trim().toLowerCase();
-  const userId = currentUser?.id || null;
-
   let allLocalBrackets = [];
   const storageKeys = [
     BRACKET_STORAGE_KEY,
@@ -7884,9 +7880,9 @@ function getSavedBrackets() {
   const deletedIds = getDeletedBracketIds();
   const idMap = new Map();
 
-  // 1. Preserve every custom bracket submitted on this device
+  // Preserve every custom bracket submitted on this device
   allLocalBrackets.forEach(b => {
-    if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || deletedIds.has(b.id)) return;
+    if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_usc_wins_out_curated' || deletedIds.has(b.id)) return;
     
     // Automatically associate with logged-in user profile if guest
     if (currentUser && (!b.creatorId || b.creatorId.startsWith('guest_'))) {
@@ -7897,22 +7893,6 @@ function getSavedBrackets() {
     
     idMap.set(b.id, b);
   });
-
-  // 2. Only provide default USC bracket if no picks have been submitted yet
-  if (idMap.size === 0) {
-    const isPersonalJake = !userDisplayName.includes('jake t') && (userDisplayName === 'jake johnson' || userDisplayName === 'jake' || (userEmail && (userEmail.includes('jajo9147') || userEmail.includes('jakejohnson'))));
-    if (isPersonalJake) {
-      const uscCurated = createUscWinsOutBracket();
-      if (!deletedIds.has(uscCurated.id)) {
-        if (currentUser) {
-          uscCurated.creatorId = currentUser.id;
-          uscCurated.creator = currentUser.displayName || 'Jake Johnson';
-          if (currentUser.email) uscCurated.creatorEmail = currentUser.email;
-        }
-        idMap.set(uscCurated.id, uscCurated);
-      }
-    }
-  }
 
   const finalBrackets = Array.from(idMap.values());
   try {
@@ -8063,7 +8043,7 @@ function createUscWinsOutBracket() {
 }
 
 function getCuratedExpertBrackets() {
-  return [createProphetAiBenchmarkBracket(), createUscWinsOutBracket()];
+  return [createProphetAiBenchmarkBracket()];
 }
 
 function getLocalCommunityBrackets() {
@@ -8336,12 +8316,10 @@ function getCommunityBrackets() {
     b.accuracy = calculateBracketAccuracy(b);
   });
 
-  // Prophet AI and Jake Johnson's USC bracket always at top, then by accuracy
+  // Prophet AI always at top as baseline, then sort by accuracy
   all.sort((a, b) => {
     if (a.isAdminBenchmark || a.id === 'bracket_prophet_ai_baseline') return -1;
     if (b.isAdminBenchmark || b.id === 'bracket_prophet_ai_baseline') return 1;
-    if (a.id === 'bracket_usc_wins_out_curated') return -1;
-    if (b.id === 'bracket_usc_wins_out_curated') return 1;
     return (b.accuracy?.pts || 0) - (a.accuracy?.pts || 0);
   });
 
