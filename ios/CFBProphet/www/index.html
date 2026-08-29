@@ -1232,16 +1232,32 @@
         </div>
       </div>
 
-      <!-- Tab Switcher Filter Dropdown -->
-      <div class="vault-filter-bar" style="margin-top: 0.5rem; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
-        <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1; min-width: 240px;">
-          <select id="vaultTabSelect" class="schedule-filter-select" onchange="switchVaultTab(this.value)" style="flex: 1; max-width: 320px; font-size: 0.82rem;">
-            <option value="weekly" selected>📅 Weekly Standings</option>
-            <option value="community">🏆 Season Standings</option>
-            <option value="allteams">🛡️ All 30 Teams Game Matrix</option>
-            <option value="mine">👤 My Submitted Picks</option>
-          </select>
+      <!-- Sleek Segmented Mode Switcher -->
+      <div class="vault-segmented-bar-wrapper">
+        <div class="vault-segmented-track" id="vaultSegmentedTrack">
+          <button class="vault-segment-btn active" id="tabWeeklyVaultBtn" onclick="switchVaultTab('weekly')">
+            <i class="fa-solid fa-calendar-days" style="color: #38BDF8;"></i>
+            <span>Weekly Slate</span>
+          </button>
+          <button class="vault-segment-btn" id="tabCommunityVaultBtn" onclick="switchVaultTab('community')">
+            <i class="fa-solid fa-trophy" style="color: #F59E0B;"></i>
+            <span>Season Standings</span>
+          </button>
+          <button class="vault-segment-btn" id="tabAllTeamsVaultBtn" onclick="switchVaultTab('allteams')">
+            <i class="fa-solid fa-shield-halved" style="color: #10B981;"></i>
+            <span>30-Team Matrix</span>
+          </button>
+          <button class="vault-segment-btn" id="tabMyVaultBtn" onclick="switchVaultTab('mine')">
+            <i class="fa-solid fa-user" style="color: #A855F7;"></i>
+            <span>My Picks</span>
+          </button>
         </div>
+        <select id="vaultTabSelect" class="schedule-filter-select" onchange="switchVaultTab(this.value)" style="display: none;">
+          <option value="weekly" selected>📅 Weekly Standings</option>
+          <option value="community">🏆 Season Standings</option>
+          <option value="allteams">🛡️ All 30 Teams Game Matrix</option>
+          <option value="mine">👤 My Submitted Picks</option>
+        </select>
       </div>
 
       <!-- Weekly Selector Filter (Shown across tabs for instant 1-click week filtering) -->

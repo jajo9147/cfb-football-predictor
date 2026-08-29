@@ -5892,9 +5892,65 @@ body {
    CFB PROPHET WEEKLY SCORING, ALL-TEAMS MATRIX & IOS SHARE STYLES
    ========================================================================== */
 
-/* ==========================================================================
-   CFB PROPHET WEEKLY SCORING, ALL-TEAMS MATRIX & IOS SHARE STYLES
-   ========================================================================== */
+/* Sleek Glass Segmented Navigation Track */
+.vault-segmented-bar-wrapper {
+  margin-top: 0.4rem;
+  margin-bottom: 0.35rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0 !important;
+}
+
+.vault-segmented-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 3px 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.vault-segmented-track::-webkit-scrollbar {
+  display: none;
+}
+
+.vault-segment-btn {
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  font-family: var(--font-display, inherit);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.42rem 0.95rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.vault-segment-btn:hover {
+  color: #F8FAFC;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.vault-segment-btn.active {
+  background: linear-gradient(135deg, #0284C7, #2563EB);
+  color: #FFFFFF;
+  font-weight: 800;
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.45);
+}
 
 #vaultWeekSelectorStrip,
 .vault-week-selector-strip {
