@@ -8379,17 +8379,30 @@ function renderSavedBracketsVault() {
     return;
   }
 
-  const brackets = isCommunity ? getCommunityBrackets() : getSavedBrackets();
-
   if (brackets.length === 0) {
+    const evaluated = evaluateRegularSeasonAllTeams();
+    const ccg = simulateConferenceChampionships(evaluated);
+    const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
+    const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
+    const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate']);
+
     grid.innerHTML = `
-      <div class="empty-vault-state">
-        <i class="fa-solid fa-clipboard-question"></i>
-        <h3>No Submitted Picks Found</h3>
-        <p>Make your custom game picks or tune sliders, then click "Submit Current Picks" to compete against Prophet AI!</p>
-        <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="margin-top: 0.5rem;">
-          <i class="fa-solid fa-plus"></i> Submit Current Picks
-        </button>
+      <div class="empty-vault-state" style="padding: 1.5rem 1rem; border: 1px dashed rgba(56, 189, 248, 0.3); border-radius: var(--radius-lg); background: rgba(15, 23, 42, 0.6); text-align: center;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: rgba(56, 189, 248, 0.1); margin-bottom: 0.75rem;">
+          <img src="${champTeam.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png'}" style="width: 36px; height: 36px; object-fit: contain;">
+        </div>
+        <h3 style="color: #F8FAFC; font-size: 1.15rem; margin-bottom: 0.35rem;">Active ${champTeam.name} Projection Ready</h3>
+        <p style="color: #94A3B8; max-width: 420px; margin: 0 auto 1.25rem; font-size: 0.85rem; line-height: 1.5;">
+          Lock in your current ${champTeam.shortName || champTeam.name} simulation to track your live score and compete against Prophet AI on the leaderboard!
+        </p>
+        <div style="display: flex; gap: 0.65rem; justify-content: center; flex-wrap: wrap;">
+          <button class="save-bracket-btn" onclick="saveActiveProjectionDirectly()" style="background: linear-gradient(135deg, #10B981, #059669); padding: 0.6rem 1.25rem; font-size: 0.88rem; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);">
+            <i class="fa-solid fa-bolt"></i> Lock In & Submit ${champTeam.shortName || 'Picks'}
+          </button>
+          <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(255, 255, 255, 0.15); padding: 0.6rem 1rem; font-size: 0.88rem;">
+            <i class="fa-solid fa-sliders"></i> Customize Name / Notes
+          </button>
+        </div>
       </div>
     `;
     return;
@@ -8749,6 +8762,24 @@ function handleConfirmSaveBracket() {
   openBracketVaultModal();
   syncCommunityBracketsFromCloud();
 }
+
+function saveActiveProjectionDirectly() {
+  const currentUser = getCurrentUser();
+  const evaluated = evaluateRegularSeasonAllTeams();
+  const ccg = simulateConferenceChampionships(evaluated);
+  const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
+  const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
+  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate']);
+
+  const name = `${champTeam.shortName || 'CFB'} Natty Projection`;
+  const creator = currentUser ? currentUser.displayName : (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');
+  const saved = saveCurrentProjectionAsBracket(name, creator, 'Locked in 2026 Prediction');
+  saved.isPublic = true;
+  publishBracketToCloud(saved);
+  showCustomToast(`🎉 Bracket "${saved.name}" locked in & submitted!`);
+  renderSavedBracketsVault();
+}
+window.saveActiveProjectionDirectly = saveActiveProjectionDirectly;
 
 function openBracketVaultModal() {
   const modal = document.getElementById('bracketVaultModal');
