@@ -7858,11 +7858,17 @@ function addDeletedBracketId(bracketId) {
 
 function getSavedBrackets() {
   const currentUser = getCurrentUser();
+  const userDisplayName = (currentUser?.displayName || '').trim().toLowerCase();
+  const userEmail = (currentUser?.email || '').trim().toLowerCase();
+  const userId = currentUser?.id || 'jake_johnson_personal';
+  const creatorName = currentUser?.displayName || 'Jake Johnson';
+
   let allLocalBrackets = [];
   const storageKeys = [
     BRACKET_STORAGE_KEY,
     'cfb_prophet_saved_brackets_v5',
-    'cfb_prophet_saved_brackets_v4'
+    'cfb_prophet_saved_brackets_v4',
+    'cfb_prophet_saved_brackets_v3'
   ];
 
   storageKeys.forEach(k => {
@@ -7880,9 +7886,26 @@ function getSavedBrackets() {
   const deletedIds = getDeletedBracketIds();
   const idMap = new Map();
 
-  // Preserve every custom bracket submitted on this device
+  // 1. Restore user's custom Texas Natty Run and USC Wins Out picks
+  const texasBracket = createTexasWinsOutBracket();
+  if (!deletedIds.has(texasBracket.id)) {
+    texasBracket.creatorId = userId;
+    texasBracket.creator = creatorName;
+    if (userEmail) texasBracket.creatorEmail = userEmail;
+    idMap.set(texasBracket.id, texasBracket);
+  }
+
+  const uscBracket = createUscWinsOutBracket();
+  if (!deletedIds.has(uscBracket.id)) {
+    uscBracket.creatorId = userId;
+    uscBracket.creator = creatorName;
+    if (userEmail) uscBracket.creatorEmail = userEmail;
+    idMap.set(uscBracket.id, uscBracket);
+  }
+
+  // 2. Preserve any other custom bracket submitted on this device
   allLocalBrackets.forEach(b => {
-    if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_usc_wins_out_curated' || deletedIds.has(b.id)) return;
+    if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || deletedIds.has(b.id)) return;
     
     // Automatically associate with logged-in user profile if guest
     if (currentUser && (!b.creatorId || b.creatorId.startsWith('guest_'))) {
@@ -7974,6 +7997,74 @@ function createBaselineBracketObject() {
   return createProphetAiBenchmarkBracket();
 }
 
+function createTexasWinsOutBracket() {
+  return {
+    id: 'bracket_texas_natty_run_curated',
+    name: 'Texas Natty Run',
+    creator: 'Jake Johnson',
+    creatorId: 'jake_johnson_personal',
+    creatorEmail: 'jajo9147@gmail.com',
+    notes: 'Arch Manning MVP season, SEC Championship title, and runs the 12-team CFP table!',
+    createdAt: '2026-08-28T14:00:00Z',
+    mode: 'custom',
+    isPublic: true,
+    champion: {
+      id: 'texas',
+      name: 'Texas Longhorns',
+      shortName: 'Texas',
+      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',
+      score: 35,
+      oppScore: 24
+    },
+    runnerUp: {
+      id: 'georgia',
+      name: 'Georgia Bulldogs',
+      shortName: 'Georgia'
+    },
+    seeds: [
+      { seed: 1, id: 'texas', name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', wins: 13, losses: 0 },
+      { seed: 2, id: 'ohiostate', name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png', wins: 12, losses: 1 },
+      { seed: 3, id: 'clemson', name: 'Clemson', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/228.png', wins: 12, losses: 1 },
+      { seed: 4, id: 'utah', name: 'Utah', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/254.png', wins: 11, losses: 2 },
+      { seed: 5, id: 'georgia', name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png', wins: 11, losses: 2 },
+      { seed: 6, id: 'oregon', name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 11, losses: 1 },
+      { seed: 7, id: 'alabama', name: 'Alabama', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/333.png', wins: 10, losses: 2 },
+      { seed: 8, id: 'notredame', name: 'Notre Dame', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png', wins: 10, losses: 2 },
+      { seed: 9, id: 'pennstate', name: 'Penn State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/213.png', wins: 10, losses: 2 },
+      { seed: 10, id: 'usc', name: 'USC', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/30.png', wins: 10, losses: 2 },
+      { seed: 11, id: 'olemiss', name: 'Ole Miss', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/145.png', wins: 10, losses: 2 },
+      { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png', wins: 12, losses: 1 }
+    ],
+    playoffSummary: {
+      fr: [
+        { label: '#5 vs #12', winner: 'Georgia' },
+        { label: '#6 vs #11', winner: 'Oregon' },
+        { label: '#7 vs #10', winner: 'Alabama' },
+        { label: '#8 vs #9', winner: 'Notre Dame' }
+      ],
+      qf: [
+        { bowl: 'Sugar Bowl', winner: 'Texas' },
+        { bowl: 'Rose Bowl', winner: 'Ohio State' },
+        { bowl: 'Peach Bowl', winner: 'Georgia' },
+        { bowl: 'Fiesta Bowl', winner: 'Oregon' }
+      ],
+      sf: [
+        { bowl: 'Orange Bowl', winner: 'Texas' },
+        { bowl: 'Cotton Bowl', winner: 'Georgia' }
+      ]
+    },
+    simState: {
+      teamId: 'texas',
+      userPicks: {},
+      manualScores: {},
+      ccgPicks: { 'sec': 'texas' },
+      playoffPicks: { 'natty': 'texas' },
+      teamSliders: { 'texas': { qbRating: 25, groundAttack: 20, defenseHavoc: 15, turnoverLuck: 10, crowdNoise: 15 } },
+      gameSliders: {}
+    }
+  };
+}
+
 function createUscWinsOutBracket() {
   return {
     id: 'bracket_usc_wins_out_curated',
@@ -8043,7 +8134,7 @@ function createUscWinsOutBracket() {
 }
 
 function getCuratedExpertBrackets() {
-  return [createProphetAiBenchmarkBracket()];
+  return [createProphetAiBenchmarkBracket(), createTexasWinsOutBracket(), createUscWinsOutBracket()];
 }
 
 function getLocalCommunityBrackets() {
@@ -8051,7 +8142,7 @@ function getLocalCommunityBrackets() {
     const raw = localStorage.getItem(COMMUNITY_BRACKETS_KEY);
     if (raw) {
       const deletedIds = getDeletedBracketIds();
-      return (JSON.parse(raw) || []).filter(b => b && b.id && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_usc_wins_out_curated' && !deletedIds.has(b.id));
+      return (JSON.parse(raw) || []).filter(b => b && b.id && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_texas_natty_run_curated' && b.id !== 'bracket_usc_wins_out_curated' && !deletedIds.has(b.id));
     }
   } catch (e) {}
   return [];
