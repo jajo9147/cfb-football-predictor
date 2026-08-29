@@ -1245,20 +1245,21 @@ function recalculateSeason() {
 
   let cfpSeed = 'BUBBLE / OUT';
   let cfpStatus = 'Missed 12-Team CFP';
-  let nattyOdds = '+8000';
-
+  let nattyOdds = team.titleOdds || '+3500';
   if (currentSeedNum >= 1 && currentSeedNum <= 4) {
     cfpSeed = `#${currentSeedNum} SEED`;
     cfpStatus = '1st Round Bye (Quarterfinals)';
-    nattyOdds = (currentSeedNum === 1) ? '+350' : '+450';
+    nattyOdds = team.titleOdds || '+350';
   } else if (currentSeedNum >= 5 && currentSeedNum <= 8) {
     cfpSeed = `#${currentSeedNum} SEED`;
     cfpStatus = `Hosts 1st Round (${team.stadiumCity || 'On Campus'})`;
-    nattyOdds = (currentSeedNum === 5) ? '+650' : '+950';
+    nattyOdds = team.titleOdds || '+1200';
   } else if (currentSeedNum >= 9 && currentSeedNum <= 12) {
     cfpSeed = `#${currentSeedNum} SEED`;
     cfpStatus = 'First Round Road Game';
-    nattyOdds = '+2200';
+    nattyOdds = team.titleOdds || '+2500';
+  } else {
+    nattyOdds = team.titleOdds || '+15000';
   }
 
   document.getElementById('kpiCfpSeed').innerText = cfpSeed;
@@ -7165,10 +7166,8 @@ window.openHypeCardModal = function(game) {
 // CFB PROPHET WEEK-BY-WEEK PREDICTION & 30-TEAM VAULT MATRIX ENGINE
 // ==========================================================================
 
-state.selectedVaultWeek = 'all'; // 'all', 'W0', 'W1', ... 'W14', 'CCG', 'CFP'
+state.selectedVaultWeek = 'W1'; // Default to current week (Week 1)
 const ALL_WEEKS_LIST = [
-  { key: 'all', label: 'All Weeks' },
-  { key: 'W0', label: 'Week 0' },
   { key: 'W1', label: 'Week 1' },
   { key: 'W2', label: 'Week 2' },
   { key: 'W3', label: 'Week 3' },
@@ -7184,7 +7183,8 @@ const ALL_WEEKS_LIST = [
   { key: 'W13', label: 'Week 13' },
   { key: 'W14', label: 'Week 14' },
   { key: 'CCG', label: 'Conf Champs' },
-  { key: 'CFP', label: 'CFP Playoff' }
+  { key: 'CFP', label: 'CFP Playoff' },
+  { key: 'all', label: 'Full Season Standings' }
 ];
 
 function getTeamsOnByeForWeek(targetWeek = 'W1') {
@@ -7428,9 +7428,12 @@ function updateAuthUI() {
     else if (user.provider === 'github') badge = 'GitHub Verified';
     if (pEmail) pEmail.textContent = user.email ? `${user.email} • ${badge}` : `@${user.handle || 'Coach'} • ${badge}`;
 
-    const favTeam = TEAMS_DATABASE[user.favTeam || 'usc'] || TEAMS_DATABASE['usc'];
+    const currentFavId = user.favTeam || state.currentTeamId || 'usc';
+    const favTeam = TEAMS_DATABASE[currentFavId] || TEAMS_DATABASE['usc'];
     if (pTeamName) pTeamName.textContent = favTeam.name;
     if (pTeamLogo) pTeamLogo.src = favTeam.logoUrl || '';
+
+    populateFavoriteTeamDropdown(currentFavId);
 
     const myBrackets = getSavedBrackets();
     if (pSavedCount) pSavedCount.textContent = `${myBrackets.length} Active Saved`;
@@ -7447,6 +7450,41 @@ function updateAuthUI() {
   }
 }
 window.updateAuthUI = updateAuthUI;
+
+function populateFavoriteTeamDropdown(selectedTeamId) {
+  const selectEl = document.getElementById('authFavoriteTeamSelect');
+  if (!selectEl) return;
+
+  const sortedTeams = Object.keys(TEAMS_DATABASE).map(k => TEAMS_DATABASE[k]).sort((a, b) => a.name.localeCompare(b.name));
+  selectEl.innerHTML = sortedTeams.map(t => `
+    <option value="${t.id}" ${t.id === selectedTeamId ? 'selected' : ''}>
+      ${t.name} (${t.conference || 'FBS'})
+    </option>
+  `).join('');
+}
+window.populateFavoriteTeamDropdown = populateFavoriteTeamDropdown;
+
+function handleFavoriteTeamChange(newTeamId) {
+  if (!newTeamId || !TEAMS_DATABASE[newTeamId]) return;
+  const user = getCurrentUser();
+  if (user) {
+    user.favTeam = newTeamId;
+    localStorage.setItem('cfb_prophet_current_user', JSON.stringify(user));
+  }
+  localStorage.setItem('cfb_prophet_fav_team', newTeamId);
+  
+  const favTeam = TEAMS_DATABASE[newTeamId];
+  const pTeamName = document.getElementById('authProfileTeamName');
+  const pTeamLogo = document.getElementById('authProfileTeamLogo');
+  if (pTeamName) pTeamName.textContent = favTeam.name;
+  if (pTeamLogo) pTeamLogo.src = favTeam.logoUrl || '';
+
+  selectTeam(newTeamId);
+  if (typeof showCustomToast === 'function') {
+    showCustomToast(`⭐ Favorite team updated to ${favTeam.name}!`);
+  }
+}
+window.handleFavoriteTeamChange = handleFavoriteTeamChange;
 
 function openAuthModal() {
   updateAuthUI();
@@ -8439,89 +8477,36 @@ function renderSavedBracketsVault() {
     `).join('');
 
     html += `
-      <div class="bracket-vault-card ${isActive ? 'active-bracket' : ''} ${isAiBenchmark ? 'ai-benchmark-card' : ''}" onclick="handleVaultCardClick('${b.id}', event)">
-        <div class="bracket-card-header">
-          <div style="display: flex; gap: 0.65rem; align-items: flex-start;">
-            <span class="bracket-rank-badge ${rankCls}">${rankMedal}</span>
-            <div>
-              <div class="bracket-card-title" style="${isAiBenchmark ? 'color: #38BDF8;' : ''}">
-                ${isAiBenchmark ? '<i class="fa-solid fa-robot" style="color: #38BDF8; margin-right: 4px;"></i>' : ''} ${b.name}
-              </div>
-              <div class="bracket-card-meta">
-                <span>By ${creatorLabel}</span>
-                <span>•</span>
-                <span>${dateStr}</span>
-                ${isWeekly ? `<span style="color: #38BDF8; font-weight: 700;">• ${state.selectedVaultWeek === 'all' ? 'Season Standings' : state.selectedVaultWeek + ' Score'}</span>` : ''}
-              </div>
-            </div>
+      <div class="leaderboard-compact-card ${isActive ? 'active-bracket' : ''} ${isAiBenchmark ? 'ai-benchmark-card' : ''}" onclick="openSubmissionDetailModal('${b.id}', event)">
+        <div class="lb-rank-col">
+          <span class="lb-rank-badge ${rankCls}">${rankMedal}</span>
+        </div>
+        
+        <div class="lb-user-col">
+          <div class="lb-user-header">
+            <span class="lb-user-name">${isAiBenchmark ? '🤖 Prophet AI' : (isOwner ? '👤 ' + (currentUser?.displayName || 'Jake Johnson') : (b.creator || 'Coach'))}</span>
+            ${isAiBenchmark ? '<span class="lb-type-badge ai">AI BENCHMARK</span>' : (isOwner ? '<span class="lb-type-badge you">YOUR PICKS</span>' : '')}
           </div>
-          ${isAiBenchmark ? `
-            <span class="bracket-mode-badge" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8; border-color: rgba(56, 189, 248, 0.5); font-weight: 800;">
-              <i class="fa-solid fa-robot"></i> GOLDEN BENCHMARK
-            </span>
-          ` : (isOwner ? `
-            <span class="bracket-mode-badge" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.5); font-weight: 800;">
-              <i class="fa-solid fa-user-check"></i> YOUR PICKS
-            </span>
-          ` : `
-            <span class="bracket-mode-badge ${isBaseline ? 'baseline' : 'custom'}">
-              ${isBaseline ? '<i class="fa-solid fa-shield"></i> CHALK' : '<i class="fa-solid fa-sliders"></i> COMMUNITY'}
-            </span>
-          `)}
+          <div class="lb-bracket-name">${b.name}</div>
         </div>
 
-        <!-- Weekly / Bracket Accuracy Score & Grade Strip -->
-        <div class="bracket-accuracy-strip">
-          <div>
-            <div class="bracket-accuracy-score-box">
-              <span class="bracket-accuracy-pct">${acc.pct}%</span>
-              <span class="bracket-accuracy-pts">(${acc.pts}/${acc.maxPts} PTS)</span>
-            </div>
-            <div class="bracket-accuracy-bar-track">
-              <div class="bracket-accuracy-bar-fill" style="width: ${acc.pct}%;"></div>
-            </div>
-          </div>
-          <div style="text-align: right;">
-            <span class="bracket-grade-pill grade-${acc.grade.charAt(0)}">GRADE ${acc.grade}</span>
-            <div style="font-size: 0.68rem; color: #94A3B8; font-family: var(--font-mono); margin-top: 0.25rem;">${acc.hits}</div>
+        <div class="lb-champ-col">
+          <img src="${champ.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png'}" class="lb-champ-logo" alt="${champ.name}">
+          <div class="lb-champ-details">
+            <span class="lb-champ-tag">PREDICTED NATTY</span>
+            <span class="lb-champ-title">${champ.shortName || champ.name}</span>
           </div>
         </div>
 
-        <div class="bracket-champ-preview">
-          <img src="${champ.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png'}" class="bracket-champ-logo" alt="${champ.name}">
-          <div class="bracket-champ-info">
-            <span class="bracket-champ-label">🏆 PREDICTED NATIONAL CHAMPION</span>
-            <span class="bracket-champ-name">${champ.name}</span>
-          </div>
+        <div class="lb-score-col">
+          <div class="lb-score-pts">${acc.pts} <span class="lb-pts-label">PTS</span></div>
+          <span class="bracket-grade-pill grade-${acc.grade.charAt(0)}" style="font-size: 0.7rem; padding: 2px 8px;">${acc.grade} (${acc.pct}%)</span>
         </div>
 
-        <div class="bracket-seeds-pill-row">
-          ${seedPills}
-        </div>
-
-        <div class="bracket-card-actions" onclick="event.stopPropagation()">
-          <button class="bracket-action-btn load-btn" onclick="event.stopPropagation(); loadSavedBracket('${b.id}')" title="Load these predictions into the simulator">
-            <i class="fa-solid fa-play"></i> Load
+        <div class="lb-action-col">
+          <button class="lb-view-details-btn" onclick="event.stopPropagation(); openSubmissionDetailModal('${b.id}', event)" title="View picks breakdown & details">
+            <span>View Picks</span> <i class="fa-solid fa-chevron-right"></i>
           </button>
-          <button class="bracket-action-btn export-btn" onclick="event.stopPropagation(); openCfpBracketCanvasModalForBracket('${b.id}')" title="Export Tournament Graphic">
-            <i class="fa-solid fa-camera-retro"></i> Graphic
-          </button>
-          <button class="bracket-action-btn" style="background: rgba(168, 85, 247, 0.2); color: #D8B4FE; border-color: rgba(168, 85, 247, 0.4);" onclick="event.stopPropagation(); openBracketQrModal('${b.id}', event)" title="Scan QR Code to Sync directly to Phone">
-            <i class="fa-solid fa-qrcode"></i> Sync
-          </button>
-          <button class="bracket-action-btn share-btn" onclick="event.stopPropagation(); copyBracketShareLink('${b.id}', event)" title="Copy Shareable Link">
-            <i class="fa-solid fa-link"></i> Link
-          </button>
-          ${!isOwner && !isAiBenchmark ? `
-            <button class="bracket-action-btn" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);" onclick="event.stopPropagation(); copyCommunityBracketToMine('${b.id}', event)" title="Save a copy directly into My Saved Predictions">
-              <i class="fa-solid fa-bookmark"></i> Copy
-            </button>
-          ` : ''}
-          ${isOwner && !isAiBenchmark ? `
-            <button class="bracket-action-btn delete-btn" onclick="event.stopPropagation(); deleteSavedBracket('${b.id}', event)" title="Delete your prediction permanently">
-              <i class="fa-solid fa-trash-can"></i> Delete
-            </button>
-          ` : ''}
         </div>
       </div>
     `;
@@ -8530,11 +8515,103 @@ function renderSavedBracketsVault() {
   grid.innerHTML = html;
 }
 
+function openSubmissionDetailModal(bracketId, e) {
+  if (e && e.stopPropagation) e.stopPropagation();
+  const brackets = getCommunityBrackets().concat(getSavedBrackets());
+  const b = brackets.find(item => item.id === bracketId);
+  if (!b) return;
+
+  const modal = document.getElementById('submissionDetailModal');
+  if (!modal) return;
+
+  const isAiBenchmark = b.isAdminBenchmark || b.id === 'bracket_prophet_ai_baseline';
+  const currentUser = getCurrentUser();
+  const userDisplayName = (currentUser?.displayName || '').trim().toLowerCase();
+  const userHandle = (currentUser?.handle || '').trim().toLowerCase();
+  const userEmail = (currentUser?.email || '').trim().toLowerCase();
+  const creatorLower = (b.creator || '').trim().toLowerCase();
+  const creatorEmail = (b.creatorEmail || '').trim().toLowerCase();
+
+  const isOwner = !isAiBenchmark && !!currentUser && (
+    (b.creatorId && b.creatorId === currentUser.id) ||
+    (creatorEmail && userEmail && creatorEmail === userEmail) ||
+    (creatorLower && (creatorLower === userDisplayName || creatorLower === userHandle))
+  );
+
+  const acc = b.accuracy || calculateBracketAccuracy(b);
+  const champ = b.champion || { name: 'Champion', shortName: 'Champs', logoUrl: '' };
+
+  const rankTag = document.getElementById('subModalRankTag');
+  const gradePill = document.getElementById('subModalGradePill');
+  const titleEl = document.getElementById('subModalTitle');
+  const metaEl = document.getElementById('subModalMeta');
+  const champLogo = document.getElementById('subModalChampLogo');
+  const champName = document.getElementById('subModalChampName');
+  const seedsGrid = document.getElementById('subModalSeedsGrid');
+  const actionsEl = document.getElementById('subModalActions');
+
+  if (rankTag) rankTag.innerHTML = isAiBenchmark ? '<i class="fa-solid fa-robot"></i> PROPHET AI BENCHMARK' : (isOwner ? '<i class="fa-solid fa-user-check"></i> YOUR ENTRY' : '<i class="fa-solid fa-trophy"></i> COMMUNITY ENTRY');
+  if (gradePill) {
+    gradePill.className = `bracket-grade-pill grade-${acc.grade.charAt(0)}`;
+    gradePill.innerText = `GRADE ${acc.grade} (${acc.pts}/${acc.maxPts} PTS • ${acc.pct}%)`;
+  }
+  if (titleEl) titleEl.innerText = b.name;
+  if (metaEl) {
+    const dateStr = b.createdAt ? new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '2026 Season';
+    metaEl.innerText = `By ${isOwner ? 'You' : (b.creator || 'Coach')} • Submitted ${dateStr}`;
+  }
+  if (champLogo) champLogo.src = champ.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png';
+  if (champName) champName.innerText = champ.name;
+
+  if (seedsGrid) {
+    seedsGrid.innerHTML = (b.seeds || []).map(s => `
+      <div style="background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-sm); padding: 0.45rem 0.6rem; display: flex; align-items: center; gap: 8px;">
+        <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: #38BDF8;">#${s.seed || ''}</span>
+        ${s.logoUrl ? `<img src="${s.logoUrl}" style="width: 20px; height: 20px; object-fit: contain;">` : ''}
+        <div style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${s.name}</div>
+      </div>
+    `).join('');
+  }
+
+  if (actionsEl) {
+    actionsEl.innerHTML = `
+      <button class="action-btn" onclick="closeSubmissionDetailModal(); loadSavedBracket('${b.id}');" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #FFFFFF;">
+        <i class="fa-solid fa-play"></i> Load into Simulator
+      </button>
+      <button class="action-btn secondary-btn" onclick="openCfpBracketCanvasModalForBracket('${b.id}')">
+        <i class="fa-solid fa-camera-retro"></i> Graphic
+      </button>
+      <button class="action-btn" style="background: rgba(168, 85, 247, 0.2); color: #D8B4FE; border: 1px solid rgba(168, 85, 247, 0.4);" onclick="openBracketQrModal('${b.id}', event)">
+        <i class="fa-solid fa-qrcode"></i> Sync QR
+      </button>
+      <button class="action-btn secondary-btn" onclick="copyBracketShareLink('${b.id}', event)">
+        <i class="fa-solid fa-link"></i> Link
+      </button>
+      ${isOwner ? `
+        <button class="action-btn" style="background: rgba(239, 68, 68, 0.2); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.4);" onclick="closeSubmissionDetailModal(); deleteSavedBracket('${b.id}', event)">
+          <i class="fa-solid fa-trash-can"></i> Delete
+        </button>
+      ` : ''}
+    `;
+  }
+
+  modal.classList.add('open');
+  document.body.classList.add('modal-open');
+}
+window.openSubmissionDetailModal = openSubmissionDetailModal;
+
+function closeSubmissionDetailModal() {
+  const modal = document.getElementById('submissionDetailModal');
+  if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+window.closeSubmissionDetailModal = closeSubmissionDetailModal;
+
 function handleVaultCardClick(bracketId, e) {
   if (e && e.target && e.target.closest && e.target.closest('.bracket-action-btn')) {
     return;
   }
-  loadSavedBracket(bracketId);
+  openSubmissionDetailModal(bracketId, e);
 }
 window.handleVaultCardClick = handleVaultCardClick;
 

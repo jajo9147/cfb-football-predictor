@@ -501,6 +501,7 @@ var TEAMS_DATABASE = {
     "stadiumCapacity": "63,470",
     "stadiumCity": "Provo, UT",
     "baseSpRating": 21.5,
+    "titleOdds": "+35000",
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/252.png",
     "colors": {
       "primary": "#002E5D",
@@ -8870,6 +8871,7 @@ var TEAMS_DATABASE = {
     "apRank": "#12 AP",
     "apPoints": "890 pts",
     "baseSpRating": 23.8,
+    "titleOdds": "+25000",
     "playoffContenderRank": 12,
     "themeClass": "theme-texastech",
     "colors": {
@@ -9270,6 +9272,7 @@ var TEAMS_DATABASE = {
     "stadiumCapacity": "51,444",
     "stadiumCity": "Salt Lake City, UT",
     "baseSpRating": 22.5,
+    "titleOdds": "+6000",
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/254.png",
     "colors": {
       "primary": "#CC0000",
@@ -9669,6 +9672,7 @@ var TEAMS_DATABASE = {
     "stadiumCapacity": "69,250",
     "stadiumCity": "Iowa City, IA",
     "baseSpRating": 21.0,
+    "titleOdds": "+10000",
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2294.png",
     "colors": {
       "primary": "#FFE100",
@@ -10068,6 +10072,7 @@ var TEAMS_DATABASE = {
     "stadiumCapacity": "62,621",
     "stadiumCity": "Columbia, MO",
     "baseSpRating": 20.8,
+    "titleOdds": "+6500",
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/142.png",
     "colors": {
       "primary": "#F1B82D",
@@ -10467,6 +10472,7 @@ var TEAMS_DATABASE = {
     "stadiumCapacity": "50,782",
     "stadiumCity": "Tucson, AZ",
     "baseSpRating": 19.5,
+    "titleOdds": "+17500",
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/12.png",
     "colors": {
       "primary": "#CC0033",
@@ -10866,6 +10872,7 @@ var TEAMS_DATABASE = {
     "stadiumCapacity": "70,138",
     "stadiumCity": "Seattle, WA",
     "baseSpRating": 22.5,
+    "titleOdds": "+20000",
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/264.png",
     "colors": {
       "primary": "#4B2E83",
@@ -11265,6 +11272,7 @@ var TEAMS_DATABASE = {
     "stadiumCapacity": "40,000",
     "stadiumCity": "Houston, TX",
     "baseSpRating": 20.0,
+    "titleOdds": "+50000",
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png",
     "colors": {
       "primary": "#C8102E",
@@ -11664,6 +11672,7 @@ var TEAMS_DATABASE = {
     "stadiumCapacity": "60,800",
     "stadiumCity": "Louisville, KY",
     "baseSpRating": 20.5,
+    "titleOdds": "+8000",
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/97.png",
     "colors": {
       "primary": "#C90000",
