@@ -729,8 +729,7 @@ function selectTeam(teamId) {
   // Update Body Theme Class
   document.body.className = team.themeClass || `theme-${teamId}`;
 
-  // Update Navigation & Hero with Official Logos
-  document.getElementById('navLogoBadge').innerHTML = `<img src="${team.logoUrl}" alt="${team.name}" class="nav-logo-img">`;
+  // Update Hero & Footer with Official Logos (Nav logo permanently stays CFB Prophet Brand)
   document.getElementById('heroEmblem').innerHTML = `<img src="${team.logoUrl}" alt="${team.name}" class="hero-logo-img">`;
   document.getElementById('heroTeamName').innerText = team.name;
   document.getElementById('footerEmblem').innerHTML = `<img src="${team.logoUrl}" alt="${team.name}" style="width: 28px; height: 28px; object-fit: contain;">`;
