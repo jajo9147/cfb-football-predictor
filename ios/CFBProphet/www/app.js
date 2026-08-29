@@ -8453,22 +8453,7 @@ function renderSavedBracketsVault() {
   const isCommunity = state.activeVaultTab === 'community' || isWeekly;
   const currentUser = getCurrentUser();
 
-  // If user clicked "My Saved" tab while logged out, prompt them to sign in
-  if (state.activeVaultTab === 'mine' && !currentUser) {
-    grid.innerHTML = `
-      <div class="empty-vault-state">
-        <i class="fa-solid fa-user-lock" style="font-size: 2.4rem; color: #38BDF8; margin-bottom: 0.75rem;"></i>
-        <h3 style="color: #F8FAFC; font-size: 1.15rem;">Sign In to View Your Picks</h3>
-        <p style="color: #94A3B8; max-width: 420px; margin: 0.5rem auto 1.25rem; line-height: 1.5; font-size: 0.88rem;">
-          Sign in with Google, Apple, or your Coach Account to save, manage, and sync your predictions across all your devices.
-        </p>
-        <button class="save-bracket-btn" onclick="openAuthModal()" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); padding: 0.65rem 1.35rem; font-size: 0.9rem; margin: 0 auto; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);">
-          <i class="fa-solid fa-right-to-bracket"></i> Sign In / Register
-        </button>
-      </div>
-    `;
-    return;
-  }
+  const brackets = isCommunity ? getCommunityBrackets() : getSavedBrackets();
 
   if (brackets.length === 0) {
     const evaluated = evaluateRegularSeasonAllTeams();
