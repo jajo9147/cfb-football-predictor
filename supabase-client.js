@@ -371,7 +371,6 @@
     signInWithPassword: signInWithPassword,
     signUpWithPassword: signUpWithPassword,
     signOut: signOut,
-    initGIS: initGoogleIdentityServices,
     saveBracket: saveBracketToCloud,
     fetchCommunityBrackets: fetchCloudCommunityBrackets
   };
