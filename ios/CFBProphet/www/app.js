@@ -7288,25 +7288,25 @@ function renderVaultWeekSelector() {
   if (!strip) return;
 
   strip.style.display = 'flex';
+  strip.style.overflowX = 'auto';
+  strip.style.webkitOverflowScrolling = 'touch';
+  strip.style.gap = '0.4rem';
+  strip.style.padding = '0.35rem 0.15rem';
+  strip.style.scrollbarWidth = 'none';
 
-  strip.innerHTML = `
-    <div class="vault-week-filter-bar compact-filter">
-      <div class="vault-week-filter-left">
-        <i class="fa-solid fa-calendar-days" style="color: #38BDF8;"></i>
-        <span>SLATE:</span>
-      </div>
-      <div class="vault-week-select-wrapper">
-        <select id="vaultWeekSelectDropdown" class="vault-week-dropdown" onchange="selectVaultWeek(this.value)" aria-label="Select Game Slate Week">
-          ${ALL_WEEKS_LIST.map(w => `
-            <option value="${w.key}" ${state.selectedVaultWeek === w.key ? 'selected' : ''}>
-              ${w.key === 'all' ? '🏆 Full 2026 Season Standings' : (w.key === 'CCG' ? '🏆 Conference Championship Slate' : (w.key === 'CFP' ? '🏈 12-Team CFP Playoff Bracket' : `${w.label} Slate Predictions`))}
-            </option>
-          `).join('')}
-        </select>
-        <i class="fa-solid fa-chevron-down vault-dropdown-chevron"></i>
-      </div>
-    </div>
-  `;
+  strip.innerHTML = ALL_WEEKS_LIST.map(w => {
+    const isActive = state.selectedVaultWeek === w.key;
+    let icon = '📅';
+    if (w.key === 'CCG') icon = '🏆';
+    else if (w.key === 'CFP') icon = '🏈';
+    else if (w.key === 'all') icon = '📊';
+
+    return `
+      <button class="vault-week-pill-btn ${isActive ? 'active' : ''}" onclick="selectVaultWeek('${w.key}')" style="white-space: nowrap; flex-shrink: 0; padding: 0.38rem 0.85rem; border-radius: var(--radius-full); font-size: 0.76rem; font-weight: 700; font-family: var(--font-mono); border: 1px solid ${isActive ? '#38BDF8' : 'rgba(255,255,255,0.12)'}; background: ${isActive ? 'rgba(56, 189, 248, 0.22)' : 'rgba(30, 41, 59, 0.7)'}; color: ${isActive ? '#38BDF8' : '#94A3B8'}; cursor: pointer; transition: all 0.15s ease; box-shadow: ${isActive ? '0 0 10px rgba(56, 189, 248, 0.3)' : 'none'};">
+        <span>${icon} ${w.label}</span>
+      </button>
+    `;
+  }).join('');
 }
 
 function selectVaultWeek(weekKey) {
