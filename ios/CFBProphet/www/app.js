@@ -7858,10 +7858,7 @@ function addDeletedBracketId(bracketId) {
 
 function getSavedBrackets() {
   const currentUser = getCurrentUser();
-  const userDisplayName = (currentUser?.displayName || '').trim().toLowerCase();
-  const userEmail = (currentUser?.email || '').trim().toLowerCase();
-  const userId = currentUser?.id || 'jake_johnson_personal';
-  const creatorName = currentUser?.displayName || 'Jake Johnson';
+  const deletedIds = getDeletedBracketIds();
 
   let allLocalBrackets = [];
   const storageKeys = [
@@ -7883,43 +7880,66 @@ function getSavedBrackets() {
     } catch (e) {}
   });
 
-  const deletedIds = getDeletedBracketIds();
-  const idMap = new Map();
+  const userBracketsMap = new Map();
 
-  // 1. Restore user's custom Texas Natty Run and USC Wins Out picks
-  const texasBracket = createTexasWinsOutBracket();
-  if (!deletedIds.has(texasBracket.id)) {
-    texasBracket.creatorId = userId;
-    texasBracket.creator = creatorName;
-    if (userEmail) texasBracket.creatorEmail = userEmail;
-    idMap.set(texasBracket.id, texasBracket);
-  }
+  if (currentUser) {
+    const userDisplayName = (currentUser?.displayName || '').trim().toLowerCase();
+    const userEmail = (currentUser?.email || '').trim().toLowerCase();
+    const userId = currentUser.id || 'jake_johnson_personal';
 
-  const uscBracket = createUscWinsOutBracket();
-  if (!deletedIds.has(uscBracket.id)) {
-    uscBracket.creatorId = userId;
-    uscBracket.creator = creatorName;
-    if (userEmail) uscBracket.creatorEmail = userEmail;
-    idMap.set(uscBracket.id, uscBracket);
-  }
+    // 1. If this is Jake Johnson's account, associate Jake's curated submissions
+    const isJakeAccount = userEmail.includes('jajo9147') || userDisplayName.includes('jake johnson') || (currentUser.handle && currentUser.handle.toLowerCase().includes('jake'));
 
-  // 2. Preserve any other custom bracket submitted on this device
-  allLocalBrackets.forEach(b => {
-    if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || deletedIds.has(b.id)) return;
-    
-    // Automatically associate with logged-in user profile if guest
-    if (currentUser && (!b.creatorId || b.creatorId.startsWith('guest_'))) {
-      b.creatorId = currentUser.id;
-      if (!b.creator || b.creator === 'Coach') b.creator = currentUser.displayName;
-      if (currentUser.email) b.creatorEmail = currentUser.email;
+    if (isJakeAccount) {
+      const texasBracket = createTexasWinsOutBracket();
+      if (!deletedIds.has(texasBracket.id)) {
+        texasBracket.creatorId = userId;
+        texasBracket.creator = currentUser.displayName || 'Jake Johnson';
+        texasBracket.creatorEmail = currentUser.email || 'jajo9147@gmail.com';
+        userBracketsMap.set(texasBracket.id, texasBracket);
+      }
+
+      const uscBracket = createUscWinsOutBracket();
+      if (!deletedIds.has(uscBracket.id)) {
+        uscBracket.creatorId = userId;
+        uscBracket.creator = currentUser.displayName || 'Jake Johnson';
+        uscBracket.creatorEmail = currentUser.email || 'jajo9147@gmail.com';
+        userBracketsMap.set(uscBracket.id, uscBracket);
+      }
     }
-    
-    idMap.set(b.id, b);
-  });
 
-  const finalBrackets = Array.from(idMap.values());
+    // 2. Filter brackets that belong to this logged-in account or unclaimed guest picks
+    allLocalBrackets.forEach(b => {
+      if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || deletedIds.has(b.id)) return;
+      
+      const isOwner = (b.creatorId && b.creatorId === userId) ||
+                      (b.creatorEmail && userEmail && b.creatorEmail.toLowerCase() === userEmail) ||
+                      (b.creatorId && b.creatorId.startsWith('guest_')) ||
+                      (!b.creatorId);
+
+      if (isOwner) {
+        b.creatorId = userId;
+        if (!b.creator || b.creator === 'Coach') b.creator = currentUser.displayName || 'Coach';
+        if (currentUser.email) b.creatorEmail = currentUser.email;
+        userBracketsMap.set(b.id, b);
+      }
+    });
+  } else {
+    // 3. GUEST MODE: When not signed in, only show picks created in guest session
+    allLocalBrackets.forEach(b => {
+      if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_usc_wins_out_curated' || deletedIds.has(b.id)) return;
+
+      if (!b.creatorId || b.creatorId.startsWith('guest_')) {
+        userBracketsMap.set(b.id, b);
+      }
+    });
+  }
+
+  const finalBrackets = Array.from(userBracketsMap.values());
   try {
-    localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(finalBrackets));
+    if (currentUser) {
+      localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(finalBrackets));
+    }
   } catch(e) {}
 
   return finalBrackets;
@@ -8456,6 +8476,27 @@ function renderSavedBracketsVault() {
   const brackets = isCommunity ? getCommunityBrackets() : getSavedBrackets();
 
   if (brackets.length === 0) {
+    if (state.activeVaultTab === 'mine' && !currentUser) {
+      grid.innerHTML = `
+        <div class="empty-vault-state" style="padding: 1.5rem 1rem; border: 1px dashed rgba(56, 189, 248, 0.3); border-radius: var(--radius-lg); background: rgba(15, 23, 42, 0.6); text-align: center;">
+          <div style="font-size: 2.2rem; color: #38BDF8; margin-bottom: 0.5rem;"><i class="fa-solid fa-user-lock"></i></div>
+          <h3 style="color: #F8FAFC; font-size: 1.15rem; margin-bottom: 0.35rem;">Guest Mode: No Submitted Picks</h3>
+          <p style="color: #94A3B8; max-width: 420px; margin: 0 auto 1.25rem; font-size: 0.85rem; line-height: 1.5;">
+            Sign in with Google or your Coach account to view and sync your submitted picks across all devices, or submit your active simulation as a guest.
+          </p>
+          <div style="display: flex; gap: 0.65rem; justify-content: center; flex-wrap: wrap;">
+            <button class="save-bracket-btn" onclick="openAuthModal()" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); padding: 0.6rem 1.25rem; font-size: 0.88rem; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);">
+              <i class="fa-solid fa-right-to-bracket"></i> Sign In to Account
+            </button>
+            <button class="save-bracket-btn" onclick="saveActiveProjectionDirectly()" style="background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(255, 255, 255, 0.15); padding: 0.6rem 1rem; font-size: 0.88rem;">
+              <i class="fa-solid fa-bolt"></i> Submit as Guest
+            </button>
+          </div>
+        </div>
+      `;
+      return;
+    }
+
     const evaluated = evaluateRegularSeasonAllTeams();
     const ccg = simulateConferenceChampionships(evaluated);
     const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
