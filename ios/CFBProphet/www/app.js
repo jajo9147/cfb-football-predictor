@@ -7288,8 +7288,10 @@ function renderVaultWeekSelector() {
   if (!strip) return;
 
   strip.style.display = 'flex';
+  const isSeasonTab = state.activeVaultTab === 'community';
+
   strip.innerHTML = ALL_WEEKS_LIST.map(w => {
-    const isActive = state.selectedVaultWeek === w.key;
+    const isActive = isSeasonTab ? (w.key === 'all') : (state.selectedVaultWeek === w.key);
     let icon = '📅';
     if (w.key === 'CCG') icon = '🏆';
     else if (w.key === 'CFP') icon = '🏈';
@@ -7297,14 +7299,32 @@ function renderVaultWeekSelector() {
 
     return `
       <button class="vault-week-pill-btn ${isActive ? 'active' : ''}" onclick="selectVaultWeek('${w.key}')" title="Filter to ${w.label}">
-        <span>${icon} ${w.label}</span>
+        <span>${icon}</span>
+        <span>${w.label}</span>
       </button>
     `;
   }).join('');
+
+  setTimeout(() => {
+    const activeBtn = strip.querySelector('.vault-week-pill-btn.active');
+    if (activeBtn && typeof activeBtn.scrollIntoView === 'function') {
+      activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }, 20);
 }
 
 function selectVaultWeek(weekKey) {
   state.selectedVaultWeek = weekKey;
+  const select = document.getElementById('vaultTabSelect');
+  if (weekKey === 'all') {
+    state.activeVaultTab = 'community';
+    if (select) select.value = 'community';
+  } else {
+    if (state.activeVaultTab === 'community') {
+      state.activeVaultTab = 'weekly';
+      if (select) select.value = 'weekly';
+    }
+  }
   renderVaultWeekSelector();
   renderSavedBracketsVault();
 }
@@ -8289,15 +8309,17 @@ async function publishDeletionTombstoneToCloud(bracketId) {
 
 function calculateBracketAccuracy(bracket) {
   if (!bracket) {
-    return { pts: 120, maxPts: 120, pct: 100.0, grade: 'A+', hits: '12/12 Live Picks' };
+    return { pts: 3720, maxPts: 3720, pct: 100.0, grade: 'A+', hits: '372/372 Live Picks' };
   }
-  const weekly = calculateWeeklyScoreForUser(bracket, state.selectedVaultWeek || 'all');
+  const isSeasonTab = state.activeVaultTab === 'community';
+  const targetWeek = isSeasonTab ? 'all' : (state.selectedVaultWeek || 'W1');
+  const weekly = calculateWeeklyScoreForUser(bracket, targetWeek);
   return {
-    pts: weekly.pts || 120,
-    maxPts: weekly.maxPts || 120,
+    pts: weekly.pts || (targetWeek === 'all' ? 3720 : 310),
+    maxPts: weekly.maxPts || (targetWeek === 'all' ? 3720 : 310),
     pct: weekly.pct !== undefined ? weekly.pct : 100.0,
     grade: weekly.grade || 'A+',
-    hits: weekly.hits || '12/12 Live Picks'
+    hits: weekly.hits || `${weekly.gameCount}/${weekly.gameCount} Live Picks`
   };
 }
 
@@ -8366,6 +8388,13 @@ function switchVaultTab(tabKey) {
   if (tabAllTeams) tabAllTeams.classList.toggle('active', tabKey === 'allteams');
   if (tabMine) tabMine.classList.toggle('active', tabKey === 'mine');
 
+  if (tabKey === 'community') {
+    state.selectedVaultWeek = 'all';
+  } else if (tabKey === 'weekly' && state.selectedVaultWeek === 'all') {
+    state.selectedVaultWeek = 'W1';
+  }
+
+  renderVaultWeekSelector();
   renderSavedBracketsVault();
 }
 window.switchVaultTab = switchVaultTab;
@@ -8426,11 +8455,13 @@ function renderSavedBracketsVault() {
 
   // 1. Generate "YOU vs PROPHET AI" Head-to-Head Banner
   let html = '';
-  const currentWeekLabel = state.selectedVaultWeek === 'all' ? 'FULL SEASON' : (state.selectedVaultWeek || 'WEEK 1');
-  const aiWeeklyScore = calculateWeeklyScoreForUser(aiBracket, state.selectedVaultWeek);
+  const isSeasonTab = state.activeVaultTab === 'community';
+  const effectiveWeek = isSeasonTab ? 'all' : (state.selectedVaultWeek || 'W1');
+  const currentWeekLabel = effectiveWeek === 'all' ? 'FULL 2026 SEASON' : (effectiveWeek === 'CCG' ? 'CONF CHAMPIONSHIPS' : (effectiveWeek === 'CFP' ? '12-TEAM CFP PLAYOFF' : `${effectiveWeek} SLATE`));
+  const aiWeeklyScore = calculateWeeklyScoreForUser(aiBracket, effectiveWeek);
 
   if (myTopBracket) {
-    const userWeeklyScore = calculateWeeklyScoreForUser(myTopBracket, state.selectedVaultWeek);
+    const userWeeklyScore = calculateWeeklyScoreForUser(myTopBracket, effectiveWeek);
     const pointDiff = userWeeklyScore.pts - aiWeeklyScore.pts;
     let vsAiStatusBadge = '';
     let vsAiCardClass = 'tied';
@@ -8502,8 +8533,7 @@ function renderSavedBracketsVault() {
     );
     const creatorLabel = isOwner ? 'You' : (b.creator || 'Prophet');
 
-    const weeklyScore = isWeekly ? calculateWeeklyScoreForUser(b, state.selectedVaultWeek) : null;
-    const acc = weeklyScore || b.accuracy || calculateBracketAccuracy(b);
+    const acc = calculateWeeklyScoreForUser(b, effectiveWeek);
 
     const rankNum = idx + 1;
     let rankMedal = `#${rankNum}`;

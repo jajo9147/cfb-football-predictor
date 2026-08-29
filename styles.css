@@ -5899,20 +5899,22 @@ body {
 #vaultWeekSelectorStrip,
 .vault-week-selector-strip {
   display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
   align-items: center !important;
   gap: 0.5rem !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
   -webkit-overflow-scrolling: touch !important;
   scrollbar-width: none !important;
-  padding: 0.35rem 0.25rem !important;
+  padding: 0.35rem 0.2rem !important;
   margin: 0.35rem 0 0.65rem 0 !important;
   width: 100% !important;
-  min-height: 52px !important;
-  height: 52px !important;
-  max-height: 52px !important;
+  min-height: 48px !important;
+  height: 48px !important;
+  max-height: 48px !important;
   box-sizing: border-box !important;
-  flex: 0 0 52px !important;
+  flex: 0 0 48px !important;
   flex-shrink: 0 !important;
   flex-grow: 0 !important;
   position: relative !important;
@@ -5926,118 +5928,47 @@ body {
 
 .vault-week-pill-btn {
   white-space: nowrap !important;
+  flex: 0 0 auto !important;
   flex-shrink: 0 !important;
   display: inline-flex !important;
+  flex-direction: row !important;
   align-items: center !important;
-  gap: 5px !important;
-  padding: 0.45rem 1rem !important;
-  height: 38px !important;
-  line-height: 1 !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 0 0.95rem !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+  line-height: 36px !important;
   border-radius: 9999px !important;
-  font-size: 0.82rem !important;
+  font-size: 0.8rem !important;
   font-weight: 700 !important;
   font-family: var(--font-mono) !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  background: rgba(30, 41, 59, 0.95) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9)) !important;
   color: #CBD5E1 !important;
   cursor: pointer !important;
-  transition: all 0.15s ease !important;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
   outline: none !important;
   box-sizing: border-box !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
 }
 
 .vault-week-pill-btn:hover {
-  background: rgba(51, 65, 85, 0.98) !important;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 1), rgba(51, 65, 85, 1)) !important;
   color: #FFFFFF !important;
   border-color: rgba(56, 189, 248, 0.6) !important;
   transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 8px rgba(56, 189, 248, 0.25) !important;
 }
 
 .vault-week-pill-btn.active {
-  background: rgba(56, 189, 248, 0.3) !important;
-  color: #38BDF8 !important;
+  background: linear-gradient(135deg, #0284C7, #2563EB) !important;
+  color: #FFFFFF !important;
   border-color: #38BDF8 !important;
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.5) !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.6), 0 4px 12px rgba(2, 132, 199, 0.4) !important;
   font-weight: 800 !important;
-}
-
-.vault-week-filter-left {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  font-weight: 800;
-  color: #38BDF8;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-}
-
-.vault-week-select-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex: 1;
-  max-width: 420px;
-}
-
-.vault-week-dropdown {
-  width: 100%;
-  appearance: none;
-  -webkit-appearance: none;
-  background: rgba(30, 41, 59, 0.85);
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  border-radius: var(--radius-sm);
-  color: #F8FAFC;
-  font-family: var(--font-display, inherit);
-  font-size: 0.84rem;
-  font-weight: 700;
-  padding: 0.42rem 2.2rem 0.42rem 0.75rem;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.2s ease;
-}
-
-.vault-week-dropdown:hover,
-.vault-week-dropdown:focus {
-  background: rgba(30, 41, 59, 1);
-  border-color: #38BDF8;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
-}
-
-.vault-week-dropdown option {
-  background: #0F172A;
-  color: #F8FAFC;
-  font-weight: 600;
-}
-
-.vault-dropdown-chevron {
-  position: absolute;
-  right: 0.75rem;
-  pointer-events: none;
-  color: #38BDF8;
-  font-size: 0.75rem;
-}
-
-.vault-week-filter-label {
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  font-weight: 800;
-  color: #38BDF8;
-  letter-spacing: 0.05em;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.vault-week-buttons-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 0.4rem;
-  align-items: center;
-  flex: 1;
+  transform: translateY(-1px) !important;
 }
 
 /* Enhanced Modal Dialog Dimensions & Card Visibility */
@@ -6278,28 +6209,30 @@ body {
     text-align: center !important;
   }
 
-  .vault-week-filter-bar {
-    padding: 0.5rem 0.65rem !important;
-    gap: 0.4rem !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    overflow-x: hidden !important;
-  }
-
-  .vault-week-buttons-wrap {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 0.25rem 0.35rem !important;
-    width: 100% !important;
+  #vaultWeekSelectorStrip,
+  .vault-week-selector-strip {
+    min-height: 48px !important;
+    height: 48px !important;
+    max-height: 48px !important;
+    flex: 0 0 48px !important;
+    flex-shrink: 0 !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    padding: 0.35rem 0.2rem !important;
+    margin: 0.35rem 0 0.65rem 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .vault-week-pill-btn {
-    padding: 0.42rem 0.85rem !important;
+    padding: 0 0.85rem !important;
     font-size: 0.78rem !important;
-    height: 36px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
+    line-height: 34px !important;
     border-radius: 9999px !important;
+    flex: 0 0 auto !important;
     flex-shrink: 0 !important;
     display: inline-flex !important;
     align-items: center !important;
