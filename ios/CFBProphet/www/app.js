@@ -7288,12 +7288,6 @@ function renderVaultWeekSelector() {
   if (!strip) return;
 
   strip.style.display = 'flex';
-  strip.style.overflowX = 'auto';
-  strip.style.webkitOverflowScrolling = 'touch';
-  strip.style.gap = '0.4rem';
-  strip.style.padding = '0.35rem 0.15rem';
-  strip.style.scrollbarWidth = 'none';
-
   strip.innerHTML = ALL_WEEKS_LIST.map(w => {
     const isActive = state.selectedVaultWeek === w.key;
     let icon = '📅';
@@ -7302,7 +7296,7 @@ function renderVaultWeekSelector() {
     else if (w.key === 'all') icon = '📊';
 
     return `
-      <button class="vault-week-pill-btn ${isActive ? 'active' : ''}" onclick="selectVaultWeek('${w.key}')" style="white-space: nowrap; flex-shrink: 0; padding: 0.38rem 0.85rem; border-radius: var(--radius-full); font-size: 0.76rem; font-weight: 700; font-family: var(--font-mono); border: 1px solid ${isActive ? '#38BDF8' : 'rgba(255,255,255,0.12)'}; background: ${isActive ? 'rgba(56, 189, 248, 0.22)' : 'rgba(30, 41, 59, 0.7)'}; color: ${isActive ? '#38BDF8' : '#94A3B8'}; cursor: pointer; transition: all 0.15s ease; box-shadow: ${isActive ? '0 0 10px rgba(56, 189, 248, 0.3)' : 'none'};">
+      <button class="vault-week-pill-btn ${isActive ? 'active' : ''}" onclick="selectVaultWeek('${w.key}')" title="Filter to ${w.label}">
         <span>${icon} ${w.label}</span>
       </button>
     `;

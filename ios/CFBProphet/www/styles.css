@@ -5896,21 +5896,27 @@ body {
    CFB PROPHET WEEKLY SCORING, ALL-TEAMS MATRIX & IOS SHARE STYLES
    ========================================================================== */
 
+#vaultWeekSelectorStrip,
 .vault-week-selector-strip {
   display: flex !important;
   align-items: center !important;
-  gap: 0.45rem !important;
+  gap: 0.5rem !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
   -webkit-overflow-scrolling: touch !important;
   scrollbar-width: none !important;
-  padding: 0.4rem 0.2rem !important;
-  margin: 0.4rem 0 0.85rem 0 !important;
+  padding: 0.5rem 0.25rem !important;
+  margin: 0.5rem 0 0.85rem 0 !important;
   width: 100% !important;
+  min-height: 52px !important;
+  height: 52px !important;
   box-sizing: border-box !important;
   flex-shrink: 0 !important;
+  position: relative !important;
+  z-index: 20 !important;
 }
 
+#vaultWeekSelectorStrip::-webkit-scrollbar,
 .vault-week-selector-strip::-webkit-scrollbar {
   display: none !important;
 }
@@ -5918,30 +5924,38 @@ body {
 .vault-week-pill-btn {
   white-space: nowrap !important;
   flex-shrink: 0 !important;
-  padding: 0.42rem 0.95rem !important;
-  border-radius: var(--radius-full) !important;
-  font-size: 0.78rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 0.45rem 1rem !important;
+  height: 38px !important;
+  line-height: 1 !important;
+  border-radius: 9999px !important;
+  font-size: 0.82rem !important;
   font-weight: 700 !important;
   font-family: var(--font-mono) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  background: rgba(30, 41, 59, 0.85) !important;
-  color: #94A3B8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  background: rgba(30, 41, 59, 0.95) !important;
+  color: #CBD5E1 !important;
   cursor: pointer !important;
   transition: all 0.15s ease !important;
   outline: none !important;
+  box-sizing: border-box !important;
 }
 
 .vault-week-pill-btn:hover {
-  background: rgba(51, 65, 85, 0.95) !important;
+  background: rgba(51, 65, 85, 0.98) !important;
   color: #FFFFFF !important;
-  border-color: rgba(56, 189, 248, 0.5) !important;
+  border-color: rgba(56, 189, 248, 0.6) !important;
+  transform: translateY(-1px) !important;
 }
 
 .vault-week-pill-btn.active {
-  background: rgba(56, 189, 248, 0.25) !important;
+  background: rgba(56, 189, 248, 0.3) !important;
   color: #38BDF8 !important;
   border-color: #38BDF8 !important;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.5) !important;
+  font-weight: 800 !important;
 }
 
 .vault-week-filter-left {
@@ -6028,20 +6042,22 @@ body {
   max-width: 1060px !important;
   width: 95vw !important;
   max-height: 92vh !important;
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   padding: 1.15rem 1.4rem !important;
 }
 
 .bracket-vault-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1rem;
-  margin-top: 0.4rem;
-  flex: 1;
-  max-height: 72vh;
-  overflow-y: auto;
-  padding-right: 0.35rem;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.65rem !important;
+  margin-top: 0.4rem !important;
+  flex: 1 1 auto !important;
+  max-height: 65vh !important;
+  overflow-y: auto !important;
+  padding: 0.25rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 
@@ -6294,15 +6310,19 @@ body {
     flex-wrap: wrap !important;
     gap: 0.25rem 0.35rem !important;
     width: 100% !important;
-    overflow-x: hidden !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 
   .vault-week-pill-btn {
-    padding: 0.35rem 0.55rem !important;
-    font-size: 0.72rem !important;
-    min-height: 28px !important;
-    border-radius: var(--radius-sm) !important;
+    padding: 0.42rem 0.85rem !important;
+    font-size: 0.78rem !important;
+    height: 36px !important;
+    border-radius: 9999px !important;
     flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
   }
 
   .bracket-vault-grid {
