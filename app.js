@@ -16,9 +16,54 @@ const state = {
   activeModalGame: null,
   deferredPrompt: null,
   activeVaultTab: 'weekly',
-  selectedVaultWeek: 'all',
+  selectedVaultWeek: 'W1',
   activeSavedBracketId: null
 };
+
+// Official 2026 Preseason Vegas National Championship Title Odds
+const OFFICIAL_TEAM_TITLE_ODDS = {
+  georgia: '+320',
+  ohiostate: '+350',
+  texas: '+450',
+  oregon: '+650',
+  alabama: '+750',
+  pennstate: '+1200',
+  notredame: '+1400',
+  olemiss: '+1500',
+  miami: '+1800',
+  tennessee: '+2200',
+  lsu: '+2500',
+  michigan: '+3000',
+  clemson: '+3500',
+  usc: '+4000',
+  texasam: '+4500',
+  oklahoma: '+5000',
+  utah: '+6000',
+  missouri: '+6500',
+  louisville: '+8000',
+  smu: '+9000',
+  iowa: '+10000',
+  boisestate: '+12500',
+  colorado: '+15000',
+  arizona: '+17500',
+  washington: '+20000',
+  texastech: '+25000',
+  floridastate: '+30000',
+  byu: '+35000',
+  indiana: '+40000',
+  arizonastate: '+45000',
+  houston: '+50000'
+};
+
+function getTeamTitleOdds(teamId) {
+  if (!teamId) return '+3500';
+  const tid = teamId.toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (OFFICIAL_TEAM_TITLE_ODDS[tid]) return OFFICIAL_TEAM_TITLE_ODDS[tid];
+  const team = typeof TEAMS_DATABASE !== 'undefined' ? (TEAMS_DATABASE[teamId] || TEAMS_DATABASE[tid]) : null;
+  if (team && team.titleOdds) return team.titleOdds;
+  return '+5000';
+}
+window.getTeamTitleOdds = getTeamTitleOdds;
 
 // Global Preset Definitions
 const GLOBAL_PRESETS = {
@@ -693,7 +738,8 @@ function selectTeam(teamId) {
   const rankEl = document.getElementById('heroRank');
   if (rankEl) rankEl.innerText = `${team.apRank} POLL`;
   const nattyEl = document.getElementById('heroNattyOdds');
-  if (nattyEl) nattyEl.innerText = `${team.titleOdds || '+350'} Title Odds`;
+  const oddsStr = getTeamTitleOdds(teamId);
+  if (nattyEl) nattyEl.innerText = `${oddsStr} Title Odds`;
   const coachEl = document.getElementById('heroCoach');
   if (coachEl) coachEl.innerText = `HC: ${team.headCoach}`;
   const ocEl = document.getElementById('heroOC');
@@ -1245,21 +1291,17 @@ function recalculateSeason() {
 
   let cfpSeed = 'BUBBLE / OUT';
   let cfpStatus = 'Missed 12-Team CFP';
-  let nattyOdds = team.titleOdds || '+3500';
+  let nattyOdds = getTeamTitleOdds(state.currentTeamId);
+
   if (currentSeedNum >= 1 && currentSeedNum <= 4) {
     cfpSeed = `#${currentSeedNum} SEED`;
     cfpStatus = '1st Round Bye (Quarterfinals)';
-    nattyOdds = team.titleOdds || '+350';
   } else if (currentSeedNum >= 5 && currentSeedNum <= 8) {
     cfpSeed = `#${currentSeedNum} SEED`;
     cfpStatus = `Hosts 1st Round (${team.stadiumCity || 'On Campus'})`;
-    nattyOdds = team.titleOdds || '+1200';
   } else if (currentSeedNum >= 9 && currentSeedNum <= 12) {
     cfpSeed = `#${currentSeedNum} SEED`;
     cfpStatus = 'First Round Road Game';
-    nattyOdds = team.titleOdds || '+2500';
-  } else {
-    nattyOdds = team.titleOdds || '+15000';
   }
 
   document.getElementById('kpiCfpSeed').innerText = cfpSeed;
@@ -7428,12 +7470,13 @@ function updateAuthUI() {
     else if (user.provider === 'github') badge = 'GitHub Verified';
     if (pEmail) pEmail.textContent = user.email ? `${user.email} • ${badge}` : `@${user.handle || 'Coach'} • ${badge}`;
 
-    const currentFavId = user.favTeam || state.currentTeamId || 'usc';
-    const favTeam = TEAMS_DATABASE[currentFavId] || TEAMS_DATABASE['usc'];
+    const savedFav = user.favTeam || localStorage.getItem('cfb_prophet_fav_team') || localStorage.getItem('cfb_prophet_favorite_team_id') || state.currentTeamId || 'ohiostate';
+    user.favTeam = savedFav;
+    const favTeam = TEAMS_DATABASE[savedFav] || TEAMS_DATABASE['ohiostate'] || TEAMS_DATABASE['usc'];
     if (pTeamName) pTeamName.textContent = favTeam.name;
     if (pTeamLogo) pTeamLogo.src = favTeam.logoUrl || '';
 
-    populateFavoriteTeamDropdown(currentFavId);
+    populateFavoriteTeamDropdown(savedFav);
 
     const myBrackets = getSavedBrackets();
     if (pSavedCount) pSavedCount.textContent = `${myBrackets.length} Active Saved`;
@@ -7466,12 +7509,18 @@ window.populateFavoriteTeamDropdown = populateFavoriteTeamDropdown;
 
 function handleFavoriteTeamChange(newTeamId) {
   if (!newTeamId || !TEAMS_DATABASE[newTeamId]) return;
+
+  localStorage.setItem('cfb_prophet_fav_team', newTeamId);
+  localStorage.setItem('cfb_prophet_favorite_team_id', newTeamId);
+
   const user = getCurrentUser();
   if (user) {
     user.favTeam = newTeamId;
-    localStorage.setItem('cfb_prophet_current_user', JSON.stringify(user));
+    setCurrentUser(user);
+    if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.updateProfile === 'function') {
+      try { window.CFBProphetSupabase.updateProfile({ favTeam: newTeamId }); } catch (e) {}
+    }
   }
-  localStorage.setItem('cfb_prophet_fav_team', newTeamId);
   
   const favTeam = TEAMS_DATABASE[newTeamId];
   const pTeamName = document.getElementById('authProfileTeamName');
@@ -9725,10 +9774,13 @@ window.dismissChallengeBanner = dismissChallengeBanner;
 function startApp() {
   console.log('CFB Prophet Pro: Initializing application state...');
 
-  // 1. Determine Default Active Team — always Ohio State on iOS (file://) to prevent
-  //    stale WKWebView query strings (e.g. ?team=texas) from overriding the baseline.
+  // 1. Determine Default Active Team: User's saved favorite team, or query param, or Ohio State
   const isFileProtocol = window.location.protocol === 'file:';
-  let defaultTeamId = 'ohiostate';
+  const savedFav = localStorage.getItem('cfb_prophet_fav_team') || localStorage.getItem('cfb_prophet_favorite_team_id');
+  const user = getCurrentUser();
+  let defaultTeamId = user?.favTeam || savedFav || 'ohiostate';
+  if (!TEAMS_DATABASE[defaultTeamId]) defaultTeamId = 'ohiostate';
+
   if (!isFileProtocol) {
     const urlParams = new URLSearchParams(window.location.search);
     const paramTeam = urlParams.get('team') ? urlParams.get('team').toLowerCase().trim() : null;

@@ -483,6 +483,8 @@ var TEAMS_DATABASE = {
   "byu": {
     "id": "byu",
     "name": "BYU Cougars",
+    "titleOdds": "+35000",
+    "titleOdds": "+35000",
     "shortName": "BYU",
     "abbr": "BYU",
     "conference": "Big 12",
@@ -923,6 +925,8 @@ var TEAMS_DATABASE = {
   "texas": {
     "id": "texas",
     "name": "Texas Longhorns",
+    "titleOdds": "+450",
+    "titleOdds": "+450",
     "shortName": "Texas",
     "abbr": "TEX",
     "mascot": "Longhorns",
@@ -1320,6 +1324,8 @@ var TEAMS_DATABASE = {
   "michigan": {
     "id": "michigan",
     "name": "Michigan Wolverines",
+    "titleOdds": "+3000",
+    "titleOdds": "+3000",
     "shortName": "Michigan",
     "abbr": "MICH",
     "mascot": "Wolverines",
@@ -1717,6 +1723,8 @@ var TEAMS_DATABASE = {
   "ohiostate": {
     "id": "ohiostate",
     "name": "Ohio State Buckeyes",
+    "titleOdds": "+350",
+    "titleOdds": "+350",
     "shortName": "Ohio State",
     "abbr": "OSU",
     "mascot": "Buckeyes",
@@ -2112,6 +2120,8 @@ var TEAMS_DATABASE = {
   "georgia": {
     "id": "georgia",
     "name": "Georgia Bulldogs",
+    "titleOdds": "+320",
+    "titleOdds": "+320",
     "shortName": "Georgia",
     "abbr": "UGA",
     "mascot": "Bulldogs",
@@ -2507,6 +2517,8 @@ var TEAMS_DATABASE = {
   "alabama": {
     "id": "alabama",
     "name": "Alabama Crimson Tide",
+    "titleOdds": "+750",
+    "titleOdds": "+750",
     "shortName": "Alabama",
     "abbr": "BAMA",
     "mascot": "Crimson Tide",
@@ -2902,6 +2914,8 @@ var TEAMS_DATABASE = {
   "oregon": {
     "id": "oregon",
     "name": "Oregon Ducks",
+    "titleOdds": "+650",
+    "titleOdds": "+650",
     "shortName": "Oregon",
     "abbr": "ORE",
     "mascot": "Ducks",
@@ -3296,6 +3310,8 @@ var TEAMS_DATABASE = {
   "pennstate": {
     "id": "pennstate",
     "name": "Penn State Nittany Lions",
+    "titleOdds": "+1200",
+    "titleOdds": "+1200",
     "shortName": "Penn State",
     "abbr": "PSU",
     "mascot": "Nittany Lions",
@@ -3688,6 +3704,8 @@ var TEAMS_DATABASE = {
   "notredame": {
     "id": "notredame",
     "name": "Notre Dame Fighting Irish",
+    "titleOdds": "+1400",
+    "titleOdds": "+1400",
     "shortName": "Notre Dame",
     "abbr": "ND",
     "mascot": "Fighting Irish",
@@ -4085,6 +4103,8 @@ var TEAMS_DATABASE = {
   "lsu": {
     "id": "lsu",
     "name": "LSU Tigers",
+    "titleOdds": "+2500",
+    "titleOdds": "+2500",
     "shortName": "LSU",
     "abbr": "LSU",
     "mascot": "Tigers",
@@ -4481,6 +4501,8 @@ var TEAMS_DATABASE = {
   "tennessee": {
     "id": "tennessee",
     "name": "Tennessee Volunteers",
+    "titleOdds": "+2200",
+    "titleOdds": "+2200",
     "shortName": "Tennessee",
     "abbr": "TENN",
     "mascot": "Volunteers",
@@ -4876,6 +4898,8 @@ var TEAMS_DATABASE = {
   "indiana": {
     "id": "indiana",
     "name": "Indiana Hoosiers",
+    "titleOdds": "+40000",
+    "titleOdds": "+40000",
     "shortName": "Indiana",
     "abbr": "IND",
     "mascot": "Hoosiers",
@@ -5269,6 +5293,8 @@ var TEAMS_DATABASE = {
   "miami": {
     "id": "miami",
     "name": "Miami Hurricanes",
+    "titleOdds": "+1800",
+    "titleOdds": "+1800",
     "shortName": "Miami",
     "abbr": "MIA",
     "mascot": "Hurricanes",
@@ -5662,6 +5688,8 @@ var TEAMS_DATABASE = {
   "texasam": {
     "id": "texasam",
     "name": "Texas A&M Aggies",
+    "titleOdds": "+4500",
+    "titleOdds": "+4500",
     "shortName": "Texas A&M",
     "abbr": "TAMU",
     "mascot": "Aggies",
@@ -6058,6 +6086,8 @@ var TEAMS_DATABASE = {
   "olemiss": {
     "id": "olemiss",
     "name": "Ole Miss Rebels",
+    "titleOdds": "+1500",
+    "titleOdds": "+1500",
     "shortName": "Ole Miss",
     "abbr": "MISS",
     "mascot": "Rebels",
@@ -6452,6 +6482,8 @@ var TEAMS_DATABASE = {
   "oklahoma": {
     "id": "oklahoma",
     "name": "Oklahoma Sooners",
+    "titleOdds": "+5000",
+    "titleOdds": "+5000",
     "shortName": "Oklahoma",
     "abbr": "OU",
     "mascot": "Sooners",
@@ -6847,6 +6879,8 @@ var TEAMS_DATABASE = {
   "boisestate": {
     "id": "boisestate",
     "name": "Boise State Broncos",
+    "titleOdds": "+12500",
+    "titleOdds": "+12500",
     "shortName": "Boise State",
     "mascot": "Broncos",
     "abbr": "BSU",
@@ -7247,6 +7281,8 @@ var TEAMS_DATABASE = {
   "usc": {
     "id": "usc",
     "name": "USC Trojans",
+    "titleOdds": "+4000",
+    "titleOdds": "+4000",
     "shortName": "USC",
     "mascot": "Trojans",
     "abbr": "USC",
@@ -7648,6 +7684,8 @@ var TEAMS_DATABASE = {
   "floridastate": {
     "id": "floridastate",
     "name": "Florida State Seminoles",
+    "titleOdds": "+30000",
+    "titleOdds": "+30000",
     "shortName": "Florida State",
     "mascot": "Seminoles",
     "abbr": "FSU",
@@ -8049,6 +8087,8 @@ var TEAMS_DATABASE = {
   "clemson": {
     "id": "clemson",
     "name": "Clemson Tigers",
+    "titleOdds": "+3500",
+    "titleOdds": "+3500",
     "shortName": "Clemson",
     "mascot": "Tigers",
     "abbr": "CLEM",
@@ -8449,6 +8489,8 @@ var TEAMS_DATABASE = {
   "smu": {
     "id": "smu",
     "name": "SMU Mustangs",
+    "titleOdds": "+9000",
+    "titleOdds": "+9000",
     "shortName": "SMU",
     "mascot": "Mustangs",
     "abbr": "SMU",
@@ -8850,6 +8892,8 @@ var TEAMS_DATABASE = {
   "texastech": {
     "id": "texastech",
     "name": "Texas Tech Red Raiders",
+    "titleOdds": "+25000",
+    "titleOdds": "+25000",
     "shortName": "Texas Tech",
     "mascot": "Red Raiders",
     "abbr": "TTU",
@@ -9254,6 +9298,8 @@ var TEAMS_DATABASE = {
   "utah": {
     "id": "utah",
     "name": "Utah Utes",
+    "titleOdds": "+6000",
+    "titleOdds": "+6000",
     "shortName": "Utah",
     "abbr": "UTAH",
     "mascot": "Swoop",
@@ -9654,6 +9700,8 @@ var TEAMS_DATABASE = {
   "iowa": {
     "id": "iowa",
     "name": "Iowa Hawkeyes",
+    "titleOdds": "+10000",
+    "titleOdds": "+10000",
     "shortName": "Iowa",
     "abbr": "IOWA",
     "mascot": "Herky the Hawk",
@@ -10054,6 +10102,8 @@ var TEAMS_DATABASE = {
   "missouri": {
     "id": "missouri",
     "name": "Missouri Tigers",
+    "titleOdds": "+6500",
+    "titleOdds": "+6500",
     "shortName": "Missouri",
     "abbr": "MIZ",
     "mascot": "Truman the Tiger",
@@ -10454,6 +10504,8 @@ var TEAMS_DATABASE = {
   "arizona": {
     "id": "arizona",
     "name": "Arizona Wildcats",
+    "titleOdds": "+17500",
+    "titleOdds": "+17500",
     "shortName": "Arizona",
     "abbr": "ARIZ",
     "mascot": "Wilbur and Wilma Wildcat",
@@ -10854,6 +10906,8 @@ var TEAMS_DATABASE = {
   "washington": {
     "id": "washington",
     "name": "Washington Huskies",
+    "titleOdds": "+20000",
+    "titleOdds": "+20000",
     "shortName": "Washington",
     "abbr": "WASH",
     "mascot": "Harry the Husky / Dubs II",
@@ -11254,6 +11308,8 @@ var TEAMS_DATABASE = {
   "houston": {
     "id": "houston",
     "name": "Houston Cougars",
+    "titleOdds": "+50000",
+    "titleOdds": "+50000",
     "shortName": "Houston",
     "abbr": "HOU",
     "mascot": "Shasta",
@@ -11654,6 +11710,8 @@ var TEAMS_DATABASE = {
   "louisville": {
     "id": "louisville",
     "name": "Louisville Cardinals",
+    "titleOdds": "+8000",
+    "titleOdds": "+8000",
     "shortName": "Louisville",
     "abbr": "LOU",
     "mascot": "Louie the Cardinal",
@@ -12055,6 +12113,8 @@ var TEAMS_DATABASE = {
   "colorado": {
     "id": "colorado",
     "name": "Colorado Buffaloes",
+    "titleOdds": "+15000",
+    "titleOdds": "+15000",
     "shortName": "Colorado",
     "abbr": "COL",
     "mascot": "Buffaloes",
@@ -12462,6 +12522,8 @@ var TEAMS_DATABASE = {
   "arizonastate": {
     "id": "arizonastate",
     "name": "Arizona State Sun Devils",
+    "titleOdds": "+45000",
+    "titleOdds": "+45000",
     "shortName": "Arizona State",
     "abbr": "ASU",
     "mascot": "Sun Devils",
