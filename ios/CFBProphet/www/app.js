@@ -7858,11 +7858,9 @@ function addDeletedBracketId(bracketId) {
 
 function getSavedBrackets() {
   const currentUser = getCurrentUser();
-  if (!currentUser) return [];
-
-  const userDisplayName = (currentUser.displayName || '').trim().toLowerCase();
-  const userEmail = (currentUser.email || '').trim().toLowerCase();
-  const userId = currentUser.id;
+  const userDisplayName = (currentUser?.displayName || '').trim().toLowerCase();
+  const userEmail = (currentUser?.email || '').trim().toLowerCase();
+  const userId = currentUser?.id || null;
 
   let allLocalBrackets = [];
   const storageKeys = [
@@ -7886,36 +7884,33 @@ function getSavedBrackets() {
   const deletedIds = getDeletedBracketIds();
   const idMap = new Map();
 
+  // 1. Preserve every custom bracket submitted on this device
   allLocalBrackets.forEach(b => {
     if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || deletedIds.has(b.id)) return;
-
-    const crEmail = (b.creatorEmail || '').trim().toLowerCase();
-    const crId = b.creatorId;
-
-    // Strict account ownership:
-    let isOwner = false;
-    if (crId && userId && crId === userId) {
-      isOwner = true;
-    } else if (crEmail && userEmail && crEmail === userEmail) {
-      isOwner = true;
+    
+    // Automatically associate with logged-in user profile if guest
+    if (currentUser && (!b.creatorId || b.creatorId.startsWith('guest_'))) {
+      b.creatorId = currentUser.id;
+      if (!b.creator || b.creator === 'Coach') b.creator = currentUser.displayName;
+      if (currentUser.email) b.creatorEmail = currentUser.email;
     }
-
-    if (isOwner) {
-      idMap.set(b.id, b);
-    }
+    
+    idMap.set(b.id, b);
   });
 
-  // Personal Jake Johnson account owns USC Wins Out by default
-  const isWorkAccount = userDisplayName.includes('jake t') || (userEmail && userEmail.includes('work'));
-  const isPersonalJake = !isWorkAccount && (userDisplayName === 'jake johnson' || userDisplayName === 'jake' || (userEmail && (userEmail.includes('jajo9147') || userEmail.includes('jakejohnson'))));
-  
-  if (isPersonalJake) {
-    const uscCurated = createUscWinsOutBracket();
-    if (!deletedIds.has(uscCurated.id) && !idMap.has(uscCurated.id)) {
-      uscCurated.creatorId = userId;
-      uscCurated.creator = currentUser.displayName || 'Jake Johnson';
-      if (userEmail) uscCurated.creatorEmail = currentUser.email;
-      idMap.set(uscCurated.id, uscCurated);
+  // 2. Only provide default USC bracket if no picks have been submitted yet
+  if (idMap.size === 0) {
+    const isPersonalJake = !userDisplayName.includes('jake t') && (userDisplayName === 'jake johnson' || userDisplayName === 'jake' || (userEmail && (userEmail.includes('jajo9147') || userEmail.includes('jakejohnson'))));
+    if (isPersonalJake) {
+      const uscCurated = createUscWinsOutBracket();
+      if (!deletedIds.has(uscCurated.id)) {
+        if (currentUser) {
+          uscCurated.creatorId = currentUser.id;
+          uscCurated.creator = currentUser.displayName || 'Jake Johnson';
+          if (currentUser.email) uscCurated.creatorEmail = currentUser.email;
+        }
+        idMap.set(uscCurated.id, uscCurated);
+      }
     }
   }
 
