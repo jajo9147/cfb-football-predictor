@@ -7284,33 +7284,23 @@ function calculateWeeklyScoreForUser(bracket, targetWeek = 'W1') {
 }
 
 function renderVaultWeekSelector() {
-  const strip = document.getElementById('vaultWeekSelectorStrip');
-  if (!strip) return;
+  const dropdown = document.getElementById('vaultWeekSelectDropdown');
+  const tabSelect = document.getElementById('vaultTabSelect');
+  const weekWrapper = document.getElementById('vaultWeekDropdownWrapper');
 
-  strip.style.display = 'flex';
-  const isSeasonTab = state.activeVaultTab === 'community';
+  if (tabSelect) {
+    tabSelect.value = state.activeVaultTab || 'weekly';
+  }
 
-  strip.innerHTML = ALL_WEEKS_LIST.map(w => {
-    const isActive = isSeasonTab ? (w.key === 'all') : (state.selectedVaultWeek === w.key);
-    let icon = '📅';
-    if (w.key === 'CCG') icon = '🏆';
-    else if (w.key === 'CFP') icon = '🏈';
-    else if (w.key === 'all') icon = '📊';
+  if (dropdown) {
+    const isSeasonTab = state.activeVaultTab === 'community';
+    const activeVal = isSeasonTab ? 'all' : (state.selectedVaultWeek || 'W1');
+    dropdown.value = activeVal;
+  }
 
-    return `
-      <button class="vault-week-pill-btn ${isActive ? 'active' : ''}" onclick="selectVaultWeek('${w.key}')" title="Filter to ${w.label}">
-        <span>${icon}</span>
-        <span>${w.label}</span>
-      </button>
-    `;
-  }).join('');
-
-  setTimeout(() => {
-    const activeBtn = strip.querySelector('.vault-week-pill-btn.active');
-    if (activeBtn && typeof activeBtn.scrollIntoView === 'function') {
-      activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
-  }, 20);
+  if (weekWrapper) {
+    weekWrapper.style.display = state.activeVaultTab === 'mine' ? 'none' : 'flex';
+  }
 }
 
 function selectVaultWeek(weekKey) {
@@ -8378,20 +8368,13 @@ function switchVaultTab(tabKey) {
   if (select && select.value !== tabKey) {
     select.value = tabKey;
   }
-  const tabWeekly = document.getElementById('tabWeeklyVaultBtn');
-  const tabComm = document.getElementById('tabCommunityVaultBtn');
-  const tabAllTeams = document.getElementById('tabAllTeamsVaultBtn');
-  const tabMine = document.getElementById('tabMyVaultBtn');
-
-  if (tabWeekly) tabWeekly.classList.toggle('active', tabKey === 'weekly');
-  if (tabComm) tabComm.classList.toggle('active', tabKey === 'community');
-  if (tabAllTeams) tabAllTeams.classList.toggle('active', tabKey === 'allteams');
-  if (tabMine) tabMine.classList.toggle('active', tabKey === 'mine');
-
+  const weekDropdown = document.getElementById('vaultWeekSelectDropdown');
   if (tabKey === 'community') {
     state.selectedVaultWeek = 'all';
+    if (weekDropdown) weekDropdown.value = 'all';
   } else if (tabKey === 'weekly' && state.selectedVaultWeek === 'all') {
     state.selectedVaultWeek = 'W1';
+    if (weekDropdown) weekDropdown.value = 'W1';
   }
 
   renderVaultWeekSelector();

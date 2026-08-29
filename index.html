@@ -1232,37 +1232,42 @@
         </div>
       </div>
 
-      <!-- Sleek Segmented Mode Switcher -->
-      <div class="vault-segmented-bar-wrapper">
-        <div class="vault-segmented-track" id="vaultSegmentedTrack">
-          <button class="vault-segment-btn active" id="tabWeeklyVaultBtn" onclick="switchVaultTab('weekly')">
-            <i class="fa-solid fa-calendar-days" style="color: #38BDF8;"></i>
-            <span>Weekly Slate</span>
-          </button>
-          <button class="vault-segment-btn" id="tabCommunityVaultBtn" onclick="switchVaultTab('community')">
-            <i class="fa-solid fa-trophy" style="color: #F59E0B;"></i>
-            <span>Season Standings</span>
-          </button>
-          <button class="vault-segment-btn" id="tabAllTeamsVaultBtn" onclick="switchVaultTab('allteams')">
-            <i class="fa-solid fa-shield-halved" style="color: #10B981;"></i>
-            <span>30-Team Matrix</span>
-          </button>
-          <button class="vault-segment-btn" id="tabMyVaultBtn" onclick="switchVaultTab('mine')">
-            <i class="fa-solid fa-user" style="color: #A855F7;"></i>
-            <span>My Picks</span>
-          </button>
+      <!-- Dual Filter Bar: Standings View & Week Slate Dropdowns -->
+      <div class="vault-filter-bar" style="margin-top: 0.5rem; margin-bottom: 0.65rem; display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: 0.65rem;">
+        
+        <!-- Standings View Mode Filter -->
+        <div style="display: flex; align-items: center; gap: 0.4rem; flex: 1 1 200px; max-width: 320px;">
+          <select id="vaultTabSelect" class="schedule-filter-select" onchange="switchVaultTab(this.value)" style="width: 100%; font-size: 0.82rem; height: 38px;">
+            <option value="weekly" selected>📅 Weekly Standings</option>
+            <option value="community">🏆 Season Standings</option>
+            <option value="allteams">🛡️ All 30 Teams Matrix</option>
+            <option value="mine">👤 My Submitted Picks</option>
+          </select>
         </div>
-        <select id="vaultTabSelect" class="schedule-filter-select" onchange="switchVaultTab(this.value)" style="display: none;">
-          <option value="weekly" selected>📅 Weekly Standings</option>
-          <option value="community">🏆 Season Standings</option>
-          <option value="allteams">🛡️ All 30 Teams Game Matrix</option>
-          <option value="mine">👤 My Submitted Picks</option>
-        </select>
-      </div>
 
-      <!-- Weekly Selector Filter (Shown across tabs for instant 1-click week filtering) -->
-      <div class="vault-week-selector-strip" id="vaultWeekSelectorStrip">
-        <!-- Injected via JavaScript (Week 1 to Week 14 + CCG + CFP + Full Season) -->
+        <!-- Week / Slate Filter Dropdown -->
+        <div style="display: flex; align-items: center; gap: 0.4rem; flex: 1 1 240px; max-width: 340px;" id="vaultWeekDropdownWrapper">
+          <select id="vaultWeekSelectDropdown" class="schedule-filter-select" onchange="selectVaultWeek(this.value)" style="width: 100%; font-size: 0.82rem; height: 38px;">
+            <option value="W1" selected>📅 Week 1 Slate (310 PTS)</option>
+            <option value="W2">📅 Week 2 Slate (280 PTS)</option>
+            <option value="W3">📅 Week 3 Slate (270 PTS)</option>
+            <option value="W4">📅 Week 4 Slate (310 PTS)</option>
+            <option value="W5">📅 Week 5 Slate (300 PTS)</option>
+            <option value="W6">📅 Week 6 Slate (290 PTS)</option>
+            <option value="W7">📅 Week 7 Slate (280 PTS)</option>
+            <option value="W8">📅 Week 8 Slate (270 PTS)</option>
+            <option value="W9">📅 Week 9 Slate (260 PTS)</option>
+            <option value="W10">📅 Week 10 Slate (250 PTS)</option>
+            <option value="W11">📅 Week 11 Slate (270 PTS)</option>
+            <option value="W12">📅 Week 12 Slate (280 PTS)</option>
+            <option value="W13">📅 Week 13 Slate (290 PTS)</option>
+            <option value="W14">📅 Week 14 Slate (260 PTS)</option>
+            <option value="CCG">🏆 Conf Championships (100 PTS)</option>
+            <option value="CFP">🏈 12-Team CFP Playoff (110 PTS)</option>
+            <option value="all">🏆 Full 2026 Season (3,720 PTS)</option>
+          </select>
+        </div>
+
       </div>
 
       <!-- Vault Brackets List / Grid -->
