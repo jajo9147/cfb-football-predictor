@@ -6134,14 +6134,6 @@ function updateSocialMetadataForChampion(champ) {
 
   const ogDesc = document.getElementById('ogDescription') || document.querySelector('meta[property="og:description"]');
   if (ogDesc) ogDesc.setAttribute('content', `Custom CFP Simulation: ${champFullName} is predicted to win the 2027 College Football National Championship!`);
-
-  // Favicon & Apple Touch Icon
-  if (champLogo) {
-    const appleIcon = document.querySelector('link[rel="apple-touch-icon"]');
-    if (appleIcon) appleIcon.setAttribute('href', champLogo);
-    let favIcon = document.querySelector('link[rel="icon"]');
-    if (favIcon) favIcon.setAttribute('href', champLogo);
-  }
 }
 
 function createChampionShareFile(champ) {
