@@ -5905,13 +5905,16 @@ body {
   overflow-y: hidden !important;
   -webkit-overflow-scrolling: touch !important;
   scrollbar-width: none !important;
-  padding: 0.5rem 0.25rem !important;
-  margin: 0.5rem 0 0.85rem 0 !important;
+  padding: 0.35rem 0.25rem !important;
+  margin: 0.35rem 0 0.65rem 0 !important;
   width: 100% !important;
   min-height: 52px !important;
   height: 52px !important;
+  max-height: 52px !important;
   box-sizing: border-box !important;
+  flex: 0 0 52px !important;
   flex-shrink: 0 !important;
+  flex-grow: 0 !important;
   position: relative !important;
   z-index: 20 !important;
 }
@@ -6041,58 +6044,36 @@ body {
 #bracketVaultModal .modal-dialog {
   max-width: 1060px !important;
   width: 95vw !important;
-  max-height: 92vh !important;
+  max-height: 90vh !important;
+  height: 90vh !important;
   display: flex !important;
   flex-direction: column !important;
   padding: 1.15rem 1.4rem !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
 }
 
+#bracketVaultModal .modal-header,
+#bracketVaultModal .vault-filter-bar {
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+}
+
+#bracketVaultGrid,
 .bracket-vault-grid {
   display: flex !important;
   flex-direction: column !important;
   gap: 0.65rem !important;
   margin-top: 0.4rem !important;
-  flex: 1 1 auto !important;
-  max-height: 65vh !important;
+  flex: 1 1 0px !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
   overflow-y: auto !important;
+  overflow-x: hidden !important;
   padding: 0.25rem !important;
   width: 100% !important;
   box-sizing: border-box !important;
-}
-
-
-.vault-week-pill-btn {
-  padding: 0.45rem 0.85rem !important;
-  border-radius: var(--radius-full) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  background: rgba(30, 41, 59, 0.8) !important;
-  color: #CBD5E1 !important;
-  font-family: var(--font-mono) !important;
-  font-size: 0.76rem !important;
-  font-weight: 700 !important;
-  white-space: nowrap !important;
-  cursor: pointer !important;
-  transition: var(--transition-fast) !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-height: 32px !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
-}
-
-.vault-week-pill-btn:hover {
-  color: #FFFFFF !important;
-  background: rgba(51, 65, 85, 1) !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  transform: translateY(-1px) !important;
-}
-
-.vault-week-pill-btn.active {
-  background: linear-gradient(135deg, #0284C7, #0369A1) !important;
-  color: #FFFFFF !important;
-  border-color: #38BDF8 !important;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5) !important;
-  font-weight: 800 !important;
 }
 
 /* All 30 Teams Matchup Inspector in Vault */
@@ -6329,7 +6310,9 @@ body {
     display: flex !important;
     flex-direction: column !important;
     gap: 0.95rem !important;
-    max-height: calc(85vh - 170px) !important;
+    flex: 1 1 0px !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
     padding: 0.2rem 0.1rem 1.5rem 0.1rem !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
