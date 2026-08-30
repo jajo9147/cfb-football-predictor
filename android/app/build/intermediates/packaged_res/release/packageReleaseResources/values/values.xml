@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="bg_dark">#0A0E17</color>
+    <color name="bg_surface">#0F172A</color>
+    <color name="brand_accent">#F59E0B</color>
+    <color name="brand_primary">#00E5FF</color>
+    <color name="nav_bar">#0A0E17</color>
+    <color name="status_bar">#0A0E17</color>
+    <string name="app_description">2026 College Football Predictor &amp; 12-Team CFP Simulator</string>
+    <string name="app_name">CFB Prophet</string>
+    <style name="Theme.CFBProphet" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="android:statusBarColor">@color/status_bar</item>
+        <item name="android:navigationBarColor">@color/nav_bar</item>
+        <item name="android:windowLightStatusBar" ns1:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" ns1:targetApi="o_mr1">false</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:colorBackground">@color/bg_dark</item>
+    </style>
+</resources>
