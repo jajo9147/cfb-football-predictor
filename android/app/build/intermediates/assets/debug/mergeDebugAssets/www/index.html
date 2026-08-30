@@ -71,7 +71,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=319">
+  <link rel="stylesheet" href="styles.css?v=325">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1251,8 +1251,9 @@
         </div>
 
         <!-- Week / Slate Filter Dropdown -->
-        <div style="display: flex; align-items: center; gap: 0.4rem; flex: 1 1 240px; max-width: 340px;" id="vaultWeekDropdownWrapper">
+        <div style="display: flex; align-items: center; gap: 0.4rem; flex: 1 1 220px; max-width: 320px;" id="vaultWeekDropdownWrapper">
           <select id="vaultWeekSelectDropdown" class="schedule-filter-select" onchange="selectVaultWeek(this.value)" style="width: 100%; font-size: 0.82rem; height: 38px;">
+            <option value="W0">📅 Week 0 Slate (10 PTS • Final - USC 42, SJSU 26)</option>
             <option value="W1" selected>📅 Week 1 Slate (310 PTS)</option>
             <option value="W2">📅 Week 2 Slate (280 PTS)</option>
             <option value="W3">📅 Week 3 Slate (270 PTS)</option>
@@ -1270,6 +1271,13 @@
             <option value="CCG">🏆 Conf Championships (100 PTS)</option>
             <option value="CFP">🏈 12-Team CFP Playoff (110 PTS)</option>
             <option value="all">🏆 Full 2026 Season (3,720 PTS)</option>
+          </select>
+        </div>
+
+        <!-- Team Focus Filter Dropdown -->
+        <div style="display: flex; align-items: center; gap: 0.4rem; flex: 1 1 220px; max-width: 320px;" id="vaultTeamDropdownWrapper">
+          <select id="vaultTeamSelectDropdown" class="schedule-filter-select" onchange="selectVaultTeam(this.value)" style="width: 100%; font-size: 0.82rem; height: 38px;">
+            <option value="all" selected>🏈 All Teams (Global View)</option>
           </select>
         </div>
 
@@ -1343,13 +1351,34 @@
         </div>
       </div>
 
+      <!-- Week 0 Official Real-World Matchup Result Section -->
+      <div id="subModalWeek0Section" style="margin-bottom: 1.15rem;">
+        <div style="font-size: 0.76rem; color: #34D399; font-family: var(--font-mono); font-weight: 800; margin-bottom: 0.45rem; text-transform: uppercase; display: flex; align-items: center; justify-content: space-between;">
+          <span><i class="fa-solid fa-lock" style="color: #10B981;"></i> WEEK 0 OFFICIAL GAME RESULT:</span>
+          <span style="color: #10B981; font-size: 0.72rem; font-weight: 800; background: rgba(16, 185, 129, 0.2); padding: 2px 6px; border-radius: 4px;">OFFICIAL FINAL</span>
+        </div>
+        <div id="subModalWeek0Content" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-sm); padding: 0.65rem 0.85rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
       <!-- Top 12 Playoff Field Grid -->
-      <div style="margin-bottom: 1.25rem;">
+      <div id="subModalPlayoffSection" style="margin-bottom: 1.25rem;">
         <div style="font-size: 0.76rem; color: #94A3B8; font-family: var(--font-mono); font-weight: 700; margin-bottom: 0.45rem; text-transform: uppercase;">
           🏈 12-TEAM PLAYOFF FIELD:
         </div>
         <div id="subModalSeedsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.45rem;">
           <!-- Injected seeds -->
+        </div>
+      </div>
+
+      <!-- Team-Specific Schedule & Picks Breakdown Section -->
+      <div id="subModalTeamScheduleSection" style="margin-bottom: 1.25rem; display: none;">
+        <div id="subModalTeamScheduleTitle" style="font-size: 0.76rem; color: #38BDF8; font-family: var(--font-mono); font-weight: 700; margin-bottom: 0.45rem; text-transform: uppercase;">
+          📅 TEAM GAME-BY-GAME PICKS:
+        </div>
+        <div id="subModalTeamScheduleList" style="display: flex; flex-direction: column; gap: 0.4rem; max-height: 240px; overflow-y: auto; padding-right: 4px;">
+          <!-- Injected game picks -->
         </div>
       </div>
 
@@ -1641,10 +1670,10 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=319"></script>
-  <script src="qrious.min.js?v=319"></script>
-  <script src="qrcode.min.js?v=319"></script>
-  <script src="data/teams.js?v=319"></script>
-  <script src="app.js?v=319"></script>
+  <script src="supabase-client.js?v=325"></script>
+  <script src="qrious.min.js?v=325"></script>
+  <script src="qrcode.min.js?v=325"></script>
+  <script src="data/teams.js?v=325"></script>
+  <script src="app.js?v=325"></script>
 </body>
 </html>

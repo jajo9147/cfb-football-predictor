@@ -17,6 +17,7 @@ const state = {
   deferredPrompt: null,
   activeVaultTab: 'weekly',
   selectedVaultWeek: 'W1',
+  selectedVaultTeam: 'all',
   activeSavedBracketId: null
 };
 
@@ -233,10 +234,10 @@ const TEAM_OPENER_KICKOFFS = {
     tv: 'NBC / Peacock'
   },
   'usc': {
-    utc: '2026-09-06T23:30:00Z', // Sun Sep 6 @ 4:30 PM PDT / 7:30 PM EDT (Las Vegas, NV)
-    opponent: 'Ole Miss Rebels',
-    venue: 'Allegiant Stadium (Las Vegas, NV)',
-    tv: 'ABC Vegas Kickoff Classic'
+    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 4:30 PM PDT / 7:30 PM EDT (Los Angeles, CA)
+    opponent: 'Fresno State Bulldogs',
+    venue: 'Los Angeles Memorial Coliseum (Los Angeles, CA)',
+    tv: 'Big Ten Network / FS1'
   },
   'olemiss': {
     utc: '2026-09-06T23:30:00Z', // Sun Sep 6 @ 6:30 PM CDT / 7:30 PM EDT (Las Vegas, NV)
@@ -1388,10 +1389,11 @@ function renderSchedule() {
         </div>
 
         <div class="score-center" onclick="event.stopPropagation();">
-          <div class="proj-score-box editable-score-box" title="Type to project custom score">
+          <div class="proj-score-box ${sim.isFinal ? 'locked-score-box' : 'editable-score-box'}" title="${sim.isFinal ? 'Official Final Score (Locked)' : 'Type to project custom score'}">
             <input type="number" min="0" max="99" 
-                   class="score-input ${isWin ? 'win-score' : ''}" 
+                   class="score-input ${isWin ? 'win-score' : ''} ${sim.isFinal ? 'locked-score-input' : ''}" 
                    value="${sim.projUt}" 
+                   ${sim.isFinal ? 'disabled readonly' : ''}
                    data-gameid="${game.id}" 
                    data-side="team" 
                    aria-label="${team.abbr} score projection"
@@ -1400,8 +1402,9 @@ function renderSchedule() {
                    onclick="event.stopPropagation();">
             <span class="score-divider">-</span>
             <input type="number" min="0" max="99" 
-                   class="score-input ${!isWin ? 'win-score' : ''}" 
+                   class="score-input ${!isWin ? 'win-score' : ''} ${sim.isFinal ? 'locked-score-input' : ''}" 
                    value="${sim.projOpp}" 
+                   ${sim.isFinal ? 'disabled readonly' : ''}
                    data-gameid="${game.id}" 
                    data-side="opp" 
                    aria-label="${game.oppAbbr} score projection"
@@ -1410,15 +1413,15 @@ function renderSchedule() {
                    onclick="event.stopPropagation();">
           </div>
           <div class="score-sub-row">
-            <span class="vegas-line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : `${game.oppAbbr} -${game.vegasSpread}`}</span>
-            ${sim.isManualScore ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event)" title="Reset to AI baseline projection"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
+            ${sim.isFinal ? `<span class="vegas-line" style="color: #10B981; font-weight: 800;"><i class="fa-solid fa-lock"></i> OFFICIAL FINAL</span>` : `<span class="vegas-line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : `${game.oppAbbr} -${game.vegasSpread}`}</span>`}
+            ${(!sim.isFinal && sim.isManualScore) ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event)" title="Reset to AI baseline projection"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
           </div>
         </div>
 
         <div class="team-pill" style="justify-content: flex-end; text-align: right;">
           <div class="team-text">
             <span class="team-abbr">${game.oppAbbr}</span>
-            <span class="team-ranking-sub">${game.oppRank}</span>
+            <span class="team-ranking-sub">${(game.oppId && TEAMS_DATABASE[game.oppId]) ? TEAMS_DATABASE[game.oppId].apRank : (game.oppRank || 'NR')}</span>
           </div>
           <div class="team-logo-circle" style="border: 2px solid ${game.oppColor}; padding: 3px;">
             <img src="${game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || ''}" alt="${game.oppAbbr}" class="card-team-logo">
@@ -1428,8 +1431,8 @@ function renderSchedule() {
 
       <div class="card-stats-row">
         <div class="prob-labels-sm">
-          <span>WIN PROBABILITY</span>
-          <span style="color: ${isWin ? 'var(--color-success)' : 'var(--color-danger)'};">${sim.adjWinProb}%</span>
+          <span>${sim.isFinal ? 'OUTCOME' : 'WIN PROBABILITY'}</span>
+          <span style="color: ${isWin ? 'var(--color-success)' : 'var(--color-danger)'};">${sim.isFinal ? (isWin ? 'WIN 100%' : 'LOSS 0%') : `${sim.adjWinProb}%`}</span>
         </div>
         <div class="prob-track-sm">
           <div class="prob-fill-sm" style="width: ${sim.adjWinProb}%; background: ${isWin ? 'var(--color-brand-primary)' : 'var(--color-danger)'};"></div>
@@ -1437,15 +1440,25 @@ function renderSchedule() {
       </div>
 
       <div class="card-actions">
-        <div class="wl-toggle-wrap" onclick="event.stopPropagation();">
-          <span>PICK:</span>
-          <button class="wl-toggle-btn ${effectivePick === 'W' ? 'win' : ''}" data-pick="W" data-gameid="${game.id}" onclick="event.stopPropagation();">W</button>
-          <button class="wl-toggle-btn ${effectivePick === 'L' ? 'loss' : ''}" data-pick="L" data-gameid="${game.id}" onclick="event.stopPropagation();">L</button>
-        </div>
-        <button class="sim-btn-sm" data-simid="${game.id}" onclick="event.stopPropagation(); window.openSimModalByGameId('${game.id}');">
-          <i class="fa-solid fa-play"></i>
-          <span>Simulate</span>
-        </button>
+        ${sim.isFinal ? `
+          <div class="wl-toggle-wrap" onclick="event.stopPropagation();" style="opacity: 0.9;">
+            <span style="color: #10B981; font-weight: 800; font-family: var(--font-mono); font-size: 0.76rem;"><i class="fa-solid fa-lock"></i> ${isWin ? 'FINAL WIN' : 'FINAL LOSS'}</span>
+          </div>
+          <button class="sim-btn-sm" data-simid="${game.id}" onclick="event.stopPropagation(); window.openSimModalByGameId('${game.id}');" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #10B981;">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span>Box Score</span>
+          </button>
+        ` : `
+          <div class="wl-toggle-wrap" onclick="event.stopPropagation();">
+            <span>PICK:</span>
+            <button class="wl-toggle-btn ${effectivePick === 'W' ? 'win' : ''}" data-pick="W" data-gameid="${game.id}" onclick="event.stopPropagation();">W</button>
+            <button class="wl-toggle-btn ${effectivePick === 'L' ? 'loss' : ''}" data-pick="L" data-gameid="${game.id}" onclick="event.stopPropagation();">L</button>
+          </div>
+          <button class="sim-btn-sm" data-simid="${game.id}" onclick="event.stopPropagation(); window.openSimModalByGameId('${game.id}');">
+            <i class="fa-solid fa-play"></i>
+            <span>Simulate</span>
+          </button>
+        `}
       </div>
     `;
 
@@ -7255,7 +7268,9 @@ window.openHypeCardModal = function(game) {
 // ==========================================================================
 
 state.selectedVaultWeek = 'W1'; // Default to current week (Week 1)
+state.selectedVaultTeam = 'all'; // Default to all teams (Global view)
 const ALL_WEEKS_LIST = [
+  { key: 'W0', label: 'Week 0' },
   { key: 'W1', label: 'Week 1' },
   { key: 'W2', label: 'Week 2' },
   { key: 'W3', label: 'Week 3' },
@@ -7295,8 +7310,8 @@ function getTeamsOnByeForWeek(targetWeek = 'W1') {
 }
 
 function calculateWeeklyScoreForUser(bracket, targetWeek = 'W1') {
-  // Weekly Point System: +10 pts per straight-up win, +15 pts for ATS upset pick
-  // Accurately factors in BYE weeks (only counts games actually scheduled and played in targetWeek)
+  // Weekly Point System: +10 pts per straight-up win
+  // Accurately factors in BYE weeks, real completed games, and individual bracket predictions
   const weekGames = [];
   const teamIds = Object.keys(TEAMS_DATABASE);
   const seenGameKeys = new Set();
@@ -7315,24 +7330,136 @@ function calculateWeeklyScoreForUser(bracket, targetWeek = 'W1') {
     });
   });
 
-  const totalPossible = weekGames.length * 10 || 100;
+  const totalPossible = (weekGames.length * 10) || 10;
   const userPicks = bracket.simState?.userPicks || {};
+  const manualScores = bracket.simState?.manualScores || {};
+  const teamSliders = bracket.simState?.teamSliders || {};
 
-  // Undefeated pre-season standard (100% until real completed games)
+  let correctPicks = 0;
+  let earnedPts = 0;
+  let lockedCount = 0;
+
+  weekGames.forEach(({ teamId, game }) => {
+    let isPredictedWin = true;
+    if (manualScores[game.id]) {
+      isPredictedWin = manualScores[game.id].teamScore > manualScores[game.id].oppScore;
+    } else if (userPicks[game.id]) {
+      isPredictedWin = userPicks[game.id] === 'W';
+    } else {
+      const oppId = getOpponentTeamId(game);
+      const teamSl = teamSliders[teamId] || GLOBAL_PRESETS['baseline'];
+      const oppEffSliders = oppId && teamSliders[oppId] ? teamSliders[oppId] : GLOBAL_PRESETS['baseline'];
+      const sim = calculateCombinedMatchup(game, teamId, teamSl, oppId, oppEffSliders, null);
+      isPredictedWin = sim.isWin;
+    }
+
+    if (game.isFinal && typeof game.actualScoreUt === 'number') {
+      lockedCount++;
+      const actualWin = game.actualScoreUt > game.actualScoreOpp;
+      if (isPredictedWin === actualWin) {
+        correctPicks++;
+        earnedPts += 10;
+      }
+    } else {
+      // Future unplayed game: standard baseline prediction points
+      correctPicks++;
+      earnedPts += 10;
+    }
+  });
+
+  const pct = Math.round((earnedPts / totalPossible) * 100);
+  const grade = pct >= 90 ? 'A+' : (pct >= 80 ? 'A' : (pct >= 70 ? 'B' : (pct >= 60 ? 'C' : 'D')));
+
   return {
-    pts: totalPossible,
+    pts: earnedPts,
     maxPts: totalPossible,
-    pct: 100.0,
+    pct,
     gameCount: weekGames.length,
-    hits: `${weekGames.length}/${weekGames.length} Correct Picks`,
-    grade: 'A+'
+    lockedCount,
+    hits: `${correctPicks}/${weekGames.length} Correct Picks`,
+    grade
   };
 }
+
+function calculateTeamScoreForUser(bracket, teamId) {
+  if (!teamId || teamId === 'all') {
+    return calculateWeeklyScoreForUser(bracket, 'all');
+  }
+  const team = TEAMS_DATABASE[teamId];
+  if (!team || !team.schedule) {
+    return { pts: 120, maxPts: 120, pct: 100.0, wins: 12, losses: 0, record: '12-0', hits: '12/12 Live Picks', grade: 'A+' };
+  }
+
+  const userPicks = bracket.simState?.userPicks || {};
+  const manualScores = bracket.simState?.manualScores || {};
+  const teamSliders = bracket.simState?.teamSliders?.[teamId] || {};
+  const gameSliders = bracket.simState?.gameSliders || {};
+
+  let predictedWins = 0;
+  let predictedLosses = 0;
+  let correctPicks = 0;
+  const totalGames = team.schedule.length;
+
+  team.schedule.forEach(game => {
+    let isWin = true;
+    let projScoreUt = game.projScoreUt || 28;
+    let projScoreOpp = game.projScoreOpp || 21;
+
+    if (game.isFinal && typeof game.actualScoreUt === 'number') {
+      isWin = game.actualScoreUt > game.actualScoreOpp;
+      projScoreUt = game.actualScoreUt;
+      projScoreOpp = game.actualScoreOpp;
+    } else if (manualScores[game.id]) {
+      isWin = manualScores[game.id].teamScore > manualScores[game.id].oppScore;
+      projScoreUt = manualScores[game.id].teamScore;
+      projScoreOpp = manualScores[game.id].oppScore;
+    } else if (userPicks[game.id]) {
+      isWin = userPicks[game.id] === 'W';
+    } else {
+      const oppId = getOpponentTeamId(game);
+      const oppEffSliders = oppId && bracket.simState?.teamSliders?.[oppId] ? bracket.simState.teamSliders[oppId] : GLOBAL_PRESETS['baseline'];
+      const sim = calculateCombinedMatchup(game, teamId, teamSliders, oppId, oppEffSliders, null);
+      isWin = sim.isWin;
+      projScoreUt = sim.projUt;
+      projScoreOpp = sim.projOpp;
+    }
+
+    if (isWin) predictedWins++;
+    else predictedLosses++;
+
+    if (game.isFinal) {
+      const actualWin = game.actualScoreUt > game.actualScoreOpp;
+      if (isWin === actualWin) correctPicks++;
+    } else {
+      correctPicks++;
+    }
+  });
+
+  const pts = correctPicks * 10;
+  const maxPts = totalGames * 10;
+  const pct = Math.round((pts / maxPts) * 100);
+  const grade = pct >= 90 ? 'A+' : (pct >= 80 ? 'A' : (pct >= 70 ? 'B' : 'C'));
+
+  return {
+    pts,
+    maxPts,
+    pct,
+    predictedWins,
+    predictedLosses,
+    record: `${predictedWins}-${predictedLosses}`,
+    gameCount: totalGames,
+    hits: `${correctPicks}/${totalGames} Correct Picks`,
+    grade
+  };
+}
+window.calculateTeamScoreForUser = calculateTeamScoreForUser;
 
 function renderVaultWeekSelector() {
   const dropdown = document.getElementById('vaultWeekSelectDropdown');
   const tabSelect = document.getElementById('vaultTabSelect');
+  const teamDropdown = document.getElementById('vaultTeamSelectDropdown');
   const weekWrapper = document.getElementById('vaultWeekDropdownWrapper');
+  const teamWrapper = document.getElementById('vaultTeamDropdownWrapper');
 
   if (tabSelect) {
     tabSelect.value = state.activeVaultTab || 'weekly';
@@ -7344,10 +7471,32 @@ function renderVaultWeekSelector() {
     dropdown.value = activeVal;
   }
 
+  if (teamDropdown) {
+    if (teamDropdown.options.length <= 1) {
+      let teamOpts = `<option value="all" ${state.selectedVaultTeam === 'all' ? 'selected' : ''}>🏈 All Teams (Global View)</option>`;
+      const teamIds = Object.keys(TEAMS_DATABASE).sort((a, b) => TEAMS_DATABASE[a].name.localeCompare(TEAMS_DATABASE[b].name));
+      teamIds.forEach(tid => {
+        const t = TEAMS_DATABASE[tid];
+        teamOpts += `<option value="${tid}" ${state.selectedVaultTeam === tid ? 'selected' : ''}>${t.name} (${t.conference})</option>`;
+      });
+      teamDropdown.innerHTML = teamOpts;
+    }
+    teamDropdown.value = state.selectedVaultTeam || 'all';
+  }
+
   if (weekWrapper) {
-    weekWrapper.style.display = state.activeVaultTab === 'mine' ? 'none' : 'flex';
+    weekWrapper.style.display = (state.activeVaultTab === 'mine' || state.selectedVaultTeam !== 'all') ? 'none' : 'flex';
   }
 }
+
+function selectVaultTeam(teamId) {
+  state.selectedVaultTeam = teamId || 'all';
+  const dropdown = document.getElementById('vaultTeamSelectDropdown');
+  if (dropdown) dropdown.value = state.selectedVaultTeam;
+  renderVaultWeekSelector();
+  renderSavedBracketsVault();
+}
+window.selectVaultTeam = selectVaultTeam;
 
 function selectVaultWeek(weekKey) {
   state.selectedVaultWeek = weekKey;
@@ -8430,6 +8579,9 @@ function calculateBracketAccuracy(bracket) {
   if (!bracket) {
     return { pts: 3720, maxPts: 3720, pct: 100.0, grade: 'A+', hits: '372/372 Live Picks' };
   }
+  if (state.selectedVaultTeam && state.selectedVaultTeam !== 'all') {
+    return calculateTeamScoreForUser(bracket, state.selectedVaultTeam);
+  }
   const isSeasonTab = state.activeVaultTab === 'community';
   const targetWeek = isSeasonTab ? 'all' : (state.selectedVaultWeek || 'W1');
   const weekly = calculateWeeklyScoreForUser(bracket, targetWeek);
@@ -8582,14 +8734,60 @@ function renderSavedBracketsVault() {
   const aiBracket = brackets.find(b => b.isAdminBenchmark || b.id === 'bracket_prophet_ai_baseline') || createProphetAiBenchmarkBracket();
   const myTopBracket = myBrackets[0] || null;
 
-  // 1. Generate "YOU vs PROPHET AI" Head-to-Head Banner
+  // Check if filtering by a single team vs global/weekly
+  const isTeamFilter = state.selectedVaultTeam && state.selectedVaultTeam !== 'all';
+  const focusTeam = isTeamFilter ? TEAMS_DATABASE[state.selectedVaultTeam] : null;
+
   let html = '';
   const isSeasonTab = state.activeVaultTab === 'community';
   const effectiveWeek = isSeasonTab ? 'all' : (state.selectedVaultWeek || 'W1');
-  const currentWeekLabel = effectiveWeek === 'all' ? 'FULL 2026 SEASON' : (effectiveWeek === 'CCG' ? 'CONF CHAMPIONSHIPS' : (effectiveWeek === 'CFP' ? '12-TEAM CFP PLAYOFF' : `${effectiveWeek} SLATE`));
-  const aiWeeklyScore = calculateWeeklyScoreForUser(aiBracket, effectiveWeek);
+  const currentWeekLabel = effectiveWeek === 'all' ? 'FULL 2026 SEASON' : (effectiveWeek === 'W0' ? 'WEEK 0 (LOCKED SLATE)' : (effectiveWeek === 'CCG' ? 'CONF CHAMPIONSHIPS' : (effectiveWeek === 'CFP' ? '12-TEAM CFP PLAYOFF' : `${effectiveWeek} SLATE`)));
+  
+  const aiWeeklyScore = isTeamFilter ? calculateTeamScoreForUser(aiBracket, state.selectedVaultTeam) : calculateWeeklyScoreForUser(aiBracket, effectiveWeek);
 
-  if (myTopBracket) {
+  // 1. Generate "YOU vs PROPHET AI" Head-to-Head Banner
+  if (isTeamFilter && focusTeam) {
+    const userTeamScore = myTopBracket ? calculateTeamScoreForUser(myTopBracket, state.selectedVaultTeam) : null;
+    const bannerTitle = `🛡️ ${focusTeam.name.toUpperCase()} PICKS LEADERBOARD`;
+    
+    if (userTeamScore) {
+      const diff = userTeamScore.pts - aiWeeklyScore.pts;
+      let statusBadge = diff > 0 ? `<span class="vs-ai-badge win"><i class="fa-solid fa-crown"></i> BEATING PROPHET AI (+${diff} PTS)</span>` : (diff === 0 ? `<span class="vs-ai-badge tie"><i class="fa-solid fa-handshake"></i> TIED WITH PROPHET AI (${userTeamScore.pts} PTS)</span>` : `<span class="vs-ai-badge trail"><i class="fa-solid fa-fire"></i> ${Math.abs(diff)} PTS BEHIND PROPHET AI</span>`);
+
+      html += `
+        <div class="h2h-vs-ai-banner ${diff > 0 ? 'ahead' : (diff === 0 ? 'tied' : 'behind')}" style="border-left: 4px solid ${focusTeam.colors.primary};">
+          <div class="h2h-main-info">
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <span class="h2h-tag" style="color: ${focusTeam.colors.accent || '#38BDF8'};">${bannerTitle}</span>
+              ${statusBadge}
+            </div>
+            <div class="h2h-title">
+              <span>👤 ${myTopBracket.name || 'Your Picks'}: <strong>${userTeamScore.record} (${userTeamScore.pts} PTS)</strong></span>
+              <span style="opacity: 0.5; margin: 0 6px;">vs</span>
+              <span>🤖 Prophet AI: <strong>${aiWeeklyScore.record} (${aiWeeklyScore.pts} PTS)</strong></span>
+            </div>
+          </div>
+          <div class="h2h-stats-pill">
+            <span>Team Accuracy: <strong>${userTeamScore.pct}% (${userTeamScore.hits})</strong></span>
+          </div>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="h2h-vs-ai-banner invite" style="border-left: 4px solid ${focusTeam.colors.primary};">
+          <div class="h2h-main-info">
+            <span class="h2h-tag" style="color: #F59E0B;">🤖 PROPHET AI ${focusTeam.shortName.toUpperCase()} PROJECTION</span>
+            <div class="h2h-title" style="font-size: 0.95rem; color: #E2E8F0;">
+              Prophet AI projects ${focusTeam.name} to finish <strong>${aiWeeklyScore.record}</strong> (${aiWeeklyScore.pts} PTS). Lock in your simulation to compete!
+            </div>
+          </div>
+          <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="padding: 0.45rem 0.85rem; font-size: 0.8rem; white-space: nowrap;">
+            <i class="fa-solid fa-paper-plane"></i> Submit ${focusTeam.shortName} Picks
+          </button>
+        </div>
+      `;
+    }
+  } else if (myTopBracket) {
     const userWeeklyScore = calculateWeeklyScoreForUser(myTopBracket, effectiveWeek);
     const pointDiff = userWeeklyScore.pts - aiWeeklyScore.pts;
     let vsAiStatusBadge = '';
@@ -8662,7 +8860,7 @@ function renderSavedBracketsVault() {
     );
     const creatorLabel = isOwner ? 'You' : (b.creator || 'Prophet');
 
-    const acc = calculateWeeklyScoreForUser(b, effectiveWeek);
+    const acc = isTeamFilter ? calculateTeamScoreForUser(b, state.selectedVaultTeam) : calculateWeeklyScoreForUser(b, effectiveWeek);
 
     const rankNum = idx + 1;
     let rankMedal = `#${rankNum}`;
@@ -8670,13 +8868,6 @@ function renderSavedBracketsVault() {
     if (rankNum === 1) { rankMedal = '🥇 #1'; rankCls = 'rank-1'; }
     else if (rankNum === 2) { rankMedal = '🥈 #2'; rankCls = 'rank-2'; }
     else if (rankNum === 3) { rankMedal = '🥉 #3'; rankCls = 'rank-3'; }
-
-    const seedPills = (b.seeds || []).slice(0, 8).map(s => `
-      <span class="bracket-seed-mini-pill" title="#${s.seed || ''} ${s.name} (${s.wins || 11}-${s.losses || 1})">
-        ${s.logoUrl ? `<img src="${s.logoUrl}" alt="${s.name}">` : ''}
-        <span>#${s.seed || ''} ${s.name}</span>
-      </span>
-    `).join('');
 
     html += `
       <div class="leaderboard-compact-card ${isActive ? 'active-bracket' : ''} ${isAiBenchmark ? 'ai-benchmark-card' : ''}" onclick="openSubmissionDetailModal('${b.id}', event)">
@@ -8688,6 +8879,7 @@ function renderSavedBracketsVault() {
           <div class="lb-user-header">
             <span class="lb-user-name">${isAiBenchmark ? '🤖 Prophet AI' : (isOwner ? '👤 ' + (currentUser?.displayName || 'Jake Johnson') : (b.creator || 'Coach'))}</span>
             ${isAiBenchmark ? '<span class="lb-type-badge ai">AI BENCHMARK</span>' : (isOwner ? '<span class="lb-type-badge you">YOUR PICKS</span>' : '')}
+            ${isTeamFilter && acc.record ? `<span class="lb-type-badge" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.3);">${focusTeam?.shortName || 'Team'}: ${acc.record}</span>` : ''}
           </div>
           <div class="lb-bracket-name">${b.name}</div>
         </div>
@@ -8740,7 +8932,32 @@ function openSubmissionDetailModal(bracketId, e) {
     (creatorLower && (creatorLower === userDisplayName || creatorLower === userHandle))
   );
 
-  const acc = b.accuracy || calculateBracketAccuracy(b);
+  const isTeamFilter = state.selectedVaultTeam && state.selectedVaultTeam !== 'all';
+  const focusTeam = isTeamFilter ? TEAMS_DATABASE[state.selectedVaultTeam] : null;
+
+  // Populate Week 0 Official Score Card
+  const week0ContentEl = document.getElementById('subModalWeek0Content');
+  if (week0ContentEl) {
+    const isSeasonTab = state.activeVaultTab === 'community';
+    const effectiveWeek = isSeasonTab ? 'all' : (state.selectedVaultWeek || 'W1');
+    const w0Acc = calculateWeeklyScoreForUser(b, 'W0');
+    week0ContentEl.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/30.png" style="width: 24px; height: 24px; object-fit: contain;">
+        <span style="font-weight: 800; color: #FFFFFF; font-size: 0.85rem;">USC 42</span>
+        <span style="color: #94A3B8; font-size: 0.76rem;">-</span>
+        <span style="font-weight: 800; color: #FFFFFF; font-size: 0.85rem;">26 SJSU</span>
+        <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/23.png" style="width: 24px; height: 24px; object-fit: contain;">
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <span style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 800; color: #34D399; background: rgba(16, 185, 129, 0.15); padding: 2px 8px; border-radius: 4px;">
+          ${b.name}: CORRECT PICK (+${w0Acc.pts}/${w0Acc.maxPts} PTS)
+        </span>
+      </div>
+    `;
+  }
+
+  const acc = isTeamFilter ? calculateTeamScoreForUser(b, state.selectedVaultTeam) : (b.accuracy || calculateBracketAccuracy(b));
   const champ = b.champion || { name: 'Champion', shortName: 'Champs', logoUrl: '' };
 
   const rankTag = document.getElementById('subModalRankTag');
@@ -8750,6 +8967,10 @@ function openSubmissionDetailModal(bracketId, e) {
   const champLogo = document.getElementById('subModalChampLogo');
   const champName = document.getElementById('subModalChampName');
   const seedsGrid = document.getElementById('subModalSeedsGrid');
+  const playoffSection = document.getElementById('subModalPlayoffSection');
+  const teamSection = document.getElementById('subModalTeamScheduleSection');
+  const teamTitle = document.getElementById('subModalTeamScheduleTitle');
+  const teamList = document.getElementById('subModalTeamScheduleList');
   const actionsEl = document.getElementById('subModalActions');
 
   if (rankTag) rankTag.innerHTML = isAiBenchmark ? '<i class="fa-solid fa-robot"></i> PROPHET AI BENCHMARK' : (isOwner ? '<i class="fa-solid fa-user-check"></i> YOUR ENTRY' : '<i class="fa-solid fa-trophy"></i> COMMUNITY ENTRY');
@@ -8773,6 +8994,60 @@ function openSubmissionDetailModal(bracketId, e) {
         <div style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${s.name}</div>
       </div>
     `).join('');
+  }
+
+  // Handle Team Schedule breakdown
+  if (isTeamFilter && focusTeam && teamSection && teamList) {
+    teamSection.style.display = 'block';
+    if (teamTitle) teamTitle.innerText = `📅 ${focusTeam.name.toUpperCase()} PREDICTED SLATE (${acc.record}):`;
+    
+    const userPicks = b.simState?.userPicks || {};
+    const manualScores = b.simState?.manualScores || {};
+    const teamSliders = b.simState?.teamSliders?.[state.selectedVaultTeam] || {};
+
+    let listHtml = '';
+    focusTeam.schedule.forEach(g => {
+      let isWin = true;
+      let scoreA = g.projScoreUt || 28;
+      let scoreB = g.projScoreOpp || 21;
+      let isFinalGame = g.isFinal && typeof g.actualScoreUt === 'number';
+
+      if (isFinalGame) {
+        scoreA = g.actualScoreUt;
+        scoreB = g.actualScoreOpp;
+        isWin = scoreA > scoreB;
+      } else if (manualScores[g.id]) {
+        scoreA = manualScores[g.id].teamScore;
+        scoreB = manualScores[g.id].oppScore;
+        isWin = scoreA > scoreB;
+      } else if (userPicks[g.id]) {
+        isWin = userPicks[g.id] === 'W';
+      } else {
+        const oppId = getOpponentTeamId(g);
+        const oppEff = oppId && b.simState?.teamSliders?.[oppId] ? b.simState.teamSliders[oppId] : GLOBAL_PRESETS['baseline'];
+        const sim = calculateCombinedMatchup(g, state.selectedVaultTeam, teamSliders, oppId, oppEff, null);
+        scoreA = sim.projUt;
+        scoreB = sim.projOpp;
+        isWin = sim.isWin;
+      }
+
+      listHtml += `
+        <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-sm); padding: 0.4rem 0.6rem; font-size: 0.76rem;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="font-family: var(--font-mono); color: #94A3B8; font-weight: 700;">${g.week}</span>
+            <span style="color: #E2E8F0; font-weight: 600;">${g.isHome ? 'vs' : '@'} ${g.oppAbbr || g.opponent}</span>
+            ${isFinalGame ? '<span style="background: rgba(16, 185, 129, 0.2); color: #10B981; font-size: 0.62rem; font-weight: 800; padding: 1px 5px; border-radius: 3px;"><i class="fa-solid fa-lock"></i> FINAL</span>' : ''}
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-family: var(--font-mono); font-weight: 800; color: #FFFFFF;">${scoreA} - ${scoreB}</span>
+            <span style="font-weight: 800; font-family: var(--font-mono); color: ${isWin ? '#10B981' : '#EF4444'}; background: ${isWin ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)'}; padding: 1px 6px; border-radius: 4px;">${isWin ? 'W' : 'L'}</span>
+          </div>
+        </div>
+      `;
+    });
+    teamList.innerHTML = listHtml;
+  } else if (teamSection) {
+    teamSection.style.display = 'none';
   }
 
   if (actionsEl) {
@@ -8873,6 +9148,13 @@ function openSaveBracketModal(fromVault = false) {
       </div>
       <div style="font-size: 0.76rem; color: #94A3B8; margin-top: 0.25rem;">
         <strong>#1-#4 Byes:</strong> #${cfp.seed1?.shortName || '1'}, #${cfp.seed2?.shortName || '2'}, #${cfp.seed3?.shortName || '3'}, #${cfp.seed4?.shortName || '4'}
+      </div>
+      <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: var(--radius-sm); padding: 0.55rem 0.75rem; margin-top: 0.65rem; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="background: #10B981; color: #000; font-weight: 800; font-size: 0.68rem; padding: 2px 6px; border-radius: 4px;">WEEK 0 FINAL</span>
+          <span style="font-size: 0.8rem; font-weight: 700; color: #F8FAFC;">USC 42 - 26 San Jose State</span>
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800; color: #34D399;">+10 PTS (100% Scored)</span>
       </div>
     `;
   }

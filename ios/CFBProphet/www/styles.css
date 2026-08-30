@@ -5149,7 +5149,6 @@ body {
 }
 
 /* Bracket Vault Modal Dialog */
-.bracket-vault-grid {
 .bracket-vault-grid,
 #bracketVaultGrid {
   display: flex !important;
