@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Instant Cache Purge & Fresh Asset Verification -->
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CFB Prophet | College Football 2026 Prediction & AI Simulation Engine</title>
+  
+  <!-- SEO & Social Sharing Metadata -->
+  <meta name="description" content="Simulate every top college football game drive-by-drive, tune custom AI scenarios for 10 powerhouses, and project CFP Playoff seeds.">
+  <meta name="theme-color" content="#07090E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CFB Prophet">
+  
+  <!-- PWA Manifest & Touch Icons -->
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=4">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png?v=4">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=4">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=4">
+  <link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152.png?v=4">
+  <link rel="apple-touch-icon" sizes="192x192" href="./icons/icon-192.png?v=4">
+  <link rel="apple-touch-icon-precomposed" href="./apple-touch-icon.png?v=4">
+  <link rel="manifest" href="./manifest.json?v=4">
+  
+  <!-- Open Graph Protocol -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CFB Prophet: College Football AI Prediction & Simulation Engine" id="ogTitle">
+  <meta property="og:description" content="Simulate 10,000 drives, tune custom single-game scenarios, and calculate CFP Playoff paths for top college football powerhouses." id="ogDescription">
+  <meta property="og:image" content="./icons/icon-512.png?v=4" id="ogImage">
+  
+  <!-- Fonts: Bebas Neue, Outfit, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <script>
+    // Cleanly unregister any stale service workers to prevent cache/reload loops
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let reg of registrations) {
+          reg.unregister();
+        }
+      });
+    }
+    if ('caches' in window) {
+      caches.keys().then(function(names) {
+        for (let name of names) {
+          caches.delete(name);
+        }
+      });
+    }
+
+    function forcePurgeCacheAndReload() {
+      if ('caches' in window) {
+        caches.keys().then(function(keys) {
+          return Promise.all(keys.map(function(k) { return caches.delete(k); }));
+        }).then(function() {
+          window.location.href = window.location.pathname + '?t=' + Date.now();
+        });
+      } else {
+        window.location.href = window.location.pathname + '?t=' + Date.now();
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css?v=319">
+  <style id="mobile-critical-overrides">
+    html, body {
+      overflow-x: hidden !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    body.modal-open {
+      overflow: hidden !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+    }
+    .modal-backdrop {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+      background: rgba(4, 7, 13, 0.96) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      z-index: 99999 !important;
+      display: none !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 0.5rem !important;
+      box-sizing: border-box !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      margin: 0 !important;
+    }
+    .modal-backdrop.open {
+      display: flex !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+    .modal-dialog, .receipts-dialog {
+      width: 95% !important;
+      max-width: 820px !important;
+      box-sizing: border-box !important;
+      margin: auto !important;
+      background: #0A0E17 !important;
+    }
+    @media (max-width: 768px) {
+      .modal-backdrop {
+        padding: 0.35rem !important;
+      }
+      .modal-dialog, .receipts-dialog {
+        width: calc(100vw - 0.7rem) !important;
+        max-width: calc(100vw - 0.7rem) !important;
+        margin: 0 auto !important;
+        padding: 0.75rem 0.55rem 1rem !important;
+      }
+      .receipts-kpi-strip {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.35rem !important;
+        width: 100% !important;
+      }
+      .receipts-tabs {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 0.2rem !important;
+        width: 100% !important;
+      }
+      .receipts-tabs .sub-tab {
+        flex-direction: column !important;
+        gap: 2px !important;
+        padding: 0.35rem 0.15rem !important;
+        font-size: 0.65rem !important;
+        text-align: center !important;
+      }
+      .ledger-filter-bar {
+        flex-direction: column !important;
+        gap: 0.35rem !important;
+        width: 100% !important;
+      }
+      .ledger-filter-bar select, .ledger-filter-bar input {
+        width: 100% !important;
+        min-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .settled-ledger-table-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      .settled-table {
+        min-width: 480px !important;
+      }
+      .odds-chart-wrap, .calibration-chart-box {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+      #oddsTickerCanvas, #calibrationCanvas, #radarChartCanvas, #hypeCanvas {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+<body class="theme-ohiostate">
+
+  <!-- Ambient Stadium Glow Effects -->
+  <div class="ambient-glow glow-primary"></div>
+  <div class="ambient-glow glow-secondary"></div>
+  <div class="grid-overlay"></div>
+
+  <!-- Main Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand">
+        <div class="logo-badge" id="navLogoBadge">
+          <img src="./apple-touch-icon.png?v=4" alt="CFB Prophet" class="nav-logo-img">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">CFB PROPHET</span>
+          <span class="brand-subtitle">COLLEGE FOOTBALL AI SIMULATOR</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <button class="vault-btn-badge" id="navBracketVaultBtn" onclick="openBracketVaultModal()" title="Submit your picks and view weekly standings">
+          <i class="fa-solid fa-paper-plane" style="color: #10B981;"></i>
+          <span>Submit Picks & Standings</span>
+        </button>
+        <button class="user-auth-btn-badge" id="navAuthBtn" onclick="openAuthModal()" title="Account & Creator Profile">
+          <i class="fa-solid fa-user-circle" id="navAuthIcon"></i>
+          <span id="navAuthLabel">Sign In</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Top Quick Team Selector Bar & Search (Complete AP Top 25 Contenders) -->
+  <section class="team-selector-section">
+    <div class="container">
+      <div class="team-search-bar-wrap">
+        <div class="team-search-input-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="teamSearchInput" class="team-search-input" placeholder="Search any Top 25 team..." autocomplete="off" spellcheck="false">
+          <button class="search-clear-btn" id="teamSearchClearBtn" onclick="clearTeamSearch()" style="display: none;" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
+          <kbd class="search-shortcut-badge">⌘K</kbd>
+        </div>
+        <!-- #teamSearchResultsDropdown is portal-mounted to <body> by initTeamSearch() -->
+      </div>
+      <div class="team-selector-track" id="teamSelectorTrack">
+        <button class="team-pill-btn active" data-teamid="ohiostate" onclick="selectTeam('ohiostate')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/194.png" alt="Ohio State" class="team-pill-logo-img"></span><span>Ohio State</span><span class="team-pill-rank">#1 AP</span></button>
+        <button class="team-pill-btn" data-teamid="oregon" onclick="selectTeam('oregon')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png" alt="Oregon" class="team-pill-logo-img"></span><span>Oregon</span><span class="team-pill-rank">#2 AP</span></button>
+        <button class="team-pill-btn" data-teamid="georgia" onclick="selectTeam('georgia')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/61.png" alt="Georgia" class="team-pill-logo-img"></span><span>Georgia</span><span class="team-pill-rank">#3 AP</span></button>
+        <button class="team-pill-btn" data-teamid="notredame" onclick="selectTeam('notredame')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/87.png" alt="Notre Dame" class="team-pill-logo-img"></span><span>Notre Dame</span><span class="team-pill-rank">#4 AP</span></button>
+        <button class="team-pill-btn" data-teamid="texas" onclick="selectTeam('texas')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas" class="team-pill-logo-img"></span><span>Texas</span><span class="team-pill-rank">#5 AP</span></button>
+        <button class="team-pill-btn" data-teamid="indiana" onclick="selectTeam('indiana')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/84.png" alt="Indiana" class="team-pill-logo-img"></span><span>Indiana</span><span class="team-pill-rank">#6 AP</span></button>
+        <button class="team-pill-btn" data-teamid="miami" onclick="selectTeam('miami')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png" alt="Miami" class="team-pill-logo-img"></span><span>Miami</span><span class="team-pill-rank">#7 AP</span></button>
+        <button class="team-pill-btn" data-teamid="texasam" onclick="selectTeam('texasam')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/245.png" alt="Texas A&M" class="team-pill-logo-img"></span><span>Texas A&M</span><span class="team-pill-rank">#8 AP</span></button>
+        <button class="team-pill-btn" data-teamid="olemiss" onclick="selectTeam('olemiss')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/145.png" alt="Ole Miss" class="team-pill-logo-img"></span><span>Ole Miss</span><span class="team-pill-rank">#9 AP</span></button>
+        <button class="team-pill-btn" data-teamid="oklahoma" onclick="selectTeam('oklahoma')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/201.png" alt="Oklahoma" class="team-pill-logo-img"></span><span>Oklahoma</span><span class="team-pill-rank">#10 AP</span></button>
+        <button class="team-pill-btn" data-teamid="lsu" onclick="selectTeam('lsu')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/99.png" alt="LSU" class="team-pill-logo-img"></span><span>LSU</span><span class="team-pill-rank">#11 AP</span></button>
+        <button class="team-pill-btn" data-teamid="texastech" onclick="selectTeam('texastech')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png" alt="Texas Tech" class="team-pill-logo-img"></span><span>Texas Tech</span><span class="team-pill-rank">#12 AP</span></button>
+        <button class="team-pill-btn" data-teamid="alabama" onclick="selectTeam('alabama')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/333.png" alt="Alabama" class="team-pill-logo-img"></span><span>Alabama</span><span class="team-pill-rank">#13 AP</span></button>
+        <button class="team-pill-btn" data-teamid="byu" onclick="selectTeam('byu')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/252.png" alt="BYU" class="team-pill-logo-img"></span><span>BYU</span><span class="team-pill-rank">#14 AP</span></button>
+        <button class="team-pill-btn" data-teamid="usc" onclick="selectTeam('usc')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/30.png" alt="USC" class="team-pill-logo-img"></span><span>USC</span><span class="team-pill-rank">#15 AP</span></button>
+        <button class="team-pill-btn" data-teamid="michigan" onclick="selectTeam('michigan')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/130.png" alt="Michigan" class="team-pill-logo-img"></span><span>Michigan</span><span class="team-pill-rank">#16 AP</span></button>
+        <button class="team-pill-btn" data-teamid="washington" onclick="selectTeam('washington')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/264.png" alt="Washington" class="team-pill-logo-img"></span><span>Washington</span><span class="team-pill-rank">#17 AP</span></button>
+        <button class="team-pill-btn" data-teamid="pennstate" onclick="selectTeam('pennstate')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/213.png" alt="Penn State" class="team-pill-logo-img"></span><span>Penn State</span><span class="team-pill-rank">#18 AP</span></button>
+        <button class="team-pill-btn" data-teamid="smu" onclick="selectTeam('smu')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/2567.png" alt="SMU" class="team-pill-logo-img"></span><span>SMU</span><span class="team-pill-rank">#19 AP</span></button>
+        <button class="team-pill-btn" data-teamid="tennessee" onclick="selectTeam('tennessee')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png" alt="Tennessee" class="team-pill-logo-img"></span><span>Tennessee</span><span class="team-pill-rank">#20 AP</span></button>
+        <button class="team-pill-btn" data-teamid="utah" onclick="selectTeam('utah')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/254.png" alt="Utah" class="team-pill-logo-img"></span><span>Utah</span><span class="team-pill-rank">#21 AP</span></button>
+        <button class="team-pill-btn" data-teamid="iowa" onclick="selectTeam('iowa')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/2294.png" alt="Iowa" class="team-pill-logo-img"></span><span>Iowa</span><span class="team-pill-rank">#22 AP</span></button>
+        <button class="team-pill-btn" data-teamid="houston" onclick="selectTeam('houston')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/248.png" alt="Houston" class="team-pill-logo-img"></span><span>Houston</span><span class="team-pill-rank">#23 AP</span></button>
+        <button class="team-pill-btn" data-teamid="louisville" onclick="selectTeam('louisville')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/97.png" alt="Louisville" class="team-pill-logo-img"></span><span>Louisville</span><span class="team-pill-rank">#24 AP</span></button>
+        <button class="team-pill-btn" data-teamid="missouri" onclick="selectTeam('missouri')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/142.png" alt="Missouri" class="team-pill-logo-img"></span><span>Missouri</span><span class="team-pill-rank">#25 AP</span></button>
+        <button class="team-pill-btn" data-teamid="clemson" onclick="selectTeam('clemson')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/228.png" alt="Clemson" class="team-pill-logo-img"></span><span>Clemson</span><span class="team-pill-rank">RV</span></button>
+        <button class="team-pill-btn" data-teamid="floridastate" onclick="selectTeam('floridastate')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/52.png" alt="Florida State" class="team-pill-logo-img"></span><span>Florida State</span><span class="team-pill-rank">RV</span></button>
+        <button class="team-pill-btn" data-teamid="arizona" onclick="selectTeam('arizona')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/12.png" alt="Arizona" class="team-pill-logo-img"></span><span>Arizona</span><span class="team-pill-rank">RV</span></button>
+        <button class="team-pill-btn" data-teamid="arizonastate" onclick="selectTeam('arizonastate')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/9.png" alt="Arizona State" class="team-pill-logo-img"></span><span>Arizona State</span><span class="team-pill-rank">RV</span></button>
+        <button class="team-pill-btn" data-teamid="boisestate" onclick="selectTeam('boisestate')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/68.png" alt="Boise State" class="team-pill-logo-img"></span><span>Boise State</span><span class="team-pill-rank">NR</span></button>
+        <button class="team-pill-btn" data-teamid="colorado" onclick="selectTeam('colorado')"><span class="team-pill-logo-badge"><img src="https://a.espncdn.com/i/teamlogos/ncaa/500/38.png" alt="Colorado" class="team-pill-logo-img"></span><span>Colorado</span><span class="team-pill-rank">NR</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Active Team Hero Card (Clean & Focused: Hype Card + More) -->
+  <header class="team-hero-section">
+    <div class="container">
+      <div class="hero-banner-card" id="teamHeroBanner">
+        <div class="team-identity">
+          <div class="team-emblem-large" id="heroEmblem">
+            <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/194.png" alt="Ohio State Buckeyes" class="hero-logo-img">
+          </div>
+          <div class="team-details">
+            <h1 id="heroTeamName">Ohio State Buckeyes</h1>
+            <div class="team-meta-pills" id="heroMetaPills">
+              <span class="meta-pill rank" id="heroRank">#1 AP POLL</span>
+              <span class="meta-pill" id="heroNattyOdds" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.35); color: #38BDF8; font-weight: 700;">+350 Title Odds</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-quick-actions">
+          <button class="action-btn hype-btn" id="heroHypeCardBtn" onclick="openSeasonHypeCardModal()" title="Export Season Projection Hype Card for Group Chat">
+            <span>📸 Hype Card</span>
+          </button>
+          <div class="more-tools-dropdown-wrap">
+            <button class="action-btn secondary-btn" id="moreToolsBtn" onclick="toggleMoreToolsMenu(event)" title="More Tools & Sharing">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+              <span>More ▾</span>
+            </button>
+            <div class="more-tools-menu" id="moreToolsMenu">
+              <button class="dropdown-item" onclick="openDreamSandboxModal()"><i class="fa-solid fa-bolt" style="color: #F59E0B;"></i> Dream Matchup Simulator</button>
+              <button class="dropdown-item" onclick="openCfpMatrixModal()"><i class="fa-solid fa-fire-flame-curved" style="color: #EF4444;"></i> CFP Chaos Matrix</button>
+              <button class="dropdown-item" id="shareScenarioBtn" onclick="shareCustomScenario()"><i class="fa-solid fa-share-nodes"></i> Share Scenario Link</button>
+              <button class="dropdown-item" onclick="openReceiptsModal()"><i class="fa-solid fa-receipt"></i> Model Receipts & Brier Curve</button>
+              <button class="dropdown-item" id="quickSimAllBtn" onclick="runMonteCarloRecalibration()"><i class="fa-solid fa-dice-d20"></i> 10k Monte Carlo Re-Sim</button>
+              <button class="dropdown-item" onclick="forcePurgeCacheAndReload()"><i class="fa-solid fa-arrows-rotate" style="color: #10B981;"></i> Update App & Purge Cache</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+  <!-- Main Application Body -->
+  <main class="container">
+
+    <!-- KPI Season Overview Dashboard -->
+    <section class="kpi-grid">
+      <div class="kpi-card" style="cursor: pointer;" onclick="document.getElementById('playoffSection').scrollIntoView({behavior:'smooth'});" title="Click to view Conference Championships & 12-Team CFP Bracket">
+        <span class="kpi-label"><i class="fa-solid fa-trophy"></i> TOTAL PREDICTED RECORD</span>
+        <span class="kpi-value" id="kpiTotalRecord">15 - 1</span>
+        <span class="kpi-sub" id="kpiRecordSub"><span id="kpiRecord">11 - 1</span> Reg • <span id="kpiPostseasonOutcome" style="color: var(--color-brand-accent); font-weight: 700;">🏆 National Champions</span></span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label"><i class="fa-solid fa-chart-line"></i> WIN PROBABILITY</span>
+        <span class="kpi-value" id="kpiWinProb">92.4%</span>
+        <span class="kpi-sub" id="kpiConfRecord">9-0 Conference</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label"><i class="fa-solid fa-gauge-high"></i> AVG SCORING MARGIN</span>
+        <span class="kpi-value" id="kpiMargin">+22.4</span>
+        <span class="kpi-sub">Points per game</span>
+      </div>
+      <div class="kpi-card" style="cursor: pointer;" onclick="document.getElementById('playoffSection').scrollIntoView({behavior:'smooth'});" title="Click to view 12-Team CFP Bracket">
+        <span class="kpi-label"><i class="fa-solid fa-shield-halved"></i> 12-TEAM CFP SEED</span>
+        <span class="kpi-value" id="kpiCfpSeed">#1 SEED</span>
+        <span class="kpi-sub" id="kpiCfpStatus">First Round Bye</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label"><i class="fa-solid fa-ring"></i> NATTY TITLE ODDS</span>
+        <span class="kpi-value" id="kpiNattyOdds">+350</span>
+        <span class="kpi-sub" id="kpiNattyOddsSub">34.8% Championship Sim</span>
+      </div>
+      <div class="kpi-card" id="monteCarloKpiCard" style="cursor: pointer;" title="Click to view 10,000 Monte Carlo simulation breakdown">
+        <span class="kpi-label"><i class="fa-solid fa-dice-d20"></i> MONTE CARLO ENGINE</span>
+        <span class="kpi-value" id="kpiMonteCarloRuns">10,000 SIMS</span>
+        <span class="kpi-sub" id="kpiMonteCarloTopOutcome">12-0 (48.6% Prob)</span>
+      </div>
+    </section>
+
+    <!-- CFB AI Simulation Tuning Section (Compact Filter & Collapsible Sliders) -->
+    <section class="tuning-section" id="tuningSection">
+      <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.6rem;">
+        <div class="section-title">
+          <i class="fa-solid fa-sliders"></i>
+          <span>CFB AI TUNING</span>
+        </div>
+        <div class="tuning-filter-wrap" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+          <div class="custom-dropdown-wrap" id="presetDropdownWrap">
+            <button class="action-btn secondary-btn dropdown-trigger-btn" id="presetDropdownBtn" onclick="togglePresetDropdown(event)" title="Choose AI simulation preset calibration">
+              <span id="presetDropdownLabel">🎯 Season Baseline</span>
+              <i class="fa-solid fa-chevron-down dropdown-arrow-icon"></i>
+            </button>
+            <div class="custom-dropdown-menu" id="presetDropdownMenu">
+              <button class="dropdown-item active" data-preset="baseline" onclick="selectGlobalPreset('baseline', event)">
+                <span class="preset-icon">🎯</span>
+                <div class="preset-info">
+                  <span class="preset-title">Season Baseline</span>
+                  <span class="preset-desc">Vegas spreads & EPA consensus</span>
+                </div>
+              </button>
+              <button class="dropdown-item" data-preset="qb-mvp" onclick="selectGlobalPreset('qb-mvp', event)">
+                <span class="preset-icon">🔥</span>
+                <div class="preset-info">
+                  <span class="preset-title">QB Heisman Mode</span>
+                  <span class="preset-desc">+15% passing EPA efficiency</span>
+                </div>
+              </button>
+              <button class="dropdown-item" data-preset="qb-slump" onclick="selectGlobalPreset('qb-slump', event)">
+                <span class="preset-icon">📉</span>
+                <div class="preset-info">
+                  <span class="preset-title">QB Slump Mode</span>
+                  <span class="preset-desc">-15% turnover margin & accuracy</span>
+                </div>
+              </button>
+              <button class="dropdown-item" data-preset="iron-defense" onclick="selectGlobalPreset('iron-defense', event)">
+                <span class="preset-icon">🛡️</span>
+                <div class="preset-info">
+                  <span class="preset-title">Iron Curtain Defense</span>
+                  <span class="preset-desc">+20% havoc & sack generation</span>
+                </div>
+              </button>
+              <button class="dropdown-item" data-preset="chaos" onclick="selectGlobalPreset('chaos', event)">
+                <span class="preset-icon">🎲</span>
+                <div class="preset-info">
+                  <span class="preset-title">CFB Chaos Upset Mode</span>
+                  <span class="preset-desc">High volatility & wild variance</span>
+                </div>
+              </button>
+            </div>
+          </div>
+          <button class="action-btn toggle-sliders-btn" id="toggleSlidersBtn" onclick="toggleCustomSlidersView()" title="Toggle granular custom tuning sliders">
+            <i class="fa-solid fa-sliders"></i>
+            <span id="toggleSlidersLabel">Custom Sliders ▾</span>
+          </button>
+          <button class="action-btn reset-ai-btn" id="resetAllAiBtn" onclick="resetAllToBaseline()" title="Reset all custom sliders, picks, and AI overrides back to authentic baselines">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Reset All</span>
+          </button>
+        </div>
+      </div>
+      <div class="sliders-grid" id="globalSlidersGrid" style="display: none; margin-top: 0.75rem;">
+        <!-- Dynamically injected sliders -->
+      </div>
+    </section>
+
+    <!-- 2026 Official Schedule Section (Sleek Filter Dropdown) -->
+    <section class="schedule-section" id="scheduleSection">
+      <div class="schedule-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+        <div class="section-title">
+          <i class="fa-solid fa-calendar-days"></i>
+          <span>2026 OFFICIAL SCHEDULE & SIMULATED MATCHUPS</span>
+        </div>
+        <div class="schedule-filter-wrap">
+          <div class="custom-dropdown-wrap" id="scheduleFilterDropdownWrap">
+            <button class="action-btn secondary-btn dropdown-trigger-btn" id="scheduleFilterDropdownBtn" onclick="toggleScheduleFilterDropdown(event)" title="Filter games by type or venue">
+              <span id="scheduleFilterLabel">📅 All 12 Games</span>
+              <i class="fa-solid fa-chevron-down dropdown-arrow-icon"></i>
+            </button>
+            <div class="custom-dropdown-menu" id="scheduleFilterDropdownMenu" style="min-width: 220px;">
+              <button class="dropdown-item active" data-filter="all" onclick="selectScheduleFilter('all', event)">
+                <span class="preset-icon">📅</span>
+                <span class="preset-title">All 12 Games</span>
+              </button>
+              <button class="dropdown-item" data-filter="marquee" onclick="selectScheduleFilter('marquee', event)">
+                <span class="preset-icon">🔥</span>
+                <span class="preset-title">Marquee & Rivalries</span>
+              </button>
+              <button class="dropdown-item" data-filter="conf" onclick="selectScheduleFilter('conf', event)">
+                <span class="preset-icon">🏆</span>
+                <span class="preset-title">Conference Games</span>
+              </button>
+              <button class="dropdown-item" data-filter="home" onclick="selectScheduleFilter('home', event)">
+                <span class="preset-icon">🏟️</span>
+                <span class="preset-title">Home Games</span>
+              </button>
+              <button class="dropdown-item" data-filter="away" onclick="selectScheduleFilter('away', event)">
+                <span class="preset-icon">✈️</span>
+                <span class="preset-title">Away / Neutral</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="score-tuning-hint-banner" style="background: rgba(37, 99, 235, 0.12); border: 1px dashed rgba(56, 189, 248, 0.35); border-radius: var(--radius-md); padding: 0.5rem 0.85rem; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 0.95rem;">💡</span>
+        <span style="font-size: 0.82rem; color: #E2E8F0;">Tap or type into any score box to customize projections.</span>
+      </div>
+
+      <div class="schedule-grid" id="scheduleGrid">
+        <!-- Injected Game Cards -->
+      </div>
+    </section>
+
+    <!-- Conference Championship Games Section -->
+    <section class="ccg-section" id="ccgSection">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fa-solid fa-crown"></i>
+          <span>CONFERENCE CHAMPIONSHIP SATURDAY (DEC 5, 2026)</span>
+        </div>
+        <div class="section-badge" style="background: rgba(255, 215, 0, 0.15); border: 1px solid rgba(255, 215, 0, 0.4); color: #FFD700; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; font-family: var(--font-mono); display: flex; align-items: center; gap: 5px;">
+          <i class="fa-solid fa-bolt"></i>
+          <span>CFP TOP 4 AUTO-BYE QUALIFIERS</span>
+        </div>
+      </div>
+      <div class="ccg-grid" id="ccgGrid">
+        <!-- Dynamically rendered CCG Matchup Cards -->
+      </div>
+    </section>
+
+    <!-- 12-Team CFP Playoff Bracket Section (Clean 2-Action Strip) -->
+    <section class="playoff-section" id="playoffSection">
+      <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+        <div class="section-title">
+          <i class="fa-solid fa-diagram-project"></i>
+          <span>12-TEAM COLLEGE FOOTBALL PLAYOFF PROJECTION & LIVE SIMULATOR</span>
+        </div>
+        <div class="cfp-bracket-actions">
+          <button class="action-btn secondary-btn" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;" onclick="forcePurgeCacheAndReload()" title="Force Refresh Bracket & Clear Stored Cache">
+            <i class="fa-solid fa-arrows-rotate" style="color: #38BDF8;"></i>
+            <span>Refresh Bracket</span>
+          </button>
+          <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" title="Submit your custom picks & see global rank">
+            <i class="fa-solid fa-paper-plane" style="color: #10B981;"></i>
+            <span>Submit / Save Bracket</span>
+          </button>
+          <button class="action-btn hype-btn" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;" onclick="openCfpBracketCanvasModal()" title="Export 12-Team CFP Tournament Bracket Graphic">
+            <i class="fa-solid fa-camera-retro"></i>
+            <span>Export Bracket Graphic</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="playoff-bracket-grid" id="playoffBracketGrid">
+        <!-- Dynamically rendered interactive bracket rounds -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Matchup Simulation Modal -->
+  <div class="modal-backdrop" id="simModal" onclick="if(event.target===this) closeSimModal()">
+    <div class="modal-dialog">
+      <button class="modal-close" id="closeSimModalBtn" onclick="closeSimModal()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="modal-header">
+        <span class="matchup-tag" id="modalWeekTag">MATCHUP SIMULATION</span>
+        <h2 class="modal-title" id="modalMatchupTitle">Matchup Simulation Engine</h2>
+        <span class="modal-stadium" id="modalStadiumLocation">Live Venue & Weather</span>
+      </div>
+
+      <div class="modal-scoreboard" id="modalScoreboard">
+        <!-- Injected Scoreboard -->
+      </div>
+
+      <div class="modal-sub-tabs">
+        <button class="sub-tab active" data-subtab="drives" onclick="switchModalSubTab('drives')">
+          <i class="fa-solid fa-list-ol"></i>
+          <span>Drive Log</span>
+        </button>
+        <button class="sub-tab" data-subtab="game-tuning" onclick="switchModalSubTab('game-tuning')">
+          <i class="fa-solid fa-sliders"></i>
+          <span>Game AI Tuning</span>
+        </button>
+        <button class="sub-tab" data-subtab="radar" onclick="switchModalSubTab('radar')">
+          <i class="fa-solid fa-chart-radar"></i>
+          <span>Radar Stats</span>
+        </button>
+        <button class="sub-tab" data-subtab="scout" onclick="switchModalSubTab('scout')">
+          <i class="fa-solid fa-binoculars"></i>
+          <span>Tactical Intel</span>
+        </button>
+      </div>
+
+      <div class="tab-pane active" id="pane-drives">
+        <div id="driveLogContainer" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 280px; overflow-y: auto;">
+          <!-- Drives injected -->
+        </div>
+      </div>
+
+      <div class="tab-pane" id="pane-game-tuning">
+        <div class="game-tuning-panel">
+          <div class="tuning-banner">
+            <span class="tuning-badge"><i class="fa-solid fa-bullseye"></i> SINGLE-GAME AI TUNING</span>
+            <span class="tuning-subtitle">Customize this specific matchup's weights. Changes will override global settings and recalculate scores and CFP paths.</span>
+          </div>
+
+          <div class="game-preset-row">
+            <span style="font-size: 0.78rem; font-weight: 700; color: var(--color-text-muted);">Quick Game Scenarios:</span>
+            <div class="game-preset-buttons">
+              <button class="game-preset-btn active" data-gamepreset="baseline" onclick="applyGameScenarioPreset('baseline')">Season Baseline</button>
+              <button class="game-preset-btn" data-gamepreset="qb-slump" onclick="applyGameScenarioPreset('qb-slump')">QB Slump</button>
+              <button class="game-preset-btn" data-gamepreset="blowout" onclick="applyGameScenarioPreset('blowout')">Offensive Blowout</button>
+              <button class="game-preset-btn" data-gamepreset="turnover-trap" onclick="applyGameScenarioPreset('turnover-trap')">Turnover Trap</button>
+              <button class="game-preset-btn" data-gamepreset="ground-pound" onclick="applyGameScenarioPreset('ground-pound')">Ground & Pound</button>
+            </div>
+          </div>
+
+          <!-- Weather & Environmental / Injury Condition Modifier Row -->
+          <div class="game-preset-row weather-mod-row" style="margin-top: 0.4rem;">
+            <span style="font-size: 0.76rem; font-weight: 700; color: #38BDF8;"><i class="fa-solid fa-cloud-bolt"></i> Weather & Injury Factors:</span>
+            <div class="game-preset-buttons weather-chips-wrap">
+              <button class="weather-chip active" data-weather="dome" onclick="setGameWeatherCondition('dome')">☀️ Clear / Dome</button>
+              <button class="weather-chip" data-weather="rain" onclick="setGameWeatherCondition('rain')">🌧️ Heavy Rain (-15% Pass, +25% Fumble)</button>
+              <button class="weather-chip" data-weather="snow" onclick="setGameWeatherCondition('snow')">❄️ Blizzard / Snow (-8 Pts, Heavy Run)</button>
+              <button class="weather-chip" data-weather="wind" onclick="setGameWeatherCondition('wind')">💨 25+ MPH Wind (-30% Deep/FG)</button>
+              <button class="weather-chip injury-chip" data-injury="true" id="injuryChipBtn" onclick="toggleGameInjuryCondition()">🩹 Key Starter Out (-4.5 SP+)</button>
+            </div>
+          </div>
+
+          <div class="game-sliders-grid" id="modalGameSlidersGrid">
+            <!-- Injected single-game sliders -->
+          </div>
+
+          <div class="tuning-footer-actions">
+            <button class="action-btn secondary-btn" id="resetGameTuningBtn" onclick="resetCurrentGameTuning()">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span>Reset Game</span>
+            </button>
+            <button class="action-btn hype-btn" id="applyAndSimGameBtn" onclick="applyAndSimulateModalGame()">
+              <i class="fa-solid fa-play"></i>
+              <span>Apply & Re-Simulate (10,000 Drives)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="pane-radar">
+        <div style="display: flex; justify-content: center; align-items: center; min-height: 220px;">
+          <canvas id="radarChartCanvas" width="380" height="240"></canvas>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="pane-scout">
+        <div id="scoutReportBox" style="background: rgba(0,0,0,0.3); border-radius: var(--radius-md); padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+          <!-- Scout info -->
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="card-export-btn" id="modalExportCardBtn" onclick="exportModalGameCard()">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Generate Single-Game Matchup Card</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Social Hype Card Generator Modal -->
+  <div class="modal-backdrop" id="hypeCardModal" onclick="if(event.target===this) closeHypeCardModal()">
+    <div class="modal-dialog" style="max-width: 680px; text-align: center;">
+      <button class="modal-close" id="closeHypeCardBtn" onclick="closeHypeCardModal()"><i class="fa-solid fa-xmark"></i></button>
+      <h2 class="modal-title" style="font-size: 1.6rem; letter-spacing: 0.05em;"><i class="fa-solid fa-fire" style="color: #F59E0B; margin-right: 0.4rem;"></i>GROUP CHAT HYPE CARD</h2>
+      
+      <div style="margin: 1.25rem 0; display: flex; justify-content: center;">
+        <canvas id="hypeCanvas" width="1200" height="675" style="width: 100%; max-width: 620px; aspect-ratio: 16 / 9; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);"></canvas>
+      </div>
+
+      <!-- Direct App Hyperlink Banner for Group Chat -->
+      <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: var(--radius-sm); padding: 0.55rem 0.85rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; font-size: 0.8rem;">
+        <span style="display: flex; align-items: center; gap: 6px; color: #94A3B8; font-family: var(--font-mono); white-space: nowrap;">
+          <i class="fa-solid fa-link" style="color: #38BDF8;"></i> <span>App Link:</span>
+        </span>
+        <a href="https://jajo9147.github.io/cfb-football-predictor/" id="hypeDirectHyperlink" target="_blank" style="color: #38BDF8; font-family: var(--font-mono); font-weight: 700; text-decoration: underline; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">https://jajo9147.github.io/cfb-football-predictor/</a>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        <button class="action-btn" style="background: linear-gradient(135deg, #0284C7, #0369A1); color: #FFFFFF;" id="shareHypeCardNativeBtn" onclick="shareActiveCanvasToNativeSheet('hypeCanvas', 'cfb_prophet_matchup.png', 'CFB Prophet Matchup Hype Card')">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          <span>Share to iMessage / Chat</span>
+        </button>
+        <button class="action-btn" style="background: linear-gradient(135deg, #10B981, #059669); color: #FFFFFF; font-weight: 800;" onclick="copyHypeCardAndLink()">
+          <i class="fa-solid fa-copy"></i>
+          <span>Copy Image & App Link</span>
+        </button>
+        <button class="action-btn hype-btn" id="downloadHypeCardBtn" onclick="downloadHypeCardImage()">
+          <i class="fa-solid fa-download"></i>
+          <span>Save Image</span>
+        </button>
+        <button class="action-btn secondary-btn" id="copyHypeCardBtn" onclick="copyHypeCardImage()">
+          <i class="fa-regular fa-copy"></i>
+          <span>Copy Image Only</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10,000 MONTE CARLO SEASON SIMULATION MODAL -->
+  <div class="modal-backdrop" id="monteCarloModal" onclick="if(event.target===this) closeMonteCarloModal()">
+    <div class="modal-dialog monte-carlo-modal-card">
+      <button class="modal-close" id="closeMonteCarloModalBtn" onclick="closeMonteCarloModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header">
+        <span class="matchup-tag"><i class="fa-solid fa-dice-d20"></i> STOCHASTIC SIMULATION ENGINE</span>
+        <h3 class="modal-title" id="mcModalTitle">10,000 MONTE CARLO SIMULATION</h3>
+        <p class="modal-stadium" id="mcModalSub">10,000 Full-Season Drives Iterations (Poisson / EPA Calibrated)</p>
+      </div>
+
+      <!-- Simulation Run Banner / Animation -->
+      <div class="mc-sim-banner" id="mcSimBanner">
+        <div class="mc-progress-header">
+          <span class="mc-status-text" id="mcStatusText"><i class="fa-solid fa-dice-d20 fa-spin" style="color: var(--color-brand-accent);"></i> SIMULATING 10,000 SEASONS...</span>
+          <span class="mc-progress-pct" id="mcProgressPct">100%</span>
+        </div>
+        <div class="mc-progress-bar">
+          <div class="mc-progress-fill" id="mcProgressFill" style="width: 100%;"></div>
+        </div>
+      </div>
+
+      <!-- Monte Carlo Top Summary Cards -->
+      <div class="mc-metrics-grid">
+        <div class="mc-metric-card">
+          <span class="mc-metric-label"><i class="fa-solid fa-trophy"></i> AVG WINS</span>
+          <span class="mc-metric-value" id="mcAvgWins">10.4</span>
+          <span class="mc-metric-sub" id="mcMostLikelyRecord">11-1 (38.2%)</span>
+        </div>
+        <div class="mc-metric-card">
+          <span class="mc-metric-label"><i class="fa-solid fa-shield-halved"></i> 12-TEAM CFP</span>
+          <span class="mc-metric-value" id="mcCfpOdds">84.6%</span>
+          <span class="mc-metric-sub" id="mcCfpSeedRange">Seed: #5 - #8</span>
+        </div>
+        <div class="mc-metric-card">
+          <span class="mc-metric-label"><i class="fa-solid fa-ring"></i> NATTY TITLE</span>
+          <span class="mc-metric-value" id="mcNattyOdds">14.8%</span>
+          <span class="mc-metric-sub" id="mcChampionshipProb">Top Contender</span>
+        </div>
+      </div>
+
+      <!-- Monte Carlo Win Probability Distribution Histogram -->
+      <div class="mc-distribution-section">
+        <h4 class="mc-section-title"><i class="fa-solid fa-chart-column"></i> 10,000-SEASON RECORD PROBABILITY DISTRIBUTION</h4>
+        <div class="mc-bars-list" id="mcBarsList">
+          <!-- Dynamically populated bars -->
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 0.5rem;">
+        <button class="action-btn secondary-btn" id="mcRerunBtn" onclick="openMonteCarloModal()">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span>Re-Run 10,000 Sims</span>
+        </button>
+        <button class="action-btn hype-btn" id="mcApplyCloseBtn" onclick="closeMonteCarloModal()">
+          <i class="fa-solid fa-check"></i>
+          <span>Close & Apply</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1-Tap PWA Mobile Install Drawer -->
+  <div class="pwa-drawer-backdrop" id="pwaInstallDrawer" onclick="if(event.target===this) closePwaInstallDrawer()">
+    <div class="pwa-drawer">
+      <div class="pwa-drawer-header">
+        <div class="pwa-drawer-title-wrap">
+          <div class="logo-badge" style="width: 36px; height: 36px;">
+            <img src="./apple-touch-icon.png?v=4" alt="App Icon" class="nav-logo-img" id="pwaDrawerLogo">
+          </div>
+          <div>
+            <div class="pwa-drawer-title">INSTALL APP TO HOME SCREEN</div>
+            <div class="pwa-drawer-sub">Instant full-screen launch • 100% Free</div>
+          </div>
+        </div>
+        <button class="modal-close" id="closePwaDrawerBtn" onclick="closePwaInstallDrawer()" style="position: static;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Browser Selector Tabs -->
+      <div class="pwa-browser-tabs">
+        <button class="pwa-tab-btn active" id="pwaTabSafari" data-tab="safari" onclick="switchPwaTab('safari')">
+          <i class="fa-brands fa-safari"></i> Safari
+        </button>
+        <button class="pwa-tab-btn" id="pwaTabChrome" data-tab="chrome" onclick="switchPwaTab('chrome')">
+          <i class="fa-brands fa-chrome"></i> Chrome
+        </button>
+        <button class="pwa-tab-btn" id="pwaTabAndroid" data-tab="android" onclick="switchPwaTab('android')">
+          <i class="fa-brands fa-android"></i> Android
+        </button>
+        <button class="pwa-tab-btn" id="pwaTabDesktop" data-tab="desktop" onclick="switchPwaTab('desktop')">
+          <i class="fa-solid fa-laptop"></i> Desktop
+        </button>
+      </div>
+
+      <!-- Safari Panel -->
+      <div class="pwa-tab-panel active" id="pwaPanelSafari">
+        <div class="pwa-steps-container">
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
+            <div class="pwa-step-text">
+              <strong>1. Tap Safari Share</strong>
+              <span>Tap the <strong>Share</strong> button at the bottom of your Safari browser.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-regular fa-square-plus"></i></div>
+            <div class="pwa-step-text">
+              <strong>2. Add to Home Screen</strong>
+              <span>Scroll down and select <strong>"Add to Home Screen"</strong>.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="pwa-step-text">
+              <strong>3. Tap Add</strong>
+              <span>Tap <strong>Add</strong> in top-right. Launch directly anytime!</span>
+            </div>
+          </div>
+        </div>
+        <div class="pwa-bottom-pointer">
+          <i class="fa-solid fa-chevron-down pwa-bounce-arrow"></i>
+          <span>Tap the Share icon below in Safari</span>
+        </div>
+      </div>
+
+      <!-- Chrome Panel -->
+      <div class="pwa-tab-panel" id="pwaPanelChrome">
+        <div class="pwa-steps-container">
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+            <div class="pwa-step-text">
+              <strong>1. Open Chrome Menu</strong>
+              <span>Tap the <strong>3 dots menu</strong> <i class="fa-solid fa-ellipsis-vertical"></i> or Share button in Chrome.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-download"></i></div>
+            <div class="pwa-step-text">
+              <strong>2. Select "Add to Home screen"</strong>
+              <span>Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong>.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="pwa-step-text">
+              <strong>3. Confirm Install</strong>
+              <span>Tap <strong>Install</strong> to add CFB Prophet to your phone.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Android Panel -->
+      <div class="pwa-tab-panel" id="pwaPanelAndroid">
+        <div class="pwa-steps-container">
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+            <div class="pwa-step-text">
+              <strong>1. Tap Browser Menu</strong>
+              <span>Tap the three dots <i class="fa-solid fa-ellipsis-vertical"></i> in the top-right corner of Chrome.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <div class="pwa-step-text">
+              <strong>2. Tap "Install App"</strong>
+              <span>Select <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="pwa-step-text">
+              <strong>3. Launch Instant Fullscreen</strong>
+              <span>The native app icon will be placed directly on your home screen.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Panel -->
+      <div class="pwa-tab-panel" id="pwaPanelDesktop">
+        <div class="pwa-steps-container">
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-download"></i></div>
+            <div class="pwa-step-text">
+              <strong>1. Address Bar Install Icon</strong>
+              <span>Click the <strong>Install</strong> icon in the right side of the browser URL bar.</span>
+            </div>
+          </div>
+          <div class="pwa-step-card">
+            <div class="pwa-step-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="pwa-step-text">
+              <strong>2. Click "Install"</strong>
+              <span>Launch CFB Prophet in a dedicated standalone window with zero browser tabs.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="action-btn hype-btn" id="pwaNativePromptBtn" onclick="closePwaInstallDrawer()" style="width: 100%; justify-content: center; margin-top: 0.25rem;">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="pwaPromptBtnText">Got It • Close</span>
+      </button>
+    </div>
+  </div>
+
+  
+      <!-- ==========================================================================
+       DREAM MATCHUP SANDBOX LAUNCHER (CLEAN, NATIVE MOBILE-OPTIMIZED)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="dreamSandboxModal">
+    <div class="modal-dialog" style="max-width: 580px; padding: 1.25rem;">
+      <button class="modal-close" onclick="closeDreamSandboxModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header" style="text-align: center; margin-bottom: 1rem;">
+        <span class="matchup-tag" style="background: rgba(245, 158, 11, 0.2); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.4);"><i class="fa-solid fa-bolt"></i> DREAM MATCHUP COLLIDER</span>
+        <h2 class="modal-title" style="font-size: 1.6rem; margin-top: 0.25rem;">Select Two Contenders</h2>
+        <span class="modal-stadium" style="font-size: 0.8rem;">Collide any two college football powerhouses in the full 10,000 Monte Carlo drive engine</span>
+      </div>
+
+      <!-- Selectors Form -->
+      <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+        <div>
+          <label style="display: block; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: #38BDF8; margin-bottom: 0.35rem;"><i class="fa-solid fa-shield"></i> TEAM A (HOME / FAVORITE)</label>
+          <select id="sandboxTeamASelect" class="sandbox-dropdown" style="font-size: 0.95rem; padding: 0.65rem 0.85rem;">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+
+        <div>
+          <label style="display: block; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: #10B981; margin-bottom: 0.35rem;"><i class="fa-solid fa-shield"></i> TEAM B (CHALLENGER)</label>
+          <select id="sandboxTeamBSelect" class="sandbox-dropdown" style="font-size: 0.95rem; padding: 0.65rem 0.85rem;">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+
+        <div>
+          <label style="display: block; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: #F59E0B; margin-bottom: 0.35rem;"><i class="fa-solid fa-location-dot"></i> VENUE & ENVIRONMENT</label>
+          <select id="sandboxVenueSelect" class="sandbox-dropdown" style="font-size: 0.88rem; padding: 0.65rem 0.85rem;">
+            <option value="neutral">🏆 Neutral Site / Bowl Game (Atlanta / Rose Bowl)</option>
+            <option value="homeA">🏟️ Team A Home Campus Stadium</option>
+            <option value="homeB">🏟️ Team B Home Campus Stadium</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.6rem;">
+        <button class="action-btn hype-btn" onclick="launchDreamMatchupInSimModal()" style="width: 100%; justify-content: center; padding: 0.85rem 1.25rem; font-size: 1rem;">
+          <i class="fa-solid fa-play"></i>
+          <span>Simulate 10,000 Drives & Open AI Tuning</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10,000-RUN CFP CHAOS MATRIX & BUBBLE HEATMAP MODAL -->
+  <div class="modal-backdrop" id="cfpMatrixModal">
+    <div class="modal-dialog" style="max-width: 960px; max-height: 90vh; display: flex; flex-direction: column;">
+      <button class="modal-close" onclick="closeCfpMatrixModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header" style="margin-bottom: 0.75rem;">
+        <span class="matchup-tag" style="background: rgba(239, 68, 68, 0.2); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.4);"><i class="fa-solid fa-fire-flame-curved"></i> 10,000 MONTE CARLO SEASONS</span>
+        <h2 class="modal-title" style="font-size: 1.6rem; margin-top: 0.25rem;">CFP Bubble Chaos & Title Heatmap</h2>
+        <span class="modal-stadium" style="font-size: 0.8rem;">Stochastic multi-season Monte Carlo simulation across all 20+ powerhouses (SP+ & schedule-calibrated)</span>
+      </div>
+
+      <!-- Filter / Sort Bar -->
+      <div class="matrix-filter-row" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+        <div class="matrix-conf-pills" style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+          <button class="conf-filter-btn active" data-conf="all" onclick="filterCfpMatrix('all')">ALL (TOP 20)</button>
+          <button class="conf-filter-btn" data-conf="SEC" onclick="filterCfpMatrix('SEC')">SEC</button>
+          <button class="conf-filter-btn" data-conf="Big Ten" onclick="filterCfpMatrix('Big Ten')">BIG TEN</button>
+          <button class="conf-filter-btn" data-conf="Big 12" onclick="filterCfpMatrix('Big 12')">BIG 12</button>
+          <button class="conf-filter-btn" data-conf="ACC" onclick="filterCfpMatrix('ACC')">ACC</button>
+          <button class="conf-filter-btn" data-conf="G5" onclick="filterCfpMatrix('G5')">G5 / IND</button>
+        </div>
+        <button class="action-btn hype-btn" onclick="rerunCfpMatrixSims()" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span>Re-Simulate 10k</span>
+        </button>
+      </div>
+
+      <!-- Matrix Table Scrollable Container -->
+      <div class="matrix-table-wrap" style="flex: 1; overflow-y: auto; max-height: 520px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: rgba(0,0,0,0.35);">
+        <table class="chaos-matrix-table" id="chaosMatrixTable" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+          <thead>
+            <tr style="background: rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-dim); text-align: right; position: sticky; top: 0; backdrop-filter: blur(10px); z-index: 2;">
+              <th style="text-align: left; padding: 0.65rem 0.8rem;">TEAM</th>
+              <th style="padding: 0.65rem 0.5rem; cursor: pointer; text-align: center;" onclick="sortCfpMatrix('natty')">👑 NATTY % <i class="fa-solid fa-sort"></i></th>
+              <th style="padding: 0.65rem 0.5rem; cursor: pointer; text-align: center;" onclick="sortCfpMatrix('bye')">🥇 TOP-4 BYE % <i class="fa-solid fa-sort"></i></th>
+              <th style="padding: 0.65rem 0.5rem; cursor: pointer; text-align: center;" onclick="sortCfpMatrix('cfp')">🎟️ TOTAL CFP % <i class="fa-solid fa-sort"></i></th>
+              <th style="padding: 0.65rem 0.5rem; cursor: pointer; text-align: center;" onclick="sortCfpMatrix('bubble')">⚠️ BUBBLE % <i class="fa-solid fa-sort"></i></th>
+              <th style="padding: 0.65rem 0.8rem; cursor: pointer; text-align: center;" onclick="sortCfpMatrix('avgWins')">📊 AVG WINS <i class="fa-solid fa-sort"></i></th>
+            </tr>
+          </thead>
+          <tbody id="chaosMatrixBody">
+            <!-- Dynamic Heatmap Rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       RECEIPTS & MODEL ACCURACY HUB MODAL (HISTORICAL TRACKING & CALIBRATION)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="receiptsModal">
+    <div class="modal-dialog receipts-dialog">
+      <button class="modal-close" onclick="closeReceiptsModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header" style="text-align: center; margin-bottom: 0.5rem;">
+        <span class="matchup-tag" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fa-solid fa-receipt"></i> PROPHET RECEIPTS & MODEL CALIBRATION</span>
+        <h2 class="modal-title" style="font-size: 1.6rem; margin-top: 0.2rem;">Prediction Ledger & Historical Accuracy</h2>
+        <span class="modal-stadium" style="font-size: 0.8rem;">Evaluating probabilistic rigor, Brier score calibration, and against-the-spread performance</span>
+      </div>
+
+      <!-- Precision KPIs Strip -->
+      <div class="receipts-kpi-strip">
+        <div class="receipts-kpi-card">
+          <span class="r-label"><i class="fa-solid fa-bullseye"></i> BRIER SCORE</span>
+          <span class="r-val" id="receiptsBrierScore" style="color: #38BDF8;">0.076</span>
+          <span class="r-sub" style="color: #10B981; font-weight: 700;">Elite (&lt; 0.10)</span>
+        </div>
+        <div class="receipts-kpi-card">
+          <span class="r-label"><i class="fa-solid fa-trophy"></i> STRAIGHT-UP</span>
+          <span class="r-val" id="receiptsStraightUp" style="color: #FFFFFF;">41 - 7</span>
+          <span class="r-sub" style="color: #94A3B8;">85.4% Win Pct</span>
+        </div>
+        <div class="receipts-kpi-card">
+          <span class="r-label"><i class="fa-solid fa-chart-line"></i> VEGAS (ATS)</span>
+          <span class="r-val" id="receiptsAts" style="color: #F59E0B;">31 - 17</span>
+          <span class="r-sub" style="color: #F59E0B; font-weight: 700;">64.6% Cover</span>
+        </div>
+        <div class="receipts-kpi-card">
+          <span class="r-label"><i class="fa-solid fa-scale-balanced"></i> LOG LOSS</span>
+          <span class="r-val" id="receiptsLogLoss" style="color: #A855F7;">0.285</span>
+          <span class="r-sub" style="color: #94A3B8;">Entropy</span>
+        </div>
+      </div>
+
+      <!-- Receipts Sub Tabs -->
+      <div class="modal-sub-tabs receipts-tabs">
+        <button class="sub-tab active" data-receiptstab="ledger" onclick="switchReceiptsTab('ledger')">
+          <i class="fa-solid fa-list-check"></i>
+          <span>Game Ledger</span>
+        </button>
+        <button class="sub-tab" data-receiptstab="calibration" onclick="switchReceiptsTab('calibration')">
+          <i class="fa-solid fa-chart-area"></i>
+          <span>Calibration</span>
+        </button>
+        <button class="sub-tab" data-receiptstab="odds-ticker" onclick="switchReceiptsTab('odds-ticker')">
+          <i class="fa-solid fa-arrow-trend-up"></i>
+          <span>Odds Ticker</span>
+        </button>
+        <button class="sub-tab" data-receiptstab="archive" onclick="switchReceiptsTab('archive')">
+          <i class="fa-solid fa-box-archive"></i>
+          <span>Snapshots</span>
+        </button>
+      </div>
+
+      <div class="modal-tab-body" style="padding: 0.5rem 0 0;">
+        <!-- Panel 1: Settled Ledger -->
+        <div class="sub-tab-panel active" id="receiptsPanelLedger">
+          <!-- Filter & Search Bar for All Powerhouse Teams -->
+          <div class="ledger-filter-bar" style="display: flex; gap: 0.45rem; margin-bottom: 0.6rem; flex-wrap: wrap;">
+            <select id="ledgerTeamFilter" class="sandbox-dropdown" style="padding: 0.4rem 0.65rem; font-size: 0.76rem; flex: 1.2; min-width: 140px;" onchange="renderFilteredReceiptsLedger()">
+              <option value="all">🏆 All Powerhouse Teams (AP Top 25 & Contenders)</option>
+            </select>
+            <select id="ledgerWeekFilter" class="sandbox-dropdown" style="padding: 0.4rem 0.65rem; font-size: 0.76rem; width: 120px;" onchange="renderFilteredReceiptsLedger()">
+              <option value="all">📅 All Weeks</option>
+              <option value="WEEK 1">Week 1</option>
+              <option value="WEEK 2">Week 2</option>
+              <option value="WEEK 3">Week 3</option>
+              <option value="WEEK 4">Week 4</option>
+              <option value="WEEK 5">Week 5</option>
+              <option value="WEEK 6">Week 6</option>
+              <option value="WEEK 7">Week 7</option>
+              <option value="WEEK 8">Week 8</option>
+              <option value="WEEK 9">Week 9</option>
+              <option value="WEEK 10">Week 10</option>
+              <option value="WEEK 11">Week 11</option>
+              <option value="WEEK 12">Week 12</option>
+              <option value="WEEK 13">Week 13</option>
+            </select>
+            <input type="text" id="ledgerSearchInput" class="team-search-input" placeholder="Search team or matchup..." style="padding: 0.4rem 0.65rem; font-size: 0.76rem; flex: 1.4; min-width: 140px; height: auto;" oninput="renderFilteredReceiptsLedger()">
+          </div>
+
+          <div class="settled-ledger-table-wrap">
+            <table class="settled-table" id="settledGamesTable">
+              <thead>
+                <tr>
+                  <th>WEEK / MATCHUP</th>
+                  <th>PREDICTED WINNER</th>
+                  <th>WIN PROB</th>
+                  <th>PROJECTED / FINAL</th>
+                  <th>VEGAS SPREAD</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody id="settledGamesTableBody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Panel 2: Calibration Curve -->
+        <div class="sub-tab-panel" id="receiptsPanelCalibration" style="display: none;">
+          <div class="calibration-container">
+            <div class="calibration-chart-box">
+              <canvas id="calibrationCanvas" width="480" height="260"></canvas>
+            </div>
+            <div class="calibration-intel">
+              <h4 style="color: #FFFFFF; font-size: 0.9rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem;"><i class="fa-solid fa-circle-info" style="color: #38BDF8;"></i> What is Probability Calibration?</h4>
+              <p style="font-size: 0.78rem; color: var(--color-text-dim); line-height: 1.45; margin-bottom: 0.5rem;">
+                A well-calibrated machine learning model means that when CFB Prophet gives a team an <strong>80% win probability</strong> across 50 games, that team should win exactly <strong>80% (40 out of 50)</strong> of those games. 
+                The closer the blue plot hugs the diagonal dashed baseline, the more mathematically sound and reliable the projections are.
+              </p>
+              <div class="calibration-bin-list" id="calibrationBinList">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Championship Stock Ticker -->
+        <div class="sub-tab-panel" id="receiptsPanelOddsTicker" style="display: none;">
+          <div class="odds-ticker-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 0.4rem;">
+              <div>
+                <span style="font-size: 0.82rem; font-family: var(--font-mono); font-weight: 800; color: #FFFFFF;"><i class="fa-solid fa-trophy" style="color: var(--color-gold);"></i> NATIONAL TITLE WIN PROBABILITY (%)</span>
+                <p style="font-size: 0.72rem; color: #94A3B8; margin-top: 2px;">Higher % = Higher likelihood to win the 12-Team CFP National Championship</p>
+              </div>
+              <div class="odds-legend-pills" id="oddsLegendPills" style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+                <!-- Legend injected via JS -->
+              </div>
+            </div>
+            <div class="odds-chart-wrap" style="background: rgba(10, 14, 23, 0.95); border: 1px solid var(--color-border); border-radius: 8px; padding: 0.85rem;">
+              <canvas id="oddsTickerCanvas" width="640" height="280"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 4: Weekly Snapshots -->
+        <div class="sub-tab-panel" id="receiptsPanelArchive" style="display: none;">
+          <div class="archive-browser-container">
+            <div class="archive-header-row">
+              <label style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF;"><i class="fa-solid fa-calendar-week" style="color: var(--color-brand-accent);"></i> Select Historical Snapshot:</label>
+              <select id="archiveSnapshotSelect" class="sandbox-dropdown" style="max-width: 320px;" onchange="loadSelectedArchiveSnapshot()">
+                <option value="2026_preseason_baseline">2026 Preseason AP Baseline (Aug 19)</option>
+                <option value="2026_week_01_settled">2026 Week 1 Kickoff Games (Sep 5)</option>
+              </select>
+            </div>
+            <div class="archive-json-preview" id="archiveJsonPreview">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <span id="footerEmblem">
+          <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/194.png" alt="Ohio State Buckeyes" style="width: 24px; height: 24px; object-fit: contain;">
+        </span>
+        <span>CFB PROPHET • COLLEGE FOOTBALL AI PREDICTOR</span>
+      </div>
+      <p class="footer-text">10,000 Monte Carlo drive-by-drive engine, real-time AP Poll telemetry, single-game AI scenario tuning, and 12-team CFP Playoff simulator.</p>
+      
+      <div class="footer-creator-badge">
+        <span style="font-size: 0.85rem; color: #E2E8F0; font-weight: 500;">Architect & Owner:</span>
+        <a href="https://www.linkedin.com/in/jake-johnson-/" target="_blank" rel="noopener noreferrer" class="linkedin-btn" title="View Jake Johnson on LinkedIn">
+          <i class="fa-brands fa-linkedin" style="font-size: 1.05rem;"></i>
+          <span>Jake Johnson</span>
+          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.85; margin-left: 2px;"></i>
+        </a>
+        <span style="font-size: 0.8rem; color: #94A3B8;">• © 2026 CFB Prophet</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Native Bottom Navigation Dock -->
+  <nav class="mobile-bottom-dock" id="mobileBottomDock">
+    <button class="dock-btn active" data-dock="overview" onclick="scrollToTeamOverview()">
+      <i class="fa-solid fa-house"></i>
+      <span>Team</span>
+    </button>
+    <button class="dock-btn" data-dock="schedule" onclick="switchAppView('schedule')">
+      <i class="fa-solid fa-calendar-days"></i>
+      <span>Schedule</span>
+    </button>
+    <button class="dock-btn" data-dock="playoffs" onclick="switchAppView('playoffs')">
+      <i class="fa-solid fa-trophy"></i>
+      <span>Playoffs</span>
+    </button>
+    <button class="dock-btn" data-dock="tuning" onclick="switchAppView('tuning')">
+      <i class="fa-solid fa-sliders"></i>
+      <span>Tuning</span>
+    </button>
+    <button class="dock-btn" data-dock="vault" onclick="openBracketVaultModal()">
+      <i class="fa-solid fa-list-check" style="color: #10B981;"></i>
+      <span>Picks</span>
+    </button>
+    <button class="dock-btn" data-dock="dream" onclick="openDreamSandboxModal()">
+      <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i>
+      <span>Dream</span>
+    </button>
+  </nav>
+
+  
+  <!-- SAVE BRACKET PROJECTION MODAL -->
+  <div class="modal-backdrop" id="saveBracketModal">
+    <div class="modal-dialog" style="max-width: 580px;">
+      <button class="modal-close" onclick="closeSaveBracketModal()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="modal-header">
+        <span class="matchup-tag" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);">
+          <i class="fa-solid fa-trophy"></i> CFB PROPHET PICKS HUB
+        </span>
+        <h2 class="modal-title" style="font-size: 1.5rem;">SUBMIT YOUR PICKS & PROJECTIONS</h2>
+        <p style="font-size: 0.85rem; color: #94A3B8;">Lock in this 12-team CFP playoff bracket and season simulation so you can track how your picks perform all season long.</p>
+      </div>
+
+      <div class="save-bracket-form">
+        <div class="bracket-form-group">
+          <label for="bracketNameInput">Bracket Name</label>
+          <input type="text" id="bracketNameInput" class="bracket-form-input" placeholder="e.g. My 2026 Baseline Chalk, Texas Natty Run, Big 12 Chaos" maxlength="45">
+        </div>
+
+        <div class="bracket-form-group">
+          <label for="bracketCreatorInput">Creator / Handle</label>
+          <input type="text" id="bracketCreatorInput" class="bracket-form-input" placeholder="e.g. Coach, CFBFan_01" maxlength="30">
+        </div>
+
+        <div class="bracket-form-group">
+          <label for="bracketNotesInput">Notes / Rationale (Optional)</label>
+          <input type="text" id="bracketNotesInput" class="bracket-form-input" placeholder="e.g. Arch Manning MVP season + LSU road upset" maxlength="80">
+        </div>
+
+        <label class="publish-toggle-wrap">
+          <input type="checkbox" id="publishToCommunityCheckbox" checked>
+          <div class="publish-toggle-text">
+            <strong>🌐 Publish to Community Leaderboard</strong>
+            <small>Allows anyone on any phone or computer to see, vote, and compare your bracket on the global leaderboard.</small>
+          </div>
+        </label>
+
+        <!-- Dynamic Bracket Preview Box -->
+        <div class="bracket-preview-summary-box" id="saveBracketPreviewBox">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 0.5rem;">
+          <button class="action-btn secondary-btn" onclick="closeSaveBracketModal()">Cancel</button>
+          <button class="action-btn" style="background: #10B981; color: #FFFFFF;" id="confirmSaveBracketBtn" onclick="handleConfirmSaveBracket()">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>Submit & Save Picks</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAVED BRACKETS VAULT MODAL -->
+  <div class="modal-backdrop" id="bracketVaultModal">
+    <div class="modal-dialog">
+      <button class="modal-close" onclick="closeBracketVaultModal()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.2rem;">
+        <div>
+          <span class="matchup-tag" style="background: rgba(245, 158, 11, 0.2); color: #FBBF24; border-color: rgba(245, 158, 11, 0.4);">
+            <i class="fa-solid fa-folder-closed"></i> PICKS HUB & WEEKLY STANDINGS
+          </span>
+          <h2 class="modal-title" style="font-size: 1.55rem; margin-top: 0.2rem;">CFB PROPHET PICKS & LEADERBOARD</h2>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="save-bracket-btn" onclick="openSaveBracketModal(true)" style="padding: 0.45rem 0.95rem;">
+            <i class="fa-solid fa-plus"></i>
+            <span>Submit Current Picks</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dual Filter Bar: Standings View & Week Slate Dropdowns -->
+      <div class="vault-filter-bar" style="margin-top: 0.5rem; margin-bottom: 0.65rem; display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: 0.65rem;">
+        
+        <!-- Standings View Mode Filter -->
+        <div style="display: flex; align-items: center; gap: 0.4rem; flex: 1 1 200px; max-width: 320px;">
+          <select id="vaultTabSelect" class="schedule-filter-select" onchange="switchVaultTab(this.value)" style="width: 100%; font-size: 0.82rem; height: 38px;">
+            <option value="weekly" selected>📅 Weekly Standings</option>
+            <option value="community">🏆 Season Standings</option>
+            <option value="allteams">🛡️ All 30 Teams Matrix</option>
+            <option value="mine">👤 My Submitted Picks</option>
+          </select>
+        </div>
+
+        <!-- Week / Slate Filter Dropdown -->
+        <div style="display: flex; align-items: center; gap: 0.4rem; flex: 1 1 240px; max-width: 340px;" id="vaultWeekDropdownWrapper">
+          <select id="vaultWeekSelectDropdown" class="schedule-filter-select" onchange="selectVaultWeek(this.value)" style="width: 100%; font-size: 0.82rem; height: 38px;">
+            <option value="W1" selected>📅 Week 1 Slate (310 PTS)</option>
+            <option value="W2">📅 Week 2 Slate (280 PTS)</option>
+            <option value="W3">📅 Week 3 Slate (270 PTS)</option>
+            <option value="W4">📅 Week 4 Slate (310 PTS)</option>
+            <option value="W5">📅 Week 5 Slate (300 PTS)</option>
+            <option value="W6">📅 Week 6 Slate (290 PTS)</option>
+            <option value="W7">📅 Week 7 Slate (280 PTS)</option>
+            <option value="W8">📅 Week 8 Slate (270 PTS)</option>
+            <option value="W9">📅 Week 9 Slate (260 PTS)</option>
+            <option value="W10">📅 Week 10 Slate (250 PTS)</option>
+            <option value="W11">📅 Week 11 Slate (270 PTS)</option>
+            <option value="W12">📅 Week 12 Slate (280 PTS)</option>
+            <option value="W13">📅 Week 13 Slate (290 PTS)</option>
+            <option value="W14">📅 Week 14 Slate (260 PTS)</option>
+            <option value="CCG">🏆 Conf Championships (100 PTS)</option>
+            <option value="CFP">🏈 12-Team CFP Playoff (110 PTS)</option>
+            <option value="all">🏆 Full 2026 Season (3,720 PTS)</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Vault Brackets List / Grid -->
+      <div class="bracket-vault-grid" id="bracketVaultGrid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 12-TEAM CFP BRACKET CANVAS EXPORT MODAL -->
+  <div class="modal-backdrop" id="bracketCanvasModal">
+    <div class="modal-dialog" style="max-width: 780px; text-align: center;">
+      <button class="modal-close" onclick="closeCfpBracketCanvasModal()"><i class="fa-solid fa-xmark"></i></button>
+      <h2 class="modal-title" style="font-size: 1.6rem; letter-spacing: 0.05em;">
+        <i class="fa-solid fa-trophy" style="color: #F59E0B; margin-right: 0.4rem;"></i>12-TEAM CFP TOURNAMENT BRACKET
+      </h2>
+      <p style="font-size: 0.85rem; color: var(--color-text-muted);">High-resolution tournament bracket graphic ready to download or share.</p>
+      
+      <div style="margin: 1.25rem 0; display: flex; justify-content: center;">
+        <canvas id="cfpBracketCanvas" width="1200" height="675" style="width: 100%; max-width: 720px; aspect-ratio: 16 / 9; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);"></canvas>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        <button class="action-btn" style="background: linear-gradient(135deg, #0284C7, #0369A1); color: #FFFFFF;" onclick="shareActiveCanvasToNativeSheet('cfpBracketCanvas', 'cfb_prophet_bracket.png', 'CFB Prophet 12-Team CFP Bracket')">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          <span>Share to iMessage / Chat</span>
+        </button>
+        <button class="action-btn hype-btn" id="downloadCfpBracketBtn" onclick="downloadCfpBracketGraphic()">
+          <i class="fa-solid fa-download"></i>
+          <span>Save Image</span>
+        </button>
+        <button class="action-btn secondary-btn" id="copyCfpBracketBtn" onclick="copyCfpBracketGraphic()">
+          <i class="fa-solid fa-copy"></i>
+          <span>Copy Image</span>
+        </button>
+        <button class="action-btn secondary-btn" id="shareCfpBracketLinkBtn" onclick="copyActiveBracketShareLink()">
+          <i class="fa-solid fa-link"></i>
+          <span>Copy Link</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- SYNC TO PHONE / QR CODE MODAL -->
+  <!-- SUBMISSION DETAIL MODAL (CLEAN LEADERBOARD DRILL-DOWN) -->
+  <div class="modal-backdrop" id="submissionDetailModal" style="z-index: 100006 !important;">
+    <div class="modal-dialog" style="max-width: 580px; text-align: left;">
+      <button class="modal-close" onclick="closeSubmissionDetailModal()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="modal-header" style="margin-bottom: 1rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <span class="matchup-tag" id="subModalRankTag" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8; border-color: rgba(56, 189, 248, 0.4);">
+            🥇 RANK #1
+          </span>
+          <span class="bracket-grade-pill" id="subModalGradePill" style="font-size: 0.78rem; padding: 2px 10px;">GRADE A+ (100%)</span>
+        </div>
+        <h2 class="modal-title" id="subModalTitle" style="font-size: 1.4rem; margin-top: 0.35rem;">Bracket Title</h2>
+        <p id="subModalMeta" style="font-size: 0.82rem; color: #94A3B8;">By Coach • 2026 Season</p>
+      </div>
+
+      <!-- Predicted Champion Banner -->
+      <div id="subModalChampBanner" style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: var(--radius-md); padding: 0.9rem 1.1rem; display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <img src="" id="subModalChampLogo" style="width: 44px; height: 44px; object-fit: contain;">
+        <div>
+          <div style="font-size: 0.72rem; color: #F59E0B; font-weight: 800; font-family: var(--font-mono); text-transform: uppercase;">🏆 PREDICTED NATIONAL CHAMPION</div>
+          <div id="subModalChampName" style="font-size: 1.15rem; font-weight: 800; color: #FFFFFF;">USC Trojans</div>
+        </div>
+      </div>
+
+      <!-- Top 12 Playoff Field Grid -->
+      <div style="margin-bottom: 1.25rem;">
+        <div style="font-size: 0.76rem; color: #94A3B8; font-family: var(--font-mono); font-weight: 700; margin-bottom: 0.45rem; text-transform: uppercase;">
+          🏈 12-TEAM PLAYOFF FIELD:
+        </div>
+        <div id="subModalSeedsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.45rem;">
+          <!-- Injected seeds -->
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div id="subModalActions" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end;">
+        <!-- Injected Action Buttons -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="bracketQrModal" style="z-index: 100007 !important;">
+    <div class="modal-dialog" style="max-width: 480px; text-align: center;">
+      <button class="modal-close" onclick="closeBracketQrModal()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="modal-header">
+        <span class="matchup-tag" style="background: rgba(168, 85, 247, 0.2); color: #D8B4FE; border-color: rgba(168, 85, 247, 0.4);">
+          <i class="fa-solid fa-qrcode"></i> INSTANT DEVICE SYNC
+        </span>
+        <h2 class="modal-title" id="qrModalBracketTitle" style="font-size: 1.4rem; margin-top: 0.25rem;">SYNC PICKS TO DEVICE</h2>
+        <p style="font-size: 0.85rem; color: #94A3B8;">Scan this QR code with your phone camera to load and save these predictions instantly.</p>
+      </div>
+
+      <div style="margin: 1.5rem 0; display: flex; justify-content: center; align-items: center; background: #FFFFFF; padding: 1.25rem; border-radius: var(--radius-lg); width: fit-content; margin-left: auto; margin-right: auto; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+        <canvas id="bracketQrCanvas" width="220" height="220" style="display: block; width: 220px; height: 220px; border-radius: 4px;"></canvas>
+        <img id="bracketQrImg" src="" alt="Bracket Sync QR Code" style="width: 220px; height: 220px; display: none;">
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+        <button class="action-btn secondary-btn" id="copyQrLinkBtn" onclick="copyActiveQrLink()">
+          <i class="fa-solid fa-copy"></i>
+          <span>Copy Direct Link</span>
+        </button>
+        <button class="action-btn" style="background: #A855F7; color: #FFFFFF;" onclick="closeBracketQrModal()">
+          <i class="fa-solid fa-check"></i>
+          <span>Done</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- USER AUTHENTICATION & PROFILE MODAL (SUPABASE AUTH) -->
+  <div class="modal-backdrop" id="authModal" style="z-index: 100008 !important;">
+    <div class="modal-dialog" style="max-width: 460px; text-align: center;">
+      <button class="modal-close" onclick="closeAuthModal()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <!-- LOGGED OUT / AUTHENTICATION VIEW -->
+      <div id="authLoggedOutView">
+        <div class="modal-header" style="margin-bottom: 1rem;">
+          <span class="matchup-tag" style="background: rgba(56, 189, 248, 0.18); color: #38BDF8; border-color: rgba(56, 189, 248, 0.4);">
+            <i class="fa-solid fa-bolt" style="color: #38BDF8;"></i> SUPABASE CLOUD AUTH
+          </span>
+          <h2 class="modal-title" style="font-size: 1.4rem; margin-top: 0.35rem;">ACCOUNT & CREATOR ID</h2>
+          <p style="font-size: 0.82rem; color: #94A3B8; margin-top: 0.2rem;">Sign in to sync your brackets to the cloud, claim your leaderboard rank, and access picks across devices.</p>
+        </div>
+
+        <!-- Inline Alert / Status Banner -->
+        <div id="authAlertBanner" class="auth-alert-banner" style="display: none;"></div>
+
+        <!-- Auth Method Tabs -->
+        <div class="auth-tab-bar">
+          <button class="auth-tab-btn active" id="tabOAuthBtn" onclick="switchAuthTab('oauth')">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> <span>1-Tap OAuth</span>
+          </button>
+          <button class="auth-tab-btn" id="tabPasswordBtn" onclick="switchAuthTab('password')">
+            <i class="fa-solid fa-envelope"></i> <span>Email & Pass</span>
+          </button>
+          <button class="auth-tab-btn" id="tabMagicBtn" onclick="switchAuthTab('magic')">
+            <i class="fa-solid fa-paper-plane"></i> <span>Magic Link</span>
+          </button>
+        </div>
+
+        <!-- TAB 1: 1-Tap OAuth (Google & Apple & GitHub) -->
+        <div id="authOAuthTab" class="auth-tab-content">
+          <div class="social-auth-buttons" style="display: flex; flex-direction: column; gap: 0.65rem; align-items: stretch; width: 100%; max-width: 320px; margin: 0 auto;">
+            <button class="google-sign-in-btn" id="supabaseGoogleBtn" onclick="handleSupabaseGoogleSignIn()">
+              <svg class="google-icon" width="20" height="20" viewBox="0 0 18 18">
+                <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+                <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+                <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707 0-.59.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.347 2.825.957 4.039l3.007-2.332z"/>
+                <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+              </svg>
+              <span>Continue with Google</span>
+            </button>
+            <button class="google-sign-in-btn" id="supabaseAppleBtn" onclick="handleSupabaseAppleSignIn()" style="background: rgba(0, 0, 0, 0.95); border-color: rgba(255, 255, 255, 0.25);">
+              <i class="fa-brands fa-apple" style="font-size: 1.2rem;"></i>
+              <span>Continue with Apple</span>
+            </button>
+            <button class="google-sign-in-btn" id="supabaseGitHubBtn" onclick="handleSupabaseGitHubSignIn()" style="background: rgba(30, 41, 59, 0.9); border-color: rgba(255, 255, 255, 0.2);">
+              <i class="fa-brands fa-github" style="font-size: 1.15rem;"></i>
+              <span>Continue with GitHub</span>
+            </button>
+          </div>
+
+          <div style="margin-top: 1rem; font-size: 0.74rem; color: #64748B; line-height: 1.4; text-align: center;">
+            <i class="fa-solid fa-shield-halved" style="color: #10B981;"></i> <strong>Zero-Password Exposure:</strong> Verified OAuth tokens authenticate you directly via Supabase Auth.
+          </div>
+        </div>
+
+        <!-- TAB 2: Email & Password (Sign In & Sign Up) -->
+        <div id="authPasswordTab" class="auth-tab-content" style="display: none;">
+          <form id="supabasePasswordForm" onsubmit="handleSupabasePasswordAuth(event)" style="display: flex; flex-direction: column; gap: 0.65rem; text-align: left;">
+            
+            <div class="auth-input-group" id="authRegNameGroup" style="display: none;">
+              <label for="supaNameInput">Coach / Display Name</label>
+              <input type="text" id="supaNameInput" class="auth-input" placeholder="e.g. Coach_01, CFBFan" autocomplete="name">
+            </div>
+
+            <div class="auth-input-group">
+              <label for="supaEmailInput">Email Address</label>
+              <input type="email" id="supaEmailInput" class="auth-input" placeholder="name@example.com" required autocomplete="email">
+            </div>
+
+            <div class="auth-input-group">
+              <label for="supaPasswordInput">Password</label>
+              <input type="password" id="supaPasswordInput" class="auth-input" placeholder="••••••••" minlength="6" required autocomplete="current-password">
+            </div>
+
+            <div class="auth-input-group" id="authRegTeamGroup" style="display: none;">
+              <label for="supaFavTeamSelect">Favorite Powerhouse Team</label>
+              <select id="supaFavTeamSelect" class="auth-input" style="cursor: pointer;">
+                <option value="usc">USC Trojans</option>
+                <option value="ohiostate">Ohio State Buckeyes</option>
+                <option value="texas">Texas Longhorns</option>
+                <option value="oregon">Oregon Ducks</option>
+                <option value="georgia">Georgia Bulldogs</option>
+                <option value="alabama">Alabama Crimson Tide</option>
+                <option value="lsu">LSU Tigers</option>
+                <option value="clemson">Clemson Tigers</option>
+                <option value="notredame">Notre Dame Fighting Irish</option>
+                <option value="pennstate">Penn State Nittany Lions</option>
+                <option value="michigan">Michigan Wolverines</option>
+                <option value="olemiss">Ole Miss Rebels</option>
+                <option value="indiana">Indiana Hoosiers</option>
+                <option value="miami">Miami Hurricanes</option>
+              </select>
+            </div>
+
+            <button type="submit" class="action-btn" id="supaPasswordSubmitBtn" style="background: linear-gradient(135deg, #0284C7, #0369A1); color: #FFFFFF; font-weight: 800; border: 1px solid #38BDF8; padding: 0.75rem; margin-top: 0.25rem;">
+              <i class="fa-solid fa-right-to-bracket"></i> <span id="supaPasswordSubmitLabel">Sign In</span>
+            </button>
+
+            <div style="text-align: center; margin-top: 0.45rem;">
+              <button type="button" class="link-btn" id="togglePasswordModeBtn" onclick="toggleAuthPasswordMode()" style="background: none; border: none; color: #38BDF8; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: underline;">
+                Don't have an account? Create one
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- TAB 3: Passwordless Magic Link -->
+        <div id="authMagicTab" class="auth-tab-content" style="display: none;">
+          <form id="supabaseMagicForm" onsubmit="handleSupabaseMagicLinkAuth(event)" style="display: flex; flex-direction: column; gap: 0.75rem; text-align: left;">
+            <div class="auth-input-group">
+              <label for="supaMagicEmailInput">Email Address</label>
+              <input type="email" id="supaMagicEmailInput" class="auth-input" placeholder="name@example.com" required autocomplete="email">
+            </div>
+
+            <button type="submit" class="action-btn" id="supaMagicSubmitBtn" style="background: linear-gradient(135deg, #6366F1, #4F46E5); color: #FFFFFF; font-weight: 800; border: 1px solid #818CF8; padding: 0.75rem;">
+              <i class="fa-solid fa-paper-plane"></i> <span>Send Magic Login Link</span>
+            </button>
+
+            <p style="font-size: 0.74rem; color: #94A3B8; text-align: center; line-height: 1.4; margin-top: 0.25rem;">
+              We'll send a secure, password-free login link directly to your inbox. Tap it to immediately authenticate.
+            </p>
+          </form>
+        </div>
+
+        <!-- Optional Supabase Project Config Dropdown -->
+        <div style="margin-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 0.75rem; text-align: center;">
+          <button type="button" onclick="toggleSupabaseConfigDrawer()" style="background: none; border: none; color: #64748B; font-size: 0.72rem; cursor: pointer; font-family: var(--font-mono); display: inline-flex; align-items: center; gap: 4px;">
+            <i class="fa-solid fa-gear"></i> <span id="supabaseConfigToggleLabel">Supabase Connection Settings</span>
+          </button>
+          
+          <div id="supabaseConfigDrawer" style="display: none; margin-top: 0.75rem; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 0.85rem; text-align: left;">
+            <p id="supabaseConfigNotice" style="font-size: 0.72rem; color: #F59E0B; margin-bottom: 0.5rem; line-height: 1.3;"></p>
+            <div class="auth-input-group">
+              <label for="cfgSupabaseUrl">Supabase Project URL</label>
+              <input type="url" id="cfgSupabaseUrl" class="auth-input" placeholder="https://xyz.supabase.co" style="font-size: 0.8rem; padding: 0.45rem;">
+            </div>
+            <div class="auth-input-group">
+              <label for="cfgSupabaseKey">Supabase Anon Public Key</label>
+              <input type="text" id="cfgSupabaseKey" class="auth-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5..." style="font-size: 0.8rem; padding: 0.45rem;">
+            </div>
+            <button type="button" class="action-btn" onclick="saveSupabaseConfigInputs()" style="font-size: 0.78rem; padding: 0.45rem; width: 100%; background: #2563EB; color: #FFFFFF;">
+              Save & Connect
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOGGED IN / PROFILE DASHBOARD VIEW -->
+      <div id="authLoggedInView" style="display: none;">
+        <div class="modal-header" style="margin-bottom: 1rem;">
+          <span class="matchup-tag" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);">
+            <i class="fa-solid fa-circle-check"></i> AUTHENTICATED CREATOR
+          </span>
+          <h2 class="modal-title" id="authProfileName" style="font-size: 1.45rem; margin-top: 0.25rem;">Coach Profile</h2>
+          <p id="authProfileEmail" style="font-size: 0.8rem; color: #94A3B8; font-family: var(--font-mono);">@Coach • Supabase Verified</p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; text-align: left;">
+          <div style="border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.75rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
+              <span style="font-size: 0.76rem; color: #94A3B8; font-family: var(--font-mono);">FAVORITE TEAM:</span>
+              <div style="display: flex; align-items: center; gap: 6px;" id="authProfileTeamWrap">
+                <img src="" id="authProfileTeamLogo" style="width: 20px; height: 20px; object-fit: contain;">
+                <span id="authProfileTeamName" style="font-weight: 800; font-size: 0.85rem; color: #FFFFFF;">USC Trojans</span>
+              </div>
+            </div>
+            <select id="authFavoriteTeamSelect" class="auth-input" onchange="handleFavoriteTeamChange(this.value)" style="font-size: 0.82rem; padding: 0.45rem 0.65rem; background: rgba(30, 41, 59, 0.95); border: 1px solid rgba(56, 189, 248, 0.4); color: #F8FAFC; border-radius: var(--radius-sm); cursor: pointer; width: 100%;">
+              <!-- Injected with all 31 FBS teams via JS -->
+            </select>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.65rem;">
+            <span style="font-size: 0.76rem; color: #94A3B8; font-family: var(--font-mono);">SAVED PREDICTIONS:</span>
+            <span id="authProfileSavedCount" style="font-family: var(--font-mono); font-weight: 800; color: #38BDF8;">1 Active</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.76rem; color: #94A3B8; font-family: var(--font-mono);">CLOUD SYNC STATUS:</span>
+            <span style="font-size: 0.74rem; font-weight: 800; color: #34D399;"><i class="fa-solid fa-cloud-arrow-up"></i> Supabase Protected</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; justify-content: center;">
+          <button class="action-btn secondary-btn" onclick="closeAuthModal(); openBracketVaultModal();" style="flex: 1;">
+            <i class="fa-solid fa-list-ol"></i> <span>View My Brackets</span>
+          </button>
+          <button class="action-btn" onclick="handleSignOutClick()" style="background: rgba(239, 68, 68, 0.2); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.4); flex: 1;">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sign Out</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- CFB AI SIMULATION TUNING MODAL (MOBILE & DESKTOP POPUP) -->
+  <div class="modal-backdrop" id="cfbAiTuningModal" onclick="if(event.target===this) closeAiTuningModal()">
+    <div class="modal-dialog" style="max-width: 640px; width: 95vw; max-height: 90vh; display: flex; flex-direction: column; padding: 1.25rem 1.4rem;">
+      <button class="modal-close" onclick="closeAiTuningModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-header">
+        <span class="matchup-tag" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8; border-color: rgba(56, 189, 248, 0.4);">
+          <i class="fa-solid fa-sliders"></i> SIMULATION CALIBRATION
+        </span>
+        <h2 class="modal-title" id="modalTuningTeamTitle" style="font-size: 1.45rem; margin-top: 0.25rem;">CFB AI TUNING</h2>
+        <p style="font-size: 0.82rem; color: #94A3B8;">Adjust EPA weights, quarterback execution, defense havoc, and custom sliders for real-time recalculations.</p>
+      </div>
+
+      <!-- Quick Preset Buttons -->
+      <div style="margin: 0.5rem 0 0.75rem;">
+        <label style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--color-text-muted); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 0.35rem;">Quick Scenarios:</label>
+        <div class="preset-buttons-row" id="modalPresetsContainer" style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+          <button class="preset-btn active" data-preset="baseline" onclick="applyGlobalPreset('baseline')">🎯 Baseline</button>
+          <button class="preset-btn" data-preset="qb-mvp" onclick="applyGlobalPreset('qb-mvp')">🔥 QB Heisman</button>
+          <button class="preset-btn" data-preset="qb-slump" onclick="applyGlobalPreset('qb-slump')">📉 QB Slump</button>
+          <button class="preset-btn" data-preset="iron-defense" onclick="applyGlobalPreset('iron-defense')">🛡️ Iron D</button>
+          <button class="preset-btn" data-preset="chaos" onclick="applyGlobalPreset('chaos')">🎲 Chaos</button>
+          <button class="preset-btn reset-all-btn" onclick="resetAllToBaseline()" style="margin-left: auto;">↺ Reset</button>
+        </div>
+      </div>
+
+      <!-- Custom Sliders Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.74rem; color: #38BDF8; font-weight: 700; text-transform: uppercase;">
+          <i class="fa-solid fa-sliders"></i> Custom Team Sliders:
+        </span>
+        <span style="font-size: 0.72rem; color: #94A3B8;">Real-Time Recalibration</span>
+      </div>
+
+      <!-- Custom Sliders Grid -->
+      <div class="sliders-grid" id="modalSlidersGrid" style="display: grid; gap: 0.75rem; overflow-y: auto; max-height: 48vh; padding-right: 4px;">
+        <!-- Dynamically injected team sliders -->
+      </div>
+
+      <div style="margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: flex-end; padding-top: 0.75rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+        <button class="action-btn secondary-btn" onclick="resetAllToBaseline()" style="font-size: 0.84rem; padding: 0.5rem 0.9rem;">
+          <i class="fa-solid fa-rotate-left"></i> Reset All
+        </button>
+        <button class="action-btn hype-btn" onclick="closeAiTuningModal()" style="font-size: 0.84rem; padding: 0.5rem 1.2rem;">
+          <i class="fa-solid fa-check"></i> Apply & Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js?v=319"></script>
+  <script src="qrious.min.js?v=319"></script>
+  <script src="qrcode.min.js?v=319"></script>
+  <script src="data/teams.js?v=319"></script>
+  <script src="app.js?v=319"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CFB Prophet Neural Cyber Palette -->
+    <color name="bg_dark">#0A0E17</color>
+    <color name="bg_surface">#0F172A</color>
+    <color name="brand_primary">#00E5FF</color>
+    <color name="brand_accent">#F59E0B</color>
+    <color name="status_bar">#0A0E17</color>
+    <color name="nav_bar">#0A0E17</color>
+</resources>
