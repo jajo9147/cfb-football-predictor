@@ -40,28 +40,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // 1. Configure Dark Edge-to-Edge Display
-        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
-        getWindow().setStatusBarColor(Color.parseColor("#0A0E17"));
-        getWindow().setNavigationBarColor(Color.parseColor("#0A0E17"));
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            WindowInsetsController controller = getWindow().getInsetsController();
-            if (controller != null) {
-                controller.setSystemBarsAppearance(
-                    0,
-                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS | WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
-                );
-            }
-        }
-
-        // 2. Initialize AssetLoader for secure local assets
-        assetLoader = new WebViewAssetLoader.Builder()
-            .setDomain("appassets.androidplatform.net")
-            .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
-            .build();
-
-        // 3. Initialize WebView
+        // 1. Initialize WebView & Set Content View
         webView = new WebView(this);
         webView.setBackgroundColor(Color.parseColor("#0A0E17"));
         webView.setVerticalScrollBarEnabled(false);
@@ -69,13 +48,25 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(webView);
 
-        // Handle System Insets (Status bar & Navigation bar padding)
-        ViewCompat.setOnApplyWindowInsetsListener(webView, (view, insets) -> {
-            int statusBar = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
-            int navBar = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
-            view.setPadding(0, statusBar, 0, navBar);
-            return insets;
-        });
+        // 2. Configure Dark System Bars
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), true);
+        getWindow().setStatusBarColor(Color.parseColor("#0A0E17"));
+        getWindow().setNavigationBarColor(Color.parseColor("#0A0E17"));
+
+        try {
+            androidx.core.view.WindowInsetsControllerCompat controller = 
+                WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
+            if (controller != null) {
+                controller.setAppearanceLightStatusBars(false);
+                controller.setAppearanceLightNavigationBars(false);
+            }
+        } catch (Exception ignored) {}
+
+        // 3. Initialize AssetLoader for secure local assets
+        assetLoader = new WebViewAssetLoader.Builder()
+            .setDomain("appassets.androidplatform.net")
+            .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
+            .build();
 
         configureWebView();
 
