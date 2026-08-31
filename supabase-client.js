@@ -219,12 +219,33 @@
 
   // 4. Email & Password Sign In
   async function signInWithPassword(email, password) {
+    if (!email || !password) {
+      return { error: { message: 'Please enter both email and password.' } };
+    }
+
+    // Built-in Reviewer / Demo account fallback
+    if (email.trim().toLowerCase() === 'reviewer.demo@cfbprophet.app' && password.trim() === 'ReviewerDemo2026!') {
+      const demoUser = {
+        id: 'reviewer_demo_user_2026',
+        email: 'reviewer.demo@cfbprophet.app',
+        displayName: 'App Reviewer (Demo)',
+        handle: 'app_reviewer',
+        avatarUrl: '',
+        favTeam: localStorage.getItem('cfb_prophet_fav_team') || 'usc',
+        provider: 'demo',
+        createdAt: new Date().toISOString()
+      };
+      localStorage.setItem('cfb_prophet_auth_user_v4', JSON.stringify(demoUser));
+      localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(demoUser));
+      localStorage.setItem('cfb_prophet_user_handle', demoUser.displayName);
+      if (typeof window.updateAuthUI === 'function') window.updateAuthUI();
+      if (typeof window.renderSavedBracketsVault === 'function') window.renderSavedBracketsVault();
+      return { data: { user: demoUser, session: { user: demoUser } }, error: null };
+    }
+
     if (!isSupabaseConfigured()) {
       showConfigModal('Sign in requires Supabase Project URL & Anon Key.');
       return { error: { message: 'Supabase project not yet connected.' } };
-    }
-    if (!email || !password) {
-      return { error: { message: 'Please enter both email and password.' } };
     }
     return await supabaseClient.auth.signInWithPassword({ email, password });
   }
