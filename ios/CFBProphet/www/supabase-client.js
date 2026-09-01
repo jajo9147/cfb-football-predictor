@@ -289,17 +289,24 @@
   }
 
   // 7. Save Bracket to Supabase Cloud
+  // 7. Save Bracket to Supabase Cloud (Supports both logged-in users and guest submissions)
   async function saveBracketToCloud(bracketObj) {
     if (!isSupabaseConfigured() || !bracketObj) return null;
     try {
-      const { data: { session } } = await supabaseClient.auth.getSession();
-      if (!session || !session.user) return null;
+      let userId = null;
+      try {
+        const { data } = await supabaseClient.auth.getSession();
+        if (data && data.session && data.session.user) {
+          userId = data.session.user.id;
+        }
+      } catch (authErr) {}
 
       const row = {
         id: bracketObj.id,
-        user_id: session.user.id,
-        name: bracketObj.name,
-        creator: bracketObj.creator,
+        user_id: userId,
+        creator_id: bracketObj.creatorId || userId || `guest_${Date.now()}`,
+        name: bracketObj.name || 'My CFB Prediction',
+        creator: bracketObj.creator || 'Coach',
         notes: bracketObj.notes || '',
         champion: bracketObj.champion,
         runner_up: bracketObj.runnerUp,
@@ -307,7 +314,7 @@
         playoff_summary: bracketObj.playoffSummary || null,
         sim_state: bracketObj.simState || {},
         mode: bracketObj.mode || 'custom',
-        is_public: !!bracketObj.isPublic,
+        is_public: bracketObj.isPublic !== false,
         created_at: bracketObj.createdAt || new Date().toISOString()
       };
 
