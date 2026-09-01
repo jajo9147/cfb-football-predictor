@@ -71,7 +71,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=327">
+  <link rel="stylesheet" href="styles.css?v=329">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -501,6 +501,49 @@
     </section>
 
   </main>
+
+  <!-- PRODUCTION SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand-row">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="./apple-touch-icon.png?v=4" alt="CFB Prophet" width="30" height="30" style="border-radius: 6px;">
+            <span class="footer-title">CFB PROPHET</span>
+          </div>
+          <p class="footer-tagline">College football matchup simulation engine and interactive 12-team College Football Playoff bracket predictor.</p>
+        </div>
+        
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <h4>Simulator</h4>
+            <a href="javascript:void(0)" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Top 25 Matchups</a>
+            <a href="javascript:void(0)" onclick="openBracketVaultModal()">Community Leaderboard</a>
+            <a href="javascript:void(0)" onclick="openCfpBracketCanvasModal()">Export 12-Team Bracket</a>
+            <a href="https://github.com/jajo9147/cfb-football-predictor/releases/tag/v1.0.0" target="_blank" rel="noopener">Android APK Release</a>
+          </div>
+          
+          <div class="footer-col">
+            <h4>Legal & Policies</h4>
+            <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
+            <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a>
+            <a href="mailto:jajo9147@gmail.com">Support & Contact</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-disclaimer-row">
+        <p class="footer-disclaimer">
+          <strong>Notice:</strong> CFB Prophet is an independent collegiate football simulation and analytics platform created for editorial and entertainment purposes. It is not affiliated with, endorsed by, or sponsored by the NCAA, the College Football Playoff (CFP), ESPN, or any participating university athletic department. All team logos, names, and trademarks remain the property of their respective athletic associations.
+        </p>
+      </div>
+
+      <div class="footer-bottom-row">
+        <span>&copy; 2026 CFB Prophet. All rights reserved.</span>
+        <span class="footer-version">v1.0.0 | 2026 Season Edition</span>
+      </div>
+    </div>
+  </footer>
 
   <!-- Matchup Simulation Modal -->
   <div class="modal-backdrop" id="simModal" onclick="if(event.target===this) closeSimModal()">
@@ -1411,7 +1454,7 @@
           <i class="fa-solid fa-copy"></i>
           <span>Copy Direct Link</span>
         </button>
-        <button class="action-btn" style="background: #A855F7; color: #FFFFFF;" onclick="closeBracketQrModal()">
+        <button class="action-btn" style="background: #2563EB; color: #FFFFFF;" onclick="closeBracketQrModal()">
           <i class="fa-solid fa-check"></i>
           <span>Done</span>
         </button>
@@ -1428,7 +1471,7 @@
       <div id="authLoggedOutView">
         <div class="modal-header" style="margin-bottom: 1rem;">
           <span class="matchup-tag" style="background: rgba(56, 189, 248, 0.18); color: #38BDF8; border-color: rgba(56, 189, 248, 0.4);">
-            <i class="fa-solid fa-bolt" style="color: #38BDF8;"></i> SUPABASE CLOUD AUTH
+            <i class="fa-solid fa-shield-halved" style="color: #38BDF8;"></i> CLOUD PROFILE
           </span>
           <h2 class="modal-title" style="font-size: 1.4rem; margin-top: 0.35rem;">ACCOUNT & CREATOR ID</h2>
           <p style="font-size: 0.82rem; color: #94A3B8; margin-top: 0.2rem;">Sign in to sync your brackets to the cloud, claim your leaderboard rank, and access picks across devices.</p>
@@ -1440,13 +1483,13 @@
         <!-- Auth Method Tabs -->
         <div class="auth-tab-bar">
           <button class="auth-tab-btn active" id="tabOAuthBtn" onclick="switchAuthTab('oauth')">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> <span>1-Tap OAuth</span>
+            <i class="fa-solid fa-shield-halved"></i> <span>Social Sign In</span>
           </button>
           <button class="auth-tab-btn" id="tabPasswordBtn" onclick="switchAuthTab('password')">
             <i class="fa-solid fa-envelope"></i> <span>Email & Pass</span>
           </button>
           <button class="auth-tab-btn" id="tabMagicBtn" onclick="switchAuthTab('magic')">
-            <i class="fa-solid fa-paper-plane"></i> <span>Magic Link</span>
+            <i class="fa-solid fa-paper-plane"></i> <span>Email Link</span>
           </button>
         </div>
 
@@ -1528,8 +1571,8 @@
               <input type="email" id="supaMagicEmailInput" class="auth-input" placeholder="name@example.com" required autocomplete="email">
             </div>
 
-            <button type="submit" class="action-btn" id="supaMagicSubmitBtn" style="background: linear-gradient(135deg, #6366F1, #4F46E5); color: #FFFFFF; font-weight: 800; border: 1px solid #818CF8; padding: 0.75rem;">
-              <i class="fa-solid fa-paper-plane"></i> <span>Send Magic Login Link</span>
+            <button type="submit" class="action-btn" id="supaMagicSubmitBtn" style="background: #2563EB; color: #FFFFFF; font-weight: 800; border: 1px solid #3B82F6; padding: 0.75rem;">
+              <i class="fa-solid fa-paper-plane"></i> <span>Send Secure Login Link</span>
             </button>
 
             <p style="font-size: 0.74rem; color: #94A3B8; text-align: center; line-height: 1.4; margin-top: 0.25rem;">
@@ -1662,10 +1705,10 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=327"></script>
-  <script src="qrious.min.js?v=327"></script>
-  <script src="qrcode.min.js?v=327"></script>
-  <script src="data/teams.js?v=327"></script>
-  <script src="app.js?v=327"></script>
+  <script src="supabase-client.js?v=329"></script>
+  <script src="qrious.min.js?v=329"></script>
+  <script src="qrcode.min.js?v=329"></script>
+  <script src="data/teams.js?v=329"></script>
+  <script src="app.js?v=329"></script>
 </body>
 </html>

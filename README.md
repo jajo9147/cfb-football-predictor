@@ -1,4 +1,4 @@
-# 🏈 CFB Prophet — College Football AI Predictor & Season Simulator
+# 🏈 CFB Prophet - College Football AI Predictor & Season Simulator
 
 [![Live App](https://img.shields.io/badge/Live_App-jajo9147.github.io%2Fcfb--football--predictor-blue?style=for-the-badge&logo=googlechrome&logoColor=white)](https://jajo9147.github.io/cfb-football-predictor/)
 [![AP Top 25](https://img.shields.io/badge/AP_Top_25-26_Programs_Calibrated-gold?style=for-the-badge)](https://jajo9147.github.io/cfb-football-predictor/)

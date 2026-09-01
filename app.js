@@ -9180,7 +9180,7 @@ function openSubmissionDetailModal(bracketId, e) {
       <button class="action-btn secondary-btn" onclick="openCfpBracketCanvasModalForBracket('${b.id}')">
         <i class="fa-solid fa-camera-retro"></i> Graphic
       </button>
-      <button class="action-btn" style="background: rgba(168, 85, 247, 0.2); color: #D8B4FE; border: 1px solid rgba(168, 85, 247, 0.4);" onclick="openBracketQrModal('${b.id}', event)">
+      <button class="action-btn" style="background: rgba(37, 99, 235, 0.18); color: #93C5FD; border: 1px solid rgba(37, 99, 235, 0.45);" onclick="openBracketQrModal('${b.id}', event)">
         <i class="fa-solid fa-qrcode"></i> Sync QR
       </button>
       <button class="action-btn secondary-btn" onclick="copyBracketShareLink('${b.id}', event)">
@@ -10428,7 +10428,7 @@ function startApp() {
   try { syncCommunityBracketsFromCloud(); } catch (e) {}
   try { initPwaServiceWorker(); } catch (e) {}
 
-  // 3. Restore scenario from URL permalink hash (#sim=...) — skip on file:// (iOS)
+  // 3. Restore scenario from URL permalink hash (#sim=...) - skip on file:// (iOS)
   //    to prevent stale WKWebView hash state from loading wrong team
   if (!isFileProtocol) {
     try { restoreScenarioFromUrl(); } catch (e) {}
