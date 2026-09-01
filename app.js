@@ -8354,8 +8354,73 @@ function createUscWinsOutBracket() {
   };
 }
 
+function createBillJohnsonBracket() {
+  return {
+    id: "bracket_1788122129050_b89cnj",
+    name: "Texas Natty Projection",
+    creator: "Bill Johnson",
+    creatorId: "56a97b58-44e3-445b-bdb1-cbfce0d9b5aa",
+    creatorEmail: "bmjohnson063@gmail.com",
+    notes: "Custom 2026 CFP Simulation",
+    createdAt: "2026-08-30T20:35:29.050Z",
+    mode: "baseline",
+    isPublic: true,
+    champion: {
+      id: "texas",
+      name: "Texas Longhorns",
+      shortName: "Texas",
+      logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png",
+      score: 29,
+      oppScore: 27
+    },
+    runnerUp: {
+      id: "ohiostate",
+      name: "Ohio State Buckeyes",
+      shortName: "Ohio State"
+    },
+    seeds: [
+      { seed: 1, id: "georgia", name: "Georgia", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png", wins: 12, losses: 1 },
+      { seed: 2, id: "ohiostate", name: "Ohio State", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png", wins: 12, losses: 1 },
+      { seed: 3, id: "miami", name: "Miami", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png", wins: 12, losses: 1 },
+      { seed: 4, id: "texastech", name: "Texas Tech", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png", wins: 10, losses: 3 },
+      { seed: 5, id: "texas", name: "Texas", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png", wins: 11, losses: 2 },
+      { seed: 6, id: "oregon", name: "Oregon", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png", wins: 11, losses: 2 },
+      { seed: 7, id: "notredame", name: "Notre Dame", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png", wins: 11, losses: 1 },
+      { seed: 8, id: "olemiss", name: "Ole Miss", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png", wins: 10, losses: 2 },
+      { seed: 9, id: "indiana", name: "Indiana", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png", wins: 10, losses: 2 },
+      { seed: 10, id: "lsu", name: "LSU", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png", wins: 10, losses: 2 },
+      { seed: 11, id: "alabama", name: "Alabama", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png", wins: 10, losses: 2 },
+      { seed: 12, id: "boisestate", name: "Boise State", logoUrl: "https://a.espncdn.com/i/teamlogos/ncaa/500/68.png", wins: 12, losses: 1 }
+    ],
+    playoffSummary: {
+      fr: [{ winner: "Texas" }, { winner: "Oregon" }, { winner: "Notre Dame" }, { winner: "Indiana" }],
+      qf: [{ winner: "Georgia" }, { winner: "Ohio State" }, { winner: "Oregon" }, { winner: "Texas" }],
+      sf: [{ winner: "Texas" }, { winner: "Ohio State" }]
+    },
+    simState: {
+      teamId: "texas",
+      userPicks: { "playoff-fr4": "L", "playoff-sf1": "L", "playoff-natty": "W", "osu-w2": "L" },
+      manualScores: {
+        "playoff-fr4": { teamScore: 29, oppScore: 33 },
+        "playoff-sf1": { teamScore: 28, oppScore: 32 },
+        "playoff-natty": { teamScore: 29, oppScore: 27 },
+        "osu-w2": { teamScore: 27, oppScore: 29 }
+      },
+      ccgPicks: {},
+      playoffPicks: {},
+      teamSliders: {},
+      gameSliders: {
+        "tex-w2": { qbRating: 25, groundAttack: -10, defenseHavoc: 15, turnoverLuck: 0, crowdNoise: 15, isCustom: true, targetTeamId: "texas" },
+        "tex-w5": { qbRating: -15, groundAttack: -10, defenseHavoc: 0, turnoverLuck: 10, crowdNoise: 0, isCustom: true, targetTeamId: "texas" },
+        "tex-w9": { qbRating: 5, groundAttack: -25, defenseHavoc: 0, turnoverLuck: 0, crowdNoise: 0, isCustom: true, targetTeamId: "texas" },
+        "tex-w12": { qbRating: 15, groundAttack: 0, defenseHavoc: 5, turnoverLuck: -5, crowdNoise: -20, isCustom: true, targetTeamId: "texas" }
+      }
+    }
+  };
+}
+
 function getCuratedExpertBrackets() {
-  return [createProphetAiBenchmarkBracket(), createTexasWinsOutBracket(), createUscWinsOutBracket()];
+  return [createProphetAiBenchmarkBracket(), createTexasWinsOutBracket(), createUscWinsOutBracket(), createBillJohnsonBracket()];
 }
 
 function getLocalCommunityBrackets() {
@@ -8454,43 +8519,79 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
   _isCloudSyncing = true;
 
   try {
-    const res = await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}/json?poll=1&since=all`, { 
-      cache: 'no-store',
-      headers: { 'Accept': 'application/json' }
-    });
-    if (!res.ok) {
-      _isCloudSyncing = false;
-      return;
-    }
-    const text = await res.text();
     const cloudBrackets = [];
     const deletedIds = getDeletedBracketIds();
 
-    text.trim().split('\n').forEach(line => {
+    // 1. Fetch static persistent community feed (CDN / zero expiration)
+    try {
+      const feedRes = await fetch(`data/community_brackets.json?v=${Date.now()}`, { cache: 'no-store' });
+      if (feedRes.ok) {
+        const feedData = await feedRes.json();
+        if (Array.isArray(feedData)) {
+          feedData.forEach(b => {
+            if (b && b.id && !deletedIds.has(b.id)) {
+              cloudBrackets.push(b);
+            }
+          });
+        }
+      }
+    } catch (errFeed) {
+      console.warn('[CFB Prophet] Static feed fetch notice:', errFeed);
+    }
+
+    // 2. Fetch from Supabase Cloud if available
+    if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.fetchCloudCommunityBrackets === 'function') {
       try {
-        if (!line || !line.trim()) return;
-        const json = JSON.parse(line.trim());
-        if (json.message) {
-          let b = null;
+        const supaBrackets = await window.CFBProphetSupabase.fetchCloudCommunityBrackets();
+        if (Array.isArray(supaBrackets)) {
+          supaBrackets.forEach(b => {
+            if (b && b.id && !deletedIds.has(b.id)) {
+              cloudBrackets.push(b);
+            }
+          });
+        }
+      } catch (errSupa) {
+        console.warn('[CFB Prophet] Supabase cloud brackets notice:', errSupa);
+      }
+    }
+
+    // 3. Real-time ntfy.sh relay
+    try {
+      const res = await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}/json?poll=1&since=all`, { 
+        cache: 'no-store',
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        const text = await res.text();
+        text.trim().split('\n').forEach(line => {
           try {
-            b = typeof json.message === 'string' ? JSON.parse(json.message) : json.message;
-          } catch(e) {}
-          if (b) {
-            if (b.action === 'delete_bracket' || b.isDeleted || b.deletedId) {
-              const delId = b.deletedId || b.id;
-              if (delId) {
-                addDeletedBracketId(delId);
-                deletedIds.add(delId);
-              }
-            } else if (b.name && b.id && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_usc_wins_out_curated' && !deletedIds.has(b.id)) {
-              if (!b.name.toLowerCase().includes('prophet ai') && !b.name.toLowerCase().includes('live sync test')) {
-                cloudBrackets.push(b);
+            if (!line || !line.trim()) return;
+            const json = JSON.parse(line.trim());
+            if (json.message) {
+              let b = null;
+              try {
+                b = typeof json.message === 'string' ? JSON.parse(json.message) : json.message;
+              } catch(e) {}
+              if (b) {
+                if (b.action === 'delete_bracket' || b.isDeleted || b.deletedId) {
+                  const delId = b.deletedId || b.id;
+                  if (delId) {
+                    addDeletedBracketId(delId);
+                    deletedIds.add(delId);
+                  }
+                } else if (b.name && b.id && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_usc_wins_out_curated' && !deletedIds.has(b.id)) {
+                  if (!b.name.toLowerCase().includes('prophet ai') && !b.name.toLowerCase().includes('live sync test')) {
+                    cloudBrackets.push(b);
+                  }
+                }
               }
             }
-          }
-        }
-      } catch (e) {}
-    });
+          } catch (e) {}
+        });
+      }
+    } catch (errNtfy) {
+      console.warn('[CFB Prophet] ntfy relay notice:', errNtfy);
+    }
 
     // Clean local community brackets
     const local = getLocalCommunityBrackets().filter(b => !deletedIds.has(b.id));
@@ -8535,7 +8636,14 @@ async function publishBracketToCloud(bracketObj) {
     filtered.unshift(compact);
     localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(filtered));
 
-    // 2. Publish to cloud topic with guaranteed caching (< 1.2 KB)
+    // 2. Publish to Supabase Cloud if available
+    if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.saveBracketToCloud === 'function') {
+      try {
+        window.CFBProphetSupabase.saveBracketToCloud(compact);
+      } catch(eSupa) {}
+    }
+
+    // 3. Publish to cloud topic with guaranteed caching (< 1.2 KB)
     const payload = JSON.stringify(compact);
     await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}`, {
       method: 'POST',
