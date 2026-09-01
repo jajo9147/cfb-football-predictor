@@ -8999,8 +8999,8 @@ function renderSavedBracketsVault() {
         
         <div class="lb-user-col">
           <div class="lb-user-header">
-            <span class="lb-user-name">${isAiBenchmark ? '🤖 Prophet AI' : (isOwner ? '👤 ' + (currentUser?.displayName || 'Jake Johnson') : (b.creator || 'Coach'))}</span>
-            ${isAiBenchmark ? '<span class="lb-type-badge ai">AI BENCHMARK</span>' : (isOwner ? '<span class="lb-type-badge you">YOUR PICKS</span>' : '')}
+            <span class="lb-user-name">${isAiBenchmark ? '🤖 Prophet AI' : (b.creator || 'Coach')}</span>
+            ${isAiBenchmark ? '<span class="lb-type-badge ai">AI BENCHMARK</span>' : (isOwner ? '<span class="lb-type-badge you">YOUR ENTRY</span>' : '')}
             ${isTeamFilter && acc.record ? `<span class="lb-type-badge" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.3);">${focusTeam?.shortName || 'Team'}: ${acc.record}</span>` : ''}
           </div>
           <div class="lb-bracket-name">${b.name}</div>
@@ -9103,7 +9103,7 @@ function openSubmissionDetailModal(bracketId, e) {
   if (titleEl) titleEl.innerText = b.name;
   if (metaEl) {
     const dateStr = b.createdAt ? new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '2026 Season';
-    metaEl.innerText = `By ${isOwner ? 'You' : (b.creator || 'Coach')} • Submitted ${dateStr}`;
+    metaEl.innerText = `By ${b.creator || 'Coach'}${isOwner ? ' (You)' : ''} • Submitted ${dateStr}`;
   }
   if (champLogo) champLogo.src = champ.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png';
   if (champName) champName.innerText = champ.name;
