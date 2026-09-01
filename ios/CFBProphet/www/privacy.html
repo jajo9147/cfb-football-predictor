@@ -4,112 +4,190 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy - CFB Prophet</title>
-  <link rel="icon" href="icons/icon-192.png">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-dark: #07090E;
-      --card-bg: #0F172A;
-      --accent: #38BDF8;
-      --text: #F8FAFC;
-      --text-muted: #94A3B8;
-      --border: rgba(255, 255, 255, 0.1);
-    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: var(--bg-dark);
-      color: var(--text);
+      background: #080B11;
+      color: #E2E8F0;
       font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.6;
-      padding: 2rem 1rem;
-      display: flex;
-      justify-content: center;
+      line-height: 1.7;
+      padding: 0;
+      margin: 0;
     }
-    .container {
-      max-width: 780px;
-      width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2.5rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    .top-nav {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0D121D;
+      padding: 0.85rem 1.5rem;
     }
-    .header {
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .badge {
-      display: inline-block;
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--accent);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      margin-bottom: 0.75rem;
-      font-weight: 700;
-    }
-    h1 { font-size: 2rem; font-weight: 800; color: #FFF; margin-bottom: 0.5rem; }
-    h2 { font-size: 1.25rem; font-weight: 700; color: var(--accent); margin-top: 1.75rem; margin-bottom: 0.5rem; }
-    p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; }
-    ul { list-style: square; padding-left: 1.25rem; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; }
-    li { margin-bottom: 0.35rem; }
-    .footer {
-      border-top: 1px solid var(--border);
-      padding-top: 1.5rem;
-      margin-top: 2rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    .top-nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+    .nav-brand img {
+      border-radius: 6px;
+    }
+    .nav-back {
+      color: #94A3B8;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+    .nav-back:hover {
+      color: #FFFFFF;
+    }
+    .page-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+    .doc-meta {
+      font-size: 0.82rem;
+      color: #64748B;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .intro-lead {
+      font-size: 1.05rem;
+      color: #94A3B8;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      margin-top: 2.2rem;
+      margin-bottom: 0.6rem;
+    }
+    p {
+      color: #94A3B8;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+    ul {
+      margin: 0.5rem 0 1.2rem 1.25rem;
+      color: #94A3B8;
+      font-size: 0.95rem;
+    }
+    li {
+      margin-bottom: 0.45rem;
+    }
+    strong {
+      color: #E2E8F0;
+    }
+    a {
+      color: #38BDF8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer-note {
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.82rem;
+      color: #64748B;
+      display: flex;
+      justify-content: space-between;
       flex-wrap: wrap;
       gap: 1rem;
     }
-    a { color: var(--accent); text-decoration: none; font-weight: 600; }
-    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <span class="badge">CFB PROPHET LEGAL</span>
-      <h1>Privacy Policy</h1>
-      <p>Last updated: August 28, 2026</p>
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="./apple-touch-icon.png?v=4" alt="CFB Prophet" width="26" height="26">
+        <span>CFB PROPHET</span>
+      </a>
+      <a href="index.html" class="nav-back">&larr; Return to App</a>
     </div>
+  </nav>
 
-    <h2>1. Introduction</h2>
-    <p>Welcome to <strong>CFB Prophet</strong> ("we," "our," or "the App"). We are committed to protecting your privacy. This Privacy Policy explains how information is handled when you use the CFB Prophet iOS application and web simulation platform.</p>
+  <main class="page-content">
+    <div class="doc-meta">Legal &bull; Updated September 1, 2026</div>
+    <h1>Privacy Policy</h1>
+    <p class="intro-lead">
+      CFB Prophet was built for college football fans to simulate games and test playoff scenarios. We do not track you, sell your data, run third-party advertising networks, or harvest personal info.
+    </p>
 
-    <h2>2. Data Collection and Usage</h2>
-    <p><strong>We do not collect, track, or sell your personal data.</strong></p>
-    <ul>
-      <li><strong>No Tracking:</strong> CFB Prophet does not use tracking identifiers, advertising SDKs, or data brokers.</li>
-      <li><strong>Local Storage:</strong> Your custom game simulations, slider settings, and bracket projections are stored securely on your local device (localStorage / App Container).</li>
-      <li><strong>Account Sign-In (Optional):</strong> If you choose to sign in with Google or create a coach profile, your authentication token is verified securely via Supabase Auth solely to sync your saved predictions across your devices. We do not use your email for marketing or spam.</li>
-    </ul>
+    <h2>1. Data Stored on Your Device</h2>
+    <p>
+      By default, all of your simulated games, custom score overrides, and team slider adjustments are stored directly in your web browser or device storage (via local storage).
+    </p>
+    <p>
+      This data belongs to you and remains on your device until you clear your browser data or delete the app.
+    </p>
 
-    <h2>3. Cloud Sync & Community Submissions</h2>
-    <p>When you explicitly choose to submit a bracket to the public Community Leaderboard or scan a QR code, only the game pick predictions, accuracy score, and your chosen display name are broadcast. No private personal data is ever shared.</p>
+    <h2>2. Community Brackets & Public Leaderboard</h2>
+    <p>
+      If you choose to submit a bracket to the public Community Leaderboard, the app sends your game picks, predicted scores, and the display name or nickname you entered to our database.
+    </p>
+    <p>
+      These submissions are public so other users can view and compare picks. Please do not submit sensitive personal information (such as your real full name, phone number, or home address) as your bracket name or handle.
+    </p>
 
-    <h2>4. Children's Privacy</h2>
-    <p>CFB Prophet is suitable for all audiences (rated 4+) and does not knowingly collect any personal information from children under the age of 13.</p>
+    <h2>3. Account Sign-In (Optional)</h2>
+    <p>
+      Creating an account or signing in with Google or an email link is completely optional. If you choose to sign in, we only store your authentication record to link your saved predictions to your profile across your devices.
+    </p>
+    <p>
+      We will never sell your email, spam you, or share your account info with data brokers or marketing firms.
+    </p>
 
-    <h2>5. Third-Party Services</h2>
-    <p>The app may display team logos and schedules provided via public athletic feeds solely for simulation reference under fair-use editorial guidelines.</p>
+    <h2>4. Live Sports Feeds</h2>
+    <p>
+      CFB Prophet pulls weekly game schedules, team ratings, and live scores from public athletic APIs (such as ESPN). We do not send your personal identity or browsing habits to these providers.
+    </p>
 
-    <h2>6. Contact Information</h2>
-    <p>If you have any questions or feedback regarding this Privacy Policy, please contact us at:</p>
-    <p><strong>Email:</strong> <a href="mailto:jajo9147@gmail.com">jajo9147@gmail.com</a><br>
-    <strong>Website:</strong> <a href="https://jajo9147.github.io/cfb-football-predictor/">https://jajo9147.github.io/cfb-football-predictor/</a></p>
+    <h2>5. Analytics & Cookies</h2>
+    <p>
+      We do not use tracking cookies, cross-site trackers, or third-party ad pixels. The app only stores functional preferences (such as your active team theme and saved predictions) necessary for the simulator to run.
+    </p>
 
-    <div class="footer">
-      <span>&copy; 2026 CFB Prophet. All rights reserved.</span>
-      <a href="index.html">&larr; Return to CFB Prophet</a>
+    <h2>6. Contact</h2>
+    <p>
+      If you have any questions or feedback about privacy or how data is handled in CFB Prophet, feel free to email:
+    </p>
+    <p>
+      <strong>Jake Johnson</strong><br>
+      <a href="mailto:jajo9147@gmail.com">jajo9147@gmail.com</a>
+    </p>
+
+    <div class="footer-note">
+      <span>&copy; 2026 CFB Prophet</span>
+      <a href="terms.html">Terms of Service &rarr;</a>
     </div>
-  </div>
+  </main>
 </body>
 </html>
