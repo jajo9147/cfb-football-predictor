@@ -400,7 +400,9 @@
     signUpWithPassword: signUpWithPassword,
     signOut: signOut,
     saveBracket: saveBracketToCloud,
-    fetchCommunityBrackets: fetchCloudCommunityBrackets
+    saveBracketToCloud: saveBracketToCloud,
+    fetchCommunityBrackets: fetchCloudCommunityBrackets,
+    fetchCloudCommunityBrackets: fetchCloudCommunityBrackets
   };
 
   // Initialize on script load
