@@ -7952,7 +7952,7 @@ function handleSignOutClick() {
 }
 window.handleSignOutClick = handleSignOutClick;
 
-function saveCurrentProjectionAsBracket(name, creator, notes) {
+function saveCurrentProjectionAsBracket(name, creator, notes, forceNewId = false) {
   const evaluated = evaluateRegularSeasonAllTeams();
   const ccg = simulateConferenceChampionships(evaluated);
   const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
@@ -7964,6 +7964,13 @@ function saveCurrentProjectionAsBracket(name, creator, notes) {
   const creatorName = creator && creator.trim() ? creator.trim() : (currentUser ? currentUser.displayName : 'Coach');
   const creatorId = currentUser ? currentUser.id : `guest_${Date.now()}`;
 
+  const isEditingExisting = !forceNewId && state.activeSavedBracketId && 
+    state.activeSavedBracketId !== 'bracket_prophet_ai_baseline' && 
+    state.activeSavedBracketId !== 'bracket_usc_wins_out_curated' &&
+    state.activeSavedBracketId !== 'bracket_texas_natty_run_curated';
+
+  const bracketId = isEditingExisting ? state.activeSavedBracketId : `bracket_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+
   const seeds = (cfp.seeds || []).slice(0, 12).map((s, idx) => ({
     seed: idx + 1,
     id: s?.id || 'team',
@@ -7974,7 +7981,7 @@ function saveCurrentProjectionAsBracket(name, creator, notes) {
   }));
 
   const bracketObj = {
-    id: `bracket_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+    id: bracketId,
     name: (name && name.trim()) ? name.trim() : `${champTeam.shortName || 'CFB'} Championship Projection`,
     creator: creatorName,
     creatorId: creatorId,
@@ -8027,7 +8034,14 @@ function saveCurrentProjectionAsBracket(name, creator, notes) {
   };
 
   const myBrackets = getSavedBrackets();
-  myBrackets.unshift(bracketObj);
+  const existingIdx = myBrackets.findIndex(b => b && b.id === bracketId);
+  if (existingIdx !== -1) {
+    myBrackets[existingIdx] = bracketObj;
+  } else {
+    myBrackets.unshift(bracketObj);
+  }
+  state.activeSavedBracketId = bracketObj.id;
+
   try {
     localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
   } catch (e) {}
@@ -9245,8 +9259,24 @@ function openSaveBracketModal(fromVault = false) {
   const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
   const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate']);
 
+  const allComm = getCommunityBrackets();
+  const activeExisting = state.activeSavedBracketId ? allComm.find(b => b.id === state.activeSavedBracketId) : null;
+  const isEditingExisting = activeExisting && 
+    activeExisting.id !== 'bracket_prophet_ai_baseline' && 
+    activeExisting.id !== 'bracket_usc_wins_out_curated' &&
+    activeExisting.id !== 'bracket_texas_natty_run_curated';
+
   if (previewBox) {
     previewBox.innerHTML = `
+      ${isEditingExisting ? `
+        <div style="background: rgba(37, 99, 235, 0.18); border: 1px solid rgba(37, 99, 235, 0.4); border-radius: var(--radius-sm); padding: 0.5rem 0.75rem; margin-bottom: 0.65rem; color: #93C5FD; font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-pen-to-square" style="color: #60A5FA;"></i>
+            <span>Updating: <strong>${activeExisting.name}</strong></span>
+          </div>
+          <span style="font-size: 0.7rem; color: #93C5FD; background: rgba(37, 99, 235, 0.3); padding: 1px 6px; border-radius: 4px;">Picks Updated on Leaderboard</span>
+        </div>
+      ` : ''}
       <div style="display: flex; align-items: center; gap: 0.75rem;">
         <img src="${champTeam.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png'}" style="width: 40px; height: 40px; object-fit: contain;">
         <div>
@@ -9270,12 +9300,27 @@ function openSaveBracketModal(fromVault = false) {
   const currentUser = getCurrentUser();
   const nameInput = document.getElementById('bracketNameInput');
   const creatorInput = document.getElementById('bracketCreatorInput');
+  const notesInput = document.getElementById('bracketNotesInput');
 
   if (nameInput) {
-    nameInput.value = `${champTeam.shortName || 'CFB'} Natty Projection`;
+    nameInput.value = isEditingExisting ? activeExisting.name : `${champTeam.shortName || 'CFB'} Natty Projection`;
   }
   if (creatorInput) {
-    creatorInput.value = currentUser ? currentUser.displayName : (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');
+    creatorInput.value = isEditingExisting && activeExisting.creator ? activeExisting.creator : (currentUser ? currentUser.displayName : (localStorage.getItem('cfb_prophet_user_handle') || 'Coach'));
+  }
+  if (notesInput && isEditingExisting && activeExisting.notes) {
+    notesInput.value = activeExisting.notes;
+  }
+
+  const confirmBtn = document.getElementById('confirmSaveBracketBtn');
+  if (confirmBtn) {
+    if (isEditingExisting) {
+      confirmBtn.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> <span>Update Bracket Picks</span>';
+      confirmBtn.style.background = 'linear-gradient(135deg, #2563EB, #1D4ED8)';
+    } else {
+      confirmBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> <span>Submit & Save Picks</span>';
+      confirmBtn.style.background = '#10B981';
+    }
   }
 
   modal.classList.add('open');
@@ -9308,6 +9353,13 @@ function handleConfirmSaveBracket() {
     } catch(e) {}
   }
 
+  const allComm = getCommunityBrackets();
+  const activeExisting = state.activeSavedBracketId ? allComm.find(b => b.id === state.activeSavedBracketId) : null;
+  const wasEditing = activeExisting && 
+    activeExisting.id !== 'bracket_prophet_ai_baseline' && 
+    activeExisting.id !== 'bracket_usc_wins_out_curated' &&
+    activeExisting.id !== 'bracket_texas_natty_run_curated';
+
   const saved = saveCurrentProjectionAsBracket(name, creator, notes);
   if (isPublic) {
     saved.isPublic = true;
@@ -9317,7 +9369,7 @@ function handleConfirmSaveBracket() {
   state._openedFromVault = false;
   const modal = document.getElementById('saveBracketModal');
   if (modal) modal.classList.remove('open');
-  showCustomToast(`🎉 Bracket "${saved.name}" saved & published to Community Vault!`);
+  showCustomToast(`🎉 Bracket "${saved.name}" ${wasEditing ? 'updated' : 'saved'} & published to Community Vault!`);
   openBracketVaultModal();
   syncCommunityBracketsFromCloud();
 }
