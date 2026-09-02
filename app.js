@@ -8010,11 +8010,7 @@ async function handleSupabasePasswordAuth(e) {
       provider: 'demo',
       createdAt: new Date().toISOString()
     };
-    localStorage.setItem('cfb_prophet_auth_user_v4', JSON.stringify(demoUser));
-    localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(demoUser));
-    localStorage.setItem('cfb_prophet_user_handle', demoUser.displayName);
-    if (typeof window.updateAuthUI === 'function') window.updateAuthUI();
-    if (typeof window.renderSavedBracketsVault === 'function') window.renderSavedBracketsVault();
+    setCurrentUser(demoUser);
     showCustomToast('🎉 Welcome, Apple App Reviewer! Signed in.');
     closeAuthModal();
     return;
@@ -8032,11 +8028,7 @@ async function handleSupabasePasswordAuth(e) {
       provider: 'google',
       createdAt: '2026-08-28T14:00:00Z'
     };
-    localStorage.setItem('cfb_prophet_auth_user_v4', JSON.stringify(jakeUser));
-    localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(jakeUser));
-    localStorage.setItem('cfb_prophet_user_handle', jakeUser.displayName);
-    if (typeof window.updateAuthUI === 'function') window.updateAuthUI();
-    if (typeof window.renderSavedBracketsVault === 'function') window.renderSavedBracketsVault();
+    setCurrentUser(jakeUser);
     showCustomToast('🎉 Welcome back, Jake Johnson! Signed in.');
     closeAuthModal();
     return;
@@ -8054,11 +8046,7 @@ async function handleSupabasePasswordAuth(e) {
       provider: 'email',
       createdAt: '2026-08-28T14:00:00Z'
     };
-    localStorage.setItem('cfb_prophet_auth_user_v4', JSON.stringify(verizonUser));
-    localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(verizonUser));
-    localStorage.setItem('cfb_prophet_user_handle', verizonUser.displayName);
-    if (typeof window.updateAuthUI === 'function') window.updateAuthUI();
-    if (typeof window.renderSavedBracketsVault === 'function') window.renderSavedBracketsVault();
+    setCurrentUser(verizonUser);
     showCustomToast('🎉 Welcome back, Jake T Johnson! Signed in.');
     closeAuthModal();
     return;
@@ -8264,57 +8252,77 @@ function isBracketOwnedByUser(b, currentUser, isFromLocalSaved = false) {
   const bCreator = (b.creator || '').trim().toLowerCase();
   const bCreatorEmail = (b.creatorEmail || b.creator_email || '').trim().toLowerCase();
 
+  // If not logged in (guest)
   if (!currentUser) {
-    if (isFromLocalSaved) return (!bCreatorId || bCreatorId.startsWith('guest_'));
+    if (isFromLocalSaved) {
+      if (bCreatorEmail === 'jajo9147@gmail.com' || bCreatorEmail === 'jake.johnson1@verizon.com' || bCreatorEmail.includes('@')) return false;
+      if (bCreator === 'jake johnson' || bCreator === 'jake t johnson' || bCreator === 'hayden karr' || bCreator === 'logandplunkett' || bCreator === 'bill johnson') return false;
+      return (!bCreatorId || bCreatorId.startsWith('guest_'));
+    }
     return false;
   }
 
   const userId = (currentUser.id || '').trim();
   const userDisplayName = (currentUser.displayName || '').trim().toLowerCase();
-  const userHandle = (currentUser.handle || '').trim().toLowerCase();
   const userEmail = (currentUser.email || '').trim().toLowerCase();
 
-  // 1. Account A: jajo9147@gmail.com (Jake Johnson)
+  // ----------------------------------------------------
+  // CASE 1: Reviewer Demo (reviewer.demo@cfbprophet.app)
+  // STRICT ISOLATION: Reviewer Demo owns ONLY their own demo bracket!
+  // Can NEVER own, edit, or delete any Jake Johnson, Jake T Johnson, or community bracket!
+  // ----------------------------------------------------
+  const isReviewerDemo = userEmail === 'reviewer.demo@cfbprophet.app' || userId === 'reviewer_demo_user_2026' || userDisplayName.includes('reviewer');
+  if (isReviewerDemo) {
+    if (b.id === 'bracket_demo_reviewer_sample') return true;
+    if (bCreatorEmail === 'reviewer.demo@cfbprophet.app') return true;
+    if (bCreatorId === 'reviewer_demo_user_2026') return true;
+    return false; // Absolute hard wall: cannot own or edit anything else
+  }
+
+  // ----------------------------------------------------
+  // CASE 2: Account A: Jake Johnson (jajo9147@gmail.com)
+  // ----------------------------------------------------
   const isJajoAccount = userEmail === 'jajo9147@gmail.com' || (userDisplayName === 'jake johnson' && !userEmail.includes('verizon'));
   if (isJajoAccount) {
+    // Hard rejection of Verizon's brackets
+    if (bCreatorEmail === 'jake.johnson1@verizon.com' || bCreator === 'jake t johnson' || bCreator === 'big10 sucks' || bCreator === 'big 12 sucks' || b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_1787937853466_h2h0r3') {
+      return false;
+    }
     if (bCreatorEmail === 'jajo9147@gmail.com') return true;
+    if (bCreatorId === '116de3ad-fe71-4f75-8743-49162d223d08') return true;
+    if (b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_1787937962988_ekhyka' || b.id === 'bracket_1788031172051_pe9e3z') return true;
     if (bCreator === 'jake johnson' || bCreator === 'big jay' || bCreator === 'coach' || bCreator === 'coachi') {
-      if (bCreatorEmail !== 'jake.johnson1@verizon.com') return true;
-    }
-    if (b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_1787937962988_ekhyka' || b.id === 'bracket_1788031172051_pe9e3z') {
-      return true;
-    }
-    if (bCreatorId === '116de3ad-fe71-4f75-8743-49162d223d08' && bCreator !== 'jake t johnson' && bCreator !== 'big10 sucks') {
-      return true;
-    }
-    if (isFromLocalSaved && (!bCreatorId || bCreatorId.startsWith('guest_'))) {
-      return true;
+      if (!bCreatorEmail || bCreatorEmail === 'jajo9147@gmail.com') return true;
     }
     return false;
   }
 
-  // 2. Account B: jake.johnson1@verizon.com (Jake T Johnson)
+  // ----------------------------------------------------
+  // CASE 3: Account B: Jake T Johnson (jake.johnson1@verizon.com)
+  // ----------------------------------------------------
   const isVerizonAccount = userEmail === 'jake.johnson1@verizon.com' || userDisplayName === 'jake t johnson';
   if (isVerizonAccount) {
-    if (bCreatorEmail === 'jake.johnson1@verizon.com') return true;
-    if (bCreator === 'jake t johnson' || bCreator === 'big10 sucks') return true;
-    if (b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_1787937853466_h2h0r3') return true;
-    if (bCreatorId === '8f96664c-c8e9-4360-8071-503aac2e3155') return true;
-    if (isFromLocalSaved && (!bCreatorId || bCreatorId.startsWith('guest_'))) {
-      return true;
+    // Hard rejection of Jajo's brackets
+    if (bCreatorEmail === 'jajo9147@gmail.com' || bCreator === 'jake johnson' || b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_1787937962988_ekhyka' || b.id === 'bracket_1788031172051_pe9e3z') {
+      return false;
     }
+    if (bCreatorEmail === 'jake.johnson1@verizon.com') return true;
+    if (bCreatorId === '8f96664c-c8e9-4360-8071-503aac2e3155') return true;
+    if (b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_1787937853466_h2h0r3') return true;
+    if (bCreator === 'jake t johnson' || bCreator === 'big10 sucks' || bCreator === 'big 12 sucks') return true;
     return false;
   }
 
-  // 3. General standard ownership for all other users (e.g. Logan Plunkett, Hayden Karr, Bill Johnson)
+  // ----------------------------------------------------
+  // CASE 4: Any other signed-in user
+  // ----------------------------------------------------
+  if (bCreatorEmail === 'jajo9147@gmail.com' || bCreatorEmail === 'jake.johnson1@verizon.com') return false;
+  if (b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_1787937962988_ekhyka' || b.id === 'bracket_1788031172051_pe9e3z' || b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_1787937853466_h2h0r3') {
+    return false;
+  }
   if (userId && bCreatorId && (bCreatorId === userId)) return true;
   if (userEmail && bCreatorEmail && (bCreatorEmail === userEmail)) return true;
   if (userDisplayName && bCreator && (bCreator === userDisplayName)) return true;
-  if (userHandle && bCreator && (bCreator === userHandle)) return true;
-
-  if (isFromLocalSaved && (!bCreatorId || bCreatorId.startsWith('guest_'))) {
-    return true;
-  }
 
   return false;
 }
@@ -8323,81 +8331,110 @@ window.isBracketOwnedByUser = isBracketOwnedByUser;
 function getSavedBrackets() {
   const currentUser = getCurrentUser();
   const deletedIds = getDeletedBracketIds();
-
-  let localSavedBrackets = [];
-  const storageKeys = [
-    BRACKET_STORAGE_KEY,
-    'cfb_prophet_saved_brackets_v5',
-    'cfb_prophet_saved_brackets_v4',
-    'cfb_prophet_saved_brackets_v3'
-  ];
-
-  storageKeys.forEach(k => {
-    try {
-      const raw = localStorage.getItem(k);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) {
-          localSavedBrackets.push(...parsed);
-        }
-      }
-    } catch (e) {}
-  });
-
-  // Also query community brackets synced from cloud
-  let communityBrackets = [];
-  try {
-    const comm = getLocalCommunityBrackets();
-    if (Array.isArray(comm)) {
-      communityBrackets = comm;
-    }
-  } catch (e) {}
-
   const userBracketsMap = new Map();
 
-  // If this is specifically Jake Johnson (jajo9147@gmail.com), ensure his Texas Natty Run bracket is included
-  const isJajo = currentUser && (
-    (currentUser.email || '').toLowerCase() === 'jajo9147@gmail.com' ||
-    ((currentUser.displayName || '').toLowerCase() === 'jake johnson' && !(currentUser.email || '').includes('verizon'))
-  );
+  if (!currentUser) {
+    // Guest: only load local unassigned brackets
+    let localSavedBrackets = [];
+    try {
+      const raw = localStorage.getItem(BRACKET_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) localSavedBrackets = parsed;
+      }
+    } catch (e) {}
+    localSavedBrackets.forEach(b => {
+      if (isBracketOwnedByUser(b, null, true)) {
+        userBracketsMap.set(b.id, b);
+      }
+    });
+    return Array.from(userBracketsMap.values());
+  }
+
+  const userEmail = (currentUser.email || '').toLowerCase();
+  const userId = currentUser.id || '';
+
+  // 1. Reviewer Demo: dedicated demo bracket ONLY
+  if (userEmail === 'reviewer.demo@cfbprophet.app' || userId === 'reviewer_demo_user_2026') {
+    const demoBracket = {
+      id: 'bracket_demo_reviewer_sample',
+      name: 'Reviewer 2026 CFP Simulation',
+      creator: 'Apple App Reviewer',
+      creatorId: 'reviewer_demo_user_2026',
+      creatorEmail: 'reviewer.demo@cfbprophet.app',
+      notes: 'Demo bracket for App Review validation',
+      createdAt: new Date().toISOString(),
+      mode: 'custom',
+      isPublic: true,
+      champion: {
+        id: 'georgia',
+        name: 'Georgia Bulldogs',
+        shortName: 'Georgia',
+        logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',
+        score: 34,
+        oppScore: 24
+      },
+      runnerUp: {
+        id: 'ohiostate',
+        name: 'Ohio State Buckeyes',
+        shortName: 'Ohio State'
+      },
+      seeds: [
+        { id: 'georgia', name: 'Georgia', seed: 1, wins: 13, losses: 0, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png' },
+        { id: 'ohiostate', name: 'Ohio State', seed: 2, wins: 12, losses: 1, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png' },
+        { id: 'miami', name: 'Miami', seed: 3, wins: 12, losses: 1, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png' },
+        { id: 'texastech', name: 'Texas Tech', seed: 4, wins: 11, losses: 2, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png' },
+        { id: 'michigan', name: 'Michigan', seed: 5, wins: 12, losses: 1, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/130.png' },
+        { id: 'notredame', name: 'Notre Dame', seed: 6, wins: 11, losses: 1, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png' },
+        { id: 'texas', name: 'Texas', seed: 7, wins: 10, losses: 2, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png' },
+        { id: 'oregon', name: 'Oregon', seed: 8, wins: 10, losses: 2, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png' },
+        { id: 'olemiss', name: 'Ole Miss', seed: 9, wins: 10, losses: 2, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/145.png' },
+        { id: 'lsu', name: 'LSU', seed: 10, wins: 10, losses: 3, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/99.png' },
+        { id: 'alabama', name: 'Alabama', seed: 11, wins: 9, losses: 3, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/333.png' },
+        { id: 'clemson', name: 'Clemson', seed: 12, wins: 10, losses: 3, logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/228.png' }
+      ]
+    };
+    if (!deletedIds.has(demoBracket.id)) {
+      userBracketsMap.set(demoBracket.id, demoBracket);
+    }
+    return Array.from(userBracketsMap.values());
+  }
+
+  // 2. Jake Johnson (jajo9147@gmail.com): Ensure his Texas Natty Run bracket is present
+  const isJajo = (userEmail === 'jajo9147@gmail.com' || ((currentUser.displayName || '').toLowerCase() === 'jake johnson' && !userEmail.includes('verizon')));
   if (isJajo) {
     const texasBracket = createTexasWinsOutBracket();
     if (!deletedIds.has(texasBracket.id)) {
-      texasBracket.creatorId = currentUser.id || '116de3ad-fe71-4f75-8743-49162d223d08';
+      texasBracket.creatorId = '116de3ad-fe71-4f75-8743-49162d223d08';
       texasBracket.creator = 'Jake Johnson';
       texasBracket.creatorEmail = 'jajo9147@gmail.com';
       userBracketsMap.set(texasBracket.id, texasBracket);
     }
   }
 
-  // 1. Process local saved brackets (with local guest claiming enabled)
-  localSavedBrackets.forEach(b => {
-    if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_usc_wins_out_curated' || deletedIds.has(b.id)) return;
-    if (isBracketOwnedByUser(b, currentUser, true)) {
-      if (currentUser && (!b.creatorId || b.creatorId.startsWith('guest_'))) {
-        b.creatorId = currentUser.id;
-        if (currentUser.email) b.creatorEmail = currentUser.email;
-      }
-      userBracketsMap.set(b.id, b);
-    }
-  });
+  // 3. Scan community brackets and local brackets ONLY for matching ownership
+  let allSources = [];
+  try {
+    const comm = getLocalCommunityBrackets();
+    if (Array.isArray(comm)) allSources.push(...comm);
+  } catch (e) {}
 
-  // 2. Process cloud community brackets (only true owner match, never claiming someone else)
-  communityBrackets.forEach(b => {
+  try {
+    const raw = localStorage.getItem(BRACKET_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) allSources.push(...parsed);
+    }
+  } catch (e) {}
+
+  allSources.forEach(b => {
     if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_usc_wins_out_curated' || deletedIds.has(b.id)) return;
     if (isBracketOwnedByUser(b, currentUser, false)) {
       userBracketsMap.set(b.id, b);
     }
   });
 
-  const finalBrackets = Array.from(userBracketsMap.values());
-  try {
-    if (currentUser) {
-      localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(finalBrackets));
-    }
-  } catch(e) {}
-
-  return finalBrackets;
+  return Array.from(userBracketsMap.values());
 }
 
 
