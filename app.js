@@ -8758,14 +8758,34 @@ function getCuratedExpertBrackets() {
 }
 
 function getLocalCommunityBrackets() {
+  const deletedIds = getDeletedBracketIds();
+  const map = new Map();
+
+  // 1. Static guaranteed feed (always ready synchronously, zero network latency)
+  if (typeof window !== 'undefined' && Array.isArray(window._CFB_STATIC_COMMUNITY_BRACKETS)) {
+    window._CFB_STATIC_COMMUNITY_BRACKETS.forEach(b => {
+      if (b && b.id && !deletedIds.has(b.id)) {
+        map.set(b.id, b);
+      }
+    });
+  }
+
+  // 2. LocalStorage cache & real-time updates
   try {
     const raw = localStorage.getItem(COMMUNITY_BRACKETS_KEY);
     if (raw) {
-      const deletedIds = getDeletedBracketIds();
-      return (JSON.parse(raw) || []).filter(b => b && b.id && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_texas_natty_run_curated' && b.id !== 'bracket_usc_wins_out_curated' && !deletedIds.has(b.id));
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        parsed.forEach(b => {
+          if (b && b.id && !deletedIds.has(b.id)) {
+            map.set(b.id, b);
+          }
+        });
+      }
     }
   } catch (e) {}
-  return [];
+
+  return Array.from(map.values()).filter(b => b && b.id && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_usc_wins_out_curated' && !deletedIds.has(b.id));
 }
 
 function prepareCompactBracketPayload(b) {
