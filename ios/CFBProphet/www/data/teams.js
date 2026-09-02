@@ -8926,9 +8926,9 @@ var TEAMS_DATABASE = {
         "rivalryName": "SEASON OPENER",
         "vegasSpread": -31.5,
         "overUnder": 57.5,
-        "baseWinProb": 98,
-        "projScoreUt": 45,
-        "projScoreOpp": 13,
+        "baseWinProb": 96,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Will Hammond early rhythm and deep passing connection with Micah Hudson.",
           "keyMatchup": "Texas Tech offensive tempo vs ACU secondary.",
