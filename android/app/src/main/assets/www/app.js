@@ -8231,7 +8231,22 @@ window.saveCurrentProjectionAsBracket = saveCurrentProjectionAsBracket;
 function getDeletedBracketIds() {
   try {
     const raw = localStorage.getItem(DELETED_BRACKETS_KEY);
-    if (raw) return new Set(JSON.parse(raw) || []);
+    if (raw) {
+      const set = new Set(JSON.parse(raw) || []);
+      // Protect Jake Johnson personal / Coach restored brackets from any accidental test tombstones
+      const protectedIds = [
+        'bracket_texas_natty_run_curated',
+        'bracket_1788379888693_dp2edk', // Long Horns Nation
+        'bracket_1787937962988_ekhyka', // HOOK'EM
+        'bracket_1788031172051_pe9e3z', // Georgia Natty Projection
+        'bracket_1788107533721_xivsla', // Ohio State Natty Projection (Coach)
+        'bracket_1788032610598_nbefcu', // Ohio State Natty Projection (Coachi)
+        'bracket_1787956769853_9u53gs', // Georgia Natty Projection (Coach)
+        'bracket_1787858780235_md4xw1'  // Alabama Kelon out here (Big Jay)
+      ];
+      protectedIds.forEach(id => set.delete(id));
+      return set;
+    }
   } catch (e) {}
   return new Set();
 }
