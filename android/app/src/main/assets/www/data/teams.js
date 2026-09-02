@@ -12525,7 +12525,7 @@ var TEAMS_DATABASE = {
         "date": "Sep 5, 2026",
         "opponent": "Northern Arizona Lumberjacks",
         "oppAbbr": "NAU",
-        "oppRank": "RV",
+        "oppRank": "FCS",
         "oppBadge": "NAU",
         "oppColor": "#003366",
         "oppSecondary": "#FFC627",
@@ -12539,18 +12539,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": false,
-        "vegasSpread": 14.5,
-        "overUnder": 52.5,
-        "baseWinProb": 8,
-        "projScoreUt": 17,
-        "projScoreOpp": 34,
+        "vegasSpread": -28.5,
+        "overUnder": 54.5,
+        "baseWinProb": 98,
+        "projScoreUt": 42,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Season opener in Tempe against in-state FCS Lumberjacks."
         },
-        "oppId": "arizona",
-        "is_tracked": true
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "asu-w2",
