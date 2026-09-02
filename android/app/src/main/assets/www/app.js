@@ -8158,11 +8158,63 @@ function addDeletedBracketId(bracketId) {
   } catch (e) {}
 }
 
+function isBracketOwnedByUser(b, currentUser, isFromLocalSaved = false) {
+  if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_usc_wins_out_curated') return false;
+
+  const bCreatorId = (b.creatorId || b.creator_id || b.user_id || b.userId || '').trim();
+  const bCreator = (b.creator || '').trim().toLowerCase();
+  const bCreatorEmail = (b.creatorEmail || b.creator_email || '').trim().toLowerCase();
+
+  if (!currentUser) {
+    if (isFromLocalSaved) return (!bCreatorId || bCreatorId.startsWith('guest_'));
+    return false;
+  }
+
+  const userId = (currentUser.id || '').trim();
+  const userDisplayName = (currentUser.displayName || '').trim().toLowerCase();
+  const userHandle = (currentUser.handle || '').trim().toLowerCase();
+  const userEmail = (currentUser.email || '').trim().toLowerCase();
+
+  // 1. Direct User ID / Creator ID match
+  if (userId && bCreatorId && (bCreatorId === userId)) return true;
+
+  // 2. Direct Email match
+  if (userEmail && bCreatorEmail && (bCreatorEmail === userEmail)) return true;
+
+  // 3. Direct Display Name or Handle match
+  if (userDisplayName && bCreator && (bCreator === userDisplayName)) return true;
+  if (userHandle && bCreator && (bCreator === userHandle)) return true;
+
+  // 4. Special account binding for Jake Johnson
+  const isJakeAccount = userEmail.includes('jajo9147') || 
+                        userDisplayName.includes('jake johnson') || 
+                        userDisplayName.includes('jake t johnson') || 
+                        userHandle.includes('jake') ||
+                        userId === '8f96664c-c8e9-4360-8071-503aac2e3155' ||
+                        userId === '116de3ad-fe71-4f75-8743-49162d223d08' ||
+                        userId === 'jake_johnson_personal';
+
+  if (isJakeAccount) {
+    if (bCreator === 'jake johnson' || bCreator === 'jake t johnson' || bCreator === 'big10 sucks') return true;
+    if (bCreatorId === '8f96664c-c8e9-4360-8071-503aac2e3155' || bCreatorId === '116de3ad-fe71-4f75-8743-49162d223d08') return true;
+    if (b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_texas_natty_run_curated') return true;
+    if (bCreatorEmail === 'jajo9147@gmail.com') return true;
+  }
+
+  // 5. Unclaimed local guest brackets in current session (ONLY if in local storage)
+  if (isFromLocalSaved && (!bCreatorId || bCreatorId.startsWith('guest_'))) {
+    return true;
+  }
+
+  return false;
+}
+window.isBracketOwnedByUser = isBracketOwnedByUser;
+
 function getSavedBrackets() {
   const currentUser = getCurrentUser();
   const deletedIds = getDeletedBracketIds();
 
-  let allLocalBrackets = [];
+  let localSavedBrackets = [];
   const storageKeys = [
     BRACKET_STORAGE_KEY,
     'cfb_prophet_saved_brackets_v5',
@@ -8176,66 +8228,59 @@ function getSavedBrackets() {
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) {
-          allLocalBrackets.push(...parsed);
+          localSavedBrackets.push(...parsed);
         }
       }
     } catch (e) {}
   });
 
+  // Also query community brackets synced from cloud
+  let communityBrackets = [];
+  try {
+    const comm = getLocalCommunityBrackets();
+    if (Array.isArray(comm)) {
+      communityBrackets = comm;
+    }
+  } catch (e) {}
+
   const userBracketsMap = new Map();
 
-  if (currentUser) {
-    const userDisplayName = (currentUser?.displayName || '').trim().toLowerCase();
-    const userEmail = (currentUser?.email || '').trim().toLowerCase();
-    const userId = currentUser.id || 'jake_johnson_personal';
-
-    // 1. If this is Jake Johnson's account, associate Jake's curated submissions
-    const isJakeAccount = userEmail.includes('jajo9147') || userDisplayName.includes('jake johnson') || (currentUser.handle && currentUser.handle.toLowerCase().includes('jake'));
-
-    if (isJakeAccount) {
-      const texasBracket = createTexasWinsOutBracket();
-      if (!deletedIds.has(texasBracket.id)) {
-        texasBracket.creatorId = userId;
-        texasBracket.creator = currentUser.displayName || 'Jake Johnson';
-        texasBracket.creatorEmail = currentUser.email || 'jajo9147@gmail.com';
-        userBracketsMap.set(texasBracket.id, texasBracket);
-      }
-
-      const uscBracket = createUscWinsOutBracket();
-      if (!deletedIds.has(uscBracket.id)) {
-        uscBracket.creatorId = userId;
-        uscBracket.creator = currentUser.displayName || 'Jake Johnson';
-        uscBracket.creatorEmail = currentUser.email || 'jajo9147@gmail.com';
-        userBracketsMap.set(uscBracket.id, uscBracket);
-      }
+  // If this is Jake Johnson's account, ensure his Texas Natty Run bracket is included
+  const isJake = currentUser && (
+    (currentUser.email || '').toLowerCase().includes('jajo9147') || 
+    (currentUser.displayName || '').toLowerCase().includes('jake johnson') || 
+    (currentUser.displayName || '').toLowerCase().includes('jake t johnson') ||
+    ((currentUser.handle || '').toLowerCase().includes('jake'))
+  );
+  if (isJake) {
+    const texasBracket = createTexasWinsOutBracket();
+    if (!deletedIds.has(texasBracket.id)) {
+      texasBracket.creatorId = currentUser.id || 'jake_johnson_personal';
+      texasBracket.creator = 'Jake Johnson';
+      texasBracket.creatorEmail = currentUser.email || 'jajo9147@gmail.com';
+      userBracketsMap.set(texasBracket.id, texasBracket);
     }
-
-    // 2. Filter brackets that belong to this logged-in account or unclaimed guest picks
-    allLocalBrackets.forEach(b => {
-      if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || deletedIds.has(b.id)) return;
-      
-      const isOwner = (b.creatorId && b.creatorId === userId) ||
-                      (b.creatorEmail && userEmail && b.creatorEmail.toLowerCase() === userEmail) ||
-                      (b.creatorId && b.creatorId.startsWith('guest_')) ||
-                      (!b.creatorId);
-
-      if (isOwner) {
-        b.creatorId = userId;
-        if (!b.creator || b.creator === 'Coach') b.creator = currentUser.displayName || 'Coach';
-        if (currentUser.email) b.creatorEmail = currentUser.email;
-        userBracketsMap.set(b.id, b);
-      }
-    });
-  } else {
-    // 3. GUEST MODE: When not signed in, only show picks created in guest session
-    allLocalBrackets.forEach(b => {
-      if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_usc_wins_out_curated' || deletedIds.has(b.id)) return;
-
-      if (!b.creatorId || b.creatorId.startsWith('guest_')) {
-        userBracketsMap.set(b.id, b);
-      }
-    });
   }
+
+  // 1. Process local saved brackets (with local guest claiming enabled)
+  localSavedBrackets.forEach(b => {
+    if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_usc_wins_out_curated' || deletedIds.has(b.id)) return;
+    if (isBracketOwnedByUser(b, currentUser, true)) {
+      if (currentUser && (!b.creatorId || b.creatorId.startsWith('guest_'))) {
+        b.creatorId = currentUser.id;
+        if (currentUser.email) b.creatorEmail = currentUser.email;
+      }
+      userBracketsMap.set(b.id, b);
+    }
+  });
+
+  // 2. Process cloud community brackets (only true owner match, never claiming someone else)
+  communityBrackets.forEach(b => {
+    if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_usc_wins_out_curated' || deletedIds.has(b.id)) return;
+    if (isBracketOwnedByUser(b, currentUser, false)) {
+      userBracketsMap.set(b.id, b);
+    }
+  });
 
   const finalBrackets = Array.from(userBracketsMap.values());
   try {
@@ -8521,7 +8566,7 @@ function createBillJohnsonBracket() {
 }
 
 function getCuratedExpertBrackets() {
-  return [createProphetAiBenchmarkBracket(), createTexasWinsOutBracket(), createUscWinsOutBracket(), createBillJohnsonBracket()];
+  return [createProphetAiBenchmarkBracket(), createTexasWinsOutBracket(), createBillJohnsonBracket()];
 }
 
 function getLocalCommunityBrackets() {
@@ -9061,12 +9106,8 @@ function renderSavedBracketsVault() {
     const creatorLower = (b.creator || '').trim().toLowerCase();
     const creatorEmail = (b.creatorEmail || '').trim().toLowerCase();
 
-    // Strict Ownership: ONLY active when user is signed in AND is the genuine creator
-    const isOwner = !isAiBenchmark && !!currentUser && (
-      (b.creatorId && b.creatorId === currentUser.id) ||
-      (creatorEmail && userEmail && creatorEmail === userEmail) ||
-      (creatorLower && (creatorLower === userDisplayName || creatorLower === userHandle))
-    );
+    // Strict Ownership: verified via unified isBracketOwnedByUser helper
+    const isOwner = !isAiBenchmark && !!currentUser && isBracketOwnedByUser(b, currentUser);
     const creatorLabel = isOwner ? 'You' : (b.creator || 'Prophet');
 
     const acc = isTeamFilter ? calculateTeamScoreForUser(b, state.selectedVaultTeam) : calculateWeeklyScoreForUser(b, effectiveWeek);
@@ -9135,11 +9176,7 @@ function openSubmissionDetailModal(bracketId, e) {
   const creatorLower = (b.creator || '').trim().toLowerCase();
   const creatorEmail = (b.creatorEmail || '').trim().toLowerCase();
 
-  const isOwner = !isAiBenchmark && !!currentUser && (
-    (b.creatorId && b.creatorId === currentUser.id) ||
-    (creatorEmail && userEmail && creatorEmail === userEmail) ||
-    (creatorLower && (creatorLower === userDisplayName || creatorLower === userHandle))
-  );
+  const isOwner = !isAiBenchmark && !!currentUser && isBracketOwnedByUser(b, currentUser);
 
   const isTeamFilter = state.selectedVaultTeam && state.selectedVaultTeam !== 'all';
   const focusTeam = isTeamFilter ? TEAMS_DATABASE[state.selectedVaultTeam] : null;
