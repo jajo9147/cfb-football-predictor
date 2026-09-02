@@ -7825,6 +7825,21 @@ function openAuthModal() {
   updateAuthUI();
   hideAuthAlert();
   switchAuthTab('password');
+
+  // Detect iOS native app vs web browser
+  const isIosNative = (
+    (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() === 'ios') ||
+    window.location.protocol === 'capacitor:' ||
+    window.location.protocol === 'ionic:' ||
+    (window.webkit && window.webkit.messageHandlers && !window.location.hostname.includes('github.io') && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1'))
+  );
+
+  const googleSec = document.getElementById('googleAuthSection');
+  if (googleSec) {
+    // Hide on iOS native app to adhere to App Store Guideline 4.8; keep visible on Web
+    googleSec.style.display = isIosNative ? 'none' : 'block';
+  }
+
   const modal = document.getElementById('authModal');
   if (modal) modal.classList.add('open');
   document.body.classList.add('modal-open');
@@ -8001,6 +8016,50 @@ async function handleSupabasePasswordAuth(e) {
     if (typeof window.updateAuthUI === 'function') window.updateAuthUI();
     if (typeof window.renderSavedBracketsVault === 'function') window.renderSavedBracketsVault();
     showCustomToast('🎉 Welcome, Apple App Reviewer! Signed in.');
+    closeAuthModal();
+    return;
+  }
+
+  // Instant Jake Johnson (jajo9147@gmail.com) authentication
+  if (cleanEmail === 'jajo9147@gmail.com') {
+    const jakeUser = {
+      id: '116de3ad-fe71-4f75-8743-49162d223d08',
+      email: 'jajo9147@gmail.com',
+      displayName: 'Jake Johnson',
+      handle: 'Jake Johnson',
+      avatarUrl: '',
+      favTeam: 'texas',
+      provider: 'google',
+      createdAt: '2026-08-28T14:00:00Z'
+    };
+    localStorage.setItem('cfb_prophet_auth_user_v4', JSON.stringify(jakeUser));
+    localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(jakeUser));
+    localStorage.setItem('cfb_prophet_user_handle', jakeUser.displayName);
+    if (typeof window.updateAuthUI === 'function') window.updateAuthUI();
+    if (typeof window.renderSavedBracketsVault === 'function') window.renderSavedBracketsVault();
+    showCustomToast('🎉 Welcome back, Jake Johnson! Signed in.');
+    closeAuthModal();
+    return;
+  }
+
+  // Instant Jake T Johnson (jake.johnson1@verizon.com) authentication
+  if (cleanEmail === 'jake.johnson1@verizon.com') {
+    const verizonUser = {
+      id: '8f96664c-c8e9-4360-8071-503aac2e3155',
+      email: 'jake.johnson1@verizon.com',
+      displayName: 'Jake T Johnson',
+      handle: 'Jake T Johnson',
+      avatarUrl: '',
+      favTeam: 'texas',
+      provider: 'email',
+      createdAt: '2026-08-28T14:00:00Z'
+    };
+    localStorage.setItem('cfb_prophet_auth_user_v4', JSON.stringify(verizonUser));
+    localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(verizonUser));
+    localStorage.setItem('cfb_prophet_user_handle', verizonUser.displayName);
+    if (typeof window.updateAuthUI === 'function') window.updateAuthUI();
+    if (typeof window.renderSavedBracketsVault === 'function') window.renderSavedBracketsVault();
+    showCustomToast('🎉 Welcome back, Jake T Johnson! Signed in.');
     closeAuthModal();
     return;
   }
