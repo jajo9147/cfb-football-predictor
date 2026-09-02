@@ -8175,33 +8175,44 @@ function isBracketOwnedByUser(b, currentUser, isFromLocalSaved = false) {
   const userHandle = (currentUser.handle || '').trim().toLowerCase();
   const userEmail = (currentUser.email || '').trim().toLowerCase();
 
-  // 1. Direct User ID / Creator ID match
+  // 1. Account A: jajo9147@gmail.com (Jake Johnson)
+  const isJajoAccount = userEmail === 'jajo9147@gmail.com' || (userDisplayName === 'jake johnson' && !userEmail.includes('verizon'));
+  if (isJajoAccount) {
+    if (bCreatorEmail === 'jajo9147@gmail.com') return true;
+    if (bCreator === 'jake johnson' || bCreator === 'big jay' || bCreator === 'coach' || bCreator === 'coachi') {
+      if (bCreatorEmail !== 'jake.johnson1@verizon.com') return true;
+    }
+    if (b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_1787937962988_ekhyka' || b.id === 'bracket_1788031172051_pe9e3z') {
+      return true;
+    }
+    if (bCreatorId === '116de3ad-fe71-4f75-8743-49162d223d08' && bCreator !== 'jake t johnson' && bCreator !== 'big10 sucks') {
+      return true;
+    }
+    if (isFromLocalSaved && (!bCreatorId || bCreatorId.startsWith('guest_'))) {
+      return true;
+    }
+    return false;
+  }
+
+  // 2. Account B: jake.johnson1@verizon.com (Jake T Johnson)
+  const isVerizonAccount = userEmail === 'jake.johnson1@verizon.com' || userDisplayName === 'jake t johnson';
+  if (isVerizonAccount) {
+    if (bCreatorEmail === 'jake.johnson1@verizon.com') return true;
+    if (bCreator === 'jake t johnson' || bCreator === 'big10 sucks') return true;
+    if (b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_1787937853466_h2h0r3') return true;
+    if (bCreatorId === '8f96664c-c8e9-4360-8071-503aac2e3155') return true;
+    if (isFromLocalSaved && (!bCreatorId || bCreatorId.startsWith('guest_'))) {
+      return true;
+    }
+    return false;
+  }
+
+  // 3. General standard ownership for all other users (e.g. Logan Plunkett, Hayden Karr, Bill Johnson)
   if (userId && bCreatorId && (bCreatorId === userId)) return true;
-
-  // 2. Direct Email match
   if (userEmail && bCreatorEmail && (bCreatorEmail === userEmail)) return true;
-
-  // 3. Direct Display Name or Handle match
   if (userDisplayName && bCreator && (bCreator === userDisplayName)) return true;
   if (userHandle && bCreator && (bCreator === userHandle)) return true;
 
-  // 4. Special account binding for Jake Johnson
-  const isJakeAccount = userEmail.includes('jajo9147') || 
-                        userDisplayName.includes('jake johnson') || 
-                        userDisplayName.includes('jake t johnson') || 
-                        userHandle.includes('jake') ||
-                        userId === '8f96664c-c8e9-4360-8071-503aac2e3155' ||
-                        userId === '116de3ad-fe71-4f75-8743-49162d223d08' ||
-                        userId === 'jake_johnson_personal';
-
-  if (isJakeAccount) {
-    if (bCreator === 'jake johnson' || bCreator === 'jake t johnson' || bCreator === 'big10 sucks') return true;
-    if (bCreatorId === '8f96664c-c8e9-4360-8071-503aac2e3155' || bCreatorId === '116de3ad-fe71-4f75-8743-49162d223d08') return true;
-    if (b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_texas_natty_run_curated') return true;
-    if (bCreatorEmail === 'jajo9147@gmail.com') return true;
-  }
-
-  // 5. Unclaimed local guest brackets in current session (ONLY if in local storage)
   if (isFromLocalSaved && (!bCreatorId || bCreatorId.startsWith('guest_'))) {
     return true;
   }
@@ -8245,19 +8256,17 @@ function getSavedBrackets() {
 
   const userBracketsMap = new Map();
 
-  // If this is Jake Johnson's account, ensure his Texas Natty Run bracket is included
-  const isJake = currentUser && (
-    (currentUser.email || '').toLowerCase().includes('jajo9147') || 
-    (currentUser.displayName || '').toLowerCase().includes('jake johnson') || 
-    (currentUser.displayName || '').toLowerCase().includes('jake t johnson') ||
-    ((currentUser.handle || '').toLowerCase().includes('jake'))
+  // If this is specifically Jake Johnson (jajo9147@gmail.com), ensure his Texas Natty Run bracket is included
+  const isJajo = currentUser && (
+    (currentUser.email || '').toLowerCase() === 'jajo9147@gmail.com' ||
+    ((currentUser.displayName || '').toLowerCase() === 'jake johnson' && !(currentUser.email || '').includes('verizon'))
   );
-  if (isJake) {
+  if (isJajo) {
     const texasBracket = createTexasWinsOutBracket();
     if (!deletedIds.has(texasBracket.id)) {
-      texasBracket.creatorId = currentUser.id || 'jake_johnson_personal';
+      texasBracket.creatorId = currentUser.id || '116de3ad-fe71-4f75-8743-49162d223d08';
       texasBracket.creator = 'Jake Johnson';
-      texasBracket.creatorEmail = currentUser.email || 'jajo9147@gmail.com';
+      texasBracket.creatorEmail = 'jajo9147@gmail.com';
       userBracketsMap.set(texasBracket.id, texasBracket);
     }
   }
@@ -8291,6 +8300,8 @@ function getSavedBrackets() {
 
   return finalBrackets;
 }
+
+
 
 
 function createProphetAiBenchmarkBracket() {

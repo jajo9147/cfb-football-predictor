@@ -861,8 +861,8 @@
     },
     {
         "id": "bracket_1788283017975_otti8m",
-        "user_id": "8f96664c-c8e9-4360-8071-503aac2e3155",
-        "creator_id": "8f96664c-c8e9-4360-8071-503aac2e3155",
+        "user_id": "116de3ad-fe71-4f75-8743-49162d223d08",
+        "creator_id": "116de3ad-fe71-4f75-8743-49162d223d08",
         "name": "LSU",
         "creator": "Big10 Sucks",
         "notes": "Custom 2026 CFP Simulation",
@@ -1329,6 +1329,543 @@
         "mode": "baseline",
         "is_public": true,
         "created_at": "2026-08-30T20:35:29.05+00:00"
+    },
+    {
+        "id": "bracket_1788031172051_pe9e3z",
+        "user_id": "116de3ad-fe71-4f75-8743-49162d223d08",
+        "creator_id": "116de3ad-fe71-4f75-8743-49162d223d08",
+        "name": "Georgia Natty Projection",
+        "creator": "Jake Johnson",
+        "notes": "Custom 2026 CFP Simulation",
+        "champion": {
+            "id": "georgia",
+            "name": "Georgia Bulldogs",
+            "score": 28,
+            "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png",
+            "oppScore": 31,
+            "shortName": "Georgia"
+        },
+        "runner_up": {
+            "id": "oregon",
+            "name": "Oregon Ducks",
+            "shortName": "Oregon"
+        },
+        "seeds": [
+            {
+                "id": "oregon",
+                "name": "Oregon",
+                "seed": 1,
+                "wins": 13,
+                "losses": 0,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png"
+            },
+            {
+                "id": "georgia",
+                "name": "Georgia",
+                "seed": 2,
+                "wins": 12,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png"
+            },
+            {
+                "id": "miami",
+                "name": "Miami",
+                "seed": 3,
+                "wins": 12,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png"
+            },
+            {
+                "id": "texastech",
+                "name": "Texas Tech",
+                "seed": 4,
+                "wins": 10,
+                "losses": 3,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png"
+            },
+            {
+                "id": "notredame",
+                "name": "Notre Dame",
+                "seed": 5,
+                "wins": 11,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png"
+            },
+            {
+                "id": "indiana",
+                "name": "Indiana",
+                "seed": 6,
+                "wins": 11,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png"
+            },
+            {
+                "id": "texas",
+                "name": "Texas",
+                "seed": 7,
+                "wins": 10,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png"
+            },
+            {
+                "id": "olemiss",
+                "name": "Ole Miss",
+                "seed": 8,
+                "wins": 10,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png"
+            },
+            {
+                "id": "lsu",
+                "name": "LSU",
+                "seed": 9,
+                "wins": 10,
+                "losses": 3,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png"
+            },
+            {
+                "id": "alabama",
+                "name": "Alabama",
+                "seed": 10,
+                "wins": 10,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png"
+            },
+            {
+                "id": "boisestate",
+                "name": "Boise State",
+                "seed": 11,
+                "wins": 12,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/68.png"
+            }
+        ],
+        "playoff_summary": {
+            "fr": [
+                {
+                    "winner": "Notre Dame"
+                },
+                {
+                    "winner": "Indiana"
+                },
+                {
+                    "winner": "Texas"
+                },
+                {
+                    "winner": "Ole Miss"
+                }
+            ],
+            "qf": [
+                {
+                    "winner": "Oregon"
+                },
+                {
+                    "winner": "Georgia"
+                },
+                {
+                    "winner": "Miami"
+                },
+                {
+                    "winner": "Notre Dame"
+                }
+            ],
+            "sf": [
+                {
+                    "winner": "Oregon"
+                },
+                {
+                    "winner": "Georgia"
+                }
+            ]
+        },
+        "sim_state": {
+            "teamId": "ohiostate",
+            "ccgPicks": {},
+            "userPicks": {
+                "osu-w1": "L"
+            },
+            "gameSliders": {},
+            "teamSliders": {
+                "ohiostate": {
+                    "qbRating": -35,
+                    "crowdNoise": 0,
+                    "defenseHavoc": 0,
+                    "groundAttack": 0,
+                    "turnoverLuck": 0
+                }
+            },
+            "manualScores": {
+                "osu-w1": {
+                    "oppScore": 56,
+                    "teamScore": 39
+                }
+            },
+            "playoffPicks": {}
+        },
+        "mode": "baseline",
+        "is_public": true,
+        "created_at": "2026-08-29T19:19:32.051+00:00"
+    },
+    {
+        "id": "bracket_1787937962988_ekhyka",
+        "user_id": "116de3ad-fe71-4f75-8743-49162d223d08",
+        "creator_id": "116de3ad-fe71-4f75-8743-49162d223d08",
+        "name": "HOOK'EM",
+        "creator": "Jake Johnson",
+        "notes": "Custom 2026 CFP Simulation",
+        "champion": {
+            "id": "texas",
+            "name": "Texas Longhorns",
+            "score": 29,
+            "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png",
+            "oppScore": 27,
+            "shortName": "Texas"
+        },
+        "runner_up": {
+            "id": "ohiostate",
+            "name": "Ohio State Buckeyes",
+            "shortName": "Ohio State"
+        },
+        "seeds": [
+            {
+                "id": "texas",
+                "name": "Texas",
+                "seed": 1,
+                "wins": 12,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png"
+            },
+            {
+                "id": "ohiostate",
+                "name": "Ohio State",
+                "seed": 2,
+                "wins": 12,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png"
+            },
+            {
+                "id": "miami",
+                "name": "Miami",
+                "seed": 3,
+                "wins": 12,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png"
+            },
+            {
+                "id": "texastech",
+                "name": "Texas Tech",
+                "seed": 4,
+                "wins": 10,
+                "losses": 3,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png"
+            },
+            {
+                "id": "georgia",
+                "name": "Georgia",
+                "seed": 5,
+                "wins": 11,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png"
+            },
+            {
+                "id": "oregon",
+                "name": "Oregon",
+                "seed": 6,
+                "wins": 11,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png"
+            },
+            {
+                "id": "notredame",
+                "name": "Notre Dame",
+                "seed": 7,
+                "wins": 11,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png"
+            },
+            {
+                "id": "olemiss",
+                "name": "Ole Miss",
+                "seed": 8,
+                "wins": 10,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png"
+            },
+            {
+                "id": "indiana",
+                "name": "Indiana",
+                "seed": 9,
+                "wins": 10,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png"
+            },
+            {
+                "id": "alabama",
+                "name": "Alabama",
+                "seed": 10,
+                "wins": 10,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png"
+            },
+            {
+                "id": "boisestate",
+                "name": "Boise State",
+                "seed": 11,
+                "wins": 12,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/68.png"
+            }
+        ],
+        "playoff_summary": {
+            "fr": [
+                {
+                    "winner": "Georgia"
+                },
+                {
+                    "winner": "Oregon"
+                },
+                {
+                    "winner": "Notre Dame"
+                },
+                {
+                    "winner": "Ole Miss"
+                }
+            ],
+            "qf": [
+                {
+                    "winner": "Texas"
+                },
+                {
+                    "winner": "Ohio State"
+                },
+                {
+                    "winner": "Oregon"
+                },
+                {
+                    "winner": "Georgia"
+                }
+            ],
+            "sf": [
+                {
+                    "winner": "Texas"
+                },
+                {
+                    "winner": "Ohio State"
+                }
+            ]
+        },
+        "sim_state": {
+            "teamId": "texas",
+            "ccgPicks": {},
+            "userPicks": {
+                "ten-w4": "W",
+                "tex-w4": "L",
+                "tam-w12": "L",
+                "tex-w12": "W"
+            },
+            "gameSliders": {},
+            "teamSliders": {
+                "texas": {
+                    "qbRating": 10,
+                    "crowdNoise": 0,
+                    "defenseHavoc": 10,
+                    "groundAttack": -10,
+                    "turnoverLuck": 0
+                }
+            },
+            "manualScores": {},
+            "playoffPicks": {}
+        },
+        "mode": "baseline",
+        "is_public": true,
+        "created_at": "2026-08-28T17:26:02.988+00:00"
+    },
+    {
+        "id": "bracket_1787937853466_h2h0r3",
+        "user_id": "116de3ad-fe71-4f75-8743-49162d223d08",
+        "creator_id": "116de3ad-fe71-4f75-8743-49162d223d08",
+        "name": "Indiana Guess",
+        "creator": "Jake T Johnson",
+        "notes": "Custom 2026 CFP Simulation",
+        "champion": {
+            "id": "indiana",
+            "name": "Indiana Hoosiers",
+            "score": 32,
+            "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png",
+            "oppScore": 42,
+            "shortName": "Indiana"
+        },
+        "runner_up": {
+            "id": "georgia",
+            "name": "Georgia Bulldogs",
+            "shortName": "Georgia"
+        },
+        "seeds": [
+            {
+                "id": "georgia",
+                "name": "Georgia",
+                "seed": 1,
+                "wins": 12,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png"
+            },
+            {
+                "id": "ohiostate",
+                "name": "Ohio State",
+                "seed": 2,
+                "wins": 12,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png"
+            },
+            {
+                "id": "miami",
+                "name": "Miami",
+                "seed": 3,
+                "wins": 12,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png"
+            },
+            {
+                "id": "texastech",
+                "name": "Texas Tech",
+                "seed": 4,
+                "wins": 10,
+                "losses": 3,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png"
+            },
+            {
+                "id": "oregon",
+                "name": "Oregon",
+                "seed": 5,
+                "wins": 11,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png"
+            },
+            {
+                "id": "notredame",
+                "name": "Notre Dame",
+                "seed": 6,
+                "wins": 11,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png"
+            },
+            {
+                "id": "indiana",
+                "name": "Indiana",
+                "seed": 7,
+                "wins": 11,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png"
+            },
+            {
+                "id": "texas",
+                "name": "Texas",
+                "seed": 8,
+                "wins": 10,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png"
+            },
+            {
+                "id": "olemiss",
+                "name": "Ole Miss",
+                "seed": 9,
+                "wins": 10,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png"
+            },
+            {
+                "id": "lsu",
+                "name": "LSU",
+                "seed": 10,
+                "wins": 10,
+                "losses": 3,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png"
+            },
+            {
+                "id": "alabama",
+                "name": "Alabama",
+                "seed": 11,
+                "wins": 10,
+                "losses": 2,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png"
+            },
+            {
+                "id": "boisestate",
+                "name": "Boise State",
+                "seed": 12,
+                "wins": 12,
+                "losses": 1,
+                "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/68.png"
+            }
+        ],
+        "playoff_summary": {
+            "fr": [
+                {
+                    "winner": "Oregon"
+                },
+                {
+                    "winner": "Notre Dame"
+                },
+                {
+                    "winner": "Indiana"
+                },
+                {
+                    "winner": "Texas"
+                }
+            ],
+            "qf": [
+                {
+                    "winner": "Georgia"
+                },
+                {
+                    "winner": "Indiana"
+                },
+                {
+                    "winner": "Notre Dame"
+                },
+                {
+                    "winner": "Oregon"
+                }
+            ],
+            "sf": [
+                {
+                    "winner": "Georgia"
+                },
+                {
+                    "winner": "Indiana"
+                }
+            ]
+        },
+        "sim_state": {
+            "teamId": "indiana",
+            "ccgPicks": {},
+            "userPicks": {
+                "ind-w12": "W",
+                "playoff-qf2": "L",
+                "playoff-sf2": "W",
+                "playoff-natty": "L"
+            },
+            "gameSliders": {},
+            "teamSliders": {},
+            "manualScores": {
+                "playoff-qf2": {
+                    "oppScore": 43,
+                    "teamScore": 33
+                },
+                "playoff-sf2": {
+                    "oppScore": 29,
+                    "teamScore": 49
+                },
+                "playoff-natty": {
+                    "oppScore": 42,
+                    "teamScore": 32
+                }
+            },
+            "playoffPicks": {}
+        },
+        "mode": "baseline",
+        "is_public": true,
+        "created_at": "2026-08-28T17:24:13.466+00:00"
     },
     {
         "id": "bracket_texas_natty_run_curated",
