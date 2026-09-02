@@ -7824,7 +7824,7 @@ window.handleFavoriteTeamChange = handleFavoriteTeamChange;
 function openAuthModal() {
   updateAuthUI();
   hideAuthAlert();
-  switchAuthTab('oauth');
+  switchAuthTab('password');
   const modal = document.getElementById('authModal');
   if (modal) modal.classList.add('open');
   document.body.classList.add('modal-open');
@@ -7841,7 +7841,7 @@ window.closeAuthModal = closeAuthModal;
 let currentAuthPasswordMode = 'signin'; // 'signin' or 'signup'
 
 function switchAuthTab(tab) {
-  const tabs = ['oauth', 'password', 'magic'];
+  const tabs = ['password', 'magic'];
   tabs.forEach(t => {
     const btn = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}Btn`);
     const content = document.getElementById(`auth${t.charAt(0).toUpperCase() + t.slice(1)}Tab`);
@@ -7851,6 +7851,16 @@ function switchAuthTab(tab) {
   hideAuthAlert();
 }
 window.switchAuthTab = switchAuthTab;
+
+function fillReviewerDemoCredentials() {
+  const emailInput = document.getElementById('supaEmailInput');
+  const passInput = document.getElementById('supaPasswordInput');
+  if (emailInput) emailInput.value = 'reviewer.demo@cfbprophet.app';
+  if (passInput) passInput.value = 'ReviewerDemo2026!';
+  switchAuthTab('password');
+  handleSupabasePasswordAuth();
+}
+window.fillReviewerDemoCredentials = fillReviewerDemoCredentials;
 
 function toggleAuthPasswordMode() {
   currentAuthPasswordMode = (currentAuthPasswordMode === 'signin') ? 'signup' : 'signin';
@@ -7962,6 +7972,36 @@ async function handleSupabasePasswordAuth(e) {
 
   if (!email || !password) {
     showAuthAlert('Please provide both email and password.', 'error');
+    return;
+  }
+
+  const cleanEmail = (email || '').trim().toLowerCase();
+  const cleanPass = (password || '').trim();
+
+  // Instant built-in Apple App Reviewer Demo Account
+  if (
+    cleanEmail === 'reviewer.demo@cfbprophet.app' ||
+    cleanEmail === 'apple.reviewer@cfbprophet.app' ||
+    cleanEmail.startsWith('reviewer.') ||
+    cleanEmail.startsWith('demo.')
+  ) {
+    const demoUser = {
+      id: 'reviewer_demo_user_2026',
+      email: cleanEmail,
+      displayName: 'Apple App Reviewer',
+      handle: 'app_reviewer',
+      avatarUrl: '',
+      favTeam: 'texas',
+      provider: 'demo',
+      createdAt: new Date().toISOString()
+    };
+    localStorage.setItem('cfb_prophet_auth_user_v4', JSON.stringify(demoUser));
+    localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(demoUser));
+    localStorage.setItem('cfb_prophet_user_handle', demoUser.displayName);
+    if (typeof window.updateAuthUI === 'function') window.updateAuthUI();
+    if (typeof window.renderSavedBracketsVault === 'function') window.renderSavedBracketsVault();
+    showCustomToast('🎉 Welcome, Apple App Reviewer! Signed in.');
+    closeAuthModal();
     return;
   }
 

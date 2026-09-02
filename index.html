@@ -1481,38 +1481,16 @@
 
         <!-- Auth Method Tabs -->
         <div class="auth-tab-bar">
-          <button class="auth-tab-btn active" id="tabOAuthBtn" onclick="switchAuthTab('oauth')">
-            <i class="fa-solid fa-shield-halved"></i> <span>Social Sign In</span>
-          </button>
-          <button class="auth-tab-btn" id="tabPasswordBtn" onclick="switchAuthTab('password')">
-            <i class="fa-solid fa-envelope"></i> <span>Email & Pass</span>
+          <button class="auth-tab-btn active" id="tabPasswordBtn" onclick="switchAuthTab('password')">
+            <i class="fa-solid fa-envelope"></i> <span>Email & Password</span>
           </button>
           <button class="auth-tab-btn" id="tabMagicBtn" onclick="switchAuthTab('magic')">
             <i class="fa-solid fa-paper-plane"></i> <span>Email Link</span>
           </button>
         </div>
 
-        <!-- TAB 1: 1-Tap OAuth (Google & Apple & GitHub) -->
-        <div id="authOAuthTab" class="auth-tab-content">
-          <div class="social-auth-buttons" style="display: flex; flex-direction: column; gap: 0.65rem; align-items: stretch; width: 100%; max-width: 320px; margin: 0 auto;">
-            <button class="google-sign-in-btn" id="supabaseGoogleBtn" onclick="handleSupabaseGoogleSignIn()">
-              <svg class="google-icon" width="20" height="20" viewBox="0 0 18 18">
-                <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
-                <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
-                <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707 0-.59.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.347 2.825.957 4.039l3.007-2.332z"/>
-                <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
-              </svg>
-              <span>Continue with Google</span>
-            </button>
-          </div>
-
-          <div style="margin-top: 1rem; font-size: 0.74rem; color: #64748B; line-height: 1.4; text-align: center;">
-            <i class="fa-solid fa-shield-halved" style="color: #10B981;"></i> <strong>Zero-Password Exposure:</strong> Verified OAuth tokens authenticate you directly via Supabase Auth.
-          </div>
-        </div>
-
-        <!-- TAB 2: Email & Password (Sign In & Sign Up) -->
-        <div id="authPasswordTab" class="auth-tab-content" style="display: none;">
+        <!-- TAB 1: Email & Password (Sign In & Sign Up) -->
+        <div id="authPasswordTab" class="auth-tab-content" style="display: block;">
           <form id="supabasePasswordForm" onsubmit="handleSupabasePasswordAuth(event)" style="display: flex; flex-direction: column; gap: 0.65rem; text-align: left;">
             
             <div class="auth-input-group" id="authRegNameGroup" style="display: none;">
@@ -1530,14 +1508,19 @@
               <input type="password" id="supaPasswordInput" class="auth-input" placeholder="••••••••" minlength="6" required autocomplete="current-password">
             </div>
 
+            <div style="text-align: center; margin: 0.25rem 0;">
+              <button type="button" onclick="fillReviewerDemoCredentials()" style="background: rgba(56, 189, 248, 0.12); border: 1px dashed #38BDF8; color: #38BDF8; font-size: 0.74rem; font-weight: 700; border-radius: 6px; padding: 0.4rem 0.75rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+                <i class="fa-solid fa-key"></i> <span>Reviewer Demo: reviewer.demo@cfbprophet.app (Tap to Fill & Sign In)</span>
+              </button>
+            </div>
+
             <div class="auth-input-group" id="authRegTeamGroup" style="display: none;">
               <label for="supaFavTeamSelect">Favorite Powerhouse Team</label>
               <select id="supaFavTeamSelect" class="auth-input" style="cursor: pointer;">
-                <option value="usc">USC Trojans</option>
-                <option value="ohiostate">Ohio State Buckeyes</option>
                 <option value="texas">Texas Longhorns</option>
-                <option value="oregon">Oregon Ducks</option>
+                <option value="ohiostate">Ohio State Buckeyes</option>
                 <option value="georgia">Georgia Bulldogs</option>
+                <option value="oregon">Oregon Ducks</option>
                 <option value="alabama">Alabama Crimson Tide</option>
                 <option value="lsu">LSU Tigers</option>
                 <option value="clemson">Clemson Tigers</option>
@@ -1547,6 +1530,7 @@
                 <option value="olemiss">Ole Miss Rebels</option>
                 <option value="indiana">Indiana Hoosiers</option>
                 <option value="miami">Miami Hurricanes</option>
+                <option value="usc">USC Trojans</option>
               </select>
             </div>
 
@@ -1704,10 +1688,10 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=331"></script>
-  <script src="qrious.min.js?v=331"></script>
-  <script src="qrcode.min.js?v=331"></script>
-  <script src="data/teams.js?v=336"></script>
-  <script src="app.js?v=336"></script>
+  <script src="supabase-client.js?v=337"></script>
+  <script src="qrious.min.js?v=337"></script>
+  <script src="qrcode.min.js?v=337"></script>
+  <script src="data/teams.js?v=337"></script>
+  <script src="app.js?v=337"></script>
 </body>
 </html>

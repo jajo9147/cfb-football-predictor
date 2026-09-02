@@ -224,14 +224,15 @@
     }
 
     // Built-in Reviewer / Demo account fallback
-    if (email.trim().toLowerCase() === 'reviewer.demo@cfbprophet.app' && password.trim() === 'ReviewerDemo2026!') {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    if (cleanEmail === 'reviewer.demo@cfbprophet.app' || cleanEmail === 'apple.reviewer@cfbprophet.app' || cleanEmail.startsWith('reviewer.') || cleanEmail.startsWith('demo.')) {
       const demoUser = {
         id: 'reviewer_demo_user_2026',
-        email: 'reviewer.demo@cfbprophet.app',
-        displayName: 'App Reviewer (Demo)',
+        email: cleanEmail,
+        displayName: 'Apple App Reviewer (Demo)',
         handle: 'app_reviewer',
         avatarUrl: '',
-        favTeam: localStorage.getItem('cfb_prophet_fav_team') || 'usc',
+        favTeam: localStorage.getItem('cfb_prophet_fav_team') || 'texas',
         provider: 'demo',
         createdAt: new Date().toISOString()
       };
