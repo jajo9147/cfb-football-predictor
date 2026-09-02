@@ -1035,12 +1035,13 @@ function calculateVegasEdge(game, sim) {
   const totalEdge = simTotal - vegasTotal;
   const hasTotalEdge = Math.abs(totalEdge) >= 4.5;
 
+  const provider = game.oddsProvider || 'DraftKings';
   let badgeHtml = '';
   if (hasSpreadEdge) {
-    badgeHtml = `<span class="vegas-edge-badge highlight" title="Sharp Market Edge: Model Spread deviates by ${Math.abs(spreadEdge).toFixed(1)} pts from Vegas"><i class="fa-solid fa-gem"></i> ${Math.abs(spreadEdge).toFixed(1)} PT SPREAD EDGE</span>`;
+    badgeHtml = `<span class="vegas-edge-badge highlight" title="Sharp Market Edge: Model Spread deviates by ${Math.abs(spreadEdge).toFixed(1)} pts from ${provider} line"><i class="fa-solid fa-gem"></i> ${Math.abs(spreadEdge).toFixed(1)} PT SPREAD EDGE</span>`;
   } else if (hasTotalEdge) {
     const ouType = totalEdge > 0 ? 'OVER' : 'UNDER';
-    badgeHtml = `<span class="vegas-edge-badge" title="Total Edge vs Vegas ${vegasTotal} O/U"><i class="fa-solid fa-arrow-trend-up"></i> ${ouType} EDGE (${Math.abs(totalEdge).toFixed(1)} PTS)</span>`;
+    badgeHtml = `<span class="vegas-edge-badge" title="Total Edge vs ${provider} ${vegasTotal} O/U"><i class="fa-solid fa-arrow-trend-up"></i> ${ouType} EDGE (${Math.abs(totalEdge).toFixed(1)} PTS)</span>`;
   }
 
   return {
@@ -1413,7 +1414,7 @@ function renderSchedule() {
                    onclick="event.stopPropagation();">
           </div>
           <div class="score-sub-row">
-            ${sim.isFinal ? `<span class="vegas-line" style="color: #10B981; font-weight: 800;"><i class="fa-solid fa-lock"></i> OFFICIAL FINAL</span>` : `<span class="vegas-line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : `${game.oppAbbr} -${game.vegasSpread}`}</span>`}
+            ${sim.isFinal ? `<span class="vegas-line" style="color: #10B981; font-weight: 800;"><i class="fa-solid fa-lock"></i> OFFICIAL FINAL</span>` : `<span class="vegas-line" title="${game.oddsProvider || 'DraftKings'} Live Market Line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : (game.vegasSpread === 0 ? 'PICK' : `${game.oppAbbr} -${game.vegasSpread}`)}</span>`}
             ${(!sim.isFinal && sim.isManualScore) ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event)" title="Reset to AI baseline projection"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
           </div>
         </div>
@@ -5222,6 +5223,28 @@ const LiveSyncEngine = {
       const data = await res.json();
       if (!data.events || data.events.length === 0) return false;
 
+      const findScheduledGame = (schedule, oppComp, isHome) => {
+        if (!schedule || !oppComp) return null;
+        const oppAbbr = (oppComp.team?.abbreviation || '').toUpperCase();
+        const oppDisplay = (oppComp.team?.displayName || '').toLowerCase();
+        const oppShort = (oppComp.team?.shortDisplayName || '').toLowerCase();
+        const oppName = (oppComp.team?.name || '').toLowerCase();
+        const mappedOppId = ESPN_TEAM_MAP[oppComp.id];
+
+        return schedule.find(g => {
+          if (g.isHome !== isHome) return false;
+          if (g.oppId && mappedOppId && g.oppId === mappedOppId) return true;
+          if (g.oppAbbr && oppAbbr && g.oppAbbr.toUpperCase() === oppAbbr) return true;
+          if (g.opponent) {
+            const oppLow = g.opponent.toLowerCase();
+            if (oppDisplay && oppLow.includes(oppDisplay)) return true;
+            if (oppShort && oppLow.includes(oppShort)) return true;
+            if (oppName && oppLow.includes(oppName)) return true;
+          }
+          return false;
+        });
+      };
+
       let updatedCount = 0;
       data.events.forEach(event => {
         const comp = event.competitions?.[0];
@@ -5238,24 +5261,88 @@ const LiveSyncEngine = {
         const homeTeamId = ESPN_TEAM_MAP[homeComp.id];
         const awayTeamId = ESPN_TEAM_MAP[awayComp.id];
 
-        // Match against TEAMS_DATABASE schedules
-        if (homeTeamId && TEAMS_DATABASE[homeTeamId]) {
-          const game = TEAMS_DATABASE[homeTeamId].schedule.find(g => g.oppAbbr === awayComp.team?.abbreviation || g.isHome);
-          if (game && isCompleted) {
-            game.isFinal = true;
-            game.actualScoreUt = parseInt(homeComp.score, 10);
-            game.actualScoreOpp = parseInt(awayComp.score, 10);
-            updatedCount++;
+        // 1. Extract live DraftKings odds from ESPN feed if available
+        let liveSpreadHome = null;
+        let liveSpreadAway = null;
+        let liveOverUnder = null;
+        let oddsProviderName = 'DraftKings';
+
+        const oddsArr = comp.odds || [];
+        if (oddsArr.length > 0) {
+          const oddsObj = oddsArr.find(o => o.provider?.name?.toLowerCase().includes('draftkings')) || oddsArr[0];
+          oddsProviderName = oddsObj.provider?.displayName || oddsObj.provider?.name || 'DraftKings';
+
+          if (typeof oddsObj.overUnder === 'number') {
+            liveOverUnder = oddsObj.overUnder;
+          }
+
+          let rawSpread = null;
+          if (typeof oddsObj.spread === 'number') {
+            rawSpread = Math.abs(oddsObj.spread);
+          } else if (oddsObj.details) {
+            const m = oddsObj.details.match(/-?(\d+(\.\d+)?)/);
+            if (m) rawSpread = parseFloat(m[1]);
+          }
+
+          if (rawSpread !== null) {
+            const homeFav = oddsObj.homeTeamOdds?.favorite === true;
+            const awayFav = oddsObj.awayTeamOdds?.favorite === true;
+            if (homeFav) {
+              liveSpreadHome = -rawSpread;
+              liveSpreadAway = +rawSpread;
+            } else if (awayFav) {
+              liveSpreadHome = +rawSpread;
+              liveSpreadAway = -rawSpread;
+            } else if (oddsObj.details && (oddsObj.details.toUpperCase().includes('EVEN') || oddsObj.details.toUpperCase().includes('PICK'))) {
+              liveSpreadHome = 0;
+              liveSpreadAway = 0;
+            }
           }
         }
 
+        // 2. Update home team schedule
+        if (homeTeamId && TEAMS_DATABASE[homeTeamId]) {
+          const game = findScheduledGame(TEAMS_DATABASE[homeTeamId].schedule, awayComp, true);
+          if (game) {
+            if (isCompleted) {
+              game.isFinal = true;
+              game.actualScoreUt = parseInt(homeComp.score, 10);
+              game.actualScoreOpp = parseInt(awayComp.score, 10);
+              updatedCount++;
+            } else {
+              // Update live DraftKings line without altering model predictions
+              if (liveSpreadHome !== null) {
+                game.vegasSpread = liveSpreadHome;
+                game.oddsProvider = oddsProviderName;
+                updatedCount++;
+              }
+              if (liveOverUnder !== null) {
+                game.overUnder = liveOverUnder;
+              }
+            }
+          }
+        }
+
+        // 3. Update away team schedule
         if (awayTeamId && TEAMS_DATABASE[awayTeamId]) {
-          const game = TEAMS_DATABASE[awayTeamId].schedule.find(g => g.oppAbbr === homeComp.team?.abbreviation || !g.isHome);
-          if (game && isCompleted) {
-            game.isFinal = true;
-            game.actualScoreUt = parseInt(awayComp.score, 10);
-            game.actualScoreOpp = parseInt(homeComp.score, 10);
-            updatedCount++;
+          const game = findScheduledGame(TEAMS_DATABASE[awayTeamId].schedule, homeComp, false);
+          if (game) {
+            if (isCompleted) {
+              game.isFinal = true;
+              game.actualScoreUt = parseInt(awayComp.score, 10);
+              game.actualScoreOpp = parseInt(homeComp.score, 10);
+              updatedCount++;
+            } else {
+              // Update live DraftKings line without altering model predictions
+              if (liveSpreadAway !== null) {
+                game.vegasSpread = liveSpreadAway;
+                game.oddsProvider = oddsProviderName;
+                updatedCount++;
+              }
+              if (liveOverUnder !== null) {
+                game.overUnder = liveOverUnder;
+              }
+            }
           }
         }
       });
