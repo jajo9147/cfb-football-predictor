@@ -1666,6 +1666,30 @@
             <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sign Out</span>
           </button>
         </div>
+
+        <!-- Account Deletion (Apple Guideline 5.1.1(v) Two-Step Verification) -->
+        <div style="margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid rgba(255, 255, 255, 0.08); text-align: center;">
+          <div id="authDeleteAccountInitial">
+            <button type="button" class="link-btn" onclick="showDeleteAccountConfirmation()" style="background: none; border: none; color: #EF4444; font-size: 0.75rem; cursor: pointer; text-decoration: underline; display: inline-flex; align-items: center; gap: 4px;">
+              <i class="fa-solid fa-trash-can"></i> Delete Account &amp; Prediction Data
+            </button>
+          </div>
+          
+          <!-- Two-Step Confirmation Box (Hidden by default) -->
+          <div id="authDeleteAccountConfirmBox" style="display: none; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-sm); padding: 0.75rem; margin-top: 0.35rem; text-align: center;">
+            <p style="font-size: 0.76rem; color: #FCA5A5; line-height: 1.4; margin-bottom: 0.6rem; font-weight: 600;">
+              ⚠️ Are you sure you want to delete your account? All your saved predictions, profile info, and custom simulation data will be permanently erased.
+            </p>
+            <div style="display: flex; gap: 0.5rem; justify-content: center;">
+              <button type="button" class="action-btn" onclick="executeDeleteAccount()" style="background: #DC2626; color: #FFFFFF; font-weight: 800; font-size: 0.76rem; padding: 0.45rem 0.85rem; border: none; border-radius: var(--radius-sm); flex: 1; cursor: pointer;">
+                <i class="fa-solid fa-trash"></i> Yes, Permanently Delete
+              </button>
+              <button type="button" class="action-btn secondary-btn" onclick="cancelDeleteAccountConfirmation()" style="font-size: 0.76rem; padding: 0.45rem 0.85rem; flex: 1; cursor: pointer;">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1724,11 +1748,11 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=352"></script>
-  <script src="qrious.min.js?v=352"></script>
-  <script src="qrcode.min.js?v=352"></script>
-  <script src="data/teams.js?v=352"></script>
-  <script src="data/community_brackets.js?v=352"></script>
-  <script src="app.js?v=352"></script>
+  <script src="supabase-client.js?v=353"></script>
+  <script src="qrious.min.js?v=353"></script>
+  <script src="qrcode.min.js?v=353"></script>
+  <script src="data/teams.js?v=353"></script>
+  <script src="data/community_brackets.js?v=353"></script>
+  <script src="app.js?v=353"></script>
 </body>
 </html>

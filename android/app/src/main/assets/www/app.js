@@ -7825,6 +7825,7 @@ function openAuthModal() {
   updateAuthUI();
   hideAuthAlert();
   switchAuthTab('password');
+  cancelDeleteAccountConfirmation();
 
   // Detect iOS native app vs web browser
   const isIosNative = (
@@ -8171,6 +8172,66 @@ function handleSignOutClick() {
   closeAuthModal();
 }
 window.handleSignOutClick = handleSignOutClick;
+
+function showDeleteAccountConfirmation() {
+  const initial = document.getElementById('authDeleteAccountInitial');
+  const confirmBox = document.getElementById('authDeleteAccountConfirmBox');
+  if (initial) initial.style.display = 'none';
+  if (confirmBox) confirmBox.style.display = 'block';
+}
+window.showDeleteAccountConfirmation = showDeleteAccountConfirmation;
+
+function cancelDeleteAccountConfirmation() {
+  const initial = document.getElementById('authDeleteAccountInitial');
+  const confirmBox = document.getElementById('authDeleteAccountConfirmBox');
+  if (initial) initial.style.display = 'block';
+  if (confirmBox) confirmBox.style.display = 'none';
+}
+window.cancelDeleteAccountConfirmation = cancelDeleteAccountConfirmation;
+
+async function executeDeleteAccount() {
+  const currentUser = getCurrentUser();
+
+  // 1. Mark all user brackets as deleted in local storage tombstone
+  try {
+    const myBrackets = getSavedBrackets();
+    if (Array.isArray(myBrackets)) {
+      myBrackets.forEach(b => {
+        if (b && b.id) {
+          addDeletedBracketId(b.id);
+        }
+      });
+    }
+  } catch (e) {}
+
+  // 2. Clear bracket storage keys
+  try {
+    localStorage.removeItem(BRACKET_STORAGE_KEY);
+    localStorage.removeItem('cfb_prophet_saved_brackets_v5');
+    localStorage.removeItem('cfb_prophet_saved_brackets_v4');
+    localStorage.removeItem('cfb_prophet_saved_brackets_v3');
+  } catch (e) {}
+
+  // 3. Clear cloud session & auth keys
+  try {
+    if (window.CFBProphetSupabase) {
+      await window.CFBProphetSupabase.signOut();
+    }
+  } catch (e) {}
+
+  localStorage.removeItem(AUTH_STORAGE_KEY);
+  localStorage.removeItem('cfb_prophet_auth_user_v4');
+  localStorage.removeItem('cfb_prophet_auth_user_v3');
+  localStorage.removeItem('cfb_prophet_user_handle');
+  localStorage.removeItem('cfb_prophet_fav_team');
+  localStorage.removeItem('cfb_prophet_favorite_team_id');
+
+  cancelDeleteAccountConfirmation();
+  setCurrentUser(null);
+  showCustomToast('🗑️ Your account and prediction data have been permanently deleted.');
+  closeAuthModal();
+}
+window.executeDeleteAccount = executeDeleteAccount;
 
 function saveCurrentProjectionAsBracket(name, creator, notes, forceNewId = false) {
   const evaluated = evaluateRegularSeasonAllTeams();
