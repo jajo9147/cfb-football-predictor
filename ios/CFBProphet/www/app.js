@@ -113,179 +113,191 @@ function getOpponentTeamId(game) {
 // ==========================================================================
 
 const TEAM_OPENER_KICKOFFS = {
-  'byu': {
-    utc: '2026-08-30T02:15:00Z', // Sat Aug 29 @ 8:15 PM MDT (Week 0 opener vs Portland State)
-    opponent: 'Portland State Vikings',
-    venue: 'LaVell Edwards Stadium (Provo, UT)',
+  'colorado': {
+    utc: '2026-09-04T00:00:00Z', // Thu Sep 3 @ 8:00 PM EDT (Atlanta, GA)
+    opponent: 'Georgia Tech Yellow Jackets',
+    venue: 'Bobby Dodd Stadium (Atlanta, GA)',
     tv: 'ESPN'
   },
-  'miami': {
-    utc: '2026-09-05T00:00:00Z', // Fri Sep 4 @ 8:00 PM EDT (Stanford, CA)
-    opponent: 'Stanford Cardinal',
-    venue: 'Stanford Stadium (Stanford, CA)',
-    tv: 'ACC Network / ESPN'
+  'missouri': {
+    utc: '2026-09-04T00:00:00Z', // Thu Sep 3 @ 8:00 PM EDT (Columbia, MO)
+    opponent: 'Arkansas-Pine Bluff Golden Lions',
+    venue: 'Memorial Stadium (Columbia, MO)',
+    tv: 'SEC Network'
   },
-  'texas': {
-    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 11:00 AM CDT (Austin, TX)
-    opponent: 'Texas State Bobcats',
-    venue: 'DKR Texas Memorial Stadium (Austin, TX)',
-    tv: 'ABC / SEC Network'
-  },
-  'michigan': {
-    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 12:00 PM EDT (Ann Arbor, MI)
-    opponent: 'Western Michigan Broncos',
-    venue: 'Michigan Stadium (Ann Arbor, MI)',
-    tv: 'FOX Big Noon Kickoff'
+  'utah': {
+    utc: '2026-09-04T01:00:00Z', // Thu Sep 3 @ 9:00 PM EDT (Salt Lake City, UT)
+    opponent: 'Idaho Vandals',
+    venue: 'Rice-Eccles Stadium (Salt Lake City, UT)',
+    tv: 'ESPNU'
   },
   'oklahoma': {
-    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 11:00 AM CDT (Norman, OK)
+    utc: '2026-09-05T00:00:00Z', // Fri Sep 4 @ 8:00 PM EDT (Norman, OK)
     opponent: 'UTEP Miners',
-    venue: 'Gaylord Family Oklahoma Memorial Stadium (Norman, OK)',
-    tv: 'SEC Network'
+    venue: 'Memorial Stadium (Norman, OK)',
+    tv: 'SECN+'
+  },
+  'miami': {
+    utc: '2026-09-05T01:00:00Z', // Fri Sep 4 @ 9:00 PM EDT (Stanford, CA)
+    opponent: 'Stanford Cardinal',
+    venue: 'Stanford Stadium (Stanford, CA)',
+    tv: 'ESPN'
+  },
+  'usc': {
+    utc: '2026-09-05T01:00:00Z', // Fri Sep 4 @ 9:00 PM EDT (Los Angeles, CA)
+    opponent: 'Fresno State Bulldogs',
+    venue: 'Los Angeles Memorial Coliseum (Los Angeles, CA)',
+    tv: 'FOX'
   },
   'indiana': {
     utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 12:00 PM EDT (Bloomington, IN)
     opponent: 'North Texas Mean Green',
     venue: 'Memorial Stadium (Bloomington, IN)',
-    tv: 'Big Ten Network'
+    tv: 'FOX'
   },
-  'tennessee': {
-    utc: '2026-09-05T16:45:00Z', // Sat Sep 5 @ 12:45 PM EDT (Knoxville, TN)
-    opponent: 'Furman Paladins',
-    venue: 'Neyland Stadium (Knoxville, TN)',
-    tv: 'SEC Network'
+  'alabama': {
+    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 12:00 PM EDT (Tuscaloosa, AL)
+    opponent: 'East Carolina Pirates',
+    venue: 'Bryant-Denny Stadium (Tuscaloosa, AL)',
+    tv: 'ABC'
+  },
+  'houston': {
+    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 12:00 PM EDT (Houston, TX)
+    opponent: 'Oregon State Beavers',
+    venue: 'TDECU Stadium (Houston, TX)',
+    tv: 'ESPN/Disney+'
   },
   'ohiostate': {
-    utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 3:30 PM EDT (Columbus, OH)
+    utc: '2026-09-05T16:30:00Z', // Sat Sep 5 @ 12:30 PM EDT (Columbus, OH)
     opponent: 'Ball State Cardinals',
     venue: 'Ohio Stadium (Columbus, OH)',
-    tv: 'CBS / Paramount+'
+    tv: 'BTN'
+  },
+  'georgia': {
+    utc: '2026-09-05T19:00:00Z', // Sat Sep 5 @ 3:00 PM EDT (Athens, GA)
+    opponent: 'Tennessee State Tigers',
+    venue: 'Sanford Stadium (Athens, GA)',
+    tv: 'SECN+'
+  },
+  'texas': {
+    utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 3:30 PM EDT / 2:30 PM CDT (Austin, TX)
+    opponent: 'Texas State Bobcats',
+    venue: 'DKR Texas Memorial Stadium (Austin, TX)',
+    tv: 'ESPN'
+  },
+  'oregon': {
+    utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 3:30 PM EDT (Eugene, OR)
+    opponent: 'Boise State Broncos',
+    venue: 'Autzen Stadium (Eugene, OR)',
+    tv: 'CBS'
   },
   'pennstate': {
     utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 3:30 PM EDT (State College, PA)
     opponent: 'Marshall Thundering Herd',
-    venue: 'Beaver Stadium (State College, PA)',
-    tv: 'Big Ten Network'
+    venue: 'Beaver Stadium (University Park, PA)',
+    tv: 'FS1'
   },
-  'notredame': {
-    utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 2:30 PM CDT / 3:30 PM EDT (Green Bay, WI)
-    opponent: 'Wisconsin Badgers',
-    venue: 'Lambeau Field (Green Bay, WI)',
-    tv: 'NBC / Peacock'
+  'tennessee': {
+    utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 3:30 PM EDT (Knoxville, TN)
+    opponent: 'Furman Paladins',
+    venue: 'Neyland Stadium (Knoxville, TN)',
+    tv: 'SECN+'
   },
-  'texastech': {
-    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 6:00 PM CDT (Lubbock, TX)
-    opponent: 'Abilene Christian Wildcats',
-    venue: 'Jones AT&T Stadium (Lubbock, TX)',
-    tv: 'FOX / FS1'
+  'boisestate': {
+    utc: '2026-09-05T19:30:00Z', // Sat Sep 5 @ 3:30 PM EDT (Eugene, OR)
+    opponent: 'Oregon Ducks',
+    venue: 'Autzen Stadium (Eugene, OR)',
+    tv: 'CBS'
   },
-  'alabama': {
-    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 6:00 PM CDT (Tuscaloosa, AL)
-    opponent: 'East Carolina Pirates',
-    venue: 'Bryant-Denny Stadium (Tuscaloosa, AL)',
-    tv: 'ESPN'
+  'iowa': {
+    utc: '2026-09-05T20:15:00Z', // Sat Sep 5 @ 4:15 PM EDT (Iowa City, IA)
+    opponent: 'Northern Illinois Huskies',
+    venue: 'Kinnick Stadium (Iowa City, IA)',
+    tv: 'BTN'
   },
   'texasam': {
-    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 6:00 PM CDT (College Station, TX)
+    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 7:00 PM EDT (College Station, TX)
     opponent: 'Missouri State Bears',
     venue: 'Kyle Field (College Station, TX)',
-    tv: 'SEC Network'
+    tv: 'ESPN'
   },
-  'georgia': {
-    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 7:30 PM EDT (Atlanta, GA)
-    opponent: 'Florida State Seminoles',
-    venue: 'Mercedes-Benz Stadium (Atlanta, GA)',
-    tv: 'ABC Saturday Night Football'
-  },
-  'floridastate': {
-    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 7:30 PM EDT (Atlanta, GA)
-    opponent: 'Georgia Bulldogs',
-    venue: 'Mercedes-Benz Stadium (Atlanta, GA)',
-    tv: 'ABC Saturday Night Football'
+  'texastech': {
+    utc: '2026-09-05T23:00:00Z', // Sat Sep 5 @ 7:00 PM EDT (Lubbock, TX)
+    opponent: 'Abilene Christian Wildcats',
+    venue: 'Jones AT&T Stadium (Lubbock, TX)',
+    tv: 'FS1'
   },
   'lsu': {
-    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 6:30 PM CDT / 7:30 PM EDT (Baton Rouge, LA)
+    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 7:30 PM EDT (Baton Rouge, LA)
     opponent: 'Clemson Tigers',
     venue: 'Tiger Stadium (Baton Rouge, LA)',
-    tv: 'ABC / ESPN'
+    tv: 'ABC'
   },
   'clemson': {
     utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 7:30 PM EDT (Baton Rouge, LA)
     opponent: 'LSU Tigers',
     venue: 'Tiger Stadium (Baton Rouge, LA)',
-    tv: 'ABC / ESPN'
+    tv: 'ABC'
   },
-  'smu': {
-    utc: '2026-09-06T00:00:00Z', // Sat Sep 5 @ 7:00 PM CDT (Dallas, TX)
-    opponent: 'Stephen F. Austin Lumberjacks',
-    venue: 'Gerald J. Ford Stadium (Dallas, TX)',
-    tv: 'ACC Network'
+  'michigan': {
+    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 7:30 PM EDT (Ann Arbor, MI)
+    opponent: 'Western Michigan Broncos',
+    venue: 'Michigan Stadium (Ann Arbor, MI)',
+    tv: 'NBC'
   },
-  'boisestate': {
-    utc: '2026-09-06T01:00:00Z', // Sat Sep 5 @ 7:00 PM MDT / 9:00 PM EDT (Boise, ID)
-    opponent: 'South Florida Bulls',
-    venue: 'Albertsons Stadium (Boise, ID)',
-    tv: 'FS1'
-  },
-  'oregon': {
-    utc: '2026-09-06T02:30:00Z', // Sat Sep 5 @ 7:30 PM PDT / 10:30 PM EDT (Eugene, OR)
-    opponent: 'Boise State Broncos',
-    venue: 'Autzen Stadium (Eugene, OR)',
-    tv: 'NBC / Peacock'
-  },
-  'usc': {
-    utc: '2026-09-05T23:30:00Z', // Sat Sep 5 @ 4:30 PM PDT / 7:30 PM EDT (Los Angeles, CA)
-    opponent: 'Fresno State Bulldogs',
-    venue: 'Los Angeles Memorial Coliseum (Los Angeles, CA)',
-    tv: 'Big Ten Network / FS1'
-  },
-  'olemiss': {
-    utc: '2026-09-06T23:30:00Z', // Sun Sep 6 @ 6:30 PM CDT / 7:30 PM EDT (Las Vegas, NV)
-    opponent: 'USC Trojans',
-    venue: 'Allegiant Stadium (Las Vegas, NV)',
-    tv: 'ABC Vegas Kickoff Classic'
-  },
-  'utah': {
-    utc: '2026-09-04T01:00:00Z', // Thu Sep 3 @ 7:00 PM MDT / 9:00 PM EDT (Salt Lake City, UT)
-    opponent: 'Idaho Vandals',
-    venue: 'Rice-Eccles Stadium (Salt Lake City, UT)',
-    tv: 'ESPNU'
-  },
-  'iowa': {
-    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 11:00 AM CDT / 12:00 PM EDT (Iowa City, IA)
-    opponent: 'Northern Illinois Huskies',
-    venue: 'Kinnick Stadium (Iowa City, IA)',
-    tv: 'Big Ten Network'
-  },
-  'missouri': {
-    utc: '2026-09-04T00:00:00Z', // Thu Sep 3 @ 7:00 PM CDT / 8:00 PM EDT (Columbia, MO)
-    opponent: 'Arkansas-Pine Bluff Golden Lions',
-    venue: 'Faurot Field (Columbia, MO)',
-    tv: 'SEC Network'
+  'byu': {
+    utc: '2026-09-06T00:00:00Z', // Sat Sep 5 @ 8:00 PM EDT (Provo, UT)
+    opponent: 'Utah Tech Trailblazers',
+    venue: 'LaVell Edwards Stadium (Provo, UT)',
+    tv: 'ESPN+'
   },
   'arizona': {
-    utc: '2026-09-06T02:30:00Z', // Sat Sep 5 @ 7:30 PM MST / 10:30 PM EDT (Tucson, AZ)
+    utc: '2026-09-06T01:30:00Z', // Sat Sep 5 @ 9:30 PM EDT (Tucson, AZ)
     opponent: 'Northern Arizona Lumberjacks',
     venue: 'Arizona Stadium (Tucson, AZ)',
     tv: 'ESPN+'
   },
+  'arizonastate': {
+    utc: '2026-09-06T02:00:00Z', // Sat Sep 5 @ 10:00 PM EDT (Tempe, AZ)
+    opponent: 'Morgan State Bears',
+    venue: 'Mountain America Stadium (Tempe, AZ)',
+    tv: 'ESPN+'
+  },
   'washington': {
-    utc: '2026-09-06T19:30:00Z', // Sun Sep 6 @ 12:30 PM PDT / 3:30 PM EDT (Seattle, WA)
+    utc: '2026-09-06T20:00:00Z', // Sun Sep 6 @ 4:00 PM EDT (Seattle, WA)
     opponent: 'Washington State Cougars (Apple Cup)',
     venue: 'Husky Stadium (Seattle, WA)',
-    tv: 'FOX'
+    tv: 'NBC'
   },
-  'houston': {
-    utc: '2026-09-05T16:00:00Z', // Sat Sep 5 @ 11:00 AM CDT / 12:00 PM EDT (Houston, TX)
-    opponent: 'Oregon State Beavers',
-    venue: 'TDECU Stadium (Houston, TX)',
-    tv: 'ESPN'
+  'notredame': {
+    utc: '2026-09-06T23:30:00Z', // Sun Sep 6 @ 7:30 PM EDT (Green Bay, WI)
+    opponent: 'Wisconsin Badgers',
+    venue: 'Lambeau Field (Green Bay, WI)',
+    tv: 'NBC'
+  },
+  'olemiss': {
+    utc: '2026-09-06T23:30:00Z', // Sun Sep 6 @ 7:30 PM EDT (Nashville, TN)
+    opponent: 'Louisville Cardinals',
+    venue: 'Nissan Stadium (Nashville, TN)',
+    tv: 'ABC'
   },
   'louisville': {
-    utc: '2026-09-06T23:30:00Z', // Sun Sep 6 @ 6:30 PM CDT / 7:30 PM EDT (Nashville, TN)
+    utc: '2026-09-06T23:30:00Z', // Sun Sep 6 @ 7:30 PM EDT (Nashville, TN)
     opponent: 'Ole Miss Rebels',
     venue: 'Nissan Stadium (Nashville, TN)',
-    tv: 'ABC / ESPN'
+    tv: 'ABC'
+  },
+  'floridastate': {
+    utc: '2026-09-07T23:30:00Z', // Mon Sep 7 @ 7:30 PM EDT (Tallahassee, FL)
+    opponent: 'SMU Mustangs',
+    venue: 'Doak Campbell Stadium (Tallahassee, FL)',
+    tv: 'ESPN'
+  },
+  'smu': {
+    utc: '2026-09-07T23:30:00Z', // Mon Sep 7 @ 7:30 PM EDT (Tallahassee, FL)
+    opponent: 'Florida State Seminoles',
+    venue: 'Doak Campbell Stadium (Tallahassee, FL)',
+    tv: 'ESPN'
   }
 };
 
@@ -320,6 +332,18 @@ function formatGameDateWithTime(game) {
   
   // Explicit kickoff time on the game
   let timeStr = game.kickoffTime || game.time;
+
+  // Convert UTC timestamp if present
+  if (!timeStr && game.utc) {
+    try {
+      const dt = new Date(game.utc);
+      timeStr = new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        timeZone: 'America/New_York'
+      }).format(dt) + ' ET';
+    } catch (e) {}
+  }
   
   // Canonical kickoff times for marquee 2026 games if not explicitly set
   if (!timeStr) {
@@ -335,6 +359,10 @@ function formatGameDateWithTime(game) {
       timeStr = '7:30 PM ET';
     } else if (/IRON BOWL/i.test(riv) || opp === 'AUB') {
       timeStr = '3:30 PM ET';
+    } else if (rawDate.includes('Sep 3') || rawDate.includes('Thu') || opp === 'GT' || opp === 'GEORGIA TECH') {
+      timeStr = '8:00 PM ET';
+    } else if (rawDate.includes('Sep 4') || rawDate.includes('Fri')) {
+      timeStr = '9:00 PM ET';
     } else if (game.isMarquee && (week.includes('1') || week.includes('2'))) {
       timeStr = '12:00 PM ET';
     } else if (game.isMarquee) {
@@ -344,10 +372,11 @@ function formatGameDateWithTime(game) {
     }
   }
 
+  const tvSuffix = game.tv ? ` • ${game.tv}` : '';
   if (rawDate) {
-    return `${rawDate} • ${timeStr}`;
+    return `${rawDate} • ${timeStr}${tvSuffix}`;
   }
-  return timeStr;
+  return `${timeStr}${tvSuffix}`;
 }
 window.formatGameDateWithTime = formatGameDateWithTime;
 
@@ -5152,7 +5181,9 @@ const ESPN_TEAM_MAP = {
   '12': 'arizona',
   '264': 'washington',
   '248': 'houston',
-  '97': 'louisville'
+  '97': 'louisville',
+  '38': 'colorado',
+  '9': 'arizonastate'
 };
 
 const TEAM_TO_ESPN_ID = {
@@ -5184,7 +5215,9 @@ const TEAM_TO_ESPN_ID = {
   arizona: '12',
   washington: '264',
   houston: '248',
-  louisville: '97'
+  louisville: '97',
+  colorado: '38',
+  arizonastate: '9'
 };
 
 const LiveSyncEngine = {
@@ -5218,7 +5251,7 @@ const LiveSyncEngine = {
 
   async syncScoreboard() {
     try {
-      const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard');
+      const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&limit=150');
       if (!res.ok) return false;
       const data = await res.json();
       if (!data.events || data.events.length === 0) return false;
@@ -5251,6 +5284,7 @@ const LiveSyncEngine = {
         if (!comp) return;
 
         const isCompleted = event.status?.type?.completed === true;
+        const isLiveInProgress = event.status?.type?.state === 'in';
         const competitors = comp.competitors || [];
         if (competitors.length < 2) return;
 
@@ -5260,6 +5294,25 @@ const LiveSyncEngine = {
 
         const homeTeamId = ESPN_TEAM_MAP[homeComp.id];
         const awayTeamId = ESPN_TEAM_MAP[awayComp.id];
+
+        // Extract real-time kickoff timestamp and TV broadcast
+        const eventUtc = event.date;
+        let eventKickoffTime = null;
+        if (eventUtc) {
+          try {
+            const dt = new Date(eventUtc);
+            eventKickoffTime = new Intl.DateTimeFormat('en-US', {
+              hour: 'numeric',
+              minute: '2-digit',
+              timeZone: 'America/New_York'
+            }).format(dt) + ' ET';
+          } catch (e) {}
+        }
+        let eventTv = comp.broadcast || '';
+        if (!eventTv && comp.broadcasts && comp.broadcasts.length > 0) {
+          eventTv = (comp.broadcasts[0].names || []).join('/');
+        }
+        const eventStatusDetail = event.status?.type?.shortDetail || event.status?.type?.detail || '';
 
         // 1. Extract live DraftKings odds from ESPN feed if available
         let liveSpreadHome = null;
@@ -5304,8 +5357,21 @@ const LiveSyncEngine = {
         if (homeTeamId && TEAMS_DATABASE[homeTeamId]) {
           const game = findScheduledGame(TEAMS_DATABASE[homeTeamId].schedule, awayComp, true);
           if (game) {
-            if (isCompleted) {
+            if (eventUtc) game.utc = eventUtc;
+            if (eventKickoffTime) game.kickoffTime = eventKickoffTime;
+            if (eventTv) game.tv = eventTv;
+            if (eventStatusDetail) game.liveStatus = eventStatusDetail;
+
+            if (isLiveInProgress) {
+              game.isLive = true;
+              game.clock = event.status?.displayClock;
+              game.period = event.status?.period;
+              if (homeComp.score) game.actualScoreUt = parseInt(homeComp.score, 10);
+              if (awayComp.score) game.actualScoreOpp = parseInt(awayComp.score, 10);
+              updatedCount++;
+            } else if (isCompleted) {
               game.isFinal = true;
+              game.isLive = false;
               game.actualScoreUt = parseInt(homeComp.score, 10);
               game.actualScoreOpp = parseInt(awayComp.score, 10);
               updatedCount++;
@@ -5327,8 +5393,21 @@ const LiveSyncEngine = {
         if (awayTeamId && TEAMS_DATABASE[awayTeamId]) {
           const game = findScheduledGame(TEAMS_DATABASE[awayTeamId].schedule, homeComp, false);
           if (game) {
-            if (isCompleted) {
+            if (eventUtc) game.utc = eventUtc;
+            if (eventKickoffTime) game.kickoffTime = eventKickoffTime;
+            if (eventTv) game.tv = eventTv;
+            if (eventStatusDetail) game.liveStatus = eventStatusDetail;
+
+            if (isLiveInProgress) {
+              game.isLive = true;
+              game.clock = event.status?.displayClock;
+              game.period = event.status?.period;
+              if (awayComp.score) game.actualScoreUt = parseInt(awayComp.score, 10);
+              if (homeComp.score) game.actualScoreOpp = parseInt(homeComp.score, 10);
+              updatedCount++;
+            } else if (isCompleted) {
               game.isFinal = true;
+              game.isLive = false;
               game.actualScoreUt = parseInt(awayComp.score, 10);
               game.actualScoreOpp = parseInt(homeComp.score, 10);
               updatedCount++;
@@ -5346,6 +5425,11 @@ const LiveSyncEngine = {
           }
         }
       });
+
+      if (updatedCount > 0) {
+        if (typeof window.renderScheduleGrid === 'function') window.renderScheduleGrid();
+        if (typeof window.updateCountdownTickerForActiveTeam === 'function') window.updateCountdownTickerForActiveTeam();
+      }
 
       return updatedCount > 0;
     } catch (err) {
