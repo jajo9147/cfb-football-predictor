@@ -223,9 +223,13 @@
       return { error: { message: 'Please enter both email and password.' } };
     }
 
-    // Built-in Reviewer / Demo account fallback
+    // Built-in Reviewer / Demo account fallback (Apple Guideline 2.1 Demo Credentials)
     const cleanEmail = (email || '').trim().toLowerCase();
-    if (cleanEmail === 'reviewer.demo@cfbprophet.app' || cleanEmail === 'apple.reviewer@cfbprophet.app' || cleanEmail.startsWith('reviewer.') || cleanEmail.startsWith('demo.')) {
+    const cleanPass = (password || '').trim();
+    if (cleanEmail === 'reviewer.demo@cfbprophet.app' || cleanEmail === 'apple.reviewer@cfbprophet.app') {
+      if (cleanPass !== 'Reviewer2026!' && cleanPass !== 'ReviewerDemo2026!') {
+        return { error: { message: 'Invalid email or password.' } };
+      }
       const demoUser = {
         id: 'reviewer_demo_user_2026',
         email: cleanEmail,
@@ -242,46 +246,6 @@
       if (typeof window.updateAuthUI === 'function') window.updateAuthUI();
       if (typeof window.renderSavedBracketsVault === 'function') window.renderSavedBracketsVault();
       return { data: { user: demoUser, session: { user: demoUser } }, error: null };
-    }
-
-    // Instant Jake Johnson (jajo9147@gmail.com) authentication
-    if (cleanEmail === 'jajo9147@gmail.com') {
-      const jakeUser = {
-        id: '116de3ad-fe71-4f75-8743-49162d223d08',
-        email: 'jajo9147@gmail.com',
-        displayName: 'Jake Johnson',
-        handle: 'Jake Johnson',
-        avatarUrl: '',
-        favTeam: localStorage.getItem('cfb_prophet_fav_team') || 'texas',
-        provider: 'google',
-        createdAt: '2026-08-28T14:00:00Z'
-      };
-      localStorage.setItem('cfb_prophet_auth_user_v4', JSON.stringify(jakeUser));
-      localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(jakeUser));
-      localStorage.setItem('cfb_prophet_user_handle', jakeUser.displayName);
-      if (typeof window.updateAuthUI === 'function') window.updateAuthUI();
-      if (typeof window.renderSavedBracketsVault === 'function') window.renderSavedBracketsVault();
-      return { data: { user: jakeUser, session: { user: jakeUser } }, error: null };
-    }
-
-    // Instant Jake T Johnson (jake.johnson1@verizon.com) authentication
-    if (cleanEmail === 'jake.johnson1@verizon.com') {
-      const verizonUser = {
-        id: '8f96664c-c8e9-4360-8071-503aac2e3155',
-        email: 'jake.johnson1@verizon.com',
-        displayName: 'Jake T Johnson',
-        handle: 'Jake T Johnson',
-        avatarUrl: '',
-        favTeam: localStorage.getItem('cfb_prophet_fav_team') || 'texas',
-        provider: 'email',
-        createdAt: '2026-08-28T14:00:00Z'
-      };
-      localStorage.setItem('cfb_prophet_auth_user_v4', JSON.stringify(verizonUser));
-      localStorage.setItem('cfb_prophet_auth_user_v3', JSON.stringify(verizonUser));
-      localStorage.setItem('cfb_prophet_user_handle', verizonUser.displayName);
-      if (typeof window.updateAuthUI === 'function') window.updateAuthUI();
-      if (typeof window.renderSavedBracketsVault === 'function') window.renderSavedBracketsVault();
-      return { data: { user: verizonUser, session: { user: verizonUser } }, error: null };
     }
 
     if (!isSupabaseConfigured()) {

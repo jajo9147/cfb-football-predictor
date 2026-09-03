@@ -7993,13 +7993,12 @@ async function handleSupabasePasswordAuth(e) {
   const cleanEmail = (email || '').trim().toLowerCase();
   const cleanPass = (password || '').trim();
 
-  // Instant built-in Apple App Reviewer Demo Account
-  if (
-    cleanEmail === 'reviewer.demo@cfbprophet.app' ||
-    cleanEmail === 'apple.reviewer@cfbprophet.app' ||
-    cleanEmail.startsWith('reviewer.') ||
-    cleanEmail.startsWith('demo.')
-  ) {
+  // Apple App Reviewer Demo Account (Guideline 2.1 Demo Credentials)
+  if (cleanEmail === 'reviewer.demo@cfbprophet.app' || cleanEmail === 'apple.reviewer@cfbprophet.app') {
+    if (cleanPass !== 'Reviewer2026!' && cleanPass !== 'ReviewerDemo2026!') {
+      showAuthAlert('Invalid email or password.', 'error');
+      return;
+    }
     const demoUser = {
       id: 'reviewer_demo_user_2026',
       email: cleanEmail,
@@ -8012,42 +8011,6 @@ async function handleSupabasePasswordAuth(e) {
     };
     setCurrentUser(demoUser);
     showCustomToast('🎉 Welcome, Apple App Reviewer! Signed in.');
-    closeAuthModal();
-    return;
-  }
-
-  // Instant Jake Johnson (jajo9147@gmail.com) authentication
-  if (cleanEmail === 'jajo9147@gmail.com') {
-    const jakeUser = {
-      id: '116de3ad-fe71-4f75-8743-49162d223d08',
-      email: 'jajo9147@gmail.com',
-      displayName: 'Jake Johnson',
-      handle: 'Jake Johnson',
-      avatarUrl: '',
-      favTeam: 'texas',
-      provider: 'google',
-      createdAt: '2026-08-28T14:00:00Z'
-    };
-    setCurrentUser(jakeUser);
-    showCustomToast('🎉 Welcome back, Jake Johnson! Signed in.');
-    closeAuthModal();
-    return;
-  }
-
-  // Instant Jake T Johnson (jake.johnson1@verizon.com) authentication
-  if (cleanEmail === 'jake.johnson1@verizon.com') {
-    const verizonUser = {
-      id: '8f96664c-c8e9-4360-8071-503aac2e3155',
-      email: 'jake.johnson1@verizon.com',
-      displayName: 'Jake T Johnson',
-      handle: 'Jake T Johnson',
-      avatarUrl: '',
-      favTeam: 'texas',
-      provider: 'email',
-      createdAt: '2026-08-28T14:00:00Z'
-    };
-    setCurrentUser(verizonUser);
-    showCustomToast('🎉 Welcome back, Jake T Johnson! Signed in.');
     closeAuthModal();
     return;
   }
