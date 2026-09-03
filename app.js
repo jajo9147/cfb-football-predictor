@@ -8041,6 +8041,89 @@ async function handleSupabasePasswordAuth(e) {
 }
 window.handleSupabasePasswordAuth = handleSupabasePasswordAuth;
 
+async function handleProfileSetPassword() {
+  const input = document.getElementById('authProfileNewPasswordInput');
+  const notice = document.getElementById('authPasswordStatusNotice');
+  const btn = document.getElementById('authProfileSavePasswordBtn');
+  const password = input?.value?.trim();
+
+  if (!password || password.length < 6) {
+    if (notice) {
+      notice.textContent = '❌ Min 6 characters required';
+      notice.style.color = '#F87171';
+    }
+    showCustomToast('⚠️ Password must be at least 6 characters.');
+    return;
+  }
+
+  if (btn) btn.disabled = true;
+  if (notice) {
+    notice.textContent = 'Updating password...';
+    notice.style.color = '#38BDF8';
+  }
+
+  try {
+    if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.updateAccountPassword === 'function') {
+      const res = await window.CFBProphetSupabase.updateAccountPassword(password);
+      if (res && res.error) {
+        if (notice) {
+          notice.textContent = `❌ ${res.error.message}`;
+          notice.style.color = '#F87171';
+        }
+        showCustomToast(`⚠️ Error: ${res.error.message}`);
+      } else {
+        if (notice) {
+          notice.textContent = '✅ Password saved!';
+          notice.style.color = '#34D399';
+        }
+        if (input) input.value = '';
+        showCustomToast('🔒 Password saved! You can now log in with email & password on any device.');
+      }
+    } else {
+      showCustomToast('⚠️ Cloud connection unavailable.');
+    }
+  } catch (err) {
+    showCustomToast(`⚠️ ${err.message || 'Failed to update password'}`);
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+window.handleProfileSetPassword = handleProfileSetPassword;
+
+async function handleForgotPasswordRequest() {
+  const emailInput = document.getElementById('supaEmailInput');
+  let email = emailInput?.value?.trim();
+
+  if (!email) {
+    email = prompt('Enter your account email to receive a password creation / reset link:');
+    if (email) email = email.trim();
+  }
+
+  if (!email || !email.includes('@')) {
+    showAuthAlert('Please enter your email address first.', 'error');
+    return;
+  }
+
+  showAuthAlert(`Sending password setup link to ${email}...`, 'info');
+
+  try {
+    if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.resetPasswordForEmail === 'function') {
+      const res = await window.CFBProphetSupabase.resetPasswordForEmail(email);
+      if (res && res.error) {
+        showAuthAlert(res.error.message || 'Could not send email link.', 'error');
+      } else {
+        showAuthAlert(`📬 Password link sent to ${email}! Check your inbox to create your password.`, 'success');
+        showCustomToast(`📬 Password email sent to ${email}!`);
+      }
+    } else {
+      showAuthAlert('Cloud connection unavailable.', 'error');
+    }
+  } catch (err) {
+    showAuthAlert(err.message || 'Failed to send email link.', 'error');
+  }
+}
+window.handleForgotPasswordRequest = handleForgotPasswordRequest;
+
 function toggleSupabaseConfigDrawer() {
   const drawer = document.getElementById('supabaseConfigDrawer');
   if (drawer) {

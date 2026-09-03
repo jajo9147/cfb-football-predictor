@@ -1557,9 +1557,12 @@
               <i class="fa-solid fa-right-to-bracket"></i> <span id="supaPasswordSubmitLabel">Sign In</span>
             </button>
 
-            <div style="text-align: center; margin-top: 0.45rem;">
+            <div style="text-align: center; margin-top: 0.45rem; display: flex; flex-direction: column; gap: 0.35rem;">
               <button type="button" class="link-btn" id="togglePasswordModeBtn" onclick="toggleAuthPasswordMode()" style="background: none; border: none; color: #38BDF8; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: underline;">
                 Don't have an account? Create one
+              </button>
+              <button type="button" class="link-btn" id="forgotPasswordBtn" onclick="handleForgotPasswordRequest()" style="background: none; border: none; color: #94A3B8; font-size: 0.74rem; cursor: pointer; text-decoration: underline;">
+                <i class="fa-solid fa-key" style="margin-right: 3px;"></i> Forgot or set password via email
               </button>
             </div>
           </form>
@@ -1635,9 +1638,23 @@
             <span id="authProfileSavedCount" style="font-family: var(--font-mono); font-weight: 800; color: #38BDF8;">1 Active</span>
           </div>
 
-          <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.65rem;">
             <span style="font-size: 0.76rem; color: #94A3B8; font-family: var(--font-mono);">CLOUD SYNC STATUS:</span>
             <span style="font-size: 0.74rem; font-weight: 800; color: #34D399;"><i class="fa-solid fa-cloud-arrow-up"></i> Supabase Protected</span>
+          </div>
+
+          <!-- Account Password Setup / Update Section -->
+          <div style="padding-top: 0.25rem; text-align: left;" id="authSetPasswordSection">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <span style="font-size: 0.76rem; color: #94A3B8; font-family: var(--font-mono);">SET / UPDATE PASSWORD:</span>
+              <span style="font-size: 0.72rem; color: #38BDF8;" id="authPasswordStatusNotice">Works with Email Login</span>
+            </div>
+            <div style="display: flex; gap: 0.45rem; align-items: center;">
+              <input type="password" id="authProfileNewPasswordInput" class="auth-input" placeholder="Enter new password (min 6 chars)" style="font-size: 0.8rem; padding: 0.45rem 0.65rem; background: rgba(30, 41, 59, 0.95); border: 1px solid rgba(255, 255, 255, 0.15); color: #F8FAFC; border-radius: var(--radius-sm); flex: 1;">
+              <button type="button" class="save-bracket-btn" id="authProfileSavePasswordBtn" onclick="handleProfileSetPassword()" style="padding: 0.45rem 0.85rem; font-size: 0.78rem; white-space: nowrap; background: linear-gradient(135deg, #0284C7, #0369A1); color: #FFFFFF; font-weight: 700; border: 1px solid #38BDF8;">
+                <i class="fa-solid fa-lock"></i> Save
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1707,11 +1724,11 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=351"></script>
-  <script src="qrious.min.js?v=351"></script>
-  <script src="qrcode.min.js?v=351"></script>
-  <script src="data/teams.js?v=351"></script>
-  <script src="data/community_brackets.js?v=351"></script>
-  <script src="app.js?v=351"></script>
+  <script src="supabase-client.js?v=352"></script>
+  <script src="qrious.min.js?v=352"></script>
+  <script src="qrcode.min.js?v=352"></script>
+  <script src="data/teams.js?v=352"></script>
+  <script src="data/community_brackets.js?v=352"></script>
+  <script src="app.js?v=352"></script>
 </body>
 </html>

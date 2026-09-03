@@ -279,6 +279,30 @@
     });
   }
 
+  // 5b. Update / Set Password for current user
+  async function updateAccountPassword(newPassword) {
+    if (!isSupabaseConfigured()) {
+      return { error: { message: 'Supabase project not connected.' } };
+    }
+    if (!newPassword || newPassword.length < 6) {
+      return { error: { message: 'Password must be at least 6 characters.' } };
+    }
+    return await supabaseClient.auth.updateUser({ password: newPassword });
+  }
+
+  // 5c. Send Password Reset / Setup Link via Email
+  async function resetPasswordForEmail(email) {
+    if (!isSupabaseConfigured()) {
+      return { error: { message: 'Supabase project not connected.' } };
+    }
+    if (!email || !email.includes('@')) {
+      return { error: { message: 'Please enter a valid email address.' } };
+    }
+    return await supabaseClient.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: window.location.origin + window.location.pathname
+    });
+  }
+
   // 6. Sign Out
   async function signOut() {
     if (supabaseClient) {
@@ -403,6 +427,8 @@
     signInWithMagicLink: signInWithMagicLink,
     signInWithPassword: signInWithPassword,
     signUpWithPassword: signUpWithPassword,
+    updateAccountPassword: updateAccountPassword,
+    resetPasswordForEmail: resetPasswordForEmail,
     signOut: signOut,
     saveBracket: saveBracketToCloud,
     saveBracketToCloud: saveBracketToCloud,
