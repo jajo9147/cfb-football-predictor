@@ -18,6 +18,15 @@ ESPN_SCOREBOARD_URL = "https://site.api.espn.com/apis/site/v2/sports/football/co
 
 def fetch_espn_scores():
     try:
+        import subprocess
+        res = subprocess.run(['curl', '-s', '-H', 'Accept: application/json', ESPN_SCOREBOARD_URL], stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
+        if res.returncode == 0 and res.stdout:
+            data = json.loads(res.stdout.decode('utf-8'))
+            return data.get('events', [])
+    except Exception:
+        pass
+
+    try:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
             'Accept': 'application/json',

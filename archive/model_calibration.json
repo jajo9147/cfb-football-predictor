@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-08-25T15:40:52.539812+00:00",
+  "updatedAt": "2026-09-04T17:23:28.679520+00:00",
   "season": 2026,
   "overallStats": {
-    "totalGames": 6,
-    "straightUpWins": 5,
+    "totalGames": 9,
+    "straightUpWins": 8,
     "straightUpLosses": 1,
-    "straightUpPct": 83.3,
-    "atsWins": 5,
+    "straightUpPct": 88.9,
+    "atsWins": 8,
     "atsLosses": 1,
-    "atsPct": 83.3,
-    "brierScore": 0.124,
+    "atsPct": 88.9,
+    "brierScore": 0.103,
     "brierGrade": "Good (< 0.150)",
-    "logLoss": 0.367
+    "logLoss": 0.341
   },
   "calibrationBins": [
     {
@@ -29,8 +29,8 @@
     {
       "binRange": "70% - 80%",
       "predictedProbAvg": 75.0,
-      "actualWinFreq": 75.0,
-      "sampleSize": 0
+      "actualWinFreq": 100.0,
+      "sampleSize": 3
     },
     {
       "binRange": "80% - 90%",
@@ -149,6 +149,45 @@
       "scoreFav": 27,
       "scoreDog": 20,
       "brier": "0.230"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "USC Trojans vs San Jos\u00e9 State Spartans",
+      "pred": "USC Trojans (75%)",
+      "prob": 0.75,
+      "actual": "USC Trojans 42 - San Jos\u00e9 State Spartans 26",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": true,
+      "scoreFav": 42,
+      "scoreDog": 26,
+      "brier": "0.062"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Utah Utes vs Idaho Vandals",
+      "pred": "Utah Utes (75%)",
+      "prob": 0.75,
+      "actual": "Utah Utes 66 - Idaho Vandals 14",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": true,
+      "scoreFav": 66,
+      "scoreDog": 14,
+      "brier": "0.062"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Missouri Tigers vs Arkansas-Pine Bluff Golden Lions",
+      "pred": "Missouri Tigers (75%)",
+      "prob": 0.75,
+      "actual": "Missouri Tigers 54 - Arkansas-Pine Bluff Golden Lions 14",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": true,
+      "scoreFav": 54,
+      "scoreDog": 14,
+      "brier": "0.062"
     }
   ],
   "retrainingHistory": [
