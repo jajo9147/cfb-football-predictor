@@ -2822,6 +2822,300 @@ select option {
 }
 
 /* ==========================================================================
+   PREDICTION ACCURACY & WRONG/CORRECT MATCHUP EVALUATION STYLES
+   ========================================================================== */
+
+.team-schedule-accuracy-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.2rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all var(--transition-fast);
+}
+
+.team-schedule-accuracy-banner.perfect {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.15);
+}
+
+.team-schedule-accuracy-banner.has-misses {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  box-shadow: 0 4px 18px rgba(239, 68, 68, 0.15);
+}
+
+.ts-acc-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ts-acc-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.perfect .ts-acc-icon {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.has-misses .ts-acc-icon {
+  background: rgba(239, 68, 68, 0.2);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.ts-acc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ts-acc-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #F8FAFC;
+  text-transform: uppercase;
+}
+
+.ts-acc-detail {
+  font-size: 0.82rem;
+  color: #94A3B8;
+}
+
+.ts-pts-lost {
+  color: #F87171;
+  font-weight: 700;
+}
+
+.ts-pts-perfect {
+  color: #34D399;
+  font-weight: 700;
+}
+
+.ts-acc-score {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.ts-pts-num {
+  font-family: var(--font-mono);
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.ts-pts-total {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #94A3B8;
+  margin-left: 2px;
+}
+
+/* Card Highlights for Wrong & Correct Predictions */
+.game-card.prediction-wrong-card {
+  border: 1.5px solid rgba(239, 68, 68, 0.6) !important;
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.12) 0%, rgba(15, 23, 42, 0.85) 100%) !important;
+  box-shadow: 0 4px 22px rgba(239, 68, 68, 0.2) !important;
+}
+
+.game-card.prediction-correct-card {
+  border: 1.5px solid rgba(16, 185, 129, 0.5) !important;
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%) !important;
+  box-shadow: 0 4px 22px rgba(16, 185, 129, 0.15) !important;
+}
+
+.prediction-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.prediction-status-badge.wrong {
+  background: rgba(239, 68, 68, 0.22);
+  border: 1px solid rgba(239, 68, 68, 0.6);
+  color: #FCA5A5;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+.prediction-status-badge.correct {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  color: #6EE7B7;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+}
+
+.prediction-outcome-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--radius-sm);
+  gap: 8px;
+}
+
+.prediction-outcome-bar.wrong {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.prediction-outcome-bar.correct {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.prediction-outcome-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prediction-x-icon {
+  font-size: 1.4rem;
+  color: #EF4444;
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.6));
+}
+
+.prediction-check-icon {
+  font-size: 1.4rem;
+  color: #10B981;
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.5));
+}
+
+.prediction-outcome-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.outcome-header-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.outcome-status-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.outcome-status-title.wrong {
+  color: #EF4444;
+}
+
+.outcome-status-title.correct {
+  color: #10B981;
+}
+
+.points-diff-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.points-diff-badge.minus {
+  background: rgba(239, 68, 68, 0.3);
+  color: #FCA5A5;
+  border: 1px solid rgba(239, 68, 68, 0.6);
+}
+
+.points-diff-badge.plus {
+  background: rgba(16, 185, 129, 0.25);
+  color: #6EE7B7;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.outcome-matchup-sub {
+  font-size: 0.76rem;
+  color: #94A3B8;
+}
+
+.pick-strike {
+  color: #F87171;
+  text-decoration: line-through;
+}
+
+.pick-success {
+  color: #34D399;
+}
+
+.actual-winner {
+  color: #FFFFFF;
+}
+
+.bullet-sep {
+  opacity: 0.5;
+  margin: 0 4px;
+}
+
+.bracket-banner-score-pill {
+  display: inline-block;
+  background: rgba(37, 99, 235, 0.3);
+  border: 1px solid rgba(96, 165, 250, 0.5);
+  color: #93C5FD;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-left: 6px;
+}
+
+.detail-pick-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.detail-pick-tag.correct {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.detail-pick-tag.wrong {
+  background: rgba(239, 68, 68, 0.2);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+/* ==========================================================================
    CONFERENCE CHAMPIONSHIP GAMES (CCG) SECTION
    ========================================================================== */
 
