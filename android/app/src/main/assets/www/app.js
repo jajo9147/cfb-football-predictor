@@ -4050,7 +4050,7 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
     return fallbackSeed || '';
   }
 
-  function teamRow(fallbackSeed, tObj, score, isWinner, isHighlighted, gameId, side) {
+  function teamRow(fallbackSeed, tObj, score, isWinner, isHighlighted, gameId, side, isFinalGame = false) {
     const seedNum = getTeamSeed(tObj, fallbackSeed);
     const name = tObj ? tObj.shortName || tObj.name : `Seed #${seedNum}`;
     const logo = tObj?.logoUrl || (tObj?.abbr && typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[tObj.abbr] : '') || '';
@@ -4317,9 +4317,9 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
           </div>
         </div>
 
-        <button class="action-btn" onclick="openSaveBracketModal()" style="width: 100%; background: linear-gradient(135deg, #10B981, #059669); color: #FFFFFF; font-weight: 800; font-size: 0.82rem; padding: 0.55rem 0.85rem; border-radius: var(--radius-md); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4); border: 1px solid rgba(255, 255, 255, 0.2); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem;" title="Submit and save your complete season and playoff bracket projection">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span>Submit Your Picks</span>
+        <button class="action-btn" onclick="openSaveBracketModal()" style="width: 100%; background: ${state.activeSavedBracketId ? 'linear-gradient(135deg, #2563EB, #1D4ED8)' : 'linear-gradient(135deg, #10B981, #059669)'}; color: #FFFFFF; font-weight: 800; font-size: 0.82rem; padding: 0.55rem 0.85rem; border-radius: var(--radius-md); box-shadow: 0 4px 14px ${state.activeSavedBracketId ? 'rgba(37, 99, 235, 0.4)' : 'rgba(16, 185, 129, 0.4)'}; border: 1px solid rgba(255, 255, 255, 0.2); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem;" title="${state.activeSavedBracketId ? 'Update and save changes to your active bracket' : 'Submit and save your complete season and playoff bracket projection'}">
+          <i class="fa-solid ${state.activeSavedBracketId ? 'fa-cloud-arrow-up' : 'fa-paper-plane'}"></i>
+          <span>${state.activeSavedBracketId ? 'Save Bracket Changes' : 'Submit Your Picks'}</span>
         </button>
       </div>
     </div>
@@ -8870,8 +8870,21 @@ function getSavedBrackets() {
   return Array.from(userBracketsMap.values());
 }
 
-
-
+function getAllKnownBrackets() {
+  const map = new Map();
+  if (typeof getCommunityBrackets === 'function') {
+    try {
+      getCommunityBrackets().forEach(b => { if (b && b.id) map.set(b.id, b); });
+    } catch(e) {}
+  }
+  if (typeof getSavedBrackets === 'function') {
+    try {
+      getSavedBrackets().forEach(b => { if (b && b.id) map.set(b.id, b); });
+    } catch(e) {}
+  }
+  return Array.from(map.values());
+}
+window.getAllKnownBrackets = getAllKnownBrackets;
 
 function createProphetAiBenchmarkBracket() {
   return {
@@ -9748,8 +9761,11 @@ function renderSavedBracketsVault() {
         </div>
 
         <div class="lb-action-col">
+          <button class="lb-adjust-btn" onclick="event.stopPropagation(); loadSavedBracket('${b.id}', true);" title="Load into simulator and edit scores/picks">
+            <i class="fa-solid fa-pen-to-square"></i> <span>Adjust</span>
+          </button>
           <button class="lb-view-details-btn" onclick="event.stopPropagation(); openSubmissionDetailModal('${b.id}', event)" title="View picks breakdown & details">
-            <span>View Picks</span> <i class="fa-solid fa-chevron-right"></i>
+            <span>View</span> <i class="fa-solid fa-chevron-right"></i>
           </button>
         </div>
       </div>
@@ -9898,8 +9914,8 @@ function openSubmissionDetailModal(bracketId, e) {
 
   if (actionsEl) {
     actionsEl.innerHTML = `
-      <button class="action-btn" onclick="closeSubmissionDetailModal(); loadSavedBracket('${b.id}');" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #FFFFFF;">
-        <i class="fa-solid fa-play"></i> Load into Simulator
+      <button class="action-btn" onclick="closeSubmissionDetailModal(); loadSavedBracket('${b.id}', true);" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #FFFFFF; font-weight: 700;">
+        <i class="fa-solid fa-pen-to-square"></i> Adjust & Edit in Simulator
       </button>
       <button class="action-btn secondary-btn" onclick="openCfpBracketCanvasModalForBracket('${b.id}')">
         <i class="fa-solid fa-camera-retro"></i> Graphic
@@ -9983,8 +9999,8 @@ function openSaveBracketModal(fromVault = false) {
   const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
   const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate']);
 
-  const allComm = getCommunityBrackets();
-  const activeExisting = state.activeSavedBracketId ? allComm.find(b => b.id === state.activeSavedBracketId) : null;
+  const allKnown = getAllKnownBrackets();
+  const activeExisting = state.activeSavedBracketId ? allKnown.find(b => b.id === state.activeSavedBracketId) : null;
   const isEditingExisting = activeExisting && 
     activeExisting.id !== 'bracket_prophet_ai_baseline' && 
     activeExisting.id !== 'bracket_usc_wins_out_curated' &&
@@ -10077,8 +10093,8 @@ function handleConfirmSaveBracket() {
     } catch(e) {}
   }
 
-  const allComm = getCommunityBrackets();
-  const activeExisting = state.activeSavedBracketId ? allComm.find(b => b.id === state.activeSavedBracketId) : null;
+  const allKnown = getAllKnownBrackets();
+  const activeExisting = state.activeSavedBracketId ? allKnown.find(b => b.id === state.activeSavedBracketId) : null;
   const wasEditing = activeExisting && 
     activeExisting.id !== 'bracket_prophet_ai_baseline' && 
     activeExisting.id !== 'bracket_usc_wins_out_curated' &&
@@ -10094,6 +10110,7 @@ function handleConfirmSaveBracket() {
   const modal = document.getElementById('saveBracketModal');
   if (modal) modal.classList.remove('open');
   showCustomToast(`🎉 Bracket "${saved.name}" ${wasEditing ? 'updated' : 'saved'} & published to Community Vault!`);
+  renderActiveBracketEditorBar(saved);
   openBracketVaultModal();
   syncCommunityBracketsFromCloud();
 }
@@ -10377,10 +10394,13 @@ function copyCfpBracketGraphic() {
   });
 }
 
-function loadSavedBracket(bracketId) {
-  const allBrackets = getCommunityBrackets();
+function loadSavedBracket(bracketId, andEdit = false) {
+  const allBrackets = getAllKnownBrackets();
   const target = allBrackets.find(b => b.id === bracketId);
-  if (!target) return;
+  if (!target) {
+    showCustomToast('⚠️ Could not locate bracket to load.');
+    return;
+  }
 
   state.activeSavedBracketId = target.id;
   if (target.simState) {
@@ -10395,10 +10415,54 @@ function loadSavedBracket(bracketId) {
     state.currentTeamId = target.champion.id;
   }
 
+  if (!TEAMS_DATABASE[state.currentTeamId]) {
+    state.currentTeamId = target.champion?.id || getTopRankedTeamId() || 'ohiostate';
+  }
+
   closeBracketVaultModal();
-  updateTeamView(state.currentTeamId);
-  showCustomToast(`🎯 Loaded predictions: "${target.name}"`);
+  if (typeof closeSubmissionDetailModal === 'function') closeSubmissionDetailModal();
+
+  // Full recalculation and rendering
+  selectTeam(state.currentTeamId);
+
+  // Render the persistent Active Bracket Editing Bar
+  renderActiveBracketEditorBar(target);
+
+  if (andEdit) {
+    setTimeout(() => {
+      const el = document.getElementById('playoffSection') || document.getElementById('scheduleSection');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 250);
+  }
+
+  showCustomToast(`🎯 Loaded "${target.name}" into Simulator!`);
 }
+window.loadSavedBracket = loadSavedBracket;
+
+function renderActiveBracketEditorBar(bracket) {
+  const banner = document.getElementById('activeBracketEditorBanner');
+  if (!banner) return;
+  const nameEl = document.getElementById('activeBracketBannerName');
+  if (bracket && state.activeSavedBracketId) {
+    if (nameEl) nameEl.innerText = `"${bracket.name || 'Personal Bracket'}"`;
+    banner.style.display = 'block';
+  } else {
+    banner.style.display = 'none';
+  }
+}
+window.renderActiveBracketEditorBar = renderActiveBracketEditorBar;
+
+function exitBracketEditingMode() {
+  state.activeSavedBracketId = null;
+  state.userPicks = {};
+  state.manualScores = {};
+  state.ccgPicks = {};
+  state.playoffPicks = {};
+  renderActiveBracketEditorBar(null);
+  selectTeam(state.currentTeamId);
+  showCustomToast('🔄 Exited bracket editing mode (returned to baseline).');
+}
+window.exitBracketEditingMode = exitBracketEditingMode;
 
 
 
@@ -11194,6 +11258,18 @@ window.addEventListener('load', () => {
     setTimeout(() => {
       if (typeof window.switchAppView === 'function') window.switchAppView(hash);
     }, 600);
+  }
+  const isWeb = window.location.protocol !== 'file:';
+  if (hash === 'vault' || hash === 'leaderboard' || (isWeb && new URLSearchParams(window.location.search).get('vault'))) {
+    setTimeout(() => {
+      if (typeof window.openBracketVaultModal === 'function') window.openBracketVaultModal();
+    }, 600);
+  }
+  const editBracketId = isWeb ? new URLSearchParams(window.location.search).get('editBracket') : null;
+  if (editBracketId) {
+    setTimeout(() => {
+      if (typeof window.loadSavedBracket === 'function') window.loadSavedBracket(editBracketId, true);
+    }, 800);
   }
 });
 

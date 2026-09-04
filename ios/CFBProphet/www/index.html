@@ -262,6 +262,31 @@
     </div>
   </section>
 
+  <!-- Active Bracket Editing Sticky Banner -->
+  <aside class="active-bracket-banner" id="activeBracketEditorBanner" style="display: none;" aria-label="Active bracket editing bar">
+    <div class="container active-bracket-banner-inner">
+      <div class="active-bracket-info">
+        <div class="active-bracket-title-row">
+          <span class="active-bracket-pill"><i class="fa-solid fa-pen-to-square"></i> EDITING SAVED BRACKET</span>
+          <span class="active-bracket-name" id="activeBracketBannerName">"My Bracket"</span>
+        </div>
+        <div class="active-bracket-hint">
+          Tweak regular-season, CCG, or playoff picks below. When finished, hit <strong>Save Updates</strong> to update your leaderboard entry.
+        </div>
+      </div>
+      <div class="active-bracket-actions">
+        <button class="action-btn save-updates-btn" id="activeBracketSaveBtn" onclick="openSaveBracketModal(false)" title="Save changes to this bracket">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <span>Save Updates</span>
+        </button>
+        <button class="action-btn exit-editing-btn" onclick="exitBracketEditingMode()" title="Exit bracket editing and return to baseline">
+          <i class="fa-solid fa-xmark"></i>
+          <span>Exit</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
   <!-- Active Team Hero Card (Clean & Focused: Hype Card + More) -->
   <header class="team-hero-section">
     <div class="container">
@@ -1748,11 +1773,11 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=355"></script>
-  <script src="qrious.min.js?v=355"></script>
-  <script src="qrcode.min.js?v=355"></script>
-  <script src="data/teams.js?v=355"></script>
-  <script src="data/community_brackets.js?v=355"></script>
-  <script src="app.js?v=355"></script>
+  <script src="supabase-client.js?v=357"></script>
+  <script src="qrious.min.js?v=357"></script>
+  <script src="qrcode.min.js?v=357"></script>
+  <script src="data/teams.js?v=357"></script>
+  <script src="data/community_brackets.js?v=357"></script>
+  <script src="app.js?v=357"></script>
 </body>
 </html>
