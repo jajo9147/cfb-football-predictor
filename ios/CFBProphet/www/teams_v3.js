@@ -7335,7 +7335,10 @@ var TEAMS_DATABASE = {
       {
         "id": "usc-w2",
         "week": "WEEK 1",
-        "date": "Sep 5, 2026",
+        "date": "Sep 4, 2026",
+        "kickoffTime": "9:00 PM ET",
+        "utc": "2026-09-05T01:00:00Z",
+        "tv": "FOX",
         "opponent": "Fresno State Bulldogs",
         "oppAbbr": "FRES",
         "oppRank": "NR",
@@ -7346,7 +7349,7 @@ var TEAMS_DATABASE = {
         "isHome": true,
         "stadium": "Los Angeles Memorial Coliseum",
         "location": "Los Angeles, CA",
-        "isMarquee": false,
+        "isMarquee": true,
         "isBigTen": false,
         "vegasSpread": -27.5,
         "overUnder": 58.5,
@@ -7354,12 +7357,12 @@ var TEAMS_DATABASE = {
         "projScoreUt": 45,
         "projScoreOpp": 14,
         "scoutReport": {
-          "xFactor": "Coliseum home tempo and offensive line push.",
-          "keyMatchup": "USC receivers in space vs Fresno secondary.",
-          "summary": "Week 1 home clash at the LA Coliseum."
+          "xFactor": "Friday night lights at the Coliseum; Jayden Maiava passing rhythm.",
+          "keyMatchup": "USC receivers in space vs Fresno State secondary.",
+          "summary": "Week 1 Friday night home clash at the LA Coliseum (FOX, 9:00 PM ET / 6:00 PM PT)."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": true
       },
       {
         "id": "usc-w3",
@@ -8924,8 +8927,8 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isBig12": false,
         "rivalryName": "SEASON OPENER",
-        "vegasSpread": -18.5,
-        "overUnder": 60.5,
+        "vegasSpread": -31.5,
+        "overUnder": 57.5,
         "baseWinProb": 96,
         "projScoreUt": 38,
         "projScoreOpp": 14,
@@ -12529,7 +12532,7 @@ var TEAMS_DATABASE = {
         "date": "Sep 5, 2026",
         "opponent": "Northern Arizona Lumberjacks",
         "oppAbbr": "NAU",
-        "oppRank": "RV",
+        "oppRank": "FCS",
         "oppBadge": "NAU",
         "oppColor": "#003366",
         "oppSecondary": "#FFC627",
@@ -12543,18 +12546,18 @@ var TEAMS_DATABASE = {
         "isBigTen": false,
         "isAcc": false,
         "isConf": false,
-        "vegasSpread": 14.5,
-        "overUnder": 52.5,
-        "baseWinProb": 8,
-        "projScoreUt": 17,
-        "projScoreOpp": 34,
+        "vegasSpread": -28.5,
+        "overUnder": 54.5,
+        "baseWinProb": 98,
+        "projScoreUt": 42,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Cutter Boley passing precision and Kyson Brown explosive ground attack.",
           "keyMatchup": "Cutter Boley and WR duo (Miller & Harris) vs opponent secondary.",
           "summary": "Season opener in Tempe against in-state FCS Lumberjacks."
         },
-        "oppId": "arizona",
-        "is_tracked": true
+        "oppId": null,
+        "is_tracked": false
       },
       {
         "id": "asu-w2",

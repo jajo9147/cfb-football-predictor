@@ -328,23 +328,83 @@ function formatKickoffDateLocal(kickoffDate) {
 
 function formatGameDateWithTime(game) {
   if (!game) return '';
-  const rawDate = game.date || '';
-  
-  // Explicit kickoff time on the game
+  let rawDate = game.date || '';
   let timeStr = game.kickoffTime || game.time;
-
-  // Convert UTC timestamp if present
-  if (!timeStr && game.utc) {
+  
+  // 1. Authoritative UTC timestamp conversion to US Eastern Time & Day-of-week check
+  if (game.utc) {
     try {
       const dt = new Date(game.utc);
-      timeStr = new Intl.DateTimeFormat('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
+      
+      // Determine calendar date in US Eastern Time (primary sports broadcasting reference)
+      const etDateStr = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
         timeZone: 'America/New_York'
-      }).format(dt) + ' ET';
+      }).format(dt); // e.g. "Sep 4, 2026"
+
+      const etWeekday = new Intl.DateTimeFormat('en-US', {
+        weekday: 'short',
+        timeZone: 'America/New_York'
+      }).format(dt); // e.g. "Fri"
+
+      // Check if this game is TODAY or TOMORROW in US Eastern Time
+      const now = new Date();
+      const todayEtStr = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        timeZone: 'America/New_York'
+      }).format(now);
+
+      const tomorrowDt = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+      const tomorrowEtStr = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        timeZone: 'America/New_York'
+      }).format(tomorrowDt);
+
+      const monthDayEt = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'America/New_York'
+      }).format(dt);
+
+      if (etDateStr === todayEtStr) {
+        rawDate = `TODAY (${etWeekday}, ${monthDayEt})`;
+      } else if (etDateStr === tomorrowEtStr) {
+        rawDate = `TOMORROW (${etWeekday}, ${monthDayEt})`;
+      } else {
+        rawDate = `${etWeekday}, ${etDateStr}`;
+      }
+
+      if (!timeStr) {
+        timeStr = new Intl.DateTimeFormat('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          timeZone: 'America/New_York'
+        }).format(dt) + ' ET';
+      }
+    } catch (e) {}
+  } else if (rawDate) {
+    // If no UTC timestamp, check if rawDate matches today
+    try {
+      const now = new Date();
+      const todayEtStr = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'America/New_York'
+      }).format(now);
+      if (rawDate.includes('Sep 4') && todayEtStr.includes('Sep 4')) {
+        rawDate = `TODAY (Fri, Sep 4)`;
+      } else if (rawDate.includes('Sep 5') && todayEtStr.includes('Sep 4')) {
+        rawDate = `TOMORROW (Sat, Sep 5)`;
+      }
     } catch (e) {}
   }
-  
+
   // Canonical kickoff times for marquee 2026 games if not explicitly set
   if (!timeStr) {
     const opp = (game.oppAbbr || game.opponent || '').toUpperCase();
@@ -361,7 +421,7 @@ function formatGameDateWithTime(game) {
       timeStr = '3:30 PM ET';
     } else if (rawDate.includes('Sep 3') || rawDate.includes('Thu') || opp === 'GT' || opp === 'GEORGIA TECH') {
       timeStr = '8:00 PM ET';
-    } else if (rawDate.includes('Sep 4') || rawDate.includes('Fri')) {
+    } else if (rawDate.includes('Sep 4') || rawDate.includes('Fri') || opp === 'FRES' || opp === 'FRESNO' || opp === 'STAN') {
       timeStr = '9:00 PM ET';
     } else if (game.isMarquee && (week.includes('1') || week.includes('2'))) {
       timeStr = '12:00 PM ET';
@@ -387,8 +447,18 @@ function updateCountdownTickerForActiveTeam() {
 
   const teamId = state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
   const team = TEAMS_DATABASE[teamId] || Object.values(TEAMS_DATABASE)[0];
-  const kickoffInfo = TEAM_OPENER_KICKOFFS[teamId] || { utc: '2026-09-05T16:00:00Z', tv: 'ABC / ESPN' };
-  const kickoffDate = new Date(kickoffInfo.utc);
+
+  // Find the next upcoming uncompleted game in the team's schedule
+  let nextGame = null;
+  if (team && Array.isArray(team.schedule)) {
+    nextGame = team.schedule.find(g => !g.isFinal && (g.utc || g.kickoffTime || g.date));
+  }
+
+  const kickoffUtc = nextGame?.utc || TEAM_OPENER_KICKOFFS[teamId]?.utc || '2026-09-05T16:00:00Z';
+  const kickoffTv = nextGame?.tv || TEAM_OPENER_KICKOFFS[teamId]?.tv || 'ABC / ESPN';
+  const opponentName = nextGame?.opponent || TEAM_OPENER_KICKOFFS[teamId]?.opponent || 'Next Opponent';
+
+  const kickoffDate = new Date(kickoffUtc);
   const now = new Date().getTime();
   const diff = kickoffDate.getTime() - now;
 
@@ -405,10 +475,14 @@ function updateCountdownTickerForActiveTeam() {
   const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
   if (textEl) {
-    textEl.innerText = `${team.abbr} KICKOFF: ${days}D ${hours}H • ${localFormatted}`;
+    if (days === 0) {
+      textEl.innerText = `${team.abbr} KICKOFF TODAY: ${hours}H ${mins}M • ${localFormatted}`;
+    } else {
+      textEl.innerText = `${team.abbr} KICKOFF: ${days}D ${hours}H • ${localFormatted}`;
+    }
   }
   if (badgeEl) {
-    badgeEl.title = `Next ${team.name} Kickoff: ${localFormatted} (Converted to your local timezone: ${tzAbbr})\nTV: ${kickoffInfo.tv || 'National Broadcast'}\nOpener: ${kickoffInfo.opponent || 'Week 1'}`;
+    badgeEl.title = `Next ${team.name} Kickoff: ${localFormatted} (Converted to your local timezone: ${tzAbbr})\nTV: ${kickoffTv}\nMatchup: vs ${opponentName}`;
   }
 }
 window.updateCountdownTickerForActiveTeam = updateCountdownTickerForActiveTeam;
@@ -5298,6 +5372,7 @@ const LiveSyncEngine = {
         // Extract real-time kickoff timestamp and TV broadcast
         const eventUtc = event.date;
         let eventKickoffTime = null;
+        let eventDateStr = null;
         if (eventUtc) {
           try {
             const dt = new Date(eventUtc);
@@ -5306,6 +5381,13 @@ const LiveSyncEngine = {
               minute: '2-digit',
               timeZone: 'America/New_York'
             }).format(dt) + ' ET';
+
+            eventDateStr = new Intl.DateTimeFormat('en-US', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric',
+              timeZone: 'America/New_York'
+            }).format(dt); // e.g. "Sep 4, 2026"
           } catch (e) {}
         }
         let eventTv = comp.broadcast || '';
@@ -5313,6 +5395,16 @@ const LiveSyncEngine = {
           eventTv = (comp.broadcasts[0].names || []).join('/');
         }
         const eventStatusDetail = event.status?.type?.shortDetail || event.status?.type?.detail || '';
+
+        // Update global opener kickoffs mapping if available
+        if (homeTeamId && TEAM_OPENER_KICKOFFS[homeTeamId] && eventUtc) {
+          TEAM_OPENER_KICKOFFS[homeTeamId].utc = eventUtc;
+          if (eventTv) TEAM_OPENER_KICKOFFS[homeTeamId].tv = eventTv;
+        }
+        if (awayTeamId && TEAM_OPENER_KICKOFFS[awayTeamId] && eventUtc) {
+          TEAM_OPENER_KICKOFFS[awayTeamId].utc = eventUtc;
+          if (eventTv) TEAM_OPENER_KICKOFFS[awayTeamId].tv = eventTv;
+        }
 
         // 1. Extract live DraftKings odds from ESPN feed if available
         let liveSpreadHome = null;
@@ -5358,6 +5450,7 @@ const LiveSyncEngine = {
           const game = findScheduledGame(TEAMS_DATABASE[homeTeamId].schedule, awayComp, true);
           if (game) {
             if (eventUtc) game.utc = eventUtc;
+            if (eventDateStr) game.date = eventDateStr;
             if (eventKickoffTime) game.kickoffTime = eventKickoffTime;
             if (eventTv) game.tv = eventTv;
             if (eventStatusDetail) game.liveStatus = eventStatusDetail;
@@ -5394,6 +5487,7 @@ const LiveSyncEngine = {
           const game = findScheduledGame(TEAMS_DATABASE[awayTeamId].schedule, homeComp, false);
           if (game) {
             if (eventUtc) game.utc = eventUtc;
+            if (eventDateStr) game.date = eventDateStr;
             if (eventKickoffTime) game.kickoffTime = eventKickoffTime;
             if (eventTv) game.tv = eventTv;
             if (eventStatusDetail) game.liveStatus = eventStatusDetail;
@@ -5427,7 +5521,9 @@ const LiveSyncEngine = {
       });
 
       if (updatedCount > 0) {
-        if (typeof window.renderScheduleGrid === 'function') window.renderScheduleGrid();
+        if (typeof renderSchedule === 'function') renderSchedule();
+        if (typeof window.renderSchedule === 'function') window.renderSchedule();
+        if (typeof updateCountdownTickerForActiveTeam === 'function') updateCountdownTickerForActiveTeam();
         if (typeof window.updateCountdownTickerForActiveTeam === 'function') window.updateCountdownTickerForActiveTeam();
       }
 
@@ -8319,6 +8415,50 @@ async function executeDeleteAccount() {
   closeAuthModal();
 }
 window.executeDeleteAccount = executeDeleteAccount;
+
+async function runAccountDeletionDemoRecording() {
+  console.log("Starting automated Account Deletion demo flow...");
+  // Step 1: Initial home view pause
+  await new Promise(r => setTimeout(r, 2000));
+  
+  // Step 2: Open Sign In modal
+  openAuthModal();
+  await new Promise(r => setTimeout(r, 2200));
+  
+  // Step 3: Click demo reviewer credentials button
+  fillReviewerDemoCredentials();
+  await new Promise(r => setTimeout(r, 2500));
+  
+  // Step 4: Open profile modal
+  openAuthModal();
+  await new Promise(r => setTimeout(r, 2200));
+  
+  // Step 5: Smoothly scroll to the Delete Account button
+  const triggerBtn = document.getElementById('authDeleteAccountTriggerBtn');
+  if (triggerBtn) {
+    triggerBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  await new Promise(r => setTimeout(r, 2200));
+  
+  // Step 6: Reveal the confirmation dialog
+  showDeleteAccountConfirmation();
+  await new Promise(r => setTimeout(r, 3200));
+  
+  // Step 7: Confirm deletion
+  await executeDeleteAccount();
+  await new Promise(r => setTimeout(r, 4000));
+}
+window.runAccountDeletionDemoRecording = runAccountDeletionDemoRecording;
+
+// Check if demo recording flag was requested
+try {
+  if (localStorage.getItem('run_account_deletion_demo') === 'true') {
+    localStorage.removeItem('run_account_deletion_demo');
+    setTimeout(() => {
+      runAccountDeletionDemoRecording();
+    }, 2000);
+  }
+} catch (e) {}
 
 function saveCurrentProjectionAsBracket(name, creator, notes, forceNewId = false) {
   const evaluated = evaluateRegularSeasonAllTeams();

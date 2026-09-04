@@ -7335,7 +7335,10 @@ var TEAMS_DATABASE = {
       {
         "id": "usc-w2",
         "week": "WEEK 1",
-        "date": "Sep 5, 2026",
+        "date": "Sep 4, 2026",
+        "kickoffTime": "9:00 PM ET",
+        "utc": "2026-09-05T01:00:00Z",
+        "tv": "FOX",
         "opponent": "Fresno State Bulldogs",
         "oppAbbr": "FRES",
         "oppRank": "NR",
@@ -7346,7 +7349,7 @@ var TEAMS_DATABASE = {
         "isHome": true,
         "stadium": "Los Angeles Memorial Coliseum",
         "location": "Los Angeles, CA",
-        "isMarquee": false,
+        "isMarquee": true,
         "isBigTen": false,
         "vegasSpread": -27.5,
         "overUnder": 58.5,
@@ -7354,12 +7357,12 @@ var TEAMS_DATABASE = {
         "projScoreUt": 45,
         "projScoreOpp": 14,
         "scoutReport": {
-          "xFactor": "Coliseum home tempo and offensive line push.",
-          "keyMatchup": "USC receivers in space vs Fresno secondary.",
-          "summary": "Week 1 home clash at the LA Coliseum."
+          "xFactor": "Friday night lights at the Coliseum; Jayden Maiava passing rhythm.",
+          "keyMatchup": "USC receivers in space vs Fresno State secondary.",
+          "summary": "Week 1 Friday night home clash at the LA Coliseum (FOX, 9:00 PM ET / 6:00 PM PT)."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": true
       },
       {
         "id": "usc-w3",
