@@ -1633,9 +1633,15 @@ function handleScoreInputChange(gameId, side, value) {
   const numVal = parseInt(value, 10);
   if (isNaN(numVal) || numVal < 0) return;
 
-  if (!state.manualScores) state.manualScores = {};
-  
   const gObj = findGameById(gameId) || { id: gameId };
+  if (gObj && gObj.isFinal) {
+    if (typeof showCustomToast === 'function') {
+      showCustomToast('🔒 Cannot edit completed game with official final score');
+    }
+    return;
+  }
+
+  if (!state.manualScores) state.manualScores = {};
   const currentSim = calculateAdjustedMatchup(gObj);
   let teamScore = state.manualScores[gameId]?.teamScore ?? currentSim.projUt;
   let oppScore = state.manualScores[gameId]?.oppScore ?? currentSim.projOpp;
@@ -2418,13 +2424,14 @@ function openSimModal(game) {
         </div>
 
         <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;" onclick="event.stopPropagation();">
-          <div class="editable-score-box" style="padding: 3px 8px; border-radius: var(--radius-md);" title="Click to manually project score">
+          <div class="editable-score-box" style="padding: 3px 8px; border-radius: var(--radius-md);" title="${game.isFinal ? 'Official Final Score (Locked)' : 'Click to manually project score'}">
             <input type="number" min="0" max="99" 
                    class="score-input ${isTeam1Win ? 'win-score' : ''}" 
                    style="width: 52px; height: 38px; font-size: 1.6rem;"
                    value="${score1}" 
                    data-gameid="${game.id}" 
                    data-side="team" 
+                   ${game.isFinal ? 'disabled style="opacity: 0.9; cursor: not-allowed;"' : ''}
                    aria-label="${team1.shortName || team1.name} score"
                    onchange="handleScoreInputChange('${game.id}', 'team', this.value); updateModalScoreboardLive();"
                    onfocus="this.select();"
@@ -2436,12 +2443,16 @@ function openSimModal(game) {
                    value="${score2}" 
                    data-gameid="${game.id}" 
                    data-side="opp" 
+                   ${game.isFinal ? 'disabled style="opacity: 0.9; cursor: not-allowed;"' : ''}
                    aria-label="${team2.shortName || team2.name} score"
                    onchange="handleScoreInputChange('${game.id}', 'opp', this.value); updateModalScoreboardLive();"
                    onfocus="this.select();"
                    onclick="event.stopPropagation();">
           </div>
           ${(() => {
+            if (game.isFinal) {
+              return `<span class="locked-final-tag" style="margin-top: 3px;"><i class="fa-solid fa-lock"></i> OFFICIAL FINAL</span>`;
+            }
             const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
             const rProb2 = 100 - rProb1;
             const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
@@ -4073,13 +4084,13 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
     const highlightStyle = isHighlighted ? 'color: var(--color-brand-accent); font-weight: 800;' : '';
 
     return `
-      <div class="matchup-teams-row" onclick="event.stopPropagation();">
+      <div class="matchup-teams-row" onclick="if(!event.target.closest('.score-input')) { event.stopPropagation(); window.openSimModalByGameId('${gameId}'); }">
         <div class="matchup-team-item">
           <span class="matchup-team-logo-wrap"><img src="${logo}" class="matchup-team-logo" alt="${name}"></span>
           <span style="${highlightStyle}">#${seedNum} ${name} <small style="opacity: 0.7; font-size: 0.68rem;">${record}</small></span>
         </div>
         <div style="display: flex; align-items: center; gap: 4px;">
-          ${gameId ? `
+          ${gameId && !isFinalGame ? `
             <input type="number" min="0" max="99" 
                    class="score-input ${isWinner ? 'win-score' : ''}" 
                    style="width: 38px; height: 26px; font-size: 1.15rem; padding: 0; line-height: 1;"
@@ -4104,6 +4115,7 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
     const isManual = !!(state.manualScores && state.manualScores[m.id]);
     const isCustom = !!(state.gameSliders && state.gameSliders[m.id]?.isCustom);
     const isUserPick = !!(state.playoffPicks && state.playoffPicks[m.id]);
+    const isFinalGame = !!m.isFinal;
 
     let customBadgeHtml = '';
     if (isManual) {
@@ -4128,16 +4140,16 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
     const venueText = m.teamA?.stadium || defaultVenue || 'Campus Stadium';
 
     return `
-      <div class="playoff-matchup-box ${isActive ? 'active-team-matchup' : ''}" onclick="if(!event.target.closest('.score-input') && !event.target.closest('.reset-score-mini-btn')) window.openSimModalByGameId('${m.id}')">
+      <div class="playoff-matchup-box ${isActive ? 'active-team-matchup' : ''}" onclick="if(!event.target.closest('.score-input') && !event.target.closest('.reset-score-mini-btn')) window.openSimModalByGameId('${m.id}')" title="Click to tune simulation & edit matchup">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
           <span style="font-size: 0.65rem; font-family: var(--font-mono); color: var(--color-text-dim); text-transform: uppercase;">${m.label || defaultVenue || 'CFP MATCHUP'}</span>
           <div style="display: flex; align-items: center; gap: 4px;">
             ${customBadgeHtml}
-            ${isManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${m.id}', event)" title="Reset to AI baseline"><i class="fa-solid fa-rotate-left"></i></button>` : ''}
+            ${isManual && !isFinalGame ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${m.id}', event)" title="Reset to AI baseline"><i class="fa-solid fa-rotate-left"></i></button>` : ''}
           </div>
         </div>
-        ${teamRow(seedB, m.teamB, m.sim.scoreB, !m.sim.isAWinner, isTeamMatch(m.teamB, teamId), m.id, 'opp')}
-        ${teamRow(seedA, m.teamA, m.sim.scoreA, m.sim.isAWinner, isTeamMatch(m.teamA, teamId), m.id, 'team')}
+        ${teamRow(seedB, m.teamB, m.sim.scoreB, !m.sim.isAWinner, isTeamMatch(m.teamB, teamId), m.id, 'opp', isFinalGame)}
+        ${teamRow(seedA, m.teamA, m.sim.scoreA, m.sim.isAWinner, isTeamMatch(m.teamA, teamId), m.id, 'team', isFinalGame)}
         
         <!-- Win Probability KPI Meter -->
         <div style="display: flex; flex-direction: column; gap: 3px; margin: 4px 0 2px 0;">
@@ -4155,9 +4167,18 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
           </div>
         </div>
 
-        <div class="playoff-result-badge">
+        <div class="playoff-result-badge" style="display: flex; justify-content: space-between; align-items: center;">
           <span style="color: var(--color-text-dim);">${venueText}</span>
-          <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${m.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="playoff-win-tag"><i class="fa-solid fa-check"></i> ${m.sim.winner?.shortName?.toUpperCase()} ADVANCES</span>
+            ${!isFinalGame ? `
+              <button class="bracket-tune-pill" onclick="event.stopPropagation(); window.openSimModalByGameId('${m.id}')" title="Tune simulation & adjust picks">
+                <i class="fa-solid fa-sliders"></i> Edit
+              </button>
+            ` : `
+              <span class="locked-final-tag"><i class="fa-solid fa-lock"></i> FINAL</span>
+            `}
+          </div>
         </div>
       </div>
     `;
@@ -4249,11 +4270,11 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
           <span style="font-size: 0.65rem; font-family: var(--font-mono); color: #FFD700; font-weight: 800; text-transform: uppercase;">NATIONAL TITLE GAME</span>
           <div style="display: flex; align-items: center; gap: 4px;">
             ${nattyCustomBadgeHtml}
-            ${isNattyManual ? `<button class="reset-score-mini-btn" onclick="resetManualScore('playoff-natty', event)" title="Reset to AI baseline"><i class="fa-solid fa-rotate-left"></i></button>` : ''}
+            ${isNattyManual && !p.natty?.isFinal ? `<button class="reset-score-mini-btn" onclick="resetManualScore('playoff-natty', event)" title="Reset to AI baseline"><i class="fa-solid fa-rotate-left"></i></button>` : ''}
           </div>
         </div>
-        ${teamRow('SF1', p.natty.teamA, p.natty.sim.scoreA, p.natty.sim.isAWinner, isTeamMatch(p.natty.teamA, teamId), 'playoff-natty', 'team')}
-        ${teamRow('SF2', p.natty.teamB, p.natty.sim.scoreB, !p.natty.sim.isAWinner, isTeamMatch(p.natty.teamB, teamId), 'playoff-natty', 'opp')}
+        ${teamRow('SF1', p.natty.teamA, p.natty.sim.scoreA, p.natty.sim.isAWinner, isTeamMatch(p.natty.teamA, teamId), 'playoff-natty', 'team', !!p.natty?.isFinal)}
+        ${teamRow('SF2', p.natty.teamB, p.natty.sim.scoreB, !p.natty.sim.isAWinner, isTeamMatch(p.natty.teamB, teamId), 'playoff-natty', 'opp', !!p.natty?.isFinal)}
         
         <!-- Win Probability KPI Meter -->
         <div style="display: flex; flex-direction: column; gap: 3px; margin: 4px 0 2px 0;">
@@ -4271,9 +4292,18 @@ function renderPlayoffBracket(totalWins, cfpSeed, playoffData) {
           </div>
         </div>
 
-        <div class="playoff-result-badge">
+        <div class="playoff-result-badge" style="display: flex; justify-content: space-between; align-items: center;">
           <span style="color: var(--color-text-dim);">Mercedes-Benz Stadium (Atlanta)</span>
-          <span class="playoff-win-tag" style="color: #FFD700;"><i class="fa-solid fa-crown"></i> ${nattyChamp?.shortName?.toUpperCase()} NATIONAL CHAMPION</span>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="playoff-win-tag" style="color: #FFD700;"><i class="fa-solid fa-crown"></i> ${nattyChamp?.shortName?.toUpperCase()} CHAMPION</span>
+            ${!p.natty?.isFinal ? `
+              <button class="bracket-tune-pill" style="border-color: rgba(255, 215, 0, 0.4); color: #FFD700;" onclick="event.stopPropagation(); window.openSimModalByGameId('playoff-natty')" title="Tune National Title Game">
+                <i class="fa-solid fa-sliders"></i> Edit
+              </button>
+            ` : `
+              <span class="locked-final-tag"><i class="fa-solid fa-lock"></i> FINAL</span>
+            `}
+          </div>
         </div>
       </div>
 
@@ -7414,16 +7444,29 @@ window.switchAppView = function(viewName) {
 
   if (viewName === 'schedule') {
     const el = document.getElementById('scheduleSection');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.pageYOffset - 60;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   } else if (viewName === 'playoffs') {
     const el = document.getElementById('playoffSection');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.pageYOffset - 60;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   } else if (viewName === 'tuning') {
     if (typeof openAiTuningModal === 'function') openAiTuningModal();
   } else if (viewName === 'dream') {
     if (typeof openDreamSandboxModal === 'function') openDreamSandboxModal();
   }
 };
+
+window.addEventListener('hashchange', () => {
+  const hash = (window.location.hash || '').replace('#', '');
+  if (['playoffs', 'schedule', 'tuning', 'dream'].includes(hash)) {
+    if (typeof window.switchAppView === 'function') window.switchAppView(hash);
+  }
+});
 
 window.scrollToTeamOverview = function() {
   document.querySelectorAll('.dock-btn[data-dock]').forEach(btn => {
@@ -11145,6 +11188,12 @@ window.addEventListener('load', () => {
   if (grid && !grid.hasChildNodes()) {
     console.log('CFB Prophet: Ensuring schedule grid render on window load...');
     selectTeam(state.currentTeamId || 'ohiostate');
+  }
+  const hash = (window.location.hash || '').replace('#', '');
+  if (['playoffs', 'schedule', 'tuning', 'dream'].includes(hash)) {
+    setTimeout(() => {
+      if (typeof window.switchAppView === 'function') window.switchAppView(hash);
+    }, 600);
   }
 });
 

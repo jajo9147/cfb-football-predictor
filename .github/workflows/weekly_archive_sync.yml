@@ -6,6 +6,8 @@ on:
     - cron: '0 15 * * 6'
     # Sunday 08:00 UTC (4:00 AM ET) - Post-game settlement & Brier grading
     - cron: '0 8 * * 0'
+    # Tuesday 14:00 UTC (10:00 AM ET) - Post-AP Poll Weekly Model Retraining & Calibration
+    - cron: '0 14 * * 2'
   workflow_dispatch:
 
 permissions:
@@ -31,14 +33,21 @@ jobs:
       - name: Settle Accuracy & Calculate Brier Score
         run: python3 scripts/settle_week_accuracy.py
 
-      - name: Commit and Push Archive Snapshots
+      - name: Retrain Model & Recalculate Future Projections
+        run: |
+          python3 scripts/retrain_weekly_model.py
+          # Synchronize updated datasets to mobile web packages
+          cp data/teams.js data/teams_v3.js ios/CFBProphet/www/data/ || true
+          cp data/teams.js data/teams_v3.js android/app/src/main/assets/www/data/ || true
+
+      - name: Commit and Push Archive & Model Updates
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add archive/
+          git add archive/ data/ ios/ android/
           if git diff --staged --quiet; then
-            echo "No archive changes to commit"
+            echo "No archive or model changes to commit"
           else
-            git commit -m "chore(archive): automated weekly snapshot and model calibration update [skip ci]"
+            git commit -m "chore(model): automated weekly retraining, calibration, and future projections update"
             git push origin main
           fi

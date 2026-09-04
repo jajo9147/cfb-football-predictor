@@ -2784,6 +2784,43 @@ select option {
   gap: 0.25rem;
 }
 
+.bracket-tune-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-brand-accent);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition-fast);
+}
+
+.bracket-tune-pill:hover {
+  background: var(--color-brand-accent);
+  color: #000000;
+  border-color: var(--color-brand-accent);
+  box-shadow: 0 0 10px var(--color-brand-glow);
+}
+
+.locked-final-tag {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #F87171;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 /* ==========================================================================
    CONFERENCE CHAMPIONSHIP GAMES (CCG) SECTION
    ========================================================================== */
