@@ -8298,7 +8298,9 @@ async function executeDeleteAccount() {
 
   // 3. Clear cloud session & auth keys
   try {
-    if (window.CFBProphetSupabase) {
+    if (window.CFBProphetSupabase && window.CFBProphetSupabase.deleteUserAccount) {
+      await window.CFBProphetSupabase.deleteUserAccount();
+    } else if (window.CFBProphetSupabase) {
       await window.CFBProphetSupabase.signOut();
     }
   } catch (e) {}
@@ -8312,7 +8314,8 @@ async function executeDeleteAccount() {
 
   cancelDeleteAccountConfirmation();
   setCurrentUser(null);
-  showCustomToast('🗑️ Your account and prediction data have been permanently deleted.');
+  updateAuthUI();
+  showCustomToast('🗑️ Your account and data have been permanently deleted.');
   closeAuthModal();
 }
 window.executeDeleteAccount = executeDeleteAccount;

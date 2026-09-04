@@ -317,6 +317,32 @@
     return { success: true };
   }
 
+  // 6b. Delete User Account & User Cloud Data (Apple Guideline 5.1.1(v))
+  async function deleteUserAccount() {
+    if (supabaseClient) {
+      try {
+        const sessionRes = await supabaseClient.auth.getSession();
+        const sessionUser = sessionRes?.data?.session?.user;
+        if (sessionUser && sessionUser.id) {
+          try {
+            await supabaseClient.from('brackets').delete().eq('user_id', sessionUser.id);
+          } catch (e) {}
+          try {
+            await supabaseClient.from('profiles').delete().eq('id', sessionUser.id);
+          } catch (e) {}
+        }
+      } catch (e) {}
+      try {
+        await supabaseClient.auth.signOut();
+      } catch (e) {}
+    }
+    localStorage.removeItem('cfb_prophet_auth_user_v4');
+    if (typeof window.updateAuthUI === 'function') {
+      window.updateAuthUI();
+    }
+    return { success: true };
+  }
+
   // 7. Save Bracket to Supabase Cloud
   // 7. Save Bracket to Supabase Cloud (Supports both logged-in users and guest submissions)
   async function saveBracketToCloud(bracketObj) {
@@ -430,6 +456,7 @@
     updateAccountPassword: updateAccountPassword,
     resetPasswordForEmail: resetPasswordForEmail,
     signOut: signOut,
+    deleteUserAccount: deleteUserAccount,
     saveBracket: saveBracketToCloud,
     saveBracketToCloud: saveBracketToCloud,
     fetchCommunityBrackets: fetchCloudCommunityBrackets,

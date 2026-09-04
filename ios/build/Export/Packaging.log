@@ -1,0 +1,856 @@
+2026-09-02 19:40:45 +0000 [MT] Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x9fe342a00; archive(resolved)="<IDEArchive: 0x9fdc0c150>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team(resolved)="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	Chain (15, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x9fe342a00; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionProcessingPipelineContext: 0x9fe341e00; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionContext: 0xa00536f80; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionContext: 0xa00536a80; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionContext: 0xa00536800; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionContext: 0xa00536580; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionContext: 0xa00536300; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionContext: 0xa00536080; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionContext: 0xa00535e00; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionContext: 0xa00534f00; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionContext: 0xa00534c80; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionContext: 0xa00534a00; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="<IDEProvisioningBasicTeam: 0x9fddbc060; teamID='2TZS84XR89', teamName='(null)'>">
+	<IDEDistributionContext: 0xa00534780; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="(null)">
+	<IDEDistributionContext: 0xa00534000; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0xa005e0700>", team="(null)">
+	<IDEDistributionContext: 0x1034e2c40; archive = "<IDEArchive: 0x9fdc0c150>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x9fe342a00>
+2026-09-02 19:40:45 +0000 [MT] Processing step: IDEDistributionCreateDestRootStep
+2026-09-02 19:40:45 +0000 [MT] Processing step: IDEDistributionCopyItemStep
+2026-09-02 19:40:45 +0000 [MT] Running /usr/bin/ditto '-V' '/Users/jakejohnson/cfb-football-predictor/ios/build/CFBProphet.xcarchive/Products/Applications/CFBProphet.app' '/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root/Payload/CFBProphet.app'
+2026-09-02 19:40:46 +0000  >>> Copying /Users/jakejohnson/cfb-football-predictor/ios/build/CFBProphet.xcarchive/Products/Applications/CFBProphet.app 
+2026-09-02 19:40:46 +0000  copying file ./_CodeSignature/CodeResources ... 
+2026-09-02 19:40:46 +0000  16479 bytes for ./_CodeSignature/CodeResources
+2026-09-02 19:40:46 +0000  copying file ./AppIcon60x60@2x.png ... 
+2026-09-02 19:40:46 +0000  26735 bytes for ./AppIcon60x60@2x.png
+2026-09-02 19:40:46 +0000  copying file ./www/qrcode.min.js ... 
+2026-09-02 19:40:46 +0000  19927 bytes for ./www/qrcode.min.js
+2026-09-02 19:40:46 +0000  copying file ./www/preview.jpg ... 
+2026-09-02 19:40:46 +0000  1061989 bytes for ./www/preview.jpg
+2026-09-02 19:40:46 +0000  copying file ./www/favicon.ico ... 
+2026-09-02 19:40:46 +0000  4064 bytes for ./www/favicon.ico
+2026-09-02 19:40:46 +0000  copying file ./www/index.html ... 
+2026-09-02 19:40:46 +0000  104173 bytes for ./www/index.html
+2026-09-02 19:40:46 +0000  copying file ./www/apple-touch-icon.png ... 
+2026-09-02 19:40:46 +0000  45849 bytes for ./www/apple-touch-icon.png
+2026-09-02 19:40:46 +0000  copying file ./www/styles.css ... 
+2026-09-02 19:40:46 +0000  148141 bytes for ./www/styles.css
+2026-09-02 19:40:46 +0000  copying file ./www/terms.html ... 
+2026-09-02 19:40:46 +0000  5871 bytes for ./www/terms.html
+2026-09-02 19:40:46 +0000  copying file ./www/qrious.min.js ... 
+2026-09-02 19:40:46 +0000  17579 bytes for ./www/qrious.min.js
+2026-09-02 19:40:46 +0000  copying file ./www/champ/houston.html ... 
+2026-09-02 19:40:46 +0000  3115 bytes for ./www/champ/houston.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/texasam.html ... 
+2026-09-02 19:40:46 +0000  3122 bytes for ./www/champ/texasam.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/floridastate.html ... 
+2026-09-02 19:40:46 +0000  3183 bytes for ./www/champ/floridastate.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/oregon.html ... 
+2026-09-02 19:40:46 +0000  3093 bytes for ./www/champ/oregon.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/notredame.html ... 
+2026-09-02 19:40:46 +0000  3193 bytes for ./www/champ/notredame.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/smu.html ... 
+2026-09-02 19:40:46 +0000  3087 bytes for ./www/champ/smu.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/pennstate.html ... 
+2026-09-02 19:40:46 +0000  3190 bytes for ./www/champ/pennstate.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/olemiss.html ... 
+2026-09-02 19:40:46 +0000  3114 bytes for ./www/champ/olemiss.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/clemson.html ... 
+2026-09-02 19:40:46 +0000  3106 bytes for ./www/champ/clemson.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/byu.html ... 
+2026-09-02 19:40:46 +0000  3074 bytes for ./www/champ/byu.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/tennessee.html ... 
+2026-09-02 19:40:46 +0000  3163 bytes for ./www/champ/tennessee.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/utah.html ... 
+2026-09-02 19:40:46 +0000  3061 bytes for ./www/champ/utah.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/oklahoma.html ... 
+2026-09-02 19:40:46 +0000  3124 bytes for ./www/champ/oklahoma.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/indiana.html ... 
+2026-09-02 19:40:46 +0000  3117 bytes for ./www/champ/indiana.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/michigan.html ... 
+2026-09-02 19:40:46 +0000  3148 bytes for ./www/champ/michigan.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/washington.html ... 
+2026-09-02 19:40:46 +0000  3145 bytes for ./www/champ/washington.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/boisestate.html ... 
+2026-09-02 19:40:46 +0000  3147 bytes for ./www/champ/boisestate.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/ohiostate.html ... 
+2026-09-02 19:40:46 +0000  3150 bytes for ./www/champ/ohiostate.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/lsu.html ... 
+2026-09-02 19:40:46 +0000  3061 bytes for ./www/champ/lsu.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/alabama.html ... 
+2026-09-02 19:40:46 +0000  3154 bytes for ./www/champ/alabama.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/miami.html ... 
+2026-09-02 19:40:46 +0000  3123 bytes for ./www/champ/miami.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/colorado.html ... 
+2026-09-02 19:40:46 +0000  3138 bytes for ./www/champ/colorado.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/usc.html ... 
+2026-09-02 19:40:46 +0000  3069 bytes for ./www/champ/usc.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/missouri.html ... 
+2026-09-02 19:40:46 +0000  3117 bytes for ./www/champ/missouri.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/louisville.html ... 
+2026-09-02 19:40:46 +0000  3156 bytes for ./www/champ/louisville.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/texastech.html ... 
+2026-09-02 19:40:46 +0000  3179 bytes for ./www/champ/texastech.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/iowa.html ... 
+2026-09-02 19:40:46 +0000  3098 bytes for ./www/champ/iowa.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/arizona.html ... 
+2026-09-02 19:40:46 +0000  3118 bytes for ./www/champ/arizona.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/georgia.html ... 
+2026-09-02 19:40:46 +0000  3117 bytes for ./www/champ/georgia.html
+2026-09-02 19:40:46 +0000  copying file ./www/champ/texas.html ... 
+2026-09-02 19:40:46 +0000  3110 bytes for ./www/champ/texas.html
+2026-09-02 19:40:46 +0000  copying file ./www/icons/icon-144.png ... 
+2026-09-02 19:40:46 +0000  30644 bytes for ./www/icons/icon-144.png
+2026-09-02 19:40:46 +0000  copying file ./www/icons/icon-192.png ... 
+2026-09-02 19:40:46 +0000  51582 bytes for ./www/icons/icon-192.png
+2026-09-02 19:40:46 +0000  copying file ./www/icons/icon-384.png ... 
+2026-09-02 19:40:46 +0000  191067 bytes for ./www/icons/icon-384.png
+2026-09-02 19:40:46 +0000  copying file ./www/icons/icon-48.png ... 
+2026-09-02 19:40:46 +0000  4064 bytes for ./www/icons/icon-48.png
+2026-09-02 19:40:46 +0000  copying file ./www/icons/icon-1024.png ... 
+2026-09-02 19:40:46 +0000  1338760 bytes for ./www/icons/icon-1024.png
+2026-09-02 19:40:46 +0000  copying file ./www/icons/icon-152.png ... 
+2026-09-02 19:40:46 +0000  33963 bytes for ./www/icons/icon-152.png
+2026-09-02 19:40:46 +0000  copying file ./www/icons/icon-72.png ... 
+2026-09-02 19:40:46 +0000  8566 bytes for ./www/icons/icon-72.png
+2026-09-02 19:40:46 +0000  copying file ./www/icons/icon-96.png ... 
+2026-09-02 19:40:46 +0000  14159 bytes for ./www/icons/icon-96.png
+2026-09-02 19:40:46 +0000  copying file ./www/icons/screenshot-desktop.jpg ... 
+2026-09-02 19:40:46 +0000  1061989 bytes for ./www/icons/screenshot-desktop.jpg
+2026-09-02 19:40:46 +0000  copying file ./www/icons/screenshot-mobile.png ... 
+2026-09-02 19:40:46 +0000  1543927 bytes for ./www/icons/screenshot-mobile.png
+2026-09-02 19:40:46 +0000  copying file ./www/icons/icon-128.png ... 
+2026-09-02 19:40:46 +0000  23408 bytes for ./www/icons/icon-128.png
+2026-09-02 19:40:46 +0000  copying file ./www/icons/icon-512.png ... 
+2026-09-02 19:40:46 +0000  319573 bytes for ./www/icons/icon-512.png
+2026-09-02 19:40:46 +0000  copying file ./www/apple-touch-icon-precomposed.png ... 
+2026-09-02 19:40:46 +0000  45849 bytes for ./www/apple-touch-icon-precomposed.png
+2026-09-02 19:40:46 +0000  copying file ./www/manifest.json ... 
+2026-09-02 19:40:46 +0000  5141 bytes for ./www/manifest.json
+2026-09-02 19:40:46 +0000  copying file ./www/supabase-client.js ... 
+2026-09-02 19:40:46 +0000  14486 bytes for ./www/supabase-client.js
+2026-09-02 19:40:46 +0000  copying file ./www/data/teams.js ... 
+2026-09-02 19:40:46 +0000  422729 bytes for ./www/data/teams.js
+2026-09-02 19:40:46 +0000  copying file ./www/data/community_brackets.json ... 
+2026-09-02 19:40:46 +0000  62697 bytes for ./www/data/community_brackets.json
+2026-09-02 19:40:46 +0000  copying file ./www/data/teams_v3.js ... 
+2026-09-02 19:40:46 +0000  422730 bytes for ./www/data/teams_v3.js
+2026-09-02 19:40:46 +0000  copying file ./www/app.js ... 
+2026-09-02 19:40:46 +0000  431383 bytes for ./www/app.js
+2026-09-02 19:40:46 +0000  copying file ./www/sw.js ... 
+2026-09-02 19:40:46 +0000  650 bytes for ./www/sw.js
+2026-09-02 19:40:46 +0000  copying file ./www/privacy.html ... 
+2026-09-02 19:40:46 +0000  6022 bytes for ./www/privacy.html
+2026-09-02 19:40:46 +0000  copying file ./Assets.car ... 
+2026-09-02 19:40:46 +0000  2070168 bytes for ./Assets.car
+2026-09-02 19:40:46 +0000  copying file ./AppIcon76x76@2x~ipad.png ... 
+2026-09-02 19:40:46 +0000  43800 bytes for ./AppIcon76x76@2x~ipad.png
+2026-09-02 19:40:46 +0000  copying file ./PrivacyInfo.xcprivacy ... 
+2026-09-02 19:40:46 +0000  641 bytes for ./PrivacyInfo.xcprivacy
+2026-09-02 19:40:46 +0000  copying file ./CFBProphet ... 
+2026-09-02 19:40:46 +0000  136464 bytes for ./CFBProphet
+2026-09-02 19:40:46 +0000  copying file ./embedded.mobileprovision ... 
+2026-09-02 19:40:46 +0000  12316 bytes for ./embedded.mobileprovision
+2026-09-02 19:40:46 +0000  copying file ./Info.plist ... 
+2026-09-02 19:40:46 +0000  1751 bytes for ./Info.plist
+2026-09-02 19:40:46 +0000  copying file ./PkgInfo ... 
+2026-09-02 19:40:46 +0000  8 bytes for ./PkgInfo
+2026-09-02 19:40:46 +0000 [MT] /usr/bin/ditto exited with 0
+2026-09-02 19:40:46 +0000 [MT] Processing step: IDEDistributionEmbedProfileStep
+2026-09-02 19:40:46 +0000 [MT] Processing step: IDEDistributionInfoPlistStep
+2026-09-02 19:40:46 +0000 [MT] Skipping setting DTXcodeBuildDistribution because toolsBuildVersionName was nil.
+2026-09-02 19:40:46 +0000 [MT] Processing step: IDEDistributionItemRemovalStep
+2026-09-02 19:40:46 +0000 [MT] Processing step: IDEDistributionAppThinningPlistStep
+2026-09-02 19:40:46 +0000 [MT] Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2026-09-02 19:40:46 +0000 [MT] Processing step: IDEDistributionSymbolsStep
+2026-09-02 19:40:46 +0000 [MT] Writing /var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Symbols/4C53927A-7024-3944-B976-A693BFE1C220.symbols
+2026-09-02 19:40:46 +0000 [MT] Processing step: IDEDistributionCopyAppleProvidedContentStep
+2026-09-02 19:40:46 +0000 [MT] Processing step: IDEDistributionAppThinningStep
+2026-09-02 19:40:46 +0000 [MT] Skipping step: IDEDistributionAppThinningStep because it said so
+2026-09-02 19:40:46 +0000 [MT] Processing step: IDEDistributionArchThinningStep
+2026-09-02 19:40:46 +0000 [MT] Archs to thin for item /Users/jakejohnson/cfb-football-predictor/ios/build/CFBProphet.xcarchive/Products/Applications/CFBProphet.app are []
+2026-09-02 19:40:46 +0000 [MT] Processing step: IDEDistributionODRStep
+2026-09-02 19:40:46 +0000 [MT] Processing step: IDEDistributionStripXattrsStep
+2026-09-02 19:40:46 +0000 [MT] Skipping stripping extended attributes because the codesign step will strip them.
+2026-09-02 19:40:46 +0000 [MT] Processing step: IDEDistributionCodesignStep
+2026-09-02 19:40:46 +0000 [MT] Entitlements for <IDEDistributionItem: 0x9fdd566a0; bundleID='com.jakejohnson.cfbprophet', path='<DVTFilePath:0x9fe3f57a0:'/Users/jakejohnson/cfb-football-predictor/ios/build/CFBProphet.xcarchive/Products/Applications/CFBProphet.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x9fdd563a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x9fdcc49c0; name='Apple Development: jajo9147@gmail.com (FA3ZAPWL4N)', hash='19943D7789CBF83D63234B8F77FE1B64C06C08C0', serialNumber='3A97F0663F4286C982E720B5CB097039', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-26 19:42:24 +0000''>', entitlements='{
+    "application-identifier" = "2TZS84XR89.com.jakejohnson.cfbprophet";
+    "com.apple.developer.team-identifier" = 2TZS84XR89;
+    "get-task-allow" = 1;
+}', teamID='2TZS84XR89', identifier='com.jakejohnson.cfbprophet', executablePath='<DVTFilePath:0x9fdd55c80:'/Users/jakejohnson/cfb-football-predictor/ios/build/CFBProphet.xcarchive/Products/Applications/CFBProphet.app/CFBProphet'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "2TZS84XR89.com.jakejohnson.cfbprophet";
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = 2TZS84XR89;
+    "get-task-allow" = 0;
+}
+2026-09-02 19:40:46 +0000 [MT] Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2026-09-02 19:40:46 +0000 [MT] Entitlements for <IDEDistributionItem: 0x9fdd566a0; bundleID='com.jakejohnson.cfbprophet', path='<DVTFilePath:0x9fe3f57a0:'/Users/jakejohnson/cfb-football-predictor/ios/build/CFBProphet.xcarchive/Products/Applications/CFBProphet.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x9fdd563a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x9fdcc7f00; name='Apple Development: jajo9147@gmail.com (FA3ZAPWL4N)', hash='19943D7789CBF83D63234B8F77FE1B64C06C08C0', serialNumber='3A97F0663F4286C982E720B5CB097039', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-26 19:42:24 +0000''>', entitlements='{
+    "application-identifier" = "2TZS84XR89.com.jakejohnson.cfbprophet";
+    "com.apple.developer.team-identifier" = 2TZS84XR89;
+    "get-task-allow" = 1;
+}', teamID='2TZS84XR89', identifier='com.jakejohnson.cfbprophet', executablePath='<DVTFilePath:0x9fdd55c80:'/Users/jakejohnson/cfb-football-predictor/ios/build/CFBProphet.xcarchive/Products/Applications/CFBProphet.app/CFBProphet'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "2TZS84XR89.com.jakejohnson.cfbprophet";
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = 2TZS84XR89;
+    "get-task-allow" = 0;
+}
+2026-09-02 19:40:46 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x9fdd566a0; bundleID='com.jakejohnson.cfbprophet', path='<DVTFilePath:0x9fe3f57a0:'/Users/jakejohnson/cfb-football-predictor/ios/build/CFBProphet.xcarchive/Products/Applications/CFBProphet.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x9fdd563a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x9fdcc7f00; name='Apple Development: jajo9147@gmail.com (FA3ZAPWL4N)', hash='19943D7789CBF83D63234B8F77FE1B64C06C08C0', serialNumber='3A97F0663F4286C982E720B5CB097039', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2026-08-26 19:42:24 +0000''>', entitlements='{
+    "application-identifier" = "2TZS84XR89.com.jakejohnson.cfbprophet";
+    "com.apple.developer.team-identifier" = 2TZS84XR89;
+    "get-task-allow" = 1;
+}', teamID='2TZS84XR89', identifier='com.jakejohnson.cfbprophet', executablePath='<DVTFilePath:0x9fdd55c80:'/Users/jakejohnson/cfb-football-predictor/ios/build/CFBProphet.xcarchive/Products/Applications/CFBProphet.app/CFBProphet'>', hardenedRuntime='0'>'> to: /var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/entitlements~~~MfV88t
+2026-09-02 19:40:46 +0000 [MT] invoking codesign: <NSConcreteTask: 0x9fde871b0; launchPath='/usr/bin/codesign', arguments='(
+    "-f",
+    "-s",
+    "-",
+    "--signature-size",
+    16000,
+    "--entitlements",
+    "/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/entitlements~~~MfV88t",
+    "--requirements",
+    "=designated => anchor apple generic and identifier \"com.jakejohnson.cfbprophet\" and certificate leaf[subject.CN] = \"Apple Distribution: JAKE THOMAS JOHNSON (2TZS84XR89)\" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */",
+    "--preserve-metadata=identifier,flags,runtime,launch-constraints,library-constraints",
+    "--omit-adhoc-flag",
+    "--team-identifier",
+    2TZS84XR89,
+    "--generate-entitlement-der",
+    "--strip-disallowed-xattrs",
+    "-vvv",
+    "/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root/Payload/CFBProphet.app"
+)'>
+2026-09-02 19:40:46 +0000 [MT] codesign output: /var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root/Payload/CFBProphet.app: replacing existing signature
+/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root/Payload/CFBProphet.app: signed app bundle with Mach-O thin (arm64) [com.jakejohnson.cfbprophet]
+2026-09-02 19:40:46 +0000 [MT] Remote code signing '/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root/Payload/CFBProphet.app' with signature slices '[<DVTCodeSignatureSlice: 0x9fdce7ed0; architecture='arm64', cmsDigest='<DVTCodeSignatureHash: 0x9fd930440; digestAlgorithmDescription='sha256', cdHashHexEncoded='b5fa0bb8039e9d4260d86a4d343b92d0f1d325109c260c190247670800bf80f2'>', codeSignatureHashes='{(
+    <DVTCodeSignatureHash: 0x9fd930480; digestAlgorithmDescription='sha256', cdHashHexEncoded='b5fa0bb8039e9d4260d86a4d343b92d0f1d325109c260c190247670800bf80f2'>
+)}', cmsHexEncoded=''>]' and configuration 'RemoteSigningToolConfiguration(path: <DVTFilePath:0x9fde1c2a0:'/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root/Payload/CFBProphet.app'>, signingCertificate: <DVTSigningCertificate: 0x9fdcc6700; name='Apple Distribution: JAKE THOMAS JOHNSON (2TZS84XR89)', hash='53C5D061F60195FAA79C0305E60F01753CE46CD3', serialNumber='58EAF5BC0804B6E156C8E998BCDA25D6', certificateKinds='(
+    "1.2.840.113635.100.6.1.7",
+    "1.2.840.113635.100.6.1.4"
+), issueDate='2026-08-28 22:17:36 +0000''>, session: <DVTServicesAccountBasedSession: 0x9fde1d9e0; account='<DVTAppleIDBasedDeveloperAccount: 0xa004ef880; username='jajo9147@gmail.com'>'>, team: <DVTPortalTeam: 0xa00c10680; name='JAKE THOMAS JOHNSON', teamID='2TZS84XR89', type='Individual', memberships='(
+    "<DVTPortalMembership: 0x9fe7ceac0; programs='{(\n    <DVTPortalProgram: 0x9fe3d7b60; <DVTPortalProgram: 0x9fe3d7b60; identifier='Xcode.Portal.Program.iOS'>>\n)}'>",
+    "<DVTPortalMembership: 0x9fe7cfab0; programs='{(\n    <DVTPortalProgram: 0x9fe3d7b10; <DVTPortalProgram: 0x9fe3d7b10; identifier='Xcode.Portal.Program.Mac'>>\n)}'>"
+)'>, codeResourcesDictionary: [AnyHashable("files2"): {
+    "AppIcon60x60@2x.png" =     {
+        hash2 = {length = 32, bytes = 0x6efac777 a0d1e7c7 03407363 e374bd34 ... 434826e2 bec34e5c };
+    };
+    "AppIcon76x76@2x~ipad.png" =     {
+        hash2 = {length = 32, bytes = 0xbb8490c1 631beb4e 86ee0424 21af6a33 ... 15d6b68f 44fc2513 };
+    };
+    "Assets.car" =     {
+        hash2 = {length = 32, bytes = 0x8e0e66cf a8bc3eef a9b68968 40b1277b ... 4ad97467 ee63f004 };
+    };
+    "PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x7902c140 e39ab84b 36edb680 a6da4dc6 ... 9fce3b85 af779fdb };
+    };
+    "embedded.mobileprovision" =     {
+        hash2 = {length = 32, bytes = 0x3faf428c 40483058 ae64d9fb 4b83cdac ... b0f7320d 4838521c };
+    };
+    "www/app.js" =     {
+        hash2 = {length = 32, bytes = 0x4cb09c93 ed9c9d9c 861c29af 83583e8e ... 01f2f7e0 bce9bedd };
+    };
+    "www/apple-touch-icon-precomposed.png" =     {
+        hash2 = {length = 32, bytes = 0xa1338718 810eb2c9 609b7916 b52b6385 ... 74559f72 21483fd0 };
+    };
+    "www/apple-touch-icon.png" =     {
+        hash2 = {length = 32, bytes = 0xa1338718 810eb2c9 609b7916 b52b6385 ... 74559f72 21483fd0 };
+    };
+    "www/champ/alabama.html" =     {
+        hash2 = {length = 32, bytes = 0xb8f3fcfd af4f095e a965b46b 5089d5cc ... 47066bd0 31c3da54 };
+    };
+    "www/champ/arizona.html" =     {
+        hash2 = {length = 32, bytes = 0x3b2348cd 5a353741 c5998960 4e3206fc ... 4f233951 dc87e075 };
+    };
+    "www/champ/boisestate.html" =     {
+        hash2 = {length = 32, bytes = 0x335d469f c1bc495a eefe5efb 0fae4a62 ... bba89f61 ec2f5abc };
+    };
+    "www/champ/byu.html" =     {
+        hash2 = {length = 32, bytes = 0x17695bca 30a1322f 34a72888 c0170dcd ... 1a9dc152 23b1f0db };
+    };
+    "www/champ/clemson.html" =     {
+        hash2 = {length = 32, bytes = 0x7510f464 c8bfa16a 8ef3e6cb 1c29a7e2 ... 5d918abc 1f0cd836 };
+    };
+    "www/champ/colorado.html" =     {
+        hash2 = {length = 32, bytes = 0x9b7ccd2f 05534be2 b41f497e 8c3c3681 ... ca5aff7f cbbb01fc };
+    };
+    "www/champ/floridastate.html" =     {
+        hash2 = {length = 32, bytes = 0x95b110e5 699c5700 8ceb2f48 ffbbcab0 ... 24bccafc 2c6ea581 };
+    };
+    "www/champ/georgia.html" =     {
+        hash2 = {length = 32, bytes = 0x1ff4028f 3d83dce8 a444a1df c0eea25e ... a56af6f0 b2228221 };
+    };
+    "www/champ/houston.html" =     {
+        hash2 = {length = 32, bytes = 0x0a4b27ec 51552f06 0c05f440 aede2571 ... 09b5eb7c 3eeab314 };
+    };
+    "www/champ/indiana.html" =     {
+        hash2 = {length = 32, bytes = 0xfbdcb0b8 826bc57c 58459bd3 332f6d7a ... 134a6906 79344b05 };
+    };
+    "www/champ/iowa.html" =     {
+        hash2 = {length = 32, bytes = 0x01d85e23 cc3b214a c2bf69b9 b143cd97 ... 2d41023d 9de4eb6d };
+    };
+    "www/champ/louisville.html" =     {
+        hash2 = {length = 32, bytes = 0xbf74e4f8 f7f46a99 6313ab75 f80bc876 ... 25c9d31f 9377d14c };
+    };
+    "www/champ/lsu.html" =     {
+        hash2 = {length = 32, bytes = 0x962be0ae d9044e09 76331816 e5169f43 ... eb1e373e 2b4b2aa2 };
+    };
+    "www/champ/miami.html" =     {
+        hash2 = {length = 32, bytes = 0x190590d6 36c3f82d c2b8ffec 458980eb ... 6e7ebe70 82c514aa };
+    };
+    "www/champ/michigan.html" =     {
+        hash2 = {length = 32, bytes = 0x9b0b65d3 ecec1d40 a4a8267c 0bfb6291 ... c8ebdf80 a37baa8f };
+    };
+    "www/champ/missouri.html" =     {
+        hash2 = {length = 32, bytes = 0x54a6ba1d 5e059f66 ae53c872 4e65baaa ... bb480ced c2fd8624 };
+    };
+    "www/champ/notredame.html" =     {
+        hash2 = {length = 32, bytes = 0xbac57a9e f3c0bc92 206c92cd 5b7b9540 ... 51729b1d 1f076c3f };
+    };
+    "www/champ/ohiostate.html" =     {
+        hash2 = {length = 32, bytes = 0xe9f60850 a6995485 7d34162f 25fa7490 ... a70dedae 0718294b };
+    };
+    "www/champ/oklahoma.html" =     {
+        hash2 = {length = 32, bytes = 0x38837e07 b57f420d c760388d a7c2335a ... 377ba6e5 fd8d8aba };
+    };
+    "www/champ/olemiss.html" =     {
+        hash2 = {length = 32, bytes = 0x877ecf73 e1efbeeb 35f9516c 3115f653 ... a88341a4 7b3796dd };
+    };
+    "www/champ/oregon.html" =     {
+        hash2 = {length = 32, bytes = 0xb4b644bd c58b971b b2ffcfb9 72d0adbb ... a81b8eb4 071dfc90 };
+    };
+    "www/champ/pennstate.html" =     {
+        hash2 = {length = 32, bytes = 0x6c500fc6 a8607b02 c6f75bf3 506655e3 ... dd4741b8 927ab2d7 };
+    };
+    "www/champ/smu.html" =     {
+        hash2 = {length = 32, bytes = 0x28128eb0 59ff0b56 4529ec4f 56bc4424 ... a491f24e adb6ed13 };
+    };
+    "www/champ/tennessee.html" =     {
+        hash2 = {length = 32, bytes = 0xa2ae6ecb 3cd9f5d4 cb07a239 c6a45650 ... 6af01889 8004bd1a };
+    };
+    "www/champ/texas.html" =     {
+        hash2 = {length = 32, bytes = 0x492ccbf4 ce7a780d 1844a1c6 48293471 ... 19ef168c 501d7cfb };
+    };
+    "www/champ/texasam.html" =     {
+        hash2 = {length = 32, bytes = 0xa16bdc89 dcd1ab94 926378cc 39095d1e ... 4cd7a58a 03de4daf };
+    };
+    "www/champ/texastech.html" =     {
+        hash2 = {length = 32, bytes = 0x1ef0971b 25c62dc9 aaebffca 86d0d255 ... 18f824ed 0c386ce3 };
+    };
+    "www/champ/usc.html" =     {
+        hash2 = {length = 32, bytes = 0x212bdc2a e22e638f ffd92e7b bfe5685c ... 9dcc2a5f 6c0c414c };
+    };
+    "www/champ/utah.html" =     {
+        hash2 = {length = 32, bytes = 0x158a746d 8d40d3db f800a0bd ef31e084 ... 237dc12d ae05a873 };
+    };
+    "www/champ/washington.html" =     {
+        hash2 = {length = 32, bytes = 0xe1cffcfe 9b826dad 01f3eeb7 d9801d3e ... b4341d12 7e6f0b92 };
+    };
+    "www/data/community_brackets.json" =     {
+        hash2 = {length = 32, bytes = 0xf82da8ea 81d37aba 895c429d d2c71426 ... f15a3a75 b3287db7 };
+    };
+    "www/data/teams.js" =     {
+        hash2 = {length = 32, bytes = 0x3d6e919e b65204d7 dd64eb70 b32cbe77 ... afdd1064 e5aea96e };
+    };
+    "www/data/teams_v3.js" =     {
+        hash2 = {length = 32, bytes = 0x87592bec 3338518a 0ff05ad7 643c06ed ... bdc1774b f8ddd090 };
+    };
+    "www/favicon.ico" =     {
+        hash2 = {length = 32, bytes = 0x8e3023fb 1d4f967b 32363b6d 27400adf ... 376fa2e7 00c23bfc };
+    };
+    "www/icons/icon-1024.png" =     {
+        hash2 = {length = 32, bytes = 0x06832f8b a6a573f0 25ca939f 9458e913 ... 853c83e7 1907f4e5 };
+    };
+    "www/icons/icon-128.png" =     {
+        hash2 = {length = 32, bytes = 0x0e3ae0db ddca3494 fbb448e1 fe13ebb5 ... 3e894b7c 3f221177 };
+    };
+    "www/icons/icon-144.png" =     {
+        hash2 = {length = 32, bytes = 0x7436cba1 8d703162 1a92327d 12a046c8 ... 882aebcb 08247096 };
+    };
+    "www/icons/icon-152.png" =     {
+        hash2 = {length = 32, bytes = 0xaa0a6ff0 55a2fe1c 9ba6c144 88f37c1a ... 65fd9a9e fd878974 };
+    };
+    "www/icons/icon-192.png" =     {
+        hash2 = {length = 32, bytes = 0x8843ea49 befa02b3 21621f74 71bfd5d6 ... 605ae979 88d883b0 };
+    };
+    "www/icons/icon-384.png" =     {
+        hash2 = {length = 32, bytes = 0xc275f13b 0d62be0d 013ab3bd e856f08b ... ec77e5d4 f48a31d3 };
+    };
+    "www/icons/icon-48.png" =     {
+        hash2 = {length = 32, bytes = 0x8e3023fb 1d4f967b 32363b6d 27400adf ... 376fa2e7 00c23bfc };
+    };
+    "www/icons/icon-512.png" =     {
+        hash2 = {length = 32, bytes = 0x77988adc 32b94fe4 ec4e5d09 f941f762 ... affe9379 a7db14d1 };
+    };
+    "www/icons/icon-72.png" =     {
+        hash2 = {length = 32, bytes = 0xf7827e19 36ba09ec 2ed25073 6f9c3008 ... 082c4e0c de97d532 };
+    };
+    "www/icons/icon-96.png" =     {
+        hash2 = {length = 32, bytes = 0x79f2d3b2 adf2d7b8 62c271ce 1487ec3c ... acfb3ace ef2bca52 };
+    };
+    "www/icons/screenshot-desktop.jpg" =     {
+        hash2 = {length = 32, bytes = 0x1b4e3fff 93faadcf 35894d38 94a3684a ... b8d95652 6753af43 };
+    };
+    "www/icons/screenshot-mobile.png" =     {
+        hash2 = {length = 32, bytes = 0x789ec181 3fa8a1fc d56307b3 c1cccd8e ... e7dc9c19 86e3ce3c };
+    };
+    "www/index.html" =     {
+        hash2 = {length = 32, bytes = 0x8da9360c 84d7a202 d2adb537 0a3298db ... fe853d11 f66feab6 };
+    };
+    "www/manifest.json" =     {
+        hash2 = {length = 32, bytes = 0xc8d7e3f5 896f02b6 15d7c1af 1fb0a866 ... 76bca039 7e0b94ca };
+    };
+    "www/preview.jpg" =     {
+        hash2 = {length = 32, bytes = 0x1b4e3fff 93faadcf 35894d38 94a3684a ... b8d95652 6753af43 };
+    };
+    "www/privacy.html" =     {
+        hash2 = {length = 32, bytes = 0xc0c44ee6 2ae9b9e4 5f4cf9d5 b6ef1c0e ... f41519c5 7a5fa59a };
+    };
+    "www/qrcode.min.js" =     {
+        hash2 = {length = 32, bytes = 0xc541ef06 327885a8 415bca8d f6071e14 ... 36db54bd e8484f36 };
+    };
+    "www/qrious.min.js" =     {
+        hash2 = {length = 32, bytes = 0xdb99dcaf 40a92618 1bce4522 477c2efc ... a97faea4 77c9528b };
+    };
+    "www/styles.css" =     {
+        hash2 = {length = 32, bytes = 0x62e3d937 5f484c64 f4eb0348 ab906fae ... d79dc41c b75f19d5 };
+    };
+    "www/supabase-client.js" =     {
+        hash2 = {length = 32, bytes = 0xa703e371 7da7acf1 19f775c1 7dea1f52 ... da905c00 f51b80c8 };
+    };
+    "www/sw.js" =     {
+        hash2 = {length = 32, bytes = 0x83dc1944 66c7077f 6389156e 20c2aff6 ... 4af06b50 738c24be };
+    };
+    "www/terms.html" =     {
+        hash2 = {length = 32, bytes = 0xcbacf5b7 8f6efd57 f9008092 317f9c8a ... 74570873 24da0ac0 };
+    };
+}, AnyHashable("rules"): {
+    "^.*" = 1;
+    "^.*\\.lproj/" =     {
+        optional = 1;
+        weight = 1000;
+    };
+    "^.*\\.lproj/locversion.plist$" =     {
+        omit = 1;
+        weight = 1100;
+    };
+    "^Base\\.lproj/" =     {
+        weight = 1010;
+    };
+    "^version.plist$" = 1;
+}, AnyHashable("files"): {
+    "AppIcon60x60@2x.png" = {length = 20, bytes = 0xb864edf0c6ec522ce566a3f55555fb0f5dd4364a};
+    "AppIcon76x76@2x~ipad.png" = {length = 20, bytes = 0xc65238a7e4ae9349ee54181b65854ed3f9aa0cc5};
+    "Assets.car" = {length = 20, bytes = 0x8648ac5bf8dfb4c1db2919886d39c21d1f1af93f};
+    "Info.plist" = {length = 20, bytes = 0x41a1db2007a9338eab3f3e69067847006dd3ab2b};
+    PkgInfo = {length = 20, bytes = 0x9f9eea0cfe2d65f2c3d6b092e375b40782d08f31};
+    "PrivacyInfo.xcprivacy" = {length = 20, bytes = 0x1b993d71ddd1b258e31b901f36f2b2d71f990512};
+    "embedded.mobileprovision" = {length = 20, bytes = 0x15810f8ebf0b9493f8bf79dc3ded84959621ef53};
+    "www/app.js" = {length = 20, bytes = 0x2afcc425454a8d82cb19c8e2a0fe0e2991992c09};
+    "www/apple-touch-icon-precomposed.png" = {length = 20, bytes = 0x2e656ee1912a5d2b13db117c1e34a6f599ed5b4e};
+    "www/apple-touch-icon.png" = {length = 20, bytes = 0x2e656ee1912a5d2b13db117c1e34a6f599ed5b4e};
+    "www/champ/alabama.html" = {length = 20, bytes = 0x6d80d92e6e799f8d1c5dd6b33a2531ab9529608a};
+    "www/champ/arizona.html" = {length = 20, bytes = 0x9b70e69139f2d7dc7338978ac7f9f80c963aeaaf};
+    "www/champ/boisestate.html" = {length = 20, bytes = 0xf4a155f43b035d9869478ddf6570c39dc4722061};
+    "www/champ/byu.html" = {length = 20, bytes = 0x6e9079055daf5bbaa8fff0c2b228b66ddb26d034};
+    "www/champ/clemson.html" = {length = 20, bytes = 0x66566d2f9bb2a3b92ff16da6bdea705b24a26324};
+    "www/champ/colorado.html" = {length = 20, bytes = 0xb2e44244aef0e385bafb97234b68e99841a0da42};
+    "www/champ/floridastate.html" = {length = 20, bytes = 0x4a62124570cc72c7f6a54921c4e7ef2352466277};
+    "www/champ/georgia.html" = {length = 20, bytes = 0x51a7c4291a68bc7d0abc26701e0a62f9096743c4};
+    "www/champ/houston.html" = {length = 20, bytes = 0x4e84dad6aee443216e20b0e77c561d381ac33899};
+    "www/champ/indiana.html" = {length = 20, bytes = 0x3f22e4fddd08a428b2d8c1d10cc2fd45b321192a};
+    "www/champ/iowa.html" = {length = 20, bytes = 0xeaee7b4c2e377065f2bc331fbc0107d96b99fc26};
+    "www/champ/louisville.html" = {length = 20, bytes = 0x37b28654a2acef517bf7c017fab1ce0e9caff7d1};
+    "www/champ/lsu.html" = {length = 20, bytes = 0xa864679c1c81247d1962c0002a10108ae5ba3399};
+    "www/champ/miami.html" = {length = 20, bytes = 0x31957e2e653dc5b6a6c6ede9a56ccc4286574772};
+    "www/champ/michigan.html" = {length = 20, bytes = 0x2401b6c23a4520e635c9c5c714f4d3faf283dd42};
+    "www/champ/missouri.html" = {length = 20, bytes = 0xed73869f638027eef8dbeaacda169c8c76dc0537};
+    "www/champ/notredame.html" = {length = 20, bytes = 0xa9936d951168ba646ce2c96ecad72a893680f844};
+    "www/champ/ohiostate.html" = {length = 20, bytes = 0x7bdb63f41d1395f31c26f5bc6e3b4b672977089c};
+    "www/champ/oklahoma.html" = {length = 20, bytes = 0x6f4fbb9c17eab3166e08288bdbcf005a07ff2071};
+    "www/champ/olemiss.html" = {length = 20, bytes = 0xeeccb00abf2b3de85ee18193f13f2784ef41539a};
+    "www/champ/oregon.html" = {length = 20, bytes = 0xd3491839faea0417adaaf8320c2874713014c578};
+    "www/champ/pennstate.html" = {length = 20, bytes = 0xf7bcb22236181df10627da550f2a0564d7d643c3};
+    "www/champ/smu.html" = {length = 20, bytes = 0x3bbe7d0c61b1c82058516ab2ab7446aa6b02fd25};
+    "www/champ/tennessee.html" = {length = 20, bytes = 0x323791e3e7912be9057283c69b205e49b6715781};
+    "www/champ/texas.html" = {length = 20, bytes = 0x5c41f864edab43472c3365b7a2fddd749cc6a561};
+    "www/champ/texasam.html" = {length = 20, bytes = 0x064b8aed66407482a5c9d98648d00835160c27ff};
+    "www/champ/texastech.html" = {length = 20, bytes = 0x96685099382f0e2a01fd5a1725a7f753b95099b3};
+    "www/champ/usc.html" = {length = 20, bytes = 0x78139f4b45f1431ba81567fd3421055a6e05b848};
+    "www/champ/utah.html" = {length = 20, bytes = 0x9ba4d7d6cad2b21f0de4705c3f32da8a554d1a1f};
+    "www/champ/washington.html" = {length = 20, bytes = 0x8aed9ed50fe3e90074d59e523eb8213f26449e5e};
+    "www/data/community_brackets.json" = {length = 20, bytes = 0xdd1499d3a01b43f335813410e10c91a54e34b317};
+    "www/data/teams.js" = {length = 20, bytes = 0x2f0e03bb23c560a9ea4851c9716f534cda094a43};
+    "www/data/teams_v3.js" = {length = 20, bytes = 0x269b6886f2ac00cccd414dfb9d879349fac6d302};
+    "www/favicon.ico" = {length = 20, bytes = 0x989045f76a8e16009cf2e1580ee6ca5a02d89d7a};
+    "www/icons/icon-1024.png" = {length = 20, bytes = 0x553ff301e953bcca875dfedb88fa7e07413cf4a1};
+    "www/icons/icon-128.png" = {length = 20, bytes = 0x9897806b4987cefe51787eeaa2e1088210233dd4};
+    "www/icons/icon-144.png" = {length = 20, bytes = 0x020228b00d2b9863d601dbeb6b1d4e156c510053};
+    "www/icons/icon-152.png" = {length = 20, bytes = 0xa30c393a540d82fdb2f4894fb2a69971a17dc00a};
+    "www/icons/icon-192.png" = {length = 20, bytes = 0x17359b73f7bc384afd3a5e8425fe9876d02f0b9e};
+    "www/icons/icon-384.png" = {length = 20, bytes = 0x5a11cc0741c8e08fe1beba4efe63552ac37221ca};
+    "www/icons/icon-48.png" = {length = 20, bytes = 0x989045f76a8e16009cf2e1580ee6ca5a02d89d7a};
+    "www/icons/icon-512.png" = {length = 20, bytes = 0x7195fb36befb5122df8db72dc40c6aedea1947ca};
+    "www/icons/icon-72.png" = {length = 20, bytes = 0x71db82a211fd4a86decbcb44b35bfd18e0b6c472};
+    "www/icons/icon-96.png" = {length = 20, bytes = 0x34d8ef4e19d910f1d4a0dea2e85ba606072e08ea};
+    "www/icons/screenshot-desktop.jpg" = {length = 20, bytes = 0x0a60cdba2c5565b69ab8984179e8477369df0719};
+    "www/icons/screenshot-mobile.png" = {length = 20, bytes = 0x45807bd3d834616bb751e6993433ebb2dc960372};
+    "www/index.html" = {length = 20, bytes = 0xadd071afc13d36f06504ffdbfebbde81eaf33bc1};
+    "www/manifest.json" = {length = 20, bytes = 0x62a37ba671cf004a5b8757b9b9c7da315d9287f2};
+    "www/preview.jpg" = {length = 20, bytes = 0x0a60cdba2c5565b69ab8984179e8477369df0719};
+    "www/privacy.html" = {length = 20, bytes = 0x614ddc61399f040a89be0d47a8c1a5a3703d6156};
+    "www/qrcode.min.js" = {length = 20, bytes = 0x2d06c1f823f34c19981c6ae0b0eb0f5861c5e14b};
+    "www/qrious.min.js" = {length = 20, bytes = 0xa9271e81e2ac6a692b1c133811afa33f0f3d7dc5};
+    "www/styles.css" = {length = 20, bytes = 0xdd3ad71f29bc4b25ba3295afa5f034c311372af8};
+    "www/supabase-client.js" = {length = 20, bytes = 0xec16768aafb53c3a4330a39e31cda976f4bfe7ff};
+    "www/sw.js" = {length = 20, bytes = 0x507c46584cccec3972372bfef59c7760ccd5be3a};
+    "www/terms.html" = {length = 20, bytes = 0x458422547aeda1969ce534556311c0e89c27050b};
+}, AnyHashable("rules2"): {
+    ".*\\.dSYM($|/)" =     {
+        weight = 11;
+    };
+    "^(.*/)?\\.DS_Store$" =     {
+        omit = 1;
+        weight = 2000;
+    };
+    "^.*" = 1;
+    "^.*\\.lproj/" =     {
+        optional = 1;
+        weight = 1000;
+    };
+    "^.*\\.lproj/locversion.plist$" =     {
+        omit = 1;
+        weight = 1100;
+    };
+    "^Base\\.lproj/" =     {
+        weight = 1010;
+    };
+    "^Info\\.plist$" =     {
+        omit = 1;
+        weight = 20;
+    };
+    "^PkgInfo$" =     {
+        omit = 1;
+        weight = 20;
+    };
+    "^embedded\\.provisionprofile$" =     {
+        weight = 20;
+    };
+    "^version\\.plist$" =     {
+        weight = 20;
+    };
+}], enableSignatureValidation: true, logAspect: <DVTLogAspect:0x9fde1c000:IDEDistributionPipeline:level=verbose(3):effective-level=verbose(3)>)'
+2026-09-02 19:40:46 +0000 [MT] Sending request 09549CED-3F94-403F-BA10-2E756C4FE136 to <https://developerservices2.apple.com/services/v1/certificates> for session <DVTServicesAccountBasedSession: 0x9fde1d9e0; account='<DVTAppleIDBasedDeveloperAccount: 0xa004ef880; username='jajo9147@gmail.com'>'>.
+Method: POST
+
+Headers:
+{
+    Accept = "application/vnd.api+json";
+    "Accept-Encoding" = "gzip, deflate";
+    "Content-Length" = 113;
+    "Content-Type" = "application/vnd.api+json";
+    DSESSIONID = t5j5rvb0bua7v64i91mijm4nhbpjvmci2vpblffsh3ia4651614;
+    "User-Agent" = Xcode;
+    "X-Apple-App-Info" = "com.apple.gs.xcode.auth";
+    "X-Apple-GS-Token" = "AAAABLwIAAAAAGqR3wwRDWdzLnhjb2RlLmF1dGi9AE5Yw95gUiyDhZtXiqNwCD0DP60OM6xYOqfOrQIFSAhEoxxy1NErp/D4ZqxOrTTvtawjZKli9UhUpWmE66+itmz8rqohzDohZoBRhTF61qH/BrbhYpWm6Cn8+U4MMFBG0wHiap/boiPpxC4jDtAc80EDXkn3";
+    "X-Apple-I-Identity-Id" = "001438-10-6737c7b9-7beb-4e9d-adea-789257401734";
+    "X-HTTP-Method-Override" = GET;
+    "X-MMe-Client-Info" = "<Mac17,9> <macOS;26.6.2;25G83> <com.apple.AuthKit/1 (com.apple.dt.xcodebuild/24902)>";
+    "X-Mme-Device-Id" = "737B8DA6-83FE-5AFF-946C-6C0A281C0726";
+    "X-Xcode-Version" = "26.6 (17F113)";
+}
+
+Payload:
+{"urlEncodedQueryParams":"teamId=2TZS84XR89&filter%5BserialNumber%5D=58EAF5BC0804B6E156C8E998BCDA25D6&limit=200"}
+2026-09-02 19:40:46 +0000 [MT] Received response for 09549CED-3F94-403F-BA10-2E756C4FE136 @ <https://developerservices2.apple.com/services/v1/certificates>. Code = 0
+2026-09-02 19:40:46 +0000 [MT] Response payload: {
+  "data" : [ {
+    "type" : "certificates",
+    "id" : "Z2Z5RTY3XX",
+    "attributes" : {
+      "requesterEmail" : "jajo9147@gmail.com",
+      "serialNumber" : "58EAF5BC0804B6E156C8E998BCDA25D6",
+      "certificateContent" : "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",
+      "displayName" : "JAKE THOMAS JOHNSON",
+      "requesterLastName" : "JOHNSON",
+      "csrContent" : null,
+      "machineName" : null,
+      "platform" : null,
+      "requesterFirstName" : "JAKE THOMAS",
+      "machineId" : null,
+      "name" : "Apple Distribution: JAKE THOMAS JOHNSON",
+      "responseId" : "a5fe00f4-6aff-49e3-8b7e-a32388f0f2f0",
+      "expirationDate" : "2027-08-28T22:17:35.000+00:00",
+      "certificateType" : "DISTRIBUTION_MANAGED"
+    },
+    "links" : {
+      "self" : "https://developerservices2.apple.com:443/services/v1/certificates/Z2Z5RTY3XX"
+    }
+  } ],
+  "links" : {
+    "self" : "https://developerservices2.apple.com:443/services/v1/certificates?filter%5BserialNumber%5D=58EAF5BC0804B6E156C8E998BCDA25D6&limit=200"
+  },
+  "meta" : {
+    "paging" : {
+      "total" : 1,
+      "limit" : 200
+    }
+  }
+}
+
+2026-09-02 19:40:46 +0000 [MT] Sending request F875B4F6-6DA0-4C32-BAD6-F19ACC06B70D to <https://developerservices3.apple.com/services/v1/batch> for session <DVTServicesAccountBasedSession: 0x9fde1d9e0; account='<DVTAppleIDBasedDeveloperAccount: 0xa004ef880; username='jajo9147@gmail.com'>'>.
+Method: POST
+
+Headers:
+{
+    Accept = "application/vnd.api+json";
+    "Accept-Encoding" = "gzip, deflate";
+    "Content-Length" = 488;
+    "Content-Type" = "application/vnd.api+json";
+    DSESSIONID = t5j5rvb0bua7v64i91mijm4nhbpjvmci2vpblffsh3ia4651614;
+    "User-Agent" = Xcode;
+    "X-Apple-App-Info" = "com.apple.gs.xcode.auth";
+    "X-Apple-GS-Token" = "AAAABLwIAAAAAGqR3wwRDWdzLnhjb2RlLmF1dGi9AE5Yw95gUiyDhZtXiqNwCD0DP60OM6xYOqfOrQIFSAhEoxxy1NErp/D4ZqxOrTTvtawjZKli9UhUpWmE66+itmz8rqohzDohZoBRhTF61qH/BrbhYpWm6Cn8+U4MMFBG0wHiap/boiPpxC4jDtAc80EDXkn3";
+    "X-Apple-I-Identity-Id" = "001438-10-6737c7b9-7beb-4e9d-adea-789257401734";
+    "X-MMe-Client-Info" = "<Mac17,9> <macOS;26.6.2;25G83> <com.apple.AuthKit/1 (com.apple.dt.xcodebuild/24902)>";
+    "X-Mme-Device-Id" = "737B8DA6-83FE-5AFF-946C-6C0A281C0726";
+    "X-Xcode-Version" = "26.6 (17F113)";
+}
+
+Payload:
+{"data":{"type":"batch","attributes":{"resourceVersion":"1","resourceList":[{"data":{"relationships":{"bundleId":{"data":{"id":"J8Y3GFFAP4","type":"bundleIds"}},"certificate":{"data":{"id":"Z2Z5RTY3XX","type":"certificates"}}},"type":"codeSignatures","attributes":{"teamId":"2TZS84XR89","name":"0","digestHash":"B5FA0BB8039E9D4260D86A4D343B92D0F1D325109C260C190247670800BF80F2","cdHashSha256":"B5FA0BB8039E9D4260D86A4D343B92D0F1D325109C260C190247670800BF80F2"}}}],"teamId":"2TZS84XR89"}}}
+2026-09-02 19:40:46 +0000 [MT] Received response for F875B4F6-6DA0-4C32-BAD6-F19ACC06B70D @ <https://developerservices3.apple.com/services/v1/batch>. Code = 0
+2026-09-02 19:40:46 +0000 [MT] Response payload: {
+  "data" : {
+    "type" : "batch",
+    "id" : "acffc81e-7f97-49fe-b623-db69de4cece9",
+    "attributes" : {
+      "responseId" : "acffc81e-7f97-49fe-b623-db69de4cece9",
+      "resourceList" : [ {
+        "type" : "codeSignatures",
+        "id" : "6dfe3ab9-96fc-48f6-86e3-3ae392c1ce05",
+        "attributes" : {
+          "digestHash" : "B5FA0BB8039E9D4260D86A4D343B92D0F1D325109C260C190247670800BF80F2",
+          "cdHashSha256" : "B5FA0BB8039E9D4260D86A4D343B92D0F1D325109C260C190247670800BF80F2",
+          "signature" : "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",
+          "name" : "0",
+          "responseId" : "acffc81e-7f97-49fe-b623-db69de4cece9",
+          "cmsSignature" : "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",
+          "timestamp" : false
+        },
+        "relationships" : {
+          "bundleId" : {
+            "data" : {
+              "type" : "bundleIds",
+              "id" : "J8Y3GFFAP4"
+            },
+            "links" : {
+              "self" : {
+                "href" : "https://developerservices3.apple.com:443/services/v1/codeSignatures/6dfe3ab9-96fc-48f6-86e3-3ae392c1ce05/relationships/bundleId"
+              },
+              "related" : {
+                "href" : "https://developerservices3.apple.com:443/services/v1/codeSignatures/6dfe3ab9-96fc-48f6-86e3-3ae392c1ce05/bundleId"
+              }
+            }
+          },
+          "certificate" : {
+            "data" : {
+              "type" : "certificates",
+              "id" : "Z2Z5RTY3XX"
+            },
+            "links" : {
+              "self" : {
+                "href" : "https://developerservices3.apple.com:443/services/v1/codeSignatures/6dfe3ab9-96fc-48f6-86e3-3ae392c1ce05/relationships/certificate"
+              },
+              "related" : {
+                "href" : "https://developerservices3.apple.com:443/services/v1/codeSignatures/6dfe3ab9-96fc-48f6-86e3-3ae392c1ce05/certificate"
+              }
+            }
+          }
+        },
+        "links" : {
+          "self" : {
+            "href" : "https://developerservices3.apple.com:443/services/v1/codeSignatures/6dfe3ab9-96fc-48f6-86e3-3ae392c1ce05"
+          }
+        }
+      } ],
+      "resourceVersion" : "1"
+    },
+    "links" : {
+      "self" : "https://developerservices3.apple.com:443/services/v1/batch/acffc81e-7f97-49fe-b623-db69de4cece9"
+    }
+  },
+  "links" : {
+    "self" : "https://developerservices3.apple.com:443/services/v1/batch"
+  }
+}
+
+2026-09-02 19:40:46 +0000 [MT] Remote signature for /var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root/Payload/CFBProphet.app (arch: arm64) is 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
+2026-09-02 19:40:46 +0000 [MT] invoking codesign: <NSConcreteTask: 0x9fde87b60; launchPath='/usr/bin/codesign', arguments='(
+    "-e",
+    "--edit-cms",
+    "/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/cms~~~dngLbZ",
+    "/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root/Payload/CFBProphet.app"
+)'>
+2026-09-02 19:40:47 +0000 [MT] codesign output: 
+2026-09-02 19:40:47 +0000 [MT] Processing step: IDEDistributionZipODRItemStep
+2026-09-02 19:40:47 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2026-09-02 19:40:47 +0000 [MT] Processing step: IDEDistributionCreateIPAStep
+2026-09-02 19:40:47 +0000 [MT] Running /usr/bin/rsync '-8aPhhE' '/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Symbols' '--link-dest' '/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6' '/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root'
+2026-09-02 19:40:47 +0000  Symbols/
+Symbols/4C53927A-7024-3944-B976-A693BFE1C220.symbols
+2026-09-02 19:40:47 +0000 [MT] /usr/bin/rsync exited with 0
+2026-09-02 19:40:47 +0000 [MT] Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root' '/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Packages/CFBProphet.ipa'
+2026-09-02 19:40:47 +0000  >>> Copying /var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root 
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/_CodeSignature/CodeResources ... 
+2026-09-02 19:40:47 +0000  16479 bytes for ./Payload/CFBProphet.app/_CodeSignature/CodeResources
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/AppIcon60x60@2x.png ... 
+2026-09-02 19:40:47 +0000  26735 bytes for ./Payload/CFBProphet.app/AppIcon60x60@2x.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/qrcode.min.js ... 
+2026-09-02 19:40:47 +0000  19927 bytes for ./Payload/CFBProphet.app/www/qrcode.min.js
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/preview.jpg ... 
+2026-09-02 19:40:47 +0000  1061989 bytes for ./Payload/CFBProphet.app/www/preview.jpg
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/favicon.ico ... 
+2026-09-02 19:40:47 +0000  4064 bytes for ./Payload/CFBProphet.app/www/favicon.ico
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/index.html ... 
+2026-09-02 19:40:47 +0000  104173 bytes for ./Payload/CFBProphet.app/www/index.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/apple-touch-icon.png ... 
+2026-09-02 19:40:47 +0000  45849 bytes for ./Payload/CFBProphet.app/www/apple-touch-icon.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/styles.css ... 
+2026-09-02 19:40:47 +0000  148141 bytes for ./Payload/CFBProphet.app/www/styles.css
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/terms.html ... 
+2026-09-02 19:40:47 +0000  5871 bytes for ./Payload/CFBProphet.app/www/terms.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/qrious.min.js ... 
+2026-09-02 19:40:47 +0000  17579 bytes for ./Payload/CFBProphet.app/www/qrious.min.js
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/houston.html ... 
+2026-09-02 19:40:47 +0000  3115 bytes for ./Payload/CFBProphet.app/www/champ/houston.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/texasam.html ... 
+2026-09-02 19:40:47 +0000  3122 bytes for ./Payload/CFBProphet.app/www/champ/texasam.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/floridastate.html ... 
+2026-09-02 19:40:47 +0000  3183 bytes for ./Payload/CFBProphet.app/www/champ/floridastate.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/oregon.html ... 
+2026-09-02 19:40:47 +0000  3093 bytes for ./Payload/CFBProphet.app/www/champ/oregon.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/notredame.html ... 
+2026-09-02 19:40:47 +0000  3193 bytes for ./Payload/CFBProphet.app/www/champ/notredame.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/smu.html ... 
+2026-09-02 19:40:47 +0000  3087 bytes for ./Payload/CFBProphet.app/www/champ/smu.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/pennstate.html ... 
+2026-09-02 19:40:47 +0000  3190 bytes for ./Payload/CFBProphet.app/www/champ/pennstate.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/olemiss.html ... 
+2026-09-02 19:40:47 +0000  3114 bytes for ./Payload/CFBProphet.app/www/champ/olemiss.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/clemson.html ... 
+2026-09-02 19:40:47 +0000  3106 bytes for ./Payload/CFBProphet.app/www/champ/clemson.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/byu.html ... 
+2026-09-02 19:40:47 +0000  3074 bytes for ./Payload/CFBProphet.app/www/champ/byu.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/tennessee.html ... 
+2026-09-02 19:40:47 +0000  3163 bytes for ./Payload/CFBProphet.app/www/champ/tennessee.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/utah.html ... 
+2026-09-02 19:40:47 +0000  3061 bytes for ./Payload/CFBProphet.app/www/champ/utah.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/oklahoma.html ... 
+3124 bytes for ./Payload/CFBProphet.app/www/champ/oklahoma.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/indiana.html ... 
+2026-09-02 19:40:47 +0000  3117 bytes for ./Payload/CFBProphet.app/www/champ/indiana.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/michigan.html ... 
+2026-09-02 19:40:47 +0000  3148 bytes for ./Payload/CFBProphet.app/www/champ/michigan.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/washington.html ... 
+2026-09-02 19:40:47 +0000  3145 bytes for ./Payload/CFBProphet.app/www/champ/washington.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/boisestate.html ... 
+2026-09-02 19:40:47 +0000  3147 bytes for ./Payload/CFBProphet.app/www/champ/boisestate.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/ohiostate.html ... 
+2026-09-02 19:40:47 +0000  3150 bytes for ./Payload/CFBProphet.app/www/champ/ohiostate.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/lsu.html ... 
+2026-09-02 19:40:47 +0000  3061 bytes for ./Payload/CFBProphet.app/www/champ/lsu.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/alabama.html ... 
+2026-09-02 19:40:47 +0000  3154 bytes for ./Payload/CFBProphet.app/www/champ/alabama.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/miami.html ... 
+2026-09-02 19:40:47 +0000  3123 bytes for ./Payload/CFBProphet.app/www/champ/miami.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/colorado.html ... 
+2026-09-02 19:40:47 +0000  3138 bytes for ./Payload/CFBProphet.app/www/champ/colorado.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/usc.html ... 
+2026-09-02 19:40:47 +0000  3069 bytes for ./Payload/CFBProphet.app/www/champ/usc.html
+copying file ./Payload/CFBProphet.app/www/champ/missouri.html ... 
+2026-09-02 19:40:47 +0000  3117 bytes for ./Payload/CFBProphet.app/www/champ/missouri.html
+copying file ./Payload/CFBProphet.app/www/champ/louisville.html ... 
+2026-09-02 19:40:47 +0000  3156 bytes for ./Payload/CFBProphet.app/www/champ/louisville.html
+copying file ./Payload/CFBProphet.app/www/champ/texastech.html ... 
+2026-09-02 19:40:47 +0000  3179 bytes for ./Payload/CFBProphet.app/www/champ/texastech.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/iowa.html ... 
+2026-09-02 19:40:47 +0000  3098 bytes for ./Payload/CFBProphet.app/www/champ/iowa.html
+copying file ./Payload/CFBProphet.app/www/champ/arizona.html ... 
+2026-09-02 19:40:47 +0000  3118 bytes for ./Payload/CFBProphet.app/www/champ/arizona.html
+copying file ./Payload/CFBProphet.app/www/champ/georgia.html ... 
+2026-09-02 19:40:47 +0000  3117 bytes for ./Payload/CFBProphet.app/www/champ/georgia.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/champ/texas.html ... 
+2026-09-02 19:40:47 +0000  3110 bytes for ./Payload/CFBProphet.app/www/champ/texas.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/icon-144.png ... 
+2026-09-02 19:40:47 +0000  30644 bytes for ./Payload/CFBProphet.app/www/icons/icon-144.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/icon-192.png ... 
+2026-09-02 19:40:47 +0000  51582 bytes for ./Payload/CFBProphet.app/www/icons/icon-192.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/icon-384.png ... 
+2026-09-02 19:40:47 +0000  191067 bytes for ./Payload/CFBProphet.app/www/icons/icon-384.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/icon-48.png ... 
+2026-09-02 19:40:47 +0000  4064 bytes for ./Payload/CFBProphet.app/www/icons/icon-48.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/icon-1024.png ... 
+2026-09-02 19:40:47 +0000  1338760 bytes for ./Payload/CFBProphet.app/www/icons/icon-1024.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/icon-152.png ... 
+2026-09-02 19:40:47 +0000  33963 bytes for ./Payload/CFBProphet.app/www/icons/icon-152.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/icon-72.png ... 
+2026-09-02 19:40:47 +0000  8566 bytes for ./Payload/CFBProphet.app/www/icons/icon-72.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/icon-96.png ... 
+2026-09-02 19:40:47 +0000  14159 bytes for ./Payload/CFBProphet.app/www/icons/icon-96.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/screenshot-desktop.jpg ... 
+2026-09-02 19:40:47 +0000  1061989 bytes for ./Payload/CFBProphet.app/www/icons/screenshot-desktop.jpg
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/screenshot-mobile.png ... 
+2026-09-02 19:40:47 +0000  1543927 bytes for ./Payload/CFBProphet.app/www/icons/screenshot-mobile.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/icon-128.png ... 
+2026-09-02 19:40:47 +0000  23408 bytes for ./Payload/CFBProphet.app/www/icons/icon-128.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/icons/icon-512.png ... 
+2026-09-02 19:40:47 +0000  319573 bytes for ./Payload/CFBProphet.app/www/icons/icon-512.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/apple-touch-icon-precomposed.png ... 
+2026-09-02 19:40:47 +0000  45849 bytes for ./Payload/CFBProphet.app/www/apple-touch-icon-precomposed.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/manifest.json ... 
+2026-09-02 19:40:47 +0000  5141 bytes for ./Payload/CFBProphet.app/www/manifest.json
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/supabase-client.js ... 
+2026-09-02 19:40:47 +0000  14486 bytes for ./Payload/CFBProphet.app/www/supabase-client.js
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/data/teams.js ... 
+2026-09-02 19:40:47 +0000  422729 bytes for ./Payload/CFBProphet.app/www/data/teams.js
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/data/community_brackets.json ... 
+2026-09-02 19:40:47 +0000  62697 bytes for ./Payload/CFBProphet.app/www/data/community_brackets.json
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/data/teams_v3.js ... 
+2026-09-02 19:40:47 +0000  422730 bytes for ./Payload/CFBProphet.app/www/data/teams_v3.js
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/app.js ... 
+2026-09-02 19:40:47 +0000  431383 bytes for ./Payload/CFBProphet.app/www/app.js
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/sw.js ... 
+2026-09-02 19:40:47 +0000  650 bytes for ./Payload/CFBProphet.app/www/sw.js
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/www/privacy.html ... 
+2026-09-02 19:40:47 +0000  6022 bytes for ./Payload/CFBProphet.app/www/privacy.html
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/Assets.car ... 
+2026-09-02 19:40:47 +0000  2070168 bytes for ./Payload/CFBProphet.app/Assets.car
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/AppIcon76x76@2x~ipad.png ... 
+2026-09-02 19:40:47 +0000  43800 bytes for ./Payload/CFBProphet.app/AppIcon76x76@2x~ipad.png
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/PrivacyInfo.xcprivacy ... 
+2026-09-02 19:40:47 +0000  641 bytes for ./Payload/CFBProphet.app/PrivacyInfo.xcprivacy
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/CFBProphet ... 
+2026-09-02 19:40:47 +0000  134528 bytes for ./Payload/CFBProphet.app/CFBProphet
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/embedded.mobileprovision ... 
+2026-09-02 19:40:47 +0000  12342 bytes for ./Payload/CFBProphet.app/embedded.mobileprovision
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/Info.plist ... 
+2026-09-02 19:40:47 +0000  1751 bytes for ./Payload/CFBProphet.app/Info.plist
+2026-09-02 19:40:47 +0000  copying file ./Payload/CFBProphet.app/PkgInfo ... 
+2026-09-02 19:40:47 +0000  8 bytes for ./Payload/CFBProphet.app/PkgInfo
+2026-09-02 19:40:47 +0000  copying file ./Symbols/4C53927A-7024-3944-B976-A693BFE1C220.symbols ... 
+2026-09-02 19:40:47 +0000  73180 bytes for ./Symbols/4C53927A-7024-3944-B976-A693BFE1C220.symbols
+2026-09-02 19:40:47 +0000 [MT] /usr/bin/ditto exited with 0
+2026-09-02 19:40:47 +0000 [MT] Processing step: IDEDistributionAppStoreInformationStep
+2026-09-02 19:40:47 +0000 [MT] Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2026-09-02 19:40:47 +0000 [MT] Processing step: IDEDistributionGenerateProcessedDistributionItems
+2026-09-02 19:40:47 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x9fde1c2a0:'/var/folders/8s/bk3rpzxn3wv7l9k5qlyg00j80000gn/T/XcodeDistPipeline.~~~RK5NL6/Root/Payload/CFBProphet.app'>
+2026-09-02 19:40:47 +0000 [MT] Processing step: IDEDistributionCreateManifestStep
+2026-09-02 19:40:47 +0000 [MT] Skipping step: IDEDistributionCreateManifestStep because it said so

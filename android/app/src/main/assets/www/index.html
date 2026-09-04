@@ -1668,23 +1668,23 @@
         </div>
 
         <!-- Account Deletion (Apple Guideline 5.1.1(v) Two-Step Verification) -->
-        <div style="margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid rgba(255, 255, 255, 0.08); text-align: center;">
+        <div style="margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid rgba(239, 68, 68, 0.25); text-align: center;">
           <div id="authDeleteAccountInitial">
-            <button type="button" class="link-btn" onclick="showDeleteAccountConfirmation()" style="background: none; border: none; color: #EF4444; font-size: 0.75rem; cursor: pointer; text-decoration: underline; display: inline-flex; align-items: center; gap: 4px;">
+            <button type="button" id="authDeleteAccountTriggerBtn" onclick="showDeleteAccountConfirmation()" style="width: 100%; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.4); color: #F87171; font-size: 0.82rem; font-weight: 700; padding: 0.6rem 1rem; border-radius: var(--radius-sm); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s ease;">
               <i class="fa-solid fa-trash-can"></i> Delete Account &amp; Prediction Data
             </button>
           </div>
           
           <!-- Two-Step Confirmation Box (Hidden by default) -->
-          <div id="authDeleteAccountConfirmBox" style="display: none; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-sm); padding: 0.75rem; margin-top: 0.35rem; text-align: center;">
-            <p style="font-size: 0.76rem; color: #FCA5A5; line-height: 1.4; margin-bottom: 0.6rem; font-weight: 600;">
-              ⚠️ Are you sure you want to delete your account? All your saved predictions, profile info, and custom simulation data will be permanently erased.
+          <div id="authDeleteAccountConfirmBox" style="display: none; background: rgba(239, 68, 68, 0.15); border: 1.5px solid rgba(239, 68, 68, 0.5); border-radius: var(--radius-sm); padding: 0.85rem; margin-top: 0.5rem; text-align: center;">
+            <p style="font-size: 0.78rem; color: #FCA5A5; line-height: 1.45; margin-bottom: 0.75rem; font-weight: 600;">
+              ⚠️ Are you sure you want to permanently delete your account? All saved predictions, custom simulation weights, and profile data will be permanently wiped.
             </p>
             <div style="display: flex; gap: 0.5rem; justify-content: center;">
-              <button type="button" class="action-btn" onclick="executeDeleteAccount()" style="background: #DC2626; color: #FFFFFF; font-weight: 800; font-size: 0.76rem; padding: 0.45rem 0.85rem; border: none; border-radius: var(--radius-sm); flex: 1; cursor: pointer;">
+              <button type="button" class="action-btn" id="confirmDeleteAccountBtn" onclick="executeDeleteAccount()" style="background: #DC2626; color: #FFFFFF; font-weight: 800; font-size: 0.78rem; padding: 0.55rem 0.95rem; border: none; border-radius: var(--radius-sm); flex: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);">
                 <i class="fa-solid fa-trash"></i> Yes, Permanently Delete
               </button>
-              <button type="button" class="action-btn secondary-btn" onclick="cancelDeleteAccountConfirmation()" style="font-size: 0.76rem; padding: 0.45rem 0.85rem; flex: 1; cursor: pointer;">
+              <button type="button" class="action-btn secondary-btn" onclick="cancelDeleteAccountConfirmation()" style="font-size: 0.78rem; padding: 0.55rem 0.95rem; flex: 1; cursor: pointer;">
                 Cancel
               </button>
             </div>
