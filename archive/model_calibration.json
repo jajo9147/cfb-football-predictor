@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-04T17:23:28.679520+00:00",
+  "updatedAt": "2026-09-04T17:41:10.422323+00:00",
   "season": 2026,
   "overallStats": {
     "totalGames": 9,
@@ -221,6 +221,41 @@
         "missouri": {
           "old": 20.8,
           "new": 22.8,
+          "delta": 2.0
+        }
+      },
+      "unplayedGamesRecalculated": 369
+    },
+    {
+      "timestamp": "2026-09-04T17:41:14.718233+00:00",
+      "gamesEvaluated": 5,
+      "modelMae": 17.6,
+      "vegasMae": 18.9,
+      "modelBeatVegasPct": 40.0,
+      "ratingShifts": {
+        "usc": {
+          "old": 24.5,
+          "new": 24.5,
+          "delta": 0.0
+        },
+        "utah": {
+          "old": 24.5,
+          "new": 26.5,
+          "delta": 2.0
+        },
+        "colorado": {
+          "old": 17.14,
+          "new": 16.78,
+          "delta": -0.36
+        },
+        "floridastate": {
+          "old": 25.18,
+          "new": 26.86,
+          "delta": 1.68
+        },
+        "missouri": {
+          "old": 22.8,
+          "new": 24.8,
           "delta": 2.0
         }
       },
