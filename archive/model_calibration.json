@@ -150,5 +150,37 @@
       "scoreDog": 20,
       "brier": "0.230"
     }
+  ],
+  "retrainingHistory": [
+    {
+      "timestamp": "2026-09-05T02:59:35.037555+00:00",
+      "gamesEvaluated": 4,
+      "modelMae": 28.25,
+      "vegasMae": 27.75,
+      "modelBeatVegasPct": 0.0,
+      "ratingShifts": {
+        "usc": {
+          "old": 24.5,
+          "new": 26.06,
+          "delta": 1.56
+        },
+        "floridastate": {
+          "old": 23.5,
+          "new": 25.18,
+          "delta": 1.68
+        },
+        "utah": {
+          "old": 22.5,
+          "new": 24.5,
+          "delta": 2.0
+        },
+        "missouri": {
+          "old": 20.8,
+          "new": 22.8,
+          "delta": 2.0
+        }
+      },
+      "unplayedGamesRecalculated": 365
+    }
   ]
 }

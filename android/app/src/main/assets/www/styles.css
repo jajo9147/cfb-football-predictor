@@ -3056,6 +3056,155 @@ select option {
   border: 1px solid rgba(16, 185, 129, 0.5);
 }
 
+/* Spread KPI & Prediction Variance Badges */
+.prediction-status-badge.spread-cover {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.prediction-status-badge.spread-wrong {
+  background: rgba(239, 68, 68, 0.2);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.spread-kpi-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.spread-kpi-pill.cover {
+  background: rgba(16, 185, 129, 0.22);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.spread-kpi-pill.loss {
+  background: rgba(239, 68, 68, 0.22);
+  color: #FCA5A5;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.kpi-scores-comparison-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin: 6px 0;
+}
+
+.kpi-score-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kpi-score-lbl {
+  font-size: 0.62rem;
+  font-family: var(--font-mono);
+  color: #94A3B8;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.kpi-score-val {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #E2E8F0;
+}
+
+.kpi-score-val.proj {
+  color: #93C5FD;
+}
+
+.kpi-score-val.actual {
+  color: #F8FAFC;
+}
+
+.kpi-score-val.line {
+  color: #FBBF24;
+}
+
+.kpi-score-val.cover-text {
+  color: #34D399;
+}
+
+.kpi-score-val.loss-text {
+  color: #F87171;
+}
+
+.prediction-diagnostic-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  background: rgba(30, 41, 59, 0.6);
+  border-left: 3px solid #F59E0B;
+  padding: 5px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.prediction-diagnostic-row .diag-icon {
+  color: #F59E0B;
+  font-size: 0.72rem;
+  margin-top: 2px;
+}
+
+.prediction-diagnostic-row .diag-text {
+  font-size: 0.73rem;
+  color: #CBD5E1;
+  line-height: 1.35;
+  font-family: var(--font-sans);
+}
+
+.pred-vs-actual-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.70rem;
+  flex-wrap: wrap;
+}
+
+.pred-vs-actual-badge .pva-proj {
+  color: #93C5FD;
+}
+
+.pred-vs-actual-badge .pva-final {
+  color: #F8FAFC;
+}
+
+.pred-vs-actual-badge .pva-div {
+  color: #64748B;
+}
+
+.pred-vs-actual-badge .pva-spread.hit {
+  color: #34D399;
+  font-weight: 800;
+}
+
+.pred-vs-actual-badge .pva-spread.miss {
+  color: #F87171;
+  font-weight: 800;
+}
+
 .outcome-matchup-sub {
   font-size: 0.76rem;
   color: #94A3B8;

@@ -1439,19 +1439,40 @@ function renderSchedule() {
   // Calculate team prediction accuracy on settled games
   let settledGamesCount = 0;
   let correctSettledCount = 0;
+  let atsSettledCount = 0;
+
   team.schedule.forEach(g => {
-    if (g.isFinal && typeof g.actualScoreUt === 'number') {
+    const actUt = typeof g.actualScoreUt === 'number' ? g.actualScoreUt : (typeof g.finalTeamScore === 'number' ? g.finalTeamScore : null);
+    const actOpp = typeof g.actualScoreOpp === 'number' ? g.actualScoreOpp : (typeof g.finalOppScore === 'number' ? g.finalOppScore : null);
+    if (g.isFinal && actUt !== null && actOpp !== null) {
       settledGamesCount++;
-      const actWin = g.actualScoreUt > g.actualScoreOpp;
+      const actWin = actUt > actOpp;
       let pPick = state.userPicks[g.id];
       if (!pPick && state.manualScores && state.manualScores[g.id]) {
         pPick = state.manualScores[g.id].teamScore > state.manualScores[g.id].oppScore ? 'W' : 'L';
       }
+      const predUt = typeof g.predictedScoreUt === 'number' ? g.predictedScoreUt : (typeof g.projScoreUt === 'number' ? g.projScoreUt : 24);
+      const predOpp = typeof g.predictedScoreOpp === 'number' ? g.predictedScoreOpp : (typeof g.projScoreOpp === 'number' ? g.projScoreOpp : 21);
       if (!pPick) {
-        pPick = (g.baseWinProb >= 50 || (g.projScoreUt && g.projScoreUt > g.projScoreOpp)) ? 'W' : 'L';
+        pPick = (g.baseWinProb >= 50 || (predUt > predOpp)) ? 'W' : 'L';
       }
       if ((pPick === 'W') === actWin) {
         correctSettledCount++;
+      }
+
+      if (typeof g.vegasSpread === 'number') {
+        const actualMargin = actUt - actOpp;
+        const predMargin = predUt - predOpp;
+        const teamCoverMargin = actualMargin + g.vegasSpread;
+        if (Math.abs(teamCoverMargin) < 0.25) {
+          atsSettledCount++;
+        } else {
+          const modelPickCover = (predMargin + g.vegasSpread) > 0;
+          const teamCovered = teamCoverMargin > 0;
+          if (modelPickCover === teamCovered) {
+            atsSettledCount++;
+          }
+        }
       }
     }
   });
@@ -1461,7 +1482,8 @@ function renderSchedule() {
     const earnedPts = correctSettledCount * 10;
     const maxPossiblePts = settledGamesCount * 10;
     const lostPts = maxPossiblePts - earnedPts;
-    const pct = Math.round((correctSettledCount / settledGamesCount) * 100);
+    const suPct = Math.round((correctSettledCount / settledGamesCount) * 100);
+    const atsPct = Math.round((atsSettledCount / settledGamesCount) * 100);
 
     const accuracyBanner = document.createElement('div');
     accuracyBanner.className = `team-schedule-accuracy-banner ${isPerfect ? 'perfect' : 'has-misses'}`;
@@ -1469,10 +1491,11 @@ function renderSchedule() {
       <div class="ts-acc-left">
         <span class="ts-acc-icon"><i class="fa-solid ${isPerfect ? 'fa-award' : 'fa-chart-pie'}"></i></span>
         <div class="ts-acc-text">
-          <span class="ts-acc-title">LIVE PREDICTION PERFORMANCE (${settledGamesCount} ${settledGamesCount === 1 ? 'GAME' : 'GAMES'} FINAL)</span>
+          <span class="ts-acc-title">LIVE PREDICTION & SPREAD PERFORMANCE (${settledGamesCount} ${settledGamesCount === 1 ? 'GAME' : 'GAMES'} FINAL)</span>
           <span class="ts-acc-detail">
-            <strong>${correctSettledCount} of ${settledGamesCount} Correct Picks</strong> (${pct}%) • 
-            ${lostPts > 0 ? `<span class="ts-pts-lost"><i class="fa-solid fa-triangle-exclamation"></i> -${lostPts} PTS from ${settledGamesCount - correctSettledCount} missed ${settledGamesCount - correctSettledCount === 1 ? 'pick' : 'picks'}</span>` : '<span class="ts-pts-perfect"><i class="fa-solid fa-check"></i> Perfect Record (All picks hit!)</span>'}
+            <strong>Straight Up: ${correctSettledCount} of ${settledGamesCount} Hit (${suPct}%)</strong> • 
+            <strong>ATS: ${atsSettledCount} of ${settledGamesCount} Beat Vegas (${atsPct}%)</strong>
+            ${lostPts > 0 ? `<br><span class="ts-pts-lost"><i class="fa-solid fa-triangle-exclamation"></i> -${lostPts} PTS from ${settledGamesCount - correctSettledCount} missed pick</span>` : ' • <span class="ts-pts-perfect"><i class="fa-solid fa-check"></i> 100% Win/Loss Record</span>'}
           </span>
         </div>
       </div>
@@ -1501,24 +1524,82 @@ function renderSchedule() {
 
     const userPick = state.userPicks[game.id];
     const isWin = sim.isWin;
-    // Default the Pick to Win or Loss based off the projected score
     const effectivePick = userPick || (isWin ? 'W' : 'L');
 
-    // Calculate prediction accuracy for completed games
-    let isPredictionCorrect = true;
+    // Extract actual final scores
+    const actualUt = typeof game.actualScoreUt === 'number' ? game.actualScoreUt : (typeof game.finalTeamScore === 'number' ? game.finalTeamScore : null);
+    const actualOpp = typeof game.actualScoreOpp === 'number' ? game.actualScoreOpp : (typeof game.finalOppScore === 'number' ? game.finalOppScore : null);
+    const hasFinalScores = (sim.isFinal || game.isFinal) && actualUt !== null && actualOpp !== null;
+
+    // Extract predicted scores
+    const predUt = typeof game.predictedScoreUt === 'number' ? game.predictedScoreUt : (typeof game.projScoreUt === 'number' ? game.projScoreUt : 24);
+    const predOpp = typeof game.predictedScoreOpp === 'number' ? game.predictedScoreOpp : (typeof game.projScoreOpp === 'number' ? game.projScoreOpp : 21);
+    const predMargin = predUt - predOpp;
+
+    // Determine predicted straight-up pick
     let predictedPick = userPick;
     if (!predictedPick && state.manualScores && state.manualScores[game.id]) {
       predictedPick = state.manualScores[game.id].teamScore > state.manualScores[game.id].oppScore ? 'W' : 'L';
     }
     if (!predictedPick) {
-      predictedPick = (game.baseWinProb >= 50 || (game.projScoreUt && game.projScoreUt > game.projScoreOpp)) ? 'W' : 'L';
+      predictedPick = (game.baseWinProb >= 50 || predMargin >= 0) ? 'W' : 'L';
     }
 
-    const actualWin = sim.isFinal ? (game.actualScoreUt > game.actualScoreOpp) : isWin;
+    const actualWin = hasFinalScores ? (actualUt > actualOpp) : isWin;
     const predictedWin = (predictedPick === 'W');
+    const isPredictionCorrect = hasFinalScores ? (predictedWin === actualWin) : true;
 
-    if (sim.isFinal) {
-      isPredictionCorrect = (predictedWin === actualWin);
+    // Against The Spread (ATS) & Beat Vegas Calculations
+    let spreadHit = false;
+    let isPush = false;
+    let spreadCoverText = '';
+    let diagnosticText = '';
+
+    if (hasFinalScores && typeof game.vegasSpread === 'number') {
+      const actualMargin = actualUt - actualOpp;
+      const teamCoverMargin = actualMargin + game.vegasSpread; // Margin over spread
+
+      if (Math.abs(teamCoverMargin) < 0.25) {
+        isPush = true;
+        spreadHit = true;
+        spreadCoverText = `Push vs ${game.vegasSpread} line`;
+      } else if (teamCoverMargin > 0) {
+        spreadCoverText = `${team.abbr} Covered (${game.vegasSpread < 0 ? game.vegasSpread : '+' + game.vegasSpread})`;
+      } else {
+        const oppLine = game.vegasSpread < 0 ? `+${Math.abs(game.vegasSpread)}` : `-${game.vegasSpread}`;
+        spreadCoverText = `${game.oppAbbr} Covered (${oppLine})`;
+      }
+
+      const modelPickCover = (predMargin + game.vegasSpread) > 0;
+      const teamCovered = teamCoverMargin > 0;
+
+      if (isPush) {
+        spreadHit = true;
+      } else if (modelPickCover === teamCovered) {
+        spreadHit = true; // Beat Vegas!
+      } else {
+        spreadHit = false; // Missed spread
+      }
+
+      // Diagnostic explanation ("call out where we were wrong in the prediction")
+      const marginError = actualMargin - predMargin;
+      const diffTeam = actualUt - predUt;
+      const diffOpp = actualOpp - predOpp;
+
+      if (Math.abs(marginError) <= 3) {
+        diagnosticText = `🎯 Spot-On Calibration: Model within ${Math.abs(marginError)} pts of actual margin (${actualMargin > 0 ? '+' : ''}${actualMargin} vs ${predMargin > 0 ? '+' : ''}${predMargin} proj).`;
+      } else if (diffOpp > 7) {
+        diagnosticText = `⚠️ Underestimated ${game.oppAbbr} attack: ${game.oppAbbr} scored ${actualOpp} pts (+${diffOpp} over ${predOpp} proj). Spread pick ${spreadHit ? 'held' : 'failed'}.`;
+      } else if (diffTeam < -7) {
+        diagnosticText = `⚠️ Underperformed on offense: ${team.abbr} scored ${actualUt} pts (${diffTeam} below ${predUt} proj), missing the spread cover.`;
+      } else if (marginError < -3) {
+        diagnosticText = `⚠️ Margin variance: Model projected ${team.abbr} by ${predMargin > 0 ? '+' : ''}${predMargin}, but actual margin was ${actualMargin > 0 ? '+' : ''}${actualMargin} (off by ${Math.abs(marginError)} pts).`;
+      } else {
+        diagnosticText = `⚠️ Model was conservative on ${team.abbr}: Won by +${actualMargin} (outperformed ${predMargin > 0 ? '+' : ''}${predMargin} proj by +${marginError} pts).`;
+      }
+    }
+
+    if (hasFinalScores) {
       if (!isPredictionCorrect) {
         card.classList.add('prediction-wrong-card');
       } else {
@@ -1527,12 +1608,18 @@ function renderSchedule() {
     }
 
     let badgeHtml = `<span>${game.isHome ? 'HOME' : 'AWAY'}</span>`;
-    if (sim.isFinal) {
-      if (!isPredictionCorrect) {
-        badgeHtml = `<span class="prediction-status-badge wrong" title="Prediction Wrong: 0 of 10 Points"><i class="fa-solid fa-circle-xmark"></i> PREDICTION WRONG (0 PTS)</span>`;
-      } else {
-        badgeHtml = `<span class="prediction-status-badge correct" title="Prediction Hit: +10 Points"><i class="fa-solid fa-circle-check"></i> PREDICTION HIT (+10 PTS)</span>`;
-      }
+    if (hasFinalScores) {
+      const suBadge = !isPredictionCorrect ? 
+        `<span class="prediction-status-badge wrong" title="Straight Up Missed: 0 of 10 Points"><i class="fa-solid fa-circle-xmark"></i> PREDICTION WRONG (0 PTS)</span>` : 
+        `<span class="prediction-status-badge correct" title="Straight Up Hit: +10 Points"><i class="fa-solid fa-circle-check"></i> PREDICTION HIT (+10 PTS)</span>`;
+      
+      const atsBadge = (typeof game.vegasSpread === 'number') ? (
+        spreadHit ?
+          `<span class="prediction-status-badge spread-cover" title="Beat Vegas Line (${game.vegasSpread})"><i class="fa-solid fa-bolt"></i> BEAT VEGAS (COVER)</span>` :
+          `<span class="prediction-status-badge spread-wrong" title="Failed to Cover Vegas Line (${game.vegasSpread})"><i class="fa-solid fa-triangle-exclamation"></i> SPREAD: LOSS</span>`
+      ) : '';
+
+      badgeHtml = `${atsBadge} ${suBadge}`;
     } else if (sim.isManualScore) {
       badgeHtml = `<span class="custom-tuned-badge manual-score-badge"><i class="fa-solid fa-pen-to-square"></i> CUSTOM SCORE</span>`;
     } else if (sim.isCustomTuned) {
@@ -1564,11 +1651,11 @@ function renderSchedule() {
         </div>
 
         <div class="score-center" onclick="event.stopPropagation();">
-          <div class="proj-score-box ${sim.isFinal ? 'locked-score-box' : 'editable-score-box'}" title="${sim.isFinal ? 'Official Final Score (Locked)' : 'Type to project custom score'}">
+          <div class="proj-score-box ${hasFinalScores ? 'locked-score-box' : 'editable-score-box'}" title="${hasFinalScores ? 'Official Final Score (Locked)' : 'Type to project custom score'}">
             <input type="number" min="0" max="99" 
-                   class="score-input ${isWin ? 'win-score' : ''} ${sim.isFinal ? 'locked-score-input' : ''}" 
-                   value="${sim.projUt}" 
-                   ${sim.isFinal ? 'disabled readonly' : ''}
+                   class="score-input ${isWin ? 'win-score' : ''} ${hasFinalScores ? 'locked-score-input' : ''}" 
+                   value="${hasFinalScores ? actualUt : sim.projUt}" 
+                   ${hasFinalScores ? 'disabled readonly' : ''}
                    data-gameid="${game.id}" 
                    data-side="team" 
                    aria-label="${team.abbr} score projection"
@@ -1577,9 +1664,9 @@ function renderSchedule() {
                    onclick="event.stopPropagation();">
             <span class="score-divider">-</span>
             <input type="number" min="0" max="99" 
-                   class="score-input ${!isWin ? 'win-score' : ''} ${sim.isFinal ? 'locked-score-input' : ''}" 
-                   value="${sim.projOpp}" 
-                   ${sim.isFinal ? 'disabled readonly' : ''}
+                   class="score-input ${!isWin ? 'win-score' : ''} ${hasFinalScores ? 'locked-score-input' : ''}" 
+                   value="${hasFinalScores ? actualOpp : sim.projOpp}" 
+                   ${hasFinalScores ? 'disabled readonly' : ''}
                    data-gameid="${game.id}" 
                    data-side="opp" 
                    aria-label="${game.oppAbbr} score projection"
@@ -1588,12 +1675,16 @@ function renderSchedule() {
                    onclick="event.stopPropagation();">
           </div>
           <div class="score-sub-row">
-            ${sim.isFinal ? (
-              !isPredictionCorrect ? 
-                `<span class="vegas-line" style="color: #F87171; font-weight: 800;"><i class="fa-solid fa-xmark"></i> MISSED PICK (FINAL: ${game.actualScoreUt}-${game.actualScoreOpp})</span>` :
-                `<span class="vegas-line" style="color: #34D399; font-weight: 800;"><i class="fa-solid fa-check"></i> HIT PICK (FINAL: ${game.actualScoreUt}-${game.actualScoreOpp})</span>`
+            ${hasFinalScores ? (
+              `<div class="pred-vs-actual-badge" title="Model Projection vs Official Final">
+                <span class="pva-proj">PROJ: <strong>${predUt}-${predOpp}</strong></span>
+                <span class="pva-div">|</span>
+                <span class="pva-final">FINAL: <strong>${actualUt}-${actualOpp}</strong></span>
+                <span class="pva-div">•</span>
+                <span class="pva-spread ${spreadHit ? 'hit' : 'miss'}">${spreadCoverText}</span>
+              </div>`
             ) : `<span class="vegas-line" title="${game.oddsProvider || 'DraftKings'} Live Market Line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : (game.vegasSpread === 0 ? 'PICK' : `${game.oppAbbr} -${game.vegasSpread}`)}</span>`}
-            ${(!sim.isFinal && sim.isManualScore) ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event)" title="Reset to AI baseline projection"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
+            ${(!hasFinalScores && sim.isManualScore) ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event)" title="Reset to AI baseline projection"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
           </div>
         </div>
 
@@ -1610,8 +1701,8 @@ function renderSchedule() {
 
       <div class="card-stats-row">
         <div class="prob-labels-sm">
-          <span>${sim.isFinal ? 'OUTCOME' : 'WIN PROBABILITY'}</span>
-          <span style="color: ${isWin ? 'var(--color-success)' : 'var(--color-danger)'};">${sim.isFinal ? (isWin ? 'WIN 100%' : 'LOSS 0%') : `${sim.adjWinProb}%`}</span>
+          <span>${hasFinalScores ? 'OUTCOME' : 'WIN PROBABILITY'}</span>
+          <span style="color: ${isWin ? 'var(--color-success)' : 'var(--color-danger)'};">${hasFinalScores ? (isWin ? 'WIN 100%' : 'LOSS 0%') : `${sim.adjWinProb}%`}</span>
         </div>
         <div class="prob-track-sm">
           <div class="prob-fill-sm" style="width: ${sim.adjWinProb}%; background: ${isWin ? 'var(--color-brand-primary)' : 'var(--color-danger)'};"></div>
@@ -1619,26 +1710,55 @@ function renderSchedule() {
       </div>
 
       <div class="card-actions">
-        ${sim.isFinal ? `
+        ${hasFinalScores ? `
           <div class="prediction-outcome-bar ${isPredictionCorrect ? 'correct' : 'wrong'}">
-            <div class="prediction-outcome-main">
+            <div class="prediction-outcome-main" style="width: 100%;">
               <span class="${isPredictionCorrect ? 'prediction-check-icon' : 'prediction-x-icon'}">
                 <i class="fa-solid ${isPredictionCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
               </span>
-              <div class="prediction-outcome-desc">
-                <div class="outcome-header-row">
-                  <span class="outcome-status-title ${isPredictionCorrect ? 'correct' : 'wrong'}">
-                    ${isPredictionCorrect ? 'PREDICTION HIT' : 'PREDICTION WRONG'}
-                  </span>
-                  <span class="points-diff-badge ${isPredictionCorrect ? 'plus' : 'minus'}">
-                    ${isPredictionCorrect ? '+10 PTS' : '0 / 10 PTS'}
-                  </span>
+              <div class="prediction-outcome-desc" style="width: 100%;">
+                <div class="outcome-header-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; gap: 6px;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="outcome-status-title ${isPredictionCorrect ? 'correct' : 'wrong'}">
+                      ${isPredictionCorrect ? 'STRAIGHT UP HIT' : 'STRAIGHT UP WRONG'}
+                    </span>
+                    <span class="points-diff-badge ${isPredictionCorrect ? 'plus' : 'minus'}">
+                      ${isPredictionCorrect ? '+10 PTS' : '0 / 10 PTS'}
+                    </span>
+                  </div>
+                  ${typeof game.vegasSpread === 'number' ? `
+                    <span class="spread-kpi-pill ${spreadHit ? 'cover' : 'loss'}">
+                      <i class="fa-solid ${spreadHit ? 'fa-shield-halved' : 'fa-triangle-exclamation'}"></i>
+                      ${spreadHit ? 'BEAT VEGAS: SPREAD WIN' : 'SPREAD LOSS (FAILED TO COVER)'}
+                    </span>
+                  ` : ''}
                 </div>
-                <div class="outcome-matchup-sub">
-                  <span>Picked: <strong class="${isPredictionCorrect ? 'pick-success' : 'pick-strike'}">${predictedPick === 'W' ? team.abbr + ' WIN' : game.oppAbbr + ' WIN'} ${isPredictionCorrect ? '✅' : '❌'}</strong></span>
-                  <span class="bullet-sep">•</span>
-                  <span>Final: <strong class="actual-winner">${actualWin ? team.abbr + ' Won' : game.oppAbbr + ' Won'} (${game.actualScoreUt}-${game.actualScoreOpp})</strong></span>
+
+                <div class="kpi-scores-comparison-row">
+                  <div class="kpi-score-col">
+                    <span class="kpi-score-lbl">MODEL PROJ</span>
+                    <span class="kpi-score-val proj">${team.abbr} ${predUt} - ${predOpp} ${game.oppAbbr}</span>
+                  </div>
+                  <div class="kpi-score-col">
+                    <span class="kpi-score-lbl">ACTUAL FINAL</span>
+                    <span class="kpi-score-val actual">${team.abbr} ${actualUt} - ${actualOpp} ${game.oppAbbr}</span>
+                  </div>
+                  <div class="kpi-score-col">
+                    <span class="kpi-score-lbl">VEGAS LINE</span>
+                    <span class="kpi-score-val line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : (game.vegasSpread === 0 ? 'PICK' : `${game.oppAbbr} -${game.vegasSpread}`)}</span>
+                  </div>
+                  <div class="kpi-score-col">
+                    <span class="kpi-score-lbl">SPREAD RESULT</span>
+                    <span class="kpi-score-val ${spreadHit ? 'cover-text' : 'loss-text'}">${spreadCoverText}</span>
+                  </div>
                 </div>
+
+                ${diagnosticText ? `
+                  <div class="prediction-diagnostic-row">
+                    <span class="diag-icon"><i class="fa-solid fa-chart-line"></i></span>
+                    <span class="diag-text">${diagnosticText}</span>
+                  </div>
+                ` : ''}
               </div>
             </div>
             <button class="sim-btn-sm" data-simid="${game.id}" onclick="event.stopPropagation(); window.openSimModalByGameId('${game.id}');" style="background: ${isPredictionCorrect ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)'}; border: 1px solid ${isPredictionCorrect ? 'rgba(16, 185, 129, 0.4)' : 'rgba(239, 68, 68, 0.4)'}; color: ${isPredictionCorrect ? '#6EE7B7' : '#FCA5A5'};">
@@ -11432,7 +11552,14 @@ function checkUrlNavigationOnLoad() {
   const urlParams = isWeb ? new URLSearchParams(window.location.search) : null;
   const scrollTo = urlParams ? urlParams.get('scrollTo') : null;
 
-  if (scrollTo === 'week1') {
+  if (scrollTo === 'week0' || scrollTo === 'final') {
+    setTimeout(() => {
+      const targetCard = document.querySelector('#scheduleGrid .game-card');
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'instant', block: 'center' });
+      }
+    }, 1000);
+  } else if (scrollTo === 'week1') {
     setTimeout(() => {
       const cards = document.querySelectorAll('#scheduleGrid .game-card');
       const targetCard = cards[1] || cards[0];

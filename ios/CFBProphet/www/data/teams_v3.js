@@ -6940,18 +6940,25 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -35.5,
         "overUnder": 52.5,
         "baseWinProb": 96,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "projScoreUt": 45,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oklahoma front seven vs UTEP Miners rushing attack.",
           "summary": "Regular season non-conference test against UTEP Miners."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 51,
+        "finalOppScore": 0,
+        "actualScoreUt": 51,
+        "actualScoreOpp": 0,
+        "predictedScoreUt": 45,
+        "predictedScoreOpp": 10
       },
       {
         "id": "ou-w2",
@@ -7797,8 +7804,8 @@ var TEAMS_DATABASE = {
         "vegasSpread": -24.5,
         "overUnder": 52.5,
         "baseWinProb": 96,
-        "projScoreUt": 42,
-        "projScoreOpp": 26,
+        "projScoreUt": 39,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs San Jos\u00e9 State Spartans rushing attack.",
@@ -7809,7 +7816,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 42,
         "finalOppScore": 26,
-        "finalWin": true
+        "finalWin": true,
+        "actualScoreUt": 42,
+        "actualScoreOpp": 26,
+        "predictedScoreUt": 39,
+        "predictedScoreOpp": 17
       },
       {
         "id": "usc-w1",
@@ -7830,11 +7841,11 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -21.5,
         "overUnder": 52.5,
         "baseWinProb": 96,
-        "projScoreUt": 42,
-        "projScoreOpp": 26,
+        "projScoreUt": 38,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs Fresno State Bulldogs rushing attack.",
@@ -7842,10 +7853,9 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "isFinal": true,
-        "finalTeamScore": 42,
-        "finalOppScore": 26,
-        "finalWin": true
+        "finalWin": true,
+        "predictedScoreUt": 38,
+        "predictedScoreOpp": 17
       },
       {
         "id": "usc-w2",
@@ -8231,8 +8241,8 @@ var TEAMS_DATABASE = {
         "vegasSpread": -23.5,
         "overUnder": 52.5,
         "baseWinProb": 95,
-        "projScoreUt": 34,
-        "projScoreOpp": 17,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Florida State front seven vs New Mexico State Aggies rushing attack.",
@@ -8243,7 +8253,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 34,
         "finalOppScore": 17,
-        "finalWin": true
+        "finalWin": true,
+        "actualScoreUt": 34,
+        "actualScoreOpp": 17,
+        "predictedScoreUt": 38,
+        "predictedScoreOpp": 14
       },
       {
         "id": "fsu-w1",
@@ -9941,8 +9955,8 @@ var TEAMS_DATABASE = {
         "vegasSpread": -41.5,
         "overUnder": 52.5,
         "baseWinProb": 99,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "projScoreUt": 48,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Utah offensive line vs Idaho Vandals defensive front.",
@@ -9953,7 +9967,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 35,
         "finalOppScore": 17,
-        "finalWin": true
+        "finalWin": true,
+        "actualScoreUt": 35,
+        "actualScoreOpp": 17,
+        "predictedScoreUt": 48,
+        "predictedScoreOpp": 7
       },
       {
         "id": "utah-w2",
@@ -10794,8 +10812,8 @@ var TEAMS_DATABASE = {
         "vegasSpread": -40.0,
         "overUnder": 52.5,
         "baseWinProb": 99,
-        "projScoreUt": 54,
-        "projScoreOpp": 14,
+        "projScoreUt": 49,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Missouri offensive line vs Arkansas-Pine Bluff Golden Lions defensive front.",
@@ -10806,7 +10824,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 54,
         "finalOppScore": 14,
-        "finalWin": true
+        "finalWin": true,
+        "actualScoreUt": 54,
+        "actualScoreOpp": 14,
+        "predictedScoreUt": 49,
+        "predictedScoreOpp": 7
       },
       {
         "id": "miz-w2",
@@ -12922,8 +12944,8 @@ var TEAMS_DATABASE = {
         "vegasSpread": -10.0,
         "overUnder": 52.5,
         "baseWinProb": 78,
-        "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "projScoreUt": 31,
+        "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Georgia Tech Yellow Jackets rushing attack.",
@@ -12934,7 +12956,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 28,
         "finalOppScore": 24,
-        "finalWin": true
+        "finalWin": true,
+        "actualScoreUt": 28,
+        "actualScoreOpp": 24,
+        "predictedScoreUt": 31,
+        "predictedScoreOpp": 21
       },
       {
         "id": "col-w2",
