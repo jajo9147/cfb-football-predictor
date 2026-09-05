@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-09-04T17:41:10.422323+00:00",
+  "updatedAt": "2026-08-25T15:40:52.539812+00:00",
   "season": 2026,
   "overallStats": {
-    "totalGames": 9,
-    "straightUpWins": 8,
+    "totalGames": 6,
+    "straightUpWins": 5,
     "straightUpLosses": 1,
-    "straightUpPct": 88.9,
-    "atsWins": 8,
+    "straightUpPct": 83.3,
+    "atsWins": 5,
     "atsLosses": 1,
-    "atsPct": 88.9,
-    "brierScore": 0.103,
+    "atsPct": 83.3,
+    "brierScore": 0.124,
     "brierGrade": "Good (< 0.150)",
-    "logLoss": 0.341
+    "logLoss": 0.367
   },
   "calibrationBins": [
     {
@@ -29,8 +29,8 @@
     {
       "binRange": "70% - 80%",
       "predictedProbAvg": 75.0,
-      "actualWinFreq": 100.0,
-      "sampleSize": 3
+      "actualWinFreq": 75.0,
+      "sampleSize": 0
     },
     {
       "binRange": "80% - 90%",
@@ -149,117 +149,6 @@
       "scoreFav": 27,
       "scoreDog": 20,
       "brier": "0.230"
-    },
-    {
-      "week": "LIVE SETTLED",
-      "matchup": "USC Trojans vs San Jos\u00e9 State Spartans",
-      "pred": "USC Trojans (75%)",
-      "prob": 0.75,
-      "actual": "USC Trojans 42 - San Jos\u00e9 State Spartans 26",
-      "spread": -3.5,
-      "ats": "Settled",
-      "isWin": true,
-      "scoreFav": 42,
-      "scoreDog": 26,
-      "brier": "0.062"
-    },
-    {
-      "week": "LIVE SETTLED",
-      "matchup": "Utah Utes vs Idaho Vandals",
-      "pred": "Utah Utes (75%)",
-      "prob": 0.75,
-      "actual": "Utah Utes 66 - Idaho Vandals 14",
-      "spread": -3.5,
-      "ats": "Settled",
-      "isWin": true,
-      "scoreFav": 66,
-      "scoreDog": 14,
-      "brier": "0.062"
-    },
-    {
-      "week": "LIVE SETTLED",
-      "matchup": "Missouri Tigers vs Arkansas-Pine Bluff Golden Lions",
-      "pred": "Missouri Tigers (75%)",
-      "prob": 0.75,
-      "actual": "Missouri Tigers 54 - Arkansas-Pine Bluff Golden Lions 14",
-      "spread": -3.5,
-      "ats": "Settled",
-      "isWin": true,
-      "scoreFav": 54,
-      "scoreDog": 14,
-      "brier": "0.062"
-    }
-  ],
-  "retrainingHistory": [
-    {
-      "timestamp": "2026-09-04T17:18:14.283443+00:00",
-      "gamesEvaluated": 5,
-      "modelMae": 17.6,
-      "vegasMae": 18.9,
-      "modelBeatVegasPct": 40.0,
-      "ratingShifts": {
-        "usc": {
-          "old": 24.5,
-          "new": 24.5,
-          "delta": 0.0
-        },
-        "utah": {
-          "old": 22.5,
-          "new": 24.5,
-          "delta": 2.0
-        },
-        "colorado": {
-          "old": 17.5,
-          "new": 17.14,
-          "delta": -0.36
-        },
-        "floridastate": {
-          "old": 23.5,
-          "new": 25.18,
-          "delta": 1.68
-        },
-        "missouri": {
-          "old": 20.8,
-          "new": 22.8,
-          "delta": 2.0
-        }
-      },
-      "unplayedGamesRecalculated": 369
-    },
-    {
-      "timestamp": "2026-09-04T17:41:14.718233+00:00",
-      "gamesEvaluated": 5,
-      "modelMae": 17.6,
-      "vegasMae": 18.9,
-      "modelBeatVegasPct": 40.0,
-      "ratingShifts": {
-        "usc": {
-          "old": 24.5,
-          "new": 24.5,
-          "delta": 0.0
-        },
-        "utah": {
-          "old": 24.5,
-          "new": 26.5,
-          "delta": 2.0
-        },
-        "colorado": {
-          "old": 17.14,
-          "new": 16.78,
-          "delta": -0.36
-        },
-        "floridastate": {
-          "old": 25.18,
-          "new": 26.86,
-          "delta": 1.68
-        },
-        "missouri": {
-          "old": 22.8,
-          "new": 24.8,
-          "delta": 2.0
-        }
-      },
-      "unplayedGamesRecalculated": 369
     }
   ]
 }

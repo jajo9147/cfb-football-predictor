@@ -8622,11 +8622,12 @@ function saveCurrentProjectionAsBracket(name, creator, notes, forceNewId = false
   const creatorName = creator && creator.trim() ? creator.trim() : (currentUser ? currentUser.displayName : 'Coach');
   const creatorId = currentUser ? currentUser.id : `guest_${Date.now()}`;
 
-  const isEditingExisting = !forceNewId && state.activeSavedBracketId && 
-    state.activeSavedBracketId !== 'bracket_prophet_ai_baseline' && 
-    state.activeSavedBracketId !== 'bracket_usc_wins_out_curated' &&
-    state.activeSavedBracketId !== 'bracket_texas_natty_run_curated';
+  const allKnown = getAllKnownBrackets();
+  const existingBracket = state.activeSavedBracketId ? allKnown.find(b => b.id === state.activeSavedBracketId) : null;
+  const isAi = existingBracket && (existingBracket.isAdminBenchmark || existingBracket.id === 'bracket_prophet_ai_baseline' || (existingBracket.name && existingBracket.name.toLowerCase().includes('prophet ai')));
+  const isOwner = existingBracket && !isAi && (isBracketOwnedByUser(existingBracket, currentUser) || getSavedBrackets().some(sb => sb.id === existingBracket.id));
 
+  const isEditingExisting = !forceNewId && isOwner;
   const bracketId = isEditingExisting ? state.activeSavedBracketId : `bracket_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
 
   const seeds = (cfp.seeds || []).slice(0, 12).map((s, idx) => ({
@@ -9828,6 +9829,8 @@ function renderSavedBracketsVault() {
 
     // Strict Ownership: verified via unified isBracketOwnedByUser helper
     const isOwner = !isAiBenchmark && !!currentUser && isBracketOwnedByUser(b, currentUser);
+    const isMine = !isAiBenchmark && myBracketIds.has(b.id);
+    const canAdjust = !isAiBenchmark && (isOwner || isMine);
     const creatorLabel = isOwner ? 'You' : (b.creator || 'Prophet');
 
     const acc = isTeamFilter ? calculateTeamScoreForUser(b, state.selectedVaultTeam) : calculateWeeklyScoreForUser(b, effectiveWeek);
@@ -9868,9 +9871,11 @@ function renderSavedBracketsVault() {
         </div>
 
         <div class="lb-action-col">
-          <button class="lb-adjust-btn" onclick="event.stopPropagation(); loadSavedBracket('${b.id}', true);" title="Load into simulator and edit scores/picks">
-            <i class="fa-solid fa-pen-to-square"></i> <span>Adjust</span>
-          </button>
+          ${canAdjust ? `
+            <button class="lb-adjust-btn" onclick="event.stopPropagation(); loadSavedBracket('${b.id}', true);" title="Load into simulator and edit your submitted picks">
+              <i class="fa-solid fa-pen-to-square"></i> <span>Adjust</span>
+            </button>
+          ` : ''}
           <button class="lb-view-details-btn" onclick="event.stopPropagation(); openSubmissionDetailModal('${b.id}', event)" title="View picks breakdown & details">
             <span>View</span> <i class="fa-solid fa-chevron-right"></i>
           </button>
@@ -9900,6 +9905,8 @@ function openSubmissionDetailModal(bracketId, e) {
   const creatorEmail = (b.creatorEmail || '').trim().toLowerCase();
 
   const isOwner = !isAiBenchmark && !!currentUser && isBracketOwnedByUser(b, currentUser);
+  const isMine = !isAiBenchmark && getSavedBrackets().some(sb => sb.id === b.id);
+  const canAdjust = !isAiBenchmark && (isOwner || isMine);
 
   const isTeamFilter = state.selectedVaultTeam && state.selectedVaultTeam !== 'all';
   const focusTeam = isTeamFilter ? TEAMS_DATABASE[state.selectedVaultTeam] : null;
@@ -10025,9 +10032,11 @@ function openSubmissionDetailModal(bracketId, e) {
 
   if (actionsEl) {
     actionsEl.innerHTML = `
-      <button class="action-btn" onclick="closeSubmissionDetailModal(); loadSavedBracket('${b.id}', true);" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #FFFFFF; font-weight: 700;">
-        <i class="fa-solid fa-pen-to-square"></i> Adjust & Edit in Simulator
-      </button>
+      ${canAdjust ? `
+        <button class="action-btn" onclick="closeSubmissionDetailModal(); loadSavedBracket('${b.id}', true);" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #FFFFFF; font-weight: 700;">
+          <i class="fa-solid fa-pen-to-square"></i> Adjust & Edit My Bracket
+        </button>
+      ` : ''}
       <button class="action-btn secondary-btn" onclick="openCfpBracketCanvasModalForBracket('${b.id}')">
         <i class="fa-solid fa-camera-retro"></i> Graphic
       </button>
@@ -10110,12 +10119,11 @@ function openSaveBracketModal(fromVault = false) {
   const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
   const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate']);
 
+  const currentUser = getCurrentUser();
   const allKnown = getAllKnownBrackets();
   const activeExisting = state.activeSavedBracketId ? allKnown.find(b => b.id === state.activeSavedBracketId) : null;
-  const isEditingExisting = activeExisting && 
-    activeExisting.id !== 'bracket_prophet_ai_baseline' && 
-    activeExisting.id !== 'bracket_usc_wins_out_curated' &&
-    activeExisting.id !== 'bracket_texas_natty_run_curated';
+  const isAi = activeExisting && (activeExisting.isAdminBenchmark || activeExisting.id === 'bracket_prophet_ai_baseline' || (activeExisting.name && activeExisting.name.toLowerCase().includes('prophet ai')));
+  const isEditingExisting = activeExisting && !isAi && (isBracketOwnedByUser(activeExisting, currentUser) || getSavedBrackets().some(sb => sb.id === activeExisting.id));
 
   if (previewBox) {
     previewBox.innerHTML = `
@@ -10204,12 +10212,11 @@ function handleConfirmSaveBracket() {
     } catch(e) {}
   }
 
+  const currentUser = getCurrentUser();
   const allKnown = getAllKnownBrackets();
   const activeExisting = state.activeSavedBracketId ? allKnown.find(b => b.id === state.activeSavedBracketId) : null;
-  const wasEditing = activeExisting && 
-    activeExisting.id !== 'bracket_prophet_ai_baseline' && 
-    activeExisting.id !== 'bracket_usc_wins_out_curated' &&
-    activeExisting.id !== 'bracket_texas_natty_run_curated';
+  const isAi = activeExisting && (activeExisting.isAdminBenchmark || activeExisting.id === 'bracket_prophet_ai_baseline' || (activeExisting.name && activeExisting.name.toLowerCase().includes('prophet ai')));
+  const wasEditing = activeExisting && !isAi && (isBracketOwnedByUser(activeExisting, currentUser) || getSavedBrackets().some(sb => sb.id === activeExisting.id));
 
   const saved = saveCurrentProjectionAsBracket(name, creator, notes);
   if (isPublic) {
@@ -10265,8 +10272,20 @@ function deleteSavedBracket(bracketId, e) {
     if (typeof e.preventDefault === 'function') e.preventDefault();
   }
   
-  if (bracketId === 'bracket_prophet_ai_baseline') {
-    showCustomToast('🤖 The Prophet AI Golden Benchmark cannot be deleted.');
+  const allKnown = getAllKnownBrackets();
+  const target = allKnown.find(b => b.id === bracketId);
+  const isAi = (target && (target.isAdminBenchmark || target.id === 'bracket_prophet_ai_baseline' || (target.name && target.name.toLowerCase().includes('prophet ai')))) || bracketId === 'bracket_prophet_ai_baseline';
+  
+  if (isAi) {
+    showCustomToast('🔒 The Prophet AI Benchmark is permanently locked and cannot be deleted.');
+    return;
+  }
+
+  const currentUser = getCurrentUser();
+  const isMine = getSavedBrackets().some(sb => sb.id === bracketId);
+  const isOwner = target ? isBracketOwnedByUser(target, currentUser) : false;
+  if (!isMine && !isOwner) {
+    showCustomToast('🔒 You can only delete brackets that you submitted.');
     return;
   }
 
@@ -10513,7 +10532,24 @@ function loadSavedBracket(bracketId, andEdit = false) {
     return;
   }
 
-  state.activeSavedBracketId = target.id;
+  const isAi = target.isAdminBenchmark || target.id === 'bracket_prophet_ai_baseline' || (target.name && target.name.toLowerCase().includes('prophet ai'));
+  const currentUser = getCurrentUser();
+  const isMine = getSavedBrackets().some(sb => sb.id === target.id);
+  const isOwner = !isAi && !!currentUser && isBracketOwnedByUser(target, currentUser);
+  const canEdit = !isAi && (isOwner || isMine);
+
+  if (andEdit && !canEdit) {
+    if (isAi) {
+      showCustomToast('🔒 Prophet AI Benchmark is locked and cannot be adjusted.');
+    } else {
+      showCustomToast('🔒 You can only adjust brackets that you submitted.');
+    }
+    andEdit = false;
+  }
+
+  // Only bind activeSavedBracketId if the user owns this bracket
+  state.activeSavedBracketId = canEdit ? target.id : null;
+
   if (target.simState) {
     if (target.simState.teamId) state.currentTeamId = target.simState.teamId;
     state.userPicks = JSON.parse(JSON.stringify(target.simState.userPicks || {}));
@@ -10536,8 +10572,8 @@ function loadSavedBracket(bracketId, andEdit = false) {
   // Full recalculation and rendering
   selectTeam(state.currentTeamId);
 
-  // Render the persistent Active Bracket Editing Bar
-  renderActiveBracketEditorBar(target);
+  // Render the persistent Active Bracket Editing Bar ONLY if user owns this bracket
+  renderActiveBracketEditorBar(canEdit ? target : null);
 
   if (andEdit) {
     setTimeout(() => {
@@ -10546,7 +10582,11 @@ function loadSavedBracket(bracketId, andEdit = false) {
     }, 250);
   }
 
-  showCustomToast(`🎯 Loaded "${target.name}" into Simulator!`);
+  if (canEdit) {
+    showCustomToast(`🎯 Loaded "${target.name}" into Simulator for editing!`);
+  } else {
+    showCustomToast(`👀 Loaded "${target.name}" (Read-Only View)`);
+  }
 }
 window.loadSavedBracket = loadSavedBracket;
 
