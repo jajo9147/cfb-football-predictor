@@ -51,9 +51,15 @@ def load_teams_file(filepath):
 
 def save_teams_file(filepath, db):
     json_formatted = json.dumps(db, indent=2)
-    header = "var TEAMS_DATABASE = "
+    prefix = ""
+    if os.path.exists(filepath):
+        with open(filepath, 'r', encoding='utf-8') as f:
+            orig = f.read()
+        idx = orig.find('var TEAMS_DATABASE = ')
+        if idx != -1:
+            prefix = orig[:idx]
     footer = ";\n\nif (typeof module !== 'undefined' && module.exports) {\n  module.exports = TEAMS_DATABASE;\n}\n"
-    content = header + json_formatted + footer
+    content = prefix + "var TEAMS_DATABASE = " + json_formatted + footer
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
 
@@ -259,11 +265,16 @@ def main():
                 continue # Do NOT alter completed official scores
 
             # Determine opponent SP+
-            opp_id = match_team_in_db(db, g.get('opponent')) or match_team_in_db(db, g.get('oppAbbr'))
+            opp_id = g.get('oppId')
             if opp_id and opp_id in db:
                 sp_opp = float(db[opp_id].get('baseSpRating', 22.0))
+            elif g.get('oppRank') == 'FCS':
+                sp_opp = -14.0
             else:
-                sp_opp = 5.0 # Baseline non-power opponent
+                opp_name = (g.get('opponent') or '').lower()
+                power4_keywords = ['sec', 'big ten', 'big 12', 'acc', 'notre dame']
+                is_power = any(kw in opp_name for kw in power4_keywords)
+                sp_opp = 13.0 if is_power else 4.5
 
             stadium = g.get('stadium', '')
             hfa = 0.0

@@ -406,17 +406,16 @@ function formatGameDateWithTime(game) {
     } catch (e) {}
   }
 
-  // Canonical kickoff times for marquee 2026 games if not explicitly set
   if (!timeStr) {
     const opp = (game.oppAbbr || game.opponent || '').toUpperCase();
     const riv = (game.rivalryName || '').toUpperCase();
     const week = (game.week || '').toUpperCase();
 
-    if (/RED RIVER/i.test(riv) || opp === 'OU') {
+    if (/RED RIVER/i.test(riv) || (opp === 'OU' && /TEXAS/i.test(game.id))) {
       timeStr = '3:30 PM ET';
-    } else if (/THE GAME/i.test(riv) || (opp === 'MICH' && week.includes('14'))) {
+    } else if (/THE GAME/i.test(riv) || (opp === 'MICH' && week.includes('13'))) {
       timeStr = '12:00 PM ET';
-    } else if (/LONE STAR/i.test(riv) || opp === 'TAMU') {
+    } else if (/LONE STAR/i.test(riv) || (opp === 'TAMU' && week.includes('13'))) {
       timeStr = '7:30 PM ET';
     } else if (/IRON BOWL/i.test(riv) || opp === 'AUB') {
       timeStr = '3:30 PM ET';
@@ -424,16 +423,12 @@ function formatGameDateWithTime(game) {
       timeStr = '8:00 PM ET';
     } else if (rawDate.includes('Sep 4') || rawDate.includes('Fri') || opp === 'FRES' || opp === 'FRESNO' || opp === 'STAN') {
       timeStr = '9:00 PM ET';
-    } else if (game.isMarquee && (week.includes('1') || week.includes('2'))) {
-      timeStr = '12:00 PM ET';
-    } else if (game.isMarquee) {
-      timeStr = '7:30 PM ET';
     } else {
       timeStr = 'TBD';
     }
   }
 
-  const tvSuffix = game.tv ? ` • ${game.tv}` : '';
+  const tvSuffix = (game.tv && game.tv !== 'TBD') ? ` • ${game.tv}` : '';
   if (rawDate) {
     return `${rawDate} • ${timeStr}${tvSuffix}`;
   }
@@ -11401,6 +11396,31 @@ if (document.readyState === 'loading') {
   startApp();
 }
 
+function switchAppView(view) {
+  document.querySelectorAll('.dock-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.dock === view);
+  });
+
+  if (view === 'schedule') {
+    const el = document.getElementById('scheduleSection');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (view === 'playoffs') {
+    const el = document.getElementById('playoffBracketSection') || document.getElementById('cfpSection') || document.querySelector('.bracket-section');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (view === 'tuning') {
+    if (typeof window.openAiTuningModal === 'function') {
+      window.openAiTuningModal();
+    } else {
+      const el = document.querySelector('.tuning-section') || document.getElementById('tuningSection');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  } else if (view === 'overview' || view === 'team') {
+    if (typeof window.scrollToTeamOverview === 'function') window.scrollToTeamOverview();
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+window.switchAppView = switchAppView;
+
 // Bulletproof rendering insurance and deep-linking on load
 function checkUrlNavigationOnLoad() {
   const grid = document.getElementById('scheduleGrid');
@@ -11408,13 +11428,32 @@ function checkUrlNavigationOnLoad() {
     console.log('CFB Prophet: Ensuring schedule grid render on window load...');
     selectTeam(state.currentTeamId || 'ohiostate');
   }
-  const hash = (window.location.hash || '').replace('#', '');
-  if (['playoffs', 'schedule', 'tuning', 'dream'].includes(hash)) {
+  const isWeb = window.location.protocol !== 'file:';
+  const urlParams = isWeb ? new URLSearchParams(window.location.search) : null;
+  const scrollTo = urlParams ? urlParams.get('scrollTo') : null;
+
+  if (scrollTo === 'week1') {
     setTimeout(() => {
-      if (typeof window.switchAppView === 'function') window.switchAppView(hash);
+      const cards = document.querySelectorAll('#scheduleGrid .game-card');
+      const targetCard = cards[1] || cards[0];
+      if (targetCard) {
+        const topY = targetCard.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: topY, behavior: 'instant' });
+      }
+    }, 800);
+  } else if (scrollTo === 'schedule' || hash === 'schedule') {
+    setTimeout(() => {
+      const el = document.getElementById('scheduleSection');
+      if (el) {
+        const topY = el.getBoundingClientRect().top + window.pageYOffset - 40;
+        window.scrollTo({ top: topY, behavior: 'instant' });
+      }
+    }, 800);
+  } else if (['playoffs', 'tuning', 'dream'].includes(hash)) {
+    setTimeout(() => {
+      switchAppView(hash);
     }, 400);
   }
-  const isWeb = window.location.protocol !== 'file:';
   if (hash === 'vault' || hash === 'leaderboard' || (isWeb && new URLSearchParams(window.location.search).get('vault'))) {
     setTimeout(() => {
       if (typeof window.openBracketVaultModal === 'function') window.openBracketVaultModal();
