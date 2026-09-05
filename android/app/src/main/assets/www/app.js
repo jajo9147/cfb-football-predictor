@@ -9819,7 +9819,6 @@ function renderSavedBracketsVault() {
     const dateStr = b.createdAt ? new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '2026 Season';
     const champ = b.champion || { name: 'Champion', shortName: 'Champs', logoUrl: '' };
     const isActive = state.activeSavedBracketId === b.id;
-    const isMine = myBracketIds.has(b.id);
     
     const userDisplayName = (currentUser?.displayName || '').trim().toLowerCase();
     const userHandle = (currentUser?.handle || '').trim().toLowerCase();
@@ -10156,7 +10155,6 @@ function openSaveBracketModal(fromVault = false) {
     `;
   }
 
-  const currentUser = getCurrentUser();
   const nameInput = document.getElementById('bracketNameInput');
   const creatorInput = document.getElementById('bracketCreatorInput');
   const notesInput = document.getElementById('bracketNotesInput');
@@ -11403,8 +11401,8 @@ if (document.readyState === 'loading') {
   startApp();
 }
 
-// Bulletproof rendering insurance on window load
-window.addEventListener('load', () => {
+// Bulletproof rendering insurance and deep-linking on load
+function checkUrlNavigationOnLoad() {
   const grid = document.getElementById('scheduleGrid');
   if (grid && !grid.hasChildNodes()) {
     console.log('CFB Prophet: Ensuring schedule grid render on window load...');
@@ -11414,20 +11412,35 @@ window.addEventListener('load', () => {
   if (['playoffs', 'schedule', 'tuning', 'dream'].includes(hash)) {
     setTimeout(() => {
       if (typeof window.switchAppView === 'function') window.switchAppView(hash);
-    }, 600);
+    }, 400);
   }
   const isWeb = window.location.protocol !== 'file:';
   if (hash === 'vault' || hash === 'leaderboard' || (isWeb && new URLSearchParams(window.location.search).get('vault'))) {
     setTimeout(() => {
       if (typeof window.openBracketVaultModal === 'function') window.openBracketVaultModal();
-    }, 600);
+      const scrollIndex = isWeb ? parseInt(new URLSearchParams(window.location.search).get('scrollCard') || '-1', 10) : -1;
+      if (scrollIndex >= 0) {
+        setTimeout(() => {
+          const cards = document.querySelectorAll('#bracketVaultGrid .saved-bracket-card');
+          if (cards[scrollIndex]) {
+            cards[scrollIndex].scrollIntoView({ behavior: 'instant', block: 'center' });
+          }
+        }, 700);
+      }
+    }, 400);
   }
   const editBracketId = isWeb ? new URLSearchParams(window.location.search).get('editBracket') : null;
   if (editBracketId) {
     setTimeout(() => {
       if (typeof window.loadSavedBracket === 'function') window.loadSavedBracket(editBracketId, true);
-    }, 800);
+    }, 600);
   }
-});
+}
+
+if (document.readyState === 'complete') {
+  checkUrlNavigationOnLoad();
+} else {
+  window.addEventListener('load', checkUrlNavigationOnLoad);
+}
 
 
