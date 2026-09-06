@@ -56,33 +56,33 @@ These 5 games represent the largest mathematical disagreement between the CFB Pr
 
 | Matchup | Vegas Line | Model Proj | Model Spread Edge | Your Spread Pick | Final Score | ATS Result |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **TTU vs. ACU** | TTU -42.5 | 38 - 14 | **+18.5 pts** | **ACU +42.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Texas vs. Texas State** | TEX -29.5 | 48 - 7 | **+11.5 pts** | **TEXAS -29.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Ohio State vs. Ball State** | OSU -31.5 | 48 - 7 | **+9.5 pts** | **OHIO STATE -31.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Oklahoma vs. UTEP** | OU -31.5 | 48 - 7 | **+9.5 pts** | **OKLAHOMA -31.5** | `____ - ____` | `[ ] W [ ] L` |
-| **BYU vs. Portland State** | BYU -31.5 | 48 - 7 | **+9.5 pts** | **BYU -31.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Georgia vs. Tennessee State** | UGA -9.5 | 38 - 20 | **+8.5 pts** | **GEORGIA -9.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Indiana vs. North Texas** | IND -17.5 | 38 - 14 | **+6.5 pts** | **INDIANA -17.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Alabama vs. East Carolina** | ALA -18.5 | 38 - 14 | **+5.5 pts** | **ALABAMA -18.5** | `____ - ____` | `[ ] W [ ] L` |
+| **TTU vs. ACU** | TTU -42.5 | 38 - 14 | **+18.5 pts** | **ACU +42.5** | `33 - 10` | `[x] W [ ] L` |
+| **Texas vs. Texas State** | TEX -29.5 | 48 - 7 | **+11.5 pts** | **TEXAS -29.5** | `59 - 7` | `[x] W [ ] L` |
+| **Ohio State vs. Ball State** | OSU -31.5 | 48 - 7 | **+9.5 pts** | **OHIO STATE -31.5** | `56 - 3` | `[x] W [ ] L` |
+| **Oklahoma vs. UTEP** | OU -31.5 | 48 - 7 | **+9.5 pts** | **OKLAHOMA -31.5** | `51 - 0` | `[x] W [ ] L` |
+| **BYU vs. Portland State** | BYU -31.5 | 48 - 7 | **+9.5 pts** | **BYU -31.5** | `63 - 7` | `[x] W [ ] L` |
+| **Georgia vs. Tennessee State** | UGA -9.5 | 38 - 20 | **+8.5 pts** | **GEORGIA -9.5** | `63 - 3` | `[x] W [ ] L` |
+| **Indiana vs. North Texas** | IND -17.5 | 38 - 14 | **+6.5 pts** | **INDIANA -17.5** | `52 - 16` | `[x] W [ ] L` |
+| **Alabama vs. East Carolina** | ALA -18.5 | 38 - 14 | **+5.5 pts** | **ALABAMA -18.5** | `48 - 10` | `[x] W [ ] L` |
 | **Notre Dame vs. Wisconsin** | ND -18.5 | 38 - 14 | **+5.5 pts** | **NOTRE DAME -18.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Miami vs. Stanford** | MIA -18.5 | 38 - 14 | **+5.5 pts** | **MIAMI -18.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Michigan vs. W. Michigan** | MICH -27.5 | 42 - 10 | **+4.5 pts** | **MICHIGAN -27.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Tennessee vs. Furman** | TENN -27.5 | 42 - 10 | **+4.5 pts** | **TENNESSEE -27.5** | `____ - ____` | `[ ] W [ ] L` |
+| **Miami vs. Stanford** | MIA -18.5 | 38 - 14 | **+5.5 pts** | **MIAMI -18.5** | `45 - 6` | `[x] W [ ] L` |
+| **Michigan vs. W. Michigan** | MICH -27.5 | 42 - 10 | **+4.5 pts** | **MICHIGAN -27.5** | `13 - 12` | `[ ] W [x] L` |
+| **Tennessee vs. Furman** | TENN -27.5 | 42 - 10 | **+4.5 pts** | **TENNESSEE -27.5** | `56 - 9` | `[x] W [ ] L` |
 | **SMU vs. Stephen F. Austin** | SMU -27.5 | 42 - 10 | **+4.5 pts** | **SMU -27.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Missouri vs. AR-Pine Bluff** | MIZ -27.5 | 42 - 10 | **+4.5 pts** | **MISSOURI -27.5** | `____ - ____` | `[ ] W [ ] L` |
+| **Missouri vs. AR-Pine Bluff** | MIZ -27.5 | 42 - 10 | **+4.5 pts** | **MISSOURI -27.5** | `54 - 14` | `[x] W [ ] L` |
 | **Houston vs. SF Austin** | HOU -27.5 | 42 - 10 | **+4.5 pts** | **HOUSTON -27.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Oregon vs. Boise State** | ORE -10.5 | 35 - 21 | **+3.5 pts** | **OREGON -10.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Penn State vs. Marshall** | PSU -14.5 | 35 - 17 | **+3.5 pts** | **PENN STATE -14.5** | `____ - ____` | `[ ] W [ ] L` |
-| **USC vs. Fresno State** | USC -27.5 | 45 - 14 | **+3.5 pts** | **USC -27.5** | `____ - ____` | `[ ] W [ ] L` |
+| **Oregon vs. Boise State** | ORE -10.5 | 35 - 21 | **+3.5 pts** | **OREGON -10.5** | `34 - 27` | `[ ] W [x] L` |
+| **Penn State vs. Marshall** | PSU -14.5 | 35 - 17 | **+3.5 pts** | **PENN STATE -14.5** | `45 - 0` | `[x] W [ ] L` |
+| **USC vs. Fresno State** | USC -27.5 | 45 - 14 | **+3.5 pts** | **USC -27.5** | `39 - 0` | `[x] W [ ] L` |
 | **Florida State vs. Alabama** | FSU +3.5 | 24 - 31 | **+3.5 pts** | **ALABAMA -3.5** | `____ - ____` | `[ ] W [ ] L` |
 | **Utah vs. Idaho** | UTAH -14.5 | 35 - 17 | **+3.5 pts** | **UTAH -14.5** | `66 - 14` | `[x] W [ ] L` |
-| **Iowa vs. Northern Illinois** | IOWA -14.5 | 35 - 17 | **+3.5 pts** | **IOWA -14.5** | `____ - ____` | `[ ] W [ ] L` |
+| **Iowa vs. Northern Illinois** | IOWA -14.5 | 35 - 17 | **+3.5 pts** | **IOWA -14.5** | `40 - 0` | `[x] W [ ] L` |
 | **Washington vs. Wash State** | WASH -24.5 | 41 - 13 | **+3.5 pts** | **WASHINGTON -24.5** | `____ - ____` | `[ ] W [ ] L` |
-| **LSU vs. Clemson** | LSU -14.5 | 34 - 17 | **+2.5 pts** | **LSU -14.5** | `____ - ____` | `[ ] W [ ] L` |
+| **LSU vs. Clemson** | LSU -14.5 | 34 - 17 | **+2.5 pts** | **LSU -14.5** | `51 - 10` | `[x] W [ ] L` |
 | **Boise State vs. USF** | BSU -8.5 | 31 - 20 | **+2.5 pts** | **BOISE STATE -8.5** | `____ - ____` | `[ ] W [ ] L` |
 | **Arizona vs. N. Arizona** | ARIZ -21.5 | 38 - 14 | **+2.5 pts** | **ARIZONA -21.5** | `____ - ____` | `[ ] W [ ] L` |
-| **Colorado at Georgia Tech** | COL -3.5 | 28 - 24 | **+0.5 pts** | **COLORADO -3.5** | `14 - 13` | `[x] W [ ] L` |
-| **Texas A&M vs. Missouri St** | TA&M -17.5 | 35 - 17 | **+0.5 pts** | **TEXAS A&M -17.5** | `____ - ____` | `[ ] W [ ] L` |
+| **Colorado at Georgia Tech** | COL -3.5 | 28 - 24 | **+0.5 pts** | **COLORADO -3.5** | `14 - 13` | `[ ] W [x] L` |
+| **Texas A&M vs. Missouri St** | TA&M -17.5 | 35 - 17 | **+0.5 pts** | **TEXAS A&M -17.5** | `50 - 0` | `[x] W [ ] L` |
 | **Ole Miss vs. Louisville** | MISS -14.5 | 35 - 20 | **+0.5 pts** | **OLE MISS -14.5** | `____ - ____` | `[ ] W [ ] L` |
 
 ---
