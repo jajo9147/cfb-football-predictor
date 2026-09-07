@@ -550,7 +550,13 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "rivalryName": "HOLY WAR",
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 63,
+        "actualScoreOpp": 7,
+        "finalTeamScore": 63,
+        "finalOppScore": 7,
+        "finalWin": true
       },
       {
         "id": "byu-w2",
@@ -976,7 +982,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 59,
+        "actualScoreOpp": 7,
+        "finalTeamScore": 59,
+        "finalOppScore": 7,
+        "finalWin": true
       },
       {
         "id": "tex-w2",
@@ -1404,7 +1416,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 13,
+        "actualScoreOpp": 12,
+        "finalTeamScore": 13,
+        "finalOppScore": 12,
+        "finalWin": true
       },
       {
         "id": "mich-w2",
@@ -1832,7 +1850,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 56,
+        "actualScoreOpp": 3,
+        "finalTeamScore": 56,
+        "finalOppScore": 3,
+        "finalWin": true
       },
       {
         "id": "osu-w2",
@@ -2260,7 +2284,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 63,
+        "actualScoreOpp": 3,
+        "finalTeamScore": 63,
+        "finalOppScore": 3,
+        "finalWin": true
       },
       {
         "id": "uga-w2",
@@ -2688,7 +2718,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 48,
+        "actualScoreOpp": 10,
+        "finalTeamScore": 48,
+        "finalOppScore": 10,
+        "finalWin": true
       },
       {
         "id": "bama-w2",
@@ -3117,7 +3153,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": "boisestate",
         "is_tracked": true,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 34,
+        "actualScoreOpp": 27,
+        "finalTeamScore": 34,
+        "finalOppScore": 27,
+        "finalWin": true
       },
       {
         "id": "ore-w2",
@@ -3545,7 +3587,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 45,
+        "actualScoreOpp": 0,
+        "finalTeamScore": 45,
+        "finalOppScore": 0,
+        "finalWin": true
       },
       {
         "id": "psu-w2",
@@ -4400,7 +4448,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": "clemson",
         "is_tracked": true,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 51,
+        "actualScoreOpp": 10,
+        "finalTeamScore": 51,
+        "finalOppScore": 10,
+        "finalWin": true
       },
       {
         "id": "lsu-w2",
@@ -4827,7 +4881,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 56,
+        "actualScoreOpp": 9,
+        "finalTeamScore": 56,
+        "finalOppScore": 9,
+        "finalWin": true
       },
       {
         "id": "tenn-w2",
@@ -5255,7 +5315,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 52,
+        "actualScoreOpp": 16,
+        "finalTeamScore": 52,
+        "finalOppScore": 16,
+        "finalWin": true
       },
       {
         "id": "ind-w2",
@@ -5682,7 +5748,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 45,
+        "actualScoreOpp": 6,
+        "finalTeamScore": 45,
+        "finalOppScore": 6,
+        "finalWin": true
       },
       {
         "id": "mia-w2",
@@ -6110,7 +6182,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 50,
+        "actualScoreOpp": 0,
+        "finalTeamScore": 50,
+        "finalOppScore": 0,
+        "finalWin": true
       },
       {
         "id": "tamu-w2",
@@ -6974,7 +7052,8 @@ var TEAMS_DATABASE = {
         "actualScoreOpp": 0,
         "predictedScoreUt": 48,
         "predictedScoreOpp": 7,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "finalWin": true
       },
       {
         "id": "ou-w2",
@@ -7404,7 +7483,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": "oregon",
         "is_tracked": true,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 27,
+        "actualScoreOpp": 34,
+        "finalTeamScore": 27,
+        "finalOppScore": 34,
+        "finalWin": false
       },
       {
         "id": "bsu-w2",
@@ -8710,7 +8795,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": "lsu",
         "is_tracked": true,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 10,
+        "actualScoreOpp": 51,
+        "finalTeamScore": 10,
+        "finalOppScore": 51,
+        "finalWin": false
       },
       {
         "id": "clem-w2",
@@ -9567,7 +9658,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 33,
+        "actualScoreOpp": 10,
+        "finalTeamScore": 33,
+        "finalOppScore": 10,
+        "finalWin": true
       },
       {
         "id": "ttu-w2",
@@ -10427,7 +10524,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 40,
+        "actualScoreOpp": 0,
+        "finalTeamScore": 40,
+        "finalOppScore": 0,
+        "finalWin": true
       },
       {
         "id": "iowa-w2",
@@ -11285,7 +11388,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 35,
+        "actualScoreOpp": 7,
+        "finalTeamScore": 35,
+        "finalOppScore": 7,
+        "finalWin": true
       },
       {
         "id": "ariz-w2",
@@ -11711,7 +11820,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 24,
+        "actualScoreOpp": 10,
+        "finalTeamScore": 24,
+        "finalOppScore": 10,
+        "finalWin": true
       },
       {
         "id": "wash-w2",
@@ -12137,7 +12252,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 33,
+        "actualScoreOpp": 20,
+        "finalTeamScore": 33,
+        "finalOppScore": 20,
+        "finalWin": true
       },
       {
         "id": "hou-w2",
@@ -13425,7 +13546,13 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "oddsProvider": "DraftKings"
+        "oddsProvider": "DraftKings",
+        "isFinal": true,
+        "actualScoreUt": 70,
+        "actualScoreOpp": 7,
+        "finalTeamScore": 70,
+        "finalOppScore": 7,
+        "finalWin": true
       },
       {
         "id": "asu-w2",
