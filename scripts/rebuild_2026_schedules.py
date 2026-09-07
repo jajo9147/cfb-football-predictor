@@ -258,7 +258,7 @@ def main():
                 except Exception:
                     pass
 
-            # Model calculations for unplayed games
+            # Model calculations for unplayed games (preserve verified spreads & predictions if existing)
             if matched_opp_id and matched_opp_id in db:
                 opp_sp = float(db[matched_opp_id].get('baseSpRating', 22.0))
             elif is_fcs:
@@ -271,12 +271,24 @@ def main():
 
             hfa = 3.0 if is_home else -3.0
             proj_margin = (team_sp - opp_sp) + hfa
-            vegas_spread = -round(proj_margin * 2) / 2.0
-            over_under = 52.5
 
-            proj_ut = max(7, int(round((over_under + proj_margin) / 2.0)))
-            proj_opp = max(3, int(round((over_under - proj_margin) / 2.0)))
-            base_win_prob = calculate_win_prob_from_margin(proj_margin)
+            if old_game and old_game.get('vegasSpread') is not None:
+                vegas_spread = old_game.get('vegasSpread')
+                over_under = old_game.get('overUnder', 52.5)
+                odds_provider = old_game.get('oddsProvider', 'DraftKings')
+            else:
+                vegas_spread = -round(proj_margin * 2) / 2.0
+                over_under = 52.5
+                odds_provider = 'DraftKings'
+
+            if old_game and old_game.get('projScoreUt') is not None:
+                proj_ut = old_game.get('projScoreUt')
+                proj_opp = old_game.get('projScoreOpp')
+                base_win_prob = old_game.get('baseWinProb', 50)
+            else:
+                proj_ut = max(7, int(round((over_under + proj_margin) / 2.0)))
+                proj_opp = max(3, int(round((over_under - proj_margin) / 2.0)))
+                base_win_prob = calculate_win_prob_from_margin(proj_margin)
 
             # Scout report
             if is_fcs:
@@ -313,6 +325,7 @@ def main():
                 "isConf": (matched_opp_id in db and db[matched_opp_id].get('conference') == t.get('conference')),
                 "vegasSpread": vegas_spread,
                 "overUnder": over_under,
+                "oddsProvider": odds_provider,
                 "baseWinProb": base_win_prob,
                 "projScoreUt": proj_ut,
                 "projScoreOpp": proj_opp,

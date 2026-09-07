@@ -537,8 +537,8 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -31.5,
-        "overUnder": 52.5,
+        "vegasSpread": -50.5,
+        "overUnder": 61.5,
         "baseWinProb": 99,
         "projScoreUt": 48,
         "projScoreOpp": 7,
@@ -549,7 +549,8 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "rivalryName": "HOLY WAR"
+        "rivalryName": "HOLY WAR",
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "byu-w2",
@@ -964,7 +965,7 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isConf": false,
         "vegasSpread": -29.5,
-        "overUnder": 52.5,
+        "overUnder": 61.5,
         "baseWinProb": 99,
         "projScoreUt": 48,
         "projScoreOpp": 7,
@@ -974,7 +975,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against Texas State Bobcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "tex-w2",
@@ -1391,7 +1393,7 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isConf": false,
         "vegasSpread": -27.5,
-        "overUnder": 52.5,
+        "overUnder": 50.5,
         "baseWinProb": 98,
         "projScoreUt": 42,
         "projScoreOpp": 10,
@@ -1401,7 +1403,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against Western Michigan Broncos."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "mich-w2",
@@ -1817,8 +1820,8 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -31.5,
-        "overUnder": 52.5,
+        "vegasSpread": -50.5,
+        "overUnder": 55.5,
         "baseWinProb": 99,
         "projScoreUt": 48,
         "projScoreOpp": 7,
@@ -1828,7 +1831,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against Ball State Cardinals."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "osu-w2",
@@ -2244,8 +2248,8 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -9.5,
-        "overUnder": 52.5,
+        "vegasSpread": -49.5,
+        "overUnder": 55.5,
         "baseWinProb": 91,
         "projScoreUt": 38,
         "projScoreOpp": 20,
@@ -2255,7 +2259,8 @@ var TEAMS_DATABASE = {
           "summary": "Non-conference matchup in Athens, GA against FCS challenger Tennessee State Tigers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "uga-w2",
@@ -2671,7 +2676,7 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -28.5,
         "overUnder": 52.5,
         "baseWinProb": 95,
         "projScoreUt": 38,
@@ -2682,7 +2687,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against East Carolina Pirates."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "bama-w2",
@@ -3099,8 +3105,8 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -10.5,
-        "overUnder": 52.5,
+        "vegasSpread": -24.5,
+        "overUnder": 53.5,
         "baseWinProb": 85,
         "projScoreUt": 35,
         "projScoreOpp": 21,
@@ -3110,7 +3116,8 @@ var TEAMS_DATABASE = {
           "summary": "High-stakes clash against NR Boise State Broncos."
         },
         "oppId": "boisestate",
-        "is_tracked": true
+        "is_tracked": true,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "ore-w2",
@@ -3526,8 +3533,8 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.5,
-        "overUnder": 52.5,
+        "vegasSpread": -23.5,
+        "overUnder": 53.5,
         "baseWinProb": 91,
         "projScoreUt": 35,
         "projScoreOpp": 17,
@@ -3537,7 +3544,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against Marshall Thundering Herd."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "psu-w2",
@@ -3952,8 +3960,8 @@ var TEAMS_DATABASE = {
         "location": "Green Bay, WI",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
-        "overUnder": 52.5,
+        "vegasSpread": -21.0,
+        "overUnder": 45.5,
         "baseWinProb": 95,
         "projScoreUt": 38,
         "projScoreOpp": 14,
@@ -3963,7 +3971,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against Wisconsin Badgers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "nd-w2",
@@ -4379,8 +4388,8 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -14.5,
-        "overUnder": 52.5,
+        "vegasSpread": -10.0,
+        "overUnder": 48.5,
         "baseWinProb": 89,
         "projScoreUt": 34,
         "projScoreOpp": 17,
@@ -4390,7 +4399,8 @@ var TEAMS_DATABASE = {
           "summary": "High-stakes clash against RV Clemson Tigers."
         },
         "oppId": "clemson",
-        "is_tracked": true
+        "is_tracked": true,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "lsu-w2",
@@ -4805,8 +4815,8 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -27.5,
-        "overUnder": 52.5,
+        "vegasSpread": -49.5,
+        "overUnder": 66.5,
         "baseWinProb": 98,
         "projScoreUt": 42,
         "projScoreOpp": 10,
@@ -4816,7 +4826,8 @@ var TEAMS_DATABASE = {
           "summary": "Non-conference matchup in Knoxville, TN against FCS challenger Furman Paladins."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "tenn-w2",
@@ -5232,8 +5243,8 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.5,
-        "overUnder": 52.5,
+        "vegasSpread": -39.5,
+        "overUnder": 57.5,
         "baseWinProb": 95,
         "projScoreUt": 38,
         "projScoreOpp": 14,
@@ -5243,7 +5254,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against North Texas Mean Green."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "ind-w2",
@@ -5658,8 +5670,8 @@ var TEAMS_DATABASE = {
         "location": "Stanford, CA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
-        "overUnder": 52.5,
+        "vegasSpread": -24.5,
+        "overUnder": 46.5,
         "baseWinProb": 95,
         "projScoreUt": 38,
         "projScoreOpp": 14,
@@ -5669,7 +5681,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against Stanford Cardinal."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "mia-w2",
@@ -6085,8 +6098,8 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.5,
-        "overUnder": 52.5,
+        "vegasSpread": -38.5,
+        "overUnder": 53.5,
         "baseWinProb": 91,
         "projScoreUt": 35,
         "projScoreOpp": 17,
@@ -6096,7 +6109,8 @@ var TEAMS_DATABASE = {
           "summary": "Non-conference matchup in College Station, TX against FCS challenger Missouri State Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "tamu-w2",
@@ -6513,8 +6527,8 @@ var TEAMS_DATABASE = {
         "location": "Nashville, TN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -14.5,
-        "overUnder": 52.5,
+        "vegasSpread": -6.5,
+        "overUnder": 54.5,
         "baseWinProb": 87,
         "projScoreUt": 35,
         "projScoreOpp": 20,
@@ -6524,7 +6538,8 @@ var TEAMS_DATABASE = {
           "summary": "High-stakes clash against #24 AP Louisville Cardinals."
         },
         "oppId": "louisville",
-        "is_tracked": true
+        "is_tracked": true,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "miss-w2",
@@ -6940,8 +6955,8 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -31.5,
-        "overUnder": 52.5,
+        "vegasSpread": -40.5,
+        "overUnder": 51.5,
         "baseWinProb": 99,
         "projScoreUt": 48,
         "projScoreOpp": 7,
@@ -6958,7 +6973,8 @@ var TEAMS_DATABASE = {
         "actualScoreUt": 51,
         "actualScoreOpp": 0,
         "predictedScoreUt": 48,
-        "predictedScoreOpp": 7
+        "predictedScoreOpp": 7,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "ou-w2",
@@ -7376,8 +7392,8 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 10.5,
-        "overUnder": 52.5,
+        "vegasSpread": 24.5,
+        "overUnder": 53.5,
         "baseWinProb": 15,
         "projScoreUt": 21,
         "projScoreOpp": 35,
@@ -7387,7 +7403,8 @@ var TEAMS_DATABASE = {
           "summary": "High-stakes clash against #2 AP Oregon Ducks."
         },
         "oppId": "oregon",
-        "is_tracked": true
+        "is_tracked": true,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "bsu-w2",
@@ -7801,8 +7818,8 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
-        "overUnder": 52.5,
+        "vegasSpread": -37.5,
+        "overUnder": 61.5,
         "baseWinProb": 96,
         "projScoreUt": 39,
         "projScoreOpp": 17,
@@ -7820,7 +7837,8 @@ var TEAMS_DATABASE = {
         "actualScoreUt": 42,
         "actualScoreOpp": 26,
         "predictedScoreUt": 39,
-        "predictedScoreOpp": 17
+        "predictedScoreOpp": 17,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "usc-w1",
@@ -7841,8 +7859,8 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -27.5,
-        "overUnder": 52.5,
+        "vegasSpread": -21.5,
+        "overUnder": 51.5,
         "baseWinProb": 98,
         "projScoreUt": 45,
         "projScoreOpp": 14,
@@ -7860,7 +7878,8 @@ var TEAMS_DATABASE = {
         "actualScoreUt": 39,
         "actualScoreOpp": 0,
         "predictedScoreUt": 45,
-        "predictedScoreOpp": 14
+        "predictedScoreOpp": 14,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "usc-w2",
@@ -8243,8 +8262,8 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.5,
-        "overUnder": 52.5,
+        "vegasSpread": -30.5,
+        "overUnder": 53.5,
         "baseWinProb": 95,
         "projScoreUt": 38,
         "projScoreOpp": 14,
@@ -8262,7 +8281,8 @@ var TEAMS_DATABASE = {
         "actualScoreUt": 34,
         "actualScoreOpp": 17,
         "predictedScoreUt": 38,
-        "predictedScoreOpp": 14
+        "predictedScoreOpp": 14,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "fsu-w1",
@@ -8283,7 +8303,7 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -5.0,
+        "vegasSpread": 3.0,
         "overUnder": 52.5,
         "baseWinProb": 66,
         "projScoreUt": 29,
@@ -8294,7 +8314,8 @@ var TEAMS_DATABASE = {
           "summary": "High-stakes clash against #19 AP SMU Mustangs."
         },
         "oppId": "smu",
-        "is_tracked": true
+        "is_tracked": true,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "fsu-w3",
@@ -8677,8 +8698,8 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 14.5,
-        "overUnder": 52.5,
+        "vegasSpread": 10.0,
+        "overUnder": 48.5,
         "baseWinProb": 11,
         "projScoreUt": 17,
         "projScoreOpp": 34,
@@ -8688,7 +8709,8 @@ var TEAMS_DATABASE = {
           "summary": "High-stakes clash against #11 AP LSU Tigers."
         },
         "oppId": "lsu",
-        "is_tracked": true
+        "is_tracked": true,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "clem-w2",
@@ -9103,7 +9125,7 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.0,
+        "vegasSpread": -3.0,
         "overUnder": 52.5,
         "baseWinProb": 34,
         "projScoreUt": 24,
@@ -9114,7 +9136,8 @@ var TEAMS_DATABASE = {
           "summary": "High-stakes clash against RV Florida State Seminoles."
         },
         "oppId": "floridastate",
-        "is_tracked": true
+        "is_tracked": true,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "smu-w2",
@@ -9532,8 +9555,8 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -42.5,
-        "overUnder": 52.5,
+        "vegasSpread": -45.5,
+        "overUnder": 61.5,
         "baseWinProb": 95,
         "projScoreUt": 38,
         "projScoreOpp": 14,
@@ -9543,7 +9566,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against Abilene Christian Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "ttu-w2",
@@ -9957,8 +9981,8 @@ var TEAMS_DATABASE = {
         "location": "Salt Lake City, UT",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.5,
-        "overUnder": 52.5,
+        "vegasSpread": -38.5,
+        "overUnder": 60.5,
         "baseWinProb": 99,
         "projScoreUt": 35,
         "projScoreOpp": 17,
@@ -9976,7 +10000,8 @@ var TEAMS_DATABASE = {
         "actualScoreUt": 66,
         "actualScoreOpp": 14,
         "predictedScoreUt": 35,
-        "predictedScoreOpp": 17
+        "predictedScoreOpp": 17,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "utah-w2",
@@ -10390,8 +10415,8 @@ var TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.5,
-        "overUnder": 52.5,
+        "vegasSpread": -31.5,
+        "overUnder": 44.5,
         "baseWinProb": 91,
         "projScoreUt": 35,
         "projScoreOpp": 17,
@@ -10401,7 +10426,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against Northern Illinois Huskies."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "iowa-w2",
@@ -10814,8 +10840,8 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -27.5,
-        "overUnder": 52.5,
+        "vegasSpread": -55.5,
+        "overUnder": 62.5,
         "baseWinProb": 98,
         "projScoreUt": 42,
         "projScoreOpp": 10,
@@ -10833,7 +10859,8 @@ var TEAMS_DATABASE = {
         "actualScoreUt": 54,
         "actualScoreOpp": 14,
         "predictedScoreUt": 42,
-        "predictedScoreOpp": 10
+        "predictedScoreOpp": 10,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "miz-w2",
@@ -11246,8 +11273,8 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.5,
-        "overUnder": 52.5,
+        "vegasSpread": -33.5,
+        "overUnder": 59.5,
         "baseWinProb": 95,
         "projScoreUt": 38,
         "projScoreOpp": 14,
@@ -11257,7 +11284,8 @@ var TEAMS_DATABASE = {
           "summary": "Non-conference matchup in Tucson, AZ against FCS challenger Northern Arizona Lumberjacks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "ariz-w2",
@@ -11671,8 +11699,8 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
-        "overUnder": 52.5,
+        "vegasSpread": -23.5,
+        "overUnder": 51.5,
         "baseWinProb": 97,
         "projScoreUt": 41,
         "projScoreOpp": 13,
@@ -11682,7 +11710,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against Washington State Cougars."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "wash-w2",
@@ -12096,8 +12125,8 @@ var TEAMS_DATABASE = {
         "location": "Houston, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
-        "overUnder": 52.5,
+        "vegasSpread": -21.0,
+        "overUnder": 50.5,
         "baseWinProb": 91,
         "projScoreUt": 36,
         "projScoreOpp": 17,
@@ -12107,7 +12136,8 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against Oregon State Beavers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "hou-w2",
@@ -12520,8 +12550,8 @@ var TEAMS_DATABASE = {
         "location": "Nashville, TN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 14.5,
-        "overUnder": 52.5,
+        "vegasSpread": 6.5,
+        "overUnder": 54.5,
         "baseWinProb": 13,
         "projScoreUt": 20,
         "projScoreOpp": 35,
@@ -12531,7 +12561,8 @@ var TEAMS_DATABASE = {
           "summary": "High-stakes clash against #9 AP Ole Miss Rebels."
         },
         "oppId": "olemiss",
-        "is_tracked": true
+        "is_tracked": true,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "lou-w2",
@@ -12946,8 +12977,8 @@ var TEAMS_DATABASE = {
         "location": "Atlanta, GA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -3.5,
-        "overUnder": 52.5,
+        "vegasSpread": 6.5,
+        "overUnder": 53.5,
         "baseWinProb": 78,
         "projScoreUt": 28,
         "projScoreOpp": 24,
@@ -12965,7 +12996,8 @@ var TEAMS_DATABASE = {
         "actualScoreUt": 14,
         "actualScoreOpp": 13,
         "predictedScoreUt": 28,
-        "predictedScoreOpp": 24
+        "predictedScoreOpp": 24,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "col-w2",
@@ -13381,7 +13413,7 @@ var TEAMS_DATABASE = {
         "location": "Tempe, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -33.0,
+        "vegasSpread": -43.5,
         "overUnder": 52.5,
         "baseWinProb": 98,
         "projScoreUt": 43,
@@ -13392,7 +13424,8 @@ var TEAMS_DATABASE = {
           "summary": "Non-conference matchup in Tempe, AZ against FCS challenger Morgan State Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "oddsProvider": "DraftKings"
       },
       {
         "id": "asu-w2",

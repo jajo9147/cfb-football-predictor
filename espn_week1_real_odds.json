@@ -1,0 +1,233 @@
+{
+  "usc_w0": {
+    "spread": -37.5,
+    "ou": 61.5,
+    "details": "USC -37.5",
+    "isHome": true,
+    "opp": "San Jos\u00e9 State Spartans"
+  },
+  "floridastate_w0": {
+    "spread": -30.5,
+    "ou": 53.5,
+    "details": "FSU -30.5",
+    "isHome": true,
+    "opp": "New Mexico State Aggies"
+  },
+  "utah_w1": {
+    "spread": -38.5,
+    "ou": 60.5,
+    "details": "UTAH -38.5",
+    "isHome": true,
+    "opp": "Idaho Vandals"
+  },
+  "missouri_w1": {
+    "spread": -55.5,
+    "ou": 62.5,
+    "details": "MIZ -55.5",
+    "isHome": true,
+    "opp": "Arkansas-Pine Bluff Golden Lions"
+  },
+  "colorado_w1": {
+    "spread": 6.5,
+    "ou": 53.5,
+    "details": "GT -6.5",
+    "isHome": false,
+    "opp": "Georgia Tech Yellow Jackets"
+  },
+  "miami_w1": {
+    "spread": -24.5,
+    "ou": 46.5,
+    "details": "MIA -24.5",
+    "isHome": false,
+    "opp": "Stanford Cardinal"
+  },
+  "oklahoma_w1": {
+    "spread": -40.5,
+    "ou": 51.5,
+    "details": "OU -40.5",
+    "isHome": true,
+    "opp": "UTEP Miners"
+  },
+  "usc_w1": {
+    "spread": -21.5,
+    "ou": 51.5,
+    "details": "USC -21.5",
+    "isHome": true,
+    "opp": "Fresno State Bulldogs"
+  },
+  "ohiostate_w1": {
+    "spread": -50.5,
+    "ou": 55.5,
+    "details": "OSU -50.5",
+    "isHome": true,
+    "opp": "Ball State Cardinals"
+  },
+  "oregon_w1": {
+    "spread": -24.5,
+    "ou": 53.5,
+    "details": "ORE -24.5",
+    "isHome": true,
+    "opp": "Boise State Broncos"
+  },
+  "boisestate_w1": {
+    "spread": 24.5,
+    "ou": 53.5,
+    "details": "ORE -24.5",
+    "isHome": false,
+    "opp": "Oregon Ducks"
+  },
+  "georgia_w1": {
+    "spread": -49.5,
+    "ou": 55.5,
+    "details": "UGA -49.5",
+    "isHome": true,
+    "opp": "Tennessee State Tigers"
+  },
+  "texas_w1": {
+    "spread": -29.5,
+    "ou": 61.5,
+    "details": "TEX -29.5",
+    "isHome": true,
+    "opp": "Texas State Bobcats"
+  },
+  "indiana_w1": {
+    "spread": -39.5,
+    "ou": 57.5,
+    "details": "IU -39.5",
+    "isHome": true,
+    "opp": "North Texas Mean Green"
+  },
+  "texasam_w1": {
+    "spread": -38.5,
+    "ou": 53.5,
+    "details": "TA&M -38.5",
+    "isHome": true,
+    "opp": "Missouri State Bears"
+  },
+  "lsu_w1": {
+    "spread": -10.0,
+    "ou": 48.5,
+    "details": "LSU -10",
+    "isHome": true,
+    "opp": "Clemson Tigers"
+  },
+  "clemson_w1": {
+    "spread": 10.0,
+    "ou": 48.5,
+    "details": "LSU -10",
+    "isHome": false,
+    "opp": "LSU Tigers"
+  },
+  "texastech_w1": {
+    "spread": -45.5,
+    "ou": 61.5,
+    "details": "TTU -45.5",
+    "isHome": true,
+    "opp": "Abilene Christian Wildcats"
+  },
+  "alabama_w1": {
+    "spread": -28.5,
+    "ou": 52.5,
+    "details": "ALA -28.5",
+    "isHome": true,
+    "opp": "East Carolina Pirates"
+  },
+  "byu_w1": {
+    "spread": -50.5,
+    "ou": 61.5,
+    "details": "BYU -50.5",
+    "isHome": true,
+    "opp": "Utah Tech Trailblazers"
+  },
+  "michigan_w1": {
+    "spread": -27.5,
+    "ou": 50.5,
+    "details": "MICH -27.5",
+    "isHome": true,
+    "opp": "Western Michigan Broncos"
+  },
+  "pennstate_w1": {
+    "spread": -23.5,
+    "ou": 53.5,
+    "details": "PSU -23.5",
+    "isHome": true,
+    "opp": "Marshall Thundering Herd"
+  },
+  "tennessee_w1": {
+    "spread": -49.5,
+    "ou": 66.5,
+    "details": "TENN -49.5",
+    "isHome": true,
+    "opp": "Furman Paladins"
+  },
+  "iowa_w1": {
+    "spread": -31.5,
+    "ou": 44.5,
+    "details": "IOWA -31.5",
+    "isHome": true,
+    "opp": "Northern Illinois Huskies"
+  },
+  "houston_w1": {
+    "spread": -21.0,
+    "ou": 50.5,
+    "details": "HOU -21",
+    "isHome": true,
+    "opp": "Oregon State Beavers"
+  },
+  "arizona_w1": {
+    "spread": -33.5,
+    "ou": 59.5,
+    "details": "ARIZ -33.5",
+    "isHome": true,
+    "opp": "Northern Arizona Lumberjacks"
+  },
+  "arizonastate_w1": {
+    "spread": -43.5,
+    "ou": 52.5,
+    "details": "ASU -43.5",
+    "isHome": true,
+    "opp": "Morgan State Bears"
+  },
+  "notredame_w1": {
+    "spread": -21.0,
+    "ou": 45.5,
+    "details": "ND -21",
+    "isHome": true,
+    "opp": "Wisconsin Badgers"
+  },
+  "olemiss_w1": {
+    "spread": -6.5,
+    "ou": 54.5,
+    "details": "MISS -6.5",
+    "isHome": true,
+    "opp": "Louisville Cardinals"
+  },
+  "louisville_w1": {
+    "spread": 6.5,
+    "ou": 54.5,
+    "details": "MISS -6.5",
+    "isHome": false,
+    "opp": "Ole Miss Rebels"
+  },
+  "washington_w1": {
+    "spread": -23.5,
+    "ou": 51.5,
+    "details": "WASH -23.5",
+    "isHome": true,
+    "opp": "Washington State Cougars"
+  },
+  "floridastate_w1": {
+    "spread": 3.0,
+    "ou": 52.5,
+    "details": "SMU -3",
+    "isHome": true,
+    "opp": "SMU Mustangs"
+  },
+  "smu_w1": {
+    "spread": -3.0,
+    "ou": 52.5,
+    "details": "SMU -3",
+    "isHome": false,
+    "opp": "Florida State Seminoles"
+  }
+}
