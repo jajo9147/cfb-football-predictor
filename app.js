@@ -1567,6 +1567,25 @@ function renderSchedule() {
     let spreadCoverText = '';
     let diagnosticText = '';
 
+    // Total (Over/Under) Calculations
+    const hasOu = typeof game.overUnder === 'number';
+    const actualTotal = hasFinalScores ? (actualUt + actualOpp) : null;
+    const predTotal = predUt + predOpp;
+    let totalHit = false;
+    let totalCoverText = '';
+    if (hasFinalScores && hasOu) {
+      if (Math.abs(actualTotal - game.overUnder) < 0.25) {
+        totalHit = true;
+        totalCoverText = `Push ${game.overUnder}`;
+      } else if (actualTotal > game.overUnder) {
+        totalCoverText = `Over ${game.overUnder}`;
+        totalHit = predTotal > game.overUnder;
+      } else {
+        totalCoverText = `Under ${game.overUnder}`;
+        totalHit = predTotal < game.overUnder;
+      }
+    }
+
     if (hasFinalScores && typeof game.vegasSpread === 'number') {
       const actualMargin = actualUt - actualOpp;
       const teamCoverMargin = actualMargin + game.vegasSpread; // Margin over spread
@@ -1695,7 +1714,7 @@ function renderSchedule() {
                 <span class="pva-div">•</span>
                 <span class="pva-spread ${spreadHit ? 'hit' : 'miss'}">${spreadCoverText}</span>
               </div>`
-            ) : `<span class="vegas-line" title="${game.oddsProvider || 'DraftKings'} Live Market Line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : (game.vegasSpread === 0 ? 'PICK' : `${game.oppAbbr} -${game.vegasSpread}`)}</span>`}
+            ) : `<span class="vegas-line" title="${game.oddsProvider || 'DraftKings'} Live Market Line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : (game.vegasSpread === 0 ? 'PICK' : `${game.oppAbbr} -${game.vegasSpread}`)}${hasOu ? ` • O/U ${game.overUnder}` : ''}</span>`}
             ${(!hasFinalScores && sim.isManualScore) ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event)" title="Reset to AI baseline projection"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
           </div>
         </div>
@@ -1744,24 +1763,30 @@ function renderSchedule() {
                       ${spreadHit ? 'BEAT VEGAS: SPREAD WIN' : 'SPREAD LOSS (FAILED TO COVER)'}
                     </span>
                   ` : ''}
+                  ${(hasFinalScores && hasOu && vegasEdge?.hasTotalEdge) ? `
+                    <span class="spread-kpi-pill ${totalHit ? 'cover' : 'loss'}">
+                      <i class="fa-solid ${totalHit ? 'fa-arrow-trend-up' : 'fa-triangle-exclamation'}"></i>
+                      ${totalHit ? `TOTAL WIN (${totalCoverText.toUpperCase()})` : `TOTAL LOSS (${actualTotal} PTS)`}
+                    </span>
+                  ` : ''}
                 </div>
 
                 <div class="kpi-scores-comparison-row">
                   <div class="kpi-score-col">
                     <span class="kpi-score-lbl">MODEL PROJ</span>
-                    <span class="kpi-score-val proj">${team.abbr} ${predUt} - ${predOpp} ${game.oppAbbr}</span>
+                    <span class="kpi-score-val proj">${team.abbr} ${predUt} - ${predOpp} ${game.oppAbbr} <span style="color: #94A3B8; font-size: 0.7rem; font-weight: 500;">(${predTotal} Ttl)</span></span>
                   </div>
                   <div class="kpi-score-col">
                     <span class="kpi-score-lbl">ACTUAL FINAL</span>
-                    <span class="kpi-score-val actual">${team.abbr} ${actualUt} - ${actualOpp} ${game.oppAbbr}</span>
+                    <span class="kpi-score-val actual">${team.abbr} ${actualUt} - ${actualOpp} ${game.oppAbbr} <span style="color: #94A3B8; font-size: 0.7rem; font-weight: 500;">(${actualTotal} Ttl)</span></span>
                   </div>
                   <div class="kpi-score-col">
                     <span class="kpi-score-lbl">VEGAS LINE</span>
-                    <span class="kpi-score-val line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : (game.vegasSpread === 0 ? 'PICK' : `${game.oppAbbr} -${game.vegasSpread}`)}</span>
+                    <span class="kpi-score-val line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : (game.vegasSpread === 0 ? 'PICK' : `${game.oppAbbr} -${game.vegasSpread}`)}${hasOu ? ` • O/U ${game.overUnder}` : ''}</span>
                   </div>
                   <div class="kpi-score-col">
-                    <span class="kpi-score-lbl">SPREAD RESULT</span>
-                    <span class="kpi-score-val ${spreadHit ? 'cover-text' : 'loss-text'}">${spreadCoverText}</span>
+                    <span class="kpi-score-lbl">${hasOu ? 'MARKET RESULTS' : 'SPREAD RESULT'}</span>
+                    <span class="kpi-score-val ${spreadHit ? 'cover-text' : 'loss-text'}">${spreadCoverText}${hasOu ? ` <span style="color: #94A3B8; font-size: 0.7rem;">•</span> <span style="color: ${totalHit ? '#34D399' : '#CBD5E1'}; font-weight: 700;">${totalCoverText}</span>` : ''}</span>
                   </div>
                 </div>
 
