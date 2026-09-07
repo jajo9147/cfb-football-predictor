@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-CFB Prophet - Weekly Model Retraining & Calibration Engine
-Ingests completed game scores from ESPN, compares model projections against Las Vegas lines,
+CFB Prophet - Weekly Model Retraining & Calibration Engine (Enhanced)
+Ingests completed game scores & boxscores from ESPN, advanced EPA/PPA metrics
+and 247Sports Talent Composite from CollegeFootballData (CFBD),
 computes Bayesian team rating updates to minimize prediction residual error,
-and re-projects remaining regular-season schedules.
+and re-projects remaining regular-season schedules with non-linear blowout calibration.
 """
 
 import sys
@@ -19,6 +20,13 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEAMS_FILE = os.path.join(ROOT_DIR, 'data', 'teams.js')
 TEAMS_V3_FILE = os.path.join(ROOT_DIR, 'data', 'teams_v3.js')
 CALIBRATION_FILE = os.path.join(ROOT_DIR, 'archive', 'model_calibration.json')
+
+# Import CFBD Client
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+try:
+    import cfbd_client
+except ImportError:
+    cfbd_client = None
 
 ESPN_SCOREBOARD_URL = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard"
 
@@ -68,7 +76,6 @@ def fetch_espn_scoreboard(date_str=None):
     if date_str:
         url += f"?dates={date_str}"
     
-    # Try via curl subprocess first as ESPN blocks standard python user agents
     try:
         import subprocess
         res = subprocess.run(['curl', '-s', '-H', 'Accept: application/json', url], stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
@@ -103,7 +110,6 @@ def match_team_in_db(db, name_or_abbr):
     return None
 
 def calculate_win_prob_from_margin(margin):
-    # Logistic function parameterized so a 7-point margin corresponds to ~70% win prob
     k = 0.125
     prob = 1.0 / (1.0 + math.exp(-k * margin))
     return int(round(prob * 100))
@@ -111,20 +117,31 @@ def calculate_win_prob_from_margin(margin):
 def main():
     parser = argparse.ArgumentParser(description="Retrain CFB Prophet weekly models against actual scores & Vegas consensus lines.")
     parser.add_argument('--dry-run', action='store_true', help="Compute adjustments without modifying database files.")
-    parser.add_argument('--dates', nargs='*', help="Specific dates in YYYYMMDD format to ingest (e.g. 20260829 20260903 20260904 20260905).")
+    parser.add_argument('--dates', nargs='*', help="Specific dates in YYYYMMDD format to ingest.")
     args = parser.parse_args()
 
     print("=" * 70)
-    print("🏈 CFB PROPHET — WEEKLY MODEL RETRAINING & CALIBRATION ENGINE")
+    print("🏈 CFB PROPHET — ENHANCED WEEKLY MODEL RETRAINING ENGINE")
     print("=" * 70)
 
     db = load_teams_file(TEAMS_FILE)
     print(f"Loaded {len(db)} teams from {TEAMS_FILE}")
 
-    # Dates to scan for the current season if not explicitly passed
+    # Load CFBD Analytics Feeds
+    talent_map = {}
+    adv_stats_w1 = {}
+    if cfbd_client:
+        try:
+            talent_map = cfbd_client.get_team_talent_composite(2025)
+            print(f"🔥 CFBD Ingestion: Loaded {len(talent_map)} teams with 247Sports Talent Composite")
+            adv_stats_w1 = cfbd_client.get_week_advanced_game_stats(2026, 1)
+            print(f"🔥 CFBD Ingestion: Loaded {len(adv_stats_w1)} advanced EPA/PPA boxscores for Week 1")
+        except Exception as e:
+            print(f"Notice: CFBD loading warning: {e}")
+
+    # Dates to scan
     target_dates = args.dates
     if not target_dates:
-        # Scan Week 0 and Week 1 default calendar
         target_dates = ['20260829', '20260903', '20260904', '20260905', '20260906', '20260907']
 
     all_completed_games = []
@@ -170,7 +187,6 @@ def main():
             t2_id = match_team_in_db(db, t2_name)
 
             if t1_id:
-                # Check if already added
                 if not any(cg.get('teamId') == t1_id and cg.get('teamScore') == score1 for cg in all_completed_games):
                     all_completed_games.append({
                         'teamId': t1_id,
@@ -194,7 +210,7 @@ def main():
     model_beats_vegas_count = 0
     total_evaluated = 0
 
-    team_performances = {} # teamId -> list of performance differentials
+    team_performances = {}
 
     for g in all_completed_games:
         tid = g['teamId']
@@ -204,7 +220,7 @@ def main():
         proj_margin = g['projUt'] - g['projOpp']
         proj_total = g['projUt'] + g['projOpp']
 
-        vegas_margin = -g['vegasSpread'] # If Vegas is -7.5, Vegas expects team to win by 7.5
+        vegas_margin = -g['vegasSpread']
         vegas_total = g['overUnder']
 
         model_err = abs(proj_margin - actual_margin)
@@ -217,8 +233,16 @@ def main():
             model_beats_vegas_count += 1
         total_evaluated += 1
 
-        # Track team performance differential: Actual Margin vs. Expected Pre-Game Margin
+        # Composite performance delta: Incorporates score margin plus EPA efficiency
         perf_delta = actual_margin - proj_margin
+        
+        # Check EPA bonus from CFBD
+        team_short = db[tid].get('shortName', '').lower()
+        if team_short in adv_stats_w1:
+            team_ppa = adv_stats_w1[team_short].get('offense', {}).get('ppa', 0.0)
+            if team_ppa and team_ppa > 0.25:
+                perf_delta += (team_ppa - 0.25) * 15.0 # Reward hyper-efficient offenses
+
         if tid not in team_performances:
             team_performances[tid] = []
         team_performances[tid].append(perf_delta)
@@ -233,18 +257,16 @@ def main():
     print(f"  • Model Beat Vegas Rate:            {beat_vegas_pct}% ({model_beats_vegas_count}/{total_evaluated} games)")
 
     # 4. Bayesian SP+ Rating Updating
-    # Learning rate (shrinkage factor) for early season: alpha = 0.12
-    # Clamped between -2.0 and +2.0 to avoid fluke single-game overreactions
     ALPHA = 0.12
     rating_shifts = {}
 
-    print("\n📈 RETRAINED TEAM POWER RATINGS (BAYESIAN ADJUSTMENT):")
+    print("\n📈 RETRAINED TEAM POWER RATINGS (BAYESIAN ADJUSTMENT + EPA):")
     for tid, deltas in team_performances.items():
         t = db[tid]
         old_rating = float(t.get('baseSpRating', 22.0))
         avg_delta = sum(deltas) / len(deltas)
         raw_adjustment = avg_delta * ALPHA
-        clamped_adjustment = max(-2.0, min(2.0, raw_adjustment))
+        clamped_adjustment = max(-2.5, min(2.5, raw_adjustment))
         new_rating = round(old_rating + clamped_adjustment, 2)
         rating_shifts[tid] = {
             'old': old_rating,
@@ -256,25 +278,35 @@ def main():
         if not args.dry_run:
             t['baseSpRating'] = new_rating
 
-    # 5. Re-project Future Unplayed Games
+    # 5. Re-project Future Unplayed Games (With Talent Blowout Multiplier & Market Anchoring)
     unplayed_games_recalculated = 0
+    blowout_games_calibrated = 0
+
     for tid, t in db.items():
         sp_team = float(t.get('baseSpRating', 22.0))
+        team_name = t.get('name', '').lower()
+        fav_talent = talent_map.get(team_name, talent_map.get(t.get('shortName', '').lower(), 750.0))
+
         for g in t.get('schedule', []):
             if g.get('isFinal'):
-                continue # Do NOT alter completed official scores
+                continue
 
-            # Determine opponent SP+
+            # Determine opponent SP+ & talent
             opp_id = g.get('oppId')
+            opp_talent = 420.0
             if opp_id and opp_id in db:
                 sp_opp = float(db[opp_id].get('baseSpRating', 22.0))
+                opp_name = db[opp_id].get('name', '').lower()
+                opp_talent = talent_map.get(opp_name, talent_map.get(db[opp_id].get('shortName', '').lower(), 650.0))
             elif g.get('oppRank') == 'FCS':
                 sp_opp = -14.0
+                opp_talent = 180.0
             else:
                 opp_name = (g.get('opponent') or '').lower()
                 power4_keywords = ['sec', 'big ten', 'big 12', 'acc', 'notre dame']
                 is_power = any(kw in opp_name for kw in power4_keywords)
                 sp_opp = 13.0 if is_power else 4.5
+                opp_talent = 620.0 if is_power else 380.0
 
             stadium = g.get('stadium', '')
             hfa = 0.0
@@ -283,11 +315,39 @@ def main():
             else:
                 hfa = -STADIUM_HFA.get(stadium, 2.5)
 
-            projected_margin = (sp_team - sp_opp) + hfa
+            # Talent Gap Blowout Bonus
+            talent_bonus = 0.0
+            if cfbd_client:
+                if sp_team >= sp_opp:
+                    talent_bonus = cfbd_client.calculate_talent_blowout_bonus(fav_talent, opp_talent)
+                else:
+                    talent_bonus = -cfbd_client.calculate_talent_blowout_bonus(opp_talent, fav_talent)
+
+            raw_margin = (sp_team - sp_opp) + hfa + talent_bonus
+
+            # Consensus Market Anchoring: If Vegas spread exists, blend 60% model + 40% Vegas line
+            vegas_spread = g.get('vegasSpread')
+            if isinstance(vegas_spread, (int, float)):
+                vegas_margin = -vegas_spread
+                projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
+            else:
+                projected_margin = round(raw_margin, 1)
+
             base_total = float(g.get('overUnder', 55.0))
 
-            adj_ut_score = max(6, int(round((base_total + projected_margin) / 2.0)))
-            adj_opp_score = max(3, int(round((base_total - projected_margin) / 2.0)))
+            # Non-linear scoring distribution for blowouts (eliminates 38-point ceiling)
+            if projected_margin >= 28.0:
+                blowout_games_calibrated += 1
+                adj_opp_score = max(0, min(14, int(round(12.0 - (projected_margin - 28.0) * 0.25))))
+                adj_ut_score = int(round(adj_opp_score + projected_margin))
+            elif projected_margin <= -28.0:
+                blowout_games_calibrated += 1
+                adj_ut_score = max(0, min(14, int(round(12.0 - (abs(projected_margin) - 28.0) * 0.25))))
+                adj_opp_score = int(round(adj_ut_score + abs(projected_margin)))
+            else:
+                adj_ut_score = max(6, int(round((base_total + projected_margin) / 2.0)))
+                adj_opp_score = max(3, int(round((base_total - projected_margin) / 2.0)))
+
             win_prob = calculate_win_prob_from_margin(projected_margin)
 
             if not args.dry_run:
@@ -298,6 +358,7 @@ def main():
             unplayed_games_recalculated += 1
 
     print(f"\n🔮 Re-projected {unplayed_games_recalculated} future regular-season games with updated power ratings!")
+    print(f"🚀 Applied Non-Linear Blowout Calibration to {blowout_games_calibrated} mismatch games!")
 
     # 6. Save Retrained Databases & Calibration Ledger
     if not args.dry_run:
@@ -306,7 +367,6 @@ def main():
         print(f"💾 Updated: {TEAMS_FILE}")
         print(f"💾 Updated: {TEAMS_V3_FILE}")
 
-        # Update model_calibration.json
         if os.path.exists(CALIBRATION_FILE):
             with open(CALIBRATION_FILE, 'r', encoding='utf-8') as f:
                 calib = json.load(f)
@@ -321,7 +381,8 @@ def main():
                 'vegasMae': avg_vegas_mae,
                 'modelBeatVegasPct': beat_vegas_pct,
                 'ratingShifts': rating_shifts,
-                'unplayedGamesRecalculated': unplayed_games_recalculated
+                'unplayedGamesRecalculated': unplayed_games_recalculated,
+                'blowoutGamesCalibrated': blowout_games_calibrated
             })
 
             with open(CALIBRATION_FILE, 'w', encoding='utf-8') as f:
