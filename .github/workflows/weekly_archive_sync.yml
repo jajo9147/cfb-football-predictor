@@ -6,8 +6,10 @@ on:
     - cron: '0 15 * * 6'
     # Sunday 08:00 UTC (4:00 AM ET) - Post-game settlement & Brier grading
     - cron: '0 8 * * 0'
-    # Tuesday 14:00 UTC (10:00 AM ET) - Post-AP Poll Weekly Model Retraining & Calibration
+    # Tuesday 14:00 UTC (10:00 AM ET) - Standard Week Model Retraining
     - cron: '0 14 * * 2'
+    # Tuesday 18:30 UTC (2:30 PM ET) - Post-AP Poll Release (Labor Day Week & Late Polls)
+    - cron: '30 18 * * 2'
   workflow_dispatch:
 
 permissions:
@@ -34,6 +36,8 @@ jobs:
         run: python3 scripts/settle_week_accuracy.py
 
       - name: Retrain Model & Recalculate Future Projections
+        env:
+          CFBD_API_KEY: ${{ secrets.CFBD_API_KEY || 'GNtgI3UY9ShOqcE0DTRDjaYycdGzBJDrqHjbgWT9lsw87ePi/iA4bjuNwak4WaC6' }}
         run: |
           python3 scripts/retrain_weekly_model.py
           # Synchronize updated datasets to mobile web packages
