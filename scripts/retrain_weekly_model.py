@@ -21,12 +21,17 @@ TEAMS_FILE = os.path.join(ROOT_DIR, 'data', 'teams.js')
 TEAMS_V3_FILE = os.path.join(ROOT_DIR, 'data', 'teams_v3.js')
 CALIBRATION_FILE = os.path.join(ROOT_DIR, 'archive', 'model_calibration.json')
 
-# Import CFBD Client
+# Import CFBD Client & Monte Carlo Engine
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 try:
     import cfbd_client
 except ImportError:
     cfbd_client = None
+
+try:
+    import monte_carlo_engine
+except ImportError:
+    monte_carlo_engine = None
 
 ESPN_SCOREBOARD_URL = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard"
 
@@ -338,25 +343,56 @@ def main():
 
             base_total = float(g.get('overUnder', 55.0))
 
-            # Non-linear scoring distribution for blowouts (eliminates 38-point ceiling)
-            if projected_margin >= 28.0:
-                blowout_games_calibrated += 1
-                adj_opp_score = max(0, min(14, int(round(12.0 - (projected_margin - 28.0) * 0.25))))
-                adj_ut_score = int(round(adj_opp_score + projected_margin))
-            elif projected_margin <= -28.0:
-                blowout_games_calibrated += 1
-                adj_ut_score = max(0, min(14, int(round(12.0 - (abs(projected_margin) - 28.0) * 0.25))))
-                adj_opp_score = int(round(adj_ut_score + abs(projected_margin)))
+            if monte_carlo_engine:
+                mc_sim = monte_carlo_engine.simulate_matchup_10k(
+                    team_a_name=t.get('shortName', tid),
+                    team_b_name=g.get('oppAbbr') or g.get('opponent', 'OPP'),
+                    sp_a=sp_team,
+                    sp_b=sp_opp,
+                    talent_a=fav_talent,
+                    talent_b=opp_talent,
+                    is_home_a=g.get('isHome', True),
+                    hfa_pts=STADIUM_HFA.get(stadium, 2.5),
+                    vegas_spread=vegas_spread,
+                    vegas_total=base_total,
+                    iterations=2500
+                )
+                adj_ut_score = mc_sim['projScoreA']
+                adj_opp_score = mc_sim['projScoreB']
+                win_prob = int(round(mc_sim['winProbA']))
+                if abs(adj_ut_score - adj_opp_score) >= 28:
+                    blowout_games_calibrated += 1
+
+                if not args.dry_run:
+                    g['projScoreUt'] = adj_ut_score
+                    g['projScoreOpp'] = adj_opp_score
+                    g['baseWinProb'] = win_prob
+                    g['mcCoverProb'] = mc_sim['coverProbA']
+                    g['mcOverProb'] = mc_sim['overProb']
+                    g['mcRecommendedAts'] = mc_sim['recommendedAts']
+                    g['mcRecommendedOu'] = mc_sim['recommendedOu']
+                    g['mcScoreDistUt'] = mc_sim['scoreDistributionA']
+                    g['mcScoreDistOpp'] = mc_sim['scoreDistributionB']
             else:
-                adj_ut_score = max(6, int(round((base_total + projected_margin) / 2.0)))
-                adj_opp_score = max(3, int(round((base_total - projected_margin) / 2.0)))
+                # Non-linear scoring distribution for blowouts fallback
+                if projected_margin >= 28.0:
+                    blowout_games_calibrated += 1
+                    adj_opp_score = max(0, min(14, int(round(12.0 - (projected_margin - 28.0) * 0.25))))
+                    adj_ut_score = int(round(adj_opp_score + projected_margin))
+                elif projected_margin <= -28.0:
+                    blowout_games_calibrated += 1
+                    adj_ut_score = max(0, min(14, int(round(12.0 - (abs(projected_margin) - 28.0) * 0.25))))
+                    adj_opp_score = int(round(adj_ut_score + abs(projected_margin)))
+                else:
+                    adj_ut_score = max(6, int(round((base_total + projected_margin) / 2.0)))
+                    adj_opp_score = max(3, int(round((base_total - projected_margin) / 2.0)))
 
-            win_prob = calculate_win_prob_from_margin(projected_margin)
+                win_prob = calculate_win_prob_from_margin(projected_margin)
 
-            if not args.dry_run:
-                g['projScoreUt'] = adj_ut_score
-                g['projScoreOpp'] = adj_opp_score
-                g['baseWinProb'] = win_prob
+                if not args.dry_run:
+                    g['projScoreUt'] = adj_ut_score
+                    g['projScoreOpp'] = adj_opp_score
+                    g['baseWinProb'] = win_prob
             
             unplayed_games_recalculated += 1
 
