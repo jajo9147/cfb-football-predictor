@@ -70,7 +70,7 @@ def fetch_cfbd_endpoint(endpoint, params=None, cache_name=None):
         print(f"Error fetching CFBD endpoint {endpoint}: {e}")
         return []
 
-def get_team_talent_composite(year=2025):
+def get_team_talent_composite(year=2026):
     """Fetches 247Sports Team Talent Composite."""
     data = fetch_cfbd_endpoint('/talent', {'year': year}, cache_name=f"talent_{year}")
     talent_map = {}
@@ -81,7 +81,7 @@ def get_team_talent_composite(year=2025):
             talent_map[team_name.lower()] = float(talent_val)
     return talent_map
 
-def get_sp_ratings(year=2025):
+def get_sp_ratings(year=2026):
     """Fetches official Bill Connelly SP+ ratings."""
     data = fetch_cfbd_endpoint('/ratings/sp', {'year': year}, cache_name=f"sp_{year}")
     sp_map = {}

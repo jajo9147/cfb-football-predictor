@@ -127,15 +127,18 @@ def main():
     db = load_teams_file(TEAMS_FILE)
     print(f"Loaded {len(db)} teams from {TEAMS_FILE}")
 
-    # Load CFBD Analytics Feeds
+    # Load CFBD Analytics Feeds (Strictly 2026 Official Season Data)
     talent_map = {}
+    sp_map_2026 = {}
     adv_stats_w1 = {}
     if cfbd_client:
         try:
-            talent_map = cfbd_client.get_team_talent_composite(2025)
-            print(f"🔥 CFBD Ingestion: Loaded {len(talent_map)} teams with 247Sports Talent Composite")
+            talent_map = cfbd_client.get_team_talent_composite(2026)
+            print(f"🔥 CFBD Ingestion: Loaded {len(talent_map)} teams with 2026 247Sports Talent Composite")
+            sp_map_2026 = cfbd_client.get_sp_ratings(2026)
+            print(f"🔥 CFBD Ingestion: Loaded {len(sp_map_2026)} teams with 2026 Official SP+ Ratings")
             adv_stats_w1 = cfbd_client.get_week_advanced_game_stats(2026, 1)
-            print(f"🔥 CFBD Ingestion: Loaded {len(adv_stats_w1)} advanced EPA/PPA boxscores for Week 1")
+            print(f"🔥 CFBD Ingestion: Loaded {len(adv_stats_w1)} advanced EPA/PPA boxscores for 2026 Week 1")
         except Exception as e:
             print(f"Notice: CFBD loading warning: {e}")
 
