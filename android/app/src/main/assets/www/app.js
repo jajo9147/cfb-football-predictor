@@ -1124,12 +1124,24 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
 function calculateVegasEdge(game, sim) {
   if (!game || !sim || typeof game.vegasSpread !== 'number') return null;
 
-  const simSpread = sim.projUt - sim.projOpp;
+  // Use pregame model projection (or user-tuned projection on unplayed games), NEVER the actual postgame final score
+  let projUt = sim.projUt;
+  let projOpp = sim.projOpp;
+
+  if (game.isFinal || sim.isFinal) {
+    if (typeof game.predictedScoreUt === 'number') projUt = game.predictedScoreUt;
+    else if (typeof game.projScoreUt === 'number') projUt = game.projScoreUt;
+
+    if (typeof game.predictedScoreOpp === 'number') projOpp = game.predictedScoreOpp;
+    else if (typeof game.projScoreOpp === 'number') projOpp = game.projScoreOpp;
+  }
+
+  const simSpread = projUt - projOpp;
   const vegasExpectedDiff = -game.vegasSpread;
   const spreadEdge = simSpread - vegasExpectedDiff;
   const hasSpreadEdge = Math.abs(spreadEdge) >= 3.0;
 
-  const simTotal = sim.projUt + sim.projOpp;
+  const simTotal = projUt + projOpp;
   const vegasTotal = game.overUnder || 52.5;
   const totalEdge = simTotal - vegasTotal;
   const hasTotalEdge = Math.abs(totalEdge) >= 4.5;
@@ -2452,6 +2464,9 @@ function updateModalScoreboardLive() {
                  onclick="event.stopPropagation();">
         </div>
         ${(() => {
+          if (game.isFinal) {
+            return `<span class="locked-final-tag" style="margin-top: 3px;"><i class="fa-solid fa-lock"></i> OFFICIAL FINAL</span>`;
+          }
           const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
           const rProb2 = 100 - rProb1;
           const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
