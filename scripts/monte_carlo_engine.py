@@ -45,6 +45,8 @@ def simulate_matchup_10k(
     talent_b=650.0,
     ppa_off_a=0.15,
     ppa_off_b=0.10,
+    ret_prod_a=0.60,
+    ret_prod_b=0.60,
     is_home_a=True,
     hfa_pts=2.5,
     vegas_spread=None,
@@ -54,6 +56,7 @@ def simulate_matchup_10k(
     """
     Simulates 10,000 full drive-by-drive games between Team A and Team B.
     Returns full score distributions, median margin, cover probability, and O/U odds.
+    Incorporates 2026 CFBD SP+, 247Sports Talent, EPA/PPA, and Returning Production.
     """
     hfa = hfa_pts if is_home_a else -hfa_pts
 
@@ -71,8 +74,12 @@ def simulate_matchup_10k(
         else:
             talent_bonus = -cfbd_client.calculate_talent_blowout_bonus(talent_b, talent_a)
 
+    # 2.5 Returning Production & Roster Continuity Differential
+    ret_delta = (float(ret_prod_a or 0.60) - float(ret_prod_b or 0.60)) * 3.0
+
     # 3. SP+ rating differential (points per game scale)
-    sp_diff = (sp_a - sp_b) + hfa + (talent_bonus * 0.5)
+    sp_diff = (sp_a - sp_b) + hfa + (talent_bonus * 0.5) + ret_delta
+
 
     # 4. Modulate per-drive scoring probabilities
     # A 7-point SP+ advantage translates to ~+0.05 TD probability per drive
@@ -192,9 +199,10 @@ def simulate_matchup_10k(
     over_pct = round((overs / iterations) * 100.0, 1)
     under_pct = round((under_totals / iterations) * 100.0, 1)
 
-    # Win probability
+    # Win probability (clamped 1.0% to 99.0% to reflect authentic sports uncertainty)
     a_wins = sum(1 for m in margins if m > 0)
-    win_prob_a = round((a_wins / iterations) * 100.0, 1)
+    win_prob_a = max(1.0, min(99.0, round((a_wins / iterations) * 100.0, 1)))
+
 
     # Determine recommended side
     if cover_pct >= 53.5:

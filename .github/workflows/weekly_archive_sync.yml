@@ -8,8 +8,10 @@ on:
     - cron: '0 8 * * 0'
     # Tuesday 14:00 UTC (10:00 AM ET) - Standard Week Model Retraining
     - cron: '0 14 * * 2'
-    # Tuesday 18:30 UTC (2:30 PM ET) - Post-AP Poll Release (Labor Day Week & Late Polls)
+    # Tuesday 18:30 UTC (2:30 PM ET) - Post-AP Poll Release
     - cron: '30 18 * * 2'
+    # Tuesday 19:30 UTC (3:30 PM ET) - Poll verification retry
+    - cron: '30 19 * * 2'
   workflow_dispatch:
 
 permissions:
@@ -44,7 +46,11 @@ jobs:
           cp data/teams.js data/teams_v3.js ios/CFBProphet/www/data/ || true
           cp data/teams.js data/teams_v3.js android/app/src/main/assets/www/data/ || true
 
+      - name: Run Production Pre-Flight Inspection
+        run: python3 scripts/validate_prod_readiness.py
+
       - name: Commit and Push Archive & Model Updates
+
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"

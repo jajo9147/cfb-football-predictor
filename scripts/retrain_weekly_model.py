@@ -47,37 +47,37 @@ ESPN_ID_TO_TEAM_ID = {
 
 # Authoritative Week 2 Rankings (Used when ESPN API is still serving stale Preseason cache)
 WEEK2_OFFICIAL_POLL = {
-    'ohiostate': {'apRank': '#1 AP', 'apPoints': '1,672 PTS (40 1st)', 'rankNum': 1},
-    'georgia': {'apRank': '#2 AP', 'apPoints': '1,595 PTS (14 1st)', 'rankNum': 2},
-    'texas': {'apRank': '#3 AP', 'apPoints': '1,520 PTS', 'rankNum': 3},
-    'notredame': {'apRank': '#4 AP', 'apPoints': '1,490 PTS (6 1st)', 'rankNum': 4},
-    'indiana': {'apRank': '#5 AP', 'apPoints': '1,440 PTS (8 1st)', 'rankNum': 5},
-    'oregon': {'apRank': '#6 AP', 'apPoints': '1,385 PTS', 'rankNum': 6},
-    'miami': {'apRank': '#7 AP', 'apPoints': '1,320 PTS (1 1st)', 'rankNum': 7},
-    'lsu': {'apRank': '#8 AP', 'apPoints': '1,240 PTS', 'rankNum': 8},
-    'texasam': {'apRank': '#9 AP', 'apPoints': '1,165 PTS', 'rankNum': 9},
-    'oklahoma': {'apRank': '#10 AP', 'apPoints': '1,110 PTS', 'rankNum': 10},
-    'olemiss': {'apRank': '#11 AP', 'apPoints': '1,040 PTS', 'rankNum': 11},
-    'alabama': {'apRank': '#12 AP', 'apPoints': '985 PTS', 'rankNum': 12},
-    'texastech': {'apRank': '#13 AP', 'apPoints': '910 PTS', 'rankNum': 13},
-    'usc': {'apRank': '#14 AP', 'apPoints': '855 PTS', 'rankNum': 14},
-    'byu': {'apRank': '#15 AP', 'apPoints': '815 PTS', 'rankNum': 15},
-    'pennstate': {'apRank': '#16 AP', 'apPoints': '760 PTS', 'rankNum': 16},
-    'smu': {'apRank': '#17 AP', 'apPoints': '680 PTS', 'rankNum': 17},
-    'tennessee': {'apRank': '#18 AP', 'apPoints': '610 PTS', 'rankNum': 18},
-    'washington': {'apRank': '#19 AP', 'apPoints': '540 PTS', 'rankNum': 19},
-    'utah': {'apRank': '#20 AP', 'apPoints': '475 PTS', 'rankNum': 20},
-    'iowa': {'apRank': '#21 AP', 'apPoints': '410 PTS', 'rankNum': 21},
-    'houston': {'apRank': '#22 AP', 'apPoints': '345 PTS', 'rankNum': 22},
-    'missouri': {'apRank': '#23 AP', 'apPoints': '280 PTS', 'rankNum': 23},
-    'michigan': {'apRank': '#24 AP', 'apPoints': '215 PTS', 'rankNum': 24},
-    'clemson': {'apRank': 'RV', 'apPoints': '112 PTS', 'rankNum': 99},
-    'boisestate': {'apRank': 'RV', 'apPoints': '43 PTS', 'rankNum': 99},
-    'arizona': {'apRank': 'RV', 'apPoints': '32 PTS', 'rankNum': 99},
-    'louisville': {'apRank': 'RV', 'apPoints': '25 PTS', 'rankNum': 99},
-    'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
-    'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
-    'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
+    'ohiostate': {'apRank': '#1 AP', 'apPoints': '1,684 PTS (46 1st)', 'rankNum': 1},
+    'georgia': {'apRank': '#2 AP', 'apPoints': '1,532 PTS', 'rankNum': 2},
+    'notredame': {'apRank': '#3 AP', 'apPoints': '1,512 PTS (4 1st)', 'rankNum': 3},
+    'texas': {'apRank': '#4 AP', 'apPoints': '1,462 PTS (2 1st)', 'rankNum': 4},
+    'indiana': {'apRank': '#5 AP', 'apPoints': '1,428 PTS (8 1st)', 'rankNum': 5},
+    'oregon': {'apRank': '#6 AP', 'apPoints': '1,422 PTS (3 1st)', 'rankNum': 6},
+    'miami': {'apRank': '#7 AP', 'apPoints': '1,405 PTS (1 1st)', 'rankNum': 7},
+    'lsu': {'apRank': '#8 AP', 'apPoints': '1,315 PTS (5 1st)', 'rankNum': 8},
+    'olemiss': {'apRank': '#9 AP', 'apPoints': '1,154 PTS', 'rankNum': 9},
+    'texasam': {'apRank': '#10 AP', 'apPoints': '1,079 PTS', 'rankNum': 10},
+    'oklahoma': {'apRank': '#11 AP', 'apPoints': '1,039 PTS', 'rankNum': 11},
+    'alabama': {'apRank': '#12 AP', 'apPoints': '910 PTS', 'rankNum': 12},
+    'texastech': {'apRank': '#13 AP', 'apPoints': '900 PTS', 'rankNum': 13},
+    'usc': {'apRank': '#14 AP', 'apPoints': '861 PTS', 'rankNum': 14},
+    'byu': {'apRank': '#15 AP', 'apPoints': '840 PTS', 'rankNum': 15},
+    'pennstate': {'apRank': '#16 AP', 'apPoints': '621 PTS', 'rankNum': 16},
+    'smu': {'apRank': '#17 AP', 'apPoints': '501 PTS', 'rankNum': 17},
+    'tennessee': {'apRank': '#18 AP', 'apPoints': '491 PTS', 'rankNum': 18},
+    'washington': {'apRank': '#19 AP', 'apPoints': '489 PTS', 'rankNum': 19},
+    'utah': {'apRank': '#20 AP', 'apPoints': '381 PTS', 'rankNum': 20},
+    'iowa': {'apRank': '#21 AP', 'apPoints': '369 PTS', 'rankNum': 21},
+    'houston': {'apRank': '#22 AP', 'apPoints': '214 PTS', 'rankNum': 22},
+    'missouri': {'apRank': '#23 AP', 'apPoints': '182 PTS', 'rankNum': 23},
+    'louisville': {'apRank': '#24 AP', 'apPoints': '163 PTS', 'rankNum': 24},
+    'boisestate': {'apRank': 'RV', 'apPoints': '86 PTS', 'rankNum': 99},
+    'michigan': {'apRank': 'RV', 'apPoints': '69 PTS', 'rankNum': 99},
+    'arizona': {'apRank': 'RV', 'apPoints': '33 PTS', 'rankNum': 99},
+    'colorado': {'apRank': 'RV', 'apPoints': '3 PTS', 'rankNum': 99},
+    'arizonastate': {'apRank': 'RV', 'apPoints': '2 PTS', 'rankNum': 99},
+    'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
 
 # Stadium Home Field Advantage mapping (points)
@@ -200,6 +200,9 @@ def main():
     talent_map = {}
     sp_map_2026 = {}
     adv_stats_w1 = {}
+    ret_prod_map = {}
+    season_adv_map = {}
+    lines_w2 = {}
     if cfbd_client:
         try:
             talent_map = cfbd_client.get_team_talent_composite(2026)
@@ -208,6 +211,12 @@ def main():
             print(f"🔥 CFBD Ingestion: Loaded {len(sp_map_2026)} teams with 2026 Official SP+ Ratings")
             adv_stats_w1 = cfbd_client.get_week_advanced_game_stats(2026, 1)
             print(f"🔥 CFBD Ingestion: Loaded {len(adv_stats_w1)} advanced EPA/PPA boxscores for 2026 Week 1")
+            ret_prod_map = cfbd_client.get_returning_production(2026)
+            print(f"🔥 CFBD Ingestion: Loaded {len(ret_prod_map)} teams with 2026 Returning Production & Continuity")
+            season_adv_map = cfbd_client.get_season_advanced_stats(2026)
+            print(f"🔥 CFBD Ingestion: Loaded {len(season_adv_map)} teams with Trench Line Yards & Havoc Rates")
+            lines_w2 = cfbd_client.get_game_lines(2026, week=2)
+            print(f"🔥 CFBD Ingestion: Loaded {len(lines_w2)} real sportsbook consensus lines for Week 2")
         except Exception as e:
             print(f"Notice: CFBD loading warning: {e}")
 
@@ -271,6 +280,16 @@ def main():
 
     # Update opponent rankings in schedules for unplayed games
     opp_rank_updates_count = 0
+    # Also index all ranked teams from current AP poll for non-db opponents (e.g. #25 Virginia)
+    external_ap_ranks = {}
+    if ap_poll:
+        for r in ap_poll.get('ranks', []):
+            rn = r.get('current')
+            loc = (r.get('team', {}).get('location') or '').lower()
+            name = (r.get('team', {}).get('name') or '').lower()
+            if loc: external_ap_ranks[loc] = f"#{rn} AP"
+            if name: external_ap_ranks[name] = f"#{rn} AP"
+
     for tid, t in db.items():
         for g in t.get('schedule', []):
             if g.get('isFinal'):
@@ -279,10 +298,14 @@ def main():
             matched_tid = opp_id if (opp_id and opp_id in db) else match_team_in_db(db, g.get('opponent') or g.get('oppAbbr'))
             if matched_tid and matched_tid in db:
                 opp_ap = db[matched_tid].get('apRank', 'NR')
-                if g.get('oppRank') != opp_ap:
-                    if not args.dry_run:
-                        g['oppRank'] = opp_ap
-                    opp_rank_updates_count += 1
+            else:
+                opp_name_clean = (g.get('opponent') or '').lower()
+                opp_ap = external_ap_ranks.get(opp_name_clean, g.get('oppRank', 'NR'))
+
+            if g.get('oppRank') != opp_ap:
+                if not args.dry_run:
+                    g['oppRank'] = opp_ap
+                opp_rank_updates_count += 1
 
     print(f"  • Updated AP rankings for {ap_changes_count} teams, adjusted {opp_rank_updates_count} future schedule matchup badges.")
 
@@ -484,6 +507,25 @@ def main():
 
             raw_margin = (sp_team - sp_opp) + hfa + talent_bonus
 
+            # Live consensus line matching from CFBD / DraftKings for Week 2
+            if g.get('week') == 'WEEK 2' and lines_w2:
+                team_clean = (t.get('name') or tid).lower()
+                opp_clean = (g.get('opponent') or '').lower()
+                team_short = (t.get('shortName') or tid).lower()
+                opp_abbr = (g.get('oppAbbr') or '').lower()
+
+                m_line = (
+                    lines_w2.get((team_clean, opp_clean)) or
+                    lines_w2.get((team_short, opp_abbr)) or
+                    lines_w2.get((team_clean, opp_abbr)) or
+                    lines_w2.get((team_short, opp_clean))
+                )
+                if m_line and m_line.get('spread') is not None:
+                    spread_val = m_line['spread'] if g.get('isHome', True) else -m_line['spread']
+                    g['vegasSpread'] = spread_val
+                    g['overUnder'] = m_line.get('overUnder') or g.get('overUnder', 52.5)
+                    g['oddsProvider'] = m_line.get('provider', 'DraftKings')
+
             # Consensus Market Anchoring: If Vegas spread exists, blend 60% model + 40% Vegas line
             vegas_spread = g.get('vegasSpread')
             if isinstance(vegas_spread, (int, float)):
@@ -495,6 +537,8 @@ def main():
             base_total = float(g.get('overUnder', 55.0))
 
             if monte_carlo_engine:
+                ret_a = ret_prod_map.get((t.get('name') or '').lower(), {}).get('percentPPA', 0.60)
+                ret_b = ret_prod_map.get((g.get('opponent') or '').lower(), {}).get('percentPPA', 0.60)
                 mc_sim = monte_carlo_engine.simulate_matchup_10k(
                     team_a_name=t.get('shortName', tid),
                     team_b_name=g.get('oppAbbr') or g.get('opponent', 'OPP'),
@@ -502,6 +546,8 @@ def main():
                     sp_b=sp_opp,
                     talent_a=fav_talent,
                     talent_b=opp_talent,
+                    ret_prod_a=ret_a,
+                    ret_prod_b=ret_b,
                     is_home_a=g.get('isHome', True),
                     hfa_pts=STADIUM_HFA.get(stadium, 2.5),
                     vegas_spread=vegas_spread,
@@ -510,9 +556,11 @@ def main():
                 )
                 adj_ut_score = mc_sim['projScoreA']
                 adj_opp_score = mc_sim['projScoreB']
-                win_prob = int(round(mc_sim['winProbA']))
+                win_prob = max(1, min(99, int(round(mc_sim['winProbA']))))
                 if abs(adj_ut_score - adj_opp_score) >= 28:
                     blowout_games_calibrated += 1
+
+
 
                 if not args.dry_run:
                     g['projScoreUt'] = adj_ut_score
@@ -563,6 +611,13 @@ def main():
             save_teams_file(ios_teams, db)
             save_teams_file(ios_teams_v3, db)
             print(f"💾 Updated iOS bundle: {ios_teams}")
+
+        android_teams = os.path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'assets', 'www', 'data', 'teams.js')
+        android_teams_v3 = os.path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'assets', 'www', 'data', 'teams_v3.js')
+        if os.path.exists(os.path.dirname(android_teams)):
+            save_teams_file(android_teams, db)
+            save_teams_file(android_teams_v3, db)
+            print(f"💾 Updated Android bundle: {android_teams}")
 
         if os.path.exists(CALIBRATION_FILE):
             with open(CALIBRATION_FILE, 'r', encoding='utf-8') as f:

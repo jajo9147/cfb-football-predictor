@@ -111,6 +111,94 @@ def get_week_advanced_game_stats(year=2026, week=1):
             }
     return stats_by_team
 
+def get_returning_production(year=2026):
+    """Fetches 2026 returning production metrics (usage and PPA percent)."""
+    data = fetch_cfbd_endpoint('/player/returning', {'year': year}, cache_name=f"returning_{year}")
+    ret_map = {}
+    for item in data:
+        team = item.get('team')
+        if team:
+            ret_map[team.lower()] = {
+                'percentPPA': float(item.get('percentPPA') or 0.5),
+                'percentPassingPPA': float(item.get('percentPassingPPA') or 0.5),
+                'percentRushingPPA': float(item.get('percentRushingPPA') or 0.5),
+                'percentReceivingPPA': float(item.get('percentReceivingPPA') or 0.5),
+                'usage': float(item.get('usage') or 0.5),
+                'passingUsage': float(item.get('passingUsage') or 0.5),
+                'rushingUsage': float(item.get('rushingUsage') or 0.5)
+            }
+    return ret_map
+
+def get_season_advanced_stats(year=2026):
+    """Fetches full-season advanced stats (havoc, line yards, points per opportunity, etc.)."""
+    data = fetch_cfbd_endpoint('/stats/season/advanced', {'year': year}, cache_name=f"season_adv_{year}")
+    adv_map = {}
+    for item in data:
+        team = item.get('team')
+        if team:
+            off = item.get('offense', {})
+            defe = item.get('defense', {})
+            adv_map[team.lower()] = {
+                'offenseSuccessRate': float(off.get('successRate') or 0.40),
+                'offenseExplosiveness': float(off.get('explosiveness') or 1.25),
+                'offensePPO': float(off.get('pointsPerOpportunity') or 3.8),
+                'offenseLineYards': float(off.get('lineYards') or 3.0),
+                'offenseStuffRate': float(off.get('stuffRate') or 0.18),
+                'defenseSuccessRate': float(defe.get('successRate') or 0.40),
+                'defenseExplosiveness': float(defe.get('explosiveness') or 1.25),
+                'defenseHavoc': float(defe.get('havoc', {}).get('total') or 0.15),
+                'defenseLineYards': float(defe.get('lineYards') or 3.0),
+                'defenseStuffRate': float(defe.get('stuffRate') or 0.18)
+            }
+    return adv_map
+
+def get_game_lines(year=2026, week=None):
+    """Fetches consensus lines, opening lines, and spreads from DraftKings/consensus."""
+    params = {'year': year}
+    cache_tag = f"lines_{year}"
+    if week is not None:
+        params['week'] = week
+        cache_tag += f"_w{week}"
+    data = fetch_cfbd_endpoint('/lines', params, cache_name=cache_tag)
+    lines_by_matchup = {}
+    for item in data:
+        home = (item.get('homeTeam') or '').lower()
+        away = (item.get('awayTeam') or '').lower()
+        lines = item.get('lines', [])
+        if not lines:
+            continue
+        # Prioritize DraftKings, Bovada, then consensus
+        best_line = None
+        for prov in ['DraftKings', 'Bovada', 'consensus', 'ESPN Bet']:
+            for l in lines:
+                if (l.get('provider') or '').lower() == prov.lower():
+                    best_line = l
+                    break
+            if best_line:
+                break
+        if not best_line and lines:
+            best_line = lines[0]
+
+        if best_line:
+            spread = best_line.get('spread')
+            spread_open = best_line.get('spreadOpen', spread)
+            ou = best_line.get('overUnder')
+            ou_open = best_line.get('overUnderOpen', ou)
+            prov_name = best_line.get('provider', 'Consensus')
+            match_data = {
+                'provider': prov_name,
+                'spread': spread,
+                'spreadOpen': spread_open,
+                'overUnder': ou,
+                'overUnderOpen': ou_open,
+                'homeMoneyline': best_line.get('homeMoneyline'),
+                'awayMoneyline': best_line.get('awayMoneyline')
+            }
+            lines_by_matchup[(home, away)] = match_data
+            lines_by_matchup[(away, home)] = match_data
+    return lines_by_matchup
+
+
 def calculate_talent_blowout_bonus(fav_talent, dog_talent):
     """
     Calculates non-linear margin expansion for elite talent mismatches.

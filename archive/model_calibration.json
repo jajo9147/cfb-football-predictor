@@ -649,6 +649,278 @@
       },
       "unplayedGamesRecalculated": 344,
       "blowoutGamesCalibrated": 146
+    },
+    {
+      "timestamp": "2026-09-08T18:55:42.775679+00:00",
+      "gamesEvaluated": 27,
+      "modelMae": 31.3,
+      "vegasMae": 30.91,
+      "modelBeatVegasPct": 11.1,
+      "ratingShifts": {
+        "usc": {
+          "old": 26.06,
+          "new": 28.56,
+          "delta": 2.5
+        },
+        "floridastate": {
+          "old": 25.18,
+          "new": 25.73,
+          "delta": 0.55
+        },
+        "utah": {
+          "old": 24.5,
+          "new": 27.0,
+          "delta": 2.5
+        },
+        "missouri": {
+          "old": 22.8,
+          "new": 25.3,
+          "delta": 2.5
+        },
+        "oklahoma": {
+          "old": 26.0,
+          "new": 28.5,
+          "delta": 2.5
+        },
+        "ohiostate": {
+          "old": 32.5,
+          "new": 35.0,
+          "delta": 2.5
+        },
+        "oregon": {
+          "old": 31.0,
+          "new": 31.53,
+          "delta": 0.53
+        },
+        "georgia": {
+          "old": 32.0,
+          "new": 34.5,
+          "delta": 2.5
+        },
+        "texas": {
+          "old": 31.5,
+          "new": 34.0,
+          "delta": 2.5
+        },
+        "indiana": {
+          "old": 25.5,
+          "new": 28.0,
+          "delta": 2.5
+        },
+        "texasam": {
+          "old": 26.5,
+          "new": 29.0,
+          "delta": 2.5
+        },
+        "lsu": {
+          "old": 28.5,
+          "new": 31.0,
+          "delta": 2.5
+        },
+        "texastech": {
+          "old": 23.8,
+          "new": 26.25,
+          "delta": 2.45
+        },
+        "alabama": {
+          "old": 26.5,
+          "new": 29.0,
+          "delta": 2.5
+        },
+        "byu": {
+          "old": 21.5,
+          "new": 24.0,
+          "delta": 2.5
+        },
+        "michigan": {
+          "old": 24.8,
+          "new": 24.56,
+          "delta": -0.24
+        },
+        "pennstate": {
+          "old": 20.5,
+          "new": 23.0,
+          "delta": 2.5
+        },
+        "tennessee": {
+          "old": 24.0,
+          "new": 26.5,
+          "delta": 2.5
+        },
+        "iowa": {
+          "old": 21.0,
+          "new": 23.5,
+          "delta": 2.5
+        },
+        "houston": {
+          "old": 20.0,
+          "new": 21.31,
+          "delta": 1.31
+        },
+        "arizona": {
+          "old": 19.5,
+          "new": 22.0,
+          "delta": 2.5
+        },
+        "arizonastate": {
+          "old": 16.2,
+          "new": 18.7,
+          "delta": 2.5
+        },
+        "notredame": {
+          "old": 27.5,
+          "new": 30.0,
+          "delta": 2.5
+        },
+        "olemiss": {
+          "old": 26.0,
+          "new": 26.0,
+          "delta": 0.0
+        },
+        "washington": {
+          "old": 22.5,
+          "new": 23.82,
+          "delta": 1.32
+        }
+      },
+      "unplayedGamesRecalculated": 339,
+      "blowoutGamesCalibrated": 153
+    },
+    {
+      "timestamp": "2026-09-08T18:56:17.426259+00:00",
+      "gamesEvaluated": 27,
+      "modelMae": 31.3,
+      "vegasMae": 30.91,
+      "modelBeatVegasPct": 11.1,
+      "ratingShifts": {
+        "usc": {
+          "old": 26.06,
+          "new": 28.56,
+          "delta": 2.5
+        },
+        "floridastate": {
+          "old": 25.18,
+          "new": 25.73,
+          "delta": 0.55
+        },
+        "utah": {
+          "old": 24.5,
+          "new": 27.0,
+          "delta": 2.5
+        },
+        "missouri": {
+          "old": 22.8,
+          "new": 25.3,
+          "delta": 2.5
+        },
+        "oklahoma": {
+          "old": 26.0,
+          "new": 28.5,
+          "delta": 2.5
+        },
+        "ohiostate": {
+          "old": 32.5,
+          "new": 35.0,
+          "delta": 2.5
+        },
+        "oregon": {
+          "old": 31.0,
+          "new": 31.53,
+          "delta": 0.53
+        },
+        "georgia": {
+          "old": 32.0,
+          "new": 34.5,
+          "delta": 2.5
+        },
+        "texas": {
+          "old": 31.5,
+          "new": 34.0,
+          "delta": 2.5
+        },
+        "indiana": {
+          "old": 25.5,
+          "new": 28.0,
+          "delta": 2.5
+        },
+        "texasam": {
+          "old": 26.5,
+          "new": 29.0,
+          "delta": 2.5
+        },
+        "lsu": {
+          "old": 28.5,
+          "new": 31.0,
+          "delta": 2.5
+        },
+        "texastech": {
+          "old": 23.8,
+          "new": 26.25,
+          "delta": 2.45
+        },
+        "alabama": {
+          "old": 26.5,
+          "new": 29.0,
+          "delta": 2.5
+        },
+        "byu": {
+          "old": 21.5,
+          "new": 24.0,
+          "delta": 2.5
+        },
+        "michigan": {
+          "old": 24.8,
+          "new": 24.56,
+          "delta": -0.24
+        },
+        "pennstate": {
+          "old": 20.5,
+          "new": 23.0,
+          "delta": 2.5
+        },
+        "tennessee": {
+          "old": 24.0,
+          "new": 26.5,
+          "delta": 2.5
+        },
+        "iowa": {
+          "old": 21.0,
+          "new": 23.5,
+          "delta": 2.5
+        },
+        "houston": {
+          "old": 20.0,
+          "new": 21.31,
+          "delta": 1.31
+        },
+        "arizona": {
+          "old": 19.5,
+          "new": 22.0,
+          "delta": 2.5
+        },
+        "arizonastate": {
+          "old": 16.2,
+          "new": 18.7,
+          "delta": 2.5
+        },
+        "notredame": {
+          "old": 27.5,
+          "new": 30.0,
+          "delta": 2.5
+        },
+        "olemiss": {
+          "old": 26.0,
+          "new": 26.0,
+          "delta": 0.0
+        },
+        "washington": {
+          "old": 22.5,
+          "new": 23.82,
+          "delta": 1.32
+        }
+      },
+      "unplayedGamesRecalculated": 339,
+      "blowoutGamesCalibrated": 154
     }
   ]
 }

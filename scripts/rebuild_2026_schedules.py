@@ -106,12 +106,61 @@ def save_teams(filepath, db, prefix):
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
 
+def fetch_all_espn_schedules(db):
+    """Loads cached ESPN schedules or fetches live 2026 schedules from ESPN official API."""
+    if os.path.exists(ESPN_DATA_FILE):
+        try:
+            with open(ESPN_DATA_FILE, 'r', encoding='utf-8') as f:
+                cached = json.load(f)
+                if cached and len(cached) >= len(db):
+                    print(f"Loaded {len(cached)} cached 2026 schedules from {ESPN_DATA_FILE}")
+                    return cached
+        except Exception:
+            pass
+
+    print("⚡ Fetching live 2026 team schedules from ESPN official API via curl...")
+    import subprocess
+    schedules = {}
+    team_to_eid = {tid: eid for eid, tid in ESPN_ID_TO_TEAM_ID.items()}
+    
+    for tid in db.keys():
+        eid = team_to_eid.get(tid)
+        if not eid:
+            continue
+        url = f"https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/{eid}/schedule?season=2026"
+        try:
+            res = subprocess.run(['curl', '-s', '-H', 'Accept: application/json', url], stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=12)
+            if res.returncode == 0 and res.stdout:
+                sched_data = json.loads(res.stdout.decode('utf-8'))
+                events = sched_data.get('events', [])
+                if events:
+                    schedules[tid] = events
+                    print(f"  • Retrieved {len(events)} events for {tid} (ESPN ID: {eid})")
+                else:
+                    print(f"  ⚠️ No events returned for {tid} (ESPN ID: {eid})")
+            else:
+                print(f"  ⚠️ Curl error fetching schedule for {tid} (ESPN ID: {eid})")
+        except Exception as e:
+            print(f"  ⚠️ Error fetching schedule for {tid}: {e}")
+
+    if len(schedules) >= len(db):
+        try:
+            with open(ESPN_DATA_FILE, 'w', encoding='utf-8') as f:
+                json.dump(schedules, f, indent=2)
+            print(f"✓ Cached live schedules for {len(schedules)} teams to {ESPN_DATA_FILE}")
+        except Exception as e:
+            print(f"Notice: Could not write cache file: {e}")
+    else:
+        print(f"⚠️ Warning: Retrieved only {len(schedules)}/{len(db)} schedules.")
+
+    return schedules
+
+
 def main():
     print("Rebuilding 2026 CFB Prophet Schedules from ESPN Official API...")
-    with open(ESPN_DATA_FILE, 'r', encoding='utf-8') as f:
-        espn_schedules = json.load(f)
-
     db, prefix = load_teams(TEAMS_FILE)
+    espn_schedules = fetch_all_espn_schedules(db)
+
 
     # Invert ESPN ID map
     team_to_eid = {}
@@ -202,13 +251,18 @@ def main():
             # Home / Away
             is_home = (our_comp.get('homeAway') == 'home')
 
-            # Week & Dates
-            utc_timestamp = ev.get('date')
+            # Week & Dates - STRICT 2026 DTG ENFORCEMENT
+            utc_timestamp = ev.get('date', '')
+            if not utc_timestamp or not (utc_timestamp.startswith('2026-') or utc_timestamp.startswith('2027-01')):
+                print(f"  ⚠️ Skipping invalid/prior-year DTG event for {tid}: {utc_timestamp}")
+                continue
+
             status_obj = comps.get('status', {}).get('type', {})
             status_detail = status_obj.get('detail', '')
             time_valid = comps.get('timeValid', False) and ('TBD' not in status_detail)
 
             date_str, kickoff_time = format_iso_to_ny(utc_timestamp, time_valid)
+
 
             # Determine Week Label
             ev_week_num = ev.get('week', {}).get('number', idx)
@@ -397,6 +451,20 @@ def main():
     print(f"\n🎉 Successfully rebuilt {total_games_built} games across all {len(db)} teams!")
     print(f"Saved: {TEAMS_FILE}")
     print(f"Saved: {TEAMS_V3_FILE}")
+
+    ios_teams = os.path.join(ROOT_DIR, 'ios', 'CFBProphet', 'www', 'data', 'teams.js')
+    ios_teams_v3 = os.path.join(ROOT_DIR, 'ios', 'CFBProphet', 'www', 'data', 'teams_v3.js')
+    if os.path.exists(os.path.dirname(ios_teams)):
+        save_teams(ios_teams, db, prefix)
+        save_teams(ios_teams_v3, db, prefix)
+        print(f"💾 Synced iOS bundle: {ios_teams}")
+
+    android_teams = os.path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'assets', 'www', 'data', 'teams.js')
+    android_teams_v3 = os.path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'assets', 'www', 'data', 'teams_v3.js')
+    if os.path.exists(os.path.dirname(android_teams)):
+        save_teams(android_teams, db, prefix)
+        save_teams(android_teams_v3, db, prefix)
+        print(f"💾 Synced Android bundle: {android_teams}")
 
 if __name__ == '__main__':
     main()

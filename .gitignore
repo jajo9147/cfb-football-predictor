@@ -9,6 +9,8 @@ __pycache__/
 *.pyo
 .pytest_cache/
 archive/cfbd_cache/
+all_espn_2026_schedules.json
+
 
 # OS
 .DS_Store
