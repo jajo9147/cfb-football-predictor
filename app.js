@@ -8314,10 +8314,12 @@ function openAuthModal() {
 
   // Detect iOS native app vs web browser
   const isIosNative = (
+    window.isCFBProphetNativeApp === true ||
+    window.isNativeIos === true ||
+    (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appleSignIn) ||
     (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() === 'ios') ||
     window.location.protocol === 'capacitor:' ||
-    window.location.protocol === 'ionic:' ||
-    (window.webkit && window.webkit.messageHandlers && !window.location.hostname.includes('github.io') && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1'))
+    window.location.protocol === 'ionic:'
   );
 
   const googleSec = document.getElementById('googleAuthSection');

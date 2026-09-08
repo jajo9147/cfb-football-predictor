@@ -8,6 +8,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
     private let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     private let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+    private let refreshControl = UIRefreshControl()
+
+    private let remoteURL = URL(string: "https://jajo9147.github.io/cfb-football-predictor/")!
+    private var isFallenBackToLocal = false
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -17,7 +21,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 7/255.0, green: 9/255.0, blue: 14/255.0, alpha: 1.0)
         setupWebView()
-        loadLocalWebContent()
+        loadRemoteOrFallback()
     }
 
     private func setupWebView() {
@@ -26,6 +30,14 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         contentController.add(self, name: "share")
         contentController.add(self, name: "toast")
         contentController.add(self, name: "appleSignIn")
+
+        // Inject Native App environment flags before any scripts run
+        let nativeAppScript = WKUserScript(
+            source: "window.isCFBProphetNativeApp = true; window.isNativeIos = true;",
+            injectionTime: .atDocumentStart,
+            forMainFrameOnly: true
+        )
+        contentController.addUserScript(nativeAppScript)
 
         let config = WKWebViewConfiguration()
         config.userContentController = contentController
@@ -44,7 +56,24 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         webView.scrollView.contentInsetAdjustmentBehavior = .always
         webView.scrollView.bounces = true
 
+        // Pull-to-refresh to pull live data updates on demand
+        refreshControl.tintColor = UIColor(red: 235/255.0, green: 94/255.0, blue: 40/255.0, alpha: 1.0)
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        webView.scrollView.refreshControl = refreshControl
+
         view.addSubview(webView)
+    }
+
+    private func loadRemoteOrFallback() {
+        isFallenBackToLocal = false
+        let request = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        webView.load(request)
+    }
+
+    @objc private func handleRefresh() {
+        isFallenBackToLocal = false
+        let request = URLRequest(url: remoteURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+        webView.load(request)
     }
 
     private func loadLocalWebContent() {
@@ -53,11 +82,18 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
             webView.loadFileURL(indexUrl, allowingReadAccessTo: wwwUrl)
         } else if let indexUrl = Bundle.main.url(forResource: "index", withExtension: "html") {
             webView.loadFileURL(indexUrl, allowingReadAccessTo: indexUrl.deletingLastPathComponent())
-        } else {
-            // Remote fallback if local bundle is missing
-            if let remoteUrl = URL(string: "https://jajo9147.github.io/cfb-football-predictor/") {
-                webView.load(URLRequest(url: remoteUrl))
-            }
+        }
+    }
+
+    private func handleLoadFailure(error: Error) {
+        let nsError = error as NSError
+        if nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorCancelled {
+            return
+        }
+        if !isFallenBackToLocal {
+            print("CFB Prophet: Remote load failed (\(error.localizedDescription)). Falling back to offline bundle.")
+            isFallenBackToLocal = true
+            loadLocalWebContent()
         }
     }
 
@@ -168,6 +204,20 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
     }
 
     // MARK: - WKNavigationDelegate
+
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        refreshControl.endRefreshing()
+        handleLoadFailure(error: error)
+    }
+
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        refreshControl.endRefreshing()
+        handleLoadFailure(error: error)
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        refreshControl.endRefreshing()
+    }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url {

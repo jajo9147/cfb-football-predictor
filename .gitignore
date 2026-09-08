@@ -13,3 +13,7 @@ archive/cfbd_cache/
 # OS
 .DS_Store
 Thumbs.db
+
+# Build artifacts
+ios/build/
+ios/DerivedData/
