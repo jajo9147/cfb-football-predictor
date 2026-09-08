@@ -319,23 +319,29 @@ def main():
     # 1. Ingest completed games already marked in TEAMS_DATABASE
     for tid, t in db.items():
         for g in t.get('schedule', []):
-            if g.get('isFinal') and isinstance(g.get('actualScoreUt'), (int, float)) and isinstance(g.get('actualScoreOpp'), (int, float)):
+            score_ut = g.get('actualScoreUt') if g.get('actualScoreUt') is not None else g.get('finalTeamScore')
+            score_opp = g.get('actualScoreOpp') if g.get('actualScoreOpp') is not None else g.get('finalOppScore')
+            is_completed = (g.get('isFinal') or score_ut is not None) and (score_ut is not None and score_opp is not None)
+            if is_completed:
                 opp_id = match_team_in_db(db, g.get('opponent')) or match_team_in_db(db, g.get('oppAbbr'))
+                spread = g.get('vegasSpread')
+                if spread is None:
+                    spread = -3.5
                 all_completed_games.append({
                     'teamId': tid,
                     'oppId': opp_id,
                     'gameId': g.get('id'),
-                    'teamScore': int(g['actualScoreUt']),
-                    'oppScore': int(g['actualScoreOpp']),
+                    'teamScore': int(score_ut),
+                    'oppScore': int(score_opp),
                     'projUt': g.get('projScoreUt', 24),
                     'projOpp': g.get('projScoreOpp', 21),
-                    'vegasSpread': g.get('vegasSpread', -3.5),
-                    'overUnder': g.get('overUnder', 55.0),
+                    'vegasSpread': float(spread),
+                    'overUnder': float(g.get('overUnder', 52.5)),
                     'isHome': g.get('isHome', True),
                     'stadium': g.get('stadium', '')
                 })
 
-    # 2. Ingest live games from ESPN
+    # 2. Ingest live games from ESPN if not already in TEAMS_DATABASE
     for d_str in target_dates:
         events = fetch_espn_scoreboard(d_str)
         for ev in events:
@@ -357,7 +363,7 @@ def main():
             t2_id = match_team_in_db(db, t2_name)
 
             if t1_id:
-                if not any(cg.get('teamId') == t1_id and cg.get('teamScore') == score1 for cg in all_completed_games):
+                if not any(cg.get('teamId') == t1_id for cg in all_completed_games):
                     all_completed_games.append({
                         'teamId': t1_id,
                         'oppId': t2_id,
@@ -403,15 +409,17 @@ def main():
             model_beats_vegas_count += 1
         total_evaluated += 1
 
-        # Composite performance delta: Incorporates score margin plus EPA efficiency
-        perf_delta = actual_margin - proj_margin
+        # Composite performance delta: Incorporates score margin vs. expectation
+        perf_delta = actual_margin - vegas_margin
         
         # Check EPA bonus from CFBD
         team_short = db[tid].get('shortName', '').lower()
         if team_short in adv_stats_w1:
             team_ppa = adv_stats_w1[team_short].get('offense', {}).get('ppa', 0.0)
-            if team_ppa and team_ppa > 0.25:
-                perf_delta += (team_ppa - 0.25) * 15.0 # Reward hyper-efficient offenses
+            if team_ppa and team_ppa > 0.35:
+                perf_delta += (team_ppa - 0.35) * 12.0 # Reward hyper-efficient offenses
+            elif team_ppa and team_ppa < 0.10:
+                perf_delta -= 3.0 # Penalize broken offenses
 
         if tid not in team_performances:
             team_performances[tid] = []
@@ -427,7 +435,7 @@ def main():
     print(f"  • Model Beat Vegas Rate:            {beat_vegas_pct}% ({model_beats_vegas_count}/{total_evaluated} games)")
 
     # 4. Bayesian SP+ Rating Updating
-    ALPHA = 0.12
+    ALPHA = 0.22
     rating_shifts = {}
 
     BASELINE_SP_RATINGS = {
@@ -448,7 +456,22 @@ def main():
         t['seasonBaselineSpRating'] = baseline
         avg_delta = sum(deltas) / len(deltas)
         raw_adjustment = avg_delta * ALPHA
-        clamped_adjustment = max(-2.5, min(2.5, raw_adjustment))
+
+        # Add EPA efficiency penalty or reward
+        team_short = db[tid].get('shortName', '').lower()
+        epa_shift = 0.0
+        if team_short in adv_stats_w1:
+            team_ppa = adv_stats_w1[team_short].get('offense', {}).get('ppa', 0.0)
+            if team_ppa and team_ppa < 0.12:
+                epa_shift -= 1.5  # Heavy penalty for dead offensive efficiency
+            elif team_ppa and team_ppa > 0.40:
+                epa_shift += 1.5  # High-octane efficiency reward
+
+        # Extra penalty for catastrophic underperformances (> 20 pt delta)
+        if avg_delta <= -20.0:
+            epa_shift -= 1.0
+
+        clamped_adjustment = max(-6.0, min(6.0, raw_adjustment + epa_shift))
         new_rating = round(baseline + clamped_adjustment, 2)
         rating_shifts[tid] = {
             'old': baseline,
@@ -525,16 +548,18 @@ def main():
                     g['vegasSpread'] = spread_val
                     g['overUnder'] = m_line.get('overUnder') or g.get('overUnder', 52.5)
                     g['oddsProvider'] = m_line.get('provider', 'DraftKings')
-
-            # Consensus Market Anchoring: If Vegas spread exists, blend 60% model + 40% Vegas line
-            vegas_spread = g.get('vegasSpread')
-            if isinstance(vegas_spread, (int, float)):
-                vegas_margin = -vegas_spread
-                projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
+                    vegas_margin = -spread_val
+                    projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
+                else:
+                    projected_margin = round(raw_margin, 1)
             else:
+                # Weeks 3+: Derive purely from freshly updated power ratings (NO anchoring to stale preseason lines)
                 projected_margin = round(raw_margin, 1)
+                g['vegasSpread'] = -projected_margin
+                g['oddsProvider'] = 'CFB Prophet Projected'
 
-            base_total = float(g.get('overUnder', 55.0))
+            base_total = float(g.get('overUnder', 52.5))
+            vegas_spread = g.get('vegasSpread')
 
             if monte_carlo_engine:
                 ret_a = ret_prod_map.get((t.get('name') or '').lower(), {}).get('percentPPA', 0.60)
