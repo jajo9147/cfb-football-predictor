@@ -355,7 +355,9 @@ def main():
                     'vegasSpread': float(spread),
                     'overUnder': float(g.get('overUnder', 52.5)),
                     'isHome': g.get('isHome', True),
-                    'stadium': g.get('stadium', '')
+                    'stadium': g.get('stadium', ''),
+                    'oppRank': g.get('oppRank', 'NR'),
+                    'opponent': g.get('opponent', '')
                 })
 
     # 2. Ingest live games from ESPN if not already in TEAMS_DATABASE
@@ -392,7 +394,9 @@ def main():
                         'vegasSpread': -3.5,
                         'overUnder': 55.0,
                         'isHome': c1.get('homeAway') == 'home',
-                        'stadium': comps.get('venue', {}).get('fullName', '')
+                        'stadium': comps.get('venue', {}).get('fullName', ''),
+                        'oppRank': 'NR',
+                        'opponent': t2_name
                     })
 
     print(f"\n📊 Settled Matchups Ingested for Analysis: {len(all_completed_games)}")
@@ -427,14 +431,31 @@ def main():
         total_evaluated += 1
 
         # Composite performance delta: Incorporates score margin vs. expectation
-        perf_delta = actual_margin - vegas_margin
+        raw_delta = actual_margin - vegas_margin
+
+        # 1. FCS / Cupcake dominance normalization:
+        # A 50-60 point blowout against an FCS or massive underdog where the defense gives up <= 10 pts
+        # represents total game control. Don't penalize a team simply because Vegas hung an extreme -50 line.
+        is_cupcake = g.get('oppRank') == 'FCS' or g.get('vegasSpread', 0) <= -28.0 or 'fcs' in g.get('opponent', '').lower()
+        if is_cupcake and actual_margin >= 35 and g['oppScore'] <= 10:
+            effective_delta = max(raw_delta, 18.0)
+        else:
+            effective_delta = raw_delta
+
+        # 2. Diminishing returns on blowout covers (> +12.0 pts):
+        # Beating the spread by 20+ pts against overmatched opponents is mostly 4th-quarter garbage time.
+        # Sub-linear square root scaling dampens artificial rating inflation.
+        if effective_delta > 12.0:
+            perf_delta = 12.0 + math.sqrt(effective_delta - 12.0) * 1.6
+        else:
+            perf_delta = effective_delta
         
         # Check EPA bonus from CFBD
         team_short = db[tid].get('shortName', '').lower()
         if team_short in adv_stats_w1:
             team_ppa = adv_stats_w1[team_short].get('offense', {}).get('ppa', 0.0)
             if team_ppa and team_ppa > 0.35:
-                perf_delta += (team_ppa - 0.35) * 12.0 # Reward hyper-efficient offenses
+                perf_delta += min(3.0, (team_ppa - 0.35) * 8.0) # Reward hyper-efficient offenses (capped)
             elif team_ppa and team_ppa < 0.10:
                 perf_delta -= 3.0 # Penalize broken offenses
 
@@ -482,13 +503,13 @@ def main():
             if team_ppa and team_ppa < 0.12:
                 epa_shift -= 1.5  # Heavy penalty for dead offensive efficiency
             elif team_ppa and team_ppa > 0.40:
-                epa_shift += 1.5  # High-octane efficiency reward
+                epa_shift += 1.0  # High-octane efficiency reward
 
         # Extra penalty for catastrophic underperformances (> 20 pt delta)
         if avg_delta <= -20.0:
             epa_shift -= 1.0
 
-        clamped_adjustment = max(-6.0, min(6.0, raw_adjustment + epa_shift))
+        clamped_adjustment = max(-6.0, min(4.5, raw_adjustment + epa_shift))
         new_rating = round(baseline + clamped_adjustment, 2)
         rating_shifts[tid] = {
             'old': baseline,
