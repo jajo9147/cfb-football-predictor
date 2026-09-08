@@ -71,7 +71,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=363">
+  <link rel="stylesheet" href="styles.css?v=420">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -358,10 +358,13 @@
         <span class="kpi-value" id="kpiNattyOdds">+350</span>
         <span class="kpi-sub" id="kpiNattyOddsSub">34.8% Championship Sim</span>
       </div>
-      <div class="kpi-card" id="monteCarloKpiCard" style="cursor: pointer;" title="Click to view 10,000 Monte Carlo simulation breakdown">
-        <span class="kpi-label"><i class="fa-solid fa-dice-d20"></i> MONTE CARLO ENGINE</span>
+      <div class="kpi-card" id="monteCarloKpiCard" style="cursor: pointer;" title="Click to toggle historical checkpoints (Preseason vs ROS)">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <span class="kpi-label"><i class="fa-solid fa-dice-d20"></i> MONTE CARLO ENGINE</span>
+          <span class="kpi-tag" style="background: rgba(245, 158, 11, 0.18); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.4); padding: 1px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: 800;"><i class="fa-solid fa-clock-rotate-left"></i> TIMELINE FILTER ▾</span>
+        </div>
         <span class="kpi-value" id="kpiMonteCarloRuns">10,000 SIMS</span>
-        <span class="kpi-sub" id="kpiMonteCarloTopOutcome">12-0 (48.6% Prob)</span>
+        <span class="kpi-sub" id="kpiMonteCarloTopOutcome">11-1 (38.2% Prob)</span>
       </div>
     </section>
 
@@ -742,11 +745,19 @@
       <!-- Monte Carlo Historical Timeline Filter -->
       <div class="mc-timeline-filter-wrap" id="mcTimelineFilterWrap">
         <div class="mc-timeline-header">
-          <span class="mc-timeline-label"><i class="fa-solid fa-clock-rotate-left"></i> TIMELINE CHECKPOINT:</span>
-          <span class="mc-timeline-context-badge" id="mcTimelineBadge">Current • 1-0 (11 Remaining)</span>
+          <span class="mc-timeline-label"><i class="fa-solid fa-clock-rotate-left"></i> TIMELINE CHECKPOINT FILTER:</span>
+          <span class="mc-timeline-context-badge" id="mcTimelineBadge"><i class="fa-solid fa-lock"></i> Locked 1-0 • 11 Remaining (ROS)</span>
         </div>
         <div class="mc-timeline-pills" id="mcTimelinePills">
-          <!-- Populated dynamically via JS: [Preseason (W0)] [After Week 1] [Current] -->
+          <button class="mc-timeline-pill" data-checkpoint="preseason" onclick="switchMonteCarloTimeline('preseason')">
+            <i class="fa-solid fa-calendar-day"></i> Preseason (W0)
+          </button>
+          <button class="mc-timeline-pill" data-checkpoint="week-1" onclick="switchMonteCarloTimeline('week-1')">
+            <i class="fa-solid fa-check-circle"></i> Week 1 (1-0)
+          </button>
+          <button class="mc-timeline-pill active" data-checkpoint="current" onclick="switchMonteCarloTimeline('current')">
+            <i class="fa-solid fa-bolt"></i> Current (ROS)
+          </button>
         </div>
       </div>
 
@@ -1784,11 +1795,11 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=381"></script>
-  <script src="qrious.min.js?v=381"></script>
-  <script src="qrcode.min.js?v=381"></script>
-  <script src="data/teams.js?v=381"></script>
-  <script src="data/community_brackets.js?v=381"></script>
-  <script src="app.js?v=381"></script>
+  <script src="supabase-client.js?v=420"></script>
+  <script src="qrious.min.js?v=420"></script>
+  <script src="qrcode.min.js?v=420"></script>
+  <script src="data/teams.js?v=420"></script>
+  <script src="data/community_brackets.js?v=420"></script>
+  <script src="app.js?v=420"></script>
 </body>
 </html>
