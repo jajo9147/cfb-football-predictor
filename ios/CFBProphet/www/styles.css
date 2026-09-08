@@ -4042,6 +4042,90 @@ select option {
   box-shadow: 0 0 10px var(--color-brand-glow);
 }
 
+/* Monte Carlo Historical Timeline Bar */
+.mc-timeline-filter-wrap {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.35rem 0;
+}
+
+.mc-timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.mc-timeline-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--color-text-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  letter-spacing: 0.5px;
+}
+
+.mc-timeline-context-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: var(--radius-full);
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #F59E0B;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.mc-timeline-pills {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  padding-bottom: 3px;
+  scrollbar-width: thin;
+}
+
+.mc-timeline-pill {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.mc-timeline-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.mc-timeline-pill.active {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.22), rgba(239, 68, 68, 0.18));
+  border-color: var(--color-brand-accent);
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
+}
+
 .mc-metrics-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

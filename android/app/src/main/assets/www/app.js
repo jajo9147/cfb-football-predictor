@@ -1192,12 +1192,16 @@ function calculateAdjustedMatchup(game, targetTeamId) {
   if (!team) return { adjWinProb: 50, projUt: 24, projOpp: 21, isWin: true, isCustomTuned: false, syncedFrom: null };
 
   // 0. Live ESPN Locked-In Completed Game (Actual Final Score & Result)
-  if (game && game.isFinal && typeof game.actualScoreUt === 'number') {
-    const isWin = game.actualScoreUt > game.actualScoreOpp;
+  const hasCompletedFinal = game && (game.isFinal || typeof game.finalTeamScore === 'number') &&
+    (typeof game.actualScoreUt === 'number' || typeof game.finalTeamScore === 'number');
+  if (hasCompletedFinal) {
+    const scoreUt = typeof game.actualScoreUt === 'number' ? game.actualScoreUt : game.finalTeamScore;
+    const scoreOpp = typeof game.actualScoreOpp === 'number' ? game.actualScoreOpp : game.finalOppScore;
+    const isWin = (typeof game.finalWin === 'boolean') ? game.finalWin : (scoreUt > scoreOpp);
     return {
       adjWinProb: isWin ? 100 : 0,
-      projUt: game.actualScoreUt,
-      projOpp: game.actualScoreOpp,
+      projUt: scoreUt,
+      projOpp: scoreOpp,
       isWin,
       isFinal: true,
       isCustomTuned: false,
@@ -5952,15 +5956,140 @@ function initLiveSyncEngine() {
 // 10,000 MONTE CARLO SEASON SIMULATION ENGINE
 // ==========================================================================
 
-function runMonteCarloSeasonSim(teamId, iterations = 10000) {
-  const team = TEAMS_DATABASE[teamId];
-  if (!team) return { iterations: 10000, avgWins: '0.0', winDistribution: {}, mostLikelyRecord: '0-0', mostLikelyPct: '0%', cfpOdds: '0%', nattyOdds: '0%' };
+// ==========================================================================
+// 10,000 MONTE CARLO SEASON SIMULATION ENGINE (WITH TIMELINE CHECKPOINTS)
+// ==========================================================================
 
-  const schedule = team.schedule;
-  const gameProbs = schedule.map(g => {
-    const sim = calculateAdjustedMatchup(g, teamId);
-    return sim.adjWinProb / 100.0;
+function getAvailableMonteCarloCheckpoints(teamId) {
+  const team = TEAMS_DATABASE[teamId];
+  if (!team || !team.schedule) {
+    return [{ id: 'preseason', label: 'Preseason (W0)', shortLabel: 'Preseason', record: '0-0', lockedWins: 0, lockedLosses: 0, remainingCount: 12, isPreseason: true }];
+  }
+
+  const checkpoints = [
+    {
+      id: 'preseason',
+      label: 'Preseason Baseline',
+      shortLabel: 'Preseason (W0)',
+      record: '0-0',
+      lockedWins: 0,
+      lockedLosses: 0,
+      remainingCount: team.schedule.length,
+      isPreseason: true
+    }
+  ];
+
+  let cumulativeWins = 0;
+  let cumulativeLosses = 0;
+
+  team.schedule.forEach((g, idx) => {
+    const isCompleted = g && (g.isFinal || typeof g.finalTeamScore === 'number') &&
+      (typeof g.actualScoreUt === 'number' || typeof g.finalTeamScore === 'number');
+
+    if (isCompleted) {
+      const scoreUt = typeof g.actualScoreUt === 'number' ? g.actualScoreUt : g.finalTeamScore;
+      const scoreOpp = typeof g.actualScoreOpp === 'number' ? g.actualScoreOpp : g.finalOppScore;
+      const isWin = (typeof g.finalWin === 'boolean') ? g.finalWin : (scoreUt > scoreOpp);
+
+      if (isWin) cumulativeWins++;
+      else cumulativeLosses++;
+
+      const weekLabel = (g.week || `Week ${idx + 1}`).replace(/^WEEK\s+/i, 'Week ');
+      checkpoints.push({
+        id: `week-${idx + 1}`,
+        label: `After ${weekLabel} (${cumulativeWins}-${cumulativeLosses})`,
+        shortLabel: `${weekLabel} (${cumulativeWins}-${cumulativeLosses})`,
+        record: `${cumulativeWins}-${cumulativeLosses}`,
+        lockedWins: cumulativeWins,
+        lockedLosses: cumulativeLosses,
+        scheduleIndex: idx,
+        remainingCount: team.schedule.length - (idx + 1)
+      });
+    }
   });
+
+  // If there are completed games, also expose "Current (ROS)"
+  if (cumulativeWins + cumulativeLosses > 0) {
+    checkpoints.push({
+      id: 'current',
+      label: `Current (${cumulativeWins}-${cumulativeLosses} ROS)`,
+      shortLabel: `Current (ROS)`,
+      record: `${cumulativeWins}-${cumulativeLosses}`,
+      lockedWins: cumulativeWins,
+      lockedLosses: cumulativeLosses,
+      remainingCount: team.schedule.length - (cumulativeWins + cumulativeLosses),
+      isCurrent: true
+    });
+  }
+
+  return checkpoints;
+}
+window.getAvailableMonteCarloCheckpoints = getAvailableMonteCarloCheckpoints;
+
+function runMonteCarloSeasonSim(teamId, iterations = 10000, checkpointKey = 'current') {
+  const team = TEAMS_DATABASE[teamId];
+  if (!team) {
+    return {
+      iterations: 10000,
+      avgWins: '0.0',
+      winDistribution: {},
+      mostLikelyRecord: '0-0',
+      mostLikelyPct: '0%',
+      cfpOdds: '0%',
+      nattyOdds: '0%',
+      checkpointKey,
+      checkpointLabel: 'Unknown',
+      lockedRecord: '0-0',
+      remainingCount: 0
+    };
+  }
+
+  const schedule = team.schedule || [];
+  const checkpoints = getAvailableMonteCarloCheckpoints(teamId);
+  const activeCheckpoint = checkpoints.find(c => c.id === checkpointKey) || checkpoints[checkpoints.length - 1];
+
+  let lockedWins = 0;
+  let lockedLosses = 0;
+  let gameProbsToSim = [];
+
+  if (activeCheckpoint.id === 'preseason') {
+    lockedWins = 0;
+    lockedLosses = 0;
+    gameProbsToSim = schedule.map(g => {
+      const sim = calculateAdjustedMatchup(g, teamId);
+      if (sim.isFinal) {
+        return (typeof g.baseWinProb === 'number' ? g.baseWinProb : 50) / 100.0;
+      }
+      return sim.adjWinProb / 100.0;
+    });
+  } else if (activeCheckpoint.isCurrent) {
+    lockedWins = activeCheckpoint.lockedWins;
+    lockedLosses = activeCheckpoint.lockedLosses;
+    schedule.forEach(g => {
+      const isCompleted = g && (g.isFinal || typeof g.finalTeamScore === 'number') &&
+        (typeof g.actualScoreUt === 'number' || typeof g.finalTeamScore === 'number');
+      if (!isCompleted) {
+        const sim = calculateAdjustedMatchup(g, teamId);
+        gameProbsToSim.push(sim.adjWinProb / 100.0);
+      }
+    });
+  } else {
+    // Specific completed week checkpoint (e.g. week-1, week-2)
+    const targetIndex = activeCheckpoint.scheduleIndex !== undefined ? activeCheckpoint.scheduleIndex : -1;
+    lockedWins = activeCheckpoint.lockedWins;
+    lockedLosses = activeCheckpoint.lockedLosses;
+
+    schedule.forEach((g, idx) => {
+      if (idx > targetIndex) {
+        const sim = calculateAdjustedMatchup(g, teamId);
+        if (sim.isFinal) {
+          gameProbsToSim.push((typeof g.baseWinProb === 'number' ? g.baseWinProb : 50) / 100.0);
+        } else {
+          gameProbsToSim.push(sim.adjWinProb / 100.0);
+        }
+      }
+    });
+  }
 
   const winDistribution = { 12: 0, 11: 0, 10: 0, 9: 0, 8: 0, 7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: 0 };
   let totalWinsSum = 0;
@@ -5968,21 +6097,22 @@ function runMonteCarloSeasonSim(teamId, iterations = 10000) {
   let nationalTitles = 0;
 
   for (let i = 0; i < iterations; i++) {
-    let simWins = 0;
-    for (let j = 0; j < gameProbs.length; j++) {
-      if (Math.random() < gameProbs[j]) {
+    let simWins = lockedWins;
+    for (let j = 0; j < gameProbsToSim.length; j++) {
+      if (Math.random() < gameProbsToSim[j]) {
         simWins++;
       }
     }
-    winDistribution[simWins]++;
-    totalWinsSum += simWins;
+    const clampedWins = Math.max(0, Math.min(12, simWins));
+    winDistribution[clampedWins]++;
+    totalWinsSum += clampedWins;
 
-    if (simWins >= 10) playoffAppearances++;
-    else if (simWins === 9 && Math.random() < 0.35) playoffAppearances++;
+    if (clampedWins >= 10) playoffAppearances++;
+    else if (clampedWins === 9 && Math.random() < 0.35) playoffAppearances++;
 
-    if (simWins >= 12 && Math.random() < 0.38) nationalTitles++;
-    else if (simWins === 11 && Math.random() < 0.18) nationalTitles++;
-    else if (simWins === 10 && Math.random() < 0.05) nationalTitles++;
+    if (clampedWins >= 12 && Math.random() < 0.40) nationalTitles++;
+    else if (clampedWins === 11 && Math.random() < 0.18) nationalTitles++;
+    else if (clampedWins === 10 && Math.random() < 0.05) nationalTitles++;
   }
 
   const distPct = {};
@@ -6020,9 +6150,76 @@ function runMonteCarloSeasonSim(teamId, iterations = 10000) {
     mostLikelyRecord: mostLikely,
     mostLikelyPct,
     cfpOdds: `${((playoffAppearances / iterations) * 100).toFixed(1)}%`,
-    nattyOdds: `${((nationalTitles / iterations) * 100).toFixed(1)}%`
+    nattyOdds: `${((nationalTitles / iterations) * 100).toFixed(1)}%`,
+    checkpointKey: activeCheckpoint.id,
+    checkpointLabel: activeCheckpoint.label,
+    lockedRecord: activeCheckpoint.record,
+    lockedWins,
+    lockedLosses,
+    remainingCount: gameProbsToSim.length
   };
 }
+window.runMonteCarloSeasonSim = runMonteCarloSeasonSim;
+
+function renderMonteCarloResults(mc) {
+  const avgWinsEl = document.getElementById('mcAvgWins');
+  const recordEl = document.getElementById('mcMostLikelyRecord');
+  const cfpEl = document.getElementById('mcCfpOdds');
+  const nattyEl = document.getElementById('mcNattyOdds');
+  const badgeEl = document.getElementById('mcTimelineBadge');
+
+  if (avgWinsEl) avgWinsEl.innerText = mc.avgWins;
+  if (recordEl) recordEl.innerText = `Most Likely: ${mc.mostLikelyRecord} (${mc.mostLikelyPct})`;
+  if (cfpEl) cfpEl.innerText = mc.cfpOdds;
+  if (nattyEl) nattyEl.innerText = mc.nattyOdds;
+
+  if (badgeEl) {
+    if (mc.checkpointKey === 'preseason') {
+      badgeEl.innerHTML = `<i class="fa-solid fa-clock-rotate-left"></i> Baseline: 0-0 (12 Simulated)`;
+    } else {
+      badgeEl.innerHTML = `<i class="fa-solid fa-lock"></i> Locked ${mc.lockedRecord} • ${mc.remainingCount} Remaining (ROS)`;
+    }
+  }
+
+  const barsContainer = document.getElementById('mcBarsList');
+  if (barsContainer) {
+    let barsHtml = '';
+    Object.keys(mc.winDistribution).forEach(recordKey => {
+      const item = mc.winDistribution[recordKey];
+      const pctVal = parseFloat(item.pct);
+      const isHighlight = recordKey === mc.mostLikelyRecord;
+      barsHtml += `
+        <div class="mc-bar-row">
+          <span class="mc-bar-label" style="${isHighlight ? 'color: var(--color-brand-accent); font-weight: 900;' : ''}">${recordKey}</span>
+          <div class="mc-bar-track">
+            <div class="mc-bar-fill" style="width: ${Math.min(100, pctVal * 2.2)}%; ${isHighlight ? 'background: linear-gradient(90deg, #F59E0B, #EF4444);' : ''}"></div>
+          </div>
+          <span class="mc-bar-val" style="${isHighlight ? 'color: #F59E0B; font-weight: 900;' : ''}">${item.pct}%</span>
+        </div>
+      `;
+    });
+    barsContainer.innerHTML = barsHtml;
+  }
+}
+window.renderMonteCarloResults = renderMonteCarloResults;
+
+function switchMonteCarloTimeline(checkpointKey) {
+  state.monteCarloActiveTimeline = checkpointKey;
+
+  // Update pill active classes
+  const pills = document.querySelectorAll('.mc-timeline-pill');
+  pills.forEach(p => {
+    if (p.dataset.checkpoint === checkpointKey) {
+      p.classList.add('active');
+    } else {
+      p.classList.remove('active');
+    }
+  });
+
+  const mc = runMonteCarloSeasonSim(state.currentTeamId, 10000, checkpointKey);
+  renderMonteCarloResults(mc);
+}
+window.switchMonteCarloTimeline = switchMonteCarloTimeline;
 
 function openMonteCarloModal() {
   const modal = document.getElementById('monteCarloModal');
@@ -6032,6 +6229,7 @@ function openMonteCarloModal() {
   if (!team) return;
 
   modal.classList.add('open');
+  document.body.classList.add('modal-open');
 
   const statusText = document.getElementById('mcStatusText');
   const progressPct = document.getElementById('mcProgressPct');
@@ -6043,6 +6241,23 @@ function openMonteCarloModal() {
 
   document.getElementById('mcModalTitle').innerText = `10,000 MONTE CARLO SIMULATION: ${team.name.toUpperCase()}`;
 
+  // Populate Timeline Pills (Prior Weeks Only + Preseason + Current)
+  const checkpoints = getAvailableMonteCarloCheckpoints(state.currentTeamId);
+  const activeCheckpointId = state.monteCarloActiveTimeline || (checkpoints.some(c => c.isCurrent) ? 'current' : 'preseason');
+  state.monteCarloActiveTimeline = activeCheckpointId;
+
+  const pillsContainer = document.getElementById('mcTimelinePills');
+  if (pillsContainer) {
+    pillsContainer.innerHTML = checkpoints.map(c => `
+      <button class="mc-timeline-pill ${c.id === activeCheckpointId ? 'active' : ''}" 
+              data-checkpoint="${c.id}" 
+              onclick="switchMonteCarloTimeline('${c.id}')">
+        <i class="fa-solid ${c.isPreseason ? 'fa-calendar-day' : (c.isCurrent ? 'fa-bolt' : 'fa-check-circle')}"></i>
+        ${c.shortLabel}
+      </button>
+    `).join('');
+  }
+
   let step = 0;
   const animInterval = setInterval(() => {
     step += 25;
@@ -6053,33 +6268,8 @@ function openMonteCarloModal() {
       clearInterval(animInterval);
       if (statusText) statusText.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--color-success);"></i> 10,000 MONTE CARLO SEASONS SIMULATED`;
 
-      const mc = runMonteCarloSeasonSim(state.currentTeamId, 10000);
-
-      document.getElementById('mcAvgWins').innerText = mc.avgWins;
-      document.getElementById('mcMostLikelyRecord').innerText = `Most Likely: ${mc.mostLikelyRecord} (${mc.mostLikelyPct})`;
-      document.getElementById('mcCfpOdds').innerText = mc.cfpOdds;
-      document.getElementById('mcNattyOdds').innerText = mc.nattyOdds;
-
-      const barsContainer = document.getElementById('mcBarsList');
-      if (barsContainer) {
-        let barsHtml = '';
-        Object.keys(mc.winDistribution).forEach(recordKey => {
-          const item = mc.winDistribution[recordKey];
-          const pctVal = parseFloat(item.pct);
-          const isHighlight = recordKey === mc.mostLikelyRecord;
-          barsHtml += `
-            <div class="mc-bar-row">
-              <span class="mc-bar-label" style="${isHighlight ? 'color: var(--color-brand-accent);' : ''}">${recordKey}</span>
-              <div class="mc-bar-track">
-                <div class="mc-bar-fill" style="width: ${Math.min(100, pctVal * 2.2)}%; ${isHighlight ? 'background: linear-gradient(90deg, #F59E0B, #EF4444);' : ''}"></div>
-              </div>
-              <span class="mc-bar-val" style="${isHighlight ? 'color: #F59E0B;' : ''}">${item.pct}%</span>
-            </div>
-          `;
-        });
-        barsContainer.innerHTML = barsHtml;
-      }
-
+      const mc = runMonteCarloSeasonSim(state.currentTeamId, 10000, state.monteCarloActiveTimeline);
+      renderMonteCarloResults(mc);
       recalculateSeason();
     }
   }, 75);
@@ -8314,10 +8504,12 @@ function openAuthModal() {
 
   // Detect iOS native app vs web browser
   const isIosNative = (
+    window.isCFBProphetNativeApp === true ||
+    window.isNativeIos === true ||
+    (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appleSignIn) ||
     (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() === 'ios') ||
     window.location.protocol === 'capacitor:' ||
-    window.location.protocol === 'ionic:' ||
-    (window.webkit && window.webkit.messageHandlers && !window.location.hostname.includes('github.io') && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1'))
+    window.location.protocol === 'ionic:'
   );
 
   const googleSec = document.getElementById('googleAuthSection');
