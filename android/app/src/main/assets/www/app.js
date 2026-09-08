@@ -536,13 +536,31 @@ function initPwaServiceWorker() {
 // ==========================================================================
 
 function getNumericRank(team) {
-  if (!team) return 999;
-  if (typeof team.playoffContenderRank === 'number') return team.playoffContenderRank;
-  const match = (team.apRank || '').match(/\d+/);
-  if (match) return parseInt(match[0], 10);
-  if (team.apRank === 'RV') return 100;
-  return 200;
+  if (!team) return 9999;
+  const apRank = (team.apRank || '').trim();
+
+  // 1. Top 25 Ranked Teams (#1 - #25): return integer rank (1..25)
+  const match = apRank.match(/\d+/);
+  if (apRank.startsWith('#') && match) {
+    return parseInt(match[0], 10);
+  }
+
+  // 2. Receiving Votes (RV):
+  // Must be strictly ahead of unranked teams (NR / fell off).
+  // Within RV, sort by vote points descending (e.g. 86 pts > 69 pts > 33 pts).
+  if (apRank === 'RV' || apRank.includes('RV')) {
+    const ptsMatch = (team.apPoints || '').replace(/,/g, '').match(/\d+/);
+    const pts = ptsMatch ? parseInt(ptsMatch[0], 10) : 0;
+    return 100 - (pts / 10000);
+  }
+
+  // 3. Unranked / NR / No Votes / Fell off rankings:
+  // Strictly at the back behind all ranked and RV teams.
+  // Secondary tiebreaker by baseSpRating descending.
+  const rating = (typeof team.baseSpRating === 'number') ? team.baseSpRating : 0;
+  return 1000 - (rating / 100);
 }
+window.getNumericRank = getNumericRank;
 
 function renderTeamSelector() {
   const track = document.getElementById('teamSelectorTrack');
@@ -705,7 +723,22 @@ function initTeamSearch() {
 
     const matchedTeams = Object.keys(TEAMS_DATABASE)
       .filter(tid => teamMatchesSearchQuery(tid, TEAMS_DATABASE[tid], q))
-      .sort((a, b) => calculateTeamSearchRelevance(b, TEAMS_DATABASE[b], q) - calculateTeamSearchRelevance(a, TEAMS_DATABASE[a], q));
+      .sort((a, b) => {
+        const teamA = TEAMS_DATABASE[a];
+        const teamB = TEAMS_DATABASE[b];
+        const relA = calculateTeamSearchRelevance(a, teamA, q);
+        const relB = calculateTeamSearchRelevance(b, teamB, q);
+
+        // Direct high-confidence match takes precedence (e.g. typing a specific team alias/name)
+        const diff = relB - relA;
+        if (Math.abs(diff) >= 1000) return diff;
+
+        // Rank priority tiebreaker: Ranked #1-#25 -> Receiving Votes (RV) -> Unranked (NR) at back
+        const rankDiff = getNumericRank(teamA) - getNumericRank(teamB);
+        if (rankDiff !== 0) return rankDiff;
+
+        return diff;
+      });
 
     // Filter pill buttons in the track
     const matchedSet = new Set(matchedTeams);
@@ -728,13 +761,14 @@ function initTeamSearch() {
     dropdown.innerHTML = '';
     matchedTeams.forEach(tid => {
       const t = TEAMS_DATABASE[tid];
+      const rankBadgeText = (t.apRank === 'RV' && t.apPoints) ? `${t.apRank} • ${t.apPoints.split(' ')[0]} pts` : (t.apRank || 'NR');
       const item = document.createElement('div');
       item.className = `team-search-item ${tid === state.currentTeamId ? 'active' : ''}`;
       item.innerHTML = `
         <div class="search-item-left">
           <img src="${t.logoUrl}" alt="${t.shortName}" class="search-item-logo">
           <div class="search-item-info">
-            <div class="search-item-name">${t.name} <span class="search-item-badge">${t.apRank}</span></div>
+            <div class="search-item-name">${t.name} <span class="search-item-badge">${rankBadgeText}</span></div>
             <div class="search-item-sub">HC: ${t.headCoach} • QB: ${t.confirmedStarterQb || 'Starter'} • ${t.conference}</div>
           </div>
         </div>
@@ -765,7 +799,17 @@ function initTeamSearch() {
       const q = input.value.trim().toLowerCase();
       const matched = Object.keys(TEAMS_DATABASE)
         .filter(tid => teamMatchesSearchQuery(tid, TEAMS_DATABASE[tid], q))
-        .sort((a, b) => calculateTeamSearchRelevance(b, TEAMS_DATABASE[b], q) - calculateTeamSearchRelevance(a, TEAMS_DATABASE[a], q))[0];
+        .sort((a, b) => {
+          const teamA = TEAMS_DATABASE[a];
+          const teamB = TEAMS_DATABASE[b];
+          const relA = calculateTeamSearchRelevance(a, teamA, q);
+          const relB = calculateTeamSearchRelevance(b, teamB, q);
+          const diff = relB - relA;
+          if (Math.abs(diff) >= 1000) return diff;
+          const rankDiff = getNumericRank(teamA) - getNumericRank(teamB);
+          if (rankDiff !== 0) return rankDiff;
+          return diff;
+        })[0];
       if (matched) {
         selectTeam(matched);
         input.value = '';
@@ -6377,9 +6421,8 @@ function populateSandboxDropdowns() {
   // Sort teams by rank/prestige
   const teamEntries = Object.entries(TEAMS_DATABASE);
   teamEntries.sort((a, b) => {
-    const rankNumA = parseInt(a[1].apRank?.replace(/[^0-9]/g, '') || '99', 10);
-    const rankNumB = parseInt(b[1].apRank?.replace(/[^0-9]/g, '') || '99', 10);
-    if (rankNumA !== rankNumB) return rankNumA - rankNumB;
+    const rankDiff = getNumericRank(a[1]) - getNumericRank(b[1]);
+    if (rankDiff !== 0) return rankDiff;
     return a[1].name.localeCompare(b[1].name);
   });
 
@@ -6542,9 +6585,8 @@ function populateReceiptsFilterDropdowns() {
 
   const entries = Object.entries(TEAMS_DATABASE);
   entries.sort((a, b) => {
-    const rankA = parseInt(a[1].apRank?.replace(/[^0-9]/g, '') || '99', 10);
-    const rankB = parseInt(b[1].apRank?.replace(/[^0-9]/g, '') || '99', 10);
-    if (rankA !== rankB) return rankA - rankB;
+    const rankDiff = getNumericRank(a[1]) - getNumericRank(b[1]);
+    if (rankDiff !== 0) return rankDiff;
     return a[1].name.localeCompare(b[1].name);
   });
 

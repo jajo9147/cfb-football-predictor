@@ -489,7 +489,7 @@ var TEAMS_DATABASE = {
     "conference": "Big 12",
     "apRank": "#15 AP",
     "apPoints": "840 PTS",
-    "playoffContenderRank": 14,
+    "playoffContenderRank": 15,
     "themeClass": "theme-byu",
     "headCoach": "Kalani Sitake",
     "offensiveCoordinator": "Aaron Roderick",
@@ -1150,7 +1150,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#07090E"
     },
     "baseSpRating": 37.5,
-    "playoffContenderRank": 5,
+    "playoffContenderRank": 4,
     "sliderLabels": {
       "qb": "Arch Manning & Cam Coleman Passing Attack",
       "ground": "Hollywood Smothers & Raleek Brown Ground Attack",
@@ -1792,7 +1792,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#050D1A"
     },
     "baseSpRating": 18.8,
-    "playoffContenderRank": 16,
+    "playoffContenderRank": 26,
     "sliderLabels": {
       "qb": "Bryce Underwood Execution",
       "ground": "Jordan Marshall & Taylor Tatum Ground Attack",
@@ -3076,7 +3076,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#0A0507"
     },
     "baseSpRating": 36.85,
-    "playoffContenderRank": 3,
+    "playoffContenderRank": 2,
     "sliderLabels": {
       "qb": "Gunner Stockton Execution",
       "ground": "Nate Frazier & Chauncey Bowens Ground Attack",
@@ -3718,7 +3718,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#0C0507"
     },
     "baseSpRating": 28.59,
-    "playoffContenderRank": 13,
+    "playoffContenderRank": 12,
     "sliderLabels": {
       "qb": "Keelon Russell Air Attack",
       "ground": "Daniel Hill & Kevin Riley Physical Ground Attack",
@@ -4361,7 +4361,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#050F0A"
     },
     "baseSpRating": 27.15,
-    "playoffContenderRank": 2,
+    "playoffContenderRank": 6,
     "sliderLabels": {
       "qb": "Dante Moore Execution",
       "ground": "Jordon Davison & Dierre Hill Jr. Ground Attack",
@@ -5003,7 +5003,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#050B14"
     },
     "baseSpRating": 26.5,
-    "playoffContenderRank": 18,
+    "playoffContenderRank": 16,
     "sliderLabels": {
       "qb": "Rocco Becht Air Attack",
       "ground": "Quinton Martin Jr. & James Peoples Ground Attack",
@@ -5644,7 +5644,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#060B12"
     },
     "baseSpRating": 29.04,
-    "playoffContenderRank": 4,
+    "playoffContenderRank": 3,
     "sliderLabels": {
       "qb": "CJ Carr Execution",
       "ground": "Aneyas Williams Ground Attack",
@@ -6286,7 +6286,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#0E0914"
     },
     "baseSpRating": 34.5,
-    "playoffContenderRank": 11,
+    "playoffContenderRank": 8,
     "sliderLabels": {
       "qb": "Sam Leavitt Execution",
       "ground": "Harlem Berry Ground Attack",
@@ -6927,7 +6927,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#0D0803"
     },
     "baseSpRating": 25.53,
-    "playoffContenderRank": 20,
+    "playoffContenderRank": 18,
     "sliderLabels": {
       "qb": "Faizon Brandon Pinpoint Air Attack",
       "ground": "DeSean Bishop & Javin Gordon Power Ground Attack",
@@ -7569,7 +7569,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#0D0505"
     },
     "baseSpRating": 27.03,
-    "playoffContenderRank": 6,
+    "playoffContenderRank": 5,
     "sliderLabels": {
       "qb": "Josh Hoover Execution",
       "ground": "Turbo Richard Ground Attack",
@@ -8852,7 +8852,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#0A0404"
     },
     "baseSpRating": 29.03,
-    "playoffContenderRank": 8,
+    "playoffContenderRank": 10,
     "sliderLabels": {
       "qb": "Marcel Reed Dual-Threat Attack",
       "ground": "Rueben Owens II & Tiger Riden Ground Attack",
@@ -10137,7 +10137,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#0A0505"
     },
     "baseSpRating": 28.41,
-    "playoffContenderRank": 10,
+    "playoffContenderRank": 11,
     "sliderLabels": {
       "qb": "John Mateer Dual-Threat Execution",
       "ground": "Xavier Robinson & Lloyd Avant Ground Attack",
@@ -11389,7 +11389,7 @@ var TEAMS_DATABASE = {
         "oddsProvider": "CFB Prophet Projected"
       }
     ],
-    "playoffContenderRank": 30,
+    "playoffContenderRank": 25,
     "seasonBaselineSpRating": 18.5
   },
   "usc": {
@@ -12016,7 +12016,7 @@ var TEAMS_DATABASE = {
         }
       }
     ],
-    "playoffContenderRank": 15,
+    "playoffContenderRank": 14,
     "seasonBaselineSpRating": 26.06
   },
   "floridastate": {
@@ -12643,7 +12643,7 @@ var TEAMS_DATABASE = {
         }
       }
     ],
-    "playoffContenderRank": 27,
+    "playoffContenderRank": 30,
     "seasonBaselineSpRating": 25.18
   },
   "clemson": {
@@ -13284,7 +13284,7 @@ var TEAMS_DATABASE = {
         }
       }
     ],
-    "playoffContenderRank": 26,
+    "playoffContenderRank": 31,
     "seasonBaselineSpRating": 23.8
   },
   "smu": {
@@ -13924,7 +13924,7 @@ var TEAMS_DATABASE = {
         }
       }
     ],
-    "playoffContenderRank": 19,
+    "playoffContenderRank": 17,
     "seasonBaselineSpRating": 23.0
   },
   "texastech": {
@@ -13952,7 +13952,7 @@ var TEAMS_DATABASE = {
     "apRank": "#13 AP",
     "apPoints": "900 PTS",
     "baseSpRating": 17.85,
-    "playoffContenderRank": 12,
+    "playoffContenderRank": 13,
     "themeClass": "theme-texastech",
     "colors": {
       "primary": "#CC0000",
@@ -14581,7 +14581,7 @@ var TEAMS_DATABASE = {
     "conference": "Big 12",
     "apRank": "#20 AP",
     "apPoints": "381 PTS",
-    "playoffContenderRank": 21,
+    "playoffContenderRank": 20,
     "themeClass": "theme-utah",
     "headCoach": "Morgan Scalley",
     "offensiveCoordinator": "Kevin McGiven",
@@ -15221,7 +15221,7 @@ var TEAMS_DATABASE = {
     "conference": "Big Ten",
     "apRank": "#21 AP",
     "apPoints": "369 PTS",
-    "playoffContenderRank": 22,
+    "playoffContenderRank": 21,
     "themeClass": "theme-iowa",
     "headCoach": "Kirk Ferentz",
     "offensiveCoordinator": "Tim Lester",
@@ -15860,7 +15860,7 @@ var TEAMS_DATABASE = {
     "conference": "SEC",
     "apRank": "#23 AP",
     "apPoints": "182 PTS",
-    "playoffContenderRank": 25,
+    "playoffContenderRank": 23,
     "themeClass": "theme-missouri",
     "headCoach": "Eli Drinkwitz",
     "offensiveCoordinator": "Kirby Moore",
@@ -16499,7 +16499,7 @@ var TEAMS_DATABASE = {
     "conference": "Big 12",
     "apRank": "RV",
     "apPoints": "33 PTS",
-    "playoffContenderRank": 28,
+    "playoffContenderRank": 27,
     "themeClass": "theme-arizona",
     "headCoach": "Brent Brennan",
     "offensiveCoordinator": "Dino Babers",
@@ -17139,7 +17139,7 @@ var TEAMS_DATABASE = {
     "conference": "Big Ten",
     "apRank": "#19 AP",
     "apPoints": "489 PTS",
-    "playoffContenderRank": 17,
+    "playoffContenderRank": 19,
     "themeClass": "theme-washington",
     "headCoach": "Jedd Fisch",
     "offensiveCoordinator": "Jimmie Dougherty",
@@ -17779,7 +17779,7 @@ var TEAMS_DATABASE = {
     "conference": "Big 12",
     "apRank": "#22 AP",
     "apPoints": "214 PTS",
-    "playoffContenderRank": 23,
+    "playoffContenderRank": 22,
     "themeClass": "theme-houston",
     "headCoach": "Willie Fritz",
     "offensiveCoordinator": "Slade Nagle",
@@ -19057,7 +19057,7 @@ var TEAMS_DATABASE = {
     "conference": "Big 12",
     "apRank": "RV",
     "apPoints": "3 PTS",
-    "playoffContenderRank": 31,
+    "playoffContenderRank": 28,
     "headCoach": "Deion Sanders",
     "offensiveCoordinator": "Brennan Marion",
     "defensiveCoordinator": "Chris Marve",

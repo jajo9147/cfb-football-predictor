@@ -261,6 +261,22 @@ def main():
 
     # Apply rankings to teams in DB
     ap_changes_count = 0
+    # Derive sequential contender ranks (1..31) based on official poll hierarchy
+    def get_team_rank_metric(tid, t_obj):
+        info = ranking_updates.get(tid, {})
+        r_str = info.get('apRank', t_obj.get('apRank', 'NR'))
+        m_r = re.search(r'\d+', r_str)
+        if r_str.startswith('#') and m_r:
+            return int(m_r.group(0))
+        if 'RV' in r_str:
+            pts_m = re.search(r'\d+', (info.get('apPoints', t_obj.get('apPoints', ''))).replace(',', ''))
+            pts = int(pts_m.group(0)) if pts_m else 0
+            return 100.0 - (pts / 10000.0)
+        return 1000.0 - (t_obj.get('baseSpRating', 0.0) / 100.0)
+
+    sorted_by_rank = sorted(db.keys(), key=lambda k: get_team_rank_metric(k, db[k]))
+    rank_order_map = {k: idx + 1 for idx, k in enumerate(sorted_by_rank)}
+
     for tid, t in db.items():
         old_rank = t.get('apRank', 'NR')
         if tid in ranking_updates:
@@ -277,6 +293,7 @@ def main():
         if not args.dry_run:
             t['apRank'] = new_rank
             t['apPoints'] = new_pts
+            t['playoffContenderRank'] = rank_order_map.get(tid, 99)
 
     # Update opponent rankings in schedules for unplayed games
     opp_rank_updates_count = 0

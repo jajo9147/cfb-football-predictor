@@ -487,9 +487,9 @@ var TEAMS_DATABASE = {
     "shortName": "BYU",
     "abbr": "BYU",
     "conference": "Big 12",
-    "apRank": "#14 AP",
-    "apPoints": "680 pts",
-    "playoffContenderRank": 14,
+    "apRank": "#15 AP",
+    "apPoints": "840 PTS",
+    "playoffContenderRank": 15,
     "themeClass": "theme-byu",
     "headCoach": "Kalani Sitake",
     "offensiveCoordinator": "Aaron Roderick",
@@ -501,7 +501,7 @@ var TEAMS_DATABASE = {
     "stadium": "LaVell Edwards Stadium",
     "stadiumCapacity": "63,470",
     "stadiumCity": "Provo, UT",
-    "baseSpRating": 21.5,
+    "baseSpRating": 24.72,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/252.png",
     "colors": {
       "primary": "#002E5D",
@@ -537,10 +537,11 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -31.5,
-        "overUnder": 52.5,
+        "vegasSpread": -50.5,
+        "overUnder": 61.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 99,
-        "projScoreUt": 48,
+        "projScoreUt": 63,
         "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
@@ -549,7 +550,11 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "rivalryName": "HOLY WAR"
+        "rivalryName": "HOLY WAR",
+        "isFinal": true,
+        "finalTeamScore": 63,
+        "finalOppScore": 7,
+        "finalWin": true
       },
       {
         "id": "byu-w2",
@@ -572,16 +577,35 @@ var TEAMS_DATABASE = {
         "isConf": true,
         "vegasSpread": -5.0,
         "overUnder": 52.5,
-        "baseWinProb": 65,
-        "projScoreUt": 29,
-        "projScoreOpp": 24,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 83,
+        "projScoreUt": 30,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "BYU quarterback play vs Arizona Wildcats secondary.",
           "summary": "High-stakes clash against RV Arizona Wildcats."
         },
         "oppId": "arizona",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 73.1,
+        "mcOverProb": 32.6,
+        "mcRecommendedAts": "BYU -5.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 16,
+          "p75": 23,
+          "p90": 30
+        }
       },
       {
         "id": "byu-w3",
@@ -602,18 +626,37 @@ var TEAMS_DATABASE = {
         "location": "Fort Collins, CO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.0,
+        "vegasSpread": -18.6,
         "overUnder": 52.5,
-        "baseWinProb": 85,
-        "projScoreUt": 33,
-        "projScoreOpp": 19,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 35,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "BYU front seven vs Colorado State Rams rushing attack.",
           "summary": "Regular season non-conference test against Colorado State Rams."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.6,
+        "mcOverProb": 30.4,
+        "mcRecommendedAts": "BYU -18.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 22,
+          "p25": 28,
+          "p50": 35,
+          "p75": 42,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 15,
+          "p90": 20
+        }
       },
       {
         "id": "byu-w5",
@@ -634,18 +677,37 @@ var TEAMS_DATABASE = {
         "location": "Fort Worth, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.0,
+        "vegasSpread": -18.6,
         "overUnder": 52.5,
-        "baseWinProb": 85,
-        "projScoreUt": 33,
-        "projScoreOpp": 19,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "BYU front seven vs TCU Horned Frogs rushing attack.",
           "summary": "Regular season non-conference test against TCU Horned Frogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 76.0,
+        "mcOverProb": 36.8,
+        "mcRecommendedAts": "BYU -18.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 31,
+          "p50": 38,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 15,
+          "p90": 20
+        }
       },
       {
         "id": "byu-w6",
@@ -666,18 +728,37 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -20.0,
+        "vegasSpread": -23.6,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "BYU front seven vs Iowa State Cyclones rushing attack.",
           "summary": "Regular season non-conference test against Iowa State Cyclones."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 78.8,
+        "mcOverProb": 26.6,
+        "mcRecommendedAts": "BYU -23.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 26,
+          "p25": 31,
+          "p50": 38,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "byu-w7",
@@ -688,7 +769,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Notre Dame Fighting Irish",
         "oppAbbr": "ND",
-        "oppRank": "#4 AP",
+        "oppRank": "#3 AP",
         "oppBadge": "ND",
         "oppColor": "#0C2340",
         "oppSecondary": "#FEE123",
@@ -698,18 +779,37 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 3.0,
+        "vegasSpread": 1.9,
         "overUnder": 52.5,
-        "baseWinProb": 41,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 46,
+        "projScoreUt": 23,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "BYU quarterback play vs Notre Dame Fighting Irish secondary.",
           "summary": "High-stakes clash against #4 AP Notre Dame Fighting Irish."
         },
         "oppId": "notredame",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 48.2,
+        "mcOverProb": 33.5,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 36
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 37
+        }
       },
       {
         "id": "byu-w8",
@@ -730,18 +830,37 @@ var TEAMS_DATABASE = {
         "location": "Orlando, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.0,
+        "vegasSpread": -18.6,
         "overUnder": 52.5,
-        "baseWinProb": 85,
-        "projScoreUt": 33,
-        "projScoreOpp": 19,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 35,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "BYU front seven vs UCF Knights rushing attack.",
           "summary": "Regular season non-conference test against UCF Knights."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 72.8,
+        "mcOverProb": 27.4,
+        "mcRecommendedAts": "BYU -18.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 28,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 10,
+          "p75": 14,
+          "p90": 20
+        }
       },
       {
         "id": "byu-w9",
@@ -762,18 +881,37 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -8.5,
+        "vegasSpread": -5.0,
         "overUnder": 52.5,
-        "baseWinProb": 74,
-        "projScoreUt": 30,
-        "projScoreOpp": 22,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 73,
+        "projScoreUt": 28,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "BYU quarterback play vs Arizona State Sun Devils secondary.",
-          "summary": "High-stakes clash against RV Arizona State Sun Devils."
+          "summary": "High-stakes clash against NR Arizona State Sun Devils."
         },
         "oppId": "arizonastate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 58.8,
+        "mcOverProb": 32.9,
+        "mcRecommendedAts": "BYU -5.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 19,
+          "p75": 26,
+          "p90": 33
+        }
       },
       {
         "id": "byu-w10",
@@ -784,7 +922,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Utah Utes",
         "oppAbbr": "UTAH",
-        "oppRank": "#21 AP",
+        "oppRank": "#20 AP",
         "oppBadge": "UTAH",
         "oppColor": "#CC0000",
         "oppSecondary": "#FFFFFF",
@@ -794,19 +932,38 @@ var TEAMS_DATABASE = {
         "location": "Salt Lake City, UT",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 6.0,
+        "vegasSpread": 8.7,
         "overUnder": 52.5,
-        "baseWinProb": 32,
-        "projScoreUt": 23,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 22,
+        "projScoreUt": 18,
         "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "BYU quarterback play vs Utah Utes secondary.",
-          "summary": "High-stakes clash against #21 AP Utah Utes."
+          "summary": "High-stakes clash against #20 AP Utah Utes."
         },
         "oppId": "utah",
         "is_tracked": true,
-        "rivalryName": "HOLY WAR"
+        "rivalryName": "HOLY WAR",
+        "mcCoverProb": 42.4,
+        "mcOverProb": 34.8,
+        "mcRecommendedAts": "UTAH -8.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 30,
+          "p75": 37,
+          "p90": 43
+        }
       },
       {
         "id": "byu-w11",
@@ -827,18 +984,37 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -20.0,
+        "vegasSpread": -23.6,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "BYU front seven vs Baylor Bears rushing attack.",
           "summary": "Regular season non-conference test against Baylor Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 78.1,
+        "mcOverProb": 24.8,
+        "mcRecommendedAts": "BYU -23.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 26,
+          "p25": 31,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "byu-w12",
@@ -859,18 +1035,37 @@ var TEAMS_DATABASE = {
         "location": "Lawrence, KS",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.0,
+        "vegasSpread": -18.6,
         "overUnder": 52.5,
-        "baseWinProb": 85,
-        "projScoreUt": 33,
-        "projScoreOpp": 19,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 35,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "BYU front seven vs Kansas Jayhawks rushing attack.",
           "summary": "Regular season non-conference test against Kansas Jayhawks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.0,
+        "mcOverProb": 28.7,
+        "mcRecommendedAts": "BYU -18.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 28,
+          "p50": 35,
+          "p75": 42,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 3,
+          "p50": 10,
+          "p75": 14,
+          "p90": 20
+        }
       },
       {
         "id": "byu-w13",
@@ -891,20 +1086,40 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -20.0,
+        "vegasSpread": -23.6,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "BYU front seven vs Cincinnati Bearcats rushing attack.",
           "summary": "Regular season non-conference test against Cincinnati Bearcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 77.7,
+        "mcOverProb": 26.4,
+        "mcRecommendedAts": "BYU -23.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 26,
+          "p25": 31,
+          "p50": 38,
+          "p75": 45,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       }
-    ]
+    ],
+    "seasonBaselineSpRating": 21.5
   },
   "texas": {
     "id": "texas",
@@ -914,8 +1129,8 @@ var TEAMS_DATABASE = {
     "abbr": "TEX",
     "mascot": "Longhorns",
     "conference": "SEC",
-    "apRank": "#5 AP",
-    "apPoints": "1,483 PTS",
+    "apRank": "#4 AP",
+    "apPoints": "1,462 PTS (2 1st)",
     "headCoach": "Steve Sarkisian",
     "defensiveCoordinator": "Will Muschamp",
     "offensiveCoordinator": "Kyle Flood",
@@ -934,8 +1149,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0E121C",
       "bgBase": "#07090E"
     },
-    "baseSpRating": 31.5,
-    "playoffContenderRank": 5,
+    "baseSpRating": 37.5,
+    "playoffContenderRank": 4,
     "sliderLabels": {
       "qb": "Arch Manning & Cam Coleman Passing Attack",
       "ground": "Hollywood Smothers & Raleek Brown Ground Attack",
@@ -964,9 +1179,10 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isConf": false,
         "vegasSpread": -29.5,
-        "overUnder": 52.5,
+        "overUnder": 61.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 99,
-        "projScoreUt": 48,
+        "projScoreUt": 59,
         "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -974,7 +1190,11 @@ var TEAMS_DATABASE = {
           "summary": "Regular season non-conference test against Texas State Bobcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 59,
+        "finalOppScore": 7,
+        "finalWin": true
       },
       {
         "id": "tex-w2",
@@ -997,16 +1217,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -2.0,
         "overUnder": 52.5,
-        "baseWinProb": 56,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 69,
         "projScoreUt": 27,
-        "projScoreOpp": 25,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Ohio State Buckeyes secondary.",
           "summary": "High-stakes clash against #1 AP Ohio State Buckeyes."
         },
         "oppId": "ohiostate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 65.5,
+        "mcOverProb": 33.5,
+        "mcRecommendedAts": "Texas -2.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 19,
+          "p75": 27,
+          "p90": 33
+        }
       },
       {
         "id": "tex-w3",
@@ -1027,18 +1266,37 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -30.0,
+        "vegasSpread": -45.5,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 41,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 51,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas front seven vs UTSA Roadrunners rushing attack.",
           "summary": "Regular season non-conference test against UTSA Roadrunners."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 45.3,
+        "mcOverProb": 60.0,
+        "mcRecommendedAts": "UTSA +45.5",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 36,
+          "p25": 42,
+          "p50": 51,
+          "p75": 58,
+          "p90": 66
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "tex-w4",
@@ -1049,7 +1307,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Tennessee Volunteers",
         "oppAbbr": "TENN",
-        "oppRank": "#20 AP",
+        "oppRank": "#18 AP",
         "oppBadge": "TENN",
         "oppColor": "#FF8200",
         "oppSecondary": "#FFFFFF",
@@ -1059,18 +1317,37 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -4.5,
+        "vegasSpread": -7.5,
         "overUnder": 52.5,
-        "baseWinProb": 64,
-        "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 80,
+        "projScoreUt": 29,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Tennessee Volunteers secondary.",
-          "summary": "High-stakes clash against #20 AP Tennessee Volunteers."
+          "summary": "High-stakes clash against #18 AP Tennessee Volunteers."
         },
         "oppId": "tennessee",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 60.0,
+        "mcOverProb": 33.4,
+        "mcRecommendedAts": "Texas -7.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 23,
+          "p50": 29,
+          "p75": 36,
+          "p90": 43
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        }
       },
       {
         "id": "tex-w6",
@@ -1081,7 +1358,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Oklahoma Sooners",
         "oppAbbr": "OU",
-        "oppRank": "#10 AP",
+        "oppRank": "#11 AP",
         "oppBadge": "OU",
         "oppColor": "#841617",
         "oppSecondary": "#FDF9D8",
@@ -1091,11 +1368,12 @@ var TEAMS_DATABASE = {
         "location": "Dallas, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.5,
+        "vegasSpread": -6.6,
         "overUnder": 52.5,
-        "baseWinProb": 58,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 77,
         "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Oklahoma Sooners secondary.",
@@ -1103,7 +1381,25 @@ var TEAMS_DATABASE = {
         },
         "oppId": "oklahoma",
         "is_tracked": true,
-        "rivalryName": "RED RIVER RIVALRY"
+        "rivalryName": "RED RIVER RIVALRY",
+        "mcCoverProb": 61.3,
+        "mcOverProb": 33.0,
+        "mcRecommendedAts": "Texas -6.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 28,
+          "p75": 35,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        }
       },
       {
         "id": "tex-w7",
@@ -1124,18 +1420,37 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -30.0,
+        "vegasSpread": -45.5,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 41,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 51,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas front seven vs Florida Gators rushing attack.",
           "summary": "Regular season non-conference test against Florida Gators."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 46.4,
+        "mcOverProb": 60.6,
+        "mcRecommendedAts": "FLA +45.5",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 37,
+          "p25": 43,
+          "p50": 51,
+          "p75": 58,
+          "p90": 65
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 0,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "tex-w8",
@@ -1156,18 +1471,37 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -8.5,
+        "vegasSpread": -14.8,
         "overUnder": 52.5,
-        "baseWinProb": 74,
-        "projScoreUt": 30,
-        "projScoreOpp": 22,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 95,
+        "projScoreUt": 34,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Ole Miss Rebels secondary.",
-          "summary": "High-stakes clash against #9 AP Ole Miss Rebels."
+          "summary": "High-stakes clash against #11 AP Ole Miss Rebels."
         },
         "oppId": "olemiss",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 69.1,
+        "mcOverProb": 30.6,
+        "mcRecommendedAts": "Texas -14.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 12,
+          "p75": 17,
+          "p90": 24
+        }
       },
       {
         "id": "tex-w9",
@@ -1188,18 +1522,37 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -30.0,
+        "vegasSpread": -45.5,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 41,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 51,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas front seven vs Mississippi State Bulldogs rushing attack.",
           "summary": "Regular season non-conference test against Mississippi State Bulldogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 47.8,
+        "mcOverProb": 61.8,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 37,
+          "p25": 43,
+          "p50": 51,
+          "p75": 58,
+          "p90": 66
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "tex-w10",
@@ -1210,7 +1563,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Missouri Tigers",
         "oppAbbr": "MIZ",
-        "oppRank": "#25 AP",
+        "oppRank": "#23 AP",
         "oppBadge": "MIZ",
         "oppColor": "#F1B82D",
         "oppSecondary": "#000000",
@@ -1220,18 +1573,37 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -5.5,
+        "vegasSpread": -15.0,
         "overUnder": 52.5,
-        "baseWinProb": 67,
-        "projScoreUt": 29,
-        "projScoreOpp": 23,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 95,
+        "projScoreUt": 34,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Missouri Tigers secondary.",
-          "summary": "High-stakes clash against #25 AP Missouri Tigers."
+          "summary": "High-stakes clash against #23 AP Missouri Tigers."
         },
         "oppId": "missouri",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 68.9,
+        "mcOverProb": 31.8,
+        "mcRecommendedAts": "Texas -15.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 12,
+          "p75": 17,
+          "p90": 23
+        }
       },
       {
         "id": "tex-w11",
@@ -1242,7 +1614,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "LSU Tigers",
         "oppAbbr": "LSU",
-        "oppRank": "#11 AP",
+        "oppRank": "#8 AP",
         "oppBadge": "LSU",
         "oppColor": "#461D7C",
         "oppSecondary": "#FDD023",
@@ -1252,18 +1624,37 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.0,
+        "vegasSpread": -0.5,
         "overUnder": 52.5,
-        "baseWinProb": 50,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 55,
+        "projScoreUt": 25,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs LSU Tigers secondary.",
-          "summary": "High-stakes clash against #11 AP LSU Tigers."
+          "summary": "High-stakes clash against #8 AP LSU Tigers."
         },
         "oppId": "lsu",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 55.3,
+        "mcOverProb": 34.6,
+        "mcRecommendedAts": "Texas -0.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 35
+        }
       },
       {
         "id": "tex-w12",
@@ -1284,18 +1675,37 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -30.0,
+        "vegasSpread": -45.5,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 41,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 50,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas front seven vs Arkansas Razorbacks rushing attack.",
           "summary": "Regular season non-conference test against Arkansas Razorbacks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 44.9,
+        "mcOverProb": 59.0,
+        "mcRecommendedAts": "ARK +45.5",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 36,
+          "p25": 43,
+          "p50": 50,
+          "p75": 58,
+          "p90": 65
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "tex-w13",
@@ -1306,7 +1716,7 @@ var TEAMS_DATABASE = {
         "tv": "ABC",
         "opponent": "Texas A&M Aggies",
         "oppAbbr": "TA&M",
-        "oppRank": "#8 AP",
+        "oppRank": "#10 AP",
         "oppBadge": "TAMU",
         "oppColor": "#500000",
         "oppSecondary": "#FFFFFF",
@@ -1316,23 +1726,43 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.0,
+        "vegasSpread": -4.0,
         "overUnder": 52.5,
-        "baseWinProb": 56,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 67,
         "projScoreUt": 27,
-        "projScoreOpp": 25,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Texas A&M Aggies secondary.",
-          "summary": "High-stakes clash against #8 AP Texas A&M Aggies."
+          "summary": "High-stakes clash against #9 AP Texas A&M Aggies."
         },
         "oppId": "texasam",
         "is_tracked": true,
-        "rivalryName": "LONE STAR SHOWDOWN"
+        "rivalryName": "LONE STAR SHOWDOWN",
+        "mcCoverProb": 55.1,
+        "mcOverProb": 35.4,
+        "mcRecommendedAts": "Texas -4.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png",
-    "badgeText": "TEX"
+    "badgeText": "TEX",
+    "seasonBaselineSpRating": 31.5
   },
   "michigan": {
     "id": "michigan",
@@ -1342,8 +1772,8 @@ var TEAMS_DATABASE = {
     "abbr": "MICH",
     "mascot": "Wolverines",
     "conference": "Big Ten",
-    "apRank": "#16 AP",
-    "apPoints": "680 PTS",
+    "apRank": "RV",
+    "apPoints": "69 PTS",
     "headCoach": "Kyle Whittingham",
     "defensiveCoordinator": "Jay Hill",
     "offensiveCoordinator": "Jason Beck",
@@ -1361,8 +1791,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0B172A",
       "bgBase": "#050D1A"
     },
-    "baseSpRating": 24.8,
-    "playoffContenderRank": 16,
+    "baseSpRating": 18.8,
+    "playoffContenderRank": 26,
     "sliderLabels": {
       "qb": "Bryce Underwood Execution",
       "ground": "Jordan Marshall & Taylor Tatum Ground Attack",
@@ -1391,17 +1821,22 @@ var TEAMS_DATABASE = {
         "isMarquee": false,
         "isConf": false,
         "vegasSpread": -27.5,
-        "overUnder": 52.5,
+        "overUnder": 50.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 10,
+        "projScoreUt": 13,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Michigan front seven vs Western Michigan Broncos rushing attack.",
           "summary": "Regular season non-conference test against Western Michigan Broncos."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 13,
+        "finalOppScore": 12,
+        "finalWin": true
       },
       {
         "id": "mich-w2",
@@ -1412,7 +1847,7 @@ var TEAMS_DATABASE = {
         "tv": "FOX",
         "opponent": "Oklahoma Sooners",
         "oppAbbr": "OU",
-        "oppRank": "#10 AP",
+        "oppRank": "#11 AP",
         "oppBadge": "OU",
         "oppColor": "#841617",
         "oppSecondary": "#FDF9D8",
@@ -1424,16 +1859,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -2.0,
         "overUnder": 52.5,
-        "baseWinProb": 56,
-        "projScoreUt": 27,
-        "projScoreOpp": 25,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 28,
+        "projScoreUt": 18,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Oklahoma Sooners secondary.",
           "summary": "High-stakes clash against #10 AP Oklahoma Sooners."
         },
         "oppId": "oklahoma",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 23.8,
+        "mcOverProb": 27.1,
+        "mcRecommendedAts": "OU +2.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 19,
+          "p50": 26,
+          "p75": 33,
+          "p90": 38
+        }
       },
       {
         "id": "mich-w3",
@@ -1454,18 +1908,37 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.5,
+        "vegasSpread": -23.3,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 35,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Michigan front seven vs UTEP Miners rushing attack.",
           "summary": "Regular season non-conference test against UTEP Miners."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 62.3,
+        "mcOverProb": 23.7,
+        "mcRecommendedAts": "Michigan -23.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 28,
+          "p50": 35,
+          "p75": 42,
+          "p90": 50
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "mich-w4",
@@ -1476,7 +1949,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Iowa Hawkeyes",
         "oppAbbr": "IOWA",
-        "oppRank": "#22 AP",
+        "oppRank": "#21 AP",
         "oppBadge": "IOWA",
         "oppColor": "#FFE100",
         "oppSecondary": "#000000",
@@ -1486,18 +1959,37 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -7.0,
+        "vegasSpread": -0.6,
         "overUnder": 52.5,
-        "baseWinProb": 70,
-        "projScoreUt": 30,
-        "projScoreOpp": 23,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 56,
+        "projScoreUt": 22,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Iowa Hawkeyes secondary.",
-          "summary": "High-stakes clash against #22 AP Iowa Hawkeyes."
+          "summary": "High-stakes clash against #21 AP Iowa Hawkeyes."
         },
         "oppId": "iowa",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 55.6,
+        "mcOverProb": 20.9,
+        "mcRecommendedAts": "Michigan -0.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 35
+        },
+        "mcScoreDistOpp": {
+          "p10": 9,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 33
+        }
       },
       {
         "id": "mich-w5",
@@ -1518,18 +2010,37 @@ var TEAMS_DATABASE = {
         "location": "Minneapolis, MN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.5,
+        "vegasSpread": -18.3,
         "overUnder": 52.5,
-        "baseWinProb": 90,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 95,
+        "projScoreUt": 33,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Michigan front seven vs Minnesota Golden Gophers rushing attack.",
           "summary": "Regular season non-conference test against Minnesota Golden Gophers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 57.7,
+        "mcOverProb": 26.0,
+        "mcRecommendedAts": "Michigan -18.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 25,
+          "p50": 33,
+          "p75": 40,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 21
+        }
       },
       {
         "id": "mich-w7",
@@ -1540,7 +2051,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Penn State Nittany Lions",
         "oppAbbr": "PSU",
-        "oppRank": "#18 AP",
+        "oppRank": "#16 AP",
         "oppBadge": "PSU",
         "oppColor": "#041E42",
         "oppSecondary": "#FFFFFF",
@@ -1550,18 +2061,37 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -7.5,
+        "vegasSpread": 5.2,
         "overUnder": 52.5,
-        "baseWinProb": 71,
-        "projScoreUt": 30,
-        "projScoreOpp": 23,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 34,
+        "projScoreUt": 20,
+        "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Penn State Nittany Lions secondary.",
-          "summary": "High-stakes clash against #18 AP Penn State Nittany Lions."
+          "summary": "High-stakes clash against #16 AP Penn State Nittany Lions."
         },
         "oppId": "pennstate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 48.6,
+        "mcOverProb": 27.8,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 19,
+          "p75": 26,
+          "p90": 33
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        }
       },
       {
         "id": "mich-w8",
@@ -1572,7 +2102,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Indiana Hoosiers",
         "oppAbbr": "IU",
-        "oppRank": "#6 AP",
+        "oppRank": "#5 AP",
         "oppBadge": "IND",
         "oppColor": "#990000",
         "oppSecondary": "#EEEDEB",
@@ -1582,18 +2112,37 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.5,
+        "vegasSpread": 5.7,
         "overUnder": 52.5,
-        "baseWinProb": 57,
-        "projScoreUt": 27,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 32,
+        "projScoreUt": 19,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Indiana Hoosiers secondary.",
-          "summary": "High-stakes clash against #6 AP Indiana Hoosiers."
+          "summary": "High-stakes clash against #5 AP Indiana Hoosiers."
         },
         "oppId": "indiana",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 45.6,
+        "mcOverProb": 28.6,
+        "mcRecommendedAts": "IU -5.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 19,
+          "p75": 26,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 19,
+          "p50": 25,
+          "p75": 32,
+          "p90": 38
+        }
       },
       {
         "id": "mich-w9",
@@ -1614,18 +2163,37 @@ var TEAMS_DATABASE = {
         "location": "Piscataway, NJ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.5,
+        "vegasSpread": -18.3,
         "overUnder": 52.5,
-        "baseWinProb": 90,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 94,
+        "projScoreUt": 32,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Michigan front seven vs Rutgers Scarlet Knights rushing attack.",
           "summary": "Regular season non-conference test against Rutgers Scarlet Knights."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 57.4,
+        "mcOverProb": 25.4,
+        "mcRecommendedAts": "Michigan -18.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 31,
+          "p75": 40,
+          "p90": 46
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 21
+        }
       },
       {
         "id": "mich-w10",
@@ -1646,18 +2214,37 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.5,
+        "vegasSpread": -23.3,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 35,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Michigan front seven vs Michigan State Spartans rushing attack.",
           "summary": "Regular season non-conference test against Michigan State Spartans."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 63.8,
+        "mcOverProb": 22.8,
+        "mcRecommendedAts": "Michigan -23.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 42,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 12,
+          "p90": 17
+        }
       },
       {
         "id": "mich-w11",
@@ -1668,7 +2255,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Oregon Ducks",
         "oppAbbr": "ORE",
-        "oppRank": "#2 AP",
+        "oppRank": "#6 AP",
         "oppBadge": "ORE",
         "oppColor": "#154733",
         "oppSecondary": "#FEE123",
@@ -1678,18 +2265,37 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 9.0,
+        "vegasSpread": 12.3,
         "overUnder": 52.5,
-        "baseWinProb": 24,
-        "projScoreUt": 22,
-        "projScoreOpp": 31,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 12,
+        "projScoreUt": 14,
+        "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Oregon Ducks secondary.",
-          "summary": "High-stakes clash against #2 AP Oregon Ducks."
+          "summary": "High-stakes clash against #6 AP Oregon Ducks."
         },
         "oppId": "oregon",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 42.2,
+        "mcOverProb": 24.7,
+        "mcRecommendedAts": "ORE -12.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 20,
+          "p90": 26
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 23,
+          "p50": 30,
+          "p75": 36,
+          "p90": 42
+        }
       },
       {
         "id": "mich-w12",
@@ -1710,18 +2316,37 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.5,
+        "vegasSpread": -23.3,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 35,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Michigan front seven vs UCLA Bruins rushing attack.",
           "summary": "Regular season non-conference test against UCLA Bruins."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 63.8,
+        "mcOverProb": 22.4,
+        "mcRecommendedAts": "Michigan -23.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 22,
+          "p25": 27,
+          "p50": 34,
+          "p75": 42,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "mich-w13",
@@ -1742,11 +2367,12 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 10.5,
+        "vegasSpread": 20.6,
         "overUnder": 52.5,
-        "baseWinProb": 21,
-        "projScoreUt": 21,
-        "projScoreOpp": 32,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 3,
+        "projScoreUt": 10,
+        "projScoreOpp": 34,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Ohio State Buckeyes secondary.",
@@ -1754,12 +2380,31 @@ var TEAMS_DATABASE = {
         },
         "oppId": "ohiostate",
         "is_tracked": true,
-        "rivalryName": "THE GAME"
+        "rivalryName": "THE GAME",
+        "mcCoverProb": 34.4,
+        "mcOverProb": 23.1,
+        "mcRecommendedAts": "OSU -20.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 9,
+          "p75": 13,
+          "p90": 20
+        },
+        "mcScoreDistOpp": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 47
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/130.png",
     "badgeText": "MICH",
-    "confirmedStarterQb": "Bryce Underwood"
+    "confirmedStarterQb": "Bryce Underwood",
+    "seasonBaselineSpRating": 24.8
   },
   "ohiostate": {
     "id": "ohiostate",
@@ -1770,7 +2415,7 @@ var TEAMS_DATABASE = {
     "mascot": "Buckeyes",
     "conference": "Big Ten",
     "apRank": "#1 AP",
-    "apPoints": "1,672 PTS",
+    "apPoints": "1,684 PTS (46 1st)",
     "headCoach": "Ryan Day",
     "defensiveCoordinator": "Matt Patricia",
     "offensiveCoordinator": "Arthur Smith",
@@ -1788,7 +2433,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#1A1010",
       "bgBase": "#0D0808"
     },
-    "baseSpRating": 32.5,
+    "baseSpRating": 35.39,
     "playoffContenderRank": 1,
     "sliderLabels": {
       "qb": "Julian Sayin Arthur Smith Passing Attack",
@@ -1817,18 +2462,23 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -31.5,
-        "overUnder": 52.5,
+        "vegasSpread": -50.5,
+        "overUnder": 55.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 99,
-        "projScoreUt": 48,
-        "projScoreOpp": 7,
+        "projScoreUt": 56,
+        "projScoreOpp": 3,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ohio State front seven vs Ball State Cardinals rushing attack.",
           "summary": "Regular season non-conference test against Ball State Cardinals."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 56,
+        "finalOppScore": 3,
+        "finalWin": true
       },
       {
         "id": "osu-w2",
@@ -1839,7 +2489,7 @@ var TEAMS_DATABASE = {
         "tv": "ABC",
         "opponent": "Texas Longhorns",
         "oppAbbr": "TEX",
-        "oppRank": "#5 AP",
+        "oppRank": "#4 AP",
         "oppBadge": "TEX",
         "oppColor": "#BF5700",
         "oppSecondary": "#FFFFFF",
@@ -1851,16 +2501,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": 2.0,
         "overUnder": 52.5,
-        "baseWinProb": 44,
-        "projScoreUt": 25,
-        "projScoreOpp": 27,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 36,
+        "projScoreUt": 21,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State quarterback play vs Texas Longhorns secondary.",
-          "summary": "High-stakes clash against #5 AP Texas Longhorns."
+          "summary": "High-stakes clash against #3 AP Texas Longhorns."
         },
         "oppId": "texas",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 37.8,
+        "mcOverProb": 35.2,
+        "mcRecommendedAts": "TEX -2.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 9,
+          "p25": 14,
+          "p50": 20,
+          "p75": 28,
+          "p90": 34
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 40
+        }
       },
       {
         "id": "osu-w3",
@@ -1881,18 +2550,37 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -31.0,
+        "vegasSpread": -44.1,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 50,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ohio State front seven vs Kent State Golden Flashes rushing attack.",
           "summary": "Regular season non-conference test against Kent State Golden Flashes."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 47.8,
+        "mcOverProb": 59.2,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 36,
+          "p25": 42,
+          "p50": 50,
+          "p75": 58,
+          "p90": 65
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "osu-w4",
@@ -1913,18 +2601,37 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -31.0,
+        "vegasSpread": -44.1,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 50,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ohio State front seven vs Illinois Fighting Illini rushing attack.",
           "summary": "Regular season non-conference test against Illinois Fighting Illini."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 47.4,
+        "mcOverProb": 56.5,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 35,
+          "p25": 41,
+          "p50": 49,
+          "p75": 57,
+          "p90": 65
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 3,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "osu-w5",
@@ -1935,7 +2642,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Iowa Hawkeyes",
         "oppAbbr": "IOWA",
-        "oppRank": "#22 AP",
+        "oppRank": "#21 AP",
         "oppBadge": "IOWA",
         "oppColor": "#FFE100",
         "oppSecondary": "#000000",
@@ -1945,18 +2652,37 @@ var TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -8.5,
+        "vegasSpread": -12.2,
         "overUnder": 52.5,
-        "baseWinProb": 74,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 88,
         "projScoreUt": 30,
-        "projScoreOpp": 22,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State quarterback play vs Iowa Hawkeyes secondary.",
-          "summary": "High-stakes clash against #22 AP Iowa Hawkeyes."
+          "summary": "High-stakes clash against #21 AP Iowa Hawkeyes."
         },
         "oppId": "iowa",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 65.2,
+        "mcOverProb": 25.3,
+        "mcRecommendedAts": "Ohio State -12.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 19,
+          "p90": 24
+        }
       },
       {
         "id": "osu-w6",
@@ -1977,18 +2703,37 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -31.0,
+        "vegasSpread": -44.1,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 50,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ohio State front seven vs Maryland Terrapins rushing attack.",
           "summary": "Regular season non-conference test against Maryland Terrapins."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 47.8,
+        "mcOverProb": 58.4,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 35,
+          "p25": 41,
+          "p50": 50,
+          "p75": 58,
+          "p90": 65
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "osu-w7",
@@ -1999,7 +2744,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Indiana Hoosiers",
         "oppAbbr": "IU",
-        "oppRank": "#6 AP",
+        "oppRank": "#5 AP",
         "oppBadge": "IND",
         "oppColor": "#990000",
         "oppSecondary": "#EEEDEB",
@@ -2009,18 +2754,37 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -4.0,
+        "vegasSpread": -5.9,
         "overUnder": 52.5,
-        "baseWinProb": 62,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 73,
         "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State quarterback play vs Indiana Hoosiers secondary.",
-          "summary": "High-stakes clash against #6 AP Indiana Hoosiers."
+          "summary": "High-stakes clash against #5 AP Indiana Hoosiers."
         },
         "oppId": "indiana",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 60.2,
+        "mcOverProb": 32.1,
+        "mcRecommendedAts": "Ohio State -5.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        }
       },
       {
         "id": "osu-w9",
@@ -2031,7 +2795,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "USC Trojans",
         "oppAbbr": "USC",
-        "oppRank": "#15 AP",
+        "oppRank": "#14 AP",
         "oppBadge": "USC",
         "oppColor": "#990000",
         "oppSecondary": "#FFC72C",
@@ -2041,18 +2805,37 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -3.5,
+        "vegasSpread": -6.7,
         "overUnder": 52.5,
-        "baseWinProb": 61,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 76,
+        "projScoreUt": 29,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State quarterback play vs USC Trojans secondary.",
-          "summary": "High-stakes clash against #15 AP USC Trojans."
+          "summary": "High-stakes clash against #14 AP USC Trojans."
         },
         "oppId": "usc",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 60.9,
+        "mcOverProb": 33.2,
+        "mcRecommendedAts": "Ohio State -6.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 28,
+          "p75": 35,
+          "p90": 43
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        }
       },
       {
         "id": "osu-w10",
@@ -2063,7 +2846,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Oregon Ducks",
         "oppAbbr": "ORE",
-        "oppRank": "#2 AP",
+        "oppRank": "#6 AP",
         "oppBadge": "ORE",
         "oppColor": "#154733",
         "oppSecondary": "#FEE123",
@@ -2073,18 +2856,37 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -4.5,
+        "vegasSpread": -12.2,
         "overUnder": 52.5,
-        "baseWinProb": 64,
-        "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 91,
+        "projScoreUt": 32,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State quarterback play vs Oregon Ducks secondary.",
-          "summary": "High-stakes clash against #2 AP Oregon Ducks."
+          "summary": "High-stakes clash against #6 AP Oregon Ducks."
         },
         "oppId": "oregon",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 64.7,
+        "mcOverProb": 31.2,
+        "mcRecommendedAts": "Ohio State -12.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 31,
+          "p75": 40,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 20,
+          "p90": 26
+        }
       },
       {
         "id": "osu-w11",
@@ -2105,18 +2907,37 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -31.0,
+        "vegasSpread": -44.1,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 50,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ohio State front seven vs Northwestern Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Northwestern Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 48.1,
+        "mcOverProb": 58.1,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 35,
+          "p25": 41,
+          "p50": 50,
+          "p75": 58,
+          "p90": 65
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "osu-w12",
@@ -2137,18 +2958,37 @@ var TEAMS_DATABASE = {
         "location": "Lincoln, NE",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -25.0,
+        "vegasSpread": -37.6,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ohio State front seven vs Nebraska Cornhuskers rushing attack.",
           "summary": "Regular season non-conference test against Nebraska Cornhuskers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 55.4,
+        "mcOverProb": 45.7,
+        "mcRecommendedAts": "Ohio State -37.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 37,
+          "p50": 45,
+          "p75": 52,
+          "p90": 60
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "osu-w13",
@@ -2159,7 +2999,7 @@ var TEAMS_DATABASE = {
         "tv": "FOX",
         "opponent": "Michigan Wolverines",
         "oppAbbr": "MICH",
-        "oppRank": "#16 AP",
+        "oppRank": "RV",
         "oppBadge": "MICH",
         "oppColor": "#00274C",
         "oppSecondary": "#FFCB05",
@@ -2169,24 +3009,44 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -10.5,
+        "vegasSpread": -20.6,
         "overUnder": 52.5,
-        "baseWinProb": 79,
-        "projScoreUt": 32,
-        "projScoreOpp": 21,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 36,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State quarterback play vs Michigan Wolverines secondary.",
-          "summary": "High-stakes clash against #16 AP Michigan Wolverines."
+          "summary": "High-stakes clash against #24 AP Michigan Wolverines."
         },
         "oppId": "michigan",
         "is_tracked": true,
-        "rivalryName": "THE GAME"
+        "rivalryName": "THE GAME",
+        "mcCoverProb": 76.7,
+        "mcOverProb": 26.5,
+        "mcRecommendedAts": "Ohio State -20.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 43,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
     "badgeText": "OSU",
-    "confirmedStarterQb": "Julian Sayin"
+    "confirmedStarterQb": "Julian Sayin",
+    "seasonBaselineSpRating": 32.5
   },
   "georgia": {
     "id": "georgia",
@@ -2196,8 +3056,8 @@ var TEAMS_DATABASE = {
     "abbr": "UGA",
     "mascot": "Bulldogs",
     "conference": "SEC",
-    "apRank": "#3 AP",
-    "apPoints": "1,540 PTS (8 1st)",
+    "apRank": "#2 AP",
+    "apPoints": "1,532 PTS",
     "headCoach": "Kirby Smart",
     "defensiveCoordinator": "Glenn Schumann",
     "offensiveCoordinator": "Mike Bobo",
@@ -2215,8 +3075,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#170C0F",
       "bgBase": "#0A0507"
     },
-    "baseSpRating": 32.0,
-    "playoffContenderRank": 3,
+    "baseSpRating": 36.85,
+    "playoffContenderRank": 2,
     "sliderLabels": {
       "qb": "Gunner Stockton Execution",
       "ground": "Nate Frazier & Chauncey Bowens Ground Attack",
@@ -2244,18 +3104,23 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -9.5,
-        "overUnder": 52.5,
+        "vegasSpread": -49.5,
+        "overUnder": 55.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 91,
-        "projScoreUt": 38,
-        "projScoreOpp": 20,
+        "projScoreUt": 63,
+        "projScoreOpp": 3,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Georgia offensive line vs Tennessee State Tigers defensive front.",
           "summary": "Non-conference matchup in Athens, GA against FCS challenger Tennessee State Tigers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 63,
+        "finalOppScore": 3,
+        "finalWin": true
       },
       {
         "id": "uga-w2",
@@ -2278,16 +3143,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -30.5,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 11,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 51,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Georgia front seven vs Western Kentucky Hilltoppers rushing attack.",
           "summary": "Regular season non-conference test against Western Kentucky Hilltoppers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 89.5,
+        "mcOverProb": 63.5,
+        "mcRecommendedAts": "Georgia -30.5",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 37,
+          "p25": 44,
+          "p50": 51,
+          "p75": 59,
+          "p90": 66
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "uga-w3",
@@ -2308,18 +3192,37 @@ var TEAMS_DATABASE = {
         "location": "Fayetteville, AR",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -40.5,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 47,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Georgia front seven vs Arkansas Razorbacks rushing attack.",
           "summary": "Regular season non-conference test against Arkansas Razorbacks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 53.2,
+        "mcOverProb": 50.0,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 33,
+          "p25": 40,
+          "p50": 47,
+          "p75": 55,
+          "p90": 62
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "uga-w4",
@@ -2330,7 +3233,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Oklahoma Sooners",
         "oppAbbr": "OU",
-        "oppRank": "#10 AP",
+        "oppRank": "#11 AP",
         "oppBadge": "OU",
         "oppColor": "#841617",
         "oppSecondary": "#FDF9D8",
@@ -2340,18 +3243,37 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -9.0,
+        "vegasSpread": -12.4,
         "overUnder": 52.5,
-        "baseWinProb": 75,
-        "projScoreUt": 31,
-        "projScoreOpp": 22,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 91,
+        "projScoreUt": 32,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Georgia quarterback play vs Oklahoma Sooners secondary.",
           "summary": "High-stakes clash against #10 AP Oklahoma Sooners."
         },
         "oppId": "oklahoma",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 66.8,
+        "mcOverProb": 30.2,
+        "mcRecommendedAts": "Georgia -12.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 20,
+          "p90": 25
+        }
       },
       {
         "id": "uga-w5",
@@ -2372,18 +3294,37 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -30.5,
+        "vegasSpread": -47.0,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 51,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Georgia front seven vs Vanderbilt Commodores rushing attack.",
           "summary": "Regular season non-conference test against Vanderbilt Commodores."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 44.3,
+        "mcOverProb": 61.8,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 37,
+          "p25": 44,
+          "p50": 51,
+          "p75": 59,
+          "p90": 66
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 0,
+          "p50": 3,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "uga-w6",
@@ -2394,7 +3335,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Alabama Crimson Tide",
         "oppAbbr": "ALA",
-        "oppRank": "#13 AP",
+        "oppRank": "#12 AP",
         "oppBadge": "BAMA",
         "oppColor": "#9E1B32",
         "oppSecondary": "#FFFFFF",
@@ -2404,18 +3345,37 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.5,
+        "vegasSpread": -4.3,
         "overUnder": 52.5,
-        "baseWinProb": 58,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 70,
+        "projScoreUt": 27,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Georgia quarterback play vs Alabama Crimson Tide secondary.",
-          "summary": "High-stakes clash against #13 AP Alabama Crimson Tide."
+          "summary": "High-stakes clash against #12 AP Alabama Crimson Tide."
         },
         "oppId": "alabama",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 58.0,
+        "mcOverProb": 33.4,
+        "mcRecommendedAts": "Georgia -4.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        }
       },
       {
         "id": "uga-w7",
@@ -2436,18 +3396,37 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -30.5,
+        "vegasSpread": -47.0,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 51,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Georgia front seven vs Auburn Tigers rushing attack.",
           "summary": "Regular season non-conference test against Auburn Tigers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 43.4,
+        "mcOverProb": 62.4,
+        "mcRecommendedAts": "AUB +47.0",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 37,
+          "p25": 43,
+          "p50": 51,
+          "p75": 59,
+          "p90": 66
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "uga-w9",
@@ -2468,11 +3447,12 @@ var TEAMS_DATABASE = {
         "location": "Atlanta, GA",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -30.5,
+        "vegasSpread": -45.5,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 50,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Georgia front seven vs Florida Gators rushing attack.",
@@ -2480,7 +3460,25 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "rivalryName": "WORLD'S LARGEST OUTDOOR COCKTAIL PARTY"
+        "rivalryName": "WORLD'S LARGEST OUTDOOR COCKTAIL PARTY",
+        "mcCoverProb": 45.2,
+        "mcOverProb": 59.5,
+        "mcRecommendedAts": "FLA +45.5",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 36,
+          "p25": 42,
+          "p50": 50,
+          "p75": 58,
+          "p90": 65
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 3,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "uga-w10",
@@ -2501,18 +3499,37 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -3.0,
+        "vegasSpread": -9.1,
         "overUnder": 52.5,
-        "baseWinProb": 59,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 83,
+        "projScoreUt": 30,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Georgia quarterback play vs Ole Miss Rebels secondary.",
-          "summary": "High-stakes clash against #9 AP Ole Miss Rebels."
+          "summary": "High-stakes clash against #11 AP Ole Miss Rebels."
         },
         "oppId": "olemiss",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 62.1,
+        "mcOverProb": 33.0,
+        "mcRecommendedAts": "Georgia -9.1",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 16,
+          "p75": 23,
+          "p90": 30
+        }
       },
       {
         "id": "uga-w11",
@@ -2523,7 +3540,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Missouri Tigers",
         "oppAbbr": "MIZ",
-        "oppRank": "#25 AP",
+        "oppRank": "#23 AP",
         "oppBadge": "MIZ",
         "oppColor": "#F1B82D",
         "oppSecondary": "#000000",
@@ -2533,18 +3550,37 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -12.0,
+        "vegasSpread": -21.4,
         "overUnder": 52.5,
-        "baseWinProb": 82,
-        "projScoreUt": 32,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 37,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Georgia quarterback play vs Missouri Tigers secondary.",
-          "summary": "High-stakes clash against #25 AP Missouri Tigers."
+          "summary": "High-stakes clash against #23 AP Missouri Tigers."
         },
         "oppId": "missouri",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 75.4,
+        "mcOverProb": 27.2,
+        "mcRecommendedAts": "Georgia -21.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 12,
+          "p90": 16
+        }
       },
       {
         "id": "uga-w12",
@@ -2565,18 +3601,37 @@ var TEAMS_DATABASE = {
         "location": "Columbia, SC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -40.5,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 47,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Georgia front seven vs South Carolina Gamecocks rushing attack.",
           "summary": "Regular season non-conference test against South Carolina Gamecocks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 52.3,
+        "mcOverProb": 49.7,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 33,
+          "p25": 39,
+          "p50": 47,
+          "p75": 55,
+          "p90": 62
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "uga-w13",
@@ -2597,23 +3652,43 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -30.5,
+        "vegasSpread": -47.0,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 11,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 52,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Georgia front seven vs Georgia Tech Yellow Jackets rushing attack.",
           "summary": "Regular season non-conference test against Georgia Tech Yellow Jackets."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 46.6,
+        "mcOverProb": 63.7,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 37,
+          "p25": 44,
+          "p50": 51,
+          "p75": 59,
+          "p90": 66
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 0,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png",
     "badgeText": "UGA",
-    "confirmedStarterQb": "Gunner Stockton"
+    "confirmedStarterQb": "Gunner Stockton",
+    "seasonBaselineSpRating": 32.0
   },
   "alabama": {
     "id": "alabama",
@@ -2623,8 +3698,8 @@ var TEAMS_DATABASE = {
     "abbr": "BAMA",
     "mascot": "Crimson Tide",
     "conference": "SEC",
-    "apRank": "#13 AP",
-    "apPoints": "845 PTS",
+    "apRank": "#12 AP",
+    "apPoints": "910 PTS",
     "headCoach": "Kalen DeBoer",
     "defensiveCoordinator": "Kane Wommack",
     "offensiveCoordinator": "Nick Sheridan",
@@ -2642,8 +3717,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#180B0E",
       "bgBase": "#0C0507"
     },
-    "baseSpRating": 26.5,
-    "playoffContenderRank": 13,
+    "baseSpRating": 28.59,
+    "playoffContenderRank": 12,
     "sliderLabels": {
       "qb": "Keelon Russell Air Attack",
       "ground": "Daniel Hill & Kevin Riley Physical Ground Attack",
@@ -2671,18 +3746,23 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -28.5,
         "overUnder": 52.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "projScoreUt": 48,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Alabama front seven vs East Carolina Pirates rushing attack.",
           "summary": "Regular season non-conference test against East Carolina Pirates."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 48,
+        "finalOppScore": 10,
+        "finalWin": true
       },
       {
         "id": "bama-w2",
@@ -2705,16 +3785,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -19.0,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Alabama front seven vs Kentucky Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Kentucky Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 90.0,
+        "mcOverProb": 34.3,
+        "mcRecommendedAts": "Alabama -19.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "bama-w3",
@@ -2725,7 +3824,7 @@ var TEAMS_DATABASE = {
         "tv": "ABC",
         "opponent": "Florida State Seminoles",
         "oppAbbr": "FSU",
-        "oppRank": "RV",
+        "oppRank": "NR",
         "oppBadge": "FSU",
         "oppColor": "#782F40",
         "oppSecondary": "#CEB888",
@@ -2735,18 +3834,37 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -3.5,
+        "vegasSpread": -8.9,
         "overUnder": 52.5,
-        "baseWinProb": 65,
-        "projScoreUt": 31,
-        "projScoreOpp": 24,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 85,
+        "projScoreUt": 30,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Alabama quarterback play vs Florida State Seminoles secondary.",
-          "summary": "High-stakes clash against RV Florida State Seminoles."
+          "summary": "High-stakes clash against NR Florida State Seminoles."
         },
         "oppId": "floridastate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 64.2,
+        "mcOverProb": 33.1,
+        "mcRecommendedAts": "Alabama -8.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 16,
+          "p75": 23,
+          "p90": 28
+        }
       },
       {
         "id": "bama-w4",
@@ -2767,18 +3885,37 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -25.0,
+        "vegasSpread": -37.6,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Alabama front seven vs South Carolina Gamecocks rushing attack.",
           "summary": "Regular season non-conference test against South Carolina Gamecocks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 56.4,
+        "mcOverProb": 46.3,
+        "mcRecommendedAts": "Alabama -37.6",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 38,
+          "p50": 45,
+          "p75": 53,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "bama-w5",
@@ -2799,18 +3936,37 @@ var TEAMS_DATABASE = {
         "location": "Starkville, MS",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -31.1,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Alabama front seven vs Mississippi State Bulldogs rushing attack.",
           "summary": "Regular season non-conference test against Mississippi State Bulldogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 58.9,
+        "mcOverProb": 34.9,
+        "mcRecommendedAts": "Alabama -31.1",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "bama-w6",
@@ -2821,7 +3977,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Georgia Bulldogs",
         "oppAbbr": "UGA",
-        "oppRank": "#3 AP",
+        "oppRank": "#2 AP",
         "oppBadge": "UGA",
         "oppColor": "#BA0C2F",
         "oppSecondary": "#000000",
@@ -2831,18 +3987,37 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.5,
+        "vegasSpread": 4.3,
         "overUnder": 52.5,
-        "baseWinProb": 42,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 36,
+        "projScoreUt": 21,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Alabama quarterback play vs Georgia Bulldogs secondary.",
-          "summary": "High-stakes clash against #3 AP Georgia Bulldogs."
+          "summary": "High-stakes clash against #2 AP Georgia Bulldogs."
         },
         "oppId": "georgia",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 48.2,
+        "mcOverProb": 32.8,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 9,
+          "p25": 14,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 19,
+          "p50": 26,
+          "p75": 33,
+          "p90": 40
+        }
       },
       {
         "id": "bama-w7",
@@ -2853,7 +4028,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Tennessee Volunteers",
         "oppAbbr": "TENN",
-        "oppRank": "#20 AP",
+        "oppRank": "#18 AP",
         "oppBadge": "TENN",
         "oppColor": "#FF8200",
         "oppSecondary": "#FFFFFF",
@@ -2863,19 +4038,38 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.5,
+        "vegasSpread": 1.4,
         "overUnder": 52.5,
-        "baseWinProb": 48,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 47,
+        "projScoreUt": 23,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Alabama quarterback play vs Tennessee Volunteers secondary.",
-          "summary": "High-stakes clash against #20 AP Tennessee Volunteers."
+          "summary": "High-stakes clash against #18 AP Tennessee Volunteers."
         },
         "oppId": "tennessee",
         "is_tracked": true,
-        "rivalryName": "THIRD SATURDAY IN OCTOBER"
+        "rivalryName": "THIRD SATURDAY IN OCTOBER",
+        "mcCoverProb": 49.1,
+        "mcOverProb": 35.8,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        }
       },
       {
         "id": "bama-w8",
@@ -2886,7 +4080,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas A&M Aggies",
         "oppAbbr": "TA&M",
-        "oppRank": "#8 AP",
+        "oppRank": "#10 AP",
         "oppBadge": "TAMU",
         "oppColor": "#500000",
         "oppSecondary": "#FFFFFF",
@@ -2896,18 +4090,37 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -3.0,
+        "vegasSpread": -3.6,
         "overUnder": 52.5,
-        "baseWinProb": 59,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 66,
+        "projScoreUt": 26,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Alabama quarterback play vs Texas A&M Aggies secondary.",
-          "summary": "High-stakes clash against #8 AP Texas A&M Aggies."
+          "summary": "High-stakes clash against #9 AP Texas A&M Aggies."
         },
         "oppId": "texasam",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 56.9,
+        "mcOverProb": 33.2,
+        "mcRecommendedAts": "Alabama -3.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 40
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        }
       },
       {
         "id": "bama-w10",
@@ -2918,7 +4131,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "LSU Tigers",
         "oppAbbr": "LSU",
-        "oppRank": "#11 AP",
+        "oppRank": "#8 AP",
         "oppBadge": "LSU",
         "oppColor": "#461D7C",
         "oppSecondary": "#FDD023",
@@ -2928,18 +4141,37 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.0,
+        "vegasSpread": 8.4,
         "overUnder": 52.5,
-        "baseWinProb": 35,
-        "projScoreUt": 24,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 23,
+        "projScoreUt": 18,
         "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Alabama quarterback play vs LSU Tigers secondary.",
-          "summary": "High-stakes clash against #11 AP LSU Tigers."
+          "summary": "High-stakes clash against #8 AP LSU Tigers."
         },
         "oppId": "lsu",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 44.2,
+        "mcOverProb": 33.3,
+        "mcRecommendedAts": "LSU -8.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 14,
+          "p25": 21,
+          "p50": 29,
+          "p75": 36,
+          "p90": 42
+        }
       },
       {
         "id": "bama-w11",
@@ -2960,18 +4192,37 @@ var TEAMS_DATABASE = {
         "location": "Nashville, TN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -31.1,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Alabama front seven vs Vanderbilt Commodores rushing attack.",
           "summary": "Regular season non-conference test against Vanderbilt Commodores."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 59.8,
+        "mcOverProb": 34.5,
+        "mcRecommendedAts": "Alabama -31.1",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "bama-w12",
@@ -2992,18 +4243,37 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -43.5,
+        "vegasSpread": -64.3,
         "overUnder": 52.5,
+        "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
-        "projScoreUt": 48,
-        "projScoreOpp": 4,
+        "projScoreUt": 58,
+        "projScoreOpp": 5,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Alabama offensive line vs Chattanooga Mocs defensive front.",
           "summary": "Non-conference matchup in Tuscaloosa, AL against FCS challenger Chattanooga Mocs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 17.5,
+        "mcOverProb": 78.0,
+        "mcRecommendedAts": "UTC +64.3",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 43,
+          "p25": 50,
+          "p50": 58,
+          "p75": 65,
+          "p90": 72
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 0,
+          "p50": 3,
+          "p75": 7,
+          "p90": 13
+        }
       },
       {
         "id": "bama-w13",
@@ -3024,11 +4294,12 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -25.0,
+        "vegasSpread": -37.6,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Alabama front seven vs Auburn Tigers rushing attack.",
@@ -3036,12 +4307,31 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "rivalryName": "IRON BOWL"
+        "rivalryName": "IRON BOWL",
+        "mcCoverProb": 55.6,
+        "mcOverProb": 47.7,
+        "mcRecommendedAts": "Alabama -37.6",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 37,
+          "p50": 45,
+          "p75": 54,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png",
     "badgeText": "BAMA",
-    "confirmedStarterQb": "Keelon Russell"
+    "confirmedStarterQb": "Keelon Russell",
+    "seasonBaselineSpRating": 26.5
   },
   "oregon": {
     "id": "oregon",
@@ -3051,8 +4341,8 @@ var TEAMS_DATABASE = {
     "abbr": "ORE",
     "mascot": "Ducks",
     "conference": "Big Ten",
-    "apRank": "#2 AP",
-    "apPoints": "1,597 PTS (14 1st)",
+    "apRank": "#6 AP",
+    "apPoints": "1,422 PTS (3 1st)",
     "headCoach": "Dan Lanning",
     "defensiveCoordinator": "Chris Hampton",
     "offensiveCoordinator": "Will Stein",
@@ -3070,8 +4360,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0B1A12",
       "bgBase": "#050F0A"
     },
-    "baseSpRating": 31.0,
-    "playoffContenderRank": 2,
+    "baseSpRating": 27.15,
+    "playoffContenderRank": 6,
     "sliderLabels": {
       "qb": "Dante Moore Execution",
       "ground": "Jordon Davison & Dierre Hill Jr. Ground Attack",
@@ -3089,7 +4379,7 @@ var TEAMS_DATABASE = {
         "tv": "CBS",
         "opponent": "Boise State Broncos",
         "oppAbbr": "BOIS",
-        "oppRank": "NR",
+        "oppRank": "RV",
         "oppBadge": "BSU",
         "oppColor": "#0033A0",
         "oppSecondary": "#D64309",
@@ -3099,18 +4389,23 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -10.5,
-        "overUnder": 52.5,
+        "vegasSpread": -24.5,
+        "overUnder": 53.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 85,
-        "projScoreUt": 35,
-        "projScoreOpp": 21,
+        "projScoreUt": 34,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oregon quarterback play vs Boise State Broncos secondary.",
-          "summary": "High-stakes clash against NR Boise State Broncos."
+          "summary": "High-stakes clash against RV Boise State Broncos."
         },
         "oppId": "boisestate",
-        "is_tracked": true
+        "is_tracked": true,
+        "isFinal": true,
+        "finalTeamScore": 34,
+        "finalOppScore": 27,
+        "finalWin": true
       },
       {
         "id": "ore-w2",
@@ -3133,16 +4428,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -23.5,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oregon front seven vs Oklahoma State Cowboys rushing attack.",
           "summary": "Regular season non-conference test against Oklahoma State Cowboys."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 82.0,
+        "mcOverProb": 34.5,
+        "mcRecommendedAts": "Oregon -23.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 41,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "ore-w3",
@@ -3163,18 +4477,37 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -48.0,
+        "vegasSpread": -63.3,
         "overUnder": 52.5,
+        "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
-        "projScoreUt": 50,
-        "projScoreOpp": 3,
+        "projScoreUt": 57,
+        "projScoreOpp": 5,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Oregon offensive line vs Portland State Vikings defensive front.",
           "summary": "Non-conference matchup in Eugene, OR against FCS challenger Portland State Vikings."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 17.5,
+        "mcOverProb": 78.2,
+        "mcRecommendedAts": "PRST +63.3",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 43,
+          "p25": 50,
+          "p50": 58,
+          "p75": 65,
+          "p90": 72
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 0,
+          "p50": 3,
+          "p75": 7,
+          "p90": 10
+        }
       },
       {
         "id": "ore-w4",
@@ -3185,7 +4518,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "USC Trojans",
         "oppAbbr": "USC",
-        "oppRank": "#15 AP",
+        "oppRank": "#14 AP",
         "oppBadge": "USC",
         "oppColor": "#990000",
         "oppSecondary": "#FFC72C",
@@ -3195,18 +4528,37 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.0,
+        "vegasSpread": 1.6,
         "overUnder": 52.5,
-        "baseWinProb": 56,
-        "projScoreUt": 27,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 47,
+        "projScoreUt": 23,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oregon quarterback play vs USC Trojans secondary.",
-          "summary": "High-stakes clash against #15 AP USC Trojans."
+          "summary": "High-stakes clash against #14 AP USC Trojans."
         },
         "oppId": "usc",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 49.1,
+        "mcOverProb": 33.1,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        }
       },
       {
         "id": "ore-w6",
@@ -3227,18 +4579,37 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -29.5,
+        "vegasSpread": -36.5,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 41,
-        "projScoreOpp": 12,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oregon front seven vs UCLA Bruins rushing attack.",
           "summary": "Regular season non-conference test against UCLA Bruins."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 56.2,
+        "mcOverProb": 45.3,
+        "mcRecommendedAts": "Oregon -36.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 37,
+          "p50": 44,
+          "p75": 52,
+          "p90": 60
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "ore-w7",
@@ -3259,18 +4630,37 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -29.5,
+        "vegasSpread": -36.5,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 41,
-        "projScoreOpp": 12,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oregon front seven vs Nebraska Cornhuskers rushing attack.",
           "summary": "Regular season non-conference test against Nebraska Cornhuskers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 57.5,
+        "mcOverProb": 43.1,
+        "mcRecommendedAts": "Oregon -36.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 37,
+          "p50": 44,
+          "p75": 52,
+          "p90": 59
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "ore-w8",
@@ -3291,18 +4681,37 @@ var TEAMS_DATABASE = {
         "location": "Champaign, IL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.5,
+        "vegasSpread": -30.0,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oregon front seven vs Illinois Fighting Illini rushing attack.",
           "summary": "Regular season non-conference test against Illinois Fighting Illini."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 63.1,
+        "mcOverProb": 33.7,
+        "mcRecommendedAts": "Oregon -30.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 41,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "ore-w9",
@@ -3323,18 +4732,37 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -29.5,
+        "vegasSpread": -36.5,
         "overUnder": 52.5,
-        "baseWinProb": 98,
-        "projScoreUt": 41,
-        "projScoreOpp": 12,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oregon front seven vs Northwestern Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Northwestern Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 54.3,
+        "mcOverProb": 44.9,
+        "mcRecommendedAts": "Oregon -36.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 37,
+          "p50": 44,
+          "p75": 52,
+          "p90": 59
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "ore-w10",
@@ -3355,18 +4783,37 @@ var TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 4.5,
+        "vegasSpread": 12.2,
         "overUnder": 52.5,
-        "baseWinProb": 36,
-        "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 13,
+        "projScoreUt": 15,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oregon quarterback play vs Ohio State Buckeyes secondary.",
           "summary": "High-stakes clash against #1 AP Ohio State Buckeyes."
         },
         "oppId": "ohiostate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 39.4,
+        "mcOverProb": 31.2,
+        "mcRecommendedAts": "OSU -12.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 14,
+          "p75": 21,
+          "p90": 27
+        },
+        "mcScoreDistOpp": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 44
+        }
       },
       {
         "id": "ore-w11",
@@ -3377,7 +4824,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Michigan Wolverines",
         "oppAbbr": "MICH",
-        "oppRank": "#16 AP",
+        "oppRank": "RV",
         "oppBadge": "MICH",
         "oppColor": "#00274C",
         "oppSecondary": "#FFCB05",
@@ -3387,18 +4834,37 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -9.0,
+        "vegasSpread": -12.3,
         "overUnder": 52.5,
-        "baseWinProb": 76,
-        "projScoreUt": 31,
-        "projScoreOpp": 22,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 91,
+        "projScoreUt": 32,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oregon quarterback play vs Michigan Wolverines secondary.",
-          "summary": "High-stakes clash against #16 AP Michigan Wolverines."
+          "summary": "High-stakes clash against #24 AP Michigan Wolverines."
         },
         "oppId": "michigan",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 65.6,
+        "mcOverProb": 30.4,
+        "mcRecommendedAts": "Oregon -12.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 20,
+          "p90": 27
+        }
       },
       {
         "id": "ore-w12",
@@ -3419,18 +4885,37 @@ var TEAMS_DATABASE = {
         "location": "East Lansing, MI",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.5,
+        "vegasSpread": -30.0,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 40,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oregon front seven vs Michigan State Spartans rushing attack.",
           "summary": "Regular season non-conference test against Michigan State Spartans."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 59.8,
+        "mcOverProb": 34.0,
+        "mcRecommendedAts": "Oregon -30.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 40,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "ore-w13",
@@ -3441,7 +4926,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Washington Huskies",
         "oppAbbr": "WASH",
-        "oppRank": "#17 AP",
+        "oppRank": "#19 AP",
         "oppBadge": "WASH",
         "oppColor": "#4B2E83",
         "oppSecondary": "#B7A57A",
@@ -3451,24 +4936,44 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -11.5,
+        "vegasSpread": -12.9,
         "overUnder": 52.5,
-        "baseWinProb": 81,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 92,
         "projScoreUt": 32,
-        "projScoreOpp": 20,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oregon quarterback play vs Washington Huskies secondary.",
-          "summary": "High-stakes clash against #17 AP Washington Huskies."
+          "summary": "High-stakes clash against #19 AP Washington Huskies."
         },
         "oppId": "washington",
         "is_tracked": true,
-        "rivalryName": "PACIFIC NORTHWEST CLASH"
+        "rivalryName": "PACIFIC NORTHWEST CLASH",
+        "mcCoverProb": 69.6,
+        "mcOverProb": 30.4,
+        "mcRecommendedAts": "Oregon -12.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 26,
+          "p50": 33,
+          "p75": 40,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 20,
+          "p90": 24
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png",
     "badgeText": "ORE",
-    "confirmedStarterQb": "Dante Moore"
+    "confirmedStarterQb": "Dante Moore",
+    "seasonBaselineSpRating": 31.0
   },
   "pennstate": {
     "id": "pennstate",
@@ -3478,8 +4983,8 @@ var TEAMS_DATABASE = {
     "abbr": "PSU",
     "mascot": "Nittany Lions",
     "conference": "Big Ten",
-    "apRank": "#18 AP",
-    "apPoints": "540 PTS",
+    "apRank": "#16 AP",
+    "apPoints": "621 PTS",
     "headCoach": "Matt Campbell",
     "defensiveCoordinator": "Tom Allen",
     "offensiveCoordinator": "Andy Kotelnicki",
@@ -3497,8 +5002,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0C1626",
       "bgBase": "#050B14"
     },
-    "baseSpRating": 20.5,
-    "playoffContenderRank": 18,
+    "baseSpRating": 26.5,
+    "playoffContenderRank": 16,
     "sliderLabels": {
       "qb": "Rocco Becht Air Attack",
       "ground": "Quinton Martin Jr. & James Peoples Ground Attack",
@@ -3526,18 +5031,23 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.5,
-        "overUnder": 52.5,
+        "vegasSpread": -23.5,
+        "overUnder": 53.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 91,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "projScoreUt": 45,
+        "projScoreOpp": 0,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Penn State front seven vs Marshall Thundering Herd rushing attack.",
           "summary": "Regular season non-conference test against Marshall Thundering Herd."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 45,
+        "finalOppScore": 0,
+        "finalWin": true
       },
       {
         "id": "psu-w2",
@@ -3560,16 +5070,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -13.0,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Penn State front seven vs Temple Owls rushing attack.",
           "summary": "Regular season non-conference test against Temple Owls."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 89.9,
+        "mcOverProb": 28.8,
+        "mcRecommendedAts": "Penn State -13.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 12,
+          "p90": 16
+        }
       },
       {
         "id": "psu-w3",
@@ -3590,18 +5119,37 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -28.9,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Penn State front seven vs Buffalo Bulls rushing attack.",
           "summary": "Regular season non-conference test against Buffalo Bulls."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 70.2,
+        "mcOverProb": 36.8,
+        "mcRecommendedAts": "Penn State -28.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 28,
+          "p25": 34,
+          "p50": 41,
+          "p75": 49,
+          "p90": 57
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "psu-w4",
@@ -3622,18 +5170,37 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -28.9,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Penn State front seven vs Wisconsin Badgers rushing attack.",
           "summary": "Regular season non-conference test against Wisconsin Badgers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 70.8,
+        "mcOverProb": 36.0,
+        "mcRecommendedAts": "Penn State -28.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 28,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "psu-w5",
@@ -3654,18 +5221,37 @@ var TEAMS_DATABASE = {
         "location": "Evanston, IL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -13.0,
+        "vegasSpread": -22.4,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Penn State front seven vs Northwestern Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Northwestern Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.5,
+        "mcOverProb": 29.6,
+        "mcRecommendedAts": "Penn State -22.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 38,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "psu-w6",
@@ -3676,7 +5262,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "USC Trojans",
         "oppAbbr": "USC",
-        "oppRank": "#15 AP",
+        "oppRank": "#14 AP",
         "oppBadge": "USC",
         "oppColor": "#990000",
         "oppSecondary": "#FFC72C",
@@ -3686,18 +5272,37 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.5,
+        "vegasSpread": -4.8,
         "overUnder": 52.5,
-        "baseWinProb": 42,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 72,
+        "projScoreUt": 28,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Penn State quarterback play vs USC Trojans secondary.",
-          "summary": "High-stakes clash against #15 AP USC Trojans."
+          "summary": "High-stakes clash against #14 AP USC Trojans."
         },
         "oppId": "usc",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 59.9,
+        "mcOverProb": 34.6,
+        "mcRecommendedAts": "Penn State -4.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 26,
+          "p90": 33
+        }
       },
       {
         "id": "psu-w7",
@@ -3708,7 +5313,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Michigan Wolverines",
         "oppAbbr": "MICH",
-        "oppRank": "#16 AP",
+        "oppRank": "RV",
         "oppBadge": "MICH",
         "oppColor": "#00274C",
         "oppSecondary": "#FFCB05",
@@ -3718,18 +5323,37 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 7.5,
+        "vegasSpread": -5.2,
         "overUnder": 52.5,
-        "baseWinProb": 29,
-        "projScoreUt": 23,
-        "projScoreOpp": 30,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 73,
+        "projScoreUt": 28,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Penn State quarterback play vs Michigan Wolverines secondary.",
-          "summary": "High-stakes clash against #16 AP Michigan Wolverines."
+          "summary": "High-stakes clash against #24 AP Michigan Wolverines."
         },
         "oppId": "michigan",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 60.8,
+        "mcOverProb": 33.2,
+        "mcRecommendedAts": "Penn State -5.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 35,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 19,
+          "p75": 26,
+          "p90": 31
+        }
       },
       {
         "id": "psu-w9",
@@ -3750,18 +5374,37 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -28.9,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Penn State front seven vs Purdue Boilermakers rushing attack.",
           "summary": "Regular season non-conference test against Purdue Boilermakers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 70.6,
+        "mcOverProb": 38.4,
+        "mcRecommendedAts": "Penn State -28.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 28,
+          "p25": 34,
+          "p50": 42,
+          "p75": 50,
+          "p90": 58
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "psu-w10",
@@ -3772,7 +5415,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Washington Huskies",
         "oppAbbr": "WASH",
-        "oppRank": "#17 AP",
+        "oppRank": "#19 AP",
         "oppBadge": "WASH",
         "oppColor": "#4B2E83",
         "oppSecondary": "#B7A57A",
@@ -3782,18 +5425,37 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.0,
+        "vegasSpread": -4.8,
         "overUnder": 52.5,
-        "baseWinProb": 35,
-        "projScoreUt": 24,
-        "projScoreOpp": 29,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 70,
+        "projScoreUt": 27,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Penn State quarterback play vs Washington Huskies secondary.",
-          "summary": "High-stakes clash against #17 AP Washington Huskies."
+          "summary": "High-stakes clash against #19 AP Washington Huskies."
         },
         "oppId": "washington",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 58.0,
+        "mcOverProb": 32.1,
+        "mcRecommendedAts": "Penn State -4.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 33
+        }
       },
       {
         "id": "psu-w11",
@@ -3814,18 +5476,37 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -28.9,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Penn State front seven vs Minnesota Golden Gophers rushing attack.",
           "summary": "Regular season non-conference test against Minnesota Golden Gophers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.8,
+        "mcOverProb": 34.9,
+        "mcRecommendedAts": "Penn State -28.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 49,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "psu-w12",
@@ -3846,18 +5527,37 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -28.9,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Penn State front seven vs Rutgers Scarlet Knights rushing attack.",
           "summary": "Regular season non-conference test against Rutgers Scarlet Knights."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 68.1,
+        "mcOverProb": 35.0,
+        "mcRecommendedAts": "Penn State -28.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "psu-w13",
@@ -3878,23 +5578,43 @@ var TEAMS_DATABASE = {
         "location": "College Park, MD",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -13.0,
+        "vegasSpread": -22.4,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Penn State front seven vs Maryland Terrapins rushing attack.",
           "summary": "Regular season non-conference test against Maryland Terrapins."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.4,
+        "mcOverProb": 28.9,
+        "mcRecommendedAts": "Penn State -22.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 30,
+          "p50": 38,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 16
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/213.png",
     "badgeText": "PSU",
-    "confirmedStarterQb": "Rocco Becht"
+    "confirmedStarterQb": "Rocco Becht",
+    "seasonBaselineSpRating": 20.5
   },
   "notredame": {
     "id": "notredame",
@@ -3904,8 +5624,8 @@ var TEAMS_DATABASE = {
     "abbr": "ND",
     "mascot": "Fighting Irish",
     "conference": "Independent",
-    "apRank": "#4 AP",
-    "apPoints": "1,510 PTS (6 1st)",
+    "apRank": "#3 AP",
+    "apPoints": "1,512 PTS (4 1st)",
     "headCoach": "Marcus Freeman",
     "defensiveCoordinator": "Chris Ash",
     "offensiveCoordinator": "Mike Denbrock",
@@ -3923,8 +5643,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0E1724",
       "bgBase": "#060B12"
     },
-    "baseSpRating": 27.5,
-    "playoffContenderRank": 4,
+    "baseSpRating": 29.04,
+    "playoffContenderRank": 3,
     "sliderLabels": {
       "qb": "CJ Carr Execution",
       "ground": "Aneyas Williams Ground Attack",
@@ -3952,18 +5672,23 @@ var TEAMS_DATABASE = {
         "location": "Green Bay, WI",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
-        "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "vegasSpread": -21.0,
+        "overUnder": 45.5,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 100,
+        "projScoreUt": 41,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Notre Dame front seven vs Wisconsin Badgers rushing attack.",
           "summary": "Regular season non-conference test against Wisconsin Badgers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 41,
+        "finalOppScore": 13,
+        "finalWin": true
       },
       {
         "id": "nd-w2",
@@ -3984,18 +5709,37 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -26.0,
-        "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 13,
+        "vegasSpread": -44.5,
+        "overUnder": 55.5,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 44,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Notre Dame front seven vs Rice Owls rushing attack.",
           "summary": "Regular season non-conference test against Rice Owls."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 30.6,
+        "mcOverProb": 33.1,
+        "mcRecommendedAts": "RICE +44.5",
+        "mcRecommendedOu": "UNDER 55.5",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 37,
+          "p50": 44,
+          "p75": 52,
+          "p90": 59
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "nd-w3",
@@ -4016,11 +5760,12 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -26.0,
+        "vegasSpread": -35.8,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 13,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Notre Dame front seven vs Michigan State Spartans rushing attack.",
@@ -4028,7 +5773,25 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "rivalryName": "MIDWEST BLUEBLOOD CLASH"
+        "rivalryName": "MIDWEST BLUEBLOOD CLASH",
+        "mcCoverProb": 57.3,
+        "mcOverProb": 44.2,
+        "mcRecommendedAts": "Notre Dame -35.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 37,
+          "p50": 44,
+          "p75": 52,
+          "p90": 59
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "nd-w4",
@@ -4049,18 +5812,37 @@ var TEAMS_DATABASE = {
         "location": "West Lafayette, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -20.0,
+        "vegasSpread": -30.8,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Notre Dame front seven vs Purdue Boilermakers rushing attack.",
           "summary": "Regular season non-conference test against Purdue Boilermakers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 63.7,
+        "mcOverProb": 35.2,
+        "mcRecommendedAts": "Notre Dame -30.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "nd-w5",
@@ -4081,18 +5863,37 @@ var TEAMS_DATABASE = {
         "location": "Chapel Hill, NC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -20.0,
+        "vegasSpread": -30.8,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Notre Dame front seven vs North Carolina Tar Heels rushing attack.",
           "summary": "Regular season non-conference test against North Carolina Tar Heels."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 63.4,
+        "mcOverProb": 34.4,
+        "mcRecommendedAts": "Notre Dame -30.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "nd-w6",
@@ -4113,18 +5914,37 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -26.0,
+        "vegasSpread": -35.8,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 13,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 44,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Notre Dame front seven vs Stanford Cardinal rushing attack.",
           "summary": "Regular season non-conference test against Stanford Cardinal."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 55.8,
+        "mcOverProb": 42.7,
+        "mcRecommendedAts": "Notre Dame -35.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 37,
+          "p50": 44,
+          "p75": 52,
+          "p90": 58
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "nd-w7",
@@ -4135,7 +5955,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "BYU Cougars",
         "oppAbbr": "BYU",
-        "oppRank": "#14 AP",
+        "oppRank": "#15 AP",
         "oppBadge": "BYU",
         "oppColor": "#002E5D",
         "oppSecondary": "#FFFFFF",
@@ -4145,18 +5965,37 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -3.0,
+        "vegasSpread": -1.9,
         "overUnder": 52.5,
-        "baseWinProb": 59,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 61,
+        "projScoreUt": 26,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Notre Dame quarterback play vs BYU Cougars secondary.",
-          "summary": "High-stakes clash against #14 AP BYU Cougars."
+          "summary": "High-stakes clash against #15 AP BYU Cougars."
         },
         "oppId": "byu",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 58.4,
+        "mcOverProb": 33.8,
+        "mcRecommendedAts": "Notre Dame -1.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 17,
+          "p50": 26,
+          "p75": 33,
+          "p90": 40
+        },
+        "mcScoreDistOpp": {
+          "p10": 9,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 35
+        }
       },
       {
         "id": "nd-w9",
@@ -4177,18 +6016,37 @@ var TEAMS_DATABASE = {
         "location": "Foxborough, MA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -20.0,
+        "vegasSpread": -30.8,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 39,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Notre Dame front seven vs Navy Midshipmen rushing attack.",
           "summary": "Regular season non-conference test against Navy Midshipmen."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 58.4,
+        "mcOverProb": 27.4,
+        "mcRecommendedAts": "Notre Dame -30.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 25,
+          "p25": 31,
+          "p50": 38,
+          "p75": 47,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "nd-w10",
@@ -4209,10 +6067,11 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -3.5,
+        "vegasSpread": 0.4,
         "overUnder": 52.5,
-        "baseWinProb": 61,
-        "projScoreUt": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 51,
+        "projScoreUt": 24,
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -4220,7 +6079,25 @@ var TEAMS_DATABASE = {
           "summary": "High-stakes clash against #7 AP Miami Hurricanes."
         },
         "oppId": "miami",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 51.4,
+        "mcOverProb": 34.6,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 37
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        }
       },
       {
         "id": "nd-w11",
@@ -4241,18 +6118,37 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -26.0,
+        "vegasSpread": -35.8,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 13,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Notre Dame front seven vs Boston College Eagles rushing attack.",
           "summary": "Regular season non-conference test against Boston College Eagles."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 58.8,
+        "mcOverProb": 43.8,
+        "mcRecommendedAts": "Notre Dame -35.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 37,
+          "p50": 45,
+          "p75": 52,
+          "p90": 59
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "nd-w12",
@@ -4263,7 +6159,7 @@ var TEAMS_DATABASE = {
         "tv": "NBC",
         "opponent": "SMU Mustangs",
         "oppAbbr": "SMU",
-        "oppRank": "#19 AP",
+        "oppRank": "#17 AP",
         "oppBadge": "SMU",
         "oppColor": "#003366",
         "oppSecondary": "#CC0000",
@@ -4273,18 +6169,37 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -7.5,
+        "vegasSpread": -8.5,
         "overUnder": 52.5,
-        "baseWinProb": 72,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 82,
         "projScoreUt": 30,
-        "projScoreOpp": 22,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Notre Dame quarterback play vs SMU Mustangs secondary.",
-          "summary": "High-stakes clash against #19 AP SMU Mustangs."
+          "summary": "High-stakes clash against #17 AP SMU Mustangs."
         },
         "oppId": "smu",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 61.8,
+        "mcOverProb": 32.7,
+        "mcRecommendedAts": "Notre Dame -8.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 23,
+          "p90": 30
+        }
       },
       {
         "id": "nd-w13",
@@ -4305,23 +6220,43 @@ var TEAMS_DATABASE = {
         "location": "Syracuse, NY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -20.0,
+        "vegasSpread": -30.8,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Notre Dame front seven vs Syracuse Orange rushing attack.",
           "summary": "Regular season non-conference test against Syracuse Orange."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 63.9,
+        "mcOverProb": 37.3,
+        "mcRecommendedAts": "Notre Dame -30.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 49,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png",
     "badgeText": "ND",
-    "confirmedStarterQb": "CJ Carr"
+    "confirmedStarterQb": "CJ Carr",
+    "seasonBaselineSpRating": 27.5
   },
   "lsu": {
     "id": "lsu",
@@ -4331,8 +6266,8 @@ var TEAMS_DATABASE = {
     "abbr": "LSU",
     "mascot": "Tigers",
     "conference": "SEC",
-    "apRank": "#11 AP",
-    "apPoints": "988 PTS",
+    "apRank": "#8 AP",
+    "apPoints": "1,315 PTS (5 1st)",
     "headCoach": "Brian Kelly",
     "defensiveCoordinator": "Blake Baker",
     "offensiveCoordinator": "Joe Sloan",
@@ -4350,8 +6285,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#191124",
       "bgBase": "#0E0914"
     },
-    "baseSpRating": 28.5,
-    "playoffContenderRank": 11,
+    "baseSpRating": 34.5,
+    "playoffContenderRank": 8,
     "sliderLabels": {
       "qb": "Sam Leavitt Execution",
       "ground": "Harlem Berry Ground Attack",
@@ -4364,8 +6299,8 @@ var TEAMS_DATABASE = {
         "id": "lsu-w1",
         "week": "WEEK 1",
         "date": "Sep 5, 2026",
-        "kickoffTime": "7:30 PM ET",
-        "utc": "2026-09-05T23:30Z",
+        "kickoffTime": "9:40 PM ET",
+        "utc": "2026-09-06T01:40Z",
         "tv": "ABC",
         "opponent": "Clemson Tigers",
         "oppAbbr": "CLEM",
@@ -4379,18 +6314,23 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -14.5,
-        "overUnder": 52.5,
+        "vegasSpread": -10.0,
+        "overUnder": 48.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 89,
-        "projScoreUt": 34,
-        "projScoreOpp": 17,
+        "projScoreUt": 51,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "LSU quarterback play vs Clemson Tigers secondary.",
           "summary": "High-stakes clash against RV Clemson Tigers."
         },
         "oppId": "clemson",
-        "is_tracked": true
+        "is_tracked": true,
+        "isFinal": true,
+        "finalTeamScore": 51,
+        "finalOppScore": 10,
+        "finalWin": true
       },
       {
         "id": "lsu-w2",
@@ -4413,16 +6353,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -27.0,
         "overUnder": 52.5,
-        "baseWinProb": 97,
-        "projScoreUt": 40,
-        "projScoreOpp": 13,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 48,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "LSU front seven vs Louisiana Tech Bulldogs rushing attack.",
           "summary": "Regular season non-conference test against Louisiana Tech Bulldogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 86.8,
+        "mcOverProb": 53.0,
+        "mcRecommendedAts": "LSU -27.0",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 33,
+          "p25": 39,
+          "p50": 47,
+          "p75": 55,
+          "p90": 62
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "lsu-w3",
@@ -4443,18 +6402,37 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.5,
+        "vegasSpread": -6.8,
         "overUnder": 52.5,
-        "baseWinProb": 48,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 78,
+        "projScoreUt": 29,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "LSU quarterback play vs Ole Miss Rebels secondary.",
-          "summary": "High-stakes clash against #9 AP Ole Miss Rebels."
+          "summary": "High-stakes clash against #11 AP Ole Miss Rebels."
         },
         "oppId": "olemiss",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 61.6,
+        "mcOverProb": 33.2,
+        "mcRecommendedAts": "LSU -6.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 28,
+          "p75": 35,
+          "p90": 42
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 12,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        }
       },
       {
         "id": "lsu-w4",
@@ -4465,7 +6443,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas A&M Aggies",
         "oppAbbr": "TA&M",
-        "oppRank": "#8 AP",
+        "oppRank": "#10 AP",
         "oppBadge": "TAMU",
         "oppColor": "#500000",
         "oppSecondary": "#FFFFFF",
@@ -4475,18 +6453,37 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -5.0,
+        "vegasSpread": -8.0,
         "overUnder": 52.5,
-        "baseWinProb": 65,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 81,
         "projScoreUt": 29,
-        "projScoreOpp": 24,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "LSU quarterback play vs Texas A&M Aggies secondary.",
-          "summary": "High-stakes clash against #8 AP Texas A&M Aggies."
+          "summary": "High-stakes clash against #9 AP Texas A&M Aggies."
         },
         "oppId": "texasam",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 60.3,
+        "mcOverProb": 33.6,
+        "mcRecommendedAts": "LSU -8.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 22,
+          "p50": 29,
+          "p75": 37,
+          "p90": 42
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 23,
+          "p90": 30
+        }
       },
       {
         "id": "lsu-w5",
@@ -4507,18 +6504,37 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -27.0,
+        "vegasSpread": -40.5,
         "overUnder": 52.5,
-        "baseWinProb": 97,
-        "projScoreUt": 40,
-        "projScoreOpp": 13,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 48,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "LSU front seven vs McNeese Cowboys rushing attack.",
           "summary": "Regular season non-conference test against McNeese Cowboys."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 54.0,
+        "mcOverProb": 51.7,
+        "mcRecommendedAts": "LSU -40.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 34,
+          "p25": 40,
+          "p50": 48,
+          "p75": 55,
+          "p90": 63
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "lsu-w6",
@@ -4539,18 +6555,37 @@ var TEAMS_DATABASE = {
         "location": "Lexington, KY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.0,
+        "vegasSpread": -35.5,
         "overUnder": 52.5,
-        "baseWinProb": 93,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "LSU front seven vs Kentucky Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Kentucky Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 57.9,
+        "mcOverProb": 45.0,
+        "mcRecommendedAts": "LSU -35.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 37,
+          "p50": 45,
+          "p75": 52,
+          "p90": 60
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "lsu-w7",
@@ -4571,18 +6606,37 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -27.0,
+        "vegasSpread": -40.5,
         "overUnder": 52.5,
-        "baseWinProb": 97,
-        "projScoreUt": 40,
-        "projScoreOpp": 13,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 48,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "LSU front seven vs Mississippi State Bulldogs rushing attack.",
           "summary": "Regular season non-conference test against Mississippi State Bulldogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 55.2,
+        "mcOverProb": 52.1,
+        "mcRecommendedAts": "LSU -40.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 34,
+          "p25": 40,
+          "p50": 48,
+          "p75": 55,
+          "p90": 63
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "lsu-w8",
@@ -4603,18 +6657,37 @@ var TEAMS_DATABASE = {
         "location": "Auburn, AL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.0,
+        "vegasSpread": -35.5,
         "overUnder": 52.5,
-        "baseWinProb": 93,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "LSU front seven vs Auburn Tigers rushing attack.",
           "summary": "Regular season non-conference test against Auburn Tigers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 58.9,
+        "mcOverProb": 44.8,
+        "mcRecommendedAts": "LSU -35.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 37,
+          "p50": 45,
+          "p75": 52,
+          "p90": 59
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "lsu-w10",
@@ -4625,7 +6698,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Alabama Crimson Tide",
         "oppAbbr": "ALA",
-        "oppRank": "#13 AP",
+        "oppRank": "#12 AP",
         "oppBadge": "BAMA",
         "oppColor": "#9E1B32",
         "oppSecondary": "#FFFFFF",
@@ -4635,18 +6708,37 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -5.0,
+        "vegasSpread": -8.4,
         "overUnder": 52.5,
-        "baseWinProb": 65,
-        "projScoreUt": 29,
-        "projScoreOpp": 24,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 82,
+        "projScoreUt": 30,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "LSU quarterback play vs Alabama Crimson Tide secondary.",
-          "summary": "High-stakes clash against #13 AP Alabama Crimson Tide."
+          "summary": "High-stakes clash against #12 AP Alabama Crimson Tide."
         },
         "oppId": "alabama",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 63.5,
+        "mcOverProb": 34.4,
+        "mcRecommendedAts": "LSU -8.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 23,
+          "p50": 30,
+          "p75": 38,
+          "p90": 44
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 23,
+          "p90": 30
+        }
       },
       {
         "id": "lsu-w11",
@@ -4657,7 +6749,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas Longhorns",
         "oppAbbr": "TEX",
-        "oppRank": "#5 AP",
+        "oppRank": "#4 AP",
         "oppBadge": "TEX",
         "oppColor": "#BF5700",
         "oppSecondary": "#FFFFFF",
@@ -4667,18 +6759,37 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.0,
+        "vegasSpread": 0.5,
         "overUnder": 52.5,
-        "baseWinProb": 50,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 52,
+        "projScoreUt": 24,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "LSU quarterback play vs Texas Longhorns secondary.",
-          "summary": "High-stakes clash against #5 AP Texas Longhorns."
+          "summary": "High-stakes clash against #3 AP Texas Longhorns."
         },
         "oppId": "texas",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 52.2,
+        "mcOverProb": 34.7,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        }
       },
       {
         "id": "lsu-w12",
@@ -4689,7 +6800,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Tennessee Volunteers",
         "oppAbbr": "TENN",
-        "oppRank": "#20 AP",
+        "oppRank": "#18 AP",
         "oppBadge": "TENN",
         "oppColor": "#FF8200",
         "oppSecondary": "#FFFFFF",
@@ -4699,18 +6810,37 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -1.5,
+        "vegasSpread": -4.5,
         "overUnder": 52.5,
-        "baseWinProb": 55,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 69,
         "projScoreUt": 27,
-        "projScoreOpp": 26,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "LSU quarterback play vs Tennessee Volunteers secondary.",
-          "summary": "High-stakes clash against #20 AP Tennessee Volunteers."
+          "summary": "High-stakes clash against #18 AP Tennessee Volunteers."
         },
         "oppId": "tennessee",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 57.2,
+        "mcOverProb": 32.6,
+        "mcRecommendedAts": "LSU -4.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 33
+        }
       },
       {
         "id": "lsu-w13",
@@ -4731,23 +6861,43 @@ var TEAMS_DATABASE = {
         "location": "Fayetteville, AR",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.0,
+        "vegasSpread": -35.5,
         "overUnder": 52.5,
-        "baseWinProb": 93,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "LSU front seven vs Arkansas Razorbacks rushing attack.",
           "summary": "Regular season non-conference test against Arkansas Razorbacks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 58.4,
+        "mcOverProb": 44.8,
+        "mcRecommendedAts": "LSU -35.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 37,
+          "p50": 44,
+          "p75": 53,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png",
     "badgeText": "LSU",
-    "confirmedStarterQb": "Sam Leavitt"
+    "confirmedStarterQb": "Sam Leavitt",
+    "seasonBaselineSpRating": 28.5
   },
   "tennessee": {
     "id": "tennessee",
@@ -4757,8 +6907,8 @@ var TEAMS_DATABASE = {
     "abbr": "TENN",
     "mascot": "Volunteers",
     "conference": "SEC",
-    "apRank": "#20 AP",
-    "apPoints": "415 PTS",
+    "apRank": "#18 AP",
+    "apPoints": "491 PTS",
     "headCoach": "Josh Heupel",
     "defensiveCoordinator": "Jim Knowles",
     "offensiveCoordinator": "Joey Halzle",
@@ -4776,8 +6926,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#1A1007",
       "bgBase": "#0D0803"
     },
-    "baseSpRating": 24.0,
-    "playoffContenderRank": 20,
+    "baseSpRating": 25.53,
+    "playoffContenderRank": 18,
     "sliderLabels": {
       "qb": "Faizon Brandon Pinpoint Air Attack",
       "ground": "DeSean Bishop & Javin Gordon Power Ground Attack",
@@ -4805,18 +6955,23 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -27.5,
-        "overUnder": 52.5,
+        "vegasSpread": -49.5,
+        "overUnder": 66.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 10,
+        "projScoreUt": 56,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Tennessee offensive line vs Furman Paladins defensive front.",
           "summary": "Non-conference matchup in Knoxville, TN against FCS challenger Furman Paladins."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 56,
+        "finalOppScore": 9,
+        "finalWin": true
       },
       {
         "id": "tenn-w2",
@@ -4839,16 +6994,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -16.5,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Tennessee front seven vs Georgia Tech Yellow Jackets rushing attack.",
           "summary": "Regular season non-conference test against Georgia Tech Yellow Jackets."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 90.9,
+        "mcOverProb": 40.8,
+        "mcRecommendedAts": "Tennessee -16.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 49,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "tenn-w3",
@@ -4869,18 +7043,37 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -22.5,
+        "vegasSpread": -31.9,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Tennessee front seven vs Kennesaw State Owls rushing attack.",
           "summary": "Regular season non-conference test against Kennesaw State Owls."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 71.4,
+        "mcOverProb": 51.4,
+        "mcRecommendedAts": "Tennessee -31.9",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 32,
+          "p25": 38,
+          "p50": 46,
+          "p75": 55,
+          "p90": 62
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "tenn-w4",
@@ -4891,7 +7084,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas Longhorns",
         "oppAbbr": "TEX",
-        "oppRank": "#5 AP",
+        "oppRank": "#4 AP",
         "oppBadge": "TEX",
         "oppColor": "#BF5700",
         "oppSecondary": "#FFFFFF",
@@ -4901,18 +7094,37 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 4.5,
+        "vegasSpread": 7.5,
         "overUnder": 52.5,
-        "baseWinProb": 36,
-        "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 23,
+        "projScoreUt": 20,
+        "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Tennessee quarterback play vs Texas Longhorns secondary.",
-          "summary": "High-stakes clash against #5 AP Texas Longhorns."
+          "summary": "High-stakes clash against #3 AP Texas Longhorns."
         },
         "oppId": "texas",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 42.9,
+        "mcOverProb": 43.2,
+        "mcRecommendedAts": "TEX -7.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 23,
+          "p50": 30,
+          "p75": 38,
+          "p90": 45
+        }
       },
       {
         "id": "tenn-w5",
@@ -4933,18 +7145,37 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -22.5,
+        "vegasSpread": -31.9,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Tennessee front seven vs Auburn Tigers rushing attack.",
           "summary": "Regular season non-conference test against Auburn Tigers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 72.0,
+        "mcOverProb": 51.2,
+        "mcRecommendedAts": "Tennessee -31.9",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 38,
+          "p50": 45,
+          "p75": 54,
+          "p90": 62
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "tenn-w6",
@@ -4965,18 +7196,37 @@ var TEAMS_DATABASE = {
         "location": "Fayetteville, AR",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.5,
+        "vegasSpread": -24.9,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Tennessee front seven vs Arkansas Razorbacks rushing attack.",
           "summary": "Regular season non-conference test against Arkansas Razorbacks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.5,
+        "mcOverProb": 42.0,
+        "mcRecommendedAts": "Tennessee -24.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 41,
+          "p75": 48,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "tenn-w7",
@@ -4987,7 +7237,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Alabama Crimson Tide",
         "oppAbbr": "ALA",
-        "oppRank": "#13 AP",
+        "oppRank": "#12 AP",
         "oppBadge": "BAMA",
         "oppColor": "#9E1B32",
         "oppSecondary": "#FFFFFF",
@@ -4997,19 +7247,38 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -0.5,
+        "vegasSpread": -1.4,
         "overUnder": 52.5,
-        "baseWinProb": 52,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 59,
+        "projScoreUt": 27,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Tennessee quarterback play vs Alabama Crimson Tide secondary.",
-          "summary": "High-stakes clash against #13 AP Alabama Crimson Tide."
+          "summary": "High-stakes clash against #12 AP Alabama Crimson Tide."
         },
         "oppId": "alabama",
         "is_tracked": true,
-        "rivalryName": "THIRD SATURDAY IN OCTOBER"
+        "rivalryName": "THIRD SATURDAY IN OCTOBER",
+        "mcCoverProb": 56.2,
+        "mcOverProb": 43.5,
+        "mcRecommendedAts": "Tennessee -1.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        }
       },
       {
         "id": "tenn-w8",
@@ -5030,18 +7299,37 @@ var TEAMS_DATABASE = {
         "location": "Columbia, SC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.5,
+        "vegasSpread": -24.9,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Tennessee front seven vs South Carolina Gamecocks rushing attack.",
           "summary": "Regular season non-conference test against South Carolina Gamecocks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 76.6,
+        "mcOverProb": 40.8,
+        "mcRecommendedAts": "Tennessee -24.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 49,
+          "p90": 58
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 12,
+          "p90": 17
+        }
       },
       {
         "id": "tenn-w10",
@@ -5062,18 +7350,37 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -22.5,
+        "vegasSpread": -31.9,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Tennessee front seven vs Kentucky Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Kentucky Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 70.4,
+        "mcOverProb": 49.7,
+        "mcRecommendedAts": "Tennessee -31.9",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 38,
+          "p50": 45,
+          "p75": 54,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "tenn-w11",
@@ -5084,7 +7391,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas A&M Aggies",
         "oppAbbr": "TA&M",
-        "oppRank": "#8 AP",
+        "oppRank": "#10 AP",
         "oppBadge": "TAMU",
         "oppColor": "#500000",
         "oppSecondary": "#FFFFFF",
@@ -5094,18 +7401,37 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.5,
+        "vegasSpread": 8.0,
         "overUnder": 52.5,
-        "baseWinProb": 33,
-        "projScoreUt": 24,
-        "projScoreOpp": 29,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 22,
+        "projScoreUt": 20,
+        "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Tennessee quarterback play vs Texas A&M Aggies secondary.",
-          "summary": "High-stakes clash against #8 AP Texas A&M Aggies."
+          "summary": "High-stakes clash against #9 AP Texas A&M Aggies."
         },
         "oppId": "texasam",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 40.7,
+        "mcOverProb": 41.4,
+        "mcRecommendedAts": "TA&M -8.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 26,
+          "p90": 33
+        },
+        "mcScoreDistOpp": {
+          "p10": 17,
+          "p25": 23,
+          "p50": 30,
+          "p75": 38,
+          "p90": 45
+        }
       },
       {
         "id": "tenn-w12",
@@ -5116,7 +7442,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "LSU Tigers",
         "oppAbbr": "LSU",
-        "oppRank": "#11 AP",
+        "oppRank": "#8 AP",
         "oppBadge": "LSU",
         "oppColor": "#461D7C",
         "oppSecondary": "#FDD023",
@@ -5126,18 +7452,37 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 1.5,
+        "vegasSpread": 4.5,
         "overUnder": 52.5,
-        "baseWinProb": 45,
-        "projScoreUt": 26,
-        "projScoreOpp": 27,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 35,
+        "projScoreUt": 23,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Tennessee quarterback play vs LSU Tigers secondary.",
-          "summary": "High-stakes clash against #11 AP LSU Tigers."
+          "summary": "High-stakes clash against #8 AP LSU Tigers."
         },
         "oppId": "lsu",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 46.4,
+        "mcOverProb": 45.3,
+        "mcRecommendedAts": "LSU -4.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        },
+        "mcScoreDistOpp": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 28,
+          "p75": 36,
+          "p90": 42
+        }
       },
       {
         "id": "tenn-w13",
@@ -5158,23 +7503,43 @@ var TEAMS_DATABASE = {
         "location": "Nashville, TN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.5,
+        "vegasSpread": -24.9,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Tennessee front seven vs Vanderbilt Commodores rushing attack.",
           "summary": "Regular season non-conference test against Vanderbilt Commodores."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.7,
+        "mcOverProb": 40.5,
+        "mcRecommendedAts": "Tennessee -24.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png",
     "badgeText": "TENN",
-    "confirmedStarterQb": "Faizon Brandon"
+    "confirmedStarterQb": "Faizon Brandon",
+    "seasonBaselineSpRating": 24.0
   },
   "indiana": {
     "id": "indiana",
@@ -5184,8 +7549,8 @@ var TEAMS_DATABASE = {
     "abbr": "IND",
     "mascot": "Hoosiers",
     "conference": "Big Ten",
-    "apRank": "#6 AP",
-    "apPoints": "1,410 PTS (2 1st)",
+    "apRank": "#5 AP",
+    "apPoints": "1,428 PTS (8 1st)",
     "headCoach": "Curt Cignetti",
     "defensiveCoordinator": "Bryant Haines",
     "offensiveCoordinator": "Mike Shanahan",
@@ -5203,8 +7568,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#1A0A0A",
       "bgBase": "#0D0505"
     },
-    "baseSpRating": 25.5,
-    "playoffContenderRank": 6,
+    "baseSpRating": 27.03,
+    "playoffContenderRank": 5,
     "sliderLabels": {
       "qb": "Josh Hoover Execution",
       "ground": "Turbo Richard Ground Attack",
@@ -5232,18 +7597,23 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.5,
-        "overUnder": 52.5,
+        "vegasSpread": -39.5,
+        "overUnder": 57.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "projScoreUt": 52,
+        "projScoreOpp": 16,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Indiana front seven vs North Texas Mean Green rushing attack.",
           "summary": "Regular season non-conference test against North Texas Mean Green."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 52,
+        "finalOppScore": 16,
+        "finalWin": true
       },
       {
         "id": "ind-w2",
@@ -5266,16 +7636,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -24.0,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Indiana front seven vs Howard Bison rushing attack.",
           "summary": "Regular season non-conference test against Howard Bison."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 78.8,
+        "mcOverProb": 34.6,
+        "mcRecommendedAts": "Indiana -24.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 41,
+          "p75": 48,
+          "p90": 57
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "ind-w3",
@@ -5296,18 +7685,37 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.0,
+        "vegasSpread": -26.9,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Indiana front seven vs Western Kentucky Hilltoppers rushing attack.",
           "summary": "Regular season non-conference test against Western Kentucky Hilltoppers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 76.0,
+        "mcOverProb": 35.8,
+        "mcRecommendedAts": "Indiana -26.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 41,
+          "p75": 49,
+          "p90": 57
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "ind-w4",
@@ -5328,18 +7736,37 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.0,
+        "vegasSpread": -26.9,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Indiana front seven vs Northwestern Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Northwestern Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 76.0,
+        "mcOverProb": 34.7,
+        "mcRecommendedAts": "Indiana -26.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "ind-w5",
@@ -5360,18 +7787,37 @@ var TEAMS_DATABASE = {
         "location": "Piscataway, NJ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.0,
+        "vegasSpread": -21.9,
         "overUnder": 52.5,
-        "baseWinProb": 90,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Indiana front seven vs Rutgers Scarlet Knights rushing attack.",
           "summary": "Regular season non-conference test against Rutgers Scarlet Knights."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.2,
+        "mcOverProb": 30.6,
+        "mcRecommendedAts": "Indiana -21.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 38,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "ind-w6",
@@ -5392,18 +7838,37 @@ var TEAMS_DATABASE = {
         "location": "Lincoln, NE",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.0,
+        "vegasSpread": -21.9,
         "overUnder": 52.5,
-        "baseWinProb": 90,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Indiana front seven vs Nebraska Cornhuskers rushing attack.",
           "summary": "Regular season non-conference test against Nebraska Cornhuskers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.0,
+        "mcOverProb": 30.2,
+        "mcRecommendedAts": "Indiana -21.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 12,
+          "p90": 17
+        }
       },
       {
         "id": "ind-w7",
@@ -5424,18 +7889,37 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 4.0,
+        "vegasSpread": 5.9,
         "overUnder": 52.5,
-        "baseWinProb": 38,
-        "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 33,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Indiana quarterback play vs Ohio State Buckeyes secondary.",
           "summary": "High-stakes clash against #1 AP Ohio State Buckeyes."
         },
         "oppId": "ohiostate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 46.2,
+        "mcOverProb": 33.0,
+        "mcRecommendedAts": "OSU -5.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 33
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        }
       },
       {
         "id": "ind-w8",
@@ -5446,7 +7930,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Michigan Wolverines",
         "oppAbbr": "MICH",
-        "oppRank": "#16 AP",
+        "oppRank": "RV",
         "oppBadge": "MICH",
         "oppColor": "#00274C",
         "oppSecondary": "#FFCB05",
@@ -5456,18 +7940,37 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.5,
+        "vegasSpread": -5.7,
         "overUnder": 52.5,
-        "baseWinProb": 43,
-        "projScoreUt": 25,
-        "projScoreOpp": 27,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 75,
+        "projScoreUt": 28,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Indiana quarterback play vs Michigan Wolverines secondary.",
-          "summary": "High-stakes clash against #16 AP Michigan Wolverines."
+          "summary": "High-stakes clash against #24 AP Michigan Wolverines."
         },
         "oppId": "michigan",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 62.6,
+        "mcOverProb": 34.2,
+        "mcRecommendedAts": "Indiana -5.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 28,
+          "p75": 35,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        }
       },
       {
         "id": "ind-w9",
@@ -5488,18 +7991,37 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.0,
+        "vegasSpread": -26.9,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 40,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Indiana front seven vs Minnesota Golden Gophers rushing attack.",
           "summary": "Regular season non-conference test against Minnesota Golden Gophers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 74.4,
+        "mcOverProb": 31.5,
+        "mcRecommendedAts": "Indiana -26.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 40,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "ind-w11",
@@ -5510,7 +8032,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "USC Trojans",
         "oppAbbr": "USC",
-        "oppRank": "#15 AP",
+        "oppRank": "#14 AP",
         "oppBadge": "USC",
         "oppColor": "#990000",
         "oppSecondary": "#FFC72C",
@@ -5520,18 +8042,37 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.5,
+        "vegasSpread": -3.8,
         "overUnder": 52.5,
-        "baseWinProb": 58,
-        "projScoreUt": 27,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 67,
+        "projScoreUt": 26,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Indiana quarterback play vs USC Trojans secondary.",
-          "summary": "High-stakes clash against #15 AP USC Trojans."
+          "summary": "High-stakes clash against #14 AP USC Trojans."
         },
         "oppId": "usc",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 58.0,
+        "mcOverProb": 33.8,
+        "mcRecommendedAts": "Indiana -3.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        }
       },
       {
         "id": "ind-w12",
@@ -5542,7 +8083,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Washington Huskies",
         "oppAbbr": "WASH",
-        "oppRank": "#17 AP",
+        "oppRank": "#19 AP",
         "oppBadge": "WASH",
         "oppColor": "#4B2E83",
         "oppSecondary": "#B7A57A",
@@ -5552,18 +8093,37 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.0,
+        "vegasSpread": -5.3,
         "overUnder": 52.5,
-        "baseWinProb": 50,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 72,
+        "projScoreUt": 28,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Indiana quarterback play vs Washington Huskies secondary.",
-          "summary": "High-stakes clash against #17 AP Washington Huskies."
+          "summary": "High-stakes clash against #19 AP Washington Huskies."
         },
         "oppId": "washington",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 59.4,
+        "mcOverProb": 34.4,
+        "mcRecommendedAts": "Indiana -5.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 35,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 26,
+          "p90": 31
+        }
       },
       {
         "id": "ind-w13",
@@ -5584,23 +8144,43 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.0,
+        "vegasSpread": -26.9,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Indiana front seven vs Purdue Boilermakers rushing attack.",
           "summary": "Regular season non-conference test against Purdue Boilermakers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 74.8,
+        "mcOverProb": 33.5,
+        "mcRecommendedAts": "Indiana -26.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 41,
+          "p75": 48,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png",
     "badgeText": "IND",
-    "confirmedStarterQb": "Josh Hoover"
+    "confirmedStarterQb": "Josh Hoover",
+    "seasonBaselineSpRating": 25.5
   },
   "miami": {
     "id": "miami",
@@ -5611,7 +8191,7 @@ var TEAMS_DATABASE = {
     "mascot": "Hurricanes",
     "conference": "ACC",
     "apRank": "#7 AP",
-    "apPoints": "1,310 PTS (1 1st)",
+    "apPoints": "1,405 PTS (1 1st)",
     "headCoach": "Mario Cristobal",
     "defensiveCoordinator": "Corey Hetherman",
     "offensiveCoordinator": "Shannon Dawson",
@@ -5629,7 +8209,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0B1710",
       "bgBase": "#050F0A"
     },
-    "baseSpRating": 27.0,
+    "baseSpRating": 31.98,
     "playoffContenderRank": 7,
     "sliderLabels": {
       "qb": "Darian Mensah Accurate Air Attack",
@@ -5658,18 +8238,23 @@ var TEAMS_DATABASE = {
         "location": "Stanford, CA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
-        "overUnder": 52.5,
+        "vegasSpread": -24.5,
+        "overUnder": 46.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "projScoreUt": 45,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Miami front seven vs Stanford Cardinal rushing attack.",
           "summary": "Regular season non-conference test against Stanford Cardinal."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 45,
+        "finalOppScore": 6,
+        "finalWin": true
       },
       {
         "id": "mia-w2",
@@ -5692,16 +8277,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -25.5,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Miami front seven vs Florida A&M Rattlers rushing attack.",
           "summary": "Regular season non-conference test against Florida A&M Rattlers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 88.5,
+        "mcOverProb": 47.5,
+        "mcRecommendedAts": "Miami -25.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 38,
+          "p50": 45,
+          "p75": 54,
+          "p90": 62
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "mia-w3",
@@ -5722,18 +8326,37 @@ var TEAMS_DATABASE = {
         "location": "Winston-Salem, NC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.5,
+        "vegasSpread": -31.4,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 43,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Miami front seven vs Wake Forest Demon Deacons rushing attack.",
           "summary": "Regular season non-conference test against Wake Forest Demon Deacons."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.7,
+        "mcOverProb": 38.3,
+        "mcRecommendedAts": "Miami -31.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 28,
+          "p25": 34,
+          "p50": 42,
+          "p75": 51,
+          "p90": 58
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "mia-w4",
@@ -5754,18 +8377,37 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -25.5,
+        "vegasSpread": -36.4,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Miami front seven vs Central Michigan Chippewas rushing attack.",
           "summary": "Regular season non-conference test against Central Michigan Chippewas."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 59.6,
+        "mcOverProb": 46.2,
+        "mcRecommendedAts": "Miami -36.4",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 37,
+          "p50": 45,
+          "p75": 54,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "mia-w5",
@@ -5776,7 +8418,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Clemson Tigers",
         "oppAbbr": "CLEM",
-        "oppRank": "RV",
+        "oppRank": "NR",
         "oppBadge": "CLEM",
         "oppColor": "#F56600",
         "oppSecondary": "#522D80",
@@ -5786,18 +8428,37 @@ var TEAMS_DATABASE = {
         "location": "Clemson, SC",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.0,
+        "vegasSpread": -11.7,
         "overUnder": 52.5,
-        "baseWinProb": 51,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 89,
+        "projScoreUt": 32,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Miami quarterback play vs Clemson Tigers secondary.",
           "summary": "High-stakes clash against RV Clemson Tigers."
         },
         "oppId": "clemson",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 65.6,
+        "mcOverProb": 30.8,
+        "mcRecommendedAts": "Miami -11.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 14,
+          "p75": 20,
+          "p90": 27
+        }
       },
       {
         "id": "mia-w7",
@@ -5808,7 +8469,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Florida State Seminoles",
         "oppAbbr": "FSU",
-        "oppRank": "RV",
+        "oppRank": "NR",
         "oppBadge": "FSU",
         "oppColor": "#782F40",
         "oppSecondary": "#CEB888",
@@ -5818,19 +8479,38 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -5.0,
+        "vegasSpread": -10.8,
         "overUnder": 52.5,
-        "baseWinProb": 65,
-        "projScoreUt": 29,
-        "projScoreOpp": 24,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 88,
+        "projScoreUt": 31,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Miami quarterback play vs Florida State Seminoles secondary.",
-          "summary": "High-stakes clash against RV Florida State Seminoles."
+          "summary": "High-stakes clash against NR Florida State Seminoles."
         },
         "oppId": "floridastate",
         "is_tracked": true,
-        "rivalryName": "FLORIDA RIVALRY SHOWDOWN"
+        "rivalryName": "FLORIDA RIVALRY SHOWDOWN",
+        "mcCoverProb": 64.2,
+        "mcOverProb": 31.9,
+        "mcRecommendedAts": "Miami -10.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 9,
+          "p50": 14,
+          "p75": 21,
+          "p90": 27
+        }
       },
       {
         "id": "mia-w8",
@@ -5851,18 +8531,37 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -25.5,
+        "vegasSpread": -36.4,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Miami front seven vs Pittsburgh Panthers rushing attack.",
           "summary": "Regular season non-conference test against Pittsburgh Panthers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 61.2,
+        "mcOverProb": 46.7,
+        "mcRecommendedAts": "Miami -36.4",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 38,
+          "p50": 45,
+          "p75": 54,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "mia-w9",
@@ -5883,18 +8582,37 @@ var TEAMS_DATABASE = {
         "location": "Chapel Hill, NC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.5,
+        "vegasSpread": -31.4,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 43,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Miami front seven vs North Carolina Tar Heels rushing attack.",
           "summary": "Regular season non-conference test against North Carolina Tar Heels."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.2,
+        "mcOverProb": 37.7,
+        "mcRecommendedAts": "Miami -31.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 29,
+          "p25": 35,
+          "p50": 42,
+          "p75": 51,
+          "p90": 58
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "mia-w10",
@@ -5905,7 +8623,7 @@ var TEAMS_DATABASE = {
         "tv": "NBC",
         "opponent": "Notre Dame Fighting Irish",
         "oppAbbr": "ND",
-        "oppRank": "#4 AP",
+        "oppRank": "#3 AP",
         "oppBadge": "ND",
         "oppColor": "#0C2340",
         "oppSecondary": "#FEE123",
@@ -5915,18 +8633,37 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 3.5,
+        "vegasSpread": -0.4,
         "overUnder": 52.5,
-        "baseWinProb": 39,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 54,
         "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Miami quarterback play vs Notre Dame Fighting Irish secondary.",
           "summary": "High-stakes clash against #4 AP Notre Dame Fighting Irish."
         },
         "oppId": "notredame",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 54.4,
+        "mcOverProb": 33.3,
+        "mcRecommendedAts": "Miami -0.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 36
+        }
       },
       {
         "id": "mia-w11",
@@ -5947,18 +8684,37 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -25.5,
+        "vegasSpread": -36.4,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Miami front seven vs Duke Blue Devils rushing attack.",
           "summary": "Regular season non-conference test against Duke Blue Devils."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 60.4,
+        "mcOverProb": 45.9,
+        "mcRecommendedAts": "Miami -36.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 37,
+          "p50": 45,
+          "p75": 54,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "mia-w12",
@@ -5979,18 +8735,37 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -25.5,
+        "vegasSpread": -36.4,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Miami front seven vs Virginia Tech Hokies rushing attack.",
           "summary": "Regular season non-conference test against Virginia Tech Hokies."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 62.0,
+        "mcOverProb": 47.7,
+        "mcRecommendedAts": "Miami -36.4",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 38,
+          "p50": 45,
+          "p75": 54,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "mia-w13",
@@ -6011,23 +8786,43 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -25.5,
+        "vegasSpread": -36.4,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Miami front seven vs Boston College Eagles rushing attack.",
           "summary": "Regular season non-conference test against Boston College Eagles."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 59.0,
+        "mcOverProb": 45.9,
+        "mcRecommendedAts": "Miami -36.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 38,
+          "p50": 45,
+          "p75": 54,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png",
     "badgeText": "MIA",
-    "confirmedStarterQb": "Darian Mensah"
+    "confirmedStarterQb": "Darian Mensah",
+    "seasonBaselineSpRating": 27.0
   },
   "texasam": {
     "id": "texasam",
@@ -6037,8 +8832,8 @@ var TEAMS_DATABASE = {
     "abbr": "TAMU",
     "mascot": "Aggies",
     "conference": "SEC",
-    "apRank": "#8 AP",
-    "apPoints": "1,260 PTS",
+    "apRank": "#10 AP",
+    "apPoints": "1,079 PTS",
     "headCoach": "Mike Elko",
     "defensiveCoordinator": "Jay Bateman",
     "offensiveCoordinator": "Collin Klein",
@@ -6056,8 +8851,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#140707",
       "bgBase": "#0A0404"
     },
-    "baseSpRating": 26.5,
-    "playoffContenderRank": 8,
+    "baseSpRating": 29.03,
+    "playoffContenderRank": 10,
     "sliderLabels": {
       "qb": "Marcel Reed Dual-Threat Attack",
       "ground": "Rueben Owens II & Tiger Riden Ground Attack",
@@ -6085,18 +8880,23 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.5,
-        "overUnder": 52.5,
+        "vegasSpread": -38.5,
+        "overUnder": 53.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 91,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "projScoreUt": 50,
+        "projScoreOpp": 0,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Texas A&M offensive line vs Missouri State Bears defensive front.",
           "summary": "Non-conference matchup in College Station, TX against FCS challenger Missouri State Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 50,
+        "finalOppScore": 0,
+        "finalWin": true
       },
       {
         "id": "tamu-w2",
@@ -6119,16 +8919,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -13.5,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 89,
+        "projScoreUt": 31,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Arizona State Sun Devils secondary.",
-          "summary": "High-stakes clash against RV Arizona State Sun Devils."
+          "summary": "High-stakes clash against NR Arizona State Sun Devils."
         },
         "oppId": "arizonastate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 59.8,
+        "mcOverProb": 29.8,
+        "mcRecommendedAts": "Texas A&M -13.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 44
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 13,
+          "p75": 20,
+          "p90": 27
+        }
       },
       {
         "id": "tamu-w3",
@@ -6149,18 +8968,37 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -25.0,
+        "vegasSpread": -37.0,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas A&M front seven vs Kentucky Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Kentucky Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 59.1,
+        "mcOverProb": 47.0,
+        "mcRecommendedAts": "Texas A&M -37.0",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 32,
+          "p25": 38,
+          "p50": 45,
+          "p75": 54,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "tamu-w4",
@@ -6171,7 +9009,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "LSU Tigers",
         "oppAbbr": "LSU",
-        "oppRank": "#11 AP",
+        "oppRank": "#8 AP",
         "oppBadge": "LSU",
         "oppColor": "#461D7C",
         "oppSecondary": "#FDD023",
@@ -6181,18 +9019,37 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.0,
+        "vegasSpread": 8.0,
         "overUnder": 52.5,
-        "baseWinProb": 35,
-        "projScoreUt": 24,
-        "projScoreOpp": 29,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 23,
+        "projScoreUt": 18,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs LSU Tigers secondary.",
-          "summary": "High-stakes clash against #11 AP LSU Tigers."
+          "summary": "High-stakes clash against #8 AP LSU Tigers."
         },
         "oppId": "lsu",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 43.9,
+        "mcOverProb": 32.9,
+        "mcRecommendedAts": "LSU -8.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 12,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 28,
+          "p75": 36,
+          "p90": 41
+        }
       },
       {
         "id": "tamu-w5",
@@ -6213,18 +9070,37 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -25.0,
+        "vegasSpread": -37.0,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 46,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas A&M front seven vs Arkansas Razorbacks rushing attack.",
           "summary": "Regular season non-conference test against Arkansas Razorbacks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 56.6,
+        "mcOverProb": 45.3,
+        "mcRecommendedAts": "Texas A&M -37.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 31,
+          "p25": 37,
+          "p50": 45,
+          "p75": 54,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "tamu-w6",
@@ -6235,7 +9111,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Missouri Tigers",
         "oppAbbr": "MIZ",
-        "oppRank": "#25 AP",
+        "oppRank": "#23 AP",
         "oppBadge": "MIZ",
         "oppColor": "#F1B82D",
         "oppSecondary": "#000000",
@@ -6245,18 +9121,37 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -0.5,
+        "vegasSpread": -6.6,
         "overUnder": 52.5,
-        "baseWinProb": 52,
-        "projScoreUt": 27,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 78,
+        "projScoreUt": 29,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Missouri Tigers secondary.",
-          "summary": "High-stakes clash against #25 AP Missouri Tigers."
+          "summary": "High-stakes clash against #23 AP Missouri Tigers."
         },
         "oppId": "missouri",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 62.2,
+        "mcOverProb": 33.6,
+        "mcRecommendedAts": "Texas A&M -6.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 28,
+          "p75": 35,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        }
       },
       {
         "id": "tamu-w7",
@@ -6277,18 +9172,37 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -43.5,
+        "vegasSpread": -63.4,
         "overUnder": 52.5,
+        "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
-        "projScoreUt": 48,
-        "projScoreOpp": 4,
+        "projScoreUt": 58,
+        "projScoreOpp": 5,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Texas A&M offensive line vs The Citadel Bulldogs defensive front.",
           "summary": "Non-conference matchup in College Station, TX against FCS challenger The Citadel Bulldogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 19.6,
+        "mcOverProb": 79.0,
+        "mcRecommendedAts": "CIT +63.4",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 43,
+          "p25": 50,
+          "p50": 58,
+          "p75": 66,
+          "p90": 72
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 0,
+          "p50": 3,
+          "p75": 7,
+          "p90": 10
+        }
       },
       {
         "id": "tamu-w8",
@@ -6299,7 +9213,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Alabama Crimson Tide",
         "oppAbbr": "ALA",
-        "oppRank": "#13 AP",
+        "oppRank": "#12 AP",
         "oppBadge": "BAMA",
         "oppColor": "#9E1B32",
         "oppSecondary": "#FFFFFF",
@@ -6309,18 +9223,37 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 3.0,
+        "vegasSpread": 3.6,
         "overUnder": 52.5,
+        "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 41,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "projScoreUt": 22,
+        "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Alabama Crimson Tide secondary.",
-          "summary": "High-stakes clash against #13 AP Alabama Crimson Tide."
+          "summary": "High-stakes clash against #12 AP Alabama Crimson Tide."
         },
         "oppId": "alabama",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 50.0,
+        "mcOverProb": 33.8,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 9,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 34
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 40
+        }
       },
       {
         "id": "tamu-w10",
@@ -6341,18 +9274,37 @@ var TEAMS_DATABASE = {
         "location": "Columbia, SC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -30.0,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas A&M front seven vs South Carolina Gamecocks rushing attack.",
           "summary": "Regular season non-conference test against South Carolina Gamecocks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.2,
+        "mcOverProb": 34.3,
+        "mcRecommendedAts": "Texas A&M -30.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "tamu-w11",
@@ -6363,7 +9315,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Tennessee Volunteers",
         "oppAbbr": "TENN",
-        "oppRank": "#20 AP",
+        "oppRank": "#18 AP",
         "oppBadge": "TENN",
         "oppColor": "#FF8200",
         "oppSecondary": "#FFFFFF",
@@ -6373,18 +9325,37 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -5.5,
+        "vegasSpread": -8.0,
         "overUnder": 52.5,
-        "baseWinProb": 67,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 80,
         "projScoreUt": 29,
-        "projScoreOpp": 24,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Tennessee Volunteers secondary.",
-          "summary": "High-stakes clash against #20 AP Tennessee Volunteers."
+          "summary": "High-stakes clash against #18 AP Tennessee Volunteers."
         },
         "oppId": "tennessee",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 59.2,
+        "mcOverProb": 31.4,
+        "mcRecommendedAts": "Texas A&M -8.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 29,
+          "p75": 37,
+          "p90": 42
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 30
+        }
       },
       {
         "id": "tamu-w12",
@@ -6395,7 +9366,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Oklahoma Sooners",
         "oppAbbr": "OU",
-        "oppRank": "#10 AP",
+        "oppRank": "#11 AP",
         "oppBadge": "OU",
         "oppColor": "#841617",
         "oppSecondary": "#FDF9D8",
@@ -6405,11 +9376,12 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.5,
+        "vegasSpread": 1.9,
         "overUnder": 52.5,
-        "baseWinProb": 42,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 45,
+        "projScoreUt": 23,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Oklahoma Sooners secondary.",
@@ -6417,7 +9389,25 @@ var TEAMS_DATABASE = {
         },
         "oppId": "oklahoma",
         "is_tracked": true,
-        "rivalryName": "RED RIVER RIVALRY"
+        "rivalryName": "RED RIVER RIVALRY",
+        "mcCoverProb": 47.6,
+        "mcOverProb": 35.3,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        },
+        "mcScoreDistOpp": {
+          "p10": 12,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        }
       },
       {
         "id": "tamu-w13",
@@ -6428,7 +9418,7 @@ var TEAMS_DATABASE = {
         "tv": "ABC",
         "opponent": "Texas Longhorns",
         "oppAbbr": "TEX",
-        "oppRank": "#5 AP",
+        "oppRank": "#4 AP",
         "oppBadge": "TEX",
         "oppColor": "#BF5700",
         "oppSecondary": "#FFFFFF",
@@ -6438,24 +9428,44 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.0,
+        "vegasSpread": 4.0,
         "overUnder": 52.5,
-        "baseWinProb": 44,
-        "projScoreUt": 25,
-        "projScoreOpp": 27,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 37,
+        "projScoreUt": 21,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Texas Longhorns secondary.",
-          "summary": "High-stakes clash against #5 AP Texas Longhorns."
+          "summary": "High-stakes clash against #3 AP Texas Longhorns."
         },
         "oppId": "texas",
         "is_tracked": true,
-        "rivalryName": "LONE STAR SHOWDOWN"
+        "rivalryName": "LONE STAR SHOWDOWN",
+        "mcCoverProb": 45.7,
+        "mcOverProb": 35.2,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 34
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 19,
+          "p50": 26,
+          "p75": 33,
+          "p90": 38
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png",
     "badgeText": "TAMU",
-    "confirmedStarterQb": "Marcel Reed"
+    "confirmedStarterQb": "Marcel Reed",
+    "seasonBaselineSpRating": 26.5
   },
   "olemiss": {
     "id": "olemiss",
@@ -6466,7 +9476,7 @@ var TEAMS_DATABASE = {
     "mascot": "Rebels",
     "conference": "SEC",
     "apRank": "#9 AP",
-    "apPoints": "1,180 PTS",
+    "apPoints": "1,154 PTS",
     "headCoach": "Lane Kiffin",
     "defensiveCoordinator": "Pete Golding",
     "offensiveCoordinator": "Charlie Weis Jr.",
@@ -6484,7 +9494,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#140A0D",
       "bgBase": "#0A0507"
     },
-    "baseSpRating": 26.0,
+    "baseSpRating": 25.23,
     "playoffContenderRank": 9,
     "sliderLabels": {
       "qb": "Trinidad Chambliss Explosive Air Raid",
@@ -6503,7 +9513,7 @@ var TEAMS_DATABASE = {
         "tv": "ABC",
         "opponent": "Louisville Cardinals",
         "oppAbbr": "LOU",
-        "oppRank": "#24 AP",
+        "oppRank": "RV",
         "oppBadge": "LOU",
         "oppColor": "#C90000",
         "oppSecondary": "#000000",
@@ -6513,18 +9523,23 @@ var TEAMS_DATABASE = {
         "location": "Nashville, TN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -14.5,
-        "overUnder": 52.5,
-        "baseWinProb": 87,
-        "projScoreUt": 35,
-        "projScoreOpp": 20,
+        "vegasSpread": -6.5,
+        "overUnder": 54.5,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 81,
+        "projScoreUt": 41,
+        "projScoreOpp": 38,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ole Miss quarterback play vs Louisville Cardinals secondary.",
-          "summary": "High-stakes clash against #24 AP Louisville Cardinals."
+          "summary": "High-stakes clash against RV Louisville Cardinals."
         },
         "oppId": "louisville",
-        "is_tracked": true
+        "is_tracked": true,
+        "isFinal": true,
+        "finalTeamScore": 41,
+        "finalOppScore": 38,
+        "finalWin": true
       },
       {
         "id": "miss-w2",
@@ -6547,16 +9562,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -24.5,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ole Miss front seven vs Charlotte 49ers rushing attack.",
           "summary": "Regular season non-conference test against Charlotte 49ers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 85.0,
+        "mcOverProb": 46.0,
+        "mcRecommendedAts": "Ole Miss -24.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 37,
+          "p50": 44,
+          "p75": 52,
+          "p90": 59
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "miss-w3",
@@ -6567,7 +9601,7 @@ var TEAMS_DATABASE = {
         "tv": "ABC",
         "opponent": "LSU Tigers",
         "oppAbbr": "LSU",
-        "oppRank": "#11 AP",
+        "oppRank": "#8 AP",
         "oppBadge": "LSU",
         "oppColor": "#461D7C",
         "oppSecondary": "#FDD023",
@@ -6577,18 +9611,37 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -0.5,
+        "vegasSpread": 6.8,
         "overUnder": 52.5,
-        "baseWinProb": 52,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 26,
+        "projScoreUt": 21,
+        "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ole Miss quarterback play vs LSU Tigers secondary.",
-          "summary": "High-stakes clash against #11 AP LSU Tigers."
+          "summary": "High-stakes clash against #8 AP LSU Tigers."
         },
         "oppId": "lsu",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 42.3,
+        "mcOverProb": 43.6,
+        "mcRecommendedAts": "LSU -6.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
+        }
       },
       {
         "id": "miss-w4",
@@ -6609,18 +9662,37 @@ var TEAMS_DATABASE = {
         "location": "Gainesville, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -24.6,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ole Miss front seven vs Florida Gators rushing attack.",
           "summary": "Regular season non-conference test against Florida Gators."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.8,
+        "mcOverProb": 39.6,
+        "mcRecommendedAts": "Ole Miss -24.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 41,
+          "p75": 48,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "miss-w6",
@@ -6641,18 +9713,37 @@ var TEAMS_DATABASE = {
         "location": "Nashville, TN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -24.6,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ole Miss front seven vs Vanderbilt Commodores rushing attack.",
           "summary": "Regular season non-conference test against Vanderbilt Commodores."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 74.2,
+        "mcOverProb": 40.7,
+        "mcRecommendedAts": "Ole Miss -24.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "miss-w7",
@@ -6663,7 +9754,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Missouri Tigers",
         "oppAbbr": "MIZ",
-        "oppRank": "#25 AP",
+        "oppRank": "#23 AP",
         "oppBadge": "MIZ",
         "oppColor": "#F1B82D",
         "oppSecondary": "#000000",
@@ -6673,18 +9764,37 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -6.0,
+        "vegasSpread": -8.3,
         "overUnder": 52.5,
-        "baseWinProb": 68,
-        "projScoreUt": 29,
-        "projScoreOpp": 23,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 82,
+        "projScoreUt": 32,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ole Miss quarterback play vs Missouri Tigers secondary.",
-          "summary": "High-stakes clash against #25 AP Missouri Tigers."
+          "summary": "High-stakes clash against #23 AP Missouri Tigers."
         },
         "oppId": "missouri",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 64.6,
+        "mcOverProb": 42.5,
+        "mcRecommendedAts": "Ole Miss -8.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 32,
+          "p75": 39,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        }
       },
       {
         "id": "miss-w8",
@@ -6695,7 +9805,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas Longhorns",
         "oppAbbr": "TEX",
-        "oppRank": "#5 AP",
+        "oppRank": "#4 AP",
         "oppBadge": "TEX",
         "oppColor": "#BF5700",
         "oppSecondary": "#FFFFFF",
@@ -6705,18 +9815,37 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 8.5,
+        "vegasSpread": 14.8,
         "overUnder": 52.5,
-        "baseWinProb": 26,
-        "projScoreUt": 22,
-        "projScoreOpp": 30,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 8,
+        "projScoreUt": 15,
+        "projScoreOpp": 35,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ole Miss quarterback play vs Texas Longhorns secondary.",
-          "summary": "High-stakes clash against #5 AP Texas Longhorns."
+          "summary": "High-stakes clash against #3 AP Texas Longhorns."
         },
         "oppId": "texas",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 35.0,
+        "mcOverProb": 40.2,
+        "mcRecommendedAts": "TEX -14.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 13,
+          "p75": 20,
+          "p90": 27
+        },
+        "mcScoreDistOpp": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 42,
+          "p90": 49
+        }
       },
       {
         "id": "miss-w9",
@@ -6737,18 +9866,37 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -29.6,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ole Miss front seven vs Auburn Tigers rushing attack.",
           "summary": "Regular season non-conference test against Auburn Tigers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.7,
+        "mcOverProb": 46.1,
+        "mcRecommendedAts": "Ole Miss -29.6",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 37,
+          "p50": 44,
+          "p75": 52,
+          "p90": 61
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "miss-w10",
@@ -6759,7 +9907,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Georgia Bulldogs",
         "oppAbbr": "UGA",
-        "oppRank": "#3 AP",
+        "oppRank": "#2 AP",
         "oppBadge": "UGA",
         "oppColor": "#BA0C2F",
         "oppSecondary": "#000000",
@@ -6769,18 +9917,37 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 3.0,
+        "vegasSpread": 9.1,
         "overUnder": 52.5,
-        "baseWinProb": 41,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 21,
+        "projScoreUt": 19,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ole Miss quarterback play vs Georgia Bulldogs secondary.",
-          "summary": "High-stakes clash against #3 AP Georgia Bulldogs."
+          "summary": "High-stakes clash against #2 AP Georgia Bulldogs."
         },
         "oppId": "georgia",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 41.8,
+        "mcOverProb": 42.3,
+        "mcRecommendedAts": "UGA -9.1",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 19,
+          "p75": 26,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        }
       },
       {
         "id": "miss-w11",
@@ -6791,7 +9958,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Oklahoma Sooners",
         "oppAbbr": "OU",
-        "oppRank": "#10 AP",
+        "oppRank": "#11 AP",
         "oppBadge": "OU",
         "oppColor": "#841617",
         "oppSecondary": "#FDF9D8",
@@ -6801,18 +9968,37 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 3.0,
+        "vegasSpread": 5.7,
         "overUnder": 52.5,
-        "baseWinProb": 41,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 31,
+        "projScoreUt": 22,
+        "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ole Miss quarterback play vs Oklahoma Sooners secondary.",
           "summary": "High-stakes clash against #10 AP Oklahoma Sooners."
         },
         "oppId": "oklahoma",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 43.8,
+        "mcOverProb": 42.8,
+        "mcRecommendedAts": "OU -5.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 35
+        },
+        "mcScoreDistOpp": {
+          "p10": 14,
+          "p25": 21,
+          "p50": 29,
+          "p75": 37,
+          "p90": 44
+        }
       },
       {
         "id": "miss-w12",
@@ -6833,18 +10019,37 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -29.6,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ole Miss front seven vs Wofford Terriers rushing attack.",
           "summary": "Regular season non-conference test against Wofford Terriers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 74.6,
+        "mcOverProb": 46.3,
+        "mcRecommendedAts": "Ole Miss -29.6",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 37,
+          "p50": 44,
+          "p75": 52,
+          "p90": 59
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "miss-w13",
@@ -6865,11 +10070,12 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -29.6,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 45,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ole Miss front seven vs Mississippi State Bulldogs rushing attack.",
@@ -6877,12 +10083,31 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "rivalryName": "EGG BOWL"
+        "rivalryName": "EGG BOWL",
+        "mcCoverProb": 74.1,
+        "mcOverProb": 48.8,
+        "mcRecommendedAts": "Ole Miss -29.6",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 37,
+          "p50": 44,
+          "p75": 52,
+          "p90": 59
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png",
     "badgeText": "MISS",
-    "confirmedStarterQb": "Trinidad Chambliss"
+    "confirmedStarterQb": "Trinidad Chambliss",
+    "seasonBaselineSpRating": 26.0
   },
   "oklahoma": {
     "id": "oklahoma",
@@ -6892,8 +10117,8 @@ var TEAMS_DATABASE = {
     "abbr": "OU",
     "mascot": "Sooners",
     "conference": "SEC",
-    "apRank": "#10 AP",
-    "apPoints": "1,140 PTS",
+    "apRank": "#11 AP",
+    "apPoints": "1,039 PTS",
     "headCoach": "Brent Venables",
     "defensiveCoordinator": "Zac Alley",
     "offensiveCoordinator": "Joe Jon Finley",
@@ -6911,8 +10136,8 @@ var TEAMS_DATABASE = {
       "bgSurface": "#140A0A",
       "bgBase": "#0A0505"
     },
-    "baseSpRating": 26.0,
-    "playoffContenderRank": 10,
+    "baseSpRating": 28.41,
+    "playoffContenderRank": 11,
     "sliderLabels": {
       "qb": "John Mateer Dual-Threat Execution",
       "ground": "Xavier Robinson & Lloyd Avant Ground Attack",
@@ -6940,11 +10165,12 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -31.5,
-        "overUnder": 52.5,
+        "vegasSpread": -40.5,
+        "overUnder": 51.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 99,
-        "projScoreUt": 48,
-        "projScoreOpp": 7,
+        "projScoreUt": 51,
+        "projScoreOpp": 0,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oklahoma front seven vs UTEP Miners rushing attack.",
@@ -6955,10 +10181,7 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 51,
         "finalOppScore": 0,
-        "actualScoreUt": 51,
-        "actualScoreOpp": 0,
-        "predictedScoreUt": 48,
-        "predictedScoreOpp": 7
+        "finalWin": true
       },
       {
         "id": "ou-w2",
@@ -6969,7 +10192,7 @@ var TEAMS_DATABASE = {
         "tv": "FOX",
         "opponent": "Michigan Wolverines",
         "oppAbbr": "MICH",
-        "oppRank": "#16 AP",
+        "oppRank": "RV",
         "oppBadge": "MICH",
         "oppColor": "#00274C",
         "oppSecondary": "#FFCB05",
@@ -6981,16 +10204,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": 2.0,
         "overUnder": 52.5,
-        "baseWinProb": 44,
-        "projScoreUt": 25,
-        "projScoreOpp": 27,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 79,
+        "projScoreUt": 29,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oklahoma quarterback play vs Michigan Wolverines secondary.",
-          "summary": "High-stakes clash against #16 AP Michigan Wolverines."
+          "summary": "High-stakes clash against #24 AP Michigan Wolverines."
         },
         "oppId": "michigan",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 80.6,
+        "mcOverProb": 33.1,
+        "mcRecommendedAts": "Oklahoma +2.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 29,
+          "p75": 37,
+          "p90": 42
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        }
       },
       {
         "id": "ou-w3",
@@ -7011,18 +10253,37 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -31.7,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 43,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oklahoma front seven vs New Mexico Lobos rushing attack.",
           "summary": "Regular season non-conference test against New Mexico Lobos."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 63.6,
+        "mcOverProb": 37.6,
+        "mcRecommendedAts": "Oklahoma -31.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 34,
+          "p50": 42,
+          "p75": 51,
+          "p90": 58
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "ou-w4",
@@ -7033,7 +10294,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Georgia Bulldogs",
         "oppAbbr": "UGA",
-        "oppRank": "#3 AP",
+        "oppRank": "#2 AP",
         "oppBadge": "UGA",
         "oppColor": "#BA0C2F",
         "oppSecondary": "#000000",
@@ -7043,18 +10304,37 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 9.0,
+        "vegasSpread": 12.4,
         "overUnder": 52.5,
-        "baseWinProb": 25,
-        "projScoreUt": 22,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 12,
+        "projScoreUt": 15,
         "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oklahoma quarterback play vs Georgia Bulldogs secondary.",
-          "summary": "High-stakes clash against #3 AP Georgia Bulldogs."
+          "summary": "High-stakes clash against #2 AP Georgia Bulldogs."
         },
         "oppId": "georgia",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 38.0,
+        "mcOverProb": 31.1,
+        "mcRecommendedAts": "UGA -12.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 14,
+          "p75": 20,
+          "p90": 27
+        },
+        "mcScoreDistOpp": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        }
       },
       {
         "id": "ou-w6",
@@ -7065,7 +10345,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas Longhorns",
         "oppAbbr": "TEX",
-        "oppRank": "#5 AP",
+        "oppRank": "#4 AP",
         "oppBadge": "TEX",
         "oppColor": "#BF5700",
         "oppSecondary": "#FFFFFF",
@@ -7075,19 +10355,38 @@ var TEAMS_DATABASE = {
         "location": "Dallas, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.5,
+        "vegasSpread": 6.6,
         "overUnder": 52.5,
-        "baseWinProb": 42,
-        "projScoreUt": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 28,
+        "projScoreUt": 19,
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oklahoma quarterback play vs Texas Longhorns secondary.",
-          "summary": "High-stakes clash against #5 AP Texas Longhorns."
+          "summary": "High-stakes clash against #3 AP Texas Longhorns."
         },
         "oppId": "texas",
         "is_tracked": true,
-        "rivalryName": "RED RIVER RIVALRY"
+        "rivalryName": "RED RIVER RIVALRY",
+        "mcCoverProb": 45.1,
+        "mcOverProb": 33.2,
+        "mcRecommendedAts": "TEX -6.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 19,
+          "p75": 26,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        }
       },
       {
         "id": "ou-w7",
@@ -7108,18 +10407,37 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -31.7,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 43,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oklahoma front seven vs Kentucky Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Kentucky Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 63.4,
+        "mcOverProb": 38.3,
+        "mcRecommendedAts": "Oklahoma -31.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 28,
+          "p25": 35,
+          "p50": 42,
+          "p75": 51,
+          "p90": 58
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "ou-w8",
@@ -7140,18 +10458,37 @@ var TEAMS_DATABASE = {
         "location": "Starkville, MS",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -26.7,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 40,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oklahoma front seven vs Mississippi State Bulldogs rushing attack.",
           "summary": "Regular season non-conference test against Mississippi State Bulldogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 71.9,
+        "mcOverProb": 31.5,
+        "mcRecommendedAts": "Oklahoma -26.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 40,
+          "p75": 48,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "ou-w9",
@@ -7172,18 +10509,37 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -31.7,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 43,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oklahoma front seven vs South Carolina Gamecocks rushing attack.",
           "summary": "Regular season non-conference test against South Carolina Gamecocks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.9,
+        "mcOverProb": 38.6,
+        "mcRecommendedAts": "Oklahoma -31.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 30,
+          "p25": 35,
+          "p50": 43,
+          "p75": 51,
+          "p90": 58
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "ou-w10",
@@ -7204,18 +10560,37 @@ var TEAMS_DATABASE = {
         "location": "Gainesville, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -26.7,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 40,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oklahoma front seven vs Florida Gators rushing attack.",
           "summary": "Regular season non-conference test against Florida Gators."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 72.1,
+        "mcOverProb": 31.4,
+        "mcRecommendedAts": "Oklahoma -26.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 39,
+          "p75": 47,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "ou-w11",
@@ -7236,18 +10611,37 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -3.0,
+        "vegasSpread": -5.7,
         "overUnder": 52.5,
-        "baseWinProb": 59,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 74,
         "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oklahoma quarterback play vs Ole Miss Rebels secondary.",
-          "summary": "High-stakes clash against #9 AP Ole Miss Rebels."
+          "summary": "High-stakes clash against #11 AP Ole Miss Rebels."
         },
         "oppId": "olemiss",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 61.2,
+        "mcOverProb": 34.1,
+        "mcRecommendedAts": "Oklahoma -5.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 35,
+          "p90": 42
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 19,
+          "p75": 26,
+          "p90": 31
+        }
       },
       {
         "id": "ou-w12",
@@ -7258,7 +10652,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas A&M Aggies",
         "oppAbbr": "TA&M",
-        "oppRank": "#8 AP",
+        "oppRank": "#10 AP",
         "oppBadge": "TAMU",
         "oppColor": "#500000",
         "oppSecondary": "#FFFFFF",
@@ -7268,19 +10662,38 @@ var TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.5,
+        "vegasSpread": -1.9,
         "overUnder": 52.5,
-        "baseWinProb": 58,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 59,
+        "projScoreUt": 25,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oklahoma quarterback play vs Texas A&M Aggies secondary.",
-          "summary": "High-stakes clash against #8 AP Texas A&M Aggies."
+          "summary": "High-stakes clash against #9 AP Texas A&M Aggies."
         },
         "oppId": "texasam",
         "is_tracked": true,
-        "rivalryName": "RED RIVER RIVALRY"
+        "rivalryName": "RED RIVER RIVALRY",
+        "mcCoverProb": 56.8,
+        "mcOverProb": 34.5,
+        "mcRecommendedAts": "Oklahoma -1.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 35
+        }
       },
       {
         "id": "ou-w13",
@@ -7291,7 +10704,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Missouri Tigers",
         "oppAbbr": "MIZ",
-        "oppRank": "#25 AP",
+        "oppRank": "#23 AP",
         "oppBadge": "MIZ",
         "oppColor": "#F1B82D",
         "oppSecondary": "#000000",
@@ -7301,23 +10714,43 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.0,
+        "vegasSpread": -5.9,
         "overUnder": 52.5,
-        "baseWinProb": 51,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 75,
+        "projScoreUt": 28,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oklahoma quarterback play vs Missouri Tigers secondary.",
-          "summary": "High-stakes clash against #25 AP Missouri Tigers."
+          "summary": "High-stakes clash against #23 AP Missouri Tigers."
         },
         "oppId": "missouri",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 61.8,
+        "mcOverProb": 33.2,
+        "mcRecommendedAts": "Oklahoma -5.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 28,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        }
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/201.png",
     "badgeText": "OU",
-    "confirmedStarterQb": "John Mateer"
+    "confirmedStarterQb": "John Mateer",
+    "seasonBaselineSpRating": 26.0
   },
   "boisestate": {
     "id": "boisestate",
@@ -7327,8 +10760,8 @@ var TEAMS_DATABASE = {
     "mascot": "Broncos",
     "abbr": "BSU",
     "conference": "Mountain West",
-    "apRank": "NR",
-    "apPoints": "845 pts",
+    "apRank": "RV",
+    "apPoints": "86 PTS",
     "headCoach": "Spencer Danielson",
     "offensiveCoordinator": "Nate Potter",
     "defensiveCoordinator": "Erik Chinander",
@@ -7353,7 +10786,7 @@ var TEAMS_DATABASE = {
       "turnover": "Blue Turf Turnover Luck",
       "crowd": "Albertsons Stadium Blue Turf Roar"
     },
-    "baseSpRating": 18.5,
+    "baseSpRating": 20.85,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/68.png",
     "badgeText": "BSU",
     "schedule": [
@@ -7366,7 +10799,7 @@ var TEAMS_DATABASE = {
         "tv": "CBS",
         "opponent": "Oregon Ducks",
         "oppAbbr": "ORE",
-        "oppRank": "#2 AP",
+        "oppRank": "#6 AP",
         "oppBadge": "ORE",
         "oppColor": "#154733",
         "oppSecondary": "#FEE123",
@@ -7376,18 +10809,23 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 10.5,
-        "overUnder": 52.5,
+        "vegasSpread": 24.5,
+        "overUnder": 53.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 15,
-        "projScoreUt": 21,
-        "projScoreOpp": 35,
+        "projScoreUt": 27,
+        "projScoreOpp": 34,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Boise State quarterback play vs Oregon Ducks secondary.",
-          "summary": "High-stakes clash against #2 AP Oregon Ducks."
+          "summary": "High-stakes clash against #6 AP Oregon Ducks."
         },
         "oppId": "oregon",
-        "is_tracked": true
+        "is_tracked": true,
+        "isFinal": true,
+        "finalTeamScore": 27,
+        "finalOppScore": 34,
+        "finalWin": false
       },
       {
         "id": "bsu-w2",
@@ -7410,16 +10848,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -17.0,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Boise State front seven vs Memphis Tigers rushing attack.",
           "summary": "Regular season non-conference test against Memphis Tigers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 76.8,
+        "mcOverProb": 27.3,
+        "mcRecommendedAts": "Boise State -17.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 29,
+          "p50": 35,
+          "p75": 42,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 9,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "bsu-w3",
@@ -7440,18 +10897,37 @@ var TEAMS_DATABASE = {
         "location": "Boise, ID",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -35.5,
+        "vegasSpread": -42.2,
         "overUnder": 52.5,
+        "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
-        "projScoreUt": 44,
-        "projScoreOpp": 8,
+        "projScoreUt": 50,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Boise State offensive line vs South Dakota Coyotes defensive front.",
           "summary": "Non-conference matchup in Boise, ID against FCS challenger South Dakota Coyotes."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 54.4,
+        "mcOverProb": 60.1,
+        "mcRecommendedAts": "Boise State -42.2",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 36,
+          "p25": 42,
+          "p50": 50,
+          "p75": 58,
+          "p90": 65
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "bsu-w4",
@@ -7472,18 +10948,37 @@ var TEAMS_DATABASE = {
         "location": "Kalamazoo, MI",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -11.0,
+        "vegasSpread": -14.0,
         "overUnder": 52.5,
-        "baseWinProb": 80,
-        "projScoreUt": 32,
-        "projScoreOpp": 21,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 93,
+        "projScoreUt": 33,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Boise State front seven vs Western Michigan Broncos rushing attack.",
           "summary": "Regular season non-conference test against Western Michigan Broncos."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 66.7,
+        "mcOverProb": 31.2,
+        "mcRecommendedAts": "Boise State -14.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 40,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 17,
+          "p90": 24
+        }
       },
       {
         "id": "bsu-w5",
@@ -7504,18 +10999,37 @@ var TEAMS_DATABASE = {
         "location": "Boise, ID",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.0,
+        "vegasSpread": -19.0,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Boise State front seven vs Utah State Aggies rushing attack.",
           "summary": "Regular season non-conference test against Utah State Aggies."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.9,
+        "mcOverProb": 27.6,
+        "mcRecommendedAts": "Boise State -19.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 29,
+          "p50": 35,
+          "p75": 42,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 9,
+          "p75": 14,
+          "p90": 20
+        }
       },
       {
         "id": "bsu-w6",
@@ -7536,18 +11050,37 @@ var TEAMS_DATABASE = {
         "location": "Fresno, CA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -11.0,
+        "vegasSpread": -14.0,
         "overUnder": 52.5,
-        "baseWinProb": 80,
-        "projScoreUt": 32,
-        "projScoreOpp": 21,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 93,
+        "projScoreUt": 33,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Boise State front seven vs Fresno State Bulldogs rushing attack.",
           "summary": "Regular season non-conference test against Fresno State Bulldogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 66.2,
+        "mcOverProb": 30.3,
+        "mcRecommendedAts": "Boise State -14.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 26,
+          "p50": 33,
+          "p75": 40,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 17,
+          "p90": 24
+        }
       },
       {
         "id": "bsu-w8",
@@ -7568,18 +11101,37 @@ var TEAMS_DATABASE = {
         "location": "Pullman, WA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -11.0,
+        "vegasSpread": -14.0,
         "overUnder": 52.5,
-        "baseWinProb": 80,
-        "projScoreUt": 32,
-        "projScoreOpp": 21,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 93,
+        "projScoreUt": 33,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Boise State front seven vs Washington State Cougars rushing attack.",
           "summary": "Regular season non-conference test against Washington State Cougars."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 65.4,
+        "mcOverProb": 30.4,
+        "mcRecommendedAts": "Boise State -14.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 26,
+          "p50": 33,
+          "p75": 40,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 17,
+          "p90": 24
+        }
       },
       {
         "id": "bsu-w9",
@@ -7600,18 +11152,37 @@ var TEAMS_DATABASE = {
         "location": "Boise, ID",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.0,
+        "vegasSpread": -19.0,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Boise State front seven vs Texas State Bobcats rushing attack.",
           "summary": "Regular season non-conference test against Texas State Bobcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.9,
+        "mcOverProb": 28.1,
+        "mcRecommendedAts": "Boise State -19.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 29,
+          "p50": 35,
+          "p75": 43,
+          "p90": 50
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 3,
+          "p50": 9,
+          "p75": 13,
+          "p90": 19
+        }
       },
       {
         "id": "bsu-w10",
@@ -7632,18 +11203,37 @@ var TEAMS_DATABASE = {
         "location": "Fort Collins, CO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -11.0,
+        "vegasSpread": -14.0,
         "overUnder": 52.5,
-        "baseWinProb": 80,
-        "projScoreUt": 32,
-        "projScoreOpp": 21,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 94,
+        "projScoreUt": 33,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Boise State front seven vs Colorado State Rams rushing attack.",
           "summary": "Regular season non-conference test against Colorado State Rams."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 66.8,
+        "mcOverProb": 30.7,
+        "mcRecommendedAts": "Boise State -14.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 26,
+          "p50": 33,
+          "p75": 40,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 17,
+          "p90": 24
+        }
       },
       {
         "id": "bsu-w11",
@@ -7664,18 +11254,37 @@ var TEAMS_DATABASE = {
         "location": "Boise, ID",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.0,
+        "vegasSpread": -19.0,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Boise State front seven vs Oregon State Beavers rushing attack.",
           "summary": "Regular season non-conference test against Oregon State Beavers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.6,
+        "mcOverProb": 29.3,
+        "mcRecommendedAts": "Boise State -19.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 29,
+          "p50": 36,
+          "p75": 43,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 9,
+          "p75": 14,
+          "p90": 20
+        }
       },
       {
         "id": "bsu-w12",
@@ -7696,18 +11305,37 @@ var TEAMS_DATABASE = {
         "location": "Boise, ID",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.0,
+        "vegasSpread": -19.0,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Boise State front seven vs San Diego State Aztecs rushing attack.",
           "summary": "Regular season non-conference test against San Diego State Aztecs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 74.0,
+        "mcOverProb": 26.9,
+        "mcRecommendedAts": "Boise State -19.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 28,
+          "p50": 36,
+          "p75": 42,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 3,
+          "p50": 9,
+          "p75": 13,
+          "p90": 19
+        }
       },
       {
         "id": "bsu-w13",
@@ -7728,21 +11356,41 @@ var TEAMS_DATABASE = {
         "location": "TBD",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -7.5,
+        "vegasSpread": -14.0,
         "overUnder": 54.5,
-        "baseWinProb": 71,
-        "projScoreUt": 31,
-        "projScoreOpp": 23,
+        "baseWinProb": 93,
+        "projScoreUt": 33,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Pac-12 regular season finale seeding and championship game qualification.",
           "keyMatchup": "Boise State rushing attack vs Pac-12 opponent defensive front.",
           "summary": "Pac-12 regular season flex finale on Thanksgiving weekend."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 66.7,
+        "mcOverProb": 26.0,
+        "mcRecommendedAts": "Boise State -14.0",
+        "mcRecommendedOu": "UNDER 54.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 40,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 17,
+          "p90": 24
+        },
+        "oddsProvider": "CFB Prophet Projected"
       }
     ],
-    "playoffContenderRank": 30
+    "playoffContenderRank": 25,
+    "seasonBaselineSpRating": 18.5
   },
   "usc": {
     "id": "usc",
@@ -7752,8 +11400,8 @@ var TEAMS_DATABASE = {
     "mascot": "Trojans",
     "abbr": "USC",
     "conference": "Big Ten",
-    "apRank": "#15 AP",
-    "apPoints": "740 pts",
+    "apRank": "#14 AP",
+    "apPoints": "861 PTS",
     "headCoach": "Lincoln Riley",
     "offensiveCoordinator": "Josh Henson",
     "defensiveCoordinator": "D'Anton Lynn",
@@ -7778,7 +11426,7 @@ var TEAMS_DATABASE = {
       "turnover": "Coliseum Turnover Margin Luck",
       "crowd": "LA Memorial Coliseum Roar"
     },
-    "baseSpRating": 26.06,
+    "baseSpRating": 25.73,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/30.png",
     "badgeText": "USC",
     "schedule": [
@@ -7801,11 +11449,12 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
-        "overUnder": 52.5,
+        "vegasSpread": -37.5,
+        "overUnder": 61.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 17,
+        "projScoreUt": 42,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs San Jos\u00e9 State Spartans rushing attack.",
@@ -7816,11 +11465,7 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 42,
         "finalOppScore": 26,
-        "finalWin": true,
-        "actualScoreUt": 42,
-        "actualScoreOpp": 26,
-        "predictedScoreUt": 39,
-        "predictedScoreOpp": 17
+        "finalWin": true
       },
       {
         "id": "usc-w1",
@@ -7841,11 +11486,12 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -27.5,
-        "overUnder": 52.5,
+        "vegasSpread": -21.5,
+        "overUnder": 51.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 98,
-        "projScoreUt": 45,
-        "projScoreOpp": 14,
+        "projScoreUt": 39,
+        "projScoreOpp": 0,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs Fresno State Bulldogs rushing attack.",
@@ -7853,9 +11499,10 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "finalWin": true,
-        "predictedScoreUt": 45,
-        "predictedScoreOpp": 14
+        "isFinal": true,
+        "finalTeamScore": 39,
+        "finalOppScore": 0,
+        "finalWin": true
       },
       {
         "id": "usc-w2",
@@ -7878,16 +11525,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -24.5,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 43,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs Louisiana Ragin' Cajuns rushing attack.",
           "summary": "Regular season non-conference test against Louisiana Ragin' Cajuns."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 81.6,
+        "mcOverProb": 38.6,
+        "mcRecommendedAts": "USC -24.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 28,
+          "p25": 34,
+          "p50": 42,
+          "p75": 51,
+          "p90": 58
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "usc-w3",
@@ -7908,18 +11574,37 @@ var TEAMS_DATABASE = {
         "location": "Piscataway, NJ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -25.5,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs Rutgers Scarlet Knights rushing attack.",
           "summary": "Regular season non-conference test against Rutgers Scarlet Knights."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 67.3,
+        "mcOverProb": 28.8,
+        "mcRecommendedAts": "USC -25.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 31,
+          "p50": 38,
+          "p75": 45,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 15
+        }
       },
       {
         "id": "usc-w4",
@@ -7930,7 +11615,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Oregon Ducks",
         "oppAbbr": "ORE",
-        "oppRank": "#2 AP",
+        "oppRank": "#6 AP",
         "oppBadge": "ORE",
         "oppColor": "#154733",
         "oppSecondary": "#FEE123",
@@ -7940,18 +11625,37 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.0,
+        "vegasSpread": -1.6,
         "overUnder": 52.5,
-        "baseWinProb": 44,
-        "projScoreUt": 25,
-        "projScoreOpp": 27,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 61,
+        "projScoreUt": 26,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "USC quarterback play vs Oregon Ducks secondary.",
-          "summary": "High-stakes clash against #2 AP Oregon Ducks."
+          "summary": "High-stakes clash against #6 AP Oregon Ducks."
         },
         "oppId": "oregon",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 58.7,
+        "mcOverProb": 34.0,
+        "mcRecommendedAts": "USC -1.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 19,
+          "p50": 24,
+          "p75": 33,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 34
+        }
       },
       {
         "id": "usc-w5",
@@ -7962,7 +11666,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Washington Huskies",
         "oppAbbr": "WASH",
-        "oppRank": "#17 AP",
+        "oppRank": "#19 AP",
         "oppBadge": "WASH",
         "oppColor": "#4B2E83",
         "oppSecondary": "#B7A57A",
@@ -7972,18 +11676,37 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -6.5,
+        "vegasSpread": -10.5,
         "overUnder": 52.5,
-        "baseWinProb": 69,
-        "projScoreUt": 30,
-        "projScoreOpp": 23,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 87,
+        "projScoreUt": 31,
+        "projScoreOpp": 16,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "USC quarterback play vs Washington Huskies secondary.",
-          "summary": "High-stakes clash against #17 AP Washington Huskies."
+          "summary": "High-stakes clash against #19 AP Washington Huskies."
         },
         "oppId": "washington",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 65.6,
+        "mcOverProb": 33.8,
+        "mcRecommendedAts": "USC -10.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 14,
+          "p75": 21,
+          "p90": 28
+        }
       },
       {
         "id": "usc-w6",
@@ -7994,7 +11717,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Penn State Nittany Lions",
         "oppAbbr": "PSU",
-        "oppRank": "#18 AP",
+        "oppRank": "#16 AP",
         "oppBadge": "PSU",
         "oppColor": "#041E42",
         "oppSecondary": "#FFFFFF",
@@ -8004,18 +11727,37 @@ var TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.5,
+        "vegasSpread": 4.8,
         "overUnder": 52.5,
-        "baseWinProb": 58,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 34,
+        "projScoreUt": 20,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "USC quarterback play vs Penn State Nittany Lions secondary.",
-          "summary": "High-stakes clash against #18 AP Penn State Nittany Lions."
+          "summary": "High-stakes clash against #16 AP Penn State Nittany Lions."
         },
         "oppId": "pennstate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 45.9,
+        "mcOverProb": 33.3,
+        "mcRecommendedAts": "PSU -4.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        }
       },
       {
         "id": "usc-w8",
@@ -8036,18 +11778,37 @@ var TEAMS_DATABASE = {
         "location": "Madison, WI",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -25.5,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 39,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs Wisconsin Badgers rushing attack.",
           "summary": "Regular season non-conference test against Wisconsin Badgers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 68.0,
+        "mcOverProb": 29.8,
+        "mcRecommendedAts": "USC -25.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 31,
+          "p50": 38,
+          "p75": 45,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 16
+        }
       },
       {
         "id": "usc-w9",
@@ -8068,10 +11829,11 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 3.5,
+        "vegasSpread": 6.7,
         "overUnder": 52.5,
-        "baseWinProb": 39,
-        "projScoreUt": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 26,
+        "projScoreUt": 19,
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -8079,7 +11841,25 @@ var TEAMS_DATABASE = {
           "summary": "High-stakes clash against #1 AP Ohio State Buckeyes."
         },
         "oppId": "ohiostate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 42.8,
+        "mcOverProb": 34.2,
+        "mcRecommendedAts": "OSU -6.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 17,
+          "p75": 26,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 35,
+          "p90": 41
+        }
       },
       {
         "id": "usc-w11",
@@ -8090,7 +11870,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Indiana Hoosiers",
         "oppAbbr": "IU",
-        "oppRank": "#6 AP",
+        "oppRank": "#5 AP",
         "oppBadge": "IND",
         "oppColor": "#990000",
         "oppSecondary": "#EEEDEB",
@@ -8100,18 +11880,37 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.5,
+        "vegasSpread": 3.8,
         "overUnder": 52.5,
-        "baseWinProb": 42,
-        "projScoreUt": 25,
-        "projScoreOpp": 27,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 39,
+        "projScoreUt": 21,
+        "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "USC quarterback play vs Indiana Hoosiers secondary.",
-          "summary": "High-stakes clash against #6 AP Indiana Hoosiers."
+          "summary": "High-stakes clash against #5 AP Indiana Hoosiers."
         },
         "oppId": "indiana",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 48.2,
+        "mcOverProb": 32.3,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 9,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 34
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 17,
+          "p50": 24,
+          "p75": 33,
+          "p90": 38
+        }
       },
       {
         "id": "usc-w12",
@@ -8132,18 +11931,37 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
+        "vegasSpread": -31.0,
         "overUnder": 52.5,
-        "baseWinProb": 96,
-        "projScoreUt": 39,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs Maryland Terrapins rushing attack.",
           "summary": "Regular season non-conference test against Maryland Terrapins."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 60.3,
+        "mcOverProb": 35.1,
+        "mcRecommendedAts": "USC -31.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 34,
+          "p50": 41,
+          "p75": 49,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "usc-w13",
@@ -8164,11 +11982,12 @@ var TEAMS_DATABASE = {
         "location": "Pasadena, CA",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -25.5,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 39,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs UCLA Bruins rushing attack.",
@@ -8176,10 +11995,29 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "rivalryName": "BATTLE FOR THE VICTORY BELL"
+        "rivalryName": "BATTLE FOR THE VICTORY BELL",
+        "mcCoverProb": 70.6,
+        "mcOverProb": 30.0,
+        "mcRecommendedAts": "USC -25.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 25,
+          "p25": 31,
+          "p50": 38,
+          "p75": 46,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 15
+        }
       }
     ],
-    "playoffContenderRank": 15
+    "playoffContenderRank": 14,
+    "seasonBaselineSpRating": 26.06
   },
   "floridastate": {
     "id": "floridastate",
@@ -8189,8 +12027,8 @@ var TEAMS_DATABASE = {
     "mascot": "Seminoles",
     "abbr": "FSU",
     "conference": "ACC",
-    "apRank": "RV",
-    "apPoints": "718 pts",
+    "apRank": "NR",
+    "apPoints": "",
     "headCoach": "Mike Norvell",
     "offensiveCoordinator": "Tim Harris Jr.",
     "defensiveCoordinator": "Tony White",
@@ -8215,7 +12053,7 @@ var TEAMS_DATABASE = {
       "turnover": "Doak Campbell Turnover Luck",
       "crowd": "Doak Campbell War Chant Roar"
     },
-    "baseSpRating": 25.18,
+    "baseSpRating": 23.7,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/52.png",
     "badgeText": "FSU",
     "schedule": [
@@ -8238,11 +12076,12 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.5,
-        "overUnder": 52.5,
+        "vegasSpread": -30.5,
+        "overUnder": 53.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "projScoreUt": 34,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Florida State front seven vs New Mexico State Aggies rushing attack.",
@@ -8253,11 +12092,7 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 34,
         "finalOppScore": 17,
-        "finalWin": true,
-        "actualScoreUt": 34,
-        "actualScoreOpp": 17,
-        "predictedScoreUt": 38,
-        "predictedScoreOpp": 14
+        "finalWin": true
       },
       {
         "id": "fsu-w1",
@@ -8268,7 +12103,7 @@ var TEAMS_DATABASE = {
         "tv": "ESPN",
         "opponent": "SMU Mustangs",
         "oppAbbr": "SMU",
-        "oppRank": "#19 AP",
+        "oppRank": "#17 AP",
         "oppBadge": "SMU",
         "oppColor": "#003366",
         "oppSecondary": "#CC0000",
@@ -8278,18 +12113,23 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -5.0,
+        "vegasSpread": 3.0,
         "overUnder": 52.5,
-        "baseWinProb": 66,
-        "projScoreUt": 29,
-        "projScoreOpp": 24,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 68,
+        "projScoreUt": 24,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Florida State quarterback play vs SMU Mustangs secondary.",
-          "summary": "High-stakes clash against #19 AP SMU Mustangs."
+          "summary": "High-stakes clash against #17 AP SMU Mustangs."
         },
         "oppId": "smu",
-        "is_tracked": true
+        "is_tracked": true,
+        "isFinal": true,
+        "finalTeamScore": 24,
+        "finalOppScore": 27,
+        "finalWin": false
       },
       {
         "id": "fsu-w3",
@@ -8300,7 +12140,7 @@ var TEAMS_DATABASE = {
         "tv": "ABC",
         "opponent": "Alabama Crimson Tide",
         "oppAbbr": "ALA",
-        "oppRank": "#13 AP",
+        "oppRank": "#12 AP",
         "oppBadge": "BAMA",
         "oppColor": "#9E1B32",
         "oppSecondary": "#FFFFFF",
@@ -8310,18 +12150,37 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 3.5,
+        "vegasSpread": 8.9,
         "overUnder": 52.5,
-        "baseWinProb": 35,
-        "projScoreUt": 24,
-        "projScoreOpp": 31,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 22,
+        "projScoreUt": 18,
+        "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Florida State quarterback play vs Alabama Crimson Tide secondary.",
-          "summary": "High-stakes clash against #13 AP Alabama Crimson Tide."
+          "summary": "High-stakes clash against #12 AP Alabama Crimson Tide."
         },
         "oppId": "alabama",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 42.8,
+        "mcOverProb": 32.5,
+        "mcRecommendedAts": "ALA -8.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 12,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 29,
+          "p75": 36,
+          "p90": 42
+        }
       },
       {
         "id": "fsu-w4",
@@ -8342,18 +12201,37 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.5,
+        "vegasSpread": -25.4,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 40,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Florida State front seven vs Central Arkansas Bears rushing attack.",
           "summary": "Regular season non-conference test against Central Arkansas Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.8,
+        "mcOverProb": 31.3,
+        "mcRecommendedAts": "Florida State -25.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 32,
+          "p50": 40,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "fsu-w5",
@@ -8364,8 +12242,8 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Virginia Cavaliers",
         "oppAbbr": "UVA",
-        "oppRank": "NR",
-        "oppBadge": "UVA",
+        "oppRank": "#25 AP",
+        "oppBadge": "#25 AP",
         "oppColor": "#1E293B",
         "oppSecondary": "#FFFFFF",
         "oppLogoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/258.png",
@@ -8374,18 +12252,37 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.5,
+        "vegasSpread": -25.4,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 39,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Florida State front seven vs Virginia Cavaliers rushing attack.",
           "summary": "Regular season non-conference test against Virginia Cavaliers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 71.1,
+        "mcOverProb": 30.2,
+        "mcRecommendedAts": "Florida State -25.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 26,
+          "p25": 31,
+          "p50": 38,
+          "p75": 47,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "fsu-w6",
@@ -8404,20 +12301,39 @@ var TEAMS_DATABASE = {
         "isHome": false,
         "stadium": "L&N Federal Credit Union Stadium",
         "location": "Louisville, KY",
-        "isMarquee": true,
+        "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -1.5,
+        "vegasSpread": 0.1,
         "overUnder": 52.5,
-        "baseWinProb": 55,
-        "projScoreUt": 27,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 54,
+        "projScoreUt": 25,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Florida State quarterback play vs Louisville Cardinals secondary.",
-          "summary": "High-stakes clash against #24 AP Louisville Cardinals."
+          "summary": "High-stakes clash against RV Louisville Cardinals."
         },
         "oppId": "louisville",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 53.6,
+        "mcOverProb": 36.2,
+        "mcRecommendedAts": "Florida State +0.1",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 12,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        }
       },
       {
         "id": "fsu-w7",
@@ -8438,11 +12354,12 @@ var TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.0,
+        "vegasSpread": 10.8,
         "overUnder": 52.5,
-        "baseWinProb": 35,
-        "projScoreUt": 24,
-        "projScoreOpp": 29,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 17,
+        "projScoreUt": 16,
+        "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Florida State quarterback play vs Miami Hurricanes secondary.",
@@ -8450,7 +12367,25 @@ var TEAMS_DATABASE = {
         },
         "oppId": "miami",
         "is_tracked": true,
-        "rivalryName": "FLORIDA RIVALRY SHOWDOWN"
+        "rivalryName": "FLORIDA RIVALRY SHOWDOWN",
+        "mcCoverProb": 39.8,
+        "mcOverProb": 31.0,
+        "mcRecommendedAts": "MIA -10.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 16,
+          "p75": 23,
+          "p90": 28
+        },
+        "mcScoreDistOpp": {
+          "p10": 17,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
+        }
       },
       {
         "id": "fsu-w9",
@@ -8461,7 +12396,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Clemson Tigers",
         "oppAbbr": "CLEM",
-        "oppRank": "RV",
+        "oppRank": "NR",
         "oppBadge": "CLEM",
         "oppColor": "#F56600",
         "oppSecondary": "#522D80",
@@ -8471,18 +12406,37 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -4.5,
+        "vegasSpread": -8.4,
         "overUnder": 52.5,
-        "baseWinProb": 63,
-        "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 82,
+        "projScoreUt": 30,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Florida State quarterback play vs Clemson Tigers secondary.",
           "summary": "High-stakes clash against RV Clemson Tigers."
         },
         "oppId": "clemson",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 62.2,
+        "mcOverProb": 34.9,
+        "mcRecommendedAts": "Florida State -8.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 43
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 30
+        }
       },
       {
         "id": "fsu-w10",
@@ -8503,18 +12457,37 @@ var TEAMS_DATABASE = {
         "location": "Chestnut Hill, MA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.5,
+        "vegasSpread": -20.4,
         "overUnder": 52.5,
-        "baseWinProb": 90,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Florida State front seven vs Boston College Eagles rushing attack.",
           "summary": "Regular season non-conference test against Boston College Eagles."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.9,
+        "mcOverProb": 31.3,
+        "mcRecommendedAts": "Florida State -20.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 30,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 3,
+          "p50": 9,
+          "p75": 14,
+          "p90": 20
+        }
       },
       {
         "id": "fsu-w11",
@@ -8535,18 +12508,37 @@ var TEAMS_DATABASE = {
         "location": "Pittsburgh, PA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.5,
+        "vegasSpread": -20.4,
         "overUnder": 52.5,
-        "baseWinProb": 90,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Florida State front seven vs Pittsburgh Panthers rushing attack.",
           "summary": "Regular season non-conference test against Pittsburgh Panthers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 68.6,
+        "mcOverProb": 30.2,
+        "mcRecommendedAts": "Florida State -20.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 29,
+          "p50": 36,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 9,
+          "p75": 14,
+          "p90": 20
+        }
       },
       {
         "id": "fsu-w12",
@@ -8567,18 +12559,37 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.5,
+        "vegasSpread": -25.4,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 40,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Florida State front seven vs NC State Wolfpack rushing attack.",
           "summary": "Regular season non-conference test against NC State Wolfpack."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.6,
+        "mcOverProb": 30.8,
+        "mcRecommendedAts": "Florida State -25.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 27,
+          "p25": 33,
+          "p50": 40,
+          "p75": 47,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "fsu-w13",
@@ -8599,21 +12610,41 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.5,
+        "vegasSpread": -25.4,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 40,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Florida State front seven vs Florida Gators rushing attack.",
           "summary": "Regular season non-conference test against Florida Gators."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.9,
+        "mcOverProb": 30.6,
+        "mcRecommendedAts": "Florida State -25.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 26,
+          "p25": 33,
+          "p50": 40,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       }
     ],
-    "playoffContenderRank": 27
+    "playoffContenderRank": 30,
+    "seasonBaselineSpRating": 25.18
   },
   "clemson": {
     "id": "clemson",
@@ -8623,8 +12654,8 @@ var TEAMS_DATABASE = {
     "mascot": "Tigers",
     "abbr": "CLEM",
     "conference": "ACC",
-    "apRank": "RV",
-    "apPoints": "620 pts",
+    "apRank": "NR",
+    "apPoints": "",
     "headCoach": "Dabo Swinney",
     "offensiveCoordinator": "Garrett Riley",
     "defensiveCoordinator": "Wes Goodwin",
@@ -8649,7 +12680,7 @@ var TEAMS_DATABASE = {
       "turnover": "Memorial Stadium Turnover Luck",
       "crowd": "Memorial Stadium (Death Valley) Roar"
     },
-    "baseSpRating": 23.8,
+    "baseSpRating": 17.8,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/228.png",
     "badgeText": "CLEM",
     "schedule": [
@@ -8657,12 +12688,12 @@ var TEAMS_DATABASE = {
         "id": "clem-w1",
         "week": "WEEK 1",
         "date": "Sep 5, 2026",
-        "kickoffTime": "7:30 PM ET",
-        "utc": "2026-09-05T23:30Z",
+        "kickoffTime": "9:40 PM ET",
+        "utc": "2026-09-06T01:40Z",
         "tv": "ABC",
         "opponent": "LSU Tigers",
         "oppAbbr": "LSU",
-        "oppRank": "#11 AP",
+        "oppRank": "#8 AP",
         "oppBadge": "LSU",
         "oppColor": "#461D7C",
         "oppSecondary": "#FDD023",
@@ -8672,18 +12703,23 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 14.5,
-        "overUnder": 52.5,
+        "vegasSpread": 10.0,
+        "overUnder": 48.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 11,
-        "projScoreUt": 17,
-        "projScoreOpp": 34,
+        "projScoreUt": 10,
+        "projScoreOpp": 51,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Clemson quarterback play vs LSU Tigers secondary.",
-          "summary": "High-stakes clash against #11 AP LSU Tigers."
+          "summary": "High-stakes clash against #8 AP LSU Tigers."
         },
         "oppId": "lsu",
-        "is_tracked": true
+        "is_tracked": true,
+        "isFinal": true,
+        "finalTeamScore": 10,
+        "finalOppScore": 51,
+        "finalWin": false
       },
       {
         "id": "clem-w2",
@@ -8706,16 +12742,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -22.5,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 15,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Clemson front seven vs Georgia Southern Eagles rushing attack.",
           "summary": "Regular season non-conference test against Georgia Southern Eagles."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.3,
+        "mcOverProb": 29.2,
+        "mcRecommendedAts": "Clemson -22.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 29,
+          "p50": 36,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 3,
+          "p50": 9,
+          "p75": 13,
+          "p90": 19
+        }
       },
       {
         "id": "clem-w3",
@@ -8736,18 +12791,37 @@ var TEAMS_DATABASE = {
         "location": "Clemson, SC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -22.5,
+        "vegasSpread": -21.4,
         "overUnder": 52.5,
-        "baseWinProb": 94,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
         "projScoreUt": 37,
-        "projScoreOpp": 15,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Clemson front seven vs North Carolina Tar Heels rushing attack.",
           "summary": "Regular season non-conference test against North Carolina Tar Heels."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 67.0,
+        "mcOverProb": 32.2,
+        "mcRecommendedAts": "Clemson -21.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 29,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 9,
+          "p75": 13,
+          "p90": 19
+        }
       },
       {
         "id": "clem-w4",
@@ -8768,18 +12842,37 @@ var TEAMS_DATABASE = {
         "location": "Berkeley, CA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.5,
+        "vegasSpread": -16.4,
         "overUnder": 52.5,
-        "baseWinProb": 88,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 94,
+        "projScoreUt": 33,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Clemson front seven vs California Golden Bears rushing attack.",
           "summary": "Regular season non-conference test against California Golden Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 61.8,
+        "mcOverProb": 30.2,
+        "mcRecommendedAts": "Clemson -16.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 26,
+          "p50": 33,
+          "p75": 40,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 17,
+          "p90": 24
+        }
       },
       {
         "id": "clem-w5",
@@ -8800,18 +12893,37 @@ var TEAMS_DATABASE = {
         "location": "Clemson, SC",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.0,
+        "vegasSpread": 11.7,
         "overUnder": 52.5,
-        "baseWinProb": 49,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 15,
+        "projScoreUt": 16,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Clemson quarterback play vs Miami Hurricanes secondary.",
           "summary": "High-stakes clash against #7 AP Miami Hurricanes."
         },
         "oppId": "miami",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 40.0,
+        "mcOverProb": 31.8,
+        "mcRecommendedAts": "MIA -11.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 16,
+          "p75": 21,
+          "p90": 28
+        },
+        "mcScoreDistOpp": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 44
+        }
       },
       {
         "id": "clem-w7",
@@ -8832,10 +12944,11 @@ var TEAMS_DATABASE = {
         "location": "Clemson, SC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -41.0,
+        "vegasSpread": -47.3,
         "overUnder": 52.5,
+        "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
-        "projScoreUt": 47,
+        "projScoreUt": 51,
         "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
@@ -8843,7 +12956,25 @@ var TEAMS_DATABASE = {
           "summary": "Non-conference matchup in Clemson, SC against FCS challenger Charleston Southern Buccaneers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 44.8,
+        "mcOverProb": 61.9,
+        "mcRecommendedAts": "CHSO +47.3",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 37,
+          "p25": 43,
+          "p50": 51,
+          "p75": 59,
+          "p90": 66
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 0,
+          "p50": 6,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "clem-w8",
@@ -8864,18 +12995,37 @@ var TEAMS_DATABASE = {
         "location": "Clemson, SC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -22.5,
+        "vegasSpread": -21.4,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Clemson front seven vs Virginia Tech Hokies rushing attack.",
           "summary": "Regular season non-conference test against Virginia Tech Hokies."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.1,
+        "mcOverProb": 30.4,
+        "mcRecommendedAts": "Clemson -21.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 22,
+          "p25": 29,
+          "p50": 36,
+          "p75": 43,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 14,
+          "p90": 20
+        }
       },
       {
         "id": "clem-w9",
@@ -8886,7 +13036,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Florida State Seminoles",
         "oppAbbr": "FSU",
-        "oppRank": "RV",
+        "oppRank": "NR",
         "oppBadge": "FSU",
         "oppColor": "#782F40",
         "oppSecondary": "#CEB888",
@@ -8896,18 +13046,37 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 4.5,
+        "vegasSpread": 8.4,
         "overUnder": 52.5,
-        "baseWinProb": 37,
-        "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 23,
+        "projScoreUt": 18,
+        "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Clemson quarterback play vs Florida State Seminoles secondary.",
-          "summary": "High-stakes clash against RV Florida State Seminoles."
+          "summary": "High-stakes clash against NR Florida State Seminoles."
         },
         "oppId": "floridastate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 44.3,
+        "mcOverProb": 33.4,
+        "mcRecommendedAts": "FSU -8.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 28,
+          "p75": 35,
+          "p90": 42
+        }
       },
       {
         "id": "clem-w10",
@@ -8928,18 +13097,37 @@ var TEAMS_DATABASE = {
         "location": "Syracuse, NY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.5,
+        "vegasSpread": -16.4,
         "overUnder": 52.5,
-        "baseWinProb": 88,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 93,
+        "projScoreUt": 33,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Clemson front seven vs Syracuse Orange rushing attack.",
           "summary": "Regular season non-conference test against Syracuse Orange."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 61.0,
+        "mcOverProb": 32.3,
+        "mcRecommendedAts": "Clemson -16.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 18,
+          "p90": 24
+        }
       },
       {
         "id": "clem-w11",
@@ -8960,18 +13148,37 @@ var TEAMS_DATABASE = {
         "location": "Clemson, SC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -22.5,
+        "vegasSpread": -21.4,
         "overUnder": 52.5,
-        "baseWinProb": 94,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
         "projScoreUt": 37,
-        "projScoreOpp": 15,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Clemson front seven vs Georgia Tech Yellow Jackets rushing attack.",
           "summary": "Regular season non-conference test against Georgia Tech Yellow Jackets."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 66.5,
+        "mcOverProb": 30.1,
+        "mcRecommendedAts": "Clemson -21.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 30,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 9,
+          "p75": 13,
+          "p90": 20
+        }
       },
       {
         "id": "clem-w12",
@@ -8992,18 +13199,37 @@ var TEAMS_DATABASE = {
         "location": "Durham, NC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.5,
+        "vegasSpread": -16.4,
         "overUnder": 52.5,
-        "baseWinProb": 88,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 93,
+        "projScoreUt": 33,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Clemson front seven vs Duke Blue Devils rushing attack.",
           "summary": "Regular season non-conference test against Duke Blue Devils."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 61.4,
+        "mcOverProb": 32.6,
+        "mcRecommendedAts": "Clemson -16.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 26,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 17,
+          "p90": 24
+        }
       },
       {
         "id": "clem-w13",
@@ -9024,11 +13250,12 @@ var TEAMS_DATABASE = {
         "location": "Clemson, SC",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -22.5,
+        "vegasSpread": -21.4,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Clemson front seven vs South Carolina Gamecocks rushing attack.",
@@ -9036,10 +13263,29 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "rivalryName": "PALMETTO BOWL"
+        "rivalryName": "PALMETTO BOWL",
+        "mcCoverProb": 65.6,
+        "mcOverProb": 30.1,
+        "mcRecommendedAts": "Clemson -21.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 29,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 3,
+          "p50": 9,
+          "p75": 13,
+          "p90": 20
+        }
       }
     ],
-    "playoffContenderRank": 26
+    "playoffContenderRank": 31,
+    "seasonBaselineSpRating": 23.8
   },
   "smu": {
     "id": "smu",
@@ -9049,8 +13295,8 @@ var TEAMS_DATABASE = {
     "mascot": "Mustangs",
     "abbr": "SMU",
     "conference": "ACC",
-    "apRank": "#19 AP",
-    "apPoints": "482 pts",
+    "apRank": "#17 AP",
+    "apPoints": "501 PTS",
     "headCoach": "Rhett Lashlee",
     "offensiveCoordinator": "Casey Woods",
     "defensiveCoordinator": "Scott Symons",
@@ -9088,7 +13334,7 @@ var TEAMS_DATABASE = {
         "tv": "ESPN",
         "opponent": "Florida State Seminoles",
         "oppAbbr": "FSU",
-        "oppRank": "RV",
+        "oppRank": "NR",
         "oppBadge": "FSU",
         "oppColor": "#782F40",
         "oppSecondary": "#CEB888",
@@ -9098,18 +13344,23 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.0,
+        "vegasSpread": -3.0,
         "overUnder": 52.5,
-        "baseWinProb": 34,
-        "projScoreUt": 24,
-        "projScoreOpp": 29,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 38,
+        "projScoreUt": 27,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "SMU quarterback play vs Florida State Seminoles secondary.",
-          "summary": "High-stakes clash against RV Florida State Seminoles."
+          "summary": "High-stakes clash against NR Florida State Seminoles."
         },
         "oppId": "floridastate",
-        "is_tracked": true
+        "is_tracked": true,
+        "isFinal": true,
+        "finalTeamScore": 27,
+        "finalOppScore": 24,
+        "finalWin": true
       },
       {
         "id": "smu-w2",
@@ -9132,16 +13383,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -21.5,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 39,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "SMU front seven vs UC Davis Aggies rushing attack.",
           "summary": "Regular season non-conference test against UC Davis Aggies."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 79.2,
+        "mcOverProb": 30.0,
+        "mcRecommendedAts": "SMU -21.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 26,
+          "p25": 31,
+          "p50": 38,
+          "p75": 46,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 16
+        }
       },
       {
         "id": "smu-w3",
@@ -9162,18 +13432,37 @@ var TEAMS_DATABASE = {
         "location": "Louisville, KY",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.5,
+        "vegasSpread": 0.8,
         "overUnder": 52.5,
-        "baseWinProb": 48,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 51,
+        "projScoreUt": 24,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "SMU quarterback play vs Louisville Cardinals secondary.",
-          "summary": "High-stakes clash against #24 AP Louisville Cardinals."
+          "summary": "High-stakes clash against RV Louisville Cardinals."
         },
         "oppId": "louisville",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 51.2,
+        "mcOverProb": 34.4,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        }
       },
       {
         "id": "smu-w4",
@@ -9194,10 +13483,11 @@ var TEAMS_DATABASE = {
         "location": "Dallas, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -40.0,
+        "vegasSpread": -48.7,
         "overUnder": 52.5,
+        "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
-        "projScoreUt": 46,
+        "projScoreUt": 53,
         "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
@@ -9205,7 +13495,25 @@ var TEAMS_DATABASE = {
           "summary": "Non-conference matchup in Dallas, TX against FCS challenger Missouri State Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 45.3,
+        "mcOverProb": 66.4,
+        "mcRecommendedAts": "MOST +48.7",
+        "mcRecommendedOu": "OVER 52.5",
+        "mcScoreDistUt": {
+          "p10": 38,
+          "p25": 44,
+          "p50": 52,
+          "p75": 61,
+          "p90": 68
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 0,
+          "p50": 3,
+          "p75": 9,
+          "p90": 13
+        }
       },
       {
         "id": "smu-w5",
@@ -9226,18 +13534,37 @@ var TEAMS_DATABASE = {
         "location": "Dallas, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.5,
+        "vegasSpread": -23.7,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 39,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "SMU front seven vs Boston College Eagles rushing attack.",
           "summary": "Regular season non-conference test against Boston College Eagles."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 76.0,
+        "mcOverProb": 30.1,
+        "mcRecommendedAts": "SMU -23.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 31,
+          "p50": 38,
+          "p75": 45,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 16
+        }
       },
       {
         "id": "smu-w7",
@@ -9248,8 +13575,8 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Virginia Cavaliers",
         "oppAbbr": "UVA",
-        "oppRank": "NR",
-        "oppBadge": "UVA",
+        "oppRank": "#25 AP",
+        "oppBadge": "#25 AP",
         "oppColor": "#1E293B",
         "oppSecondary": "#FFFFFF",
         "oppLogoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/258.png",
@@ -9258,18 +13585,37 @@ var TEAMS_DATABASE = {
         "location": "Dallas, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.5,
+        "vegasSpread": -23.7,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 39,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "SMU front seven vs Virginia Cavaliers rushing attack.",
           "summary": "Regular season non-conference test against Virginia Cavaliers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 77.7,
+        "mcOverProb": 30.8,
+        "mcRecommendedAts": "SMU -23.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 26,
+          "p25": 31,
+          "p50": 38,
+          "p75": 47,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 15
+        }
       },
       {
         "id": "smu-w8",
@@ -9290,18 +13636,37 @@ var TEAMS_DATABASE = {
         "location": "Dallas, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.5,
+        "vegasSpread": -23.7,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 39,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "SMU front seven vs California Golden Bears rushing attack.",
           "summary": "Regular season non-conference test against California Golden Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 76.7,
+        "mcOverProb": 30.3,
+        "mcRecommendedAts": "SMU -23.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 31,
+          "p50": 38,
+          "p75": 47,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 15
+        }
       },
       {
         "id": "smu-w9",
@@ -9322,18 +13687,37 @@ var TEAMS_DATABASE = {
         "location": "Syracuse, NY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -15.5,
+        "vegasSpread": -18.7,
         "overUnder": 52.5,
-        "baseWinProb": 87,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
+        "projScoreUt": 36,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "SMU front seven vs Syracuse Orange rushing attack.",
           "summary": "Regular season non-conference test against Syracuse Orange."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.9,
+        "mcOverProb": 31.2,
+        "mcRecommendedAts": "SMU -18.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 28,
+          "p50": 35,
+          "p75": 43,
+          "p90": 50
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 15,
+          "p90": 20
+        }
       },
       {
         "id": "smu-w10",
@@ -9354,18 +13738,37 @@ var TEAMS_DATABASE = {
         "location": "Dallas, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.5,
+        "vegasSpread": -23.7,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 39,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "SMU front seven vs Virginia Tech Hokies rushing attack.",
           "summary": "Regular season non-conference test against Virginia Tech Hokies."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 75.7,
+        "mcOverProb": 31.0,
+        "mcRecommendedAts": "SMU -23.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 31,
+          "p50": 38,
+          "p75": 45,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 16
+        }
       },
       {
         "id": "smu-w11",
@@ -9386,18 +13789,37 @@ var TEAMS_DATABASE = {
         "location": "Dallas, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.5,
+        "vegasSpread": -23.7,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "SMU front seven vs Wake Forest Demon Deacons rushing attack.",
           "summary": "Regular season non-conference test against Wake Forest Demon Deacons."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.4,
+        "mcOverProb": 28.8,
+        "mcRecommendedAts": "SMU -23.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 31,
+          "p50": 38,
+          "p75": 45,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 16
+        }
       },
       {
         "id": "smu-w12",
@@ -9408,7 +13830,7 @@ var TEAMS_DATABASE = {
         "tv": "NBC",
         "opponent": "Notre Dame Fighting Irish",
         "oppAbbr": "ND",
-        "oppRank": "#4 AP",
+        "oppRank": "#3 AP",
         "oppBadge": "ND",
         "oppColor": "#0C2340",
         "oppSecondary": "#FEE123",
@@ -9418,18 +13840,37 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 7.5,
+        "vegasSpread": 8.5,
         "overUnder": 52.5,
-        "baseWinProb": 28,
-        "projScoreUt": 22,
-        "projScoreOpp": 30,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 21,
+        "projScoreUt": 18,
+        "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "SMU quarterback play vs Notre Dame Fighting Irish secondary.",
           "summary": "High-stakes clash against #4 AP Notre Dame Fighting Irish."
         },
         "oppId": "notredame",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 41.2,
+        "mcOverProb": 33.8,
+        "mcRecommendedAts": "ND -8.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 30
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 29,
+          "p75": 37,
+          "p90": 44
+        }
       },
       {
         "id": "smu-w13",
@@ -9450,21 +13891,41 @@ var TEAMS_DATABASE = {
         "location": "Stanford, CA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -15.5,
+        "vegasSpread": -18.7,
         "overUnder": 52.5,
-        "baseWinProb": 87,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
+        "projScoreUt": 36,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "SMU front seven vs Stanford Cardinal rushing attack.",
           "summary": "Regular season non-conference test against Stanford Cardinal."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 68.5,
+        "mcOverProb": 31.1,
+        "mcRecommendedAts": "SMU -18.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 22,
+          "p25": 28,
+          "p50": 35,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 20
+        }
       }
     ],
-    "playoffContenderRank": 19
+    "playoffContenderRank": 17,
+    "seasonBaselineSpRating": 23.0
   },
   "texastech": {
     "id": "texastech",
@@ -9488,10 +13949,10 @@ var TEAMS_DATABASE = {
     "stadiumCapacity": "60,454",
     "stadiumCity": "Lubbock, TX",
     "conference": "Big 12",
-    "apRank": "#12 AP",
-    "apPoints": "890 pts",
-    "baseSpRating": 23.8,
-    "playoffContenderRank": 12,
+    "apRank": "#13 AP",
+    "apPoints": "900 PTS",
+    "baseSpRating": 17.85,
+    "playoffContenderRank": 13,
     "themeClass": "theme-texastech",
     "colors": {
       "primary": "#CC0000",
@@ -9527,18 +13988,23 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -42.5,
-        "overUnder": 52.5,
+        "vegasSpread": -45.5,
+        "overUnder": 61.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "projScoreUt": 33,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas Tech front seven vs Abilene Christian Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Abilene Christian Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 33,
+        "finalOppScore": 10,
+        "finalWin": true
       },
       {
         "id": "ttu-w2",
@@ -9561,16 +14027,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -16.5,
         "overUnder": 52.5,
-        "baseWinProb": 88,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 91,
+        "projScoreUt": 35,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas Tech front seven vs Oregon State Beavers rushing attack.",
           "summary": "Regular season non-conference test against Oregon State Beavers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 59.1,
+        "mcOverProb": 42.1,
+        "mcRecommendedAts": "Texas Tech -16.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 42,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 9,
+          "p50": 14,
+          "p75": 20,
+          "p90": 27
+        }
       },
       {
         "id": "ttu-w3",
@@ -9581,7 +14066,7 @@ var TEAMS_DATABASE = {
         "tv": "FOX",
         "opponent": "Houston Cougars",
         "oppAbbr": "HOU",
-        "oppRank": "#23 AP",
+        "oppRank": "#22 AP",
         "oppBadge": "HOU",
         "oppColor": "#C8102E",
         "oppSecondary": "#FFFFFF",
@@ -9591,18 +14076,37 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -7.0,
+        "vegasSpread": -2.1,
         "overUnder": 52.5,
-        "baseWinProb": 70,
-        "projScoreUt": 30,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 62,
+        "projScoreUt": 28,
         "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas Tech quarterback play vs Houston Cougars secondary.",
-          "summary": "High-stakes clash against #23 AP Houston Cougars."
+          "summary": "High-stakes clash against #22 AP Houston Cougars."
         },
         "oppId": "houston",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 57.1,
+        "mcOverProb": 43.7,
+        "mcRecommendedAts": "Texas Tech -2.1",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 35,
+          "p90": 42
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        }
       },
       {
         "id": "ttu-w4",
@@ -9623,18 +14127,37 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -22.5,
+        "vegasSpread": -18.7,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 39,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas Tech front seven vs Sam Houston Bearkats rushing attack.",
           "summary": "Regular season non-conference test against Sam Houston Bearkats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 72.5,
+        "mcOverProb": 41.6,
+        "mcRecommendedAts": "Texas Tech -18.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 31,
+          "p50": 38,
+          "p75": 46,
+          "p90": 53
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 23
+        }
       },
       {
         "id": "ttu-w5",
@@ -9645,7 +14168,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Colorado Buffaloes",
         "oppAbbr": "COLO",
-        "oppRank": "NR",
+        "oppRank": "RV",
         "oppBadge": "COL",
         "oppColor": "#CFB87C",
         "oppSecondary": "#000000",
@@ -9655,18 +14178,37 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -3.5,
+        "vegasSpread": 2.6,
         "overUnder": 52.5,
-        "baseWinProb": 60,
-        "projScoreUt": 28,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 43,
+        "projScoreUt": 24,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas Tech quarterback play vs Colorado Buffaloes secondary.",
           "summary": "High-stakes clash against NR Colorado Buffaloes."
         },
         "oppId": "colorado",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 46.6,
+        "mcOverProb": 43.9,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 23,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        }
       },
       {
         "id": "ttu-w7",
@@ -9687,18 +14229,37 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -10.5,
+        "vegasSpread": 1.8,
         "overUnder": 52.5,
-        "baseWinProb": 79,
-        "projScoreUt": 32,
-        "projScoreOpp": 21,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 44,
+        "projScoreUt": 25,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas Tech quarterback play vs Arizona State Sun Devils secondary.",
-          "summary": "High-stakes clash against RV Arizona State Sun Devils."
+          "summary": "High-stakes clash against NR Arizona State Sun Devils."
         },
         "oppId": "arizonastate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 47.4,
+        "mcOverProb": 44.9,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 26,
+          "p75": 34,
+          "p90": 41
+        }
       },
       {
         "id": "ttu-w8",
@@ -9719,18 +14280,37 @@ var TEAMS_DATABASE = {
         "location": "Cincinnati, OH",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.5,
+        "vegasSpread": -13.7,
         "overUnder": 52.5,
-        "baseWinProb": 88,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 92,
+        "projScoreUt": 35,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas Tech front seven vs Cincinnati Bearcats rushing attack.",
           "summary": "Regular season non-conference test against Cincinnati Bearcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 67.0,
+        "mcOverProb": 40.7,
+        "mcRecommendedAts": "Texas Tech -13.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 42,
+          "p90": 50
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 14,
+          "p75": 20,
+          "p90": 27
+        }
       },
       {
         "id": "ttu-w9",
@@ -9751,10 +14331,11 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -7.5,
+        "vegasSpread": -2.1,
         "overUnder": 52.5,
-        "baseWinProb": 71,
-        "projScoreUt": 30,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 63,
+        "projScoreUt": 28,
         "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -9762,7 +14343,25 @@ var TEAMS_DATABASE = {
           "summary": "High-stakes clash against RV Arizona Wildcats."
         },
         "oppId": "arizona",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 59.4,
+        "mcOverProb": 44.5,
+        "mcRecommendedAts": "Texas Tech -2.1",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 35,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        }
       },
       {
         "id": "ttu-w10",
@@ -9783,18 +14382,37 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -22.5,
+        "vegasSpread": -18.7,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
+        "projScoreUt": 38,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas Tech front seven vs West Virginia Mountaineers rushing attack.",
           "summary": "Regular season non-conference test against West Virginia Mountaineers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 72.1,
+        "mcOverProb": 41.1,
+        "mcRecommendedAts": "Texas Tech -18.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 38,
+          "p75": 46,
+          "p90": 54
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 21
+        }
       },
       {
         "id": "ttu-w11",
@@ -9815,11 +14433,12 @@ var TEAMS_DATABASE = {
         "location": "Stillwater, OK",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -16.5,
+        "vegasSpread": -13.7,
         "overUnder": 52.5,
-        "baseWinProb": 88,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 91,
+        "projScoreUt": 35,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas Tech front seven vs Oklahoma State Cowboys rushing attack.",
@@ -9827,7 +14446,25 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "rivalryName": "RED RIVER RIVALRY"
+        "rivalryName": "RED RIVER RIVALRY",
+        "mcCoverProb": 68.4,
+        "mcOverProb": 42.7,
+        "mcRecommendedAts": "Texas Tech -13.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 43,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 14,
+          "p75": 20,
+          "p90": 27
+        }
       },
       {
         "id": "ttu-w12",
@@ -9848,18 +14485,37 @@ var TEAMS_DATABASE = {
         "location": "Waco, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.5,
+        "vegasSpread": -13.7,
         "overUnder": 52.5,
-        "baseWinProb": 88,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 92,
+        "projScoreUt": 35,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas Tech front seven vs Baylor Bears rushing attack.",
           "summary": "Regular season non-conference test against Baylor Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 67.1,
+        "mcOverProb": 41.9,
+        "mcRecommendedAts": "Texas Tech -13.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 42,
+          "p90": 50
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 9,
+          "p50": 14,
+          "p75": 20,
+          "p90": 27
+        }
       },
       {
         "id": "ttu-w13",
@@ -9880,20 +14536,40 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -22.5,
+        "vegasSpread": -18.7,
         "overUnder": 52.5,
-        "baseWinProb": 94,
-        "projScoreUt": 37,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 41,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas Tech front seven vs TCU Horned Frogs rushing attack.",
           "summary": "Regular season non-conference test against TCU Horned Frogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 77.1,
+        "mcOverProb": 50.6,
+        "mcRecommendedAts": "Texas Tech -18.7",
+        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcScoreDistUt": {
+          "p10": 26,
+          "p25": 33,
+          "p50": 41,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 23
+        }
       }
-    ]
+    ],
+    "seasonBaselineSpRating": 23.8
   },
   "utah": {
     "id": "utah",
@@ -9903,9 +14579,9 @@ var TEAMS_DATABASE = {
     "abbr": "UTAH",
     "mascot": "Swoop",
     "conference": "Big 12",
-    "apRank": "#21 AP",
-    "apPoints": "375 PTS",
-    "playoffContenderRank": 21,
+    "apRank": "#20 AP",
+    "apPoints": "381 PTS",
+    "playoffContenderRank": 20,
     "themeClass": "theme-utah",
     "headCoach": "Morgan Scalley",
     "offensiveCoordinator": "Kevin McGiven",
@@ -9916,7 +14592,7 @@ var TEAMS_DATABASE = {
     "stadium": "Rice-Eccles Stadium",
     "stadiumCapacity": "51,444",
     "stadiumCity": "Salt Lake City, UT",
-    "baseSpRating": 24.5,
+    "baseSpRating": 29.39,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/254.png",
     "colors": {
       "primary": "#CC0000",
@@ -9952,11 +14628,12 @@ var TEAMS_DATABASE = {
         "location": "Salt Lake City, UT",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.5,
-        "overUnder": 52.5,
+        "vegasSpread": -38.5,
+        "overUnder": 60.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 99,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "projScoreUt": 66,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Utah offensive line vs Idaho Vandals defensive front.",
@@ -9965,13 +14642,9 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "isFinal": true,
-        "finalTeamScore": 35,
-        "finalOppScore": 17,
-        "finalWin": true,
-        "actualScoreUt": 35,
-        "actualScoreOpp": 17,
-        "predictedScoreUt": 35,
-        "predictedScoreOpp": 17
+        "finalTeamScore": 66,
+        "finalOppScore": 14,
+        "finalWin": true
       },
       {
         "id": "utah-w2",
@@ -9994,16 +14667,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -23.0,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Utah front seven vs Arkansas Razorbacks rushing attack.",
           "summary": "Regular season non-conference test against Arkansas Razorbacks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 87.5,
+        "mcOverProb": 32.8,
+        "mcRecommendedAts": "Utah -23.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 29,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "utah-w3",
@@ -10024,18 +14716,37 @@ var TEAMS_DATABASE = {
         "location": "Salt Lake City, UT",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.0,
+        "vegasSpread": -29.9,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Utah front seven vs Utah State Aggies rushing attack.",
           "summary": "Regular season non-conference test against Utah State Aggies."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 67.7,
+        "mcOverProb": 34.9,
+        "mcRecommendedAts": "Utah -29.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 28,
+          "p25": 34,
+          "p50": 41,
+          "p75": 49,
+          "p90": 56
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "utah-w4",
@@ -10056,18 +14767,37 @@ var TEAMS_DATABASE = {
         "location": "Ames, IA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.0,
+        "vegasSpread": -23.4,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Utah front seven vs Iowa State Cyclones rushing attack.",
           "summary": "Regular season non-conference test against Iowa State Cyclones."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 76.6,
+        "mcOverProb": 25.0,
+        "mcRecommendedAts": "Utah -23.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 44,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "utah-w6",
@@ -10088,18 +14818,37 @@ var TEAMS_DATABASE = {
         "location": "Salt Lake City, UT",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.0,
+        "vegasSpread": -29.9,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Utah front seven vs Kansas Jayhawks rushing attack.",
           "summary": "Regular season non-conference test against Kansas Jayhawks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 68.5,
+        "mcOverProb": 34.1,
+        "mcRecommendedAts": "Utah -29.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 28,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 13
+        }
       },
       {
         "id": "utah-w7",
@@ -10110,7 +14859,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Colorado Buffaloes",
         "oppAbbr": "COLO",
-        "oppRank": "NR",
+        "oppRank": "RV",
         "oppBadge": "COL",
         "oppColor": "#CFB87C",
         "oppSecondary": "#000000",
@@ -10120,18 +14869,37 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -4.0,
+        "vegasSpread": -8.9,
         "overUnder": 52.5,
-        "baseWinProb": 62,
-        "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 84,
+        "projScoreUt": 30,
+        "projScoreOpp": 16,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Utah quarterback play vs Colorado Buffaloes secondary.",
           "summary": "High-stakes clash against NR Colorado Buffaloes."
         },
         "oppId": "colorado",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 64.7,
+        "mcOverProb": 31.4,
+        "mcRecommendedAts": "Utah -8.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 16,
+          "p75": 23,
+          "p90": 30
+        }
       },
       {
         "id": "utah-w8",
@@ -10142,7 +14910,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Houston Cougars",
         "oppAbbr": "HOU",
-        "oppRank": "#23 AP",
+        "oppRank": "#22 AP",
         "oppBadge": "HOU",
         "oppColor": "#C8102E",
         "oppSecondary": "#FFFFFF",
@@ -10152,18 +14920,37 @@ var TEAMS_DATABASE = {
         "location": "Salt Lake City, UT",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -7.5,
+        "vegasSpread": -15.2,
         "overUnder": 52.5,
-        "baseWinProb": 72,
-        "projScoreUt": 30,
-        "projScoreOpp": 22,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 95,
+        "projScoreUt": 34,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Utah quarterback play vs Houston Cougars secondary.",
-          "summary": "High-stakes clash against #23 AP Houston Cougars."
+          "summary": "High-stakes clash against #22 AP Houston Cougars."
         },
         "oppId": "houston",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 69.0,
+        "mcOverProb": 30.2,
+        "mcRecommendedAts": "Utah -15.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 12,
+          "p75": 17,
+          "p90": 23
+        }
       },
       {
         "id": "utah-w9",
@@ -10184,18 +14971,37 @@ var TEAMS_DATABASE = {
         "location": "Cincinnati, OH",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.0,
+        "vegasSpread": -23.4,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Utah front seven vs Cincinnati Bearcats rushing attack.",
           "summary": "Regular season non-conference test against Cincinnati Bearcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 76.8,
+        "mcOverProb": 26.6,
+        "mcRecommendedAts": "Utah -23.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 31,
+          "p50": 37,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       },
       {
         "id": "utah-w10",
@@ -10206,7 +15012,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "BYU Cougars",
         "oppAbbr": "BYU",
-        "oppRank": "#14 AP",
+        "oppRank": "#15 AP",
         "oppBadge": "BYU",
         "oppColor": "#002E5D",
         "oppSecondary": "#FFFFFF",
@@ -10216,19 +15022,38 @@ var TEAMS_DATABASE = {
         "location": "Salt Lake City, UT",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -6.0,
+        "vegasSpread": -8.7,
         "overUnder": 52.5,
-        "baseWinProb": 68,
-        "projScoreUt": 29,
-        "projScoreOpp": 23,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 83,
+        "projScoreUt": 30,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Utah quarterback play vs BYU Cougars secondary.",
-          "summary": "High-stakes clash against #14 AP BYU Cougars."
+          "summary": "High-stakes clash against #15 AP BYU Cougars."
         },
         "oppId": "byu",
         "is_tracked": true,
-        "rivalryName": "HOLY WAR"
+        "rivalryName": "HOLY WAR",
+        "mcCoverProb": 62.9,
+        "mcOverProb": 32.6,
+        "mcRecommendedAts": "Utah -8.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 43
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 16,
+          "p75": 23,
+          "p90": 29
+        }
       },
       {
         "id": "utah-w11",
@@ -10249,18 +15074,37 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.0,
+        "vegasSpread": -8.6,
         "overUnder": 52.5,
-        "baseWinProb": 56,
-        "projScoreUt": 27,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 81,
+        "projScoreUt": 29,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Utah quarterback play vs Arizona Wildcats secondary.",
           "summary": "High-stakes clash against RV Arizona Wildcats."
         },
         "oppId": "arizona",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 60.3,
+        "mcOverProb": 32.8,
+        "mcRecommendedAts": "Utah -8.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 22,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 16,
+          "p75": 23,
+          "p90": 30
+        }
       },
       {
         "id": "utah-w12",
@@ -10281,18 +15125,37 @@ var TEAMS_DATABASE = {
         "location": "Fort Worth, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.0,
+        "vegasSpread": -23.4,
         "overUnder": 52.5,
-        "baseWinProb": 89,
-        "projScoreUt": 35,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 41,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Utah front seven vs TCU Horned Frogs rushing attack.",
           "summary": "Regular season non-conference test against TCU Horned Frogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 83.5,
+        "mcOverProb": 35.6,
+        "mcRecommendedAts": "Utah -23.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 28,
+          "p25": 34,
+          "p50": 41,
+          "p75": 48,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 16
+        }
       },
       {
         "id": "utah-w13",
@@ -10313,20 +15176,40 @@ var TEAMS_DATABASE = {
         "location": "Salt Lake City, UT",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.0,
+        "vegasSpread": -29.9,
         "overUnder": 52.5,
-        "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 15,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 42,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Utah front seven vs West Virginia Mountaineers rushing attack.",
           "summary": "Regular season non-conference test against West Virginia Mountaineers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.6,
+        "mcOverProb": 36.2,
+        "mcRecommendedAts": "Utah -29.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 29,
+          "p25": 34,
+          "p50": 41,
+          "p75": 49,
+          "p90": 55
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
+        }
       }
-    ]
+    ],
+    "seasonBaselineSpRating": 24.5
   },
   "iowa": {
     "id": "iowa",
@@ -10336,9 +15219,9 @@ var TEAMS_DATABASE = {
     "abbr": "IOWA",
     "mascot": "Herky the Hawk",
     "conference": "Big Ten",
-    "apRank": "#22 AP",
-    "apPoints": "340 PTS",
-    "playoffContenderRank": 22,
+    "apRank": "#21 AP",
+    "apPoints": "369 PTS",
+    "playoffContenderRank": 21,
     "themeClass": "theme-iowa",
     "headCoach": "Kirk Ferentz",
     "offensiveCoordinator": "Tim Lester",
@@ -10349,7 +15232,7 @@ var TEAMS_DATABASE = {
     "stadium": "Kinnick Stadium",
     "stadiumCapacity": "69,250",
     "stadiumCity": "Iowa City, IA",
-    "baseSpRating": 21.0,
+    "baseSpRating": 20.71,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2294.png",
     "colors": {
       "primary": "#FFE100",
@@ -10385,18 +15268,23 @@ var TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.5,
-        "overUnder": 52.5,
+        "vegasSpread": -31.5,
+        "overUnder": 44.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 91,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "projScoreUt": 40,
+        "projScoreOpp": 0,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Northern Illinois Huskies rushing attack.",
           "summary": "Regular season non-conference test against Northern Illinois Huskies."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 40,
+        "finalOppScore": 0,
+        "finalWin": true
       },
       {
         "id": "iowa-w2",
@@ -10419,16 +15307,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -19.5,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 98,
+        "projScoreUt": 34,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Iowa State Cyclones rushing attack.",
           "summary": "Regular season non-conference test against Iowa State Cyclones."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 71.4,
+        "mcOverProb": 20.8,
+        "mcRecommendedAts": "Iowa -19.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "iowa-w3",
@@ -10449,18 +15356,37 @@ var TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.5,
+        "vegasSpread": -20.3,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 34,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Northern Iowa Panthers rushing attack.",
           "summary": "Regular season non-conference test against Northern Iowa Panthers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.8,
+        "mcOverProb": 20.3,
+        "mcRecommendedAts": "Iowa -20.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "iowa-w4",
@@ -10471,7 +15397,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Michigan Wolverines",
         "oppAbbr": "MICH",
-        "oppRank": "#16 AP",
+        "oppRank": "RV",
         "oppBadge": "MICH",
         "oppColor": "#00274C",
         "oppSecondary": "#FFCB05",
@@ -10481,18 +15407,37 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 7.0,
+        "vegasSpread": 0.6,
         "overUnder": 52.5,
-        "baseWinProb": 30,
-        "projScoreUt": 23,
-        "projScoreOpp": 30,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 51,
+        "projScoreUt": 22,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Iowa quarterback play vs Michigan Wolverines secondary.",
-          "summary": "High-stakes clash against #16 AP Michigan Wolverines."
+          "summary": "High-stakes clash against #24 AP Michigan Wolverines."
         },
         "oppId": "michigan",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 50.8,
+        "mcOverProb": 27.4,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 21,
+          "p75": 29,
+          "p90": 35
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 35
+        }
       },
       {
         "id": "iowa-w5",
@@ -10513,18 +15458,37 @@ var TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 8.5,
+        "vegasSpread": 12.2,
         "overUnder": 52.5,
-        "baseWinProb": 26,
-        "projScoreUt": 22,
-        "projScoreOpp": 30,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 12,
+        "projScoreUt": 14,
+        "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Iowa quarterback play vs Ohio State Buckeyes secondary.",
           "summary": "High-stakes clash against #1 AP Ohio State Buckeyes."
         },
         "oppId": "ohiostate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 41.1,
+        "mcOverProb": 25.2,
+        "mcRecommendedAts": "OSU -12.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 14,
+          "p75": 20,
+          "p90": 24
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 42
+        }
       },
       {
         "id": "iowa-w6",
@@ -10535,7 +15499,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Washington Huskies",
         "oppAbbr": "WASH",
-        "oppRank": "#17 AP",
+        "oppRank": "#19 AP",
         "oppBadge": "WASH",
         "oppColor": "#4B2E83",
         "oppSecondary": "#B7A57A",
@@ -10545,18 +15509,37 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 4.5,
+        "vegasSpread": 1.0,
         "overUnder": 52.5,
-        "baseWinProb": 36,
-        "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 48,
+        "projScoreUt": 22,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Iowa quarterback play vs Washington Huskies secondary.",
-          "summary": "High-stakes clash against #17 AP Washington Huskies."
+          "summary": "High-stakes clash against #19 AP Washington Huskies."
         },
         "oppId": "washington",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 48.1,
+        "mcOverProb": 27.9,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 35
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 35
+        }
       },
       {
         "id": "iowa-w8",
@@ -10577,18 +15560,37 @@ var TEAMS_DATABASE = {
         "location": "Minneapolis, MN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -13.5,
+        "vegasSpread": -15.3,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 93,
+        "projScoreUt": 32,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Minnesota Golden Gophers rushing attack.",
           "summary": "Regular season non-conference test against Minnesota Golden Gophers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.2,
+        "mcOverProb": 23.4,
+        "mcRecommendedAts": "Iowa -15.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 44
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 23
+        }
       },
       {
         "id": "iowa-w9",
@@ -10609,18 +15611,37 @@ var TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.5,
+        "vegasSpread": -20.3,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 34,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Wisconsin Badgers rushing attack.",
           "summary": "Regular season non-conference test against Wisconsin Badgers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 67.4,
+        "mcOverProb": 20.1,
+        "mcRecommendedAts": "Iowa -20.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "iowa-w10",
@@ -10641,18 +15662,37 @@ var TEAMS_DATABASE = {
         "location": "Evanston, IL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -13.5,
+        "vegasSpread": -15.3,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 93,
+        "projScoreUt": 31,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Northwestern Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Northwestern Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 62.7,
+        "mcOverProb": 23.7,
+        "mcRecommendedAts": "Iowa -15.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 22
+        }
       },
       {
         "id": "iowa-w11",
@@ -10673,18 +15713,37 @@ var TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.5,
+        "vegasSpread": -20.3,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 34,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Purdue Boilermakers rushing attack.",
           "summary": "Regular season non-conference test against Purdue Boilermakers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 70.9,
+        "mcOverProb": 19.6,
+        "mcRecommendedAts": "Iowa -20.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 46
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "iowa-w12",
@@ -10705,18 +15764,37 @@ var TEAMS_DATABASE = {
         "location": "Champaign, IL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -13.5,
+        "vegasSpread": -15.3,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 94,
+        "projScoreUt": 32,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Illinois Fighting Illini rushing attack.",
           "summary": "Regular season non-conference test against Illinois Fighting Illini."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 63.1,
+        "mcOverProb": 22.9,
+        "mcRecommendedAts": "Iowa -15.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 23
+        }
       },
       {
         "id": "iowa-w13",
@@ -10737,20 +15815,40 @@ var TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.5,
+        "vegasSpread": -20.3,
         "overUnder": 52.5,
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 34,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Nebraska Cornhuskers rushing attack.",
           "summary": "Regular season non-conference test against Nebraska Cornhuskers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 68.2,
+        "mcOverProb": 21.3,
+        "mcRecommendedAts": "Iowa -20.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       }
-    ]
+    ],
+    "seasonBaselineSpRating": 21.0
   },
   "missouri": {
     "id": "missouri",
@@ -10760,9 +15858,9 @@ var TEAMS_DATABASE = {
     "abbr": "MIZ",
     "mascot": "Truman the Tiger",
     "conference": "SEC",
-    "apRank": "#25 AP",
-    "apPoints": "310 PTS",
-    "playoffContenderRank": 25,
+    "apRank": "#23 AP",
+    "apPoints": "182 PTS",
+    "playoffContenderRank": 23,
     "themeClass": "theme-missouri",
     "headCoach": "Eli Drinkwitz",
     "offensiveCoordinator": "Kirby Moore",
@@ -10773,7 +15871,7 @@ var TEAMS_DATABASE = {
     "stadium": "Faurot Field at Memorial Stadium",
     "stadiumCapacity": "62,621",
     "stadiumCity": "Columbia, MO",
-    "baseSpRating": 22.8,
+    "baseSpRating": 19.47,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/142.png",
     "colors": {
       "primary": "#F1B82D",
@@ -10809,11 +15907,12 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -27.5,
-        "overUnder": 52.5,
+        "vegasSpread": -55.5,
+        "overUnder": 62.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 98,
-        "projScoreUt": 42,
-        "projScoreOpp": 10,
+        "projScoreUt": 54,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Missouri offensive line vs Arkansas-Pine Bluff Golden Lions defensive front.",
@@ -10824,11 +15923,7 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 54,
         "finalOppScore": 14,
-        "finalWin": true,
-        "actualScoreUt": 54,
-        "actualScoreOpp": 14,
-        "predictedScoreUt": 42,
-        "predictedScoreOpp": 10
+        "finalWin": true
       },
       {
         "id": "miz-w2",
@@ -10851,16 +15946,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -15.5,
         "overUnder": 52.5,
-        "baseWinProb": 87,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 94,
         "projScoreUt": 34,
-        "projScoreOpp": 19,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Missouri front seven vs Kansas Jayhawks rushing attack.",
           "summary": "Regular season non-conference test against Kansas Jayhawks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 66.7,
+        "mcOverProb": 32.4,
+        "mcRecommendedAts": "Missouri -15.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 17,
+          "p90": 24
+        }
       },
       {
         "id": "miz-w3",
@@ -10881,18 +15995,37 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.5,
+        "vegasSpread": -21.9,
         "overUnder": 52.5,
-        "baseWinProb": 93,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Missouri front seven vs Troy Trojans rushing attack.",
           "summary": "Regular season non-conference test against Troy Trojans."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.1,
+        "mcOverProb": 31.4,
+        "mcRecommendedAts": "Missouri -21.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "miz-w4",
@@ -10913,18 +16046,37 @@ var TEAMS_DATABASE = {
         "location": "Starkville, MS",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -15.5,
+        "vegasSpread": -16.4,
         "overUnder": 52.5,
-        "baseWinProb": 87,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 94,
         "projScoreUt": 34,
-        "projScoreOpp": 19,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Missouri front seven vs Mississippi State Bulldogs rushing attack.",
           "summary": "Regular season non-conference test against Mississippi State Bulldogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.4,
+        "mcOverProb": 34.2,
+        "mcRecommendedAts": "Missouri -16.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 17,
+          "p90": 24
+        }
       },
       {
         "id": "miz-w5",
@@ -10945,18 +16097,37 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.5,
+        "vegasSpread": -21.9,
         "overUnder": 52.5,
-        "baseWinProb": 93,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
         "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Missouri front seven vs Florida Gators rushing attack.",
           "summary": "Regular season non-conference test against Florida Gators."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.3,
+        "mcOverProb": 28.4,
+        "mcRecommendedAts": "Missouri -21.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 30,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "miz-w6",
@@ -10967,7 +16138,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas A&M Aggies",
         "oppAbbr": "TA&M",
-        "oppRank": "#8 AP",
+        "oppRank": "#10 AP",
         "oppBadge": "TAMU",
         "oppColor": "#500000",
         "oppSecondary": "#FFFFFF",
@@ -10977,18 +16148,37 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.5,
+        "vegasSpread": 6.6,
         "overUnder": 52.5,
-        "baseWinProb": 48,
-        "projScoreUt": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 31,
+        "projScoreUt": 20,
         "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Missouri quarterback play vs Texas A&M Aggies secondary.",
-          "summary": "High-stakes clash against #8 AP Texas A&M Aggies."
+          "summary": "High-stakes clash against #9 AP Texas A&M Aggies."
         },
         "oppId": "texasam",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 46.8,
+        "mcOverProb": 32.9,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 26,
+          "p90": 33
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        }
       },
       {
         "id": "miz-w7",
@@ -11009,18 +16199,37 @@ var TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 6.0,
+        "vegasSpread": 8.3,
         "overUnder": 52.5,
-        "baseWinProb": 32,
-        "projScoreUt": 23,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 21,
+        "projScoreUt": 18,
         "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Missouri quarterback play vs Ole Miss Rebels secondary.",
-          "summary": "High-stakes clash against #9 AP Ole Miss Rebels."
+          "summary": "High-stakes clash against #11 AP Ole Miss Rebels."
         },
         "oppId": "olemiss",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 43.3,
+        "mcOverProb": 34.2,
+        "mcRecommendedAts": "MISS -8.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 30,
+          "p75": 36,
+          "p90": 41
+        }
       },
       {
         "id": "miz-w9",
@@ -11041,18 +16250,37 @@ var TEAMS_DATABASE = {
         "location": "Fayetteville, AR",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -15.5,
+        "vegasSpread": -16.4,
         "overUnder": 52.5,
-        "baseWinProb": 87,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 94,
         "projScoreUt": 34,
-        "projScoreOpp": 19,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Missouri front seven vs Arkansas Razorbacks rushing attack.",
           "summary": "Regular season non-conference test against Arkansas Razorbacks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 63.1,
+        "mcOverProb": 30.4,
+        "mcRecommendedAts": "Missouri -16.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 26,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 12,
+          "p75": 17,
+          "p90": 23
+        }
       },
       {
         "id": "miz-w10",
@@ -11063,7 +16291,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas Longhorns",
         "oppAbbr": "TEX",
-        "oppRank": "#5 AP",
+        "oppRank": "#4 AP",
         "oppBadge": "TEX",
         "oppColor": "#BF5700",
         "oppSecondary": "#FFFFFF",
@@ -11073,18 +16301,37 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.5,
+        "vegasSpread": 15.0,
         "overUnder": 52.5,
-        "baseWinProb": 33,
-        "projScoreUt": 23,
-        "projScoreOpp": 29,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 7,
+        "projScoreUt": 13,
+        "projScoreOpp": 33,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Missouri quarterback play vs Texas Longhorns secondary.",
-          "summary": "High-stakes clash against #5 AP Texas Longhorns."
+          "summary": "High-stakes clash against #3 AP Texas Longhorns."
         },
         "oppId": "texas",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 35.5,
+        "mcOverProb": 31.6,
+        "mcRecommendedAts": "TEX -15.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 19,
+          "p90": 24
+        },
+        "mcScoreDistOpp": {
+          "p10": 20,
+          "p25": 26,
+          "p50": 33,
+          "p75": 40,
+          "p90": 47
+        }
       },
       {
         "id": "miz-w11",
@@ -11095,7 +16342,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Georgia Bulldogs",
         "oppAbbr": "UGA",
-        "oppRank": "#3 AP",
+        "oppRank": "#2 AP",
         "oppBadge": "UGA",
         "oppColor": "#BA0C2F",
         "oppSecondary": "#000000",
@@ -11105,18 +16352,37 @@ var TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 12.0,
+        "vegasSpread": 21.4,
         "overUnder": 52.5,
-        "baseWinProb": 18,
-        "projScoreUt": 20,
-        "projScoreOpp": 32,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 2,
+        "projScoreUt": 10,
+        "projScoreOpp": 36,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Missouri quarterback play vs Georgia Bulldogs secondary.",
-          "summary": "High-stakes clash against #3 AP Georgia Bulldogs."
+          "summary": "High-stakes clash against #2 AP Georgia Bulldogs."
         },
         "oppId": "georgia",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 33.2,
+        "mcOverProb": 29.4,
+        "mcRecommendedAts": "UGA -21.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 9,
+          "p75": 14,
+          "p90": 20
+        },
+        "mcScoreDistOpp": {
+          "p10": 23,
+          "p25": 30,
+          "p50": 36,
+          "p75": 42,
+          "p90": 49
+        }
       },
       {
         "id": "miz-w12",
@@ -11137,18 +16403,37 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.5,
+        "vegasSpread": -21.9,
         "overUnder": 52.5,
-        "baseWinProb": 93,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
         "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Missouri front seven vs Kentucky Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Kentucky Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 71.5,
+        "mcOverProb": 31.0,
+        "mcRecommendedAts": "Missouri -21.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 30,
+          "p50": 37,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "miz-w13",
@@ -11159,7 +16444,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Oklahoma Sooners",
         "oppAbbr": "OU",
-        "oppRank": "#10 AP",
+        "oppRank": "#11 AP",
         "oppBadge": "OU",
         "oppColor": "#841617",
         "oppSecondary": "#FDF9D8",
@@ -11169,20 +16454,40 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.0,
+        "vegasSpread": 5.9,
         "overUnder": 52.5,
-        "baseWinProb": 49,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 31,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Missouri quarterback play vs Oklahoma Sooners secondary.",
           "summary": "High-stakes clash against #10 AP Oklahoma Sooners."
         },
         "oppId": "oklahoma",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 43.5,
+        "mcOverProb": 32.8,
+        "mcRecommendedAts": "OU -5.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 26,
+          "p90": 32
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        }
       }
-    ]
+    ],
+    "seasonBaselineSpRating": 22.8
   },
   "arizona": {
     "id": "arizona",
@@ -11193,8 +16498,8 @@ var TEAMS_DATABASE = {
     "mascot": "Wilbur and Wilma Wildcat",
     "conference": "Big 12",
     "apRank": "RV",
-    "apPoints": "280 PTS",
-    "playoffContenderRank": 28,
+    "apPoints": "33 PTS",
+    "playoffContenderRank": 27,
     "themeClass": "theme-arizona",
     "headCoach": "Brent Brennan",
     "offensiveCoordinator": "Dino Babers",
@@ -11205,7 +16510,7 @@ var TEAMS_DATABASE = {
     "stadium": "Arizona Stadium",
     "stadiumCapacity": "50,782",
     "stadiumCity": "Tucson, AZ",
-    "baseSpRating": 19.5,
+    "baseSpRating": 18.29,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/12.png",
     "colors": {
       "primary": "#CC0033",
@@ -11241,18 +16546,23 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.5,
-        "overUnder": 52.5,
+        "vegasSpread": -33.5,
+        "overUnder": 59.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 95,
-        "projScoreUt": 38,
-        "projScoreOpp": 14,
+        "projScoreUt": 35,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Arizona offensive line vs Northern Arizona Lumberjacks defensive front.",
           "summary": "Non-conference matchup in Tucson, AZ against FCS challenger Northern Arizona Lumberjacks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 35,
+        "finalOppScore": 7,
+        "finalWin": true
       },
       {
         "id": "ariz-w2",
@@ -11263,7 +16573,7 @@ var TEAMS_DATABASE = {
         "tv": "FOX",
         "opponent": "BYU Cougars",
         "oppAbbr": "BYU",
-        "oppRank": "#14 AP",
+        "oppRank": "#15 AP",
         "oppBadge": "BYU",
         "oppColor": "#002E5D",
         "oppSecondary": "#FFFFFF",
@@ -11273,18 +16583,37 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.0,
-        "overUnder": 52.5,
-        "baseWinProb": 35,
-        "projScoreUt": 24,
+        "vegasSpread": 7.5,
+        "overUnder": 47.5,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 20,
+        "projScoreUt": 18,
         "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona quarterback play vs BYU Cougars secondary.",
-          "summary": "High-stakes clash against #14 AP BYU Cougars."
+          "summary": "High-stakes clash against #15 AP BYU Cougars."
         },
         "oppId": "byu",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 40.1,
+        "mcOverProb": 44.5,
+        "mcRecommendedAts": "BYU -7.5",
+        "mcRecommendedOu": "UNDER 47.5",
+        "mcScoreDistUt": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 30
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 28,
+          "p75": 36,
+          "p90": 42
+        }
       },
       {
         "id": "ariz-w3",
@@ -11305,18 +16634,37 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.0,
+        "vegasSpread": -17.4,
         "overUnder": 52.5,
-        "baseWinProb": 90,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
         "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona front seven vs Northern Illinois Huskies rushing attack.",
           "summary": "Regular season non-conference test against Northern Illinois Huskies."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 70.0,
+        "mcOverProb": 29.0,
+        "mcRecommendedAts": "Arizona -17.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 21
+        }
       },
       {
         "id": "ariz-w4",
@@ -11337,18 +16685,37 @@ var TEAMS_DATABASE = {
         "location": "Pullman, WA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -12.0,
+        "vegasSpread": -12.4,
         "overUnder": 52.5,
-        "baseWinProb": 82,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 89,
         "projScoreUt": 32,
-        "projScoreOpp": 20,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona front seven vs Washington State Cougars rushing attack.",
           "summary": "Regular season non-conference test against Washington State Cougars."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 65.1,
+        "mcOverProb": 31.8,
+        "mcRecommendedAts": "Arizona -12.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 14,
+          "p75": 20,
+          "p90": 27
+        }
       },
       {
         "id": "ariz-w5",
@@ -11369,18 +16736,37 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.0,
+        "vegasSpread": -17.4,
         "overUnder": 52.5,
-        "baseWinProb": 90,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
+        "projScoreUt": 34,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona front seven vs Cincinnati Bearcats rushing attack.",
           "summary": "Regular season non-conference test against Cincinnati Bearcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.8,
+        "mcOverProb": 28.1,
+        "mcRecommendedAts": "Arizona -17.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 20
+        }
       },
       {
         "id": "ariz-w6",
@@ -11401,18 +16787,37 @@ var TEAMS_DATABASE = {
         "location": "Morgantown, WV",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -12.0,
+        "vegasSpread": -12.4,
         "overUnder": 52.5,
-        "baseWinProb": 82,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 91,
         "projScoreUt": 32,
-        "projScoreOpp": 20,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona front seven vs West Virginia Mountaineers rushing attack.",
           "summary": "Regular season non-conference test against West Virginia Mountaineers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.6,
+        "mcOverProb": 29.6,
+        "mcRecommendedAts": "Arizona -12.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 20,
+          "p90": 26
+        }
       },
       {
         "id": "ariz-w8",
@@ -11433,18 +16838,37 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.0,
+        "vegasSpread": -17.4,
         "overUnder": 52.5,
-        "baseWinProb": 90,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
+        "projScoreUt": 34,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona front seven vs Iowa State Cyclones rushing attack.",
           "summary": "Regular season non-conference test against Iowa State Cyclones."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.8,
+        "mcOverProb": 28.5,
+        "mcRecommendedAts": "Arizona -17.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 20
+        }
       },
       {
         "id": "ariz-w9",
@@ -11455,7 +16879,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas Tech Red Raiders",
         "oppAbbr": "TTU",
-        "oppRank": "#12 AP",
+        "oppRank": "#13 AP",
         "oppBadge": "TTU",
         "oppColor": "#CC0000",
         "oppSecondary": "#000000",
@@ -11465,18 +16889,37 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 7.5,
+        "vegasSpread": 2.1,
         "overUnder": 52.5,
-        "baseWinProb": 29,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 44,
         "projScoreUt": 23,
-        "projScoreOpp": 30,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona quarterback play vs Texas Tech Red Raiders secondary.",
-          "summary": "High-stakes clash against #12 AP Texas Tech Red Raiders."
+          "summary": "High-stakes clash against #13 AP Texas Tech Red Raiders."
         },
         "oppId": "texastech",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 48.6,
+        "mcOverProb": 33.5,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        }
       },
       {
         "id": "ariz-w10",
@@ -11497,18 +16940,37 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.0,
+        "vegasSpread": -17.4,
         "overUnder": 52.5,
-        "baseWinProb": 90,
-        "projScoreUt": 35,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
+        "projScoreUt": 37,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona front seven vs TCU Horned Frogs rushing attack.",
           "summary": "Regular season non-conference test against TCU Horned Frogs."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.6,
+        "mcOverProb": 38.4,
+        "mcRecommendedAts": "Arizona -17.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 30,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 23
+        }
       },
       {
         "id": "ariz-w11",
@@ -11519,7 +16981,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Utah Utes",
         "oppAbbr": "UTAH",
-        "oppRank": "#21 AP",
+        "oppRank": "#20 AP",
         "oppBadge": "UTAH",
         "oppColor": "#CC0000",
         "oppSecondary": "#FFFFFF",
@@ -11529,18 +16991,37 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.0,
+        "vegasSpread": 8.6,
         "overUnder": 52.5,
-        "baseWinProb": 44,
-        "projScoreUt": 25,
-        "projScoreOpp": 27,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 20,
+        "projScoreUt": 18,
+        "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona quarterback play vs Utah Utes secondary.",
-          "summary": "High-stakes clash against #21 AP Utah Utes."
+          "summary": "High-stakes clash against #20 AP Utah Utes."
         },
         "oppId": "utah",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 42.8,
+        "mcOverProb": 33.3,
+        "mcRecommendedAts": "UTAH -8.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 30
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 21,
+          "p50": 28,
+          "p75": 37,
+          "p90": 44
+        }
       },
       {
         "id": "ariz-w12",
@@ -11561,18 +17042,37 @@ var TEAMS_DATABASE = {
         "location": "Manhattan, KS",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -12.0,
+        "vegasSpread": -12.4,
         "overUnder": 52.5,
-        "baseWinProb": 82,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 89,
         "projScoreUt": 32,
-        "projScoreOpp": 20,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona front seven vs Kansas State Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Kansas State Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.1,
+        "mcOverProb": 32.0,
+        "mcRecommendedAts": "Arizona -12.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 14,
+          "p75": 20,
+          "p90": 27
+        }
       },
       {
         "id": "ariz-w13",
@@ -11593,21 +17093,41 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -6.5,
+        "vegasSpread": 1.4,
         "overUnder": 52.5,
-        "baseWinProb": 69,
-        "projScoreUt": 29,
-        "projScoreOpp": 23,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 47,
+        "projScoreUt": 23,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona quarterback play vs Arizona State Sun Devils secondary.",
-          "summary": "High-stakes clash against RV Arizona State Sun Devils."
+          "summary": "High-stakes clash against NR Arizona State Sun Devils."
         },
         "oppId": "arizonastate",
         "is_tracked": true,
-        "rivalryName": "TERRITORIAL CUP"
+        "rivalryName": "TERRITORIAL CUP",
+        "mcCoverProb": 49.3,
+        "mcOverProb": 33.8,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 35
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 37
+        }
       }
-    ]
+    ],
+    "seasonBaselineSpRating": 19.5
   },
   "washington": {
     "id": "washington",
@@ -11617,9 +17137,9 @@ var TEAMS_DATABASE = {
     "abbr": "WASH",
     "mascot": "Harry the Husky / Dubs II",
     "conference": "Big Ten",
-    "apRank": "#17 AP",
-    "apPoints": "680 PTS",
-    "playoffContenderRank": 17,
+    "apRank": "#19 AP",
+    "apPoints": "489 PTS",
+    "playoffContenderRank": 19,
     "themeClass": "theme-washington",
     "headCoach": "Jedd Fisch",
     "offensiveCoordinator": "Jimmie Dougherty",
@@ -11630,7 +17150,7 @@ var TEAMS_DATABASE = {
     "stadium": "Husky Stadium",
     "stadiumCapacity": "70,138",
     "stadiumCity": "Seattle, WA",
-    "baseSpRating": 22.5,
+    "baseSpRating": 18.25,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/264.png",
     "colors": {
       "primary": "#4B2E83",
@@ -11666,18 +17186,23 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.5,
-        "overUnder": 52.5,
+        "vegasSpread": -23.5,
+        "overUnder": 51.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 97,
-        "projScoreUt": 41,
-        "projScoreOpp": 13,
+        "projScoreUt": 24,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Washington front seven vs Washington State Cougars rushing attack.",
           "summary": "Regular season non-conference test against Washington State Cougars."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 24,
+        "finalOppScore": 10,
+        "finalWin": true
       },
       {
         "id": "wash-w2",
@@ -11700,16 +17225,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -21.0,
         "overUnder": 52.5,
-        "baseWinProb": 93,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Washington front seven vs Utah State Aggies rushing attack.",
           "summary": "Regular season non-conference test against Utah State Aggies."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 65.2,
+        "mcOverProb": 30.2,
+        "mcRecommendedAts": "Washington -21.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 29,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 9,
+          "p75": 14,
+          "p90": 20
+        }
       },
       {
         "id": "wash-w3",
@@ -11730,18 +17274,37 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.0,
+        "vegasSpread": -20.2,
         "overUnder": 52.5,
-        "baseWinProb": 93,
-        "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 36,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Washington front seven vs Eastern Washington Eagles rushing attack.",
           "summary": "Regular season non-conference test against Eastern Washington Eagles."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 68.2,
+        "mcOverProb": 30.1,
+        "mcRecommendedAts": "Washington -20.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 29,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 3,
+          "p50": 9,
+          "p75": 14,
+          "p90": 20
+        }
       },
       {
         "id": "wash-w4",
@@ -11762,18 +17325,37 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.0,
+        "vegasSpread": -20.2,
         "overUnder": 52.5,
-        "baseWinProb": 93,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
         "projScoreUt": 37,
-        "projScoreOpp": 16,
+        "projScoreOpp": 10,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Washington front seven vs Minnesota Golden Gophers rushing attack.",
           "summary": "Regular season non-conference test against Minnesota Golden Gophers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 68.4,
+        "mcOverProb": 31.7,
+        "mcRecommendedAts": "Washington -20.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 29,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 9,
+          "p75": 14,
+          "p90": 20
+        }
       },
       {
         "id": "wash-w5",
@@ -11784,7 +17366,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "USC Trojans",
         "oppAbbr": "USC",
-        "oppRank": "#15 AP",
+        "oppRank": "#14 AP",
         "oppBadge": "USC",
         "oppColor": "#990000",
         "oppSecondary": "#FFC72C",
@@ -11794,18 +17376,37 @@ var TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 6.5,
+        "vegasSpread": 10.5,
         "overUnder": 52.5,
-        "baseWinProb": 31,
-        "projScoreUt": 23,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 16,
+        "projScoreUt": 16,
         "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Washington quarterback play vs USC Trojans secondary.",
-          "summary": "High-stakes clash against #15 AP USC Trojans."
+          "summary": "High-stakes clash against #14 AP USC Trojans."
         },
         "oppId": "usc",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 40.1,
+        "mcOverProb": 31.8,
+        "mcRecommendedAts": "USC -10.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 16,
+          "p75": 23,
+          "p90": 29
+        },
+        "mcScoreDistOpp": {
+          "p10": 17,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
+        }
       },
       {
         "id": "wash-w6",
@@ -11816,7 +17417,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Iowa Hawkeyes",
         "oppAbbr": "IOWA",
-        "oppRank": "#22 AP",
+        "oppRank": "#21 AP",
         "oppBadge": "IOWA",
         "oppColor": "#FFE100",
         "oppSecondary": "#000000",
@@ -11826,18 +17427,37 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -4.5,
+        "vegasSpread": -1.0,
         "overUnder": 52.5,
-        "baseWinProb": 64,
-        "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 57,
+        "projScoreUt": 23,
+        "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Washington quarterback play vs Iowa Hawkeyes secondary.",
-          "summary": "High-stakes clash against #22 AP Iowa Hawkeyes."
+          "summary": "High-stakes clash against #21 AP Iowa Hawkeyes."
         },
         "oppId": "iowa",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 54.5,
+        "mcOverProb": 25.8,
+        "mcRecommendedAts": "Washington -1.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        },
+        "mcScoreDistOpp": {
+          "p10": 9,
+          "p25": 14,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        }
       },
       {
         "id": "wash-w7",
@@ -11858,18 +17478,37 @@ var TEAMS_DATABASE = {
         "location": "West Lafayette, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -15.0,
+        "vegasSpread": -14.2,
         "overUnder": 52.5,
-        "baseWinProb": 87,
-        "projScoreUt": 34,
-        "projScoreOpp": 19,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 92,
+        "projScoreUt": 33,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Washington front seven vs Purdue Boilermakers rushing attack.",
           "summary": "Regular season non-conference test against Purdue Boilermakers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 62.8,
+        "mcOverProb": 33.0,
+        "mcRecommendedAts": "Washington -14.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 26,
+          "p50": 33,
+          "p75": 40,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 20,
+          "p90": 24
+        }
       },
       {
         "id": "wash-w9",
@@ -11890,18 +17529,37 @@ var TEAMS_DATABASE = {
         "location": "Lincoln, NE",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -15.0,
+        "vegasSpread": -14.2,
         "overUnder": 52.5,
-        "baseWinProb": 87,
-        "projScoreUt": 34,
-        "projScoreOpp": 19,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 91,
+        "projScoreUt": 33,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Washington front seven vs Nebraska Cornhuskers rushing attack.",
           "summary": "Regular season non-conference test against Nebraska Cornhuskers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 61.9,
+        "mcOverProb": 33.0,
+        "mcRecommendedAts": "Washington -14.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 33,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 20,
+          "p90": 24
+        }
       },
       {
         "id": "wash-w10",
@@ -11912,7 +17570,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Penn State Nittany Lions",
         "oppAbbr": "PSU",
-        "oppRank": "#18 AP",
+        "oppRank": "#16 AP",
         "oppBadge": "PSU",
         "oppColor": "#041E42",
         "oppSecondary": "#FFFFFF",
@@ -11922,18 +17580,37 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -5.0,
+        "vegasSpread": 4.8,
         "overUnder": 52.5,
-        "baseWinProb": 65,
-        "projScoreUt": 29,
-        "projScoreOpp": 24,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 35,
+        "projScoreUt": 21,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Washington quarterback play vs Penn State Nittany Lions secondary.",
-          "summary": "High-stakes clash against #18 AP Penn State Nittany Lions."
+          "summary": "High-stakes clash against #16 AP Penn State Nittany Lions."
         },
         "oppId": "pennstate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 48.1,
+        "mcOverProb": 34.2,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 9,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 19,
+          "p50": 26,
+          "p75": 34,
+          "p90": 41
+        }
       },
       {
         "id": "wash-w11",
@@ -11954,18 +17631,37 @@ var TEAMS_DATABASE = {
         "location": "East Lansing, MI",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -15.0,
+        "vegasSpread": -14.2,
         "overUnder": 52.5,
-        "baseWinProb": 87,
-        "projScoreUt": 34,
-        "projScoreOpp": 19,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 91,
+        "projScoreUt": 32,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Washington front seven vs Michigan State Spartans rushing attack.",
           "summary": "Regular season non-conference test against Michigan State Spartans."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 60.9,
+        "mcOverProb": 33.7,
+        "mcRecommendedAts": "Washington -14.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 25,
+          "p50": 31,
+          "p75": 41,
+          "p90": 47
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 20,
+          "p90": 26
+        }
       },
       {
         "id": "wash-w12",
@@ -11976,7 +17672,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Indiana Hoosiers",
         "oppAbbr": "IU",
-        "oppRank": "#6 AP",
+        "oppRank": "#5 AP",
         "oppBadge": "IND",
         "oppColor": "#990000",
         "oppSecondary": "#EEEDEB",
@@ -11986,18 +17682,37 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.0,
+        "vegasSpread": 5.3,
         "overUnder": 52.5,
-        "baseWinProb": 50,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 32,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Washington quarterback play vs Indiana Hoosiers secondary.",
-          "summary": "High-stakes clash against #6 AP Indiana Hoosiers."
+          "summary": "High-stakes clash against #5 AP Indiana Hoosiers."
         },
         "oppId": "indiana",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 46.4,
+        "mcOverProb": 34.0,
+        "mcRecommendedAts": "IU -5.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 9,
+          "p25": 14,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        }
       },
       {
         "id": "wash-w13",
@@ -12008,7 +17723,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Oregon Ducks",
         "oppAbbr": "ORE",
-        "oppRank": "#2 AP",
+        "oppRank": "#6 AP",
         "oppBadge": "ORE",
         "oppColor": "#154733",
         "oppSecondary": "#FEE123",
@@ -12018,21 +17733,41 @@ var TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 11.5,
+        "vegasSpread": 12.9,
         "overUnder": 52.5,
-        "baseWinProb": 19,
-        "projScoreUt": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 11,
+        "projScoreUt": 15,
         "projScoreOpp": 32,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Washington quarterback play vs Oregon Ducks secondary.",
-          "summary": "High-stakes clash against #2 AP Oregon Ducks."
+          "summary": "High-stakes clash against #6 AP Oregon Ducks."
         },
         "oppId": "oregon",
         "is_tracked": true,
-        "rivalryName": "PACIFIC NORTHWEST CLASH"
+        "rivalryName": "PACIFIC NORTHWEST CLASH",
+        "mcCoverProb": 35.8,
+        "mcOverProb": 30.4,
+        "mcRecommendedAts": "ORE -12.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 14,
+          "p75": 20,
+          "p90": 27
+        },
+        "mcScoreDistOpp": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        }
       }
-    ]
+    ],
+    "seasonBaselineSpRating": 22.5
   },
   "houston": {
     "id": "houston",
@@ -12042,9 +17777,9 @@ var TEAMS_DATABASE = {
     "abbr": "HOU",
     "mascot": "Shasta",
     "conference": "Big 12",
-    "apRank": "#23 AP",
-    "apPoints": "340 PTS",
-    "playoffContenderRank": 23,
+    "apRank": "#22 AP",
+    "apPoints": "214 PTS",
+    "playoffContenderRank": 22,
     "themeClass": "theme-houston",
     "headCoach": "Willie Fritz",
     "offensiveCoordinator": "Slade Nagle",
@@ -12055,7 +17790,7 @@ var TEAMS_DATABASE = {
     "stadium": "TDECU Stadium",
     "stadiumCapacity": "40,000",
     "stadiumCity": "Houston, TX",
-    "baseSpRating": 20.0,
+    "baseSpRating": 18.24,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png",
     "colors": {
       "primary": "#C8102E",
@@ -12078,7 +17813,7 @@ var TEAMS_DATABASE = {
         "date": "Sep 5, 2026",
         "kickoffTime": "12:00 PM ET",
         "utc": "2026-09-05T16:00Z",
-        "tv": "ESPN",
+        "tv": "ESPNEWS",
         "opponent": "Oregon State Beavers",
         "oppAbbr": "ORST",
         "oppRank": "NR",
@@ -12091,18 +17826,23 @@ var TEAMS_DATABASE = {
         "location": "Houston, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
-        "overUnder": 52.5,
+        "vegasSpread": -21.0,
+        "overUnder": 50.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "projScoreUt": 33,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Houston front seven vs Oregon State Beavers rushing attack.",
           "summary": "Regular season non-conference test against Oregon State Beavers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 33,
+        "finalOppScore": 20,
+        "finalWin": true
       },
       {
         "id": "hou-w2",
@@ -12125,16 +17865,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -18.5,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 96,
+        "projScoreUt": 34,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Houston front seven vs Southern Jaguars rushing attack.",
           "summary": "Regular season non-conference test against Southern Jaguars."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 66.6,
+        "mcOverProb": 29.7,
+        "mcRecommendedAts": "Houston -18.5",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 21
+        }
       },
       {
         "id": "hou-w3",
@@ -12145,7 +17904,7 @@ var TEAMS_DATABASE = {
         "tv": "FOX",
         "opponent": "Texas Tech Red Raiders",
         "oppAbbr": "TTU",
-        "oppRank": "#12 AP",
+        "oppRank": "#13 AP",
         "oppBadge": "TTU",
         "oppColor": "#CC0000",
         "oppSecondary": "#000000",
@@ -12155,18 +17914,37 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 7.0,
+        "vegasSpread": 2.1,
         "overUnder": 52.5,
-        "baseWinProb": 30,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 47,
         "projScoreUt": 23,
-        "projScoreOpp": 30,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Houston quarterback play vs Texas Tech Red Raiders secondary.",
-          "summary": "High-stakes clash against #12 AP Texas Tech Red Raiders."
+          "summary": "High-stakes clash against #13 AP Texas Tech Red Raiders."
         },
         "oppId": "texastech",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 50.4,
+        "mcOverProb": 35.4,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 36
+        },
+        "mcScoreDistOpp": {
+          "p10": 12,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        }
       },
       {
         "id": "hou-w4",
@@ -12187,18 +17965,37 @@ var TEAMS_DATABASE = {
         "location": "Statesboro, GA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -12.5,
+        "vegasSpread": -12.2,
         "overUnder": 52.5,
-        "baseWinProb": 83,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 91,
         "projScoreUt": 32,
-        "projScoreOpp": 20,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Houston front seven vs Georgia Southern Eagles rushing attack.",
           "summary": "Regular season non-conference test against Georgia Southern Eagles."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 66.1,
+        "mcOverProb": 32.2,
+        "mcRecommendedAts": "Houston -12.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 14,
+          "p75": 20,
+          "p90": 26
+        }
       },
       {
         "id": "hou-w5",
@@ -12219,18 +18016,37 @@ var TEAMS_DATABASE = {
         "location": "Houston, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -17.2,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
+        "projScoreUt": 35,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Houston front seven vs UCF Knights rushing attack.",
           "summary": "Regular season non-conference test against UCF Knights."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.0,
+        "mcOverProb": 29.0,
+        "mcRecommendedAts": "Houston -17.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 21
+        }
       },
       {
         "id": "hou-w6",
@@ -12251,18 +18067,37 @@ var TEAMS_DATABASE = {
         "location": "Manhattan, KS",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -12.5,
+        "vegasSpread": -12.2,
         "overUnder": 52.5,
-        "baseWinProb": 83,
-        "projScoreUt": 32,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 90,
+        "projScoreUt": 31,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Houston front seven vs Kansas State Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Kansas State Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.5,
+        "mcOverProb": 29.5,
+        "mcRecommendedAts": "Houston -12.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 20,
+          "p90": 26
+        }
       },
       {
         "id": "hou-w7",
@@ -12283,18 +18118,37 @@ var TEAMS_DATABASE = {
         "location": "Houston, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -17.2,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
+        "projScoreUt": 35,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Houston front seven vs Oklahoma State Cowboys rushing attack.",
           "summary": "Regular season non-conference test against Oklahoma State Cowboys."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 71.4,
+        "mcOverProb": 28.5,
+        "mcRecommendedAts": "Houston -17.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 20
+        }
       },
       {
         "id": "hou-w8",
@@ -12305,7 +18159,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Utah Utes",
         "oppAbbr": "UTAH",
-        "oppRank": "#21 AP",
+        "oppRank": "#20 AP",
         "oppBadge": "UTAH",
         "oppColor": "#CC0000",
         "oppSecondary": "#FFFFFF",
@@ -12315,18 +18169,37 @@ var TEAMS_DATABASE = {
         "location": "Salt Lake City, UT",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 7.5,
+        "vegasSpread": 15.2,
         "overUnder": 52.5,
-        "baseWinProb": 28,
-        "projScoreUt": 22,
-        "projScoreOpp": 30,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 7,
+        "projScoreUt": 13,
+        "projScoreOpp": 33,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Houston quarterback play vs Utah Utes secondary.",
-          "summary": "High-stakes clash against #21 AP Utah Utes."
+          "summary": "High-stakes clash against #20 AP Utah Utes."
         },
         "oppId": "utah",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 36.8,
+        "mcOverProb": 30.4,
+        "mcRecommendedAts": "UTAH -15.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 19,
+          "p90": 24
+        },
+        "mcScoreDistOpp": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 33,
+          "p75": 40,
+          "p90": 45
+        }
       },
       {
         "id": "hou-w10",
@@ -12347,18 +18220,37 @@ var TEAMS_DATABASE = {
         "location": "Houston, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -17.2,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 96,
+        "projScoreUt": 35,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Houston front seven vs Cincinnati Bearcats rushing attack.",
           "summary": "Regular season non-conference test against Cincinnati Bearcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.8,
+        "mcOverProb": 30.1,
+        "mcRecommendedAts": "Houston -17.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 28,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 21
+        }
       },
       {
         "id": "hou-w11",
@@ -12369,7 +18261,7 @@ var TEAMS_DATABASE = {
         "tv": "ESPN",
         "opponent": "Colorado Buffaloes",
         "oppAbbr": "COLO",
-        "oppRank": "NR",
+        "oppRank": "RV",
         "oppBadge": "COL",
         "oppColor": "#CFB87C",
         "oppSecondary": "#000000",
@@ -12379,18 +18271,37 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.5,
+        "vegasSpread": 2.2,
         "overUnder": 52.5,
-        "baseWinProb": 48,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 44,
+        "projScoreUt": 23,
+        "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Houston quarterback play vs Colorado Buffaloes secondary.",
           "summary": "High-stakes clash against NR Colorado Buffaloes."
         },
         "oppId": "colorado",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 48.5,
+        "mcOverProb": 35.5,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 14,
+          "p50": 23,
+          "p75": 30,
+          "p90": 35
+        },
+        "mcScoreDistOpp": {
+          "p10": 12,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        }
       },
       {
         "id": "hou-w12",
@@ -12411,18 +18322,37 @@ var TEAMS_DATABASE = {
         "location": "Morgantown, WV",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -12.5,
+        "vegasSpread": -12.2,
         "overUnder": 52.5,
-        "baseWinProb": 83,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 90,
         "projScoreUt": 32,
-        "projScoreOpp": 20,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Houston front seven vs West Virginia Mountaineers rushing attack.",
           "summary": "Regular season non-conference test against West Virginia Mountaineers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 65.8,
+        "mcOverProb": 32.5,
+        "mcRecommendedAts": "Houston -12.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 19,
+          "p25": 24,
+          "p50": 31,
+          "p75": 39,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 14,
+          "p75": 20,
+          "p90": 26
+        }
       },
       {
         "id": "hou-w13",
@@ -12443,20 +18373,40 @@ var TEAMS_DATABASE = {
         "location": "Houston, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.5,
+        "vegasSpread": -17.2,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
+        "projScoreUt": 35,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Houston front seven vs Baylor Bears rushing attack.",
           "summary": "Regular season non-conference test against Baylor Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 70.8,
+        "mcOverProb": 29.1,
+        "mcRecommendedAts": "Houston -17.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 21
+        }
       }
-    ]
+    ],
+    "seasonBaselineSpRating": 20.0
   },
   "louisville": {
     "id": "louisville",
@@ -12467,7 +18417,7 @@ var TEAMS_DATABASE = {
     "mascot": "Louie the Cardinal",
     "conference": "ACC",
     "apRank": "#24 AP",
-    "apPoints": "310 PTS",
+    "apPoints": "163 PTS",
     "playoffContenderRank": 24,
     "themeClass": "theme-louisville",
     "headCoach": "Jeff Brohm",
@@ -12479,7 +18429,7 @@ var TEAMS_DATABASE = {
     "stadium": "L&N Federal Credit Union Stadium",
     "stadiumCapacity": "60,800",
     "stadiumCity": "Louisville, KY",
-    "baseSpRating": 20.5,
+    "baseSpRating": 21.27,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/97.png",
     "colors": {
       "primary": "#C90000",
@@ -12505,7 +18455,7 @@ var TEAMS_DATABASE = {
         "tv": "ABC",
         "opponent": "Ole Miss Rebels",
         "oppAbbr": "MISS",
-        "oppRank": "#9 AP",
+        "oppRank": "#11 AP",
         "oppBadge": "MISS",
         "oppColor": "#CE1126",
         "oppSecondary": "#14234B",
@@ -12515,18 +18465,23 @@ var TEAMS_DATABASE = {
         "location": "Nashville, TN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 14.5,
-        "overUnder": 52.5,
-        "baseWinProb": 13,
-        "projScoreUt": 20,
-        "projScoreOpp": 35,
+        "vegasSpread": 6.5,
+        "overUnder": 54.5,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 23,
+        "projScoreUt": 38,
+        "projScoreOpp": 41,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Louisville quarterback play vs Ole Miss Rebels secondary.",
-          "summary": "High-stakes clash against #9 AP Ole Miss Rebels."
+          "summary": "High-stakes clash against #11 AP Ole Miss Rebels."
         },
         "oppId": "olemiss",
-        "is_tracked": true
+        "is_tracked": true,
+        "isFinal": true,
+        "finalTeamScore": 38,
+        "finalOppScore": 41,
+        "finalWin": false
       },
       {
         "id": "lou-w2",
@@ -12549,16 +18504,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -19.0,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Louisville front seven vs Villanova Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Villanova Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 78.8,
+        "mcOverProb": 30.6,
+        "mcRecommendedAts": "Louisville -19.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "lou-w3",
@@ -12569,7 +18543,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "SMU Mustangs",
         "oppAbbr": "SMU",
-        "oppRank": "#19 AP",
+        "oppRank": "#17 AP",
         "oppBadge": "SMU",
         "oppColor": "#003366",
         "oppSecondary": "#CC0000",
@@ -12579,18 +18553,37 @@ var TEAMS_DATABASE = {
         "location": "Louisville, KY",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -0.5,
+        "vegasSpread": -0.8,
         "overUnder": 52.5,
-        "baseWinProb": 52,
-        "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 56,
+        "projScoreUt": 25,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Louisville quarterback play vs SMU Mustangs secondary.",
-          "summary": "High-stakes clash against #19 AP SMU Mustangs."
+          "summary": "High-stakes clash against #17 AP SMU Mustangs."
         },
         "oppId": "smu",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 55.7,
+        "mcOverProb": 34.4,
+        "mcRecommendedAts": "Louisville -0.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 12,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 22,
+          "p75": 29,
+          "p90": 35
+        }
       },
       {
         "id": "lou-w4",
@@ -12611,18 +18604,37 @@ var TEAMS_DATABASE = {
         "location": "Louisville, KY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -21.3,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Louisville front seven vs Wake Forest Demon Deacons rushing attack.",
           "summary": "Regular season non-conference test against Wake Forest Demon Deacons."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 72.6,
+        "mcOverProb": 31.5,
+        "mcRecommendedAts": "Louisville -21.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "lou-w5",
@@ -12643,18 +18655,37 @@ var TEAMS_DATABASE = {
         "location": "Raleigh, NC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -13.0,
+        "vegasSpread": -16.3,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 96,
+        "projScoreUt": 34,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Louisville front seven vs NC State Wolfpack rushing attack.",
           "summary": "Regular season non-conference test against NC State Wolfpack."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 67.4,
+        "mcOverProb": 32.6,
+        "mcRecommendedAts": "Louisville -16.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 23
+        }
       },
       {
         "id": "lou-w6",
@@ -12665,7 +18696,7 @@ var TEAMS_DATABASE = {
         "tv": "ESPN",
         "opponent": "Florida State Seminoles",
         "oppAbbr": "FSU",
-        "oppRank": "RV",
+        "oppRank": "NR",
         "oppBadge": "FSU",
         "oppColor": "#782F40",
         "oppSecondary": "#CEB888",
@@ -12673,20 +18704,39 @@ var TEAMS_DATABASE = {
         "isHome": true,
         "stadium": "L&N Federal Credit Union Stadium",
         "location": "Louisville, KY",
-        "isMarquee": true,
+        "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 1.5,
+        "vegasSpread": -0.1,
         "overUnder": 52.5,
-        "baseWinProb": 45,
-        "projScoreUt": 25,
-        "projScoreOpp": 27,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 53,
+        "projScoreUt": 24,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Louisville quarterback play vs Florida State Seminoles secondary.",
-          "summary": "High-stakes clash against RV Florida State Seminoles."
+          "summary": "High-stakes clash against NR Florida State Seminoles."
         },
         "oppId": "floridastate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 53.0,
+        "mcOverProb": 35.8,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
+        }
       },
       {
         "id": "lou-w7",
@@ -12707,18 +18757,37 @@ var TEAMS_DATABASE = {
         "location": "Syracuse, NY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -13.0,
+        "vegasSpread": -16.3,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 95,
+        "projScoreUt": 35,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Louisville front seven vs Syracuse Orange rushing attack.",
           "summary": "Regular season non-conference test against Syracuse Orange."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 68.1,
+        "mcOverProb": 33.3,
+        "mcRecommendedAts": "Louisville -16.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 42,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 23
+        }
       },
       {
         "id": "lou-w9",
@@ -12739,18 +18808,37 @@ var TEAMS_DATABASE = {
         "location": "Louisville, KY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -21.3,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 98,
+        "projScoreUt": 38,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Louisville front seven vs Stanford Cardinal rushing attack.",
           "summary": "Regular season non-conference test against Stanford Cardinal."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 71.4,
+        "mcOverProb": 31.4,
+        "mcRecommendedAts": "Louisville -21.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 23,
+          "p25": 30,
+          "p50": 37,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "lou-w10",
@@ -12771,18 +18859,37 @@ var TEAMS_DATABASE = {
         "location": "Atlanta, GA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -13.0,
+        "vegasSpread": -16.3,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 95,
+        "projScoreUt": 34,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Louisville front seven vs Georgia Tech Yellow Jackets rushing attack.",
           "summary": "Regular season non-conference test against Georgia Tech Yellow Jackets."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 67.1,
+        "mcOverProb": 31.1,
+        "mcRecommendedAts": "Louisville -16.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 23
+        }
       },
       {
         "id": "lou-w11",
@@ -12803,18 +18910,37 @@ var TEAMS_DATABASE = {
         "location": "Chapel Hill, NC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -13.0,
+        "vegasSpread": -16.3,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 95,
+        "projScoreUt": 34,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Louisville front seven vs North Carolina Tar Heels rushing attack.",
           "summary": "Regular season non-conference test against North Carolina Tar Heels."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 68.4,
+        "mcOverProb": 31.0,
+        "mcRecommendedAts": "Louisville -16.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 23
+        }
       },
       {
         "id": "lou-w12",
@@ -12835,18 +18961,37 @@ var TEAMS_DATABASE = {
         "location": "Louisville, KY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -21.3,
         "overUnder": 52.5,
-        "baseWinProb": 91,
-        "projScoreUt": 36,
-        "projScoreOpp": 17,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 38,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Louisville front seven vs Pittsburgh Panthers rushing attack.",
           "summary": "Regular season non-conference test against Pittsburgh Panthers."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 72.9,
+        "mcOverProb": 31.8,
+        "mcRecommendedAts": "Louisville -21.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 38,
+          "p75": 45,
+          "p90": 52
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "lou-w13",
@@ -12867,20 +19012,40 @@ var TEAMS_DATABASE = {
         "location": "Lexington, KY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -13.0,
+        "vegasSpread": -16.3,
         "overUnder": 52.5,
-        "baseWinProb": 84,
-        "projScoreUt": 33,
-        "projScoreOpp": 20,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 95,
+        "projScoreUt": 34,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Louisville front seven vs Kentucky Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Kentucky Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 67.2,
+        "mcOverProb": 30.2,
+        "mcRecommendedAts": "Louisville -16.3",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 23
+        }
       }
-    ]
+    ],
+    "seasonBaselineSpRating": 20.5
   },
   "colorado": {
     "id": "colorado",
@@ -12890,9 +19055,9 @@ var TEAMS_DATABASE = {
     "abbr": "COL",
     "mascot": "Buffaloes",
     "conference": "Big 12",
-    "apRank": "NR",
-    "apPoints": "115 PTS",
-    "playoffContenderRank": 31,
+    "apRank": "RV",
+    "apPoints": "3 PTS",
+    "playoffContenderRank": 28,
     "headCoach": "Deion Sanders",
     "offensiveCoordinator": "Brennan Marion",
     "defensiveCoordinator": "Chris Marve",
@@ -12911,7 +19076,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#171510",
       "bgBase": "#0B0A08"
     },
-    "baseSpRating": 17.5,
+    "baseSpRating": 16.99,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/38.png",
     "badgeText": "COL",
     "sliderLabels": {
@@ -12941,11 +19106,12 @@ var TEAMS_DATABASE = {
         "location": "Atlanta, GA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -3.5,
-        "overUnder": 52.5,
+        "vegasSpread": 6.5,
+        "overUnder": 53.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 78,
-        "projScoreUt": 28,
-        "projScoreOpp": 24,
+        "projScoreUt": 14,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Georgia Tech Yellow Jackets rushing attack.",
@@ -12954,13 +19120,9 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "isFinal": true,
-        "finalTeamScore": 28,
-        "finalOppScore": 24,
-        "finalWin": true,
-        "actualScoreUt": 28,
-        "actualScoreOpp": 24,
-        "predictedScoreUt": 28,
-        "predictedScoreOpp": 24
+        "finalTeamScore": 14,
+        "finalOppScore": 13,
+        "finalWin": true
       },
       {
         "id": "col-w2",
@@ -12983,16 +19145,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": -16.0,
         "overUnder": 52.5,
-        "baseWinProb": 88,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 96,
+        "projScoreUt": 35,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Weber State Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Weber State Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.8,
+        "mcOverProb": 29.6,
+        "mcRecommendedAts": "Colorado -16.0",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 35,
+          "p75": 42,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 20
+        }
       },
       {
         "id": "col-w3",
@@ -13013,18 +19194,37 @@ var TEAMS_DATABASE = {
         "location": "Evanston, IL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -10.0,
+        "vegasSpread": -11.8,
         "overUnder": 52.5,
-        "baseWinProb": 78,
-        "projScoreUt": 31,
-        "projScoreOpp": 21,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 88,
+        "projScoreUt": 32,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Northwestern Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Northwestern Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 64.2,
+        "mcOverProb": 32.3,
+        "mcRecommendedAts": "Colorado -11.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 39,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 14,
+          "p75": 20,
+          "p90": 27
+        }
       },
       {
         "id": "col-w4",
@@ -13045,18 +19245,37 @@ var TEAMS_DATABASE = {
         "location": "Waco, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -10.0,
+        "vegasSpread": -11.8,
         "overUnder": 52.5,
-        "baseWinProb": 78,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 88,
         "projScoreUt": 31,
-        "projScoreOpp": 21,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Baylor Bears rushing attack.",
           "summary": "Regular season non-conference test against Baylor Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 62.2,
+        "mcOverProb": 32.5,
+        "mcRecommendedAts": "Colorado -11.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 9,
+          "p50": 14,
+          "p75": 21,
+          "p90": 27
+        }
       },
       {
         "id": "col-w5",
@@ -13067,7 +19286,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas Tech Red Raiders",
         "oppAbbr": "TTU",
-        "oppRank": "#12 AP",
+        "oppRank": "#13 AP",
         "oppBadge": "TTU",
         "oppColor": "#CC0000",
         "oppSecondary": "#000000",
@@ -13077,18 +19296,37 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 3.5,
+        "vegasSpread": -2.6,
         "overUnder": 52.5,
-        "baseWinProb": 40,
-        "projScoreUt": 25,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 63,
+        "projScoreUt": 26,
+        "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Colorado quarterback play vs Texas Tech Red Raiders secondary.",
-          "summary": "High-stakes clash against #12 AP Texas Tech Red Raiders."
+          "summary": "High-stakes clash against #13 AP Texas Tech Red Raiders."
         },
         "oppId": "texastech",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 58.8,
+        "mcOverProb": 35.5,
+        "mcRecommendedAts": "Colorado -2.6",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 19,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 9,
+          "p25": 14,
+          "p50": 21,
+          "p75": 27,
+          "p90": 34
+        }
       },
       {
         "id": "col-w7",
@@ -13099,7 +19337,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Utah Utes",
         "oppAbbr": "UTAH",
-        "oppRank": "#21 AP",
+        "oppRank": "#20 AP",
         "oppBadge": "UTAH",
         "oppColor": "#CC0000",
         "oppSecondary": "#FFFFFF",
@@ -13109,18 +19347,37 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 4.0,
+        "vegasSpread": 8.9,
         "overUnder": 52.5,
-        "baseWinProb": 38,
-        "projScoreUt": 24,
-        "projScoreOpp": 28,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 20,
+        "projScoreUt": 18,
+        "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Colorado quarterback play vs Utah Utes secondary.",
-          "summary": "High-stakes clash against #21 AP Utah Utes."
+          "summary": "High-stakes clash against #20 AP Utah Utes."
         },
         "oppId": "utah",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 41.4,
+        "mcOverProb": 32.0,
+        "mcRecommendedAts": "UTAH -8.9",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 30
+        },
+        "mcScoreDistOpp": {
+          "p10": 16,
+          "p25": 22,
+          "p50": 29,
+          "p75": 36,
+          "p90": 42
+        }
       },
       {
         "id": "col-w8",
@@ -13141,18 +19398,37 @@ var TEAMS_DATABASE = {
         "location": "Stillwater, OK",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -10.0,
+        "vegasSpread": -11.8,
         "overUnder": 52.5,
-        "baseWinProb": 78,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 87,
         "projScoreUt": 31,
-        "projScoreOpp": 21,
+        "projScoreOpp": 16,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Oklahoma State Cowboys rushing attack.",
           "summary": "Regular season non-conference test against Oklahoma State Cowboys."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 61.5,
+        "mcOverProb": 33.7,
+        "mcRecommendedAts": "Colorado -11.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 38,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 14,
+          "p75": 21,
+          "p90": 27
+        }
       },
       {
         "id": "col-w9",
@@ -13173,18 +19449,37 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.0,
+        "vegasSpread": -17.8,
         "overUnder": 52.5,
-        "baseWinProb": 88,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
+        "projScoreUt": 35,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Kansas State Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Kansas State Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 70.5,
+        "mcOverProb": 32.5,
+        "mcRecommendedAts": "Colorado -17.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 28,
+          "p50": 35,
+          "p75": 43,
+          "p90": 49
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 21
+        }
       },
       {
         "id": "col-w10",
@@ -13205,18 +19500,37 @@ var TEAMS_DATABASE = {
         "location": "Tempe, AZ",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 1.5,
+        "vegasSpread": 7.7,
         "overUnder": 52.5,
-        "baseWinProb": 45,
-        "projScoreUt": 25,
-        "projScoreOpp": 27,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 26,
+        "projScoreUt": 19,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Colorado quarterback play vs Arizona State Sun Devils secondary.",
-          "summary": "High-stakes clash against RV Arizona State Sun Devils."
+          "summary": "High-stakes clash against NR Arizona State Sun Devils."
         },
         "oppId": "arizonastate",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 45.6,
+        "mcOverProb": 33.4,
+        "mcRecommendedAts": "ASU -7.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 17,
+          "p75": 25,
+          "p90": 31
+        },
+        "mcScoreDistOpp": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 28,
+          "p75": 35,
+          "p90": 41
+        }
       },
       {
         "id": "col-w11",
@@ -13227,7 +19541,7 @@ var TEAMS_DATABASE = {
         "tv": "ESPN",
         "opponent": "Houston Cougars",
         "oppAbbr": "HOU",
-        "oppRank": "#23 AP",
+        "oppRank": "#22 AP",
         "oppBadge": "HOU",
         "oppColor": "#C8102E",
         "oppSecondary": "#FFFFFF",
@@ -13237,18 +19551,37 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -0.5,
+        "vegasSpread": -2.2,
         "overUnder": 52.5,
-        "baseWinProb": 52,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 62,
         "projScoreUt": 26,
-        "projScoreOpp": 26,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Colorado quarterback play vs Houston Cougars secondary.",
-          "summary": "High-stakes clash against #23 AP Houston Cougars."
+          "summary": "High-stakes clash against #22 AP Houston Cougars."
         },
         "oppId": "houston",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 57.3,
+        "mcOverProb": 33.9,
+        "mcRecommendedAts": "Colorado -2.2",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 19,
+          "p50": 26,
+          "p75": 33,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 9,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 34
+        }
       },
       {
         "id": "col-w12",
@@ -13269,18 +19602,37 @@ var TEAMS_DATABASE = {
         "location": "Cincinnati, OH",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -10.0,
+        "vegasSpread": -11.8,
         "overUnder": 52.5,
-        "baseWinProb": 78,
-        "projScoreUt": 31,
-        "projScoreOpp": 21,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 88,
+        "projScoreUt": 32,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Cincinnati Bearcats rushing attack.",
           "summary": "Regular season non-conference test against Cincinnati Bearcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 62.0,
+        "mcOverProb": 33.8,
+        "mcRecommendedAts": "Colorado -11.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 17,
+          "p25": 24,
+          "p50": 31,
+          "p75": 40,
+          "p90": 45
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 10,
+          "p50": 14,
+          "p75": 21,
+          "p90": 27
+        }
       },
       {
         "id": "col-w13",
@@ -13301,20 +19653,40 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.0,
+        "vegasSpread": -17.8,
         "overUnder": 52.5,
-        "baseWinProb": 88,
-        "projScoreUt": 34,
-        "projScoreOpp": 18,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 97,
+        "projScoreUt": 35,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs UCF Knights rushing attack.",
           "summary": "Regular season non-conference test against UCF Knights."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 69.6,
+        "mcOverProb": 30.9,
+        "mcRecommendedAts": "Colorado -17.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 42,
+          "p90": 50
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 20
+        }
       }
-    ]
+    ],
+    "seasonBaselineSpRating": 17.5
   },
   "arizonastate": {
     "id": "arizonastate",
@@ -13325,7 +19697,7 @@ var TEAMS_DATABASE = {
     "mascot": "Sun Devils",
     "conference": "Big 12",
     "apRank": "RV",
-    "apPoints": "72 PTS",
+    "apPoints": "2 PTS",
     "playoffContenderRank": 29,
     "headCoach": "Kenny Dillingham",
     "offensiveCoordinator": "Marcus Arroyo",
@@ -13346,7 +19718,7 @@ var TEAMS_DATABASE = {
       "bgBase": "#0D0508",
       "border": "rgba(140, 29, 64, 0.45)"
     },
-    "baseSpRating": 16.2,
+    "baseSpRating": 22.2,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/9.png",
     "badgeText": "ASU",
     "sliderLabels": {
@@ -13376,18 +19748,23 @@ var TEAMS_DATABASE = {
         "location": "Tempe, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -33.0,
+        "vegasSpread": -43.5,
         "overUnder": 52.5,
+        "oddsProvider": "DraftKings",
         "baseWinProb": 98,
-        "projScoreUt": 43,
-        "projScoreOpp": 10,
+        "projScoreUt": 70,
+        "projScoreOpp": 7,
         "scoutReport": {
           "xFactor": "Executing clean offensive tempo and establishing physical line of scrimmage early.",
           "keyMatchup": "Arizona State offensive line vs Morgan State Bears defensive front.",
           "summary": "Non-conference matchup in Tempe, AZ against FCS challenger Morgan State Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "isFinal": true,
+        "finalTeamScore": 70,
+        "finalOppScore": 7,
+        "finalWin": true
       },
       {
         "id": "asu-w2",
@@ -13398,7 +19775,7 @@ var TEAMS_DATABASE = {
         "tv": "ABC",
         "opponent": "Texas A&M Aggies",
         "oppAbbr": "TA&M",
-        "oppRank": "#8 AP",
+        "oppRank": "#10 AP",
         "oppBadge": "TAMU",
         "oppColor": "#500000",
         "oppSecondary": "#FFFFFF",
@@ -13410,16 +19787,35 @@ var TEAMS_DATABASE = {
         "isConf": false,
         "vegasSpread": 13.5,
         "overUnder": 52.5,
-        "baseWinProb": 16,
-        "projScoreUt": 20,
-        "projScoreOpp": 33,
+        "oddsProvider": "DraftKings",
+        "baseWinProb": 14,
+        "projScoreUt": 16,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona State quarterback play vs Texas A&M Aggies secondary.",
-          "summary": "High-stakes clash against #8 AP Texas A&M Aggies."
+          "summary": "High-stakes clash against #9 AP Texas A&M Aggies."
         },
         "oppId": "texasam",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 47.2,
+        "mcOverProb": 33.4,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 16,
+          "p75": 22,
+          "p90": 28
+        },
+        "mcScoreDistOpp": {
+          "p10": 17,
+          "p25": 23,
+          "p50": 31,
+          "p75": 37,
+          "p90": 44
+        }
       },
       {
         "id": "asu-w3",
@@ -13440,18 +19836,37 @@ var TEAMS_DATABASE = {
         "location": "London",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -8.5,
+        "vegasSpread": -16.8,
         "overUnder": 52.5,
-        "baseWinProb": 75,
-        "projScoreUt": 31,
-        "projScoreOpp": 22,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 96,
+        "projScoreUt": 34,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona State front seven vs Kansas Jayhawks rushing attack.",
           "summary": "Regular season non-conference test against Kansas Jayhawks."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 71.1,
+        "mcOverProb": 28.8,
+        "mcRecommendedAts": "Arizona State -16.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 20,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 21
+        }
       },
       {
         "id": "asu-w5",
@@ -13472,18 +19887,37 @@ var TEAMS_DATABASE = {
         "location": "Tempe, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.5,
+        "vegasSpread": -21.8,
         "overUnder": 52.5,
-        "baseWinProb": 86,
-        "projScoreUt": 34,
-        "projScoreOpp": 19,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 37,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona State front seven vs Baylor Bears rushing attack.",
           "summary": "Regular season non-conference test against Baylor Bears."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 75.2,
+        "mcOverProb": 26.6,
+        "mcRecommendedAts": "Arizona State -21.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 12,
+          "p90": 17
+        }
       },
       {
         "id": "asu-w6",
@@ -13504,18 +19938,37 @@ var TEAMS_DATABASE = {
         "location": "Tempe, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.5,
+        "vegasSpread": -21.8,
         "overUnder": 52.5,
-        "baseWinProb": 86,
-        "projScoreUt": 34,
-        "projScoreOpp": 19,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 37,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona State front seven vs Hawai'i Rainbow Warriors rushing attack.",
           "summary": "Regular season non-conference test against Hawai'i Rainbow Warriors."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 73.4,
+        "mcOverProb": 27.9,
+        "mcRecommendedAts": "Arizona State -21.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
+        }
       },
       {
         "id": "asu-w7",
@@ -13526,7 +19979,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Texas Tech Red Raiders",
         "oppAbbr": "TTU",
-        "oppRank": "#12 AP",
+        "oppRank": "#13 AP",
         "oppBadge": "TTU",
         "oppColor": "#CC0000",
         "oppSecondary": "#000000",
@@ -13536,18 +19989,37 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 10.5,
+        "vegasSpread": -1.8,
         "overUnder": 52.5,
-        "baseWinProb": 21,
-        "projScoreUt": 21,
-        "projScoreOpp": 32,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 60,
+        "projScoreUt": 25,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona State quarterback play vs Texas Tech Red Raiders secondary.",
-          "summary": "High-stakes clash against #12 AP Texas Tech Red Raiders."
+          "summary": "High-stakes clash against #13 AP Texas Tech Red Raiders."
         },
         "oppId": "texastech",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 57.6,
+        "mcOverProb": 34.5,
+        "mcRecommendedAts": "Arizona State -1.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 35
+        }
       },
       {
         "id": "asu-w8",
@@ -13568,18 +20040,37 @@ var TEAMS_DATABASE = {
         "location": "Tempe, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.5,
+        "vegasSpread": -21.8,
         "overUnder": 52.5,
-        "baseWinProb": 86,
-        "projScoreUt": 34,
-        "projScoreOpp": 19,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 37,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona State front seven vs Kansas State Wildcats rushing attack.",
           "summary": "Regular season non-conference test against Kansas State Wildcats."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 74.7,
+        "mcOverProb": 25.9,
+        "mcRecommendedAts": "Arizona State -21.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 12,
+          "p90": 17
+        }
       },
       {
         "id": "asu-w9",
@@ -13590,7 +20081,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "BYU Cougars",
         "oppAbbr": "BYU",
-        "oppRank": "#14 AP",
+        "oppRank": "#15 AP",
         "oppBadge": "BYU",
         "oppColor": "#002E5D",
         "oppSecondary": "#FFFFFF",
@@ -13600,18 +20091,37 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 8.5,
+        "vegasSpread": 5.0,
         "overUnder": 52.5,
-        "baseWinProb": 26,
-        "projScoreUt": 22,
-        "projScoreOpp": 30,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 34,
+        "projScoreUt": 20,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona State quarterback play vs BYU Cougars secondary.",
-          "summary": "High-stakes clash against #14 AP BYU Cougars."
+          "summary": "High-stakes clash against #15 AP BYU Cougars."
         },
         "oppId": "byu",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 46.0,
+        "mcOverProb": 33.3,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 7,
+          "p25": 13,
+          "p50": 20,
+          "p75": 27,
+          "p90": 34
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
+          "p25": 20,
+          "p50": 26,
+          "p75": 34,
+          "p90": 41
+        }
       },
       {
         "id": "asu-w10",
@@ -13622,7 +20132,7 @@ var TEAMS_DATABASE = {
         "tv": "TBD",
         "opponent": "Colorado Buffaloes",
         "oppAbbr": "COLO",
-        "oppRank": "NR",
+        "oppRank": "RV",
         "oppBadge": "COL",
         "oppColor": "#CFB87C",
         "oppSecondary": "#000000",
@@ -13632,18 +20142,37 @@ var TEAMS_DATABASE = {
         "location": "Tempe, AZ",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -1.5,
+        "vegasSpread": -7.7,
         "overUnder": 52.5,
-        "baseWinProb": 55,
-        "projScoreUt": 27,
-        "projScoreOpp": 25,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 80,
+        "projScoreUt": 29,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona State quarterback play vs Colorado Buffaloes secondary.",
           "summary": "High-stakes clash against NR Colorado Buffaloes."
         },
         "oppId": "colorado",
-        "is_tracked": true
+        "is_tracked": true,
+        "mcCoverProb": 62.2,
+        "mcOverProb": 33.2,
+        "mcRecommendedAts": "Arizona State -7.7",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 16,
+          "p25": 22,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
+        },
+        "mcScoreDistOpp": {
+          "p10": 6,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 30
+        }
       },
       {
         "id": "asu-w11",
@@ -13664,18 +20193,37 @@ var TEAMS_DATABASE = {
         "location": "Orlando, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -8.5,
+        "vegasSpread": -16.8,
         "overUnder": 52.5,
-        "baseWinProb": 75,
-        "projScoreUt": 31,
-        "projScoreOpp": 22,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 96,
+        "projScoreUt": 34,
+        "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona State front seven vs UCF Knights rushing attack.",
           "summary": "Regular season non-conference test against UCF Knights."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 70.9,
+        "mcOverProb": 29.8,
+        "mcRecommendedAts": "Arizona State -16.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
+        },
+        "mcScoreDistOpp": {
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 17,
+          "p90": 22
+        }
       },
       {
         "id": "asu-w12",
@@ -13696,18 +20244,37 @@ var TEAMS_DATABASE = {
         "location": "Tempe, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -14.5,
+        "vegasSpread": -21.8,
         "overUnder": 52.5,
-        "baseWinProb": 86,
-        "projScoreUt": 34,
-        "projScoreOpp": 19,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 99,
+        "projScoreUt": 37,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona State front seven vs Oklahoma State Cowboys rushing attack.",
           "summary": "Regular season non-conference test against Oklahoma State Cowboys."
         },
         "oppId": null,
-        "is_tracked": false
+        "is_tracked": false,
+        "mcCoverProb": 74.8,
+        "mcOverProb": 27.4,
+        "mcRecommendedAts": "Arizona State -21.8",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 24,
+          "p25": 30,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
+        },
+        "mcScoreDistOpp": {
+          "p10": 0,
+          "p25": 3,
+          "p50": 7,
+          "p75": 12,
+          "p90": 16
+        }
       },
       {
         "id": "asu-w13",
@@ -13728,11 +20295,12 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 6.5,
+        "vegasSpread": -1.4,
         "overUnder": 52.5,
-        "baseWinProb": 31,
-        "projScoreUt": 23,
-        "projScoreOpp": 29,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 58,
+        "projScoreUt": 25,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona State quarterback play vs Arizona Wildcats secondary.",
@@ -13740,9 +20308,28 @@ var TEAMS_DATABASE = {
         },
         "oppId": "arizona",
         "is_tracked": true,
-        "rivalryName": "TERRITORIAL CUP"
+        "rivalryName": "TERRITORIAL CUP",
+        "mcCoverProb": 56.3,
+        "mcOverProb": 32.9,
+        "mcRecommendedAts": "Arizona State -1.4",
+        "mcRecommendedOu": "UNDER 52.5",
+        "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
+          "p10": 10,
+          "p25": 14,
+          "p50": 21,
+          "p75": 28,
+          "p90": 35
+        }
       }
-    ]
+    ],
+    "seasonBaselineSpRating": 16.2
   }
 };
 
