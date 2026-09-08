@@ -34,6 +34,16 @@ except ImportError:
     monte_carlo_engine = None
 
 ESPN_SCOREBOARD_URL = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard"
+ESPN_RANKINGS_URL = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/rankings"
+
+ESPN_ID_TO_TEAM_ID = {
+    333: 'alabama', 12: 'arizona', 9: 'arizonastate', 68: 'boisestate', 252: 'byu',
+    228: 'clemson', 38: 'colorado', 52: 'floridastate', 61: 'georgia', 248: 'houston',
+    84: 'indiana', 2294: 'iowa', 97: 'louisville', 99: 'lsu', 2390: 'miami',
+    130: 'michigan', 142: 'missouri', 87: 'notredame', 194: 'ohiostate', 201: 'oklahoma',
+    145: 'olemiss', 2483: 'oregon', 213: 'pennstate', 2567: 'smu', 2633: 'tennessee',
+    251: 'texas', 245: 'texasam', 2641: 'texastech', 30: 'usc', 254: 'utah', 264: 'washington'
+}
 
 # Stadium Home Field Advantage mapping (points)
 STADIUM_HFA = {
@@ -104,6 +114,19 @@ def fetch_espn_scoreboard(date_str=None):
         print(f"Notice: ESPN Scoreboard API fetch error for {date_str}: {e}")
         return []
 
+def fetch_espn_ap_rankings():
+    url = ESPN_RANKINGS_URL
+    try:
+        import subprocess
+        res = subprocess.run(['curl', '-s', '-H', 'Accept: application/json', url], stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
+        if res.returncode == 0 and res.stdout:
+            data = json.loads(res.stdout.decode('utf-8'))
+            ap_poll = next((rk for rk in data.get('rankings', []) if 'AP' in rk.get('name', '')), None)
+            return ap_poll
+    except Exception as e:
+        print(f"Notice: ESPN Rankings API fetch warning: {e}")
+    return None
+
 def normalize_name(name):
     return re.sub(r'[^a-z0-9]', '', (name or '').lower())
 
@@ -146,6 +169,80 @@ def main():
             print(f"🔥 CFBD Ingestion: Loaded {len(adv_stats_w1)} advanced EPA/PPA boxscores for 2026 Week 1")
         except Exception as e:
             print(f"Notice: CFBD loading warning: {e}")
+
+    # 0. Ingest Live AP Top 25 Poll & Others Receiving Votes
+    print("\n🏆 INGESTING OFFICIAL AP TOP 25 POLL...")
+    ap_poll = fetch_espn_ap_rankings()
+    ranking_updates = {}
+    if ap_poll:
+        ranks = ap_poll.get('ranks', [])
+        others = ap_poll.get('others', [])
+        print(f"  • Retrieved AP Poll with {len(ranks)} ranked teams & {len(others)} others receiving votes")
+
+        for r in ranks:
+            eid = int(r.get('team', {}).get('id', 0))
+            tid = ESPN_ID_TO_TEAM_ID.get(eid)
+            cur = r.get('current')
+            pts = int(r.get('points', 0))
+            first = r.get('firstPlaceVotes', 0)
+            pts_str = f"{pts:,} PTS"
+            if first > 0:
+                pts_str += f" ({first} 1st)"
+            if tid and tid in db:
+                ranking_updates[tid] = {
+                    'apRank': f"#{cur} AP",
+                    'apPoints': pts_str,
+                    'rankNum': cur
+                }
+
+        for o in others:
+            eid = int(o.get('team', {}).get('id', 0))
+            tid = ESPN_ID_TO_TEAM_ID.get(eid)
+            pts = int(o.get('points', 0))
+            if tid and tid in db and tid not in ranking_updates:
+                ranking_updates[tid] = {
+                    'apRank': 'RV',
+                    'apPoints': f"{pts:,} PTS",
+                    'rankNum': 99
+                }
+
+        # Apply rankings to teams in DB
+        ap_changes_count = 0
+        for tid, t in db.items():
+            old_rank = t.get('apRank', 'NR')
+            if tid in ranking_updates:
+                new_rank = ranking_updates[tid]['apRank']
+                new_pts = ranking_updates[tid]['apPoints']
+            else:
+                new_rank = 'NR'
+                new_pts = ''
+
+            if old_rank != new_rank:
+                ap_changes_count += 1
+                print(f"  • {t.get('shortName', tid):<14} AP Rank: {old_rank} → {new_rank} ({new_pts})")
+
+            if not args.dry_run:
+                t['apRank'] = new_rank
+                t['apPoints'] = new_pts
+
+        # Update opponent rankings in schedules for unplayed games
+        opp_rank_updates_count = 0
+        for tid, t in db.items():
+            for g in t.get('schedule', []):
+                if g.get('isFinal'):
+                    continue
+                opp_id = g.get('oppId')
+                matched_tid = opp_id if (opp_id and opp_id in db) else match_team_in_db(db, g.get('opponent') or g.get('oppAbbr'))
+                if matched_tid and matched_tid in db:
+                    opp_ap = db[matched_tid].get('apRank', 'NR')
+                    if g.get('oppRank') != opp_ap:
+                        if not args.dry_run:
+                            g['oppRank'] = opp_ap
+                        opp_rank_updates_count += 1
+
+        print(f"  • Updated AP rankings for {ap_changes_count} teams, adjusted {opp_rank_updates_count} future schedule matchup badges.")
+    else:
+        print("  • Notice: AP Poll data could not be fetched from ESPN. Retaining existing rankings.")
 
     # Dates to scan
     target_dates = args.dates
@@ -405,6 +502,13 @@ def main():
         save_teams_file(TEAMS_V3_FILE, db)
         print(f"💾 Updated: {TEAMS_FILE}")
         print(f"💾 Updated: {TEAMS_V3_FILE}")
+
+        ios_teams = os.path.join(ROOT_DIR, 'ios', 'CFBProphet', 'www', 'data', 'teams.js')
+        ios_teams_v3 = os.path.join(ROOT_DIR, 'ios', 'CFBProphet', 'www', 'data', 'teams_v3.js')
+        if os.path.exists(os.path.dirname(ios_teams)):
+            save_teams_file(ios_teams, db)
+            save_teams_file(ios_teams_v3, db)
+            print(f"💾 Updated iOS bundle: {ios_teams}")
 
         if os.path.exists(CALIBRATION_FILE):
             with open(CALIBRATION_FILE, 'r', encoding='utf-8') as f:
