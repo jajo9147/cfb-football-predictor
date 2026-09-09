@@ -967,9 +967,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 6.9,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 27,
-        "projScoreUt": 19,
-        "projScoreOpp": 28,
+        "baseWinProb": 22,
+        "projScoreUt": 18,
+        "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "BYU quarterback play vs Utah Utes secondary.",
@@ -1400,9 +1400,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 63,
-        "projScoreUt": 26,
-        "projScoreOpp": 21,
+        "baseWinProb": 58,
+        "projScoreUt": 27,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Tennessee Volunteers secondary.",
@@ -1455,9 +1455,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -3.9,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 69,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "baseWinProb": 64,
+        "projScoreUt": 26,
+        "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Oklahoma Sooners secondary.",
@@ -1673,12 +1673,12 @@ var TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -13.6,
+        "vegasSpread": -7.6,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 92,
-        "projScoreUt": 32,
-        "projScoreOpp": 13,
+        "baseWinProb": 76,
+        "projScoreUt": 28,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Missouri Tigers secondary.",
@@ -1704,10 +1704,10 @@ var TEAMS_DATABASE = {
           "p75": 19,
           "p90": 24
         },
-        "preseasonWinProb": 67,
-        "preseasonProjUt": 29,
-        "preseasonProjOpp": 23,
-        "preseasonSpread": -5.5
+        "preseasonWinProb": 52,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": -0.5
       },
       {
         "id": "tex-w11",
@@ -1728,12 +1728,12 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -0.5,
+        "vegasSpread": 5.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 56,
-        "projScoreUt": 25,
-        "projScoreOpp": 23,
+        "baseWinProb": 26,
+        "projScoreUt": 19,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs LSU Tigers secondary.",
@@ -1759,10 +1759,10 @@ var TEAMS_DATABASE = {
           "p75": 30,
           "p90": 37
         },
-        "preseasonWinProb": 50,
-        "preseasonProjUt": 26,
-        "preseasonProjOpp": 26,
-        "preseasonSpread": -0.5
+        "preseasonWinProb": 35,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 5
       },
       {
         "id": "tex-w12",
@@ -1841,9 +1841,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -1.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 58,
-        "projScoreUt": 25,
-        "projScoreOpp": 22,
+        "baseWinProb": 53,
+        "projScoreUt": 24,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Texas A&M Aggies secondary.",
@@ -2107,12 +2107,12 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 1,
+        "vegasSpread": -3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 49,
-        "projScoreUt": 21,
-        "projScoreOpp": 21,
+        "baseWinProb": 58,
+        "projScoreUt": 24,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Iowa Hawkeyes secondary.",
@@ -2440,9 +2440,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 12.3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 13,
+        "baseWinProb": 10,
         "projScoreUt": 14,
-        "projScoreOpp": 30,
+        "projScoreOpp": 32,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Oregon Ducks secondary.",
@@ -2550,9 +2550,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 22.2,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 2,
-        "projScoreUt": 10,
-        "projScoreOpp": 35,
+        "baseWinProb": 1,
+        "projScoreUt": 7,
+        "projScoreOpp": 37,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Ohio State Buckeyes secondary.",
@@ -2710,9 +2710,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 2,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 46,
-        "projScoreUt": 23,
-        "projScoreOpp": 24,
+        "baseWinProb": 42,
+        "projScoreUt": 22,
+        "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State quarterback play vs Texas Longhorns secondary.",
@@ -2875,9 +2875,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -12.2,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 90,
+        "baseWinProb": 86,
         "projScoreUt": 30,
-        "projScoreOpp": 13,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State quarterback play vs Iowa Hawkeyes secondary.",
@@ -2985,9 +2985,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -8.2,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 81,
-        "projScoreUt": 30,
-        "projScoreOpp": 17,
+        "baseWinProb": 77,
+        "projScoreUt": 29,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State quarterback play vs Indiana Hoosiers secondary.",
@@ -3040,9 +3040,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -8.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 81,
-        "projScoreUt": 30,
-        "projScoreOpp": 17,
+        "baseWinProb": 78,
+        "projScoreUt": 29,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State quarterback play vs USC Trojans secondary.",
@@ -3640,9 +3640,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -2.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 62,
-        "projScoreUt": 26,
-        "projScoreOpp": 21,
+        "baseWinProb": 59,
+        "projScoreUt": 25,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Georgia quarterback play vs Alabama Crimson Tide secondary.",
@@ -3806,9 +3806,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -8.8,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 84,
-        "projScoreUt": 30,
-        "projScoreOpp": 17,
+        "baseWinProb": 79,
+        "projScoreUt": 31,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Georgia quarterback play vs Ole Miss Rebels secondary.",
@@ -4405,9 +4405,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 43,
+        "baseWinProb": 35,
         "projScoreUt": 22,
-        "projScoreOpp": 25,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Alabama quarterback play vs Tennessee Volunteers secondary.",
@@ -4436,7 +4436,7 @@ var TEAMS_DATABASE = {
         },
         "preseasonWinProb": 48,
         "preseasonProjUt": 26,
-        "preseasonProjOpp": 26,
+        "preseasonProjOpp": 29,
         "preseasonSpread": 0.5
       },
       {
@@ -4516,9 +4516,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 5.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 32,
-        "projScoreUt": 20,
-        "projScoreOpp": 27,
+        "baseWinProb": 26,
+        "projScoreUt": 19,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Alabama quarterback play vs LSU Tigers secondary.",
@@ -4817,7 +4817,9 @@ var TEAMS_DATABASE = {
         "preseasonWinProb": 85,
         "preseasonProjUt": 35,
         "preseasonProjOpp": 21,
-        "preseasonSpread": -24.5
+        "preseasonSpread": -24.5,
+        "actualScoreUt": 34,
+        "actualScoreOpp": 27
       },
       {
         "id": "ore-w2",
@@ -4951,9 +4953,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 1.4,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 48,
-        "projScoreUt": 23,
-        "projScoreOpp": 24,
+        "baseWinProb": 41,
+        "projScoreUt": 22,
+        "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oregon quarterback play vs USC Trojans secondary.",
@@ -5226,9 +5228,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 13.9,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 9,
-        "projScoreUt": 14,
-        "projScoreOpp": 32,
+        "baseWinProb": 7,
+        "projScoreUt": 13,
+        "projScoreOpp": 33,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oregon quarterback play vs Ohio State Buckeyes secondary.",
@@ -5826,8 +5828,8 @@ var TEAMS_DATABASE = {
         "vegasSpread": -3.7,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 68,
-        "projScoreUt": 27,
+        "baseWinProb": 62,
+        "projScoreUt": 24,
         "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -5936,9 +5938,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -3.2,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 66,
-        "projScoreUt": 27,
-        "projScoreOpp": 21,
+        "baseWinProb": 61,
+        "projScoreUt": 25,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Penn State quarterback play vs Washington Huskies secondary.",
@@ -6536,9 +6538,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -0.6,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 57,
-        "projScoreUt": 25,
-        "projScoreOpp": 22,
+        "baseWinProb": 48,
+        "projScoreUt": 23,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Notre Dame quarterback play vs BYU Cougars secondary.",
@@ -6643,12 +6645,12 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -0.1,
+        "vegasSpread": 3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 53,
+        "baseWinProb": 42,
         "projScoreUt": 24,
-        "projScoreOpp": 23,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Notre Dame quarterback play vs Miami Hurricanes secondary.",
@@ -6674,10 +6676,10 @@ var TEAMS_DATABASE = {
           "p75": 30,
           "p90": 37
         },
-        "preseasonWinProb": 61,
-        "preseasonProjUt": 28,
-        "preseasonProjOpp": 24,
-        "preseasonSpread": -3.5
+        "preseasonWinProb": 42,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 3
       },
       {
         "id": "nd-w11",
@@ -6946,7 +6948,9 @@ var TEAMS_DATABASE = {
         "preseasonWinProb": 89,
         "preseasonProjUt": 34,
         "preseasonProjOpp": 17,
-        "preseasonSpread": -10
+        "preseasonSpread": -10,
+        "actualScoreUt": 51,
+        "actualScoreOpp": 10
       },
       {
         "id": "lsu-w2",
@@ -7025,9 +7029,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -5.3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 71,
-        "projScoreUt": 27,
-        "projScoreOpp": 19,
+        "baseWinProb": 68,
+        "projScoreUt": 29,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "LSU quarterback play vs Ole Miss Rebels secondary.",
@@ -7055,7 +7059,7 @@ var TEAMS_DATABASE = {
         },
         "preseasonWinProb": 48,
         "preseasonProjUt": 26,
-        "preseasonProjOpp": 26,
+        "preseasonProjOpp": 29,
         "preseasonSpread": 0.5
       },
       {
@@ -7465,9 +7469,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 0,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 53,
+        "baseWinProb": 46,
         "projScoreUt": 24,
-        "projScoreOpp": 24,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "LSU quarterback play vs Tennessee Volunteers secondary.",
@@ -7984,7 +7988,7 @@ var TEAMS_DATABASE = {
           "p90": 36
         },
         "preseasonWinProb": 52,
-        "preseasonProjUt": 26,
+        "preseasonProjUt": 29,
         "preseasonProjOpp": 26,
         "preseasonSpread": -0.5
       },
@@ -8120,9 +8124,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 6,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 31,
-        "projScoreUt": 22,
-        "projScoreOpp": 29,
+        "baseWinProb": 27,
+        "projScoreUt": 19,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Tennessee quarterback play vs Texas A&M Aggies secondary.",
@@ -8719,9 +8723,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 73,
-        "projScoreUt": 28,
-        "projScoreOpp": 20,
+        "baseWinProb": 67,
+        "projScoreUt": 25,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Indiana quarterback play vs Michigan Wolverines secondary.",
@@ -8884,9 +8888,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -4.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 70,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "baseWinProb": 66,
+        "projScoreUt": 26,
+        "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Indiana quarterback play vs Washington Huskies secondary.",
@@ -8914,7 +8918,7 @@ var TEAMS_DATABASE = {
         },
         "preseasonWinProb": 50,
         "preseasonProjUt": 26,
-        "preseasonProjOpp": 26,
+        "preseasonProjOpp": 29,
         "preseasonSpread": -4.5
       },
       {
@@ -9263,9 +9267,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -11.1,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 88,
-        "projScoreUt": 32,
-        "projScoreOpp": 15,
+        "baseWinProb": 85,
+        "projScoreUt": 30,
+        "projScoreOpp": 16,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Miami quarterback play vs Clemson Tigers secondary.",
@@ -9293,7 +9297,7 @@ var TEAMS_DATABASE = {
         },
         "preseasonWinProb": 51,
         "preseasonProjUt": 26,
-        "preseasonProjOpp": 26,
+        "preseasonProjOpp": 29,
         "preseasonSpread": -11.1
       },
       {
@@ -9481,12 +9485,12 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 0.1,
+        "vegasSpread": -3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 52,
-        "projScoreUt": 24,
-        "projScoreOpp": 23,
+        "baseWinProb": 58,
+        "projScoreUt": 27,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Miami quarterback play vs Notre Dame Fighting Irish secondary.",
@@ -9512,10 +9516,10 @@ var TEAMS_DATABASE = {
           "p75": 30,
           "p90": 37
         },
-        "preseasonWinProb": 39,
-        "preseasonProjUt": 24,
-        "preseasonProjOpp": 28,
-        "preseasonSpread": 3.5
+        "preseasonWinProb": 58,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -3
       },
       {
         "id": "mia-w11",
@@ -9918,9 +9922,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 5.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 32,
-        "projScoreUt": 20,
-        "projScoreOpp": 27,
+        "baseWinProb": 26,
+        "projScoreUt": 19,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs LSU Tigers secondary.",
@@ -10028,9 +10032,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -7.6,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 80,
-        "projScoreUt": 29,
-        "projScoreOpp": 18,
+        "baseWinProb": 76,
+        "projScoreUt": 28,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Missouri Tigers secondary.",
@@ -10138,9 +10142,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 4,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 38,
-        "projScoreUt": 22,
-        "projScoreOpp": 26,
+        "baseWinProb": 32,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Alabama Crimson Tide secondary.",
@@ -10303,9 +10307,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 2.1,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 44,
-        "projScoreUt": 23,
-        "projScoreOpp": 25,
+        "baseWinProb": 39,
+        "projScoreUt": 22,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Oklahoma Sooners secondary.",
@@ -10495,7 +10499,9 @@ var TEAMS_DATABASE = {
         "preseasonWinProb": 87,
         "preseasonProjUt": 35,
         "preseasonProjOpp": 20,
-        "preseasonSpread": -6.5
+        "preseasonSpread": -6.5,
+        "actualScoreUt": 41,
+        "actualScoreOpp": 38
       },
       {
         "id": "miss-w2",
@@ -10603,7 +10609,7 @@ var TEAMS_DATABASE = {
           "p90": 43
         },
         "preseasonWinProb": 52,
-        "preseasonProjUt": 26,
+        "preseasonProjUt": 29,
         "preseasonProjOpp": 26,
         "preseasonSpread": -0.5
       },
@@ -10794,9 +10800,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 13.3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 10,
-        "projScoreUt": 16,
-        "projScoreOpp": 34,
+        "baseWinProb": 8,
+        "projScoreUt": 14,
+        "projScoreOpp": 32,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ole Miss quarterback play vs Texas Longhorns secondary.",
@@ -10959,9 +10965,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 6.8,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 28,
-        "projScoreUt": 20,
-        "projScoreOpp": 30,
+        "baseWinProb": 23,
+        "projScoreUt": 18,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ole Miss quarterback play vs Oklahoma Sooners secondary.",
@@ -11229,8 +11235,8 @@ var TEAMS_DATABASE = {
         "vegasSpread": 2,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 81,
-        "projScoreUt": 29,
+        "baseWinProb": 78,
+        "projScoreUt": 27,
         "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -11339,9 +11345,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 10.9,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 15,
-        "projScoreUt": 16,
-        "projScoreOpp": 30,
+        "baseWinProb": 12,
+        "projScoreUt": 15,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oklahoma quarterback play vs Georgia Bulldogs secondary.",
@@ -11781,9 +11787,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -7.1,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 79,
-        "projScoreUt": 29,
-        "projScoreOpp": 18,
+        "baseWinProb": 74,
+        "projScoreUt": 28,
+        "projScoreOpp": 19,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oklahoma quarterback play vs Missouri Tigers secondary.",
@@ -11811,7 +11817,7 @@ var TEAMS_DATABASE = {
         },
         "preseasonWinProb": 51,
         "preseasonProjUt": 26,
-        "preseasonProjOpp": 26,
+        "preseasonProjOpp": 29,
         "preseasonSpread": -7.1
       }
     ],
@@ -11917,7 +11923,9 @@ var TEAMS_DATABASE = {
         "preseasonWinProb": 15,
         "preseasonProjUt": 21,
         "preseasonProjOpp": 35,
-        "preseasonSpread": 24.5
+        "preseasonSpread": 24.5,
+        "actualScoreUt": 27,
+        "actualScoreOpp": 34
       },
       {
         "id": "bsu-w2",
@@ -12910,9 +12918,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 3.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 38,
-        "projScoreUt": 22,
-        "projScoreOpp": 26,
+        "baseWinProb": 34,
+        "projScoreUt": 21,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "USC quarterback play vs Penn State Nittany Lions secondary.",
@@ -13075,8 +13083,8 @@ var TEAMS_DATABASE = {
         "vegasSpread": 3.3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 40,
-        "projScoreUt": 22,
+        "baseWinProb": 34,
+        "projScoreUt": 21,
         "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -13361,7 +13369,9 @@ var TEAMS_DATABASE = {
         "preseasonWinProb": 66,
         "preseasonProjUt": 29,
         "preseasonProjOpp": 24,
-        "preseasonSpread": 3
+        "preseasonSpread": 3,
+        "actualScoreUt": 24,
+        "actualScoreOpp": 27
       },
       {
         "id": "fsu-w3",
@@ -13385,9 +13395,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 10.3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 18,
-        "projScoreUt": 17,
-        "projScoreOpp": 30,
+        "baseWinProb": 14,
+        "projScoreUt": 16,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Florida State quarterback play vs Alabama Crimson Tide secondary.",
@@ -13547,12 +13557,12 @@ var TEAMS_DATABASE = {
         "location": "Louisville, KY",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 0.1,
+        "vegasSpread": 2.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 53,
+        "baseWinProb": 44,
         "projScoreUt": 24,
-        "projScoreOpp": 23,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Florida State quarterback play vs Louisville Cardinals secondary.",
@@ -13578,10 +13588,10 @@ var TEAMS_DATABASE = {
           "p75": 30,
           "p90": 37
         },
-        "preseasonWinProb": 55,
-        "preseasonProjUt": 27,
-        "preseasonProjOpp": 25,
-        "preseasonSpread": -1.5
+        "preseasonWinProb": 44,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 2.5
       },
       {
         "id": "fsu-w7",
@@ -13605,9 +13615,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 10.2,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 17,
-        "projScoreUt": 17,
-        "projScoreOpp": 30,
+        "baseWinProb": 15,
+        "projScoreUt": 16,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Florida State quarterback play vs Miami Hurricanes secondary.",
@@ -14015,7 +14025,9 @@ var TEAMS_DATABASE = {
         "preseasonWinProb": 11,
         "preseasonProjUt": 17,
         "preseasonProjOpp": 34,
-        "preseasonSpread": 10
+        "preseasonSpread": 10,
+        "actualScoreUt": 10,
+        "actualScoreOpp": 51
       },
       {
         "id": "clem-w2",
@@ -14233,7 +14245,7 @@ var TEAMS_DATABASE = {
           "p90": 44
         },
         "preseasonWinProb": 49,
-        "preseasonProjUt": 26,
+        "preseasonProjUt": 29,
         "preseasonProjOpp": 26,
         "preseasonSpread": 11.1
       },
@@ -14369,9 +14381,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 8.4,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 22,
-        "projScoreUt": 18,
-        "projScoreOpp": 29,
+        "baseWinProb": 16,
+        "projScoreUt": 17,
+        "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Clemson quarterback play vs Florida State Seminoles secondary.",
@@ -14724,7 +14736,9 @@ var TEAMS_DATABASE = {
         "preseasonWinProb": 34,
         "preseasonProjUt": 24,
         "preseasonProjOpp": 29,
-        "preseasonSpread": -3
+        "preseasonSpread": -3,
+        "actualScoreUt": 27,
+        "actualScoreOpp": 24
       },
       {
         "id": "smu-w2",
@@ -14803,9 +14817,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 0.8,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 52,
-        "projScoreUt": 24,
-        "projScoreOpp": 24,
+        "baseWinProb": 43,
+        "projScoreUt": 23,
+        "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "SMU quarterback play vs Louisville Cardinals secondary.",
@@ -14833,7 +14847,7 @@ var TEAMS_DATABASE = {
         },
         "preseasonWinProb": 48,
         "preseasonProjUt": 26,
-        "preseasonProjOpp": 26,
+        "preseasonProjOpp": 29,
         "preseasonSpread": 0.5
       },
       {
@@ -15243,9 +15257,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 8.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 22,
-        "projScoreUt": 18,
-        "projScoreOpp": 29,
+        "baseWinProb": 18,
+        "projScoreUt": 17,
+        "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "SMU quarterback play vs Notre Dame Fighting Irish secondary.",
@@ -15622,12 +15636,12 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.6,
+        "vegasSpread": -4.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 44,
-        "projScoreUt": 24,
-        "projScoreOpp": 27,
+        "baseWinProb": 63,
+        "projScoreUt": 28,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas Tech quarterback play vs Colorado Buffaloes secondary.",
@@ -15655,7 +15669,7 @@ var TEAMS_DATABASE = {
         },
         "preseasonWinProb": 60,
         "preseasonProjUt": 28,
-        "preseasonProjOpp": 25,
+        "preseasonProjOpp": 24,
         "preseasonSpread": -3.5
       },
       {
@@ -15677,12 +15691,12 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.3,
+        "vegasSpread": 4,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 51,
-        "projScoreUt": 26,
-        "projScoreOpp": 25,
+        "baseWinProb": 39,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas Tech quarterback play vs Arizona State Sun Devils secondary.",
@@ -15708,10 +15722,10 @@ var TEAMS_DATABASE = {
           "p75": 32,
           "p90": 38
         },
-        "preseasonWinProb": 79,
-        "preseasonProjUt": 32,
-        "preseasonProjOpp": 21,
-        "preseasonSpread": -10.5
+        "preseasonWinProb": 45,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 2
       },
       {
         "id": "ttu-w8",
@@ -16385,12 +16399,12 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -8.4,
+        "vegasSpread": -8.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 82,
-        "projScoreUt": 30,
-        "projScoreOpp": 17,
+        "baseWinProb": 78,
+        "projScoreUt": 29,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Utah quarterback play vs Colorado Buffaloes secondary.",
@@ -16416,10 +16430,10 @@ var TEAMS_DATABASE = {
           "p75": 23,
           "p90": 30
         },
-        "preseasonWinProb": 62,
-        "preseasonProjUt": 28,
-        "preseasonProjOpp": 24,
-        "preseasonSpread": -4
+        "preseasonWinProb": 78,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -8.5
       },
       {
         "id": "utah-w8",
@@ -16609,9 +16623,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -8.1,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 81,
-        "projScoreUt": 29,
-        "projScoreOpp": 17,
+        "baseWinProb": 78,
+        "projScoreUt": 28,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Utah quarterback play vs Arizona Wildcats secondary.",
@@ -16983,12 +16997,12 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -1,
+        "vegasSpread": 3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 58,
-        "projScoreUt": 23,
-        "projScoreOpp": 21,
+        "baseWinProb": 42,
+        "projScoreUt": 20,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Iowa quarterback play vs Michigan Wolverines secondary.",
@@ -17093,12 +17107,12 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -0.6,
+        "vegasSpread": -3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 54,
-        "projScoreUt": 23,
-        "projScoreOpp": 22,
+        "baseWinProb": 58,
+        "projScoreUt": 24,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Iowa quarterback play vs Washington Huskies secondary.",
@@ -17124,10 +17138,10 @@ var TEAMS_DATABASE = {
           "p75": 28,
           "p90": 34
         },
-        "preseasonWinProb": 36,
+        "preseasonWinProb": 58,
         "preseasonProjUt": 24,
-        "preseasonProjOpp": 28,
-        "preseasonSpread": 4.5
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -3
       },
       {
         "id": "iowa-w8",
@@ -17858,9 +17872,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 8.3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 23,
+        "baseWinProb": 18,
         "projScoreUt": 18,
-        "projScoreOpp": 29,
+        "projScoreOpp": 32,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Missouri quarterback play vs Ole Miss Rebels secondary.",
@@ -18023,9 +18037,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 21.1,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 3,
-        "projScoreUt": 10,
-        "projScoreOpp": 36,
+        "baseWinProb": 1,
+        "projScoreUt": 8,
+        "projScoreOpp": 37,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Missouri quarterback play vs Georgia Bulldogs secondary.",
@@ -18162,7 +18176,7 @@ var TEAMS_DATABASE = {
           "p90": 41
         },
         "preseasonWinProb": 49,
-        "preseasonProjUt": 26,
+        "preseasonProjUt": 29,
         "preseasonProjOpp": 26,
         "preseasonSpread": 7.1
       }
@@ -18287,11 +18301,11 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 7.5,
+        "vegasSpread": 5,
         "overUnder": 47.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 16,
-        "projScoreUt": 17,
+        "baseWinProb": 14,
+        "projScoreUt": 16,
         "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -18620,9 +18634,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 2.1,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 44,
+        "baseWinProb": 40,
         "projScoreUt": 23,
-        "projScoreOpp": 24,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona quarterback play vs Texas Tech Red Raiders secondary.",
@@ -18837,12 +18851,12 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -0.1,
+        "vegasSpread": -1.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 54,
-        "projScoreUt": 24,
-        "projScoreOpp": 23,
+        "projScoreUt": 27,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona quarterback play vs Arizona State Sun Devils secondary.",
@@ -18869,10 +18883,10 @@ var TEAMS_DATABASE = {
           "p75": 30,
           "p90": 37
         },
-        "preseasonWinProb": 69,
-        "preseasonProjUt": 29,
-        "preseasonProjOpp": 23,
-        "preseasonSpread": -6.5
+        "preseasonWinProb": 54,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -1.5
       }
     ],
     "seasonBaselineSpRating": 19.5,
@@ -19163,9 +19177,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 10.2,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 17,
-        "projScoreUt": 17,
-        "projScoreOpp": 30,
+        "baseWinProb": 14,
+        "projScoreUt": 16,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Washington quarterback play vs USC Trojans secondary.",
@@ -19215,12 +19229,12 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.6,
+        "vegasSpread": 3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 51,
-        "projScoreUt": 22,
-        "projScoreOpp": 22,
+        "baseWinProb": 42,
+        "projScoreUt": 20,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Washington quarterback play vs Iowa Hawkeyes secondary.",
@@ -19246,10 +19260,10 @@ var TEAMS_DATABASE = {
           "p75": 28,
           "p90": 35
         },
-        "preseasonWinProb": 64,
-        "preseasonProjUt": 28,
+        "preseasonWinProb": 42,
+        "preseasonProjUt": 20,
         "preseasonProjOpp": 24,
-        "preseasonSpread": -4.5
+        "preseasonSpread": 3
       },
       {
         "id": "wash-w7",
@@ -19522,7 +19536,7 @@ var TEAMS_DATABASE = {
           "p90": 41
         },
         "preseasonWinProb": 50,
-        "preseasonProjUt": 26,
+        "preseasonProjUt": 29,
         "preseasonProjOpp": 26,
         "preseasonSpread": 4.5
       },
@@ -19548,9 +19562,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 12.9,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 10,
-        "projScoreUt": 15,
-        "projScoreOpp": 31,
+        "baseWinProb": 8,
+        "projScoreUt": 14,
+        "projScoreOpp": 33,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Washington quarterback play vs Oregon Ducks secondary.",
@@ -19761,9 +19775,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 2.1,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 45,
-        "projScoreUt": 23,
-        "projScoreOpp": 24,
+        "baseWinProb": 38,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Houston quarterback play vs Texas Tech Red Raiders secondary.",
@@ -20036,8 +20050,8 @@ var TEAMS_DATABASE = {
         "vegasSpread": 14.6,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 8,
-        "projScoreUt": 14,
+        "baseWinProb": 6,
+        "projScoreUt": 13,
         "projScoreOpp": 33,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -20143,12 +20157,12 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.2,
+        "vegasSpread": 0.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 44,
-        "projScoreUt": 23,
-        "projScoreOpp": 25,
+        "baseWinProb": 49,
+        "projScoreUt": 26,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Houston quarterback play vs Colorado Buffaloes secondary.",
@@ -20174,9 +20188,9 @@ var TEAMS_DATABASE = {
           "p75": 31,
           "p90": 38
         },
-        "preseasonWinProb": 48,
+        "preseasonWinProb": 49,
         "preseasonProjUt": 26,
-        "preseasonProjOpp": 26,
+        "preseasonProjOpp": 27,
         "preseasonSpread": 0.5
       },
       {
@@ -20389,7 +20403,9 @@ var TEAMS_DATABASE = {
         "preseasonWinProb": 13,
         "preseasonProjUt": 20,
         "preseasonProjOpp": 35,
-        "preseasonSpread": 6.5
+        "preseasonSpread": 6.5,
+        "actualScoreUt": 38,
+        "actualScoreOpp": 41
       },
       {
         "id": "lou-w2",
@@ -20497,7 +20513,7 @@ var TEAMS_DATABASE = {
           "p90": 37
         },
         "preseasonWinProb": 52,
-        "preseasonProjUt": 26,
+        "preseasonProjUt": 29,
         "preseasonProjOpp": 26,
         "preseasonSpread": -0.5
       },
@@ -20630,12 +20646,12 @@ var TEAMS_DATABASE = {
         "location": "Louisville, KY",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -0.1,
+        "vegasSpread": -2.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 54,
-        "projScoreUt": 24,
-        "projScoreOpp": 23,
+        "baseWinProb": 56,
+        "projScoreUt": 27,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Louisville quarterback play vs Florida State Seminoles secondary.",
@@ -20661,10 +20677,10 @@ var TEAMS_DATABASE = {
           "p75": 30,
           "p90": 37
         },
-        "preseasonWinProb": 45,
-        "preseasonProjUt": 25,
-        "preseasonProjOpp": 27,
-        "preseasonSpread": 1.5
+        "preseasonWinProb": 56,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -2.5
       },
       {
         "id": "lou-w7",
@@ -21288,8 +21304,8 @@ var TEAMS_DATABASE = {
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 37,
-        "projScoreUt": 26,
-        "projScoreOpp": 31,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Colorado quarterback play vs Texas Tech Red Raiders secondary.",
@@ -21315,10 +21331,10 @@ var TEAMS_DATABASE = {
           "p75": 28,
           "p90": 34
         },
-        "preseasonWinProb": 37,
-        "preseasonProjUt": 26,
-        "preseasonProjOpp": 31,
-        "preseasonSpread": 4.5
+        "preseasonWinProb": 40,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 3.5
       },
       {
         "id": "col-w7",
@@ -21504,11 +21520,11 @@ var TEAMS_DATABASE = {
         "location": "Tempe, AZ",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 3.5,
+        "vegasSpread": 6.2,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 39,
-        "projScoreUt": 24,
+        "baseWinProb": 24,
+        "projScoreUt": 19,
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -21535,10 +21551,10 @@ var TEAMS_DATABASE = {
           "p75": 34,
           "p90": 41
         },
-        "preseasonWinProb": 39,
-        "preseasonProjUt": 24,
-        "preseasonProjOpp": 28,
-        "preseasonSpread": 3.5
+        "preseasonWinProb": 45,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 1.5
       },
       {
         "id": "col-w11",
@@ -21832,9 +21848,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 13.5,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 10,
-        "projScoreUt": 14,
-        "projScoreOpp": 32,
+        "baseWinProb": 8,
+        "projScoreUt": 13,
+        "projScoreOpp": 33,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona State quarterback play vs Texas A&M Aggies secondary.",
@@ -22049,12 +22065,12 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -0.3,
+        "vegasSpread": -4,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 56,
-        "projScoreUt": 24,
-        "projScoreOpp": 23,
+        "baseWinProb": 61,
+        "projScoreUt": 28,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona State quarterback play vs Texas Tech Red Raiders secondary.",
@@ -22080,10 +22096,10 @@ var TEAMS_DATABASE = {
           "p75": 30,
           "p90": 37
         },
-        "preseasonWinProb": 21,
-        "preseasonProjUt": 21,
-        "preseasonProjOpp": 32,
-        "preseasonSpread": 10.5
+        "preseasonWinProb": 55,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -2
       },
       {
         "id": "asu-w8",
@@ -22162,9 +22178,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": 7.8,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 24,
+        "baseWinProb": 20,
         "projScoreUt": 18,
-        "projScoreOpp": 28,
+        "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona State quarterback play vs BYU Cougars secondary.",
@@ -22379,12 +22395,12 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 0.1,
+        "vegasSpread": 1.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 53,
+        "baseWinProb": 46,
         "projScoreUt": 24,
-        "projScoreOpp": 23,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona State quarterback play vs Arizona Wildcats secondary.",
@@ -22411,10 +22427,10 @@ var TEAMS_DATABASE = {
           "p75": 30,
           "p90": 37
         },
-        "preseasonWinProb": 31,
-        "preseasonProjUt": 23,
-        "preseasonProjOpp": 29,
-        "preseasonSpread": 6.5
+        "preseasonWinProb": 46,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 1.5
       }
     ],
     "seasonBaselineSpRating": 16.2,
