@@ -6099,7 +6099,13 @@ function runMonteCarloSeasonSim(teamId, iterations = 10000, checkpointKey = 'cur
   if (activeCheckpoint.id === 'preseason') {
     lockedWins = 0;
     lockedLosses = 0;
-    gameProbsToSim = schedule.map(g => {
+    gameProbsToSim = schedule.map((g, idx) => {
+      if (typeof g.preseasonWinProb === 'number') {
+        return g.preseasonWinProb / 100.0;
+      }
+      if (team.preseasonBaseline && Array.isArray(team.preseasonBaseline.gameWinProbs) && typeof team.preseasonBaseline.gameWinProbs[idx] === 'number') {
+        return team.preseasonBaseline.gameWinProbs[idx] / 100.0;
+      }
       const sim = calculateAdjustedMatchup(g, teamId);
       if (sim.isFinal) {
         return (typeof g.baseWinProb === 'number' ? g.baseWinProb : 50) / 100.0;
@@ -6140,6 +6146,11 @@ function runMonteCarloSeasonSim(teamId, iterations = 10000, checkpointKey = 'cur
   let playoffAppearances = 0;
   let nationalTitles = 0;
 
+  const isPowerConf = team.conference === 'Big Ten' || team.conference === 'SEC';
+  const isOtherP4 = team.conference === 'ACC' || team.conference === 'Big 12';
+  const isPreContender = !!(team.preseasonBaseline && (team.preseasonBaseline.cfpSeed || (team.preseasonBaseline.baseSpRating && team.preseasonBaseline.baseSpRating >= 24.0)));
+  const isCurrentContender = (team.baseSpRating || 20.0) >= 24.0;
+
   for (let i = 0; i < iterations; i++) {
     let simWins = lockedWins;
     for (let j = 0; j < gameProbsToSim.length; j++) {
@@ -6151,12 +6162,37 @@ function runMonteCarloSeasonSim(teamId, iterations = 10000, checkpointKey = 'cur
     winDistribution[clampedWins]++;
     totalWinsSum += clampedWins;
 
-    if (clampedWins >= 10) playoffAppearances++;
-    else if (clampedWins === 9 && Math.random() < 0.35) playoffAppearances++;
+    if (activeCheckpoint.id === 'preseason') {
+      if (clampedWins >= 11) playoffAppearances++;
+      else if (clampedWins === 10) {
+        if (isPowerConf) playoffAppearances++;
+        else if (isOtherP4) playoffAppearances += 0.85;
+        else playoffAppearances += 0.50;
+      } else if (clampedWins === 9) {
+        if (isPreContender && isPowerConf) playoffAppearances += 0.70;
+        else if (isPowerConf) playoffAppearances += 0.35;
+        else if (isOtherP4) playoffAppearances += 0.20;
+      }
 
-    if (clampedWins >= 12 && Math.random() < 0.40) nationalTitles++;
-    else if (clampedWins === 11 && Math.random() < 0.18) nationalTitles++;
-    else if (clampedWins === 10 && Math.random() < 0.05) nationalTitles++;
+      if (isPreContender) {
+        if (clampedWins >= 12 && Math.random() < 0.40) nationalTitles++;
+        else if (clampedWins === 11 && Math.random() < 0.22) nationalTitles++;
+        else if (clampedWins === 10 && Math.random() < 0.08) nationalTitles++;
+      }
+    } else {
+      if (clampedWins >= 11) playoffAppearances++;
+      else if (clampedWins === 10) {
+        if (isPowerConf) playoffAppearances += 0.90;
+        else if (isOtherP4) playoffAppearances += 0.70;
+        else playoffAppearances += 0.40;
+      } else if (clampedWins === 9 && Math.random() < 0.35) playoffAppearances++;
+
+      if (isCurrentContender) {
+        if (clampedWins >= 12 && Math.random() < 0.35) nationalTitles++;
+        else if (clampedWins === 11 && Math.random() < 0.15) nationalTitles++;
+        else if (clampedWins === 10 && Math.random() < 0.03) nationalTitles++;
+      }
+    }
   }
 
   const distPct = {};

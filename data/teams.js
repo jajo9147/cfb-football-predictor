@@ -501,7 +501,7 @@ var TEAMS_DATABASE = {
     "stadium": "LaVell Edwards Stadium",
     "stadiumCapacity": "63,470",
     "stadiumCity": "Provo, UT",
-    "baseSpRating": 26.0,
+    "baseSpRating": 26,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/252.png",
     "colors": {
       "primary": "#002E5D",
@@ -554,7 +554,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 63,
         "finalOppScore": 7,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 99,
+        "preseasonProjUt": 48,
+        "preseasonProjOpp": 7,
+        "preseasonSpread": -50.5
       },
       {
         "id": "byu-w2",
@@ -575,7 +579,7 @@ var TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -5.0,
+        "vegasSpread": -5,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 86,
@@ -605,7 +609,11 @@ var TEAMS_DATABASE = {
           "p50": 16,
           "p75": 21,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 65,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -5
       },
       {
         "id": "byu-w3",
@@ -639,7 +647,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 75.0,
+        "mcCoverProb": 75,
         "mcOverProb": 28.2,
         "mcRecommendedAts": "BYU -19.9",
         "mcRecommendedOu": "UNDER 52.5",
@@ -656,7 +664,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 19
-        }
+        },
+        "preseasonWinProb": 85,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -14
       },
       {
         "id": "byu-w5",
@@ -691,7 +703,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 79.7,
-        "mcOverProb": 38.0,
+        "mcOverProb": 38,
         "mcRecommendedAts": "BYU -19.9",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -707,7 +719,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 19
-        }
+        },
+        "preseasonWinProb": 85,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -14
       },
       {
         "id": "byu-w6",
@@ -758,7 +774,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -20
       },
       {
         "id": "byu-w7",
@@ -809,7 +829,11 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 41,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 3
       },
       {
         "id": "byu-w8",
@@ -844,7 +868,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 74.3,
-        "mcOverProb": 26.0,
+        "mcOverProb": 26,
         "mcRecommendedAts": "BYU -19.9",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -860,7 +884,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 85,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -14
       },
       {
         "id": "byu-w9",
@@ -911,7 +939,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 23,
           "p90": 30
-        }
+        },
+        "preseasonWinProb": 74,
+        "preseasonProjUt": 30,
+        "preseasonProjOpp": 22,
+        "preseasonSpread": -8.5
       },
       {
         "id": "byu-w10",
@@ -963,7 +995,11 @@ var TEAMS_DATABASE = {
           "p50": 27,
           "p75": 35,
           "p90": 41
-        }
+        },
+        "preseasonWinProb": 32,
+        "preseasonProjUt": 23,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 6
       },
       {
         "id": "byu-w11",
@@ -1014,7 +1050,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -20
       },
       {
         "id": "byu-w12",
@@ -1049,7 +1089,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 75.4,
-        "mcOverProb": 28.0,
+        "mcOverProb": 28,
         "mcRecommendedAts": "BYU -19.9",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -1065,7 +1105,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 85,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -14
       },
       {
         "id": "byu-w13",
@@ -1116,10 +1160,34 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -20
       }
     ],
-    "seasonBaselineSpRating": 21.5
+    "seasonBaselineSpRating": 21.5,
+    "preseasonBaseline": {
+      "baseSpRating": 21.5,
+      "apRank": "#14 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+35000",
+      "gameWinProbs": [
+        99,
+        65,
+        85,
+        85,
+        92,
+        41,
+        85,
+        74,
+        32,
+        92,
+        85,
+        92
+      ]
+    }
   },
   "texas": {
     "id": "texas",
@@ -1149,7 +1217,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0E121C",
       "bgBase": "#07090E"
     },
-    "baseSpRating": 36.0,
+    "baseSpRating": 36,
     "playoffContenderRank": 4,
     "sliderLabels": {
       "qb": "Arch Manning & Cam Coleman Passing Attack",
@@ -1194,7 +1262,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 59,
         "finalOppScore": 7,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 99,
+        "preseasonProjUt": 48,
+        "preseasonProjOpp": 7,
+        "preseasonSpread": -29.5
       },
       {
         "id": "tex-w2",
@@ -1215,7 +1287,7 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -2.0,
+        "vegasSpread": -2,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 58,
@@ -1245,7 +1317,11 @@ var TEAMS_DATABASE = {
           "p50": 22,
           "p75": 29,
           "p90": 35
-        }
+        },
+        "preseasonWinProb": 56,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2
       },
       {
         "id": "tex-w3",
@@ -1266,7 +1342,7 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -44.0,
+        "vegasSpread": -44,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -1296,7 +1372,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 41,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -30
       },
       {
         "id": "tex-w4",
@@ -1317,7 +1397,7 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -3.0,
+        "vegasSpread": -3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 63,
@@ -1347,7 +1427,11 @@ var TEAMS_DATABASE = {
           "p50": 20,
           "p75": 27,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 64,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -4.5
       },
       {
         "id": "tex-w6",
@@ -1399,7 +1483,11 @@ var TEAMS_DATABASE = {
           "p50": 20,
           "p75": 27,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 58,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2.5
       },
       {
         "id": "tex-w7",
@@ -1420,7 +1508,7 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -44.0,
+        "vegasSpread": -44,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -1450,7 +1538,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 41,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -30
       },
       {
         "id": "tex-w8",
@@ -1501,7 +1593,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 19,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 74,
+        "preseasonProjUt": 30,
+        "preseasonProjOpp": 22,
+        "preseasonSpread": -8.5
       },
       {
         "id": "tex-w9",
@@ -1522,7 +1618,7 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -44.0,
+        "vegasSpread": -44,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -1552,7 +1648,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 41,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -30
       },
       {
         "id": "tex-w10",
@@ -1603,7 +1703,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 19,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 67,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 23,
+        "preseasonSpread": -5.5
       },
       {
         "id": "tex-w11",
@@ -1654,7 +1758,11 @@ var TEAMS_DATABASE = {
           "p50": 22,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 50,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": -0.5
       },
       {
         "id": "tex-w12",
@@ -1675,7 +1783,7 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -44.0,
+        "vegasSpread": -44,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -1705,7 +1813,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 41,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -30
       },
       {
         "id": "tex-w13",
@@ -1757,12 +1869,36 @@ var TEAMS_DATABASE = {
           "p50": 21,
           "p75": 29,
           "p90": 36
-        }
+        },
+        "preseasonWinProb": 56,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png",
     "badgeText": "TEX",
-    "seasonBaselineSpRating": 31.5
+    "seasonBaselineSpRating": 31.5,
+    "preseasonBaseline": {
+      "baseSpRating": 31.5,
+      "apRank": "#5 AP",
+      "cfpSeed": 5,
+      "nattyOdds": "+550",
+      "gameWinProbs": [
+        99,
+        56,
+        98,
+        64,
+        58,
+        98,
+        74,
+        98,
+        67,
+        50,
+        98,
+        56
+      ]
+    }
   },
   "michigan": {
     "id": "michigan",
@@ -1836,7 +1972,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 13,
         "finalOppScore": 12,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 10,
+        "preseasonSpread": -27.5
       },
       {
         "id": "mich-w2",
@@ -1857,7 +1997,7 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -2.0,
+        "vegasSpread": -2,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 22,
@@ -1887,7 +2027,11 @@ var TEAMS_DATABASE = {
           "p50": 27,
           "p75": 34,
           "p90": 40
-        }
+        },
+        "preseasonWinProb": 56,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2
       },
       {
         "id": "mich-w3",
@@ -1938,7 +2082,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -23.5
       },
       {
         "id": "mich-w4",
@@ -1959,7 +2107,7 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 1.0,
+        "vegasSpread": 1,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 49,
@@ -1989,7 +2137,11 @@ var TEAMS_DATABASE = {
           "p50": 20,
           "p75": 27,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 70,
+        "preseasonProjUt": 30,
+        "preseasonProjOpp": 23,
+        "preseasonSpread": -7
       },
       {
         "id": "mich-w5",
@@ -2040,7 +2192,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 17,
           "p90": 23
-        }
+        },
+        "preseasonWinProb": 90,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -17.5
       },
       {
         "id": "mich-w7",
@@ -2075,7 +2231,7 @@ var TEAMS_DATABASE = {
         "oppId": "pennstate",
         "is_tracked": true,
         "mcCoverProb": 47.6,
-        "mcOverProb": 27.0,
+        "mcOverProb": 27,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -2091,7 +2247,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 71,
+        "preseasonProjUt": 30,
+        "preseasonProjOpp": 23,
+        "preseasonSpread": -7.5
       },
       {
         "id": "mich-w8",
@@ -2112,7 +2272,7 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.0,
+        "vegasSpread": 5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 33,
@@ -2126,7 +2286,7 @@ var TEAMS_DATABASE = {
         "oppId": "indiana",
         "is_tracked": true,
         "mcCoverProb": 46.3,
-        "mcOverProb": 27.0,
+        "mcOverProb": 27,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -2142,7 +2302,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 57,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2.5
       },
       {
         "id": "mich-w9",
@@ -2193,7 +2357,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 17,
           "p90": 22
-        }
+        },
+        "preseasonWinProb": 90,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -17.5
       },
       {
         "id": "mich-w10",
@@ -2244,7 +2412,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 12,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -23.5
       },
       {
         "id": "mich-w11",
@@ -2295,7 +2467,11 @@ var TEAMS_DATABASE = {
           "p50": 30,
           "p75": 37,
           "p90": 43
-        }
+        },
+        "preseasonWinProb": 24,
+        "preseasonProjUt": 22,
+        "preseasonProjOpp": 31,
+        "preseasonSpread": 9
       },
       {
         "id": "mich-w12",
@@ -2330,7 +2506,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 63.5,
-        "mcOverProb": 23.0,
+        "mcOverProb": 23,
         "mcRecommendedAts": "Michigan -23.3",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -2346,7 +2522,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -23.5
       },
       {
         "id": "mich-w13",
@@ -2398,13 +2578,37 @@ var TEAMS_DATABASE = {
           "p50": 34,
           "p75": 41,
           "p90": 48
-        }
+        },
+        "preseasonWinProb": 21,
+        "preseasonProjUt": 21,
+        "preseasonProjOpp": 32,
+        "preseasonSpread": 10.5
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/130.png",
     "badgeText": "MICH",
     "confirmedStarterQb": "Bryce Underwood",
-    "seasonBaselineSpRating": 24.8
+    "seasonBaselineSpRating": 24.8,
+    "preseasonBaseline": {
+      "baseSpRating": 24.8,
+      "apRank": "#13 AP",
+      "cfpSeed": 8,
+      "nattyOdds": "+1600",
+      "gameWinProbs": [
+        98,
+        56,
+        95,
+        70,
+        90,
+        71,
+        57,
+        90,
+        95,
+        24,
+        95,
+        21
+      ]
+    }
   },
   "ohiostate": {
     "id": "ohiostate",
@@ -2433,7 +2637,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#1A1010",
       "bgBase": "#0D0808"
     },
-    "baseSpRating": 37.0,
+    "baseSpRating": 37,
     "playoffContenderRank": 1,
     "sliderLabels": {
       "qb": "Julian Sayin Arthur Smith Passing Attack",
@@ -2478,7 +2682,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 56,
         "finalOppScore": 3,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 99,
+        "preseasonProjUt": 48,
+        "preseasonProjOpp": 7,
+        "preseasonSpread": -50.5
       },
       {
         "id": "osu-w2",
@@ -2499,7 +2707,7 @@ var TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 2.0,
+        "vegasSpread": 2,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 46,
@@ -2529,7 +2737,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 44,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 2
       },
       {
         "id": "osu-w3",
@@ -2580,7 +2792,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -31
       },
       {
         "id": "osu-w4",
@@ -2614,7 +2830,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 48.0,
+        "mcCoverProb": 48,
         "mcOverProb": 61.4,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "OVER 52.5",
@@ -2631,7 +2847,11 @@ var TEAMS_DATABASE = {
           "p50": 3,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -31
       },
       {
         "id": "osu-w5",
@@ -2682,7 +2902,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 19,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 74,
+        "preseasonProjUt": 30,
+        "preseasonProjOpp": 22,
+        "preseasonSpread": -8.5
       },
       {
         "id": "osu-w6",
@@ -2733,7 +2957,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -31
       },
       {
         "id": "osu-w7",
@@ -2784,7 +3012,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 23,
           "p90": 30
-        }
+        },
+        "preseasonWinProb": 62,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -4
       },
       {
         "id": "osu-w9",
@@ -2835,7 +3067,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 23,
           "p90": 30
-        }
+        },
+        "preseasonWinProb": 61,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -3.5
       },
       {
         "id": "osu-w10",
@@ -2886,7 +3122,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 17,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 64,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -4.5
       },
       {
         "id": "osu-w11",
@@ -2937,7 +3177,11 @@ var TEAMS_DATABASE = {
           "p50": 3,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -31
       },
       {
         "id": "osu-w12",
@@ -2988,7 +3232,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -25
       },
       {
         "id": "osu-w13",
@@ -3040,13 +3288,37 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 79,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 21,
+        "preseasonSpread": -10.5
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
     "badgeText": "OSU",
     "confirmedStarterQb": "Julian Sayin",
-    "seasonBaselineSpRating": 32.5
+    "seasonBaselineSpRating": 32.5,
+    "preseasonBaseline": {
+      "baseSpRating": 32.5,
+      "apRank": "#1 AP",
+      "cfpSeed": 1,
+      "nattyOdds": "+350",
+      "gameWinProbs": [
+        99,
+        44,
+        98,
+        98,
+        74,
+        98,
+        62,
+        61,
+        64,
+        98,
+        96,
+        79
+      ]
+    }
   },
   "georgia": {
     "id": "georgia",
@@ -3120,7 +3392,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 63,
         "finalOppScore": 3,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -49.5
       },
       {
         "id": "uga-w2",
@@ -3171,7 +3447,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -30.5
       },
       {
         "id": "uga-w3",
@@ -3205,7 +3485,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 52.0,
+        "mcCoverProb": 52,
         "mcOverProb": 51.9,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
@@ -3222,7 +3502,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       },
       {
         "id": "uga-w4",
@@ -3273,7 +3557,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 20,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 75,
+        "preseasonProjUt": 31,
+        "preseasonProjOpp": 22,
+        "preseasonSpread": -9
       },
       {
         "id": "uga-w5",
@@ -3307,7 +3595,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 46.0,
+        "mcCoverProb": 46,
         "mcOverProb": 62.7,
         "mcRecommendedAts": "VAN +46.7",
         "mcRecommendedOu": "OVER 52.5",
@@ -3324,7 +3612,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -30.5
       },
       {
         "id": "uga-w6",
@@ -3375,7 +3667,11 @@ var TEAMS_DATABASE = {
           "p50": 21,
           "p75": 27,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 58,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2.5
       },
       {
         "id": "uga-w7",
@@ -3426,7 +3722,11 @@ var TEAMS_DATABASE = {
           "p50": 3,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -30.5
       },
       {
         "id": "uga-w9",
@@ -3478,7 +3778,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -30.5
       },
       {
         "id": "uga-w10",
@@ -3529,7 +3833,11 @@ var TEAMS_DATABASE = {
           "p50": 16,
           "p75": 23,
           "p90": 30
-        }
+        },
+        "preseasonWinProb": 59,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -3
       },
       {
         "id": "uga-w11",
@@ -3580,7 +3888,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 12,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 82,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -12
       },
       {
         "id": "uga-w12",
@@ -3631,7 +3943,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       },
       {
         "id": "uga-w13",
@@ -3682,13 +3998,37 @@ var TEAMS_DATABASE = {
           "p50": 3,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 11,
+        "preseasonSpread": -30.5
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png",
     "badgeText": "UGA",
     "confirmedStarterQb": "Gunner Stockton",
-    "seasonBaselineSpRating": 32.0
+    "seasonBaselineSpRating": 32,
+    "preseasonBaseline": {
+      "baseSpRating": 32,
+      "apRank": "#3 AP",
+      "cfpSeed": 3,
+      "nattyOdds": "+380",
+      "gameWinProbs": [
+        91,
+        98,
+        96,
+        75,
+        98,
+        58,
+        98,
+        98,
+        59,
+        82,
+        96,
+        98
+      ]
+    }
   },
   "alabama": {
     "id": "alabama",
@@ -3717,7 +4057,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#180B0E",
       "bgBase": "#0C0507"
     },
-    "baseSpRating": 30.0,
+    "baseSpRating": 30,
     "playoffContenderRank": 12,
     "sliderLabels": {
       "qb": "Keelon Russell Air Attack",
@@ -3762,7 +4102,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 48,
         "finalOppScore": 10,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -28.5
       },
       {
         "id": "bama-w2",
@@ -3783,7 +4127,7 @@ var TEAMS_DATABASE = {
         "location": "Lexington, KY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -19,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 99,
@@ -3813,7 +4157,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "bama-w3",
@@ -3864,7 +4212,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 22,
           "p90": 28
-        }
+        },
+        "preseasonWinProb": 65,
+        "preseasonProjUt": 31,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -3.5
       },
       {
         "id": "bama-w4",
@@ -3885,7 +4237,7 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -39.0,
+        "vegasSpread": -39,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -3915,7 +4267,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -25
       },
       {
         "id": "bama-w5",
@@ -3949,7 +4305,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 60.0,
+        "mcCoverProb": 60,
         "mcOverProb": 37.8,
         "mcRecommendedAts": "Alabama -32.5",
         "mcRecommendedOu": "UNDER 52.5",
@@ -3966,7 +4322,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "bama-w6",
@@ -4017,7 +4377,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 42,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 2.5
       },
       {
         "id": "bama-w7",
@@ -4038,7 +4402,7 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 3.0,
+        "vegasSpread": 3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 43,
@@ -4069,7 +4433,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 48,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": 0.5
       },
       {
         "id": "bama-w8",
@@ -4090,7 +4458,7 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -4.0,
+        "vegasSpread": -4,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 68,
@@ -4120,7 +4488,11 @@ var TEAMS_DATABASE = {
           "p50": 20,
           "p75": 27,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 59,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -3
       },
       {
         "id": "bama-w10",
@@ -4171,7 +4543,11 @@ var TEAMS_DATABASE = {
           "p50": 27,
           "p75": 34,
           "p90": 41
-        }
+        },
+        "preseasonWinProb": 35,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 5
       },
       {
         "id": "bama-w11",
@@ -4222,7 +4598,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "bama-w12",
@@ -4273,7 +4653,11 @@ var TEAMS_DATABASE = {
           "p50": 3,
           "p75": 7,
           "p90": 10
-        }
+        },
+        "preseasonWinProb": 99,
+        "preseasonProjUt": 48,
+        "preseasonProjOpp": 4,
+        "preseasonSpread": -43.5
       },
       {
         "id": "bama-w13",
@@ -4294,7 +4678,7 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -39.0,
+        "vegasSpread": -39,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -4325,13 +4709,37 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -25
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png",
     "badgeText": "BAMA",
     "confirmedStarterQb": "Keelon Russell",
-    "seasonBaselineSpRating": 26.5
+    "seasonBaselineSpRating": 26.5,
+    "preseasonBaseline": {
+      "baseSpRating": 26.5,
+      "apRank": "#8 AP",
+      "cfpSeed": 7,
+      "nattyOdds": "+1100",
+      "gameWinProbs": [
+        95,
+        91,
+        65,
+        96,
+        91,
+        42,
+        48,
+        59,
+        35,
+        91,
+        99,
+        96
+      ]
+    }
   },
   "oregon": {
     "id": "oregon",
@@ -4405,7 +4813,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 34,
         "finalOppScore": 27,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 85,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 21,
+        "preseasonSpread": -24.5
       },
       {
         "id": "ore-w2",
@@ -4456,7 +4868,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -23.5
       },
       {
         "id": "ore-w3",
@@ -4507,7 +4923,11 @@ var TEAMS_DATABASE = {
           "p50": 3,
           "p75": 7,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 99,
+        "preseasonProjUt": 50,
+        "preseasonProjOpp": 3,
+        "preseasonSpread": -48
       },
       {
         "id": "ore-w4",
@@ -4558,7 +4978,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 56,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2
       },
       {
         "id": "ore-w6",
@@ -4609,7 +5033,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 41,
+        "preseasonProjOpp": 12,
+        "preseasonSpread": -29.5
       },
       {
         "id": "ore-w7",
@@ -4660,7 +5088,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 41,
+        "preseasonProjOpp": 12,
+        "preseasonSpread": -29.5
       },
       {
         "id": "ore-w8",
@@ -4681,7 +5113,7 @@ var TEAMS_DATABASE = {
         "location": "Champaign, IL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -30.0,
+        "vegasSpread": -30,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -4695,7 +5127,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 60.7,
-        "mcOverProb": 34.0,
+        "mcOverProb": 34,
         "mcRecommendedAts": "Oregon -30.0",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -4711,7 +5143,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -23.5
       },
       {
         "id": "ore-w9",
@@ -4762,7 +5198,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 41,
+        "preseasonProjOpp": 12,
+        "preseasonSpread": -29.5
       },
       {
         "id": "ore-w10",
@@ -4813,7 +5253,11 @@ var TEAMS_DATABASE = {
           "p50": 32,
           "p75": 39,
           "p90": 45
-        }
+        },
+        "preseasonWinProb": 36,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 4.5
       },
       {
         "id": "ore-w11",
@@ -4864,7 +5308,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 20,
           "p90": 26
-        }
+        },
+        "preseasonWinProb": 76,
+        "preseasonProjUt": 31,
+        "preseasonProjOpp": 22,
+        "preseasonSpread": -9
       },
       {
         "id": "ore-w12",
@@ -4885,7 +5333,7 @@ var TEAMS_DATABASE = {
         "location": "East Lansing, MI",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -30.0,
+        "vegasSpread": -30,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -4915,7 +5363,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -23.5
       },
       {
         "id": "ore-w13",
@@ -4950,7 +5402,7 @@ var TEAMS_DATABASE = {
         "oppId": "washington",
         "is_tracked": true,
         "rivalryName": "PACIFIC NORTHWEST CLASH",
-        "mcCoverProb": 70.0,
+        "mcCoverProb": 70,
         "mcOverProb": 31.3,
         "mcRecommendedAts": "Oregon -12.9",
         "mcRecommendedOu": "UNDER 52.5",
@@ -4967,13 +5419,37 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 20,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 81,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -11.5
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png",
     "badgeText": "ORE",
     "confirmedStarterQb": "Dante Moore",
-    "seasonBaselineSpRating": 31.0
+    "seasonBaselineSpRating": 31,
+    "preseasonBaseline": {
+      "baseSpRating": 31,
+      "apRank": "#2 AP",
+      "cfpSeed": 2,
+      "nattyOdds": "+450",
+      "gameWinProbs": [
+        85,
+        95,
+        99,
+        56,
+        98,
+        98,
+        95,
+        98,
+        36,
+        76,
+        95,
+        81
+      ]
+    }
   },
   "pennstate": {
     "id": "pennstate",
@@ -5002,7 +5478,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#0C1626",
       "bgBase": "#050B14"
     },
-    "baseSpRating": 25.0,
+    "baseSpRating": 25,
     "playoffContenderRank": 16,
     "sliderLabels": {
       "qb": "Rocco Becht Air Attack",
@@ -5047,7 +5523,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 45,
         "finalOppScore": 0,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -23.5
       },
       {
         "id": "psu-w2",
@@ -5068,7 +5548,7 @@ var TEAMS_DATABASE = {
         "location": "Philadelphia, PA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -13.0,
+        "vegasSpread": -13,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 98,
@@ -5098,7 +5578,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13
       },
       {
         "id": "psu-w3",
@@ -5149,7 +5633,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "psu-w4",
@@ -5200,7 +5688,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "psu-w5",
@@ -5251,7 +5743,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13
       },
       {
         "id": "psu-w6",
@@ -5302,7 +5798,11 @@ var TEAMS_DATABASE = {
           "p50": 20,
           "p75": 27,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 42,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 2.5
       },
       {
         "id": "psu-w7",
@@ -5336,7 +5836,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": "michigan",
         "is_tracked": true,
-        "mcCoverProb": 59.0,
+        "mcCoverProb": 59,
         "mcOverProb": 33.7,
         "mcRecommendedAts": "Penn State -3.7",
         "mcRecommendedOu": "UNDER 52.5",
@@ -5353,7 +5853,11 @@ var TEAMS_DATABASE = {
           "p50": 20,
           "p75": 27,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 29,
+        "preseasonProjUt": 23,
+        "preseasonProjOpp": 30,
+        "preseasonSpread": 7.5
       },
       {
         "id": "psu-w9",
@@ -5404,7 +5908,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "psu-w10",
@@ -5438,7 +5946,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": "washington",
         "is_tracked": true,
-        "mcCoverProb": 58.0,
+        "mcCoverProb": 58,
         "mcOverProb": 34.1,
         "mcRecommendedAts": "Penn State -3.2",
         "mcRecommendedOu": "UNDER 52.5",
@@ -5455,7 +5963,11 @@ var TEAMS_DATABASE = {
           "p50": 20,
           "p75": 27,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 35,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 5
       },
       {
         "id": "psu-w11",
@@ -5506,7 +6018,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "psu-w12",
@@ -5557,7 +6073,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "psu-w13",
@@ -5608,13 +6128,37 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 19
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/213.png",
     "badgeText": "PSU",
     "confirmedStarterQb": "Rocco Becht",
-    "seasonBaselineSpRating": 20.5
+    "seasonBaselineSpRating": 20.5,
+    "preseasonBaseline": {
+      "baseSpRating": 20.5,
+      "apRank": "#18 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+1200",
+      "gameWinProbs": [
+        91,
+        84,
+        91,
+        91,
+        84,
+        42,
+        29,
+        91,
+        35,
+        91,
+        91,
+        84
+      ]
+    }
   },
   "notredame": {
     "id": "notredame",
@@ -5672,7 +6216,7 @@ var TEAMS_DATABASE = {
         "location": "Green Bay, WI",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.0,
+        "vegasSpread": -21,
         "overUnder": 45.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 100,
@@ -5688,7 +6232,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 41,
         "finalOppScore": 13,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -21
       },
       {
         "id": "nd-w2",
@@ -5739,7 +6287,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 13,
+        "preseasonSpread": -26
       },
       {
         "id": "nd-w3",
@@ -5791,7 +6343,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 13,
+        "preseasonSpread": -26
       },
       {
         "id": "nd-w4",
@@ -5842,7 +6398,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -20
       },
       {
         "id": "nd-w5",
@@ -5893,7 +6453,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -20
       },
       {
         "id": "nd-w6",
@@ -5927,8 +6491,8 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 56.0,
-        "mcOverProb": 42.0,
+        "mcCoverProb": 56,
+        "mcOverProb": 42,
         "mcRecommendedAts": "Notre Dame -35.8",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -5944,7 +6508,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 13,
+        "preseasonSpread": -26
       },
       {
         "id": "nd-w7",
@@ -5995,7 +6563,11 @@ var TEAMS_DATABASE = {
           "p50": 21,
           "p75": 29,
           "p90": 36
-        }
+        },
+        "preseasonWinProb": 59,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -3
       },
       {
         "id": "nd-w9",
@@ -6046,7 +6618,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -20
       },
       {
         "id": "nd-w10",
@@ -6097,7 +6673,11 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 61,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -3.5
       },
       {
         "id": "nd-w11",
@@ -6131,7 +6711,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 58.0,
+        "mcCoverProb": 58,
         "mcOverProb": 44.6,
         "mcRecommendedAts": "Notre Dame -35.8",
         "mcRecommendedOu": "UNDER 52.5",
@@ -6148,7 +6728,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 13,
+        "preseasonSpread": -26
       },
       {
         "id": "nd-w12",
@@ -6199,7 +6783,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 23,
           "p90": 30
-        }
+        },
+        "preseasonWinProb": 72,
+        "preseasonProjUt": 30,
+        "preseasonProjOpp": 22,
+        "preseasonSpread": -7.5
       },
       {
         "id": "nd-w13",
@@ -6250,13 +6838,37 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -20
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png",
     "badgeText": "ND",
     "confirmedStarterQb": "CJ Carr",
-    "seasonBaselineSpRating": 27.5
+    "seasonBaselineSpRating": 27.5,
+    "preseasonBaseline": {
+      "baseSpRating": 27.5,
+      "apRank": "#6 AP",
+      "cfpSeed": 6,
+      "nattyOdds": "+700",
+      "gameWinProbs": [
+        95,
+        96,
+        96,
+        92,
+        92,
+        96,
+        59,
+        92,
+        61,
+        96,
+        72,
+        92
+      ]
+    }
   },
   "lsu": {
     "id": "lsu",
@@ -6285,7 +6897,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#191124",
       "bgBase": "#0E0914"
     },
-    "baseSpRating": 33.0,
+    "baseSpRating": 33,
     "playoffContenderRank": 8,
     "sliderLabels": {
       "qb": "Sam Leavitt Execution",
@@ -6314,7 +6926,7 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -10.0,
+        "vegasSpread": -10,
         "overUnder": 48.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 89,
@@ -6330,7 +6942,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 51,
         "finalOppScore": 10,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -10
       },
       {
         "id": "lsu-w2",
@@ -6351,7 +6967,7 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -27.0,
+        "vegasSpread": -27,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 99,
@@ -6365,7 +6981,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 86.8,
-        "mcOverProb": 51.0,
+        "mcOverProb": 51,
         "mcRecommendedAts": "LSU -27.0",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -6381,7 +6997,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 97,
+        "preseasonProjUt": 40,
+        "preseasonProjOpp": 13,
+        "preseasonSpread": -27
       },
       {
         "id": "lsu-w3",
@@ -6432,7 +7052,11 @@ var TEAMS_DATABASE = {
           "p50": 19,
           "p75": 26,
           "p90": 31
-        }
+        },
+        "preseasonWinProb": 48,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": 0.5
       },
       {
         "id": "lsu-w4",
@@ -6466,7 +7090,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": "texasam",
         "is_tracked": true,
-        "mcCoverProb": 61.0,
+        "mcCoverProb": 61,
         "mcOverProb": 33.6,
         "mcRecommendedAts": "LSU -5.5",
         "mcRecommendedOu": "UNDER 52.5",
@@ -6483,7 +7107,11 @@ var TEAMS_DATABASE = {
           "p50": 19,
           "p75": 26,
           "p90": 33
-        }
+        },
+        "preseasonWinProb": 65,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -5
       },
       {
         "id": "lsu-w5",
@@ -6504,7 +7132,7 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -39.0,
+        "vegasSpread": -39,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -6534,7 +7162,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 97,
+        "preseasonProjUt": 40,
+        "preseasonProjOpp": 13,
+        "preseasonSpread": -27
       },
       {
         "id": "lsu-w6",
@@ -6555,7 +7187,7 @@ var TEAMS_DATABASE = {
         "location": "Lexington, KY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -34.0,
+        "vegasSpread": -34,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -6585,7 +7217,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 93,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21
       },
       {
         "id": "lsu-w7",
@@ -6606,7 +7242,7 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -39.0,
+        "vegasSpread": -39,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -6636,7 +7272,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 97,
+        "preseasonProjUt": 40,
+        "preseasonProjOpp": 13,
+        "preseasonSpread": -27
       },
       {
         "id": "lsu-w8",
@@ -6657,7 +7297,7 @@ var TEAMS_DATABASE = {
         "location": "Auburn, AL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -34.0,
+        "vegasSpread": -34,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -6687,7 +7327,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 93,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21
       },
       {
         "id": "lsu-w10",
@@ -6721,8 +7365,8 @@ var TEAMS_DATABASE = {
         },
         "oppId": "alabama",
         "is_tracked": true,
-        "mcCoverProb": 60.0,
-        "mcOverProb": 34.0,
+        "mcCoverProb": 60,
+        "mcOverProb": 34,
         "mcRecommendedAts": "LSU -5.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -6738,7 +7382,11 @@ var TEAMS_DATABASE = {
           "p50": 19,
           "p75": 26,
           "p90": 31
-        }
+        },
+        "preseasonWinProb": 65,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -5
       },
       {
         "id": "lsu-w11",
@@ -6789,7 +7437,11 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 50,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": 0.5
       },
       {
         "id": "lsu-w12",
@@ -6810,7 +7462,7 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -0.0,
+        "vegasSpread": 0,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 53,
@@ -6823,7 +7475,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": "tennessee",
         "is_tracked": true,
-        "mcCoverProb": 53.0,
+        "mcCoverProb": 53,
         "mcOverProb": 36.1,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
@@ -6840,7 +7492,11 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 31,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 55,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": -1.5
       },
       {
         "id": "lsu-w13",
@@ -6861,7 +7517,7 @@ var TEAMS_DATABASE = {
         "location": "Fayetteville, AR",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -34.0,
+        "vegasSpread": -34,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -6874,7 +7530,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 57.0,
+        "mcCoverProb": 57,
         "mcOverProb": 42.9,
         "mcRecommendedAts": "LSU -34.0",
         "mcRecommendedOu": "UNDER 52.5",
@@ -6891,13 +7547,37 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 93,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png",
     "badgeText": "LSU",
     "confirmedStarterQb": "Sam Leavitt",
-    "seasonBaselineSpRating": 28.5
+    "seasonBaselineSpRating": 28.5,
+    "preseasonBaseline": {
+      "baseSpRating": 28.5,
+      "apRank": "#11 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+2500",
+      "gameWinProbs": [
+        89,
+        97,
+        48,
+        65,
+        97,
+        93,
+        97,
+        93,
+        65,
+        50,
+        55,
+        93
+      ]
+    }
   },
   "tennessee": {
     "id": "tennessee",
@@ -6971,7 +7651,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 56,
         "finalOppScore": 9,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 10,
+        "preseasonSpread": -49.5
       },
       {
         "id": "tenn-w2",
@@ -7005,8 +7689,8 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 94.0,
-        "mcOverProb": 42.0,
+        "mcCoverProb": 94,
+        "mcOverProb": 42,
         "mcRecommendedAts": "Tennessee -16.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -7022,7 +7706,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -16.5
       },
       {
         "id": "tenn-w3",
@@ -7057,7 +7745,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 70.6,
-        "mcOverProb": 57.0,
+        "mcOverProb": 57,
         "mcRecommendedAts": "Tennessee -34.9",
         "mcRecommendedOu": "OVER 52.5",
         "mcScoreDistUt": {
@@ -7073,7 +7761,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -22.5
       },
       {
         "id": "tenn-w4",
@@ -7094,7 +7786,7 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 3.0,
+        "vegasSpread": 3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 42,
@@ -7108,7 +7800,7 @@ var TEAMS_DATABASE = {
         "oppId": "texas",
         "is_tracked": true,
         "mcCoverProb": 46.4,
-        "mcOverProb": 43.0,
+        "mcOverProb": 43,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -7124,7 +7816,11 @@ var TEAMS_DATABASE = {
           "p50": 27,
           "p75": 34,
           "p90": 41
-        }
+        },
+        "preseasonWinProb": 36,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 4.5
       },
       {
         "id": "tenn-w5",
@@ -7175,7 +7871,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -22.5
       },
       {
         "id": "tenn-w6",
@@ -7226,7 +7926,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -16.5
       },
       {
         "id": "tenn-w7",
@@ -7247,7 +7951,7 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -3.0,
+        "vegasSpread": -3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 65,
@@ -7262,7 +7966,7 @@ var TEAMS_DATABASE = {
         "is_tracked": true,
         "rivalryName": "THIRD SATURDAY IN OCTOBER",
         "mcCoverProb": 55.3,
-        "mcOverProb": 43.0,
+        "mcOverProb": 43,
         "mcRecommendedAts": "Tennessee -3.0",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -7278,7 +7982,11 @@ var TEAMS_DATABASE = {
           "p50": 22,
           "p75": 30,
           "p90": 36
-        }
+        },
+        "preseasonWinProb": 52,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": -0.5
       },
       {
         "id": "tenn-w8",
@@ -7329,7 +8037,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -16.5
       },
       {
         "id": "tenn-w10",
@@ -7380,7 +8092,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -22.5
       },
       {
         "id": "tenn-w11",
@@ -7401,7 +8117,7 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 6.0,
+        "vegasSpread": 6,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 31,
@@ -7431,7 +8147,11 @@ var TEAMS_DATABASE = {
           "p50": 29,
           "p75": 37,
           "p90": 44
-        }
+        },
+        "preseasonWinProb": 33,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 5.5
       },
       {
         "id": "tenn-w12",
@@ -7452,7 +8172,7 @@ var TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -0.0,
+        "vegasSpread": 0,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 54,
@@ -7482,7 +8202,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 45,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 1.5
       },
       {
         "id": "tenn-w13",
@@ -7533,13 +8257,37 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 15
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -16.5
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png",
     "badgeText": "TENN",
     "confirmedStarterQb": "Faizon Brandon",
-    "seasonBaselineSpRating": 24.0
+    "seasonBaselineSpRating": 24,
+    "preseasonBaseline": {
+      "baseSpRating": 24,
+      "apRank": "#20 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+2200",
+      "gameWinProbs": [
+        98,
+        89,
+        94,
+        36,
+        94,
+        89,
+        52,
+        89,
+        94,
+        33,
+        45,
+        89
+      ]
+    }
   },
   "indiana": {
     "id": "indiana",
@@ -7613,7 +8361,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 52,
         "finalOppScore": 16,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -39.5
       },
       {
         "id": "ind-w2",
@@ -7634,7 +8386,7 @@ var TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -24.0,
+        "vegasSpread": -24,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 99,
@@ -7664,7 +8416,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24
       },
       {
         "id": "ind-w3",
@@ -7715,7 +8471,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24
       },
       {
         "id": "ind-w4",
@@ -7766,7 +8526,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24
       },
       {
         "id": "ind-w5",
@@ -7817,7 +8581,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 90,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18
       },
       {
         "id": "ind-w6",
@@ -7868,7 +8636,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 90,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18
       },
       {
         "id": "ind-w7",
@@ -7919,7 +8691,11 @@ var TEAMS_DATABASE = {
           "p50": 29,
           "p75": 37,
           "p90": 43
-        }
+        },
+        "preseasonWinProb": 38,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 4
       },
       {
         "id": "ind-w8",
@@ -7940,7 +8716,7 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -5.0,
+        "vegasSpread": -5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 73,
@@ -7970,7 +8746,11 @@ var TEAMS_DATABASE = {
           "p50": 19,
           "p75": 26,
           "p90": 33
-        }
+        },
+        "preseasonWinProb": 43,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 2.5
       },
       {
         "id": "ind-w9",
@@ -8021,7 +8801,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24
       },
       {
         "id": "ind-w11",
@@ -8072,7 +8856,11 @@ var TEAMS_DATABASE = {
           "p50": 21,
           "p75": 27,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 58,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2.5
       },
       {
         "id": "ind-w12",
@@ -8123,7 +8911,11 @@ var TEAMS_DATABASE = {
           "p50": 20,
           "p75": 27,
           "p90": 33
-        }
+        },
+        "preseasonWinProb": 50,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": -4.5
       },
       {
         "id": "ind-w13",
@@ -8157,7 +8949,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 74.0,
+        "mcCoverProb": 74,
         "mcOverProb": 32.6,
         "mcRecommendedAts": "Indiana -26.2",
         "mcRecommendedOu": "UNDER 52.5",
@@ -8174,13 +8966,37 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png",
     "badgeText": "IND",
     "confirmedStarterQb": "Josh Hoover",
-    "seasonBaselineSpRating": 25.5
+    "seasonBaselineSpRating": 25.5,
+    "preseasonBaseline": {
+      "baseSpRating": 25.5,
+      "apRank": "#6 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+40000",
+      "gameWinProbs": [
+        95,
+        95,
+        95,
+        95,
+        90,
+        90,
+        38,
+        43,
+        95,
+        58,
+        50,
+        95
+      ]
+    }
   },
   "miami": {
     "id": "miami",
@@ -8254,7 +9070,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 45,
         "finalOppScore": 6,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       },
       {
         "id": "mia-w2",
@@ -8305,7 +9125,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -25.5
       },
       {
         "id": "mia-w3",
@@ -8356,7 +9180,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -19.5
       },
       {
         "id": "mia-w4",
@@ -8391,7 +9219,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 60.1,
-        "mcOverProb": 46.0,
+        "mcOverProb": 46,
         "mcRecommendedAts": "Miami -35.8",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -8407,7 +9235,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -25.5
       },
       {
         "id": "mia-w5",
@@ -8458,7 +9290,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 21,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 51,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": -11.1
       },
       {
         "id": "mia-w7",
@@ -8510,7 +9346,11 @@ var TEAMS_DATABASE = {
           "p50": 16,
           "p75": 21,
           "p90": 28
-        }
+        },
+        "preseasonWinProb": 65,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -5
       },
       {
         "id": "mia-w8",
@@ -8561,7 +9401,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -25.5
       },
       {
         "id": "mia-w9",
@@ -8612,7 +9456,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -19.5
       },
       {
         "id": "mia-w10",
@@ -8663,7 +9511,11 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 39,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 3.5
       },
       {
         "id": "mia-w11",
@@ -8697,7 +9549,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 60.0,
+        "mcCoverProb": 60,
         "mcOverProb": 45.8,
         "mcRecommendedAts": "Miami -35.8",
         "mcRecommendedOu": "UNDER 52.5",
@@ -8714,7 +9566,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -25.5
       },
       {
         "id": "mia-w12",
@@ -8765,7 +9621,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -25.5
       },
       {
         "id": "mia-w13",
@@ -8816,13 +9676,37 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -25.5
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png",
     "badgeText": "MIA",
     "confirmedStarterQb": "Darian Mensah",
-    "seasonBaselineSpRating": 27.0
+    "seasonBaselineSpRating": 27,
+    "preseasonBaseline": {
+      "baseSpRating": 27,
+      "apRank": "#7 AP",
+      "cfpSeed": 4,
+      "nattyOdds": "+900",
+      "gameWinProbs": [
+        95,
+        96,
+        92,
+        96,
+        51,
+        65,
+        96,
+        92,
+        39,
+        96,
+        96,
+        96
+      ]
+    }
   },
   "texasam": {
     "id": "texasam",
@@ -8851,7 +9735,7 @@ var TEAMS_DATABASE = {
       "bgSurface": "#140707",
       "bgBase": "#0A0404"
     },
-    "baseSpRating": 30.0,
+    "baseSpRating": 30,
     "playoffContenderRank": 10,
     "sliderLabels": {
       "qb": "Marcel Reed Dual-Threat Attack",
@@ -8896,7 +9780,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 50,
         "finalOppScore": 0,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -38.5
       },
       {
         "id": "tamu-w2",
@@ -8947,7 +9835,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 17,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13.5
       },
       {
         "id": "tamu-w3",
@@ -8968,7 +9860,7 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -38.0,
+        "vegasSpread": -38,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -8998,7 +9890,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -25
       },
       {
         "id": "tamu-w4",
@@ -9032,7 +9928,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": "lsu",
         "is_tracked": true,
-        "mcCoverProb": 46.0,
+        "mcCoverProb": 46,
         "mcOverProb": 33.1,
         "mcRecommendedAts": "LSU -5.5",
         "mcRecommendedOu": "UNDER 52.5",
@@ -9049,7 +9945,11 @@ var TEAMS_DATABASE = {
           "p50": 27,
           "p75": 34,
           "p90": 41
-        }
+        },
+        "preseasonWinProb": 35,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 5
       },
       {
         "id": "tamu-w5",
@@ -9070,7 +9970,7 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -38.0,
+        "vegasSpread": -38,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -9084,7 +9984,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 55.1,
-        "mcOverProb": 49.0,
+        "mcOverProb": 49,
         "mcRecommendedAts": "Texas A&M -38.0",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -9100,7 +10000,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -25
       },
       {
         "id": "tamu-w6",
@@ -9151,7 +10055,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 24,
           "p90": 31
-        }
+        },
+        "preseasonWinProb": 52,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": -0.5
       },
       {
         "id": "tamu-w7",
@@ -9202,7 +10110,11 @@ var TEAMS_DATABASE = {
           "p50": 3,
           "p75": 7,
           "p90": 12
-        }
+        },
+        "preseasonWinProb": 99,
+        "preseasonProjUt": 48,
+        "preseasonProjOpp": 4,
+        "preseasonSpread": -43.5
       },
       {
         "id": "tamu-w8",
@@ -9223,7 +10135,7 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 4.0,
+        "vegasSpread": 4,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 38,
@@ -9253,7 +10165,11 @@ var TEAMS_DATABASE = {
           "p50": 27,
           "p75": 33,
           "p90": 40
-        }
+        },
+        "preseasonWinProb": 41,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 3
       },
       {
         "id": "tamu-w10",
@@ -9274,7 +10190,7 @@ var TEAMS_DATABASE = {
         "location": "Columbia, SC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -31.0,
+        "vegasSpread": -31,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -9304,7 +10220,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "tamu-w11",
@@ -9325,7 +10245,7 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -6.0,
+        "vegasSpread": -6,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 73,
@@ -9355,7 +10275,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 26,
           "p90": 31
-        }
+        },
+        "preseasonWinProb": 67,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -5.5
       },
       {
         "id": "tamu-w12",
@@ -9407,7 +10331,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 42,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 2.5
       },
       {
         "id": "tamu-w13",
@@ -9459,13 +10387,37 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 44,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 2
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png",
     "badgeText": "TAMU",
     "confirmedStarterQb": "Marcel Reed",
-    "seasonBaselineSpRating": 26.5
+    "seasonBaselineSpRating": 26.5,
+    "preseasonBaseline": {
+      "baseSpRating": 26.5,
+      "apRank": "#8 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+4500",
+      "gameWinProbs": [
+        91,
+        84,
+        96,
+        35,
+        96,
+        52,
+        99,
+        41,
+        91,
+        67,
+        42,
+        44
+      ]
+    }
   },
   "olemiss": {
     "id": "olemiss",
@@ -9539,7 +10491,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 41,
         "finalOppScore": 38,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 87,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -6.5
       },
       {
         "id": "miss-w2",
@@ -9590,7 +10546,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 15
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       },
       {
         "id": "miss-w3",
@@ -9641,7 +10601,11 @@ var TEAMS_DATABASE = {
           "p50": 28,
           "p75": 36,
           "p90": 43
-        }
+        },
+        "preseasonWinProb": 52,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": -0.5
       },
       {
         "id": "miss-w4",
@@ -9676,7 +10640,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 74.8,
-        "mcOverProb": 41.0,
+        "mcOverProb": 41,
         "mcRecommendedAts": "Ole Miss -24.6",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -9692,7 +10656,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       },
       {
         "id": "miss-w6",
@@ -9743,7 +10711,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       },
       {
         "id": "miss-w7",
@@ -9794,7 +10766,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 24,
           "p90": 31
-        }
+        },
+        "preseasonWinProb": 68,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 23,
+        "preseasonSpread": -6
       },
       {
         "id": "miss-w8",
@@ -9845,7 +10821,11 @@ var TEAMS_DATABASE = {
           "p50": 34,
           "p75": 41,
           "p90": 48
-        }
+        },
+        "preseasonWinProb": 26,
+        "preseasonProjUt": 22,
+        "preseasonProjOpp": 30,
+        "preseasonSpread": 8.5
       },
       {
         "id": "miss-w9",
@@ -9896,7 +10876,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 15
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       },
       {
         "id": "miss-w10",
@@ -9947,7 +10931,11 @@ var TEAMS_DATABASE = {
           "p50": 31,
           "p75": 38,
           "p90": 45
-        }
+        },
+        "preseasonWinProb": 41,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 3
       },
       {
         "id": "miss-w11",
@@ -9998,7 +10986,11 @@ var TEAMS_DATABASE = {
           "p50": 30,
           "p75": 37,
           "p90": 44
-        }
+        },
+        "preseasonWinProb": 41,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 3
       },
       {
         "id": "miss-w12",
@@ -10049,7 +11041,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       },
       {
         "id": "miss-w13",
@@ -10101,13 +11097,37 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png",
     "badgeText": "MISS",
     "confirmedStarterQb": "Trinidad Chambliss",
-    "seasonBaselineSpRating": 26.0
+    "seasonBaselineSpRating": 26,
+    "preseasonBaseline": {
+      "baseSpRating": 26,
+      "apRank": "#9 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+1500",
+      "gameWinProbs": [
+        87,
+        96,
+        52,
+        91,
+        91,
+        68,
+        26,
+        96,
+        41,
+        41,
+        96,
+        96
+      ]
+    }
   },
   "oklahoma": {
     "id": "oklahoma",
@@ -10181,7 +11201,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 51,
         "finalOppScore": 0,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 99,
+        "preseasonProjUt": 48,
+        "preseasonProjOpp": 7,
+        "preseasonSpread": -40.5
       },
       {
         "id": "ou-w2",
@@ -10202,7 +11226,7 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 2.0,
+        "vegasSpread": 2,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 81,
@@ -10215,7 +11239,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": "michigan",
         "is_tracked": true,
-        "mcCoverProb": 82.0,
+        "mcCoverProb": 82,
         "mcOverProb": 32.6,
         "mcRecommendedAts": "Oklahoma +2.0",
         "mcRecommendedOu": "UNDER 52.5",
@@ -10232,7 +11256,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 24,
           "p90": 30
-        }
+        },
+        "preseasonWinProb": 44,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 2
       },
       {
         "id": "ou-w3",
@@ -10283,7 +11311,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       },
       {
         "id": "ou-w4",
@@ -10334,7 +11366,11 @@ var TEAMS_DATABASE = {
           "p50": 30,
           "p75": 37,
           "p90": 44
-        }
+        },
+        "preseasonWinProb": 25,
+        "preseasonProjUt": 22,
+        "preseasonProjOpp": 31,
+        "preseasonSpread": 9
       },
       {
         "id": "ou-w6",
@@ -10386,7 +11422,11 @@ var TEAMS_DATABASE = {
           "p50": 26,
           "p75": 33,
           "p90": 40
-        }
+        },
+        "preseasonWinProb": 42,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 2.5
       },
       {
         "id": "ou-w7",
@@ -10421,7 +11461,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 65.2,
-        "mcOverProb": 42.0,
+        "mcOverProb": 42,
         "mcRecommendedAts": "Oklahoma -32.9",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -10437,7 +11477,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       },
       {
         "id": "ou-w8",
@@ -10488,7 +11532,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       },
       {
         "id": "ou-w9",
@@ -10539,7 +11587,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       },
       {
         "id": "ou-w10",
@@ -10590,7 +11642,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       },
       {
         "id": "ou-w11",
@@ -10624,7 +11680,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": "olemiss",
         "is_tracked": true,
-        "mcCoverProb": 61.0,
+        "mcCoverProb": 61,
         "mcOverProb": 32.6,
         "mcRecommendedAts": "Oklahoma -6.8",
         "mcRecommendedOu": "UNDER 52.5",
@@ -10641,7 +11697,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 24,
           "p90": 31
-        }
+        },
+        "preseasonWinProb": 59,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -3
       },
       {
         "id": "ou-w12",
@@ -10676,7 +11736,7 @@ var TEAMS_DATABASE = {
         "oppId": "texasam",
         "is_tracked": true,
         "rivalryName": "RED RIVER RIVALRY",
-        "mcCoverProb": 57.0,
+        "mcCoverProb": 57,
         "mcOverProb": 35.8,
         "mcRecommendedAts": "Oklahoma -2.1",
         "mcRecommendedOu": "UNDER 52.5",
@@ -10693,7 +11753,11 @@ var TEAMS_DATABASE = {
           "p50": 21,
           "p75": 28,
           "p90": 35
-        }
+        },
+        "preseasonWinProb": 58,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2.5
       },
       {
         "id": "ou-w13",
@@ -10744,13 +11808,37 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 24,
           "p90": 30
-        }
+        },
+        "preseasonWinProb": 51,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": -7.1
       }
     ],
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/201.png",
     "badgeText": "OU",
     "confirmedStarterQb": "John Mateer",
-    "seasonBaselineSpRating": 26.0
+    "seasonBaselineSpRating": 26,
+    "preseasonBaseline": {
+      "baseSpRating": 26,
+      "apRank": "#10 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+5000",
+      "gameWinProbs": [
+        99,
+        44,
+        96,
+        25,
+        42,
+        96,
+        91,
+        96,
+        91,
+        59,
+        58,
+        51
+      ]
+    }
   },
   "boisestate": {
     "id": "boisestate",
@@ -10825,7 +11913,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 27,
         "finalOppScore": 34,
-        "finalWin": false
+        "finalWin": false,
+        "preseasonWinProb": 15,
+        "preseasonProjUt": 21,
+        "preseasonProjOpp": 35,
+        "preseasonSpread": 24.5
       },
       {
         "id": "bsu-w2",
@@ -10846,7 +11938,7 @@ var TEAMS_DATABASE = {
         "location": "Boise, ID",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.0,
+        "vegasSpread": -17,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 98,
@@ -10876,7 +11968,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 14,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -17
       },
       {
         "id": "bsu-w3",
@@ -10927,7 +12023,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 99,
+        "preseasonProjUt": 44,
+        "preseasonProjOpp": 8,
+        "preseasonSpread": -35.5
       },
       {
         "id": "bsu-w4",
@@ -10978,7 +12078,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 19,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 80,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 21,
+        "preseasonSpread": -11
       },
       {
         "id": "bsu-w5",
@@ -11029,7 +12133,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -17
       },
       {
         "id": "bsu-w6",
@@ -11080,7 +12188,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 19,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 80,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 21,
+        "preseasonSpread": -11
       },
       {
         "id": "bsu-w8",
@@ -11131,7 +12243,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 19,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 80,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 21,
+        "preseasonSpread": -11
       },
       {
         "id": "bsu-w9",
@@ -11182,7 +12298,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 14,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -17
       },
       {
         "id": "bsu-w10",
@@ -11233,7 +12353,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 19,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 80,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 21,
+        "preseasonSpread": -11
       },
       {
         "id": "bsu-w11",
@@ -11284,7 +12408,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 14,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -17
       },
       {
         "id": "bsu-w12",
@@ -11335,7 +12463,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -17
       },
       {
         "id": "bsu-w13",
@@ -11386,11 +12518,35 @@ var TEAMS_DATABASE = {
           "p75": 19,
           "p90": 24
         },
-        "oddsProvider": "CFB Prophet Projected"
+        "oddsProvider": "CFB Prophet Projected",
+        "preseasonWinProb": 71,
+        "preseasonProjUt": 31,
+        "preseasonProjOpp": 23,
+        "preseasonSpread": -7.5
       }
     ],
     "playoffContenderRank": 25,
-    "seasonBaselineSpRating": 18.5
+    "seasonBaselineSpRating": 18.5,
+    "preseasonBaseline": {
+      "baseSpRating": 18.5,
+      "apRank": "NR",
+      "cfpSeed": null,
+      "nattyOdds": "+12500",
+      "gameWinProbs": [
+        15,
+        89,
+        99,
+        80,
+        89,
+        80,
+        80,
+        89,
+        80,
+        89,
+        89,
+        71
+      ]
+    }
   },
   "usc": {
     "id": "usc",
@@ -11437,7 +12593,7 @@ var TEAMS_DATABASE = {
         "kickoffTime": "3:00 PM ET",
         "utc": "2026-08-29T19:00Z",
         "tv": "NBC",
-        "opponent": "San Jos\u00e9 State Spartans",
+        "opponent": "San José State Spartans",
         "oppAbbr": "SJSU",
         "oppRank": "NR",
         "oppBadge": "SJSU",
@@ -11457,15 +12613,19 @@ var TEAMS_DATABASE = {
         "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
-          "keyMatchup": "USC front seven vs San Jos\u00e9 State Spartans rushing attack.",
-          "summary": "Regular season non-conference test against San Jos\u00e9 State Spartans."
+          "keyMatchup": "USC front seven vs San José State Spartans rushing attack.",
+          "summary": "Regular season non-conference test against San José State Spartans."
         },
         "oppId": null,
         "is_tracked": false,
         "isFinal": true,
         "finalTeamScore": 42,
         "finalOppScore": 26,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -37.5
       },
       {
         "id": "usc-w1",
@@ -11502,7 +12662,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 39,
         "finalOppScore": 0,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 45,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -21.5
       },
       {
         "id": "usc-w2",
@@ -11536,7 +12700,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 82.0,
+        "mcCoverProb": 82,
         "mcOverProb": 38.5,
         "mcRecommendedAts": "USC -24.5",
         "mcRecommendedOu": "UNDER 52.5",
@@ -11553,7 +12717,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       },
       {
         "id": "usc-w3",
@@ -11604,7 +12772,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       },
       {
         "id": "usc-w4",
@@ -11638,7 +12810,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": "oregon",
         "is_tracked": true,
-        "mcCoverProb": 57.0,
+        "mcCoverProb": 57,
         "mcOverProb": 35.8,
         "mcRecommendedAts": "USC -1.4",
         "mcRecommendedOu": "UNDER 52.5",
@@ -11655,7 +12827,11 @@ var TEAMS_DATABASE = {
           "p50": 21,
           "p75": 29,
           "p90": 35
-        }
+        },
+        "preseasonWinProb": 44,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 2
       },
       {
         "id": "usc-w5",
@@ -11706,7 +12882,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 21,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 69,
+        "preseasonProjUt": 30,
+        "preseasonProjOpp": 23,
+        "preseasonSpread": -6.5
       },
       {
         "id": "usc-w6",
@@ -11757,7 +12937,11 @@ var TEAMS_DATABASE = {
           "p50": 26,
           "p75": 33,
           "p90": 40
-        }
+        },
+        "preseasonWinProb": 58,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2.5
       },
       {
         "id": "usc-w8",
@@ -11791,7 +12975,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 67.0,
+        "mcCoverProb": 67,
         "mcOverProb": 28.6,
         "mcRecommendedAts": "USC -25.3",
         "mcRecommendedOu": "UNDER 52.5",
@@ -11808,7 +12992,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       },
       {
         "id": "usc-w9",
@@ -11859,7 +13047,11 @@ var TEAMS_DATABASE = {
           "p50": 29,
           "p75": 37,
           "p90": 43
-        }
+        },
+        "preseasonWinProb": 39,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 3.5
       },
       {
         "id": "usc-w11",
@@ -11910,7 +13102,11 @@ var TEAMS_DATABASE = {
           "p50": 26,
           "p75": 33,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 42,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 2.5
       },
       {
         "id": "usc-w12",
@@ -11944,7 +13140,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 66.0,
+        "mcCoverProb": 66,
         "mcOverProb": 35.2,
         "mcRecommendedAts": "USC -30.8",
         "mcRecommendedOu": "UNDER 52.5",
@@ -11961,7 +13157,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 39,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24.5
       },
       {
         "id": "usc-w13",
@@ -11996,7 +13196,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "rivalryName": "BATTLE FOR THE VICTORY BELL",
-        "mcCoverProb": 67.0,
+        "mcCoverProb": 67,
         "mcOverProb": 31.2,
         "mcRecommendedAts": "USC -25.3",
         "mcRecommendedOu": "UNDER 52.5",
@@ -12013,11 +13213,35 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       }
     ],
     "playoffContenderRank": 14,
-    "seasonBaselineSpRating": 26.06
+    "seasonBaselineSpRating": 26.06,
+    "preseasonBaseline": {
+      "baseSpRating": 26.06,
+      "apRank": "#15 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+4000",
+      "gameWinProbs": [
+        96,
+        98,
+        96,
+        91,
+        44,
+        69,
+        58,
+        91,
+        39,
+        42,
+        96,
+        91
+      ]
+    }
   },
   "floridastate": {
     "id": "floridastate",
@@ -12092,7 +13316,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 34,
         "finalOppScore": 17,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -30.5
       },
       {
         "id": "fsu-w1",
@@ -12113,7 +13341,7 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 3.0,
+        "vegasSpread": 3,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 68,
@@ -12129,7 +13357,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 24,
         "finalOppScore": 27,
-        "finalWin": false
+        "finalWin": false,
+        "preseasonWinProb": 66,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": 3
       },
       {
         "id": "fsu-w3",
@@ -12164,7 +13396,7 @@ var TEAMS_DATABASE = {
         "oppId": "alabama",
         "is_tracked": true,
         "mcCoverProb": 42.8,
-        "mcOverProb": 33.0,
+        "mcOverProb": 33,
         "mcRecommendedAts": "ALA -10.3",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -12180,7 +13412,11 @@ var TEAMS_DATABASE = {
           "p50": 30,
           "p75": 37,
           "p90": 43
-        }
+        },
+        "preseasonWinProb": 35,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 31,
+        "preseasonSpread": 3.5
       },
       {
         "id": "fsu-w4",
@@ -12231,7 +13467,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -23.5
       },
       {
         "id": "fsu-w5",
@@ -12265,7 +13505,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 72.0,
+        "mcCoverProb": 72,
         "mcOverProb": 29.9,
         "mcRecommendedAts": "Florida State -25.4",
         "mcRecommendedOu": "UNDER 52.5",
@@ -12282,7 +13522,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -23.5
       },
       {
         "id": "fsu-w6",
@@ -12333,7 +13577,11 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 55,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -1.5
       },
       {
         "id": "fsu-w7",
@@ -12385,7 +13633,11 @@ var TEAMS_DATABASE = {
           "p50": 30,
           "p75": 37,
           "p90": 42
-        }
+        },
+        "preseasonWinProb": 35,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 5
       },
       {
         "id": "fsu-w9",
@@ -12436,7 +13688,11 @@ var TEAMS_DATABASE = {
           "p50": 16,
           "p75": 23,
           "p90": 30
-        }
+        },
+        "preseasonWinProb": 63,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -4.5
       },
       {
         "id": "fsu-w10",
@@ -12487,7 +13743,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 14,
           "p90": 19
-        }
+        },
+        "preseasonWinProb": 90,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -17.5
       },
       {
         "id": "fsu-w11",
@@ -12538,7 +13798,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 90,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -17.5
       },
       {
         "id": "fsu-w12",
@@ -12572,8 +13836,8 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 72.0,
-        "mcOverProb": 30.0,
+        "mcCoverProb": 72,
+        "mcOverProb": 30,
         "mcRecommendedAts": "Florida State -25.4",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -12589,7 +13853,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -23.5
       },
       {
         "id": "fsu-w13",
@@ -12640,11 +13908,35 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -23.5
       }
     ],
     "playoffContenderRank": 30,
-    "seasonBaselineSpRating": 25.18
+    "seasonBaselineSpRating": 25.18,
+    "preseasonBaseline": {
+      "baseSpRating": 25.18,
+      "apRank": "RV",
+      "cfpSeed": null,
+      "nattyOdds": "+30000",
+      "gameWinProbs": [
+        95,
+        66,
+        35,
+        95,
+        95,
+        55,
+        35,
+        63,
+        90,
+        90,
+        95,
+        95
+      ]
+    }
   },
   "clemson": {
     "id": "clemson",
@@ -12703,7 +13995,7 @@ var TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 10.0,
+        "vegasSpread": 10,
         "overUnder": 48.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 11,
@@ -12719,7 +14011,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 10,
         "finalOppScore": 51,
-        "finalWin": false
+        "finalWin": false,
+        "preseasonWinProb": 11,
+        "preseasonProjUt": 17,
+        "preseasonProjOpp": 34,
+        "preseasonSpread": 10
       },
       {
         "id": "clem-w2",
@@ -12770,7 +14066,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -22.5
       },
       {
         "id": "clem-w3",
@@ -12821,7 +14121,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 14,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -22.5
       },
       {
         "id": "clem-w4",
@@ -12872,7 +14176,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 17,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 88,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -16.5
       },
       {
         "id": "clem-w5",
@@ -12923,7 +14231,11 @@ var TEAMS_DATABASE = {
           "p50": 30,
           "p75": 38,
           "p90": 44
-        }
+        },
+        "preseasonWinProb": 49,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": 11.1
       },
       {
         "id": "clem-w7",
@@ -12958,7 +14270,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 41.5,
-        "mcOverProb": 59.0,
+        "mcOverProb": 59,
         "mcRecommendedAts": "CHSO +47.3",
         "mcRecommendedOu": "OVER 52.5",
         "mcScoreDistUt": {
@@ -12974,7 +14286,11 @@ var TEAMS_DATABASE = {
           "p50": 3,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 99,
+        "preseasonProjUt": 47,
+        "preseasonProjOpp": 6,
+        "preseasonSpread": -41
       },
       {
         "id": "clem-w8",
@@ -13025,7 +14341,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 14,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -22.5
       },
       {
         "id": "clem-w9",
@@ -13059,7 +14379,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": "floridastate",
         "is_tracked": true,
-        "mcCoverProb": 44.0,
+        "mcCoverProb": 44,
         "mcOverProb": 33.3,
         "mcRecommendedAts": "FSU -8.4",
         "mcRecommendedOu": "UNDER 52.5",
@@ -13076,7 +14396,11 @@ var TEAMS_DATABASE = {
           "p50": 28,
           "p75": 36,
           "p90": 42
-        }
+        },
+        "preseasonWinProb": 37,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 4.5
       },
       {
         "id": "clem-w10",
@@ -13127,7 +14451,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 19,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 88,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -16.5
       },
       {
         "id": "clem-w11",
@@ -13178,7 +14506,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 19
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -22.5
       },
       {
         "id": "clem-w12",
@@ -13229,7 +14561,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 19,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 88,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -16.5
       },
       {
         "id": "clem-w13",
@@ -13281,11 +14617,35 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 19
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -22.5
       }
     ],
     "playoffContenderRank": 31,
-    "seasonBaselineSpRating": 23.8
+    "seasonBaselineSpRating": 23.8,
+    "preseasonBaseline": {
+      "baseSpRating": 23.8,
+      "apRank": "RV",
+      "cfpSeed": null,
+      "nattyOdds": "+3500",
+      "gameWinProbs": [
+        11,
+        94,
+        94,
+        88,
+        49,
+        99,
+        94,
+        37,
+        88,
+        94,
+        88,
+        94
+      ]
+    }
   },
   "smu": {
     "id": "smu",
@@ -13321,7 +14681,7 @@ var TEAMS_DATABASE = {
       "turnover": "Ford Stadium Turnover Luck",
       "crowd": "Gerald J. Ford Stadium Roar"
     },
-    "baseSpRating": 23.0,
+    "baseSpRating": 23,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2567.png",
     "badgeText": "SMU",
     "schedule": [
@@ -13344,7 +14704,7 @@ var TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -3.0,
+        "vegasSpread": -3,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 38,
@@ -13360,7 +14720,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 27,
         "finalOppScore": 24,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 34,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": -3
       },
       {
         "id": "smu-w2",
@@ -13411,7 +14775,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 15
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21.5
       },
       {
         "id": "smu-w3",
@@ -13462,7 +14830,11 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 48,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": 0.5
       },
       {
         "id": "smu-w4",
@@ -13513,7 +14885,11 @@ var TEAMS_DATABASE = {
           "p50": 3,
           "p75": 9,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 99,
+        "preseasonProjUt": 46,
+        "preseasonProjOpp": 6,
+        "preseasonSpread": -40
       },
       {
         "id": "smu-w5",
@@ -13548,7 +14924,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 75.2,
-        "mcOverProb": 28.0,
+        "mcOverProb": 28,
         "mcRecommendedAts": "SMU -23.7",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -13564,7 +14940,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21.5
       },
       {
         "id": "smu-w7",
@@ -13615,7 +14995,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21.5
       },
       {
         "id": "smu-w8",
@@ -13666,7 +15050,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21.5
       },
       {
         "id": "smu-w9",
@@ -13717,7 +15105,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 14,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 87,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -15.5
       },
       {
         "id": "smu-w10",
@@ -13768,7 +15160,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21.5
       },
       {
         "id": "smu-w11",
@@ -13819,7 +15215,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21.5
       },
       {
         "id": "smu-w12",
@@ -13870,7 +15270,11 @@ var TEAMS_DATABASE = {
           "p50": 28,
           "p75": 37,
           "p90": 43
-        }
+        },
+        "preseasonWinProb": 28,
+        "preseasonProjUt": 22,
+        "preseasonProjOpp": 30,
+        "preseasonSpread": 7.5
       },
       {
         "id": "smu-w13",
@@ -13921,11 +15325,35 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 87,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -15.5
       }
     ],
     "playoffContenderRank": 17,
-    "seasonBaselineSpRating": 23.0
+    "seasonBaselineSpRating": 23,
+    "preseasonBaseline": {
+      "baseSpRating": 23,
+      "apRank": "#19 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+9000",
+      "gameWinProbs": [
+        34,
+        94,
+        48,
+        99,
+        94,
+        94,
+        94,
+        87,
+        94,
+        94,
+        28,
+        87
+      ]
+    }
   },
   "texastech": {
     "id": "texastech",
@@ -14004,7 +15432,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 33,
         "finalOppScore": 10,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -45.5
       },
       {
         "id": "ttu-w2",
@@ -14055,7 +15487,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 20,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 88,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -16.5
       },
       {
         "id": "ttu-w3",
@@ -14106,7 +15542,11 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 70,
+        "preseasonProjUt": 30,
+        "preseasonProjOpp": 23,
+        "preseasonSpread": -7
       },
       {
         "id": "ttu-w4",
@@ -14140,7 +15580,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 72.0,
+        "mcCoverProb": 72,
         "mcOverProb": 40.9,
         "mcRecommendedAts": "Texas Tech -18.7",
         "mcRecommendedOu": "UNDER 52.5",
@@ -14157,7 +15597,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 17,
           "p90": 22
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -22.5
       },
       {
         "id": "ttu-w5",
@@ -14208,7 +15652,11 @@ var TEAMS_DATABASE = {
           "p50": 27,
           "p75": 34,
           "p90": 41
-        }
+        },
+        "preseasonWinProb": 60,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -3.5
       },
       {
         "id": "ttu-w7",
@@ -14259,7 +15707,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 32,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 79,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 21,
+        "preseasonSpread": -10.5
       },
       {
         "id": "ttu-w8",
@@ -14293,7 +15745,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 67.0,
+        "mcCoverProb": 67,
         "mcOverProb": 43.5,
         "mcRecommendedAts": "Texas Tech -13.7",
         "mcRecommendedOu": "UNDER 52.5",
@@ -14310,7 +15762,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 21,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 88,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -16.5
       },
       {
         "id": "ttu-w9",
@@ -14361,7 +15817,11 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 71,
+        "preseasonProjUt": 30,
+        "preseasonProjOpp": 23,
+        "preseasonSpread": -7.5
       },
       {
         "id": "ttu-w10",
@@ -14412,7 +15872,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -22.5
       },
       {
         "id": "ttu-w11",
@@ -14448,7 +15912,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "rivalryName": "RED RIVER RIVALRY",
         "mcCoverProb": 68.6,
-        "mcOverProb": 42.0,
+        "mcOverProb": 42,
         "mcRecommendedAts": "Texas Tech -13.7",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -14464,7 +15928,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 21,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 88,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -16.5
       },
       {
         "id": "ttu-w12",
@@ -14515,7 +15983,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 21,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 88,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -16.5
       },
       {
         "id": "ttu-w13",
@@ -14550,7 +16022,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 76.7,
-        "mcOverProb": 51.0,
+        "mcOverProb": 51,
         "mcRecommendedAts": "Texas Tech -18.7",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -14566,10 +16038,34 @@ var TEAMS_DATABASE = {
           "p50": 12,
           "p75": 17,
           "p90": 23
-        }
+        },
+        "preseasonWinProb": 94,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -22.5
       }
     ],
-    "seasonBaselineSpRating": 23.8
+    "seasonBaselineSpRating": 23.8,
+    "preseasonBaseline": {
+      "baseSpRating": 23.8,
+      "apRank": "#12 AP",
+      "cfpSeed": 9,
+      "nattyOdds": "+1800",
+      "gameWinProbs": [
+        95,
+        88,
+        70,
+        94,
+        60,
+        79,
+        88,
+        71,
+        94,
+        88,
+        88,
+        94
+      ]
+    }
   },
   "utah": {
     "id": "utah",
@@ -14644,7 +16140,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 66,
         "finalOppScore": 14,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 99,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -38.5
       },
       {
         "id": "utah-w2",
@@ -14665,7 +16165,7 @@ var TEAMS_DATABASE = {
         "location": "Salt Lake City, UT",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.0,
+        "vegasSpread": -23,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 99,
@@ -14695,7 +16195,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 14
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -23
       },
       {
         "id": "utah-w3",
@@ -14746,7 +16250,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -23
       },
       {
         "id": "utah-w4",
@@ -14797,7 +16305,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 15
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -17
       },
       {
         "id": "utah-w6",
@@ -14848,7 +16360,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -23
       },
       {
         "id": "utah-w7",
@@ -14899,7 +16415,11 @@ var TEAMS_DATABASE = {
           "p50": 16,
           "p75": 23,
           "p90": 30
-        }
+        },
+        "preseasonWinProb": 62,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -4
       },
       {
         "id": "utah-w8",
@@ -14933,7 +16453,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": "houston",
         "is_tracked": true,
-        "mcCoverProb": 68.0,
+        "mcCoverProb": 68,
         "mcOverProb": 30.3,
         "mcRecommendedAts": "Utah -14.6",
         "mcRecommendedOu": "UNDER 52.5",
@@ -14950,7 +16470,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 17,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 72,
+        "preseasonProjUt": 30,
+        "preseasonProjOpp": 22,
+        "preseasonSpread": -7.5
       },
       {
         "id": "utah-w9",
@@ -14984,7 +16508,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 76.0,
+        "mcCoverProb": 76,
         "mcOverProb": 24.8,
         "mcRecommendedAts": "Utah -22.9",
         "mcRecommendedOu": "UNDER 52.5",
@@ -15001,7 +16525,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -17
       },
       {
         "id": "utah-w10",
@@ -15036,7 +16564,7 @@ var TEAMS_DATABASE = {
         "oppId": "byu",
         "is_tracked": true,
         "rivalryName": "HOLY WAR",
-        "mcCoverProb": 63.0,
+        "mcCoverProb": 63,
         "mcOverProb": 33.9,
         "mcRecommendedAts": "Utah -6.9",
         "mcRecommendedOu": "UNDER 52.5",
@@ -15053,7 +16581,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 24,
           "p90": 31
-        }
+        },
+        "preseasonWinProb": 68,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 23,
+        "preseasonSpread": -6
       },
       {
         "id": "utah-w11",
@@ -15104,7 +16636,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 24,
           "p90": 30
-        }
+        },
+        "preseasonWinProb": 56,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2
       },
       {
         "id": "utah-w12",
@@ -15155,7 +16691,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 89,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 18,
+        "preseasonSpread": -17
       },
       {
         "id": "utah-w13",
@@ -15190,7 +16730,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 67.4,
-        "mcOverProb": 33.0,
+        "mcOverProb": 33,
         "mcRecommendedAts": "Utah -29.4",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -15206,10 +16746,34 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 13
-        }
+        },
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 15,
+        "preseasonSpread": -23
       }
     ],
-    "seasonBaselineSpRating": 24.5
+    "seasonBaselineSpRating": 24.5,
+    "preseasonBaseline": {
+      "baseSpRating": 24.5,
+      "apRank": "#21 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+6000",
+      "gameWinProbs": [
+        99,
+        95,
+        95,
+        89,
+        95,
+        62,
+        72,
+        89,
+        68,
+        56,
+        89,
+        95
+      ]
+    }
   },
   "iowa": {
     "id": "iowa",
@@ -15284,7 +16848,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 40,
         "finalOppScore": 0,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -31.5
       },
       {
         "id": "iowa-w2",
@@ -15335,7 +16903,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -19.5
       },
       {
         "id": "iowa-w3",
@@ -15386,7 +16958,11 @@ var TEAMS_DATABASE = {
           "p50": 6,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -19.5
       },
       {
         "id": "iowa-w4",
@@ -15407,7 +16983,7 @@ var TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -1.0,
+        "vegasSpread": -1,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 58,
@@ -15437,7 +17013,11 @@ var TEAMS_DATABASE = {
           "p50": 20,
           "p75": 27,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 30,
+        "preseasonProjUt": 23,
+        "preseasonProjOpp": 30,
+        "preseasonSpread": 7
       },
       {
         "id": "iowa-w5",
@@ -15472,7 +17052,7 @@ var TEAMS_DATABASE = {
         "oppId": "ohiostate",
         "is_tracked": true,
         "mcCoverProb": 40.6,
-        "mcOverProb": 26.0,
+        "mcOverProb": 26,
         "mcRecommendedAts": "OSU -12.2",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -15488,7 +17068,11 @@ var TEAMS_DATABASE = {
           "p50": 30,
           "p75": 37,
           "p90": 43
-        }
+        },
+        "preseasonWinProb": 26,
+        "preseasonProjUt": 22,
+        "preseasonProjOpp": 30,
+        "preseasonSpread": 8.5
       },
       {
         "id": "iowa-w6",
@@ -15539,7 +17123,11 @@ var TEAMS_DATABASE = {
           "p50": 21,
           "p75": 28,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 36,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 4.5
       },
       {
         "id": "iowa-w8",
@@ -15590,7 +17178,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13.5
       },
       {
         "id": "iowa-w9",
@@ -15641,7 +17233,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -19.5
       },
       {
         "id": "iowa-w10",
@@ -15692,7 +17288,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13.5
       },
       {
         "id": "iowa-w11",
@@ -15743,7 +17343,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -19.5
       },
       {
         "id": "iowa-w12",
@@ -15794,7 +17398,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13.5
       },
       {
         "id": "iowa-w13",
@@ -15845,10 +17453,34 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 10,
           "p90": 16
-        }
+        },
+        "preseasonWinProb": 92,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -19.5
       }
     ],
-    "seasonBaselineSpRating": 21.0
+    "seasonBaselineSpRating": 21,
+    "preseasonBaseline": {
+      "baseSpRating": 21,
+      "apRank": "#22 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+10000",
+      "gameWinProbs": [
+        91,
+        92,
+        92,
+        30,
+        26,
+        36,
+        84,
+        92,
+        84,
+        92,
+        84,
+        92
+      ]
+    }
   },
   "missouri": {
     "id": "missouri",
@@ -15923,7 +17555,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 54,
         "finalOppScore": 14,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 42,
+        "preseasonProjOpp": 10,
+        "preseasonSpread": -55.5
       },
       {
         "id": "miz-w2",
@@ -15958,7 +17594,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 65.5,
-        "mcOverProb": 32.0,
+        "mcOverProb": 32,
         "mcRecommendedAts": "Missouri -15.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -15974,7 +17610,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 17,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 87,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -15.5
       },
       {
         "id": "miz-w3",
@@ -16025,7 +17665,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 93,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21.5
       },
       {
         "id": "miz-w4",
@@ -16076,7 +17720,11 @@ var TEAMS_DATABASE = {
           "p50": 12,
           "p75": 17,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 87,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -15.5
       },
       {
         "id": "miz-w5",
@@ -16127,7 +17775,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 93,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21.5
       },
       {
         "id": "miz-w6",
@@ -16178,7 +17830,11 @@ var TEAMS_DATABASE = {
           "p50": 27,
           "p75": 35,
           "p90": 41
-        }
+        },
+        "preseasonWinProb": 48,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 0.5
       },
       {
         "id": "miz-w7",
@@ -16229,7 +17885,11 @@ var TEAMS_DATABASE = {
           "p50": 28,
           "p75": 36,
           "p90": 42
-        }
+        },
+        "preseasonWinProb": 32,
+        "preseasonProjUt": 23,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 6
       },
       {
         "id": "miz-w9",
@@ -16280,7 +17940,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 17,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 87,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -15.5
       },
       {
         "id": "miz-w10",
@@ -16331,7 +17995,11 @@ var TEAMS_DATABASE = {
           "p50": 31,
           "p75": 39,
           "p90": 45
-        }
+        },
+        "preseasonWinProb": 33,
+        "preseasonProjUt": 23,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 5.5
       },
       {
         "id": "miz-w11",
@@ -16382,7 +18050,11 @@ var TEAMS_DATABASE = {
           "p50": 36,
           "p75": 43,
           "p90": 49
-        }
+        },
+        "preseasonWinProb": 18,
+        "preseasonProjUt": 20,
+        "preseasonProjOpp": 32,
+        "preseasonSpread": 12
       },
       {
         "id": "miz-w12",
@@ -16433,7 +18105,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 93,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21.5
       },
       {
         "id": "miz-w13",
@@ -16484,10 +18160,34 @@ var TEAMS_DATABASE = {
           "p50": 27,
           "p75": 35,
           "p90": 41
-        }
+        },
+        "preseasonWinProb": 49,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": 7.1
       }
     ],
-    "seasonBaselineSpRating": 22.8
+    "seasonBaselineSpRating": 22.8,
+    "preseasonBaseline": {
+      "baseSpRating": 22.8,
+      "apRank": "#25 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+6500",
+      "gameWinProbs": [
+        98,
+        87,
+        93,
+        87,
+        93,
+        48,
+        32,
+        87,
+        33,
+        18,
+        93,
+        49
+      ]
+    }
   },
   "arizona": {
     "id": "arizona",
@@ -16562,7 +18262,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 35,
         "finalOppScore": 7,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 95,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -33.5
       },
       {
         "id": "ariz-w2",
@@ -16613,7 +18317,11 @@ var TEAMS_DATABASE = {
           "p50": 30,
           "p75": 37,
           "p90": 43
-        }
+        },
+        "preseasonWinProb": 35,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 5
       },
       {
         "id": "ariz-w3",
@@ -16664,7 +18372,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 90,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18
       },
       {
         "id": "ariz-w4",
@@ -16715,7 +18427,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 20,
           "p90": 26
-        }
+        },
+        "preseasonWinProb": 82,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -12
       },
       {
         "id": "ariz-w5",
@@ -16766,7 +18482,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 90,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18
       },
       {
         "id": "ariz-w6",
@@ -16817,7 +18537,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 20,
           "p90": 26
-        }
+        },
+        "preseasonWinProb": 82,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -12
       },
       {
         "id": "ariz-w8",
@@ -16868,7 +18592,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 90,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18
       },
       {
         "id": "ariz-w9",
@@ -16919,7 +18647,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 29,
+        "preseasonProjUt": 23,
+        "preseasonProjOpp": 30,
+        "preseasonSpread": 7.5
       },
       {
         "id": "ariz-w10",
@@ -16953,7 +18685,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 75.0,
+        "mcCoverProb": 75,
         "mcOverProb": 38.6,
         "mcRecommendedAts": "Arizona -17.4",
         "mcRecommendedOu": "UNDER 52.5",
@@ -16970,7 +18702,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 17,
           "p90": 23
-        }
+        },
+        "preseasonWinProb": 90,
+        "preseasonProjUt": 35,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18
       },
       {
         "id": "ariz-w11",
@@ -17021,7 +18757,11 @@ var TEAMS_DATABASE = {
           "p50": 28,
           "p75": 35,
           "p90": 42
-        }
+        },
+        "preseasonWinProb": 44,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 2
       },
       {
         "id": "ariz-w12",
@@ -17072,7 +18812,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 20,
           "p90": 26
-        }
+        },
+        "preseasonWinProb": 82,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -12
       },
       {
         "id": "ariz-w13",
@@ -17124,10 +18868,34 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 69,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 23,
+        "preseasonSpread": -6.5
       }
     ],
-    "seasonBaselineSpRating": 19.5
+    "seasonBaselineSpRating": 19.5,
+    "preseasonBaseline": {
+      "baseSpRating": 19.5,
+      "apRank": "RV",
+      "cfpSeed": null,
+      "nattyOdds": "+17500",
+      "gameWinProbs": [
+        95,
+        35,
+        90,
+        82,
+        90,
+        82,
+        90,
+        29,
+        90,
+        44,
+        82,
+        69
+      ]
+    }
   },
   "washington": {
     "id": "washington",
@@ -17202,7 +18970,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 24,
         "finalOppScore": 10,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 97,
+        "preseasonProjUt": 41,
+        "preseasonProjOpp": 13,
+        "preseasonSpread": -23.5
       },
       {
         "id": "wash-w2",
@@ -17223,7 +18995,7 @@ var TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.0,
+        "vegasSpread": -21,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 98,
@@ -17253,7 +19025,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 14,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 93,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21
       },
       {
         "id": "wash-w3",
@@ -17304,7 +19080,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 93,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21
       },
       {
         "id": "wash-w4",
@@ -17355,7 +19135,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 93,
+        "preseasonProjUt": 37,
+        "preseasonProjOpp": 16,
+        "preseasonSpread": -21
       },
       {
         "id": "wash-w5",
@@ -17389,7 +19173,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": "usc",
         "is_tracked": true,
-        "mcCoverProb": 42.0,
+        "mcCoverProb": 42,
         "mcOverProb": 33.4,
         "mcRecommendedAts": "USC -10.2",
         "mcRecommendedOu": "UNDER 52.5",
@@ -17406,7 +19190,11 @@ var TEAMS_DATABASE = {
           "p50": 30,
           "p75": 37,
           "p90": 44
-        }
+        },
+        "preseasonWinProb": 31,
+        "preseasonProjUt": 23,
+        "preseasonProjOpp": 30,
+        "preseasonSpread": 6.5
       },
       {
         "id": "wash-w6",
@@ -17441,7 +19229,7 @@ var TEAMS_DATABASE = {
         "oppId": "iowa",
         "is_tracked": true,
         "mcCoverProb": 50.6,
-        "mcOverProb": 28.0,
+        "mcOverProb": 28,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -17457,7 +19245,11 @@ var TEAMS_DATABASE = {
           "p50": 21,
           "p75": 28,
           "p90": 35
-        }
+        },
+        "preseasonWinProb": 64,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -4.5
       },
       {
         "id": "wash-w7",
@@ -17508,7 +19300,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 20,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 87,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -15
       },
       {
         "id": "wash-w9",
@@ -17559,7 +19355,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 20,
           "p90": 26
-        }
+        },
+        "preseasonWinProb": 87,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -15
       },
       {
         "id": "wash-w10",
@@ -17610,7 +19410,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 33,
           "p90": 39
-        }
+        },
+        "preseasonWinProb": 65,
+        "preseasonProjUt": 29,
+        "preseasonProjOpp": 24,
+        "preseasonSpread": -5
       },
       {
         "id": "wash-w11",
@@ -17661,7 +19465,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 20,
           "p90": 26
-        }
+        },
+        "preseasonWinProb": 87,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -15
       },
       {
         "id": "wash-w12",
@@ -17712,7 +19520,11 @@ var TEAMS_DATABASE = {
           "p50": 26,
           "p75": 34,
           "p90": 41
-        }
+        },
+        "preseasonWinProb": 50,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": 4.5
       },
       {
         "id": "wash-w13",
@@ -17748,7 +19560,7 @@ var TEAMS_DATABASE = {
         "is_tracked": true,
         "rivalryName": "PACIFIC NORTHWEST CLASH",
         "mcCoverProb": 37.4,
-        "mcOverProb": 32.0,
+        "mcOverProb": 32,
         "mcRecommendedAts": "ORE -12.9",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -17764,10 +19576,34 @@ var TEAMS_DATABASE = {
           "p50": 31,
           "p75": 38,
           "p90": 45
-        }
+        },
+        "preseasonWinProb": 19,
+        "preseasonProjUt": 20,
+        "preseasonProjOpp": 32,
+        "preseasonSpread": 11.5
       }
     ],
-    "seasonBaselineSpRating": 22.5
+    "seasonBaselineSpRating": 22.5,
+    "preseasonBaseline": {
+      "baseSpRating": 22.5,
+      "apRank": "#17 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+20000",
+      "gameWinProbs": [
+        97,
+        93,
+        93,
+        93,
+        31,
+        64,
+        87,
+        87,
+        65,
+        87,
+        50,
+        19
+      ]
+    }
   },
   "houston": {
     "id": "houston",
@@ -17826,7 +19662,7 @@ var TEAMS_DATABASE = {
         "location": "Houston, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -21.0,
+        "vegasSpread": -21,
         "overUnder": 50.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 91,
@@ -17842,7 +19678,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 33,
         "finalOppScore": 20,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -21
       },
       {
         "id": "hou-w2",
@@ -17893,7 +19733,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       },
       {
         "id": "hou-w3",
@@ -17927,8 +19771,8 @@ var TEAMS_DATABASE = {
         },
         "oppId": "texastech",
         "is_tracked": true,
-        "mcCoverProb": 50.0,
-        "mcOverProb": 34.0,
+        "mcCoverProb": 50,
+        "mcOverProb": 34,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -17944,7 +19788,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 30,
+        "preseasonProjUt": 23,
+        "preseasonProjOpp": 30,
+        "preseasonSpread": 7
       },
       {
         "id": "hou-w4",
@@ -17995,7 +19843,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 20,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 83,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -12.5
       },
       {
         "id": "hou-w5",
@@ -18046,7 +19898,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       },
       {
         "id": "hou-w6",
@@ -18097,7 +19953,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 20,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 83,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -12.5
       },
       {
         "id": "hou-w7",
@@ -18148,7 +20008,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       },
       {
         "id": "hou-w8",
@@ -18199,7 +20063,11 @@ var TEAMS_DATABASE = {
           "p50": 33,
           "p75": 40,
           "p90": 47
-        }
+        },
+        "preseasonWinProb": 28,
+        "preseasonProjUt": 22,
+        "preseasonProjOpp": 30,
+        "preseasonSpread": 7.5
       },
       {
         "id": "hou-w10",
@@ -18234,7 +20102,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 70.4,
-        "mcOverProb": 29.0,
+        "mcOverProb": 29,
         "mcRecommendedAts": "Houston -17.2",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -18250,7 +20118,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       },
       {
         "id": "hou-w11",
@@ -18301,7 +20173,11 @@ var TEAMS_DATABASE = {
           "p50": 24,
           "p75": 31,
           "p90": 38
-        }
+        },
+        "preseasonWinProb": 48,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": 0.5
       },
       {
         "id": "hou-w12",
@@ -18352,7 +20228,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 20,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 83,
+        "preseasonProjUt": 32,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -12.5
       },
       {
         "id": "hou-w13",
@@ -18403,10 +20283,34 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -18.5
       }
     ],
-    "seasonBaselineSpRating": 20.0
+    "seasonBaselineSpRating": 20,
+    "preseasonBaseline": {
+      "baseSpRating": 20,
+      "apRank": "#23 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+50000",
+      "gameWinProbs": [
+        91,
+        91,
+        30,
+        83,
+        91,
+        83,
+        91,
+        28,
+        91,
+        48,
+        83,
+        91
+      ]
+    }
   },
   "louisville": {
     "id": "louisville",
@@ -18481,7 +20385,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 38,
         "finalOppScore": 41,
-        "finalWin": false
+        "finalWin": false,
+        "preseasonWinProb": 13,
+        "preseasonProjUt": 20,
+        "preseasonProjOpp": 35,
+        "preseasonSpread": 6.5
       },
       {
         "id": "lou-w2",
@@ -18502,7 +20410,7 @@ var TEAMS_DATABASE = {
         "location": "Louisville, KY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -19.0,
+        "vegasSpread": -19,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 99,
@@ -18532,7 +20440,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "lou-w3",
@@ -18583,7 +20495,11 @@ var TEAMS_DATABASE = {
           "p50": 22,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 52,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": -0.5
       },
       {
         "id": "lou-w4",
@@ -18634,7 +20550,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "lou-w5",
@@ -18685,7 +20605,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 17,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13
       },
       {
         "id": "lou-w6",
@@ -18720,7 +20644,7 @@ var TEAMS_DATABASE = {
         "oppId": "floridastate",
         "is_tracked": true,
         "mcCoverProb": 53.6,
-        "mcOverProb": 35.0,
+        "mcOverProb": 35,
         "mcRecommendedAts": "Louisville -0.1",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -18736,7 +20660,11 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 45,
+        "preseasonProjUt": 25,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 1.5
       },
       {
         "id": "lou-w7",
@@ -18787,7 +20715,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 17,
           "p90": 23
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13
       },
       {
         "id": "lou-w9",
@@ -18838,7 +20770,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "lou-w10",
@@ -18889,7 +20825,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 17,
           "p90": 23
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13
       },
       {
         "id": "lou-w11",
@@ -18940,7 +20880,11 @@ var TEAMS_DATABASE = {
           "p50": 12,
           "p75": 17,
           "p90": 23
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13
       },
       {
         "id": "lou-w12",
@@ -18975,7 +20919,7 @@ var TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 71.1,
-        "mcOverProb": 31.0,
+        "mcOverProb": 31,
         "mcRecommendedAts": "Louisville -21.3",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -18991,7 +20935,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 91,
+        "preseasonProjUt": 36,
+        "preseasonProjOpp": 17,
+        "preseasonSpread": -19
       },
       {
         "id": "lou-w13",
@@ -19042,10 +20990,34 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 17,
           "p90": 23
-        }
+        },
+        "preseasonWinProb": 84,
+        "preseasonProjUt": 33,
+        "preseasonProjOpp": 20,
+        "preseasonSpread": -13
       }
     ],
-    "seasonBaselineSpRating": 20.5
+    "seasonBaselineSpRating": 20.5,
+    "preseasonBaseline": {
+      "baseSpRating": 20.5,
+      "apRank": "#24 AP",
+      "cfpSeed": null,
+      "nattyOdds": "+8000",
+      "gameWinProbs": [
+        13,
+        91,
+        52,
+        91,
+        84,
+        45,
+        84,
+        91,
+        84,
+        84,
+        91,
+        84
+      ]
+    }
   },
   "colorado": {
     "id": "colorado",
@@ -19122,7 +21094,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 14,
         "finalOppScore": 13,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 38,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": 3
       },
       {
         "id": "col-w2",
@@ -19143,12 +21119,12 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.0,
+        "vegasSpread": -24,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 96,
-        "projScoreUt": 36,
-        "projScoreOpp": 11,
+        "projScoreUt": 38,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Weber State Wildcats rushing attack.",
@@ -19158,7 +21134,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 74.1,
         "mcOverProb": 31.6,
-        "mcRecommendedAts": "Colorado -16.0",
+        "mcRecommendedAts": "Colorado -24",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 21,
@@ -19173,7 +21149,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 96,
+        "preseasonProjUt": 38,
+        "preseasonProjOpp": 14,
+        "preseasonSpread": -24
       },
       {
         "id": "col-w3",
@@ -19194,12 +21174,12 @@ var TEAMS_DATABASE = {
         "location": "Evanston, IL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -11.8,
+        "vegasSpread": -3.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 87,
-        "projScoreUt": 31,
-        "projScoreOpp": 15,
+        "baseWinProb": 61,
+        "projScoreUt": 27,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Northwestern Wildcats rushing attack.",
@@ -19209,7 +21189,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 62.2,
         "mcOverProb": 31.6,
-        "mcRecommendedAts": "Colorado -11.8",
+        "mcRecommendedAts": "Colorado -3.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 17,
@@ -19224,7 +21204,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 21,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 61,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 23,
+        "preseasonSpread": -3.5
       },
       {
         "id": "col-w4",
@@ -19245,12 +21229,12 @@ var TEAMS_DATABASE = {
         "location": "Waco, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -11.8,
+        "vegasSpread": 2,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 89,
-        "projScoreUt": 32,
-        "projScoreOpp": 15,
+        "baseWinProb": 42,
+        "projScoreUt": 24,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Baylor Bears rushing attack.",
@@ -19260,7 +21244,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 63.9,
         "mcOverProb": 35.4,
-        "mcRecommendedAts": "Colorado -11.8",
+        "mcRecommendedAts": "BAY -2",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 17,
@@ -19275,7 +21259,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 20,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 42,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": 2
       },
       {
         "id": "col-w5",
@@ -19296,12 +21284,12 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.6,
+        "vegasSpread": 4.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 63,
+        "baseWinProb": 37,
         "projScoreUt": 26,
-        "projScoreOpp": 21,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Colorado quarterback play vs Texas Tech Red Raiders secondary.",
@@ -19311,7 +21299,7 @@ var TEAMS_DATABASE = {
         "is_tracked": true,
         "mcCoverProb": 59.2,
         "mcOverProb": 34.3,
-        "mcRecommendedAts": "Colorado -2.6",
+        "mcRecommendedAts": "TTU -4.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 13,
@@ -19326,7 +21314,11 @@ var TEAMS_DATABASE = {
           "p50": 20,
           "p75": 28,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 37,
+        "preseasonProjUt": 26,
+        "preseasonProjOpp": 31,
+        "preseasonSpread": 4.5
       },
       {
         "id": "col-w7",
@@ -19347,11 +21339,11 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 8.4,
+        "vegasSpread": 8.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 22,
-        "projScoreUt": 18,
+        "projScoreUt": 20,
         "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -19362,7 +21354,7 @@ var TEAMS_DATABASE = {
         "is_tracked": true,
         "mcCoverProb": 43.4,
         "mcOverProb": 32.5,
-        "mcRecommendedAts": "UTAH -8.4",
+        "mcRecommendedAts": "UTAH -8.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 6,
@@ -19377,7 +21369,11 @@ var TEAMS_DATABASE = {
           "p50": 28,
           "p75": 36,
           "p90": 42
-        }
+        },
+        "preseasonWinProb": 22,
+        "preseasonProjUt": 20,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 8.5
       },
       {
         "id": "col-w8",
@@ -19398,12 +21394,12 @@ var TEAMS_DATABASE = {
         "location": "Stillwater, OK",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -11.8,
+        "vegasSpread": -1.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 87,
-        "projScoreUt": 31,
-        "projScoreOpp": 15,
+        "baseWinProb": 53,
+        "projScoreUt": 28,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Oklahoma State Cowboys rushing attack.",
@@ -19413,7 +21409,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 62.2,
         "mcOverProb": 33.1,
-        "mcRecommendedAts": "Colorado -11.8",
+        "mcRecommendedAts": "Colorado -1.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 17,
@@ -19428,7 +21424,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 21,
           "p90": 28
-        }
+        },
+        "preseasonWinProb": 53,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 27,
+        "preseasonSpread": -1.5
       },
       {
         "id": "col-w9",
@@ -19449,12 +21449,12 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.8,
+        "vegasSpread": 5.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 97,
-        "projScoreUt": 36,
-        "projScoreOpp": 11,
+        "baseWinProb": 34,
+        "projScoreUt": 23,
+        "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Kansas State Wildcats rushing attack.",
@@ -19464,7 +21464,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 70.7,
         "mcOverProb": 32.5,
-        "mcRecommendedAts": "Colorado -17.8",
+        "mcRecommendedAts": "KSU -5.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 22,
@@ -19479,7 +21479,11 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 34,
+        "preseasonProjUt": 23,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 5.5
       },
       {
         "id": "col-w10",
@@ -19500,12 +21504,12 @@ var TEAMS_DATABASE = {
         "location": "Tempe, AZ",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 6.2,
+        "vegasSpread": 3.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 31,
-        "projScoreUt": 20,
-        "projScoreOpp": 27,
+        "baseWinProb": 39,
+        "projScoreUt": 24,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Colorado quarterback play vs Arizona State Sun Devils secondary.",
@@ -19515,7 +21519,7 @@ var TEAMS_DATABASE = {
         "is_tracked": true,
         "mcCoverProb": 46.6,
         "mcOverProb": 35.2,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedAts": "ASU -3.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 7,
@@ -19530,7 +21534,11 @@ var TEAMS_DATABASE = {
           "p50": 27,
           "p75": 34,
           "p90": 41
-        }
+        },
+        "preseasonWinProb": 39,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 28,
+        "preseasonSpread": 3.5
       },
       {
         "id": "col-w11",
@@ -19551,12 +21559,12 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.2,
+        "vegasSpread": -0.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 62,
-        "projScoreUt": 26,
-        "projScoreOpp": 22,
+        "baseWinProb": 51,
+        "projScoreUt": 27,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Colorado quarterback play vs Houston Cougars secondary.",
@@ -19566,7 +21574,7 @@ var TEAMS_DATABASE = {
         "is_tracked": true,
         "mcCoverProb": 57.3,
         "mcOverProb": 34.4,
-        "mcRecommendedAts": "Colorado -2.2",
+        "mcRecommendedAts": "Colorado -0.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 13,
@@ -19581,7 +21589,11 @@ var TEAMS_DATABASE = {
           "p50": 21,
           "p75": 28,
           "p90": 34
-        }
+        },
+        "preseasonWinProb": 51,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": -0.5
       },
       {
         "id": "col-w12",
@@ -19602,12 +21614,12 @@ var TEAMS_DATABASE = {
         "location": "Cincinnati, OH",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -11.8,
+        "vegasSpread": 1.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 88,
-        "projScoreUt": 32,
-        "projScoreOpp": 15,
+        "baseWinProb": 46,
+        "projScoreUt": 24,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Cincinnati Bearcats rushing attack.",
@@ -19617,7 +21629,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 63.4,
         "mcOverProb": 34.4,
-        "mcRecommendedAts": "Colorado -11.8",
+        "mcRecommendedAts": "CIN -1.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 17,
@@ -19632,7 +21644,11 @@ var TEAMS_DATABASE = {
           "p50": 14,
           "p75": 21,
           "p90": 27
-        }
+        },
+        "preseasonWinProb": 46,
+        "preseasonProjUt": 24,
+        "preseasonProjOpp": 26,
+        "preseasonSpread": 1.5
       },
       {
         "id": "col-w13",
@@ -19653,12 +21669,12 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.8,
+        "vegasSpread": -2.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 97,
-        "projScoreUt": 35,
-        "projScoreOpp": 11,
+        "baseWinProb": 57,
+        "projScoreUt": 28,
+        "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs UCF Knights rushing attack.",
@@ -19668,7 +21684,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 70.1,
         "mcOverProb": 30.8,
-        "mcRecommendedAts": "Colorado -17.8",
+        "mcRecommendedAts": "Colorado -2.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 21,
@@ -19683,10 +21699,34 @@ var TEAMS_DATABASE = {
           "p50": 10,
           "p75": 16,
           "p90": 21
-        }
+        },
+        "preseasonWinProb": 57,
+        "preseasonProjUt": 28,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -2.5
       }
     ],
-    "seasonBaselineSpRating": 17.5
+    "seasonBaselineSpRating": 17.5,
+    "preseasonBaseline": {
+      "baseSpRating": 17.5,
+      "apRank": "NR",
+      "cfpSeed": null,
+      "nattyOdds": "+15000",
+      "gameWinProbs": [
+        38,
+        96,
+        61,
+        42,
+        37,
+        22,
+        53,
+        34,
+        39,
+        51,
+        46,
+        57
+      ]
+    }
   },
   "arizonastate": {
     "id": "arizonastate",
@@ -19764,7 +21804,11 @@ var TEAMS_DATABASE = {
         "isFinal": true,
         "finalTeamScore": 70,
         "finalOppScore": 7,
-        "finalWin": true
+        "finalWin": true,
+        "preseasonWinProb": 98,
+        "preseasonProjUt": 43,
+        "preseasonProjOpp": 10,
+        "preseasonSpread": -43.5
       },
       {
         "id": "asu-w2",
@@ -19815,7 +21859,11 @@ var TEAMS_DATABASE = {
           "p50": 31,
           "p75": 38,
           "p90": 45
-        }
+        },
+        "preseasonWinProb": 16,
+        "preseasonProjUt": 20,
+        "preseasonProjOpp": 33,
+        "preseasonSpread": 13.5
       },
       {
         "id": "asu-w3",
@@ -19866,7 +21914,11 @@ var TEAMS_DATABASE = {
           "p50": 12,
           "p75": 17,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 75,
+        "preseasonProjUt": 31,
+        "preseasonProjOpp": 22,
+        "preseasonSpread": -8.5
       },
       {
         "id": "asu-w5",
@@ -19917,7 +21969,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 20
-        }
+        },
+        "preseasonWinProb": 86,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -14.5
       },
       {
         "id": "asu-w6",
@@ -19951,7 +22007,7 @@ var TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 74.0,
+        "mcCoverProb": 74,
         "mcOverProb": 26.8,
         "mcRecommendedAts": "Arizona State -20.3",
         "mcRecommendedOu": "UNDER 52.5",
@@ -19968,7 +22024,11 @@ var TEAMS_DATABASE = {
           "p50": 7,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 86,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -14.5
       },
       {
         "id": "asu-w7",
@@ -20019,7 +22079,11 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 21,
+        "preseasonProjUt": 21,
+        "preseasonProjOpp": 32,
+        "preseasonSpread": 10.5
       },
       {
         "id": "asu-w8",
@@ -20070,7 +22134,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 86,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -14.5
       },
       {
         "id": "asu-w9",
@@ -20121,7 +22189,11 @@ var TEAMS_DATABASE = {
           "p50": 28,
           "p75": 35,
           "p90": 42
-        }
+        },
+        "preseasonWinProb": 26,
+        "preseasonProjUt": 22,
+        "preseasonProjOpp": 30,
+        "preseasonSpread": 8.5
       },
       {
         "id": "asu-w10",
@@ -20172,7 +22244,11 @@ var TEAMS_DATABASE = {
           "p50": 17,
           "p75": 24,
           "p90": 32
-        }
+        },
+        "preseasonWinProb": 55,
+        "preseasonProjUt": 27,
+        "preseasonProjOpp": 25,
+        "preseasonSpread": -1.5
       },
       {
         "id": "asu-w11",
@@ -20223,7 +22299,11 @@ var TEAMS_DATABASE = {
           "p50": 13,
           "p75": 17,
           "p90": 24
-        }
+        },
+        "preseasonWinProb": 75,
+        "preseasonProjUt": 31,
+        "preseasonProjOpp": 22,
+        "preseasonSpread": -8.5
       },
       {
         "id": "asu-w12",
@@ -20274,7 +22354,11 @@ var TEAMS_DATABASE = {
           "p50": 9,
           "p75": 13,
           "p90": 17
-        }
+        },
+        "preseasonWinProb": 86,
+        "preseasonProjUt": 34,
+        "preseasonProjOpp": 19,
+        "preseasonSpread": -14.5
       },
       {
         "id": "asu-w13",
@@ -20326,10 +22410,34 @@ var TEAMS_DATABASE = {
           "p50": 23,
           "p75": 30,
           "p90": 37
-        }
+        },
+        "preseasonWinProb": 31,
+        "preseasonProjUt": 23,
+        "preseasonProjOpp": 29,
+        "preseasonSpread": 6.5
       }
     ],
-    "seasonBaselineSpRating": 16.2
+    "seasonBaselineSpRating": 16.2,
+    "preseasonBaseline": {
+      "baseSpRating": 16.2,
+      "apRank": "RV",
+      "cfpSeed": null,
+      "nattyOdds": "+45000",
+      "gameWinProbs": [
+        98,
+        16,
+        75,
+        86,
+        86,
+        21,
+        86,
+        26,
+        55,
+        75,
+        86,
+        31
+      ]
+    }
   }
 };
 

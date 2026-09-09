@@ -99,6 +99,59 @@ STADIUM_HFA = {
     "Husky Stadium": 3.5
 }
 
+NON_DB_OPPONENT_RATINGS = {
+    'Florida Gators': 19.5, 'FLA': 19.5,
+    'Nebraska Cornhuskers': 19.0, 'NEB': 19.0,
+    'Wisconsin Badgers': 19.0, 'WISC': 19.0,
+    'Kansas State Wildcats': 20.0, 'KSU': 20.0,
+    'Iowa State Cyclones': 19.5, 'ISU': 19.5,
+    'Illinois Fighting Illini': 18.5, 'ILL': 18.5,
+    'Auburn Tigers': 18.5, 'AUB': 18.5,
+    'South Carolina Gamecocks': 17.5, 'SC': 17.5,
+    'Arkansas Razorbacks': 17.5, 'ARK': 17.5,
+    'Colorado Buffaloes': 18.0, 'COL': 18.0,
+    'Arizona State Sun Devils': 18.0, 'ASU': 18.0,
+    'Georgia Tech Yellow Jackets': 18.5, 'GT': 18.5,
+    'North Carolina Tar Heels': 17.5, 'UNC': 17.5,
+    'TCU Horned Frogs': 17.5, 'TCU': 17.5,
+    'Kansas Jayhawks': 17.5, 'KU': 17.5,
+    'Kentucky Wildcats': 17.0, 'UK': 17.0,
+    'UCF Knights': 17.0, 'UCF': 17.0,
+    'Pittsburgh Panthers': 17.0, 'PITT': 17.0,
+    'NC State Wolfpack': 17.0, 'NCST': 17.0,
+    'Rutgers Scarlet Knights': 16.5, 'RUTG': 16.5,
+    'Minnesota Golden Gophers': 16.5, 'MINN': 16.5,
+    'Oklahoma State Cowboys': 16.5, 'OKST': 16.5,
+    'Baylor Bears': 16.5, 'BAY': 16.5,
+    'Virginia Tech Hokies': 16.5, 'VT': 16.5,
+    'Syracuse Orange': 16.5, 'SYR': 16.5,
+    'UCLA Bruins': 16.0, 'UCLA': 16.0,
+    'West Virginia Mountaineers': 16.0, 'WVU': 16.0,
+    'Oregon State Beavers': 16.0, 'ORST': 16.0,
+    'Washington State Cougars': 16.0, 'WSU': 16.0,
+    'Duke Blue Devils': 16.0, 'DUKE': 16.0,
+    'Maryland Terrapins': 15.5, 'MD': 15.5,
+    'Cincinnati Bearcats': 15.5, 'CIN': 15.5,
+    'California Golden Bears': 15.5, 'CAL': 15.5,
+    'Mississippi State Bulldogs': 15.0, 'MSST': 15.0,
+    'Michigan State Spartans': 15.0, 'MSU': 15.0,
+    'Virginia Cavaliers': 14.5, 'UVA': 14.5,
+    'Vanderbilt Commodores': 14.5, 'VANDY': 14.5,
+    'Boston College Eagles': 13.0, 'BC': 13.0,
+    'Wake Forest Demon Deacons': 13.0, 'WAKE': 13.0,
+    'Purdue Boilermakers': 12.5, 'PUR': 12.5,
+    'Stanford Cardinal': 12.5, 'STAN': 12.5,
+    'Northwestern Wildcats': 12.0, 'NU': 12.0,
+    'Tulane Green Wave': 13.5, 'TUL': 13.5,
+    'Memphis Tigers': 13.0, 'MEM': 13.0,
+    'UNLV Rebels': 13.0, 'UNLV': 13.0,
+    'UTSA Roadrunners': 6.0, 'UTSA': 6.0,
+    'Texas State Bobcats': 4.5, 'TXST': 4.5,
+    'Western Michigan Broncos': 3.5, 'WMU': 3.5,
+    'Ball State Cardinals': 1.0, 'BALL': 1.0,
+    'UTEP Miners': 1.0, 'UTEP': 1.0
+}
+
 def load_teams_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
@@ -545,11 +598,27 @@ def main():
                 sp_opp = -14.0
                 opp_talent = 180.0
             else:
-                opp_name = (g.get('opponent') or '').lower()
-                power4_keywords = ['sec', 'big ten', 'big 12', 'acc', 'notre dame']
-                is_power = any(kw in opp_name for kw in power4_keywords)
-                sp_opp = 13.0 if is_power else 4.5
-                opp_talent = 620.0 if is_power else 380.0
+                raw_opp_name = g.get('opponent') or ''
+                opp_abbr = g.get('oppAbbr') or ''
+                if raw_opp_name in NON_DB_OPPONENT_RATINGS:
+                    sp_opp = NON_DB_OPPONENT_RATINGS[raw_opp_name]
+                elif opp_abbr in NON_DB_OPPONENT_RATINGS:
+                    sp_opp = NON_DB_OPPONENT_RATINGS[opp_abbr]
+                else:
+                    found_rating = None
+                    for k, r in NON_DB_OPPONENT_RATINGS.items():
+                        if k.lower() in raw_opp_name.lower() or raw_opp_name.lower() in k.lower():
+                            found_rating = r
+                            break
+                    if found_rating is not None:
+                        sp_opp = found_rating
+                    elif g.get('isConf') or g.get('isBig12') or g.get('isSec') or g.get('isBigTen') or g.get('isAcc'):
+                        sp_opp = 16.5
+                    elif any(kw in raw_opp_name.lower() for kw in ['sec', 'big ten', 'big 12', 'acc', 'notre dame']):
+                        sp_opp = 16.0
+                    else:
+                        sp_opp = 5.0
+                opp_talent = 650.0 if sp_opp >= 15.0 else 380.0
 
             stadium = g.get('stadium', '')
             hfa = 0.0
