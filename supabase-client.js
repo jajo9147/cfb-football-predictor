@@ -156,11 +156,20 @@
     return await signInWithGoogleOAuthFallback();
   }
 
+  function getSafeRedirectUrl() {
+    try {
+      if (window.location && (window.location.protocol === 'http:' || window.location.protocol === 'https:') && !window.location.origin.includes('file:')) {
+        return window.location.origin + window.location.pathname;
+      }
+    } catch (e) {}
+    return 'https://jajo9147.github.io/cfb-football-predictor/';
+  }
+
   async function signInWithGoogleOAuthFallback() {
     return await supabaseClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin + window.location.pathname
+        redirectTo: getSafeRedirectUrl()
       }
     });
   }
@@ -174,7 +183,7 @@
     return await supabaseClient.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: window.location.origin + window.location.pathname
+        redirectTo: getSafeRedirectUrl()
       }
     });
   }
@@ -195,7 +204,7 @@
     return await supabaseClient.auth.signInWithOAuth({
       provider: 'apple',
       options: {
-        redirectTo: window.location.origin + window.location.pathname
+        redirectTo: getSafeRedirectUrl()
       }
     });
   }
@@ -212,7 +221,7 @@
     return await supabaseClient.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: window.location.origin + window.location.pathname
+        emailRedirectTo: getSafeRedirectUrl()
       }
     });
   }
@@ -299,7 +308,7 @@
       return { error: { message: 'Please enter a valid email address.' } };
     }
     return await supabaseClient.auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: window.location.origin + window.location.pathname
+      redirectTo: getSafeRedirectUrl()
     });
   }
 
