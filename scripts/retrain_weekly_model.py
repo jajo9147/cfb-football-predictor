@@ -665,7 +665,7 @@ def main():
 
     BASELINE_SP_RATINGS = {
         'ohiostate': 35.0, 'oregon': 34.0, 'georgia': 34.0, 'notredame': 33.5,
-        'texas': 32.0, 'indiana': 30.5, 'miami': 30.0, 'lsu': 29.5,
+        'texas': 32.0, 'indiana': 30.5, 'miami': 30.0, 'lsu': 26.5,
         'texasam': 28.2, 'pennstate': 27.5, 'texastech': 27.5, 'oklahoma': 26.8,
         'alabama': 26.5, 'olemiss': 26.2, 'usc': 25.2, 'utah': 23.5,
         'tennessee': 23.2, 'byu': 22.8, 'washington': 21.8, 'michigan': 21.5,
