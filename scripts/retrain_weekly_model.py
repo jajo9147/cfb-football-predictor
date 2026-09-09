@@ -664,14 +664,14 @@ def main():
     rating_shifts = {}
 
     BASELINE_SP_RATINGS = {
-        'ohiostate': 35.0, 'oregon': 34.0, 'georgia': 34.0, 'notredame': 33.5,
+        'ohiostate': 35.0, 'oregon': 34.0, 'georgia': 34.0, 'notredame': 31.5,
         'texas': 32.0, 'indiana': 30.5, 'miami': 30.0, 'lsu': 26.5,
-        'texasam': 28.2, 'pennstate': 27.5, 'texastech': 27.5, 'oklahoma': 26.8,
-        'alabama': 26.5, 'olemiss': 26.2, 'usc': 25.2, 'utah': 23.5,
-        'tennessee': 23.2, 'byu': 22.8, 'washington': 21.8, 'michigan': 21.5,
-        'houston': 21.0, 'missouri': 20.2, 'smu': 20.0, 'iowa': 19.8,
-        'floridastate': 18.5, 'louisville': 17.8, 'arizonastate': 17.2,
-        'clemson': 22.0, 'colorado': 15.2, 'arizona': 14.8, 'boisestate': 13.0
+        'texasam': 28.2, 'usc': 26.5, 'oklahoma': 26.8, 'alabama': 26.5,
+        'texastech': 24.5, 'olemiss': 26.2, 'byu': 24.0, 'tennessee': 23.2,
+        'washington': 21.5, 'michigan': 21.5, 'clemson': 21.0, 'pennstate': 20.0,
+        'iowa': 19.8, 'missouri': 20.2, 'smu': 20.0, 'houston': 19.5,
+        'floridastate': 18.5, 'utah': 16.5, 'louisville': 17.8, 'arizonastate': 17.0,
+        'colorado': 15.2, 'arizona': 14.5, 'boisestate': 13.0
     }
 
     print("\n📈 RETRAINED TEAM POWER RATINGS (BAYESIAN ADJUSTMENT + EPA):")
