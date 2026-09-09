@@ -8559,12 +8559,6 @@ function openAuthModal() {
     googleSec.style.display = 'block';
   }
 
-  const appleBtn = document.getElementById('appleSignInBtn');
-  if (appleBtn) {
-    const canAppleSignIn = isIosNative || (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appleSignIn);
-    appleBtn.style.display = canAppleSignIn ? 'flex' : 'none';
-  }
-
   const modal = document.getElementById('authModal');
   if (modal) modal.classList.add('open');
   document.body.classList.add('modal-open');
