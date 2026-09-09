@@ -8556,8 +8556,13 @@ function openAuthModal() {
 
   const googleSec = document.getElementById('googleAuthSection');
   if (googleSec) {
-    // Hide on iOS native app to adhere to App Store Guideline 4.8; keep visible on Web
-    googleSec.style.display = isIosNative ? 'none' : 'block';
+    googleSec.style.display = 'block';
+  }
+
+  const appleBtn = document.getElementById('appleSignInBtn');
+  if (appleBtn) {
+    const canAppleSignIn = isIosNative || (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appleSignIn);
+    appleBtn.style.display = canAppleSignIn ? 'flex' : 'none';
   }
 
   const modal = document.getElementById('authModal');
@@ -8662,6 +8667,14 @@ window.handleSupabaseGitHubSignIn = handleSupabaseGitHubSignIn;
 
 async function handleSupabaseAppleSignIn() {
   hideAuthAlert();
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appleSignIn) {
+    try {
+      window.webkit.messageHandlers.appleSignIn.postMessage({});
+      return;
+    } catch (e) {
+      console.warn('Native Apple Sign In invocation error:', e);
+    }
+  }
   if (window.CFBProphetSupabase) {
     const res = await window.CFBProphetSupabase.signInWithApple();
     if (res && res.error) {
