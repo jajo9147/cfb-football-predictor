@@ -668,7 +668,7 @@ def main():
         'texas': 32.0, 'indiana': 30.5, 'miami': 30.0, 'lsu': 26.5,
         'texasam': 28.2, 'usc': 26.5, 'oklahoma': 26.8, 'alabama': 26.5,
         'texastech': 24.5, 'olemiss': 26.2, 'byu': 24.0, 'tennessee': 23.2,
-        'washington': 21.5, 'michigan': 21.5, 'clemson': 21.0, 'pennstate': 20.0,
+        'washington': 23.0, 'michigan': 21.5, 'clemson': 21.0, 'pennstate': 20.0,
         'iowa': 19.8, 'missouri': 20.2, 'smu': 20.0, 'houston': 19.5,
         'floridastate': 18.5, 'utah': 16.5, 'louisville': 17.8, 'arizonastate': 17.0,
         'colorado': 15.2, 'arizona': 14.5, 'boisestate': 13.0
