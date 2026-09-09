@@ -86,7 +86,7 @@ def run_inspections():
         errors.append(f"Expected at least 31 tracked teams, found only {len(db)}")
 
     # 2. Strict 2026 DTG (Date-Time-Group) Inspection
-    print("\n[1/6] 📅 Inspecting DTG (Date, Time, Week, Season) Accuracy...")
+    print("\n[1/7] 📅 Inspecting DTG (Date, Time, Week, Season) Accuracy...")
     total_games = 0
     time_regex = re.compile(r'^(1[0-2]|[1-9]):[0-5][0-9]\s*(AM|PM)\s*ET$')
     
@@ -121,7 +121,7 @@ def run_inspections():
     print(f"  • Scanned {total_games} games across {len(db)} teams for 2026 DTG integrity.")
 
     # 3. Logo & Asset Integrity
-    print("\n[2/6] 🎨 Inspecting Logos, Badges, and Visual Assets...")
+    print("\n[2/7] 🎨 Inspecting Logos, Badges, and Visual Assets...")
     for tid, t in db.items():
         team_logo = t.get('logoUrl', '')
         if not team_logo or not team_logo.startswith('https://'):
@@ -146,7 +146,7 @@ def run_inspections():
     print(f"  • Verified logo URLs and opponent isolation for all {total_games} games.")
 
     # 4. Authentic AP Rankings Verification
-    print("\n[3/6] 🏆 Validating Week 2 AP Top 25 & RV Poll Precision...")
+    print("\n[3/7] 🏆 Validating Week 2 AP Top 25 & RV Poll Precision...")
     for tid, exp_rank in EXPECTED_AP_POLL_WEEK2.items():
         if tid not in db:
             errors.append(f"Missing expected tracked team: {tid}")
@@ -158,7 +158,7 @@ def run_inspections():
     print("  • Verified AP rankings match official Sept 8 release (Ohio State #1, Notre Dame #3, Texas #4, Michigan RV, Louisville #24, Clemson NR).")
 
     # 5. Rosters, Star Players, & Coaching Staffs
-    print("\n[4/6] 🏈 Inspecting 2026 Roster, QB, and Coaching Staff Integrity...")
+    print("\n[4/7] 🏈 Inspecting 2026 Roster, QB, and Coaching Staff Integrity...")
     for tid, t in db.items():
         hc = t.get('headCoach')
         qb = t.get('confirmedStarterQb')
@@ -170,7 +170,7 @@ def run_inspections():
     print(f"  • Confirmed valid 2026 starters and coaches across all {len(db)} teams.")
 
     # 6. Model Probabilities & Odds Integrity
-    print("\n[5/6] 🎯 Inspecting Odds Calibration & Monte Carlo Win Probabilities...")
+    print("\n[5/7] 🎯 Inspecting Odds Calibration & Monte Carlo Win Probabilities...")
     for tid, t in db.items():
         for g in t.get('schedule', []):
             gid = g.get('id')
@@ -188,10 +188,84 @@ def run_inspections():
             if ou is None or not (30.0 <= ou <= 95.0):
                 errors.append(f"{gid}: Over/Under out of bounds: {ou}")
 
-    print(f"  • Verified spread, over/under, and clamped win probabilities.")
+            # Strict tie elimination for all projected games
+            proj_ut = g.get('projScoreUt')
+            proj_opp = g.get('projScoreOpp')
+            if proj_ut is not None and proj_opp is not None and proj_ut == proj_opp:
+                errors.append(f"{gid}: Illegal tie score projected: {proj_ut}-{proj_opp}")
 
-    # 7. Multi-Platform Bundle Synchronization
-    print("\n[6/6] 📱 Inspecting Multi-Platform Bundle Synchronization...")
+    print(f"  • Verified spread, over/under, clamped win probabilities, and zero ties.")
+
+    # 7. Head-to-Head Reciprocal Symmetry & Strict Tie Elimination
+    print("\n[6/7] ⚖️ Inspecting Head-to-Head Reciprocal Symmetry & Strict Tie Elimination...")
+    pairs_checked = 0
+    visited = set()
+    for tid_a, t_a in db.items():
+        for g_a in t_a.get('schedule', []):
+            tid_b = g_a.get('oppId')
+            if not tid_b or tid_b not in db:
+                continue
+            pair_key = tuple(sorted([tid_a, tid_b]) + [str(g_a.get('week'))])
+            if pair_key in visited:
+                continue
+            visited.add(pair_key)
+
+            t_b = db[tid_b]
+            g_b = next((g for g in t_b.get('schedule', []) if g.get('oppId') == tid_a and (g.get('week') == g_a.get('week') or g.get('date') == g_a.get('date'))), None)
+            if not g_b:
+                g_b = next((g for g in t_b.get('schedule', []) if g.get('oppId') == tid_a), None)
+            if not g_b:
+                g_b = next((g for g in t_b.get('schedule', []) if (g.get('opponent') == t_a.get('name') or g.get('oppAbbr') == t_a.get('abbr'))), None)
+
+            if not g_b:
+                errors.append(f"Missing reciprocal matchup in database: {tid_a} vs {tid_b} ({g_a.get('week')})")
+                continue
+
+            pairs_checked += 1
+            is_final_a = g_a.get('isFinal', False)
+            is_final_b = g_b.get('isFinal', False)
+            if is_final_a != is_final_b:
+                errors.append(f"Completion status desync: {tid_a} vs {tid_b} ({is_final_a} vs {is_final_b})")
+
+            s_ut_a = g_a.get('actualScoreUt' if is_final_a else 'projScoreUt') or g_a.get('finalTeamScore') or 0
+            s_opp_a = g_a.get('actualScoreOpp' if is_final_a else 'projScoreOpp') or g_a.get('finalOppScore') or 0
+            s_ut_b = g_b.get('actualScoreUt' if is_final_b else 'projScoreUt') or g_b.get('finalTeamScore') or 0
+            s_opp_b = g_b.get('actualScoreOpp' if is_final_b else 'projScoreOpp') or g_b.get('finalOppScore') or 0
+
+            # Tie elimination
+            if s_ut_a == s_opp_a:
+                errors.append(f"Illegal tie score detected in {tid_a} ({s_ut_a}-{s_opp_a})")
+            if s_ut_b == s_opp_b:
+                errors.append(f"Illegal tie score detected in {tid_b} ({s_ut_b}-{s_opp_b})")
+
+            # Score reciprocity
+            if s_ut_a != s_opp_b or s_opp_a != s_ut_b:
+                errors.append(f"Score mismatch: {tid_a} ({s_ut_a}-{s_opp_a}) vs {tid_b} ({s_ut_b}-{s_opp_b})")
+
+            # Outcome contradiction
+            win_a = s_ut_a > s_opp_a
+            win_b = s_ut_b > s_opp_b
+            if win_a == win_b:
+                errors.append(f"Outcome contradiction in {tid_a} vs {tid_b}: both projected to {'win' if win_a else 'lose'}")
+
+            # Win probability symmetry
+            prob_a = g_a.get('baseWinProb')
+            prob_b = g_b.get('baseWinProb')
+            if not is_final_a and prob_a is not None and prob_b is not None:
+                if prob_a + prob_b != 100:
+                    errors.append(f"Win probability sum != 100% in {tid_a} ({prob_a}%) + {tid_b} ({prob_b}%) = {prob_a+prob_b}%")
+
+            # Vegas Spread symmetry
+            spread_a = g_a.get('vegasSpread')
+            spread_b = g_b.get('vegasSpread')
+            if not is_final_a and spread_a is not None and spread_b is not None:
+                if spread_a != -spread_b:
+                    errors.append(f"Vegas spread sign asymmetry in {tid_a} ({spread_a}) vs {tid_b} ({spread_b})")
+
+    print(f"  • Verified 100% reciprocal symmetry and zero ties across all {pairs_checked} intra-conference/tracked matchup pairs.")
+
+    # 8. Multi-Platform Bundle Synchronization
+    print("\n[7/7] 📱 Inspecting Multi-Platform Bundle Synchronization...")
     targets = [
         ("Web v3", TEAMS_V3_FILE),
         ("iOS WKWebView", IOS_TEAMS_FILE),

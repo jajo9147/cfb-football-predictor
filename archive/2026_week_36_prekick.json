@@ -2,7 +2,7 @@
   "season": 2026,
   "snapshotId": "2026_week_36_prekick",
   "name": "Week 36 Pre-Kickoff Projections",
-  "timestamp": "2026-09-08T20:25:12.432411+00:00",
+  "timestamp": "2026-09-09T20:29:59.534128+00:00",
   "totalTeams": 31,
   "teams": [
     {
@@ -10,7 +10,7 @@
       "name": "BYU Cougars",
       "shortName": "BYU",
       "apRank": "#15 AP",
-      "baseSpRating": 26.0,
+      "baseSpRating": 23.85,
       "conference": "Big 12",
       "headCoach": "Kalani Sitake",
       "starterQb": "Bear Bachmeier",
@@ -26,8 +26,8 @@
           "isHome": true,
           "stadium": "LaVell Edwards Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 63,
-          "projScoreOpp": 7
+          "projScoreUt": 56,
+          "projScoreOpp": 6
         },
         {
           "id": "byu-w2",
@@ -38,9 +38,9 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "LaVell Edwards Stadium",
-          "baseWinProb": 86,
-          "projScoreUt": 30,
-          "projScoreOpp": 16
+          "baseWinProb": 76,
+          "projScoreUt": 28,
+          "projScoreOpp": 18
         },
         {
           "id": "byu-w3",
@@ -51,9 +51,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Canvas Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 9
+          "baseWinProb": 65,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         },
         {
           "id": "byu-w5",
@@ -64,9 +64,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Amon G. Carter Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 39,
-          "projScoreOpp": 10
+          "baseWinProb": 69,
+          "projScoreUt": 29,
+          "projScoreOpp": 22
         },
         {
           "id": "byu-w6",
@@ -77,9 +77,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "LaVell Edwards Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 39,
-          "projScoreOpp": 7
+          "baseWinProb": 79,
+          "projScoreUt": 29,
+          "projScoreOpp": 18
         },
         {
           "id": "byu-w7",
@@ -90,9 +90,9 @@
           "oppRank": "#3 AP",
           "isHome": true,
           "stadium": "LaVell Edwards Stadium",
-          "baseWinProb": 52,
-          "projScoreUt": 24,
-          "projScoreOpp": 23
+          "baseWinProb": 43,
+          "projScoreUt": 22,
+          "projScoreOpp": 25
         },
         {
           "id": "byu-w8",
@@ -103,9 +103,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Acrisure Bounce House",
-          "baseWinProb": 98,
-          "projScoreUt": 35,
-          "projScoreOpp": 9
+          "baseWinProb": 70,
+          "projScoreUt": 28,
+          "projScoreOpp": 20
         },
         {
           "id": "byu-w9",
@@ -116,7 +116,7 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "LaVell Edwards Stadium",
-          "baseWinProb": 80,
+          "baseWinProb": 79,
           "projScoreUt": 29,
           "projScoreOpp": 18
         },
@@ -129,9 +129,9 @@
           "oppRank": "#20 AP",
           "isHome": false,
           "stadium": "Rice-Eccles Stadium",
-          "baseWinProb": 27,
-          "projScoreUt": 19,
-          "projScoreOpp": 28
+          "baseWinProb": 19,
+          "projScoreUt": 18,
+          "projScoreOpp": 29
         },
         {
           "id": "byu-w11",
@@ -142,9 +142,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "LaVell Edwards Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 39,
-          "projScoreOpp": 7
+          "baseWinProb": 85,
+          "projScoreUt": 31,
+          "projScoreOpp": 16
         },
         {
           "id": "byu-w12",
@@ -155,9 +155,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "David Booth Kansas Memorial Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 9
+          "baseWinProb": 66,
+          "projScoreUt": 27,
+          "projScoreOpp": 21
         },
         {
           "id": "byu-w13",
@@ -168,9 +168,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "LaVell Edwards Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 39,
-          "projScoreOpp": 7
+          "baseWinProb": 87,
+          "projScoreUt": 31,
+          "projScoreOpp": 16
         }
       ]
     },
@@ -179,7 +179,7 @@
       "name": "Texas Longhorns",
       "shortName": "Texas",
       "apRank": "#4 AP",
-      "baseSpRating": 36.0,
+      "baseSpRating": 34.5,
       "conference": "SEC",
       "headCoach": "Steve Sarkisian",
       "starterQb": "Arch Manning",
@@ -195,8 +195,8 @@
           "isHome": true,
           "stadium": "DKR-Texas Memorial Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 59,
-          "projScoreOpp": 7
+          "projScoreUt": 46,
+          "projScoreOpp": 16
         },
         {
           "id": "tex-w2",
@@ -207,9 +207,9 @@
           "oppRank": "#1 AP",
           "isHome": true,
           "stadium": "DKR-Texas Memorial Stadium",
-          "baseWinProb": 58,
-          "projScoreUt": 25,
-          "projScoreOpp": 22
+          "baseWinProb": 63,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         },
         {
           "id": "tex-w3",
@@ -221,7 +221,7 @@
           "isHome": true,
           "stadium": "DKR-Texas Memorial Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 49,
+          "projScoreUt": 48,
           "projScoreOpp": 6
         },
         {
@@ -233,9 +233,9 @@
           "oppRank": "#18 AP",
           "isHome": false,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 63,
-          "projScoreUt": 26,
-          "projScoreOpp": 21
+          "baseWinProb": 65,
+          "projScoreUt": 28,
+          "projScoreOpp": 23
         },
         {
           "id": "tex-w6",
@@ -246,9 +246,9 @@
           "oppRank": "#11 AP",
           "isHome": false,
           "stadium": "Cotton Bowl",
-          "baseWinProb": 69,
-          "projScoreUt": 27,
-          "projScoreOpp": 20
+          "baseWinProb": 62,
+          "projScoreUt": 26,
+          "projScoreOpp": 22
         },
         {
           "id": "tex-w7",
@@ -259,9 +259,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "DKR-Texas Memorial Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 49,
-          "projScoreOpp": 6
+          "baseWinProb": 98,
+          "projScoreUt": 35,
+          "projScoreOpp": 10
         },
         {
           "id": "tex-w8",
@@ -272,9 +272,9 @@
           "oppRank": "#9 AP",
           "isHome": true,
           "stadium": "DKR-Texas Memorial Stadium",
-          "baseWinProb": 92,
-          "projScoreUt": 32,
-          "projScoreOpp": 14
+          "baseWinProb": 89,
+          "projScoreUt": 31,
+          "projScoreOpp": 15
         },
         {
           "id": "tex-w9",
@@ -286,8 +286,8 @@
           "isHome": true,
           "stadium": "DKR-Texas Memorial Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 49,
-          "projScoreOpp": 6
+          "projScoreUt": 38,
+          "projScoreOpp": 7
         },
         {
           "id": "tex-w10",
@@ -298,9 +298,9 @@
           "oppRank": "#23 AP",
           "isHome": false,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 92,
-          "projScoreUt": 32,
-          "projScoreOpp": 13
+          "baseWinProb": 76,
+          "projScoreUt": 28,
+          "projScoreOpp": 18
         },
         {
           "id": "tex-w11",
@@ -311,9 +311,9 @@
           "oppRank": "#8 AP",
           "isHome": false,
           "stadium": "Tiger Stadium (LA)",
-          "baseWinProb": 56,
-          "projScoreUt": 25,
-          "projScoreOpp": 23
+          "baseWinProb": 47,
+          "projScoreUt": 23,
+          "projScoreOpp": 24
         },
         {
           "id": "tex-w12",
@@ -324,9 +324,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "DKR-Texas Memorial Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 49,
-          "projScoreOpp": 6
+          "baseWinProb": 98,
+          "projScoreUt": 36,
+          "projScoreOpp": 9
         },
         {
           "id": "tex-w13",
@@ -337,9 +337,9 @@
           "oppRank": "#10 AP",
           "isHome": false,
           "stadium": "Kyle Field",
-          "baseWinProb": 58,
-          "projScoreUt": 25,
-          "projScoreOpp": 22
+          "baseWinProb": 45,
+          "projScoreUt": 24,
+          "projScoreOpp": 27
         }
       ]
     },
@@ -348,7 +348,7 @@
       "name": "Michigan Wolverines",
       "shortName": "Michigan",
       "apRank": "RV",
-      "baseSpRating": 18.8,
+      "baseSpRating": 21.8,
       "conference": "Big Ten",
       "headCoach": "Kyle Whittingham",
       "starterQb": "Bryce Underwood",
@@ -364,7 +364,7 @@
           "isHome": true,
           "stadium": "Michigan Stadium",
           "baseWinProb": 98,
-          "projScoreUt": 13,
+          "projScoreUt": 39,
           "projScoreOpp": 12
         },
         {
@@ -376,9 +376,9 @@
           "oppRank": "#11 AP",
           "isHome": true,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 22,
-          "projScoreUt": 17,
-          "projScoreOpp": 27
+          "baseWinProb": 43,
+          "projScoreUt": 21,
+          "projScoreOpp": 24
         },
         {
           "id": "mich-w3",
@@ -389,9 +389,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 35,
-          "projScoreOpp": 8
+          "baseWinProb": 99,
+          "projScoreUt": 40,
+          "projScoreOpp": 6
         },
         {
           "id": "mich-w4",
@@ -402,9 +402,9 @@
           "oppRank": "#21 AP",
           "isHome": true,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 49,
-          "projScoreUt": 21,
-          "projScoreOpp": 21
+          "baseWinProb": 69,
+          "projScoreUt": 24,
+          "projScoreOpp": 18
         },
         {
           "id": "mich-w5",
@@ -415,9 +415,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Huntington Bank Stadium",
-          "baseWinProb": 94,
-          "projScoreUt": 32,
-          "projScoreOpp": 11
+          "baseWinProb": 63,
+          "projScoreUt": 24,
+          "projScoreOpp": 20
         },
         {
           "id": "mich-w7",
@@ -428,9 +428,9 @@
           "oppRank": "#16 AP",
           "isHome": true,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 38,
-          "projScoreUt": 20,
-          "projScoreOpp": 24
+          "baseWinProb": 61,
+          "projScoreUt": 24,
+          "projScoreOpp": 20
         },
         {
           "id": "mich-w8",
@@ -441,9 +441,9 @@
           "oppRank": "#5 AP",
           "isHome": true,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 33,
-          "projScoreUt": 19,
-          "projScoreOpp": 25
+          "baseWinProb": 49,
+          "projScoreUt": 22,
+          "projScoreOpp": 23
         },
         {
           "id": "mich-w9",
@@ -454,9 +454,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "SHI Stadium",
-          "baseWinProb": 95,
-          "projScoreUt": 32,
-          "projScoreOpp": 12
+          "baseWinProb": 65,
+          "projScoreUt": 25,
+          "projScoreOpp": 20
         },
         {
           "id": "mich-w10",
@@ -467,9 +467,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 35,
-          "projScoreOpp": 8
+          "baseWinProb": 88,
+          "projScoreUt": 29,
+          "projScoreOpp": 14
         },
         {
           "id": "mich-w11",
@@ -480,9 +480,9 @@
           "oppRank": "#6 AP",
           "isHome": false,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 13,
-          "projScoreUt": 14,
-          "projScoreOpp": 30
+          "baseWinProb": 15,
+          "projScoreUt": 16,
+          "projScoreOpp": 31
         },
         {
           "id": "mich-w12",
@@ -493,9 +493,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 35,
-          "projScoreOpp": 8
+          "baseWinProb": 85,
+          "projScoreUt": 29,
+          "projScoreOpp": 15
         },
         {
           "id": "mich-w13",
@@ -506,9 +506,9 @@
           "oppRank": "#1 AP",
           "isHome": false,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 2,
-          "projScoreUt": 10,
-          "projScoreOpp": 35
+          "baseWinProb": 3,
+          "projScoreUt": 11,
+          "projScoreOpp": 34
         }
       ]
     },
@@ -517,7 +517,7 @@
       "name": "Ohio State Buckeyes",
       "shortName": "Ohio State",
       "apRank": "#1 AP",
-      "baseSpRating": 37.0,
+      "baseSpRating": 34.41,
       "conference": "Big Ten",
       "headCoach": "Ryan Day",
       "starterQb": "Julian Sayin",
@@ -533,7 +533,7 @@
           "isHome": true,
           "stadium": "Ohio Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 56,
+          "projScoreUt": 53,
           "projScoreOpp": 3
         },
         {
@@ -545,9 +545,9 @@
           "oppRank": "#4 AP",
           "isHome": false,
           "stadium": "DKR-Texas Memorial Stadium",
-          "baseWinProb": 46,
-          "projScoreUt": 23,
-          "projScoreOpp": 24
+          "baseWinProb": 37,
+          "projScoreUt": 21,
+          "projScoreOpp": 26
         },
         {
           "id": "osu-w3",
@@ -558,9 +558,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 51,
-          "projScoreOpp": 6
+          "baseWinProb": 98,
+          "projScoreUt": 36,
+          "projScoreOpp": 9
         },
         {
           "id": "osu-w4",
@@ -572,8 +572,8 @@
           "isHome": true,
           "stadium": "Ohio Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 51,
-          "projScoreOpp": 6
+          "projScoreUt": 36,
+          "projScoreOpp": 9
         },
         {
           "id": "osu-w5",
@@ -584,9 +584,9 @@
           "oppRank": "#21 AP",
           "isHome": false,
           "stadium": "Kinnick Stadium",
-          "baseWinProb": 90,
-          "projScoreUt": 30,
-          "projScoreOpp": 13
+          "baseWinProb": 81,
+          "projScoreUt": 28,
+          "projScoreOpp": 16
         },
         {
           "id": "osu-w6",
@@ -598,8 +598,8 @@
           "isHome": true,
           "stadium": "Ohio Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 50,
-          "projScoreOpp": 6
+          "projScoreUt": 38,
+          "projScoreOpp": 7
         },
         {
           "id": "osu-w7",
@@ -610,9 +610,9 @@
           "oppRank": "#5 AP",
           "isHome": false,
           "stadium": "Memorial Stadium (Bloomington, IN)",
-          "baseWinProb": 81,
-          "projScoreUt": 30,
-          "projScoreOpp": 17
+          "baseWinProb": 65,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         },
         {
           "id": "osu-w9",
@@ -623,9 +623,9 @@
           "oppRank": "#14 AP",
           "isHome": false,
           "stadium": "Los Angeles Memorial Coliseum",
-          "baseWinProb": 81,
-          "projScoreUt": 30,
-          "projScoreOpp": 17
+          "baseWinProb": 64,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         },
         {
           "id": "osu-w10",
@@ -636,9 +636,9 @@
           "oppRank": "#6 AP",
           "isHome": true,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 93,
-          "projScoreUt": 33,
-          "projScoreOpp": 13
+          "baseWinProb": 87,
+          "projScoreUt": 31,
+          "projScoreOpp": 16
         },
         {
           "id": "osu-w11",
@@ -650,7 +650,7 @@
           "isHome": true,
           "stadium": "Ohio Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 51,
+          "projScoreUt": 45,
           "projScoreOpp": 6
         },
         {
@@ -662,9 +662,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Memorial Stadium (Lincoln, NE)",
-          "baseWinProb": 99,
-          "projScoreUt": 47,
-          "projScoreOpp": 6
+          "baseWinProb": 92,
+          "projScoreUt": 33,
+          "projScoreOpp": 13
         },
         {
           "id": "osu-w13",
@@ -675,9 +675,9 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 37,
-          "projScoreOpp": 7
+          "baseWinProb": 97,
+          "projScoreUt": 34,
+          "projScoreOpp": 11
         }
       ]
     },
@@ -686,7 +686,7 @@
       "name": "Georgia Bulldogs",
       "shortName": "Georgia",
       "apRank": "#2 AP",
-      "baseSpRating": 36.5,
+      "baseSpRating": 35.0,
       "conference": "SEC",
       "headCoach": "Kirby Smart",
       "starterQb": "Gunner Stockton",
@@ -702,7 +702,7 @@
           "isHome": true,
           "stadium": "Sanford Stadium",
           "baseWinProb": 91,
-          "projScoreUt": 63,
+          "projScoreUt": 52,
           "projScoreOpp": 3
         },
         {
@@ -715,8 +715,8 @@
           "isHome": true,
           "stadium": "Sanford Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 51,
-          "projScoreOpp": 6
+          "projScoreUt": 38,
+          "projScoreOpp": 8
         },
         {
           "id": "uga-w3",
@@ -727,9 +727,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Donald W. Reynolds Razorback Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 47,
-          "projScoreOpp": 6
+          "baseWinProb": 97,
+          "projScoreUt": 35,
+          "projScoreOpp": 12
         },
         {
           "id": "uga-w4",
@@ -742,7 +742,7 @@
           "stadium": "Sanford Stadium",
           "baseWinProb": 88,
           "projScoreUt": 31,
-          "projScoreOpp": 15
+          "projScoreOpp": 16
         },
         {
           "id": "uga-w5",
@@ -754,7 +754,7 @@
           "isHome": true,
           "stadium": "Sanford Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 51,
+          "projScoreUt": 44,
           "projScoreOpp": 6
         },
         {
@@ -766,9 +766,9 @@
           "oppRank": "#12 AP",
           "isHome": false,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 62,
-          "projScoreUt": 26,
-          "projScoreOpp": 21
+          "baseWinProb": 57,
+          "projScoreUt": 25,
+          "projScoreOpp": 22
         },
         {
           "id": "uga-w7",
@@ -780,8 +780,8 @@
           "isHome": true,
           "stadium": "Sanford Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 51,
-          "projScoreOpp": 6
+          "projScoreUt": 39,
+          "projScoreOpp": 8
         },
         {
           "id": "uga-w9",
@@ -792,9 +792,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Mercedes-Benz Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 50,
-          "projScoreOpp": 6
+          "baseWinProb": 98,
+          "projScoreUt": 37,
+          "projScoreOpp": 10
         },
         {
           "id": "uga-w10",
@@ -805,9 +805,9 @@
           "oppRank": "#9 AP",
           "isHome": false,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 84,
+          "baseWinProb": 73,
           "projScoreUt": 30,
-          "projScoreOpp": 17
+          "projScoreOpp": 21
         },
         {
           "id": "uga-w11",
@@ -818,9 +818,9 @@
           "oppRank": "#23 AP",
           "isHome": true,
           "stadium": "Sanford Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 37,
-          "projScoreOpp": 8
+          "baseWinProb": 96,
+          "projScoreUt": 34,
+          "projScoreOpp": 12
         },
         {
           "id": "uga-w12",
@@ -831,9 +831,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Williams-Brice Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 47,
-          "projScoreOpp": 6
+          "baseWinProb": 96,
+          "projScoreUt": 35,
+          "projScoreOpp": 12
         },
         {
           "id": "uga-w13",
@@ -845,8 +845,8 @@
           "isHome": true,
           "stadium": "Sanford Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 51,
-          "projScoreOpp": 6
+          "projScoreUt": 39,
+          "projScoreOpp": 8
         }
       ]
     },
@@ -855,7 +855,7 @@
       "name": "Alabama Crimson Tide",
       "shortName": "Alabama",
       "apRank": "#12 AP",
-      "baseSpRating": 30.0,
+      "baseSpRating": 28.59,
       "conference": "SEC",
       "headCoach": "Kalen DeBoer",
       "starterQb": "Keelon Russell",
@@ -871,8 +871,8 @@
           "isHome": true,
           "stadium": "Bryant-Denny Stadium",
           "baseWinProb": 95,
-          "projScoreUt": 48,
-          "projScoreOpp": 10
+          "projScoreUt": 40,
+          "projScoreOpp": 12
         },
         {
           "id": "bama-w2",
@@ -883,9 +883,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Kroger Field",
-          "baseWinProb": 99,
-          "projScoreUt": 42,
-          "projScoreOpp": 6
+          "baseWinProb": 84,
+          "projScoreUt": 30,
+          "projScoreOpp": 16
         },
         {
           "id": "bama-w3",
@@ -896,9 +896,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 86,
-          "projScoreUt": 31,
-          "projScoreOpp": 16
+          "baseWinProb": 82,
+          "projScoreUt": 30,
+          "projScoreOpp": 17
         },
         {
           "id": "bama-w4",
@@ -909,9 +909,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 46,
-          "projScoreOpp": 6
+          "baseWinProb": 95,
+          "projScoreUt": 34,
+          "projScoreOpp": 12
         },
         {
           "id": "bama-w5",
@@ -922,9 +922,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Davis Wade Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 42,
-          "projScoreOpp": 6
+          "baseWinProb": 90,
+          "projScoreUt": 32,
+          "projScoreOpp": 14
         },
         {
           "id": "bama-w6",
@@ -935,7 +935,7 @@
           "oppRank": "#2 AP",
           "isHome": true,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 41,
+          "baseWinProb": 43,
           "projScoreUt": 22,
           "projScoreOpp": 25
         },
@@ -948,9 +948,9 @@
           "oppRank": "#18 AP",
           "isHome": false,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 43,
-          "projScoreUt": 22,
-          "projScoreOpp": 25
+          "baseWinProb": 41,
+          "projScoreUt": 24,
+          "projScoreOpp": 27
         },
         {
           "id": "bama-w8",
@@ -963,7 +963,7 @@
           "stadium": "Bryant-Denny Stadium",
           "baseWinProb": 68,
           "projScoreUt": 27,
-          "projScoreOpp": 20
+          "projScoreOpp": 21
         },
         {
           "id": "bama-w10",
@@ -974,9 +974,9 @@
           "oppRank": "#8 AP",
           "isHome": false,
           "stadium": "Tiger Stadium (LA)",
-          "baseWinProb": 32,
-          "projScoreUt": 20,
-          "projScoreOpp": 27
+          "baseWinProb": 27,
+          "projScoreUt": 19,
+          "projScoreOpp": 28
         },
         {
           "id": "bama-w11",
@@ -987,9 +987,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "FirstBank Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 42,
-          "projScoreOpp": 6
+          "baseWinProb": 95,
+          "projScoreUt": 35,
+          "projScoreOpp": 11
         },
         {
           "id": "bama-w12",
@@ -1013,9 +1013,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 46,
-          "projScoreOpp": 6
+          "baseWinProb": 94,
+          "projScoreUt": 33,
+          "projScoreOpp": 13
         }
       ]
     },
@@ -1024,7 +1024,7 @@
       "name": "Oregon Ducks",
       "shortName": "Oregon",
       "apRank": "#6 AP",
-      "baseSpRating": 27.15,
+      "baseSpRating": 28.0,
       "conference": "Big Ten",
       "headCoach": "Dan Lanning",
       "starterQb": "Dante Moore",
@@ -1040,8 +1040,8 @@
           "isHome": true,
           "stadium": "Autzen Stadium",
           "baseWinProb": 85,
-          "projScoreUt": 34,
-          "projScoreOpp": 27
+          "projScoreUt": 39,
+          "projScoreOpp": 14
         },
         {
           "id": "ore-w2",
@@ -1052,9 +1052,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Boone Pickens Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 7
+          "baseWinProb": 86,
+          "projScoreUt": 30,
+          "projScoreOpp": 16
         },
         {
           "id": "ore-w3",
@@ -1066,7 +1066,7 @@
           "isHome": true,
           "stadium": "Autzen Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 57,
+          "projScoreUt": 58,
           "projScoreOpp": 5
         },
         {
@@ -1078,9 +1078,9 @@
           "oppRank": "#14 AP",
           "isHome": false,
           "stadium": "Los Angeles Memorial Coliseum",
-          "baseWinProb": 48,
-          "projScoreUt": 23,
-          "projScoreOpp": 24
+          "baseWinProb": 39,
+          "projScoreUt": 22,
+          "projScoreOpp": 26
         },
         {
           "id": "ore-w6",
@@ -1091,9 +1091,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 45,
-          "projScoreOpp": 6
+          "baseWinProb": 97,
+          "projScoreUt": 35,
+          "projScoreOpp": 11
         },
         {
           "id": "ore-w7",
@@ -1104,9 +1104,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 45,
-          "projScoreOpp": 6
+          "baseWinProb": 93,
+          "projScoreUt": 33,
+          "projScoreOpp": 13
         },
         {
           "id": "ore-w8",
@@ -1117,9 +1117,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Gies Memorial Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 7
+          "baseWinProb": 80,
+          "projScoreUt": 29,
+          "projScoreOpp": 18
         },
         {
           "id": "ore-w9",
@@ -1131,8 +1131,8 @@
           "isHome": true,
           "stadium": "Autzen Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 45,
-          "projScoreOpp": 6
+          "projScoreUt": 40,
+          "projScoreOpp": 7
         },
         {
           "id": "ore-w10",
@@ -1143,9 +1143,9 @@
           "oppRank": "#1 AP",
           "isHome": false,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 9,
-          "projScoreUt": 14,
-          "projScoreOpp": 32
+          "baseWinProb": 13,
+          "projScoreUt": 16,
+          "projScoreOpp": 31
         },
         {
           "id": "ore-w11",
@@ -1156,9 +1156,9 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 90,
-          "projScoreUt": 32,
-          "projScoreOpp": 14
+          "baseWinProb": 85,
+          "projScoreUt": 31,
+          "projScoreOpp": 16
         },
         {
           "id": "ore-w12",
@@ -1169,9 +1169,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Spartan Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 7
+          "baseWinProb": 90,
+          "projScoreUt": 31,
+          "projScoreOpp": 15
         },
         {
           "id": "ore-w13",
@@ -1183,7 +1183,7 @@
           "isHome": true,
           "stadium": "Autzen Stadium",
           "baseWinProb": 92,
-          "projScoreUt": 33,
+          "projScoreUt": 32,
           "projScoreOpp": 14
         }
       ]
@@ -1193,7 +1193,7 @@
       "name": "Penn State Nittany Lions",
       "shortName": "Penn State",
       "apRank": "#16 AP",
-      "baseSpRating": 25.0,
+      "baseSpRating": 23.5,
       "conference": "Big Ten",
       "headCoach": "Matt Campbell",
       "starterQb": "Rocco Becht",
@@ -1209,8 +1209,8 @@
           "isHome": true,
           "stadium": "Beaver Stadium",
           "baseWinProb": 91,
-          "projScoreUt": 45,
-          "projScoreOpp": 0
+          "projScoreUt": 38,
+          "projScoreOpp": 15
         },
         {
           "id": "psu-w2",
@@ -1222,8 +1222,8 @@
           "isHome": false,
           "stadium": "Lincoln Financial Field",
           "baseWinProb": 98,
-          "projScoreUt": 37,
-          "projScoreOpp": 9
+          "projScoreUt": 36,
+          "projScoreOpp": 10
         },
         {
           "id": "psu-w3",
@@ -1235,7 +1235,7 @@
           "isHome": true,
           "stadium": "Beaver Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 41,
+          "projScoreUt": 40,
           "projScoreOpp": 7
         },
         {
@@ -1247,9 +1247,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Beaver Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 6
+          "baseWinProb": 83,
+          "projScoreUt": 30,
+          "projScoreOpp": 17
         },
         {
           "id": "psu-w5",
@@ -1260,9 +1260,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Ryan Field",
-          "baseWinProb": 98,
-          "projScoreUt": 37,
-          "projScoreOpp": 9
+          "baseWinProb": 88,
+          "projScoreUt": 32,
+          "projScoreOpp": 15
         },
         {
           "id": "psu-w6",
@@ -1273,9 +1273,9 @@
           "oppRank": "#14 AP",
           "isHome": true,
           "stadium": "Beaver Stadium",
-          "baseWinProb": 66,
-          "projScoreUt": 27,
-          "projScoreOpp": 21
+          "baseWinProb": 56,
+          "projScoreUt": 24,
+          "projScoreOpp": 22
         },
         {
           "id": "psu-w7",
@@ -1286,9 +1286,9 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 68,
-          "projScoreUt": 27,
-          "projScoreOpp": 20
+          "baseWinProb": 39,
+          "projScoreUt": 20,
+          "projScoreOpp": 24
         },
         {
           "id": "psu-w9",
@@ -1299,9 +1299,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Beaver Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 6
+          "baseWinProb": 97,
+          "projScoreUt": 35,
+          "projScoreOpp": 11
         },
         {
           "id": "psu-w10",
@@ -1312,9 +1312,9 @@
           "oppRank": "#19 AP",
           "isHome": false,
           "stadium": "Husky Stadium",
-          "baseWinProb": 66,
-          "projScoreUt": 27,
-          "projScoreOpp": 21
+          "baseWinProb": 45,
+          "projScoreUt": 23,
+          "projScoreOpp": 24
         },
         {
           "id": "psu-w11",
@@ -1325,9 +1325,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Beaver Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 6
+          "baseWinProb": 88,
+          "projScoreUt": 31,
+          "projScoreOpp": 15
         },
         {
           "id": "psu-w12",
@@ -1338,9 +1338,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Beaver Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 6
+          "baseWinProb": 88,
+          "projScoreUt": 31,
+          "projScoreOpp": 15
         },
         {
           "id": "psu-w13",
@@ -1351,9 +1351,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "SECU Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 37,
-          "projScoreOpp": 9
+          "baseWinProb": 72,
+          "projScoreUt": 28,
+          "projScoreOpp": 20
         }
       ]
     },
@@ -1378,8 +1378,8 @@
           "isHome": true,
           "stadium": "Lambeau Field",
           "baseWinProb": 100,
-          "projScoreUt": 41,
-          "projScoreOpp": 13
+          "projScoreUt": 33,
+          "projScoreOpp": 12
         },
         {
           "id": "nd-w2",
@@ -1403,9 +1403,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Notre Dame Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 45,
-          "projScoreOpp": 6
+          "baseWinProb": 98,
+          "projScoreUt": 35,
+          "projScoreOpp": 11
         },
         {
           "id": "nd-w4",
@@ -1416,9 +1416,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Ross-Ade Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 7
+          "baseWinProb": 98,
+          "projScoreUt": 36,
+          "projScoreOpp": 10
         },
         {
           "id": "nd-w5",
@@ -1429,9 +1429,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Kenan Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 42,
-          "projScoreOpp": 7
+          "baseWinProb": 84,
+          "projScoreUt": 30,
+          "projScoreOpp": 16
         },
         {
           "id": "nd-w6",
@@ -1443,8 +1443,8 @@
           "isHome": true,
           "stadium": "Notre Dame Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 44,
-          "projScoreOpp": 6
+          "projScoreUt": 40,
+          "projScoreOpp": 7
         },
         {
           "id": "nd-w7",
@@ -1481,9 +1481,9 @@
           "oppRank": "#7 AP",
           "isHome": true,
           "stadium": "Notre Dame Stadium",
-          "baseWinProb": 53,
-          "projScoreUt": 24,
-          "projScoreOpp": 23
+          "baseWinProb": 58,
+          "projScoreUt": 25,
+          "projScoreOpp": 22
         },
         {
           "id": "nd-w11",
@@ -1495,8 +1495,8 @@
           "isHome": true,
           "stadium": "Notre Dame Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 45,
-          "projScoreOpp": 6
+          "projScoreUt": 39,
+          "projScoreOpp": 7
         },
         {
           "id": "nd-w12",
@@ -1520,9 +1520,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "JMA Wireless Dome",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 6
+          "baseWinProb": 85,
+          "projScoreUt": 30,
+          "projScoreOpp": 16
         }
       ]
     },
@@ -1531,7 +1531,7 @@
       "name": "LSU Tigers",
       "shortName": "LSU",
       "apRank": "#8 AP",
-      "baseSpRating": 33.0,
+      "baseSpRating": 31.5,
       "conference": "SEC",
       "headCoach": "Brian Kelly",
       "starterQb": "Sam Leavitt",
@@ -1547,8 +1547,8 @@
           "isHome": true,
           "stadium": "Tiger Stadium (LA)",
           "baseWinProb": 89,
-          "projScoreUt": 51,
-          "projScoreOpp": 10
+          "projScoreUt": 29,
+          "projScoreOpp": 19
         },
         {
           "id": "lsu-w2",
@@ -1560,7 +1560,7 @@
           "isHome": true,
           "stadium": "Tiger Stadium (LA)",
           "baseWinProb": 99,
-          "projScoreUt": 47,
+          "projScoreUt": 46,
           "projScoreOpp": 6
         },
         {
@@ -1572,9 +1572,9 @@
           "oppRank": "#9 AP",
           "isHome": false,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 71,
+          "baseWinProb": 59,
           "projScoreUt": 27,
-          "projScoreOpp": 19
+          "projScoreOpp": 24
         },
         {
           "id": "lsu-w4",
@@ -1585,7 +1585,7 @@
           "oppRank": "#10 AP",
           "isHome": true,
           "stadium": "Tiger Stadium (LA)",
-          "baseWinProb": 74,
+          "baseWinProb": 72,
           "projScoreUt": 28,
           "projScoreOpp": 19
         },
@@ -1599,7 +1599,7 @@
           "isHome": true,
           "stadium": "Tiger Stadium (LA)",
           "baseWinProb": 99,
-          "projScoreUt": 47,
+          "projScoreUt": 46,
           "projScoreOpp": 6
         },
         {
@@ -1611,9 +1611,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Kroger Field",
-          "baseWinProb": 99,
-          "projScoreUt": 43,
-          "projScoreOpp": 6
+          "baseWinProb": 91,
+          "projScoreUt": 32,
+          "projScoreOpp": 14
         },
         {
           "id": "lsu-w7",
@@ -1625,8 +1625,8 @@
           "isHome": true,
           "stadium": "Tiger Stadium (LA)",
           "baseWinProb": 99,
-          "projScoreUt": 47,
-          "projScoreOpp": 6
+          "projScoreUt": 36,
+          "projScoreOpp": 9
         },
         {
           "id": "lsu-w8",
@@ -1637,9 +1637,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Jordan-Hare Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 44,
-          "projScoreOpp": 6
+          "baseWinProb": 84,
+          "projScoreUt": 30,
+          "projScoreOpp": 17
         },
         {
           "id": "lsu-w10",
@@ -1650,7 +1650,7 @@
           "oppRank": "#12 AP",
           "isHome": true,
           "stadium": "Tiger Stadium (LA)",
-          "baseWinProb": 74,
+          "baseWinProb": 73,
           "projScoreUt": 28,
           "projScoreOpp": 19
         },
@@ -1663,9 +1663,9 @@
           "oppRank": "#4 AP",
           "isHome": true,
           "stadium": "Tiger Stadium (LA)",
-          "baseWinProb": 52,
+          "baseWinProb": 53,
           "projScoreUt": 24,
-          "projScoreOpp": 24
+          "projScoreOpp": 23
         },
         {
           "id": "lsu-w12",
@@ -1676,9 +1676,9 @@
           "oppRank": "#18 AP",
           "isHome": false,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 53,
-          "projScoreUt": 24,
-          "projScoreOpp": 24
+          "baseWinProb": 52,
+          "projScoreUt": 26,
+          "projScoreOpp": 25
         },
         {
           "id": "lsu-w13",
@@ -1689,9 +1689,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Donald W. Reynolds Razorback Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 44,
-          "projScoreOpp": 6
+          "baseWinProb": 88,
+          "projScoreUt": 31,
+          "projScoreOpp": 15
         }
       ]
     },
@@ -1700,7 +1700,7 @@
       "name": "Tennessee Volunteers",
       "shortName": "Tennessee",
       "apRank": "#18 AP",
-      "baseSpRating": 28.5,
+      "baseSpRating": 25.63,
       "conference": "SEC",
       "headCoach": "Josh Heupel",
       "starterQb": "Faizon Brandon",
@@ -1716,8 +1716,8 @@
           "isHome": true,
           "stadium": "Neyland Stadium",
           "baseWinProb": 98,
-          "projScoreUt": 56,
-          "projScoreOpp": 9
+          "projScoreUt": 58,
+          "projScoreOpp": 8
         },
         {
           "id": "tenn-w2",
@@ -1728,9 +1728,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Bobby Dodd Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 43,
-          "projScoreOpp": 7
+          "baseWinProb": 71,
+          "projScoreUt": 29,
+          "projScoreOpp": 21
         },
         {
           "id": "tenn-w3",
@@ -1742,7 +1742,7 @@
           "isHome": true,
           "stadium": "Neyland Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 48,
+          "projScoreUt": 46,
           "projScoreOpp": 7
         },
         {
@@ -1754,9 +1754,9 @@
           "oppRank": "#4 AP",
           "isHome": true,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 42,
-          "projScoreUt": 24,
-          "projScoreOpp": 27
+          "baseWinProb": 35,
+          "projScoreUt": 23,
+          "projScoreOpp": 28
         },
         {
           "id": "tenn-w5",
@@ -1767,9 +1767,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 48,
-          "projScoreOpp": 7
+          "baseWinProb": 89,
+          "projScoreUt": 34,
+          "projScoreOpp": 16
         },
         {
           "id": "tenn-w6",
@@ -1780,9 +1780,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Donald W. Reynolds Razorback Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 43,
-          "projScoreOpp": 7
+          "baseWinProb": 74,
+          "projScoreUt": 30,
+          "projScoreOpp": 21
         },
         {
           "id": "tenn-w7",
@@ -1793,9 +1793,9 @@
           "oppRank": "#12 AP",
           "isHome": true,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 65,
-          "projScoreUt": 28,
-          "projScoreOpp": 22
+          "baseWinProb": 59,
+          "projScoreUt": 27,
+          "projScoreOpp": 24
         },
         {
           "id": "tenn-w8",
@@ -1806,9 +1806,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Williams-Brice Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 43,
-          "projScoreOpp": 7
+          "baseWinProb": 75,
+          "projScoreUt": 30,
+          "projScoreOpp": 20
         },
         {
           "id": "tenn-w10",
@@ -1819,9 +1819,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 48,
-          "projScoreOpp": 7
+          "baseWinProb": 94,
+          "projScoreUt": 35,
+          "projScoreOpp": 14
         },
         {
           "id": "tenn-w11",
@@ -1832,8 +1832,8 @@
           "oppRank": "#10 AP",
           "isHome": false,
           "stadium": "Kyle Field",
-          "baseWinProb": 31,
-          "projScoreUt": 22,
+          "baseWinProb": 20,
+          "projScoreUt": 18,
           "projScoreOpp": 29
         },
         {
@@ -1845,9 +1845,9 @@
           "oppRank": "#8 AP",
           "isHome": true,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 54,
-          "projScoreUt": 26,
-          "projScoreOpp": 24
+          "baseWinProb": 48,
+          "projScoreUt": 25,
+          "projScoreOpp": 26
         },
         {
           "id": "tenn-w13",
@@ -1858,9 +1858,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "FirstBank Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 43,
-          "projScoreOpp": 7
+          "baseWinProb": 90,
+          "projScoreUt": 35,
+          "projScoreOpp": 16
         }
       ]
     },
@@ -1869,7 +1869,7 @@
       "name": "Indiana Hoosiers",
       "shortName": "Indiana",
       "apRank": "#5 AP",
-      "baseSpRating": 26.26,
+      "baseSpRating": 26.83,
       "conference": "Big Ten",
       "headCoach": "Curt Cignetti",
       "starterQb": "Josh Hoover",
@@ -1885,8 +1885,8 @@
           "isHome": true,
           "stadium": "Memorial Stadium (Bloomington, IN)",
           "baseWinProb": 95,
-          "projScoreUt": 52,
-          "projScoreOpp": 16
+          "projScoreUt": 48,
+          "projScoreOpp": 9
         },
         {
           "id": "ind-w2",
@@ -1898,8 +1898,8 @@
           "isHome": true,
           "stadium": "Memorial Stadium (Bloomington, IN)",
           "baseWinProb": 99,
-          "projScoreUt": 40,
-          "projScoreOpp": 7
+          "projScoreUt": 41,
+          "projScoreOpp": 6
         },
         {
           "id": "ind-w3",
@@ -1910,9 +1910,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Bloomington, IN)",
-          "baseWinProb": 99,
-          "projScoreUt": 40,
-          "projScoreOpp": 7
+          "baseWinProb": 87,
+          "projScoreUt": 31,
+          "projScoreOpp": 15
         },
         {
           "id": "ind-w4",
@@ -1923,9 +1923,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Bloomington, IN)",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 7
+          "baseWinProb": 98,
+          "projScoreUt": 36,
+          "projScoreOpp": 10
         },
         {
           "id": "ind-w5",
@@ -1936,9 +1936,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "SHI Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 38,
-          "projScoreOpp": 9
+          "baseWinProb": 81,
+          "projScoreUt": 29,
+          "projScoreOpp": 18
         },
         {
           "id": "ind-w6",
@@ -1949,9 +1949,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Memorial Stadium (Lincoln, NE)",
-          "baseWinProb": 98,
-          "projScoreUt": 38,
-          "projScoreOpp": 9
+          "baseWinProb": 74,
+          "projScoreUt": 28,
+          "projScoreOpp": 19
         },
         {
           "id": "ind-w7",
@@ -1962,9 +1962,9 @@
           "oppRank": "#1 AP",
           "isHome": true,
           "stadium": "Memorial Stadium (Bloomington, IN)",
-          "baseWinProb": 23,
-          "projScoreUt": 18,
-          "projScoreOpp": 29
+          "baseWinProb": 35,
+          "projScoreUt": 21,
+          "projScoreOpp": 26
         },
         {
           "id": "ind-w8",
@@ -1975,9 +1975,9 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 73,
-          "projScoreUt": 28,
-          "projScoreOpp": 20
+          "baseWinProb": 51,
+          "projScoreUt": 23,
+          "projScoreOpp": 22
         },
         {
           "id": "ind-w9",
@@ -1988,9 +1988,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Bloomington, IN)",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 7
+          "baseWinProb": 91,
+          "projScoreUt": 32,
+          "projScoreOpp": 14
         },
         {
           "id": "ind-w11",
@@ -2001,9 +2001,9 @@
           "oppRank": "#14 AP",
           "isHome": true,
           "stadium": "Memorial Stadium (Bloomington, IN)",
-          "baseWinProb": 66,
+          "baseWinProb": 63,
           "projScoreUt": 26,
-          "projScoreOpp": 21
+          "projScoreOpp": 22
         },
         {
           "id": "ind-w12",
@@ -2014,9 +2014,9 @@
           "oppRank": "#19 AP",
           "isHome": false,
           "stadium": "Husky Stadium",
-          "baseWinProb": 70,
-          "projScoreUt": 27,
-          "projScoreOpp": 20
+          "baseWinProb": 62,
+          "projScoreUt": 26,
+          "projScoreOpp": 22
         },
         {
           "id": "ind-w13",
@@ -2027,9 +2027,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Bloomington, IN)",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 7
+          "baseWinProb": 98,
+          "projScoreUt": 36,
+          "projScoreOpp": 10
         }
       ]
     },
@@ -2038,7 +2038,7 @@
       "name": "Miami Hurricanes",
       "shortName": "Miami",
       "apRank": "#7 AP",
-      "baseSpRating": 31.39,
+      "baseSpRating": 30.0,
       "conference": "ACC",
       "headCoach": "Mario Cristobal",
       "starterQb": "Darian Mensah",
@@ -2054,8 +2054,8 @@
           "isHome": false,
           "stadium": "Stanford Stadium",
           "baseWinProb": 95,
-          "projScoreUt": 45,
-          "projScoreOpp": 6
+          "projScoreUt": 36,
+          "projScoreOpp": 11
         },
         {
           "id": "mia-w2",
@@ -2067,7 +2067,7 @@
           "isHome": true,
           "stadium": "Hard Rock Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 46,
+          "projScoreUt": 45,
           "projScoreOpp": 6
         },
         {
@@ -2079,9 +2079,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Allegacy Federal Credit Union Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 42,
-          "projScoreOpp": 6
+          "baseWinProb": 98,
+          "projScoreUt": 36,
+          "projScoreOpp": 10
         },
         {
           "id": "mia-w4",
@@ -2093,7 +2093,7 @@
           "isHome": true,
           "stadium": "Hard Rock Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 46,
+          "projScoreUt": 45,
           "projScoreOpp": 6
         },
         {
@@ -2105,9 +2105,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Memorial Stadium (Clemson, SC)",
-          "baseWinProb": 88,
-          "projScoreUt": 32,
-          "projScoreOpp": 15
+          "baseWinProb": 73,
+          "projScoreUt": 28,
+          "projScoreOpp": 19
         },
         {
           "id": "mia-w7",
@@ -2119,7 +2119,7 @@
           "isHome": true,
           "stadium": "Hard Rock Stadium",
           "baseWinProb": 85,
-          "projScoreUt": 31,
+          "projScoreUt": 30,
           "projScoreOpp": 16
         },
         {
@@ -2131,9 +2131,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Hard Rock Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 45,
-          "projScoreOpp": 6
+          "baseWinProb": 96,
+          "projScoreUt": 34,
+          "projScoreOpp": 11
         },
         {
           "id": "mia-w9",
@@ -2144,9 +2144,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Kenan Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 42,
-          "projScoreOpp": 6
+          "baseWinProb": 86,
+          "projScoreUt": 31,
+          "projScoreOpp": 16
         },
         {
           "id": "mia-w10",
@@ -2157,9 +2157,9 @@
           "oppRank": "#3 AP",
           "isHome": false,
           "stadium": "Notre Dame Stadium",
-          "baseWinProb": 52,
-          "projScoreUt": 24,
-          "projScoreOpp": 23
+          "baseWinProb": 42,
+          "projScoreUt": 22,
+          "projScoreOpp": 25
         },
         {
           "id": "mia-w11",
@@ -2170,9 +2170,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Hard Rock Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 45,
-          "projScoreOpp": 6
+          "baseWinProb": 97,
+          "projScoreUt": 35,
+          "projScoreOpp": 10
         },
         {
           "id": "mia-w12",
@@ -2183,9 +2183,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Hard Rock Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 46,
-          "projScoreOpp": 6
+          "baseWinProb": 97,
+          "projScoreUt": 34,
+          "projScoreOpp": 11
         },
         {
           "id": "mia-w13",
@@ -2197,8 +2197,8 @@
           "isHome": true,
           "stadium": "Hard Rock Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 45,
-          "projScoreOpp": 6
+          "projScoreUt": 40,
+          "projScoreOpp": 7
         }
       ]
     },
@@ -2207,7 +2207,7 @@
       "name": "Texas A&M Aggies",
       "shortName": "Texas A&M",
       "apRank": "#10 AP",
-      "baseSpRating": 30.0,
+      "baseSpRating": 29.03,
       "conference": "SEC",
       "headCoach": "Mike Elko",
       "starterQb": "Marcel Reed",
@@ -2223,8 +2223,8 @@
           "isHome": true,
           "stadium": "Kyle Field",
           "baseWinProb": 91,
-          "projScoreUt": 50,
-          "projScoreOpp": 0
+          "projScoreUt": 46,
+          "projScoreOpp": 8
         },
         {
           "id": "tamu-w2",
@@ -2235,7 +2235,7 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Kyle Field",
-          "baseWinProb": 92,
+          "baseWinProb": 94,
           "projScoreUt": 33,
           "projScoreOpp": 13
         },
@@ -2248,9 +2248,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Kyle Field",
-          "baseWinProb": 99,
-          "projScoreUt": 46,
-          "projScoreOpp": 6
+          "baseWinProb": 96,
+          "projScoreUt": 34,
+          "projScoreOpp": 11
         },
         {
           "id": "tamu-w4",
@@ -2261,9 +2261,9 @@
           "oppRank": "#8 AP",
           "isHome": false,
           "stadium": "Tiger Stadium (LA)",
-          "baseWinProb": 32,
-          "projScoreUt": 20,
-          "projScoreOpp": 27
+          "baseWinProb": 28,
+          "projScoreUt": 19,
+          "projScoreOpp": 28
         },
         {
           "id": "tamu-w5",
@@ -2274,9 +2274,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Kyle Field",
-          "baseWinProb": 99,
-          "projScoreUt": 46,
-          "projScoreOpp": 6
+          "baseWinProb": 97,
+          "projScoreUt": 34,
+          "projScoreOpp": 11
         },
         {
           "id": "tamu-w6",
@@ -2287,9 +2287,9 @@
           "oppRank": "#23 AP",
           "isHome": false,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 80,
-          "projScoreUt": 29,
-          "projScoreOpp": 18
+          "baseWinProb": 56,
+          "projScoreUt": 25,
+          "projScoreOpp": 22
         },
         {
           "id": "tamu-w7",
@@ -2313,9 +2313,9 @@
           "oppRank": "#12 AP",
           "isHome": false,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 38,
-          "projScoreUt": 22,
-          "projScoreOpp": 26
+          "baseWinProb": 32,
+          "projScoreUt": 21,
+          "projScoreOpp": 27
         },
         {
           "id": "tamu-w10",
@@ -2326,9 +2326,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Williams-Brice Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 42,
-          "projScoreOpp": 6
+          "baseWinProb": 84,
+          "projScoreUt": 30,
+          "projScoreOpp": 16
         },
         {
           "id": "tamu-w11",
@@ -2339,9 +2339,9 @@
           "oppRank": "#18 AP",
           "isHome": true,
           "stadium": "Kyle Field",
-          "baseWinProb": 73,
-          "projScoreUt": 28,
-          "projScoreOpp": 19
+          "baseWinProb": 80,
+          "projScoreUt": 29,
+          "projScoreOpp": 18
         },
         {
           "id": "tamu-w12",
@@ -2352,9 +2352,9 @@
           "oppRank": "#11 AP",
           "isHome": false,
           "stadium": "Memorial Stadium (Norman, OK)",
-          "baseWinProb": 44,
-          "projScoreUt": 23,
-          "projScoreOpp": 25
+          "baseWinProb": 39,
+          "projScoreUt": 22,
+          "projScoreOpp": 26
         },
         {
           "id": "tamu-w13",
@@ -2365,8 +2365,8 @@
           "oppRank": "#4 AP",
           "isHome": true,
           "stadium": "Kyle Field",
-          "baseWinProb": 47,
-          "projScoreUt": 23,
+          "baseWinProb": 55,
+          "projScoreUt": 27,
           "projScoreOpp": 24
         }
       ]
@@ -2392,8 +2392,8 @@
           "isHome": true,
           "stadium": "Nissan Stadium",
           "baseWinProb": 81,
-          "projScoreUt": 41,
-          "projScoreOpp": 38
+          "projScoreUt": 30,
+          "projScoreOpp": 24
         },
         {
           "id": "miss-w2",
@@ -2405,7 +2405,7 @@
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 44,
+          "projScoreUt": 45,
           "projScoreOpp": 7
         },
         {
@@ -2417,9 +2417,9 @@
           "oppRank": "#8 AP",
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 32,
-          "projScoreUt": 22,
-          "projScoreOpp": 29
+          "baseWinProb": 41,
+          "projScoreUt": 24,
+          "projScoreOpp": 27
         },
         {
           "id": "miss-w4",
@@ -2430,9 +2430,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Ben Hill Griffin Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 8
+          "baseWinProb": 62,
+          "projScoreUt": 28,
+          "projScoreOpp": 23
         },
         {
           "id": "miss-w6",
@@ -2443,9 +2443,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "FirstBank Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 9
+          "baseWinProb": 91,
+          "projScoreUt": 34,
+          "projScoreOpp": 16
         },
         {
           "id": "miss-w7",
@@ -2456,9 +2456,9 @@
           "oppRank": "#23 AP",
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 82,
-          "projScoreUt": 32,
-          "projScoreOpp": 18
+          "baseWinProb": 73,
+          "projScoreUt": 30,
+          "projScoreOpp": 20
         },
         {
           "id": "miss-w8",
@@ -2469,9 +2469,9 @@
           "oppRank": "#4 AP",
           "isHome": false,
           "stadium": "DKR-Texas Memorial Stadium",
-          "baseWinProb": 10,
-          "projScoreUt": 16,
-          "projScoreOpp": 34
+          "baseWinProb": 11,
+          "projScoreUt": 15,
+          "projScoreOpp": 31
         },
         {
           "id": "miss-w9",
@@ -2482,9 +2482,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 45,
-          "projScoreOpp": 7
+          "baseWinProb": 88,
+          "projScoreUt": 33,
+          "projScoreOpp": 17
         },
         {
           "id": "miss-w10",
@@ -2495,9 +2495,9 @@
           "oppRank": "#2 AP",
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 21,
-          "projScoreUt": 19,
-          "projScoreOpp": 31
+          "baseWinProb": 27,
+          "projScoreUt": 21,
+          "projScoreOpp": 30
         },
         {
           "id": "miss-w11",
@@ -2509,8 +2509,8 @@
           "isHome": false,
           "stadium": "Memorial Stadium (Norman, OK)",
           "baseWinProb": 28,
-          "projScoreUt": 20,
-          "projScoreOpp": 30
+          "projScoreUt": 19,
+          "projScoreOpp": 28
         },
         {
           "id": "miss-w12",
@@ -2534,9 +2534,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 45,
-          "projScoreOpp": 7
+          "baseWinProb": 94,
+          "projScoreUt": 36,
+          "projScoreOpp": 14
         }
       ]
     },
@@ -2545,7 +2545,7 @@
       "name": "Oklahoma Sooners",
       "shortName": "Oklahoma",
       "apRank": "#11 AP",
-      "baseSpRating": 29.57,
+      "baseSpRating": 28.38,
       "conference": "SEC",
       "headCoach": "Brent Venables",
       "starterQb": "John Mateer",
@@ -2561,8 +2561,8 @@
           "isHome": true,
           "stadium": "Memorial Stadium (Norman, OK)",
           "baseWinProb": 99,
-          "projScoreUt": 51,
-          "projScoreOpp": 0
+          "projScoreUt": 46,
+          "projScoreOpp": 6
         },
         {
           "id": "ou-w2",
@@ -2573,9 +2573,9 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 81,
-          "projScoreUt": 29,
-          "projScoreOpp": 17
+          "baseWinProb": 57,
+          "projScoreUt": 24,
+          "projScoreOpp": 21
         },
         {
           "id": "ou-w3",
@@ -2587,7 +2587,7 @@
           "isHome": true,
           "stadium": "Memorial Stadium (Norman, OK)",
           "baseWinProb": 99,
-          "projScoreUt": 44,
+          "projScoreUt": 43,
           "projScoreOpp": 6
         },
         {
@@ -2599,9 +2599,9 @@
           "oppRank": "#2 AP",
           "isHome": false,
           "stadium": "Sanford Stadium",
-          "baseWinProb": 15,
+          "baseWinProb": 12,
           "projScoreUt": 16,
-          "projScoreOpp": 30
+          "projScoreOpp": 31
         },
         {
           "id": "ou-w6",
@@ -2612,8 +2612,8 @@
           "oppRank": "#4 AP",
           "isHome": true,
           "stadium": "Cotton Bowl",
-          "baseWinProb": 36,
-          "projScoreUt": 21,
+          "baseWinProb": 38,
+          "projScoreUt": 22,
           "projScoreOpp": 26
         },
         {
@@ -2625,9 +2625,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Norman, OK)",
-          "baseWinProb": 99,
-          "projScoreUt": 44,
-          "projScoreOpp": 6
+          "baseWinProb": 94,
+          "projScoreUt": 33,
+          "projScoreOpp": 13
         },
         {
           "id": "ou-w8",
@@ -2638,9 +2638,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Davis Wade Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 40,
-          "projScoreOpp": 7
+          "baseWinProb": 88,
+          "projScoreUt": 31,
+          "projScoreOpp": 15
         },
         {
           "id": "ou-w9",
@@ -2651,9 +2651,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Norman, OK)",
-          "baseWinProb": 99,
-          "projScoreUt": 44,
-          "projScoreOpp": 6
+          "baseWinProb": 92,
+          "projScoreUt": 32,
+          "projScoreOpp": 14
         },
         {
           "id": "ou-w10",
@@ -2664,9 +2664,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Ben Hill Griffin Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 7
+          "baseWinProb": 77,
+          "projScoreUt": 28,
+          "projScoreOpp": 18
         },
         {
           "id": "ou-w11",
@@ -2677,9 +2677,9 @@
           "oppRank": "#9 AP",
           "isHome": true,
           "stadium": "Memorial Stadium (Norman, OK)",
-          "baseWinProb": 77,
+          "baseWinProb": 72,
           "projScoreUt": 28,
-          "projScoreOpp": 18
+          "projScoreOpp": 19
         },
         {
           "id": "ou-w12",
@@ -2703,9 +2703,9 @@
           "oppRank": "#23 AP",
           "isHome": false,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 79,
-          "projScoreUt": 29,
-          "projScoreOpp": 18
+          "baseWinProb": 55,
+          "projScoreUt": 24,
+          "projScoreOpp": 23
         }
       ]
     },
@@ -2714,7 +2714,7 @@
       "name": "Boise State Broncos",
       "shortName": "Boise State",
       "apRank": "RV",
-      "baseSpRating": 20.47,
+      "baseSpRating": 20.97,
       "conference": "Mountain West",
       "headCoach": "Spencer Danielson",
       "starterQb": "Maddux Madsen",
@@ -2730,8 +2730,8 @@
           "isHome": false,
           "stadium": "Autzen Stadium",
           "baseWinProb": 15,
-          "projScoreUt": 27,
-          "projScoreOpp": 34
+          "projScoreUt": 14,
+          "projScoreOpp": 39
         },
         {
           "id": "bsu-w2",
@@ -2742,9 +2742,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Albertsons Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 10
+          "baseWinProb": 88,
+          "projScoreUt": 31,
+          "projScoreOpp": 15
         },
         {
           "id": "bsu-w3",
@@ -2756,7 +2756,7 @@
           "isHome": true,
           "stadium": "Albertsons Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 50,
+          "projScoreUt": 51,
           "projScoreOpp": 6
         },
         {
@@ -2768,9 +2768,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Waldo Stadium",
-          "baseWinProb": 92,
-          "projScoreUt": 33,
-          "projScoreOpp": 13
+          "baseWinProb": 94,
+          "projScoreUt": 34,
+          "projScoreOpp": 12
         },
         {
           "id": "bsu-w5",
@@ -2781,9 +2781,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Albertsons Stadium",
-          "baseWinProb": 98,
+          "baseWinProb": 99,
           "projScoreUt": 36,
-          "projScoreOpp": 10
+          "projScoreOpp": 9
         },
         {
           "id": "bsu-w6",
@@ -2794,9 +2794,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Valley Children's Stadium",
-          "baseWinProb": 93,
+          "baseWinProb": 94,
           "projScoreUt": 33,
-          "projScoreOpp": 14
+          "projScoreOpp": 13
         },
         {
           "id": "bsu-w8",
@@ -2807,9 +2807,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Martin Stadium",
-          "baseWinProb": 93,
-          "projScoreUt": 33,
-          "projScoreOpp": 13
+          "baseWinProb": 60,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         },
         {
           "id": "bsu-w9",
@@ -2820,9 +2820,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Albertsons Stadium",
-          "baseWinProb": 98,
+          "baseWinProb": 99,
           "projScoreUt": 36,
-          "projScoreOpp": 10
+          "projScoreOpp": 9
         },
         {
           "id": "bsu-w10",
@@ -2833,9 +2833,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Canvas Stadium",
-          "baseWinProb": 92,
-          "projScoreUt": 32,
-          "projScoreOpp": 13
+          "baseWinProb": 54,
+          "projScoreUt": 24,
+          "projScoreOpp": 23
         },
         {
           "id": "bsu-w11",
@@ -2846,9 +2846,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Albertsons Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 10
+          "baseWinProb": 83,
+          "projScoreUt": 30,
+          "projScoreOpp": 17
         },
         {
           "id": "bsu-w12",
@@ -2861,7 +2861,7 @@
           "stadium": "Albertsons Stadium",
           "baseWinProb": 98,
           "projScoreUt": 36,
-          "projScoreOpp": 10
+          "projScoreOpp": 9
         },
         {
           "id": "bsu-w13",
@@ -2872,9 +2872,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "TBD",
-          "baseWinProb": 93,
-          "projScoreUt": 33,
-          "projScoreOpp": 13
+          "baseWinProb": 59,
+          "projScoreUt": 25,
+          "projScoreOpp": 22
         }
       ]
     },
@@ -2883,7 +2883,7 @@
       "name": "USC Trojans",
       "shortName": "USC",
       "apRank": "#14 AP",
-      "baseSpRating": 25.5,
+      "baseSpRating": 26.98,
       "conference": "Big Ten",
       "headCoach": "Lincoln Riley",
       "starterQb": "Jayden Maiava",
@@ -2899,8 +2899,8 @@
           "isHome": true,
           "stadium": "Los Angeles Memorial Coliseum",
           "baseWinProb": 96,
-          "projScoreUt": 42,
-          "projScoreOpp": 26
+          "projScoreUt": 50,
+          "projScoreOpp": 12
         },
         {
           "id": "usc-w1",
@@ -2912,8 +2912,8 @@
           "isHome": true,
           "stadium": "Los Angeles Memorial Coliseum",
           "baseWinProb": 98,
-          "projScoreUt": 39,
-          "projScoreOpp": 0
+          "projScoreUt": 36,
+          "projScoreOpp": 15
         },
         {
           "id": "usc-w2",
@@ -2925,7 +2925,7 @@
           "isHome": true,
           "stadium": "Los Angeles Memorial Coliseum",
           "baseWinProb": 99,
-          "projScoreUt": 42,
+          "projScoreUt": 43,
           "projScoreOpp": 6
         },
         {
@@ -2937,9 +2937,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "SHI Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 39,
-          "projScoreOpp": 8
+          "baseWinProb": 81,
+          "projScoreUt": 29,
+          "projScoreOpp": 17
         },
         {
           "id": "usc-w4",
@@ -2950,8 +2950,8 @@
           "oppRank": "#6 AP",
           "isHome": true,
           "stadium": "Los Angeles Memorial Coliseum",
-          "baseWinProb": 59,
-          "projScoreUt": 25,
+          "baseWinProb": 61,
+          "projScoreUt": 26,
           "projScoreOpp": 22
         },
         {
@@ -2976,9 +2976,9 @@
           "oppRank": "#16 AP",
           "isHome": false,
           "stadium": "Beaver Stadium",
-          "baseWinProb": 38,
+          "baseWinProb": 44,
           "projScoreUt": 22,
-          "projScoreOpp": 26
+          "projScoreOpp": 24
         },
         {
           "id": "usc-w8",
@@ -2989,9 +2989,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Camp Randall Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 38,
-          "projScoreOpp": 7
+          "baseWinProb": 69,
+          "projScoreUt": 27,
+          "projScoreOpp": 20
         },
         {
           "id": "usc-w9",
@@ -3002,9 +3002,9 @@
           "oppRank": "#1 AP",
           "isHome": true,
           "stadium": "Los Angeles Memorial Coliseum",
-          "baseWinProb": 22,
-          "projScoreUt": 18,
-          "projScoreOpp": 29
+          "baseWinProb": 36,
+          "projScoreUt": 21,
+          "projScoreOpp": 26
         },
         {
           "id": "usc-w11",
@@ -3015,7 +3015,7 @@
           "oppRank": "#5 AP",
           "isHome": false,
           "stadium": "Memorial Stadium (Bloomington, IN)",
-          "baseWinProb": 40,
+          "baseWinProb": 37,
           "projScoreUt": 22,
           "projScoreOpp": 26
         },
@@ -3028,9 +3028,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Los Angeles Memorial Coliseum",
-          "baseWinProb": 99,
-          "projScoreUt": 42,
-          "projScoreOpp": 6
+          "baseWinProb": 94,
+          "projScoreUt": 33,
+          "projScoreOpp": 13
         },
         {
           "id": "usc-w13",
@@ -3041,9 +3041,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Rose Bowl",
-          "baseWinProb": 99,
-          "projScoreUt": 39,
-          "projScoreOpp": 8
+          "baseWinProb": 84,
+          "projScoreUt": 30,
+          "projScoreOpp": 17
         }
       ]
     },
@@ -3052,7 +3052,7 @@
       "name": "Florida State Seminoles",
       "shortName": "Florida State",
       "apRank": "NR",
-      "baseSpRating": 23.7,
+      "baseSpRating": 24.3,
       "conference": "ACC",
       "headCoach": "Mike Norvell",
       "starterQb": "Ashton Daniels",
@@ -3068,8 +3068,8 @@
           "isHome": true,
           "stadium": "Doak Campbell Stadium",
           "baseWinProb": 95,
-          "projScoreUt": 34,
-          "projScoreOpp": 17
+          "projScoreUt": 42,
+          "projScoreOpp": 12
         },
         {
           "id": "fsu-w1",
@@ -3081,8 +3081,8 @@
           "isHome": true,
           "stadium": "Doak Campbell Stadium",
           "baseWinProb": 68,
-          "projScoreUt": 24,
-          "projScoreOpp": 27
+          "projScoreUt": 25,
+          "projScoreOpp": 28
         },
         {
           "id": "fsu-w3",
@@ -3106,9 +3106,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Doak Campbell Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 40,
-          "projScoreOpp": 7
+          "baseWinProb": 87,
+          "projScoreUt": 31,
+          "projScoreOpp": 16
         },
         {
           "id": "fsu-w5",
@@ -3119,9 +3119,9 @@
           "oppRank": "#25 AP",
           "isHome": true,
           "stadium": "Doak Campbell Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 39,
-          "projScoreOpp": 7
+          "baseWinProb": 95,
+          "projScoreUt": 35,
+          "projScoreOpp": 12
         },
         {
           "id": "fsu-w6",
@@ -3132,9 +3132,9 @@
           "oppRank": "#24 AP",
           "isHome": false,
           "stadium": "L&N Federal Credit Union Stadium",
-          "baseWinProb": 53,
-          "projScoreUt": 24,
-          "projScoreOpp": 23
+          "baseWinProb": 45,
+          "projScoreUt": 23,
+          "projScoreOpp": 24
         },
         {
           "id": "fsu-w7",
@@ -3145,8 +3145,8 @@
           "oppRank": "#7 AP",
           "isHome": false,
           "stadium": "Hard Rock Stadium",
-          "baseWinProb": 17,
-          "projScoreUt": 17,
+          "baseWinProb": 15,
+          "projScoreUt": 16,
           "projScoreOpp": 30
         },
         {
@@ -3158,9 +3158,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Doak Campbell Stadium",
-          "baseWinProb": 84,
-          "projScoreUt": 30,
-          "projScoreOpp": 17
+          "baseWinProb": 78,
+          "projScoreUt": 29,
+          "projScoreOpp": 18
         },
         {
           "id": "fsu-w10",
@@ -3171,9 +3171,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Alumni Stadium (Chestnut Hill, MA)",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 10
+          "baseWinProb": 86,
+          "projScoreUt": 31,
+          "projScoreOpp": 16
         },
         {
           "id": "fsu-w11",
@@ -3184,9 +3184,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Acrisure Stadium",
-          "baseWinProb": 97,
-          "projScoreUt": 36,
-          "projScoreOpp": 10
+          "baseWinProb": 70,
+          "projScoreUt": 27,
+          "projScoreOpp": 20
         },
         {
           "id": "fsu-w12",
@@ -3197,9 +3197,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Doak Campbell Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 39,
-          "projScoreOpp": 7
+          "baseWinProb": 88,
+          "projScoreUt": 31,
+          "projScoreOpp": 15
         },
         {
           "id": "fsu-w13",
@@ -3210,9 +3210,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Doak Campbell Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 40,
-          "projScoreOpp": 7
+          "baseWinProb": 82,
+          "projScoreUt": 30,
+          "projScoreOpp": 17
         }
       ]
     },
@@ -3221,7 +3221,7 @@
       "name": "Clemson Tigers",
       "shortName": "Clemson",
       "apRank": "NR",
-      "baseSpRating": 17.8,
+      "baseSpRating": 20.8,
       "conference": "ACC",
       "headCoach": "Dabo Swinney",
       "starterQb": "Christopher Vizzina",
@@ -3237,8 +3237,8 @@
           "isHome": false,
           "stadium": "Tiger Stadium (LA)",
           "baseWinProb": 11,
-          "projScoreUt": 10,
-          "projScoreOpp": 51
+          "projScoreUt": 19,
+          "projScoreOpp": 29
         },
         {
           "id": "clem-w2",
@@ -3249,9 +3249,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Clemson, SC)",
-          "baseWinProb": 98,
-          "projScoreUt": 37,
-          "projScoreOpp": 10
+          "baseWinProb": 99,
+          "projScoreUt": 38,
+          "projScoreOpp": 8
         },
         {
           "id": "clem-w3",
@@ -3262,9 +3262,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Clemson, SC)",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 10
+          "baseWinProb": 75,
+          "projScoreUt": 28,
+          "projScoreOpp": 19
         },
         {
           "id": "clem-w4",
@@ -3275,9 +3275,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "California Memorial Stadium",
-          "baseWinProb": 93,
-          "projScoreUt": 33,
-          "projScoreOpp": 13
+          "baseWinProb": 64,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         },
         {
           "id": "clem-w5",
@@ -3288,9 +3288,9 @@
           "oppRank": "#7 AP",
           "isHome": true,
           "stadium": "Memorial Stadium (Clemson, SC)",
-          "baseWinProb": 15,
-          "projScoreUt": 16,
-          "projScoreOpp": 30
+          "baseWinProb": 27,
+          "projScoreUt": 19,
+          "projScoreOpp": 28
         },
         {
           "id": "clem-w7",
@@ -3302,7 +3302,7 @@
           "isHome": true,
           "stadium": "Memorial Stadium (Clemson, SC)",
           "baseWinProb": 99,
-          "projScoreUt": 50,
+          "projScoreUt": 53,
           "projScoreOpp": 6
         },
         {
@@ -3314,9 +3314,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Clemson, SC)",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 10
+          "baseWinProb": 79,
+          "projScoreUt": 29,
+          "projScoreOpp": 18
         },
         {
           "id": "clem-w9",
@@ -3340,9 +3340,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "JMA Wireless Dome",
-          "baseWinProb": 92,
-          "projScoreUt": 33,
-          "projScoreOpp": 13
+          "baseWinProb": 59,
+          "projScoreUt": 26,
+          "projScoreOpp": 22
         },
         {
           "id": "clem-w11",
@@ -3353,9 +3353,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Clemson, SC)",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 10
+          "baseWinProb": 70,
+          "projScoreUt": 27,
+          "projScoreOpp": 20
         },
         {
           "id": "clem-w12",
@@ -3366,9 +3366,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Wallace Wade Stadium",
-          "baseWinProb": 92,
-          "projScoreUt": 33,
-          "projScoreOpp": 13
+          "baseWinProb": 63,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         },
         {
           "id": "clem-w13",
@@ -3379,9 +3379,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Clemson, SC)",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 10
+          "baseWinProb": 76,
+          "projScoreUt": 28,
+          "projScoreOpp": 19
         }
       ]
     },
@@ -3406,8 +3406,8 @@
           "isHome": false,
           "stadium": "Doak Campbell Stadium",
           "baseWinProb": 38,
-          "projScoreUt": 27,
-          "projScoreOpp": 24
+          "projScoreUt": 28,
+          "projScoreOpp": 25
         },
         {
           "id": "smu-w2",
@@ -3420,7 +3420,7 @@
           "stadium": "Gerald J. Ford Stadium",
           "baseWinProb": 99,
           "projScoreUt": 39,
-          "projScoreOpp": 7
+          "projScoreOpp": 8
         },
         {
           "id": "smu-w3",
@@ -3431,8 +3431,8 @@
           "oppRank": "#24 AP",
           "isHome": false,
           "stadium": "L&N Federal Credit Union Stadium",
-          "baseWinProb": 52,
-          "projScoreUt": 24,
+          "baseWinProb": 45,
+          "projScoreUt": 22,
           "projScoreOpp": 24
         },
         {
@@ -3457,9 +3457,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Gerald J. Ford Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 38,
-          "projScoreOpp": 7
+          "baseWinProb": 94,
+          "projScoreUt": 34,
+          "projScoreOpp": 13
         },
         {
           "id": "smu-w7",
@@ -3470,9 +3470,9 @@
           "oppRank": "#25 AP",
           "isHome": true,
           "stadium": "Gerald J. Ford Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 38,
-          "projScoreOpp": 7
+          "baseWinProb": 91,
+          "projScoreUt": 32,
+          "projScoreOpp": 14
         },
         {
           "id": "smu-w8",
@@ -3483,9 +3483,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Gerald J. Ford Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 39,
-          "projScoreOpp": 7
+          "baseWinProb": 86,
+          "projScoreUt": 30,
+          "projScoreOpp": 16
         },
         {
           "id": "smu-w9",
@@ -3496,9 +3496,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "JMA Wireless Dome",
-          "baseWinProb": 97,
-          "projScoreUt": 35,
-          "projScoreOpp": 10
+          "baseWinProb": 69,
+          "projScoreUt": 27,
+          "projScoreOpp": 20
         },
         {
           "id": "smu-w10",
@@ -3509,9 +3509,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Gerald J. Ford Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 39,
-          "projScoreOpp": 8
+          "baseWinProb": 84,
+          "projScoreUt": 30,
+          "projScoreOpp": 16
         },
         {
           "id": "smu-w11",
@@ -3522,9 +3522,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Gerald J. Ford Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 39,
-          "projScoreOpp": 7
+          "baseWinProb": 93,
+          "projScoreUt": 34,
+          "projScoreOpp": 13
         },
         {
           "id": "smu-w12",
@@ -3535,9 +3535,9 @@
           "oppRank": "#3 AP",
           "isHome": false,
           "stadium": "Notre Dame Stadium",
-          "baseWinProb": 22,
-          "projScoreUt": 18,
-          "projScoreOpp": 29
+          "baseWinProb": 18,
+          "projScoreUt": 17,
+          "projScoreOpp": 30
         },
         {
           "id": "smu-w13",
@@ -3548,9 +3548,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Stanford Stadium",
-          "baseWinProb": 97,
-          "projScoreUt": 36,
-          "projScoreOpp": 11
+          "baseWinProb": 85,
+          "projScoreUt": 31,
+          "projScoreOpp": 16
         }
       ]
     },
@@ -3559,7 +3559,7 @@
       "name": "Texas Tech Red Raiders",
       "shortName": "Texas Tech",
       "apRank": "#13 AP",
-      "baseSpRating": 17.85,
+      "baseSpRating": 24.24,
       "conference": "Big 12",
       "headCoach": "Joey McGuire",
       "starterQb": "Will Hammond",
@@ -3573,10 +3573,10 @@
           "oppAbbr": "ACU",
           "oppRank": "NR",
           "isHome": true,
-          "stadium": "Galaxy Stadium",
+          "stadium": "Jones AT&T Stadium",
           "baseWinProb": 95,
-          "projScoreUt": 33,
-          "projScoreOpp": 10
+          "projScoreUt": 54,
+          "projScoreOpp": 8
         },
         {
           "id": "ttu-w2",
@@ -3587,9 +3587,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Reser Stadium",
-          "baseWinProb": 92,
-          "projScoreUt": 35,
-          "projScoreOpp": 15
+          "baseWinProb": 74,
+          "projScoreUt": 30,
+          "projScoreOpp": 20
         },
         {
           "id": "ttu-w3",
@@ -3599,10 +3599,10 @@
           "oppAbbr": "HOU",
           "oppRank": "#22 AP",
           "isHome": true,
-          "stadium": "Galaxy Stadium",
-          "baseWinProb": 62,
-          "projScoreUt": 28,
-          "projScoreOpp": 24
+          "stadium": "Jones AT&T Stadium",
+          "baseWinProb": 86,
+          "projScoreUt": 33,
+          "projScoreOpp": 18
         },
         {
           "id": "ttu-w4",
@@ -3612,10 +3612,10 @@
           "oppAbbr": "SHSU",
           "oppRank": "NR",
           "isHome": true,
-          "stadium": "Galaxy Stadium",
-          "baseWinProb": 97,
-          "projScoreUt": 38,
-          "projScoreOpp": 12
+          "stadium": "Jones AT&T Stadium",
+          "baseWinProb": 88,
+          "projScoreUt": 34,
+          "projScoreOpp": 16
         },
         {
           "id": "ttu-w5",
@@ -3626,9 +3626,9 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Folsom Field",
-          "baseWinProb": 44,
-          "projScoreUt": 24,
-          "projScoreOpp": 27
+          "baseWinProb": 60,
+          "projScoreUt": 25,
+          "projScoreOpp": 22
         },
         {
           "id": "ttu-w7",
@@ -3638,10 +3638,10 @@
           "oppAbbr": "ASU",
           "oppRank": "RV",
           "isHome": true,
-          "stadium": "Galaxy Stadium",
-          "baseWinProb": 51,
-          "projScoreUt": 26,
-          "projScoreOpp": 25
+          "stadium": "Jones AT&T Stadium",
+          "baseWinProb": 85,
+          "projScoreUt": 32,
+          "projScoreOpp": 18
         },
         {
           "id": "ttu-w8",
@@ -3652,9 +3652,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Nippert Stadium",
-          "baseWinProb": 92,
-          "projScoreUt": 35,
-          "projScoreOpp": 16
+          "baseWinProb": 76,
+          "projScoreUt": 30,
+          "projScoreOpp": 20
         },
         {
           "id": "ttu-w9",
@@ -3664,10 +3664,10 @@
           "oppAbbr": "ARIZ",
           "oppRank": "RV",
           "isHome": true,
-          "stadium": "Galaxy Stadium",
-          "baseWinProb": 60,
-          "projScoreUt": 27,
-          "projScoreOpp": 23
+          "stadium": "Jones AT&T Stadium",
+          "baseWinProb": 82,
+          "projScoreUt": 32,
+          "projScoreOpp": 19
         },
         {
           "id": "ttu-w10",
@@ -3677,10 +3677,10 @@
           "oppAbbr": "WVU",
           "oppRank": "NR",
           "isHome": true,
-          "stadium": "Galaxy Stadium",
-          "baseWinProb": 97,
-          "projScoreUt": 38,
-          "projScoreOpp": 12
+          "stadium": "Jones AT&T Stadium",
+          "baseWinProb": 91,
+          "projScoreUt": 34,
+          "projScoreOpp": 15
         },
         {
           "id": "ttu-w11",
@@ -3691,9 +3691,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Boone Pickens Stadium",
-          "baseWinProb": 92,
-          "projScoreUt": 35,
-          "projScoreOpp": 15
+          "baseWinProb": 72,
+          "projScoreUt": 30,
+          "projScoreOpp": 21
         },
         {
           "id": "ttu-w12",
@@ -3704,9 +3704,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "McLane Stadium",
-          "baseWinProb": 92,
-          "projScoreUt": 35,
-          "projScoreOpp": 15
+          "baseWinProb": 74,
+          "projScoreUt": 30,
+          "projScoreOpp": 21
         },
         {
           "id": "ttu-w13",
@@ -3716,10 +3716,10 @@
           "oppAbbr": "TCU",
           "oppRank": "NR",
           "isHome": true,
-          "stadium": "Galaxy Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 41,
-          "projScoreOpp": 12
+          "stadium": "Jones AT&T Stadium",
+          "baseWinProb": 89,
+          "projScoreUt": 36,
+          "projScoreOpp": 18
         }
       ]
     },
@@ -3728,7 +3728,7 @@
       "name": "Utah Utes",
       "shortName": "Utah",
       "apRank": "#20 AP",
-      "baseSpRating": 28.85,
+      "baseSpRating": 27.5,
       "conference": "Big 12",
       "headCoach": "Morgan Scalley",
       "starterQb": "Devon Dampier",
@@ -3744,8 +3744,8 @@
           "isHome": true,
           "stadium": "Rice-Eccles Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 66,
-          "projScoreOpp": 14
+          "projScoreUt": 50,
+          "projScoreOpp": 11
         },
         {
           "id": "utah-w2",
@@ -3756,9 +3756,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Rice-Eccles Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 6
+          "baseWinProb": 93,
+          "projScoreUt": 33,
+          "projScoreOpp": 13
         },
         {
           "id": "utah-w3",
@@ -3770,8 +3770,8 @@
           "isHome": true,
           "stadium": "Rice-Eccles Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 6
+          "projScoreUt": 40,
+          "projScoreOpp": 7
         },
         {
           "id": "utah-w4",
@@ -3782,9 +3782,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Jack Trice Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 38,
-          "projScoreOpp": 7
+          "baseWinProb": 73,
+          "projScoreUt": 28,
+          "projScoreOpp": 19
         },
         {
           "id": "utah-w6",
@@ -3795,9 +3795,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Rice-Eccles Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 6
+          "baseWinProb": 94,
+          "projScoreUt": 33,
+          "projScoreOpp": 13
         },
         {
           "id": "utah-w7",
@@ -3808,9 +3808,9 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Folsom Field",
-          "baseWinProb": 82,
-          "projScoreUt": 30,
-          "projScoreOpp": 17
+          "baseWinProb": 71,
+          "projScoreUt": 28,
+          "projScoreOpp": 20
         },
         {
           "id": "utah-w8",
@@ -3821,9 +3821,9 @@
           "oppRank": "#22 AP",
           "isHome": true,
           "stadium": "Rice-Eccles Stadium",
-          "baseWinProb": 94,
-          "projScoreUt": 33,
-          "projScoreOpp": 13
+          "baseWinProb": 92,
+          "projScoreUt": 32,
+          "projScoreOpp": 14
         },
         {
           "id": "utah-w9",
@@ -3834,9 +3834,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Nippert Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 38,
-          "projScoreOpp": 8
+          "baseWinProb": 85,
+          "projScoreUt": 31,
+          "projScoreOpp": 16
         },
         {
           "id": "utah-w10",
@@ -3847,7 +3847,7 @@
           "oppRank": "#15 AP",
           "isHome": true,
           "stadium": "Rice-Eccles Stadium",
-          "baseWinProb": 78,
+          "baseWinProb": 81,
           "projScoreUt": 29,
           "projScoreOpp": 18
         },
@@ -3860,9 +3860,9 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Casino Del Sol Stadium",
-          "baseWinProb": 81,
-          "projScoreUt": 29,
-          "projScoreOpp": 17
+          "baseWinProb": 67,
+          "projScoreUt": 27,
+          "projScoreOpp": 20
         },
         {
           "id": "utah-w12",
@@ -3873,9 +3873,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Amon G. Carter Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 8
+          "baseWinProb": 81,
+          "projScoreUt": 32,
+          "projScoreOpp": 19
         },
         {
           "id": "utah-w13",
@@ -3886,9 +3886,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Rice-Eccles Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 41,
-          "projScoreOpp": 6
+          "baseWinProb": 96,
+          "projScoreUt": 34,
+          "projScoreOpp": 12
         }
       ]
     },
@@ -3897,7 +3897,7 @@
       "name": "Iowa Hawkeyes",
       "shortName": "Iowa",
       "apRank": "#21 AP",
-      "baseSpRating": 22.34,
+      "baseSpRating": 21.21,
       "conference": "Big Ten",
       "headCoach": "Kirk Ferentz",
       "starterQb": "Jeremy Hecklinski",
@@ -3913,8 +3913,8 @@
           "isHome": true,
           "stadium": "Kinnick Stadium",
           "baseWinProb": 91,
-          "projScoreUt": 40,
-          "projScoreOpp": 0
+          "projScoreUt": 38,
+          "projScoreOpp": 6
         },
         {
           "id": "iowa-w2",
@@ -3925,9 +3925,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Kinnick Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 35,
-          "projScoreOpp": 8
+          "baseWinProb": 71,
+          "projScoreUt": 26,
+          "projScoreOpp": 18
         },
         {
           "id": "iowa-w3",
@@ -3939,7 +3939,7 @@
           "isHome": true,
           "stadium": "Kinnick Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 35,
+          "projScoreUt": 34,
           "projScoreOpp": 8
         },
         {
@@ -3951,9 +3951,9 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Michigan Stadium",
-          "baseWinProb": 58,
-          "projScoreUt": 23,
-          "projScoreOpp": 21
+          "baseWinProb": 31,
+          "projScoreUt": 18,
+          "projScoreOpp": 24
         },
         {
           "id": "iowa-w5",
@@ -3964,9 +3964,9 @@
           "oppRank": "#1 AP",
           "isHome": true,
           "stadium": "Kinnick Stadium",
-          "baseWinProb": 14,
-          "projScoreUt": 14,
-          "projScoreOpp": 30
+          "baseWinProb": 19,
+          "projScoreUt": 16,
+          "projScoreOpp": 28
         },
         {
           "id": "iowa-w6",
@@ -3977,9 +3977,9 @@
           "oppRank": "#19 AP",
           "isHome": false,
           "stadium": "Husky Stadium",
-          "baseWinProb": 54,
-          "projScoreUt": 23,
-          "projScoreOpp": 22
+          "baseWinProb": 38,
+          "projScoreUt": 20,
+          "projScoreOpp": 24
         },
         {
           "id": "iowa-w8",
@@ -3990,9 +3990,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Huntington Bank Stadium",
-          "baseWinProb": 95,
-          "projScoreUt": 32,
-          "projScoreOpp": 11
+          "baseWinProb": 63,
+          "projScoreUt": 24,
+          "projScoreOpp": 20
         },
         {
           "id": "iowa-w9",
@@ -4003,9 +4003,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Kinnick Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 35,
-          "projScoreOpp": 8
+          "baseWinProb": 73,
+          "projScoreUt": 26,
+          "projScoreOpp": 18
         },
         {
           "id": "iowa-w10",
@@ -4016,9 +4016,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Ryan Field",
-          "baseWinProb": 95,
-          "projScoreUt": 32,
-          "projScoreOpp": 11
+          "baseWinProb": 79,
+          "projScoreUt": 27,
+          "projScoreOpp": 16
         },
         {
           "id": "iowa-w11",
@@ -4029,9 +4029,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Kinnick Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 35,
-          "projScoreOpp": 8
+          "baseWinProb": 91,
+          "projScoreUt": 30,
+          "projScoreOpp": 13
         },
         {
           "id": "iowa-w12",
@@ -4042,9 +4042,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Gies Memorial Stadium",
-          "baseWinProb": 96,
-          "projScoreUt": 32,
-          "projScoreOpp": 11
+          "baseWinProb": 53,
+          "projScoreUt": 23,
+          "projScoreOpp": 22
         },
         {
           "id": "iowa-w13",
@@ -4055,9 +4055,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Kinnick Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 35,
-          "projScoreOpp": 8
+          "baseWinProb": 72,
+          "projScoreUt": 26,
+          "projScoreOpp": 18
         }
       ]
     },
@@ -4066,7 +4066,7 @@
       "name": "Missouri Tigers",
       "shortName": "Missouri",
       "apRank": "#23 AP",
-      "baseSpRating": 19.44,
+      "baseSpRating": 23.29,
       "conference": "SEC",
       "headCoach": "Eli Drinkwitz",
       "starterQb": "Austin Simmons",
@@ -4082,8 +4082,8 @@
           "isHome": true,
           "stadium": "Memorial Stadium",
           "baseWinProb": 98,
-          "projScoreUt": 54,
-          "projScoreOpp": 14
+          "projScoreUt": 59,
+          "projScoreOpp": 4
         },
         {
           "id": "miz-w2",
@@ -4094,9 +4094,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "David Booth Kansas Memorial Stadium",
-          "baseWinProb": 95,
-          "projScoreUt": 34,
-          "projScoreOpp": 13
+          "baseWinProb": 66,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         },
         {
           "id": "miz-w3",
@@ -4107,9 +4107,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 37,
-          "projScoreOpp": 9
+          "baseWinProb": 99,
+          "projScoreUt": 40,
+          "projScoreOpp": 7
         },
         {
           "id": "miz-w4",
@@ -4120,9 +4120,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Davis Wade Stadium",
-          "baseWinProb": 93,
-          "projScoreUt": 34,
-          "projScoreOpp": 12
+          "baseWinProb": 74,
+          "projScoreUt": 28,
+          "projScoreOpp": 19
         },
         {
           "id": "miz-w5",
@@ -4133,9 +4133,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 37,
-          "projScoreOpp": 9
+          "baseWinProb": 76,
+          "projScoreUt": 28,
+          "projScoreOpp": 18
         },
         {
           "id": "miz-w6",
@@ -4146,9 +4146,9 @@
           "oppRank": "#10 AP",
           "isHome": true,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 24,
-          "projScoreUt": 19,
-          "projScoreOpp": 28
+          "baseWinProb": 44,
+          "projScoreUt": 22,
+          "projScoreOpp": 25
         },
         {
           "id": "miz-w7",
@@ -4159,9 +4159,9 @@
           "oppRank": "#9 AP",
           "isHome": false,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 23,
-          "projScoreUt": 18,
-          "projScoreOpp": 29
+          "baseWinProb": 27,
+          "projScoreUt": 20,
+          "projScoreOpp": 30
         },
         {
           "id": "miz-w9",
@@ -4172,9 +4172,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Donald W. Reynolds Razorback Stadium",
-          "baseWinProb": 94,
-          "projScoreUt": 34,
-          "projScoreOpp": 13
+          "baseWinProb": 66,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         },
         {
           "id": "miz-w10",
@@ -4185,9 +4185,9 @@
           "oppRank": "#4 AP",
           "isHome": true,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 9,
-          "projScoreUt": 14,
-          "projScoreOpp": 32
+          "baseWinProb": 24,
+          "projScoreUt": 18,
+          "projScoreOpp": 28
         },
         {
           "id": "miz-w11",
@@ -4198,9 +4198,9 @@
           "oppRank": "#2 AP",
           "isHome": false,
           "stadium": "Sanford Stadium",
-          "baseWinProb": 3,
-          "projScoreUt": 10,
-          "projScoreOpp": 36
+          "baseWinProb": 4,
+          "projScoreUt": 12,
+          "projScoreOpp": 34
         },
         {
           "id": "miz-w12",
@@ -4211,9 +4211,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 37,
-          "projScoreOpp": 9
+          "baseWinProb": 84,
+          "projScoreUt": 30,
+          "projScoreOpp": 16
         },
         {
           "id": "miz-w13",
@@ -4224,9 +4224,9 @@
           "oppRank": "#11 AP",
           "isHome": true,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 26,
-          "projScoreUt": 19,
-          "projScoreOpp": 28
+          "baseWinProb": 45,
+          "projScoreUt": 23,
+          "projScoreOpp": 24
         }
       ]
     },
@@ -4235,7 +4235,7 @@
       "name": "Arizona Wildcats",
       "shortName": "Arizona",
       "apRank": "RV",
-      "baseSpRating": 18.29,
+      "baseSpRating": 19.94,
       "conference": "Big 12",
       "headCoach": "Brent Brennan",
       "starterQb": "Noah Fifita",
@@ -4251,8 +4251,8 @@
           "isHome": true,
           "stadium": "Casino Del Sol Stadium",
           "baseWinProb": 95,
-          "projScoreUt": 35,
-          "projScoreOpp": 7
+          "projScoreUt": 46,
+          "projScoreOpp": 13
         },
         {
           "id": "ariz-w2",
@@ -4263,9 +4263,9 @@
           "oppRank": "#15 AP",
           "isHome": false,
           "stadium": "LaVell Edwards Stadium",
-          "baseWinProb": 16,
-          "projScoreUt": 17,
-          "projScoreOpp": 30
+          "baseWinProb": 24,
+          "projScoreUt": 18,
+          "projScoreOpp": 28
         },
         {
           "id": "ariz-w3",
@@ -4276,9 +4276,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Casino Del Sol Stadium",
-          "baseWinProb": 96,
-          "projScoreUt": 34,
-          "projScoreOpp": 11
+          "baseWinProb": 68,
+          "projScoreUt": 27,
+          "projScoreOpp": 20
         },
         {
           "id": "ariz-w4",
@@ -4289,9 +4289,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Martin Stadium",
-          "baseWinProb": 89,
-          "projScoreUt": 31,
-          "projScoreOpp": 15
+          "baseWinProb": 59,
+          "projScoreUt": 25,
+          "projScoreOpp": 22
         },
         {
           "id": "ariz-w5",
@@ -4302,9 +4302,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Casino Del Sol Stadium",
-          "baseWinProb": 97,
-          "projScoreUt": 35,
-          "projScoreOpp": 11
+          "baseWinProb": 79,
+          "projScoreUt": 29,
+          "projScoreOpp": 18
         },
         {
           "id": "ariz-w6",
@@ -4315,9 +4315,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Milan Puskar Stadium",
-          "baseWinProb": 90,
-          "projScoreUt": 32,
-          "projScoreOpp": 15
+          "baseWinProb": 59,
+          "projScoreUt": 25,
+          "projScoreOpp": 22
         },
         {
           "id": "ariz-w8",
@@ -4328,9 +4328,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Casino Del Sol Stadium",
-          "baseWinProb": 96,
-          "projScoreUt": 35,
-          "projScoreOpp": 11
+          "baseWinProb": 64,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         },
         {
           "id": "ariz-w9",
@@ -4340,10 +4340,10 @@
           "oppAbbr": "TTU",
           "oppRank": "#13 AP",
           "isHome": false,
-          "stadium": "Galaxy Stadium",
-          "baseWinProb": 44,
-          "projScoreUt": 23,
-          "projScoreOpp": 24
+          "stadium": "Jones AT&T Stadium",
+          "baseWinProb": 18,
+          "projScoreUt": 19,
+          "projScoreOpp": 32
         },
         {
           "id": "ariz-w10",
@@ -4354,9 +4354,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Casino Del Sol Stadium",
-          "baseWinProb": 97,
-          "projScoreUt": 37,
-          "projScoreOpp": 12
+          "baseWinProb": 72,
+          "projScoreUt": 30,
+          "projScoreOpp": 21
         },
         {
           "id": "ariz-w11",
@@ -4367,9 +4367,9 @@
           "oppRank": "#20 AP",
           "isHome": true,
           "stadium": "Casino Del Sol Stadium",
-          "baseWinProb": 22,
-          "projScoreUt": 18,
-          "projScoreOpp": 28
+          "baseWinProb": 33,
+          "projScoreUt": 20,
+          "projScoreOpp": 27
         },
         {
           "id": "ariz-w12",
@@ -4380,9 +4380,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Bill Snyder Family Stadium",
-          "baseWinProb": 90,
-          "projScoreUt": 32,
-          "projScoreOpp": 15
+          "baseWinProb": 42,
+          "projScoreUt": 22,
+          "projScoreOpp": 25
         },
         {
           "id": "ariz-w13",
@@ -4393,9 +4393,9 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Casino Del Sol Stadium",
-          "baseWinProb": 54,
-          "projScoreUt": 24,
-          "projScoreOpp": 23
+          "baseWinProb": 65,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         }
       ]
     },
@@ -4404,7 +4404,7 @@
       "name": "Washington Huskies",
       "shortName": "Washington",
       "apRank": "#19 AP",
-      "baseSpRating": 18.25,
+      "baseSpRating": 19.5,
       "conference": "Big Ten",
       "headCoach": "Jedd Fisch",
       "starterQb": "Demond Williams Jr.",
@@ -4420,8 +4420,8 @@
           "isHome": true,
           "stadium": "Husky Stadium",
           "baseWinProb": 97,
-          "projScoreUt": 24,
-          "projScoreOpp": 10
+          "projScoreUt": 38,
+          "projScoreOpp": 14
         },
         {
           "id": "wash-w2",
@@ -4432,9 +4432,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Husky Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 10
+          "baseWinProb": 99,
+          "projScoreUt": 37,
+          "projScoreOpp": 9
         },
         {
           "id": "wash-w3",
@@ -4445,9 +4445,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Husky Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 10
+          "baseWinProb": 72,
+          "projScoreUt": 28,
+          "projScoreOpp": 20
         },
         {
           "id": "wash-w4",
@@ -4458,9 +4458,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Husky Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 10
+          "baseWinProb": 75,
+          "projScoreUt": 28,
+          "projScoreOpp": 18
         },
         {
           "id": "wash-w5",
@@ -4471,9 +4471,9 @@
           "oppRank": "#14 AP",
           "isHome": false,
           "stadium": "Los Angeles Memorial Coliseum",
-          "baseWinProb": 17,
-          "projScoreUt": 17,
-          "projScoreOpp": 30
+          "baseWinProb": 14,
+          "projScoreUt": 16,
+          "projScoreOpp": 31
         },
         {
           "id": "wash-w6",
@@ -4484,9 +4484,9 @@
           "oppRank": "#21 AP",
           "isHome": true,
           "stadium": "Husky Stadium",
-          "baseWinProb": 51,
-          "projScoreUt": 22,
-          "projScoreOpp": 22
+          "baseWinProb": 62,
+          "projScoreUt": 24,
+          "projScoreOpp": 20
         },
         {
           "id": "wash-w7",
@@ -4497,9 +4497,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Ross-Ade Stadium",
-          "baseWinProb": 92,
-          "projScoreUt": 33,
-          "projScoreOpp": 14
+          "baseWinProb": 76,
+          "projScoreUt": 29,
+          "projScoreOpp": 19
         },
         {
           "id": "wash-w9",
@@ -4510,9 +4510,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Memorial Stadium (Lincoln, NE)",
-          "baseWinProb": 92,
-          "projScoreUt": 33,
-          "projScoreOpp": 14
+          "baseWinProb": 44,
+          "projScoreUt": 23,
+          "projScoreOpp": 25
         },
         {
           "id": "wash-w10",
@@ -4523,9 +4523,9 @@
           "oppRank": "#16 AP",
           "isHome": true,
           "stadium": "Husky Stadium",
-          "baseWinProb": 39,
-          "projScoreUt": 22,
-          "projScoreOpp": 25
+          "baseWinProb": 55,
+          "projScoreUt": 24,
+          "projScoreOpp": 23
         },
         {
           "id": "wash-w11",
@@ -4536,9 +4536,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Spartan Stadium",
-          "baseWinProb": 91,
-          "projScoreUt": 32,
-          "projScoreOpp": 14
+          "baseWinProb": 61,
+          "projScoreUt": 26,
+          "projScoreOpp": 22
         },
         {
           "id": "wash-w12",
@@ -4549,8 +4549,8 @@
           "oppRank": "#5 AP",
           "isHome": true,
           "stadium": "Husky Stadium",
-          "baseWinProb": 34,
-          "projScoreUt": 21,
+          "baseWinProb": 38,
+          "projScoreUt": 22,
           "projScoreOpp": 26
         },
         {
@@ -4562,9 +4562,9 @@
           "oppRank": "#6 AP",
           "isHome": false,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 10,
-          "projScoreUt": 15,
-          "projScoreOpp": 31
+          "baseWinProb": 8,
+          "projScoreUt": 14,
+          "projScoreOpp": 32
         }
       ]
     },
@@ -4589,8 +4589,8 @@
           "isHome": true,
           "stadium": "TDECU Stadium",
           "baseWinProb": 91,
-          "projScoreUt": 33,
-          "projScoreOpp": 20
+          "projScoreUt": 36,
+          "projScoreOpp": 15
         },
         {
           "id": "hou-w2",
@@ -4601,9 +4601,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "TDECU Stadium",
-          "baseWinProb": 97,
+          "baseWinProb": 96,
           "projScoreUt": 34,
-          "projScoreOpp": 11
+          "projScoreOpp": 12
         },
         {
           "id": "hou-w3",
@@ -4613,10 +4613,10 @@
           "oppAbbr": "TTU",
           "oppRank": "#13 AP",
           "isHome": false,
-          "stadium": "Galaxy Stadium",
-          "baseWinProb": 45,
-          "projScoreUt": 23,
-          "projScoreOpp": 24
+          "stadium": "Jones AT&T Stadium",
+          "baseWinProb": 14,
+          "projScoreUt": 18,
+          "projScoreOpp": 33
         },
         {
           "id": "hou-w4",
@@ -4627,9 +4627,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Allen E. Paulson Stadium",
-          "baseWinProb": 90,
-          "projScoreUt": 32,
-          "projScoreOpp": 14
+          "baseWinProb": 88,
+          "projScoreUt": 31,
+          "projScoreOpp": 15
         },
         {
           "id": "hou-w5",
@@ -4640,9 +4640,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "TDECU Stadium",
-          "baseWinProb": 96,
-          "projScoreUt": 34,
-          "projScoreOpp": 11
+          "baseWinProb": 66,
+          "projScoreUt": 27,
+          "projScoreOpp": 21
         },
         {
           "id": "hou-w6",
@@ -4653,9 +4653,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Bill Snyder Family Stadium",
-          "baseWinProb": 90,
-          "projScoreUt": 32,
-          "projScoreOpp": 15
+          "baseWinProb": 36,
+          "projScoreUt": 21,
+          "projScoreOpp": 26
         },
         {
           "id": "hou-w7",
@@ -4666,9 +4666,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "TDECU Stadium",
-          "baseWinProb": 96,
-          "projScoreUt": 34,
-          "projScoreOpp": 11
+          "baseWinProb": 69,
+          "projScoreUt": 27,
+          "projScoreOpp": 20
         },
         {
           "id": "hou-w8",
@@ -4681,7 +4681,7 @@
           "stadium": "Rice-Eccles Stadium",
           "baseWinProb": 8,
           "projScoreUt": 14,
-          "projScoreOpp": 33
+          "projScoreOpp": 32
         },
         {
           "id": "hou-w10",
@@ -4692,9 +4692,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "TDECU Stadium",
-          "baseWinProb": 96,
-          "projScoreUt": 35,
-          "projScoreOpp": 11
+          "baseWinProb": 74,
+          "projScoreUt": 28,
+          "projScoreOpp": 19
         },
         {
           "id": "hou-w11",
@@ -4705,9 +4705,9 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Folsom Field",
-          "baseWinProb": 44,
-          "projScoreUt": 23,
-          "projScoreOpp": 25
+          "baseWinProb": 35,
+          "projScoreUt": 21,
+          "projScoreOpp": 26
         },
         {
           "id": "hou-w12",
@@ -4718,9 +4718,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Milan Puskar Stadium",
-          "baseWinProb": 89,
-          "projScoreUt": 32,
-          "projScoreOpp": 15
+          "baseWinProb": 53,
+          "projScoreUt": 24,
+          "projScoreOpp": 23
         },
         {
           "id": "hou-w13",
@@ -4731,9 +4731,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "TDECU Stadium",
-          "baseWinProb": 97,
-          "projScoreUt": 34,
-          "projScoreOpp": 11
+          "baseWinProb": 68,
+          "projScoreUt": 27,
+          "projScoreOpp": 20
         }
       ]
     },
@@ -4758,8 +4758,8 @@
           "isHome": false,
           "stadium": "Nissan Stadium",
           "baseWinProb": 23,
-          "projScoreUt": 38,
-          "projScoreOpp": 41
+          "projScoreUt": 24,
+          "projScoreOpp": 30
         },
         {
           "id": "lou-w2",
@@ -4770,9 +4770,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "L&N Federal Credit Union Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 38,
-          "projScoreOpp": 9
+          "baseWinProb": 74,
+          "projScoreUt": 28,
+          "projScoreOpp": 19
         },
         {
           "id": "lou-w3",
@@ -4783,9 +4783,9 @@
           "oppRank": "#17 AP",
           "isHome": true,
           "stadium": "L&N Federal Credit Union Stadium",
-          "baseWinProb": 57,
-          "projScoreUt": 25,
-          "projScoreOpp": 23
+          "baseWinProb": 55,
+          "projScoreUt": 24,
+          "projScoreOpp": 22
         },
         {
           "id": "lou-w4",
@@ -4796,9 +4796,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "L&N Federal Credit Union Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 37,
-          "projScoreOpp": 9
+          "baseWinProb": 89,
+          "projScoreUt": 32,
+          "projScoreOpp": 15
         },
         {
           "id": "lou-w5",
@@ -4809,9 +4809,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Carter-Finley Stadium",
-          "baseWinProb": 95,
-          "projScoreUt": 34,
-          "projScoreOpp": 12
+          "baseWinProb": 60,
+          "projScoreUt": 26,
+          "projScoreOpp": 22
         },
         {
           "id": "lou-w6",
@@ -4822,7 +4822,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "L&N Federal Credit Union Stadium",
-          "baseWinProb": 54,
+          "baseWinProb": 55,
           "projScoreUt": 24,
           "projScoreOpp": 23
         },
@@ -4835,9 +4835,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "JMA Wireless Dome",
-          "baseWinProb": 95,
-          "projScoreUt": 35,
-          "projScoreOpp": 12
+          "baseWinProb": 62,
+          "projScoreUt": 26,
+          "projScoreOpp": 21
         },
         {
           "id": "lou-w9",
@@ -4848,9 +4848,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "L&N Federal Credit Union Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 38,
-          "projScoreOpp": 9
+          "baseWinProb": 91,
+          "projScoreUt": 32,
+          "projScoreOpp": 14
         },
         {
           "id": "lou-w10",
@@ -4861,9 +4861,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Bobby Dodd Stadium",
-          "baseWinProb": 95,
-          "projScoreUt": 34,
-          "projScoreOpp": 12
+          "baseWinProb": 55,
+          "projScoreUt": 24,
+          "projScoreOpp": 23
         },
         {
           "id": "lou-w11",
@@ -4874,9 +4874,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Kenan Stadium",
-          "baseWinProb": 94,
-          "projScoreUt": 34,
-          "projScoreOpp": 12
+          "baseWinProb": 58,
+          "projScoreUt": 25,
+          "projScoreOpp": 22
         },
         {
           "id": "lou-w12",
@@ -4887,9 +4887,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "L&N Federal Credit Union Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 38,
-          "projScoreOpp": 9
+          "baseWinProb": 76,
+          "projScoreUt": 29,
+          "projScoreOpp": 19
         },
         {
           "id": "lou-w13",
@@ -4900,9 +4900,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Kroger Field",
-          "baseWinProb": 95,
-          "projScoreUt": 34,
-          "projScoreOpp": 12
+          "baseWinProb": 60,
+          "projScoreUt": 25,
+          "projScoreOpp": 22
         }
       ]
     },
@@ -4911,7 +4911,7 @@
       "name": "Colorado Buffaloes",
       "shortName": "Colorado",
       "apRank": "RV",
-      "baseSpRating": 16.99,
+      "baseSpRating": 17.49,
       "conference": "Big 12",
       "headCoach": "Deion Sanders",
       "starterQb": "Julian \"JuJu\" Lewis",
@@ -4927,8 +4927,8 @@
           "isHome": false,
           "stadium": "Bobby Dodd Stadium",
           "baseWinProb": 78,
-          "projScoreUt": 14,
-          "projScoreOpp": 13
+          "projScoreUt": 24,
+          "projScoreOpp": 30
         },
         {
           "id": "col-w2",
@@ -4939,8 +4939,8 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Folsom Field",
-          "baseWinProb": 96,
-          "projScoreUt": 36,
+          "baseWinProb": 97,
+          "projScoreUt": 35,
           "projScoreOpp": 11
         },
         {
@@ -4952,9 +4952,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Northwestern Medicine Field at Martin Stadium",
-          "baseWinProb": 87,
-          "projScoreUt": 31,
-          "projScoreOpp": 15
+          "baseWinProb": 69,
+          "projScoreUt": 27,
+          "projScoreOpp": 20
         },
         {
           "id": "col-w4",
@@ -4965,9 +4965,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "McLane Stadium",
-          "baseWinProb": 89,
-          "projScoreUt": 32,
-          "projScoreOpp": 15
+          "baseWinProb": 48,
+          "projScoreUt": 23,
+          "projScoreOpp": 24
         },
         {
           "id": "col-w5",
@@ -4978,9 +4978,9 @@
           "oppRank": "#13 AP",
           "isHome": true,
           "stadium": "Folsom Field",
-          "baseWinProb": 63,
-          "projScoreUt": 26,
-          "projScoreOpp": 21
+          "baseWinProb": 40,
+          "projScoreUt": 22,
+          "projScoreOpp": 25
         },
         {
           "id": "col-w7",
@@ -4991,9 +4991,9 @@
           "oppRank": "#20 AP",
           "isHome": true,
           "stadium": "Folsom Field",
-          "baseWinProb": 22,
-          "projScoreUt": 18,
-          "projScoreOpp": 29
+          "baseWinProb": 29,
+          "projScoreUt": 20,
+          "projScoreOpp": 28
         },
         {
           "id": "col-w8",
@@ -5004,9 +5004,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Boone Pickens Stadium",
-          "baseWinProb": 87,
-          "projScoreUt": 31,
-          "projScoreOpp": 15
+          "baseWinProb": 46,
+          "projScoreUt": 23,
+          "projScoreOpp": 24
         },
         {
           "id": "col-w9",
@@ -5017,9 +5017,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Folsom Field",
-          "baseWinProb": 97,
-          "projScoreUt": 36,
-          "projScoreOpp": 11
+          "baseWinProb": 56,
+          "projScoreUt": 25,
+          "projScoreOpp": 22
         },
         {
           "id": "col-w10",
@@ -5030,7 +5030,7 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Mountain America Stadium",
-          "baseWinProb": 31,
+          "baseWinProb": 30,
           "projScoreUt": 20,
           "projScoreOpp": 27
         },
@@ -5043,9 +5043,9 @@
           "oppRank": "#22 AP",
           "isHome": true,
           "stadium": "Folsom Field",
-          "baseWinProb": 62,
+          "baseWinProb": 65,
           "projScoreUt": 26,
-          "projScoreOpp": 22
+          "projScoreOpp": 21
         },
         {
           "id": "col-w12",
@@ -5056,9 +5056,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Nippert Stadium",
-          "baseWinProb": 88,
-          "projScoreUt": 32,
-          "projScoreOpp": 15
+          "baseWinProb": 50,
+          "projScoreUt": 24,
+          "projScoreOpp": 23
         },
         {
           "id": "col-w13",
@@ -5069,9 +5069,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Folsom Field",
-          "baseWinProb": 97,
-          "projScoreUt": 35,
-          "projScoreOpp": 11
+          "baseWinProb": 67,
+          "projScoreUt": 27,
+          "projScoreOpp": 20
         }
       ]
     },
@@ -5080,7 +5080,7 @@
       "name": "Arizona State Sun Devils",
       "shortName": "Arizona State",
       "apRank": "RV",
-      "baseSpRating": 20.7,
+      "baseSpRating": 19.2,
       "conference": "Big 12",
       "headCoach": "Kenny Dillingham",
       "starterQb": "Cutter Boley",
@@ -5096,8 +5096,8 @@
           "isHome": true,
           "stadium": "Mountain America Stadium",
           "baseWinProb": 98,
-          "projScoreUt": 70,
-          "projScoreOpp": 7
+          "projScoreUt": 48,
+          "projScoreOpp": 4
         },
         {
           "id": "asu-w2",
@@ -5108,9 +5108,9 @@
           "oppRank": "#10 AP",
           "isHome": false,
           "stadium": "Kyle Field",
-          "baseWinProb": 10,
-          "projScoreUt": 14,
-          "projScoreOpp": 32
+          "baseWinProb": 6,
+          "projScoreUt": 13,
+          "projScoreOpp": 33
         },
         {
           "id": "asu-w3",
@@ -5121,9 +5121,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Wembley Stadium",
-          "baseWinProb": 94,
-          "projScoreUt": 33,
-          "projScoreOpp": 13
+          "baseWinProb": 52,
+          "projScoreUt": 24,
+          "projScoreOpp": 23
         },
         {
           "id": "asu-w5",
@@ -5134,9 +5134,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Mountain America Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 36,
-          "projScoreOpp": 9
+          "baseWinProb": 73,
+          "projScoreUt": 28,
+          "projScoreOpp": 19
         },
         {
           "id": "asu-w6",
@@ -5147,9 +5147,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Mountain America Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 9
+          "baseWinProb": 97,
+          "projScoreUt": 35,
+          "projScoreOpp": 10
         },
         {
           "id": "asu-w7",
@@ -5159,10 +5159,10 @@
           "oppAbbr": "TTU",
           "oppRank": "#13 AP",
           "isHome": false,
-          "stadium": "Galaxy Stadium",
-          "baseWinProb": 56,
-          "projScoreUt": 24,
-          "projScoreOpp": 23
+          "stadium": "Jones AT&T Stadium",
+          "baseWinProb": 15,
+          "projScoreUt": 18,
+          "projScoreOpp": 32
         },
         {
           "id": "asu-w8",
@@ -5173,9 +5173,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Mountain America Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 36,
-          "projScoreOpp": 9
+          "baseWinProb": 61,
+          "projScoreUt": 26,
+          "projScoreOpp": 22
         },
         {
           "id": "asu-w9",
@@ -5186,9 +5186,9 @@
           "oppRank": "#15 AP",
           "isHome": false,
           "stadium": "LaVell Edwards Stadium",
-          "baseWinProb": 24,
+          "baseWinProb": 21,
           "projScoreUt": 18,
-          "projScoreOpp": 28
+          "projScoreOpp": 29
         },
         {
           "id": "asu-w10",
@@ -5199,9 +5199,9 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Mountain America Stadium",
-          "baseWinProb": 76,
-          "projScoreUt": 28,
-          "projScoreOpp": 19
+          "baseWinProb": 70,
+          "projScoreUt": 27,
+          "projScoreOpp": 20
         },
         {
           "id": "asu-w11",
@@ -5212,9 +5212,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Acrisure Bounce House",
-          "baseWinProb": 94,
-          "projScoreUt": 33,
-          "projScoreOpp": 13
+          "baseWinProb": 52,
+          "projScoreUt": 26,
+          "projScoreOpp": 23
         },
         {
           "id": "asu-w12",
@@ -5225,9 +5225,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Mountain America Stadium",
-          "baseWinProb": 98,
-          "projScoreUt": 36,
-          "projScoreOpp": 9
+          "baseWinProb": 74,
+          "projScoreUt": 28,
+          "projScoreOpp": 19
         },
         {
           "id": "asu-w13",
@@ -5238,9 +5238,9 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Casino Del Sol Stadium",
-          "baseWinProb": 53,
-          "projScoreUt": 24,
-          "projScoreOpp": 23
+          "baseWinProb": 35,
+          "projScoreUt": 21,
+          "projScoreOpp": 26
         }
       ]
     }
@@ -5252,30 +5252,30 @@
       "oppName": "Utah Tech Trailblazers",
       "week": "WEEK 1",
       "winProb": 99,
-      "projScore": "63-7"
+      "projScore": "56-6"
     },
     {
       "teamId": "byu",
       "teamName": "BYU Cougars",
       "oppName": "Arizona Wildcats",
       "week": "WEEK 2",
-      "winProb": 86,
-      "projScore": "30-16"
+      "winProb": 76,
+      "projScore": "28-18"
     },
     {
       "teamId": "byu",
       "teamName": "BYU Cougars",
       "oppName": "Notre Dame Fighting Irish",
       "week": "WEEK 7",
-      "winProb": 52,
-      "projScore": "24-23"
+      "winProb": 43,
+      "projScore": "22-25"
     },
     {
       "teamId": "byu",
       "teamName": "BYU Cougars",
       "oppName": "Arizona State Sun Devils",
       "week": "WEEK 9",
-      "winProb": 80,
+      "winProb": 79,
       "projScore": "29-18"
     },
     {
@@ -5283,160 +5283,160 @@
       "teamName": "BYU Cougars",
       "oppName": "Utah Utes",
       "week": "WEEK 10",
-      "winProb": 27,
-      "projScore": "19-28"
+      "winProb": 19,
+      "projScore": "18-29"
     },
     {
       "teamId": "texas",
       "teamName": "Texas Longhorns",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 2",
-      "winProb": 58,
-      "projScore": "25-22"
-    },
-    {
-      "teamId": "texas",
-      "teamName": "Texas Longhorns",
-      "oppName": "Tennessee Volunteers",
-      "week": "WEEK 4",
       "winProb": 63,
       "projScore": "26-21"
     },
     {
       "teamId": "texas",
       "teamName": "Texas Longhorns",
+      "oppName": "Tennessee Volunteers",
+      "week": "WEEK 4",
+      "winProb": 65,
+      "projScore": "28-23"
+    },
+    {
+      "teamId": "texas",
+      "teamName": "Texas Longhorns",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 6",
-      "winProb": 69,
-      "projScore": "27-20"
+      "winProb": 62,
+      "projScore": "26-22"
     },
     {
       "teamId": "texas",
       "teamName": "Texas Longhorns",
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 8",
-      "winProb": 92,
-      "projScore": "32-14"
+      "winProb": 89,
+      "projScore": "31-15"
     },
     {
       "teamId": "texas",
       "teamName": "Texas Longhorns",
       "oppName": "Missouri Tigers",
       "week": "WEEK 10",
-      "winProb": 92,
-      "projScore": "32-13"
+      "winProb": 76,
+      "projScore": "28-18"
     },
     {
       "teamId": "texas",
       "teamName": "Texas Longhorns",
       "oppName": "LSU Tigers",
       "week": "WEEK 11",
-      "winProb": 56,
-      "projScore": "25-23"
+      "winProb": 47,
+      "projScore": "23-24"
     },
     {
       "teamId": "texas",
       "teamName": "Texas Longhorns",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 13",
-      "winProb": 58,
-      "projScore": "25-22"
+      "winProb": 45,
+      "projScore": "24-27"
     },
     {
       "teamId": "michigan",
       "teamName": "Michigan Wolverines",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 2",
-      "winProb": 22,
-      "projScore": "17-27"
+      "winProb": 43,
+      "projScore": "21-24"
     },
     {
       "teamId": "michigan",
       "teamName": "Michigan Wolverines",
       "oppName": "Iowa Hawkeyes",
       "week": "WEEK 4",
-      "winProb": 49,
-      "projScore": "21-21"
+      "winProb": 69,
+      "projScore": "24-18"
     },
     {
       "teamId": "michigan",
       "teamName": "Michigan Wolverines",
       "oppName": "Penn State Nittany Lions",
       "week": "WEEK 7",
-      "winProb": 38,
-      "projScore": "20-24"
+      "winProb": 61,
+      "projScore": "24-20"
     },
     {
       "teamId": "michigan",
       "teamName": "Michigan Wolverines",
       "oppName": "Indiana Hoosiers",
       "week": "WEEK 8",
-      "winProb": 33,
-      "projScore": "19-25"
+      "winProb": 49,
+      "projScore": "22-23"
     },
     {
       "teamId": "michigan",
       "teamName": "Michigan Wolverines",
       "oppName": "Oregon Ducks",
       "week": "WEEK 11",
-      "winProb": 13,
-      "projScore": "14-30"
+      "winProb": 15,
+      "projScore": "16-31"
     },
     {
       "teamId": "michigan",
       "teamName": "Michigan Wolverines",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 13",
-      "winProb": 2,
-      "projScore": "10-35"
+      "winProb": 3,
+      "projScore": "11-34"
     },
     {
       "teamId": "ohiostate",
       "teamName": "Ohio State Buckeyes",
       "oppName": "Texas Longhorns",
       "week": "WEEK 2",
-      "winProb": 46,
-      "projScore": "23-24"
+      "winProb": 37,
+      "projScore": "21-26"
     },
     {
       "teamId": "ohiostate",
       "teamName": "Ohio State Buckeyes",
       "oppName": "Iowa Hawkeyes",
       "week": "WEEK 5",
-      "winProb": 90,
-      "projScore": "30-13"
+      "winProb": 81,
+      "projScore": "28-16"
     },
     {
       "teamId": "ohiostate",
       "teamName": "Ohio State Buckeyes",
       "oppName": "Indiana Hoosiers",
       "week": "WEEK 7",
-      "winProb": 81,
-      "projScore": "30-17"
+      "winProb": 65,
+      "projScore": "26-21"
     },
     {
       "teamId": "ohiostate",
       "teamName": "Ohio State Buckeyes",
       "oppName": "USC Trojans",
       "week": "WEEK 9",
-      "winProb": 81,
-      "projScore": "30-17"
+      "winProb": 64,
+      "projScore": "26-21"
     },
     {
       "teamId": "ohiostate",
       "teamName": "Ohio State Buckeyes",
       "oppName": "Oregon Ducks",
       "week": "WEEK 10",
-      "winProb": 93,
-      "projScore": "33-13"
+      "winProb": 87,
+      "projScore": "31-16"
     },
     {
       "teamId": "ohiostate",
       "teamName": "Ohio State Buckeyes",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 13",
-      "winProb": 99,
-      "projScore": "37-7"
+      "winProb": 97,
+      "projScore": "34-11"
     },
     {
       "teamId": "georgia",
@@ -5444,54 +5444,54 @@
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 4",
       "winProb": 88,
-      "projScore": "31-15"
+      "projScore": "31-16"
     },
     {
       "teamId": "georgia",
       "teamName": "Georgia Bulldogs",
       "oppName": "Alabama Crimson Tide",
       "week": "WEEK 6",
-      "winProb": 62,
-      "projScore": "26-21"
+      "winProb": 57,
+      "projScore": "25-22"
     },
     {
       "teamId": "georgia",
       "teamName": "Georgia Bulldogs",
       "oppName": "Florida Gators",
       "week": "WEEK 9",
-      "winProb": 99,
-      "projScore": "50-6"
+      "winProb": 98,
+      "projScore": "37-10"
     },
     {
       "teamId": "georgia",
       "teamName": "Georgia Bulldogs",
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 10",
-      "winProb": 84,
-      "projScore": "30-17"
+      "winProb": 73,
+      "projScore": "30-21"
     },
     {
       "teamId": "georgia",
       "teamName": "Georgia Bulldogs",
       "oppName": "Missouri Tigers",
       "week": "WEEK 11",
-      "winProb": 99,
-      "projScore": "37-8"
+      "winProb": 96,
+      "projScore": "34-12"
     },
     {
       "teamId": "alabama",
       "teamName": "Alabama Crimson Tide",
       "oppName": "Florida State Seminoles",
       "week": "WEEK 3",
-      "winProb": 86,
-      "projScore": "31-16"
+      "winProb": 82,
+      "projScore": "30-17"
     },
     {
       "teamId": "alabama",
       "teamName": "Alabama Crimson Tide",
       "oppName": "Georgia Bulldogs",
       "week": "WEEK 6",
-      "winProb": 41,
+      "winProb": 43,
       "projScore": "22-25"
     },
     {
@@ -5499,8 +5499,8 @@
       "teamName": "Alabama Crimson Tide",
       "oppName": "Tennessee Volunteers",
       "week": "WEEK 7",
-      "winProb": 43,
-      "projScore": "22-25"
+      "winProb": 41,
+      "projScore": "24-27"
     },
     {
       "teamId": "alabama",
@@ -5508,23 +5508,23 @@
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 8",
       "winProb": 68,
-      "projScore": "27-20"
+      "projScore": "27-21"
     },
     {
       "teamId": "alabama",
       "teamName": "Alabama Crimson Tide",
       "oppName": "LSU Tigers",
       "week": "WEEK 10",
-      "winProb": 32,
-      "projScore": "20-27"
+      "winProb": 27,
+      "projScore": "19-28"
     },
     {
       "teamId": "alabama",
       "teamName": "Alabama Crimson Tide",
       "oppName": "Auburn Tigers",
       "week": "WEEK 13",
-      "winProb": 99,
-      "projScore": "46-6"
+      "winProb": 94,
+      "projScore": "33-13"
     },
     {
       "teamId": "oregon",
@@ -5532,31 +5532,31 @@
       "oppName": "Boise State Broncos",
       "week": "WEEK 1",
       "winProb": 85,
-      "projScore": "34-27"
+      "projScore": "39-14"
     },
     {
       "teamId": "oregon",
       "teamName": "Oregon Ducks",
       "oppName": "USC Trojans",
       "week": "WEEK 4",
-      "winProb": 48,
-      "projScore": "23-24"
+      "winProb": 39,
+      "projScore": "22-26"
     },
     {
       "teamId": "oregon",
       "teamName": "Oregon Ducks",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 10",
-      "winProb": 9,
-      "projScore": "14-32"
+      "winProb": 13,
+      "projScore": "16-31"
     },
     {
       "teamId": "oregon",
       "teamName": "Oregon Ducks",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 11",
-      "winProb": 90,
-      "projScore": "32-14"
+      "winProb": 85,
+      "projScore": "31-16"
     },
     {
       "teamId": "oregon",
@@ -5564,39 +5564,39 @@
       "oppName": "Washington Huskies",
       "week": "WEEK 13",
       "winProb": 92,
-      "projScore": "33-14"
+      "projScore": "32-14"
     },
     {
       "teamId": "pennstate",
       "teamName": "Penn State Nittany Lions",
       "oppName": "USC Trojans",
       "week": "WEEK 6",
-      "winProb": 66,
-      "projScore": "27-21"
+      "winProb": 56,
+      "projScore": "24-22"
     },
     {
       "teamId": "pennstate",
       "teamName": "Penn State Nittany Lions",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 7",
-      "winProb": 68,
-      "projScore": "27-20"
+      "winProb": 39,
+      "projScore": "20-24"
     },
     {
       "teamId": "pennstate",
       "teamName": "Penn State Nittany Lions",
       "oppName": "Washington Huskies",
       "week": "WEEK 10",
-      "winProb": 66,
-      "projScore": "27-21"
+      "winProb": 45,
+      "projScore": "23-24"
     },
     {
       "teamId": "notredame",
       "teamName": "Notre Dame Fighting Irish",
       "oppName": "Michigan State Spartans",
       "week": "WEEK 3",
-      "winProb": 99,
-      "projScore": "45-6"
+      "winProb": 98,
+      "projScore": "35-11"
     },
     {
       "teamId": "notredame",
@@ -5611,8 +5611,8 @@
       "teamName": "Notre Dame Fighting Irish",
       "oppName": "Miami Hurricanes",
       "week": "WEEK 10",
-      "winProb": 53,
-      "projScore": "24-23"
+      "winProb": 58,
+      "projScore": "25-22"
     },
     {
       "teamId": "notredame",
@@ -5628,22 +5628,22 @@
       "oppName": "Clemson Tigers",
       "week": "WEEK 1",
       "winProb": 89,
-      "projScore": "51-10"
+      "projScore": "29-19"
     },
     {
       "teamId": "lsu",
       "teamName": "LSU Tigers",
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 3",
-      "winProb": 71,
-      "projScore": "27-19"
+      "winProb": 59,
+      "projScore": "27-24"
     },
     {
       "teamId": "lsu",
       "teamName": "LSU Tigers",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 4",
-      "winProb": 74,
+      "winProb": 72,
       "projScore": "28-19"
     },
     {
@@ -5651,7 +5651,7 @@
       "teamName": "LSU Tigers",
       "oppName": "Alabama Crimson Tide",
       "week": "WEEK 10",
-      "winProb": 74,
+      "winProb": 73,
       "projScore": "28-19"
     },
     {
@@ -5659,88 +5659,88 @@
       "teamName": "LSU Tigers",
       "oppName": "Texas Longhorns",
       "week": "WEEK 11",
-      "winProb": 52,
-      "projScore": "24-24"
+      "winProb": 53,
+      "projScore": "24-23"
     },
     {
       "teamId": "lsu",
       "teamName": "LSU Tigers",
       "oppName": "Tennessee Volunteers",
       "week": "WEEK 12",
-      "winProb": 53,
-      "projScore": "24-24"
+      "winProb": 52,
+      "projScore": "26-25"
     },
     {
       "teamId": "tennessee",
       "teamName": "Tennessee Volunteers",
       "oppName": "Texas Longhorns",
       "week": "WEEK 4",
-      "winProb": 42,
-      "projScore": "24-27"
+      "winProb": 35,
+      "projScore": "23-28"
     },
     {
       "teamId": "tennessee",
       "teamName": "Tennessee Volunteers",
       "oppName": "Alabama Crimson Tide",
       "week": "WEEK 7",
-      "winProb": 65,
-      "projScore": "28-22"
+      "winProb": 59,
+      "projScore": "27-24"
     },
     {
       "teamId": "tennessee",
       "teamName": "Tennessee Volunteers",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 11",
-      "winProb": 31,
-      "projScore": "22-29"
+      "winProb": 20,
+      "projScore": "18-29"
     },
     {
       "teamId": "tennessee",
       "teamName": "Tennessee Volunteers",
       "oppName": "LSU Tigers",
       "week": "WEEK 12",
-      "winProb": 54,
-      "projScore": "26-24"
+      "winProb": 48,
+      "projScore": "25-26"
     },
     {
       "teamId": "indiana",
       "teamName": "Indiana Hoosiers",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 7",
-      "winProb": 23,
-      "projScore": "18-29"
+      "winProb": 35,
+      "projScore": "21-26"
     },
     {
       "teamId": "indiana",
       "teamName": "Indiana Hoosiers",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 8",
-      "winProb": 73,
-      "projScore": "28-20"
+      "winProb": 51,
+      "projScore": "23-22"
     },
     {
       "teamId": "indiana",
       "teamName": "Indiana Hoosiers",
       "oppName": "USC Trojans",
       "week": "WEEK 11",
-      "winProb": 66,
-      "projScore": "26-21"
+      "winProb": 63,
+      "projScore": "26-22"
     },
     {
       "teamId": "indiana",
       "teamName": "Indiana Hoosiers",
       "oppName": "Washington Huskies",
       "week": "WEEK 12",
-      "winProb": 70,
-      "projScore": "27-20"
+      "winProb": 62,
+      "projScore": "26-22"
     },
     {
       "teamId": "miami",
       "teamName": "Miami Hurricanes",
       "oppName": "Clemson Tigers",
       "week": "WEEK 5",
-      "winProb": 88,
-      "projScore": "32-15"
+      "winProb": 73,
+      "projScore": "28-19"
     },
     {
       "teamId": "miami",
@@ -5748,22 +5748,22 @@
       "oppName": "Florida State Seminoles",
       "week": "WEEK 7",
       "winProb": 85,
-      "projScore": "31-16"
+      "projScore": "30-16"
     },
     {
       "teamId": "miami",
       "teamName": "Miami Hurricanes",
       "oppName": "Notre Dame Fighting Irish",
       "week": "WEEK 10",
-      "winProb": 52,
-      "projScore": "24-23"
+      "winProb": 42,
+      "projScore": "22-25"
     },
     {
       "teamId": "texasam",
       "teamName": "Texas A&M Aggies",
       "oppName": "Arizona State Sun Devils",
       "week": "WEEK 2",
-      "winProb": 92,
+      "winProb": 94,
       "projScore": "33-13"
     },
     {
@@ -5771,48 +5771,48 @@
       "teamName": "Texas A&M Aggies",
       "oppName": "LSU Tigers",
       "week": "WEEK 4",
-      "winProb": 32,
-      "projScore": "20-27"
+      "winProb": 28,
+      "projScore": "19-28"
     },
     {
       "teamId": "texasam",
       "teamName": "Texas A&M Aggies",
       "oppName": "Missouri Tigers",
       "week": "WEEK 6",
-      "winProb": 80,
-      "projScore": "29-18"
+      "winProb": 56,
+      "projScore": "25-22"
     },
     {
       "teamId": "texasam",
       "teamName": "Texas A&M Aggies",
       "oppName": "Alabama Crimson Tide",
       "week": "WEEK 8",
-      "winProb": 38,
-      "projScore": "22-26"
+      "winProb": 32,
+      "projScore": "21-27"
     },
     {
       "teamId": "texasam",
       "teamName": "Texas A&M Aggies",
       "oppName": "Tennessee Volunteers",
       "week": "WEEK 11",
-      "winProb": 73,
-      "projScore": "28-19"
+      "winProb": 80,
+      "projScore": "29-18"
     },
     {
       "teamId": "texasam",
       "teamName": "Texas A&M Aggies",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 12",
-      "winProb": 44,
-      "projScore": "23-25"
+      "winProb": 39,
+      "projScore": "22-26"
     },
     {
       "teamId": "texasam",
       "teamName": "Texas A&M Aggies",
       "oppName": "Texas Longhorns",
       "week": "WEEK 13",
-      "winProb": 47,
-      "projScore": "23-24"
+      "winProb": 55,
+      "projScore": "27-24"
     },
     {
       "teamId": "olemiss",
@@ -5820,39 +5820,39 @@
       "oppName": "Louisville Cardinals",
       "week": "WEEK 1",
       "winProb": 81,
-      "projScore": "41-38"
+      "projScore": "30-24"
     },
     {
       "teamId": "olemiss",
       "teamName": "Ole Miss Rebels",
       "oppName": "LSU Tigers",
       "week": "WEEK 3",
-      "winProb": 32,
-      "projScore": "22-29"
+      "winProb": 41,
+      "projScore": "24-27"
     },
     {
       "teamId": "olemiss",
       "teamName": "Ole Miss Rebels",
       "oppName": "Missouri Tigers",
       "week": "WEEK 7",
-      "winProb": 82,
-      "projScore": "32-18"
+      "winProb": 73,
+      "projScore": "30-20"
     },
     {
       "teamId": "olemiss",
       "teamName": "Ole Miss Rebels",
       "oppName": "Texas Longhorns",
       "week": "WEEK 8",
-      "winProb": 10,
-      "projScore": "16-34"
+      "winProb": 11,
+      "projScore": "15-31"
     },
     {
       "teamId": "olemiss",
       "teamName": "Ole Miss Rebels",
       "oppName": "Georgia Bulldogs",
       "week": "WEEK 10",
-      "winProb": 21,
-      "projScore": "19-31"
+      "winProb": 27,
+      "projScore": "21-30"
     },
     {
       "teamId": "olemiss",
@@ -5860,47 +5860,47 @@
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 11",
       "winProb": 28,
-      "projScore": "20-30"
+      "projScore": "19-28"
     },
     {
       "teamId": "olemiss",
       "teamName": "Ole Miss Rebels",
       "oppName": "Mississippi State Bulldogs",
       "week": "WEEK 13",
-      "winProb": 99,
-      "projScore": "45-7"
+      "winProb": 94,
+      "projScore": "36-14"
     },
     {
       "teamId": "oklahoma",
       "teamName": "Oklahoma Sooners",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 2",
-      "winProb": 81,
-      "projScore": "29-17"
+      "winProb": 57,
+      "projScore": "24-21"
     },
     {
       "teamId": "oklahoma",
       "teamName": "Oklahoma Sooners",
       "oppName": "Georgia Bulldogs",
       "week": "WEEK 4",
-      "winProb": 15,
-      "projScore": "16-30"
+      "winProb": 12,
+      "projScore": "16-31"
     },
     {
       "teamId": "oklahoma",
       "teamName": "Oklahoma Sooners",
       "oppName": "Texas Longhorns",
       "week": "WEEK 6",
-      "winProb": 36,
-      "projScore": "21-26"
+      "winProb": 38,
+      "projScore": "22-26"
     },
     {
       "teamId": "oklahoma",
       "teamName": "Oklahoma Sooners",
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 11",
-      "winProb": 77,
-      "projScore": "28-18"
+      "winProb": 72,
+      "projScore": "28-19"
     },
     {
       "teamId": "oklahoma",
@@ -5915,8 +5915,8 @@
       "teamName": "Oklahoma Sooners",
       "oppName": "Missouri Tigers",
       "week": "WEEK 13",
-      "winProb": 79,
-      "projScore": "29-18"
+      "winProb": 55,
+      "projScore": "24-23"
     },
     {
       "teamId": "boisestate",
@@ -5924,23 +5924,23 @@
       "oppName": "Oregon Ducks",
       "week": "WEEK 1",
       "winProb": 15,
-      "projScore": "27-34"
+      "projScore": "14-39"
     },
     {
       "teamId": "boisestate",
       "teamName": "Boise State Broncos",
       "oppName": "Pac-12 Flex Opponent",
       "week": "WEEK 13",
-      "winProb": 93,
-      "projScore": "33-13"
+      "winProb": 59,
+      "projScore": "25-22"
     },
     {
       "teamId": "usc",
       "teamName": "USC Trojans",
       "oppName": "Oregon Ducks",
       "week": "WEEK 4",
-      "winProb": 59,
-      "projScore": "25-22"
+      "winProb": 61,
+      "projScore": "26-22"
     },
     {
       "teamId": "usc",
@@ -5955,23 +5955,23 @@
       "teamName": "USC Trojans",
       "oppName": "Penn State Nittany Lions",
       "week": "WEEK 6",
-      "winProb": 38,
-      "projScore": "22-26"
+      "winProb": 44,
+      "projScore": "22-24"
     },
     {
       "teamId": "usc",
       "teamName": "USC Trojans",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 9",
-      "winProb": 22,
-      "projScore": "18-29"
+      "winProb": 36,
+      "projScore": "21-26"
     },
     {
       "teamId": "usc",
       "teamName": "USC Trojans",
       "oppName": "Indiana Hoosiers",
       "week": "WEEK 11",
-      "winProb": 40,
+      "winProb": 37,
       "projScore": "22-26"
     },
     {
@@ -5979,8 +5979,8 @@
       "teamName": "USC Trojans",
       "oppName": "UCLA Bruins",
       "week": "WEEK 13",
-      "winProb": 99,
-      "projScore": "39-8"
+      "winProb": 84,
+      "projScore": "30-17"
     },
     {
       "teamId": "floridastate",
@@ -5988,7 +5988,7 @@
       "oppName": "SMU Mustangs",
       "week": "WEEK 1",
       "winProb": 68,
-      "projScore": "24-27"
+      "projScore": "25-28"
     },
     {
       "teamId": "floridastate",
@@ -6003,8 +6003,8 @@
       "teamName": "Florida State Seminoles",
       "oppName": "Miami Hurricanes",
       "week": "WEEK 7",
-      "winProb": 17,
-      "projScore": "17-30"
+      "winProb": 15,
+      "projScore": "16-30"
     },
     {
       "teamId": "clemson",
@@ -6012,23 +6012,23 @@
       "oppName": "LSU Tigers",
       "week": "WEEK 1",
       "winProb": 11,
-      "projScore": "10-51"
+      "projScore": "19-29"
     },
     {
       "teamId": "clemson",
       "teamName": "Clemson Tigers",
       "oppName": "Miami Hurricanes",
       "week": "WEEK 5",
-      "winProb": 15,
-      "projScore": "16-30"
+      "winProb": 27,
+      "projScore": "19-28"
     },
     {
       "teamId": "clemson",
       "teamName": "Clemson Tigers",
       "oppName": "South Carolina Gamecocks",
       "week": "WEEK 13",
-      "winProb": 98,
-      "projScore": "36-10"
+      "winProb": 76,
+      "projScore": "28-19"
     },
     {
       "teamId": "smu",
@@ -6036,86 +6036,86 @@
       "oppName": "Florida State Seminoles",
       "week": "WEEK 1",
       "winProb": 38,
-      "projScore": "27-24"
+      "projScore": "28-25"
     },
     {
       "teamId": "smu",
       "teamName": "SMU Mustangs",
       "oppName": "Louisville Cardinals",
       "week": "WEEK 3",
-      "winProb": 52,
-      "projScore": "24-24"
+      "winProb": 45,
+      "projScore": "22-24"
     },
     {
       "teamId": "smu",
       "teamName": "SMU Mustangs",
       "oppName": "Notre Dame Fighting Irish",
       "week": "WEEK 12",
-      "winProb": 22,
-      "projScore": "18-29"
+      "winProb": 18,
+      "projScore": "17-30"
     },
     {
       "teamId": "texastech",
       "teamName": "Texas Tech Red Raiders",
       "oppName": "Houston Cougars",
       "week": "WEEK 3",
-      "winProb": 62,
-      "projScore": "28-24"
+      "winProb": 86,
+      "projScore": "33-18"
     },
     {
       "teamId": "texastech",
       "teamName": "Texas Tech Red Raiders",
       "oppName": "Colorado Buffaloes",
       "week": "WEEK 5",
-      "winProb": 44,
-      "projScore": "24-27"
+      "winProb": 60,
+      "projScore": "25-22"
     },
     {
       "teamId": "texastech",
       "teamName": "Texas Tech Red Raiders",
       "oppName": "Arizona State Sun Devils",
       "week": "WEEK 7",
-      "winProb": 51,
-      "projScore": "26-25"
+      "winProb": 85,
+      "projScore": "32-18"
     },
     {
       "teamId": "texastech",
       "teamName": "Texas Tech Red Raiders",
       "oppName": "Arizona Wildcats",
       "week": "WEEK 9",
-      "winProb": 60,
-      "projScore": "27-23"
+      "winProb": 82,
+      "projScore": "32-19"
     },
     {
       "teamId": "texastech",
       "teamName": "Texas Tech Red Raiders",
       "oppName": "Oklahoma State Cowboys",
       "week": "WEEK 11",
-      "winProb": 92,
-      "projScore": "35-15"
+      "winProb": 72,
+      "projScore": "30-21"
     },
     {
       "teamId": "utah",
       "teamName": "Utah Utes",
       "oppName": "Colorado Buffaloes",
       "week": "WEEK 7",
-      "winProb": 82,
-      "projScore": "30-17"
+      "winProb": 71,
+      "projScore": "28-20"
     },
     {
       "teamId": "utah",
       "teamName": "Utah Utes",
       "oppName": "Houston Cougars",
       "week": "WEEK 8",
-      "winProb": 94,
-      "projScore": "33-13"
+      "winProb": 92,
+      "projScore": "32-14"
     },
     {
       "teamId": "utah",
       "teamName": "Utah Utes",
       "oppName": "BYU Cougars",
       "week": "WEEK 10",
-      "winProb": 78,
+      "winProb": 81,
       "projScore": "29-18"
     },
     {
@@ -6123,152 +6123,152 @@
       "teamName": "Utah Utes",
       "oppName": "Arizona Wildcats",
       "week": "WEEK 11",
-      "winProb": 81,
-      "projScore": "29-17"
+      "winProb": 67,
+      "projScore": "27-20"
     },
     {
       "teamId": "iowa",
       "teamName": "Iowa Hawkeyes",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 4",
-      "winProb": 58,
-      "projScore": "23-21"
+      "winProb": 31,
+      "projScore": "18-24"
     },
     {
       "teamId": "iowa",
       "teamName": "Iowa Hawkeyes",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 5",
-      "winProb": 14,
-      "projScore": "14-30"
+      "winProb": 19,
+      "projScore": "16-28"
     },
     {
       "teamId": "iowa",
       "teamName": "Iowa Hawkeyes",
       "oppName": "Washington Huskies",
       "week": "WEEK 6",
-      "winProb": 54,
-      "projScore": "23-22"
+      "winProb": 38,
+      "projScore": "20-24"
     },
     {
       "teamId": "missouri",
       "teamName": "Missouri Tigers",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 6",
-      "winProb": 24,
-      "projScore": "19-28"
+      "winProb": 44,
+      "projScore": "22-25"
     },
     {
       "teamId": "missouri",
       "teamName": "Missouri Tigers",
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 7",
-      "winProb": 23,
-      "projScore": "18-29"
+      "winProb": 27,
+      "projScore": "20-30"
     },
     {
       "teamId": "missouri",
       "teamName": "Missouri Tigers",
       "oppName": "Texas Longhorns",
       "week": "WEEK 10",
-      "winProb": 9,
-      "projScore": "14-32"
+      "winProb": 24,
+      "projScore": "18-28"
     },
     {
       "teamId": "missouri",
       "teamName": "Missouri Tigers",
       "oppName": "Georgia Bulldogs",
       "week": "WEEK 11",
-      "winProb": 3,
-      "projScore": "10-36"
+      "winProb": 4,
+      "projScore": "12-34"
     },
     {
       "teamId": "missouri",
       "teamName": "Missouri Tigers",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 13",
-      "winProb": 26,
-      "projScore": "19-28"
+      "winProb": 45,
+      "projScore": "23-24"
     },
     {
       "teamId": "arizona",
       "teamName": "Arizona Wildcats",
       "oppName": "BYU Cougars",
       "week": "WEEK 2",
-      "winProb": 16,
-      "projScore": "17-30"
+      "winProb": 24,
+      "projScore": "18-28"
     },
     {
       "teamId": "arizona",
       "teamName": "Arizona Wildcats",
       "oppName": "Texas Tech Red Raiders",
       "week": "WEEK 9",
-      "winProb": 44,
-      "projScore": "23-24"
+      "winProb": 18,
+      "projScore": "19-32"
     },
     {
       "teamId": "arizona",
       "teamName": "Arizona Wildcats",
       "oppName": "Utah Utes",
       "week": "WEEK 11",
-      "winProb": 22,
-      "projScore": "18-28"
+      "winProb": 33,
+      "projScore": "20-27"
     },
     {
       "teamId": "arizona",
       "teamName": "Arizona Wildcats",
       "oppName": "Arizona State Sun Devils",
       "week": "WEEK 13",
-      "winProb": 54,
-      "projScore": "24-23"
+      "winProb": 65,
+      "projScore": "26-21"
     },
     {
       "teamId": "washington",
       "teamName": "Washington Huskies",
       "oppName": "USC Trojans",
       "week": "WEEK 5",
-      "winProb": 17,
-      "projScore": "17-30"
+      "winProb": 14,
+      "projScore": "16-31"
     },
     {
       "teamId": "washington",
       "teamName": "Washington Huskies",
       "oppName": "Iowa Hawkeyes",
       "week": "WEEK 6",
-      "winProb": 51,
-      "projScore": "22-22"
+      "winProb": 62,
+      "projScore": "24-20"
     },
     {
       "teamId": "washington",
       "teamName": "Washington Huskies",
       "oppName": "Penn State Nittany Lions",
       "week": "WEEK 10",
-      "winProb": 39,
-      "projScore": "22-25"
+      "winProb": 55,
+      "projScore": "24-23"
     },
     {
       "teamId": "washington",
       "teamName": "Washington Huskies",
       "oppName": "Indiana Hoosiers",
       "week": "WEEK 12",
-      "winProb": 34,
-      "projScore": "21-26"
+      "winProb": 38,
+      "projScore": "22-26"
     },
     {
       "teamId": "washington",
       "teamName": "Washington Huskies",
       "oppName": "Oregon Ducks",
       "week": "WEEK 13",
-      "winProb": 10,
-      "projScore": "15-31"
+      "winProb": 8,
+      "projScore": "14-32"
     },
     {
       "teamId": "houston",
       "teamName": "Houston Cougars",
       "oppName": "Texas Tech Red Raiders",
       "week": "WEEK 3",
-      "winProb": 45,
-      "projScore": "23-24"
+      "winProb": 14,
+      "projScore": "18-33"
     },
     {
       "teamId": "houston",
@@ -6276,15 +6276,15 @@
       "oppName": "Utah Utes",
       "week": "WEEK 8",
       "winProb": 8,
-      "projScore": "14-33"
+      "projScore": "14-32"
     },
     {
       "teamId": "houston",
       "teamName": "Houston Cougars",
       "oppName": "Colorado Buffaloes",
       "week": "WEEK 11",
-      "winProb": 44,
-      "projScore": "23-25"
+      "winProb": 35,
+      "projScore": "21-26"
     },
     {
       "teamId": "louisville",
@@ -6292,71 +6292,71 @@
       "oppName": "Ole Miss Rebels",
       "week": "WEEK 1",
       "winProb": 23,
-      "projScore": "38-41"
+      "projScore": "24-30"
     },
     {
       "teamId": "louisville",
       "teamName": "Louisville Cardinals",
       "oppName": "SMU Mustangs",
       "week": "WEEK 3",
-      "winProb": 57,
-      "projScore": "25-23"
+      "winProb": 55,
+      "projScore": "24-22"
     },
     {
       "teamId": "colorado",
       "teamName": "Colorado Buffaloes",
       "oppName": "Texas Tech Red Raiders",
       "week": "WEEK 5",
-      "winProb": 63,
-      "projScore": "26-21"
+      "winProb": 40,
+      "projScore": "22-25"
     },
     {
       "teamId": "colorado",
       "teamName": "Colorado Buffaloes",
       "oppName": "Utah Utes",
       "week": "WEEK 7",
-      "winProb": 22,
-      "projScore": "18-29"
+      "winProb": 29,
+      "projScore": "20-28"
     },
     {
       "teamId": "colorado",
       "teamName": "Colorado Buffaloes",
       "oppName": "Houston Cougars",
       "week": "WEEK 11",
-      "winProb": 62,
-      "projScore": "26-22"
+      "winProb": 65,
+      "projScore": "26-21"
     },
     {
       "teamId": "arizonastate",
       "teamName": "Arizona State Sun Devils",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 2",
-      "winProb": 10,
-      "projScore": "14-32"
+      "winProb": 6,
+      "projScore": "13-33"
     },
     {
       "teamId": "arizonastate",
       "teamName": "Arizona State Sun Devils",
       "oppName": "Texas Tech Red Raiders",
       "week": "WEEK 7",
-      "winProb": 56,
-      "projScore": "24-23"
+      "winProb": 15,
+      "projScore": "18-32"
     },
     {
       "teamId": "arizonastate",
       "teamName": "Arizona State Sun Devils",
       "oppName": "BYU Cougars",
       "week": "WEEK 9",
-      "winProb": 24,
-      "projScore": "18-28"
+      "winProb": 21,
+      "projScore": "18-29"
     },
     {
       "teamId": "arizonastate",
       "teamName": "Arizona State Sun Devils",
       "oppName": "Arizona Wildcats",
       "week": "WEEK 13",
-      "winProb": 53,
-      "projScore": "24-23"
+      "winProb": 35,
+      "projScore": "21-26"
     }
   ]
 }

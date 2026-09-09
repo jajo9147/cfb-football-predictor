@@ -71,7 +71,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=420">
+  <link rel="stylesheet" href="styles.css?v=428">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1539,8 +1539,9 @@
         <!-- TAB 1: Email & Password (Sign In & Sign Up) -->
         <div id="authPasswordTab" class="auth-tab-content" style="display: block;">
           
-          <!-- Google Sign-In (Web & Desktop) -->
+          <!-- Social Sign-In (Google) -->
           <div id="googleAuthSection" class="google-auth-wrapper" style="margin-bottom: 0.85rem;">
+            <!-- Google Sign-In -->
             <button type="button" class="google-sign-in-btn" id="supabaseGoogleBtn" onclick="handleSupabaseGoogleSignIn()">
               <svg class="google-icon" width="20" height="20" viewBox="0 0 18 18">
                 <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
@@ -1572,12 +1573,6 @@
             <div class="auth-input-group">
               <label for="supaPasswordInput">Password</label>
               <input type="password" id="supaPasswordInput" class="auth-input" placeholder="••••••••" minlength="6" required autocomplete="current-password">
-            </div>
-
-            <div style="text-align: center; margin: 0.25rem 0;">
-              <button type="button" onclick="fillReviewerDemoCredentials()" style="background: rgba(56, 189, 248, 0.12); border: 1px dashed #38BDF8; color: #38BDF8; font-size: 0.74rem; font-weight: 700; border-radius: 6px; padding: 0.4rem 0.75rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
-                <i class="fa-solid fa-key"></i> <span>Reviewer Demo: reviewer.demo@cfbprophet.app (Tap to Fill & Sign In)</span>
-              </button>
             </div>
 
             <div class="auth-input-group" id="authRegTeamGroup" style="display: none;">
@@ -1631,28 +1626,6 @@
               We'll send a secure, password-free login link directly to your inbox. Tap it to immediately authenticate.
             </p>
           </form>
-        </div>
-
-        <!-- Optional Supabase Project Config Dropdown -->
-        <div style="margin-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 0.75rem; text-align: center;">
-          <button type="button" onclick="toggleSupabaseConfigDrawer()" style="background: none; border: none; color: #64748B; font-size: 0.72rem; cursor: pointer; font-family: var(--font-mono); display: inline-flex; align-items: center; gap: 4px;">
-            <i class="fa-solid fa-gear"></i> <span id="supabaseConfigToggleLabel">Supabase Connection Settings</span>
-          </button>
-          
-          <div id="supabaseConfigDrawer" style="display: none; margin-top: 0.75rem; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 0.85rem; text-align: left;">
-            <p id="supabaseConfigNotice" style="font-size: 0.72rem; color: #F59E0B; margin-bottom: 0.5rem; line-height: 1.3;"></p>
-            <div class="auth-input-group">
-              <label for="cfgSupabaseUrl">Supabase Project URL</label>
-              <input type="url" id="cfgSupabaseUrl" class="auth-input" placeholder="https://xyz.supabase.co" style="font-size: 0.8rem; padding: 0.45rem;">
-            </div>
-            <div class="auth-input-group">
-              <label for="cfgSupabaseKey">Supabase Anon Public Key</label>
-              <input type="text" id="cfgSupabaseKey" class="auth-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5..." style="font-size: 0.8rem; padding: 0.45rem;">
-            </div>
-            <button type="button" class="action-btn" onclick="saveSupabaseConfigInputs()" style="font-size: 0.78rem; padding: 0.45rem; width: 100%; background: #2563EB; color: #FFFFFF;">
-              Save & Connect
-            </button>
-          </div>
         </div>
       </div>
 
@@ -1795,11 +1768,11 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=420"></script>
-  <script src="qrious.min.js?v=420"></script>
-  <script src="qrcode.min.js?v=420"></script>
-  <script src="data/teams.js?v=420"></script>
-  <script src="data/community_brackets.js?v=420"></script>
-  <script src="app.js?v=420"></script>
+  <script src="supabase-client.js?v=428"></script>
+  <script src="qrious.min.js?v=428"></script>
+  <script src="qrcode.min.js?v=428"></script>
+  <script src="data/teams.js?v=428"></script>
+  <script src="data/community_brackets.js?v=428"></script>
+  <script src="app.js?v=428"></script>
 </body>
 </html>

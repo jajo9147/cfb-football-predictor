@@ -82,10 +82,13 @@ WEEK2_OFFICIAL_POLL = {
 
 # Stadium Home Field Advantage mapping (points)
 STADIUM_HFA = {
-    "Los Angeles Memorial Coliseum": 3.0,
+    "Jones AT&T Stadium": 4.0,
+    "Jones AT&T Stadium (Lubbock, TX)": 4.0,
+    "Michigan Stadium": 4.0,
+    "Michigan Stadium (The Big House)": 4.0,
+    "Ohio Stadium": 4.0,
     "Sanford Stadium": 4.0,
     "Darrell K Royal-Texas Memorial Stadium": 3.5,
-    "Ohio Stadium": 4.0,
     "Tiger Stadium": 4.5,
     "Autzen Stadium": 4.0,
     "Beaver Stadium": 4.0,
@@ -96,7 +99,24 @@ STADIUM_HFA = {
     "Folsom Field": 3.5,
     "Bobby Dodd Stadium": 2.5,
     "Memorial Stadium": 3.0,
-    "Husky Stadium": 3.5
+    "Husky Stadium": 3.5,
+    "Los Angeles Memorial Coliseum": 3.0,
+    "Kinnick Stadium": 3.5,
+    "Mountain America Stadium": 3.0,
+    "Hard Rock Stadium": 3.5,
+    "Jordan-Hare Stadium": 4.0,
+    "Doak Campbell Stadium": 3.5,
+    "Camp Randall Stadium": 3.5,
+    "Arizona Stadium": 3.0,
+    "TDECU Stadium": 2.5,
+    "L&N Stadium": 2.5,
+    "L&N Federal Credit Union Stadium": 2.5,
+    "Faurot Field": 3.0,
+    "Albertsons Stadium": 3.5,
+    "Gerald J. Ford Stadium": 2.5,
+    "Gaylord Family Oklahoma Memorial Stadium": 3.5,
+    "Vaught-Hemingway Stadium": 3.5,
+    "Memorial Stadium (Clemson)": 4.0
 }
 
 NON_DB_OPPONENT_RATINGS = {
@@ -235,6 +255,108 @@ def calculate_win_prob_from_margin(margin):
     k = 0.125
     prob = 1.0 / (1.0 + math.exp(-k * margin))
     return int(round(prob * 100))
+
+def enforce_head_to_head_symmetry(db):
+    """
+    Guarantees 100% mathematical score and outcome symmetry across all head-to-head games in TEAMS_DATABASE.
+    Prevents contradictions (e.g. Team A losing to Team B while Team B loses to Team A) and eliminates tie games.
+    """
+    visited = set()
+    reconciled = 0
+    for tid_a, t_a in db.items():
+        for g_a in t_a.get('schedule', []):
+            tid_b = g_a.get('oppId')
+            if not tid_b or tid_b not in db:
+                continue
+            pair_key = tuple(sorted([tid_a, tid_b]) + [str(g_a.get('week'))])
+            if pair_key in visited:
+                continue
+            visited.add(pair_key)
+
+            t_b = db[tid_b]
+            # Match strictly by oppId and matching week or date
+            g_b = next((g for g in t_b.get('schedule', []) if g.get('oppId') == tid_a and (g.get('week') == g_a.get('week') or g.get('date') == g_a.get('date'))), None)
+            if not g_b:
+                g_b = next((g for g in t_b.get('schedule', []) if g.get('oppId') == tid_a), None)
+            if not g_b:
+                g_b = next((g for g in t_b.get('schedule', []) if (g.get('opponent') == t_a.get('name') or g.get('oppAbbr') == t_a.get('abbr'))), None)
+            if not g_b:
+                continue
+
+            if g_a.get('isFinal') or g_b.get('isFinal'):
+                s_a = g_a.get('finalTeamScore') if g_a.get('finalTeamScore') is not None else g_a.get('actualScoreUt', 0)
+                s_b = g_a.get('finalOppScore') if g_a.get('finalOppScore') is not None else g_a.get('actualScoreOpp', 0)
+                win_a = s_a > s_b
+                g_a['isFinal'] = g_b['isFinal'] = True
+                g_a['finalTeamScore'] = g_a['actualScoreUt'] = s_a
+                g_a['finalOppScore'] = g_a['actualScoreOpp'] = s_b
+                g_a['finalWin'] = win_a
+                g_b['finalTeamScore'] = g_b['actualScoreUt'] = s_b
+                g_b['finalOppScore'] = g_b['actualScoreOpp'] = s_a
+                g_b['finalWin'] = not win_a
+                reconciled += 1
+                continue
+
+            # For unplayed games, pick home game as master (or team A if neutral)
+            is_a_home = g_a.get('isHome', True)
+            master = g_a if is_a_home else g_b
+            slave = g_b if is_a_home else g_a
+
+            # Eliminate ties strictly
+            m_ut = master.get('projScoreUt') or 24
+            m_opp = master.get('projScoreOpp') or 21
+            if m_ut == m_opp:
+                if master.get('baseWinProb', 50) >= 50:
+                    m_ut += 3
+                else:
+                    m_opp += 3
+                master['projScoreUt'] = m_ut
+                master['projScoreOpp'] = m_opp
+
+            # Harmonize master win probability and spread to align with score margin
+            m_win = master['projScoreUt'] > master['projScoreOpp']
+            if m_win:
+                if master.get('baseWinProb', 50) <= 50:
+                    master['baseWinProb'] = 55
+                if master.get('vegasSpread', 0) >= 0:
+                    master['vegasSpread'] = -round(max(0.5, abs(master['projScoreUt'] - master['projScoreOpp']) * 0.8), 1)
+            else:
+                if master.get('baseWinProb', 50) >= 50:
+                    master['baseWinProb'] = 45
+                if master.get('vegasSpread', 0) <= 0:
+                    master['vegasSpread'] = round(max(0.5, abs(master['projScoreOpp'] - master['projScoreUt']) * 0.8), 1)
+
+            slave['projScoreUt'] = master['projScoreOpp']
+            slave['projScoreOpp'] = master['projScoreUt']
+            if 'baseWinProb' in master and isinstance(master['baseWinProb'], (int, float)):
+                slave['baseWinProb'] = max(1, min(99, 100 - int(master['baseWinProb'])))
+            if 'vegasSpread' in master and isinstance(master['vegasSpread'], (int, float)):
+                slave['vegasSpread'] = -master['vegasSpread']
+
+            # Symmetrize Monte Carlo metrics if present
+            if 'mcCoverProb' in master and isinstance(master['mcCoverProb'], (int, float)):
+                slave['mcCoverProb'] = round(100.0 - float(master['mcCoverProb']), 1)
+            if 'mcOverProb' in master and isinstance(master['mcOverProb'], (int, float)):
+                slave['mcOverProb'] = float(master['mcOverProb'])
+            if 'mcScoreDistUt' in master:
+                slave['mcScoreDistOpp'] = master['mcScoreDistUt']
+            if 'mcScoreDistOpp' in master:
+                slave['mcScoreDistUt'] = master['mcScoreDistOpp']
+            if 'mcRecommendedOu' in master:
+                slave['mcRecommendedOu'] = master['mcRecommendedOu']
+
+            # Symmetrize preseason fields if present
+            if 'preseasonProjUt' in master and 'preseasonProjOpp' in master:
+                slave['preseasonProjUt'] = master['preseasonProjOpp']
+                slave['preseasonProjOpp'] = master['preseasonProjUt']
+            if 'preseasonWinProb' in master and isinstance(master['preseasonWinProb'], (int, float)):
+                slave['preseasonWinProb'] = max(1, min(99, 100 - int(master['preseasonWinProb'])))
+            if 'preseasonSpread' in master and isinstance(master['preseasonSpread'], (int, float)):
+                slave['preseasonSpread'] = -master['preseasonSpread']
+
+            reconciled += 1
+
+    print(f"✓ Enforced 100% head-to-head score and outcome symmetry across {reconciled} matchup pairs.")
 
 def main():
     parser = argparse.ArgumentParser(description="Retrain CFB Prophet weekly models against actual scores & Vegas consensus lines.")
@@ -393,6 +515,12 @@ def main():
             score_opp = g.get('actualScoreOpp') if g.get('actualScoreOpp') is not None else g.get('finalOppScore')
             is_completed = (g.get('isFinal') or score_ut is not None) and (score_ut is not None and score_opp is not None)
             if is_completed:
+                if not args.dry_run:
+                    g['isFinal'] = True
+                    g['finalTeamScore'] = g['actualScoreUt'] = int(score_ut)
+                    g['finalOppScore'] = g['actualScoreOpp'] = int(score_opp)
+                    g['finalWin'] = int(score_ut) > int(score_opp)
+
                 opp_id = match_team_in_db(db, g.get('opponent')) or match_team_in_db(db, g.get('oppAbbr'))
                 spread = g.get('vegasSpread')
                 if spread is None:
@@ -487,11 +615,16 @@ def main():
         raw_delta = actual_margin - vegas_margin
 
         # 1. FCS / Cupcake dominance normalization:
-        # A 50-60 point blowout against an FCS or massive underdog where the defense gives up <= 10 pts
-        # represents total game control. Don't penalize a team simply because Vegas hung an extreme -50 line.
+        # A comfortable win against an FCS or massive underdog where the defense gives up <= 14 pts
+        # represents total game control. Don't penalize a team simply because Vegas hung an extreme -45 or -50 line.
         is_cupcake = g.get('oppRank') == 'FCS' or g.get('vegasSpread', 0) <= -28.0 or 'fcs' in g.get('opponent', '').lower()
-        if is_cupcake and actual_margin >= 35 and g['oppScore'] <= 10:
-            effective_delta = max(raw_delta, 18.0)
+        if is_cupcake:
+            if actual_margin >= 20 and g['oppScore'] <= 14:
+                effective_delta = max(raw_delta, 2.0)
+            elif actual_margin >= 28:
+                effective_delta = max(raw_delta, 0.0)
+            else:
+                effective_delta = max(raw_delta, -8.0)
         else:
             effective_delta = raw_delta
 
@@ -554,15 +687,12 @@ def main():
         if team_short in adv_stats_w1:
             team_ppa = adv_stats_w1[team_short].get('offense', {}).get('ppa', 0.0)
             if team_ppa and team_ppa < 0.12:
-                epa_shift -= 1.5  # Heavy penalty for dead offensive efficiency
+                epa_shift -= 1.0  # Moderate penalty for dead offensive efficiency
             elif team_ppa and team_ppa > 0.40:
-                epa_shift += 1.0  # High-octane efficiency reward
+                epa_shift += 0.8  # High-octane efficiency reward
 
-        # Extra penalty for catastrophic underperformances (> 20 pt delta)
-        if avg_delta <= -20.0:
-            epa_shift -= 1.0
-
-        clamped_adjustment = max(-6.0, min(4.5, raw_adjustment + epa_shift))
+        # Cap weekly rating volatility so a single non-conference game doesn't swing ratings by 6 points
+        clamped_adjustment = max(-3.0, min(3.0, raw_adjustment + epa_shift))
         new_rating = round(baseline + clamped_adjustment, 2)
         rating_shifts[tid] = {
             'old': baseline,
@@ -689,10 +819,16 @@ def main():
                 adj_ut_score = mc_sim['projScoreA']
                 adj_opp_score = mc_sim['projScoreB']
                 win_prob = max(1, min(99, int(round(mc_sim['winProbA']))))
+
+                # Strictly break ties
+                if adj_ut_score == adj_opp_score:
+                    if win_prob >= 50:
+                        adj_ut_score += 3
+                    else:
+                        adj_opp_score += 3
+
                 if abs(adj_ut_score - adj_opp_score) >= 28:
                     blowout_games_calibrated += 1
-
-
 
                 if not args.dry_run:
                     g['projScoreUt'] = adj_ut_score
@@ -720,6 +856,13 @@ def main():
 
                 win_prob = calculate_win_prob_from_margin(projected_margin)
 
+                # Strictly break ties
+                if adj_ut_score == adj_opp_score:
+                    if win_prob >= 50:
+                        adj_ut_score += 3
+                    else:
+                        adj_opp_score += 3
+
                 if not args.dry_run:
                     g['projScoreUt'] = adj_ut_score
                     g['projScoreOpp'] = adj_opp_score
@@ -729,6 +872,9 @@ def main():
 
     print(f"\n🔮 Re-projected {unplayed_games_recalculated} future regular-season games with updated power ratings!")
     print(f"🚀 Applied Non-Linear Blowout Calibration to {blowout_games_calibrated} mismatch games!")
+
+    # 5.5 Enforce 100% Head-to-Head Reciprocal Symmetry & Eliminate Ties
+    enforce_head_to_head_symmetry(db)
 
     # 6. Save Retrained Databases & Calibration Ledger
     if not args.dry_run:
