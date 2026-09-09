@@ -6099,7 +6099,13 @@ function runMonteCarloSeasonSim(teamId, iterations = 10000, checkpointKey = 'cur
   if (activeCheckpoint.id === 'preseason') {
     lockedWins = 0;
     lockedLosses = 0;
-    gameProbsToSim = schedule.map(g => {
+    gameProbsToSim = schedule.map((g, idx) => {
+      if (typeof g.preseasonWinProb === 'number') {
+        return g.preseasonWinProb / 100.0;
+      }
+      if (team.preseasonBaseline && Array.isArray(team.preseasonBaseline.gameWinProbs) && typeof team.preseasonBaseline.gameWinProbs[idx] === 'number') {
+        return team.preseasonBaseline.gameWinProbs[idx] / 100.0;
+      }
       const sim = calculateAdjustedMatchup(g, teamId);
       if (sim.isFinal) {
         return (typeof g.baseWinProb === 'number' ? g.baseWinProb : 50) / 100.0;
@@ -6140,6 +6146,11 @@ function runMonteCarloSeasonSim(teamId, iterations = 10000, checkpointKey = 'cur
   let playoffAppearances = 0;
   let nationalTitles = 0;
 
+  const isPowerConf = team.conference === 'Big Ten' || team.conference === 'SEC';
+  const isOtherP4 = team.conference === 'ACC' || team.conference === 'Big 12';
+  const isPreContender = !!(team.preseasonBaseline && (team.preseasonBaseline.cfpSeed || (team.preseasonBaseline.baseSpRating && team.preseasonBaseline.baseSpRating >= 24.0)));
+  const isCurrentContender = (team.baseSpRating || 20.0) >= 24.0;
+
   for (let i = 0; i < iterations; i++) {
     let simWins = lockedWins;
     for (let j = 0; j < gameProbsToSim.length; j++) {
@@ -6151,12 +6162,37 @@ function runMonteCarloSeasonSim(teamId, iterations = 10000, checkpointKey = 'cur
     winDistribution[clampedWins]++;
     totalWinsSum += clampedWins;
 
-    if (clampedWins >= 10) playoffAppearances++;
-    else if (clampedWins === 9 && Math.random() < 0.35) playoffAppearances++;
+    if (activeCheckpoint.id === 'preseason') {
+      if (clampedWins >= 11) playoffAppearances++;
+      else if (clampedWins === 10) {
+        if (isPowerConf) playoffAppearances++;
+        else if (isOtherP4) playoffAppearances += 0.85;
+        else playoffAppearances += 0.50;
+      } else if (clampedWins === 9) {
+        if (isPreContender && isPowerConf) playoffAppearances += 0.70;
+        else if (isPowerConf) playoffAppearances += 0.35;
+        else if (isOtherP4) playoffAppearances += 0.20;
+      }
 
-    if (clampedWins >= 12 && Math.random() < 0.40) nationalTitles++;
-    else if (clampedWins === 11 && Math.random() < 0.18) nationalTitles++;
-    else if (clampedWins === 10 && Math.random() < 0.05) nationalTitles++;
+      if (isPreContender) {
+        if (clampedWins >= 12 && Math.random() < 0.40) nationalTitles++;
+        else if (clampedWins === 11 && Math.random() < 0.22) nationalTitles++;
+        else if (clampedWins === 10 && Math.random() < 0.08) nationalTitles++;
+      }
+    } else {
+      if (clampedWins >= 11) playoffAppearances++;
+      else if (clampedWins === 10) {
+        if (isPowerConf) playoffAppearances += 0.90;
+        else if (isOtherP4) playoffAppearances += 0.70;
+        else playoffAppearances += 0.40;
+      } else if (clampedWins === 9 && Math.random() < 0.35) playoffAppearances++;
+
+      if (isCurrentContender) {
+        if (clampedWins >= 12 && Math.random() < 0.35) nationalTitles++;
+        else if (clampedWins === 11 && Math.random() < 0.15) nationalTitles++;
+        else if (clampedWins === 10 && Math.random() < 0.03) nationalTitles++;
+      }
+    }
   }
 
   const distPct = {};
@@ -9011,8 +9047,8 @@ function saveCurrentProjectionAsBracket(name, creator, notes, forceNewId = false
   const ccg = simulateConferenceChampionships(evaluated);
   const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
   const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
-  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate']);
-  const runnerTeam = playoff.runnerUp ? (TEAMS_DATABASE[playoff.runnerUp.id] || playoff.runnerUp) : TEAMS_DATABASE['oregon'];
+  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : (TEAMS_DATABASE[state.currentTeamId] || TEAMS_DATABASE['georgia']));
+  const runnerTeam = playoff.runnerUp ? (TEAMS_DATABASE[playoff.runnerUp.id] || playoff.runnerUp) : (TEAMS_DATABASE['ohiostate'] || { id: 'ohiostate', name: 'Ohio State Buckeyes', shortName: 'Ohio State' });
 
   const currentUser = getCurrentUser();
   const creatorName = creator && creator.trim() ? creator.trim() : (currentUser ? currentUser.displayName : 'Coach');
@@ -9030,7 +9066,7 @@ function saveCurrentProjectionAsBracket(name, creator, notes, forceNewId = false
     seed: idx + 1,
     id: s?.id || 'team',
     name: s?.shortName || s?.name || 'Team',
-    logoUrl: s?.logoUrl || '',
+    logoUrl: s?.logoUrl || (s?.id && TEAMS_DATABASE[s.id]?.logoUrl) || '',
     wins: s?.wins !== undefined ? s.wins : (s?.totalWins || 11),
     losses: s?.losses !== undefined ? s.losses : (s?.totalLosses || 1)
   }));
@@ -9046,39 +9082,39 @@ function saveCurrentProjectionAsBracket(name, creator, notes, forceNewId = false
     mode: isSlidersCustom() ? 'custom' : 'baseline',
     isPublic: true,
     champion: {
-      id: champTeam.id || getTopRankedTeamId() || 'ohiostate',
-      name: champTeam.name || 'Texas Longhorns',
-      shortName: champTeam.shortName || 'Texas',
-      logoUrl: champTeam.logoUrl || '',
-      score: playoff.natty?.sim?.winnerScore || playoff.natty?.sim?.scoreA || 35,
-      oppScore: playoff.natty?.sim?.loserScore || playoff.natty?.sim?.scoreB || 28
+      id: champTeam.id || 'georgia',
+      name: champTeam.name || 'Georgia Bulldogs',
+      shortName: champTeam.shortName || 'Georgia',
+      logoUrl: champTeam.logoUrl || (champTeam.id && TEAMS_DATABASE[champTeam.id]?.logoUrl) || 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',
+      score: playoff.natty?.sim?.winnerScore || playoff.natty?.sim?.scoreA || playoff.simNatty?.scoreA || 29,
+      oppScore: playoff.natty?.sim?.loserScore || playoff.natty?.sim?.scoreB || playoff.simNatty?.scoreB || 27
     },
     runnerUp: {
-      id: runnerTeam.id || 'oregon',
-      name: runnerTeam.name || 'Oregon Ducks',
-      shortName: runnerTeam.shortName || 'Oregon'
+      id: runnerTeam.id || 'ohiostate',
+      name: runnerTeam.name || 'Ohio State Buckeyes',
+      shortName: runnerTeam.shortName || 'Ohio State'
     },
     seeds: seeds,
     playoffSummary: {
       fr: [
-        { winner: playoff.fr1?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.fr2?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.fr3?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.fr4?.sim?.winner?.shortName || 'Team' }
+        { winner: playoff.fr1?.sim?.winner?.shortName || playoff.fr1Winner?.shortName || 'Team' },
+        { winner: playoff.fr2?.sim?.winner?.shortName || playoff.fr2Winner?.shortName || 'Team' },
+        { winner: playoff.fr3?.sim?.winner?.shortName || playoff.fr3Winner?.shortName || 'Team' },
+        { winner: playoff.fr4?.sim?.winner?.shortName || playoff.fr4Winner?.shortName || 'Team' }
       ],
       qf: [
-        { winner: playoff.qf1?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.qf2?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.qf3?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.qf4?.sim?.winner?.shortName || 'Team' }
+        { winner: playoff.qf1?.sim?.winner?.shortName || playoff.qf1Winner?.shortName || 'Team' },
+        { winner: playoff.qf2?.sim?.winner?.shortName || playoff.qf2Winner?.shortName || 'Team' },
+        { winner: playoff.qf3?.sim?.winner?.shortName || playoff.qf3Winner?.shortName || 'Team' },
+        { winner: playoff.qf4?.sim?.winner?.shortName || playoff.qf4Winner?.shortName || 'Team' }
       ],
       sf: [
-        { winner: playoff.sf1?.sim?.winner?.shortName || 'Team' },
-        { winner: playoff.sf2?.sim?.winner?.shortName || 'Team' }
+        { winner: playoff.sf1?.sim?.winner?.shortName || playoff.semi1Winner?.shortName || 'Team' },
+        { winner: playoff.sf2?.sim?.winner?.shortName || playoff.semi2Winner?.shortName || 'Team' }
       ]
     },
     simState: {
-      teamId: state.currentTeamId || getTopRankedTeamId() || 'ohiostate',
+      teamId: state.currentTeamId || champTeam.id || 'georgia',
       userPicks: JSON.parse(JSON.stringify(state.userPicks || {})),
       manualScores: JSON.parse(JSON.stringify(state.manualScores || {})),
       ccgPicks: JSON.parse(JSON.stringify(state.ccgPicks || {})),
@@ -9391,6 +9427,53 @@ function getAllKnownBrackets() {
 window.getAllKnownBrackets = getAllKnownBrackets;
 
 function createProphetAiBenchmarkBracket() {
+  let playoff = state.lastPlayoffResults;
+  if (!playoff || !playoff.nationalChampion) {
+    try {
+      const evaluated = evaluateRegularSeasonAllTeams();
+      const ccg = simulateConferenceChampionships(evaluated);
+      const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
+      playoff = simulatePlayoffBracket(cfp);
+    } catch (e) {
+      console.warn('Fallback generating benchmark playoff:', e);
+    }
+  }
+
+  const champTeam = (state.lastNationalChampion && TEAMS_DATABASE[state.lastNationalChampion.id])
+    ? TEAMS_DATABASE[state.lastNationalChampion.id]
+    : ((playoff && playoff.nationalChampion && TEAMS_DATABASE[playoff.nationalChampion.id])
+      ? TEAMS_DATABASE[playoff.nationalChampion.id]
+      : (TEAMS_DATABASE['georgia'] || { id: 'georgia', name: 'Georgia Bulldogs', shortName: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png' }));
+
+  const runnerTeam = (playoff && playoff.runnerUp && TEAMS_DATABASE[playoff.runnerUp.id])
+    ? TEAMS_DATABASE[playoff.runnerUp.id]
+    : (TEAMS_DATABASE['ohiostate'] || { id: 'ohiostate', name: 'Ohio State Buckeyes', shortName: 'Ohio State' });
+
+  const seeds = (playoff && playoff.cfp && Array.isArray(playoff.cfp.seeds)) ? playoff.cfp.seeds.slice(0, 12).map((s, idx) => ({
+    seed: idx + 1,
+    id: s?.id || 'team',
+    name: s?.shortName || s?.name || 'Team',
+    logoUrl: s?.logoUrl || (s?.id && TEAMS_DATABASE[s.id]?.logoUrl) || '',
+    wins: s?.wins !== undefined ? s.wins : (s?.totalWins || 11),
+    losses: s?.losses !== undefined ? s.losses : (s?.totalLosses || 1)
+  })) : [
+    { seed: 1,  id: 'georgia',    name: 'Georgia',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',   wins: 12, losses: 0 },
+    { seed: 2,  id: 'utah',       name: 'Utah',        logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/254.png',  wins: 12, losses: 0 },
+    { seed: 3,  id: 'ohiostate',  name: 'Ohio State',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',  wins: 11, losses: 1 },
+    { seed: 4,  id: 'miami',      name: 'Miami',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 11, losses: 1 },
+    { seed: 5,  id: 'notredame',  name: 'Notre Dame',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png',   wins: 12, losses: 0 },
+    { seed: 6,  id: 'lsu',        name: 'LSU',         logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/99.png',   wins: 12, losses: 0 },
+    { seed: 7,  id: 'texastech',  name: 'Texas Tech',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png', wins: 12, losses: 0 },
+    { seed: 8,  id: 'indiana',    name: 'Indiana',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png',   wins: 11, losses: 1 },
+    { seed: 9,  id: 'louisville', name: 'Louisville',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/97.png',   wins: 11, losses: 1 },
+    { seed: 10, id: 'texas',      name: 'Texas',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',  wins: 10, losses: 2 },
+    { seed: 11, id: 'oregon',     name: 'Oregon',      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 10, losses: 2 },
+    { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',   wins: 11, losses: 1 }
+  ];
+
+  const scoreA = playoff?.simNatty?.scoreA || playoff?.natty?.sim?.winnerScore || playoff?.natty?.sim?.scoreA || 29;
+  const scoreB = playoff?.simNatty?.scoreB || playoff?.natty?.sim?.loserScore || playoff?.natty?.sim?.scoreB || 27;
+
   return {
     id: 'bracket_prophet_ai_baseline',
     name: "Prophet AI's Picks",
@@ -9401,52 +9484,39 @@ function createProphetAiBenchmarkBracket() {
     isAdminBenchmark: true,
     isPublic: true,
     champion: {
-      id: 'ohiostate',
-      name: 'Ohio State Buckeyes',
-      shortName: 'Ohio State',
-      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',
-      score: 34,
-      oppScore: 24
+      id: champTeam.id || 'georgia',
+      name: champTeam.name || 'Georgia Bulldogs',
+      shortName: champTeam.shortName || 'Georgia',
+      logoUrl: champTeam.logoUrl || (champTeam.id && TEAMS_DATABASE[champTeam.id]?.logoUrl) || 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',
+      score: scoreA,
+      oppScore: scoreB
     },
     runnerUp: {
-      id: 'oregon',
-      name: 'Oregon Ducks',
-      shortName: 'Oregon'
+      id: runnerTeam.id || 'ohiostate',
+      name: runnerTeam.name || 'Ohio State Buckeyes',
+      shortName: runnerTeam.shortName || 'Ohio State'
     },
-    seeds: [
-      { seed: 1,  id: 'ohiostate',  name: 'Ohio State',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',  wins: 13, losses: 0 },
-      { seed: 2,  id: 'texas',      name: 'Texas',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',  wins: 12, losses: 1 },
-      { seed: 3,  id: 'miami',      name: 'Miami',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 12, losses: 1 },
-      { seed: 4,  id: 'texastech',  name: 'Texas Tech',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png', wins: 10, losses: 3 },
-      { seed: 5,  id: 'oregon',     name: 'Oregon',      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 11, losses: 2 },
-      { seed: 6,  id: 'georgia',    name: 'Georgia',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',   wins: 11, losses: 2 },
-      { seed: 7,  id: 'notredame',  name: 'Notre Dame',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png',   wins: 11, losses: 1 },
-      { seed: 8,  id: 'alabama',    name: 'Alabama',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/333.png',  wins: 10, losses: 2 },
-      { seed: 9,  id: 'olemiss',    name: 'Ole Miss',    logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/145.png',  wins: 10, losses: 2 },
-      { seed: 10, id: 'indiana',    name: 'Indiana',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png',   wins: 10, losses: 2 },
-      { seed: 11, id: 'lsu',        name: 'LSU',         logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/99.png',   wins: 10, losses: 2 },
-      { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',   wins: 12, losses: 1 }
-    ],
+    seeds: seeds,
     playoffSummary: {
       fr: [
-        { label: '#5 vs #12', winner: 'Oregon' },
-        { label: '#6 vs #11', winner: 'Georgia' },
-        { label: '#7 vs #10', winner: 'Notre Dame' },
-        { label: '#8 vs #9', winner: 'Alabama' }
+        { label: '#5 vs #12', winner: playoff?.fr1Winner?.shortName || playoff?.fr1Winner?.name || 'Notre Dame' },
+        { label: '#6 vs #11', winner: playoff?.fr2Winner?.shortName || playoff?.fr2Winner?.name || 'LSU' },
+        { label: '#7 vs #10', winner: playoff?.fr3Winner?.shortName || playoff?.fr3Winner?.name || 'Texas' },
+        { label: '#8 vs #9', winner: playoff?.fr4Winner?.shortName || playoff?.fr4Winner?.name || 'Indiana' }
       ],
       qf: [
-        { bowl: 'Sugar Bowl', winner: 'Ohio State' },
-        { bowl: 'Rose Bowl', winner: 'Oregon' },
-        { bowl: 'Peach Bowl', winner: 'Texas' },
-        { bowl: 'Fiesta Bowl', winner: 'Georgia' }
+        { bowl: 'Sugar Bowl', winner: playoff?.qf1Winner?.shortName || playoff?.qf1Winner?.name || 'Georgia' },
+        { bowl: 'Rose Bowl', winner: playoff?.qf2Winner?.shortName || playoff?.qf2Winner?.name || 'Texas' },
+        { bowl: 'Peach Bowl', winner: playoff?.qf3Winner?.shortName || playoff?.qf3Winner?.name || 'Ohio State' },
+        { bowl: 'Fiesta Bowl', winner: playoff?.qf4Winner?.shortName || playoff?.qf4Winner?.name || 'Miami' }
       ],
       sf: [
-        { bowl: 'Orange Bowl', winner: 'Ohio State' },
-        { bowl: 'Cotton Bowl', winner: 'Oregon' }
+        { bowl: 'Orange Bowl', winner: playoff?.semi1Winner?.shortName || playoff?.semi1Winner?.name || 'Georgia' },
+        { bowl: 'Cotton Bowl', winner: playoff?.semi2Winner?.shortName || playoff?.semi2Winner?.name || 'Ohio State' }
       ]
     },
     simState: {
-      teamId: 'ohiostate',
+      teamId: champTeam.id || 'georgia',
       userPicks: {},
       manualScores: {},
       ccgPicks: {},
@@ -10076,7 +10146,7 @@ function renderSavedBracketsVault() {
     const ccg = simulateConferenceChampionships(evaluated);
     const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
     const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
-    const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate']);
+    const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : (TEAMS_DATABASE[state.currentTeamId] || TEAMS_DATABASE['georgia']));
 
     grid.innerHTML = `
       <div class="empty-vault-state" style="padding: 1.5rem 1rem; border: 1px dashed rgba(56, 189, 248, 0.3); border-radius: var(--radius-lg); background: rgba(15, 23, 42, 0.6); text-align: center;">
@@ -10354,7 +10424,7 @@ function openSubmissionDetailModal(bracketId, e) {
     const dateStr = b.createdAt ? new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '2026 Season';
     metaEl.innerText = `By ${b.creator || 'Coach'}${isOwner ? ' (You)' : ''} • Submitted ${dateStr}`;
   }
-  if (champLogo) champLogo.src = champ.logoUrl || 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png';
+  if (champLogo) champLogo.src = champ.logoUrl || (champ.id && TEAMS_DATABASE[champ.id]?.logoUrl) || 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png';
   if (champName) champName.innerText = champ.name;
 
   if (seedsGrid) {
@@ -10512,7 +10582,7 @@ function openSaveBracketModal(fromVault = false) {
   const ccg = simulateConferenceChampionships(evaluated);
   const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
   const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
-  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate']);
+  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : (TEAMS_DATABASE[state.currentTeamId] || TEAMS_DATABASE['georgia']));
 
   const currentUser = getCurrentUser();
   const allKnown = getAllKnownBrackets();
@@ -10633,7 +10703,7 @@ function saveActiveProjectionDirectly() {
   const ccg = simulateConferenceChampionships(evaluated);
   const cfp = (state.lastPlayoffResults && state.lastPlayoffResults.cfp) ? state.lastPlayoffResults.cfp : generate12TeamCfpField(ccg.confChamps, evaluated);
   const playoff = state.lastPlayoffResults || simulatePlayoffBracket(cfp);
-  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : TEAMS_DATABASE[state.currentTeamId || getTopRankedTeamId() || 'ohiostate']);
+  const champTeam = state.lastNationalChampion || (playoff.nationalChampion ? (TEAMS_DATABASE[playoff.nationalChampion.id] || playoff.nationalChampion) : (TEAMS_DATABASE[state.currentTeamId] || TEAMS_DATABASE['georgia']));
 
   const name = `${champTeam.shortName || 'CFB'} Natty Projection`;
   const creator = currentUser ? currentUser.displayName : (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');

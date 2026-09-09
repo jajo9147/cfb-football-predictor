@@ -1772,21 +1772,21 @@
         "id": "bracket_1788107533721_xivsla",
         "user_id": "116de3ad-fe71-4f75-8743-49162d223d08",
         "creator_id": "116de3ad-fe71-4f75-8743-49162d223d08",
-        "name": "Ohio State Natty Projection",
+        "name": "Georgia Natty Projection",
         "creator": "Coach",
         "notes": "Custom 2026 CFP Simulation",
         "champion": {
-            "id": "ohiostate",
-            "name": "Ohio State Buckeyes",
-            "score": 28,
-            "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
-            "oppScore": 31,
-            "shortName": "Ohio State"
-        },
-        "runner_up": {
             "id": "georgia",
             "name": "Georgia Bulldogs",
-            "shortName": "Georgia"
+            "shortName": "Georgia",
+            "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png",
+            "score": 31,
+            "oppScore": 28
+        },
+        "runner_up": {
+            "id": "ohiostate",
+            "name": "Ohio State Buckeyes",
+            "shortName": "Ohio State"
         },
         "seeds": [
             {
@@ -1941,21 +1941,21 @@
         "id": "bracket_1788032610598_nbefcu",
         "user_id": "116de3ad-fe71-4f75-8743-49162d223d08",
         "creator_id": "116de3ad-fe71-4f75-8743-49162d223d08",
-        "name": "Ohio State Natty Projection",
+        "name": "Georgia Natty Projection",
         "creator": "Coachi",
         "notes": "Custom 2026 CFP Simulation",
         "champion": {
-            "id": "ohiostate",
-            "name": "Ohio State Buckeyes",
-            "score": 28,
-            "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
-            "oppScore": 31,
-            "shortName": "Ohio State"
-        },
-        "runner_up": {
             "id": "georgia",
             "name": "Georgia Bulldogs",
-            "shortName": "Georgia"
+            "shortName": "Georgia",
+            "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png",
+            "score": 31,
+            "oppScore": 28
+        },
+        "runner_up": {
+            "id": "ohiostate",
+            "name": "Ohio State Buckeyes",
+            "shortName": "Ohio State"
         },
         "seeds": [
             {
