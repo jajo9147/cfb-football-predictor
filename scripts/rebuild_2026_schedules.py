@@ -400,8 +400,6 @@ def main():
                 game_obj["finalTeamScore"] = final_team_score
                 game_obj["finalOppScore"] = final_opp_score
                 game_obj["finalWin"] = final_win
-                game_obj["projScoreUt"] = final_team_score
-                game_obj["projScoreOpp"] = final_opp_score
 
             new_schedule.append(game_obj)
             total_games_built += 1
