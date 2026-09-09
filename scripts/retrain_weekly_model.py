@@ -82,41 +82,41 @@ WEEK2_OFFICIAL_POLL = {
 
 # Stadium Home Field Advantage mapping (points)
 STADIUM_HFA = {
-    "Jones AT&T Stadium": 4.0,
-    "Jones AT&T Stadium (Lubbock, TX)": 4.0,
-    "Michigan Stadium": 4.0,
-    "Michigan Stadium (The Big House)": 4.0,
-    "Ohio Stadium": 4.0,
-    "Sanford Stadium": 4.0,
-    "Darrell K Royal-Texas Memorial Stadium": 3.5,
-    "Tiger Stadium": 4.5,
-    "Autzen Stadium": 4.0,
-    "Beaver Stadium": 4.0,
-    "Kyle Field": 4.5,
-    "Neyland Stadium": 4.5,
-    "Bryant-Denny Stadium": 4.0,
-    "Rice-Eccles Stadium": 4.0,
-    "Folsom Field": 3.5,
-    "Bobby Dodd Stadium": 2.5,
-    "Memorial Stadium": 3.0,
-    "Husky Stadium": 3.5,
-    "Los Angeles Memorial Coliseum": 3.0,
-    "Kinnick Stadium": 3.5,
-    "Mountain America Stadium": 3.0,
-    "Hard Rock Stadium": 3.5,
-    "Jordan-Hare Stadium": 4.0,
-    "Doak Campbell Stadium": 3.5,
-    "Camp Randall Stadium": 3.5,
-    "Arizona Stadium": 3.0,
-    "TDECU Stadium": 2.5,
-    "L&N Stadium": 2.5,
-    "L&N Federal Credit Union Stadium": 2.5,
-    "Faurot Field": 3.0,
-    "Albertsons Stadium": 3.5,
-    "Gerald J. Ford Stadium": 2.5,
-    "Gaylord Family Oklahoma Memorial Stadium": 3.5,
-    "Vaught-Hemingway Stadium": 3.5,
-    "Memorial Stadium (Clemson)": 4.0
+    "Tiger Stadium": 3.2,
+    "Kyle Field": 3.2,
+    "Neyland Stadium": 3.2,
+    "Beaver Stadium": 3.0,
+    "Ohio Stadium": 3.0,
+    "Sanford Stadium": 3.0,
+    "Autzen Stadium": 3.0,
+    "Bryant-Denny Stadium": 3.0,
+    "Rice-Eccles Stadium": 2.8,
+    "Jones AT&T Stadium": 2.8,
+    "Jones AT&T Stadium (Lubbock, TX)": 2.8,
+    "Michigan Stadium": 2.5,
+    "Michigan Stadium (The Big House)": 2.5,
+    "Darrell K Royal-Texas Memorial Stadium": 2.5,
+    "Folsom Field": 2.5,
+    "Doak Campbell Stadium": 2.5,
+    "Bobby Dodd Stadium": 2.2,
+    "Memorial Stadium": 2.5,
+    "Husky Stadium": 2.8,
+    "Los Angeles Memorial Coliseum": 2.5,
+    "Kinnick Stadium": 2.8,
+    "Mountain America Stadium": 2.5,
+    "Hard Rock Stadium": 2.5,
+    "Jordan-Hare Stadium": 3.0,
+    "Camp Randall Stadium": 2.8,
+    "Arizona Stadium": 2.2,
+    "TDECU Stadium": 2.2,
+    "L&N Stadium": 2.2,
+    "L&N Federal Credit Union Stadium": 2.2,
+    "Faurot Field": 2.5,
+    "Albertsons Stadium": 2.8,
+    "Gerald J. Ford Stadium": 2.2,
+    "Gaylord Family Oklahoma Memorial Stadium": 2.8,
+    "Vaught-Hemingway Stadium": 2.8,
+    "Memorial Stadium (Clemson)": 2.8
 }
 
 NON_DB_OPPONENT_RATINGS = {
@@ -155,7 +155,7 @@ NON_DB_OPPONENT_RATINGS = {
     'California Golden Bears': 15.5, 'CAL': 15.5,
     'Mississippi State Bulldogs': 15.0, 'MSST': 15.0,
     'Michigan State Spartans': 15.0, 'MSU': 15.0,
-    'Virginia Cavaliers': 14.5, 'UVA': 14.5,
+    'Virginia Cavaliers': 18.0, 'UVA': 18.0,
     'Vanderbilt Commodores': 14.5, 'VANDY': 14.5,
     'Boston College Eagles': 13.0, 'BC': 13.0,
     'Wake Forest Demon Deacons': 13.0, 'WAKE': 13.0,
@@ -169,7 +169,8 @@ NON_DB_OPPONENT_RATINGS = {
     'Texas State Bobcats': 4.5, 'TXST': 4.5,
     'Western Michigan Broncos': 3.5, 'WMU': 3.5,
     'Ball State Cardinals': 1.0, 'BALL': 1.0,
-    'UTEP Miners': 1.0, 'UTEP': 1.0
+    'UTEP Miners': 1.0, 'UTEP': 1.0,
+    'Weber State Wildcats': -12.0
 }
 
 def load_teams_file(filepath):
@@ -663,14 +664,14 @@ def main():
     rating_shifts = {}
 
     BASELINE_SP_RATINGS = {
-        'ohiostate': 32.5, 'georgia': 32.0, 'texas': 31.5, 'oregon': 31.0,
-        'lsu': 28.5, 'notredame': 27.5, 'miami': 27.0, 'alabama': 26.5,
-        'texasam': 26.5, 'usc': 26.06, 'oklahoma': 26.0, 'olemiss': 26.0,
-        'indiana': 25.5, 'floridastate': 25.18, 'michigan': 24.8, 'utah': 24.5,
-        'tennessee': 24.0, 'clemson': 23.8, 'texastech': 23.8, 'smu': 23.0,
-        'missouri': 22.8, 'washington': 22.5, 'byu': 21.5, 'iowa': 21.0,
-        'louisville': 20.5, 'pennstate': 20.5, 'houston': 20.0, 'arizona': 19.5,
-        'boisestate': 18.5, 'colorado': 17.5, 'arizonastate': 16.2
+        'ohiostate': 35.0, 'oregon': 34.0, 'georgia': 34.0, 'notredame': 33.5,
+        'texas': 32.0, 'indiana': 30.5, 'miami': 30.0, 'lsu': 29.5,
+        'texasam': 28.2, 'pennstate': 27.5, 'texastech': 27.5, 'oklahoma': 26.8,
+        'alabama': 26.5, 'olemiss': 26.2, 'usc': 25.2, 'utah': 23.5,
+        'tennessee': 23.2, 'byu': 22.8, 'washington': 21.8, 'michigan': 21.5,
+        'houston': 21.0, 'missouri': 20.2, 'smu': 20.0, 'iowa': 19.8,
+        'floridastate': 18.5, 'louisville': 17.8, 'arizonastate': 17.2,
+        'clemson': 22.0, 'colorado': 15.2, 'arizona': 14.8, 'boisestate': 13.0
     }
 
     print("\n📈 RETRAINED TEAM POWER RATINGS (BAYESIAN ADJUSTMENT + EPA):")
