@@ -2863,37 +2863,51 @@ function renderDriveLogBetween(team1, team2, score1, score2) {
   if (!container) return;
 
   container.innerHTML = '';
+
+  // Simulation Engine Header
+  const header = document.createElement('div');
+  header.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 0.45rem 0.75rem; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--color-border); border-radius: var(--radius-sm); margin-bottom: 0.5rem; font-size: 0.72rem; font-family: var(--font-mono);';
+  header.innerHTML = `
+    <span style="color: var(--color-brand-accent); font-weight: 800;"><i class="fa-solid fa-bolt"></i> 10,000 DRIVE ENGINE SIMULATION</span>
+    <span style="color: var(--color-text-dim);">AUTHENTIC NCAA SCORING</span>
+  `;
+  container.appendChild(header);
+
   const drives = generateDriveSimulationLogBetween(team1, team2, score1, score2);
 
   drives.forEach((d) => {
     const row = document.createElement('div');
-    row.style.background = 'rgba(255, 255, 255, 0.04)';
-    row.style.border = '1px solid var(--color-border)';
-    row.style.borderRadius = 'var(--radius-sm)';
-    row.style.padding = '0.5rem 0.8rem';
-    row.style.display = 'flex';
-    row.style.justifyContent = 'space-between';
-    row.style.alignItems = 'center';
-    row.style.fontSize = '0.78rem';
+    row.style.cssText = `background: rgba(255, 255, 255, 0.03); border: 1px solid ${d.points > 0 ? 'rgba(16, 185, 129, 0.25)' : 'var(--color-border)'}; border-radius: var(--radius-sm); padding: 0.55rem 0.75rem; display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.4rem;`;
+
+    const teamColor = d.isTeam1 
+      ? (team1.colors?.accent || team1.colors?.primary || '#38BDF8') 
+      : (team2.colors?.secondary || team2.colors?.primary || '#F59E0B');
+
+    const badgeStyle = d.points > 0
+      ? 'background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3);'
+      : 'background: rgba(148, 163, 184, 0.1); color: #94A3B8; border: 1px solid rgba(148, 163, 184, 0.2);';
 
     row.innerHTML = `
-      <div style="display: flex; align-items: center; gap: 0.6rem;">
-        <span style="font-family: var(--font-mono); font-weight: 800; color: var(--color-brand-accent);">Q${d.quarter} ${d.time}</span>
-        <span style="font-weight: 700; color: ${d.isTeam1 ? (team1.colors?.accent || team1.colors?.primary || '#FFF') : (team2.colors?.secondary || team2.colors?.primary || '#FFF')};">${d.possTeam}</span>
-        <span>${d.event}</span>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+          <span style="font-family: var(--font-mono); font-weight: 800; font-size: 0.72rem; color: var(--color-brand-accent); background: rgba(56, 189, 248, 0.1); padding: 2px 6px; border-radius: 3px;">Q${d.quarter} ${d.time}</span>
+          <span style="font-weight: 800; font-size: 0.8rem; color: ${teamColor};">${d.possTeam}</span>
+          <span style="font-family: var(--font-mono); font-weight: 700; font-size: 0.68rem; padding: 2px 6px; border-radius: 3px; ${badgeStyle}">${d.badgeText || (d.points > 0 ? `+${d.points} PTS` : 'DRIVE')}</span>
+        </div>
+        <span style="font-family: var(--font-mono); font-weight: 800; font-size: 0.82rem; color: ${d.points > 0 ? '#10B981' : 'var(--color-text-dim)'};">${d.scoreLine}</span>
       </div>
-      <span style="font-family: var(--font-mono); font-weight: 800; color: ${d.points > 0 ? 'var(--color-success)' : 'var(--color-text-dim)'};">${d.scoreLine}</span>
+      <div style="color: #CBD5E1; font-size: 0.75rem; line-height: 1.35;">${d.event}</div>
     `;
     container.appendChild(row);
   });
 }
 
 function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
-  const s1 = typeof score1 === 'number' ? score1 : 28;
-  const s2 = typeof score2 === 'number' ? score2 : 24;
+  const s1 = typeof score1 === 'number' ? Math.max(0, Math.round(score1)) : 28;
+  const s2 = typeof score2 === 'number' ? Math.max(0, Math.round(score2)) : 24;
 
   function decomposeScoreIntoFootballPlays(score) {
-    if (score <= 0) return [];
+    if (score <= 1) return [];
     if (score === 2) return [{ type: 'SAFETY', pts: 2 }];
     if (score === 3) return [{ type: 'FG', pts: 3 }];
     if (score === 4) return [{ type: 'SAFETY', pts: 2 }, { type: 'SAFETY', pts: 2 }];
@@ -2901,14 +2915,16 @@ function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
     if (score === 6) return [{ type: 'TD_NO_XP', pts: 6 }];
     if (score === 7) return [{ type: 'TD', pts: 7 }];
     if (score === 8) return [{ type: 'TD_2PT', pts: 8 }];
+    if (score === 9) return [{ type: 'FG', pts: 3 }, { type: 'FG', pts: 3 }, { type: 'FG', pts: 3 }];
+    if (score === 10) return [{ type: 'TD', pts: 7 }, { type: 'FG', pts: 3 }];
     if (score === 11) return [{ type: 'TD_2PT', pts: 8 }, { type: 'FG', pts: 3 }];
 
     const playTypes = [
       { type: 'TD', pts: 7, cost: 1 },
-      { type: 'FG', pts: 3, cost: 2 },
+      { type: 'FG', pts: 3, cost: 2.2 },
       { type: 'TD_2PT', pts: 8, cost: 4 },
       { type: 'TD_NO_XP', pts: 6, cost: 5 },
-      { type: 'SAFETY', pts: 2, cost: 12 }
+      { type: 'SAFETY', pts: 2, cost: 14 }
     ];
 
     const dp = new Array(score + 1).fill(null);
@@ -2920,7 +2936,7 @@ function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
         if (s >= p.pts && dp[s - p.pts] !== null) {
           const candidatePlays = [...dp[s - p.pts].plays, { type: p.type, pts: p.pts }];
           const numFGs = candidatePlays.filter(x => x.type === 'FG').length;
-          const fgPenalty = numFGs > 3 ? (numFGs - 3) * 6 : 0;
+          const fgPenalty = numFGs > 3 ? (numFGs - 3) * 5 : 0;
           const candidateCost = dp[s - p.pts].cost + p.cost + fgPenalty;
           if (best === null || candidateCost < best.cost) {
             best = { plays: candidatePlays, cost: candidateCost };
@@ -2929,7 +2945,43 @@ function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
       }
       dp[s] = best;
     }
-    return dp[score] ? dp[score].plays : [{ type: 'TD', pts: score }];
+    return dp[score] ? dp[score].plays : [{ type: 'TD', pts: 7 }];
+  }
+
+  function formatDrivePlay(play, team, q, isSecondTeam = false) {
+    const qb = team.confirmedStarterQb || team.starPlayer || team.shortName;
+    if (play.type === 'TD') {
+      const yard = isSecondTeam ? [18, 27, 33, 14, 45][(q * 4) % 5] : [12, 19, 24, 38, 7][(q * 3) % 5];
+      return {
+        desc: `Touchdown! ${qb} ${yard}yd scoring strike, PAT is Good (+7 pts)`,
+        badge: 'TOUCHDOWN (+7)'
+      };
+    } else if (play.type === 'TD_2PT') {
+      return {
+        desc: `Touchdown! ${team.shortName} goal-line punch-in, 2-pt conversion SUCCESSFUL (+8 pts)`,
+        badge: '2-PT CONVERSION (+8)'
+      };
+    } else if (play.type === 'TD_NO_XP') {
+      return {
+        desc: `Touchdown! ${team.shortName} explosive rush, PAT kick missed (+6 pts)`,
+        badge: 'TOUCHDOWN (+6)'
+      };
+    } else if (play.type === 'FG') {
+      const dist = isSecondTeam ? [39, 44, 25, 34, 42][(q * 3) % 5] : [32, 41, 28, 47, 36][(q * 2) % 5];
+      return {
+        desc: `Field Goal! ${team.shortName} ${dist}yd kick splits the uprights (+3 pts)`,
+        badge: 'FIELD GOAL (+3)'
+      };
+    } else if (play.type === 'SAFETY') {
+      return {
+        desc: `Safety! ${team.shortName} defense sacks QB in end zone (+2 pts)`,
+        badge: 'SAFETY (+2)'
+      };
+    }
+    return {
+      desc: `Score! ${team.shortName} scores (+${play.pts} pts)`,
+      badge: `+${play.pts} PTS`
+    };
   }
 
   const plays1 = decomposeScoreIntoFootballPlays(s1);
@@ -2955,19 +3007,19 @@ function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
   };
 
   const nonScoreDescs1 = [
-    `${team2.shortName || 'Opponent'} defense brings heavy pressure on 3rd down for punt`,
-    `Drive stalls at midfield; 44-yd punt downed inside the 20`,
-    `Pass broken up on 3rd & 8; forced to punt`,
-    `Turnover on downs! Stuffed on 4th & short`,
-    `Fumble recovered by ${team2.shortName || 'defense'}`
+    { desc: `${team2.shortName || 'Opponent'} defense brings heavy pressure on 3rd down for punt`, badge: 'PUNT' },
+    { desc: `Drive stalls at midfield; 44-yd punt downed inside the 20`, badge: 'PUNT' },
+    { desc: `Pass broken up on 3rd & 8; forced to punt`, badge: 'PUNT' },
+    { desc: `Turnover on downs! Stuffed on 4th & short at the 35`, badge: 'TURNOVER ON DOWNS' },
+    { desc: `Fumble recovered by ${team2.shortName || 'defense'} at midfield`, badge: 'FUMBLE' }
   ];
 
   const nonScoreDescs2 = [
-    `${team1.shortName || 'Defense'} forces 3-and-out punt`,
-    `Pass incomplete on 3rd down; 41-yd punt fair caught`,
-    `Heavy sack pushes drive out of field goal range; punt`,
-    `Turnover on downs after incomplete deep pass`,
-    `Turnover! Interception picked off over the middle`
+    { desc: `${team1.shortName || 'Defense'} forces 3-and-out punt`, badge: 'PUNT' },
+    { desc: `Pass incomplete on 3rd down; 41-yd punt fair caught`, badge: 'PUNT' },
+    { desc: `Heavy sack pushes drive out of field goal range; punt`, badge: 'PUNT' },
+    { desc: `Turnover on downs after incomplete deep pass on 4th down`, badge: 'TURNOVER ON DOWNS' },
+    { desc: `Turnover! Interception picked off over the middle by ${team1.shortName || 'defense'}`, badge: 'INTERCEPTION' }
   ];
 
   const events = [];
@@ -2978,26 +3030,18 @@ function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
     // 1. Team 1 primary drive
     const sp1 = qDrives1[q].shift();
     let desc1 = '';
+    let badge1 = '';
     let pts1 = 0;
     if (sp1) {
       pts1 = sp1.pts;
       cur1 += pts1;
-      const qb1 = team1.confirmedStarterQb || team1.starPlayer || team1.shortName;
-      if (sp1.type === 'TD') {
-        const yard = [12, 19, 24, 38, 7][(q * 3) % 5];
-        desc1 = `Touchdown! ${qb1} ${yard}yd scoring strike, PAT is Good (+7 pts)`;
-      } else if (sp1.type === 'TD_2PT') {
-        desc1 = `Touchdown! ${team1.shortName} goal-line punch-in, 2-pt conversion SUCCESSFUL (+8 pts)`;
-      } else if (sp1.type === 'TD_NO_XP') {
-        desc1 = `Touchdown! ${team1.shortName} explosive rush, PAT kick missed (+6 pts)`;
-      } else if (sp1.type === 'FG') {
-        const dist = [32, 41, 28, 47, 36][(q * 2) % 5];
-        desc1 = `Field Goal! ${team1.shortName} ${dist}yd kick splits the uprights (+3 pts)`;
-      } else if (sp1.type === 'SAFETY') {
-        desc1 = `Safety! ${team1.shortName} defense sacks QB in end zone (+2 pts)`;
-      }
+      const formatted = formatDrivePlay(sp1, team1, q, false);
+      desc1 = formatted.desc;
+      badge1 = formatted.badge;
     } else {
-      desc1 = nonScoreDescs1[(q - 1) % nonScoreDescs1.length];
+      const ns = nonScoreDescs1[(q - 1) % nonScoreDescs1.length];
+      desc1 = ns.desc;
+      badge1 = ns.badge;
     }
 
     events.push({
@@ -3006,6 +3050,7 @@ function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
       possTeam: team1.abbr || team1.shortName,
       isTeam1: true,
       event: desc1,
+      badgeText: badge1,
       points: pts1,
       scoreLine: `${team1.abbr || team1.shortName} ${cur1} - ${team2.abbr || team2.shortName} ${cur2}`
     });
@@ -3013,26 +3058,18 @@ function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
     // 2. Team 2 primary drive
     const sp2 = qDrives2[q].shift();
     let desc2 = '';
+    let badge2 = '';
     let pts2 = 0;
     if (sp2) {
       pts2 = sp2.pts;
       cur2 += pts2;
-      const qb2 = team2.confirmedStarterQb || team2.starPlayer || team2.shortName;
-      if (sp2.type === 'TD') {
-        const yard = [18, 27, 33, 14, 45][(q * 4) % 5];
-        desc2 = `Touchdown! ${qb2} ${yard}yd connection in the end zone, PAT Good (+7 pts)`;
-      } else if (sp2.type === 'TD_2PT') {
-        desc2 = `Touchdown! ${team2.shortName} red zone plunge, 2-pt conversion SUCCESSFUL (+8 pts)`;
-      } else if (sp2.type === 'TD_NO_XP') {
-        desc2 = `Touchdown! ${team2.shortName} breakaway run, PAT kick missed (+6 pts)`;
-      } else if (sp2.type === 'FG') {
-        const dist = [39, 44, 25, 34, 42][(q * 3) % 5];
-        desc2 = `Field Goal! ${team2.shortName} ${dist}yd kick is right down the middle (+3 pts)`;
-      } else if (sp2.type === 'SAFETY') {
-        desc2 = `Safety! ${team2.shortName} defense swarms runner in end zone (+2 pts)`;
-      }
+      const formatted = formatDrivePlay(sp2, team2, q, true);
+      desc2 = formatted.desc;
+      badge2 = formatted.badge;
     } else {
-      desc2 = nonScoreDescs2[(q - 1) % nonScoreDescs2.length];
+      const ns = nonScoreDescs2[(q - 1) % nonScoreDescs2.length];
+      desc2 = ns.desc;
+      badge2 = ns.badge;
     }
 
     events.push({
@@ -3041,6 +3078,7 @@ function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
       possTeam: team2.abbr || team2.shortName,
       isTeam1: false,
       event: desc2,
+      badgeText: badge2,
       points: pts2,
       scoreLine: `${team1.abbr || team1.shortName} ${cur1} - ${team2.abbr || team2.shortName} ${cur2}`
     });
@@ -3050,15 +3088,14 @@ function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
       if (qDrives1[q].length > 0) {
         const extra1 = qDrives1[q].shift();
         cur1 += extra1.pts;
-        const eDesc1 = extra1.type === 'TD' 
-          ? `Touchdown! ${team1.shortName} red zone connection, PAT Good (+7 pts)`
-          : `Field Goal! ${team1.shortName} 34yd kick is GOOD (+3 pts)`;
+        const formatted1 = formatDrivePlay(extra1, team1, q, false);
         events.push({
           quarter: q,
           time: times[q][2] || '01:05',
           possTeam: team1.abbr || team1.shortName,
           isTeam1: true,
-          event: eDesc1,
+          event: formatted1.desc,
+          badgeText: formatted1.badge,
           points: extra1.pts,
           scoreLine: `${team1.abbr || team1.shortName} ${cur1} - ${team2.abbr || team2.shortName} ${cur2}`
         });
@@ -3066,15 +3103,14 @@ function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
       if (qDrives2[q].length > 0) {
         const extra2 = qDrives2[q].shift();
         cur2 += extra2.pts;
-        const eDesc2 = extra2.type === 'TD'
-          ? `Touchdown! ${team2.shortName} scoring drive, PAT Good (+7 pts)`
-          : `Field Goal! ${team2.shortName} 29yd kick is GOOD (+3 pts)`;
+        const formatted2 = formatDrivePlay(extra2, team2, q, true);
         events.push({
           quarter: q,
           time: q === 4 ? '00:00 (FINAL)' : (times[q][2] || '00:25'),
           possTeam: team2.abbr || team2.shortName,
           isTeam1: false,
-          event: eDesc2,
+          event: formatted2.desc,
+          badgeText: formatted2.badge,
           points: extra2.pts,
           scoreLine: `${team1.abbr || team1.shortName} ${cur1} - ${team2.abbr || team2.shortName} ${cur2}`
         });
@@ -3181,7 +3217,8 @@ function drawRadarChart(game, sim) {
     drawRadarChartBetween(tA, tB, pSim.scoreA, pSim.scoreB, game.isHome);
   } else {
     const tActive = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
-    const team2 = {
+    const oppId = getOpponentTeamId(game);
+    const team2 = (oppId && TEAMS_DATABASE[oppId]) ? TEAMS_DATABASE[oppId] : {
       shortName: game.oppAbbr || 'OPP',
       colors: { primary: game.oppColor || '#CC0000' }
     };
