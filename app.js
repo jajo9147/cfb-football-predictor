@@ -2892,71 +2892,195 @@ function generateDriveSimulationLogBetween(team1, team2, score1, score2) {
   const s1 = typeof score1 === 'number' ? score1 : 28;
   const s2 = typeof score2 === 'number' ? score2 : 24;
 
+  function decomposeScoreIntoFootballPlays(score) {
+    if (score <= 0) return [];
+    if (score === 2) return [{ type: 'SAFETY', pts: 2 }];
+    if (score === 3) return [{ type: 'FG', pts: 3 }];
+    if (score === 4) return [{ type: 'SAFETY', pts: 2 }, { type: 'SAFETY', pts: 2 }];
+    if (score === 5) return [{ type: 'FG', pts: 3 }, { type: 'SAFETY', pts: 2 }];
+    if (score === 6) return [{ type: 'TD_NO_XP', pts: 6 }];
+    if (score === 7) return [{ type: 'TD', pts: 7 }];
+    if (score === 8) return [{ type: 'TD_2PT', pts: 8 }];
+    if (score === 11) return [{ type: 'TD_2PT', pts: 8 }, { type: 'FG', pts: 3 }];
+
+    const playTypes = [
+      { type: 'TD', pts: 7, cost: 1 },
+      { type: 'FG', pts: 3, cost: 2 },
+      { type: 'TD_2PT', pts: 8, cost: 4 },
+      { type: 'TD_NO_XP', pts: 6, cost: 5 },
+      { type: 'SAFETY', pts: 2, cost: 12 }
+    ];
+
+    const dp = new Array(score + 1).fill(null);
+    dp[0] = { plays: [], cost: 0 };
+
+    for (let s = 1; s <= score; s++) {
+      let best = null;
+      for (const p of playTypes) {
+        if (s >= p.pts && dp[s - p.pts] !== null) {
+          const candidatePlays = [...dp[s - p.pts].plays, { type: p.type, pts: p.pts }];
+          const numFGs = candidatePlays.filter(x => x.type === 'FG').length;
+          const fgPenalty = numFGs > 3 ? (numFGs - 3) * 6 : 0;
+          const candidateCost = dp[s - p.pts].cost + p.cost + fgPenalty;
+          if (best === null || candidateCost < best.cost) {
+            best = { plays: candidatePlays, cost: candidateCost };
+          }
+        }
+      }
+      dp[s] = best;
+    }
+    return dp[score] ? dp[score].plays : [{ type: 'TD', pts: score }];
+  }
+
+  const plays1 = decomposeScoreIntoFootballPlays(s1);
+  const plays2 = decomposeScoreIntoFootballPlays(s2);
+
+  const qDrives1 = { 1: [], 2: [], 3: [], 4: [] };
+  const qDrives2 = { 1: [], 2: [], 3: [], 4: [] };
+
+  plays1.forEach((p, idx) => {
+    const q = (idx % 4) + 1;
+    qDrives1[q].push(p);
+  });
+  plays2.forEach((p, idx) => {
+    const q = ((idx + 1) % 4) + 1;
+    qDrives2[q].push(p);
+  });
+
+  const times = {
+    1: ['11:24', '06:45', '01:50'],
+    2: ['12:15', '07:30', '00:42'],
+    3: ['11:50', '06:12', '01:30'],
+    4: ['10:15', '04:48', '00:00 (FINAL)']
+  };
+
+  const nonScoreDescs1 = [
+    `${team2.shortName || 'Opponent'} defense brings heavy pressure on 3rd down for punt`,
+    `Drive stalls at midfield; 44-yd punt downed inside the 20`,
+    `Pass broken up on 3rd & 8; forced to punt`,
+    `Turnover on downs! Stuffed on 4th & short`,
+    `Fumble recovered by ${team2.shortName || 'defense'}`
+  ];
+
+  const nonScoreDescs2 = [
+    `${team1.shortName || 'Defense'} forces 3-and-out punt`,
+    `Pass incomplete on 3rd down; 41-yd punt fair caught`,
+    `Heavy sack pushes drive out of field goal range; punt`,
+    `Turnover on downs after incomplete deep pass`,
+    `Turnover! Interception picked off over the middle`
+  ];
+
   const events = [];
   let cur1 = 0;
   let cur2 = 0;
 
-  // Breakdown desired scores into 4-quarter increments
-  const q1_1 = Math.round(s1 * 0.25);
-  const q2_1 = Math.round(s1 * 0.50);
-  const q3_1 = Math.round(s1 * 0.75);
-  const q4_1 = s1;
-
-  const q1_2 = Math.round(s2 * 0.25);
-  const q2_2 = Math.round(s2 * 0.50);
-  const q3_2 = Math.round(s2 * 0.75);
-  const q4_2 = s2;
-
-  const quarterTargets = [
-    { q: 1, t1: q1_1, t2: q1_2 },
-    { q: 2, t1: q2_1, t2: q2_2 },
-    { q: 3, t1: q3_1, t2: q3_2 },
-    { q: 4, t1: q4_1, t2: q4_2 }
-  ];
-
-  quarterTargets.forEach(tgt => {
-    // Drive Team 1
-    const p1 = Math.max(0, tgt.t1 - cur1);
-    cur1 += p1;
-    let desc1;
-    if (p1 >= 7) {
-      desc1 = `Touchdown! ${team1.starPlayer || team1.confirmedStarterQb || team1.shortName} explosive scoring drive (${p1} pts)`;
-    } else if (p1 > 0) {
-      desc1 = `Field Goal! ${team1.shortName} 38yd kick through the uprights (${p1} pts)`;
+  for (let q = 1; q <= 4; q++) {
+    // 1. Team 1 primary drive
+    const sp1 = qDrives1[q].shift();
+    let desc1 = '';
+    let pts1 = 0;
+    if (sp1) {
+      pts1 = sp1.pts;
+      cur1 += pts1;
+      const qb1 = team1.confirmedStarterQb || team1.starPlayer || team1.shortName;
+      if (sp1.type === 'TD') {
+        const yard = [12, 19, 24, 38, 7][(q * 3) % 5];
+        desc1 = `Touchdown! ${qb1} ${yard}yd scoring strike, PAT is Good (+7 pts)`;
+      } else if (sp1.type === 'TD_2PT') {
+        desc1 = `Touchdown! ${team1.shortName} goal-line punch-in, 2-pt conversion SUCCESSFUL (+8 pts)`;
+      } else if (sp1.type === 'TD_NO_XP') {
+        desc1 = `Touchdown! ${team1.shortName} explosive rush, PAT kick missed (+6 pts)`;
+      } else if (sp1.type === 'FG') {
+        const dist = [32, 41, 28, 47, 36][(q * 2) % 5];
+        desc1 = `Field Goal! ${team1.shortName} ${dist}yd kick splits the uprights (+3 pts)`;
+      } else if (sp1.type === 'SAFETY') {
+        desc1 = `Safety! ${team1.shortName} defense sacks QB in end zone (+2 pts)`;
+      }
     } else {
-      desc1 = `${team2.shortName} defense brings heavy pressure for 3-and-out punt`;
+      desc1 = nonScoreDescs1[(q - 1) % nonScoreDescs1.length];
     }
+
     events.push({
-      quarter: tgt.q,
-      time: tgt.q === 4 ? '06:12' : '09:45',
+      quarter: q,
+      time: times[q][0],
       possTeam: team1.abbr || team1.shortName,
       isTeam1: true,
       event: desc1,
-      points: p1,
+      points: pts1,
       scoreLine: `${team1.abbr || team1.shortName} ${cur1} - ${team2.abbr || team2.shortName} ${cur2}`
     });
 
-    // Drive Team 2
-    const p2 = Math.max(0, tgt.t2 - cur2);
-    cur2 += p2;
-    let desc2;
-    if (p2 >= 7) {
-      desc2 = `Touchdown! ${team2.starPlayer || team2.confirmedStarterQb || team2.shortName} red zone connection (${p2} pts)`;
-    } else if (p2 > 0) {
-      desc2 = `Field Goal! ${team2.shortName} splits the uprights (${p2} pts)`;
+    // 2. Team 2 primary drive
+    const sp2 = qDrives2[q].shift();
+    let desc2 = '';
+    let pts2 = 0;
+    if (sp2) {
+      pts2 = sp2.pts;
+      cur2 += pts2;
+      const qb2 = team2.confirmedStarterQb || team2.starPlayer || team2.shortName;
+      if (sp2.type === 'TD') {
+        const yard = [18, 27, 33, 14, 45][(q * 4) % 5];
+        desc2 = `Touchdown! ${qb2} ${yard}yd connection in the end zone, PAT Good (+7 pts)`;
+      } else if (sp2.type === 'TD_2PT') {
+        desc2 = `Touchdown! ${team2.shortName} red zone plunge, 2-pt conversion SUCCESSFUL (+8 pts)`;
+      } else if (sp2.type === 'TD_NO_XP') {
+        desc2 = `Touchdown! ${team2.shortName} breakaway run, PAT kick missed (+6 pts)`;
+      } else if (sp2.type === 'FG') {
+        const dist = [39, 44, 25, 34, 42][(q * 3) % 5];
+        desc2 = `Field Goal! ${team2.shortName} ${dist}yd kick is right down the middle (+3 pts)`;
+      } else if (sp2.type === 'SAFETY') {
+        desc2 = `Safety! ${team2.shortName} defense swarms runner in end zone (+2 pts)`;
+      }
     } else {
-      desc2 = `${team1.shortName} defense forces turnover on downs / punt`;
+      desc2 = nonScoreDescs2[(q - 1) % nonScoreDescs2.length];
     }
+
     events.push({
-      quarter: tgt.q,
-      time: tgt.q === 4 ? '00:00 (FINAL)' : '01:20',
+      quarter: q,
+      time: times[q][1],
       possTeam: team2.abbr || team2.shortName,
       isTeam1: false,
       event: desc2,
-      points: p2,
+      points: pts2,
       scoreLine: `${team1.abbr || team1.shortName} ${cur1} - ${team2.abbr || team2.shortName} ${cur2}`
     });
-  });
+
+    // 3. Extra scoring plays if quarter had multiple scores
+    while (qDrives1[q].length > 0 || qDrives2[q].length > 0) {
+      if (qDrives1[q].length > 0) {
+        const extra1 = qDrives1[q].shift();
+        cur1 += extra1.pts;
+        const eDesc1 = extra1.type === 'TD' 
+          ? `Touchdown! ${team1.shortName} red zone connection, PAT Good (+7 pts)`
+          : `Field Goal! ${team1.shortName} 34yd kick is GOOD (+3 pts)`;
+        events.push({
+          quarter: q,
+          time: times[q][2] || '01:05',
+          possTeam: team1.abbr || team1.shortName,
+          isTeam1: true,
+          event: eDesc1,
+          points: extra1.pts,
+          scoreLine: `${team1.abbr || team1.shortName} ${cur1} - ${team2.abbr || team2.shortName} ${cur2}`
+        });
+      }
+      if (qDrives2[q].length > 0) {
+        const extra2 = qDrives2[q].shift();
+        cur2 += extra2.pts;
+        const eDesc2 = extra2.type === 'TD'
+          ? `Touchdown! ${team2.shortName} scoring drive, PAT Good (+7 pts)`
+          : `Field Goal! ${team2.shortName} 29yd kick is GOOD (+3 pts)`;
+        events.push({
+          quarter: q,
+          time: q === 4 ? '00:00 (FINAL)' : (times[q][2] || '00:25'),
+          possTeam: team2.abbr || team2.shortName,
+          isTeam1: false,
+          event: eDesc2,
+          points: extra2.pts,
+          scoreLine: `${team1.abbr || team1.shortName} ${cur1} - ${team2.abbr || team2.shortName} ${cur2}`
+        });
+      }
+    }
+  }
 
   return events;
 }
