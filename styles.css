@@ -5616,6 +5616,13 @@ body {
   flex-shrink: 0;
 }
 
+.apple-icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  fill: #000000;
+}
+
 .auth-divider {
   display: flex;
   align-items: center;

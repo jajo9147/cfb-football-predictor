@@ -8601,6 +8601,12 @@ function openAuthModal() {
     googleSec.style.display = 'block';
   }
 
+  const appleBtn = document.getElementById('supabaseAppleBtn');
+  if (appleBtn) {
+    const isAndroid = !!(window.isNativeAndroid || window.AndroidBridge);
+    appleBtn.style.display = isAndroid ? 'none' : 'flex';
+  }
+
   const modal = document.getElementById('authModal');
   if (modal) modal.classList.add('open');
   document.body.classList.add('modal-open');
