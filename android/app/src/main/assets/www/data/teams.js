@@ -12502,61 +12502,6 @@ var TEAMS_DATABASE = {
         "preseasonProjUt": 35,
         "preseasonProjOpp": 18,
         "preseasonSpread": -17
-      },
-      {
-        "id": "bsu-w13",
-        "week": "WEEK 13",
-        "date": "Nov 28, 2026",
-        "kickoffTime": "TBD",
-        "utc": "2026-11-28T20:00:00Z",
-        "tv": "FOX/FS1",
-        "opponent": "Pac-12 Flex Opponent",
-        "oppAbbr": "P12",
-        "oppRank": "NR",
-        "oppBadge": "PAC-12",
-        "oppColor": "#004B87",
-        "oppSecondary": "#FFFFFF",
-        "oppLogoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2751.png",
-        "isHome": false,
-        "stadium": "TBD",
-        "location": "TBD",
-        "isMarquee": true,
-        "isConf": true,
-        "vegasSpread": 3.5,
-        "overUnder": 54.5,
-        "baseWinProb": 39,
-        "projScoreUt": 22,
-        "projScoreOpp": 26,
-        "scoutReport": {
-          "xFactor": "Pac-12 regular season finale seeding and championship game qualification.",
-          "keyMatchup": "Boise State rushing attack vs Pac-12 opponent defensive front.",
-          "summary": "Pac-12 regular season flex finale on Thanksgiving weekend."
-        },
-        "oppId": null,
-        "is_tracked": false,
-        "mcCoverProb": 48.4,
-        "mcOverProb": 30.1,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 54.5",
-        "mcScoreDistUt": {
-          "p10": 10,
-          "p25": 14,
-          "p50": 21,
-          "p75": 28,
-          "p90": 34
-        },
-        "mcScoreDistOpp": {
-          "p10": 13,
-          "p25": 17,
-          "p50": 26,
-          "p75": 33,
-          "p90": 38
-        },
-        "oddsProvider": "CFB Prophet Projected",
-        "preseasonWinProb": 71,
-        "preseasonProjUt": 31,
-        "preseasonProjOpp": 23,
-        "preseasonSpread": -7.5
       }
     ],
     "playoffContenderRank": 25,
@@ -22507,6 +22452,6 @@ var TEAMS_DATABASE = {
   }
 };
 
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = TEAMS_DATABASE;
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = TEAMS_DATABASE;
 }

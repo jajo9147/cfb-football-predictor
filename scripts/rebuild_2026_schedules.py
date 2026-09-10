@@ -404,42 +404,6 @@ def main():
             new_schedule.append(game_obj)
             total_games_built += 1
 
-        if tid == 'boisestate' and len(new_schedule) == 11:
-            flex_game = {
-                "id": "bsu-w13",
-                "week": "WEEK 13",
-                "date": "Nov 28, 2026",
-                "kickoffTime": "TBD",
-                "utc": "2026-11-28T20:00:00Z",
-                "tv": "FOX/FS1",
-                "opponent": "Pac-12 Flex Opponent",
-                "oppAbbr": "P12",
-                "oppRank": "NR",
-                "oppBadge": "PAC-12",
-                "oppColor": "#004B87",
-                "oppSecondary": "#FFFFFF",
-                "oppLogoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2751.png",
-                "isHome": False,
-                "stadium": "TBD",
-                "location": "TBD",
-                "isMarquee": True,
-                "isConf": True,
-                "vegasSpread": -7.5,
-                "overUnder": 54.5,
-                "baseWinProb": 71,
-                "projScoreUt": 31,
-                "projScoreOpp": 23,
-                "scoutReport": {
-                    "xFactor": "Pac-12 regular season finale seeding and championship game qualification.",
-                    "keyMatchup": "Boise State rushing attack vs Pac-12 opponent defensive front.",
-                    "summary": "Pac-12 regular season flex finale on Thanksgiving weekend."
-                },
-                "oppId": None,
-                "is_tracked": False
-            }
-            new_schedule.append(flex_game)
-            total_games_built += 1
-
         t['schedule'] = new_schedule
         print(f"✓ {tid:15}: Rebuilt {len(new_schedule)} games.")
 

@@ -11336,57 +11336,6 @@ var TEAMS_DATABASE = {
           "p75": 13,
           "p90": 19
         }
-      },
-      {
-        "id": "bsu-w13",
-        "week": "WEEK 13",
-        "date": "Nov 28, 2026",
-        "kickoffTime": "TBD",
-        "utc": "2026-11-28T20:00:00Z",
-        "tv": "FOX/FS1",
-        "opponent": "Pac-12 Flex Opponent",
-        "oppAbbr": "P12",
-        "oppRank": "NR",
-        "oppBadge": "PAC-12",
-        "oppColor": "#004B87",
-        "oppSecondary": "#FFFFFF",
-        "oppLogoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2751.png",
-        "isHome": false,
-        "stadium": "TBD",
-        "location": "TBD",
-        "isMarquee": true,
-        "isConf": true,
-        "vegasSpread": -14.0,
-        "overUnder": 54.5,
-        "baseWinProb": 93,
-        "projScoreUt": 33,
-        "projScoreOpp": 13,
-        "scoutReport": {
-          "xFactor": "Pac-12 regular season finale seeding and championship game qualification.",
-          "keyMatchup": "Boise State rushing attack vs Pac-12 opponent defensive front.",
-          "summary": "Pac-12 regular season flex finale on Thanksgiving weekend."
-        },
-        "oppId": null,
-        "is_tracked": false,
-        "mcCoverProb": 66.7,
-        "mcOverProb": 26.0,
-        "mcRecommendedAts": "Boise State -14.0",
-        "mcRecommendedOu": "UNDER 54.5",
-        "mcScoreDistUt": {
-          "p10": 20,
-          "p25": 27,
-          "p50": 34,
-          "p75": 40,
-          "p90": 45
-        },
-        "mcScoreDistOpp": {
-          "p10": 3,
-          "p25": 7,
-          "p50": 13,
-          "p75": 17,
-          "p90": 24
-        },
-        "oddsProvider": "CFB Prophet Projected"
       }
     ],
     "playoffContenderRank": 25,
@@ -20333,6 +20282,6 @@ var TEAMS_DATABASE = {
   }
 };
 
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = TEAMS_DATABASE;
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = TEAMS_DATABASE;
 }
