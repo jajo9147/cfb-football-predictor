@@ -8783,10 +8783,17 @@ async function handleSupabasePasswordAuth(e) {
     if (window.CFBProphetSupabase) {
       const res = await window.CFBProphetSupabase.signUpWithPassword(email, password, displayName, favTeam);
       if (res && res.error) {
-        showAuthAlert(res.error.message || 'Registration failed.', 'error');
+        const rawMsg = (res.error.message || '').toLowerCase();
+        let friendlyMsg = res.error.message;
+        if (rawMsg.includes('rate limit') || rawMsg.includes('over_email_send_rate_limit')) {
+          friendlyMsg = '⚠️ The email server is temporarily busy sending verification links. Tap "Continue as Guest" below to start right now without waiting!';
+        } else if (rawMsg.includes('server') || rawMsg.includes('500') || rawMsg.includes('fetch')) {
+          friendlyMsg = '⚠️ Temporary server connection issue. Tap "Continue as Guest" below to start immediately on your device!';
+        }
+        showAuthAlert(friendlyMsg || 'Registration failed.', 'error');
       } else {
-        showAuthAlert('🎉 Account created! Check your email to confirm registration.', 'success');
-        setTimeout(() => closeAuthModal(), 2000);
+        showAuthAlert('🎉 Account created! Check your email to confirm registration, or tap "Continue as Guest" to start immediately.', 'success');
+        setTimeout(() => closeAuthModal(), 2500);
       }
     }
   } else {
@@ -8794,7 +8801,16 @@ async function handleSupabasePasswordAuth(e) {
     if (window.CFBProphetSupabase) {
       const res = await window.CFBProphetSupabase.signInWithPassword(email, password);
       if (res && res.error) {
-        showAuthAlert(res.error.message || 'Invalid email or password.', 'error');
+        const rawMsg = (res.error.message || '').toLowerCase();
+        let friendlyMsg = res.error.message;
+        if (rawMsg.includes('invalid login credentials') || rawMsg.includes('invalid credentials')) {
+          friendlyMsg = '❌ Incorrect email or password. If you just registered, check your email for the confirmation link, or tap "Continue as Guest" below.';
+        } else if (rawMsg.includes('rate limit') || rawMsg.includes('over_email_send_rate_limit')) {
+          friendlyMsg = '⚠️ Server is temporarily busy. Tap "Continue as Guest" below to use the app right away.';
+        } else if (rawMsg.includes('server') || rawMsg.includes('500') || rawMsg.includes('fetch')) {
+          friendlyMsg = '⚠️ Server connection issue. Tap "Continue as Guest" below to save brackets locally without an account!';
+        }
+        showAuthAlert(friendlyMsg || 'Invalid email or password.', 'error');
       } else {
         showCustomToast('🎉 Signed in successfully!');
         closeAuthModal();
@@ -8803,6 +8819,25 @@ async function handleSupabasePasswordAuth(e) {
   }
 }
 window.handleSupabasePasswordAuth = handleSupabasePasswordAuth;
+
+function handleGuestSignIn(customName) {
+  const nameInput = document.getElementById('supaNameInput')?.value?.trim();
+  const name = customName || nameInput || 'Coach';
+  const guestUser = {
+    id: 'guest_' + Date.now().toString(36),
+    email: '',
+    displayName: name,
+    handle: name.toLowerCase().replace(/[^a-z0-9]/g, '_') || 'coach',
+    avatarUrl: '',
+    favTeam: localStorage.getItem('cfb_prophet_fav_team') || 'texas',
+    provider: 'local',
+    createdAt: new Date().toISOString()
+  };
+  setCurrentUser(guestUser);
+  showCustomToast(`🏈 Welcome, ${name}! You're logged in.`);
+  closeAuthModal();
+}
+window.handleGuestSignIn = handleGuestSignIn;
 
 async function handleProfileSetPassword() {
   const input = document.getElementById('authProfileNewPasswordInput');
