@@ -18220,12 +18220,12 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.2,
+        "vegasSpread": -3.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 44,
-        "projScoreUt": 23,
-        "projScoreOpp": 25,
+        "baseWinProb": 66,
+        "projScoreUt": 27,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Houston quarterback play vs Colorado Buffaloes secondary.",
@@ -18233,23 +18233,23 @@ var TEAMS_DATABASE = {
         },
         "oppId": "colorado",
         "is_tracked": true,
-        "mcCoverProb": 48.5,
+        "mcCoverProb": 58.4,
         "mcOverProb": 35.5,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedAts": "Houston -3.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
-          "p10": 10,
-          "p25": 14,
-          "p50": 23,
-          "p75": 30,
-          "p90": 35
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
         },
         "mcScoreDistOpp": {
-          "p10": 12,
-          "p25": 17,
-          "p50": 24,
-          "p75": 31,
-          "p90": 38
+          "p10": 9,
+          "p25": 14,
+          "p50": 20,
+          "p75": 26,
+          "p90": 32
         }
       },
       {
@@ -19500,12 +19500,12 @@ var TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.2,
+        "vegasSpread": 3.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 62,
-        "projScoreUt": 26,
-        "projScoreOpp": 22,
+        "baseWinProb": 34,
+        "projScoreUt": 20,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Colorado quarterback play vs Houston Cougars secondary.",
@@ -19513,23 +19513,23 @@ var TEAMS_DATABASE = {
         },
         "oppId": "houston",
         "is_tracked": true,
-        "mcCoverProb": 57.3,
+        "mcCoverProb": 41.6,
         "mcOverProb": 33.9,
-        "mcRecommendedAts": "Colorado -2.2",
+        "mcRecommendedAts": "Houston -3.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
-          "p10": 13,
-          "p25": 19,
-          "p50": 26,
-          "p75": 33,
-          "p90": 38
-        },
-        "mcScoreDistOpp": {
           "p10": 9,
           "p25": 14,
-          "p50": 21,
-          "p75": 28,
-          "p90": 34
+          "p50": 20,
+          "p75": 26,
+          "p90": 32
+        },
+        "mcScoreDistOpp": {
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
         }
       },
       {
