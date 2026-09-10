@@ -145,6 +145,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("Apple Sign In didCompleteWithError: \(error.localizedDescription)")
+        let errorMsg = error.localizedDescription.replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\n", with: " ")
+        DispatchQueue.main.async {
+            self.webView.evaluateJavaScript("if (window.handleAppleSignInError) { window.handleAppleSignInError('\(errorMsg)'); }", completionHandler: nil)
+        }
     }
 
     // MARK: - WKScriptMessageHandler

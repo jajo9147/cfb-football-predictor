@@ -8711,23 +8711,31 @@ async function handleSupabaseAppleSignIn() {
   hideAuthAlert();
   if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appleSignIn) {
     try {
+      showAuthAlert('🍎 Connecting to Apple ID...', 'info');
       window.webkit.messageHandlers.appleSignIn.postMessage({});
       return;
     } catch (e) {
       console.warn('Native Apple Sign In invocation error:', e);
+      showAuthAlert('Could not launch Apple Sign In: ' + (e.message || e), 'error');
+      return;
     }
   }
   if (window.CFBProphetSupabase) {
+    showAuthAlert('🍎 Connecting to Apple ID...', 'info');
     const res = await window.CFBProphetSupabase.signInWithApple();
     if (res && res.error) {
       const msg = res.error.message?.includes('provider') 
-        ? "Apple Sign-In isn't enabled in Supabase Dashboard yet (Auth -> Providers). You can sign in right now with Email & Pass or Magic Link!" 
+        ? "Apple Sign-In is active in native iOS builds with Apple capability. On web, please use Google, Email, or Guest mode!" 
         : (res.error.message || 'Apple sign-in error.');
       showAuthAlert(msg, 'error');
     }
   }
 }
 window.handleSupabaseAppleSignIn = handleSupabaseAppleSignIn;
+
+window.handleAppleSignInError = function(errorMsg) {
+  showAuthAlert(errorMsg || 'Apple Sign-In could not be completed on this device.', 'error');
+};
 
 async function handleSupabaseMagicLinkAuth(e) {
   if (e) e.preventDefault();
