@@ -8535,14 +8535,19 @@ window.updateAuthUI = updateAuthUI;
 
 function populateFavoriteTeamDropdown(selectedTeamId) {
   const selectEl = document.getElementById('authFavoriteTeamSelect');
-  if (!selectEl) return;
+  const regSelectEl = document.getElementById('supaFavTeamSelect');
+  if (!window.TEAMS_DATABASE) return;
 
+  const favTeamId = selectedTeamId || localStorage.getItem('cfb_prophet_fav_team') || 'texas';
   const sortedTeams = Object.keys(TEAMS_DATABASE).map(k => TEAMS_DATABASE[k]).sort((a, b) => a.name.localeCompare(b.name));
-  selectEl.innerHTML = sortedTeams.map(t => `
-    <option value="${t.id}" ${t.id === selectedTeamId ? 'selected' : ''}>
+  const optionsHtml = sortedTeams.map(t => `
+    <option value="${t.id}" ${t.id === favTeamId ? 'selected' : ''}>
       ${t.name} (${t.conference || 'FBS'})
     </option>
   `).join('');
+
+  if (selectEl) selectEl.innerHTML = optionsHtml;
+  if (regSelectEl) regSelectEl.innerHTML = optionsHtml;
 }
 window.populateFavoriteTeamDropdown = populateFavoriteTeamDropdown;
 
@@ -8575,6 +8580,7 @@ function handleFavoriteTeamChange(newTeamId) {
 window.handleFavoriteTeamChange = handleFavoriteTeamChange;
 
 function openAuthModal() {
+  populateFavoriteTeamDropdown();
   updateAuthUI();
   hideAuthAlert();
   switchAuthTab('password');
