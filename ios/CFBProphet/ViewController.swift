@@ -66,7 +66,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
 
     private func loadRemoteOrFallback() {
         isFallenBackToLocal = false
-        let request = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        var targetURL = remoteURL
+        if let envUrlStr = ProcessInfo.processInfo.environment["SCREENSHOT_URL"], let envUrl = URL(string: envUrlStr) {
+            targetURL = envUrl
+        }
+        let request = URLRequest(url: targetURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         webView.load(request)
     }
 
@@ -221,6 +225,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         refreshControl.endRefreshing()
+        if let js = ProcessInfo.processInfo.environment["SCREENSHOT_JS"], !js.isEmpty {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                webView.evaluateJavaScript(js, completionHandler: nil)
+            }
+        }
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
