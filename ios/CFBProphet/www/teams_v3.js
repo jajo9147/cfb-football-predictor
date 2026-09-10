@@ -1726,12 +1726,12 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -4.0,
+        "vegasSpread": 1.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 67,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "baseWinProb": 47,
+        "projScoreUt": 23,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Texas A&M Aggies secondary.",
@@ -1740,23 +1740,23 @@ var TEAMS_DATABASE = {
         "oppId": "texasam",
         "is_tracked": true,
         "rivalryName": "LONE STAR SHOWDOWN",
-        "mcCoverProb": 55.1,
+        "mcCoverProb": 47.6,
         "mcOverProb": 35.4,
-        "mcRecommendedAts": "Texas -4.0",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 20,
-          "p50": 27,
-          "p75": 34,
-          "p90": 41
+          "p25": 17,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
         },
         "mcScoreDistOpp": {
-          "p10": 7,
-          "p25": 13,
-          "p50": 20,
-          "p75": 27,
-          "p90": 34
+          "p10": 14,
+          "p25": 20,
+          "p50": 26,
+          "p75": 33,
+          "p90": 40
         }
       }
     ],
@@ -2010,7 +2010,7 @@ var TEAMS_DATABASE = {
         "location": "Minneapolis, MN",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.3,
+        "vegasSpread": -0.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 95,
@@ -2025,7 +2025,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 57.7,
         "mcOverProb": 26.0,
-        "mcRecommendedAts": "Michigan -18.3",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 19,
@@ -2163,7 +2163,7 @@ var TEAMS_DATABASE = {
         "location": "Piscataway, NJ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -18.3,
+        "vegasSpread": -0.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 94,
@@ -2178,7 +2178,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 57.4,
         "mcOverProb": 25.4,
-        "mcRecommendedAts": "Michigan -18.3",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 19,
@@ -3345,12 +3345,12 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -4.3,
+        "vegasSpread": 1.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 70,
-        "projScoreUt": 27,
-        "projScoreOpp": 20,
+        "baseWinProb": 47,
+        "projScoreUt": 24,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Georgia quarterback play vs Alabama Crimson Tide secondary.",
@@ -3358,23 +3358,23 @@ var TEAMS_DATABASE = {
         },
         "oppId": "alabama",
         "is_tracked": true,
-        "mcCoverProb": 58.0,
+        "mcCoverProb": 47.9,
         "mcOverProb": 33.4,
-        "mcRecommendedAts": "Georgia -4.3",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
+          "p10": 13,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
+        },
+        "mcScoreDistOpp": {
           "p10": 14,
           "p25": 20,
           "p50": 27,
           "p75": 34,
           "p90": 41
-        },
-        "mcScoreDistOpp": {
-          "p10": 7,
-          "p25": 13,
-          "p50": 20,
-          "p75": 27,
-          "p90": 34
         }
       },
       {
@@ -3987,12 +3987,12 @@ var TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 4.3,
+        "vegasSpread": -1.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 36,
-        "projScoreUt": 21,
-        "projScoreOpp": 26,
+        "baseWinProb": 53,
+        "projScoreUt": 27,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Alabama quarterback play vs Georgia Bulldogs secondary.",
@@ -4000,23 +4000,23 @@ var TEAMS_DATABASE = {
         },
         "oppId": "georgia",
         "is_tracked": true,
-        "mcCoverProb": 48.2,
+        "mcCoverProb": 52.1,
         "mcOverProb": 32.8,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
-          "p10": 9,
-          "p25": 14,
-          "p50": 20,
-          "p75": 27,
-          "p90": 34
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
         },
         "mcScoreDistOpp": {
           "p10": 13,
-          "p25": 19,
-          "p50": 26,
-          "p75": 33,
-          "p90": 40
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
         }
       },
       {
@@ -6067,12 +6067,12 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 0.4,
+        "vegasSpread": 1.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 51,
+        "baseWinProb": 47,
         "projScoreUt": 24,
-        "projScoreOpp": 24,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Notre Dame quarterback play vs Miami Hurricanes secondary.",
@@ -6080,23 +6080,23 @@ var TEAMS_DATABASE = {
         },
         "oppId": "miami",
         "is_tracked": true,
-        "mcCoverProb": 51.4,
+        "mcCoverProb": 47.5,
         "mcOverProb": 34.6,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
-          "p10": 10,
+          "p10": 13,
           "p25": 17,
           "p50": 24,
           "p75": 31,
-          "p90": 37
+          "p90": 38
         },
         "mcScoreDistOpp": {
-          "p10": 10,
-          "p25": 17,
-          "p50": 23,
-          "p75": 30,
-          "p90": 37
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
         }
       },
       {
@@ -8633,12 +8633,12 @@ var TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -0.4,
+        "vegasSpread": -1.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 54,
-        "projScoreUt": 24,
-        "projScoreOpp": 23,
+        "baseWinProb": 53,
+        "projScoreUt": 27,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Miami quarterback play vs Notre Dame Fighting Irish secondary.",
@@ -8646,23 +8646,23 @@ var TEAMS_DATABASE = {
         },
         "oppId": "notredame",
         "is_tracked": true,
-        "mcCoverProb": 54.4,
+        "mcCoverProb": 52.5,
         "mcOverProb": 33.3,
-        "mcRecommendedAts": "Miami -0.4",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
-          "p10": 10,
+          "p10": 14,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 13,
           "p25": 17,
           "p50": 24,
           "p75": 31,
           "p90": 38
-        },
-        "mcScoreDistOpp": {
-          "p10": 10,
-          "p25": 16,
-          "p50": 23,
-          "p75": 30,
-          "p90": 36
         }
       },
       {
@@ -9428,12 +9428,12 @@ var TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 4.0,
+        "vegasSpread": -1.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 37,
-        "projScoreUt": 21,
-        "projScoreOpp": 26,
+        "baseWinProb": 53,
+        "projScoreUt": 26,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Texas Longhorns secondary.",
@@ -9442,23 +9442,23 @@ var TEAMS_DATABASE = {
         "oppId": "texas",
         "is_tracked": true,
         "rivalryName": "LONE STAR SHOWDOWN",
-        "mcCoverProb": 45.7,
+        "mcCoverProb": 52.4,
         "mcOverProb": 35.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
-          "p10": 10,
-          "p25": 14,
-          "p50": 21,
-          "p75": 28,
-          "p90": 34
+          "p10": 14,
+          "p25": 20,
+          "p50": 26,
+          "p75": 33,
+          "p90": 40
         },
         "mcScoreDistOpp": {
           "p10": 13,
-          "p25": 19,
-          "p50": 26,
-          "p75": 33,
-          "p90": 38
+          "p25": 17,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
         }
       }
     ],
@@ -13148,7 +13148,7 @@ var TEAMS_DATABASE = {
         "location": "Durham, NC",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.4,
+        "vegasSpread": -0.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 93,
@@ -13163,7 +13163,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 61.4,
         "mcOverProb": 32.6,
-        "mcRecommendedAts": "Clemson -16.4",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 20,
@@ -14178,12 +14178,12 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 1.8,
+        "vegasSpread": 0.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 44,
-        "projScoreUt": 25,
-        "projScoreOpp": 27,
+        "baseWinProb": 49,
+        "projScoreUt": 27,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas Tech quarterback play vs Arizona State Sun Devils secondary.",
@@ -14191,23 +14191,23 @@ var TEAMS_DATABASE = {
         },
         "oppId": "arizonastate",
         "is_tracked": true,
-        "mcCoverProb": 47.4,
+        "mcCoverProb": 49.0,
         "mcOverProb": 44.9,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
-          "p10": 10,
-          "p25": 17,
-          "p50": 24,
-          "p75": 31,
-          "p90": 38
-        },
-        "mcScoreDistOpp": {
           "p10": 13,
           "p25": 20,
-          "p50": 26,
+          "p50": 27,
           "p75": 34,
           "p90": 41
+        },
+        "mcScoreDistOpp": {
+          "p10": 14,
+          "p25": 21,
+          "p50": 28,
+          "p75": 35,
+          "p90": 42
         }
       },
       {
@@ -15074,7 +15074,7 @@ var TEAMS_DATABASE = {
         "location": "Fort Worth, TX",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -23.4,
+        "vegasSpread": -0.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
@@ -15089,7 +15089,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 83.5,
         "mcOverProb": 35.6,
-        "mcRecommendedAts": "Utah -23.4",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 28,
@@ -16583,7 +16583,7 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.4,
+        "vegasSpread": -1.1,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 97,
@@ -16598,7 +16598,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 70.0,
         "mcOverProb": 29.0,
-        "mcRecommendedAts": "Arizona -17.4",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 21,
@@ -16889,7 +16889,7 @@ var TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -17.4,
+        "vegasSpread": -0.1,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 97,
@@ -16904,7 +16904,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 73.6,
         "mcOverProb": 38.4,
-        "mcRecommendedAts": "Arizona -17.4",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 23,
@@ -18271,7 +18271,7 @@ var TEAMS_DATABASE = {
         "location": "Morgantown, WV",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -12.2,
+        "vegasSpread": -0.8,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 90,
@@ -18286,7 +18286,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 65.8,
         "mcOverProb": 32.5,
-        "mcRecommendedAts": "Houston -12.2",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 19,
@@ -18706,7 +18706,7 @@ var TEAMS_DATABASE = {
         "location": "Syracuse, NY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.3,
+        "vegasSpread": -0.4,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 95,
@@ -18721,7 +18721,7 @@ var TEAMS_DATABASE = {
         "is_tracked": false,
         "mcCoverProb": 68.1,
         "mcOverProb": 33.3,
-        "mcRecommendedAts": "Louisville -16.3",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 21,
@@ -19938,12 +19938,12 @@ var TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -1.8,
+        "vegasSpread": -0.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 60,
-        "projScoreUt": 25,
-        "projScoreOpp": 22,
+        "baseWinProb": 51,
+        "projScoreUt": 28,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona State quarterback play vs Texas Tech Red Raiders secondary.",
@@ -19951,23 +19951,23 @@ var TEAMS_DATABASE = {
         },
         "oppId": "texastech",
         "is_tracked": true,
-        "mcCoverProb": 57.6,
+        "mcCoverProb": 51.0,
         "mcOverProb": 34.5,
-        "mcRecommendedAts": "Arizona State -1.8",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
-          "p10": 13,
-          "p25": 17,
-          "p50": 24,
-          "p75": 31,
-          "p90": 38
+          "p10": 14,
+          "p25": 21,
+          "p50": 28,
+          "p75": 35,
+          "p90": 42
         },
         "mcScoreDistOpp": {
-          "p10": 10,
-          "p25": 14,
-          "p50": 21,
-          "p75": 28,
-          "p90": 35
+          "p10": 13,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
         }
       },
       {
