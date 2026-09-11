@@ -8615,6 +8615,14 @@ function getCurrentUser() {
     if (raw) {
       const u = JSON.parse(raw);
       if (u) {
+        if (u.id && u.id.startsWith('apple_')) {
+          const appleId = u.id.replace('apple_', '');
+          const appleSavedName = localStorage.getItem(`cfb_prophet_apple_profile_${appleId}`);
+          if (appleSavedName && appleSavedName !== 'Apple User' && appleSavedName !== 'apple user') {
+            u.displayName = appleSavedName;
+            u.handle = appleSavedName;
+          }
+        }
         if (u.displayName === 'Apple User' || u.displayName === 'apple user') {
           const savedHandle = localStorage.getItem('cfb_prophet_user_handle');
           u.displayName = (savedHandle && savedHandle !== 'Apple User' && savedHandle !== 'apple user') ? savedHandle : 'Coach';
@@ -9153,21 +9161,29 @@ window.saveSupabaseConfigInputs = saveSupabaseConfigInputs;
 window.handleAppleSignInResult = function(payload) {
   if (!payload || !payload.userId) return;
 
+  const appleKey = `cfb_prophet_apple_profile_${payload.userId}`;
+  const appleSavedName = localStorage.getItem(appleKey);
   const existingUser = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
   const savedHandle = localStorage.getItem('cfb_prophet_user_handle');
 
   let chosenName = '';
   if (payload.fullName && payload.fullName !== 'Apple User' && payload.fullName !== 'apple user' && payload.fullName.trim()) {
     chosenName = payload.fullName.trim();
-  } else if (existingUser && existingUser.displayName && existingUser.displayName !== 'Apple User' && existingUser.displayName !== 'apple user' && existingUser.displayName !== 'Coach') {
-    chosenName = existingUser.displayName;
+  } else if (appleSavedName && appleSavedName !== 'Apple User' && appleSavedName !== 'apple user' && appleSavedName !== 'Coach') {
+    chosenName = appleSavedName;
   } else if (savedHandle && savedHandle !== 'Apple User' && savedHandle !== 'apple user' && savedHandle !== 'Coach' && !savedHandle.startsWith('coach_')) {
     chosenName = savedHandle;
+  } else if (existingUser && existingUser.displayName && existingUser.displayName !== 'Apple User' && existingUser.displayName !== 'apple user' && existingUser.displayName !== 'Coach') {
+    chosenName = existingUser.displayName;
   } else if (payload.email && !payload.email.includes('privaterelay.appleid.com')) {
     const raw = payload.email.split('@')[0].replace(/[._-]/g, ' ');
     chosenName = raw.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
   } else {
     chosenName = 'Coach';
+  }
+
+  if (chosenName !== 'Coach') {
+    localStorage.setItem(appleKey, chosenName);
   }
 
   const user = {
@@ -9181,20 +9197,19 @@ window.handleAppleSignInResult = function(payload) {
   };
   setCurrentUser(user);
   showCustomToast(`🍎 Signed in with Apple ID as ${user.displayName}!`);
-  closeAuthModal();
 
   if (chosenName === 'Coach') {
-    setTimeout(() => {
-      openAuthModal();
-      const nameInput = document.getElementById('authProfileDisplayNameInput');
-      if (nameInput) {
+    // Keep modal open, transition to logged in view and focus name input
+    updateAuthUI();
+    const nameInput = document.getElementById('authProfileDisplayNameInput');
+    if (nameInput) {
+      setTimeout(() => {
         nameInput.focus();
         nameInput.select();
-      }
-      if (typeof showCustomToast === 'function') {
-        showCustomToast('👋 Welcome! Enter your Coach name below to personalize your brackets:');
-      }
-    }, 400);
+      }, 150);
+    }
+  } else {
+    closeAuthModal();
   }
 };
 
@@ -9217,6 +9232,10 @@ function handleSaveProfileDisplayName() {
   if (currentUser) {
     currentUser.displayName = raw;
     currentUser.handle = raw;
+    if (currentUser.id && currentUser.id.startsWith('apple_')) {
+      const appleId = currentUser.id.replace('apple_', '');
+      localStorage.setItem(`cfb_prophet_apple_profile_${appleId}`, raw);
+    }
     setCurrentUser(currentUser);
   } else {
     const navLabel = document.getElementById('navAuthLabel');
@@ -9232,6 +9251,7 @@ function handleSaveProfileDisplayName() {
   if (typeof showCustomToast === 'function') {
     showCustomToast(`⭐ Coach name updated to ${raw}!`);
   }
+  closeAuthModal();
 }
 window.handleSaveProfileDisplayName = handleSaveProfileDisplayName;
 
@@ -11104,6 +11124,10 @@ function handleConfirmSaveBracket() {
       if (currentUser) {
         currentUser.displayName = cleanCreator;
         currentUser.handle = cleanCreator;
+        if (currentUser.id && currentUser.id.startsWith('apple_')) {
+          const appleId = currentUser.id.replace('apple_', '');
+          localStorage.setItem(`cfb_prophet_apple_profile_${appleId}`, cleanCreator);
+        }
         setCurrentUser(currentUser);
       } else {
         const navLabel = document.getElementById('navAuthLabel');

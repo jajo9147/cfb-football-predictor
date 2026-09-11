@@ -78,10 +78,19 @@
             window.showCustomToast(`🎉 Welcome, ${localUserObj.displayName}! Signed in.`);
           }
         }
-      } else if (event === 'SIGNED_OUT' || !session) {
-        localStorage.removeItem('cfb_prophet_auth_user_v4');
-        localStorage.removeItem('cfb_prophet_auth_user_v3');
-        localStorage.removeItem('cfb_prophet_user_handle');
+      } else if (event === 'SIGNED_OUT') {
+        let currentLocalUser = null;
+        try {
+          const raw = localStorage.getItem('cfb_prophet_auth_user_v4') || localStorage.getItem('cfb_prophet_auth_user_v3');
+          if (raw) currentLocalUser = JSON.parse(raw);
+        } catch (e) {}
+
+        // Never let Supabase SIGNED_OUT event kill an Apple native user!
+        if (!currentLocalUser || currentLocalUser.provider !== 'apple') {
+          localStorage.removeItem('cfb_prophet_auth_user_v4');
+          localStorage.removeItem('cfb_prophet_auth_user_v3');
+          localStorage.removeItem('cfb_prophet_user_handle');
+        }
       }
 
       if (typeof window.updateAuthUI === 'function') {
@@ -95,7 +104,9 @@
     // 1. Listen for dynamic changes
     supabaseClient.auth.onAuthStateChange(async (event, session) => {
       console.log('[Supabase Auth Event]:', event, session?.user?.email);
-      processSession(session, event);
+      if (session || event === 'SIGNED_OUT') {
+        processSession(session, event);
+      }
 
       if (session && session.user) {
         // Attempt cloud profile sync in background
