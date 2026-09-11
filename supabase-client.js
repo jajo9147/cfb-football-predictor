@@ -78,9 +78,10 @@
             window.showCustomToast(`🎉 Welcome, ${localUserObj.displayName}! Signed in.`);
           }
         }
-      } else if (event === 'SIGNED_OUT') {
+      } else if (event === 'SIGNED_OUT' || !session) {
         localStorage.removeItem('cfb_prophet_auth_user_v4');
         localStorage.removeItem('cfb_prophet_auth_user_v3');
+        localStorage.removeItem('cfb_prophet_user_handle');
       }
 
       if (typeof window.updateAuthUI === 'function') {
@@ -316,10 +317,24 @@
   async function signOut() {
     if (supabaseClient) {
       try {
-        await supabaseClient.auth.signOut();
+        await supabaseClient.auth.signOut({ scope: 'local' });
       } catch (e) {}
     }
-    localStorage.removeItem('cfb_prophet_auth_user_v4');
+    try {
+      localStorage.removeItem('cfb_prophet_auth_user_v4');
+      localStorage.removeItem('cfb_prophet_auth_user_v3');
+      localStorage.removeItem('cfb_prophet_user_handle');
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('sb-') || (key.includes('supabase') && key.includes('auth'))) {
+          localStorage.removeItem(key);
+        }
+      });
+      Object.keys(sessionStorage).forEach(key => {
+        if (key.startsWith('sb-') || (key.includes('supabase') && key.includes('auth'))) {
+          sessionStorage.removeItem(key);
+        }
+      });
+    } catch (e) {}
     if (typeof window.updateAuthUI === 'function') {
       window.updateAuthUI();
     }

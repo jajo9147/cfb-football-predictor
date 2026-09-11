@@ -8638,6 +8638,7 @@ function setCurrentUser(user) {
     } else {
       localStorage.removeItem(AUTH_STORAGE_KEY);
       localStorage.removeItem('cfb_prophet_auth_user_v3');
+      localStorage.removeItem('cfb_prophet_user_handle');
     }
   } catch (e) {}
   updateAuthUI();
@@ -8697,8 +8698,7 @@ function updateAuthUI() {
     if (pSavedCount) pSavedCount.textContent = `${myBrackets.length} Active Saved`;
   } else {
     if (btn) btn.classList.remove('logged-in');
-    const guestHandle = localStorage.getItem('cfb_prophet_user_handle');
-    if (label) label.textContent = (guestHandle && guestHandle !== 'Apple User' && guestHandle !== 'apple user') ? guestHandle : 'Sign In';
+    if (label) label.textContent = 'Sign In';
     if (icon) {
       icon.className = 'fa-solid fa-user-circle';
       icon.innerHTML = '';
@@ -8707,7 +8707,13 @@ function updateAuthUI() {
     if (loggedInView) loggedInView.style.display = 'none';
     if (loggedOutView) loggedOutView.style.display = 'block';
 
+    const pName = document.getElementById('authProfileName');
+    if (pName) pName.textContent = 'Coach Profile';
+    const profileNameInput = document.getElementById('authProfileDisplayNameInput');
+    if (profileNameInput) profileNameInput.value = '';
+
     const guestInput = document.getElementById('guestDisplayNameInput');
+    const guestHandle = localStorage.getItem('cfb_prophet_user_handle');
     if (guestInput) guestInput.value = (guestHandle && guestHandle !== 'Apple User' && guestHandle !== 'apple user') ? guestHandle : 'Coach';
   }
 }
@@ -9283,13 +9289,45 @@ function handleEditCoachName() {
 }
 window.handleEditCoachName = handleEditCoachName;
 
-function handleSignOutClick() {
-  if (window.CFBProphetSupabase) {
-    window.CFBProphetSupabase.signOut();
+async function handleSignOutClick() {
+  try {
+    if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.signOut === 'function') {
+      await window.CFBProphetSupabase.signOut();
+    }
+  } catch (e) {}
+
+  try {
+    localStorage.removeItem(AUTH_STORAGE_KEY);
+    localStorage.removeItem('cfb_prophet_auth_user_v4');
+    localStorage.removeItem('cfb_prophet_auth_user_v3');
+    localStorage.removeItem('cfb_prophet_user_handle');
+    localStorage.removeItem('cfb_prophet_auth_token');
+
+    Object.keys(localStorage).forEach(k => {
+      if (k.startsWith('sb-') || (k.includes('supabase') && k.includes('auth')) || k.includes('cfb_prophet_auth')) {
+        localStorage.removeItem(k);
+      }
+    });
+    Object.keys(sessionStorage).forEach(k => {
+      if (k.startsWith('sb-') || (k.includes('supabase') && k.includes('auth')) || k.includes('cfb_prophet_auth')) {
+        sessionStorage.removeItem(k);
+      }
+    });
+  } catch (e) {}
+
+  if (typeof state !== 'undefined') {
+    state.activeSavedBracketId = null;
+    if (typeof renderActiveBracketEditorBar === 'function') {
+      renderActiveBracketEditorBar(null);
+    }
   }
+
   setCurrentUser(null);
-  showCustomToast('👋 Signed out of CFB Prophet.');
   closeAuthModal();
+
+  if (typeof showCustomToast === 'function') {
+    showCustomToast('👋 Signed out of CFB Prophet.');
+  }
 }
 window.handleSignOutClick = handleSignOutClick;
 
