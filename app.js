@@ -8761,11 +8761,6 @@ function openAuthModal() {
   if (googleSec) {
     googleSec.style.display = 'block';
   }
-  if (!isIosNative && window.CFBProphetSupabase && typeof window.CFBProphetSupabase.renderGoogleButton === 'function') {
-    setTimeout(() => {
-      window.CFBProphetSupabase.renderGoogleButton();
-    }, 60);
-  }
 
   const appleBtn = document.getElementById('supabaseAppleBtn');
   if (appleBtn) {
