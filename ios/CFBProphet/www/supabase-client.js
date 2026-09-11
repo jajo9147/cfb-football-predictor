@@ -29,6 +29,7 @@
             }
           });
           setupAuthListener();
+          initGSIWhenReady();
         }
       } catch (err) {
         console.warn('[CFB Prophet] Supabase init warning:', err);
@@ -147,12 +148,155 @@
     }
   }
 
+  // Google Client ID for In-Page 1-Click Authentication (from CFB Prophet GCP project)
+  const GOOGLE_CLIENT_ID = '114317205490-ppqup25cuv5lbu5508pooaqhjs188d8u.apps.googleusercontent.com';
+  let gsiInitialized = false;
+
+  async function handleGoogleCredentialResponse(response) {
+    if (!response || !response.credential) return;
+    if (!supabaseClient) {
+      console.warn('[CFB Prophet] Supabase client not ready for Google ID token sign-in');
+      return;
+    }
+
+    try {
+      if (typeof window.showCustomToast === 'function') {
+        window.showCustomToast('⚡ Signing in with Google...');
+      }
+
+      const { data, error } = await supabaseClient.auth.signInWithIdToken({
+        provider: 'google',
+        token: response.credential
+      });
+
+      if (error) {
+        console.error('[Supabase] Google ID token sign-in error:', error);
+        if (typeof window.showAuthAlert === 'function') {
+          window.showAuthAlert(error.message || 'Google sign-in error. Please try again.', 'error');
+        }
+      } else {
+        if (typeof window.closeAuthModal === 'function') {
+          window.closeAuthModal();
+        }
+        const user = data?.user;
+        const name = user?.user_metadata?.full_name || user?.user_metadata?.name || (user?.email ? user.email.split('@')[0] : 'Coach');
+        if (typeof window.showCustomToast === 'function') {
+          window.showCustomToast(`🏈 Welcome to CFB Prophet, ${name}!`);
+        }
+      }
+    } catch (err) {
+      console.error('[Supabase] Google ID token sign-in exception:', err);
+      if (typeof window.showAuthAlert === 'function') {
+        window.showAuthAlert('Google Sign-In failed. Please try again.', 'error');
+      }
+    }
+  }
+
+  function initGSIWhenReady() {
+    if (typeof window.google !== 'undefined' && window.google.accounts && window.google.accounts.id) {
+      initGoogleIdentityServices();
+    } else {
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (typeof window.google !== 'undefined' && window.google.accounts && window.google.accounts.id) {
+          clearInterval(interval);
+          initGoogleIdentityServices();
+        } else if (attempts > 20) {
+          clearInterval(interval);
+        }
+      }, 300);
+    }
+  }
+
+  function initGoogleIdentityServices() {
+    if (typeof window.google === 'undefined' || !window.google.accounts || !window.google.accounts.id) {
+      return;
+    }
+
+    const isNativeApp = !!(window.isCFBProphetNativeApp || window.isNativeIos || (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appleSignIn));
+    if (isNativeApp) {
+      return;
+    }
+
+    if (gsiInitialized) {
+      renderGoogleButton();
+      return;
+    }
+
+    try {
+      window.google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleGoogleCredentialResponse,
+        auto_select: false,
+        cancel_on_tap_outside: true
+      });
+      gsiInitialized = true;
+      renderGoogleButton();
+
+      // Trigger One Tap if user is eligible on web
+      try {
+        window.google.accounts.id.prompt();
+      } catch (e) {}
+    } catch (err) {
+      console.warn('[Supabase] Google Identity Services init error:', err);
+    }
+  }
+
+  function renderGoogleButton() {
+    const container = document.getElementById('g_id_signin_container');
+    const fallbackBtn = document.getElementById('supabaseGoogleBtn');
+    if (!container) return;
+
+    const isNativeApp = !!(window.isCFBProphetNativeApp || window.isNativeIos || (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appleSignIn));
+    if (isNativeApp || typeof window.google === 'undefined' || !window.google.accounts || !window.google.accounts.id) {
+      container.style.display = 'none';
+      if (fallbackBtn) fallbackBtn.style.display = 'flex';
+      return;
+    }
+
+    if (!gsiInitialized) {
+      initGoogleIdentityServices();
+      return;
+    }
+
+    try {
+      const parentWidth = container.parentElement ? container.parentElement.offsetWidth : 320;
+      const targetWidth = Math.min(Math.max(parentWidth || 320, 250), 380);
+
+      window.google.accounts.id.renderButton(container, {
+        type: 'standard',
+        shape: 'rectangular',
+        theme: 'outline',
+        text: 'continue_with',
+        size: 'large',
+        logo_alignment: 'left',
+        width: targetWidth
+      });
+
+      container.style.display = 'flex';
+      if (fallbackBtn) fallbackBtn.style.display = 'none';
+    } catch (err) {
+      console.warn('[Supabase] renderButton notice:', err);
+      container.style.display = 'none';
+      if (fallbackBtn) fallbackBtn.style.display = 'flex';
+    }
+  }
+
   // 1. Direct Supabase Google OAuth
   async function signInWithGoogle() {
     if (!isSupabaseConfigured()) {
       showConfigModal('Google OAuth requires Supabase Project URL & Anon Key.');
       return { error: { message: 'Supabase project not yet connected.' } };
     }
+
+    if (!window.isCFBProphetNativeApp && typeof window.google !== 'undefined' && window.google.accounts && window.google.accounts.id) {
+      try {
+        window.google.accounts.id.prompt();
+        return { prompt: true };
+      } catch (e) {}
+    }
+
     return await signInWithGoogleOAuthFallback();
   }
 
@@ -456,6 +600,8 @@
     isConfigured: isSupabaseConfigured,
     setConfig: setSupabaseConfig,
     showConfig: showConfigModal,
+    initGoogleIdentity: initGoogleIdentityServices,
+    renderGoogleButton: renderGoogleButton,
     signInWithGoogle: signInWithGoogle,
     signInWithGitHub: signInWithGitHub,
     signInWithApple: signInWithApple,
