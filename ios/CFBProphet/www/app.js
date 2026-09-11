@@ -8676,6 +8676,9 @@ function updateAuthUI() {
     const pSavedCount = document.getElementById('authProfileSavedCount');
 
     if (pName) pName.textContent = user.displayName || user.handle || 'Coach';
+    const profileNameInput = document.getElementById('authProfileDisplayNameInput');
+    if (profileNameInput) profileNameInput.value = user.displayName || user.handle || 'Coach';
+
     let badge = 'Supabase Verified';
     if (user.provider === 'apple') badge = 'Apple Verified';
     else if (user.provider === 'google') badge = 'Google Verified';
@@ -8694,7 +8697,8 @@ function updateAuthUI() {
     if (pSavedCount) pSavedCount.textContent = `${myBrackets.length} Active Saved`;
   } else {
     if (btn) btn.classList.remove('logged-in');
-    if (label) label.textContent = 'Sign In';
+    const guestHandle = localStorage.getItem('cfb_prophet_user_handle');
+    if (label) label.textContent = (guestHandle && guestHandle !== 'Apple User' && guestHandle !== 'apple user') ? guestHandle : 'Sign In';
     if (icon) {
       icon.className = 'fa-solid fa-user-circle';
       icon.innerHTML = '';
@@ -8702,6 +8706,9 @@ function updateAuthUI() {
 
     if (loggedInView) loggedInView.style.display = 'none';
     if (loggedOutView) loggedOutView.style.display = 'block';
+
+    const guestInput = document.getElementById('guestDisplayNameInput');
+    if (guestInput) guestInput.value = (guestHandle && guestHandle !== 'Apple User' && guestHandle !== 'apple user') ? guestHandle : 'Coach';
   }
 }
 window.updateAuthUI = updateAuthUI;
@@ -9172,30 +9179,105 @@ window.handleAppleSignInResult = function(payload) {
 
   if (chosenName === 'Coach') {
     setTimeout(() => {
-      const customName = prompt('Enter your Coach / Display name:', 'Coach');
-      if (customName && customName.trim() && customName.trim() !== 'Coach' && customName.trim().toLowerCase() !== 'apple user') {
-        user.displayName = customName.trim();
-        user.handle = customName.trim();
-        setCurrentUser(user);
-        if (typeof showCustomToast === 'function') {
-          showCustomToast(`⭐ Welcome, Coach ${user.displayName}!`);
-        }
+      openAuthModal();
+      const nameInput = document.getElementById('authProfileDisplayNameInput');
+      if (nameInput) {
+        nameInput.focus();
+        nameInput.select();
+      }
+      if (typeof showCustomToast === 'function') {
+        showCustomToast('👋 Welcome! Enter your Coach name below to personalize your brackets:');
       }
     }, 400);
   }
 };
 
+function handleSaveProfileDisplayName() {
+  const input = document.getElementById('authProfileDisplayNameInput');
+  if (!input) return;
+  const raw = input.value.trim();
+  if (!raw) {
+    if (typeof showCustomToast === 'function') showCustomToast('⚠️ Please enter a valid display name.');
+    return;
+  }
+  if (raw.toLowerCase() === 'apple user') {
+    if (typeof showCustomToast === 'function') showCustomToast('⚠️ Please choose a custom name (cannot be Apple User).');
+    return;
+  }
+
+  localStorage.setItem('cfb_prophet_user_handle', raw);
+
+  const currentUser = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+  if (currentUser) {
+    currentUser.displayName = raw;
+    currentUser.handle = raw;
+    setCurrentUser(currentUser);
+  } else {
+    const navLabel = document.getElementById('navAuthLabel');
+    if (navLabel) navLabel.textContent = raw;
+  }
+
+  const pName = document.getElementById('authProfileName');
+  if (pName) pName.textContent = raw;
+
+  const bCreatorInput = document.getElementById('bracketCreatorInput');
+  if (bCreatorInput) bCreatorInput.value = raw;
+
+  if (typeof showCustomToast === 'function') {
+    showCustomToast(`⭐ Coach name updated to ${raw}!`);
+  }
+}
+window.handleSaveProfileDisplayName = handleSaveProfileDisplayName;
+
+function handleSaveGuestDisplayName() {
+  const input = document.getElementById('guestDisplayNameInput');
+  if (!input) return;
+  const raw = input.value.trim();
+  if (!raw) {
+    if (typeof showCustomToast === 'function') showCustomToast('⚠️ Please enter a valid name.');
+    return;
+  }
+  if (raw.toLowerCase() === 'apple user') {
+    if (typeof showCustomToast === 'function') showCustomToast('⚠️ Please pick a custom Coach name.');
+    return;
+  }
+
+  localStorage.setItem('cfb_prophet_user_handle', raw);
+  const navLabel = document.getElementById('navAuthLabel');
+  if (navLabel) navLabel.textContent = raw;
+
+  const bCreatorInput = document.getElementById('bracketCreatorInput');
+  if (bCreatorInput) bCreatorInput.value = raw;
+
+  if (typeof showCustomToast === 'function') {
+    showCustomToast(`⭐ Coach name set to ${raw}!`);
+  }
+}
+window.handleSaveGuestDisplayName = handleSaveGuestDisplayName;
+
 function handleEditCoachName() {
   const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
-  if (!user) return;
-  const current = user.displayName || user.handle || 'Coach';
+  const input = document.getElementById('authProfileDisplayNameInput');
+  if (input) {
+    input.focus();
+    input.select();
+    return;
+  }
+  const current = user ? (user.displayName || user.handle || 'Coach') : (localStorage.getItem('cfb_prophet_user_handle') || 'Coach');
   const newName = prompt('Enter your Coach / Display Name:', current);
-  if (newName && newName.trim() && newName.trim() !== current) {
-    user.displayName = newName.trim();
-    user.handle = newName.trim();
-    setCurrentUser(user);
+  if (newName && newName.trim() && newName.trim() !== current && newName.trim().toLowerCase() !== 'apple user') {
+    const clean = newName.trim();
+    localStorage.setItem('cfb_prophet_user_handle', clean);
+    if (user) {
+      user.displayName = clean;
+      user.handle = clean;
+      setCurrentUser(user);
+    } else {
+      const navLabel = document.getElementById('navAuthLabel');
+      if (navLabel) navLabel.textContent = clean;
+    }
     if (typeof showCustomToast === 'function') {
-      showCustomToast(`⭐ Coach name updated to ${user.displayName}!`);
+      showCustomToast(`⭐ Coach name updated to ${clean}!`);
     }
   }
 }
@@ -9476,85 +9558,103 @@ function isBracketOwnedByUser(b, currentUser, isFromLocalSaved = false) {
 
   // ----------------------------------------------------
   // CASE 1: Reviewer Demo (reviewer.demo@cfbprophet.app)
-  // STRICT ISOLATION: Reviewer Demo owns ONLY their own demo bracket!
-  // Can NEVER own, edit, or delete any Jake Johnson, Jake T Johnson, or community bracket!
   // ----------------------------------------------------
   const isReviewerDemo = userEmail === 'reviewer.demo@cfbprophet.app' || userId === 'reviewer_demo_user_2026' || userDisplayName.includes('reviewer');
   if (isReviewerDemo) {
     if (b.id === 'bracket_demo_reviewer_sample') return true;
     if (bCreatorEmail === 'reviewer.demo@cfbprophet.app') return true;
     if (bCreatorId === 'reviewer_demo_user_2026') return true;
-    return false; // Absolute hard wall: cannot own or edit anything else
+    return false;
+  }
+  if (b.id === 'bracket_demo_reviewer_sample' || bCreatorEmail === 'reviewer.demo@cfbprophet.app' || bCreatorId === 'reviewer_demo_user_2026') {
+    return false;
+  }
+
+  // ----------------------------------------------------
+  // Primary Rule: Strict Unique User ID Match
+  // ----------------------------------------------------
+  if (userId && bCreatorId && userId === bCreatorId) {
+    return true;
+  }
+
+  // If both have explicit user IDs and they do not match, they are different accounts!
+  if (userId && bCreatorId && !bCreatorId.startsWith('guest_') && userId !== bCreatorId) {
+    return false;
+  }
+
+  // ----------------------------------------------------
+  // Strict Email Match (only for non-private-relay real emails)
+  // ----------------------------------------------------
+  if (userEmail && bCreatorEmail && userEmail === bCreatorEmail && !userEmail.includes('privaterelay')) {
+    return true;
+  }
+  if (userEmail && bCreatorEmail && userEmail.includes('@') && bCreatorEmail.includes('@') && !userEmail.includes('privaterelay') && userEmail !== bCreatorEmail) {
+    return false;
   }
 
   // ----------------------------------------------------
   // CASE 2: Account A: Jake Johnson Personal (jajo9147@gmail.com)
   // ----------------------------------------------------
-  const isJajoAccount = userEmail === 'jajo9147@gmail.com' || (userDisplayName === 'jake johnson' && !userEmail.includes('verizon'));
+  const isJajoAccount = userEmail === 'jajo9147@gmail.com' || userId === '116de3ad-fe71-4f75-8743-49162d223d08';
   if (isJajoAccount) {
-    // Hard rejection of Verizon work account brackets
-    if (bCreatorEmail === 'jake.johnson1@verizon.com' || bCreator === 'jake t johnson' || bCreator === 'big10 sucks' || bCreator === 'big 12 sucks' || b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_1787937853466_h2h0r3') {
-      return false;
-    }
-    // Hard rejection of the other 4 users: Bill, Logan, Hayden, Phillip
-    if (bCreator === 'hayden karr' || bCreator === 'logandplunkett' || bCreator === 'bill johnson' || bCreator.includes('phillip') || bCreatorEmail.includes('phillip')) {
-      return false;
-    }
-    if (bCreatorId === 'db667bf7-5c78-4554-81b2-e0039c241936' || bCreatorId === '9a630b09-0dd9-47e0-9e7c-ecfd770fe060' || bCreatorId === '56a97b58-44e3-445b-bdb1-cbfce0d9b5aa') {
-      return false;
-    }
-    if (b.id === 'bracket_demo_reviewer_sample' || bCreatorEmail === 'reviewer.demo@cfbprophet.app') {
-      return false;
-    }
-
-    // Jake owns his personal account submissions:
-    if (bCreatorEmail === 'jajo9147@gmail.com') return true;
+    if (bCreatorEmail === 'jake.johnson1@verizon.com' || bCreator === 'jake t johnson' || b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_1787937853466_h2h0r3') return false;
+    if (bCreator === 'hayden karr' || bCreator === 'logandplunkett' || bCreator === 'bill johnson' || bCreator.includes('phillip')) return false;
+    if (b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_1787937962988_ekhyka' || b.id === 'bracket_1788031172051_pe9e3z' || b.id === 'bracket_1788107533721_xivsla' || b.id === 'bracket_1787956769853_9u53gs') return true;
     if (bCreatorId === '116de3ad-fe71-4f75-8743-49162d223d08') return true;
-    if (b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_1787937962988_ekhyka' || b.id === 'bracket_1788031172051_pe9e3z') return true;
-
-    // Jake also made Coach, Coachi, Big Jay predictions!
-    if (bCreator === 'coach' || bCreator === 'coachi' || bCreator === 'big jay' || bCreator === 'jake johnson') {
-      return true;
-    }
-
-    if (isFromLocalSaved && (!bCreatorId || bCreatorId.startsWith('guest_'))) {
-      return true;
-    }
-
+    if (isFromLocalSaved && (!bCreatorId || bCreatorId.startsWith('guest_'))) return true;
     return false;
   }
 
   // ----------------------------------------------------
   // CASE 3: Account B: Jake T Johnson Work (jake.johnson1@verizon.com)
   // ----------------------------------------------------
-  const isVerizonAccount = userEmail === 'jake.johnson1@verizon.com' || userDisplayName === 'jake t johnson';
+  const isVerizonAccount = userEmail === 'jake.johnson1@verizon.com' || userId === '8f96664c-c8e9-4360-8071-503aac2e3155';
   if (isVerizonAccount) {
-    // Hard rejection of Jajo personal brackets
-    if (bCreatorEmail === 'jajo9147@gmail.com' || bCreator === 'jake johnson' || b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_1787937962988_ekhyka' || b.id === 'bracket_1788031172051_pe9e3z' || bCreator === 'coach' || bCreator === 'coachi' || bCreator === 'big jay') {
-      return false;
-    }
-    // Hard rejection of the other 4 users: Bill, Logan, Hayden, Phillip
+    if (bCreatorEmail === 'jajo9147@gmail.com' || b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_1787937962988_ekhyka' || b.id === 'bracket_1788031172051_pe9e3z' || b.id === 'bracket_1788107533721_xivsla' || b.id === 'bracket_1787956769853_9u53gs') return false;
     if (bCreator === 'hayden karr' || bCreator === 'logandplunkett' || bCreator === 'bill johnson' || bCreator.includes('phillip')) return false;
-    if (bCreatorId === 'db667bf7-5c78-4554-81b2-e0039c241936' || bCreatorId === '9a630b09-0dd9-47e0-9e7c-ecfd770fe060' || bCreatorId === '56a97b58-44e3-445b-bdb1-cbfce0d9b5aa') return false;
-
-    // Jake T Johnson owns his work account submissions:
-    if (bCreatorEmail === 'jake.johnson1@verizon.com') return true;
-    if (bCreatorId === '8f96664c-c8e9-4360-8071-503aac2e3155') return true;
-    if (b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_1787937853466_h2h0r3') return true;
-    if (bCreator === 'jake t johnson' || bCreator === 'big10 sucks' || bCreator === 'big 12 sucks') return true;
+    if (bCreatorId === '8f96664c-c8e9-4360-8071-503aac2e3155' || b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_1787937853466_h2h0r3') return true;
+    if (isFromLocalSaved && (!bCreatorId || bCreatorId.startsWith('guest_'))) return true;
     return false;
   }
 
   // ----------------------------------------------------
-  // CASE 4: Any other signed-in user (Bill, Logan, Hayden, Phillip)
+  // CASE 4: Generic Name Matching Ban
+  // Generic names (Coach, Apple User, Guest, etc.) NEVER confer ownership across users!
   // ----------------------------------------------------
-  if (bCreatorEmail === 'jajo9147@gmail.com' || bCreatorEmail === 'jake.johnson1@verizon.com') return false;
-  if (b.id === 'bracket_texas_natty_run_curated' || b.id === 'bracket_1787937962988_ekhyka' || b.id === 'bracket_1788031172051_pe9e3z' || b.id === 'bracket_1788283017975_otti8m' || b.id === 'bracket_1787937853466_h2h0r3') {
+  const GENERIC_NAMES = ['coach', 'apple user', 'apple_user', 'guest', 'user', 'cfbfan', 'creator', 'anonymous'];
+  const isUserGeneric = !userDisplayName || GENERIC_NAMES.includes(userDisplayName);
+  const isBracketGeneric = !bCreator || GENERIC_NAMES.includes(bCreator);
+
+  if (isUserGeneric || isBracketGeneric) {
+    // If either name is generic, ownership is ONLY permitted for local drafts created on this device!
+    if (isFromLocalSaved && (!bCreatorId || bCreatorId.startsWith('guest_') || bCreatorId === userId)) {
+      return true;
+    }
     return false;
   }
-  if (userId && bCreatorId && (bCreatorId === userId)) return true;
-  if (userEmail && bCreatorEmail && (bCreatorEmail === userEmail)) return true;
-  if (userDisplayName && bCreator && (bCreator === userDisplayName)) return true;
+
+  // ----------------------------------------------------
+  // CASE 5: Custom Display Name match (Bill Johnson, Hayden Karr, etc.)
+  // Only valid if bracket does NOT belong to another specific account ID/email
+  // ----------------------------------------------------
+  if (userDisplayName && bCreator && userDisplayName === bCreator) {
+    if (!bCreatorId || bCreatorId.startsWith('guest_') || bCreatorId === userId) {
+      if (!bCreatorEmail || bCreatorEmail === userEmail) {
+        return true;
+      }
+    }
+  }
+
+  // ----------------------------------------------------
+  // CASE 6: Local device storage drafts
+  // ----------------------------------------------------
+  if (isFromLocalSaved) {
+    if (!bCreatorId || bCreatorId.startsWith('guest_') || bCreatorId === userId) {
+      if (!bCreatorEmail || bCreatorEmail === userEmail) {
+        return true;
+      }
+    }
+  }
 
   return false;
 }
@@ -10905,7 +11005,18 @@ function openSaveBracketModal(fromVault = false) {
     nameInput.value = isEditingExisting ? activeExisting.name : `${champTeam.shortName || 'CFB'} Natty Projection`;
   }
   if (creatorInput) {
-    creatorInput.value = isEditingExisting && activeExisting.creator ? activeExisting.creator : (currentUser ? currentUser.displayName : (localStorage.getItem('cfb_prophet_user_handle') || 'Coach'));
+    const savedHandle = localStorage.getItem('cfb_prophet_user_handle');
+    let defaultCreator = 'Coach';
+    if (isEditingExisting && activeExisting.creator) {
+      defaultCreator = activeExisting.creator;
+    } else if (currentUser && currentUser.displayName && currentUser.displayName !== 'Apple User' && currentUser.displayName !== 'Coach') {
+      defaultCreator = currentUser.displayName;
+    } else if (savedHandle && savedHandle !== 'Apple User' && savedHandle !== 'Coach') {
+      defaultCreator = savedHandle;
+    } else if (currentUser && currentUser.displayName) {
+      defaultCreator = currentUser.displayName;
+    }
+    creatorInput.value = defaultCreator;
   }
   if (notesInput && isEditingExisting && activeExisting.notes) {
     notesInput.value = activeExisting.notes;
@@ -10946,13 +11057,22 @@ function handleConfirmSaveBracket() {
   const notes = document.getElementById('bracketNotesInput')?.value;
   const isPublic = document.getElementById('publishToCommunityCheckbox')?.checked !== false;
 
+  const currentUser = getCurrentUser();
+
   if (creator && creator.trim()) {
+    const cleanCreator = creator.trim();
     try {
-      localStorage.setItem('cfb_prophet_user_handle', creator.trim());
+      localStorage.setItem('cfb_prophet_user_handle', cleanCreator);
+      if (currentUser) {
+        currentUser.displayName = cleanCreator;
+        currentUser.handle = cleanCreator;
+        setCurrentUser(currentUser);
+      } else {
+        const navLabel = document.getElementById('navAuthLabel');
+        if (navLabel) navLabel.textContent = cleanCreator;
+      }
     } catch(e) {}
   }
-
-  const currentUser = getCurrentUser();
   const allKnown = getAllKnownBrackets();
   const activeExisting = state.activeSavedBracketId ? allKnown.find(b => b.id === state.activeSavedBracketId) : null;
   const isAi = activeExisting && (activeExisting.isAdminBenchmark || activeExisting.id === 'bracket_prophet_ai_baseline' || (activeExisting.name && activeExisting.name.toLowerCase().includes('prophet ai')));

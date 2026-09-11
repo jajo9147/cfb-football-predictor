@@ -72,7 +72,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=444">
+  <link rel="stylesheet" href="styles.css?v=445">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1273,9 +1273,19 @@
           <input type="text" id="bracketNameInput" class="bracket-form-input" placeholder="e.g. My 2026 Baseline Chalk, Texas Natty Run, Big 12 Chaos" maxlength="45">
         </div>
 
-        <div class="bracket-form-group">
-          <label for="bracketCreatorInput">Creator / Handle</label>
-          <input type="text" id="bracketCreatorInput" class="bracket-form-input" placeholder="e.g. Coach, CFBFan_01" maxlength="30">
+        <div class="bracket-form-group" style="background: rgba(30, 41, 59, 0.75); border: 1.5px solid rgba(56, 189, 248, 0.4); border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 0.85rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+            <label for="bracketCreatorInput" style="margin: 0; font-weight: 800; color: #FFFFFF; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-user-pen" style="color: #38BDF8;"></i> COACH / CREATOR NAME:
+            </label>
+            <span style="font-size: 0.72rem; color: #38BDF8; font-weight: 700; background: rgba(56, 189, 248, 0.15); padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.3);">
+              ✏️ Tap to Change Name
+            </span>
+          </div>
+          <input type="text" id="bracketCreatorInput" class="bracket-form-input" placeholder="e.g. Coach Jake, TrojanFan_01" maxlength="32" style="background: rgba(15, 23, 42, 0.95); border: 1.5px solid rgba(56, 189, 248, 0.45); font-size: 0.92rem; font-weight: 700; color: #FFFFFF; width: 100%;">
+          <small style="display: block; color: #94A3B8; font-size: 0.73rem; margin-top: 0.35rem; line-height: 1.35;">
+            Change this name anytime! This name appears on your bracket, your profile, and the global leaderboard.
+          </small>
         </div>
 
         <div class="bracket-form-group">
@@ -1527,6 +1537,25 @@
         <!-- Inline Alert / Status Banner -->
         <div id="authAlertBanner" class="auth-alert-banner" style="display: none;"></div>
 
+        <!-- GUEST COACH DISPLAY NAME CARD -->
+        <div style="background: rgba(30, 41, 59, 0.85); border: 1.5px solid rgba(56, 189, 248, 0.4); border-radius: var(--radius-md); padding: 0.85rem; margin-top: 0.45rem; margin-bottom: 0.95rem; text-align: left;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+            <label for="guestDisplayNameInput" style="font-size: 0.78rem; font-weight: 800; color: #F8FAFC; font-family: var(--font-mono); margin: 0; display: flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-signature" style="color: #38BDF8;"></i> YOUR COACH DISPLAY NAME:
+            </label>
+            <span style="font-size: 0.68rem; color: #38BDF8; font-weight: 700; background: rgba(56, 189, 248, 0.15); padding: 2px 6px; border-radius: 4px;">Local & Guest</span>
+          </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <input type="text" id="guestDisplayNameInput" class="auth-input" placeholder="e.g. Coach Jake, TrojanFan_01" maxlength="32" style="flex: 1; padding: 0.5rem 0.75rem; font-size: 0.9rem; font-weight: 700; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(56, 189, 248, 0.4); color: #FFFFFF; border-radius: var(--radius-sm);" onkeydown="if(event.key==='Enter'){event.preventDefault();handleSaveGuestDisplayName();}">
+            <button type="button" class="save-bracket-btn" onclick="handleSaveGuestDisplayName()" style="padding: 0.5rem 0.9rem; font-size: 0.82rem; white-space: nowrap; background: linear-gradient(135deg, #0284C7, #0369A1); color: #FFFFFF; font-weight: 800; border: 1px solid #38BDF8; cursor: pointer; border-radius: var(--radius-sm);">
+              <i class="fa-solid fa-check"></i> Set Name
+            </button>
+          </div>
+          <p style="color: #94A3B8; font-size: 0.72rem; margin: 0.35rem 0 0; line-height: 1.3;">
+            Set the display name shown on your predictions and local bracket saves on this phone.
+          </p>
+        </div>
+
         <!-- Auth Method Tabs -->
         <div class="auth-tab-bar">
           <button class="auth-tab-btn active" id="tabPasswordBtn" onclick="switchAuthTab('password')">
@@ -1679,6 +1708,27 @@
           <p id="authProfileEmail" style="font-size: 0.8rem; color: #94A3B8; font-family: var(--font-mono);">@Coach • Supabase Verified</p>
         </div>
 
+        <!-- PROMINENT COACH / DISPLAY NAME CARD -->
+        <div class="auth-name-edit-card" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98)); border: 1.5px solid rgba(56, 189, 248, 0.5); border-radius: var(--radius-md); padding: 0.95rem; margin-bottom: 1.15rem; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4); text-align: left;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
+            <label for="authProfileDisplayNameInput" style="font-size: 0.8rem; font-weight: 800; color: #F8FAFC; font-family: var(--font-mono); margin: 0; display: flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-user-pen" style="color: #38BDF8;"></i> YOUR COACH DISPLAY NAME:
+            </label>
+            <span style="font-size: 0.7rem; color: #38BDF8; font-weight: 700; background: rgba(56, 189, 248, 0.18); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.35);">
+              ✏️ Tap to Change
+            </span>
+          </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <input type="text" id="authProfileDisplayNameInput" class="auth-input" placeholder="e.g. Coach Jake, TrojanFan_01" maxlength="32" style="flex: 1; padding: 0.55rem 0.75rem; font-size: 0.95rem; font-weight: 700; background: rgba(15, 23, 42, 0.95); border: 1.5px solid rgba(56, 189, 248, 0.4); color: #FFFFFF; border-radius: var(--radius-sm);" onkeydown="if(event.key==='Enter'){event.preventDefault();handleSaveProfileDisplayName();}">
+            <button type="button" class="save-bracket-btn" id="authProfileSaveNameBtn" onclick="handleSaveProfileDisplayName()" style="padding: 0.55rem 1rem; font-size: 0.84rem; white-space: nowrap; background: linear-gradient(135deg, #0284C7, #0369A1); color: #FFFFFF; font-weight: 800; border: 1px solid #38BDF8; cursor: pointer; border-radius: var(--radius-sm); box-shadow: 0 2px 10px rgba(2, 132, 199, 0.4);">
+              <i class="fa-solid fa-check"></i> Save Name
+            </button>
+          </div>
+          <p style="color: #94A3B8; font-size: 0.74rem; margin: 0.45rem 0 0; line-height: 1.35;">
+            Type your real name or handle and tap <strong>Save Name</strong> to update your brackets, community picks, and leaderboard rank.
+          </p>
+        </div>
+
         <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; text-align: left;">
           <div style="border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.75rem;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
@@ -1808,11 +1858,11 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=444"></script>
-  <script src="qrious.min.js?v=444"></script>
-  <script src="qrcode.min.js?v=444"></script>
-  <script src="data/teams.js?v=444"></script>
-  <script src="data/community_brackets.js?v=444"></script>
-  <script src="app.js?v=444"></script>
+  <script src="supabase-client.js?v=445"></script>
+  <script src="qrious.min.js?v=445"></script>
+  <script src="qrcode.min.js?v=445"></script>
+  <script src="data/teams.js?v=445"></script>
+  <script src="data/community_brackets.js?v=445"></script>
+  <script src="app.js?v=445"></script>
 </body>
 </html>
