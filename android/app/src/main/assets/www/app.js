@@ -8612,7 +8612,19 @@ const DELETED_BRACKETS_KEY = 'cfb_prophet_deleted_bracket_ids_v5';
 function getCurrentUser() {
   try {
     const raw = localStorage.getItem(AUTH_STORAGE_KEY) || localStorage.getItem('cfb_prophet_auth_user_v3');
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const u = JSON.parse(raw);
+      if (u) {
+        if (u.displayName === 'Apple User' || u.displayName === 'apple user') {
+          const savedHandle = localStorage.getItem('cfb_prophet_user_handle');
+          u.displayName = (savedHandle && savedHandle !== 'Apple User' && savedHandle !== 'apple user') ? savedHandle : 'Coach';
+        }
+        if (u.handle === 'Apple User' || u.handle === 'apple user') {
+          u.handle = u.displayName || 'Coach';
+        }
+      }
+      return u;
+    }
   } catch (e) {}
   return null;
 }
@@ -9127,19 +9139,67 @@ window.saveSupabaseConfigInputs = saveSupabaseConfigInputs;
 // Native Swift Bridge Callback for Apple Sign In
 window.handleAppleSignInResult = function(payload) {
   if (!payload || !payload.userId) return;
+
+  const existingUser = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+  const savedHandle = localStorage.getItem('cfb_prophet_user_handle');
+
+  let chosenName = '';
+  if (payload.fullName && payload.fullName !== 'Apple User' && payload.fullName !== 'apple user' && payload.fullName.trim()) {
+    chosenName = payload.fullName.trim();
+  } else if (existingUser && existingUser.displayName && existingUser.displayName !== 'Apple User' && existingUser.displayName !== 'apple user' && existingUser.displayName !== 'Coach') {
+    chosenName = existingUser.displayName;
+  } else if (savedHandle && savedHandle !== 'Apple User' && savedHandle !== 'apple user' && savedHandle !== 'Coach' && !savedHandle.startsWith('coach_')) {
+    chosenName = savedHandle;
+  } else if (payload.email && !payload.email.includes('privaterelay.appleid.com')) {
+    const raw = payload.email.split('@')[0].replace(/[._-]/g, ' ');
+    chosenName = raw.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  } else {
+    chosenName = 'Coach';
+  }
+
   const user = {
     id: `apple_${payload.userId}`,
-    displayName: payload.fullName || payload.displayName || 'Apple User',
-    handle: payload.fullName || 'Apple User',
+    displayName: chosenName,
+    handle: chosenName,
     email: payload.email || 'apple_user@privaterelay.appleid.com',
     provider: 'apple',
-    favTeam: state.currentTeamId || 'usc',
+    favTeam: (typeof state !== 'undefined' && state.currentTeamId) || localStorage.getItem('cfb_prophet_fav_team') || 'usc',
     createdAt: new Date().toISOString()
   };
   setCurrentUser(user);
   showCustomToast(`🍎 Signed in with Apple ID as ${user.displayName}!`);
   closeAuthModal();
+
+  if (chosenName === 'Coach') {
+    setTimeout(() => {
+      const customName = prompt('Enter your Coach / Display name:', 'Coach');
+      if (customName && customName.trim() && customName.trim() !== 'Coach' && customName.trim().toLowerCase() !== 'apple user') {
+        user.displayName = customName.trim();
+        user.handle = customName.trim();
+        setCurrentUser(user);
+        if (typeof showCustomToast === 'function') {
+          showCustomToast(`⭐ Welcome, Coach ${user.displayName}!`);
+        }
+      }
+    }, 400);
+  }
 };
+
+function handleEditCoachName() {
+  const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+  if (!user) return;
+  const current = user.displayName || user.handle || 'Coach';
+  const newName = prompt('Enter your Coach / Display Name:', current);
+  if (newName && newName.trim() && newName.trim() !== current) {
+    user.displayName = newName.trim();
+    user.handle = newName.trim();
+    setCurrentUser(user);
+    if (typeof showCustomToast === 'function') {
+      showCustomToast(`⭐ Coach name updated to ${user.displayName}!`);
+    }
+  }
+}
+window.handleEditCoachName = handleEditCoachName;
 
 function handleSignOutClick() {
   if (window.CFBProphetSupabase) {

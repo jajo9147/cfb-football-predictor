@@ -121,7 +121,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             let userIdentifier = appleIDCredential.user
-            var fullNameStr = "Apple User"
+            var fullNameStr = ""
             if let fullName = appleIDCredential.fullName {
                 let given = fullName.givenName ?? ""
                 let family = fullName.familyName ?? ""

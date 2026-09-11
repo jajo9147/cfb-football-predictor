@@ -72,7 +72,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=443">
+  <link rel="stylesheet" href="styles.css?v=444">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -1670,7 +1670,12 @@
           <span class="matchup-tag" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4);">
             <i class="fa-solid fa-circle-check"></i> AUTHENTICATED CREATOR
           </span>
-          <h2 class="modal-title" id="authProfileName" style="font-size: 1.45rem; margin-top: 0.25rem;">Coach Profile</h2>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 0.25rem;">
+            <h2 class="modal-title" id="authProfileName" style="font-size: 1.45rem; margin: 0;">Coach Profile</h2>
+            <button type="button" onclick="handleEditCoachName()" style="background: none; border: none; color: #38BDF8; cursor: pointer; font-size: 0.85rem; padding: 2px 6px;" title="Edit Coach Name">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+          </div>
           <p id="authProfileEmail" style="font-size: 0.8rem; color: #94A3B8; font-family: var(--font-mono);">@Coach • Supabase Verified</p>
         </div>
 
@@ -1803,11 +1808,11 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=443"></script>
-  <script src="qrious.min.js?v=443"></script>
-  <script src="qrcode.min.js?v=443"></script>
-  <script src="data/teams.js?v=443"></script>
-  <script src="data/community_brackets.js?v=443"></script>
-  <script src="app.js?v=443"></script>
+  <script src="supabase-client.js?v=444"></script>
+  <script src="qrious.min.js?v=444"></script>
+  <script src="qrcode.min.js?v=444"></script>
+  <script src="data/teams.js?v=444"></script>
+  <script src="data/community_brackets.js?v=444"></script>
+  <script src="app.js?v=444"></script>
 </body>
 </html>
