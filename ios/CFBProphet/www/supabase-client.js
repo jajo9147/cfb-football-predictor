@@ -148,8 +148,8 @@
     }
   }
 
-  // Google Client ID for In-Page 1-Click Authentication (from CFB Prophet GCP project)
-  const GOOGLE_CLIENT_ID = '114317205490-ppqup25cuv5lbu5508pooaqhjs188d8u.apps.googleusercontent.com';
+  // Google Client ID for In-Page 1-Click Authentication (matches Supabase backend)
+  const GOOGLE_CLIENT_ID = '875927963197-s69jbgmcf8352mbgfi382jcm5n6uf7e9.apps.googleusercontent.com';
   let gsiInitialized = false;
 
   async function handleGoogleCredentialResponse(response) {
