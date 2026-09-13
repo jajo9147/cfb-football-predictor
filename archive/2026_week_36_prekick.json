@@ -207,9 +207,9 @@
           "oppRank": "#1 AP",
           "isHome": true,
           "stadium": "DKR-Texas Memorial Stadium",
-          "baseWinProb": 63,
-          "projScoreUt": 26,
-          "projScoreOpp": 21
+          "baseWinProb": 53,
+          "projScoreUt": 24,
+          "projScoreOpp": 23
         },
         {
           "id": "tex-w3",
@@ -545,9 +545,9 @@
           "oppRank": "#4 AP",
           "isHome": false,
           "stadium": "DKR-Texas Memorial Stadium",
-          "baseWinProb": 37,
-          "projScoreUt": 21,
-          "projScoreOpp": 26
+          "baseWinProb": 47,
+          "projScoreUt": 23,
+          "projScoreOpp": 24
         },
         {
           "id": "osu-w3",

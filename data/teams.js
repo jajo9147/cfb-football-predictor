@@ -1294,9 +1294,9 @@ var TEAMS_DATABASE = {
         "vegasSpread": -2,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 54,
+        "baseWinProb": 53,
         "projScoreUt": 24,
-        "projScoreOpp": 22,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Ohio State Buckeyes secondary.",
@@ -1317,10 +1317,10 @@ var TEAMS_DATABASE = {
         },
         "mcScoreDistOpp": {
           "p10": 10,
-          "p25": 16,
-          "p50": 22,
-          "p75": 29,
-          "p90": 35
+          "p25": 17,
+          "p50": 23,
+          "p75": 30,
+          "p90": 36
         },
         "preseasonWinProb": 56,
         "preseasonProjUt": 27,
@@ -2718,8 +2718,8 @@ var TEAMS_DATABASE = {
         "vegasSpread": 2,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 46,
-        "projScoreUt": 22,
+        "baseWinProb": 47,
+        "projScoreUt": 23,
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -2734,10 +2734,10 @@ var TEAMS_DATABASE = {
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
           "p10": 10,
-          "p25": 16,
-          "p50": 22,
-          "p75": 29,
-          "p90": 35
+          "p25": 17,
+          "p50": 23,
+          "p75": 30,
+          "p90": 36
         },
         "mcScoreDistOpp": {
           "p10": 10,
