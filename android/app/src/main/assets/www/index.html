@@ -72,7 +72,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=447">
+  <link rel="stylesheet" href="styles.css?v=449">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -308,12 +308,17 @@
           <button class="action-btn hype-btn" id="heroHypeCardBtn" onclick="openSeasonHypeCardModal()" title="Export Season Projection Hype Card for Group Chat">
             <span>📸 Hype Card</span>
           </button>
+          <button class="action-btn vegas-stack-btn" id="heroVegasStackBtn" onclick="openVegasStackModal()" title="Vegas Stack — Real-Time Spread Analytics & Weekly ATS Grading">
+            <i class="fa-solid fa-layer-group" style="color: #F59E0B; margin-right: 0.35rem;"></i>
+            <span>💎 Vegas Stack</span>
+          </button>
           <div class="more-tools-dropdown-wrap">
             <button class="action-btn secondary-btn" id="moreToolsBtn" onclick="toggleMoreToolsMenu(event)" title="More Tools & Sharing">
               <i class="fa-solid fa-ellipsis-vertical"></i>
               <span>More ▾</span>
             </button>
             <div class="more-tools-menu" id="moreToolsMenu">
+              <button class="dropdown-item" onclick="openVegasStackModal()"><i class="fa-solid fa-layer-group" style="color: #F59E0B;"></i> Vegas Stack (Weekly ATS)</button>
               <button class="dropdown-item" onclick="openDreamSandboxModal()"><i class="fa-solid fa-bolt" style="color: #F59E0B;"></i> Dream Matchup Simulator</button>
               <button class="dropdown-item" onclick="openCfpMatrixModal()"><i class="fa-solid fa-fire-flame-curved" style="color: #EF4444;"></i> CFP Chaos Matrix</button>
               <button class="dropdown-item" id="shareScenarioBtn" onclick="shareCustomScenario()"><i class="fa-solid fa-share-nodes"></i> Share Scenario Link</button>
@@ -717,6 +722,73 @@
           <i class="fa-regular fa-copy"></i>
           <span>Copy Image Only</span>
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VEGAS STACK: Real-Time Odds, Weekly ATS Grading & Sharp Edges Modal -->
+  <div class="modal-backdrop" id="vegasStackModal" onclick="if(event.target===this) closeVegasStackModal()">
+    <div class="modal-dialog vegas-stack-modal-dialog">
+      <button class="modal-close" id="closeVegasStackBtn" onclick="closeVegasStackModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <!-- Modal Header -->
+      <div class="vegas-stack-header">
+        <div class="vegas-stack-title-wrap">
+          <div class="vegas-stack-badge"><i class="fa-solid fa-layer-group"></i> VEGAS STACK</div>
+          <h2 class="modal-title">REAL-TIME SPREAD & ATS ANALYTICS</h2>
+          <p class="modal-subtitle">CFB Prophet Projections vs. DraftKings Consensus Spreads • Week-by-Week Grading</p>
+        </div>
+
+        <!-- Mode Toggle & Reset Toolbar -->
+        <div class="vegas-stack-toolbar">
+          <div class="vegas-stack-mode-toggle" id="vsModeToggle">
+            <button class="mode-toggle-btn active" id="vsModeBaselineBtn" onclick="setVegasStackMode('baseline')">
+              <i class="fa-solid fa-robot"></i> <span>Prophet AI Baseline</span>
+            </button>
+            <button class="mode-toggle-btn" id="vsModeCustomBtn" onclick="setVegasStackMode('custom')">
+              <i class="fa-solid fa-sliders"></i> <span>My Custom Model</span>
+              <span class="custom-indicator-dot" id="vsCustomDot" style="display: none;"></span>
+            </button>
+          </div>
+          <button class="action-btn vs-reset-btn" id="vsResetBtn" onclick="resetVegasStackCustomTuning()" title="Reset all custom sliders back to Golden AI Baseline">
+            <i class="fa-solid fa-rotate-left"></i> <span>Reset to Baseline</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Horizontal Week Carousel / Selector -->
+      <div class="vegas-stack-week-bar" id="vegasStackWeekBar">
+        <!-- Rendered dynamically by renderVegasStackWeekBar() -->
+      </div>
+
+      <!-- Weekly Performance Summary KPI Banner -->
+      <div class="vegas-stack-summary-banner" id="vegasStackSummaryBanner">
+        <!-- Rendered dynamically by renderVegasStackSummary() -->
+      </div>
+
+      <!-- Filter & Search Toolbar -->
+      <div class="vegas-stack-filter-bar">
+        <div class="filter-pills" id="vegasStackFilterPills">
+          <button class="filter-pill active" data-filter="all" onclick="setVegasStackFilter('all')">All Games</button>
+          <button class="filter-pill" data-filter="diamond" onclick="setVegasStackFilter('diamond')">💎 Diamond Edges (7+ Pts)</button>
+          <button class="filter-pill" data-filter="covers" onclick="setVegasStackFilter('covers')">✅ Covers Only</button>
+          <button class="filter-pill" data-filter="losses" onclick="setVegasStackFilter('losses')">❌ Losses Only</button>
+        </div>
+        <div class="search-input-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="vegasStackSearchInput" placeholder="Filter team or matchup..." oninput="onVegasStackSearch(this.value)">
+        </div>
+      </div>
+
+      <!-- Matchup Cards Container -->
+      <div class="vegas-stack-cards-grid" id="vegasStackGrid">
+        <!-- Rendered dynamically by renderVegasStack() -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="vegas-stack-footer">
+        <span class="odds-source-tag"><i class="fa-solid fa-shield-halved"></i> Live Odds Powered by DraftKings Consensus • Recalibrated Automatically</span>
+        <button class="action-btn secondary-btn" onclick="closeVegasStackModal()">Close</button>
       </div>
     </div>
   </div>
@@ -1839,11 +1911,11 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=447"></script>
-  <script src="qrious.min.js?v=447"></script>
-  <script src="qrcode.min.js?v=447"></script>
-  <script src="data/teams.js?v=447"></script>
-  <script src="data/community_brackets.js?v=447"></script>
-  <script src="app.js?v=447"></script>
+  <script src="supabase-client.js?v=449"></script>
+  <script src="qrious.min.js?v=449"></script>
+  <script src="qrcode.min.js?v=449"></script>
+  <script src="data/teams.js?v=449"></script>
+  <script src="data/community_brackets.js?v=449"></script>
+  <script src="app.js?v=449"></script>
 </body>
 </html>

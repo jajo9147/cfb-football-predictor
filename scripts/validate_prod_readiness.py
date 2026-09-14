@@ -61,7 +61,7 @@ def load_db(path):
         return None
     with open(path, 'r', encoding='utf-8') as f:
         text = f.read()
-    m = re.search(r'var\s+TEAMS_DATABASE\s*=\s*(\{[\s\S]*?\});\s*(?:if\s*\(typeof module|\Z)', text)
+    m = re.search(r'(?:var|const)\s+TEAMS_DATABASE\s*=\s*(\{[\s\S]*?\});\s*(?:if\s*\(typeof module|\Z)', text)
     if not m:
         raise ValueError(f"Could not parse TEAMS_DATABASE from {path}")
     return json.loads(m.group(1))

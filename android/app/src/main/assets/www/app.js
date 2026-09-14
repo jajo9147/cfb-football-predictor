@@ -12419,3 +12419,466 @@ if (document.readyState === 'complete') {
 }
 
 
+
+
+// ==========================================================================
+// VEGAS STACK: REAL-TIME SPREAD ANALYTICS, WEEKLY ATS GRADING & CUSTOM TUNING
+// ==========================================================================
+
+const vegasStackState = {
+  currentWeek: 'WEEK 2',
+  mode: 'baseline',
+  filter: 'all',
+  searchQuery: ''
+};
+
+const VEGAS_STACK_WEEKS = [
+  'ALL',
+  'WEEK 0',
+  'WEEK 1',
+  'WEEK 2',
+  'WEEK 3',
+  'WEEK 4',
+  'WEEK 5',
+  'WEEK 6',
+  'WEEK 7',
+  'WEEK 8',
+  'WEEK 9',
+  'WEEK 10',
+  'WEEK 11',
+  'WEEK 12',
+  'WEEK 13'
+];
+
+window.openVegasStackModal = function(initialWeek) {
+  const modal = document.getElementById('vegasStackModal');
+  if (!modal) return;
+
+  if (initialWeek) {
+    vegasStackState.currentWeek = initialWeek;
+  }
+
+  document.body.classList.add('modal-open');
+  modal.classList.add('open');
+
+  renderVegasStack();
+};
+
+window.closeVegasStackModal = function() {
+  const modal = document.getElementById('vegasStackModal');
+  if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+};
+
+window.setVegasStackMode = function(mode) {
+  vegasStackState.mode = mode;
+  const bBtn = document.getElementById('vsModeBaselineBtn');
+  const cBtn = document.getElementById('vsModeCustomBtn');
+  if (bBtn) bBtn.classList.toggle('active', mode === 'baseline');
+  if (cBtn) cBtn.classList.toggle('active', mode === 'custom');
+  renderVegasStack();
+};
+
+window.setVegasStackWeek = function(week) {
+  vegasStackState.currentWeek = week;
+  renderVegasStack();
+};
+
+window.setVegasStackFilter = function(filter) {
+  vegasStackState.filter = filter;
+  document.querySelectorAll('#vegasStackFilterPills .filter-pill').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === filter);
+  });
+  renderVegasStack();
+};
+
+window.onVegasStackSearch = function(query) {
+  vegasStackState.searchQuery = (query || '').toLowerCase().trim();
+  renderVegasStack();
+};
+
+window.resetVegasStackCustomTuning = function() {
+  const count = Object.keys(state.gameSliders || {}).length;
+  state.gameSliders = {};
+  vegasStackState.mode = 'baseline';
+
+  const bBtn = document.getElementById('vsModeBaselineBtn');
+  const cBtn = document.getElementById('vsModeCustomBtn');
+  if (bBtn) bBtn.classList.add('active');
+  if (cBtn) cBtn.classList.remove('active');
+
+  const dot = document.getElementById('vsCustomDot');
+  if (dot) dot.style.display = 'none';
+
+  if (typeof showActionToast === 'function') {
+    showActionToast('✨ All custom game sliders reset to Golden AI Baseline.');
+  } else {
+    alert('All custom sliders reset to Golden AI Baseline.');
+  }
+
+  if (typeof renderSchedule === 'function') renderSchedule();
+  if (typeof updateKpiDisplays === 'function') updateKpiDisplays();
+
+  renderVegasStack();
+};
+
+function getVegasStackMatchups(weekFilter, isCustom) {
+  if (typeof TEAMS_DATABASE === 'undefined') return [];
+
+  const matchups = [];
+  const seenPairs = new Set();
+  const q = vegasStackState.searchQuery;
+
+  Object.keys(TEAMS_DATABASE).forEach(tid => {
+    const team = TEAMS_DATABASE[tid];
+    (team.schedule || []).forEach(g => {
+      if (weekFilter && weekFilter !== 'ALL' && g.week !== weekFilter) return;
+
+      const oppKey = g.oppId || g.oppAbbr || g.opponent;
+      const canonKey = [tid, oppKey].sort().join('::') + '::' + g.week;
+      if (seenPairs.has(canonKey)) return;
+      seenPairs.add(canonKey);
+
+      const isHome = !!g.isHome;
+      const homeTeam = isHome ? team : (TEAMS_DATABASE[g.oppId] || { name: g.opponent, apRank: g.oppRank || 'NR', logoUrl: g.oppLogoUrl, abbr: g.oppAbbr || 'OPP' });
+      const awayTeam = isHome ? (TEAMS_DATABASE[g.oppId] || { name: g.opponent, apRank: g.oppRank || 'NR', logoUrl: g.oppLogoUrl, abbr: g.oppAbbr || 'OPP' }) : team;
+
+      let scoreHome, scoreAway, winProbHome, isCustomTuned = false;
+
+      if (isCustom && typeof calculateAdjustedMatchup === 'function' && state.gameSliders && (state.gameSliders[g.id] || (g.oppId && state.gameSliders[g.oppId + '-' + g.week.toLowerCase().replace(/\s+/g, '')]))) {
+        const sim = calculateAdjustedMatchup(g, tid);
+        scoreHome = isHome ? sim.projUt : sim.projOpp;
+        scoreAway = isHome ? sim.projOpp : sim.projUt;
+        winProbHome = isHome ? sim.adjWinProb : (100 - sim.adjWinProb);
+        isCustomTuned = true;
+      } else {
+        scoreHome = isHome ? g.projScoreUt : g.projScoreOpp;
+        scoreAway = isHome ? g.projScoreOpp : g.projScoreUt;
+        winProbHome = isHome ? g.baseWinProb : (100 - g.baseWinProb);
+      }
+
+      if (typeof scoreHome !== 'number') scoreHome = 24;
+      if (typeof scoreAway !== 'number') scoreAway = 21;
+      if (typeof winProbHome !== 'number') winProbHome = 50;
+
+      const spreadOnHome = isHome ? g.vegasSpread : -g.vegasSpread;
+      const vegasTotal = g.overUnder || 52.5;
+
+      const modelMarginHome = scoreHome - scoreAway;
+      const vegasMarginHome = -spreadOnHome;
+      const spreadEdgeOnHome = modelMarginHome - vegasMarginHome;
+      const absEdge = Math.abs(spreadEdgeOnHome);
+
+      let recSide, recSpread;
+      if (spreadEdgeOnHome > 0.1) {
+        recSide = homeTeam.name;
+        recSpread = spreadOnHome;
+      } else if (spreadEdgeOnHome < -0.1) {
+        recSide = awayTeam.name;
+        recSpread = -spreadOnHome;
+      } else {
+        recSide = 'PASS';
+        recSpread = 0;
+      }
+
+      const isFinal = !!(g.isFinal && typeof g.actualScoreUt === 'number');
+      let actHome = null, actAway = null, atsResult = 'pending', suResult = 'pending', ouResult = 'pending';
+
+      if (isFinal) {
+        actHome = isHome ? g.actualScoreUt : g.actualScoreOpp;
+        actAway = isHome ? g.actualScoreOpp : g.actualScoreUt;
+        const actMarginHome = actHome - actAway;
+        const actualDiffVsSpread = actMarginHome + spreadOnHome;
+
+        const homeWonActual = actHome > actAway;
+        const homeWonModel = scoreHome > scoreAway;
+        suResult = (homeWonActual === homeWonModel) ? 'win' : 'loss';
+
+        if (Math.abs(actualDiffVsSpread) < 0.25) {
+          atsResult = 'push';
+        } else if (recSide === homeTeam.name) {
+          atsResult = actualDiffVsSpread > 0 ? 'win' : 'loss';
+        } else if (recSide === awayTeam.name) {
+          atsResult = actualDiffVsSpread < 0 ? 'win' : 'loss';
+        } else {
+          atsResult = 'push';
+        }
+
+        const actTotal = actHome + actAway;
+        const modelTotal = scoreHome + scoreAway;
+        const calledOver = modelTotal > vegasTotal;
+        if (Math.abs(actTotal - vegasTotal) < 0.25) {
+          ouResult = 'push';
+        } else if (calledOver) {
+          ouResult = (actTotal > vegasTotal) ? 'win' : 'loss';
+        } else {
+          ouResult = (actTotal < vegasTotal) ? 'win' : 'loss';
+        }
+      }
+
+      const isDiamond = absEdge >= 7.0;
+
+      // Filter check
+      if (vegasStackState.filter === 'diamond' && !isDiamond) return;
+      if (vegasStackState.filter === 'covers' && atsResult !== 'win') return;
+      if (vegasStackState.filter === 'losses' && atsResult !== 'loss') return;
+
+      // Search check
+      if (q) {
+        const textToSearch = `${homeTeam.name} ${awayTeam.name} ${homeTeam.abbr || ''} ${awayTeam.abbr || ''} ${g.opponent} ${g.tv || ''} ${g.week}`.toLowerCase();
+        if (!textToSearch.includes(q)) return;
+      }
+
+      matchups.push({
+        id: g.id,
+        week: g.week,
+        date: g.date,
+        kickoffTime: g.kickoffTime,
+        tv: g.tv,
+        stadium: g.stadium,
+        homeTeam,
+        awayTeam,
+        scoreHome,
+        scoreAway,
+        winProbHome,
+        spreadOnHome,
+        vegasTotal,
+        oddsProvider: g.oddsProvider || 'DraftKings',
+        spreadEdgeOnHome,
+        absEdge,
+        recSide,
+        recSpread,
+        isDiamond,
+        isFinal,
+        actHome,
+        actAway,
+        atsResult,
+        suResult,
+        ouResult,
+        isCustomTuned,
+        rawGame: g
+      });
+    });
+  });
+
+  return matchups;
+}
+
+function renderVegasStack() {
+  const weekBar = document.getElementById('vegasStackWeekBar');
+  const summaryBanner = document.getElementById('vegasStackSummaryBanner');
+  const grid = document.getElementById('vegasStackGrid');
+  const dot = document.getElementById('vsCustomDot');
+
+  const customCount = Object.keys(state.gameSliders || {}).length;
+  if (dot) dot.style.display = customCount > 0 ? 'inline-block' : 'none';
+
+  // 1. Render Week Bar
+  if (weekBar) {
+    weekBar.innerHTML = VEGAS_STACK_WEEKS.map(w => {
+      const isActive = vegasStackState.currentWeek === w;
+      let badgeHtml = '';
+      if (w === 'WEEK 0' || w === 'WEEK 1' || w === 'WEEK 2') {
+        badgeHtml = '<span class="pill-badge graded">GRADED</span>';
+      } else if (w === 'ALL') {
+        badgeHtml = '<span class="pill-badge pending">WEEKS 0-2</span>';
+      } else {
+        badgeHtml = '<span class="pill-badge pending">ACTIVE</span>';
+      }
+      return `
+        <button class="vs-week-pill ${isActive ? 'active' : ''}" onclick="setVegasStackWeek('${w}')">
+          <span>${w}</span>
+          ${badgeHtml}
+        </button>
+      `;
+    }).join('');
+  }
+
+  // 2. Fetch Matchups
+  const isCustom = vegasStackState.mode === 'custom';
+  const allWeekMatchups = getVegasStackMatchups(vegasStackState.currentWeek, isCustom);
+
+  // 3. Render Summary Banner
+  if (summaryBanner) {
+    const finalGames = allWeekMatchups.filter(g => g.isFinal);
+    const totalCount = allWeekMatchups.length;
+    const finalCount = finalGames.length;
+
+    if (finalCount > 0) {
+      const atsWins = finalGames.filter(g => g.atsResult === 'win').length;
+      const atsLosses = finalGames.filter(g => g.atsResult === 'loss').length;
+      const atsPushes = finalGames.filter(g => g.atsResult === 'push').length;
+      const atsDecided = atsWins + atsLosses;
+      const atsPct = atsDecided > 0 ? ((atsWins / atsDecided) * 100).toFixed(1) : '0.0';
+
+      const suWins = finalGames.filter(g => g.suResult === 'win').length;
+      const suPct = finalCount > 0 ? ((suWins / finalCount) * 100).toFixed(1) : '0.0';
+
+      const ouWins = finalGames.filter(g => g.ouResult === 'win').length;
+      const ouLosses = finalGames.filter(g => g.ouResult === 'loss').length;
+      const ouDecided = ouWins + ouLosses;
+      const ouPct = ouDecided > 0 ? ((ouWins / ouDecided) * 100).toFixed(1) : '0.0';
+
+      const diamondGames = finalGames.filter(g => g.isDiamond);
+      const diamondWins = diamondGames.filter(g => g.atsResult === 'win').length;
+      const diamondDecided = diamondGames.filter(g => g.atsResult === 'win' || g.atsResult === 'loss').length;
+      const diamondPct = diamondDecided > 0 ? ((diamondWins / diamondDecided) * 100).toFixed(1) : '0.0';
+
+      let tierBadge = '🔥 Elite';
+      if (parseFloat(atsPct) >= 75) tierBadge = '👑 God Tier';
+      else if (parseFloat(atsPct) >= 55) tierBadge = '💎 Sharp Profit';
+
+      summaryBanner.innerHTML = `
+        <div class="vs-kpi-card gold">
+          <span class="vs-kpi-label"><i class="fa-solid fa-trophy"></i> ATS WIN RATE</span>
+          <span class="vs-kpi-val">${atsWins}-${atsLosses}${atsPushes > 0 ? '-' + atsPushes : ''}</span>
+          <span class="vs-kpi-sub"><span class="badge-rate">${atsPct}%</span> • ${tierBadge}</span>
+        </div>
+        <div class="vs-kpi-card emerald">
+          <span class="vs-kpi-label"><i class="fa-solid fa-check-double"></i> STRAIGHT-UP RECORD</span>
+          <span class="vs-kpi-val">${suWins}-${finalCount - suWins}</span>
+          <span class="vs-kpi-sub"><span class="badge-rate">${suPct}%</span> Accuracy</span>
+        </div>
+        <div class="vs-kpi-card purple">
+          <span class="vs-kpi-label"><i class="fa-solid fa-gem"></i> DIAMOND EDGES (7+ PTS)</span>
+          <span class="vs-kpi-val">${diamondWins}-${diamondDecided - diamondWins}</span>
+          <span class="vs-kpi-sub"><span class="badge-rate">${diamondPct}%</span> High Confidence</span>
+        </div>
+        <div class="vs-kpi-card">
+          <span class="vs-kpi-label"><i class="fa-solid fa-arrow-trend-up"></i> OVER / UNDER TOTALS</span>
+          <span class="vs-kpi-val">${ouWins}-${ouLosses}</span>
+          <span class="vs-kpi-sub"><span class="badge-rate">${ouPct}%</span> Total Hit Rate</span>
+        </div>
+      `;
+    } else {
+      const diamondCount = allWeekMatchups.filter(g => g.isDiamond).length;
+      summaryBanner.innerHTML = `
+        <div class="vs-kpi-card gold">
+          <span class="vs-kpi-label"><i class="fa-solid fa-calendar-day"></i> UPCOMING SLATE</span>
+          <span class="vs-kpi-val">${totalCount} GAMES</span>
+          <span class="vs-kpi-sub">Kickoffs Pending</span>
+        </div>
+        <div class="vs-kpi-card purple">
+          <span class="vs-kpi-label"><i class="fa-solid fa-gem"></i> DIAMOND EDGES</span>
+          <span class="vs-kpi-val">${diamondCount} PLAYS</span>
+          <span class="vs-kpi-sub">7+ Pt Discrepancies</span>
+        </div>
+        <div class="vs-kpi-card emerald">
+          <span class="vs-kpi-label"><i class="fa-solid fa-sliders"></i> MODEL STATUS</span>
+          <span class="vs-kpi-val">${isCustom ? 'CUSTOM' : 'AI PROPHET'}</span>
+          <span class="vs-kpi-sub">${isCustom ? customCount + ' Games Adjusted' : 'Golden 10k Baseline'}</span>
+        </div>
+        <div class="vs-kpi-card">
+          <span class="vs-kpi-label"><i class="fa-solid fa-shield-halved"></i> ODDS TICKER</span>
+          <span class="vs-kpi-val">DRAFTKINGS</span>
+          <span class="vs-kpi-sub">Live Consensus Lines</span>
+        </div>
+      `;
+    }
+  }
+
+  // 4. Render Grid of Cards
+  if (grid) {
+    if (allWeekMatchups.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: #94A3B8;">
+          <i class="fa-solid fa-filter-circle-xmark" style="font-size: 2.5rem; color: #64748B; margin-bottom: 0.75rem;"></i>
+          <p style="font-size: 1rem; font-weight: 700; color: #CBD5E1;">No matchups match your filter or search.</p>
+          <p style="font-size: 0.8rem; margin-top: 0.25rem;">Try selecting "All Games" or clearing your search term.</p>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = allWeekMatchups.map(m => {
+      const homeRankStr = m.homeTeam.apRank ? `<span class="vs-team-rank">${m.homeTeam.apRank}</span>` : '';
+      const awayRankStr = m.awayTeam.apRank ? `<span class="vs-team-rank">${m.awayTeam.apRank}</span>` : '';
+
+      const spreadStr = m.spreadOnHome > 0 ? `+${m.spreadOnHome.toFixed(1)}` : m.spreadOnHome.toFixed(1);
+      const homeSpreadFormatted = `${m.homeTeam.abbr || m.homeTeam.name.split(' ')[0]} ${spreadStr}`;
+
+      let gradingBadge = '';
+      if (m.isFinal) {
+        if (m.atsResult === 'win') {
+          gradingBadge = `<div class="vs-grading-banner win"><span><i class="fa-solid fa-circle-check"></i> ATS COVER WIN (${m.recSide})</span><span>Final: ${m.actAway} - ${m.actHome}</span></div>`;
+        } else if (m.atsResult === 'loss') {
+          gradingBadge = `<div class="vs-grading-banner loss"><span><i class="fa-solid fa-circle-xmark"></i> ATS LOSS (${m.recSide})</span><span>Final: ${m.actAway} - ${m.actHome}</span></div>`;
+        } else {
+          gradingBadge = `<div class="vs-grading-banner push"><span><i class="fa-solid fa-circle-minus"></i> PUSH (${m.recSide})</span><span>Final: ${m.actAway} - ${m.actHome}</span></div>`;
+        }
+      } else {
+        gradingBadge = `<div class="vs-grading-banner pending"><span><i class="fa-regular fa-clock"></i> PENDING KICKOFF</span><span>Lines Active</span></div>`;
+      }
+
+      const edgeTagText = m.isDiamond ? `<i class="fa-solid fa-gem"></i> +${m.absEdge.toFixed(1)} PT DIAMOND EDGE` : `+${m.absEdge.toFixed(1)} PT EDGE`;
+
+      let pickFormatted = m.recSide;
+      if (m.recSide !== 'PASS') {
+        pickFormatted = `${m.recSide} ${m.recSpread > 0 ? '+' : ''}${m.recSpread.toFixed(1)}`;
+      }
+
+      const awayWinner = m.isFinal && m.actAway > m.actHome;
+      const homeWinner = m.isFinal && m.actHome > m.actAway;
+
+      return `
+        <div class="vs-game-card" onclick="if (typeof openSimModal === 'function') openSimModal(findGameById('${m.id}') || ${JSON.stringify(m.rawGame).replace(/"/g, '&quot;')})">
+          <div class="vs-card-header">
+            <div class="vs-card-meta">
+              <span>${m.date || 'TBD'}</span>
+              <span>•</span>
+              <span>${m.kickoffTime || 'Kickoff TBA'}</span>
+            </div>
+            ${m.tv ? `<span class="vs-tv-badge">${m.tv}</span>` : ''}
+          </div>
+
+          <div class="vs-competitors">
+            <!-- Away Team Row -->
+            <div class="vs-team-row">
+              <div class="vs-team-left">
+                ${m.awayTeam.logoUrl ? `<img src="${m.awayTeam.logoUrl}" class="vs-team-logo" alt="${m.awayTeam.name}">` : ''}
+                <div class="vs-team-name-wrap">
+                  ${awayRankStr}
+                  <span class="vs-team-name">${m.awayTeam.name}</span>
+                </div>
+              </div>
+              <div class="vs-team-scores">
+                <span class="vs-score-proj" title="Model Projection">${m.scoreAway}</span>
+                ${m.isFinal ? `<span class="vs-score-actual ${awayWinner ? 'winner' : ''}" title="Official Final Score">${m.actAway}</span>` : ''}
+              </div>
+            </div>
+
+            <!-- Home Team Row -->
+            <div class="vs-team-row">
+              <div class="vs-team-left">
+                ${m.homeTeam.logoUrl ? `<img src="${m.homeTeam.logoUrl}" class="vs-team-logo" alt="${m.homeTeam.name}">` : ''}
+                <div class="vs-team-name-wrap">
+                  ${homeRankStr}
+                  <span class="vs-team-name">${m.homeTeam.name}</span>
+                </div>
+              </div>
+              <div class="vs-team-scores">
+                <span class="vs-score-proj" title="Model Projection">${m.scoreHome}</span>
+                ${m.isFinal ? `<span class="vs-score-actual ${homeWinner ? 'winner' : ''}" title="Official Final Score">${m.actHome}</span>` : ''}
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-odds-strip">
+            <span class="vs-odds-line"><i class="fa-solid fa-scale-balanced" style="color: #60A5FA; margin-right: 4px;"></i> ${homeSpreadFormatted}</span>
+            <span class="vs-odds-total">O/U ${m.vegasTotal}</span>
+            <span style="color: #64748B; font-size: 0.68rem;">${m.oddsProvider}</span>
+          </div>
+
+          <div class="vs-edge-bar ${m.isDiamond ? 'diamond' : ''}">
+            <span class="vs-edge-tag">${edgeTagText}</span>
+            <span class="vs-rec-pick">Pick: <strong>${pickFormatted}</strong></span>
+          </div>
+
+          ${gradingBadge}
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+window.renderVegasStack = renderVegasStack;
