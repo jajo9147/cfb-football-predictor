@@ -18,7 +18,7 @@ def load_teams_database():
     with open(TEAMS_FILE, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    match = re.search(r'var\s+TEAMS_DATABASE\s*=\s*(\{[\s\S]*?\});\s*(?:if\s*\(typeof module|\Z)', content)
+    match = re.search(r'(?:const|var|let)\s+TEAMS_DATABASE\s*=\s*(\{[\s\S]*?\});\s*(?:if\s*\(typeof module|\Z)', content)
     if not match:
         raise ValueError("Could not locate TEAMS_DATABASE in teams.js")
     

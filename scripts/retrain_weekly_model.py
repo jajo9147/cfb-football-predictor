@@ -1089,6 +1089,29 @@ def main():
             save_teams_file(android_teams_v3, db)
             print(f"💾 Updated Android bundle: {android_teams}")
 
+        # Bump cache buster across web, iOS, and Android index.html files
+        index_paths = [
+            os.path.join(ROOT_DIR, 'index.html'),
+            os.path.join(ROOT_DIR, 'ios', 'CFBProphet', 'www', 'index.html'),
+            os.path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'assets', 'www', 'index.html')
+        ]
+        main_index = index_paths[0]
+        if os.path.exists(main_index):
+            with open(main_index, 'r', encoding='utf-8') as f:
+                content = f.read()
+            m = re.search(r'data/teams\.js\?v=(\d+)', content)
+            if m:
+                old_v = int(m.group(1))
+                new_v = old_v + 1
+                for p in index_paths:
+                    if os.path.exists(p):
+                        with open(p, 'r', encoding='utf-8') as f:
+                            c = f.read()
+                        c = re.sub(r'\?v=\d+', f'?v={new_v}', c)
+                        with open(p, 'w', encoding='utf-8') as f:
+                            f.write(c)
+                        print(f"🚀 Cache buster auto-bumped to v={new_v}: {p}")
+
         if os.path.exists(CALIBRATION_FILE):
             with open(CALIBRATION_FILE, 'r', encoding='utf-8') as f:
                 calib = json.load(f)
