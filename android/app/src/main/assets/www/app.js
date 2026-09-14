@@ -13019,10 +13019,6 @@ function generateVegasStackExportText(week, filter) {
     lines.push(`• Straight-Up Accuracy: ${suWins}-${finalGames.length - suWins} (${suPct}%)`);
   }
 
-  lines.push(`━━━━━━━━━━━━━━━━━━━━━━━━━━`);
-  lines.push(`📱 Simulate live lines & run custom models on CFB Prophet:`);
-  lines.push(`https://jakejohnson.me/cfb-football-predictor`);
-
   return lines.join('\n');
 }
 
@@ -13137,8 +13133,7 @@ window.shareVegasStackPicksViaNative = function() {
     try {
       window.webkit.messageHandlers.share.postMessage({
         title: title,
-        text: text,
-        url: window.location.href
+        text: text
       });
       if (typeof showCustomToast === 'function') {
         showCustomToast('📲 Opening iOS Share Sheet...');
@@ -13153,8 +13148,7 @@ window.shareVegasStackPicksViaNative = function() {
   if (navigator.share) {
     navigator.share({
       title: title,
-      text: text,
-      url: window.location.href
+      text: text
     }).then(() => {
       if (typeof showCustomToast === 'function') {
         showCustomToast('✅ Shared picks successfully!');
