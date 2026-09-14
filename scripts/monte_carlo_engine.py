@@ -19,6 +19,11 @@ try:
 except ImportError:
     cfbd_client = None
 
+try:
+    import weather_client
+except ImportError:
+    weather_client = None
+
 # Baseline drive outcome rates in FBS college football
 BASE_TD_RATE = 0.225
 BASE_FG_RATE = 0.135
@@ -51,7 +56,11 @@ def simulate_matchup_10k(
     hfa_pts=2.5,
     vegas_spread=None,
     vegas_total=52.5,
-    iterations=10000
+    iterations=10000,
+    stadium_name=None,
+    game_date=None,
+    kickoff_str=None,
+    weather_info=None
 ):
     """
     Simulates 10,000 full drive-by-drive games between Team A and Team B.
@@ -81,6 +90,16 @@ def simulate_matchup_10k(
     sp_diff = (sp_a - sp_b) + hfa + (talent_bonus * 0.5) + ret_delta
 
 
+    # 3.5 Stadium Weather & Environmental Drag
+    if weather_info is None and stadium_name and weather_client:
+        weather_info = weather_client.get_stadium_weather(stadium_name, game_date, kickoff_str)
+
+    weather_impact = None
+    if weather_info and weather_client:
+        weather_impact = weather_client.calculate_weather_impact(weather_info)
+        # Apply weather drag to total and passing efficiency
+        vegas_total = max(30.0, vegas_total - weather_impact['totalPointsDrag'])
+
     # 4. Modulate per-drive scoring probabilities
     # A 7-point SP+ advantage translates to ~+0.05 TD probability per drive
     p_td_a = max(0.08, min(0.65, BASE_TD_RATE + (sp_diff * 0.0075) + ((ppa_off_a - 0.15) * 0.25)))
@@ -88,6 +107,13 @@ def simulate_matchup_10k(
     
     p_td_b = max(0.04, min(0.55, BASE_TD_RATE - (sp_diff * 0.0075) + ((ppa_off_b - 0.15) * 0.25)))
     p_fg_b = max(0.04, min(0.20, BASE_FG_RATE - (sp_diff * 0.0015)))
+
+    # Apply weather efficiency multipliers if present
+    if weather_impact:
+        p_td_a = max(0.04, p_td_a * weather_impact['passEffMultiplier'])
+        p_td_b = max(0.04, p_td_b * weather_impact['passEffMultiplier'])
+        p_fg_a = max(0.03, p_fg_a * weather_impact['fgSuccessMultiplier'])
+        p_fg_b = max(0.03, p_fg_b * weather_impact['fgSuccessMultiplier'])
 
     # Ensure total probability doesn't exceed 0.85 (leave room for punts/turnovers)
     if p_td_a + p_fg_a > 0.82:
@@ -262,7 +288,9 @@ def simulate_matchup_10k(
             'p50': team_b_scores[int(iterations * 0.50)],
             'p75': team_b_scores[int(iterations * 0.75)],
             'p90': team_b_scores[int(iterations * 0.90)],
-        }
+        },
+        'weather': weather_info,
+        'weatherImpact': weather_impact
     }
 
 if __name__ == '__main__':

@@ -33,6 +33,11 @@ try:
 except ImportError:
     monte_carlo_engine = None
 
+try:
+    import weather_client
+except ImportError:
+    weather_client = None
+
 ESPN_SCOREBOARD_URL = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard"
 ESPN_RANKINGS_URL = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/rankings"
 
@@ -76,6 +81,41 @@ WEEK2_OFFICIAL_POLL = {
     'arizona': {'apRank': 'RV', 'apPoints': '33 PTS', 'rankNum': 99},
     'colorado': {'apRank': 'RV', 'apPoints': '3 PTS', 'rankNum': 99},
     'arizonastate': {'apRank': 'RV', 'apPoints': '2 PTS', 'rankNum': 99},
+    'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
+}
+
+# Authoritative Week 3 AP Poll (September 13, 2026 Live AP Release)
+WEEK3_OFFICIAL_POLL = {
+    'texas': {'apRank': '#1 AP', 'apPoints': '1,678 PTS (56 1st)', 'rankNum': 1},
+    'georgia': {'apRank': '#2 AP', 'apPoints': '1,551 PTS (3 1st)', 'rankNum': 2},
+    'notredame': {'apRank': '#3 AP', 'apPoints': '1,531 PTS (1 1st)', 'rankNum': 3},
+    'indiana': {'apRank': '#4 AP', 'apPoints': '1,466 PTS (3 1st)', 'rankNum': 4},
+    'miami': {'apRank': '#5 AP', 'apPoints': '1,452 PTS (4 1st)', 'rankNum': 5},
+    'ohiostate': {'apRank': '#6 AP', 'apPoints': '1,407 PTS', 'rankNum': 6},
+    'lsu': {'apRank': '#7 AP', 'apPoints': '1,334 PTS (1 1st)', 'rankNum': 7},
+    'olemiss': {'apRank': '#8 AP', 'apPoints': '1,216 PTS', 'rankNum': 8},
+    'texasam': {'apRank': '#9 AP', 'apPoints': '1,165 PTS', 'rankNum': 9},
+    'alabama': {'apRank': '#10 AP', 'apPoints': '1,068 PTS', 'rankNum': 10},
+    'byu': {'apRank': '#11 AP', 'apPoints': '966 PTS', 'rankNum': 11},
+    'usc': {'apRank': '#12 AP', 'apPoints': '944 PTS', 'rankNum': 12},
+    'texastech': {'apRank': '#13 AP', 'apPoints': '910 PTS', 'rankNum': 13},
+    'pennstate': {'apRank': '#14 AP', 'apPoints': '692 PTS', 'rankNum': 14},
+    'tennessee': {'apRank': '#15 AP', 'apPoints': '676 PTS', 'rankNum': 15},
+    'smu': {'apRank': '#16 AP', 'apPoints': '636 PTS', 'rankNum': 16},
+    'utah': {'apRank': '#17 AP', 'apPoints': '558 PTS', 'rankNum': 17},
+    'iowa': {'apRank': '#18 AP', 'apPoints': '391 PTS', 'rankNum': 18},
+    'michigan': {'apRank': '#19 AP', 'apPoints': '382 PTS', 'rankNum': 19},
+    'missouri': {'apRank': '#20 AP', 'apPoints': '344 PTS', 'rankNum': 20},
+    'oregon': {'apRank': '#21 AP', 'apPoints': '324 PTS', 'rankNum': 21},
+    'houston': {'apRank': '#22 AP', 'apPoints': '292 PTS', 'rankNum': 22},
+    'louisville': {'apRank': '#23 AP', 'apPoints': '244 PTS', 'rankNum': 23},
+    'oklahoma': {'apRank': '#24 AP', 'apPoints': '222 PTS', 'rankNum': 24},
+    'washington': {'apRank': 'RV', 'apPoints': '172 PTS', 'rankNum': 99},
+    'boisestate': {'apRank': 'RV', 'apPoints': '57 PTS', 'rankNum': 99},
+    'arizona': {'apRank': 'RV', 'apPoints': '5 PTS', 'rankNum': 99},
+    'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
@@ -176,7 +216,7 @@ NON_DB_OPPONENT_RATINGS = {
 def load_teams_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
-    match = re.search(r'var\s+TEAMS_DATABASE\s*=\s*(\{[\s\S]*?\});\s*(?:if\s*\(typeof module|\Z)', content)
+    match = re.search(r'(?:const|var|let)\s+TEAMS_DATABASE\s*=\s*(\{[\s\S]*?\});\s*(?:if\s*\(typeof module|\Z)', content)
     if not match:
         raise ValueError(f"Could not locate TEAMS_DATABASE in {filepath}")
     return json.loads(match.group(1))
@@ -184,14 +224,16 @@ def load_teams_file(filepath):
 def save_teams_file(filepath, db):
     json_formatted = json.dumps(db, indent=2)
     prefix = ""
+    var_decl = "const TEAMS_DATABASE = "
     if os.path.exists(filepath):
         with open(filepath, 'r', encoding='utf-8') as f:
             orig = f.read()
-        idx = orig.find('var TEAMS_DATABASE = ')
-        if idx != -1:
-            prefix = orig[:idx]
+        m = re.search(r'(const|var|let)\s+TEAMS_DATABASE\s*=\s*', orig)
+        if m:
+            prefix = orig[:m.start()]
+            var_decl = m.group(0)
     footer = ";\n\nif (typeof module !== 'undefined' && module.exports) {\n  module.exports = TEAMS_DATABASE;\n}\n"
-    content = prefix + "var TEAMS_DATABASE = " + json_formatted + footer
+    content = prefix + var_decl + json_formatted + footer
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
 
@@ -346,6 +388,12 @@ def enforce_head_to_head_symmetry(db):
             if 'mcRecommendedOu' in master:
                 slave['mcRecommendedOu'] = master['mcRecommendedOu']
 
+            # Symmetrize weather metrics if present
+            if 'weather' in master:
+                slave['weather'] = master['weather']
+            if 'weatherImpact' in master:
+                slave['weatherImpact'] = master['weatherImpact']
+
             # Symmetrize preseason fields if present
             if 'preseasonProjUt' in master and 'preseasonProjOpp' in master:
                 slave['preseasonProjUt'] = master['preseasonProjOpp']
@@ -432,8 +480,8 @@ def main():
                     'rankNum': 99
                 }
     else:
-        print("  • Applying verified official Week 2 Top 25 poll (Oregon #6, LSU #8, Michigan #24, Georgia #2, Texas #3)...")
-        ranking_updates = WEEK2_OFFICIAL_POLL
+        print("  • Applying verified official Week 3 Top 25 poll (Texas #1, Georgia #2, Notre Dame #3, Indiana #4, Miami #5, Ohio State #6)...")
+        ranking_updates = WEEK3_OFFICIAL_POLL
 
     # Apply rankings to teams in DB
     ap_changes_count = 0
@@ -505,7 +553,10 @@ def main():
     # Dates to scan
     target_dates = args.dates
     if not target_dates:
-        target_dates = ['20260829', '20260903', '20260904', '20260905', '20260906', '20260907']
+        target_dates = [
+            '20260829', '20260903', '20260904', '20260905', '20260906', '20260907',
+            '20260910', '20260911', '20260912', '20260913'
+        ]
 
     all_completed_games = []
     
@@ -815,7 +866,10 @@ def main():
                     hfa_pts=STADIUM_HFA.get(stadium, 2.5),
                     vegas_spread=vegas_spread,
                     vegas_total=base_total,
-                    iterations=2500
+                    iterations=2500,
+                    stadium_name=stadium,
+                    game_date=g.get('date'),
+                    kickoff_str=g.get('kickoffTime')
                 )
                 adj_ut_score = mc_sim['projScoreA']
                 adj_opp_score = mc_sim['projScoreB']
@@ -841,6 +895,10 @@ def main():
                     g['mcRecommendedOu'] = mc_sim['recommendedOu']
                     g['mcScoreDistUt'] = mc_sim['scoreDistributionA']
                     g['mcScoreDistOpp'] = mc_sim['scoreDistributionB']
+                    if mc_sim.get('weather'):
+                        g['weather'] = mc_sim['weather']
+                    if mc_sim.get('weatherImpact'):
+                        g['weatherImpact'] = mc_sim['weatherImpact']
             else:
                 # Non-linear scoring distribution for blowouts fallback
                 if projected_margin >= 28.0:

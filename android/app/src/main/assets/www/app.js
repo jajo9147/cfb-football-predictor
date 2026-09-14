@@ -2715,7 +2715,15 @@ function openSimModal(game) {
     const stadiumEl = document.getElementById('modalStadiumLocation');
     if (stadiumEl) {
       const dtStr = formatGameDateWithTime(game);
-      stadiumEl.innerText = `${dtStr ? dtStr + ' • ' : ''}${game.stadium || 'Stadium'}${game.location ? ' • ' + game.location : ''}`;
+      let weatherStr = '';
+      if (game.weather) {
+        if (game.weather.isDome) {
+          weatherStr = ' • 🏟️ Dome (Indoor)';
+        } else if (game.weather.desc) {
+          weatherStr = ` • ${game.weather.desc}`;
+        }
+      }
+      stadiumEl.innerText = `${dtStr ? dtStr + ' • ' : ''}${game.stadium || 'Stadium'}${game.location ? ' • ' + game.location : ''}${weatherStr}`;
     }
 
     // Scoreboard
