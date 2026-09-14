@@ -199,6 +199,87 @@ def get_game_lines(year=2026, week=None):
     return lines_by_matchup
 
 
+def get_cumulative_advanced_stats(year=2026, weeks=[0, 1, 2]):
+    """Aggregates multi-week advanced EPA/PPA metrics across all completed weeks."""
+    aggregated = {}
+    for w in weeks:
+        w_stats = get_week_advanced_game_stats(year, w)
+        for team, data in w_stats.items():
+            off_ppa = data.get('offense', {}).get('ppa')
+            def_ppa = data.get('defense', {}).get('ppa')
+            off_sr = data.get('offense', {}).get('successRate')
+            def_sr = data.get('defense', {}).get('successRate')
+            if team not in aggregated:
+                aggregated[team] = {
+                    'offPPA': [], 'defPPA': [],
+                    'offSR': [], 'defSR': []
+                }
+            if off_ppa is not None: aggregated[team]['offPPA'].append(float(off_ppa))
+            if def_ppa is not None: aggregated[team]['defPPA'].append(float(def_ppa))
+            if off_sr is not None: aggregated[team]['offSR'].append(float(off_sr))
+            if def_sr is not None: aggregated[team]['defSR'].append(float(def_sr))
+            
+    summary = {}
+    for team, vals in aggregated.items():
+        summary[team] = {
+            'avgOffPpa': sum(vals['offPPA']) / len(vals['offPPA']) if vals['offPPA'] else 0.0,
+            'avgDefPpa': sum(vals['defPPA']) / len(vals['defPPA']) if vals['defPPA'] else 0.0,
+            'avgOffSr': sum(vals['offSR']) / len(vals['offSR']) if vals['offSR'] else 0.40,
+            'avgDefSr': sum(vals['defSR']) / len(vals['defSR']) if vals['defSR'] else 0.40,
+            'gamesSampled': len(vals['offPPA'])
+        }
+    return summary
+
+def get_fbs_opponent_power_ratings(year=2026):
+    """
+    Computes dynamic power ratings for all 134+ FBS teams grounded in
+    2026 official Connelly SP+, 247Sports Talent Composite, and settled 2026 records.
+    Normalizes CFBD SP+ to the CFB Prophet database power scale.
+    """
+    sp_data = get_sp_ratings(year)
+    talent_data = get_team_talent_composite(year)
+    records_raw = fetch_cfbd_endpoint('/records', {'year': year}, cache_name=f"records_{year}")
+    records_map = {}
+    for r in records_raw:
+        tm = (r.get('team') or '').lower()
+        if tm:
+            records_map[tm] = r.get('total', {})
+
+    ratings_map = {}
+    for team_name, sp_info in sp_data.items():
+        raw_sp = float(sp_info.get('rating', 0.0))
+        talent = float(talent_data.get(team_name, 600.0))
+        rec = records_map.get(team_name, {'wins': 1, 'losses': 1})
+        w = rec.get('wins', 1)
+        l = rec.get('losses', 1)
+
+        # Baseline translation: DB scale average FBS is ~16-17
+        base_scaled = raw_sp + 7.0
+        # Talent roster depth modifier (+/- 2.0 pts max)
+        talent_adj = max(-2.0, min(2.0, (talent - 650.0) / 150.0))
+        # 2026 settled win-loss adjustment
+        record_adj = 0.0
+        if w >= 2 and l == 0:
+            record_adj += 1.2
+        elif w == 0 and l >= 2:
+            record_adj -= 1.4
+
+        # Specific 2026 marquee game adjustments
+        if team_name == 'oklahoma state':
+            record_adj += 2.2  # Upset #6 Oregon
+        elif team_name == 'virginia':
+            record_adj += 1.8  # #25 AP Poll entrant (2-0)
+        elif team_name == 'kentucky':
+            record_adj -= 0.5  # Lost by 24 to Alabama
+
+        final_rating = round(base_scaled + talent_adj + record_adj, 1)
+        ratings_map[team_name] = final_rating
+        # Also map without spaces
+        ratings_map[team_name.replace(' ', '')] = final_rating
+
+    return ratings_map
+
+
 def calculate_talent_blowout_bonus(fav_talent, dog_talent):
     """
     Calculates non-linear margin expansion for elite talent mismatches.

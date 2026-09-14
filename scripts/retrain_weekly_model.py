@@ -120,6 +120,18 @@ WEEK3_OFFICIAL_POLL = {
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
 
+# Baseline SP+ Ratings before Week 1 (Calibrated 2026 Connelly SP+ & 247Sports Talent Baseline)
+BASELINE_SP_RATINGS = {
+    'ohiostate': 41.7, 'oregon': 38.2, 'georgia': 35.4, 'notredame': 35.5,
+    'texas': 31.8, 'indiana': 33.4, 'miami': 30.6, 'lsu': 29.3,
+    'texasam': 29.8, 'usc': 26.4, 'oklahoma': 27.1, 'alabama': 26.6,
+    'texastech': 29.6, 'olemiss': 25.1, 'byu': 22.2, 'tennessee': 25.9,
+    'washington': 23.7, 'michigan': 25.6, 'clemson': 21.5, 'pennstate': 24.0,
+    'iowa': 22.1, 'missouri': 23.5, 'smu': 19.9, 'houston': 14.7,
+    'floridastate': 17.1, 'utah': 17.1, 'louisville': 18.7, 'arizonastate': 12.4,
+    'colorado': 8.2, 'arizona': 16.8, 'boisestate': 12.0
+}
+
 # Stadium Home Field Advantage mapping (points)
 STADIUM_HFA = {
     "Tiger Stadium": 3.2,
@@ -160,57 +172,82 @@ STADIUM_HFA = {
 }
 
 NON_DB_OPPONENT_RATINGS = {
-    'Florida Gators': 19.5, 'FLA': 19.5,
-    'Nebraska Cornhuskers': 19.0, 'NEB': 19.0,
-    'Wisconsin Badgers': 19.0, 'WISC': 19.0,
-    'Kansas State Wildcats': 20.0, 'KSU': 20.0,
-    'Iowa State Cyclones': 19.5, 'ISU': 19.5,
-    'Illinois Fighting Illini': 18.5, 'ILL': 18.5,
-    'Auburn Tigers': 18.5, 'AUB': 18.5,
-    'South Carolina Gamecocks': 17.5, 'SC': 17.5,
-    'Arkansas Razorbacks': 17.5, 'ARK': 17.5,
-    'Colorado Buffaloes': 18.0, 'COL': 18.0,
-    'Arizona State Sun Devils': 18.0, 'ASU': 18.0,
-    'Georgia Tech Yellow Jackets': 18.5, 'GT': 18.5,
-    'North Carolina Tar Heels': 17.5, 'UNC': 17.5,
-    'TCU Horned Frogs': 17.5, 'TCU': 17.5,
-    'Kansas Jayhawks': 17.5, 'KU': 17.5,
-    'Kentucky Wildcats': 17.0, 'UK': 17.0,
-    'UCF Knights': 17.0, 'UCF': 17.0,
-    'Pittsburgh Panthers': 17.0, 'PITT': 17.0,
-    'NC State Wolfpack': 17.0, 'NCST': 17.0,
-    'Rutgers Scarlet Knights': 16.5, 'RUTG': 16.5,
-    'Minnesota Golden Gophers': 16.5, 'MINN': 16.5,
-    'Oklahoma State Cowboys': 16.5, 'OKST': 16.5,
-    'Baylor Bears': 16.5, 'BAY': 16.5,
-    'Virginia Tech Hokies': 16.5, 'VT': 16.5,
-    'Syracuse Orange': 16.5, 'SYR': 16.5,
-    'UCLA Bruins': 16.0, 'UCLA': 16.0,
-    'West Virginia Mountaineers': 16.0, 'WVU': 16.0,
-    'Oregon State Beavers': 16.0, 'ORST': 16.0,
-    'Washington State Cougars': 16.0, 'WSU': 16.0,
-    'Duke Blue Devils': 16.0, 'DUKE': 16.0,
-    'Maryland Terrapins': 15.5, 'MD': 15.5,
-    'Cincinnati Bearcats': 15.5, 'CIN': 15.5,
-    'California Golden Bears': 15.5, 'CAL': 15.5,
-    'Mississippi State Bulldogs': 15.0, 'MSST': 15.0,
-    'Michigan State Spartans': 15.0, 'MSU': 15.0,
-    'Virginia Cavaliers': 18.0, 'UVA': 18.0,
-    'Vanderbilt Commodores': 14.5, 'VANDY': 14.5,
-    'Boston College Eagles': 13.0, 'BC': 13.0,
-    'Wake Forest Demon Deacons': 13.0, 'WAKE': 13.0,
-    'Purdue Boilermakers': 12.5, 'PUR': 12.5,
-    'Stanford Cardinal': 12.5, 'STAN': 12.5,
-    'Northwestern Wildcats': 12.0, 'NU': 12.0,
-    'Tulane Green Wave': 13.5, 'TUL': 13.5,
-    'Memphis Tigers': 13.0, 'MEM': 13.0,
-    'UNLV Rebels': 13.0, 'UNLV': 13.0,
-    'UTSA Roadrunners': 6.0, 'UTSA': 6.0,
-    'Texas State Bobcats': 4.5, 'TXST': 4.5,
-    'Western Michigan Broncos': 3.5, 'WMU': 3.5,
-    'Ball State Cardinals': 1.0, 'BALL': 1.0,
-    'UTEP Miners': 1.0, 'UTEP': 1.0,
-    'Weber State Wildcats': -12.0
+    'Florida Gators': 25.0, 'FLA': 25.0,
+    'South Carolina Gamecocks': 22.2, 'SC': 22.2,
+    'Auburn Tigers': 20.9, 'AUB': 20.9,
+    'Vanderbilt Commodores': 18.5, 'VANDY': 18.5,
+    'Nebraska Cornhuskers': 18.4, 'NEB': 18.4,
+    'Virginia Cavaliers': 18.4, 'UVA': 18.4,
+    'Kansas State Wildcats': 17.9, 'KSU': 17.9,
+    'Illinois Fighting Illini': 17.8, 'ILL': 17.8,
+    'Virginia Tech Hokies': 17.6, 'VT': 17.6,
+    'TCU Horned Frogs': 16.9, 'TCU': 16.9,
+    'Oklahoma State Cowboys': 16.3, 'OKST': 16.3,
+    'Pittsburgh Panthers': 14.6, 'PITT': 14.6,
+    'UCLA Bruins': 14.4, 'UCLA': 14.4,
+    'Mississippi State Bulldogs': 14.0, 'MSST': 14.0,
+    'Duke Blue Devils': 13.9, 'DUKE': 13.9,
+    'Maryland Terrapins': 13.9, 'MD': 13.9,
+    'Minnesota Golden Gophers': 13.7, 'MINN': 13.7,
+    'NC State Wolfpack': 13.4, 'NCST': 13.4,
+    'Arkansas Razorbacks': 13.2, 'ARK': 13.2,
+    'Kentucky Wildcats': 12.6, 'UK': 12.6,
+    'North Carolina Tar Heels': 12.5, 'UNC': 12.5,
+    'Northwestern Wildcats': 12.4, 'NU': 12.4,
+    'Georgia Tech Yellow Jackets': 12.2, 'GT': 12.2,
+    'Wake Forest Demon Deacons': 11.8, 'WAKE': 11.8,
+    'Wisconsin Badgers': 11.6, 'WISC': 11.6,
+    'Baylor Bears': 11.3, 'BAY': 11.3,
+    'Cincinnati Bearcats': 11.1, 'CIN': 11.1,
+    'UNLV Rebels': 10.9, 'UNLV': 10.9,
+    'California Golden Bears': 10.7, 'CAL': 10.7,
+    'Michigan State Spartans': 10.6, 'MSU': 10.6,
+    'Kansas Jayhawks': 10.5, 'KU': 10.5,
+    'San José State Spartans': 10.0, 'SJSU': 10.0,
+    'UCF Knights': 8.8, 'UCF': 8.8,
+    'Rutgers Scarlet Knights': 8.7, 'RUTG': 8.7,
+    'Memphis Tigers': 7.4, 'MEM': 7.4,
+    'West Virginia Mountaineers': 7.3, 'WVU': 7.3,
+    'UTSA Roadrunners': 7.1, 'UTSA': 7.1,
+    'Iowa State Cyclones': 6.7, 'ISU': 6.7,
+    'Syracuse Orange': 5.7, 'SYR': 5.7,
+    'Fresno State Bulldogs': 5.3, 'FRES': 5.3,
+    'Stanford Cardinal': 5.1, 'STAN': 5.1,
+    'Purdue Boilermakers': 5.1, 'PUR': 5.1,
+    'Boston College Eagles': 4.6, 'BC': 4.6,
+    'Texas State Bobcats': 3.3, 'TXST': 3.3,
+    'Tulane Green Wave': 2.8, 'TUL': 2.8,
+    'Washington State Cougars': 1.2, 'WSU': 1.2,
+    'Western Michigan Broncos': 0.5, 'WMU': 0.5,
+    'Oregon State Beavers': -0.1, 'ORST': -0.1,
+    'Marshall Thundering Herd': -1.6, 'MARSH': -1.6,
+    'Temple Owls': -2.2, 'TEM': -2.2,
+    'Louisiana Tech Bulldogs': -2.8, 'LT': -2.8,
+    'Utah State Aggies': -3.0, 'USU': -3.0,
+    'Louisiana Ragin\' Cajuns': -4.0, 'ULL': -4.0,
+    'Rice Owls': -8.7, 'RICE': -8.7,
+    'UTEP Miners': -12.7, 'UTEP': -12.7,
+    'Ball State Cardinals': -18.7, 'BALL': -18.7,
+    'Charlotte 49ers': -19.0, 'CHAR': -19.0,
+    # FCS Opponents standard baselines (-16.0 to -22.0)
+    'Villanova Wildcats': -16.0, 'Villanova': -16.0,
+    'Howard Bison': -18.0, 'Howard': -18.0,
+    'Florida A&M Rattlers': -18.0, 'FAMU': -18.0,
+    'UC Davis Aggies': -16.0, 'UCD': -16.0,
+    'Southern Jaguars': -20.0, 'Southern': -20.0,
+    'Weber State Wildcats': -18.0, 'Weber State': -18.0,
+    'Abilene Christian Wildcats': -18.0, 'ACU': -18.0,
+    'Furman Paladins': -18.0, 'Furman': -18.0,
+    'Tennessee State Tigers': -22.0, 'TSU': -22.0,
+    'Utah Tech Trailblazers': -22.0, 'Utah Tech': -22.0,
+    'Morgan State Bears': -22.0, 'Morgan State': -22.0,
+    'Idaho Vandals': -16.0, 'Idaho': -16.0,
+    'Missouri State Bears': -16.0, 'Missouri State': -16.0,
+    'Portland State Vikings': -20.0,
+    'Stephen F. Austin Lumberjacks': -18.0,
+    'Houston Christian Huskies': -22.0,
+    'Arkansas-Pine Bluff Golden Lions': -22.0,
+    'Northern Arizona Lumberjacks': -18.0
 }
 
 def load_teams_file(filepath):
@@ -423,24 +460,30 @@ def main():
     # Load CFBD Analytics Feeds (Strictly 2026 Official Season Data)
     talent_map = {}
     sp_map_2026 = {}
-    adv_stats_w1 = {}
+    cum_adv_stats = {}
+    dynamic_fbs_ratings = {}
     ret_prod_map = {}
-    season_adv_map = {}
+    lines_w1 = {}
     lines_w2 = {}
+    lines_w3 = {}
     if cfbd_client:
         try:
             talent_map = cfbd_client.get_team_talent_composite(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(talent_map)} teams with 2026 247Sports Talent Composite")
             sp_map_2026 = cfbd_client.get_sp_ratings(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(sp_map_2026)} teams with 2026 Official SP+ Ratings")
-            adv_stats_w1 = cfbd_client.get_week_advanced_game_stats(2026, 1)
-            print(f"🔥 CFBD Ingestion: Loaded {len(adv_stats_w1)} advanced EPA/PPA boxscores for 2026 Week 1")
+            cum_adv_stats = cfbd_client.get_cumulative_advanced_stats(2026, weeks=[0, 1, 2])
+            print(f"🔥 CFBD Ingestion: Loaded cumulative multi-week EPA/PPA for {len(cum_adv_stats)} teams (Weeks 0, 1, 2)")
+            dynamic_fbs_ratings = cfbd_client.get_fbs_opponent_power_ratings(2026)
+            print(f"🔥 CFBD Ingestion: Loaded {len(dynamic_fbs_ratings)} dynamic 2026 FBS opponent ratings grounded in SP+ & 2026 records")
             ret_prod_map = cfbd_client.get_returning_production(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(ret_prod_map)} teams with 2026 Returning Production & Continuity")
             season_adv_map = cfbd_client.get_season_advanced_stats(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(season_adv_map)} teams with Trench Line Yards & Havoc Rates")
+            lines_w1 = cfbd_client.get_game_lines(2026, week=1)
             lines_w2 = cfbd_client.get_game_lines(2026, week=2)
-            print(f"🔥 CFBD Ingestion: Loaded {len(lines_w2)} real sportsbook consensus lines for Week 2")
+            lines_w3 = cfbd_client.get_game_lines(2026, week=3)
+            print(f"🔥 CFBD Ingestion: Loaded {len(lines_w1)} lines for Week 1, {len(lines_w2)} lines for Week 2, {len(lines_w3)} lines for Week 3")
         except Exception as e:
             print(f"Notice: CFBD loading warning: {e}")
 
@@ -561,12 +604,54 @@ def main():
     all_completed_games = []
     
     # 1. Ingest completed games already marked in TEAMS_DATABASE
+    fcs_keywords = [
+        'fcs', 'villanova', 'howard', 'furman', 'tennessee state', 'morgan state',
+        'utah tech', 'southern jaguars', 'weber state', 'uc davis', 'idaho',
+        'florida a&m', 'missouri state', 'abilene christian', 'pine bluff',
+        'northern arizona', 'portland state', 'stephen f austin', 'houston christian',
+        'tarleton', 'central arkansas', 'nicholls', 'eastern kentucky', 'mercer',
+        'chattanooga', 'samford', 'sacramento state', 'montana state', 'montana',
+        'south dakota', 'north dakota', 'holy cross', 'richmond', 'william & mary'
+    ]
+
     for tid, t in db.items():
+        t_name = (t.get('name') or tid).lower()
+        t_short = (t.get('shortName') or tid).lower()
         for g in t.get('schedule', []):
             score_ut = g.get('actualScoreUt') if g.get('actualScoreUt') is not None else g.get('finalTeamScore')
             score_opp = g.get('actualScoreOpp') if g.get('actualScoreOpp') is not None else g.get('finalOppScore')
             is_completed = (g.get('isFinal') or score_ut is not None) and (score_ut is not None and score_opp is not None)
             if is_completed:
+                raw_opp_name = (g.get('opponent') or '').strip()
+                opp_lower = raw_opp_name.lower()
+                is_fcs_match = any(kw in opp_lower for kw in fcs_keywords) or g.get('oppRank') == 'FCS'
+                if is_fcs_match:
+                    g['oppRank'] = 'FCS'
+
+                # Calibrate historical Vegas spread against official closing lines
+                wk = g.get('week')
+                cur_l_map = lines_w1 if wk == 'WEEK 1' else (lines_w2 if wk == 'WEEK 2' else {})
+                matched_line = (
+                    cur_l_map.get((t_name, opp_lower)) or
+                    cur_l_map.get((t_short, (g.get('oppAbbr') or '').lower())) or
+                    cur_l_map.get((t_name, (g.get('oppAbbr') or '').lower())) or
+                    cur_l_map.get((t_short, opp_lower))
+                )
+                if not matched_line:
+                    for (h, a), l_info in cur_l_map.items():
+                        if (t_short in h or h in t_name) and (opp_lower in a or any(w in a for w in opp_lower.split() if len(w) > 4)):
+                            matched_line = l_info
+                            break
+                        elif (opp_lower in h or any(w in h for w in opp_lower.split() if len(w) > 4)) and (t_short in a or a in t_name):
+                            matched_line = l_info
+                            break
+
+                if matched_line and matched_line.get('spread') is not None:
+                    spread_val = matched_line['spread'] if g.get('isHome', True) else -matched_line['spread']
+                    g['vegasSpread'] = spread_val
+                    g['overUnder'] = matched_line.get('overUnder') or g.get('overUnder', 52.5)
+                    g['oddsProvider'] = matched_line.get('provider', 'Consensus')
+
                 if not args.dry_run:
                     g['isFinal'] = True
                     g['finalTeamScore'] = g['actualScoreUt'] = int(score_ut)
@@ -664,42 +749,45 @@ def main():
         total_evaluated += 1
 
         # Composite performance delta: Incorporates score margin vs. expectation
-        raw_delta = actual_margin - vegas_margin
+        delta_vegas = actual_margin - vegas_margin
+        delta_model = actual_margin - proj_margin
+        # Balanced composite delta (vs market and vs model prior)
+        raw_delta = 0.50 * delta_vegas + 0.50 * delta_model
 
-        # 1. FCS / Cupcake dominance normalization:
-        # A comfortable win against an FCS or massive underdog where the defense gives up <= 14 pts
-        # represents total game control. Don't penalize a team simply because Vegas hung an extreme -45 or -50 line.
-        is_cupcake = g.get('oppRank') == 'FCS' or g.get('vegasSpread', 0) <= -28.0 or 'fcs' in g.get('opponent', '').lower()
-        if is_cupcake:
-            if actual_margin >= 20 and g['oppScore'] <= 14:
-                effective_delta = max(raw_delta, 2.0)
-            elif actual_margin >= 28:
-                effective_delta = max(raw_delta, 0.0)
-            else:
-                effective_delta = max(raw_delta, -8.0)
-        else:
-            effective_delta = raw_delta
-
-        # 2. Diminishing returns on blowout covers (> +12.0 pts):
-        # Beating the spread by 20+ pts against overmatched opponents is mostly 4th-quarter garbage time.
-        # Sub-linear square root scaling dampens artificial rating inflation.
-        if effective_delta > 12.0:
-            perf_delta = 12.0 + math.sqrt(effective_delta - 12.0) * 1.6
-        else:
-            perf_delta = effective_delta
+        opp_name = (g.get('opponent') or '').lower()
+        opp_rank = g.get('oppRank', 'NR')
         
-        # Check EPA bonus from CFBD
-        team_short = db[tid].get('shortName', '').lower()
-        if team_short in adv_stats_w1:
-            team_ppa = adv_stats_w1[team_short].get('offense', {}).get('ppa', 0.0)
-            if team_ppa and team_ppa > 0.35:
-                perf_delta += min(3.0, (team_ppa - 0.35) * 8.0) # Reward hyper-efficient offenses (capped)
-            elif team_ppa and team_ppa < 0.10:
-                perf_delta -= 3.0 # Penalize broken offenses
+        is_fcs = opp_rank == 'FCS' or any(kw in opp_name for kw in fcs_keywords)
+        is_ranked = str(opp_rank).startswith('#')
+        is_g5 = any(kw in opp_name for kw in [
+            'texas state', 'western kentucky', 'north texas', 'western michigan',
+            'ball state', 'temple', 'louisiana tech', 'charlotte', 'fresno state',
+            'san josé state', 'san jose state', 'louisiana ragin', 'louisiana', 'utah state',
+            'memphis', 'utep', 'marshall', 'rice', 'rice owls', 'tulane', 'utsa',
+            'georgia southern', 'new mexico state', 'east carolina', 'northern illinois'
+        ])
+
+        if is_fcs:
+            w = 0.05  # FCS cupcake game: Minimal informational value for FBS conference play
+            eff_delta = max(-2.0, min(1.5, raw_delta))
+        elif is_g5:
+            w = 0.40  # G5 game: Moderate value, heavily dampen blowouts above +10
+            if raw_delta > 10.0:
+                eff_delta = 10.0 + math.sqrt(raw_delta - 10.0) * 1.0
+            elif raw_delta < -12.0:
+                eff_delta = -12.0
+            else:
+                eff_delta = raw_delta
+        elif is_ranked:
+            w = 1.40  # Top 25 Marquee matchup: Strongest signal
+            eff_delta = max(-16.0, min(18.0, raw_delta))
+        else:
+            w = 1.00  # Power 4 unranked matchup: Standard signal
+            eff_delta = max(-14.0, min(15.0, raw_delta))
 
         if tid not in team_performances:
             team_performances[tid] = []
-        team_performances[tid].append(perf_delta)
+        team_performances[tid].append((eff_delta, w))
 
     avg_model_mae = round(sum(model_margin_errors) / max(1, total_evaluated), 2) if total_evaluated > 0 else 0
     avg_vegas_mae = round(sum(vegas_margin_errors) / max(1, total_evaluated), 2) if total_evaluated > 0 else 0
@@ -710,41 +798,36 @@ def main():
     print(f"  • Vegas Consensus MAE:             {avg_vegas_mae} pts")
     print(f"  • Model Beat Vegas Rate:            {beat_vegas_pct}% ({model_beats_vegas_count}/{total_evaluated} games)")
 
-    # 4. Bayesian SP+ Rating Updating
-    ALPHA = 0.22
+    # 4. Bayesian SP+ Rating Updating (Opponent-Strength Weighted)
+    ALPHA = 0.14
     rating_shifts = {}
 
-    BASELINE_SP_RATINGS = {
-        'ohiostate': 35.0, 'oregon': 34.0, 'georgia': 34.0, 'notredame': 31.5,
-        'texas': 32.0, 'indiana': 30.5, 'miami': 30.0, 'lsu': 26.5,
-        'texasam': 28.2, 'usc': 26.5, 'oklahoma': 26.8, 'alabama': 26.5,
-        'texastech': 24.5, 'olemiss': 26.2, 'byu': 24.0, 'tennessee': 23.2,
-        'washington': 23.0, 'michigan': 21.5, 'clemson': 21.0, 'pennstate': 20.0,
-        'iowa': 19.8, 'missouri': 20.2, 'smu': 20.0, 'houston': 19.5,
-        'floridastate': 18.5, 'utah': 16.5, 'louisville': 17.8, 'arizonastate': 17.0,
-        'colorado': 15.2, 'arizona': 14.5, 'boisestate': 13.0
-    }
-
-    print("\n📈 RETRAINED TEAM POWER RATINGS (BAYESIAN ADJUSTMENT + EPA):")
-    for tid, deltas in team_performances.items():
+    print("\n📈 RETRAINED TEAM POWER RATINGS (OPPONENT-WEIGHTED BAYESIAN + CUMULATIVE EPA):")
+    for tid, delta_pairs in team_performances.items():
         t = db[tid]
         baseline = BASELINE_SP_RATINGS.get(tid, float(t.get('seasonBaselineSpRating') or t.get('baseSpRating', 22.0)))
         t['seasonBaselineSpRating'] = baseline
-        avg_delta = sum(deltas) / len(deltas)
+        
+        weighted_sum = sum(d * w for d, w in delta_pairs)
+        weight_total = sum(w for d, w in delta_pairs)
+        avg_delta = weighted_sum / max(0.1, weight_total)
         raw_adjustment = avg_delta * ALPHA
 
-        # Add EPA efficiency penalty or reward
+        # Add EPA efficiency penalty or reward from cumulative 2026 season stats
         team_short = db[tid].get('shortName', '').lower()
         epa_shift = 0.0
-        if team_short in adv_stats_w1:
-            team_ppa = adv_stats_w1[team_short].get('offense', {}).get('ppa', 0.0)
-            if team_ppa and team_ppa < 0.12:
-                epa_shift -= 1.0  # Moderate penalty for dead offensive efficiency
-            elif team_ppa and team_ppa > 0.40:
-                epa_shift += 0.8  # High-octane efficiency reward
+        c_info = cum_adv_stats.get(team_short) or cum_adv_stats.get(tid) or cum_adv_stats.get((db[tid].get('name') or '').lower())
+        if c_info:
+            ppa = c_info.get('avgOffPpa', 0.20)
+            if ppa > 0.45:
+                epa_shift += 0.50  # High-octane offense reward
+            elif ppa < 0.10:
+                epa_shift -= 0.60  # Sluggish offense penalty
+            if ppa < 0.00:
+                epa_shift -= 0.75  # Severely broken offense penalty (e.g. Clemson)
 
         # Cap weekly rating volatility so a single non-conference game doesn't swing ratings by 6 points
-        clamped_adjustment = max(-3.0, min(3.0, raw_adjustment + epa_shift))
+        clamped_adjustment = max(-2.5, min(2.5, raw_adjustment + epa_shift))
         new_rating = round(baseline + clamped_adjustment, 2)
         rating_shifts[tid] = {
             'old': baseline,
@@ -772,35 +855,54 @@ def main():
             # Determine opponent SP+ & talent
             opp_id = g.get('oppId')
             opp_talent = 420.0
-            if opp_id and opp_id in db:
+            raw_opp_name = (g.get('opponent') or '').strip()
+            opp_lower = raw_opp_name.lower()
+            opp_abbr = (g.get('oppAbbr') or '').strip().lower()
+
+            is_fcs = g.get('oppRank') == 'FCS' or any(kw in opp_lower for kw in fcs_keywords)
+            if is_fcs:
+                g['oppRank'] = 'FCS'
+                sp_opp = -16.0
+                opp_talent = 180.0
+            elif opp_id and opp_id in db:
                 sp_opp = float(db[opp_id].get('baseSpRating', 22.0))
                 opp_name = db[opp_id].get('name', '').lower()
                 opp_talent = talent_map.get(opp_name, talent_map.get(db[opp_id].get('shortName', '').lower(), 650.0))
-            elif g.get('oppRank') == 'FCS':
-                sp_opp = -14.0
-                opp_talent = 180.0
             else:
-                raw_opp_name = g.get('opponent') or ''
-                opp_abbr = g.get('oppAbbr') or ''
-                if raw_opp_name in NON_DB_OPPONENT_RATINGS:
+                # 1. Search dynamic_fbs_ratings (longest keys first)
+                found_dynamic = None
+                if opp_lower in dynamic_fbs_ratings:
+                    found_dynamic = dynamic_fbs_ratings[opp_lower]
+                elif opp_abbr in dynamic_fbs_ratings:
+                    found_dynamic = dynamic_fbs_ratings[opp_abbr]
+                else:
+                    for k in sorted(dynamic_fbs_ratings.keys(), key=len, reverse=True):
+                        if len(k) >= 4 and (k == opp_lower or k in opp_lower or (len(opp_lower) >= 4 and opp_lower in k)):
+                            found_dynamic = dynamic_fbs_ratings[k]
+                            break
+
+                if found_dynamic is not None:
+                    sp_opp = found_dynamic
+                elif raw_opp_name in NON_DB_OPPONENT_RATINGS:
                     sp_opp = NON_DB_OPPONENT_RATINGS[raw_opp_name]
-                elif opp_abbr in NON_DB_OPPONENT_RATINGS:
-                    sp_opp = NON_DB_OPPONENT_RATINGS[opp_abbr]
+                elif opp_abbr.upper() in NON_DB_OPPONENT_RATINGS:
+                    sp_opp = NON_DB_OPPONENT_RATINGS[opp_abbr.upper()]
                 else:
                     found_rating = None
-                    for k, r in NON_DB_OPPONENT_RATINGS.items():
-                        if k.lower() in raw_opp_name.lower() or raw_opp_name.lower() in k.lower():
-                            found_rating = r
+                    for k in sorted(NON_DB_OPPONENT_RATINGS.keys(), key=len, reverse=True):
+                        if k.lower() in opp_lower or (len(opp_lower) >= 4 and opp_lower in k.lower()):
+                            found_rating = NON_DB_OPPONENT_RATINGS[k]
                             break
                     if found_rating is not None:
                         sp_opp = found_rating
                     elif g.get('isConf') or g.get('isBig12') or g.get('isSec') or g.get('isBigTen') or g.get('isAcc'):
-                        sp_opp = 16.5
-                    elif any(kw in raw_opp_name.lower() for kw in ['sec', 'big ten', 'big 12', 'acc', 'notre dame']):
-                        sp_opp = 16.0
+                        sp_opp = 12.5
+                    elif any(kw in opp_lower for kw in ['sec', 'big ten', 'big 12', 'acc', 'notre dame']):
+                        sp_opp = 12.0
                     else:
-                        sp_opp = 5.0
-                opp_talent = 650.0 if sp_opp >= 15.0 else 380.0
+                        sp_opp = 2.0
+
+                opp_talent = talent_map.get(opp_lower, 650.0 if sp_opp >= 15.0 else 380.0)
 
             stadium = g.get('stadium', '')
             hfa = 0.0
@@ -819,30 +921,38 @@ def main():
 
             raw_margin = (sp_team - sp_opp) + hfa + talent_bonus
 
-            # Live consensus line matching from CFBD / DraftKings for Week 2
-            if g.get('week') == 'WEEK 2' and lines_w2:
+            # Live consensus line matching from CFBD / DraftKings for Week 3
+            matched_line = None
+            if g.get('week') == 'WEEK 3' and lines_w3:
                 team_clean = (t.get('name') or tid).lower()
                 opp_clean = (g.get('opponent') or '').lower()
                 team_short = (t.get('shortName') or tid).lower()
                 opp_abbr = (g.get('oppAbbr') or '').lower()
-
-                m_line = (
-                    lines_w2.get((team_clean, opp_clean)) or
-                    lines_w2.get((team_short, opp_abbr)) or
-                    lines_w2.get((team_clean, opp_abbr)) or
-                    lines_w2.get((team_short, opp_clean))
+                matched_line = (
+                    lines_w3.get((team_clean, opp_clean)) or
+                    lines_w3.get((team_short, opp_abbr)) or
+                    lines_w3.get((team_clean, opp_abbr)) or
+                    lines_w3.get((team_short, opp_clean))
                 )
-                if m_line and m_line.get('spread') is not None:
-                    spread_val = m_line['spread'] if g.get('isHome', True) else -m_line['spread']
-                    g['vegasSpread'] = spread_val
-                    g['overUnder'] = m_line.get('overUnder') or g.get('overUnder', 52.5)
-                    g['oddsProvider'] = m_line.get('provider', 'DraftKings')
-                    vegas_margin = -spread_val
-                    projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
-                else:
-                    projected_margin = round(raw_margin, 1)
+                if not matched_line:
+                    for (h, a), l_info in lines_w3.items():
+                        if (team_short in h or h in team_clean) and (opp_abbr in a or any(w in a for w in opp_clean.split() if len(w) > 4)):
+                            matched_line = l_info
+                            break
+                        elif (opp_abbr in h or any(w in h for w in opp_clean.split() if len(w) > 4)) and (team_short in a or a in team_clean):
+                            matched_line = l_info
+                            break
+
+            if matched_line and matched_line.get('spread') is not None:
+                spread_val = matched_line['spread'] if g.get('isHome', True) else -matched_line['spread']
+                g['vegasSpread'] = spread_val
+                g['overUnder'] = matched_line.get('overUnder') or g.get('overUnder', 52.5)
+                g['oddsProvider'] = matched_line.get('provider', 'DraftKings')
+                vegas_margin = -spread_val
+                # Blend model prediction with live Vegas consensus market (60% model, 40% Vegas)
+                projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
             else:
-                # Weeks 3+: Derive purely from freshly updated power ratings (NO anchoring to stale preseason lines)
+                # Later weeks: Pure model projection grounded in freshly calibrated ratings
                 projected_margin = round(raw_margin, 1)
                 g['vegasSpread'] = -projected_margin
                 g['oddsProvider'] = 'CFB Prophet Projected'

@@ -982,60 +982,82 @@ const STADIUM_HFA_MAP = {
 };
 
 const NON_DB_OPPONENT_RATINGS = {
-  'Florida Gators': 19.5, 'FLA': 19.5,
-  'Nebraska Cornhuskers': 19.0, 'NEB': 19.0,
-  'Wisconsin Badgers': 19.0, 'WISC': 19.0,
-  'Kansas State Wildcats': 20.0, 'KSU': 20.0,
-  'Iowa State Cyclones': 19.5, 'ISU': 19.5,
-  'Illinois Fighting Illini': 18.5, 'ILL': 18.5,
-  'Auburn Tigers': 18.5, 'AUB': 18.5,
-  'South Carolina Gamecocks': 17.5, 'SC': 17.5,
-  'Arkansas Razorbacks': 17.5, 'ARK': 17.5,
-  'Colorado Buffaloes': 18.0, 'COL': 18.0,
-  'Arizona State Sun Devils': 18.0, 'ASU': 18.0,
-  'Georgia Tech Yellow Jackets': 18.5, 'GT': 18.5,
-  'North Carolina Tar Heels': 17.5, 'UNC': 17.5,
-  'TCU Horned Frogs': 17.5, 'TCU': 17.5,
-  'Kansas Jayhawks': 17.5, 'KU': 17.5,
-  'Kentucky Wildcats': 17.0, 'UK': 17.0,
-  'UCF Knights': 17.0, 'UCF': 17.0,
-  'Pittsburgh Panthers': 17.0, 'PITT': 17.0,
-  'NC State Wolfpack': 17.0, 'NCST': 17.0,
-  'Rutgers Scarlet Knights': 16.5, 'RUTG': 16.5,
-  'Minnesota Golden Gophers': 16.5, 'MINN': 16.5,
-  'Oklahoma State Cowboys': 16.5, 'OKST': 16.5,
-  'Baylor Bears': 16.5, 'BAY': 16.5,
-  'Virginia Tech Hokies': 16.5, 'VT': 16.5,
-  'Syracuse Orange': 16.5, 'SYR': 16.5,
-  'UCLA Bruins': 16.0, 'UCLA': 16.0,
-  'West Virginia Mountaineers': 16.0, 'WVU': 16.0,
-  'Oregon State Beavers': 16.0, 'ORST': 16.0,
-  'Washington State Cougars': 16.0, 'WSU': 16.0,
-  'Duke Blue Devils': 16.0, 'DUKE': 16.0,
-  'Maryland Terrapins': 15.5, 'MD': 15.5,
-  'Cincinnati Bearcats': 15.5, 'CIN': 15.5,
-  'California Golden Bears': 15.5, 'CAL': 15.5,
-  'Mississippi State Bulldogs': 15.0, 'MSST': 15.0,
-  'Michigan State Spartans': 15.0, 'MSU': 15.0,
-  'Virginia Cavaliers': 14.5, 'UVA': 14.5,
-  'Vanderbilt Commodores': 14.5, 'VANDY': 14.5,
-  'Boston College Eagles': 13.0, 'BC': 13.0,
-  'Wake Forest Demon Deacons': 13.0, 'WAKE': 13.0,
-  'Purdue Boilermakers': 12.5, 'PUR': 12.5,
-  'Stanford Cardinal': 12.5, 'STAN': 12.5,
-  'Northwestern Wildcats': 12.0, 'NU': 12.0,
-  'Tulane Green Wave': 13.5, 'TUL': 13.5,
-  'Memphis Tigers': 13.0, 'MEM': 13.0,
-  'UNLV Rebels': 13.0, 'UNLV': 13.0,
-  'UTSA Roadrunners': 6.0, 'UTSA': 6.0,
-  'Texas State Bobcats': 4.5, 'TXST': 4.5,
-  'Ball State Cardinals': 1.0, 'BALL': 1.0,
-  'Western Michigan Broncos': 3.5, 'WMU': 3.5,
-  'Portland State Vikings': -8.0,
-  'Stephen F. Austin Lumberjacks': -6.0,
-  'Houston Christian Huskies': -8.0,
-  'Missouri State Bears': -4.0,
-  'Villanova Wildcats': -3.0
+  'Florida Gators': 25.0, 'FLA': 25.0,
+  'South Carolina Gamecocks': 22.2, 'SC': 22.2,
+  'Auburn Tigers': 20.9, 'AUB': 20.9,
+  'Vanderbilt Commodores': 18.5, 'VANDY': 18.5,
+  'Nebraska Cornhuskers': 18.4, 'NEB': 18.4,
+  'Virginia Cavaliers': 18.4, 'UVA': 18.4,
+  'Kansas State Wildcats': 17.9, 'KSU': 17.9,
+  'Illinois Fighting Illini': 17.8, 'ILL': 17.8,
+  'Virginia Tech Hokies': 17.6, 'VT': 17.6,
+  'TCU Horned Frogs': 16.9, 'TCU': 16.9,
+  'Oklahoma State Cowboys': 16.3, 'OKST': 16.3,
+  'Pittsburgh Panthers': 14.6, 'PITT': 14.6,
+  'UCLA Bruins': 14.4, 'UCLA': 14.4,
+  'Mississippi State Bulldogs': 14.0, 'MSST': 14.0,
+  'Duke Blue Devils': 13.9, 'DUKE': 13.9,
+  'Maryland Terrapins': 13.9, 'MD': 13.9,
+  'Minnesota Golden Gophers': 13.7, 'MINN': 13.7,
+  'NC State Wolfpack': 13.4, 'NCST': 13.4,
+  'Arkansas Razorbacks': 13.2, 'ARK': 13.2,
+  'Kentucky Wildcats': 12.6, 'UK': 12.6,
+  'North Carolina Tar Heels': 12.5, 'UNC': 12.5,
+  'Northwestern Wildcats': 12.4, 'NU': 12.4,
+  'Georgia Tech Yellow Jackets': 12.2, 'GT': 12.2,
+  'Wake Forest Demon Deacons': 11.8, 'WAKE': 11.8,
+  'Wisconsin Badgers': 11.6, 'WISC': 11.6,
+  'Baylor Bears': 11.3, 'BAY': 11.3,
+  'Cincinnati Bearcats': 11.1, 'CIN': 11.1,
+  'UNLV Rebels': 10.9, 'UNLV': 10.9,
+  'California Golden Bears': 10.7, 'CAL': 10.7,
+  'Michigan State Spartans': 10.6, 'MSU': 10.6,
+  'Kansas Jayhawks': 10.5, 'KU': 10.5,
+  'San José State Spartans': 10.0, 'SJSU': 10.0,
+  'UCF Knights': 8.8, 'UCF': 8.8,
+  'Rutgers Scarlet Knights': 8.7, 'RUTG': 8.7,
+  'Memphis Tigers': 7.4, 'MEM': 7.4,
+  'West Virginia Mountaineers': 7.3, 'WVU': 7.3,
+  'UTSA Roadrunners': 7.1, 'UTSA': 7.1,
+  'Iowa State Cyclones': 6.7, 'ISU': 6.7,
+  'Syracuse Orange': 5.7, 'SYR': 5.7,
+  'Fresno State Bulldogs': 5.3, 'FRES': 5.3,
+  'Stanford Cardinal': 5.1, 'STAN': 5.1,
+  'Purdue Boilermakers': 5.1, 'PUR': 5.1,
+  'Boston College Eagles': 4.6, 'BC': 4.6,
+  'Texas State Bobcats': 3.3, 'TXST': 3.3,
+  'Tulane Green Wave': 2.8, 'TUL': 2.8,
+  'Washington State Cougars': 1.2, 'WSU': 1.2,
+  'Western Michigan Broncos': 0.5, 'WMU': 0.5,
+  'Oregon State Beavers': -0.1, 'ORST': -0.1,
+  'Marshall Thundering Herd': -1.6, 'MARSH': -1.6,
+  'Temple Owls': -2.2, 'TEM': -2.2,
+  'Louisiana Tech Bulldogs': -2.8, 'LT': -2.8,
+  'Utah State Aggies': -3.0, 'USU': -3.0,
+  'Louisiana Ragin\' Cajuns': -4.0, 'ULL': -4.0,
+  'Rice Owls': -8.7, 'RICE': -8.7,
+  'UTEP Miners': -12.7, 'UTEP': -12.7,
+  'Ball State Cardinals': -18.7, 'BALL': -18.7,
+  'Charlotte 49ers': -19.0, 'CHAR': -19.0,
+  // FCS Opponents standard baselines (-16.0 to -22.0)
+  'Villanova Wildcats': -16.0, 'Villanova': -16.0,
+  'Howard Bison': -18.0, 'Howard': -18.0,
+  'Florida A&M Rattlers': -18.0, 'FAMU': -18.0,
+  'UC Davis Aggies': -16.0, 'UCD': -16.0,
+  'Southern Jaguars': -20.0, 'Southern': -20.0,
+  'Weber State Wildcats': -18.0, 'Weber State': -18.0,
+  'Abilene Christian Wildcats': -18.0, 'ACU': -18.0,
+  'Furman Paladins': -18.0, 'Furman': -18.0,
+  'Tennessee State Tigers': -22.0, 'TSU': -22.0,
+  'Utah Tech Trailblazers': -22.0, 'Utah Tech': -22.0,
+  'Morgan State Bears': -22.0, 'Morgan State': -22.0,
+  'Idaho Vandals': -16.0, 'Idaho': -16.0,
+  'Missouri State Bears': -16.0, 'Missouri State': -16.0,
+  'Portland State Vikings': -20.0,
+  'Stephen F. Austin Lumberjacks': -18.0,
+  'Houston Christian Huskies': -22.0,
+  'Arkansas-Pine Bluff Golden Lions': -22.0,
+  'Northern Arizona Lumberjacks': -18.0
 };
 
 function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSliders, userPick) {
@@ -1060,7 +1082,7 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
   let spA = tTeam.baseSpRating || 22.0;
 
   // Resolve opponent SP rating dynamically
-  let spB = 5.0;
+  let spB = 12.0;
   let oTeam = null;
   if (oppTeamId && TEAMS_DATABASE[oppTeamId]) {
     oTeam = TEAMS_DATABASE[oppTeamId];
@@ -1068,9 +1090,25 @@ function calculateCombinedMatchup(game, teamId, teamSliders, oppTeamId, oppSlide
   } else {
     const oppName = game?.opponent || '';
     const oppAbbr = game?.oppAbbr || '';
-    if (NON_DB_OPPONENT_RATINGS[oppName] !== undefined) spB = NON_DB_OPPONENT_RATINGS[oppName];
-    else if (NON_DB_OPPONENT_RATINGS[oppAbbr] !== undefined) spB = NON_DB_OPPONENT_RATINGS[oppAbbr];
-    else if (oppName.includes('FCS') || (oppName.includes('State') && game?.oppRank === 'NR')) spB = 0.0;
+    const isFcs = game?.oppRank === 'FCS' || oppName.includes('FCS') || /villanova|howard|furman|tennessee state|morgan state|utah tech|southern jaguars|weber state|uc davis|idaho|florida a&m|missouri state|abilene christian|pine bluff|northern arizona|portland state|stephen f austin|houston christian/i.test(oppName);
+    if (isFcs) {
+      spB = -16.0;
+    } else if (NON_DB_OPPONENT_RATINGS[oppName] !== undefined) {
+      spB = NON_DB_OPPONENT_RATINGS[oppName];
+    } else if (NON_DB_OPPONENT_RATINGS[oppAbbr] !== undefined) {
+      spB = NON_DB_OPPONENT_RATINGS[oppAbbr];
+    } else {
+      let found = null;
+      for (const [k, r] of Object.entries(NON_DB_OPPONENT_RATINGS)) {
+        if (oppName.toLowerCase().includes(k.toLowerCase()) || k.toLowerCase().includes(oppName.toLowerCase())) {
+          found = r;
+          break;
+        }
+      }
+      if (found !== null) spB = found;
+      else if (game?.isConf || game?.isBig12 || game?.isSec || game?.isBigTen || game?.isAcc) spB = 12.5;
+      else spB = 2.0;
+    }
   }
 
   // Calculate dynamic venue HFA
