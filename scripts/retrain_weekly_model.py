@@ -986,6 +986,15 @@ def main():
             if monte_carlo_engine:
                 ret_a = ret_prod_map.get((t.get('name') or '').lower(), {}).get('percentPPA', 0.60)
                 ret_b = ret_prod_map.get((g.get('opponent') or '').lower(), {}).get('percentPPA', 0.60)
+                
+                # Ingest cumulative multi-week EPA/PPA efficiency into Monte Carlo drive probabilities
+                c_info_a = cum_adv_stats.get(team_short) or cum_adv_stats.get(tid) or cum_adv_stats.get((t.get('name') or '').lower()) or {}
+                ppa_a = c_info_a.get('avgOffPpa', 0.18)
+
+                opp_clean_lower = opp_clean.lower()
+                c_info_b = cum_adv_stats.get(opp_abbr) or cum_adv_stats.get(opp_clean_lower) or {}
+                ppa_b = c_info_b.get('avgOffPpa', 0.14)
+
                 mc_sim = monte_carlo_engine.simulate_matchup_10k(
                     team_a_name=t.get('shortName', tid),
                     team_b_name=g.get('oppAbbr') or g.get('opponent', 'OPP'),
@@ -993,6 +1002,8 @@ def main():
                     sp_b=sp_opp,
                     talent_a=fav_talent,
                     talent_b=opp_talent,
+                    ppa_off_a=ppa_a,
+                    ppa_off_b=ppa_b,
                     ret_prod_a=ret_a,
                     ret_prod_b=ret_b,
                     is_home_a=g.get('isHome', True),
