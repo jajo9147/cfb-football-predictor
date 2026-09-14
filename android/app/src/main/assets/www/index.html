@@ -72,7 +72,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=449">
+  <link rel="stylesheet" href="styles.css?v=450">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -310,7 +310,7 @@
           </button>
           <button class="action-btn vegas-stack-btn" id="heroVegasStackBtn" onclick="openVegasStackModal()" title="Vegas Stack — Real-Time Spread Analytics & Weekly ATS Grading">
             <i class="fa-solid fa-layer-group" style="color: #F59E0B; margin-right: 0.35rem;"></i>
-            <span>💎 Vegas Stack</span>
+            <span>Vegas Stack</span>
           </button>
           <div class="more-tools-dropdown-wrap">
             <button class="action-btn secondary-btn" id="moreToolsBtn" onclick="toggleMoreToolsMenu(event)" title="More Tools & Sharing">
@@ -750,6 +750,9 @@
               <span class="custom-indicator-dot" id="vsCustomDot" style="display: none;"></span>
             </button>
           </div>
+          <button class="action-btn vs-export-btn" id="vsExportBtn" onclick="openVegasStackExportModal()" title="Export Picks Against Vegas (Clean Copy & Paste / Native Share)">
+            <i class="fa-solid fa-arrow-up-from-bracket"></i> <span id="vsExportBtnLabel">Export Week 2 Picks</span>
+          </button>
           <button class="action-btn vs-reset-btn" id="vsResetBtn" onclick="resetVegasStackCustomTuning()" title="Reset all custom sliders back to Golden AI Baseline">
             <i class="fa-solid fa-rotate-left"></i> <span>Reset to Baseline</span>
           </button>
@@ -757,8 +760,30 @@
       </div>
 
       <!-- Horizontal Week Carousel / Selector -->
-      <div class="vegas-stack-week-bar" id="vegasStackWeekBar">
-        <!-- Rendered dynamically by renderVegasStackWeekBar() -->
+      <div class="vegas-stack-week-nav-wrap">
+        <div class="vs-week-nav-header">
+          <div class="vs-nav-label-wrap">
+            <span class="vs-nav-label"><i class="fa-solid fa-calendar-week"></i> SELECT SLATE / WEEK</span>
+            <span class="vs-nav-sub">Scroll or click arrows to view all slates</span>
+          </div>
+          <div class="vs-week-quick-select-wrap">
+            <label for="vsWeekDropdown" class="quick-select-label">Jump to:</label>
+            <select id="vsWeekDropdown" class="vs-week-select" onchange="setVegasStackWeek(this.value)" title="Jump directly to any week">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+        </div>
+        <div class="vs-week-carousel-container">
+          <button class="vs-week-nav-arrow prev" id="vsWeekNavPrev" onclick="scrollVegasStackWeeks(-1)" title="Scroll previous weeks" aria-label="Scroll left">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="vegas-stack-week-bar" id="vegasStackWeekBar">
+            <!-- Rendered dynamically by renderVegasStack() -->
+          </div>
+          <button class="vs-week-nav-arrow next" id="vsWeekNavNext" onclick="scrollVegasStackWeeks(1)" title="Scroll next weeks" aria-label="Scroll right">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Weekly Performance Summary KPI Banner -->
@@ -789,6 +814,61 @@
       <div class="vegas-stack-footer">
         <span class="odds-source-tag"><i class="fa-solid fa-shield-halved"></i> Live Odds Powered by DraftKings Consensus • Recalibrated Automatically</span>
         <button class="action-btn secondary-btn" onclick="closeVegasStackModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VEGAS STACK EXPORT MODAL: Clean Copy-and-Paste Picks Card & iOS Share Sheet -->
+  <div class="modal-backdrop" id="vegasStackExportModal" onclick="if(event.target===this) closeVegasStackExportModal()">
+    <div class="modal-dialog vegas-stack-export-dialog">
+      <button class="modal-close" id="closeVegasStackExportBtn" onclick="closeVegasStackExportModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <!-- Header -->
+      <div class="vs-export-header">
+        <div class="vegas-stack-badge"><i class="fa-solid fa-arrow-up-from-bracket"></i> EXPORT PICKS</div>
+        <h2 class="modal-title">EXPORT PICKS AGAINST VEGAS</h2>
+        <p class="modal-subtitle">Clean copy-and-paste text format for group chats, iMessage, Discord, and notes.</p>
+      </div>
+
+      <!-- Export Configuration Bar -->
+      <div class="vs-export-controls">
+        <div class="vs-export-control-group">
+          <label for="vsExportWeekSelect" class="vs-control-label"><i class="fa-solid fa-calendar-day"></i> Slate:</label>
+          <select id="vsExportWeekSelect" class="vs-control-select" onchange="updateVegasStackExportPreview()">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+
+        <div class="vs-export-control-group">
+          <label for="vsExportFilterSelect" class="vs-control-label"><i class="fa-solid fa-filter"></i> Filter:</label>
+          <select id="vsExportFilterSelect" class="vs-control-select" onchange="updateVegasStackExportPreview()">
+            <option value="all">All Matchups</option>
+            <option value="diamond">💎 Diamond Edges Only (7+ Pts)</option>
+            <option value="covers">✅ Covers Only (Graded Wins)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Preview Textarea Card -->
+      <div class="vs-export-preview-wrap">
+        <div class="vs-export-preview-header">
+          <span class="preview-tag"><i class="fa-solid fa-terminal"></i> COPY-AND-PASTE PREVIEW</span>
+          <span class="preview-hint" id="vsExportCharCount">0 games formatted</span>
+        </div>
+        <textarea id="vsExportTextarea" class="vs-export-textarea" readonly spellcheck="false" placeholder="Generating picks card..."></textarea>
+      </div>
+
+      <!-- Action Buttons (Copy & Native Share) -->
+      <div class="vs-export-actions">
+        <button class="action-btn vs-export-action-copy" id="vsExportCopyBtn" onclick="copyVegasStackPicks()">
+          <i class="fa-solid fa-copy"></i>
+          <span>Copy to Clipboard</span>
+        </button>
+        <button class="action-btn vs-export-action-share" id="vsExportShareBtn" onclick="shareVegasStackPicksViaNative()">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          <span>Share (iOS / System)</span>
+        </button>
+        <button class="action-btn secondary-btn" onclick="closeVegasStackExportModal()">Done</button>
       </div>
     </div>
   </div>
@@ -1911,11 +1991,11 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=449"></script>
-  <script src="qrious.min.js?v=449"></script>
-  <script src="qrcode.min.js?v=449"></script>
-  <script src="data/teams.js?v=449"></script>
-  <script src="data/community_brackets.js?v=449"></script>
-  <script src="app.js?v=449"></script>
+  <script src="supabase-client.js?v=450"></script>
+  <script src="qrious.min.js?v=450"></script>
+  <script src="qrcode.min.js?v=450"></script>
+  <script src="data/teams.js?v=450"></script>
+  <script src="data/community_brackets.js?v=450"></script>
+  <script src="app.js?v=450"></script>
 </body>
 </html>

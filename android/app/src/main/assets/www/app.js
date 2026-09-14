@@ -12686,12 +12686,45 @@ function renderVegasStack() {
         badgeHtml = '<span class="pill-badge pending">ACTIVE</span>';
       }
       return `
-        <button class="vs-week-pill ${isActive ? 'active' : ''}" onclick="setVegasStackWeek('${w}')">
+        <button class="vs-week-pill ${isActive ? 'active' : ''}" data-week="${w}" onclick="setVegasStackWeek('${w}')">
           <span>${w}</span>
           ${badgeHtml}
         </button>
       `;
     }).join('');
+
+    // Smoothly center the active pill in view on both desktop and mobile
+    setTimeout(() => {
+      const activePill = weekBar.querySelector('.vs-week-pill.active');
+      if (activePill && typeof activePill.scrollIntoView === 'function') {
+        activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }, 40);
+  }
+
+  // 1b. Sync Quick Jump Dropdown
+  const weekDropdown = document.getElementById('vsWeekDropdown');
+  if (weekDropdown) {
+    if (weekDropdown.children.length === 0) {
+      weekDropdown.innerHTML = VEGAS_STACK_WEEKS.map(w => {
+        let label = w;
+        if (w === 'ALL') label = 'All Season (0-13)';
+        else if (w === 'WEEK 2') label = 'Week 2 (Active)';
+        return `<option value="${w}">${label}</option>`;
+      }).join('');
+    }
+    weekDropdown.value = vegasStackState.currentWeek;
+  }
+
+  // 1c. Sync Export Button Label
+  const exportBtnLabel = document.getElementById('vsExportBtnLabel');
+  if (exportBtnLabel) {
+    const curr = vegasStackState.currentWeek;
+    if (curr === 'ALL') {
+      exportBtnLabel.textContent = 'Export Season Picks';
+    } else {
+      exportBtnLabel.textContent = `Export ${curr === 'WEEK 2' ? "This Week's" : curr} Picks`;
+    }
   }
 
   // 2. Fetch Matchups
@@ -12882,3 +12915,257 @@ function renderVegasStack() {
 }
 
 window.renderVegasStack = renderVegasStack;
+
+window.scrollVegasStackWeeks = function(direction) {
+  const weekBar = document.getElementById('vegasStackWeekBar');
+  if (!weekBar) return;
+  const scrollAmount = 260 * direction;
+  weekBar.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+};
+
+// ==========================================================================
+// VEGAS STACK EXPORT & SHARING SUITE (Clean Copy & Paste & iOS Share Sheet)
+// ==========================================================================
+
+function generateVegasStackExportText(week, filter) {
+  const isCustom = vegasStackState.mode === 'custom';
+  let matchups = getVegasStackMatchups(week, isCustom);
+
+  if (filter === 'diamond') {
+    matchups = matchups.filter(m => m.isDiamond);
+  } else if (filter === 'covers') {
+    matchups = matchups.filter(m => m.atsResult === 'win');
+  }
+
+  const dateNow = new Date();
+  const dateStr = dateNow.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const timeStr = dateNow.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
+
+  const slateTitle = week === 'ALL' ? 'FULL 2026 SEASON SLATE' : `${week} SLATE`;
+  const modelName = isCustom ? 'CFB Prophet Custom Model' : 'CFB Prophet AI Baseline';
+
+  const lines = [];
+  lines.push(`🏈 CFB PROPHET // PICKS AGAINST VEGAS`);
+  lines.push(`━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+  lines.push(`📅 ${slateTitle} • DraftKings Consensus Lines`);
+  lines.push(`📊 Model: ${modelName}`);
+  lines.push(`🕒 Locked & Synced: ${dateStr} at ${timeStr}`);
+  lines.push(`━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+  lines.push('');
+
+  const diamondPicks = matchups.filter(m => m.isDiamond);
+  if (diamondPicks.length > 0 && filter !== 'diamond') {
+    lines.push(`🔥 TOP BEST BETS / DIAMOND EDGES (7+ PTS):`);
+    diamondPicks.forEach(m => {
+      const spreadFormatted = m.spreadOnHome === 0 ? 'PK' : (m.spreadOnHome > 0 ? `+${m.spreadOnHome}` : `${m.spreadOnHome}`);
+      const homeSpreadFormatted = `${m.homeTeam.abbr || m.homeTeam.name} ${spreadFormatted}`;
+      const recSpreadFormatted = m.recSpread > 0 ? `+${m.recSpread}` : `${m.recSpread}`;
+      let statusStr = '';
+      if (m.isFinal) {
+        if (m.atsResult === 'win') statusStr = ' [WIN ✅]';
+        else if (m.atsResult === 'loss') statusStr = ' [LOSS ❌]';
+        else statusStr = ' [PUSH 🟡]';
+      }
+      lines.push(`• ${m.awayTeam.name} @ ${m.homeTeam.name}`);
+      lines.push(`  Vegas: ${homeSpreadFormatted} | Total: ${m.vegasTotal}`);
+      lines.push(`  Model: ${m.awayTeam.abbr || m.awayTeam.name} ${m.scoreAway} - ${m.scoreHome} ${m.homeTeam.abbr || m.homeTeam.name}`);
+      lines.push(`  👉 PICK: ${m.recSide} ${recSpreadFormatted} (Edge: +${m.absEdge.toFixed(1)} pts)${statusStr}`);
+      lines.push('');
+    });
+    lines.push(`━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+    lines.push('');
+  }
+
+  lines.push(`📋 ${filter === 'diamond' ? 'DIAMOND EDGE PICKS' : 'ALL SLATE PICKS (ATS)'}:`);
+  if (matchups.length === 0) {
+    lines.push(`No matchups found matching current filter.`);
+  } else {
+    matchups.forEach((m, idx) => {
+      const spreadFormatted = m.spreadOnHome === 0 ? 'PK' : (m.spreadOnHome > 0 ? `+${m.spreadOnHome}` : `${m.spreadOnHome}`);
+      const homeSpreadFormatted = `${m.homeTeam.abbr || m.homeTeam.name} ${spreadFormatted}`;
+      const recSpreadFormatted = m.recSpread > 0 ? `+${m.recSpread}` : `${m.recSpread}`;
+      let statusStr = '';
+      if (m.isFinal) {
+        if (m.atsResult === 'win') statusStr = ' [WIN ✅]';
+        else if (m.atsResult === 'loss') statusStr = ' [LOSS ❌]';
+        else statusStr = ' [PUSH 🟡]';
+      }
+      const edgeMarker = m.isDiamond ? '💎 ' : '';
+      lines.push(`${idx + 1}. ${m.awayTeam.name} @ ${m.homeTeam.name}`);
+      lines.push(`   Line: ${homeSpreadFormatted} (O/U ${m.vegasTotal})`);
+      lines.push(`   Model: ${m.awayTeam.abbr || m.awayTeam.name} ${m.scoreAway} - ${m.scoreHome} ${m.homeTeam.abbr || m.homeTeam.name}`);
+      lines.push(`   👉 PICK: ${edgeMarker}${m.recSide} ${recSpreadFormatted} (Edge: +${m.absEdge.toFixed(1)} pts)${statusStr}`);
+      if (m.isFinal) {
+        lines.push(`   Final Score: ${m.awayTeam.abbr || m.awayTeam.name} ${m.actAway} - ${m.actHome} ${m.homeTeam.abbr || m.homeTeam.name}`);
+      }
+      lines.push('');
+    });
+  }
+
+  const finalGames = matchups.filter(m => m.isFinal);
+  if (finalGames.length > 0) {
+    const atsWins = finalGames.filter(g => g.atsResult === 'win').length;
+    const atsLosses = finalGames.filter(g => g.atsResult === 'loss').length;
+    const atsPushes = finalGames.filter(g => g.atsResult === 'push').length;
+    const atsDecided = atsWins + atsLosses;
+    const atsPct = atsDecided > 0 ? ((atsWins / atsDecided) * 100).toFixed(1) : '0.0';
+
+    const suWins = finalGames.filter(g => g.suResult === 'win').length;
+    const suPct = finalGames.length > 0 ? ((suWins / finalGames.length) * 100).toFixed(1) : '0.0';
+
+    lines.push(`━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+    lines.push(`🎯 SLATE RECORD (FINAL):`);
+    lines.push(`• ATS Cover Rate: ${atsWins}-${atsLosses}${atsPushes > 0 ? '-' + atsPushes : ''} (${atsPct}%)`);
+    lines.push(`• Straight-Up Accuracy: ${suWins}-${finalGames.length - suWins} (${suPct}%)`);
+  }
+
+  lines.push(`━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+  lines.push(`📱 Simulate live lines & run custom models on CFB Prophet:`);
+  lines.push(`https://jakejohnson.me/cfb-football-predictor`);
+
+  return lines.join('\n');
+}
+
+window.openVegasStackExportModal = function(targetWeek) {
+  const modal = document.getElementById('vegasStackExportModal');
+  if (!modal) return;
+
+  const weekSelect = document.getElementById('vsExportWeekSelect');
+  if (weekSelect) {
+    weekSelect.innerHTML = VEGAS_STACK_WEEKS.map(w => {
+      let label = w;
+      if (w === 'ALL') label = 'Full Season (Weeks 0-13)';
+      else if (w === 'WEEK 2') label = 'Week 2 (Current Active)';
+      return `<option value="${w}">${label}</option>`;
+    }).join('');
+
+    const initialWeek = targetWeek || vegasStackState.currentWeek || 'WEEK 2';
+    weekSelect.value = initialWeek;
+  }
+
+  const filterSelect = document.getElementById('vsExportFilterSelect');
+  if (filterSelect) {
+    filterSelect.value = 'all';
+  }
+
+  updateVegasStackExportPreview();
+
+  modal.classList.add('open');
+  document.body.classList.add('modal-open');
+};
+
+window.closeVegasStackExportModal = function() {
+  const modal = document.getElementById('vegasStackExportModal');
+  if (modal) modal.classList.remove('open');
+};
+
+window.updateVegasStackExportPreview = function() {
+  const weekSelect = document.getElementById('vsExportWeekSelect');
+  const filterSelect = document.getElementById('vsExportFilterSelect');
+  const textarea = document.getElementById('vsExportTextarea');
+  const charCount = document.getElementById('vsExportCharCount');
+
+  const selectedWeek = weekSelect ? weekSelect.value : (vegasStackState.currentWeek || 'WEEK 2');
+  const selectedFilter = filterSelect ? filterSelect.value : 'all';
+
+  const exportText = generateVegasStackExportText(selectedWeek, selectedFilter);
+
+  if (textarea) {
+    textarea.value = exportText;
+  }
+
+  if (charCount) {
+    const isCustom = vegasStackState.mode === 'custom';
+    let matchups = getVegasStackMatchups(selectedWeek, isCustom);
+    if (selectedFilter === 'diamond') matchups = matchups.filter(m => m.isDiamond);
+    if (selectedFilter === 'covers') matchups = matchups.filter(m => m.atsResult === 'win');
+    charCount.textContent = `${matchups.length} matchups • ${exportText.length} characters`;
+  }
+};
+
+window.copyVegasStackPicks = function() {
+  const textarea = document.getElementById('vsExportTextarea');
+  const btn = document.getElementById('vsExportCopyBtn');
+  if (!textarea) return;
+
+  const text = textarea.value;
+  if (!text) return;
+
+  const handleSuccess = () => {
+    if (btn) {
+      const origHtml = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copied to Clipboard!</span>';
+      btn.classList.add('btn-copied');
+      setTimeout(() => {
+        btn.innerHTML = origHtml;
+        btn.classList.remove('btn-copied');
+      }, 2500);
+    }
+    if (typeof showCustomToast === 'function') {
+      showCustomToast('📋 Picks copied to clipboard! Ready to paste into group chat.');
+    } else if (typeof showActionToast === 'function') {
+      showActionToast('📋 Picks copied to clipboard!');
+    }
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text)
+      .then(handleSuccess)
+      .catch(() => {
+        textarea.select();
+        textarea.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+        handleSuccess();
+      });
+  } else {
+    textarea.select();
+    textarea.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    handleSuccess();
+  }
+};
+
+window.shareVegasStackPicksViaNative = function() {
+  const textarea = document.getElementById('vsExportTextarea');
+  const weekSelect = document.getElementById('vsExportWeekSelect');
+  const selectedWeek = weekSelect ? weekSelect.value : (vegasStackState.currentWeek || 'WEEK 2');
+  const text = textarea ? textarea.value : '';
+  const title = `CFB Prophet ${selectedWeek} Picks Against Vegas`;
+
+  // 1. iOS App WebKit Bridge
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.share) {
+    try {
+      window.webkit.messageHandlers.share.postMessage({
+        title: title,
+        text: text,
+        url: window.location.href
+      });
+      if (typeof showCustomToast === 'function') {
+        showCustomToast('📲 Opening iOS Share Sheet...');
+      }
+      return;
+    } catch (e) {
+      console.error('iOS WebKit share error:', e);
+    }
+  }
+
+  // 2. Web Share API (Safari on iOS / macOS)
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      text: text,
+      url: window.location.href
+    }).then(() => {
+      if (typeof showCustomToast === 'function') {
+        showCustomToast('✅ Shared picks successfully!');
+      }
+    }).catch(err => {
+      if (err && err.name !== 'AbortError') {
+        window.copyVegasStackPicks();
+      }
+    });
+  } else {
+    window.copyVegasStackPicks();
+  }
+};
+

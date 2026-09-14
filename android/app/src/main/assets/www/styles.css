@@ -7510,75 +7510,237 @@ body {
   transform: translateY(-1px);
 }
 
+/* Export Button in Toolbar */
+.vs-export-btn {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.22), rgba(217, 119, 6, 0.15));
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #FDE68A;
+  font-family: var(--font-main);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.vs-export-btn:hover {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  border-color: #FDE68A;
+  color: #000000;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Week Navigation & Carousel Wrap */
+.vegas-stack-week-nav-wrap {
+  background: #0D1527;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 0.85rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.vs-week-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.vs-nav-label-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.vs-nav-label {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #F59E0B;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.vs-nav-sub {
+  font-size: 0.72rem;
+  color: #94A3B8;
+}
+
+.vs-week-quick-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.quick-select-label {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.vs-week-select {
+  background: #1E293B;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.vs-week-select:focus {
+  border-color: #F59E0B;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+}
+
+.vs-week-carousel-container {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.vs-week-nav-arrow {
+  width: 36px;
+  height: 42px;
+  flex-shrink: 0;
+  background: #1E293B;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #F59E0B;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.vs-week-nav-arrow:hover {
+  background: #334155;
+  color: #FFFFFF;
+  border-color: #F59E0B;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+.vs-week-nav-arrow:active {
+  transform: scale(0.95);
+}
+
 /* Horizontal Week Carousel */
 .vegas-stack-week-bar {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.6rem;
   overflow-x: auto;
-  padding: 0.35rem 0.25rem 0.85rem 0.25rem;
+  flex: 1;
+  min-width: 0;
+  padding: 0.25rem 0.25rem 0.65rem 0.25rem;
   scrollbar-width: thin;
-  scrollbar-color: rgba(245, 158, 11, 0.3) transparent;
-  margin-bottom: 1rem;
+  scrollbar-color: #F59E0B #1E293B;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 .vegas-stack-week-bar::-webkit-scrollbar {
-  height: 5px;
+  height: 6px;
+}
+
+.vegas-stack-week-bar::-webkit-scrollbar-track {
+  background: #1E293B;
+  border-radius: 999px;
 }
 
 .vegas-stack-week-bar::-webkit-scrollbar-thumb {
-  background: rgba(245, 158, 11, 0.3);
+  background: #F59E0B;
   border-radius: 999px;
 }
 
 .vs-week-pill {
   flex-shrink: 0;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #94A3B8;
+  background: #1E293B;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  color: #FFFFFF;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.84rem;
   font-weight: 700;
-  padding: 6px 12px;
-  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  border-radius: 9px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   transition: all 0.18s ease;
   white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
 }
 
 .vs-week-pill:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: #334155;
   color: #FFFFFF;
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .vs-week-pill.active {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.2));
-  border-color: #F59E0B;
-  color: #FDE68A;
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  border-color: #FDE68A;
+  color: #000000 !important;
+  font-weight: 800;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.55), 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .vs-week-pill .pill-badge {
-  font-size: 0.65rem;
-  padding: 1px 6px;
+  font-size: 0.68rem;
+  padding: 2px 7px;
   border-radius: 999px;
   font-weight: 800;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .vs-week-pill .pill-badge.graded {
-  background: rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.25);
   color: #34D399;
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  border: 1px solid rgba(16, 185, 129, 0.5);
 }
 
 .vs-week-pill .pill-badge.pending {
-  background: rgba(56, 189, 248, 0.15);
+  background: rgba(56, 189, 248, 0.25);
   color: #38BDF8;
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+}
+
+.vs-week-pill.active .pill-badge {
+  background: rgba(0, 0, 0, 0.25);
+  color: #000000;
+  border: 1px solid rgba(0, 0, 0, 0.35);
 }
 
 /* Weekly Summary KPI Banner */
@@ -7951,10 +8113,223 @@ body {
   color: #94A3B8;
 }
 
+/* Vegas Stack Export Modal */
+.vegas-stack-export-dialog {
+  max-width: 680px;
+  width: 94vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: #0A0F1D;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.9), 0 0 35px rgba(245, 158, 11, 0.15);
+  border-radius: var(--radius-lg);
+  overflow-y: auto;
+}
+
+.vs-export-header {
+  margin-bottom: 1.15rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.vs-export-header .modal-title {
+  font-family: 'Bebas Neue', 'Outfit', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.04em;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.vs-export-header .modal-subtitle {
+  font-size: 0.82rem;
+  color: #94A3B8;
+  margin-top: 0.25rem;
+}
+
+.vs-export-controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  background: #11192C;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+}
+
+.vs-export-control-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.vs-control-label {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #F59E0B;
+  white-space: nowrap;
+}
+
+.vs-control-select {
+  flex: 1;
+  background: #1E293B;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+.vs-control-select:focus {
+  border-color: #F59E0B;
+}
+
+.vs-export-preview-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.vs-export-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #94A3B8;
+}
+
+.preview-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #38BDF8;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.preview-hint {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #94A3B8;
+}
+
+.vs-export-textarea {
+  width: 100%;
+  height: 280px;
+  min-height: 200px;
+  max-height: 450px;
+  background: #060911;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-md);
+  color: #E2E8F0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  padding: 0.85rem;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6);
+  white-space: pre;
+}
+
+.vs-export-textarea:focus {
+  border-color: #F59E0B;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 10px rgba(245, 158, 11, 0.25);
+}
+
+.vs-export-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.vs-export-action-copy {
+  flex: 1;
+  min-width: 170px;
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: #FFFFFF;
+  border: 1px solid #34D399;
+  font-weight: 800;
+  font-size: 0.88rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+
+.vs-export-action-copy:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.5);
+  transform: translateY(-1px);
+}
+
+.vs-export-action-copy.btn-copied {
+  background: #047857;
+  border-color: #6EE7B7;
+}
+
+.vs-export-action-share {
+  flex: 1;
+  min-width: 170px;
+  background: linear-gradient(135deg, #3B82F6, #2563EB);
+  color: #FFFFFF;
+  border: 1px solid #60A5FA;
+  font-weight: 800;
+  font-size: 0.88rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+}
+
+.vs-export-action-share:hover {
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.5);
+  transform: translateY(-1px);
+}
+
 @media (max-width: 640px) {
   .vegas-stack-modal-dialog {
-    padding: 1rem;
+    padding: 0.85rem;
     width: 98vw;
+  }
+  .vegas-stack-header {
+    gap: 0.75rem;
+  }
+  .vegas-stack-toolbar {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .vs-export-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .vs-week-nav-arrow {
+    display: none;
   }
   .vegas-stack-cards-grid {
     grid-template-columns: 1fr;
@@ -7962,4 +8337,19 @@ body {
   .vegas-stack-summary-banner {
     grid-template-columns: repeat(2, 1fr);
   }
+  .vs-week-pill {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+  .vs-export-controls {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .vs-export-control-group {
+    min-width: 100%;
+  }
+  .vs-export-actions {
+    flex-direction: column;
+  }
 }
+
