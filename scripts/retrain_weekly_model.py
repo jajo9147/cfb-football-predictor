@@ -120,16 +120,39 @@ WEEK3_OFFICIAL_POLL = {
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
 
-# Baseline SP+ Ratings before Week 1 (Calibrated 2026 Connelly SP+ & 247Sports Talent Baseline)
+# Baseline SP+ Ratings before Week 1 (Calibrated to AP Top 25 Consensus, Head-to-Head, and 247Sports Roster Talent)
 BASELINE_SP_RATINGS = {
-    'ohiostate': 41.7, 'oregon': 38.2, 'georgia': 35.4, 'notredame': 35.5,
-    'texas': 31.8, 'indiana': 33.4, 'miami': 30.6, 'lsu': 29.3,
-    'texasam': 29.8, 'usc': 26.4, 'oklahoma': 27.1, 'alabama': 26.6,
-    'texastech': 29.6, 'olemiss': 25.1, 'byu': 22.2, 'tennessee': 25.9,
-    'washington': 23.7, 'michigan': 25.6, 'clemson': 21.5, 'pennstate': 24.0,
-    'iowa': 22.1, 'missouri': 23.5, 'smu': 19.9, 'houston': 14.7,
-    'floridastate': 17.1, 'utah': 17.1, 'louisville': 18.7, 'arizonastate': 12.4,
-    'colorado': 8.2, 'arizona': 16.8, 'boisestate': 12.0
+    'texas': 37.5,       # #1 AP (2-0, beat Ohio State in Columbus, 985 talent)
+    'georgia': 36.5,     # #2 AP (2-0, 1003 talent)
+    'ohiostate': 35.8,   # #6 AP (1-1, lost to Texas by 1 at home, 964 talent)
+    'notredame': 35.0,   # #3 AP (2-0, 953 talent)
+    'miami': 33.5,       # #5 AP (2-0, 885 talent)
+    'lsu': 33.0,         # #7 AP (2-0, crushed Clemson 51-10, 932 talent)
+    'indiana': 32.5,     # #4 AP (2-0, 735 talent)
+    'texasam': 31.8,     # #9 AP (2-0, blew out ASU 48-20, 933 talent)
+    'alabama': 31.2,     # #10 AP (2-0, beat Kentucky 38-14, 973 talent)
+    'oregon': 30.5,      # #21 AP (1-1, upset by OK State, 984 talent)
+    'pennstate': 27.8,   # #14 AP (2-0)
+    'michigan': 27.5,    # #19 AP (2-0, beat #11 Oklahoma)
+    'olemiss': 27.2,     # #8 AP (2-0, beat Louisville)
+    'tennessee': 26.8,   # #15 AP (2-0)
+    'usc': 26.5,         # #12 AP (3-0)
+    'oklahoma': 25.5,    # #24 AP (1-1, lost to Michigan)
+    'texastech': 25.0,   # #13 AP (2-0, Big 12, 767 talent, beat ACU/ORST)
+    'missouri': 24.5,    # #20 AP (2-0)
+    'byu': 23.5,         # #11 AP (2-0, beat Arizona)
+    'washington': 22.8,  # RV (2-0)
+    'iowa': 22.0,        # #18 AP (2-0)
+    'smu': 20.8,         # #16 AP (2-0)
+    'louisville': 19.8,  # #23 AP (1-1, lost to Ole Miss, beat Villanova)
+    'clemson': 18.8,     # NR (1-1, lost 51-10 to LSU)
+    'utah': 18.0,        # #17 AP (2-0)
+    'floridastate': 16.8,# NR (1-1)
+    'arizona': 15.5,     # RV (1-1, lost to BYU)
+    'houston': 15.0,     # #22 AP (2-0)
+    'boisestate': 14.0,  # RV (1-1, lost to Oregon)
+    'arizonastate': 11.2,# NR (1-1, lost 48-20 to A&M)
+    'colorado': 9.2      # NR (1-1)
 }
 
 # Stadium Home Field Advantage mapping (points)
