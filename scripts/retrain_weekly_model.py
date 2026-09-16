@@ -270,8 +270,49 @@ NON_DB_OPPONENT_RATINGS = {
     'Stephen F. Austin Lumberjacks': -18.0,
     'Houston Christian Huskies': -22.0,
     'Arkansas-Pine Bluff Golden Lions': -22.0,
-    'Northern Arizona Lumberjacks': -18.0
+    'Northern Arizona Lumberjacks': -18.0,
+    'Eastern Washington Eagles': -18.0, 'Eastern Washington': -18.0, 'EWU': -18.0,
+    'Northern Iowa Panthers': -18.0, 'Northern Iowa': -18.0, 'UNI': -18.0,
+    'McNeese Cowboys': -20.0, 'McNeese': -20.0, 'MCN': -20.0,
+    'Wofford Terriers': -20.0, 'Wofford': -20.0, 'WOF': -20.0,
+    'The Citadel Bulldogs': -22.0, 'The Citadel': -22.0, 'CIT': -22.0,
+    'Charleston Southern Buccaneers': -22.0, 'Charleston Southern': -22.0,
+    'Chattanooga Mocs': -18.0, 'Chattanooga': -18.0,
+    'South Dakota Coyotes': -16.0, 'South Dakota': -16.0,
+    'Central Arkansas Bears': -18.0, 'Central Arkansas': -18.0
 }
+
+# Exhaustive list of all 117+ FCS programs across all conferences (Big Sky, MVFC, CAA, SoCon, SWAC, MEAC, Southland, etc.)
+FCS_KEYWORDS = [
+    'fcs', 'eastern washington', 'northern iowa', 'mcneese', 'wofford',
+    'the citadel', 'charleston southern', 'villanova', 'howard', 'furman',
+    'tennessee state', 'morgan state', 'utah tech', 'southern jaguars',
+    'weber state', 'uc davis', 'idaho', 'florida a&m', 'missouri state',
+    'abilene christian', 'pine bluff', 'northern arizona', 'portland state',
+    'stephen f. austin', 'stephen f austin', 'houston christian', 'tarleton state',
+    'tarleton', 'central arkansas', 'nicholls', 'eastern kentucky', 'mercer',
+    'chattanooga', 'samford', 'sacramento state', 'montana state', 'montana',
+    'south dakota state', 'south dakota', 'north dakota state', 'north dakota',
+    'holy cross', 'richmond', 'william & mary', 'alabama a&m', 'alabama state',
+    'alcorn state', 'austin peay', 'bethune-cookman', 'bryant', 'bucknell',
+    'butler', 'cal poly', 'campbell', 'central connecticut', 'colgate',
+    'davidson', 'delaware state', 'drake', 'duquesne', 'east tennessee state',
+    'east texas a&m', 'eastern illinois', 'elon', 'fordham', 'gardner-webb',
+    'georgetown', 'grambling', 'hampton', 'idaho state', 'illinois state',
+    'incarnate word', 'indiana state', 'jackson state', 'lafayette', 'lamar',
+    'lehigh', 'lindenwood', 'long island', 'maine', 'marist', 'mercyhurst',
+    'merrimack', 'mississippi valley', 'monmouth', 'murray state', 'new hampshire',
+    'new haven', 'norfolk state', 'north alabama', 'north carolina a&t',
+    'north carolina central', 'northern colorado', 'northwestern state',
+    'prairie view', 'presbyterian', 'rhode island', 'robert morris',
+    'se louisiana', 'southeastern louisiana', 'sacred heart', 'san diego',
+    'south carolina state', 'southeast missouri', 'southern illinois',
+    'southern utah', 'st. thomas', 'stetson', 'stonehill', 'stony brook',
+    'tennessee tech', 'texas southern', 'towson', 'ualbany', 'ut martin',
+    'ut rio grande valley', 'vmi', 'wagner', 'western carolina',
+    'western illinois', 'youngstown state'
+]
+
 
 def load_teams_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -627,15 +668,7 @@ def main():
     all_completed_games = []
     
     # 1. Ingest completed games already marked in TEAMS_DATABASE
-    fcs_keywords = [
-        'fcs', 'villanova', 'howard', 'furman', 'tennessee state', 'morgan state',
-        'utah tech', 'southern jaguars', 'weber state', 'uc davis', 'idaho',
-        'florida a&m', 'missouri state', 'abilene christian', 'pine bluff',
-        'northern arizona', 'portland state', 'stephen f austin', 'houston christian',
-        'tarleton', 'central arkansas', 'nicholls', 'eastern kentucky', 'mercer',
-        'chattanooga', 'samford', 'sacramento state', 'montana state', 'montana',
-        'south dakota', 'north dakota', 'holy cross', 'richmond', 'william & mary'
-    ]
+    fcs_keywords = FCS_KEYWORDS
 
     for tid, t in db.items():
         t_name = (t.get('name') or tid).lower()
@@ -882,10 +915,10 @@ def main():
             opp_lower = raw_opp_name.lower()
             opp_abbr = (g.get('oppAbbr') or '').strip().lower()
 
-            is_fcs = g.get('oppRank') == 'FCS' or any(kw in opp_lower for kw in fcs_keywords)
+            is_fcs = g.get('oppRank') == 'FCS' or any(kw in opp_lower for kw in FCS_KEYWORDS)
             if is_fcs:
                 g['oppRank'] = 'FCS'
-                sp_opp = -16.0
+                sp_opp = -18.0
                 opp_talent = 180.0
             elif opp_id and opp_id in db:
                 sp_opp = float(db[opp_id].get('baseSpRating', 22.0))
@@ -900,6 +933,14 @@ def main():
                     found_dynamic = dynamic_fbs_ratings[opp_abbr]
                 else:
                     for k in sorted(dynamic_fbs_ratings.keys(), key=len, reverse=True):
+                        # Directional qualifier guard (e.g. "eastern washington" must NOT match "washington", "northern iowa" must NOT match "iowa")
+                        is_directional_mismatch = False
+                        for prefix in ['eastern ', 'western ', 'northern ', 'southern ', 'central ', 'east ', 'west ', 'north ', 'south ', 'southeast ', 'southwest ']:
+                            if prefix in opp_lower and not prefix in k:
+                                is_directional_mismatch = True
+                                break
+                        if is_directional_mismatch:
+                            continue
                         if len(k) >= 4 and (k == opp_lower or k in opp_lower or (len(opp_lower) >= 4 and opp_lower in k)):
                             found_dynamic = dynamic_fbs_ratings[k]
                             break
@@ -957,7 +998,7 @@ def main():
                     lines_w3.get((team_clean, opp_abbr)) or
                     lines_w3.get((team_short, opp_clean))
                 )
-                if not matched_line:
+                if not matched_line and not is_fcs:
                     for (h, a), l_info in lines_w3.items():
                         if (team_short in h or h in team_clean) and (opp_abbr in a or any(w in a for w in opp_clean.split() if len(w) > 4)):
                             matched_line = l_info
