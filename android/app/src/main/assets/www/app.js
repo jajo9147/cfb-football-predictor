@@ -12859,11 +12859,22 @@ function renderVegasStack() {
   // 4. Render Grid of Cards
   if (grid) {
     if (allWeekMatchups.length === 0) {
+      const isGradingFilter = (vegasStackState.filter === 'covers' || vegasStackState.filter === 'losses');
+      let emptyTitle = 'No matchups match your filter or search.';
+      let emptySub = 'Try selecting "All Games" or clearing your search term.';
+      let iconClass = 'fa-filter-circle-xmark';
+
+      if (isGradingFilter) {
+        iconClass = 'fa-clock';
+        emptyTitle = `${vegasStackState.currentWeek} Games Are Pending Kickoff!`;
+        emptySub = `Covers and losses are only graded after games go final. Switch to <strong>All Games</strong> or <strong>💎 Diamond Edges</strong> to see this week's active picks against Vegas!`;
+      }
+
       grid.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: #94A3B8;">
-          <i class="fa-solid fa-filter-circle-xmark" style="font-size: 2.5rem; color: #64748B; margin-bottom: 0.75rem;"></i>
-          <p style="font-size: 1rem; font-weight: 700; color: #CBD5E1;">No matchups match your filter or search.</p>
-          <p style="font-size: 0.8rem; margin-top: 0.25rem;">Try selecting "All Games" or clearing your search term.</p>
+          <i class="fa-solid ${iconClass}" style="font-size: 2.5rem; color: #64748B; margin-bottom: 0.75rem;"></i>
+          <p style="font-size: 1rem; font-weight: 700; color: #CBD5E1;">${emptyTitle}</p>
+          <p style="font-size: 0.85rem; margin-top: 0.35rem; line-height: 1.4;">${emptySub}</p>
         </div>
       `;
       return;
