@@ -20,3 +20,6 @@ Thumbs.db
 # Build artifacts
 ios/build/
 ios/DerivedData/
+.gradle/
+android/.gradle/
+android/app/build/

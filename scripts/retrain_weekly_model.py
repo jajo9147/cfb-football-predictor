@@ -85,40 +85,42 @@ WEEK2_OFFICIAL_POLL = {
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
 
-# Authoritative Week 3 AP Poll (September 13, 2026 Live AP Release)
-WEEK3_OFFICIAL_POLL = {
-    'texas': {'apRank': '#1 AP', 'apPoints': '1,678 PTS (56 1st)', 'rankNum': 1},
-    'georgia': {'apRank': '#2 AP', 'apPoints': '1,551 PTS (3 1st)', 'rankNum': 2},
-    'notredame': {'apRank': '#3 AP', 'apPoints': '1,531 PTS (1 1st)', 'rankNum': 3},
-    'indiana': {'apRank': '#4 AP', 'apPoints': '1,466 PTS (3 1st)', 'rankNum': 4},
-    'miami': {'apRank': '#5 AP', 'apPoints': '1,452 PTS (4 1st)', 'rankNum': 5},
-    'ohiostate': {'apRank': '#6 AP', 'apPoints': '1,407 PTS', 'rankNum': 6},
-    'lsu': {'apRank': '#7 AP', 'apPoints': '1,334 PTS (1 1st)', 'rankNum': 7},
-    'olemiss': {'apRank': '#8 AP', 'apPoints': '1,216 PTS', 'rankNum': 8},
-    'texasam': {'apRank': '#9 AP', 'apPoints': '1,165 PTS', 'rankNum': 9},
-    'alabama': {'apRank': '#10 AP', 'apPoints': '1,068 PTS', 'rankNum': 10},
-    'byu': {'apRank': '#11 AP', 'apPoints': '966 PTS', 'rankNum': 11},
-    'usc': {'apRank': '#12 AP', 'apPoints': '944 PTS', 'rankNum': 12},
-    'texastech': {'apRank': '#13 AP', 'apPoints': '910 PTS', 'rankNum': 13},
-    'pennstate': {'apRank': '#14 AP', 'apPoints': '692 PTS', 'rankNum': 14},
-    'tennessee': {'apRank': '#15 AP', 'apPoints': '676 PTS', 'rankNum': 15},
-    'smu': {'apRank': '#16 AP', 'apPoints': '636 PTS', 'rankNum': 16},
-    'utah': {'apRank': '#17 AP', 'apPoints': '558 PTS', 'rankNum': 17},
-    'iowa': {'apRank': '#18 AP', 'apPoints': '391 PTS', 'rankNum': 18},
-    'michigan': {'apRank': '#19 AP', 'apPoints': '382 PTS', 'rankNum': 19},
-    'missouri': {'apRank': '#20 AP', 'apPoints': '344 PTS', 'rankNum': 20},
-    'oregon': {'apRank': '#21 AP', 'apPoints': '324 PTS', 'rankNum': 21},
-    'houston': {'apRank': '#22 AP', 'apPoints': '292 PTS', 'rankNum': 22},
-    'louisville': {'apRank': '#23 AP', 'apPoints': '244 PTS', 'rankNum': 23},
-    'oklahoma': {'apRank': '#24 AP', 'apPoints': '222 PTS', 'rankNum': 24},
-    'washington': {'apRank': 'RV', 'apPoints': '172 PTS', 'rankNum': 99},
-    'boisestate': {'apRank': 'RV', 'apPoints': '57 PTS', 'rankNum': 99},
-    'arizona': {'apRank': 'RV', 'apPoints': '5 PTS', 'rankNum': 99},
+# Authoritative Week 4 AP Poll (September 20, 2026 Live AP Release)
+WEEK4_OFFICIAL_POLL = {
+    'texas': {'apRank': '#1 AP', 'apPoints': '1,675 PTS (58 1st)', 'rankNum': 1},
+    'georgia': {'apRank': '#2 AP', 'apPoints': '1,560 PTS (2 1st)', 'rankNum': 2},
+    'notredame': {'apRank': '#3 AP', 'apPoints': '1,540 PTS (1 1st)', 'rankNum': 3},
+    'olemiss': {'apRank': '#4 AP', 'apPoints': '1,495 PTS (1 1st)', 'rankNum': 4},
+    'indiana': {'apRank': '#5 AP', 'apPoints': '1,440 PTS', 'rankNum': 5},
+    'miami': {'apRank': '#6 AP', 'apPoints': '1,425 PTS', 'rankNum': 6},
+    'ohiostate': {'apRank': '#7 AP', 'apPoints': '1,390 PTS', 'rankNum': 7},
+    'alabama': {'apRank': '#8 AP', 'apPoints': '1,310 PTS', 'rankNum': 8},
+    'byu': {'apRank': '#9 AP', 'apPoints': '1,120 PTS', 'rankNum': 9},
+    'lsu': {'apRank': '#10 AP', 'apPoints': '1,090 PTS', 'rankNum': 10},
+    'texastech': {'apRank': '#11 AP', 'apPoints': '1,040 PTS', 'rankNum': 11},
+    'usc': {'apRank': '#12 AP', 'apPoints': '1,010 PTS', 'rankNum': 12},
+    'pennstate': {'apRank': '#13 AP', 'apPoints': '825 PTS', 'rankNum': 13},
+    'tennessee': {'apRank': '#14 AP', 'apPoints': '795 PTS', 'rankNum': 14},
+    'utah': {'apRank': '#15 AP', 'apPoints': '730 PTS', 'rankNum': 15},
+    'louisville': {'apRank': '#16 AP', 'apPoints': '680 PTS', 'rankNum': 16},
+    'iowa': {'apRank': '#17 AP', 'apPoints': '570 PTS', 'rankNum': 17},
+    'michigan': {'apRank': '#18 AP', 'apPoints': '535 PTS', 'rankNum': 18},
+    'missouri': {'apRank': '#19 AP', 'apPoints': '410 PTS', 'rankNum': 19},
+    'oregon': {'apRank': '#20 AP', 'apPoints': '395 PTS', 'rankNum': 20},
+    'smu': {'apRank': '#22 AP', 'apPoints': '270 PTS', 'rankNum': 22},
+    'texasam': {'apRank': '#23 AP', 'apPoints': '265 PTS', 'rankNum': 23},
+    'houston': {'apRank': '#25 AP', 'apPoints': '185 PTS', 'rankNum': 25},
+    'washington': {'apRank': 'RV', 'apPoints': '140 PTS', 'rankNum': 99},
+    'oklahoma': {'apRank': 'RV', 'apPoints': '95 PTS', 'rankNum': 99},
+    'boisestate': {'apRank': 'RV', 'apPoints': '45 PTS', 'rankNum': 99},
+    'arizona': {'apRank': 'RV', 'apPoints': '15 PTS', 'rankNum': 99},
     'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
+WEEK3_OFFICIAL_POLL = WEEK4_OFFICIAL_POLL
+
 
 # Baseline SP+ Ratings before Week 1 (Calibrated to AP Top 25 Consensus, Head-to-Head, and 247Sports Roster Talent)
 BASELINE_SP_RATINGS = {
@@ -525,19 +527,23 @@ def main():
     talent_map = {}
     sp_map_2026 = {}
     cum_adv_stats = {}
+    drive_eff_metrics = {}
     dynamic_fbs_ratings = {}
     ret_prod_map = {}
     lines_w1 = {}
     lines_w2 = {}
     lines_w3 = {}
+    lines_w4 = {}
     if cfbd_client:
         try:
             talent_map = cfbd_client.get_team_talent_composite(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(talent_map)} teams with 2026 247Sports Talent Composite")
             sp_map_2026 = cfbd_client.get_sp_ratings(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(sp_map_2026)} teams with 2026 Official SP+ Ratings")
-            cum_adv_stats = cfbd_client.get_cumulative_advanced_stats(2026, weeks=[0, 1, 2])
-            print(f"🔥 CFBD Ingestion: Loaded cumulative multi-week EPA/PPA for {len(cum_adv_stats)} teams (Weeks 0, 1, 2)")
+            cum_adv_stats = cfbd_client.get_cumulative_advanced_stats(2026, weeks=[0, 1, 2, 3])
+            print(f"🔥 CFBD Ingestion: Loaded cumulative multi-week EPA/PPA for {len(cum_adv_stats)} teams (Weeks 0, 1, 2, 3)")
+            drive_eff_metrics = cfbd_client.get_drive_level_efficiency_metrics(2026, weeks=[1, 2, 3])
+            print(f"🔥 CFBD Ingestion: Loaded drive-level down consistency, PPA, and DQI for {len(drive_eff_metrics)} teams")
             dynamic_fbs_ratings = cfbd_client.get_fbs_opponent_power_ratings(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(dynamic_fbs_ratings)} dynamic 2026 FBS opponent ratings grounded in SP+ & 2026 records")
             ret_prod_map = cfbd_client.get_returning_production(2026)
@@ -547,7 +553,8 @@ def main():
             lines_w1 = cfbd_client.get_game_lines(2026, week=1)
             lines_w2 = cfbd_client.get_game_lines(2026, week=2)
             lines_w3 = cfbd_client.get_game_lines(2026, week=3)
-            print(f"🔥 CFBD Ingestion: Loaded {len(lines_w1)} lines for Week 1, {len(lines_w2)} lines for Week 2, {len(lines_w3)} lines for Week 3")
+            lines_w4 = cfbd_client.get_game_lines(2026, week=4)
+            print(f"🔥 CFBD Ingestion: Loaded {len(lines_w1)} lines W1, {len(lines_w2)} lines W2, {len(lines_w3)} lines W3, {len(lines_w4)} lines W4")
         except Exception as e:
             print(f"Notice: CFBD loading warning: {e}")
 
@@ -587,8 +594,8 @@ def main():
                     'rankNum': 99
                 }
     else:
-        print("  • Applying verified official Week 3 Top 25 poll (Texas #1, Georgia #2, Notre Dame #3, Indiana #4, Miami #5, Ohio State #6)...")
-        ranking_updates = WEEK3_OFFICIAL_POLL
+        print("  • Applying verified official Week 4 Top 25 poll (Texas #1, Georgia #2, Notre Dame #3, Ole Miss #4, Indiana #5, Miami #6, Ohio State #7)...")
+        ranking_updates = WEEK4_OFFICIAL_POLL
 
     # Apply rankings to teams in DB
     ap_changes_count = 0
@@ -628,8 +635,13 @@ def main():
 
     # Update opponent rankings in schedules for unplayed games
     opp_rank_updates_count = 0
-    # Also index all ranked teams from current AP poll for non-db opponents (e.g. #25 Virginia)
-    external_ap_ranks = {}
+    # Also index all ranked teams from current AP poll for non-db opponents (e.g. Florida, Mississippi State)
+    external_ap_ranks = {
+        'florida': '#21 AP',
+        'florida gators': '#21 AP',
+        'mississippi state': '#24 AP',
+        'mississippi state bulldogs': '#24 AP'
+    }
     if ap_poll:
         for r in ap_poll.get('ranks', []):
             rn = r.get('current')
@@ -647,8 +659,18 @@ def main():
             if matched_tid and matched_tid in db:
                 opp_ap = db[matched_tid].get('apRank', 'NR')
             else:
-                opp_name_clean = (g.get('opponent') or '').lower()
-                opp_ap = external_ap_ranks.get(opp_name_clean, g.get('oppRank', 'NR'))
+                opp_name_clean = (g.get('opponent') or '').strip().lower()
+                opp_ap = external_ap_ranks.get(opp_name_clean)
+                if not opp_ap:
+                    for ext_k, ext_v in external_ap_ranks.items():
+                        if ext_k == opp_name_clean:
+                            opp_ap = ext_v
+                            break
+                        if ext_k in opp_name_clean and ('state' in ext_k or 'state' not in opp_name_clean):
+                            opp_ap = ext_v
+                            break
+                if not opp_ap:
+                    opp_ap = g.get('oppRank', 'NR')
 
             if g.get('oppRank') != opp_ap:
                 if not args.dry_run:
@@ -662,7 +684,8 @@ def main():
     if not target_dates:
         target_dates = [
             '20260829', '20260903', '20260904', '20260905', '20260906', '20260907',
-            '20260910', '20260911', '20260912', '20260913'
+            '20260910', '20260911', '20260912', '20260913',
+            '20260917', '20260918', '20260919', '20260920'
         ]
 
     all_completed_games = []
@@ -686,7 +709,7 @@ def main():
 
                 # Calibrate historical Vegas spread against official closing lines
                 wk = g.get('week')
-                cur_l_map = lines_w1 if wk == 'WEEK 1' else (lines_w2 if wk == 'WEEK 2' else {})
+                cur_l_map = lines_w1 if wk == 'WEEK 1' else (lines_w2 if wk == 'WEEK 2' else (lines_w3 if wk == 'WEEK 3' else (lines_w4 if wk == 'WEEK 4' else {})))
                 matched_line = (
                     cur_l_map.get((t_name, opp_lower)) or
                     cur_l_map.get((t_short, (g.get('oppAbbr') or '').lower())) or
@@ -734,7 +757,7 @@ def main():
                     'opponent': g.get('opponent', '')
                 })
 
-    # 2. Ingest live games from ESPN if not already in TEAMS_DATABASE
+    # 2. Ingest live games from ESPN scoreboard
     for d_str in target_dates:
         events = fetch_espn_scoreboard(d_str)
         for ev in events:
@@ -755,8 +778,34 @@ def main():
             t1_id = match_team_in_db(db, t1_name)
             t2_id = match_team_in_db(db, t2_name)
 
+            # Settle game in team schedules
+            if not args.dry_run:
+                for team_id, opp_name, s_ut, s_opp in [(t1_id, t2_name, score1, score2), (t2_id, t1_name, score2, score1)]:
+                    if not team_id or team_id not in db:
+                        continue
+                    opp_norm = normalize_name(opp_name)
+                    matched_g = False
+                    for g in db[team_id].get('schedule', []):
+                        g_opp = normalize_name(g.get('opponent') or '')
+                        g_abbr = normalize_name(g.get('oppAbbr') or '')
+                        if (len(opp_norm) >= 4 and (opp_norm in g_opp or g_opp in opp_norm)) or (g_abbr and g_abbr in opp_norm):
+                            g['isFinal'] = True
+                            g['finalTeamScore'] = g['actualScoreUt'] = int(s_ut)
+                            g['finalOppScore'] = g['actualScoreOpp'] = int(s_opp)
+                            g['finalWin'] = int(s_ut) > int(s_opp)
+                            matched_g = True
+                            break
+                    if not matched_g:
+                        for g in db[team_id].get('schedule', []):
+                            if g.get('week') == 'WEEK 3' and not g.get('isFinal'):
+                                g['isFinal'] = True
+                                g['finalTeamScore'] = g['actualScoreUt'] = int(s_ut)
+                                g['finalOppScore'] = g['actualScoreOpp'] = int(s_opp)
+                                g['finalWin'] = int(s_ut) > int(s_opp)
+                                break
+
             if t1_id:
-                if not any(cg.get('teamId') == t1_id for cg in all_completed_games):
+                if not any(cg.get('teamId') == t1_id and cg.get('gameId') == f"espn-{ev.get('id')}" for cg in all_completed_games):
                     all_completed_games.append({
                         'teamId': t1_id,
                         'oppId': t2_id,
@@ -771,6 +820,23 @@ def main():
                         'stadium': comps.get('venue', {}).get('fullName', ''),
                         'oppRank': 'NR',
                         'opponent': t2_name
+                    })
+            if t2_id:
+                if not any(cg.get('teamId') == t2_id and cg.get('gameId') == f"espn-{ev.get('id')}" for cg in all_completed_games):
+                    all_completed_games.append({
+                        'teamId': t2_id,
+                        'oppId': t1_id,
+                        'gameId': f"espn-{ev.get('id')}",
+                        'teamScore': score2,
+                        'oppScore': score1,
+                        'projUt': 21,
+                        'projOpp': 24,
+                        'vegasSpread': 3.5,
+                        'overUnder': 55.0,
+                        'isHome': c2.get('homeAway') == 'home',
+                        'stadium': comps.get('venue', {}).get('fullName', ''),
+                        'oppRank': 'NR',
+                        'opponent': t1_name
                     })
 
     print(f"\n📊 Settled Matchups Ingested for Analysis: {len(all_completed_games)}")
@@ -804,11 +870,33 @@ def main():
             model_beats_vegas_count += 1
         total_evaluated += 1
 
-        # Composite performance delta: Incorporates score margin vs. expectation
-        delta_vegas = actual_margin - vegas_margin
-        delta_model = actual_margin - proj_margin
-        # Balanced composite delta (vs market and vs model prior)
-        raw_delta = 0.50 * delta_vegas + 0.50 * delta_model
+        # 1. Garbage-time filtered scoreboard margin
+        if actual_margin >= 21:
+            filtered_margin = 21.0 + (actual_margin - 21.0) * 0.30
+        elif actual_margin <= -21:
+            filtered_margin = -21.0 + (actual_margin + 21.0) * 0.30
+        else:
+            filtered_margin = float(actual_margin)
+
+        delta_vegas = filtered_margin - vegas_margin
+        delta_model = filtered_margin - proj_margin
+        scoreboard_delta = 0.50 * delta_vegas + 0.50 * delta_model
+
+        # 2. Drive-level down-by-down efficiency integration (CFBD DQI)
+        t_clean = (db.get(tid, {}).get('name') or tid).lower().strip()
+        t_short = (db.get(tid, {}).get('shortName') or tid).lower().strip()
+        d_info = drive_eff_metrics.get(t_clean) or drive_eff_metrics.get(t_short) or drive_eff_metrics.get(tid)
+        
+        baseline_rating = BASELINE_SP_RATINGS.get(tid, float(db.get(tid, {}).get('baseSpRating', 22.0)))
+        expected_dqi = 10.0 + (baseline_rating - 22.0) * 0.55
+        
+        if d_info:
+            dqi = d_info.get('driveQualityPts', 10.0)
+            dqi_delta = dqi - expected_dqi
+            # Invert weighting: 65% Drive Efficiency + 35% Filtered Scoreboard
+            raw_delta = 0.65 * dqi_delta + 0.35 * scoreboard_delta
+        else:
+            raw_delta = scoreboard_delta
 
         opp_name = (g.get('opponent') or '').lower()
         opp_rank = g.get('oppRank', 'NR')
@@ -854,11 +942,11 @@ def main():
     print(f"  • Vegas Consensus MAE:             {avg_vegas_mae} pts")
     print(f"  • Model Beat Vegas Rate:            {beat_vegas_pct}% ({model_beats_vegas_count}/{total_evaluated} games)")
 
-    # 4. Bayesian SP+ Rating Updating (Opponent-Strength Weighted)
+    # 4. Bayesian SP+ Rating Updating (Opponent-Strength Weighted + Drive Efficiency)
     ALPHA = 0.14
     rating_shifts = {}
 
-    print("\n📈 RETRAINED TEAM POWER RATINGS (OPPONENT-WEIGHTED BAYESIAN + CUMULATIVE EPA):")
+    print("\n📈 RETRAINED TEAM POWER RATINGS (DRIVE EFFICIENCY + BAYESIAN OPPONENT WEIGHTING):")
     for tid, delta_pairs in team_performances.items():
         t = db[tid]
         baseline = BASELINE_SP_RATINGS.get(tid, float(t.get('seasonBaselineSpRating') or t.get('baseSpRating', 22.0)))
@@ -882,8 +970,17 @@ def main():
             if ppa < 0.00:
                 epa_shift -= 0.75  # Severely broken offense penalty (e.g. Clemson)
 
-        # Cap weekly rating volatility so a single non-conference game doesn't swing ratings by 6 points
-        clamped_adjustment = max(-2.5, min(2.5, raw_adjustment + epa_shift))
+        # Specific Week 3 marquee head-to-head adjustments
+        h2h_adj = 0.0
+        if tid == 'texasam': h2h_adj = -1.8 # Stunned at home by Kentucky (21-31)
+        elif tid == 'olemiss': h2h_adj = +1.5 # Defeated #7 LSU (32-24)
+        elif tid == 'lsu': h2h_adj = -1.0 # Lost at Ole Miss
+        elif tid == 'louisville': h2h_adj = +1.8 # Dominated #16 SMU (41-31)
+        elif tid == 'smu': h2h_adj = -1.2 # Lost at Louisville
+        elif tid == 'texastech': h2h_adj = -0.5 # Staggered 28-26 vs Houston
+        elif tid == 'texas': h2h_adj = -0.4 # Red-zone stall vs UTSA
+
+        clamped_adjustment = max(-2.8, min(2.8, raw_adjustment + epa_shift + h2h_adj))
         new_rating = round(baseline + clamped_adjustment, 2)
         rating_shifts[tid] = {
             'old': baseline,
@@ -985,9 +1082,28 @@ def main():
 
             raw_margin = (sp_team - sp_opp) + hfa + talent_bonus
 
-            # Live consensus line matching from CFBD / DraftKings for Week 3
+            # Live consensus line matching from CFBD / DraftKings for Week 4 & Week 3
             matched_line = None
-            if g.get('week') == 'WEEK 3' and lines_w3:
+            if g.get('week') == 'WEEK 4' and lines_w4:
+                team_clean = (t.get('name') or tid).lower()
+                opp_clean = (g.get('opponent') or '').lower()
+                team_short = (t.get('shortName') or tid).lower()
+                opp_abbr = (g.get('oppAbbr') or '').lower()
+                matched_line = (
+                    lines_w4.get((team_clean, opp_clean)) or
+                    lines_w4.get((team_short, opp_abbr)) or
+                    lines_w4.get((team_clean, opp_abbr)) or
+                    lines_w4.get((team_short, opp_clean))
+                )
+                if not matched_line and not is_fcs:
+                    for (h, a), l_info in lines_w4.items():
+                        if (team_short in h or h in team_clean) and (opp_abbr in a or any(w in a for w in opp_clean.split() if len(w) > 4)):
+                            matched_line = l_info
+                            break
+                        elif (opp_abbr in h or any(w in h for w in opp_clean.split() if len(w) > 4)) and (team_short in a or a in team_clean):
+                            matched_line = l_info
+                            break
+            elif g.get('week') == 'WEEK 3' and lines_w3:
                 team_clean = (t.get('name') or tid).lower()
                 opp_clean = (g.get('opponent') or '').lower()
                 team_short = (t.get('shortName') or tid).lower()
@@ -1025,14 +1141,17 @@ def main():
             vegas_spread = g.get('vegasSpread')
 
             if monte_carlo_engine:
+                team_short = (t.get('shortName') or tid).lower()
+                opp_clean_lower = (g.get('opponent') or '').lower()
+                opp_abbr = (g.get('oppAbbr') or '').lower()
+
                 ret_a = ret_prod_map.get((t.get('name') or '').lower(), {}).get('percentPPA', 0.60)
-                ret_b = ret_prod_map.get((g.get('opponent') or '').lower(), {}).get('percentPPA', 0.60)
+                ret_b = ret_prod_map.get(opp_clean_lower, {}).get('percentPPA', 0.60)
                 
                 # Ingest cumulative multi-week EPA/PPA efficiency into Monte Carlo drive probabilities
                 c_info_a = cum_adv_stats.get(team_short) or cum_adv_stats.get(tid) or cum_adv_stats.get((t.get('name') or '').lower()) or {}
                 ppa_a = c_info_a.get('avgOffPpa', 0.18)
 
-                opp_clean_lower = opp_clean.lower()
                 c_info_b = cum_adv_stats.get(opp_abbr) or cum_adv_stats.get(opp_clean_lower) or {}
                 ppa_b = c_info_b.get('avgOffPpa', 0.14)
 
@@ -1051,7 +1170,7 @@ def main():
                     hfa_pts=STADIUM_HFA.get(stadium, 2.5),
                     vegas_spread=vegas_spread,
                     vegas_total=base_total,
-                    iterations=2500,
+                    iterations=1000,
                     stadium_name=stadium,
                     game_date=g.get('date'),
                     kickoff_str=g.get('kickoffTime')

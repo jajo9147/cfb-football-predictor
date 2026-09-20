@@ -300,6 +300,70 @@ def calculate_talent_blowout_bonus(fav_talent, dog_talent):
     bonus = ((talent_delta - 250) / 100.0) ** 1.35 * 1.8
     return min(26.0, round(bonus, 1))
 
+def get_drive_level_efficiency_metrics(year=2026, weeks=[1, 2, 3]):
+    """
+    Aggregates multi-week per-play and drive-level efficiency from CFBD:
+    - Offensive & Defensive Success Rates (consistency on 1st & 2nd downs)
+    - Net PPA / EPA per play (scoring value added)
+    - Passing Downs Success Rate (3rd & long conversion resilience)
+    - Stuff Rate & Line Yards (trench control)
+    - Composite Drive Quality Rating delta (in SP+ scale points)
+    """
+    team_data = {}
+    for w in weeks:
+        adv = get_week_advanced_game_stats(year, w)
+        for t_name, g_info in adv.items():
+            t_key = t_name.lower().strip()
+            if t_key not in team_data:
+                team_data[t_key] = {
+                    'offPpa': [], 'defPpa': [],
+                    'offSr': [], 'defSr': [],
+                    'passSr': [], 'stuffRate': []
+                }
+            off = g_info.get('offense', {})
+            defe = g_info.get('defense', {})
+            if off.get('ppa') is not None: team_data[t_key]['offPpa'].append(float(off['ppa']))
+            if defe.get('ppa') is not None: team_data[t_key]['defPpa'].append(float(defe['ppa']))
+            if off.get('successRate') is not None: team_data[t_key]['offSr'].append(float(off['successRate']))
+            if defe.get('successRate') is not None: team_data[t_key]['defSr'].append(float(defe['successRate']))
+            if off.get('passingDowns', {}).get('successRate') is not None:
+                team_data[t_key]['passSr'].append(float(off['passingDowns']['successRate']))
+            if off.get('stuffRate') is not None:
+                team_data[t_key]['stuffRate'].append(float(off['stuffRate']))
+
+    summary = {}
+    for t_key, vals in team_data.items():
+        n = len(vals['offPpa'])
+        if n == 0:
+            continue
+        avg_off_ppa = sum(vals['offPpa']) / n
+        avg_def_ppa = sum(vals['defPpa']) / len(vals['defPpa']) if vals['defPpa'] else 0.15
+        avg_off_sr = sum(vals['offSr']) / len(vals['offSr']) if vals['offSr'] else 0.42
+        avg_def_sr = sum(vals['defSr']) / len(vals['defSr']) if vals['defSr'] else 0.42
+        avg_pass_sr = sum(vals['passSr']) / len(vals['passSr']) if vals['passSr'] else 0.32
+        avg_stuff = sum(vals['stuffRate']) / len(vals['stuffRate']) if vals['stuffRate'] else 0.18
+
+        net_ppa = avg_off_ppa - avg_def_ppa
+        net_sr = avg_off_sr - avg_def_sr
+
+        # Composite drive quality delta relative to FBS average (scaled to points)
+        drive_quality_pts = (net_ppa * 22.0) + (net_sr * 35.0) + ((avg_pass_sr - 0.32) * 8.0) - ((avg_stuff - 0.18) * 10.0)
+
+        summary[t_key] = {
+            'avgOffPpa': round(avg_off_ppa, 3),
+            'avgDefPpa': round(avg_def_ppa, 3),
+            'netPpa': round(net_ppa, 3),
+            'avgOffSr': round(avg_off_sr, 3),
+            'avgDefSr': round(avg_def_sr, 3),
+            'netSr': round(net_sr, 3),
+            'passingDownsConv': round(avg_pass_sr, 3),
+            'stuffRate': round(avg_stuff, 3),
+            'driveQualityPts': round(drive_quality_pts, 2),
+            'gamesSampled': n
+        }
+    return summary
+
+
 if __name__ == '__main__':
     print("Testing CFBD Client...")
     talent = get_team_talent_composite()
