@@ -130,7 +130,7 @@ BASELINE_SP_RATINGS = {
     'notredame': 35.0,   # #3 AP (2-0, 953 talent)
     'miami': 33.5,       # #5 AP (2-0, 885 talent)
     'lsu': 33.0,         # #7 AP (2-0, crushed Clemson 51-10, 932 talent)
-    'indiana': 32.5,     # #4 AP (2-0, 735 talent)
+    'indiana': 30.8,     # #5 AP (3-0, 735 talent, SOS-discounted for non-P4 schedule)
     'texasam': 31.8,     # #9 AP (2-0, blew out ASU 48-20, 933 talent)
     'alabama': 31.2,     # #10 AP (2-0, beat Kentucky 38-14, 973 talent)
     'oregon': 30.5,      # #21 AP (1-1, upset by OK State, 984 talent)
@@ -216,10 +216,10 @@ NON_DB_OPPONENT_RATINGS = {
     'Minnesota Golden Gophers': 13.7, 'MINN': 13.7,
     'NC State Wolfpack': 13.4, 'NCST': 13.4,
     'Arkansas Razorbacks': 13.2, 'ARK': 13.2,
-    'Kentucky Wildcats': 12.6, 'UK': 12.6,
+    'Northwestern Wildcats': 19.5, 'NU': 19.5,
+    'Kentucky Wildcats': 17.5, 'UK': 17.5,
+    'Georgia Tech Yellow Jackets': 16.5, 'GT': 16.5,
     'North Carolina Tar Heels': 12.5, 'UNC': 12.5,
-    'Northwestern Wildcats': 12.4, 'NU': 12.4,
-    'Georgia Tech Yellow Jackets': 12.2, 'GT': 12.2,
     'Wake Forest Demon Deacons': 11.8, 'WAKE': 11.8,
     'Wisconsin Badgers': 11.6, 'WISC': 11.6,
     'Baylor Bears': 11.3, 'BAY': 11.3,
@@ -510,6 +510,50 @@ def enforce_head_to_head_symmetry(db):
 
     print(f"✓ Enforced 100% head-to-head score and outcome symmetry across {reconciled} matchup pairs.")
 
+def check_is_conference_game(team_conf, opp_name, opp_abbr=""):
+    """
+    Authoritative detection of FBS conference matchups for B1G, SEC, ACC, and Big 12.
+    """
+    if not team_conf:
+        return False, ""
+    c_lower = team_conf.lower().strip()
+    opp_lower = opp_name.lower().strip()
+    
+    B1G_MEMBERS = {"indiana", "michigan", "ohio state", "oregon", "penn state", "usc", "washington", "iowa", "northwestern", "rutgers", "nebraska", "minnesota", "purdue", "wisconsin", "illinois", "maryland", "michigan state", "ucla"}
+    SEC_MEMBERS = {"texas", "georgia", "alabama", "lsu", "tennessee", "texas a&m", "ole miss", "oklahoma", "missouri", "florida", "kentucky", "south carolina", "auburn", "arkansas", "vanderbilt", "mississippi state"}
+    ACC_MEMBERS = {"miami", "florida state", "clemson", "smu", "louisville", "california", "stanford", "wake forest", "boston college", "duke", "georgia tech", "nc state", "north carolina", "pittsburgh", "syracuse", "virginia", "virginia tech"}
+    BIG12_MEMBERS = {"byu", "texas tech", "utah", "houston", "arizona", "colorado", "arizona state", "baylor", "cincinnati", "iowa state", "kansas", "kansas state", "oklahoma state", "tcu", "ucf", "west virginia"}
+
+    conf_title = ""
+    target_members = set()
+    if "big ten" in c_lower or "b1g" in c_lower:
+        target_members = B1G_MEMBERS
+        conf_title = "Big Ten"
+    elif "sec" in c_lower:
+        target_members = SEC_MEMBERS
+        conf_title = "SEC"
+    elif "acc" in c_lower:
+        target_members = ACC_MEMBERS
+        conf_title = "ACC"
+    elif "big 12" in c_lower:
+        target_members = BIG12_MEMBERS
+        conf_title = "Big 12"
+    else:
+        return False, ""
+
+    for m in target_members:
+        if m in opp_lower:
+            # Substring safety guardrails
+            if m == "michigan" and any(kw in opp_lower for kw in ["western michigan", "central michigan", "eastern michigan"]):
+                continue
+            if m == "florida" and any(kw in opp_lower for kw in ["florida state", "florida a&m", "florida international", "florida atlantic", "south florida"]):
+                continue
+            if m == "georgia" and any(kw in opp_lower for kw in ["georgia tech", "georgia southern", "georgia state"]):
+                continue
+            return True, conf_title
+
+    return False, ""
+
 def main():
     parser = argparse.ArgumentParser(description="Retrain CFB Prophet weekly models against actual scores & Vegas consensus lines.")
     parser.add_argument('--dry-run', action='store_true', help="Compute adjustments without modifying database files.")
@@ -706,6 +750,10 @@ def main():
                 is_fcs_match = any(kw in opp_lower for kw in fcs_keywords) or g.get('oppRank') == 'FCS'
                 if is_fcs_match:
                     g['oppRank'] = 'FCS'
+
+                is_conf, conf_title = check_is_conference_game(t.get('conference'), raw_opp_name, (g.get('oppAbbr') or ''))
+                if is_conf:
+                    g['isConf'] = True
 
                 # Calibrate historical Vegas spread against official closing lines
                 wk = g.get('week')
@@ -1011,6 +1059,16 @@ def main():
             raw_opp_name = (g.get('opponent') or '').strip()
             opp_lower = raw_opp_name.lower()
             opp_abbr = (g.get('oppAbbr') or '').strip().lower()
+            is_conf, conf_title = check_is_conference_game(t.get('conference'), raw_opp_name, opp_abbr)
+            if is_conf:
+                g['isConf'] = True
+                if 'scoutReport' in g and isinstance(g['scoutReport'], dict):
+                    sum_text = g['scoutReport'].get('summary', '')
+                    if 'non-conference test' in sum_text.lower() or 'regular season non-conference' in sum_text.lower():
+                        if tid == 'indiana' and 'northwestern' in opp_lower:
+                            g['scoutReport']['summary'] = "Big Ten conference battle under Friday night lights against the undefeated Northwestern Wildcats."
+                        else:
+                            g['scoutReport']['summary'] = f"{conf_title} conference battle against {raw_opp_name}."
 
             is_fcs = g.get('oppRank') == 'FCS' or any(kw in opp_lower for kw in FCS_KEYWORDS)
             if is_fcs:
@@ -1150,10 +1208,14 @@ def main():
                 
                 # Ingest cumulative multi-week EPA/PPA efficiency into Monte Carlo drive probabilities
                 c_info_a = cum_adv_stats.get(team_short) or cum_adv_stats.get(tid) or cum_adv_stats.get((t.get('name') or '').lower()) or {}
-                ppa_a = c_info_a.get('avgOffPpa', 0.18)
+                ppa_a = min(0.28, max(-0.15, float(c_info_a.get('avgOffPpa', 0.18))))
 
-                c_info_b = cum_adv_stats.get(opp_abbr) or cum_adv_stats.get(opp_clean_lower) or {}
-                ppa_b = c_info_b.get('avgOffPpa', 0.14)
+                c_info_b = (
+                    cum_adv_stats.get(opp_abbr) or 
+                    cum_adv_stats.get(opp_clean_lower) or 
+                    next((v for k, v in cum_adv_stats.items() if (k == opp_clean_lower or (len(k) > 4 and k in opp_clean_lower))), {})
+                )
+                ppa_b = min(0.28, max(-0.15, float(c_info_b.get('avgOffPpa', 0.14))))
 
                 mc_sim = monte_carlo_engine.simulate_matchup_10k(
                     team_a_name=t.get('shortName', tid),

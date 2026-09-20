@@ -270,7 +270,11 @@ def get_fbs_opponent_power_ratings(year=2026):
         elif team_name == 'virginia':
             record_adj += 1.8  # #25 AP Poll entrant (2-0)
         elif team_name == 'kentucky':
-            record_adj -= 0.5  # Lost by 24 to Alabama
+            record_adj += 3.5  # Upset #9 Texas A&M 31-21 at Kyle Field
+        elif team_name == 'northwestern':
+            record_adj += 7.0  # Blew out Colorado 41-7 on the road, 2-0 with top-tier defense
+        elif team_name == 'georgia tech':
+            record_adj += 2.5  # Strong start, beat FSU
 
         final_rating = round(base_scaled + talent_adj + record_adj, 1)
         ratings_map[team_name] = final_rating
