@@ -11518,14 +11518,15 @@ function loadSavedBracket(bracketId, andEdit = false) {
   // Only bind activeSavedBracketId if the user owns this bracket
   state.activeSavedBracketId = canEdit ? target.id : null;
 
-  if (target.simState) {
-    if (target.simState.teamId) state.currentTeamId = target.simState.teamId;
-    state.userPicks = JSON.parse(JSON.stringify(target.simState.userPicks || {}));
-    state.manualScores = JSON.parse(JSON.stringify(target.simState.manualScores || {}));
-    state.ccgPicks = JSON.parse(JSON.stringify(target.simState.ccgPicks || {}));
-    state.playoffPicks = JSON.parse(JSON.stringify(target.simState.playoffPicks || {}));
-    state.teamSliders = JSON.parse(JSON.stringify(target.simState.teamSliders || {}));
-    state.gameSliders = JSON.parse(JSON.stringify(target.simState.gameSliders || {}));
+  const sState = target.simState || target.sim_state;
+  if (sState) {
+    if (sState.teamId) state.currentTeamId = sState.teamId;
+    state.userPicks = JSON.parse(JSON.stringify(sState.userPicks || {}));
+    state.manualScores = JSON.parse(JSON.stringify(sState.manualScores || {}));
+    state.ccgPicks = JSON.parse(JSON.stringify(sState.ccgPicks || {}));
+    state.playoffPicks = JSON.parse(JSON.stringify(sState.playoffPicks || {}));
+    state.teamSliders = JSON.parse(JSON.stringify(sState.teamSliders || {}));
+    state.gameSliders = JSON.parse(JSON.stringify(sState.gameSliders || {}));
   } else if (target.champion?.id) {
     state.currentTeamId = target.champion.id;
   }
@@ -12471,9 +12472,129 @@ if (document.readyState === 'complete') {
 // VEGAS STACK: REAL-TIME SPREAD ANALYTICS, WEEKLY ATS GRADING & CUSTOM TUNING
 // ==========================================================================
 
+function getCFBCurrentWeek(targetDate = new Date()) {
+  // Monday is the start of the week.
+  // In 2026, calendar weeks run Monday 00:00:00 through Sunday 23:59:59.
+  const SCHEDULE_WEEKS_2026 = [
+    { week: 'WEEK 0', start: new Date('2026-08-24T00:00:00'), end: new Date('2026-08-30T23:59:59') },
+    { week: 'WEEK 1', start: new Date('2026-08-31T00:00:00'), end: new Date('2026-09-07T23:59:59') }, // Labor Day Monday
+    { week: 'WEEK 2', start: new Date('2026-09-08T00:00:00'), end: new Date('2026-09-13T23:59:59') },
+    { week: 'WEEK 3', start: new Date('2026-09-14T00:00:00'), end: new Date('2026-09-20T23:59:59') },
+    { week: 'WEEK 4', start: new Date('2026-09-21T00:00:00'), end: new Date('2026-09-27T23:59:59') },
+    { week: 'WEEK 5', start: new Date('2026-09-28T00:00:00'), end: new Date('2026-10-04T23:59:59') },
+    { week: 'WEEK 6', start: new Date('2026-10-05T00:00:00'), end: new Date('2026-10-11T23:59:59') },
+    { week: 'WEEK 7', start: new Date('2026-10-12T00:00:00'), end: new Date('2026-10-18T23:59:59') },
+    { week: 'WEEK 8', start: new Date('2026-10-19T00:00:00'), end: new Date('2026-10-25T23:59:59') },
+    { week: 'WEEK 9', start: new Date('2026-10-26T00:00:00'), end: new Date('2026-11-01T23:59:59') },
+    { week: 'WEEK 10', start: new Date('2026-11-02T00:00:00'), end: new Date('2026-11-08T23:59:59') },
+    { week: 'WEEK 11', start: new Date('2026-11-09T00:00:00'), end: new Date('2026-11-15T23:59:59') },
+    { week: 'WEEK 12', start: new Date('2026-11-16T00:00:00'), end: new Date('2026-11-22T23:59:59') },
+    { week: 'WEEK 13', start: new Date('2026-11-23T00:00:00'), end: new Date('2026-11-29T23:59:59') }
+  ];
+
+  const t = targetDate.getTime();
+  for (const item of SCHEDULE_WEEKS_2026) {
+    if (t >= item.start.getTime() && t <= item.end.getTime()) {
+      return item.week;
+    }
+  }
+
+  // Fallback if outside calendar bounds: earliest week with unfinalized games
+  if (typeof TEAMS_DATABASE !== 'undefined') {
+    for (const item of SCHEDULE_WEEKS_2026) {
+      const w = item.week;
+      let hasPending = false;
+      Object.values(TEAMS_DATABASE).forEach(team => {
+        (team.schedule || []).forEach(g => {
+          if (g.week === w && !g.isFinal) hasPending = true;
+        });
+      });
+      if (hasPending) return w;
+    }
+  }
+
+  return 'WEEK 4';
+}
+window.getCFBCurrentWeek = getCFBCurrentWeek;
+
+function getUserSubmittedBrackets() {
+  const brackets = [];
+  const seenIds = new Set();
+  const deletedIds = (typeof getDeletedBracketIds === 'function') ? getDeletedBracketIds() : new Set();
+  const currentUser = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+
+  // 1. Saved/submitted brackets owned by user (from localStorage / user session)
+  if (typeof getSavedBrackets === 'function') {
+    try {
+      const mySaved = getSavedBrackets();
+      mySaved.forEach(b => {
+        if (!b || !b.id || seenIds.has(b.id) || deletedIds.has(b.id)) return;
+        if (b.isAdminBenchmark || b.id === 'bracket_prophet_ai_baseline') return;
+        seenIds.add(b.id);
+        brackets.push(b);
+      });
+    } catch (e) {}
+  }
+
+  // 2. Scan all known brackets for brackets matching user handle / creator
+  if (typeof getAllKnownBrackets === 'function') {
+    try {
+      const allKnown = getAllKnownBrackets();
+      const userHandle = (localStorage.getItem('cfb_prophet_user_handle') || (currentUser ? currentUser.displayName : '') || '').toLowerCase().trim();
+      allKnown.forEach(b => {
+        if (!b || !b.id || seenIds.has(b.id) || deletedIds.has(b.id)) return;
+        if (b.isAdminBenchmark || b.id === 'bracket_prophet_ai_baseline') return;
+        const bCreator = (b.creator || '').toLowerCase().trim();
+        const isOwner = (currentUser && typeof isBracketOwnedByUser === 'function' && isBracketOwnedByUser(b, currentUser)) ||
+                        (userHandle && bCreator === userHandle) ||
+                        (bCreator === 'jake johnson');
+        if (isOwner) {
+          seenIds.add(b.id);
+          brackets.push(b);
+        }
+      });
+    } catch (e) {}
+  }
+
+  // 3. Fallback: If still empty, show all non-admin submitted community brackets
+  if (brackets.length === 0 && typeof getAllKnownBrackets === 'function') {
+    try {
+      getAllKnownBrackets().forEach(b => {
+        if (!b || !b.id || seenIds.has(b.id) || deletedIds.has(b.id)) return;
+        if (b.isAdminBenchmark || b.id === 'bracket_prophet_ai_baseline') return;
+        seenIds.add(b.id);
+        brackets.push(b);
+      });
+    } catch (e) {}
+  }
+
+  brackets.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+  return brackets;
+}
+window.getUserSubmittedBrackets = getUserSubmittedBrackets;
+
+function applySubmittedBracketToState(bracketId) {
+  const all = getUserSubmittedBrackets();
+  const target = all.find(b => b.id === bracketId);
+  if (!target) return;
+
+  const sState = target.simState || target.sim_state;
+  if (sState) {
+    if (sState.teamId) state.currentTeamId = sState.teamId;
+    state.userPicks = JSON.parse(JSON.stringify(sState.userPicks || {}));
+    state.manualScores = JSON.parse(JSON.stringify(sState.manualScores || {}));
+    state.ccgPicks = JSON.parse(JSON.stringify(sState.ccgPicks || {}));
+    state.playoffPicks = JSON.parse(JSON.stringify(sState.playoffPicks || {}));
+    state.teamSliders = JSON.parse(JSON.stringify(sState.teamSliders || {}));
+    state.gameSliders = JSON.parse(JSON.stringify(sState.gameSliders || {}));
+  }
+  state.activeSavedBracketId = target.id;
+}
+
 const vegasStackState = {
-  currentWeek: 'WEEK 2',
+  currentWeek: getCFBCurrentWeek(),
   mode: 'baseline',
+  customSourceId: null,
   filter: 'all',
   searchQuery: ''
 };
@@ -12502,11 +12623,14 @@ window.openVegasStackModal = function(initialWeek) {
 
   if (initialWeek) {
     vegasStackState.currentWeek = initialWeek;
+  } else if (!vegasStackState.currentWeek) {
+    vegasStackState.currentWeek = getCFBCurrentWeek();
   }
 
   document.body.classList.add('modal-open');
   modal.classList.add('open');
 
+  syncVegasStackCustomSourceSelect();
   renderVegasStack();
 };
 
@@ -12516,12 +12640,85 @@ window.closeVegasStackModal = function() {
   document.body.classList.remove('modal-open');
 };
 
+function syncVegasStackCustomSourceSelect() {
+  const wrap = document.getElementById('vsCustomSourceWrap');
+  const select = document.getElementById('vsCustomSourceSelect');
+  if (!wrap || !select) return;
+
+  if (vegasStackState.mode !== 'custom') {
+    wrap.style.display = 'none';
+    return;
+  }
+
+  wrap.style.display = 'inline-flex';
+
+  const submitted = getUserSubmittedBrackets();
+  const options = [];
+  options.push('<option value="active">⚡ Current Simulator Session</option>');
+
+  if (submitted.length > 0) {
+    options.push('<optgroup label="Your Submitted Picks">');
+    submitted.forEach(b => {
+      let dateLabel = '';
+      if (b.createdAt) {
+        const d = new Date(b.createdAt);
+        if (!isNaN(d.getTime())) {
+          dateLabel = ` (${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})`;
+        }
+      }
+      options.push(`<option value="${b.id}">📋 ${b.name}${dateLabel}</option>`);
+    });
+    options.push('</optgroup>');
+  }
+
+  select.innerHTML = options.join('');
+
+  let toSelect = vegasStackState.customSourceId;
+  if (!toSelect) {
+    if (state.activeSavedBracketId && submitted.some(b => b.id === state.activeSavedBracketId)) {
+      toSelect = state.activeSavedBracketId;
+    } else if (submitted.length > 0) {
+      toSelect = submitted[0].id;
+    } else {
+      toSelect = 'active';
+    }
+    vegasStackState.customSourceId = toSelect;
+    if (toSelect !== 'active') {
+      applySubmittedBracketToState(toSelect);
+    }
+  }
+
+  select.value = toSelect;
+}
+window.syncVegasStackCustomSourceSelect = syncVegasStackCustomSourceSelect;
+
+window.onVegasStackCustomSourceChange = function(sourceId) {
+  vegasStackState.customSourceId = sourceId;
+  if (sourceId === 'active') {
+    if (typeof showCustomToast === 'function') {
+      showCustomToast('⚡ Loaded Active Simulator Session picks into Vegas Stack');
+    }
+  } else {
+    const all = getUserSubmittedBrackets();
+    const target = all.find(b => b.id === sourceId);
+    if (target) {
+      applySubmittedBracketToState(target.id);
+      if (typeof showCustomToast === 'function') {
+        showCustomToast(`📋 Applied custom picks from "${target.name}" to Vegas Stack!`);
+      }
+    }
+  }
+  renderVegasStack();
+};
+
 window.setVegasStackMode = function(mode) {
   vegasStackState.mode = mode;
   const bBtn = document.getElementById('vsModeBaselineBtn');
   const cBtn = document.getElementById('vsModeCustomBtn');
   if (bBtn) bBtn.classList.toggle('active', mode === 'baseline');
   if (cBtn) cBtn.classList.toggle('active', mode === 'custom');
+
+  syncVegasStackCustomSourceSelect();
   renderVegasStack();
 };
 
@@ -12540,31 +12737,6 @@ window.setVegasStackFilter = function(filter) {
 
 window.onVegasStackSearch = function(query) {
   vegasStackState.searchQuery = (query || '').toLowerCase().trim();
-  renderVegasStack();
-};
-
-window.resetVegasStackCustomTuning = function() {
-  const count = Object.keys(state.gameSliders || {}).length;
-  state.gameSliders = {};
-  vegasStackState.mode = 'baseline';
-
-  const bBtn = document.getElementById('vsModeBaselineBtn');
-  const cBtn = document.getElementById('vsModeCustomBtn');
-  if (bBtn) bBtn.classList.add('active');
-  if (cBtn) cBtn.classList.remove('active');
-
-  const dot = document.getElementById('vsCustomDot');
-  if (dot) dot.style.display = 'none';
-
-  if (typeof showActionToast === 'function') {
-    showActionToast('✨ All custom game sliders reset to Golden AI Baseline.');
-  } else {
-    alert('All custom sliders reset to Golden AI Baseline.');
-  }
-
-  if (typeof renderSchedule === 'function') renderSchedule();
-  if (typeof updateKpiDisplays === 'function') updateKpiDisplays();
-
   renderVegasStack();
 };
 
@@ -12591,12 +12763,18 @@ function getVegasStackMatchups(weekFilter, isCustom) {
 
       let scoreHome, scoreAway, winProbHome, isCustomTuned = false;
 
-      if (isCustom && typeof calculateAdjustedMatchup === 'function' && state.gameSliders && (state.gameSliders[g.id] || (g.oppId && state.gameSliders[g.oppId + '-' + g.week.toLowerCase().replace(/\s+/g, '')]))) {
+      if (isCustom && typeof calculateAdjustedMatchup === 'function') {
         const sim = calculateAdjustedMatchup(g, tid);
-        scoreHome = isHome ? sim.projUt : sim.projOpp;
-        scoreAway = isHome ? sim.projOpp : sim.projUt;
-        winProbHome = isHome ? sim.adjWinProb : (100 - sim.adjWinProb);
-        isCustomTuned = true;
+        if (sim && sim.isCustomTuned) {
+          scoreHome = isHome ? sim.projUt : sim.projOpp;
+          scoreAway = isHome ? sim.projOpp : sim.projUt;
+          winProbHome = isHome ? sim.adjWinProb : (100 - sim.adjWinProb);
+          isCustomTuned = true;
+        } else {
+          scoreHome = isHome ? g.projScoreUt : g.projScoreOpp;
+          scoreAway = isHome ? g.projScoreOpp : g.projScoreUt;
+          winProbHome = isHome ? g.baseWinProb : (100 - g.baseWinProb);
+        }
       } else {
         scoreHome = isHome ? g.projScoreUt : g.projScoreOpp;
         scoreAway = isHome ? g.projScoreOpp : g.projScoreUt;
@@ -12727,20 +12905,30 @@ function renderVegasStack() {
   const grid = document.getElementById('vegasStackGrid');
   const dot = document.getElementById('vsCustomDot');
 
-  const customCount = Object.keys(state.gameSliders || {}).length;
-  if (dot) dot.style.display = customCount > 0 ? 'inline-block' : 'none';
+  const customCount = Object.keys(state.gameSliders || {}).length +
+    Object.keys(state.userPicks || {}).length +
+    Object.keys(state.manualScores || {}).length;
+  if (dot) dot.style.display = (customCount > 0 || (vegasStackState.mode === 'custom' && !!vegasStackState.customSourceId)) ? 'inline-block' : 'none';
+
+  const currentCfbWeek = getCFBCurrentWeek();
 
   // 1. Render Week Bar
   if (weekBar) {
     weekBar.innerHTML = VEGAS_STACK_WEEKS.map(w => {
       const isActive = vegasStackState.currentWeek === w;
       let badgeHtml = '';
-      if (w === 'WEEK 0' || w === 'WEEK 1' || w === 'WEEK 2') {
-        badgeHtml = '<span class="pill-badge graded">GRADED</span>';
-      } else if (w === 'ALL') {
-        badgeHtml = '<span class="pill-badge pending">WEEKS 0-2</span>';
+      if (w === 'ALL') {
+        badgeHtml = '<span class="pill-badge pending">FULL SEASON</span>';
       } else {
-        badgeHtml = '<span class="pill-badge pending">ACTIVE</span>';
+        const weekGames = getVegasStackMatchups(w, false);
+        const isGraded = weekGames.length > 0 && weekGames.every(g => g.isFinal);
+        if (isGraded) {
+          badgeHtml = '<span class="pill-badge graded">GRADED</span>';
+        } else if (w === currentCfbWeek) {
+          badgeHtml = '<span class="pill-badge pending">ACTIVE</span>';
+        } else {
+          badgeHtml = '<span class="pill-badge pending">UPCOMING</span>';
+        }
       }
       return `
         <button class="vs-week-pill ${isActive ? 'active' : ''}" data-week="${w}" onclick="setVegasStackWeek('${w}')">
@@ -12766,7 +12954,7 @@ function renderVegasStack() {
       weekDropdown.innerHTML = VEGAS_STACK_WEEKS.map(w => {
         let label = w;
         if (w === 'ALL') label = 'All Season (0-13)';
-        else if (w === 'WEEK 2') label = 'Week 2 (Active)';
+        else if (w === currentCfbWeek) label = `${w} (Current Week)`;
         return `<option value="${w}">${label}</option>`;
       }).join('');
     }
@@ -12780,7 +12968,7 @@ function renderVegasStack() {
     if (curr === 'ALL') {
       exportBtnLabel.textContent = 'Export Season Picks';
     } else {
-      exportBtnLabel.textContent = `Export ${curr === 'WEEK 2' ? "This Week's" : curr} Picks`;
+      exportBtnLabel.textContent = `Export ${curr} Picks`;
     }
   }
 
@@ -12842,6 +13030,13 @@ function renderVegasStack() {
       `;
     } else {
       const diamondCount = allWeekMatchups.filter(g => g.isDiamond).length;
+      let customModelSubtitle = `${customCount} Adjustments Active`;
+      if (vegasStackState.customSourceId && vegasStackState.customSourceId !== 'active') {
+        const allSub = getUserSubmittedBrackets();
+        const found = allSub.find(b => b.id === vegasStackState.customSourceId);
+        if (found) customModelSubtitle = `"${found.name}"`;
+      }
+
       summaryBanner.innerHTML = `
         <div class="vs-kpi-card gold">
           <span class="vs-kpi-label"><i class="fa-solid fa-calendar-day"></i> UPCOMING SLATE</span>
@@ -12855,8 +13050,8 @@ function renderVegasStack() {
         </div>
         <div class="vs-kpi-card emerald">
           <span class="vs-kpi-label"><i class="fa-solid fa-sliders"></i> MODEL STATUS</span>
-          <span class="vs-kpi-val">${isCustom ? 'CUSTOM' : 'AI PROPHET'}</span>
-          <span class="vs-kpi-sub">${isCustom ? customCount + ' Games Adjusted' : 'Golden 10k Baseline'}</span>
+          <span class="vs-kpi-val">${isCustom ? 'CUSTOM MODEL' : 'AI PROPHET'}</span>
+          <span class="vs-kpi-sub">${isCustom ? customModelSubtitle : 'Golden 10k Baseline'}</span>
         </div>
         <div class="vs-kpi-card">
           <span class="vs-kpi-label"><i class="fa-solid fa-shield-halved"></i> ODDS TICKER</span>
@@ -12882,21 +13077,21 @@ function renderVegasStack() {
       }
 
       grid.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: #94A3B8;">
-          <i class="fa-solid ${iconClass}" style="font-size: 2.5rem; color: #64748B; margin-bottom: 0.75rem;"></i>
-          <p style="font-size: 1rem; font-weight: 700; color: #CBD5E1;">${emptyTitle}</p>
-          <p style="font-size: 0.85rem; margin-top: 0.35rem; line-height: 1.4;">${emptySub}</p>
+        <div class="vs-empty-state">
+          <div class="empty-icon"><i class="fa-solid ${iconClass}"></i></div>
+          <div class="empty-title">${emptyTitle}</div>
+          <div class="empty-sub">${emptySub}</div>
         </div>
       `;
       return;
     }
 
     grid.innerHTML = allWeekMatchups.map(m => {
-      const homeRankStr = m.homeTeam.apRank ? `<span class="vs-team-rank">${m.homeTeam.apRank}</span>` : '';
-      const awayRankStr = m.awayTeam.apRank ? `<span class="vs-team-rank">${m.awayTeam.apRank}</span>` : '';
+      const homeSpreadFormatted = m.spreadOnHome === 0 ? 'PK' : (m.spreadOnHome > 0 ? `+${m.spreadOnHome}` : `${m.spreadOnHome}`);
+      const awaySpreadFormatted = m.spreadOnHome === 0 ? 'PK' : (m.spreadOnHome > 0 ? `-${m.spreadOnHome}` : `+${Math.abs(m.spreadOnHome)}`);
 
-      const spreadStr = m.spreadOnHome > 0 ? `+${m.spreadOnHome.toFixed(1)}` : m.spreadOnHome.toFixed(1);
-      const homeSpreadFormatted = `${m.homeTeam.abbr || m.homeTeam.name.split(' ')[0]} ${spreadStr}`;
+      const homeRankStr = (m.homeTeam.apRank && m.homeTeam.apRank !== 'NR') ? `<span class="vs-team-rank">${m.homeTeam.apRank}</span>` : '';
+      const awayRankStr = (m.awayTeam.apRank && m.awayTeam.apRank !== 'NR') ? `<span class="vs-team-rank">${m.awayTeam.apRank}</span>` : '';
 
       let gradingBadge = '';
       if (m.isFinal) {
@@ -12970,7 +13165,7 @@ function renderVegasStack() {
           </div>
 
           <div class="vs-odds-strip">
-            <span class="vs-odds-line"><i class="fa-solid fa-scale-balanced" style="color: #60A5FA; margin-right: 4px;"></i> ${homeSpreadFormatted}</span>
+            <span class="vs-odds-line"><i class="fa-solid fa-scale-balanced" style="color: #60A5FA; margin-right: 4px;"></i> ${homeTeam.abbr || homeTeam.name} ${homeSpreadFormatted}</span>
             <span class="vs-odds-total">O/U ${m.vegasTotal}</span>
             <span style="color: #64748B; font-size: 0.68rem;">${m.oddsProvider}</span>
           </div>
@@ -13015,7 +13210,16 @@ function generateVegasStackExportText(week, filter) {
   const timeStr = dateNow.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
 
   const slateTitle = week === 'ALL' ? 'FULL 2026 SEASON SLATE' : `${week} SLATE`;
-  const modelName = isCustom ? 'CFB Prophet Custom Model' : 'CFB Prophet AI Baseline';
+  let modelName = 'CFB Prophet AI Baseline';
+  if (isCustom) {
+    if (vegasStackState.customSourceId && vegasStackState.customSourceId !== 'active') {
+      const allSub = getUserSubmittedBrackets();
+      const found = allSub.find(b => b.id === vegasStackState.customSourceId);
+      modelName = found ? `Custom Picks: "${found.name}"` : 'CFB Prophet Custom Model';
+    } else {
+      modelName = 'CFB Prophet Custom Model';
+    }
+  }
 
   const lines = [];
   lines.push(`🏈 CFB PROPHET // PICKS AGAINST VEGAS`);
@@ -13099,16 +13303,17 @@ window.openVegasStackExportModal = function(targetWeek) {
   const modal = document.getElementById('vegasStackExportModal');
   if (!modal) return;
 
+  const currentCfbWeek = getCFBCurrentWeek();
   const weekSelect = document.getElementById('vsExportWeekSelect');
   if (weekSelect) {
     weekSelect.innerHTML = VEGAS_STACK_WEEKS.map(w => {
       let label = w;
       if (w === 'ALL') label = 'Full Season (Weeks 0-13)';
-      else if (w === 'WEEK 2') label = 'Week 2 (Current Active)';
+      else if (w === currentCfbWeek) label = `${w} (Current Week)`;
       return `<option value="${w}">${label}</option>`;
     }).join('');
 
-    const initialWeek = targetWeek || vegasStackState.currentWeek || 'WEEK 2';
+    const initialWeek = targetWeek || vegasStackState.currentWeek || currentCfbWeek;
     weekSelect.value = initialWeek;
   }
 
@@ -13134,7 +13339,7 @@ window.updateVegasStackExportPreview = function() {
   const textarea = document.getElementById('vsExportTextarea');
   const charCount = document.getElementById('vsExportCharCount');
 
-  const selectedWeek = weekSelect ? weekSelect.value : (vegasStackState.currentWeek || 'WEEK 2');
+  const selectedWeek = weekSelect ? weekSelect.value : (vegasStackState.currentWeek || getCFBCurrentWeek());
   const selectedFilter = filterSelect ? filterSelect.value : 'all';
 
   const exportText = generateVegasStackExportText(selectedWeek, selectedFilter);
@@ -13197,7 +13402,7 @@ window.copyVegasStackPicks = function() {
 window.shareVegasStackPicksViaNative = function() {
   const textarea = document.getElementById('vsExportTextarea');
   const weekSelect = document.getElementById('vsExportWeekSelect');
-  const selectedWeek = weekSelect ? weekSelect.value : (vegasStackState.currentWeek || 'WEEK 2');
+  const selectedWeek = weekSelect ? weekSelect.value : (vegasStackState.currentWeek || getCFBCurrentWeek());
   const text = textarea ? textarea.value : '';
   const title = `CFB Prophet ${selectedWeek} Picks Against Vegas`;
 

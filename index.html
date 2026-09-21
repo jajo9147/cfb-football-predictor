@@ -16,20 +16,20 @@
   <meta name="apple-mobile-web-app-title" content="CFB Prophet">
   
   <!-- PWA Manifest & Touch Icons -->
-  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=464">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png?v=464">
-  <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=464">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=464">
-  <link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152.png?v=464">
-  <link rel="apple-touch-icon" sizes="192x192" href="./icons/icon-192.png?v=464">
-  <link rel="apple-touch-icon-precomposed" href="./apple-touch-icon.png?v=464">
-  <link rel="manifest" href="./manifest.json?v=464">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=465">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png?v=465">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=465">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=465">
+  <link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152.png?v=465">
+  <link rel="apple-touch-icon" sizes="192x192" href="./icons/icon-192.png?v=465">
+  <link rel="apple-touch-icon-precomposed" href="./apple-touch-icon.png?v=465">
+  <link rel="manifest" href="./manifest.json?v=465">
   
   <!-- Open Graph Protocol -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="CFB Prophet: College Football AI Prediction & Simulation Engine" id="ogTitle">
   <meta property="og:description" content="Simulate 10,000 drives, tune custom single-game scenarios, and calculate CFP Playoff paths for top college football powerhouses." id="ogDescription">
-  <meta property="og:image" content="./icons/icon-512.png?v=464" id="ogImage">
+  <meta property="og:image" content="./icons/icon-512.png?v=465" id="ogImage">
   
   <!-- Fonts: Bebas Neue, Outfit, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,7 +72,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=464">
+  <link rel="stylesheet" href="styles.css?v=465">
   <style id="mobile-critical-overrides">
     html, body {
       overflow-x: hidden !important;
@@ -195,7 +195,7 @@
     <div class="container nav-container">
       <a href="#" class="brand">
         <div class="logo-badge" id="navLogoBadge">
-          <img src="./apple-touch-icon.png?v=464" alt="CFB Prophet" class="nav-logo-img">
+          <img src="./apple-touch-icon.png?v=465" alt="CFB Prophet" class="nav-logo-img">
         </div>
         <div class="brand-text">
           <span class="brand-title">CFB PROPHET</span>
@@ -542,7 +542,7 @@
       <div class="footer-brand-row">
         <div class="footer-brand">
           <div class="footer-logo">
-            <img src="./apple-touch-icon.png?v=464" alt="CFB Prophet" width="30" height="30" style="border-radius: 6px;">
+            <img src="./apple-touch-icon.png?v=465" alt="CFB Prophet" width="30" height="30" style="border-radius: 6px;">
             <span class="footer-title">CFB PROPHET</span>
           </div>
           <p class="footer-tagline">College football matchup simulation engine and interactive 12-team College Football Playoff bracket predictor.</p>
@@ -750,11 +750,15 @@
               <span class="custom-indicator-dot" id="vsCustomDot" style="display: none;"></span>
             </button>
           </div>
+          <!-- Custom Model Pick Source Dropdown -->
+          <div class="vs-custom-source-wrap" id="vsCustomSourceWrap" style="display: none;">
+            <label for="vsCustomSourceSelect" class="vs-source-label"><i class="fa-solid fa-folder-open"></i> Model Picks:</label>
+            <select id="vsCustomSourceSelect" class="vs-source-select" onchange="onVegasStackCustomSourceChange(this.value)" title="Choose between active simulator tuning or your submitted picks">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
           <button class="action-btn vs-export-btn" id="vsExportBtn" onclick="openVegasStackExportModal()" title="Export Picks Against Vegas (Clean Copy & Paste / Native Share)">
-            <i class="fa-solid fa-arrow-up-from-bracket"></i> <span id="vsExportBtnLabel">Export Week 2 Picks</span>
-          </button>
-          <button class="action-btn vs-reset-btn" id="vsResetBtn" onclick="resetVegasStackCustomTuning()" title="Reset all custom sliders back to Golden AI Baseline">
-            <i class="fa-solid fa-rotate-left"></i> <span>Reset to Baseline</span>
+            <i class="fa-solid fa-arrow-up-from-bracket"></i> <span id="vsExportBtnLabel">Export Week 4 Picks</span>
           </button>
         </div>
       </div>
@@ -960,7 +964,7 @@
       <div class="pwa-drawer-header">
         <div class="pwa-drawer-title-wrap">
           <div class="logo-badge" style="width: 36px; height: 36px;">
-            <img src="./apple-touch-icon.png?v=464" alt="App Icon" class="nav-logo-img" id="pwaDrawerLogo">
+            <img src="./apple-touch-icon.png?v=465" alt="App Icon" class="nav-logo-img" id="pwaDrawerLogo">
           </div>
           <div>
             <div class="pwa-drawer-title">INSTALL APP TO HOME SCREEN</div>
@@ -1991,11 +1995,11 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js?v=464"></script>
-  <script src="qrious.min.js?v=464"></script>
-  <script src="qrcode.min.js?v=464"></script>
-  <script src="data/teams.js?v=464"></script>
-  <script src="data/community_brackets.js?v=464"></script>
-  <script src="app.js?v=464"></script>
+  <script src="supabase-client.js?v=465"></script>
+  <script src="qrious.min.js?v=465"></script>
+  <script src="qrcode.min.js?v=465"></script>
+  <script src="data/teams.js?v=465"></script>
+  <script src="data/community_brackets.js?v=465"></script>
+  <script src="app.js?v=465"></script>
 </body>
 </html>
