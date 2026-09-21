@@ -8054,6 +8054,15 @@ body {
   box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
 }
 
+.vs-edge-bar.high-variance {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.vs-edge-bar.high-variance .vs-edge-tag {
+  color: #F87171;
+}
+
 .vs-edge-tag {
   color: #F59E0B;
   font-weight: 800;

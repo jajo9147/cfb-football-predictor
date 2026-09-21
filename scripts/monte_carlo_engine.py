@@ -60,12 +60,18 @@ def simulate_matchup_10k(
     stadium_name=None,
     game_date=None,
     kickoff_str=None,
-    weather_info=None
+    weather_info=None,
+    line_yards_a=3.0,
+    line_yards_b=3.0,
+    havoc_a=0.15,
+    havoc_b=0.15,
+    ppo_a=3.8,
+    ppo_b=3.8
 ):
     """
     Simulates 10,000 full drive-by-drive games between Team A and Team B.
     Returns full score distributions, median margin, cover probability, and O/U odds.
-    Incorporates 2026 CFBD SP+, 247Sports Talent, EPA/PPA, and Returning Production.
+    Incorporates 2026 CFBD SP+, 247Sports Talent, EPA/PPA, Trench Line Yards, Havoc, and Red Zone PPO.
     """
     hfa = hfa_pts if is_home_a else -hfa_pts
 
@@ -100,13 +106,22 @@ def simulate_matchup_10k(
         # Apply weather drag to total and passing efficiency
         vegas_total = max(30.0, vegas_total - weather_impact['totalPointsDrag'])
 
-    # 4. Modulate per-drive scoring probabilities
-    # A 7-point SP+ advantage translates to ~+0.05 TD probability per drive
-    p_td_a = max(0.08, min(0.65, BASE_TD_RATE + (sp_diff * 0.0075) + ((ppa_off_a - 0.15) * 0.25)))
-    p_fg_a = max(0.05, min(0.22, BASE_FG_RATE + (sp_diff * 0.0015)))
+    # 4. Modulate per-drive scoring probabilities with in-game trench & red-zone metrics
+    # Line yards differential gives short-yardage push (+/- 0.02)
+    trench_mod_a = max(-0.02, min(0.02, (line_yards_a - line_yards_b) * 0.01))
+    trench_mod_b = -trench_mod_a
+    # Opponent havoc disrupts drive flow
+    havoc_mod_a = max(-0.03, min(0.01, (0.15 - havoc_b) * 0.20))
+    havoc_mod_b = max(-0.03, min(0.01, (0.15 - havoc_a) * 0.20))
+    # Red-zone PPO determines touchdown conversion rate vs settling for field goals
+    ppo_mod_a = max(-0.02, min(0.03, (ppo_a - 3.8) * 0.015))
+    ppo_mod_b = max(-0.02, min(0.03, (ppo_b - 3.8) * 0.015))
+
+    p_td_a = max(0.08, min(0.65, BASE_TD_RATE + (sp_diff * 0.0075) + ((ppa_off_a - 0.15) * 0.25) + trench_mod_a + havoc_mod_a + ppo_mod_a))
+    p_fg_a = max(0.05, min(0.22, BASE_FG_RATE + (sp_diff * 0.0015) - (ppo_mod_a * 0.5)))
     
-    p_td_b = max(0.04, min(0.55, BASE_TD_RATE - (sp_diff * 0.0075) + ((ppa_off_b - 0.15) * 0.25)))
-    p_fg_b = max(0.04, min(0.20, BASE_FG_RATE - (sp_diff * 0.0015)))
+    p_td_b = max(0.04, min(0.55, BASE_TD_RATE - (sp_diff * 0.0075) + ((ppa_off_b - 0.15) * 0.25) + trench_mod_b + havoc_mod_b + ppo_mod_b))
+    p_fg_b = max(0.04, min(0.20, BASE_FG_RATE - (sp_diff * 0.0015) - (ppo_mod_b * 0.5)))
 
     # Apply weather efficiency multipliers if present
     if weather_impact:

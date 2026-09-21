@@ -307,7 +307,8 @@ FCS_KEYWORDS = [
     'new haven', 'norfolk state', 'north alabama', 'north carolina a&t',
     'north carolina central', 'northern colorado', 'northwestern state',
     'prairie view', 'presbyterian', 'rhode island', 'robert morris',
-    'se louisiana', 'southeastern louisiana', 'sacred heart', 'san diego',
+    'se louisiana', 'southeastern louisiana', 'sacred heart', 'san diego toreros',
+    'university of san diego', 'usd',
     'south carolina state', 'southeast missouri', 'southern illinois',
     'southern utah', 'st. thomas', 'stetson', 'stonehill', 'stony brook',
     'tennessee tech', 'texas southern', 'towson', 'ualbany', 'ut martin',
@@ -315,6 +316,107 @@ FCS_KEYWORDS = [
     'western illinois', 'youngstown state'
 ]
 
+# Canonical exclusion list to prevent systemic AP rank cross-contamination (e.g. Georgia Southern vs Georgia)
+CANONICAL_AP_EXCLUSIONS = {
+    'georgia': ['georgia southern', 'georgia tech', 'georgia state'],
+    'michigan': ['central michigan', 'western michigan', 'eastern michigan', 'michigan state'],
+    'houston': ['sam houston', 'houston christian'],
+    'texas': ['texas tech', 'texas a&m', 'texas state', 'north texas', 'sam houston', 'texas southern', 'utep', 'utsa', 'tarleton'],
+    'florida': ['florida state', 'florida atlantic', 'south florida', 'fiu', 'florida a&m'],
+    'ohio state': ['ohio bobcats', 'ohio university'],
+    'oklahoma': ['oklahoma state'],
+    'oregon': ['oregon state'],
+    'washington': ['washington state', 'eastern washington'],
+    'louisiana': ['louisiana tech', 'louisiana monroe', 'ul monroe', 'se louisiana'],
+    'mississippi': ['mississippi state', 'southern miss', 'mississippi valley'],
+    'carolina': ['north carolina', 'south carolina', 'east carolina', 'western carolina', 'coastal carolina'],
+    'colorado': ['colorado state', 'northern colorado'],
+    'arizona': ['arizona state', 'northern arizona'],
+    'kansas': ['kansas state'],
+    'iowa': ['iowa state', 'northern iowa'],
+    'penn state': ['penn', 'upenn', 'pennsylvania'],
+    'utah': ['utah state', 'utah tech', 'southern utah'],
+    'alabama': ['alabama state', 'alabama a&m', 'south alabama'],
+    'tennessee': ['tennessee state', 'tennessee tech', 'east tennessee state', 'ut martin'],
+    'arkansas': ['arkansas state', 'arkansas-pine bluff', 'central arkansas'],
+    'missouri': ['missouri state'],
+    'kentucky': ['western kentucky', 'eastern kentucky'],
+    'indiana': ['indiana state'],
+    'illinois': ['illinois state', 'southern illinois', 'western illinois', 'eastern illinois']
+}
+
+MASCOT_REGEX = re.compile(r'\b(eagles|bulldogs|tigers|cougars|wildcats|bears|badgers|buckeyes|wolverines|trojans|ducks|huskies|rebels|gators|seminoles|cavaliers|cardinals|chippewas|broncos|bearkats|aztecs|mountaineers|bobcats|aggies|longhorns|crimson tide|volunteers|commodores|razorbacks|gamecocks|fighting irish|blue devils|yellow jackets|tar heels|demon deacons|hokies|panthers|terrapins|scarlet knights|boilermakers|golden gophers|cornhuskers|hawkeyes|utes|red raiders|cyclones|jayhawks|horned frogs|mustangs|green wave|owls|bulls|miners|flames|blazers|thundering herd|knights)\b', re.IGNORECASE)
+
+def is_fcs_opponent(opp_name, opp_abbr=None):
+    """
+    Identifies whether an opponent is in the FCS division while preventing
+    any false classification of FBS programs (e.g. San Diego State, Georgia Southern).
+    """
+    name_clean = (opp_name or '').strip().lower()
+    abbr_clean = (opp_abbr or '').strip().upper()
+    
+    # Explicit FBS immunity guardrails (never classify these FBS programs as FCS)
+    if 'san diego state' in name_clean or abbr_clean == 'SDSU':
+        return False
+    if 'georgia southern' in name_clean or abbr_clean == 'GASO':
+        return False
+    if 'georgia state' in name_clean or abbr_clean == 'GAST':
+        return False
+    if 'texas state' in name_clean or abbr_clean == 'TXST':
+        return False
+    if 'sam houston' in name_clean or abbr_clean == 'SHSU':
+        return False
+    if 'southern miss' in name_clean or abbr_clean == 'USM':
+        return False
+    if 'south florida' in name_clean or abbr_clean == 'USF':
+        return False
+
+    for kw in FCS_KEYWORDS:
+        if kw in name_clean:
+            return True
+    return False
+
+def resolve_opponent_ap_rank(g, db, external_ap_ranks):
+    """
+    Deterministically resolves an opponent's official AP poll ranking.
+    Guarantees zero systemic substring cross-contamination.
+    """
+    raw_name = (g.get('opponent') or '').strip()
+    opp_lower = raw_name.lower()
+    opp_abbr = (g.get('oppAbbr') or '').strip().upper()
+
+    # 1. FCS Check
+    if is_fcs_opponent(raw_name, opp_abbr):
+        return 'FCS'
+
+    # 2. Check tracked teams in DB
+    opp_id = g.get('oppId')
+    matched_tid = opp_id if (opp_id and opp_id in db) else match_team_in_db(db, raw_name or opp_abbr)
+    if matched_tid and matched_tid in db:
+        g['oppId'] = matched_tid
+        return db[matched_tid].get('apRank', 'NR')
+
+    # 3. Non-DB FBS Opponent: Strict match against external AP ranks
+    school_clean = MASCOT_REGEX.sub('', opp_lower).strip()
+
+    for ext_k, ext_v in external_ap_ranks.items():
+        k_clean = ext_k.strip().lower()
+
+        # Check explicit canonical exclusion collisions
+        is_excluded = False
+        for base_k, excl_list in CANONICAL_AP_EXCLUSIONS.items():
+            if base_k in k_clean:
+                if any(excl in opp_lower for excl in excl_list) and not any(excl in k_clean for excl in excl_list):
+                    is_excluded = True
+                    break
+        if is_excluded:
+            continue
+
+        # Exact match on school name, full name, or abbreviation
+        if k_clean == opp_lower or k_clean == school_clean or k_clean == opp_abbr.lower():
+            return ext_v
+
+    return 'NR'
 
 def load_teams_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -683,38 +785,24 @@ def main():
     external_ap_ranks = {
         'florida': '#21 AP',
         'florida gators': '#21 AP',
+        'fla': '#21 AP',
         'mississippi state': '#24 AP',
-        'mississippi state bulldogs': '#24 AP'
+        'mississippi state bulldogs': '#24 AP',
+        'msst': '#24 AP'
     }
     if ap_poll:
         for r in ap_poll.get('ranks', []):
             rn = r.get('current')
             loc = (r.get('team', {}).get('location') or '').lower()
-            name = (r.get('team', {}).get('name') or '').lower()
+            abbr = (r.get('team', {}).get('abbreviation') or '').lower()
             if loc: external_ap_ranks[loc] = f"#{rn} AP"
-            if name: external_ap_ranks[name] = f"#{rn} AP"
+            if abbr: external_ap_ranks[abbr] = f"#{rn} AP"
 
     for tid, t in db.items():
         for g in t.get('schedule', []):
             if g.get('isFinal'):
                 continue
-            opp_id = g.get('oppId')
-            matched_tid = opp_id if (opp_id and opp_id in db) else match_team_in_db(db, g.get('opponent') or g.get('oppAbbr'))
-            if matched_tid and matched_tid in db:
-                opp_ap = db[matched_tid].get('apRank', 'NR')
-            else:
-                opp_name_clean = (g.get('opponent') or '').strip().lower()
-                opp_ap = external_ap_ranks.get(opp_name_clean)
-                if not opp_ap:
-                    for ext_k, ext_v in external_ap_ranks.items():
-                        if ext_k == opp_name_clean:
-                            opp_ap = ext_v
-                            break
-                        if ext_k in opp_name_clean and ('state' in ext_k or 'state' not in opp_name_clean):
-                            opp_ap = ext_v
-                            break
-                if not opp_ap:
-                    opp_ap = g.get('oppRank', 'NR')
+            opp_ap = resolve_opponent_ap_rank(g, db, external_ap_ranks)
 
             if g.get('oppRank') != opp_ap:
                 if not args.dry_run:
@@ -747,7 +835,7 @@ def main():
             if is_completed:
                 raw_opp_name = (g.get('opponent') or '').strip()
                 opp_lower = raw_opp_name.lower()
-                is_fcs_match = any(kw in opp_lower for kw in fcs_keywords) or g.get('oppRank') == 'FCS'
+                is_fcs_match = is_fcs_opponent(raw_opp_name, (g.get('oppAbbr') or ''))
                 if is_fcs_match:
                     g['oppRank'] = 'FCS'
 
@@ -1070,7 +1158,7 @@ def main():
                         else:
                             g['scoutReport']['summary'] = f"{conf_title} conference battle against {raw_opp_name}."
 
-            is_fcs = g.get('oppRank') == 'FCS' or any(kw in opp_lower for kw in FCS_KEYWORDS)
+            is_fcs = is_fcs_opponent(raw_opp_name, opp_abbr)
             if is_fcs:
                 g['oppRank'] = 'FCS'
                 sp_opp = -18.0
@@ -1081,22 +1169,28 @@ def main():
                 opp_talent = talent_map.get(opp_name, talent_map.get(db[opp_id].get('shortName', '').lower(), 650.0))
             else:
                 # 1. Search dynamic_fbs_ratings (longest keys first)
+                opp_school = MASCOT_REGEX.sub('', opp_lower).strip()
+                opp_words = opp_lower.split()
                 found_dynamic = None
                 if opp_lower in dynamic_fbs_ratings:
                     found_dynamic = dynamic_fbs_ratings[opp_lower]
+                elif opp_school in dynamic_fbs_ratings:
+                    found_dynamic = dynamic_fbs_ratings[opp_school]
                 elif opp_abbr in dynamic_fbs_ratings:
                     found_dynamic = dynamic_fbs_ratings[opp_abbr]
                 else:
                     for k in sorted(dynamic_fbs_ratings.keys(), key=len, reverse=True):
-                        # Directional qualifier guard (e.g. "eastern washington" must NOT match "washington", "northern iowa" must NOT match "iowa")
+                        # Directional qualifier guard using whole words
                         is_directional_mismatch = False
-                        for prefix in ['eastern ', 'western ', 'northern ', 'southern ', 'central ', 'east ', 'west ', 'north ', 'south ', 'southeast ', 'southwest ']:
-                            if prefix in opp_lower and not prefix in k:
+                        for prefix in ['eastern', 'western', 'northern', 'southern', 'central', 'east', 'west', 'north', 'south', 'southeast', 'southwest']:
+                            in_opp = any(w == prefix for w in opp_words)
+                            in_k = any(w == prefix for w in k.split())
+                            if in_opp != in_k:
                                 is_directional_mismatch = True
                                 break
                         if is_directional_mismatch:
                             continue
-                        if len(k) >= 4 and (k == opp_lower or k in opp_lower or (len(opp_lower) >= 4 and opp_lower in k)):
+                        if len(k) >= 4 and (k == opp_lower or k == opp_school or k in opp_lower or (len(opp_school) >= 4 and opp_school in k)):
                             found_dynamic = dynamic_fbs_ratings[k]
                             break
 
@@ -1191,7 +1285,12 @@ def main():
                 projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
             else:
                 # Later weeks: Pure model projection grounded in freshly calibrated ratings
-                projected_margin = round(raw_margin, 1)
+                # For unranked non-conference games without market line, prevent absurd blowouts > 36 pts
+                if abs(raw_margin) > 36.0 and not is_fcs:
+                    excess = abs(raw_margin) - 36.0
+                    projected_margin = round(math.copysign(36.0 + math.sqrt(excess) * 1.5, raw_margin), 1)
+                else:
+                    projected_margin = round(raw_margin, 1)
                 g['vegasSpread'] = -projected_margin
                 g['oddsProvider'] = 'CFB Prophet Projected'
 
@@ -1202,6 +1301,7 @@ def main():
                 team_short = (t.get('shortName') or tid).lower()
                 opp_clean_lower = (g.get('opponent') or '').lower()
                 opp_abbr = (g.get('oppAbbr') or '').lower()
+                opp_school = MASCOT_REGEX.sub('', opp_clean_lower).strip()
 
                 ret_a = ret_prod_map.get((t.get('name') or '').lower(), {}).get('percentPPA', 0.60)
                 ret_b = ret_prod_map.get(opp_clean_lower, {}).get('percentPPA', 0.60)
@@ -1216,6 +1316,15 @@ def main():
                     next((v for k, v in cum_adv_stats.items() if (k == opp_clean_lower or (len(k) > 4 and k in opp_clean_lower))), {})
                 )
                 ppa_b = min(0.28, max(-0.15, float(c_info_b.get('avgOffPpa', 0.14))))
+
+                # In-game trench line yards, havoc, and red-zone points per opportunity (all 138 FBS teams)
+                adv_a = season_adv_map.get(team_short) or season_adv_map.get(tid) or season_adv_map.get((t.get('name') or '').lower()) or {}
+                adv_b = season_adv_map.get(opp_clean_lower) or season_adv_map.get(opp_school) or season_adv_map.get(opp_abbr) or {}
+                if not adv_b:
+                    for ak, av in season_adv_map.items():
+                        if ak == opp_clean_lower or ak == opp_school or (len(ak) > 4 and ak in opp_clean_lower):
+                            adv_b = av
+                            break
 
                 mc_sim = monte_carlo_engine.simulate_matchup_10k(
                     team_a_name=t.get('shortName', tid),
@@ -1235,7 +1344,13 @@ def main():
                     iterations=1000,
                     stadium_name=stadium,
                     game_date=g.get('date'),
-                    kickoff_str=g.get('kickoffTime')
+                    kickoff_str=g.get('kickoffTime'),
+                    line_yards_a=adv_a.get('offenseLineYards', 3.0),
+                    line_yards_b=adv_b.get('offenseLineYards', 3.0),
+                    havoc_a=adv_a.get('defenseHavoc', 0.15),
+                    havoc_b=adv_b.get('defenseHavoc', 0.15),
+                    ppo_a=adv_a.get('offensePPO', 3.8),
+                    ppo_b=adv_b.get('offensePPO', 3.8)
                 )
                 adj_ut_score = mc_sim['projScoreA']
                 adj_opp_score = mc_sim['projScoreB']

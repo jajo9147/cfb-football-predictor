@@ -245,6 +245,8 @@ def get_fbs_opponent_power_ratings(year=2026):
         if tm:
             records_map[tm] = r.get('total', {})
 
+    adv_stats = get_season_advanced_stats(year)
+
     ratings_map = {}
     for team_name, sp_info in sp_data.items():
         raw_sp = float(sp_info.get('rating', 0.0))
@@ -264,6 +266,17 @@ def get_fbs_opponent_power_ratings(year=2026):
         elif w == 0 and l >= 2:
             record_adj -= 1.4
 
+        # Real 2026 in-game trench & efficiency telemetry (all 138 FBS teams)
+        adv_info = adv_stats.get(team_name, {})
+        trench_adj = 0.0
+        if adv_info:
+            net_line_yds = adv_info.get('offenseLineYards', 3.0) - adv_info.get('defenseLineYards', 3.0)
+            net_success = adv_info.get('offenseSuccessRate', 0.40) - adv_info.get('defenseSuccessRate', 0.40)
+            havoc = adv_info.get('defenseHavoc', 0.15)
+            ppo = adv_info.get('offensePPO', 3.8)
+            # Physical trench & efficiency adjustment (+/- 2.5 pts max)
+            trench_adj = max(-2.5, min(2.5, (net_line_yds * 0.8) + (net_success * 4.0) + ((havoc - 0.15) * 6.0) + ((ppo - 3.8) * 0.4)))
+
         # Specific 2026 marquee game adjustments
         if team_name == 'oklahoma state':
             record_adj += 2.2  # Upset #6 Oregon
@@ -276,7 +289,7 @@ def get_fbs_opponent_power_ratings(year=2026):
         elif team_name == 'georgia tech':
             record_adj += 2.5  # Strong start, beat FSU
 
-        final_rating = round(base_scaled + talent_adj + record_adj, 1)
+        final_rating = round(base_scaled + talent_adj + record_adj + trench_adj, 1)
         ratings_map[team_name] = final_rating
         # Also map without spaces
         ratings_map[team_name.replace(' ', '')] = final_rating

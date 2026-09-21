@@ -143,6 +143,29 @@ def run_inspections():
             if 'idaho state' in opp_name and opp_id == 'idaho':
                 errors.append(f"Cross-contamination: Idaho State assigned Idaho ID in {gid}")
 
+            # Strict AP Rank Isolation (prevent substring pollution)
+            opp_rank = g.get('oppRank', 'NR')
+            if 'georgia southern' in opp_name and opp_rank != 'NR':
+                errors.append(f"{gid}: False rank cross-contamination: Georgia Southern has oppRank '{opp_rank}' (must be NR)")
+            if 'georgia tech' in opp_name and opp_rank != 'NR':
+                errors.append(f"{gid}: False rank cross-contamination: Georgia Tech has oppRank '{opp_rank}' (must be NR)")
+            if 'central michigan' in opp_name and opp_rank != 'NR':
+                errors.append(f"{gid}: False rank cross-contamination: Central Michigan has oppRank '{opp_rank}' (must be NR)")
+            if 'western michigan' in opp_name and opp_rank != 'NR':
+                errors.append(f"{gid}: False rank cross-contamination: Western Michigan has oppRank '{opp_rank}' (must be NR)")
+            if 'sam houston' in opp_name and opp_rank != 'NR':
+                errors.append(f"{gid}: False rank cross-contamination: Sam Houston has oppRank '{opp_rank}' (must be NR)")
+            if 'san diego state' in opp_name and opp_rank == 'FCS':
+                errors.append(f"{gid}: False FCS classification: San Diego State marked as FCS (FBS Mountain West)")
+            if 'texas state' in opp_name and opp_rank != 'NR':
+                errors.append(f"{gid}: False rank cross-contamination: Texas State has oppRank '{opp_rank}' (must be NR)")
+            if 'north texas' in opp_name and opp_rank != 'NR':
+                errors.append(f"{gid}: False rank cross-contamination: North Texas has oppRank '{opp_rank}' (must be NR)")
+            if 'florida atlantic' in opp_name and opp_rank != 'NR':
+                errors.append(f"{gid}: False rank cross-contamination: Florida Atlantic has oppRank '{opp_rank}' (must be NR)")
+            if 'south florida' in opp_name and opp_rank != 'NR':
+                errors.append(f"{gid}: False rank cross-contamination: South Florida has oppRank '{opp_rank}' (must be NR)")
+
     print(f"  • Verified logo URLs and opponent isolation for all {total_games} games.")
 
     # 4. Authentic AP Rankings Verification

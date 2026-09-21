@@ -12662,7 +12662,17 @@ function getVegasStackMatchups(weekFilter, isCustom) {
         }
       }
 
-      const isDiamond = absEdge >= 7.0;
+      // High-Fidelity Matchup Gate: Both teams are tracked in TEAMS_DATABASE, Ranked vs Ranked, or intra-conference
+      const isTracked = !!(g.oppId && TEAMS_DATABASE[g.oppId]);
+      const isRanked = ((homeTeam.apRank && homeTeam.apRank.startsWith('#')) || (homeTeam.rank && homeTeam.rank.startsWith('#'))) &&
+                       ((awayTeam.apRank && awayTeam.apRank.startsWith('#')) || (awayTeam.rank && awayTeam.rank.startsWith('#')));
+      const isConf = !!g.isConf;
+      const isHighFidelity = isTracked || isRanked || isConf;
+
+      // Authentic Diamond Play: High-fidelity matchup with verified analytical edge (2.5 to 6.5 pts)
+      const isDiamond = isHighFidelity && (absEdge >= 2.5 && absEdge <= 6.5);
+      // Outlier spread disagreement on low-fidelity / unranked games
+      const isHighVariance = !isHighFidelity && absEdge >= 7.0;
 
       // Filter check
       if (vegasStackState.filter === 'diamond' && !isDiamond) return;
@@ -12695,6 +12705,7 @@ function getVegasStackMatchups(weekFilter, isCustom) {
         recSide,
         recSpread,
         isDiamond,
+        isHighVariance,
         isFinal,
         actHome,
         actAway,
@@ -12900,7 +12911,12 @@ function renderVegasStack() {
         gradingBadge = `<div class="vs-grading-banner pending"><span><i class="fa-regular fa-clock"></i> PENDING KICKOFF</span><span>Lines Active</span></div>`;
       }
 
-      const edgeTagText = m.isDiamond ? `<i class="fa-solid fa-gem"></i> +${m.absEdge.toFixed(1)} PT DIAMOND EDGE` : `+${m.absEdge.toFixed(1)} PT EDGE`;
+      let edgeTagText = `+${m.absEdge.toFixed(1)} PT EDGE`;
+      if (m.isDiamond) {
+        edgeTagText = `<i class="fa-solid fa-gem"></i> +${m.absEdge.toFixed(1)} PT DIAMOND EDGE`;
+      } else if (m.isHighVariance) {
+        edgeTagText = `<i class="fa-solid fa-triangle-exclamation" style="color: #F87171;"></i> +${m.absEdge.toFixed(1)} PT HIGH VARIANCE`;
+      }
 
       let pickFormatted = m.recSide;
       if (m.recSide !== 'PASS') {
@@ -12959,7 +12975,7 @@ function renderVegasStack() {
             <span style="color: #64748B; font-size: 0.68rem;">${m.oddsProvider}</span>
           </div>
 
-          <div class="vs-edge-bar ${m.isDiamond ? 'diamond' : ''}">
+          <div class="vs-edge-bar ${m.isDiamond ? 'diamond' : (m.isHighVariance ? 'high-variance' : '')}">
             <span class="vs-edge-tag">${edgeTagText}</span>
             <span class="vs-rec-pick">Pick: <strong>${pickFormatted}</strong></span>
           </div>
@@ -13012,7 +13028,7 @@ function generateVegasStackExportText(week, filter) {
 
   const diamondPicks = matchups.filter(m => m.isDiamond);
   if (diamondPicks.length > 0 && filter !== 'diamond') {
-    lines.push(`🔥 TOP BEST BETS / DIAMOND EDGES (7+ PTS):`);
+    lines.push(`🔥 TOP HIGH-CONVICTION DIAMOND PLAYS (2.5 - 6.5 PT EDGE):`);
     diamondPicks.forEach(m => {
       const spreadFormatted = m.spreadOnHome === 0 ? 'PK' : (m.spreadOnHome > 0 ? `+${m.spreadOnHome}` : `${m.spreadOnHome}`);
       const homeSpreadFormatted = `${m.homeTeam.abbr || m.homeTeam.name} ${spreadFormatted}`;
