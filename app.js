@@ -13165,7 +13165,7 @@ function renderVegasStack() {
           </div>
 
           <div class="vs-odds-strip">
-            <span class="vs-odds-line"><i class="fa-solid fa-scale-balanced" style="color: #60A5FA; margin-right: 4px;"></i> ${homeTeam.abbr || homeTeam.name} ${homeSpreadFormatted}</span>
+            <span class="vs-odds-line"><i class="fa-solid fa-scale-balanced" style="color: #60A5FA; margin-right: 4px;"></i> ${m.homeTeam.abbr || m.homeTeam.name} ${homeSpreadFormatted}</span>
             <span class="vs-odds-total">O/U ${m.vegasTotal}</span>
             <span style="color: #64748B; font-size: 0.68rem;">${m.oddsProvider}</span>
           </div>
