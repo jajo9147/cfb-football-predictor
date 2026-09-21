@@ -12830,7 +12830,7 @@ function renderVegasStack() {
           <span class="vs-kpi-sub"><span class="badge-rate">${suPct}%</span> Accuracy</span>
         </div>
         <div class="vs-kpi-card purple">
-          <span class="vs-kpi-label"><i class="fa-solid fa-gem"></i> DIAMOND EDGES (7+ PTS)</span>
+          <span class="vs-kpi-label"><i class="fa-solid fa-gem"></i> DIAMOND PLAYS</span>
           <span class="vs-kpi-val">${diamondWins}-${diamondDecided - diamondWins}</span>
           <span class="vs-kpi-sub"><span class="badge-rate">${diamondPct}%</span> High Confidence</span>
         </div>
@@ -12849,9 +12849,9 @@ function renderVegasStack() {
           <span class="vs-kpi-sub">Kickoffs Pending</span>
         </div>
         <div class="vs-kpi-card purple">
-          <span class="vs-kpi-label"><i class="fa-solid fa-gem"></i> DIAMOND EDGES</span>
+          <span class="vs-kpi-label"><i class="fa-solid fa-gem"></i> DIAMOND PLAYS</span>
           <span class="vs-kpi-val">${diamondCount} PLAYS</span>
-          <span class="vs-kpi-sub">7+ Pt Discrepancies</span>
+          <span class="vs-kpi-sub">High-Conviction Edges</span>
         </div>
         <div class="vs-kpi-card emerald">
           <span class="vs-kpi-label"><i class="fa-solid fa-sliders"></i> MODEL STATUS</span>
@@ -12878,7 +12878,7 @@ function renderVegasStack() {
       if (isGradingFilter) {
         iconClass = 'fa-clock';
         emptyTitle = `${vegasStackState.currentWeek} Games Are Pending Kickoff!`;
-        emptySub = `Covers and losses are only graded after games go final. Switch to <strong>All Games</strong> or <strong>💎 Diamond Edges</strong> to see this week's active picks against Vegas!`;
+        emptySub = `Covers and losses are only graded after games go final. Switch to <strong>All Games</strong> or <strong>💎 Diamond Plays</strong> to see this week's active picks against Vegas!`;
       }
 
       grid.innerHTML = `
@@ -13049,7 +13049,7 @@ function generateVegasStackExportText(week, filter) {
     lines.push('');
   }
 
-  lines.push(`📋 ${filter === 'diamond' ? 'DIAMOND EDGE PICKS' : 'ALL SLATE PICKS (ATS)'}:`);
+  lines.push(`📋 ${filter === 'diamond' ? 'DIAMOND PLAYS (ATS)' : 'ALL SLATE PICKS (ATS)'}:`);
   if (matchups.length === 0) {
     lines.push(`No matchups found matching current filter.`);
   } else {
