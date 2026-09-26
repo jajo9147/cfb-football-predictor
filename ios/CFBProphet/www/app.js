@@ -12818,22 +12818,29 @@ function getVegasStackMatchups(weekFilter, isCustom) {
         const homeWonModel = scoreHome > scoreAway;
         suResult = (homeWonActual === homeWonModel) ? 'win' : 'loss';
 
-        if (Math.abs(actualDiffVsSpread) < 0.25) {
+        if (recSide === 'PASS') {
+          atsResult = 'pass';
+        } else if (Math.abs(actualDiffVsSpread) < 0.25) {
           atsResult = 'push';
         } else if (recSide === homeTeam.name) {
           atsResult = actualDiffVsSpread > 0 ? 'win' : 'loss';
         } else if (recSide === awayTeam.name) {
           atsResult = actualDiffVsSpread < 0 ? 'win' : 'loss';
         } else {
-          atsResult = 'push';
+          atsResult = 'pass';
         }
 
         const actTotal = actHome + actAway;
         const modelTotal = scoreHome + scoreAway;
-        const calledOver = modelTotal > vegasTotal;
-        if (Math.abs(actTotal - vegasTotal) < 0.25) {
+        const totalEdge = modelTotal - vegasTotal;
+        const absTotalEdge = Math.abs(totalEdge);
+        const isPassOu = (g.mcRecommendedOu && g.mcRecommendedOu.includes('PASS')) || (absTotalEdge < 1.5);
+
+        if (isPassOu) {
+          ouResult = 'pass';
+        } else if (Math.abs(actTotal - vegasTotal) < 0.25) {
           ouResult = 'push';
-        } else if (calledOver) {
+        } else if (totalEdge > 0) {
           ouResult = (actTotal > vegasTotal) ? 'win' : 'loss';
         } else {
           ouResult = (actTotal < vegasTotal) ? 'win' : 'loss';
@@ -12847,8 +12854,8 @@ function getVegasStackMatchups(weekFilter, isCustom) {
       const isConf = !!g.isConf;
       const isHighFidelity = isTracked || isRanked || isConf;
 
-      // Authentic Diamond Play: High-fidelity matchup with verified analytical edge (2.5 to 6.5 pts)
-      const isDiamond = isHighFidelity && (absEdge >= 2.5 && absEdge <= 6.5);
+      // Authentic Diamond Play: High-fidelity matchup with verified analytical edge (>= 2.5 pts)
+      const isDiamond = isHighFidelity && (absEdge >= 2.5);
       // Outlier spread disagreement on low-fidelity / unranked games
       const isHighVariance = !isHighFidelity && absEdge >= 7.0;
 
@@ -12983,23 +12990,30 @@ function renderVegasStack() {
     const finalCount = finalGames.length;
 
     if (finalCount > 0) {
-      const atsWins = finalGames.filter(g => g.atsResult === 'win').length;
-      const atsLosses = finalGames.filter(g => g.atsResult === 'loss').length;
-      const atsPushes = finalGames.filter(g => g.atsResult === 'push').length;
+      const atsGames = finalGames.filter(g => g.atsResult === 'win' || g.atsResult === 'loss' || g.atsResult === 'push');
+      const atsWins = atsGames.filter(g => g.atsResult === 'win').length;
+      const atsLosses = atsGames.filter(g => g.atsResult === 'loss').length;
+      const atsPushes = atsGames.filter(g => g.atsResult === 'push').length;
       const atsDecided = atsWins + atsLosses;
       const atsPct = atsDecided > 0 ? ((atsWins / atsDecided) * 100).toFixed(1) : '0.0';
 
       const suWins = finalGames.filter(g => g.suResult === 'win').length;
-      const suPct = finalCount > 0 ? ((suWins / finalCount) * 100).toFixed(1) : '0.0';
+      const suLosses = finalGames.filter(g => g.suResult === 'loss').length;
+      const suDecided = suWins + suLosses;
+      const suPct = suDecided > 0 ? ((suWins / suDecided) * 100).toFixed(1) : '0.0';
 
-      const ouWins = finalGames.filter(g => g.ouResult === 'win').length;
-      const ouLosses = finalGames.filter(g => g.ouResult === 'loss').length;
+      const ouGames = finalGames.filter(g => g.ouResult === 'win' || g.ouResult === 'loss' || g.ouResult === 'push');
+      const ouWins = ouGames.filter(g => g.ouResult === 'win').length;
+      const ouLosses = ouGames.filter(g => g.ouResult === 'loss').length;
+      const ouPushes = ouGames.filter(g => g.ouResult === 'push').length;
       const ouDecided = ouWins + ouLosses;
       const ouPct = ouDecided > 0 ? ((ouWins / ouDecided) * 100).toFixed(1) : '0.0';
 
-      const diamondGames = finalGames.filter(g => g.isDiamond);
+      const diamondGames = finalGames.filter(g => g.isDiamond && (g.atsResult === 'win' || g.atsResult === 'loss' || g.atsResult === 'push'));
       const diamondWins = diamondGames.filter(g => g.atsResult === 'win').length;
-      const diamondDecided = diamondGames.filter(g => g.atsResult === 'win' || g.atsResult === 'loss').length;
+      const diamondLosses = diamondGames.filter(g => g.atsResult === 'loss').length;
+      const diamondPushes = diamondGames.filter(g => g.atsResult === 'push').length;
+      const diamondDecided = diamondWins + diamondLosses;
       const diamondPct = diamondDecided > 0 ? ((diamondWins / diamondDecided) * 100).toFixed(1) : '0.0';
 
       let tierBadge = '🔥 Elite';
@@ -13008,24 +13022,24 @@ function renderVegasStack() {
 
       summaryBanner.innerHTML = `
         <div class="vs-kpi-card gold">
-          <span class="vs-kpi-label"><i class="fa-solid fa-trophy"></i> ATS WIN RATE</span>
+          <span class="vs-kpi-label"><i class="fa-solid fa-trophy"></i> ATS SPREAD RECORD</span>
           <span class="vs-kpi-val">${atsWins}-${atsLosses}${atsPushes > 0 ? '-' + atsPushes : ''}</span>
           <span class="vs-kpi-sub"><span class="badge-rate">${atsPct}%</span> • ${tierBadge}</span>
         </div>
         <div class="vs-kpi-card emerald">
           <span class="vs-kpi-label"><i class="fa-solid fa-check-double"></i> STRAIGHT-UP RECORD</span>
-          <span class="vs-kpi-val">${suWins}-${finalCount - suWins}</span>
-          <span class="vs-kpi-sub"><span class="badge-rate">${suPct}%</span> Accuracy</span>
+          <span class="vs-kpi-val">${suWins}-${suLosses}</span>
+          <span class="vs-kpi-sub"><span class="badge-rate">${suPct}%</span> Outright Win Accuracy</span>
         </div>
         <div class="vs-kpi-card purple">
           <span class="vs-kpi-label"><i class="fa-solid fa-gem"></i> DIAMOND PLAYS</span>
-          <span class="vs-kpi-val">${diamondWins}-${diamondDecided - diamondWins}</span>
+          <span class="vs-kpi-val">${diamondWins}-${diamondLosses}${diamondPushes > 0 ? '-' + diamondPushes : ''}</span>
           <span class="vs-kpi-sub"><span class="badge-rate">${diamondPct}%</span> High Confidence</span>
         </div>
         <div class="vs-kpi-card">
           <span class="vs-kpi-label"><i class="fa-solid fa-arrow-trend-up"></i> OVER / UNDER TOTALS</span>
-          <span class="vs-kpi-val">${ouWins}-${ouLosses}</span>
-          <span class="vs-kpi-sub"><span class="badge-rate">${ouPct}%</span> Total Hit Rate</span>
+          <span class="vs-kpi-val">${ouWins}-${ouLosses}${ouPushes > 0 ? '-' + ouPushes : ''}</span>
+          <span class="vs-kpi-sub"><span class="badge-rate">${ouPct}%</span> (${ouDecided} Plays Graded)</span>
         </div>
       `;
     } else {
@@ -13095,12 +13109,19 @@ function renderVegasStack() {
 
       let gradingBadge = '';
       if (m.isFinal) {
+        const awayAbbr = m.awayTeam.abbr || m.awayTeam.name;
+        const homeAbbr = m.homeTeam.abbr || m.homeTeam.name;
+        const scoreStr = `Final: ${awayAbbr} ${m.actAway} - ${homeAbbr} ${m.actHome}`;
+        const suTag = m.suResult === 'win' ? '<span class="vs-badge-su win">SU WIN</span>' : '<span class="vs-badge-su loss">SU LOSS</span>';
+
         if (m.atsResult === 'win') {
-          gradingBadge = `<div class="vs-grading-banner win"><span><i class="fa-solid fa-circle-check"></i> ATS COVER WIN (${m.recSide})</span><span>Final: ${m.actAway} - ${m.actHome}</span></div>`;
+          gradingBadge = `<div class="vs-grading-banner win"><span><i class="fa-solid fa-circle-check"></i> ${suTag}ATS COVER WIN (${m.recSide})</span><span>${scoreStr}</span></div>`;
         } else if (m.atsResult === 'loss') {
-          gradingBadge = `<div class="vs-grading-banner loss"><span><i class="fa-solid fa-circle-xmark"></i> ATS LOSS (${m.recSide})</span><span>Final: ${m.actAway} - ${m.actHome}</span></div>`;
+          gradingBadge = `<div class="vs-grading-banner loss"><span><i class="fa-solid fa-circle-xmark"></i> ${suTag}ATS MISSED COVER (${m.recSide})</span><span>${scoreStr}</span></div>`;
+        } else if (m.atsResult === 'push') {
+          gradingBadge = `<div class="vs-grading-banner push"><span><i class="fa-solid fa-circle-minus"></i> ${suTag}PUSH (${m.recSide})</span><span>${scoreStr}</span></div>`;
         } else {
-          gradingBadge = `<div class="vs-grading-banner push"><span><i class="fa-solid fa-circle-minus"></i> PUSH (${m.recSide})</span><span>Final: ${m.actAway} - ${m.actHome}</span></div>`;
+          gradingBadge = `<div class="vs-grading-banner pass"><span><i class="fa-solid fa-circle-info"></i> ${suTag}PASS (No Spread Bet)</span><span>${scoreStr}</span></div>`;
         }
       } else {
         gradingBadge = `<div class="vs-grading-banner pending"><span><i class="fa-regular fa-clock"></i> PENDING KICKOFF</span><span>Lines Active</span></div>`;

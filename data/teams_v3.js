@@ -16927,7 +16927,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 3,
         "overUnder": 54.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 68,
+        "baseWinProb": 38,
         "projScoreUt": 25,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -18692,7 +18692,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -3,
         "overUnder": 54.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 38,
+        "baseWinProb": 62,
         "projScoreUt": 28,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -26903,8 +26903,8 @@ const TEAMS_DATABASE = {
         "overUnder": 53.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 78,
-        "projScoreUt": 24,
-        "projScoreOpp": 30,
+        "projScoreUt": 28,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Georgia Tech Yellow Jackets rushing attack.",

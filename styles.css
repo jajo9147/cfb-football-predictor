@@ -8136,10 +8136,39 @@ body {
   color: #CBD5E1;
 }
 
+.vs-grading-banner.pass {
+  background: rgba(100, 116, 139, 0.15);
+  border: 1px solid rgba(100, 116, 139, 0.35);
+  color: #94A3B8;
+}
+
 .vs-grading-banner.pending {
   background: rgba(56, 189, 248, 0.12);
   border: 1px solid rgba(56, 189, 248, 0.35);
   color: #38BDF8;
+}
+
+.vs-badge-su {
+  display: inline-block;
+  padding: 0.12rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  margin-right: 0.45rem;
+  vertical-align: middle;
+}
+
+.vs-badge-su.win {
+  background: rgba(16, 185, 129, 0.25);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.vs-badge-su.loss {
+  background: rgba(239, 68, 68, 0.25);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.5);
 }
 
 /* Modal Footer */
