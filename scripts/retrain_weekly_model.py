@@ -85,41 +85,42 @@ WEEK2_OFFICIAL_POLL = {
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
 
-# Authoritative Week 4 AP Poll (September 20, 2026 Live AP Release)
-WEEK4_OFFICIAL_POLL = {
-    'texas': {'apRank': '#1 AP', 'apPoints': '1,675 PTS (58 1st)', 'rankNum': 1},
-    'georgia': {'apRank': '#2 AP', 'apPoints': '1,560 PTS (2 1st)', 'rankNum': 2},
-    'notredame': {'apRank': '#3 AP', 'apPoints': '1,540 PTS (1 1st)', 'rankNum': 3},
-    'olemiss': {'apRank': '#4 AP', 'apPoints': '1,495 PTS (1 1st)', 'rankNum': 4},
-    'indiana': {'apRank': '#5 AP', 'apPoints': '1,440 PTS', 'rankNum': 5},
-    'miami': {'apRank': '#6 AP', 'apPoints': '1,425 PTS', 'rankNum': 6},
-    'ohiostate': {'apRank': '#7 AP', 'apPoints': '1,390 PTS', 'rankNum': 7},
-    'alabama': {'apRank': '#8 AP', 'apPoints': '1,310 PTS', 'rankNum': 8},
-    'byu': {'apRank': '#9 AP', 'apPoints': '1,120 PTS', 'rankNum': 9},
-    'lsu': {'apRank': '#10 AP', 'apPoints': '1,090 PTS', 'rankNum': 10},
-    'texastech': {'apRank': '#11 AP', 'apPoints': '1,040 PTS', 'rankNum': 11},
-    'usc': {'apRank': '#12 AP', 'apPoints': '1,010 PTS', 'rankNum': 12},
-    'pennstate': {'apRank': '#13 AP', 'apPoints': '825 PTS', 'rankNum': 13},
-    'tennessee': {'apRank': '#14 AP', 'apPoints': '795 PTS', 'rankNum': 14},
-    'utah': {'apRank': '#15 AP', 'apPoints': '730 PTS', 'rankNum': 15},
-    'louisville': {'apRank': '#16 AP', 'apPoints': '680 PTS', 'rankNum': 16},
-    'iowa': {'apRank': '#17 AP', 'apPoints': '570 PTS', 'rankNum': 17},
-    'michigan': {'apRank': '#18 AP', 'apPoints': '535 PTS', 'rankNum': 18},
-    'missouri': {'apRank': '#19 AP', 'apPoints': '410 PTS', 'rankNum': 19},
-    'oregon': {'apRank': '#20 AP', 'apPoints': '395 PTS', 'rankNum': 20},
-    'smu': {'apRank': '#22 AP', 'apPoints': '270 PTS', 'rankNum': 22},
-    'texasam': {'apRank': '#23 AP', 'apPoints': '265 PTS', 'rankNum': 23},
-    'houston': {'apRank': '#25 AP', 'apPoints': '185 PTS', 'rankNum': 25},
-    'washington': {'apRank': 'RV', 'apPoints': '140 PTS', 'rankNum': 99},
-    'oklahoma': {'apRank': 'RV', 'apPoints': '95 PTS', 'rankNum': 99},
-    'boisestate': {'apRank': 'RV', 'apPoints': '45 PTS', 'rankNum': 99},
-    'arizona': {'apRank': 'RV', 'apPoints': '15 PTS', 'rankNum': 99},
+# Authoritative Week 5 AP Poll (September 27, 2026 Live AP Release)
+WEEK5_OFFICIAL_POLL = {
+    'texas': {'apRank': '#1 AP', 'apPoints': '1,737 PTS (62 1st)', 'rankNum': 1},
+    'georgia': {'apRank': '#2 AP', 'apPoints': '1,646 PTS (6 1st)', 'rankNum': 2},
+    'notredame': {'apRank': '#3 AP', 'apPoints': '1,581 PTS', 'rankNum': 3},
+    'miami': {'apRank': '#4 AP', 'apPoints': '1,501 PTS (1 1st)', 'rankNum': 4},
+    'ohiostate': {'apRank': '#5 AP', 'apPoints': '1,465 PTS', 'rankNum': 5},
+    'indiana': {'apRank': '#6 AP', 'apPoints': '1,408 PTS (1 1st)', 'rankNum': 6},
+    'alabama': {'apRank': '#7 AP', 'apPoints': '1,305 PTS', 'rankNum': 7},
+    'olemiss': {'apRank': '#9 AP', 'apPoints': '1,089 PTS', 'rankNum': 9},
+    'byu': {'apRank': '#10 AP', 'apPoints': '1,078 PTS', 'rankNum': 10},
+    'lsu': {'apRank': '#11 AP', 'apPoints': '1,073 PTS', 'rankNum': 11},
+    'texastech': {'apRank': '#12 AP', 'apPoints': '1,053 PTS', 'rankNum': 12},
+    'utah': {'apRank': '#13 AP', 'apPoints': '903 PTS', 'rankNum': 13},
+    'iowa': {'apRank': '#14 AP', 'apPoints': '856 PTS', 'rankNum': 14},
+    'oregon': {'apRank': '#15 AP', 'apPoints': '725 PTS', 'rankNum': 15},
+    'tennessee': {'apRank': '#17 AP', 'apPoints': '663 PTS', 'rankNum': 17},
+    'usc': {'apRank': '#18 AP', 'apPoints': '410 PTS', 'rankNum': 18},
+    'houston': {'apRank': '#20 AP', 'apPoints': '278 PTS', 'rankNum': 20},
+    'smu': {'apRank': '#21 AP', 'apPoints': '246 PTS', 'rankNum': 21},
+    'boisestate': {'apRank': '#22 AP', 'apPoints': '221 PTS', 'rankNum': 22},
+    'missouri': {'apRank': '#25 AP', 'apPoints': '118 PTS', 'rankNum': 25},
+    'pennstate': {'apRank': 'RV', 'apPoints': '98 PTS', 'rankNum': 99},
+    'michigan': {'apRank': 'RV', 'apPoints': '54 PTS', 'rankNum': 99},
+    'louisville': {'apRank': 'RV', 'apPoints': '25 PTS', 'rankNum': 99},
+    'arizona': {'apRank': 'RV', 'apPoints': '8 PTS', 'rankNum': 99},
+    'texasam': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'oklahoma': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'washington': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
-WEEK3_OFFICIAL_POLL = WEEK4_OFFICIAL_POLL
+WEEK4_OFFICIAL_POLL = WEEK5_OFFICIAL_POLL
+WEEK3_OFFICIAL_POLL = WEEK5_OFFICIAL_POLL
 
 
 # Baseline SP+ Ratings before Week 1 (Calibrated to AP Top 25 Consensus, Head-to-Head, and 247Sports Roster Talent)
@@ -740,8 +741,8 @@ def main():
                     'rankNum': 99
                 }
     else:
-        print("  • Applying verified official Week 4 Top 25 poll (Texas #1, Georgia #2, Notre Dame #3, Ole Miss #4, Indiana #5, Miami #6, Ohio State #7)...")
-        ranking_updates = WEEK4_OFFICIAL_POLL
+        print("  • Applying verified official Week 5 Top 25 poll (Texas #1, Georgia #2, Notre Dame #3, Miami #4, Ohio State #5, Indiana #6, Alabama #7)...")
+        ranking_updates = WEEK5_OFFICIAL_POLL
 
     # Apply rankings to teams in DB
     ap_changes_count = 0
@@ -817,7 +818,8 @@ def main():
         target_dates = [
             '20260829', '20260903', '20260904', '20260905', '20260906', '20260907',
             '20260910', '20260911', '20260912', '20260913',
-            '20260917', '20260918', '20260919', '20260920'
+            '20260917', '20260918', '20260919', '20260920',
+            '20260924', '20260925', '20260926', '20260927'
         ]
 
     all_completed_games = []

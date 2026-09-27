@@ -22,34 +22,34 @@ TEAMS_V3_FILE = os.path.join(ROOT_DIR, 'data', 'teams_v3.js')
 IOS_TEAMS_FILE = os.path.join(ROOT_DIR, 'ios', 'CFBProphet', 'www', 'data', 'teams.js')
 ANDROID_TEAMS_FILE = os.path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'assets', 'www', 'data', 'teams.js')
 
-EXPECTED_AP_POLL_WEEK4 = {
+EXPECTED_AP_POLL_WEEK5 = {
     'texas': '#1 AP',
     'georgia': '#2 AP',
     'notredame': '#3 AP',
-    'olemiss': '#4 AP',
-    'indiana': '#5 AP',
-    'miami': '#6 AP',
-    'ohiostate': '#7 AP',
-    'alabama': '#8 AP',
-    'byu': '#9 AP',
-    'lsu': '#10 AP',
-    'texastech': '#11 AP',
-    'usc': '#12 AP',
-    'pennstate': '#13 AP',
-    'tennessee': '#14 AP',
-    'utah': '#15 AP',
-    'louisville': '#16 AP',
-    'iowa': '#17 AP',
-    'michigan': '#18 AP',
-    'missouri': '#19 AP',
-    'oregon': '#20 AP',
-    'smu': '#22 AP',
-    'texasam': '#23 AP',
-    'houston': '#25 AP',
-    'washington': 'RV',
-    'oklahoma': 'RV',
-    'boisestate': 'RV',
+    'miami': '#4 AP',
+    'ohiostate': '#5 AP',
+    'indiana': '#6 AP',
+    'alabama': '#7 AP',
+    'olemiss': '#9 AP',
+    'byu': '#10 AP',
+    'lsu': '#11 AP',
+    'texastech': '#12 AP',
+    'utah': '#13 AP',
+    'iowa': '#14 AP',
+    'oregon': '#15 AP',
+    'tennessee': '#17 AP',
+    'usc': '#18 AP',
+    'houston': '#20 AP',
+    'smu': '#21 AP',
+    'boisestate': '#22 AP',
+    'missouri': '#25 AP',
+    'pennstate': 'RV',
+    'michigan': 'RV',
+    'louisville': 'RV',
     'arizona': 'RV',
+    'texasam': 'NR',
+    'oklahoma': 'NR',
+    'washington': 'NR',
     'colorado': 'NR',
     'arizonastate': 'NR',
     'clemson': 'NR',
@@ -169,8 +169,8 @@ def run_inspections():
     print(f"  • Verified logo URLs and opponent isolation for all {total_games} games.")
 
     # 4. Authentic AP Rankings Verification
-    print("\n[3/7] 🏆 Validating Week 4 AP Top 25 & RV Poll Precision...")
-    for tid, exp_rank in EXPECTED_AP_POLL_WEEK4.items():
+    print("\n[3/7] 🏆 Validating Week 5 AP Top 25 & RV Poll Precision...")
+    for tid, exp_rank in EXPECTED_AP_POLL_WEEK5.items():
         if tid not in db:
             errors.append(f"Missing expected tracked team: {tid}")
             continue
@@ -178,7 +178,7 @@ def run_inspections():
         if act_rank != exp_rank:
             errors.append(f"Rank Mismatch for {tid}: Expected '{exp_rank}', found '{act_rank}'")
 
-    print("  • Verified AP rankings match official Week 4 Sept 20 release (Texas #1, Georgia #2, Notre Dame #3, Ole Miss #4, Indiana #5, Miami #6, Ohio State #7, Alabama #8, BYU #9, LSU #10, Texas Tech #11, Louisville #16, Texas A&M #23).")
+    print("  • Verified AP rankings match official Week 5 Sept 27 release (Texas #1, Georgia #2, Notre Dame #3, Miami #4, Ohio State #5, Indiana #6, Alabama #7, BYU #10, LSU #11, Texas Tech #12, Boise State #22, Texas A&M NR).")
 
     # 5. Rosters, Star Players, & Coaching Staffs
     print("\n[4/7] 🏈 Inspecting 2026 Roster, QB, and Coaching Staff Integrity...")
