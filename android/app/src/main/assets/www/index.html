@@ -800,7 +800,8 @@
         <div class="filter-pills" id="vegasStackFilterPills">
           <button class="filter-pill active" data-filter="all" onclick="setVegasStackFilter('all')">All Games</button>
           <button class="filter-pill" data-filter="diamond" onclick="setVegasStackFilter('diamond')">💎 Diamond Plays</button>
-          <button class="filter-pill" data-filter="covers" onclick="setVegasStackFilter('covers')">✅ Covers Only</button>
+          <button class="filter-pill" data-filter="covers" onclick="setVegasStackFilter('covers')">✅ Spread Covers</button>
+          <button class="filter-pill" data-filter="ou-hits" onclick="setVegasStackFilter('ou-hits')">🎯 O/U Hits</button>
           <button class="filter-pill" data-filter="losses" onclick="setVegasStackFilter('losses')">❌ Losses Only</button>
         </div>
         <div class="search-input-wrap">
@@ -848,7 +849,8 @@
           <select id="vsExportFilterSelect" class="vs-control-select" onchange="updateVegasStackExportPreview()">
             <option value="all">All Matchups</option>
             <option value="diamond">💎 Diamond Plays (High Confidence)</option>
-            <option value="covers">✅ Covers Only (Graded Wins)</option>
+            <option value="covers">✅ Spread Covers (Graded Wins)</option>
+            <option value="ou-hits">🎯 O/U Hits (Graded Over/Under Wins)</option>
           </select>
         </div>
       </div>

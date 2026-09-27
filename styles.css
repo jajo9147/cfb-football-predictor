@@ -8066,7 +8066,111 @@ body {
   color: #94A3B8;
 }
 
-/* Edge & Recommendation */
+/* Picks Strip (Spread Pick + Over/Under Pick) */
+.vs-picks-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.vs-pick-item {
+  padding: 0.45rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.76rem;
+  transition: all 0.2s ease;
+}
+
+.vs-pick-item.spread {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.vs-pick-item.spread.diamond {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(234, 88, 12, 0.12));
+  border-color: #F59E0B;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
+}
+
+.vs-pick-item.spread.high-variance {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.vs-pick-item.total {
+  background: rgba(56, 189, 248, 0.07);
+  border-color: rgba(56, 189, 248, 0.22);
+}
+
+.vs-pick-item.total.sharp {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(99, 102, 241, 0.12));
+  border-color: #38BDF8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+}
+
+.vs-pick-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+}
+
+.vs-pick-type-lbl {
+  color: #94A3B8;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.vs-pick-edge-val {
+  color: #F59E0B;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.vs-pick-item.total .vs-pick-edge-val {
+  color: #38BDF8;
+}
+
+.vs-pick-item-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vs-pick-choice {
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.vs-pick-choice.over {
+  color: #34D399;
+}
+
+.vs-pick-choice.under {
+  color: #F87171;
+}
+
+.vs-pick-choice.pass {
+  color: #94A3B8;
+}
+
+.vs-pick-proj-hint {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: #94A3B8;
+}
+
+/* Edge & Recommendation (Legacy Support) */
 .vs-edge-bar {
   display: flex;
   align-items: center;
@@ -8146,6 +8250,73 @@ body {
   background: rgba(56, 189, 248, 0.12);
   border: 1px solid rgba(56, 189, 248, 0.35);
   color: #38BDF8;
+}
+
+/* Dual Final Grading Banner (SU + ATS + Over/Under) */
+.vs-grading-banner.final-dual {
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: stretch;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.5rem 0.65rem;
+}
+
+.vs-grading-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vs-grade-badges-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.vs-badge-grade {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+.vs-badge-grade.win {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  color: #34D399;
+}
+
+.vs-badge-grade.loss {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  color: #F87171;
+}
+
+.vs-badge-grade.push {
+  background: rgba(148, 163, 184, 0.15);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: #CBD5E1;
+}
+
+.vs-badge-grade.pass {
+  background: rgba(100, 116, 139, 0.15);
+  border: 1px solid rgba(100, 116, 139, 0.35);
+  color: #94A3B8;
+}
+
+.vs-grading-score-sub {
+  font-size: 0.72rem;
+  color: #CBD5E1;
+  font-family: var(--font-mono);
+  text-align: right;
+  font-weight: 600;
 }
 
 .vs-badge-su {

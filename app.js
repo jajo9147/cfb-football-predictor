@@ -12805,12 +12805,42 @@ function getVegasStackMatchups(weekFilter, isCustom) {
         recSpread = 0;
       }
 
+      // Over / Under Total Pick & Edge Calculation
+      const modelTotal = scoreHome + scoreAway;
+      const totalEdge = modelTotal - vegasTotal;
+      const absTotalEdge = Math.abs(totalEdge);
+
+      let recOuSide, recOuText;
+      if (g.mcRecommendedOu && g.mcRecommendedOu.includes('PASS')) {
+        recOuSide = 'PASS';
+        recOuText = `PASS (O/U ${vegasTotal})`;
+      } else if (absTotalEdge < 1.5) {
+        recOuSide = 'PASS';
+        recOuText = `PASS (O/U ${vegasTotal})`;
+      } else if (g.mcRecommendedOu && g.mcRecommendedOu.includes('OVER')) {
+        recOuSide = 'OVER';
+        recOuText = `OVER ${vegasTotal}`;
+      } else if (g.mcRecommendedOu && g.mcRecommendedOu.includes('UNDER')) {
+        recOuSide = 'UNDER';
+        recOuText = `UNDER ${vegasTotal}`;
+      } else if (totalEdge >= 1.5) {
+        recOuSide = 'OVER';
+        recOuText = `OVER ${vegasTotal}`;
+      } else if (totalEdge <= -1.5) {
+        recOuSide = 'UNDER';
+        recOuText = `UNDER ${vegasTotal}`;
+      } else {
+        recOuSide = 'PASS';
+        recOuText = `PASS (O/U ${vegasTotal})`;
+      }
+
       const isFinal = !!(g.isFinal && typeof g.actualScoreUt === 'number');
-      let actHome = null, actAway = null, atsResult = 'pending', suResult = 'pending', ouResult = 'pending';
+      let actHome = null, actAway = null, actTotal = null, atsResult = 'pending', suResult = 'pending', ouResult = 'pending';
 
       if (isFinal) {
         actHome = isHome ? g.actualScoreUt : g.actualScoreOpp;
         actAway = isHome ? g.actualScoreOpp : g.actualScoreUt;
+        actTotal = actHome + actAway;
         const actMarginHome = actHome - actAway;
         const actualDiffVsSpread = actMarginHome + spreadOnHome;
 
@@ -12830,20 +12860,16 @@ function getVegasStackMatchups(weekFilter, isCustom) {
           atsResult = 'pass';
         }
 
-        const actTotal = actHome + actAway;
-        const modelTotal = scoreHome + scoreAway;
-        const totalEdge = modelTotal - vegasTotal;
-        const absTotalEdge = Math.abs(totalEdge);
-        const isPassOu = (g.mcRecommendedOu && g.mcRecommendedOu.includes('PASS')) || (absTotalEdge < 1.5);
-
-        if (isPassOu) {
+        if (recOuSide === 'PASS') {
           ouResult = 'pass';
         } else if (Math.abs(actTotal - vegasTotal) < 0.25) {
           ouResult = 'push';
-        } else if (totalEdge > 0) {
+        } else if (recOuSide === 'OVER') {
           ouResult = (actTotal > vegasTotal) ? 'win' : 'loss';
-        } else {
+        } else if (recOuSide === 'UNDER') {
           ouResult = (actTotal < vegasTotal) ? 'win' : 'loss';
+        } else {
+          ouResult = 'pass';
         }
       }
 
@@ -12863,6 +12889,7 @@ function getVegasStackMatchups(weekFilter, isCustom) {
       if (vegasStackState.filter === 'diamond' && !isDiamond) return;
       if (vegasStackState.filter === 'covers' && atsResult !== 'win') return;
       if (vegasStackState.filter === 'losses' && atsResult !== 'loss') return;
+      if (vegasStackState.filter === 'ou-hits' && ouResult !== 'win') return;
 
       // Search check
       if (q) {
@@ -12884,16 +12911,22 @@ function getVegasStackMatchups(weekFilter, isCustom) {
         winProbHome,
         spreadOnHome,
         vegasTotal,
+        modelTotal: Number(modelTotal.toFixed(1)),
+        totalEdge: Number(totalEdge.toFixed(1)),
+        absTotalEdge: Number(absTotalEdge.toFixed(1)),
         oddsProvider: g.oddsProvider || 'DraftKings',
         spreadEdgeOnHome,
         absEdge,
         recSide,
         recSpread,
+        recOuSide,
+        recOuText,
         isDiamond,
         isHighVariance,
         isFinal,
         actHome,
         actAway,
+        actTotal,
         atsResult,
         suResult,
         ouResult,
@@ -13079,7 +13112,7 @@ function renderVegasStack() {
   // 4. Render Grid of Cards
   if (grid) {
     if (allWeekMatchups.length === 0) {
-      const isGradingFilter = (vegasStackState.filter === 'covers' || vegasStackState.filter === 'losses');
+      const isGradingFilter = (vegasStackState.filter === 'covers' || vegasStackState.filter === 'losses' || vegasStackState.filter === 'ou-hits');
       let emptyTitle = 'No matchups match your filter or search.';
       let emptySub = 'Try selecting "All Games" or clearing your search term.';
       let iconClass = 'fa-filter-circle-xmark';
@@ -13087,7 +13120,7 @@ function renderVegasStack() {
       if (isGradingFilter) {
         iconClass = 'fa-clock';
         emptyTitle = `${vegasStackState.currentWeek} Games Are Pending Kickoff!`;
-        emptySub = `Covers and losses are only graded after games go final. Switch to <strong>All Games</strong> or <strong>💎 Diamond Plays</strong> to see this week's active picks against Vegas!`;
+        emptySub = `Covers, losses, and totals are only graded after games go final. Switch to <strong>All Games</strong> or <strong>💎 Diamond Plays</strong> to see this week's active picks against Vegas!`;
       }
 
       grid.innerHTML = `
@@ -13111,18 +13144,48 @@ function renderVegasStack() {
       if (m.isFinal) {
         const awayAbbr = m.awayTeam.abbr || m.awayTeam.name;
         const homeAbbr = m.homeTeam.abbr || m.homeTeam.name;
-        const scoreStr = `Final: ${awayAbbr} ${m.actAway} - ${homeAbbr} ${m.actHome}`;
-        const suTag = m.suResult === 'win' ? '<span class="vs-badge-su win">SU WIN</span>' : '<span class="vs-badge-su loss">SU LOSS</span>';
+        const scoreStr = `Final: ${awayAbbr} ${m.actAway} - ${homeAbbr} ${m.actHome} (${m.actTotal} pts)`;
 
+        const suTag = m.suResult === 'win' ? 
+          '<span class="vs-badge-grade win"><i class="fa-solid fa-check"></i> SU WIN</span>' : 
+          '<span class="vs-badge-grade loss"><i class="fa-solid fa-xmark"></i> SU LOSS</span>';
+
+        let atsTag = '';
         if (m.atsResult === 'win') {
-          gradingBadge = `<div class="vs-grading-banner win"><span><i class="fa-solid fa-circle-check"></i> ${suTag}ATS COVER WIN (${m.recSide})</span><span>${scoreStr}</span></div>`;
+          atsTag = `<span class="vs-badge-grade win"><i class="fa-solid fa-circle-check"></i> ATS COVER (${m.recSide})</span>`;
         } else if (m.atsResult === 'loss') {
-          gradingBadge = `<div class="vs-grading-banner loss"><span><i class="fa-solid fa-circle-xmark"></i> ${suTag}ATS MISSED COVER (${m.recSide})</span><span>${scoreStr}</span></div>`;
+          atsTag = `<span class="vs-badge-grade loss"><i class="fa-solid fa-circle-xmark"></i> ATS MISSED</span>`;
         } else if (m.atsResult === 'push') {
-          gradingBadge = `<div class="vs-grading-banner push"><span><i class="fa-solid fa-circle-minus"></i> ${suTag}PUSH (${m.recSide})</span><span>${scoreStr}</span></div>`;
+          atsTag = `<span class="vs-badge-grade push"><i class="fa-solid fa-circle-minus"></i> ATS PUSH</span>`;
         } else {
-          gradingBadge = `<div class="vs-grading-banner pass"><span><i class="fa-solid fa-circle-info"></i> ${suTag}PASS (No Spread Bet)</span><span>${scoreStr}</span></div>`;
+          atsTag = `<span class="vs-badge-grade pass">ATS PASS</span>`;
         }
+
+        let ouTag = '';
+        if (m.ouResult === 'win') {
+          ouTag = `<span class="vs-badge-grade win"><i class="fa-solid fa-circle-check"></i> ${m.recOuSide} HIT (${m.actTotal} pts)</span>`;
+        } else if (m.ouResult === 'loss') {
+          ouTag = `<span class="vs-badge-grade loss"><i class="fa-solid fa-circle-xmark"></i> ${m.recOuSide} MISSED (${m.actTotal} pts)</span>`;
+        } else if (m.ouResult === 'push') {
+          ouTag = `<span class="vs-badge-grade push"><i class="fa-solid fa-circle-minus"></i> O/U PUSH</span>`;
+        } else {
+          ouTag = `<span class="vs-badge-grade pass">O/U PASS</span>`;
+        }
+
+        gradingBadge = `
+          <div class="vs-grading-banner final-dual">
+            <div class="vs-grading-top">
+              <div class="vs-grade-badges-row">
+                ${suTag}
+                ${atsTag}
+                ${ouTag}
+              </div>
+            </div>
+            <div class="vs-grading-score-sub">
+              <span>${scoreStr}</span>
+            </div>
+          </div>
+        `;
       } else {
         gradingBadge = `<div class="vs-grading-banner pending"><span><i class="fa-regular fa-clock"></i> PENDING KICKOFF</span><span>Lines Active</span></div>`;
       }
@@ -13132,6 +13195,15 @@ function renderVegasStack() {
         edgeTagText = `<i class="fa-solid fa-gem"></i> +${m.absEdge.toFixed(1)} PT DIAMOND EDGE`;
       } else if (m.isHighVariance) {
         edgeTagText = `<i class="fa-solid fa-triangle-exclamation" style="color: #F87171;"></i> +${m.absEdge.toFixed(1)} PT HIGH VARIANCE`;
+      }
+
+      let ouEdgeTagText = '';
+      if (m.recOuSide === 'PASS') {
+        ouEdgeTagText = `Fair Line (${m.absTotalEdge.toFixed(1)} pt diff)`;
+      } else if (m.absTotalEdge >= 3.5) {
+        ouEdgeTagText = `<i class="fa-solid fa-fire"></i> +${m.absTotalEdge.toFixed(1)} PT TOTAL EDGE`;
+      } else {
+        ouEdgeTagText = `+${m.absTotalEdge.toFixed(1)} pt total edge`;
       }
 
       let pickFormatted = m.recSide;
@@ -13191,9 +13263,27 @@ function renderVegasStack() {
             <span style="color: #64748B; font-size: 0.68rem;">${m.oddsProvider}</span>
           </div>
 
-          <div class="vs-edge-bar ${m.isDiamond ? 'diamond' : (m.isHighVariance ? 'high-variance' : '')}">
-            <span class="vs-edge-tag">${edgeTagText}</span>
-            <span class="vs-rec-pick">Pick: <strong>${pickFormatted}</strong></span>
+          <div class="vs-picks-strip">
+            <div class="vs-pick-item spread ${m.isDiamond ? 'diamond' : (m.isHighVariance ? 'high-variance' : '')}">
+              <div class="vs-pick-item-top">
+                <span class="vs-pick-type-lbl"><i class="fa-solid fa-scale-balanced"></i> SPREAD PICK</span>
+                <span class="vs-pick-edge-val">${edgeTagText}</span>
+              </div>
+              <div class="vs-pick-item-main">
+                <span class="vs-pick-choice"><strong>${pickFormatted}</strong></span>
+              </div>
+            </div>
+
+            <div class="vs-pick-item total ${m.recOuSide.toLowerCase()} ${m.absTotalEdge >= 3.5 ? 'sharp' : ''}">
+              <div class="vs-pick-item-top">
+                <span class="vs-pick-type-lbl"><i class="fa-solid fa-arrows-up-down"></i> O/U TOTAL PICK</span>
+                <span class="vs-pick-edge-val">${ouEdgeTagText}</span>
+              </div>
+              <div class="vs-pick-item-main">
+                <span class="vs-pick-choice ${m.recOuSide.toLowerCase()}"><strong>${m.recOuText}</strong></span>
+                <span class="vs-pick-proj-hint">Proj: ${m.modelTotal} pts</span>
+              </div>
+            </div>
           </div>
 
           ${gradingBadge}
@@ -13224,6 +13314,8 @@ function generateVegasStackExportText(week, filter) {
     matchups = matchups.filter(m => m.isDiamond);
   } else if (filter === 'covers') {
     matchups = matchups.filter(m => m.atsResult === 'win');
+  } else if (filter === 'ou-hits') {
+    matchups = matchups.filter(m => m.ouResult === 'win');
   }
 
   const dateNow = new Date();
@@ -13258,23 +13350,31 @@ function generateVegasStackExportText(week, filter) {
       const spreadFormatted = m.spreadOnHome === 0 ? 'PK' : (m.spreadOnHome > 0 ? `+${m.spreadOnHome}` : `${m.spreadOnHome}`);
       const homeSpreadFormatted = `${m.homeTeam.abbr || m.homeTeam.name} ${spreadFormatted}`;
       const recSpreadFormatted = m.recSpread > 0 ? `+${m.recSpread}` : `${m.recSpread}`;
-      let statusStr = '';
+      let atsStatusStr = '';
+      let ouStatusStr = '';
       if (m.isFinal) {
-        if (m.atsResult === 'win') statusStr = ' [WIN ✅]';
-        else if (m.atsResult === 'loss') statusStr = ' [LOSS ❌]';
-        else statusStr = ' [PUSH 🟡]';
+        if (m.atsResult === 'win') atsStatusStr = ' [WIN ✅]';
+        else if (m.atsResult === 'loss') atsStatusStr = ' [LOSS ❌]';
+        else if (m.atsResult === 'push') atsStatusStr = ' [PUSH 🟡]';
+        else atsStatusStr = ' [PASS ⚪]';
+
+        if (m.ouResult === 'win') ouStatusStr = ' [WIN ✅]';
+        else if (m.ouResult === 'loss') ouStatusStr = ' [LOSS ❌]';
+        else if (m.ouResult === 'push') ouStatusStr = ' [PUSH 🟡]';
+        else ouStatusStr = ' [PASS ⚪]';
       }
       lines.push(`• ${m.awayTeam.name} @ ${m.homeTeam.name}`);
       lines.push(`  Vegas: ${homeSpreadFormatted} | Total: ${m.vegasTotal}`);
-      lines.push(`  Model: ${m.awayTeam.abbr || m.awayTeam.name} ${m.scoreAway} - ${m.scoreHome} ${m.homeTeam.abbr || m.homeTeam.name}`);
-      lines.push(`  👉 PICK: ${m.recSide} ${recSpreadFormatted} (Edge: +${m.absEdge.toFixed(1)} pts)${statusStr}`);
+      lines.push(`  Model: ${m.awayTeam.abbr || m.awayTeam.name} ${m.scoreAway} - ${m.scoreHome} ${m.homeTeam.abbr || m.homeTeam.name} (Proj Total: ${m.modelTotal})`);
+      lines.push(`  👉 SPREAD: ${m.recSide} ${recSpreadFormatted} (Edge: +${m.absEdge.toFixed(1)} pts)${atsStatusStr}`);
+      lines.push(`  🎯 TOTAL:  ${m.recOuText} (${m.recOuSide === 'PASS' ? 'Fair Line' : `Edge: +${m.absTotalEdge.toFixed(1)} pts`})${ouStatusStr}`);
       lines.push('');
     });
     lines.push(`━━━━━━━━━━━━━━━━━━━━━━━━━━`);
     lines.push('');
   }
 
-  lines.push(`📋 ${filter === 'diamond' ? 'DIAMOND PLAYS (ATS)' : 'ALL SLATE PICKS (ATS)'}:`);
+  lines.push(`📋 ${filter === 'diamond' ? 'DIAMOND PLAYS' : (filter === 'ou-hits' ? 'OVER/UNDER HITS' : 'ALL SLATE PICKS')}:`);
   if (matchups.length === 0) {
     lines.push(`No matchups found matching current filter.`);
   } else {
@@ -13282,19 +13382,27 @@ function generateVegasStackExportText(week, filter) {
       const spreadFormatted = m.spreadOnHome === 0 ? 'PK' : (m.spreadOnHome > 0 ? `+${m.spreadOnHome}` : `${m.spreadOnHome}`);
       const homeSpreadFormatted = `${m.homeTeam.abbr || m.homeTeam.name} ${spreadFormatted}`;
       const recSpreadFormatted = m.recSpread > 0 ? `+${m.recSpread}` : `${m.recSpread}`;
-      let statusStr = '';
+      let atsStatusStr = '';
+      let ouStatusStr = '';
       if (m.isFinal) {
-        if (m.atsResult === 'win') statusStr = ' [WIN ✅]';
-        else if (m.atsResult === 'loss') statusStr = ' [LOSS ❌]';
-        else statusStr = ' [PUSH 🟡]';
+        if (m.atsResult === 'win') atsStatusStr = ' [WIN ✅]';
+        else if (m.atsResult === 'loss') atsStatusStr = ' [LOSS ❌]';
+        else if (m.atsResult === 'push') atsStatusStr = ' [PUSH 🟡]';
+        else atsStatusStr = ' [PASS ⚪]';
+
+        if (m.ouResult === 'win') ouStatusStr = ' [WIN ✅]';
+        else if (m.ouResult === 'loss') ouStatusStr = ' [LOSS ❌]';
+        else if (m.ouResult === 'push') ouStatusStr = ' [PUSH 🟡]';
+        else ouStatusStr = ' [PASS ⚪]';
       }
       const edgeMarker = m.isDiamond ? '💎 ' : '';
       lines.push(`${idx + 1}. ${m.awayTeam.name} @ ${m.homeTeam.name}`);
       lines.push(`   Line: ${homeSpreadFormatted} (O/U ${m.vegasTotal})`);
-      lines.push(`   Model: ${m.awayTeam.abbr || m.awayTeam.name} ${m.scoreAway} - ${m.scoreHome} ${m.homeTeam.abbr || m.homeTeam.name}`);
-      lines.push(`   👉 PICK: ${edgeMarker}${m.recSide} ${recSpreadFormatted} (Edge: +${m.absEdge.toFixed(1)} pts)${statusStr}`);
+      lines.push(`   Model: ${m.awayTeam.abbr || m.awayTeam.name} ${m.scoreAway} - ${m.scoreHome} ${m.homeTeam.abbr || m.homeTeam.name} (Proj Total: ${m.modelTotal})`);
+      lines.push(`   👉 SPREAD: ${edgeMarker}${m.recSide} ${recSpreadFormatted} (Edge: +${m.absEdge.toFixed(1)} pts)${atsStatusStr}`);
+      lines.push(`   🎯 TOTAL:  ${m.recOuText} (${m.recOuSide === 'PASS' ? 'Fair Line' : `Edge: +${m.absTotalEdge.toFixed(1)} pts`})${ouStatusStr}`);
       if (m.isFinal) {
-        lines.push(`   Final Score: ${m.awayTeam.abbr || m.awayTeam.name} ${m.actAway} - ${m.actHome} ${m.homeTeam.abbr || m.homeTeam.name}`);
+        lines.push(`   Final Score: ${m.awayTeam.abbr || m.awayTeam.name} ${m.actAway} - ${m.homeTeam.abbr || m.homeTeam.name} ${m.actHome} (${m.actTotal} pts)`);
       }
       lines.push('');
     });
@@ -13311,9 +13419,15 @@ function generateVegasStackExportText(week, filter) {
     const suWins = finalGames.filter(g => g.suResult === 'win').length;
     const suPct = finalGames.length > 0 ? ((suWins / finalGames.length) * 100).toFixed(1) : '0.0';
 
+    const ouWins = finalGames.filter(g => g.ouResult === 'win').length;
+    const ouLosses = finalGames.filter(g => g.ouResult === 'loss').length;
+    const ouPushes = finalGames.filter(g => g.ouResult === 'push').length;
+    const ouDecided = ouWins + ouLosses;
+    const ouPct = ouDecided > 0 ? ((ouWins / ouDecided) * 100).toFixed(1) : '0.0';
     lines.push(`━━━━━━━━━━━━━━━━━━━━━━━━━━`);
     lines.push(`🎯 SLATE RECORD (FINAL):`);
     lines.push(`• ATS Cover Rate: ${atsWins}-${atsLosses}${atsPushes > 0 ? '-' + atsPushes : ''} (${atsPct}%)`);
+    lines.push(`• Over/Under Record: ${ouWins}-${ouLosses}${ouPushes > 0 ? '-' + ouPushes : ''} (${ouPct}%)`);
     lines.push(`• Straight-Up Accuracy: ${suWins}-${finalGames.length - suWins} (${suPct}%)`);
   }
 
@@ -13374,6 +13488,7 @@ window.updateVegasStackExportPreview = function() {
     let matchups = getVegasStackMatchups(selectedWeek, isCustom);
     if (selectedFilter === 'diamond') matchups = matchups.filter(m => m.isDiamond);
     if (selectedFilter === 'covers') matchups = matchups.filter(m => m.atsResult === 'win');
+    if (selectedFilter === 'ou-hits') matchups = matchups.filter(m => m.ouResult === 'win');
     charCount.textContent = `${matchups.length} matchups • ${exportText.length} characters`;
   }
 };
