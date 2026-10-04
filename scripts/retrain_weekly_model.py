@@ -548,8 +548,16 @@ def enforce_head_to_head_symmetry(db):
 
             # For unplayed games, pick home game as master (or team A if neutral)
             is_a_home = g_a.get('isHome', True)
-            master = g_a if is_a_home else g_b
-            slave = g_b if is_a_home else g_a
+            # Prioritize whichever game has live market odds from DraftKings/Consensus
+            if g_b.get('oddsProvider') != 'CFB Prophet Projected' and g_a.get('oddsProvider') == 'CFB Prophet Projected':
+                master = g_b
+                slave = g_a
+            elif g_a.get('oddsProvider') != 'CFB Prophet Projected' and g_b.get('oddsProvider') == 'CFB Prophet Projected':
+                master = g_a
+                slave = g_b
+            else:
+                master = g_a if is_a_home else g_b
+                slave = g_b if is_a_home else g_a
 
             # Eliminate ties strictly
             m_ut = master.get('projScoreUt') or 24
@@ -581,6 +589,10 @@ def enforce_head_to_head_symmetry(db):
                 slave['baseWinProb'] = max(1, min(99, 100 - int(master['baseWinProb'])))
             if 'vegasSpread' in master and isinstance(master['vegasSpread'], (int, float)):
                 slave['vegasSpread'] = -master['vegasSpread']
+            if 'overUnder' in master:
+                slave['overUnder'] = master['overUnder']
+            if 'oddsProvider' in master:
+                slave['oddsProvider'] = master['oddsProvider']
 
             # Symmetrize Monte Carlo metrics if present
             if 'mcCoverProb' in master and isinstance(master['mcCoverProb'], (int, float)):
@@ -677,6 +689,7 @@ def main():
     drive_eff_metrics = {}
     dynamic_fbs_ratings = {}
     ret_prod_map = {}
+    all_lines_by_week = {}
     lines_w1 = {}
     lines_w2 = {}
     lines_w3 = {}
@@ -697,11 +710,13 @@ def main():
             print(f"🔥 CFBD Ingestion: Loaded {len(ret_prod_map)} teams with 2026 Returning Production & Continuity")
             season_adv_map = cfbd_client.get_season_advanced_stats(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(season_adv_map)} teams with Trench Line Yards & Havoc Rates")
-            lines_w1 = cfbd_client.get_game_lines(2026, week=1)
-            lines_w2 = cfbd_client.get_game_lines(2026, week=2)
-            lines_w3 = cfbd_client.get_game_lines(2026, week=3)
-            lines_w4 = cfbd_client.get_game_lines(2026, week=4)
-            print(f"🔥 CFBD Ingestion: Loaded {len(lines_w1)} lines W1, {len(lines_w2)} lines W2, {len(lines_w3)} lines W3, {len(lines_w4)} lines W4")
+            all_lines_by_week = cfbd_client.get_all_game_lines_by_week(2026)
+            total_lines_count = sum(len(w_map) // 2 for w_map in all_lines_by_week.values())
+            print(f"🔥 CFBD Ingestion: Loaded {total_lines_count} consensus market lines across {len(all_lines_by_week)} weeks from DraftKings/Consensus")
+            lines_w1 = all_lines_by_week.get(1, {})
+            lines_w2 = all_lines_by_week.get(2, {})
+            lines_w3 = all_lines_by_week.get(3, {})
+            lines_w4 = all_lines_by_week.get(4, {})
         except Exception as e:
             print(f"Notice: CFBD loading warning: {e}")
 
@@ -846,8 +861,10 @@ def main():
                     g['isConf'] = True
 
                 # Calibrate historical Vegas spread against official closing lines
-                wk = g.get('week')
-                cur_l_map = lines_w1 if wk == 'WEEK 1' else (lines_w2 if wk == 'WEEK 2' else (lines_w3 if wk == 'WEEK 3' else (lines_w4 if wk == 'WEEK 4' else {})))
+                wk = g.get('week', '')
+                wk_m = re.search(r'\d+', wk)
+                week_num = int(wk_m.group(0)) if wk_m else None
+                cur_l_map = all_lines_by_week.get(week_num, {}) if all_lines_by_week else {}
                 matched_line = (
                     cur_l_map.get((t_name, opp_lower)) or
                     cur_l_map.get((t_short, (g.get('oppAbbr') or '').lower())) or
@@ -866,7 +883,8 @@ def main():
                 if matched_line and matched_line.get('spread') is not None:
                     spread_val = matched_line['spread'] if g.get('isHome', True) else -matched_line['spread']
                     g['vegasSpread'] = spread_val
-                    g['overUnder'] = matched_line.get('overUnder') or g.get('overUnder', 52.5)
+                    if matched_line.get('overUnder') is not None:
+                        g['overUnder'] = float(matched_line['overUnder'])
                     g['oddsProvider'] = matched_line.get('provider', 'Consensus')
 
                 if not args.dry_run:
@@ -1113,7 +1131,7 @@ def main():
         if tid == 'texasam': h2h_adj = -1.8 # Stunned at home by Kentucky (21-31)
         elif tid == 'olemiss': h2h_adj = +1.5 # Defeated #7 LSU (32-24)
         elif tid == 'lsu': h2h_adj = -1.0 # Lost at Ole Miss
-        elif tid == 'louisville': h2h_adj = +1.8 # Dominated #16 SMU (41-31)
+        elif tid == 'louisville': h2h_adj = -1.8 # Stunned at home by Wake Forest (27-30) as 13.5-pt favorites
         elif tid == 'smu': h2h_adj = -1.2 # Lost at Louisville
         elif tid == 'texastech': h2h_adj = -0.5 # Staggered 28-26 vs Houston
         elif tid == 'texas': h2h_adj = -0.4 # Red-zone stall vs UTSA
@@ -1236,40 +1254,28 @@ def main():
 
             raw_margin = (sp_team - sp_opp) + hfa + talent_bonus
 
-            # Live consensus line matching from CFBD / DraftKings for Week 4 & Week 3
+            # Live consensus line matching from CFBD / DraftKings across all weeks
             matched_line = None
-            if g.get('week') == 'WEEK 4' and lines_w4:
-                team_clean = (t.get('name') or tid).lower()
-                opp_clean = (g.get('opponent') or '').lower()
-                team_short = (t.get('shortName') or tid).lower()
-                opp_abbr = (g.get('oppAbbr') or '').lower()
+            wk_str = g.get('week', '')
+            wk_m = re.search(r'\d+', wk_str)
+            week_num = int(wk_m.group(0)) if wk_m else None
+            cur_week_lines = all_lines_by_week.get(week_num, {}) if all_lines_by_week else {}
+
+            team_clean = (t.get('name') or tid).lower()
+            opp_clean = (g.get('opponent') or '').lower()
+            team_short = (t.get('shortName') or tid).lower()
+            opp_abbr = (g.get('oppAbbr') or '').lower()
+            opp_school = MASCOT_REGEX.sub('', opp_clean).strip()
+
+            if cur_week_lines:
                 matched_line = (
-                    lines_w4.get((team_clean, opp_clean)) or
-                    lines_w4.get((team_short, opp_abbr)) or
-                    lines_w4.get((team_clean, opp_abbr)) or
-                    lines_w4.get((team_short, opp_clean))
+                    cur_week_lines.get((team_clean, opp_clean)) or
+                    cur_week_lines.get((team_short, opp_abbr)) or
+                    cur_week_lines.get((team_clean, opp_abbr)) or
+                    cur_week_lines.get((team_short, opp_clean))
                 )
                 if not matched_line and not is_fcs:
-                    for (h, a), l_info in lines_w4.items():
-                        if (team_short in h or h in team_clean) and (opp_abbr in a or any(w in a for w in opp_clean.split() if len(w) > 4)):
-                            matched_line = l_info
-                            break
-                        elif (opp_abbr in h or any(w in h for w in opp_clean.split() if len(w) > 4)) and (team_short in a or a in team_clean):
-                            matched_line = l_info
-                            break
-            elif g.get('week') == 'WEEK 3' and lines_w3:
-                team_clean = (t.get('name') or tid).lower()
-                opp_clean = (g.get('opponent') or '').lower()
-                team_short = (t.get('shortName') or tid).lower()
-                opp_abbr = (g.get('oppAbbr') or '').lower()
-                matched_line = (
-                    lines_w3.get((team_clean, opp_clean)) or
-                    lines_w3.get((team_short, opp_abbr)) or
-                    lines_w3.get((team_clean, opp_abbr)) or
-                    lines_w3.get((team_short, opp_clean))
-                )
-                if not matched_line and not is_fcs:
-                    for (h, a), l_info in lines_w3.items():
+                    for (h, a), l_info in cur_week_lines.items():
                         if (team_short in h or h in team_clean) and (opp_abbr in a or any(w in a for w in opp_clean.split() if len(w) > 4)):
                             matched_line = l_info
                             break
@@ -1280,13 +1286,12 @@ def main():
             if matched_line and matched_line.get('spread') is not None:
                 spread_val = matched_line['spread'] if g.get('isHome', True) else -matched_line['spread']
                 g['vegasSpread'] = spread_val
-                g['overUnder'] = matched_line.get('overUnder') or g.get('overUnder', 52.5)
                 g['oddsProvider'] = matched_line.get('provider', 'DraftKings')
                 vegas_margin = -spread_val
                 # Blend model prediction with live Vegas consensus market (60% model, 40% Vegas)
                 projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
             else:
-                # Later weeks: Pure model projection grounded in freshly calibrated ratings
+                # Later weeks or unlined games: Pure model projection grounded in freshly calibrated ratings
                 # For unranked non-conference games without market line, prevent absurd blowouts > 36 pts
                 if abs(raw_margin) > 36.0 and not is_fcs:
                     excess = abs(raw_margin) - 36.0
@@ -1296,7 +1301,34 @@ def main():
                 g['vegasSpread'] = -projected_margin
                 g['oddsProvider'] = 'CFB Prophet Projected'
 
-            base_total = float(g.get('overUnder', 52.5))
+            # Market-calibrated Over/Under:
+            # 1. Use posted sportsbook total when available from DraftKings / Consensus
+            # 2. For unlined matchups, calibrate expected total from SP+ Off/Def ratings, tempo/pace, and weather
+            if matched_line and matched_line.get('overUnder') is not None:
+                calibrated_total = float(matched_line['overUnder'])
+            else:
+                sp_t_info = sp_map_2026.get(team_clean) or sp_map_2026.get(team_short) or {}
+                sp_o_info = sp_map_2026.get(opp_clean) or sp_map_2026.get(opp_abbr) or sp_map_2026.get(opp_school) or {}
+                
+                off_a = sp_t_info.get('offense') or (28.5 + 0.55 * sp_team)
+                def_a = sp_t_info.get('defense') or (28.5 - 0.45 * sp_team)
+                off_b = sp_o_info.get('offense') or (28.5 + 0.55 * sp_opp)
+                def_b = sp_o_info.get('defense') or (28.5 - 0.45 * sp_opp)
+                
+                pace_a = monte_carlo_engine.estimate_team_pace(team_short) if monte_carlo_engine else 12.0
+                pace_b = monte_carlo_engine.estimate_team_pace(opp_abbr or opp_clean) if monte_carlo_engine else 12.0
+                pace_adj = ((pace_a + pace_b) / 2.0 - 12.0) * 3.0
+                
+                exp_a = 27.5 + (off_a - 28.5) * 0.55 - (28.5 - def_b) * 0.55
+                exp_b = 27.5 + (off_b - 28.5) * 0.55 - (28.5 - def_a) * 0.55
+                raw_tot = exp_a + exp_b + pace_adj
+                calibrated_total = round(raw_tot * 2) / 2.0
+                if calibrated_total % 1 == 0:
+                    calibrated_total += 0.5
+                calibrated_total = max(38.5, min(74.5, calibrated_total))
+
+            g['overUnder'] = calibrated_total
+            base_total = calibrated_total
             vegas_spread = g.get('vegasSpread')
 
             if monte_carlo_engine:

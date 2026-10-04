@@ -285,6 +285,13 @@ def run_inspections():
                 if spread_a != -spread_b:
                     errors.append(f"Vegas spread sign asymmetry in {tid_a} ({spread_a}) vs {tid_b} ({spread_b})")
 
+            # Over/Under symmetry
+            ou_a = g_a.get('overUnder')
+            ou_b = g_b.get('overUnder')
+            if not is_final_a and ou_a is not None and ou_b is not None:
+                if abs(ou_a - ou_b) > 0.01:
+                    errors.append(f"Over/Under total asymmetry in {tid_a} ({ou_a}) vs {tid_b} ({ou_b})")
+
     print(f"  • Verified 100% reciprocal symmetry and zero ties across all {pairs_checked} intra-conference/tracked matchup pairs.")
 
     # 8. Multi-Platform Bundle Synchronization

@@ -103,8 +103,9 @@ def simulate_matchup_10k(
     weather_impact = None
     if weather_info and weather_client:
         weather_impact = weather_client.calculate_weather_impact(weather_info)
-        # Apply weather drag to total and passing efficiency
-        vegas_total = max(30.0, vegas_total - weather_impact['totalPointsDrag'])
+        # Apply weather drag to pace/drives and passing efficiency (do NOT mutate posted vegas_total line!)
+        if weather_impact and weather_impact.get('totalPointsDrag'):
+            avg_drives = max(9.0, avg_drives - (weather_impact['totalPointsDrag'] * 0.15))
 
     # 4. Modulate per-drive scoring probabilities with in-game trench & red-zone metrics
     # Line yards differential gives short-yardage push (+/- 0.02)

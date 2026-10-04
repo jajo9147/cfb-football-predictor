@@ -184,8 +184,10 @@ def get_game_lines(year=2026, week=None):
             spread_open = best_line.get('spreadOpen', spread)
             ou = best_line.get('overUnder')
             ou_open = best_line.get('overUnderOpen', ou)
-            prov_name = best_line.get('provider', 'Consensus')
+            prov_name = best_line.get('provider', 'DraftKings')
             match_data = {
+                'homeTeam': home,
+                'awayTeam': away,
                 'provider': prov_name,
                 'spread': spread,
                 'spreadOpen': spread_open,
@@ -197,6 +199,58 @@ def get_game_lines(year=2026, week=None):
             lines_by_matchup[(home, away)] = match_data
             lines_by_matchup[(away, home)] = match_data
     return lines_by_matchup
+
+
+def get_all_game_lines_by_week(year=2026):
+    """
+    Fetches consensus lines, opening lines, spreads, and totals across all weeks from DraftKings/consensus.
+    Returns a dictionary mapping week_number -> { (teamA, teamB): match_data }.
+    """
+    params = {'year': year}
+    data = fetch_cfbd_endpoint('/lines', params, cache_name=f"lines_{year}_all")
+    lines_by_week = {}
+    for item in data:
+        wk = item.get('week')
+        if wk is None:
+            continue
+        if wk not in lines_by_week:
+            lines_by_week[wk] = {}
+        home = (item.get('homeTeam') or '').lower()
+        away = (item.get('awayTeam') or '').lower()
+        lines = item.get('lines', [])
+        if not lines:
+            continue
+        best_line = None
+        for prov in ['DraftKings', 'Bovada', 'consensus', 'ESPN Bet']:
+            for l in lines:
+                if (l.get('provider') or '').lower() == prov.lower():
+                    best_line = l
+                    break
+            if best_line:
+                break
+        if not best_line and lines:
+            best_line = lines[0]
+
+        if best_line:
+            spread = best_line.get('spread')
+            spread_open = best_line.get('spreadOpen', spread)
+            ou = best_line.get('overUnder')
+            ou_open = best_line.get('overUnderOpen', ou)
+            prov_name = best_line.get('provider', 'DraftKings')
+            match_data = {
+                'homeTeam': home,
+                'awayTeam': away,
+                'provider': prov_name,
+                'spread': spread,
+                'spreadOpen': spread_open,
+                'overUnder': ou,
+                'overUnderOpen': ou_open,
+                'homeMoneyline': best_line.get('homeMoneyline'),
+                'awayMoneyline': best_line.get('awayMoneyline')
+            }
+            lines_by_week[wk][(home, away)] = match_data
+            lines_by_week[wk][(away, home)] = match_data
+    return lines_by_week
 
 
 def get_cumulative_advanced_stats(year=2026, weeks=[0, 1, 2]):

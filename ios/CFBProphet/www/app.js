@@ -1231,7 +1231,16 @@ function calculateVegasEdge(game, sim) {
   const provider = game.oddsProvider || 'DraftKings';
   let badgeHtml = '';
   if (hasSpreadEdge) {
-    badgeHtml = `<span class="vegas-edge-badge highlight" title="Sharp Market Edge: Model Spread deviates by ${Math.abs(spreadEdge).toFixed(1)} pts from ${provider} line"><i class="fa-solid fa-gem"></i> ${Math.abs(spreadEdge).toFixed(1)} PT SPREAD EDGE</span>`;
+    let pickAbbr = '';
+    const myAbbr = (typeof TEAMS_DATABASE !== 'undefined' && typeof state !== 'undefined' && state?.selectedTeam && TEAMS_DATABASE[state.selectedTeam]) ? TEAMS_DATABASE[state.selectedTeam].abbr : '';
+    const oppAbbr = game.oppAbbr || game.oppBadge || '';
+    if (spreadEdge > 0) {
+      pickAbbr = myAbbr;
+    } else {
+      pickAbbr = oppAbbr;
+    }
+    const sideLabel = pickAbbr ? `${pickAbbr} ` : '';
+    badgeHtml = `<span class="vegas-edge-badge highlight" title="Sharp Market Edge: Model favors ${pickAbbr || 'side'} by ${Math.abs(spreadEdge).toFixed(1)} pts vs ${provider} line"><i class="fa-solid fa-gem"></i> ${sideLabel}+${Math.abs(spreadEdge).toFixed(1)} PT SPREAD EDGE</span>`;
   } else if (hasTotalEdge) {
     const ouType = totalEdge > 0 ? 'OVER' : 'UNDER';
     badgeHtml = `<span class="vegas-edge-badge" title="Total Edge vs ${provider} ${vegasTotal} O/U"><i class="fa-solid fa-arrow-trend-up"></i> ${ouType} EDGE (${Math.abs(totalEdge).toFixed(1)} PTS)</span>`;
