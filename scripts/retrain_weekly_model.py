@@ -119,8 +119,43 @@ WEEK5_OFFICIAL_POLL = {
     'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
-WEEK4_OFFICIAL_POLL = WEEK5_OFFICIAL_POLL
-WEEK3_OFFICIAL_POLL = WEEK5_OFFICIAL_POLL
+# Authoritative Week 6 AP Poll (October 4, 2026 Live AP Release)
+WEEK6_OFFICIAL_POLL = {
+    'texas': {'apRank': '#1 AP', 'apPoints': '1,737 PTS (61 1st)', 'rankNum': 1},
+    'georgia': {'apRank': '#2 AP', 'apPoints': '1,647 PTS (6 1st)', 'rankNum': 2},
+    'notredame': {'apRank': '#3 AP', 'apPoints': '1,532 PTS', 'rankNum': 3},
+    'miami': {'apRank': '#4 AP', 'apPoints': '1,524 PTS (2 1st)', 'rankNum': 4},
+    'ohiostate': {'apRank': '#5 AP', 'apPoints': '1,490 PTS', 'rankNum': 5},
+    'alabama': {'apRank': '#6 AP', 'apPoints': '1,460 PTS', 'rankNum': 6},
+    'indiana': {'apRank': '#7 AP', 'apPoints': '1,380 PTS (1 1st)', 'rankNum': 7},
+    'byu': {'apRank': '#8 AP', 'apPoints': '1,144 PTS', 'rankNum': 8},
+    'olemiss': {'apRank': '#9 AP', 'apPoints': '1,095 PTS', 'rankNum': 9},
+    'lsu': {'apRank': '#10 AP', 'apPoints': '1,087 PTS', 'rankNum': 10},
+    'texastech': {'apRank': '#11 AP', 'apPoints': '1,062 PTS', 'rankNum': 11},
+    'utah': {'apRank': '#12 AP', 'apPoints': '996 PTS', 'rankNum': 12},
+    'oregon': {'apRank': '#13 AP', 'apPoints': '831 PTS', 'rankNum': 13},
+    'missouri': {'apRank': '#14 AP', 'apPoints': '755 PTS', 'rankNum': 14},
+    'tennessee': {'apRank': '#15 AP', 'apPoints': '746 PTS', 'rankNum': 15},
+    'usc': {'apRank': '#19 AP', 'apPoints': '439 PTS', 'rankNum': 19},
+    'iowa': {'apRank': '#20 AP', 'apPoints': '367 PTS', 'rankNum': 20},
+    'houston': {'apRank': '#22 AP', 'apPoints': '279 PTS', 'rankNum': 22},
+    'boisestate': {'apRank': '#23 AP', 'apPoints': '271 PTS', 'rankNum': 23},
+    'smu': {'apRank': '#24 AP', 'apPoints': '167 PTS', 'rankNum': 24},
+    'arizona': {'apRank': 'RV', 'apPoints': '19 PTS', 'rankNum': 99},
+    'pennstate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'michigan': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'louisville': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'texasam': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'oklahoma': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'washington': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
+}
+WEEK5_OFFICIAL_POLL = WEEK6_OFFICIAL_POLL
+WEEK4_OFFICIAL_POLL = WEEK6_OFFICIAL_POLL
+WEEK3_OFFICIAL_POLL = WEEK6_OFFICIAL_POLL
 
 
 # Baseline SP+ Ratings before Week 1 (Calibrated to AP Top 25 Consensus, Head-to-Head, and 247Sports Roster Talent)
@@ -700,9 +735,9 @@ def main():
             print(f"🔥 CFBD Ingestion: Loaded {len(talent_map)} teams with 2026 247Sports Talent Composite")
             sp_map_2026 = cfbd_client.get_sp_ratings(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(sp_map_2026)} teams with 2026 Official SP+ Ratings")
-            cum_adv_stats = cfbd_client.get_cumulative_advanced_stats(2026, weeks=[0, 1, 2, 3])
-            print(f"🔥 CFBD Ingestion: Loaded cumulative multi-week EPA/PPA for {len(cum_adv_stats)} teams (Weeks 0, 1, 2, 3)")
-            drive_eff_metrics = cfbd_client.get_drive_level_efficiency_metrics(2026, weeks=[1, 2, 3])
+            cum_adv_stats = cfbd_client.get_cumulative_advanced_stats(2026, weeks=[0, 1, 2, 3, 4, 5])
+            print(f"🔥 CFBD Ingestion: Loaded cumulative multi-week EPA/PPA for {len(cum_adv_stats)} teams (Weeks 0-5)")
+            drive_eff_metrics = cfbd_client.get_drive_level_efficiency_metrics(2026, weeks=[1, 2, 3, 4, 5])
             print(f"🔥 CFBD Ingestion: Loaded drive-level down consistency, PPA, and DQI for {len(drive_eff_metrics)} teams")
             dynamic_fbs_ratings = cfbd_client.get_fbs_opponent_power_ratings(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(dynamic_fbs_ratings)} dynamic 2026 FBS opponent ratings grounded in SP+ & 2026 records")
@@ -756,8 +791,8 @@ def main():
                     'rankNum': 99
                 }
     else:
-        print("  • Applying verified official Week 5 Top 25 poll (Texas #1, Georgia #2, Notre Dame #3, Miami #4, Ohio State #5, Indiana #6, Alabama #7)...")
-        ranking_updates = WEEK5_OFFICIAL_POLL
+        print("  • Applying verified official Week 6 Top 25 poll (Texas #1, Georgia #2, Notre Dame #3, Miami #4, Ohio State #5, Alabama #6, Indiana #7, BYU #8)...")
+        ranking_updates = WEEK6_OFFICIAL_POLL
 
     # Apply rankings to teams in DB
     ap_changes_count = 0
@@ -834,7 +869,8 @@ def main():
             '20260829', '20260903', '20260904', '20260905', '20260906', '20260907',
             '20260910', '20260911', '20260912', '20260913',
             '20260917', '20260918', '20260919', '20260920',
-            '20260924', '20260925', '20260926', '20260927'
+            '20260924', '20260925', '20260926', '20260927',
+            '20261001', '20261002', '20261003', '20261004'
         ]
 
     all_completed_games = []
@@ -935,63 +971,69 @@ def main():
             t2_id = match_team_in_db(db, t2_name)
 
             # Settle game in team schedules
-            if not args.dry_run:
-                for team_id, opp_name, s_ut, s_opp in [(t1_id, t2_name, score1, score2), (t2_id, t1_name, score2, score1)]:
-                    if not team_id or team_id not in db:
-                        continue
-                    opp_norm = normalize_name(opp_name)
-                    matched_g = False
-                    for g in db[team_id].get('schedule', []):
-                        g_opp = normalize_name(g.get('opponent') or '')
-                        g_abbr = normalize_name(g.get('oppAbbr') or '')
-                        if (len(opp_norm) >= 4 and (opp_norm in g_opp or g_opp in opp_norm)) or (g_abbr and g_abbr in opp_norm):
+            g1_obj = None
+            g2_obj = None
+            for team_id, opp_name, s_ut, s_opp in [(t1_id, t2_name, score1, score2), (t2_id, t1_name, score2, score1)]:
+                if not team_id or team_id not in db:
+                    continue
+                opp_norm = normalize_name(opp_name)
+                matched_g = False
+                for g in db[team_id].get('schedule', []):
+                    g_opp = normalize_name(g.get('opponent') or '')
+                    g_abbr = normalize_name(g.get('oppAbbr') or '')
+                    if (len(opp_norm) >= 4 and (opp_norm in g_opp or g_opp in opp_norm)) or (g_abbr and g_abbr in opp_norm):
+                        if not args.dry_run:
                             g['isFinal'] = True
                             g['finalTeamScore'] = g['actualScoreUt'] = int(s_ut)
                             g['finalOppScore'] = g['actualScoreOpp'] = int(s_opp)
                             g['finalWin'] = int(s_ut) > int(s_opp)
-                            matched_g = True
-                            break
-                    if not matched_g:
-                        for g in db[team_id].get('schedule', []):
-                            if g.get('week') == 'WEEK 3' and not g.get('isFinal'):
-                                g['isFinal'] = True
-                                g['finalTeamScore'] = g['actualScoreUt'] = int(s_ut)
-                                g['finalOppScore'] = g['actualScoreOpp'] = int(s_opp)
-                                g['finalWin'] = int(s_ut) > int(s_opp)
-                                break
+                        if team_id == t1_id:
+                            g1_obj = g
+                        else:
+                            g2_obj = g
+                        matched_g = True
+                        break
 
             if t1_id:
                 if not any(cg.get('teamId') == t1_id and cg.get('gameId') == f"espn-{ev.get('id')}" for cg in all_completed_games):
+                    proj1 = g1_obj.get('projScoreUt', 24) if g1_obj else 24
+                    proj2 = g1_obj.get('projScoreOpp', 21) if g1_obj else 21
+                    sp1 = g1_obj.get('vegasSpread', -3.5) if g1_obj else -3.5
+                    ou1 = g1_obj.get('overUnder', 55.0) if g1_obj else 55.0
                     all_completed_games.append({
                         'teamId': t1_id,
                         'oppId': t2_id,
                         'gameId': f"espn-{ev.get('id')}",
                         'teamScore': score1,
                         'oppScore': score2,
-                        'projUt': 24,
-                        'projOpp': 21,
-                        'vegasSpread': -3.5,
-                        'overUnder': 55.0,
+                        'projUt': proj1,
+                        'projOpp': proj2,
+                        'vegasSpread': float(sp1),
+                        'overUnder': float(ou1),
                         'isHome': c1.get('homeAway') == 'home',
                         'stadium': comps.get('venue', {}).get('fullName', ''),
-                        'oppRank': 'NR',
+                        'oppRank': g1_obj.get('oppRank', 'NR') if g1_obj else 'NR',
                         'opponent': t2_name
                     })
             if t2_id:
                 if not any(cg.get('teamId') == t2_id and cg.get('gameId') == f"espn-{ev.get('id')}" for cg in all_completed_games):
+                    proj1 = g2_obj.get('projScoreUt', 24) if g2_obj else 24
+                    proj2 = g2_obj.get('projScoreOpp', 21) if g2_obj else 21
+                    sp2 = g2_obj.get('vegasSpread', 3.5) if g2_obj else 3.5
+                    ou2 = g2_obj.get('overUnder', 55.0) if g2_obj else 55.0
                     all_completed_games.append({
                         'teamId': t2_id,
                         'oppId': t1_id,
                         'gameId': f"espn-{ev.get('id')}",
                         'teamScore': score2,
                         'oppScore': score1,
-                        'projUt': 21,
-                        'projOpp': 24,
-                        'vegasSpread': 3.5,
-                        'overUnder': 55.0,
+                        'projUt': proj1,
+                        'projOpp': proj2,
+                        'vegasSpread': float(sp2),
+                        'overUnder': float(ou2),
                         'isHome': c2.get('homeAway') == 'home',
                         'stadium': comps.get('venue', {}).get('fullName', ''),
-                        'oppRank': 'NR',
+                        'oppRank': g2_obj.get('oppRank', 'NR') if g2_obj else 'NR',
                         'opponent': t1_name
                     })
 
