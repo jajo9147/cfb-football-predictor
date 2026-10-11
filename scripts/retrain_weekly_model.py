@@ -156,31 +156,31 @@ WEEK6_OFFICIAL_POLL = {
 
 # Authoritative Week 7 Official Poll (October 11, 2026 Live Release)
 WEEK7_OFFICIAL_POLL = {
-    'georgia': {'apRank': '#1 AP', 'apPoints': '1,832 PTS (60 1st)', 'rankNum': 1},
-    'notredame': {'apRank': '#2 AP', 'apPoints': '1,713 PTS (3 1st)', 'rankNum': 2},
-    'miami': {'apRank': '#3 AP', 'apPoints': '1,688 PTS (1 1st)', 'rankNum': 3},
-    'indiana': {'apRank': '#4 AP', 'apPoints': '1,633 PTS (9 1st)', 'rankNum': 4},
-    'ohiostate': {'apRank': '#5 AP', 'apPoints': '1,565 PTS (1 1st)', 'rankNum': 5},
-    'texas': {'apRank': '#6 AP', 'apPoints': '1,369 PTS', 'rankNum': 6},
-    'alabama': {'apRank': '#7 AP', 'apPoints': '1,358 PTS', 'rankNum': 7},
-    'byu': {'apRank': '#8 AP', 'apPoints': '1,355 PTS', 'rankNum': 8},
-    'texastech': {'apRank': '#9 AP', 'apPoints': '1,240 PTS', 'rankNum': 9},
-    'olemiss': {'apRank': '#10 AP', 'apPoints': '1,180 PTS', 'rankNum': 10},
-    'utah': {'apRank': '#11 AP', 'apPoints': '1,109 PTS', 'rankNum': 11},
-    'missouri': {'apRank': '#13 AP', 'apPoints': '863 PTS', 'rankNum': 13},
-    'tennessee': {'apRank': '#14 AP', 'apPoints': '837 PTS', 'rankNum': 14},
-    'usc': {'apRank': '#15 AP', 'apPoints': '758 PTS', 'rankNum': 15},
-    'iowa': {'apRank': '#16 AP', 'apPoints': '729 PTS', 'rankNum': 16},
-    'houston': {'apRank': '#18 AP', 'apPoints': '520 PTS', 'rankNum': 18},
-    'lsu': {'apRank': '#21 AP', 'apPoints': '361 PTS', 'rankNum': 21},
-    'smu': {'apRank': '#22 AP', 'apPoints': '330 PTS', 'rankNum': 22},
-    'boisestate': {'apRank': '#24 AP', 'apPoints': '205 PTS', 'rankNum': 24},
-    'oregon': {'apRank': '#25 AP', 'apPoints': '200 PTS', 'rankNum': 25},
-    'arizona': {'apRank': 'RV', 'apPoints': '95 PTS', 'rankNum': 99},
-    'oklahoma': {'apRank': 'RV', 'apPoints': '88 PTS', 'rankNum': 99},
-    'louisville': {'apRank': 'RV', 'apPoints': '45 PTS', 'rankNum': 99},
-    'michigan': {'apRank': 'RV', 'apPoints': '38 PTS', 'rankNum': 99},
-    'pennstate': {'apRank': 'RV', 'apPoints': '28 PTS', 'rankNum': 99},
+    'georgia': {'apRank': '#1 AP', 'apPoints': '1,745 PTS (66 1st)', 'rankNum': 1},
+    'notredame': {'apRank': '#2 AP', 'apPoints': '1,630 PTS (1 1st)', 'rankNum': 2},
+    'miami': {'apRank': '#3 AP', 'apPoints': '1,594 PTS (2 1st)', 'rankNum': 3},
+    'ohiostate': {'apRank': '#4 AP', 'apPoints': '1,508 PTS', 'rankNum': 4},
+    'indiana': {'apRank': '#5 AP', 'apPoints': '1,461 PTS (1 1st)', 'rankNum': 5},
+    'alabama': {'apRank': '#6 AP', 'apPoints': '1,372 PTS', 'rankNum': 6},
+    'texas': {'apRank': '#7 AP', 'apPoints': '1,371 PTS', 'rankNum': 7},
+    'byu': {'apRank': '#8 AP', 'apPoints': '1,237 PTS', 'rankNum': 8},
+    'olemiss': {'apRank': '#9 AP', 'apPoints': '1,135 PTS', 'rankNum': 9},
+    'texastech': {'apRank': '#10 AP', 'apPoints': '1,132 PTS', 'rankNum': 10},
+    'utah': {'apRank': '#11 AP', 'apPoints': '1,073 PTS', 'rankNum': 11},
+    'missouri': {'apRank': '#13 AP', 'apPoints': '882 PTS', 'rankNum': 13},
+    'tennessee': {'apRank': '#14 AP', 'apPoints': '706 PTS', 'rankNum': 14},
+    'iowa': {'apRank': '#17 AP', 'apPoints': '621 PTS', 'rankNum': 17},
+    'usc': {'apRank': '#19 AP', 'apPoints': '505 PTS', 'rankNum': 19},
+    'houston': {'apRank': '#20 AP', 'apPoints': '380 PTS', 'rankNum': 20},
+    'lsu': {'apRank': '#22 AP', 'apPoints': '274 PTS', 'rankNum': 22},
+    'boisestate': {'apRank': '#23 AP', 'apPoints': '268 PTS', 'rankNum': 23},
+    'smu': {'apRank': '#24 AP', 'apPoints': '142 PTS', 'rankNum': 24},
+    'oregon': {'apRank': 'RV', 'apPoints': '86 PTS', 'rankNum': 99},
+    'arizona': {'apRank': 'RV', 'apPoints': '82 PTS', 'rankNum': 99},
+    'oklahoma': {'apRank': 'RV', 'apPoints': '44 PTS', 'rankNum': 99},
+    'louisville': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'michigan': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'pennstate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'texasam': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'washington': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
@@ -195,39 +195,39 @@ WEEK4_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
 WEEK3_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
 
 
-# Baseline SP+ Ratings before Week 1 (Calibrated to AP Top 25 Consensus, Head-to-Head, and 247Sports Roster Talent)
+# In-Season SP+ Baseline Ratings (Calibrated to Official Week 7 AP Release, Records, and Resume Strength)
 BASELINE_SP_RATINGS = {
-    'texas': 37.5,       # #1 AP (2-0, beat Ohio State in Columbus, 985 talent)
-    'georgia': 36.5,     # #2 AP (2-0, 1003 talent)
-    'ohiostate': 35.8,   # #6 AP (1-1, lost to Texas by 1 at home, 964 talent)
-    'notredame': 35.0,   # #3 AP (2-0, 953 talent)
-    'miami': 33.5,       # #5 AP (2-0, 885 talent)
-    'lsu': 33.0,         # #7 AP (2-0, crushed Clemson 51-10, 932 talent)
-    'indiana': 30.8,     # #5 AP (3-0, 735 talent, SOS-discounted for non-P4 schedule)
-    'texasam': 31.8,     # #9 AP (2-0, blew out ASU 48-20, 933 talent)
-    'alabama': 31.2,     # #10 AP (2-0, beat Kentucky 38-14, 973 talent)
-    'oregon': 30.5,      # #21 AP (1-1, upset by OK State, 984 talent)
-    'pennstate': 27.8,   # #14 AP (2-0)
-    'michigan': 27.5,    # #19 AP (2-0, beat #11 Oklahoma)
-    'olemiss': 27.2,     # #8 AP (2-0, beat Louisville)
-    'tennessee': 26.8,   # #15 AP (2-0)
-    'usc': 26.5,         # #12 AP (3-0)
-    'oklahoma': 25.5,    # #24 AP (1-1, lost to Michigan)
-    'texastech': 25.0,   # #13 AP (2-0, Big 12, 767 talent, beat ACU/ORST)
-    'missouri': 24.5,    # #20 AP (2-0)
-    'byu': 23.5,         # #11 AP (2-0, beat Arizona)
-    'washington': 22.8,  # RV (2-0)
-    'iowa': 22.0,        # #18 AP (2-0)
-    'smu': 20.8,         # #16 AP (2-0)
-    'louisville': 19.8,  # #23 AP (1-1, lost to Ole Miss, beat Villanova)
-    'clemson': 18.8,     # NR (1-1, lost 51-10 to LSU)
-    'utah': 18.0,        # #17 AP (2-0)
-    'floridastate': 16.8,# NR (1-1)
-    'arizona': 15.5,     # RV (1-1, lost to BYU)
-    'houston': 15.0,     # #22 AP (2-0)
-    'boisestate': 14.0,  # RV (1-1, lost to Oregon)
-    'arizonastate': 11.2,# NR (1-1, lost 48-20 to A&M)
-    'colorado': 9.2      # NR (1-1)
+    'georgia': 36.9,     # #1 AP (6-0)
+    'texas': 35.8,       # #6 AP (4-1, beat Ohio State in Columbus)
+    'ohiostate': 35.2,   # #5 AP (5-1, lost to Texas by 1)
+    'notredame': 34.5,   # #2 AP (6-0)
+    'miami': 33.8,       # #3 AP (5-0)
+    'alabama': 32.5,     # #7 AP (5-1, lost only to #1 Georgia)
+    'indiana': 31.5,     # #4 AP (6-0)
+    'olemiss': 28.5,     # #10 AP (4-1, beat LSU 32-24)
+    'byu': 27.5,         # #8 AP (5-0, beat Arizona)
+    'texastech': 27.0,   # #9 AP (5-0)
+    'tennessee': 26.8,   # #14 AP (5-1)
+    'utah': 26.5,        # #11 AP (5-0)
+    'missouri': 26.0,    # #13 AP (5-1, blew out Texas A&M 27-6)
+    'usc': 25.5,         # #15 AP (6-1)
+    'lsu': 25.5,         # #21 AP (4-2, lost to Ole Miss, lost to Kentucky)
+    'oregon': 25.0,      # #25 AP (3-2, lost to Oklahoma State, UCLA)
+    'oklahoma': 24.0,    # RV (3-2, lost to Michigan, Georgia)
+    'michigan': 23.8,    # RV (3-2, lost to Iowa, Minnesota)
+    'pennstate': 23.5,   # RV (3-3, lost to Wisconsin, Northwestern, USC)
+    'texasam': 23.5,     # NR (3-3, lost to Kentucky, LSU, Missouri 27-6)
+    'iowa': 22.5,        # #16 AP (5-1)
+    'washington': 21.5,  # NR (3-3)
+    'smu': 21.0,         # #22 AP (4-1)
+    'houston': 20.5,     # #18 AP (5-1)
+    'louisville': 18.0,  # RV (3-3)
+    'boisestate': 17.5,  # #24 AP (5-1)
+    'arizona': 16.5,     # RV (5-1, lost to BYU)
+    'floridastate': 16.5,# NR (3-3)
+    'clemson': 15.5,     # NR (3-2, blown out by LSU 51-10)
+    'arizonastate': 11.0,# NR (3-2)
+    'colorado': 8.5      # NR (2-3)
 }
 
 # Stadium Home Field Advantage mapping (points - calibrated to modern college football analytics)
@@ -1269,7 +1269,7 @@ def main():
     print(f"  • Model Beat Vegas Rate:            {beat_vegas_pct}% ({model_beats_vegas_count}/{total_evaluated} games)")
 
     # 4. Bayesian SP+ Rating Updating (Opponent-Strength Weighted + Drive Efficiency)
-    ALPHA = 0.14
+    ALPHA = 0.08
     rating_shifts = {}
 
     print("\n📈 RETRAINED TEAM POWER RATINGS (DRIVE EFFICIENCY + BAYESIAN OPPONENT WEIGHTING):")
@@ -1290,23 +1290,13 @@ def main():
         if c_info:
             ppa = c_info.get('avgOffPpa', 0.20)
             if ppa > 0.45:
-                epa_shift += 0.50  # High-octane offense reward
+                epa_shift += 0.30  # High-octane offense reward
             elif ppa < 0.10:
-                epa_shift -= 0.60  # Sluggish offense penalty
+                epa_shift -= 0.40  # Sluggish offense penalty
             if ppa < 0.00:
-                epa_shift -= 0.75  # Severely broken offense penalty (e.g. Clemson)
+                epa_shift -= 0.60  # Severely broken offense penalty (e.g. Clemson)
 
-        # Specific Week 3 marquee head-to-head adjustments
-        h2h_adj = 0.0
-        if tid == 'texasam': h2h_adj = -1.8 # Stunned at home by Kentucky (21-31)
-        elif tid == 'olemiss': h2h_adj = +1.5 # Defeated #7 LSU (32-24)
-        elif tid == 'lsu': h2h_adj = -1.0 # Lost at Ole Miss
-        elif tid == 'louisville': h2h_adj = -1.8 # Stunned at home by Wake Forest (27-30) as 13.5-pt favorites
-        elif tid == 'smu': h2h_adj = -1.2 # Lost at Louisville
-        elif tid == 'texastech': h2h_adj = -0.5 # Staggered 28-26 vs Houston
-        elif tid == 'texas': h2h_adj = -0.4 # Red-zone stall vs UTSA
-
-        clamped_adjustment = max(-2.8, min(2.8, raw_adjustment + epa_shift + h2h_adj))
+        clamped_adjustment = max(-2.2, min(2.2, raw_adjustment + epa_shift))
         new_rating = round(baseline + clamped_adjustment, 2)
         rating_shifts[tid] = {
             'old': baseline,
@@ -1440,16 +1430,23 @@ def main():
 
             if matched_line and matched_line.get('spread') is not None:
                 spread_val = matched_line['spread']
+                vegas_margin = -spread_val
+                # Check for obsolete preseason lookahead lines:
+                # If game is in late season (weeks >= 9) and the lookahead spread contradicts in-season efficiency by > 4.0 points:
+                # Discard the stale summer line completely!
+                if week_num and week_num >= 9 and abs(raw_margin - vegas_margin) > 4.0:
+                    matched_line = None
+
+            if matched_line and matched_line.get('spread') is not None:
+                spread_val = matched_line['spread']
                 g['vegasSpread'] = spread_val
                 g['oddsProvider'] = matched_line.get('provider', 'DraftKings')
                 vegas_margin = -spread_val
                 # Week-dependent market blending:
                 # Weeks 7-8: 60% model, 40% live Vegas market
-                # Weeks 9+: 80% model, 20% Vegas (stale August lookahead lines shouldn't override October reality)
-                # If market diverges from rating by > 5.0 pts in late season: decay market line to 10%
+                # Weeks 9+: 85% model, 15% Vegas
                 if week_num and week_num >= 9:
-                    market_weight = 0.20 if abs(raw_margin - vegas_margin) <= 5.0 else 0.10
-                    projected_margin = round((1.0 - market_weight) * raw_margin + market_weight * vegas_margin, 1)
+                    projected_margin = round(0.85 * raw_margin + 0.15 * vegas_margin, 1)
                 else:
                     projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
             else:
