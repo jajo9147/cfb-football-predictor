@@ -66,7 +66,8 @@ def simulate_matchup_10k(
     havoc_a=0.15,
     havoc_b=0.15,
     ppo_a=3.8,
-    ppo_b=3.8
+    ppo_b=3.8,
+    projected_spread=None
 ):
     """
     Simulates 10,000 full drive-by-drive games between Team A and Team B.
@@ -83,13 +84,24 @@ def simulate_matchup_10k(
     # 2. Benchmark spread and margin for Team A
     # Clean SP+ rating differential (points per game scale)
     raw_sp_diff = (sp_a - sp_b) + hfa
-    spread_a = vegas_spread if vegas_spread is not None else -round(raw_sp_diff * 2) / 2.0
-    line_target = -spread_a # Margin needed by Team A to cover
+    
+    # eff_spread dictates the scoring expectation (target margin)
+    if projected_spread is not None:
+        eff_spread = float(projected_spread)
+    elif vegas_spread is not None:
+        # Balanced blend: 65% rating model, 35% market line
+        eff_spread = -(0.65 * raw_sp_diff + 0.35 * (-float(vegas_spread)))
+    else:
+        eff_spread = -round(raw_sp_diff * 2) / 2.0
 
-    # 3. Target expected points anchored to matchup total and spread
+    # Line target for ATS cover evaluation: strictly the actual market spread
+    line_target = -float(vegas_spread) if vegas_spread is not None else -eff_spread
+    spread_a = vegas_spread if vegas_spread is not None else eff_spread
+
+    # 3. Target expected points anchored to matchup total and efficiency spread
     target_tot = float(vegas_total if vegas_total is not None else 52.5)
-    exp_pts_a = max(3.0, (target_tot - spread_a) / 2.0)
-    exp_pts_b = max(3.0, (target_tot + spread_a) / 2.0)
+    exp_pts_a = max(3.0, (target_tot - eff_spread) / 2.0)
+    exp_pts_b = max(3.0, (target_tot + eff_spread) / 2.0)
 
     # 3.5 Stadium Weather & Environmental Drag
     if weather_info is None and stadium_name and weather_client:

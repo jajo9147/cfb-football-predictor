@@ -173,13 +173,27 @@ def run_inspections():
 
     print(f"  • Confirmed valid 2026 starters and coaches across all {len(db)} teams.")
 
-    # 6. Model Probabilities & Odds Integrity
-    print("\n[5/7] 🎯 Inspecting Odds Calibration & Monte Carlo Win Probabilities...")
+    # 6. Model Probabilities & Odds Integrity & Past Game Finality
+    print("\n[5/7] 🎯 Inspecting Odds Calibration, Win Probabilities, & Past Game Finality...")
+    import datetime
+    current_date = datetime.date(2026, 10, 11)
     for tid, t in db.items():
         for g in t.get('schedule', []):
             gid = g.get('id')
-            if g.get('isFinal'):
+            d_str = g.get('date', '')
+            try:
+                g_dt = datetime.datetime.strptime(d_str, '%b %d, %Y').date()
+            except Exception:
+                g_dt = None
+
+            # Past games (on or before current date) MUST be final and graded with actual scores
+            if g_dt and g_dt <= current_date:
+                if not g.get('isFinal'):
+                    errors.append(f"{gid} ({tid} {g.get('week')} on {d_str}): Past game is not marked isFinal=True!")
+                if g.get('actualScoreUt') is None or g.get('actualScoreOpp') is None:
+                    errors.append(f"{gid} ({tid} {g.get('week')} on {d_str}): Past game is missing actual scores!")
                 continue
+
             prob = g.get('baseWinProb')
             if prob is None or not (1 <= prob <= 99):
                 errors.append(f"{gid}: Win probability out of bounds: {prob} (must be 1-99%)")
@@ -198,7 +212,7 @@ def run_inspections():
             if proj_ut is not None and proj_opp is not None and proj_ut == proj_opp:
                 errors.append(f"{gid}: Illegal tie score projected: {proj_ut}-{proj_opp}")
 
-    print(f"  • Verified spread, over/under, clamped win probabilities, and zero ties.")
+    print(f"  • Verified spread, over/under, clamped win probabilities, zero ties, and 100% past game grading.")
 
     # 7. Head-to-Head Reciprocal Symmetry & Strict Tie Elimination
     print("\n[6/7] ⚖️ Inspecting Head-to-Head Reciprocal Symmetry & Strict Tie Elimination...")

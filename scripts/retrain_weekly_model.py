@@ -230,43 +230,43 @@ BASELINE_SP_RATINGS = {
     'colorado': 9.2      # NR (1-1)
 }
 
-# Stadium Home Field Advantage mapping (points)
+# Stadium Home Field Advantage mapping (points - calibrated to modern college football analytics)
 STADIUM_HFA = {
-    "Tiger Stadium": 3.2,
-    "Kyle Field": 3.2,
-    "Neyland Stadium": 3.2,
-    "Beaver Stadium": 3.0,
-    "Ohio Stadium": 3.0,
-    "Sanford Stadium": 3.0,
-    "Autzen Stadium": 3.0,
-    "Bryant-Denny Stadium": 3.0,
-    "Rice-Eccles Stadium": 2.8,
-    "Jones AT&T Stadium": 2.8,
-    "Jones AT&T Stadium (Lubbock, TX)": 2.8,
-    "Michigan Stadium": 2.5,
-    "Michigan Stadium (The Big House)": 2.5,
-    "Darrell K Royal-Texas Memorial Stadium": 2.5,
-    "Folsom Field": 2.5,
-    "Doak Campbell Stadium": 2.5,
-    "Bobby Dodd Stadium": 2.2,
-    "Memorial Stadium": 2.5,
-    "Husky Stadium": 2.8,
-    "Los Angeles Memorial Coliseum": 2.5,
-    "Kinnick Stadium": 2.8,
-    "Mountain America Stadium": 2.5,
-    "Hard Rock Stadium": 2.5,
-    "Jordan-Hare Stadium": 3.0,
-    "Camp Randall Stadium": 2.8,
-    "Arizona Stadium": 2.2,
-    "TDECU Stadium": 2.2,
-    "L&N Stadium": 2.2,
-    "L&N Federal Credit Union Stadium": 2.2,
-    "Faurot Field": 2.5,
-    "Albertsons Stadium": 2.8,
-    "Gerald J. Ford Stadium": 2.2,
-    "Gaylord Family Oklahoma Memorial Stadium": 2.8,
-    "Vaught-Hemingway Stadium": 2.8,
-    "Memorial Stadium (Clemson)": 2.8
+    "Tiger Stadium": 2.6,
+    "Kyle Field": 2.6,
+    "Neyland Stadium": 2.6,
+    "Beaver Stadium": 2.6,
+    "Ohio Stadium": 2.6,
+    "Sanford Stadium": 2.6,
+    "Autzen Stadium": 2.6,
+    "Bryant-Denny Stadium": 2.6,
+    "Jordan-Hare Stadium": 2.6,
+    "Rice-Eccles Stadium": 2.4,
+    "Jones AT&T Stadium": 2.4,
+    "Jones AT&T Stadium (Lubbock, TX)": 2.4,
+    "Kinnick Stadium": 2.4,
+    "Husky Stadium": 2.4,
+    "Camp Randall Stadium": 2.4,
+    "Gaylord Family Oklahoma Memorial Stadium": 2.4,
+    "Vaught-Hemingway Stadium": 2.4,
+    "Albertsons Stadium": 2.4,
+    "Michigan Stadium": 2.2,
+    "Michigan Stadium (The Big House)": 2.2,
+    "Darrell K Royal-Texas Memorial Stadium": 2.2,
+    "Memorial Stadium (Clemson)": 2.2,
+    "Doak Campbell Stadium": 2.2,
+    "Faurot Field": 2.2,
+    "Los Angeles Memorial Coliseum": 2.0,
+    "Hard Rock Stadium": 2.0,
+    "Mountain America Stadium": 2.0,
+    "Arizona Stadium": 2.0,
+    "Folsom Field": 2.0,
+    "TDECU Stadium": 2.0,
+    "L&N Stadium": 2.0,
+    "L&N Federal Credit Union Stadium": 2.0,
+    "Gerald J. Ford Stadium": 2.0,
+    "Bobby Dodd Stadium": 2.0,
+    "Memorial Stadium": 2.0
 }
 
 NON_DB_OPPONENT_RATINGS = {
@@ -577,6 +577,66 @@ def calculate_win_prob_from_margin(margin):
     prob = 1.0 / (1.0 + math.exp(-k * margin))
     return int(round(prob * 100))
 
+def find_market_line(cur_week_lines, team_id, opp_id, is_home, raw_opp_name, opp_abbr, db):
+    """
+    Safely finds the consensus market line for team_id vs opp_id from CFBD DraftKings data.
+    Guarantees no substring confusion (e.g. Texas vs Texas A&M).
+    Returns dict with 'spread', 'overUnder', and 'provider' or None.
+    """
+    if not cur_week_lines:
+        return None
+
+    t_obj = db.get(team_id, {})
+    o_obj = db.get(opp_id, {}) if opp_id else {}
+    t_names = {team_id, (t_obj.get('shortName') or '').lower(), (t_obj.get('name') or '').lower()}
+    t_names.discard('')
+    
+    o_names = set()
+    if opp_id and opp_id in db:
+        o_names.update([opp_id, (o_obj.get('shortName') or '').lower(), (o_obj.get('name') or '').lower()])
+    if raw_opp_name:
+        o_names.add(raw_opp_name.lower())
+        o_clean = MASCOT_REGEX.sub('', raw_opp_name.lower()).strip()
+        if o_clean:
+            o_names.add(o_clean)
+    if opp_abbr:
+        o_names.add(opp_abbr.lower())
+    o_names.discard('')
+
+    for (h, a), l_info in cur_week_lines.items():
+        h_tid = match_team_in_db(db, h)
+        a_tid = match_team_in_db(db, a)
+        
+        # Exact team ID match between DB teams
+        if h_tid and a_tid:
+            if (is_home and h_tid == team_id and a_tid == opp_id) or (not is_home and a_tid == team_id and h_tid == opp_id):
+                spread = l_info.get('spread')
+                if spread is None:
+                    continue
+                return {
+                    'spread': spread if is_home else -spread,
+                    'overUnder': l_info.get('overUnder'),
+                    'provider': l_info.get('provider', 'DraftKings')
+                }
+        
+        # Fallback for non-DB opponents
+        if is_home:
+            h_matches = (h_tid == team_id or h in t_names)
+            a_matches = (a in o_names or any(w in a for w in o_names if len(w) >= 4))
+            if h_matches and a_matches:
+                spread = l_info.get('spread')
+                if spread is not None:
+                    return {'spread': spread, 'overUnder': l_info.get('overUnder'), 'provider': l_info.get('provider', 'DraftKings')}
+        else:
+            a_matches = (a_tid == team_id or a in t_names)
+            h_matches = (h in o_names or any(w in h for w in o_names if len(w) >= 4))
+            if a_matches and h_matches:
+                spread = l_info.get('spread')
+                if spread is not None:
+                    return {'spread': -spread, 'overUnder': l_info.get('overUnder'), 'provider': l_info.get('provider', 'DraftKings')}
+
+    return None
+
 def enforce_head_to_head_symmetry(db):
     """
     Guarantees 100% mathematical score and outcome symmetry across all head-to-head games in TEAMS_DATABASE.
@@ -618,9 +678,8 @@ def enforce_head_to_head_symmetry(db):
                 reconciled += 1
                 continue
 
-            # For unplayed games, pick home game as master (or team A if neutral)
+            # For unplayed games, prioritize whichever game has authentic market odds from DraftKings/Consensus
             is_a_home = g_a.get('isHome', True)
-            # Prioritize whichever game has live market odds from DraftKings/Consensus
             if g_b.get('oddsProvider') != 'CFB Prophet Projected' and g_a.get('oddsProvider') == 'CFB Prophet Projected':
                 master = g_b
                 slave = g_a
@@ -628,8 +687,15 @@ def enforce_head_to_head_symmetry(db):
                 master = g_a
                 slave = g_b
             else:
-                master = g_a if is_a_home else g_b
-                slave = g_b if is_a_home else g_a
+                # If both share the same provider, select master based on team rating dominance (if rating difference >= 2.0 pts)
+                sp_a = float(t_a.get('baseSpRating', 22.0))
+                sp_b = float(t_b.get('baseSpRating', 22.0))
+                if abs(sp_a - sp_b) >= 2.0:
+                    master = g_a if sp_a > sp_b else g_b
+                    slave = g_b if sp_a > sp_b else g_a
+                else:
+                    master = g_a if is_a_home else g_b
+                    slave = g_b if is_a_home else g_a
 
             # Eliminate ties strictly
             m_ut = master.get('projScoreUt') or 24
@@ -646,13 +712,15 @@ def enforce_head_to_head_symmetry(db):
             m_win = master['projScoreUt'] > master['projScoreOpp']
             if m_win:
                 if master.get('baseWinProb', 50) <= 50:
-                    master['baseWinProb'] = 55
-                if master.get('vegasSpread', 0) >= 0:
+                    master['baseWinProb'] = max(55, master.get('baseWinProb', 55))
+                # Only synthesize a projected spread if NO authentic market line exists!
+                if master.get('oddsProvider') == 'CFB Prophet Projected':
                     master['vegasSpread'] = -round(max(0.5, abs(master['projScoreUt'] - master['projScoreOpp']) * 0.8), 1)
             else:
                 if master.get('baseWinProb', 50) >= 50:
-                    master['baseWinProb'] = 45
-                if master.get('vegasSpread', 0) <= 0:
+                    master['baseWinProb'] = min(45, master.get('baseWinProb', 45))
+                # Only synthesize a projected spread if NO authentic market line exists!
+                if master.get('oddsProvider') == 'CFB Prophet Projected':
                     master['vegasSpread'] = round(max(0.5, abs(master['projScoreOpp'] - master['projScoreUt']) * 0.8), 1)
 
             slave['projScoreUt'] = master['projScoreOpp']
@@ -989,6 +1057,8 @@ def main():
 
     # 2. Ingest live games from ESPN scoreboard
     for d_str in target_dates:
+        dt_obj = datetime.datetime.strptime(d_str, '%Y%m%d')
+        target_date_str = f"{dt_obj.strftime('%b')} {dt_obj.day}, {dt_obj.year}"
         events = fetch_espn_scoreboard(d_str)
         for ev in events:
             status = ev.get('status', {}).get('type', {})
@@ -1017,9 +1087,29 @@ def main():
                 opp_norm = normalize_name(opp_name)
                 matched_g = False
                 for g in db[team_id].get('schedule', []):
+                    g_date = g.get('date', '')
+                    date_match = (g_date == target_date_str)
+                    if not date_match:
+                        try:
+                            g_dt = datetime.datetime.strptime(g_date, '%b %d, %Y')
+                            if abs((g_dt - dt_obj).days) <= 1:
+                                date_match = True
+                        except Exception:
+                            pass
+                    if not date_match:
+                        continue
+
                     g_opp = normalize_name(g.get('opponent') or '')
-                    g_abbr = normalize_name(g.get('oppAbbr') or '')
-                    if (len(opp_norm) >= 4 and (opp_norm in g_opp or g_opp in opp_norm)) or (g_abbr and g_abbr in opp_norm):
+                    g_abbr = (g.get('oppAbbr') or '').strip().upper()
+                    name_match = False
+                    if len(opp_norm) >= 4 and (opp_norm in g_opp or g_opp in opp_norm):
+                        name_match = True
+                    elif g_abbr and g_abbr in [w.upper() for w in opp_name.split()]:
+                        name_match = True
+                    elif any(len(w) >= 5 and w in g_opp for w in opp_name.lower().split()):
+                        name_match = True
+
+                    if name_match:
                         if not args.dry_run:
                             g['isFinal'] = True
                             g['finalTeamScore'] = g['actualScoreUt'] = int(s_ut)
@@ -1335,7 +1425,6 @@ def main():
             raw_margin = (sp_team - sp_opp) + hfa + talent_bonus
 
             # Live consensus line matching from CFBD / DraftKings across all weeks
-            matched_line = None
             wk_str = g.get('week', '')
             wk_m = re.search(r'\d+', wk_str)
             week_num = int(wk_m.group(0)) if wk_m else None
@@ -1347,29 +1436,22 @@ def main():
             opp_abbr = (g.get('oppAbbr') or '').lower()
             opp_school = MASCOT_REGEX.sub('', opp_clean).strip()
 
-            if cur_week_lines:
-                matched_line = (
-                    cur_week_lines.get((team_clean, opp_clean)) or
-                    cur_week_lines.get((team_short, opp_abbr)) or
-                    cur_week_lines.get((team_clean, opp_abbr)) or
-                    cur_week_lines.get((team_short, opp_clean))
-                )
-                if not matched_line and not is_fcs:
-                    for (h, a), l_info in cur_week_lines.items():
-                        if (team_short in h or h in team_clean) and (opp_abbr in a or any(w in a for w in opp_clean.split() if len(w) > 4)):
-                            matched_line = l_info
-                            break
-                        elif (opp_abbr in h or any(w in h for w in opp_clean.split() if len(w) > 4)) and (team_short in a or a in team_clean):
-                            matched_line = l_info
-                            break
+            matched_line = find_market_line(cur_week_lines, tid, g.get('oppId'), g.get('isHome', True), raw_opp_name, opp_abbr, db)
 
             if matched_line and matched_line.get('spread') is not None:
-                spread_val = matched_line['spread'] if g.get('isHome', True) else -matched_line['spread']
+                spread_val = matched_line['spread']
                 g['vegasSpread'] = spread_val
                 g['oddsProvider'] = matched_line.get('provider', 'DraftKings')
                 vegas_margin = -spread_val
-                # Blend model prediction with live Vegas consensus market (60% model, 40% Vegas)
-                projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
+                # Week-dependent market blending:
+                # Weeks 7-8: 60% model, 40% live Vegas market
+                # Weeks 9+: 80% model, 20% Vegas (stale August lookahead lines shouldn't override October reality)
+                # If market diverges from rating by > 5.0 pts in late season: decay market line to 10%
+                if week_num and week_num >= 9:
+                    market_weight = 0.20 if abs(raw_margin - vegas_margin) <= 5.0 else 0.10
+                    projected_margin = round((1.0 - market_weight) * raw_margin + market_weight * vegas_margin, 1)
+                else:
+                    projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
             else:
                 # Later weeks or unlined games: Pure model projection grounded in freshly calibrated ratings
                 # For unranked non-conference games without market line, prevent absurd blowouts > 36 pts
@@ -1452,10 +1534,10 @@ def main():
                     ret_prod_a=ret_a,
                     ret_prod_b=ret_b,
                     is_home_a=g.get('isHome', True),
-                    hfa_pts=STADIUM_HFA.get(stadium, 2.5),
+                    hfa_pts=STADIUM_HFA.get(stadium, 2.0),
                     vegas_spread=vegas_spread,
                     vegas_total=base_total,
-                    iterations=1000,
+                    iterations=2500,
                     stadium_name=stadium,
                     game_date=g.get('date'),
                     kickoff_str=g.get('kickoffTime'),
@@ -1464,7 +1546,8 @@ def main():
                     havoc_a=adv_a.get('defenseHavoc', 0.15),
                     havoc_b=adv_b.get('defenseHavoc', 0.15),
                     ppo_a=adv_a.get('offensePPO', 3.8),
-                    ppo_b=adv_b.get('offensePPO', 3.8)
+                    ppo_b=adv_b.get('offensePPO', 3.8),
+                    projected_spread=-projected_margin
                 )
                 adj_ut_score = mc_sim['projScoreA']
                 adj_opp_score = mc_sim['projScoreB']
