@@ -106,36 +106,29 @@ def simulate_matchup_10k(
     lambda_a = exp_pts_a / avg_drives
     lambda_b = exp_pts_b / avg_drives
 
-    # College football scoring breakdown: ~73% of scoring points from TDs (~6.95 pts), ~27% from FGs (3.0 pts)
-    base_p_td_a = (lambda_a * 0.73) / 6.95
-    base_p_fg_a = (lambda_a * 0.27) / 3.00
+    # 5. Point-conserving conversion efficiency:
+    # High red-zone PPO converts drives into Touchdowns (fewer FGs); low PPO forces teams to settle for FGs (fewer TDs)
+    # Total expected points (lambda) remains strictly conserved!
+    td_share_a = max(0.55, min(0.88, 0.73 + (ppo_a - 3.8) * 0.05))
+    fg_share_a = 1.0 - td_share_a
+    p_td_a = (lambda_a * td_share_a) / 6.95
+    p_fg_a = (lambda_a * fg_share_a) / 3.00
 
-    base_p_td_b = (lambda_b * 0.73) / 6.95
-    base_p_fg_b = (lambda_b * 0.27) / 3.00
+    td_share_b = max(0.55, min(0.88, 0.73 + (ppo_b - 3.8) * 0.05))
+    fg_share_b = 1.0 - td_share_b
+    p_td_b = (lambda_b * td_share_b) / 6.95
+    p_fg_b = (lambda_b * fg_share_b) / 3.00
 
-    # 5. Modulate per-drive scoring probabilities with in-game trench & red-zone metrics
-    # Line yards differential gives short-yardage push (+/- 0.02)
-    trench_mod_a = max(-0.02, min(0.02, (line_yards_a - line_yards_b) * 0.01))
-    trench_mod_b = -trench_mod_a
-    # Opponent havoc disrupts drive flow
-    havoc_mod_a = max(-0.03, min(0.01, (0.15 - havoc_b) * 0.20))
-    havoc_mod_b = max(-0.03, min(0.01, (0.15 - havoc_a) * 0.20))
-    # Red-zone PPO: High PPO converts FGs into TDs; low PPO forces TDs into FGs
-    ppo_mod_a = max(-0.03, min(0.03, (ppo_a - 3.8) * 0.02))
-    ppo_mod_b = max(-0.03, min(0.03, (ppo_b - 3.8) * 0.02))
+    # Trench Line yards and defensive Havoc modulate drive variance
+    trench_mod = max(-0.012, min(0.012, (line_yards_a - line_yards_b) * 0.006))
+    havoc_mod_a = max(-0.015, min(0.005, (0.15 - havoc_b) * 0.10))
+    havoc_mod_b = max(-0.015, min(0.005, (0.15 - havoc_a) * 0.10))
 
-    # PPA offensive edge modulation
-    ppa_mod_a = max(-0.02, min(0.02, (ppa_off_a - 0.15) * 0.15))
-    ppa_mod_b = max(-0.02, min(0.02, (ppa_off_b - 0.15) * 0.15))
+    p_td_a = max(0.05, min(0.65, p_td_a + trench_mod + havoc_mod_a))
+    p_td_b = max(0.04, min(0.60, p_td_b - trench_mod + havoc_mod_b))
 
-    p_td_a = max(0.05, min(0.65, base_p_td_a + trench_mod_a + havoc_mod_a + ppo_mod_a + ppa_mod_a))
-    p_fg_a = max(0.04, min(0.30, base_p_fg_a - (ppo_mod_a * 0.5)))
-    
-    p_td_b = max(0.04, min(0.60, base_p_td_b + trench_mod_b + havoc_mod_b + ppo_mod_b + ppa_mod_b))
-    p_fg_b = max(0.04, min(0.30, base_p_fg_b - (ppo_mod_b * 0.5)))
-
-    # Apply weather efficiency multipliers if present
-    if weather_impact:
+    # Apply weather efficiency multipliers only when weather drag is significant (>2.0 pts or severe conditions)
+    if weather_impact and weather_impact.get('totalPointsDrag', 0) >= 2.0:
         p_td_a = max(0.04, p_td_a * weather_impact['passEffMultiplier'])
         p_td_b = max(0.04, p_td_b * weather_impact['passEffMultiplier'])
         p_fg_a = max(0.03, p_fg_a * weather_impact['fgSuccessMultiplier'])
@@ -173,20 +166,17 @@ def simulate_matchup_10k(
         score_b = 0
 
         for d in range(drives):
-            # 4th Quarter Blowout Logic (last 3 drives if margin >= 24)
-            in_garbage_time = (d >= drives - 3) and abs(score_a - score_b) >= 24
+            # 4th Quarter Blowout Logic (late drives if margin >= 28: leading team runs clock)
+            in_blowout = (d >= drives - 2) and abs(score_a - score_b) >= 28
             
             cur_p_td_a = p_td_a
             cur_p_td_b = p_td_b
 
-            if in_garbage_time:
+            if in_blowout:
                 if score_a > score_b:
-                    # Team A leading big: if talent advantage is high, 2nd string still scores
-                    cur_p_td_a = p_td_a * (0.80 if talent_delta > 350 else 0.55)
-                    cur_p_td_b = p_td_b * 0.40 # Team B offense demoralized
+                    cur_p_td_a = p_td_a * 0.85 # Leading team runs clock on the ground
                 else:
-                    cur_p_td_b = p_td_b * (0.80 if talent_delta < -350 else 0.55)
-                    cur_p_td_a = p_td_a * 0.40
+                    cur_p_td_b = p_td_b * 0.85
 
             # Team A drive
             r_a = random.random()
