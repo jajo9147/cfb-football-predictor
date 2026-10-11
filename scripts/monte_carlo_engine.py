@@ -80,21 +80,16 @@ def simulate_matchup_10k(
     pace_b = estimate_team_pace(team_b_name)
     avg_drives = (pace_a + pace_b) / 2.0
 
-    # 2. Talent delta and blowout bonus
-    talent_delta = talent_a - talent_b
-    talent_bonus = 0.0
-    if cfbd_client:
-        if talent_delta > 0:
-            talent_bonus = cfbd_client.calculate_talent_blowout_bonus(talent_a, talent_b)
-        else:
-            talent_bonus = -cfbd_client.calculate_talent_blowout_bonus(talent_b, talent_a)
+    # 2. Benchmark spread and margin for Team A
+    # Clean SP+ rating differential (points per game scale)
+    raw_sp_diff = (sp_a - sp_b) + hfa
+    spread_a = vegas_spread if vegas_spread is not None else -round(raw_sp_diff * 2) / 2.0
+    line_target = -spread_a # Margin needed by Team A to cover
 
-    # 2.5 Returning Production & Roster Continuity Differential
-    ret_delta = (float(ret_prod_a or 0.60) - float(ret_prod_b or 0.60)) * 3.0
-
-    # 3. SP+ rating differential (points per game scale)
-    sp_diff = (sp_a - sp_b) + hfa + (talent_bonus * 0.5) + ret_delta
-
+    # 3. Target expected points anchored to matchup total and spread
+    target_tot = float(vegas_total if vegas_total is not None else 52.5)
+    exp_pts_a = max(3.0, (target_tot - spread_a) / 2.0)
+    exp_pts_b = max(3.0, (target_tot + spread_a) / 2.0)
 
     # 3.5 Stadium Weather & Environmental Drag
     if weather_info is None and stadium_name and weather_client:
@@ -103,26 +98,41 @@ def simulate_matchup_10k(
     weather_impact = None
     if weather_info and weather_client:
         weather_impact = weather_client.calculate_weather_impact(weather_info)
-        # Apply weather drag to pace/drives and passing efficiency (do NOT mutate posted vegas_total line!)
+        # Apply weather drag to pace/drives
         if weather_impact and weather_impact.get('totalPointsDrag'):
             avg_drives = max(9.0, avg_drives - (weather_impact['totalPointsDrag'] * 0.15))
 
-    # 4. Modulate per-drive scoring probabilities with in-game trench & red-zone metrics
+    # 4. Derive baseline points per drive from expected points and pace
+    lambda_a = exp_pts_a / avg_drives
+    lambda_b = exp_pts_b / avg_drives
+
+    # College football scoring breakdown: ~73% of scoring points from TDs (~6.95 pts), ~27% from FGs (3.0 pts)
+    base_p_td_a = (lambda_a * 0.73) / 6.95
+    base_p_fg_a = (lambda_a * 0.27) / 3.00
+
+    base_p_td_b = (lambda_b * 0.73) / 6.95
+    base_p_fg_b = (lambda_b * 0.27) / 3.00
+
+    # 5. Modulate per-drive scoring probabilities with in-game trench & red-zone metrics
     # Line yards differential gives short-yardage push (+/- 0.02)
     trench_mod_a = max(-0.02, min(0.02, (line_yards_a - line_yards_b) * 0.01))
     trench_mod_b = -trench_mod_a
     # Opponent havoc disrupts drive flow
     havoc_mod_a = max(-0.03, min(0.01, (0.15 - havoc_b) * 0.20))
     havoc_mod_b = max(-0.03, min(0.01, (0.15 - havoc_a) * 0.20))
-    # Red-zone PPO determines touchdown conversion rate vs settling for field goals
-    ppo_mod_a = max(-0.02, min(0.03, (ppo_a - 3.8) * 0.015))
-    ppo_mod_b = max(-0.02, min(0.03, (ppo_b - 3.8) * 0.015))
+    # Red-zone PPO: High PPO converts FGs into TDs; low PPO forces TDs into FGs
+    ppo_mod_a = max(-0.03, min(0.03, (ppo_a - 3.8) * 0.02))
+    ppo_mod_b = max(-0.03, min(0.03, (ppo_b - 3.8) * 0.02))
 
-    p_td_a = max(0.08, min(0.65, BASE_TD_RATE + (sp_diff * 0.0075) + ((ppa_off_a - 0.15) * 0.25) + trench_mod_a + havoc_mod_a + ppo_mod_a))
-    p_fg_a = max(0.05, min(0.22, BASE_FG_RATE + (sp_diff * 0.0015) - (ppo_mod_a * 0.5)))
+    # PPA offensive edge modulation
+    ppa_mod_a = max(-0.02, min(0.02, (ppa_off_a - 0.15) * 0.15))
+    ppa_mod_b = max(-0.02, min(0.02, (ppa_off_b - 0.15) * 0.15))
+
+    p_td_a = max(0.05, min(0.65, base_p_td_a + trench_mod_a + havoc_mod_a + ppo_mod_a + ppa_mod_a))
+    p_fg_a = max(0.04, min(0.30, base_p_fg_a - (ppo_mod_a * 0.5)))
     
-    p_td_b = max(0.04, min(0.55, BASE_TD_RATE - (sp_diff * 0.0075) + ((ppa_off_b - 0.15) * 0.25) + trench_mod_b + havoc_mod_b + ppo_mod_b))
-    p_fg_b = max(0.04, min(0.20, BASE_FG_RATE - (sp_diff * 0.0015) - (ppo_mod_b * 0.5)))
+    p_td_b = max(0.04, min(0.60, base_p_td_b + trench_mod_b + havoc_mod_b + ppo_mod_b + ppa_mod_b))
+    p_fg_b = max(0.04, min(0.30, base_p_fg_b - (ppo_mod_b * 0.5)))
 
     # Apply weather efficiency multipliers if present
     if weather_impact:
@@ -131,7 +141,7 @@ def simulate_matchup_10k(
         p_fg_a = max(0.03, p_fg_a * weather_impact['fgSuccessMultiplier'])
         p_fg_b = max(0.03, p_fg_b * weather_impact['fgSuccessMultiplier'])
 
-    # Ensure total probability doesn't exceed 0.85 (leave room for punts/turnovers)
+    # Ensure total scoring probability doesn't exceed 0.85
     if p_td_a + p_fg_a > 0.82:
         scale_a = 0.82 / (p_td_a + p_fg_a)
         p_td_a *= scale_a
@@ -152,9 +162,7 @@ def simulate_matchup_10k(
     overs = 0
     under_totals = 0
 
-    # Benchmark spread for Team A (e.g. -24.5 means Team A needs to win by 25+)
-    spread_a = vegas_spread if vegas_spread is not None else -round(sp_diff * 2) / 2.0
-    line_target = -spread_a # Margin needed by Team A to cover
+    talent_delta = talent_a - talent_b
 
     for _ in range(iterations):
         # Vary drives slightly per game (normal distribution std dev 1.0)

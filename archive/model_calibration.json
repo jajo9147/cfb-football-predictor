@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-09-14T13:23:11.619093+00:00",
+  "updatedAt": "2026-10-11T17:30:43.278959+00:00",
   "season": 2026,
   "overallStats": {
-    "totalGames": 6,
-    "straightUpWins": 5,
-    "straightUpLosses": 1,
-    "straightUpPct": 83.3,
-    "atsWins": 5,
+    "totalGames": 25,
+    "straightUpWins": 13,
+    "straightUpLosses": 12,
+    "straightUpPct": 52.0,
+    "atsWins": 24,
     "atsLosses": 1,
-    "atsPct": 83.3,
-    "brierScore": 0.124,
-    "brierGrade": "Good (< 0.150)",
-    "logLoss": 0.367
+    "atsPct": 96.0,
+    "brierScore": 0.297,
+    "brierGrade": "Calibrating",
+    "logLoss": 0.79
   },
   "calibrationBins": [
     {
@@ -29,8 +29,8 @@
     {
       "binRange": "70% - 80%",
       "predictedProbAvg": 75.0,
-      "actualWinFreq": 75.0,
-      "sampleSize": 0
+      "actualWinFreq": 42.1,
+      "sampleSize": 19
     },
     {
       "binRange": "80% - 90%",
@@ -161,6 +161,253 @@
       "scoreFav": 27,
       "scoreDog": 20,
       "brier": "0.230"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "BYU Cougars vs Iowa State Cyclones",
+      "pred": "BYU Cougars (75%)",
+      "prob": 0.75,
+      "actual": "BYU Cougars 24 - Iowa State Cyclones 10",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": true,
+      "scoreFav": 24,
+      "scoreDog": 10,
+      "brier": "0.062"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Washington Huskies vs Iowa Hawkeyes",
+      "pred": "Iowa Hawkeyes (75%)",
+      "prob": 0.75,
+      "actual": "Washington Huskies 24 - Iowa Hawkeyes 41",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": false,
+      "scoreFav": 41,
+      "scoreDog": 24,
+      "brier": "0.562"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Oklahoma Sooners vs Texas Longhorns",
+      "pred": "Oklahoma Sooners (75%)",
+      "prob": 0.75,
+      "actual": "Oklahoma Sooners 27 - Texas Longhorns 24",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": true,
+      "scoreFav": 27,
+      "scoreDog": 24,
+      "brier": "0.062"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Alabama Crimson Tide vs Georgia Bulldogs",
+      "pred": "Georgia Bulldogs (75%)",
+      "prob": 0.75,
+      "actual": "Alabama Crimson Tide 17 - Georgia Bulldogs 20",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": false,
+      "scoreFav": 20,
+      "scoreDog": 17,
+      "brier": "0.562"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Notre Dame Fighting Irish vs Stanford Cardinal",
+      "pred": "Notre Dame Fighting Irish (75%)",
+      "prob": 0.75,
+      "actual": "Notre Dame Fighting Irish 58 - Stanford Cardinal 7",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": true,
+      "scoreFav": 58,
+      "scoreDog": 7,
+      "brier": "0.062"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Ohio State Buckeyes vs Maryland Terrapins",
+      "pred": "Ohio State Buckeyes (75%)",
+      "prob": 0.75,
+      "actual": "Ohio State Buckeyes 45 - Maryland Terrapins 16",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": true,
+      "scoreFav": 45,
+      "scoreDog": 16,
+      "brier": "0.062"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Nebraska Cornhuskers vs Indiana Hoosiers",
+      "pred": "Indiana Hoosiers (75%)",
+      "prob": 0.75,
+      "actual": "Nebraska Cornhuskers 17 - Indiana Hoosiers 20",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": false,
+      "scoreFav": 20,
+      "scoreDog": 17,
+      "brier": "0.562"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Vanderbilt Commodores vs Ole Miss Rebels",
+      "pred": "Ole Miss Rebels (75%)",
+      "prob": 0.75,
+      "actual": "Vanderbilt Commodores 17 - Ole Miss Rebels 52",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": false,
+      "scoreFav": 52,
+      "scoreDog": 17,
+      "brier": "0.562"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Kentucky Wildcats vs LSU Tigers",
+      "pred": "Kentucky Wildcats (75%)",
+      "prob": 0.75,
+      "actual": "Kentucky Wildcats 35 - LSU Tigers 34",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": true,
+      "scoreFav": 35,
+      "scoreDog": 34,
+      "brier": "0.062"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Utah Utes vs Kansas Jayhawks",
+      "pred": "Utah Utes (75%)",
+      "prob": 0.75,
+      "actual": "Utah Utes 41 - Kansas Jayhawks 24",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": true,
+      "scoreFav": 41,
+      "scoreDog": 24,
+      "brier": "0.062"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Oregon Ducks vs UCLA Bruins",
+      "pred": "UCLA Bruins (75%)",
+      "prob": 0.75,
+      "actual": "Oregon Ducks 15 - UCLA Bruins 17",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": false,
+      "scoreFav": 17,
+      "scoreDog": 15,
+      "brier": "0.562"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Missouri Tigers vs Texas A&M Aggies",
+      "pred": "Missouri Tigers (75%)",
+      "prob": 0.75,
+      "actual": "Missouri Tigers 27 - Texas A&M Aggies 6",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": true,
+      "scoreFav": 27,
+      "scoreDog": 6,
+      "brier": "0.062"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Arkansas Razorbacks vs Tennessee Volunteers",
+      "pred": "Tennessee Volunteers (75%)",
+      "prob": 0.75,
+      "actual": "Arkansas Razorbacks 17 - Tennessee Volunteers 24",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": false,
+      "scoreFav": 24,
+      "scoreDog": 17,
+      "brier": "0.562"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Florida Gators vs South Carolina Gamecocks",
+      "pred": "South Carolina Gamecocks (75%)",
+      "prob": 0.75,
+      "actual": "Florida Gators 19 - South Carolina Gamecocks 38",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": false,
+      "scoreFav": 38,
+      "scoreDog": 19,
+      "brier": "0.562"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Oklahoma State Cowboys vs UCF Knights",
+      "pred": "Oklahoma State Cowboys (75%)",
+      "prob": 0.75,
+      "actual": "Oklahoma State Cowboys 42 - UCF Knights 28",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": true,
+      "scoreFav": 42,
+      "scoreDog": 28,
+      "brier": "0.062"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Penn State Nittany Lions vs USC Trojans",
+      "pred": "USC Trojans (75%)",
+      "prob": 0.75,
+      "actual": "Penn State Nittany Lions 23 - USC Trojans 31",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": false,
+      "scoreFav": 31,
+      "scoreDog": 23,
+      "brier": "0.562"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Kansas State Wildcats vs Houston Cougars",
+      "pred": "Houston Cougars (75%)",
+      "prob": 0.75,
+      "actual": "Kansas State Wildcats 16 - Houston Cougars 35",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": false,
+      "scoreFav": 35,
+      "scoreDog": 16,
+      "brier": "0.562"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Fresno State Bulldogs vs Boise State Broncos",
+      "pred": "Boise State Broncos (75%)",
+      "prob": 0.75,
+      "actual": "Fresno State Bulldogs 31 - Boise State Broncos 38",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": false,
+      "scoreFav": 38,
+      "scoreDog": 31,
+      "brier": "0.562"
+    },
+    {
+      "week": "LIVE SETTLED",
+      "matchup": "Pittsburgh Panthers vs North Carolina Tar Heels",
+      "pred": "North Carolina Tar Heels (75%)",
+      "prob": 0.75,
+      "actual": "Pittsburgh Panthers 17 - North Carolina Tar Heels 21",
+      "spread": -3.5,
+      "ats": "Settled",
+      "isWin": false,
+      "scoreFav": 21,
+      "scoreDog": 17,
+      "brier": "0.562"
     }
   ],
   "retrainingHistory": [
@@ -5581,6 +5828,172 @@
       },
       "unplayedGamesRecalculated": 225,
       "blowoutGamesCalibrated": 27
+    },
+    {
+      "timestamp": "2026-10-11T17:29:43.865813+00:00",
+      "gamesEvaluated": 320,
+      "modelMae": 13.91,
+      "vegasMae": 11.95,
+      "modelBeatVegasPct": 35.6,
+      "ratingShifts": {
+        "byu": {
+          "old": 23.5,
+          "new": 23.39,
+          "delta": -0.11
+        },
+        "texas": {
+          "old": 37.5,
+          "new": 35.82,
+          "delta": -1.68
+        },
+        "michigan": {
+          "old": 27.5,
+          "new": 26.85,
+          "delta": -0.65
+        },
+        "ohiostate": {
+          "old": 35.8,
+          "new": 35.34,
+          "delta": -0.46
+        },
+        "georgia": {
+          "old": 36.5,
+          "new": 36.85,
+          "delta": 0.35
+        },
+        "alabama": {
+          "old": 31.2,
+          "new": 31.63,
+          "delta": 0.43
+        },
+        "oregon": {
+          "old": 30.5,
+          "new": 29.97,
+          "delta": -0.53
+        },
+        "pennstate": {
+          "old": 27.8,
+          "new": 26.26,
+          "delta": -1.54
+        },
+        "notredame": {
+          "old": 35.0,
+          "new": 34.27,
+          "delta": -0.73
+        },
+        "lsu": {
+          "old": 33.0,
+          "new": 32.17,
+          "delta": -0.83
+        },
+        "tennessee": {
+          "old": 26.8,
+          "new": 26.39,
+          "delta": -0.41
+        },
+        "indiana": {
+          "old": 30.8,
+          "new": 31.3,
+          "delta": 0.5
+        },
+        "miami": {
+          "old": 33.5,
+          "new": 33.86,
+          "delta": 0.36
+        },
+        "texasam": {
+          "old": 31.8,
+          "new": 29.0,
+          "delta": -2.8
+        },
+        "olemiss": {
+          "old": 27.2,
+          "new": 27.83,
+          "delta": 0.63
+        },
+        "oklahoma": {
+          "old": 25.5,
+          "new": 23.97,
+          "delta": -1.53
+        },
+        "boisestate": {
+          "old": 14.0,
+          "new": 15.07,
+          "delta": 1.07
+        },
+        "usc": {
+          "old": 26.5,
+          "new": 25.4,
+          "delta": -1.1
+        },
+        "floridastate": {
+          "old": 16.8,
+          "new": 17.27,
+          "delta": 0.47
+        },
+        "clemson": {
+          "old": 18.8,
+          "new": 16.07,
+          "delta": -2.73
+        },
+        "smu": {
+          "old": 20.8,
+          "new": 18.98,
+          "delta": -1.82
+        },
+        "texastech": {
+          "old": 25.0,
+          "new": 24.46,
+          "delta": -0.54
+        },
+        "utah": {
+          "old": 18.0,
+          "new": 18.94,
+          "delta": 0.94
+        },
+        "iowa": {
+          "old": 22.0,
+          "new": 21.84,
+          "delta": -0.16
+        },
+        "missouri": {
+          "old": 24.5,
+          "new": 24.4,
+          "delta": -0.1
+        },
+        "arizona": {
+          "old": 15.5,
+          "new": 16.04,
+          "delta": 0.54
+        },
+        "washington": {
+          "old": 22.8,
+          "new": 21.93,
+          "delta": -0.87
+        },
+        "houston": {
+          "old": 15.0,
+          "new": 15.9,
+          "delta": 0.9
+        },
+        "louisville": {
+          "old": 19.8,
+          "new": 18.06,
+          "delta": -1.74
+        },
+        "colorado": {
+          "old": 9.2,
+          "new": 8.06,
+          "delta": -1.14
+        },
+        "arizonastate": {
+          "old": 11.2,
+          "new": 10.36,
+          "delta": -0.84
+        }
+      },
+      "unplayedGamesRecalculated": 200,
+      "blowoutGamesCalibrated": 14
     }
   ]
 }

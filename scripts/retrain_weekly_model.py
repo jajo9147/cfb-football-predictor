@@ -153,9 +153,46 @@ WEEK6_OFFICIAL_POLL = {
     'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
-WEEK5_OFFICIAL_POLL = WEEK6_OFFICIAL_POLL
-WEEK4_OFFICIAL_POLL = WEEK6_OFFICIAL_POLL
-WEEK3_OFFICIAL_POLL = WEEK6_OFFICIAL_POLL
+
+# Authoritative Week 7 Official Poll (October 11, 2026 Live Release)
+WEEK7_OFFICIAL_POLL = {
+    'georgia': {'apRank': '#1 AP', 'apPoints': '1,832 PTS (60 1st)', 'rankNum': 1},
+    'notredame': {'apRank': '#2 AP', 'apPoints': '1,713 PTS (3 1st)', 'rankNum': 2},
+    'miami': {'apRank': '#3 AP', 'apPoints': '1,688 PTS (1 1st)', 'rankNum': 3},
+    'indiana': {'apRank': '#4 AP', 'apPoints': '1,633 PTS (9 1st)', 'rankNum': 4},
+    'ohiostate': {'apRank': '#5 AP', 'apPoints': '1,565 PTS (1 1st)', 'rankNum': 5},
+    'texas': {'apRank': '#6 AP', 'apPoints': '1,369 PTS', 'rankNum': 6},
+    'alabama': {'apRank': '#7 AP', 'apPoints': '1,358 PTS', 'rankNum': 7},
+    'byu': {'apRank': '#8 AP', 'apPoints': '1,355 PTS', 'rankNum': 8},
+    'texastech': {'apRank': '#9 AP', 'apPoints': '1,240 PTS', 'rankNum': 9},
+    'olemiss': {'apRank': '#10 AP', 'apPoints': '1,180 PTS', 'rankNum': 10},
+    'utah': {'apRank': '#11 AP', 'apPoints': '1,109 PTS', 'rankNum': 11},
+    'missouri': {'apRank': '#13 AP', 'apPoints': '863 PTS', 'rankNum': 13},
+    'tennessee': {'apRank': '#14 AP', 'apPoints': '837 PTS', 'rankNum': 14},
+    'usc': {'apRank': '#15 AP', 'apPoints': '758 PTS', 'rankNum': 15},
+    'iowa': {'apRank': '#16 AP', 'apPoints': '729 PTS', 'rankNum': 16},
+    'houston': {'apRank': '#18 AP', 'apPoints': '520 PTS', 'rankNum': 18},
+    'lsu': {'apRank': '#21 AP', 'apPoints': '361 PTS', 'rankNum': 21},
+    'smu': {'apRank': '#22 AP', 'apPoints': '330 PTS', 'rankNum': 22},
+    'boisestate': {'apRank': '#24 AP', 'apPoints': '205 PTS', 'rankNum': 24},
+    'oregon': {'apRank': '#25 AP', 'apPoints': '200 PTS', 'rankNum': 25},
+    'arizona': {'apRank': 'RV', 'apPoints': '95 PTS', 'rankNum': 99},
+    'oklahoma': {'apRank': 'RV', 'apPoints': '88 PTS', 'rankNum': 99},
+    'louisville': {'apRank': 'RV', 'apPoints': '45 PTS', 'rankNum': 99},
+    'michigan': {'apRank': 'RV', 'apPoints': '38 PTS', 'rankNum': 99},
+    'pennstate': {'apRank': 'RV', 'apPoints': '28 PTS', 'rankNum': 99},
+    'texasam': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'washington': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
+}
+CURRENT_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
+WEEK6_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
+WEEK5_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
+WEEK4_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
+WEEK3_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
 
 
 # Baseline SP+ Ratings before Week 1 (Calibrated to AP Top 25 Consensus, Head-to-Head, and 247Sports Roster Talent)
@@ -791,8 +828,8 @@ def main():
                     'rankNum': 99
                 }
     else:
-        print("  • Applying verified official Week 6 Top 25 poll (Texas #1, Georgia #2, Notre Dame #3, Miami #4, Ohio State #5, Alabama #6, Indiana #7, BYU #8)...")
-        ranking_updates = WEEK6_OFFICIAL_POLL
+        print("  • Applying verified official Week 7 Top 25 poll (Georgia #1, Notre Dame #2, Miami #3, Indiana #4, Ohio State #5, Texas #6, Alabama #7, BYU #8)...")
+        ranking_updates = CURRENT_OFFICIAL_POLL
 
     # Apply rankings to teams in DB
     ap_changes_count = 0
@@ -870,7 +907,8 @@ def main():
             '20260910', '20260911', '20260912', '20260913',
             '20260917', '20260918', '20260919', '20260920',
             '20260924', '20260925', '20260926', '20260927',
-            '20261001', '20261002', '20261003', '20261004'
+            '20261001', '20261002', '20261003', '20261004',
+            '20261008', '20261009', '20261010', '20261011'
         ]
 
     all_completed_games = []

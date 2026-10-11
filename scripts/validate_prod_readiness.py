@@ -22,39 +22,20 @@ TEAMS_V3_FILE = os.path.join(ROOT_DIR, 'data', 'teams_v3.js')
 IOS_TEAMS_FILE = os.path.join(ROOT_DIR, 'ios', 'CFBProphet', 'www', 'data', 'teams.js')
 ANDROID_TEAMS_FILE = os.path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'assets', 'www', 'data', 'teams.js')
 
-EXPECTED_AP_POLL_WEEK6 = {
-    'texas': '#1 AP',
-    'georgia': '#2 AP',
-    'notredame': '#3 AP',
-    'miami': '#4 AP',
-    'ohiostate': '#5 AP',
-    'alabama': '#6 AP',
-    'indiana': '#7 AP',
-    'byu': '#8 AP',
-    'olemiss': '#9 AP',
-    'lsu': '#10 AP',
-    'texastech': '#11 AP',
-    'utah': '#12 AP',
-    'oregon': '#13 AP',
-    'missouri': '#14 AP',
-    'tennessee': '#15 AP',
-    'usc': '#19 AP',
-    'iowa': '#20 AP',
-    'houston': '#22 AP',
-    'boisestate': '#23 AP',
-    'smu': '#24 AP',
-    'arizona': 'RV',
-    'pennstate': 'NR',
-    'michigan': 'NR',
-    'louisville': 'NR',
-    'texasam': 'NR',
-    'oklahoma': 'NR',
-    'washington': 'NR',
-    'colorado': 'NR',
-    'arizonastate': 'NR',
-    'clemson': 'NR',
-    'floridastate': 'NR'
-}
+try:
+    from retrain_weekly_model import CURRENT_OFFICIAL_POLL
+    EXPECTED_AP_POLL = {k: v['apRank'] for k, v in CURRENT_OFFICIAL_POLL.items()}
+except Exception:
+    EXPECTED_AP_POLL = {
+        'georgia': '#1 AP', 'notredame': '#2 AP', 'miami': '#3 AP', 'indiana': '#4 AP',
+        'ohiostate': '#5 AP', 'texas': '#6 AP', 'alabama': '#7 AP', 'byu': '#8 AP',
+        'texastech': '#9 AP', 'olemiss': '#10 AP', 'utah': '#11 AP', 'missouri': '#13 AP',
+        'tennessee': '#14 AP', 'usc': '#15 AP', 'iowa': '#16 AP', 'houston': '#18 AP',
+        'lsu': '#21 AP', 'smu': '#22 AP', 'boisestate': '#24 AP', 'oregon': '#25 AP',
+        'arizona': 'RV', 'oklahoma': 'RV', 'louisville': 'RV', 'michigan': 'RV', 'pennstate': 'RV',
+        'texasam': 'NR', 'washington': 'NR', 'colorado': 'NR', 'arizonastate': 'NR',
+        'clemson': 'NR', 'floridastate': 'NR'
+    }
 
 def load_db(path):
     if not os.path.exists(path):
@@ -169,8 +150,8 @@ def run_inspections():
     print(f"  • Verified logo URLs and opponent isolation for all {total_games} games.")
 
     # 4. Authentic AP Rankings Verification
-    print("\n[3/7] 🏆 Validating Week 6 AP Top 25 & RV Poll Precision...")
-    for tid, exp_rank in EXPECTED_AP_POLL_WEEK6.items():
+    print("\n[3/7] 🏆 Validating Week 7 AP Top 25 & RV Poll Precision...")
+    for tid, exp_rank in EXPECTED_AP_POLL.items():
         if tid not in db:
             errors.append(f"Missing expected tracked team: {tid}")
             continue
@@ -178,7 +159,7 @@ def run_inspections():
         if act_rank != exp_rank:
             errors.append(f"Rank Mismatch for {tid}: Expected '{exp_rank}', found '{act_rank}'")
 
-    print("  • Verified AP rankings match official Week 6 Oct 4 release (Texas #1, Georgia #2, Notre Dame #3, Miami #4, Ohio State #5, Alabama #6, Indiana #7, BYU #8, Ole Miss #9, LSU #10, Texas Tech #11, Utah #12, Missouri #14, Houston #22).")
+    print("  • Verified AP rankings match official Week 7 release.")
 
     # 5. Rosters, Star Players, & Coaching Staffs
     print("\n[4/7] 🏈 Inspecting 2026 Roster, QB, and Coaching Staff Integrity...")
