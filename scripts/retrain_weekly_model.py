@@ -194,49 +194,6 @@ WEEK5_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
 WEEK4_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
 WEEK3_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
 
-
-# In-Season Unit Baseline Ratings (Offense, Defense, Special Teams - Calibrated to 2026 In-Season Analytics)
-# Base FBS scoring baseline is 27.0 points per game.
-# Offense: Points scored vs average FBS defense (27.0). Elite: 37-41, Stagnant/Trash: 20-27.
-# Defense: Points allowed vs average FBS offense (27.0). Elite: 8-13, Solid: 14-18, Vulnerable: 19-25.
-# Special Teams: Net scoring impact. Typically -1.0 to +1.0.
-BASELINE_UNIT_RATINGS = {
-    'ohiostate':    {'off': 41.0, 'def': 8.5,  'st': 0.1},  # #5 AP (5-1)
-    'georgia':      {'off': 38.5, 'def': 11.5, 'st': 0.5},  # #1 AP (6-0)
-    'notredame':    {'off': 39.5, 'def': 13.0, 'st': 0.3},  # #2 AP (6-0)
-    'indiana':      {'off': 38.5, 'def': 12.0, 'st': 0.5},  # #4 AP (6-0)
-    'miami':        {'off': 38.0, 'def': 13.5, 'st': 0.3},  # #3 AP (5-0)
-    'alabama':      {'off': 34.5, 'def': 13.0, 'st': -0.3}, # #7 AP (5-1)
-    'lsu':          {'off': 33.5, 'def': 12.5, 'st': 0.2},  # #21 AP (4-2, Lane Kiffin HC)
-    'olemiss':      {'off': 35.0, 'def': 18.5, 'st': 0.6},  # #10 AP (4-1, Pete Golding HC)
-    'missouri':     {'off': 32.5, 'def': 16.0, 'st': -0.3}, # #13 AP (5-1)
-    'tennessee':    {'off': 37.0, 'def': 19.5, 'st': 0.4},  # #14 AP (5-1)
-    'texastech':    {'off': 35.5, 'def': 16.5, 'st': 0.2},  # #9 AP (5-0)
-    'byu':          {'off': 33.0, 'def': 17.5, 'st': 0.3},  # #8 AP (5-0)
-    'utah':         {'off': 32.0, 'def': 17.5, 'st': 0.0},  # #11 AP (5-0)
-    'usc':          {'off': 38.0, 'def': 20.0, 'st': -0.3}, # #15 AP (6-1)
-    'oregon':       {'off': 37.0, 'def': 15.5, 'st': 0.3},  # #25 AP (3-2)
-    'oklahoma':     {'off': 31.0, 'def': 14.0, 'st': 0.4},  # RV (3-2)
-    'texas':        {'off': 26.5, 'def': 10.0, 'st': -0.5}, # #6 AP (4-1, Elite defense, stagnant offense)
-    'texasam':      {'off': 21.5, 'def': 16.8, 'st': -0.5}, # NR (3-3, Collapsed offense)
-    'michigan':     {'off': 30.0, 'def': 15.5, 'st': -0.4}, # RV (3-2)
-    'pennstate':    {'off': 31.0, 'def': 16.5, 'st': 0.5},  # RV (3-3)
-    'iowa':         {'off': 21.0, 'def': 13.5, 'st': 0.5},  # #16 AP (5-1, Elite defense, trash offense)
-    'smu':          {'off': 33.5, 'def': 19.5, 'st': -0.3}, # #22 AP (4-1)
-    'houston':      {'off': 32.0, 'def': 20.5, 'st': -0.3}, # #18 AP (5-1)
-    'louisville':   {'off': 31.5, 'def': 19.0, 'st': 0.2},  # RV (3-3)
-    'washington':   {'off': 28.5, 'def': 17.0, 'st': -0.3}, # NR (3-3)
-    'boisestate':   {'off': 31.0, 'def': 22.0, 'st': -0.3}, # #24 AP (5-1)
-    'arizona':      {'off': 30.5, 'def': 21.5, 'st': -0.4}, # RV (5-1)
-    'floridastate': {'off': 28.5, 'def': 20.5, 'st': -0.3}, # NR (3-3)
-    'clemson':      {'off': 22.5, 'def': 16.5, 'st': 0.0},  # NR (3-2, Broken offense)
-    'arizonastate': {'off': 28.0, 'def': 22.5, 'st': -0.5}, # NR (3-2)
-    'colorado':     {'off': 26.5, 'def': 25.0, 'st': -0.5}  # NR (2-3)
-}
-
-# Derived Net SP+ Baseline Ratings
-BASELINE_SP_RATINGS = {k: round(v['off'] - v['def'] + v['st'], 1) for k, v in BASELINE_UNIT_RATINGS.items()}
-
 # Stadium Home Field Advantage mapping (points - calibrated to modern college football analytics)
 STADIUM_HFA = {
     "Tiger Stadium": 2.6,
@@ -816,6 +773,174 @@ def check_is_conference_game(team_conf, opp_name, opp_abbr=""):
 
     return False, ""
 
+def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None):
+    """
+    Automated, non-hardcoded mathematical solver deriving unit ratings
+    (Offense, Defense, Special Teams, and Net SP+) across all 31 tracked teams and opponents based on:
+    1. Actual 2026 completed game margins and scores.
+    2. Rigorous opponent-tier filtering:
+       - FCS games downweighted to 0.05 with stat-padding caps (max 35 pts offense, min 14 pts defense).
+       - G5 non-conference games downweighted to 0.20 with blowout dampening.
+       - P4 unranked games weighted at 1.00.
+       - P4 ranked / Top 25 games weighted at 1.50.
+    3. Iterative relaxation solver (8 iterations until mutual opponent convergence).
+    4. Per-play EPA/PPA telemetry from CFBD.
+    5. Resume penalty for unranked losses (e.g. Kentucky over LSU) and multiple conference losses.
+    6. Bayesian blend: 75% in-season observed reality, 25% preseason prior.
+    """
+    sp_map_2026 = sp_map_2026 or {}
+    cum_adv_stats = cum_adv_stats or {}
+
+    def get_prior_sp(tid, t):
+        t_name = (t.get('name') or tid).lower()
+        t_short = (t.get('shortName') or tid).lower()
+        sp = sp_map_2026.get(t_name) or sp_map_2026.get(t_short) or sp_map_2026.get(tid)
+        if not sp:
+            for k, v in sp_map_2026.items():
+                if k == t_name or k == t_short or (len(k) >= 4 and k in t_name):
+                    sp = v
+                    break
+        if sp:
+            return float(sp.get('offense', 28.0)), float(sp.get('defense', 20.0)), float(sp.get('specialTeams', 0.0))
+        return 28.0, 20.0, 0.0
+
+    def resolve_opp_units(raw_name, opp_abbr, opp_id, cur_units):
+        if is_fcs_opponent(raw_name, opp_abbr):
+            return 10.0, 45.0, 'FCS'
+        if opp_id and opp_id in cur_units:
+            return cur_units[opp_id]['off'], cur_units[opp_id]['def'], 'P4'
+        opp_clean = (raw_name or '').lower().strip()
+        opp_school = MASCOT_REGEX.sub('', opp_clean).strip()
+        opp_abbr_clean = (opp_abbr or '').lower().strip()
+        sp = sp_map_2026.get(opp_clean) or sp_map_2026.get(opp_school) or sp_map_2026.get(opp_abbr_clean)
+        if not sp:
+            for k, v in sp_map_2026.items():
+                if len(k) >= 4 and (k == opp_clean or k == opp_school or k in opp_clean or opp_school in k):
+                    sp = v
+                    break
+        if sp:
+            tier = 'G5' if float(sp.get('rating', 0)) < 6.0 else 'P4'
+            return float(sp.get('offense', 27.0)), float(sp.get('defense', 27.0)), tier
+        return 26.0, 28.0, 'G5'
+
+    cur_units = {}
+    priors = {}
+    for tid, t in db.items():
+        p_off, p_def, p_st = get_prior_sp(tid, t)
+        priors[tid] = {'off': p_off, 'def': p_def, 'st': p_st}
+        cur_units[tid] = {'off': p_off, 'def': p_def, 'st': p_st}
+
+    for iteration in range(8):
+        next_units = {}
+        for tid, t in db.items():
+            p_off = priors[tid]['off']
+            p_def = priors[tid]['def']
+            p_st = priors[tid]['st']
+            
+            weighted_implied_off = []
+            weighted_implied_def = []
+            
+            unranked_losses = 0
+            conf_losses = 0
+
+            for g in t.get('schedule', []):
+                if not g.get('isFinal'):
+                    continue
+                s_team = g.get('finalTeamScore') if g.get('finalTeamScore') is not None else g.get('actualScoreUt')
+                s_opp = g.get('finalOppScore') if g.get('finalOppScore') is not None else g.get('actualScoreOpp')
+                if s_team is None or s_opp is None:
+                    continue
+                s_team = float(s_team)
+                s_opp = float(s_opp)
+                
+                opp_name = g.get('opponent', '')
+                opp_abbr = g.get('oppAbbr', '')
+                opp_id = g.get('oppId')
+                opp_off, opp_def, tier = resolve_opp_units(opp_name, opp_abbr, opp_id, cur_units)
+                
+                is_home = g.get('isHome', True)
+                stadium = g.get('stadium', '')
+                hfa = STADIUM_HFA.get(stadium, 2.5) if is_home else -STADIUM_HFA.get(stadium, 2.5)
+                
+                opp_rank = str(g.get('oppRank', 'NR'))
+                is_ranked = opp_rank.startswith('#')
+                
+                if tier == 'FCS':
+                    w = 0.05
+                    eff_s_team = min(35.0, s_team)
+                    eff_s_opp = max(14.0, s_opp)
+                elif tier == 'G5':
+                    w = 0.20
+                    eff_s_team = min(38.0, 24.0 + (s_team - 24.0) * 0.4 if s_team > 24.0 else s_team)
+                    eff_s_opp = max(10.0, s_opp)
+                elif is_ranked:
+                    w = 1.50
+                    eff_s_team = s_team
+                    eff_s_opp = s_opp
+                else:
+                    w = 1.00
+                    eff_s_team = s_team
+                    eff_s_opp = s_opp
+
+                # Track losses
+                if s_team < s_opp:
+                    if not is_ranked and tier != 'FCS':
+                        unranked_losses += 1
+                    if g.get('isConf') or check_is_conference_game(t.get('conference'), opp_name, opp_abbr)[0]:
+                        conf_losses += 1
+
+                impl_off = eff_s_team - opp_def + 27.0 - (hfa * 0.5)
+                impl_def = eff_s_opp - opp_off + 27.0 + (hfa * 0.5)
+                
+                weighted_implied_off.append((impl_off, w))
+                weighted_implied_def.append((impl_def, w))
+
+            if weighted_implied_off:
+                w_sum_off = sum(val * w for val, w in weighted_implied_off)
+                w_sum_def = sum(val * w for val, w in weighted_implied_def)
+                w_tot = sum(w for _, w in weighted_implied_off)
+                obs_off = w_sum_off / max(0.1, w_tot)
+                obs_def = w_sum_def / max(0.1, w_tot)
+            else:
+                obs_off = p_off
+                obs_def = p_def
+
+            # EPA / PPA telemetry integration
+            t_short = (t.get('shortName') or tid).lower()
+            c_info = cum_adv_stats.get(t_short) or cum_adv_stats.get(tid) or cum_adv_stats.get((t.get('name') or '').lower())
+            if c_info:
+                ppa_off = float(c_info.get('avgOffPpa', 0.18))
+                if ppa_off < 0.10:
+                    obs_off -= 2.0
+                elif ppa_off < 0.15:
+                    obs_off -= 1.0
+                elif ppa_off > 0.35:
+                    obs_off += 1.2
+                elif ppa_off > 0.28:
+                    obs_off += 0.6
+
+                ppa_def = float(c_info.get('avgDefPpa', 0.15))
+                if ppa_def < 0.05:
+                    obs_def -= 1.2
+                elif ppa_def > 0.25:
+                    obs_def += 1.5
+
+            # Resume penalties for unranked & multi-conference losses
+            if unranked_losses > 0:
+                obs_def += (unranked_losses * 2.5)
+                obs_off -= (unranked_losses * 1.2)
+            if conf_losses >= 2:
+                obs_def += 1.5
+                obs_off -= 1.0
+
+            blend_off = round(0.75 * obs_off + 0.25 * p_off, 1)
+            blend_def = round(0.75 * obs_def + 0.25 * p_def, 1)
+            
+            next_units[tid] = {'off': blend_off, 'def': blend_def, 'st': p_st}
+        cur_units = next_units
+
+    return cur_units
+
 def main():
     parser = argparse.ArgumentParser(description="Retrain CFB Prophet weekly models against actual scores & Vegas consensus lines.")
     parser.add_argument('--dry-run', action='store_true', help="Compute adjustments without modifying database files.")
@@ -1221,7 +1346,7 @@ def main():
         t_short = (db.get(tid, {}).get('shortName') or tid).lower().strip()
         d_info = drive_eff_metrics.get(t_clean) or drive_eff_metrics.get(t_short) or drive_eff_metrics.get(tid)
         
-        baseline_rating = BASELINE_SP_RATINGS.get(tid, float(db.get(tid, {}).get('baseSpRating', 22.0)))
+        baseline_rating = float(db.get(tid, {}).get('baseSpRating', 22.0))
         expected_dqi = 10.0 + (baseline_rating - 22.0) * 0.55
         
         if d_info:
@@ -1276,62 +1401,31 @@ def main():
     print(f"  • Vegas Consensus MAE:             {avg_vegas_mae} pts")
     print(f"  • Model Beat Vegas Rate:            {beat_vegas_pct}% ({model_beats_vegas_count}/{total_evaluated} games)")
 
-    # 4. Bayesian SP+ Rating Updating (Opponent-Strength Weighted + Drive Efficiency)
-    ALPHA = 0.08
+    # 4. Systemic Dynamic Unit Rating Derivation (Automated Opponent-Adjusted Relaxation Solver)
+    print("\n📈 SYSTEMIC TEAM POWER RATINGS (SOLVED FROM 2026 ON-FIELD DATA & RESUME):")
+    derived_units = derive_systemic_unit_ratings(db, sp_map_2026, cum_adv_stats)
     rating_shifts = {}
 
-    print("\n📈 RETRAINED TEAM POWER RATINGS (DRIVE EFFICIENCY + BAYESIAN OPPONENT WEIGHTING):")
-    for tid, delta_pairs in team_performances.items():
+    for tid, u in derived_units.items():
         t = db[tid]
-        baseline = BASELINE_SP_RATINGS.get(tid, float(t.get('seasonBaselineSpRating') or t.get('baseSpRating', 22.0)))
-        t['seasonBaselineSpRating'] = baseline
-        
-        weighted_sum = sum(d * w for d, w in delta_pairs)
-        weight_total = sum(w for d, w in delta_pairs)
-        avg_delta = weighted_sum / max(0.1, weight_total)
-        raw_adjustment = avg_delta * ALPHA
-
-        # Add EPA efficiency penalty or reward from cumulative 2026 season stats
-        team_short = db[tid].get('shortName', '').lower()
-        epa_shift = 0.0
-        c_info = cum_adv_stats.get(team_short) or cum_adv_stats.get(tid) or cum_adv_stats.get((db[tid].get('name') or '').lower())
-        if c_info:
-            ppa = c_info.get('avgOffPpa', 0.20)
-            if ppa > 0.45:
-                epa_shift += 0.30  # High-octane offense reward
-            elif ppa < 0.10:
-                epa_shift -= 0.40  # Sluggish offense penalty
-            if ppa < 0.00:
-                epa_shift -= 0.60  # Severely broken offense penalty (e.g. Clemson)
-
-        clamped_adjustment = max(-2.2, min(2.2, raw_adjustment + epa_shift))
-        new_rating = round(baseline + clamped_adjustment, 2)
+        old_rating = float(t.get('baseSpRating', 20.0))
+        new_rating = round(u['off'] - u['def'] + u['st'], 1)
+        delta = round(new_rating - old_rating, 1)
+        sign = "+" if delta > 0 else ""
+        print(f"  • {t.get('shortName', tid):<14} Off: {u['off']:>4.1f} | Def: {u['def']:>4.1f} | Net: {new_rating:>5.1f} ({sign}{delta:.1f} pts)")
         rating_shifts[tid] = {
-            'old': baseline,
+            'old': old_rating,
             'new': new_rating,
-            'delta': round(clamped_adjustment, 2)
+            'delta': delta,
+            'offense': u['off'],
+            'defense': u['def'],
+            'specialTeams': u['st']
         }
-        sign = "+" if clamped_adjustment > 0 else ""
-        print(f"  • {t.get('shortName', tid):<14} {baseline:>5.1f}  →  {new_rating:>5.1f}  ({sign}{clamped_adjustment:.2f} pts)")
-        u = BASELINE_UNIT_RATINGS.get(tid, {'off': 27.5, 'def': 27.5, 'st': 0.0})
-        adj_off = round(u['off'] + (clamped_adjustment * 0.55), 1)
-        adj_def = round(u['def'] - (clamped_adjustment * 0.45), 1)
-        adj_st = u['st']
         if not args.dry_run:
             t['baseSpRating'] = new_rating
-            t['offenseRating'] = adj_off
-            t['defenseRating'] = adj_def
-            t['specialTeamsRating'] = adj_st
-
-    # Ensure all 31 DB teams have calibrated unit ratings
-    for tid, t in db.items():
-        if 'offenseRating' not in t or 'defenseRating' not in t:
-            u = BASELINE_UNIT_RATINGS.get(tid, {'off': 27.5, 'def': 27.5, 'st': 0.0})
-            if not args.dry_run:
-                t['offenseRating'] = u['off']
-                t['defenseRating'] = u['def']
-                t['specialTeamsRating'] = u['st']
-                t['baseSpRating'] = round(u['off'] - u['def'] + u['st'], 2)
+            t['offenseRating'] = u['off']
+            t['defenseRating'] = u['def']
+            t['specialTeamsRating'] = u['st']
 
     # 5. Re-project Future Unplayed Games (With Talent Blowout Multiplier & Market Anchoring)
     unplayed_games_recalculated = 0
@@ -1470,16 +1564,21 @@ def main():
                 g['oddsProvider'] = 'CFB Prophet Projected'
 
             # Resolve authentic unit ratings for Team A and Opponent
-            off_a_val = t.get('offenseRating', BASELINE_UNIT_RATINGS.get(tid, {}).get('off', 27.5))
-            def_a_val = t.get('defenseRating', BASELINE_UNIT_RATINGS.get(tid, {}).get('def', 27.5))
-            st_a_val = t.get('specialTeamsRating', BASELINE_UNIT_RATINGS.get(tid, {}).get('st', 0.0))
+            off_a_val = t.get('offenseRating', 27.5)
+            def_a_val = t.get('defenseRating', 27.5)
+            st_a_val = t.get('specialTeamsRating', 0.0)
 
             if opp_id and opp_id in db:
-                off_b_val = db[opp_id].get('offenseRating', BASELINE_UNIT_RATINGS.get(opp_id, {}).get('off', 27.5))
-                def_b_val = db[opp_id].get('defenseRating', BASELINE_UNIT_RATINGS.get(opp_id, {}).get('def', 27.5))
-                st_b_val = db[opp_id].get('specialTeamsRating', BASELINE_UNIT_RATINGS.get(opp_id, {}).get('st', 0.0))
+                off_b_val = db[opp_id].get('offenseRating', 27.5)
+                def_b_val = db[opp_id].get('defenseRating', 27.5)
+                st_b_val = db[opp_id].get('specialTeamsRating', 0.0)
             else:
                 sp_o_info = sp_map_2026.get(opp_clean) or sp_map_2026.get(opp_abbr) or sp_map_2026.get(opp_school) or {}
+                if not sp_o_info:
+                    for sk, sv in sp_map_2026.items():
+                        if len(sk) >= 4 and (sk == opp_clean or sk == opp_school or sk in opp_clean or opp_school in sk):
+                            sp_o_info = sv
+                            break
                 if sp_o_info and 'offense' in sp_o_info and 'defense' in sp_o_info:
                     off_b_val = float(sp_o_info['offense'])
                     def_b_val = float(sp_o_info['defense'])
