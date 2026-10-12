@@ -313,13 +313,15 @@ def get_fbs_opponent_power_ratings(year=2026):
         base_scaled = raw_sp + 7.0
         # Talent roster depth modifier (+/- 2.0 pts max)
         talent_adj = max(-2.0, min(2.0, (talent - 650.0) / 150.0))
-        # 2026 settled win-loss adjustment
-        record_adj = 0.0
-        if w >= 2 and l == 0:
-            record_adj += 1.2
-        elif w == 0 and l >= 2:
-            record_adj -= 1.4
-
+        # Continuous 2026 settled win-loss adjustment based on actual winning percentage
+        tot_games = w + l
+        if tot_games > 0:
+            win_pct = w / tot_games
+            record_adj = (win_pct - 0.50) * 3.5 * min(1.0, tot_games / 4.0)
+            if w >= 5 and l == 0:
+                record_adj += 1.5
+            elif l >= 3:
+                record_adj -= 1.5
         # Real 2026 in-game trench & efficiency telemetry (all 138 FBS teams)
         adv_info = adv_stats.get(team_name, {})
         trench_adj = 0.0
@@ -330,18 +332,6 @@ def get_fbs_opponent_power_ratings(year=2026):
             ppo = adv_info.get('offensePPO', 3.8)
             # Physical trench & efficiency adjustment (+/- 2.5 pts max)
             trench_adj = max(-2.5, min(2.5, (net_line_yds * 0.8) + (net_success * 4.0) + ((havoc - 0.15) * 6.0) + ((ppo - 3.8) * 0.4)))
-
-        # Specific 2026 marquee game adjustments
-        if team_name == 'oklahoma state':
-            record_adj += 2.2  # Upset #6 Oregon
-        elif team_name == 'virginia':
-            record_adj += 1.8  # #25 AP Poll entrant (2-0)
-        elif team_name == 'kentucky':
-            record_adj += 3.5  # Upset #9 Texas A&M 31-21 at Kyle Field
-        elif team_name == 'northwestern':
-            record_adj += 7.0  # Blew out Colorado 41-7 on the road, 2-0 with top-tier defense
-        elif team_name == 'georgia tech':
-            record_adj += 2.5  # Strong start, beat FSU
 
         final_rating = round(base_scaled + talent_adj + record_adj + trench_adj, 1)
         ratings_map[team_name] = final_rating

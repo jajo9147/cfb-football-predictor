@@ -834,6 +834,7 @@ def main():
     lines_w2 = {}
     lines_w3 = {}
     lines_w4 = {}
+    season_adv_map = {}
     if cfbd_client:
         try:
             talent_map = cfbd_client.get_team_talent_composite(2026)
@@ -1431,10 +1432,13 @@ def main():
             if matched_line and matched_line.get('spread') is not None:
                 spread_val = matched_line['spread']
                 vegas_margin = -spread_val
-                # Check for obsolete preseason lookahead lines:
-                # If game is in late season (weeks >= 9) and the lookahead spread contradicts in-season efficiency by > 4.0 points:
-                # Discard the stale summer line completely!
-                if week_num and week_num >= 9 and abs(raw_margin - vegas_margin) > 4.0:
+                # Strictly filter obsolete preseason summer lookahead lines:
+                # In mid-October (Week 7), any market lines for Week 8 and beyond in CFBD are summer lookaheads from July/August.
+                # Only Week 7 contains active live in-season market lines.
+                # Even for Week 7, if a line contradicts in-season ratings by > 3.5 points (e.g. Oregon -21.5 vs Nebraska), discard it!
+                if week_num and week_num >= 8:
+                    matched_line = None
+                elif week_num == 7 and abs(raw_margin - vegas_margin) > 3.5:
                     matched_line = None
 
             if matched_line and matched_line.get('spread') is not None:
@@ -1442,13 +1446,8 @@ def main():
                 g['vegasSpread'] = spread_val
                 g['oddsProvider'] = matched_line.get('provider', 'DraftKings')
                 vegas_margin = -spread_val
-                # Week-dependent market blending:
-                # Weeks 7-8: 60% model, 40% live Vegas market
-                # Weeks 9+: 85% model, 15% Vegas
-                if week_num and week_num >= 9:
-                    projected_margin = round(0.85 * raw_margin + 0.15 * vegas_margin, 1)
-                else:
-                    projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
+                # Week 7 live market blending: 60% model, 40% live Vegas market
+                projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
             else:
                 # Later weeks or unlined games: Pure model projection grounded in freshly calibrated ratings
                 # For unranked non-conference games without market line, prevent absurd blowouts > 36 pts
