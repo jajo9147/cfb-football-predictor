@@ -73,6 +73,7 @@ const GLOBAL_PRESETS = {
   'qb-mvp': { qbRating: 25, groundAttack: 10, defenseHavoc: 5, turnoverLuck: 10, crowdNoise: 15 },
   'qb-slump': { qbRating: -25, groundAttack: -10, defenseHavoc: -5, turnoverLuck: -15, crowdNoise: 0 },
   'iron-defense': { qbRating: 0, groundAttack: 5, defenseHavoc: 30, turnoverLuck: 15, crowdNoise: 20 },
+  'stagnant-offense': { qbRating: -25, groundAttack: -10, defenseHavoc: 25, turnoverLuck: -15, crowdNoise: 0 },
   'chaos': { qbRating: -15, groundAttack: 15, defenseHavoc: -20, turnoverLuck: -30, crowdNoise: 30 }
 };
 
@@ -80,6 +81,7 @@ const GLOBAL_PRESETS = {
 const GAME_PRESETS = {
   'baseline': { qbRating: 0, groundAttack: 0, defenseHavoc: 0, turnoverLuck: 0, crowdNoise: 0 },
   'qb-slump': { qbRating: -30, groundAttack: -5, defenseHavoc: -5, turnoverLuck: -20, crowdNoise: -10 },
+  'stagnant-offense': { qbRating: -25, groundAttack: -10, defenseHavoc: 25, turnoverLuck: -15, crowdNoise: 0 },
   'blowout': { qbRating: 30, groundAttack: 25, defenseHavoc: 20, turnoverLuck: 15, crowdNoise: 20 },
   'turnover-trap': { qbRating: -15, groundAttack: -10, defenseHavoc: -10, turnoverLuck: -35, crowdNoise: -15 },
   'ground-pound': { qbRating: -10, groundAttack: 30, defenseHavoc: 15, turnoverLuck: 5, crowdNoise: 10 }
@@ -2253,6 +2255,7 @@ window.applyGlobalPreset = function(presetKey) {
     'qb-mvp': '🔥 QB Heisman Mode',
     'qb-slump': '📉 QB Slump Mode',
     'iron-defense': '🛡️ Iron Curtain Defense',
+    'stagnant-offense': '⛓️ Stalled Offense / Elite Defense',
     'chaos': '🎲 CFB Chaos Mode'
   };
 
@@ -2280,6 +2283,7 @@ window.applyGlobalPreset = function(presetKey) {
     'qb-mvp': 'QB Heisman Mode',
     'qb-slump': 'QB Slump',
     'iron-defense': 'Iron Curtain D',
+    'stagnant-offense': 'Stalled Offense & Elite D',
     'chaos': 'CFB Chaos'
   };
   const name = presetNames[presetKey] || presetKey;

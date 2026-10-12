@@ -416,6 +416,13 @@
                   <span class="preset-desc">+20% havoc & sack generation</span>
                 </div>
               </button>
+              <button class="dropdown-item" data-preset="stagnant-offense" onclick="selectGlobalPreset('stagnant-offense', event)">
+                <span class="preset-icon">⛓️</span>
+                <div class="preset-info">
+                  <span class="preset-title">Stalled Offense & Elite D</span>
+                  <span class="preset-desc">-15 pts off/ST miscues, +25% havoc defense</span>
+                </div>
+              </button>
               <button class="dropdown-item" data-preset="chaos" onclick="selectGlobalPreset('chaos', event)">
                 <span class="preset-icon">🎲</span>
                 <div class="preset-info">
@@ -630,6 +637,7 @@
             <div class="game-preset-buttons">
               <button class="game-preset-btn active" data-gamepreset="baseline" onclick="applyGameScenarioPreset('baseline')">Season Baseline</button>
               <button class="game-preset-btn" data-gamepreset="qb-slump" onclick="applyGameScenarioPreset('qb-slump')">QB Slump</button>
+              <button class="game-preset-btn" data-gamepreset="stagnant-offense" onclick="applyGameScenarioPreset('stagnant-offense')">Stalled Offense & Elite D</button>
               <button class="game-preset-btn" data-gamepreset="blowout" onclick="applyGameScenarioPreset('blowout')">Offensive Blowout</button>
               <button class="game-preset-btn" data-gamepreset="turnover-trap" onclick="applyGameScenarioPreset('turnover-trap')">Turnover Trap</button>
               <button class="game-preset-btn" data-gamepreset="ground-pound" onclick="applyGameScenarioPreset('ground-pound')">Ground & Pound</button>
@@ -1966,6 +1974,7 @@
           <button class="preset-btn" data-preset="qb-mvp" onclick="applyGlobalPreset('qb-mvp')">🔥 QB Heisman</button>
           <button class="preset-btn" data-preset="qb-slump" onclick="applyGlobalPreset('qb-slump')">📉 QB Slump</button>
           <button class="preset-btn" data-preset="iron-defense" onclick="applyGlobalPreset('iron-defense')">🛡️ Iron D</button>
+          <button class="preset-btn" data-preset="stagnant-offense" onclick="applyGlobalPreset('stagnant-offense')">⛓️ Stalled Offense / Elite D</button>
           <button class="preset-btn" data-preset="chaos" onclick="applyGlobalPreset('chaos')">🎲 Chaos</button>
           <button class="preset-btn reset-all-btn" onclick="resetAllToBaseline()" style="margin-left: auto;">↺ Reset</button>
         </div>
