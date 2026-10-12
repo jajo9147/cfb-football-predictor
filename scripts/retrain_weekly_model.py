@@ -413,6 +413,59 @@ def is_fcs_opponent(opp_name, opp_abbr=None):
             return True
     return False
 
+def find_sp_opponent(raw_name, opp_abbr=None, sp_map=None):
+    """
+    Deterministically resolves an opponent from the official 2026 Connelly SP+ dictionary.
+    Guarantees:
+    - Zero directional cross-contamination (e.g. North Texas never matches Texas, Western Kentucky never matches Kentucky).
+    - Zero state flag collisions (e.g. Ohio never matches Ohio State).
+    - Specificity-first descending length matching.
+    """
+    if not sp_map or not raw_name:
+        return None
+    name_clean = (raw_name or '').lower().strip()
+    school_clean = MASCOT_REGEX.sub('', name_clean).strip()
+    abbr_clean = (opp_abbr or '').lower().strip()
+    
+    # 1. Exact match attempts
+    if name_clean in sp_map:
+        return sp_map[name_clean]
+    if school_clean in sp_map:
+        return sp_map[school_clean]
+    if abbr_clean and abbr_clean in sp_map:
+        return sp_map[abbr_clean]
+        
+    name_words = name_clean.split()
+    school_words = school_clean.split()
+    all_words = set(name_words + school_words)
+    sorted_keys = sorted(sp_map.keys(), key=len, reverse=True)
+    
+    directional_words = {'eastern', 'western', 'northern', 'southern', 'central', 'east', 'west', 'north', 'south', 'southeast', 'southwest'}
+    
+    for k in sorted_keys:
+        k_words = set(k.split())
+        mismatch = False
+        for pref in directional_words:
+            in_target = pref in all_words
+            in_k = pref in k_words
+            if in_target != in_k:
+                mismatch = True
+                break
+        if mismatch:
+            continue
+            
+        if ('state' in all_words) != ('state' in k_words):
+            continue
+            
+        if len(k) >= 4:
+            if k == name_clean or k == school_clean:
+                return sp_map[k]
+            if k in name_clean or k in school_clean or (len(school_clean) >= 4 and school_clean in k):
+                return sp_map[k]
+                
+    return None
+
+
 def resolve_opponent_ap_rank(g, db, external_ap_ranks):
     """
     Deterministically resolves an opponent's official AP poll ranking.
@@ -773,55 +826,81 @@ def check_is_conference_game(team_conf, opp_name, opp_abbr=""):
 
     return False, ""
 
-def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None):
+P4_TEAMS_SET = {
+    'ohio state', 'indiana', 'michigan', 'penn state', 'oregon', 'usc', 'washington',
+    'iowa', 'wisconsin', 'nebraska', 'illinois', 'northwestern', 'rutgers', 'maryland',
+    'minnesota', 'purdue', 'michigan state', 'ucla',
+    'georgia', 'texas', 'alabama', 'lsu', 'tennessee', 'ole miss', 'missouri', 'texas a&m',
+    'oklahoma', 'auburn', 'florida', 'south carolina', 'kentucky', 'arkansas', 'vanderbilt', 'mississippi state',
+    'utah', 'texas tech', 'byu', 'colorado', 'arizona', 'arizona state', 'kansas state', 'oklahoma state',
+    'iowa state', 'tcu', 'baylor', 'west virginia', 'ucf', 'cincinnati', 'houston', 'kansas',
+    'miami', 'clemson', 'florida state', 'louisville', 'smu', 'virginia tech', 'nc state',
+    'georgia tech', 'north carolina', 'pitt', 'pittsburgh', 'boston college', 'duke', 'cal', 'stanford', 'wake forest', 'virginia', 'syracuse',
+    'notre dame'
+}
+
+def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talent_map=None):
     """
     Automated, non-hardcoded mathematical solver deriving unit ratings
     (Offense, Defense, Special Teams, and Net SP+) across all 31 tracked teams and opponents based on:
     1. Actual 2026 completed game margins and scores.
-    2. Rigorous opponent-tier filtering:
-       - FCS games downweighted to 0.05 with stat-padding caps (max 35 pts offense, min 14 pts defense).
-       - G5 non-conference games downweighted to 0.20 with blowout dampening.
-       - P4 unranked games weighted at 1.00.
-       - P4 ranked / Top 25 games weighted at 1.50.
-    3. Iterative relaxation solver (8 iterations until mutual opponent convergence).
-    4. Per-play EPA/PPA telemetry from CFBD.
-    5. Resume penalty for unranked losses (e.g. Kentucky over LSU) and multiple conference losses.
-    6. Bayesian blend: 75% in-season observed reality, 25% preseason prior.
+    2. Rigorous opponent-tier filtering and Strength of Schedule (SOS) modulation:
+       - FCS games downweighted to 0.04 with stat-padding caps (max 35 pts offense, min 17 pts defense floor).
+       - G5 non-conference games downweighted to 0.15 with blowout dampening and min 12 pts defense floor.
+       - Full Power 4 conference school identification across Big Ten, SEC, Big 12, ACC, and Notre Dame.
+       - Opponent strength scaled weighting: Elite (>20 SP+) at 1.60, Top 25 at 1.30, Mid P4 at 1.00, Low P4 at 0.70.
+    3. Strength of Schedule (SOS) Credibility Shrinkage:
+       - Teams playing soft schedules (untested paper tigers) are regressed toward their talent baseline / prior.
+       - Teams playing gauntlets (tested against top-10 teams) have their performances validated at full strength.
+    4. 247Sports Roster Talent Composite Floor & Ceiling Grounding:
+       - Blue-chip rosters (>920 talent) anchored to title-contender baselines.
+       - Mid-tier rosters (<750 talent) anchored to realistic ceilings.
+    5. Iterative relaxation solver (8 iterations until mutual opponent convergence).
+    6. Resume penalty for unranked losses (e.g. Kentucky over LSU) and multiple conference losses.
     """
     sp_map_2026 = sp_map_2026 or {}
     cum_adv_stats = cum_adv_stats or {}
+    talent_map = talent_map or {}
 
     def get_prior_sp(tid, t):
         t_name = (t.get('name') or tid).lower()
         t_short = (t.get('shortName') or tid).lower()
-        sp = sp_map_2026.get(t_name) or sp_map_2026.get(t_short) or sp_map_2026.get(tid)
-        if not sp:
-            for k, v in sp_map_2026.items():
-                if k == t_name or k == t_short or (len(k) >= 4 and k in t_name):
-                    sp = v
-                    break
-        if sp:
-            return float(sp.get('offense', 28.0)), float(sp.get('defense', 20.0)), float(sp.get('specialTeams', 0.0))
-        return 28.0, 20.0, 0.0
+        sp = find_sp_opponent(t.get('name'), t.get('shortName'), sp_map_2026) or sp_map_2026.get(tid)
+        p_off = float(sp.get('offense', 28.0)) if sp else 28.0
+        p_def = float(sp.get('defense', 20.0)) if sp else 20.0
+        p_st = float(sp.get('specialTeams', 0.0)) if sp else 0.0
+        
+        # Talent Composite grounding
+        tal = talent_map.get(t_name, talent_map.get(t_short, 650.0))
+        if tal >= 920.0:
+            p_off = max(p_off, 40.0)
+            p_def = min(p_def, 11.5)
+        elif tal < 750.0:
+            p_off = min(p_off, 33.5)
+            p_def = max(p_def, 15.5)
 
-    def resolve_opp_units(raw_name, opp_abbr, opp_id, cur_units):
-        if is_fcs_opponent(raw_name, opp_abbr):
-            return 10.0, 45.0, 'FCS'
-        if opp_id and opp_id in cur_units:
-            return cur_units[opp_id]['off'], cur_units[opp_id]['def'], 'P4'
+        return p_off, p_def, p_st
+
+    def resolve_opp_info(raw_name, opp_abbr, opp_id, cur_units):
         opp_clean = (raw_name or '').lower().strip()
         opp_school = MASCOT_REGEX.sub('', opp_clean).strip()
-        opp_abbr_clean = (opp_abbr or '').lower().strip()
-        sp = sp_map_2026.get(opp_clean) or sp_map_2026.get(opp_school) or sp_map_2026.get(opp_abbr_clean)
-        if not sp:
-            for k, v in sp_map_2026.items():
-                if len(k) >= 4 and (k == opp_clean or k == opp_school or k in opp_clean or opp_school in k):
-                    sp = v
-                    break
+        
+        if is_fcs_opponent(raw_name, opp_abbr):
+            return 10.0, 45.0, -18.0, 'FCS'
+            
+        is_p4 = (opp_school in P4_TEAMS_SET or opp_clean in P4_TEAMS_SET or (opp_id and opp_id in db))
+        
+        if opp_id and opp_id in cur_units:
+            u = cur_units[opp_id]
+            net = u['off'] - u['def'] + u['st']
+            return u['off'], u['def'], net, 'P4'
+            
+        sp = find_sp_opponent(raw_name, opp_abbr, sp_map_2026)
         if sp:
-            tier = 'G5' if float(sp.get('rating', 0)) < 6.0 else 'P4'
-            return float(sp.get('offense', 27.0)), float(sp.get('defense', 27.0)), tier
-        return 26.0, 28.0, 'G5'
+            tier = 'P4' if is_p4 else ('G5' if float(sp.get('rating', 0)) < 6.0 else 'P4')
+            return float(sp.get('offense', 27.0)), float(sp.get('defense', 27.0)), float(sp.get('rating', 0.0)), tier
+            
+        return 26.0, 28.0, 0.0, ('P4' if is_p4 else 'G5')
 
     cur_units = {}
     priors = {}
@@ -839,6 +918,7 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None):
             
             weighted_implied_off = []
             weighted_implied_def = []
+            opp_sos_list = []
             
             unranked_losses = 0
             conf_losses = 0
@@ -856,33 +936,38 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None):
                 opp_name = g.get('opponent', '')
                 opp_abbr = g.get('oppAbbr', '')
                 opp_id = g.get('oppId')
-                opp_off, opp_def, tier = resolve_opp_units(opp_name, opp_abbr, opp_id, cur_units)
+                opp_off, opp_def, opp_net, tier = resolve_opp_info(opp_name, opp_abbr, opp_id, cur_units)
                 
                 is_home = g.get('isHome', True)
                 stadium = g.get('stadium', '')
                 hfa = STADIUM_HFA.get(stadium, 2.5) if is_home else -STADIUM_HFA.get(stadium, 2.5)
                 
-                opp_rank = str(g.get('oppRank', 'NR'))
-                is_ranked = opp_rank.startswith('#')
-                
+                # Anti-stat-padding defense and offense bounds:
                 if tier == 'FCS':
-                    w = 0.05
+                    w = 0.04
                     eff_s_team = min(35.0, s_team)
-                    eff_s_opp = max(14.0, s_opp)
+                    eff_s_opp = max(17.0, s_opp)  # FCS shutout floor: no artificial boost
                 elif tier == 'G5':
-                    w = 0.20
-                    eff_s_team = min(38.0, 24.0 + (s_team - 24.0) * 0.4 if s_team > 24.0 else s_team)
-                    eff_s_opp = max(10.0, s_opp)
-                elif is_ranked:
-                    w = 1.50
-                    eff_s_team = s_team
-                    eff_s_opp = s_opp
+                    w = 0.15
+                    eff_s_team = min(35.0, 24.0 + (s_team - 24.0) * 0.35 if s_team > 24.0 else s_team)
+                    eff_s_opp = max(12.0, s_opp)  # G5 shutout floor: no artificial boost
                 else:
-                    w = 1.00
+                    # Power 4 game scaled by opponent caliber
+                    if opp_net >= 20.0:
+                        w = 1.60  # Elite competition
+                    elif opp_net >= 12.0:
+                        w = 1.30  # Top 25 competition
+                    elif opp_net >= 4.0:
+                        w = 1.00  # Mid P4 competition
+                    else:
+                        w = 0.70  # Bottom P4 competition
+                        
                     eff_s_team = s_team
                     eff_s_opp = s_opp
 
-                # Track losses
+                # Losses
+                opp_rank = str(g.get('oppRank', 'NR'))
+                is_ranked = opp_rank.startswith('#') or opp_net >= 12.0
                 if s_team < s_opp:
                     if not is_ranked and tier != 'FCS':
                         unranked_losses += 1
@@ -894,6 +979,7 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None):
                 
                 weighted_implied_off.append((impl_off, w))
                 weighted_implied_def.append((impl_def, w))
+                opp_sos_list.append((opp_net, w))
 
             if weighted_implied_off:
                 w_sum_off = sum(val * w for val, w in weighted_implied_off)
@@ -901,31 +987,18 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None):
                 w_tot = sum(w for _, w in weighted_implied_off)
                 obs_off = w_sum_off / max(0.1, w_tot)
                 obs_def = w_sum_def / max(0.1, w_tot)
+                
+                avg_sos = sum(r * w for r, w in opp_sos_list) / max(0.1, sum(w for _, w in opp_sos_list))
             else:
                 obs_off = p_off
                 obs_def = p_def
+                avg_sos = 5.0
 
-            # EPA / PPA telemetry integration
-            t_short = (t.get('shortName') or tid).lower()
-            c_info = cum_adv_stats.get(t_short) or cum_adv_stats.get(tid) or cum_adv_stats.get((t.get('name') or '').lower())
-            if c_info:
-                ppa_off = float(c_info.get('avgOffPpa', 0.18))
-                if ppa_off < 0.10:
-                    obs_off -= 2.0
-                elif ppa_off < 0.15:
-                    obs_off -= 1.0
-                elif ppa_off > 0.35:
-                    obs_off += 1.2
-                elif ppa_off > 0.28:
-                    obs_off += 0.6
-
-                ppa_def = float(c_info.get('avgDefPpa', 0.15))
-                if ppa_def < 0.05:
-                    obs_def -= 1.2
-                elif ppa_def > 0.25:
-                    obs_def += 1.5
-
-            # Resume penalties for unranked & multi-conference losses
+            # SOS Credibility Shrinkage:
+            # Teams with easy schedules (SOS < 2.0) are regressed toward talent baseline prior
+            sos_cred = min(0.85, max(0.35, (avg_sos + 6.0) / 22.0))
+            
+            # Resume penalties for unranked losses
             if unranked_losses > 0:
                 obs_def += (unranked_losses * 2.5)
                 obs_off -= (unranked_losses * 1.2)
@@ -933,8 +1006,11 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None):
                 obs_def += 1.5
                 obs_off -= 1.0
 
-            blend_off = round(0.75 * obs_off + 0.25 * p_off, 1)
-            blend_def = round(0.75 * obs_def + 0.25 * p_def, 1)
+            in_season_weight = 0.65 * sos_cred
+            prior_weight = 1.0 - in_season_weight
+            
+            blend_off = round(in_season_weight * obs_off + prior_weight * p_off, 1)
+            blend_def = round(in_season_weight * obs_def + prior_weight * p_def, 1)
             
             next_units[tid] = {'off': blend_off, 'def': blend_def, 'st': p_st}
         cur_units = next_units
@@ -1403,7 +1479,7 @@ def main():
 
     # 4. Systemic Dynamic Unit Rating Derivation (Automated Opponent-Adjusted Relaxation Solver)
     print("\n📈 SYSTEMIC TEAM POWER RATINGS (SOLVED FROM 2026 ON-FIELD DATA & RESUME):")
-    derived_units = derive_systemic_unit_ratings(db, sp_map_2026, cum_adv_stats)
+    derived_units = derive_systemic_unit_ratings(db, sp_map_2026, cum_adv_stats, talent_map)
     rating_shifts = {}
 
     for tid, u in derived_units.items():
@@ -1468,25 +1544,7 @@ def main():
                 opp_talent = talent_map.get(opp_name, talent_map.get(db[opp_id].get('shortName', '').lower(), 650.0))
             else:
                 # 1. Search official 2026 Connelly SP+ map for opponent (all 139 FBS teams)
-                opp_school = MASCOT_REGEX.sub('', opp_lower).strip()
-                opp_words = opp_lower.split()
-                sp_o_info = sp_map_2026.get(opp_lower) or sp_map_2026.get(opp_school) or sp_map_2026.get(opp_abbr) or {}
-                if not sp_o_info:
-                    for sk, sv in sp_map_2026.items():
-                        # Directional qualifier guard using whole words
-                        is_directional_mismatch = False
-                        for prefix in ['eastern', 'western', 'northern', 'southern', 'central', 'east', 'west', 'north', 'south', 'southeast', 'southwest']:
-                            in_opp = any(w == prefix for w in opp_words)
-                            in_k = any(w == prefix for w in sk.split())
-                            if in_opp != in_k:
-                                is_directional_mismatch = True
-                                break
-                        if is_directional_mismatch:
-                            continue
-                        if len(sk) >= 4 and (sk == opp_lower or sk == opp_school or sk in opp_lower or (len(opp_school) >= 4 and opp_school in sk)):
-                            sp_o_info = sv
-                            break
-
+                sp_o_info = find_sp_opponent(raw_opp_name, opp_abbr, sp_map_2026) or {}
                 if sp_o_info and 'rating' in sp_o_info:
                     sp_opp = float(sp_o_info['rating'])
                 elif opp_lower in dynamic_fbs_ratings:
@@ -1539,11 +1597,14 @@ def main():
                 # Strictly filter obsolete preseason summer lookahead lines:
                 # In mid-October (Week 7), any market lines for Week 8 and beyond in CFBD are summer lookaheads from July/August.
                 # Only Week 7 contains active live in-season market lines.
-                # Even for Week 7, if a line contradicts in-season ratings by > 3.5 points (e.g. Oregon -21.5 vs Nebraska), discard it!
+                # Even for Week 7, if a line contradicts in-season ratings by > 3.0 points or reverses favorites of a > 2.0 pt model gap, discard it!
                 if week_num and week_num >= 8:
                     matched_line = None
-                elif week_num == 7 and abs(raw_margin - vegas_margin) > 3.5:
-                    matched_line = None
+                elif week_num == 7:
+                    if abs(raw_margin - vegas_margin) > 3.0:
+                        matched_line = None
+                    elif (raw_margin > 2.0 and vegas_margin < -2.0) or (raw_margin < -2.0 and vegas_margin > 2.0):
+                        matched_line = None
 
             if matched_line and matched_line.get('spread') is not None:
                 spread_val = matched_line['spread']
@@ -1573,12 +1634,7 @@ def main():
                 def_b_val = db[opp_id].get('defenseRating', 27.5)
                 st_b_val = db[opp_id].get('specialTeamsRating', 0.0)
             else:
-                sp_o_info = sp_map_2026.get(opp_clean) or sp_map_2026.get(opp_abbr) or sp_map_2026.get(opp_school) or {}
-                if not sp_o_info:
-                    for sk, sv in sp_map_2026.items():
-                        if len(sk) >= 4 and (sk == opp_clean or sk == opp_school or sk in opp_clean or opp_school in sk):
-                            sp_o_info = sv
-                            break
+                sp_o_info = find_sp_opponent(raw_opp_name, opp_abbr, sp_map_2026) or {}
                 if sp_o_info and 'offense' in sp_o_info and 'defense' in sp_o_info:
                     off_b_val = float(sp_o_info['offense'])
                     def_b_val = float(sp_o_info['defense'])
