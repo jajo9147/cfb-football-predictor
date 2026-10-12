@@ -67,12 +67,20 @@ def simulate_matchup_10k(
     havoc_b=0.15,
     ppo_a=3.8,
     ppo_b=3.8,
-    projected_spread=None
+    projected_spread=None,
+    off_a=None,
+    def_a=None,
+    off_b=None,
+    def_b=None,
+    st_a=0.0,
+    st_b=0.0,
+    is_live_market=False
 ):
     """
     Simulates 10,000 full drive-by-drive games between Team A and Team B.
     Returns full score distributions, median margin, cover probability, and O/U odds.
     Incorporates 2026 CFBD SP+, 247Sports Talent, EPA/PPA, Trench Line Yards, Havoc, and Red Zone PPO.
+    Supports authentic Unit-Level Offense vs. Defense interaction modeling.
     """
     hfa = hfa_pts if is_home_a else -hfa_pts
 
@@ -81,29 +89,7 @@ def simulate_matchup_10k(
     pace_b = estimate_team_pace(team_b_name)
     avg_drives = (pace_a + pace_b) / 2.0
 
-    # 2. Benchmark spread and margin for Team A
-    # Clean SP+ rating differential (points per game scale)
-    raw_sp_diff = (sp_a - sp_b) + hfa
-    
-    # eff_spread dictates the scoring expectation (target margin)
-    if projected_spread is not None:
-        eff_spread = float(projected_spread)
-    elif vegas_spread is not None:
-        # Balanced blend: 65% rating model, 35% market line
-        eff_spread = -(0.65 * raw_sp_diff + 0.35 * (-float(vegas_spread)))
-    else:
-        eff_spread = -round(raw_sp_diff * 2) / 2.0
-
-    # Line target for ATS cover evaluation: strictly the actual market spread
-    line_target = -float(vegas_spread) if vegas_spread is not None else -eff_spread
-    spread_a = vegas_spread if vegas_spread is not None else eff_spread
-
-    # 3. Target expected points anchored to matchup total and efficiency spread
-    target_tot = float(vegas_total if vegas_total is not None else 52.5)
-    exp_pts_a = max(3.0, (target_tot - eff_spread) / 2.0)
-    exp_pts_b = max(3.0, (target_tot + eff_spread) / 2.0)
-
-    # 3.5 Stadium Weather & Environmental Drag
+    # 1.5 Stadium Weather & Environmental Drag
     if weather_info is None and stadium_name and weather_client:
         weather_info = weather_client.get_stadium_weather(stadium_name, game_date, kickoff_str)
 
@@ -113,6 +99,45 @@ def simulate_matchup_10k(
         # Apply weather drag to pace/drives
         if weather_impact and weather_impact.get('totalPointsDrag'):
             avg_drives = max(9.0, avg_drives - (weather_impact['totalPointsDrag'] * 0.15))
+
+    # 2. Benchmark spread and margin for Team A
+    raw_sp_diff = (sp_a - sp_b) + hfa
+
+    # 3. Target expected points: Unit-Level Interaction vs Split Model
+    if off_a is not None and def_b is not None and off_b is not None and def_a is not None:
+        pace_factor = avg_drives / 12.3
+        # Direct Unit Interaction:
+        # Expected points = (Offense + Opposing Defense - FBS Baseline (27.0) +/- HFA/2 + ST) * pace_factor
+        unit_pts_a = max(3.0, (float(off_a) + float(def_b) - 27.0 + (hfa * 0.5) + float(st_a)) * pace_factor)
+        unit_pts_b = max(3.0, (float(off_b) + float(def_a) - 27.0 - (hfa * 0.5) + float(st_b)) * pace_factor)
+
+        if is_live_market and vegas_spread is not None and vegas_total is not None and float(vegas_total) > 0:
+            mkt_a = max(3.0, (float(vegas_total) - float(vegas_spread)) / 2.0)
+            mkt_b = max(3.0, (float(vegas_total) + float(vegas_spread)) / 2.0)
+            exp_pts_a = 0.70 * unit_pts_a + 0.30 * mkt_a
+            exp_pts_b = 0.70 * unit_pts_b + 0.30 * mkt_b
+        else:
+            exp_pts_a = unit_pts_a
+            exp_pts_b = unit_pts_b
+
+        eff_spread = -(exp_pts_a - exp_pts_b)
+        line_target = -float(vegas_spread) if vegas_spread is not None else -eff_spread
+        spread_a = vegas_spread if vegas_spread is not None else eff_spread
+    else:
+        # Fallback single-rating spread model
+        if projected_spread is not None:
+            eff_spread = float(projected_spread)
+        elif vegas_spread is not None:
+            eff_spread = -(0.65 * raw_sp_diff + 0.35 * (-float(vegas_spread)))
+        else:
+            eff_spread = -round(raw_sp_diff * 2) / 2.0
+
+        line_target = -float(vegas_spread) if vegas_spread is not None else -eff_spread
+        spread_a = vegas_spread if vegas_spread is not None else eff_spread
+
+        target_tot = float(vegas_total if vegas_total is not None else 52.5)
+        exp_pts_a = max(3.0, (target_tot - eff_spread) / 2.0)
+        exp_pts_b = max(3.0, (target_tot + eff_spread) / 2.0)
 
     # 4. Derive baseline points per drive from expected points and pace
     lambda_a = exp_pts_a / avg_drives
@@ -156,6 +181,11 @@ def simulate_matchup_10k(
         scale_b = 0.80 / (p_td_b + p_fg_b)
         p_td_b *= scale_b
         p_fg_b *= scale_b
+
+    # Total threshold for Over/Under evaluation
+    eval_tot = float(vegas_total) if (vegas_total is not None and float(vegas_total) > 0) else round((exp_pts_a + exp_pts_b) * 2) / 2.0
+    if eval_tot % 1 == 0:
+        eval_tot += 0.5
 
     # Tracking metrics
     team_a_scores = []
@@ -228,9 +258,9 @@ def simulate_matchup_10k(
             pushes += 1
 
         # Total grading
-        if total > vegas_total:
+        if total > eval_tot:
             overs += 1
-        elif total < vegas_total:
+        elif total < eval_tot:
             under_totals += 1
 
     # Statistical summaries
@@ -270,10 +300,10 @@ def simulate_matchup_10k(
 
     # Determine Over/Under pick
     if over_pct >= 54.0:
-        recommended_ou = f"OVER {vegas_total}"
+        recommended_ou = f"OVER {eval_tot}"
         ou_confidence = over_pct
     elif under_pct >= 54.0:
-        recommended_ou = f"UNDER {vegas_total}"
+        recommended_ou = f"UNDER {eval_tot}"
         ou_confidence = under_pct
     else:
         recommended_ou = "PASS (Fair Total)"
@@ -296,7 +326,7 @@ def simulate_matchup_10k(
         'pushProb': push_pct,
         'recommendedAts': recommended_ats,
         'atsConfidence': ats_confidence,
-        'vegasTotal': vegas_total,
+        'vegasTotal': eval_tot,
         'overProb': over_pct,
         'underProb': under_pct,
         'recommendedOu': recommended_ou,

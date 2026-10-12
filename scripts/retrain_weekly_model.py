@@ -195,40 +195,47 @@ WEEK4_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
 WEEK3_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
 
 
-# In-Season SP+ Baseline Ratings (Calibrated to Official Week 7 AP Release, Records, and Resume Strength)
-BASELINE_SP_RATINGS = {
-    'georgia': 36.9,     # #1 AP (6-0)
-    'texas': 35.8,       # #6 AP (4-1, beat Ohio State in Columbus)
-    'ohiostate': 35.2,   # #5 AP (5-1, lost to Texas by 1)
-    'notredame': 34.5,   # #2 AP (6-0)
-    'miami': 33.8,       # #3 AP (5-0)
-    'alabama': 32.5,     # #7 AP (5-1, lost only to #1 Georgia)
-    'indiana': 31.5,     # #4 AP (6-0)
-    'olemiss': 28.5,     # #10 AP (4-1, beat LSU 32-24)
-    'byu': 27.5,         # #8 AP (5-0, beat Arizona)
-    'texastech': 27.0,   # #9 AP (5-0)
-    'tennessee': 26.8,   # #14 AP (5-1)
-    'utah': 26.5,        # #11 AP (5-0)
-    'missouri': 26.0,    # #13 AP (5-1, blew out Texas A&M 27-6)
-    'usc': 25.5,         # #15 AP (6-1)
-    'lsu': 25.5,         # #21 AP (4-2, lost to Ole Miss, lost to Kentucky)
-    'oregon': 25.0,      # #25 AP (3-2, lost to Oklahoma State, UCLA)
-    'oklahoma': 24.0,    # RV (3-2, lost to Michigan, Georgia)
-    'michigan': 23.8,    # RV (3-2, lost to Iowa, Minnesota)
-    'pennstate': 23.5,   # RV (3-3, lost to Wisconsin, Northwestern, USC)
-    'texasam': 23.5,     # NR (3-3, lost to Kentucky, LSU, Missouri 27-6)
-    'iowa': 22.5,        # #16 AP (5-1)
-    'washington': 21.5,  # NR (3-3)
-    'smu': 21.0,         # #22 AP (4-1)
-    'houston': 20.5,     # #18 AP (5-1)
-    'louisville': 18.0,  # RV (3-3)
-    'boisestate': 17.5,  # #24 AP (5-1)
-    'arizona': 16.5,     # RV (5-1, lost to BYU)
-    'floridastate': 16.5,# NR (3-3)
-    'clemson': 15.5,     # NR (3-2, blown out by LSU 51-10)
-    'arizonastate': 11.0,# NR (3-2)
-    'colorado': 8.5      # NR (2-3)
+# In-Season Unit Baseline Ratings (Offense, Defense, Special Teams - Calibrated to 2026 In-Season Analytics)
+# Base FBS scoring baseline is 27.0 points per game.
+# Offense: Points scored vs average FBS defense (27.0). Elite: 37-41, Stagnant/Trash: 20-27.
+# Defense: Points allowed vs average FBS offense (27.0). Elite: 8-13, Solid: 14-18, Vulnerable: 19-25.
+# Special Teams: Net scoring impact. Typically -1.0 to +1.0.
+BASELINE_UNIT_RATINGS = {
+    'ohiostate':    {'off': 41.0, 'def': 8.5,  'st': 0.1},  # #5 AP (5-1)
+    'georgia':      {'off': 38.5, 'def': 11.5, 'st': 0.5},  # #1 AP (6-0)
+    'notredame':    {'off': 39.5, 'def': 13.0, 'st': 0.3},  # #2 AP (6-0)
+    'indiana':      {'off': 38.5, 'def': 12.0, 'st': 0.5},  # #4 AP (6-0)
+    'miami':        {'off': 38.0, 'def': 13.5, 'st': 0.3},  # #3 AP (5-0)
+    'alabama':      {'off': 34.5, 'def': 13.0, 'st': -0.3}, # #7 AP (5-1)
+    'lsu':          {'off': 33.5, 'def': 12.5, 'st': 0.2},  # #21 AP (4-2, Lane Kiffin HC)
+    'olemiss':      {'off': 35.0, 'def': 18.5, 'st': 0.6},  # #10 AP (4-1, Pete Golding HC)
+    'missouri':     {'off': 32.5, 'def': 16.0, 'st': -0.3}, # #13 AP (5-1)
+    'tennessee':    {'off': 37.0, 'def': 19.5, 'st': 0.4},  # #14 AP (5-1)
+    'texastech':    {'off': 35.5, 'def': 16.5, 'st': 0.2},  # #9 AP (5-0)
+    'byu':          {'off': 33.0, 'def': 17.5, 'st': 0.3},  # #8 AP (5-0)
+    'utah':         {'off': 32.0, 'def': 17.5, 'st': 0.0},  # #11 AP (5-0)
+    'usc':          {'off': 38.0, 'def': 20.0, 'st': -0.3}, # #15 AP (6-1)
+    'oregon':       {'off': 37.0, 'def': 15.5, 'st': 0.3},  # #25 AP (3-2)
+    'oklahoma':     {'off': 31.0, 'def': 14.0, 'st': 0.4},  # RV (3-2)
+    'texas':        {'off': 26.5, 'def': 10.0, 'st': -0.5}, # #6 AP (4-1, Elite defense, stagnant offense)
+    'texasam':      {'off': 21.5, 'def': 16.8, 'st': -0.5}, # NR (3-3, Collapsed offense)
+    'michigan':     {'off': 30.0, 'def': 15.5, 'st': -0.4}, # RV (3-2)
+    'pennstate':    {'off': 31.0, 'def': 16.5, 'st': 0.5},  # RV (3-3)
+    'iowa':         {'off': 21.0, 'def': 13.5, 'st': 0.5},  # #16 AP (5-1, Elite defense, trash offense)
+    'smu':          {'off': 33.5, 'def': 19.5, 'st': -0.3}, # #22 AP (4-1)
+    'houston':      {'off': 32.0, 'def': 20.5, 'st': -0.3}, # #18 AP (5-1)
+    'louisville':   {'off': 31.5, 'def': 19.0, 'st': 0.2},  # RV (3-3)
+    'washington':   {'off': 28.5, 'def': 17.0, 'st': -0.3}, # NR (3-3)
+    'boisestate':   {'off': 31.0, 'def': 22.0, 'st': -0.3}, # #24 AP (5-1)
+    'arizona':      {'off': 30.5, 'def': 21.5, 'st': -0.4}, # RV (5-1)
+    'floridastate': {'off': 28.5, 'def': 20.5, 'st': -0.3}, # NR (3-3)
+    'clemson':      {'off': 22.5, 'def': 16.5, 'st': 0.0},  # NR (3-2, Broken offense)
+    'arizonastate': {'off': 28.0, 'def': 22.5, 'st': -0.5}, # NR (3-2)
+    'colorado':     {'off': 26.5, 'def': 25.0, 'st': -0.5}  # NR (2-3)
 }
+
+# Derived Net SP+ Baseline Ratings
+BASELINE_SP_RATINGS = {k: round(v['off'] - v['def'] + v['st'], 1) for k, v in BASELINE_UNIT_RATINGS.items()}
 
 # Stadium Home Field Advantage mapping (points - calibrated to modern college football analytics)
 STADIUM_HFA = {
@@ -1306,8 +1313,25 @@ def main():
         }
         sign = "+" if clamped_adjustment > 0 else ""
         print(f"  • {t.get('shortName', tid):<14} {baseline:>5.1f}  →  {new_rating:>5.1f}  ({sign}{clamped_adjustment:.2f} pts)")
+        u = BASELINE_UNIT_RATINGS.get(tid, {'off': 27.5, 'def': 27.5, 'st': 0.0})
+        adj_off = round(u['off'] + (clamped_adjustment * 0.55), 1)
+        adj_def = round(u['def'] - (clamped_adjustment * 0.45), 1)
+        adj_st = u['st']
         if not args.dry_run:
             t['baseSpRating'] = new_rating
+            t['offenseRating'] = adj_off
+            t['defenseRating'] = adj_def
+            t['specialTeamsRating'] = adj_st
+
+    # Ensure all 31 DB teams have calibrated unit ratings
+    for tid, t in db.items():
+        if 'offenseRating' not in t or 'defenseRating' not in t:
+            u = BASELINE_UNIT_RATINGS.get(tid, {'off': 27.5, 'def': 27.5, 'st': 0.0})
+            if not args.dry_run:
+                t['offenseRating'] = u['off']
+                t['defenseRating'] = u['def']
+                t['specialTeamsRating'] = u['st']
+                t['baseSpRating'] = round(u['off'] - u['def'] + u['st'], 2)
 
     # 5. Re-project Future Unplayed Games (With Talent Blowout Multiplier & Market Anchoring)
     unplayed_games_recalculated = 0
@@ -1349,52 +1373,38 @@ def main():
                 opp_name = db[opp_id].get('name', '').lower()
                 opp_talent = talent_map.get(opp_name, talent_map.get(db[opp_id].get('shortName', '').lower(), 650.0))
             else:
-                # 1. Search dynamic_fbs_ratings (longest keys first)
+                # 1. Search official 2026 Connelly SP+ map for opponent (all 139 FBS teams)
                 opp_school = MASCOT_REGEX.sub('', opp_lower).strip()
                 opp_words = opp_lower.split()
-                found_dynamic = None
-                if opp_lower in dynamic_fbs_ratings:
-                    found_dynamic = dynamic_fbs_ratings[opp_lower]
-                elif opp_school in dynamic_fbs_ratings:
-                    found_dynamic = dynamic_fbs_ratings[opp_school]
-                elif opp_abbr in dynamic_fbs_ratings:
-                    found_dynamic = dynamic_fbs_ratings[opp_abbr]
-                else:
-                    for k in sorted(dynamic_fbs_ratings.keys(), key=len, reverse=True):
+                sp_o_info = sp_map_2026.get(opp_lower) or sp_map_2026.get(opp_school) or sp_map_2026.get(opp_abbr) or {}
+                if not sp_o_info:
+                    for sk, sv in sp_map_2026.items():
                         # Directional qualifier guard using whole words
                         is_directional_mismatch = False
                         for prefix in ['eastern', 'western', 'northern', 'southern', 'central', 'east', 'west', 'north', 'south', 'southeast', 'southwest']:
                             in_opp = any(w == prefix for w in opp_words)
-                            in_k = any(w == prefix for w in k.split())
+                            in_k = any(w == prefix for w in sk.split())
                             if in_opp != in_k:
                                 is_directional_mismatch = True
                                 break
                         if is_directional_mismatch:
                             continue
-                        if len(k) >= 4 and (k == opp_lower or k == opp_school or k in opp_lower or (len(opp_school) >= 4 and opp_school in k)):
-                            found_dynamic = dynamic_fbs_ratings[k]
+                        if len(sk) >= 4 and (sk == opp_lower or sk == opp_school or sk in opp_lower or (len(opp_school) >= 4 and opp_school in sk)):
+                            sp_o_info = sv
                             break
 
-                if found_dynamic is not None:
-                    sp_opp = found_dynamic
-                elif raw_opp_name in NON_DB_OPPONENT_RATINGS:
-                    sp_opp = NON_DB_OPPONENT_RATINGS[raw_opp_name]
-                elif opp_abbr.upper() in NON_DB_OPPONENT_RATINGS:
-                    sp_opp = NON_DB_OPPONENT_RATINGS[opp_abbr.upper()]
+                if sp_o_info and 'rating' in sp_o_info:
+                    sp_opp = float(sp_o_info['rating'])
+                elif opp_lower in dynamic_fbs_ratings:
+                    sp_opp = dynamic_fbs_ratings[opp_lower]
+                elif opp_school in dynamic_fbs_ratings:
+                    sp_opp = dynamic_fbs_ratings[opp_school]
+                elif opp_abbr in dynamic_fbs_ratings:
+                    sp_opp = dynamic_fbs_ratings[opp_abbr]
+                elif g.get('isConf') or g.get('isBig12') or g.get('isSec') or g.get('isBigTen') or g.get('isAcc'):
+                    sp_opp = 7.5
                 else:
-                    found_rating = None
-                    for k in sorted(NON_DB_OPPONENT_RATINGS.keys(), key=len, reverse=True):
-                        if k.lower() in opp_lower or (len(opp_lower) >= 4 and opp_lower in k.lower()):
-                            found_rating = NON_DB_OPPONENT_RATINGS[k]
-                            break
-                    if found_rating is not None:
-                        sp_opp = found_rating
-                    elif g.get('isConf') or g.get('isBig12') or g.get('isSec') or g.get('isBigTen') or g.get('isAcc'):
-                        sp_opp = 12.5
-                    elif any(kw in opp_lower for kw in ['sec', 'big ten', 'big 12', 'acc', 'notre dame']):
-                        sp_opp = 12.0
-                    else:
-                        sp_opp = 2.0
+                    sp_opp = 2.0
 
                 opp_talent = talent_map.get(opp_lower, 650.0 if sp_opp >= 15.0 else 380.0)
 
@@ -1459,31 +1469,47 @@ def main():
                 g['vegasSpread'] = -projected_margin
                 g['oddsProvider'] = 'CFB Prophet Projected'
 
+            # Resolve authentic unit ratings for Team A and Opponent
+            off_a_val = t.get('offenseRating', BASELINE_UNIT_RATINGS.get(tid, {}).get('off', 27.5))
+            def_a_val = t.get('defenseRating', BASELINE_UNIT_RATINGS.get(tid, {}).get('def', 27.5))
+            st_a_val = t.get('specialTeamsRating', BASELINE_UNIT_RATINGS.get(tid, {}).get('st', 0.0))
+
+            if opp_id and opp_id in db:
+                off_b_val = db[opp_id].get('offenseRating', BASELINE_UNIT_RATINGS.get(opp_id, {}).get('off', 27.5))
+                def_b_val = db[opp_id].get('defenseRating', BASELINE_UNIT_RATINGS.get(opp_id, {}).get('def', 27.5))
+                st_b_val = db[opp_id].get('specialTeamsRating', BASELINE_UNIT_RATINGS.get(opp_id, {}).get('st', 0.0))
+            else:
+                sp_o_info = sp_map_2026.get(opp_clean) or sp_map_2026.get(opp_abbr) or sp_map_2026.get(opp_school) or {}
+                if sp_o_info and 'offense' in sp_o_info and 'defense' in sp_o_info:
+                    off_b_val = float(sp_o_info['offense'])
+                    def_b_val = float(sp_o_info['defense'])
+                    st_b_val = float(sp_o_info.get('specialTeams', 0.0))
+                elif is_fcs:
+                    off_b_val = 10.0
+                    def_b_val = 45.0
+                    st_b_val = -1.0
+                else:
+                    off_b_val = 27.5 + (0.55 * sp_opp)
+                    def_b_val = 27.5 - (0.45 * sp_opp)
+                    st_b_val = 0.0
+
             # Market-calibrated Over/Under:
             # 1. Use posted sportsbook total when available from DraftKings / Consensus
-            # 2. For unlined matchups, calibrate expected total from SP+ Off/Def ratings, tempo/pace, and weather
+            # 2. For unlined matchups, calibrate expected total from unit-level interaction & pace
             if matched_line and matched_line.get('overUnder') is not None:
                 calibrated_total = float(matched_line['overUnder'])
             else:
-                sp_t_info = sp_map_2026.get(team_clean) or sp_map_2026.get(team_short) or {}
-                sp_o_info = sp_map_2026.get(opp_clean) or sp_map_2026.get(opp_abbr) or sp_map_2026.get(opp_school) or {}
-                
-                off_a = sp_t_info.get('offense') or (28.5 + 0.55 * sp_team)
-                def_a = sp_t_info.get('defense') or (28.5 - 0.45 * sp_team)
-                off_b = sp_o_info.get('offense') or (28.5 + 0.55 * sp_opp)
-                def_b = sp_o_info.get('defense') or (28.5 - 0.45 * sp_opp)
-                
                 pace_a = monte_carlo_engine.estimate_team_pace(team_short) if monte_carlo_engine else 12.0
                 pace_b = monte_carlo_engine.estimate_team_pace(opp_abbr or opp_clean) if monte_carlo_engine else 12.0
-                pace_adj = ((pace_a + pace_b) / 2.0 - 12.0) * 3.0
-                
-                exp_a = 27.5 + (off_a - 28.5) * 0.55 - (28.5 - def_b) * 0.55
-                exp_b = 27.5 + (off_b - 28.5) * 0.55 - (28.5 - def_a) * 0.55
-                raw_tot = exp_a + exp_b + pace_adj
+                pace_factor = ((pace_a + pace_b) / 2.0) / 12.3
+
+                exp_a = max(3.0, (off_a_val + def_b_val - 27.0 + (hfa * 0.5) + st_a_val) * pace_factor)
+                exp_b = max(3.0, (off_b_val + def_a_val - 27.0 - (hfa * 0.5) + st_b_val) * pace_factor)
+                raw_tot = exp_a + exp_b
                 calibrated_total = round(raw_tot * 2) / 2.0
                 if calibrated_total % 1 == 0:
                     calibrated_total += 0.5
-                calibrated_total = max(38.5, min(74.5, calibrated_total))
+                calibrated_total = max(30.5, min(78.5, calibrated_total))
 
             g['overUnder'] = calibrated_total
             base_total = calibrated_total
@@ -1543,7 +1569,14 @@ def main():
                     havoc_b=adv_b.get('defenseHavoc', 0.15),
                     ppo_a=adv_a.get('offensePPO', 3.8),
                     ppo_b=adv_b.get('offensePPO', 3.8),
-                    projected_spread=-projected_margin
+                    projected_spread=-projected_margin,
+                    off_a=off_a_val,
+                    def_a=def_a_val,
+                    off_b=off_b_val,
+                    def_b=def_b_val,
+                    st_a=st_a_val,
+                    st_b=st_b_val,
+                    is_live_market=(matched_line is not None and matched_line.get('provider') != 'CFB Prophet Projected')
                 )
                 adj_ut_score = mc_sim['projScoreA']
                 adj_opp_score = mc_sim['projScoreB']
@@ -1569,6 +1602,9 @@ def main():
                     g['mcRecommendedOu'] = mc_sim['recommendedOu']
                     g['mcScoreDistUt'] = mc_sim['scoreDistributionA']
                     g['mcScoreDistOpp'] = mc_sim['scoreDistributionB']
+                    if g.get('oddsProvider') == 'CFB Prophet Projected':
+                        g['vegasSpread'] = mc_sim['vegasSpread']
+                        g['overUnder'] = mc_sim['vegasTotal']
                     if mc_sim.get('weather'):
                         g['weather'] = mc_sim['weather']
                     if mc_sim.get('weatherImpact'):
