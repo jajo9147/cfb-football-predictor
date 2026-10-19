@@ -188,11 +188,47 @@ WEEK7_OFFICIAL_POLL = {
     'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
-CURRENT_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
-WEEK6_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
-WEEK5_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
-WEEK4_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
-WEEK3_OFFICIAL_POLL = WEEK7_OFFICIAL_POLL
+
+# Authoritative Week 8 Official Poll (October 18, 2026 Live Release)
+WEEK8_OFFICIAL_POLL = {
+    'miami': {'apRank': '#1 AP', 'apPoints': '1,697 PTS (40 1st)', 'rankNum': 1},
+    'byu': {'apRank': '#2 AP', 'apPoints': '1,675 PTS (20 1st)', 'rankNum': 2},
+    'ohiostate': {'apRank': '#3 AP', 'apPoints': '1,649 PTS (9 1st)', 'rankNum': 3},
+    'notredame': {'apRank': '#4 AP', 'apPoints': '1,395 PTS', 'rankNum': 4},
+    'georgia': {'apRank': '#5 AP', 'apPoints': '1,382 PTS', 'rankNum': 5},
+    'indiana': {'apRank': '#6 AP', 'apPoints': '1,370 PTS', 'rankNum': 6},
+    'olemiss': {'apRank': '#7 AP', 'apPoints': '1,360 PTS', 'rankNum': 7},
+    'texastech': {'apRank': '#8 AP', 'apPoints': '1,336 PTS (1 1st)', 'rankNum': 8},
+    'utah': {'apRank': '#10 AP', 'apPoints': '1,153 PTS', 'rankNum': 10},
+    'tennessee': {'apRank': '#11 AP', 'apPoints': '1,151 PTS', 'rankNum': 11},
+    'alabama': {'apRank': '#13 AP', 'apPoints': '870 PTS', 'rankNum': 13},
+    'houston': {'apRank': '#14 AP', 'apPoints': '785 PTS', 'rankNum': 14},
+    'iowa': {'apRank': '#15 AP', 'apPoints': '747 PTS', 'rankNum': 15},
+    'usc': {'apRank': '#16 AP', 'apPoints': '592 PTS', 'rankNum': 16},
+    'lsu': {'apRank': '#18 AP', 'apPoints': '529 PTS', 'rankNum': 18},
+    'texas': {'apRank': '#19 AP', 'apPoints': '440 PTS', 'rankNum': 19},
+    'boisestate': {'apRank': '#21 AP', 'apPoints': '295 PTS', 'rankNum': 21},
+    'missouri': {'apRank': '#22 AP', 'apPoints': '290 PTS', 'rankNum': 22},
+    'smu': {'apRank': '#23 AP', 'apPoints': '265 PTS', 'rankNum': 23},
+    'arizona': {'apRank': '#25 AP', 'apPoints': '136 PTS', 'rankNum': 25},
+    'oregon': {'apRank': 'RV', 'apPoints': '79 PTS', 'rankNum': 99},
+    'texasam': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'oklahoma': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'louisville': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'michigan': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'pennstate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'washington': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
+}
+CURRENT_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
+WEEK7_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
+WEEK6_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
+WEEK5_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
+WEEK4_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
+WEEK3_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
 
 # Stadium Home Field Advantage mapping (points - calibrated to modern college football analytics)
 STADIUM_HFA = {
@@ -1105,7 +1141,7 @@ def main():
                     'rankNum': 99
                 }
     else:
-        print("  • Applying verified official Week 7 Top 25 poll (Georgia #1, Notre Dame #2, Miami #3, Indiana #4, Ohio State #5, Texas #6, Alabama #7, BYU #8)...")
+        print("  • Applying verified official Week 8 Top 25 poll (Miami #1, BYU #2, Ohio State #3, Notre Dame #4, Georgia #5, Indiana #6, Ole Miss #7, Texas Tech #8)...")
         ranking_updates = CURRENT_OFFICIAL_POLL
 
     # Apply rankings to teams in DB
@@ -1146,22 +1182,28 @@ def main():
 
     # Update opponent rankings in schedules for unplayed games
     opp_rank_updates_count = 0
-    # Also index all ranked teams from current AP poll for non-db opponents (e.g. Florida, Mississippi State)
+    # Also index all ranked teams from current AP poll for non-db opponents (e.g. UCLA, Kentucky, Wake Forest, Florida, Northwestern)
     external_ap_ranks = {
-        'florida': '#21 AP',
-        'florida gators': '#21 AP',
-        'fla': '#21 AP',
-        'mississippi state': '#24 AP',
-        'mississippi state bulldogs': '#24 AP',
-        'msst': '#24 AP'
+        'ucla': '#9 AP',
+        'ucla bruins': '#9 AP',
+        'kentucky': '#12 AP',
+        'kentucky wildcats': '#12 AP',
+        'wake forest': '#17 AP',
+        'wake forest demon deacons': '#17 AP',
+        'florida': '#20 AP',
+        'florida gators': '#20 AP',
+        'northwestern': '#24 AP',
+        'northwestern wildcats': '#24 AP',
     }
     if ap_poll:
         for r in ap_poll.get('ranks', []):
             rn = r.get('current')
             loc = (r.get('team', {}).get('location') or '').lower()
             abbr = (r.get('team', {}).get('abbreviation') or '').lower()
+            name = (r.get('team', {}).get('name') or '').lower()
             if loc: external_ap_ranks[loc] = f"#{rn} AP"
             if abbr: external_ap_ranks[abbr] = f"#{rn} AP"
+            if loc and name: external_ap_ranks[f"{loc} {name}"] = f"#{rn} AP"
 
     for tid, t in db.items():
         for g in t.get('schedule', []):
@@ -1179,14 +1221,27 @@ def main():
     # Dates to scan
     target_dates = args.dates
     if not target_dates:
-        target_dates = [
+        base_dates = [
             '20260829', '20260903', '20260904', '20260905', '20260906', '20260907',
             '20260910', '20260911', '20260912', '20260913',
             '20260917', '20260918', '20260919', '20260920',
             '20260924', '20260925', '20260926', '20260927',
             '20261001', '20261002', '20261003', '20261004',
-            '20261008', '20261009', '20261010', '20261011'
+            '20261008', '20261009', '20261010', '20261011',
+            '20261015', '20261016', '20261017', '20261018'
         ]
+        schedule_dates = set(base_dates)
+        today_date = datetime.date.today()
+        for t in db.values():
+            for g in t.get('schedule', []):
+                d_str = g.get('date', '')
+                try:
+                    dt = datetime.datetime.strptime(d_str, '%b %d, %Y').date()
+                    if dt <= today_date:
+                        schedule_dates.add(dt.strftime('%Y%m%d'))
+                except Exception:
+                    pass
+        target_dates = sorted(list(schedule_dates))
 
     all_completed_games = []
     
@@ -1595,13 +1650,13 @@ def main():
                 spread_val = matched_line['spread']
                 vegas_margin = -spread_val
                 # Strictly filter obsolete preseason summer lookahead lines:
-                # In mid-October (Week 7), any market lines for Week 8 and beyond in CFBD are summer lookaheads from July/August.
-                # Only Week 7 contains active live in-season market lines.
-                # Even for Week 7, if a line contradicts in-season ratings by > 3.0 points or reverses favorites of a > 2.0 pt model gap, discard it!
-                if week_num and week_num >= 8:
+                # In mid-October (Week 8), any market lines for Week 9 and beyond in CFBD are summer lookaheads from July/August.
+                # Only Week 8 contains active live in-season market lines.
+                # Even for Week 8, if a line contradicts in-season ratings by > 4.5 points or reverses favorites of a > 2.0 pt model gap, discard it!
+                if week_num and week_num >= 9:
                     matched_line = None
-                elif week_num == 7:
-                    if abs(raw_margin - vegas_margin) > 3.0:
+                elif week_num == 8:
+                    if abs(raw_margin - vegas_margin) > 4.5:
                         matched_line = None
                     elif (raw_margin > 2.0 and vegas_margin < -2.0) or (raw_margin < -2.0 and vegas_margin > 2.0):
                         matched_line = None
@@ -1611,7 +1666,7 @@ def main():
                 g['vegasSpread'] = spread_val
                 g['oddsProvider'] = matched_line.get('provider', 'DraftKings')
                 vegas_margin = -spread_val
-                # Week 7 live market blending: 60% model, 40% live Vegas market
+                # Week 8 live market blending: 60% model, 40% live Vegas market
                 projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
             else:
                 # Later weeks or unlined games: Pure model projection grounded in freshly calibrated ratings

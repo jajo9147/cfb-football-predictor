@@ -50,40 +50,50 @@ def main():
     with open(CALIBRATION_FILE, 'r', encoding='utf-8') as f:
         calib = json.load(f)
 
-    # Base settled games history
-    settled_games = [
-        {"week": "WEEK 0", "matchup": "Georgia Tech vs #10 Florida State", "pred": "FSU (68%)", "prob": 0.68, "actual": "GT 24 - FSU 21", "spread": 10.5, "ats": "Covered (+10.5)", "isWin": False, "scoreFav": 21, "scoreDog": 24},
-        {"week": "WEEK 0", "matchup": "#18 SMU at Nevada", "pred": "SMU (88%)", "prob": 0.88, "actual": "SMU 29 - NEV 24", "spread": -24.5, "ats": "Loss (NEV +24.5)", "isWin": True, "scoreFav": 29, "scoreDog": 24},
-        {"week": "WEEK 0", "matchup": "Hawaii vs Delaware State", "pred": "HAW (94%)", "prob": 0.94, "actual": "HAW 35 - DSU 14", "spread": -20.5, "ats": "Covered (-20.5)", "isWin": True, "scoreFav": 35, "scoreDog": 14},
-        {"week": "WEEK 1", "matchup": "#5 Texas vs Texas State", "pred": "TEX (98%)", "prob": 0.98, "actual": "TEX 52 - TXST 10", "spread": -34.5, "ats": "Covered (-34.5)", "isWin": True, "scoreFav": 52, "scoreDog": 10},
-        {"week": "WEEK 1", "matchup": "#1 Georgia vs #14 Clemson", "pred": "UGA (82%)", "prob": 0.82, "actual": "UGA 34 - CLEM 3", "spread": -13.5, "ats": "Covered (-13.5)", "isWin": True, "scoreFav": 34, "scoreDog": 3},
-        {"week": "WEEK 1", "matchup": "#23 USC vs #13 LSU (Vegas)", "pred": "USC (52%)", "prob": 0.52, "actual": "USC 27 - LSU 20", "spread": 4.5, "ats": "Covered (+4.5)", "isWin": True, "scoreFav": 27, "scoreDog": 20}
-    ]
+    # Load all finalized games dynamically from data/teams.js
+    teams_file = os.path.join(ROOT_DIR, 'data', 'teams.js')
+    settled_games = []
+    if os.path.exists(teams_file):
+        with open(teams_file, 'r', encoding='utf-8') as f:
+            text = f.read()
+        import re
+        m = re.search(r'(?:var|const)\s+TEAMS_DATABASE\s*=\s*(\{[\s\S]*?\});\s*(?:if\s*\(typeof module|\Z)', text)
+        if m:
+            db = json.loads(m.group(1))
+            seen_pairs = set()
+            for tid, t in db.items():
+                for g in t.get('schedule', []):
+                    if not g.get('isFinal'):
+                        continue
+                    s_ut = g.get('actualScoreUt', g.get('finalTeamScore'))
+                    s_opp = g.get('actualScoreOpp', g.get('finalOppScore'))
+                    if s_ut is None or s_opp is None:
+                        continue
+                    
+                    opp_id = g.get('oppId')
+                    pair_key = tuple(sorted([tid, opp_id])) if opp_id else (tid, g.get('opponent'), g.get('date'))
+                    if pair_key in seen_pairs:
+                        continue
+                    seen_pairs.add(pair_key)
 
-    # Ingest ESPN live events if final
-    espn_events = fetch_espn_scores()
-    for ev in espn_events:
-        status = ev.get('status', {}).get('type', {})
-        if status.get('completed', False):
-            comps = ev.get('competitions', [{}])[0].get('competitors', [])
-            if len(comps) == 2:
-                team1 = comps[0].get('team', {}).get('displayName', 'Team 1')
-                team2 = comps[1].get('team', {}).get('displayName', 'Team 2')
-                score1 = int(comps[0].get('score', 0))
-                score2 = int(comps[1].get('score', 0))
-                is_home_win = score1 > score2
-                settled_games.append({
-                    "week": "LIVE SETTLED",
-                    "matchup": f"{team1} vs {team2}",
-                    "pred": f"{team1 if is_home_win else team2} (75%)",
-                    "prob": 0.75,
-                    "actual": f"{team1} {score1} - {team2} {score2}",
-                    "spread": -3.5,
-                    "ats": "Settled",
-                    "isWin": is_home_win,
-                    "scoreFav": max(score1, score2),
-                    "scoreDog": min(score1, score2)
-                })
+                    prob = float(g.get('baseWinProb', 50)) / 100.0
+                    is_win = int(s_ut) > int(s_opp)
+                    spread = float(g.get('vegasSpread', -3.5))
+                    margin = int(s_ut) - int(s_opp)
+                    ats_cover = (margin > spread)
+
+                    settled_games.append({
+                        'week': g.get('week'),
+                        'matchup': f"{t.get('name')} vs {g.get('opponent')}",
+                        'pred': f"{t.get('shortName')} ({int(prob*100)}%)",
+                        'prob': prob,
+                        'actual': f"{s_ut} - {s_opp}",
+                        'spread': spread,
+                        'ats': 'Covered' if ats_cover else 'Loss',
+                        'isWin': is_win,
+                        'scoreFav': max(int(s_ut), int(s_opp)),
+                        'scoreDog': min(int(s_ut), int(s_opp))
+                    })
 
     # Compute Brier Score & Accuracy Metrics
     n = len(settled_games)
