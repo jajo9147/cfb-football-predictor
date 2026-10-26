@@ -223,12 +223,48 @@ WEEK8_OFFICIAL_POLL = {
     'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
-CURRENT_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
-WEEK7_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
-WEEK6_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
-WEEK5_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
-WEEK4_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
-WEEK3_OFFICIAL_POLL = WEEK8_OFFICIAL_POLL
+
+# Authoritative Week 9 Official Poll (October 25, 2026 Live Release)
+WEEK9_OFFICIAL_POLL = {
+    'miami': {'apRank': '#1 AP', 'apPoints': '1,735 PTS (59 1st)', 'rankNum': 1},
+    'ohiostate': {'apRank': '#2 AP', 'apPoints': '1,681 PTS (10 1st)', 'rankNum': 2},
+    'georgia': {'apRank': '#3 AP', 'apPoints': '1,511 PTS', 'rankNum': 3},
+    'indiana': {'apRank': '#4 AP', 'apPoints': '1,459 PTS', 'rankNum': 4},
+    'notredame': {'apRank': '#5 AP', 'apPoints': '1,458 PTS', 'rankNum': 5},
+    'utah': {'apRank': '#6 AP', 'apPoints': '1,413 PTS (1 1st)', 'rankNum': 6},
+    'byu': {'apRank': '#8 AP', 'apPoints': '1,325 PTS', 'rankNum': 8},
+    'alabama': {'apRank': '#10 AP', 'apPoints': '1,063 PTS', 'rankNum': 10},
+    'texas': {'apRank': '#11 AP', 'apPoints': '966 PTS', 'rankNum': 11},
+    'olemiss': {'apRank': '#12 AP', 'apPoints': '871 PTS', 'rankNum': 12},
+    'texastech': {'apRank': '#13 AP', 'apPoints': '861 PTS', 'rankNum': 13},
+    'lsu': {'apRank': '#15 AP', 'apPoints': '813 PTS', 'rankNum': 15},
+    'tennessee': {'apRank': '#16 AP', 'apPoints': '662 PTS', 'rankNum': 16},
+    'houston': {'apRank': '#18 AP', 'apPoints': '491 PTS', 'rankNum': 18},
+    'smu': {'apRank': '#19 AP', 'apPoints': '440 PTS', 'rankNum': 19},
+    'boisestate': {'apRank': '#20 AP', 'apPoints': '422 PTS', 'rankNum': 20},
+    'arizona': {'apRank': '#22 AP', 'apPoints': '400 PTS', 'rankNum': 22},
+    'missouri': {'apRank': '#23 AP', 'apPoints': '329 PTS', 'rankNum': 23},
+    'iowa': {'apRank': 'RV', 'apPoints': '76 PTS', 'rankNum': 99},
+    'usc': {'apRank': 'RV', 'apPoints': '7 PTS', 'rankNum': 99},
+    'oregon': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'texasam': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'oklahoma': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'louisville': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'michigan': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'pennstate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'washington': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
+}
+CURRENT_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
+WEEK8_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
+WEEK7_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
+WEEK6_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
+WEEK5_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
+WEEK4_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
+WEEK3_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
 
 # Stadium Home Field Advantage mapping (points - calibrated to modern college football analytics)
 STADIUM_HFA = {
@@ -1085,9 +1121,9 @@ def main():
             print(f"🔥 CFBD Ingestion: Loaded {len(talent_map)} teams with 2026 247Sports Talent Composite")
             sp_map_2026 = cfbd_client.get_sp_ratings(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(sp_map_2026)} teams with 2026 Official SP+ Ratings")
-            cum_adv_stats = cfbd_client.get_cumulative_advanced_stats(2026, weeks=[0, 1, 2, 3, 4, 5])
-            print(f"🔥 CFBD Ingestion: Loaded cumulative multi-week EPA/PPA for {len(cum_adv_stats)} teams (Weeks 0-5)")
-            drive_eff_metrics = cfbd_client.get_drive_level_efficiency_metrics(2026, weeks=[1, 2, 3, 4, 5])
+            cum_adv_stats = cfbd_client.get_cumulative_advanced_stats(2026, weeks=[0, 1, 2, 3, 4, 5, 6, 7, 8])
+            print(f"🔥 CFBD Ingestion: Loaded cumulative multi-week EPA/PPA for {len(cum_adv_stats)} teams (Weeks 0-8)")
+            drive_eff_metrics = cfbd_client.get_drive_level_efficiency_metrics(2026, weeks=[1, 2, 3, 4, 5, 6, 7, 8])
             print(f"🔥 CFBD Ingestion: Loaded drive-level down consistency, PPA, and DQI for {len(drive_eff_metrics)} teams")
             dynamic_fbs_ratings = cfbd_client.get_fbs_opponent_power_ratings(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(dynamic_fbs_ratings)} dynamic 2026 FBS opponent ratings grounded in SP+ & 2026 records")
@@ -1141,7 +1177,7 @@ def main():
                     'rankNum': 99
                 }
     else:
-        print("  • Applying verified official Week 8 Top 25 poll (Miami #1, BYU #2, Ohio State #3, Notre Dame #4, Georgia #5, Indiana #6, Ole Miss #7, Texas Tech #8)...")
+        print("  • Applying verified official Week 9 Top 25 poll (Miami #1, Ohio State #2, Georgia #3, Indiana #4, Notre Dame #5, Utah #6, UCLA #7, BYU #8)...")
         ranking_updates = CURRENT_OFFICIAL_POLL
 
     # Apply rankings to teams in DB
@@ -1182,18 +1218,22 @@ def main():
 
     # Update opponent rankings in schedules for unplayed games
     opp_rank_updates_count = 0
-    # Also index all ranked teams from current AP poll for non-db opponents (e.g. UCLA, Kentucky, Wake Forest, Florida, Northwestern)
+    # Also index all ranked teams from current AP poll for non-db opponents (e.g. UCLA, Kentucky, Wake Forest, Florida, Northwestern, Oklahoma State, Wisconsin)
     external_ap_ranks = {
-        'ucla': '#9 AP',
-        'ucla bruins': '#9 AP',
-        'kentucky': '#12 AP',
-        'kentucky wildcats': '#12 AP',
-        'wake forest': '#17 AP',
-        'wake forest demon deacons': '#17 AP',
-        'florida': '#20 AP',
-        'florida gators': '#20 AP',
-        'northwestern': '#24 AP',
-        'northwestern wildcats': '#24 AP',
+        'ucla': '#7 AP',
+        'ucla bruins': '#7 AP',
+        'kentucky': '#9 AP',
+        'kentucky wildcats': '#9 AP',
+        'wake forest': '#14 AP',
+        'wake forest demon deacons': '#14 AP',
+        'florida': '#17 AP',
+        'florida gators': '#17 AP',
+        'northwestern': '#20 AP',
+        'northwestern wildcats': '#20 AP',
+        'oklahoma state': '#24 AP',
+        'oklahoma state cowboys': '#24 AP',
+        'wisconsin': '#25 AP',
+        'wisconsin badgers': '#25 AP',
     }
     if ap_poll:
         for r in ap_poll.get('ranks', []):
@@ -1228,7 +1268,8 @@ def main():
             '20260924', '20260925', '20260926', '20260927',
             '20261001', '20261002', '20261003', '20261004',
             '20261008', '20261009', '20261010', '20261011',
-            '20261015', '20261016', '20261017', '20261018'
+            '20261015', '20261016', '20261017', '20261018',
+            '20261022', '20261023', '20261024', '20261025'
         ]
         schedule_dates = set(base_dates)
         today_date = datetime.date.today()
@@ -1650,12 +1691,12 @@ def main():
                 spread_val = matched_line['spread']
                 vegas_margin = -spread_val
                 # Strictly filter obsolete preseason summer lookahead lines:
-                # In mid-October (Week 8), any market lines for Week 9 and beyond in CFBD are summer lookaheads from July/August.
-                # Only Week 8 contains active live in-season market lines.
-                # Even for Week 8, if a line contradicts in-season ratings by > 4.5 points or reverses favorites of a > 2.0 pt model gap, discard it!
-                if week_num and week_num >= 9:
+                # In late October (Week 9), any market lines for Week 10 and beyond in CFBD are summer lookaheads from July/August.
+                # Only Week 9 contains active live in-season market lines.
+                # Even for Week 9, if a line contradicts in-season ratings by > 4.5 points or reverses favorites of a > 2.0 pt model gap, discard it!
+                if week_num and week_num >= 10:
                     matched_line = None
-                elif week_num == 8:
+                elif week_num == 9:
                     if abs(raw_margin - vegas_margin) > 4.5:
                         matched_line = None
                     elif (raw_margin > 2.0 and vegas_margin < -2.0) or (raw_margin < -2.0 and vegas_margin > 2.0):
@@ -1666,7 +1707,7 @@ def main():
                 g['vegasSpread'] = spread_val
                 g['oddsProvider'] = matched_line.get('provider', 'DraftKings')
                 vegas_margin = -spread_val
-                # Week 8 live market blending: 60% model, 40% live Vegas market
+                # Week 9 live market blending: 60% model, 40% live Vegas market
                 projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
             else:
                 # Later weeks or unlined games: Pure model projection grounded in freshly calibrated ratings

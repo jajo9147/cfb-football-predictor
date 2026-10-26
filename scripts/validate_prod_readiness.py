@@ -150,7 +150,7 @@ def run_inspections():
     print(f"  • Verified logo URLs and opponent isolation for all {total_games} games.")
 
     # 4. Authentic AP Rankings Verification
-    print("\n[3/7] 🏆 Validating Week 8 AP Top 25 & RV Poll Precision...")
+    print("\n[3/7] 🏆 Validating Week 9 AP Top 25 & RV Poll Precision...")
     for tid, exp_rank in EXPECTED_AP_POLL.items():
         if tid not in db:
             errors.append(f"Missing expected tracked team: {tid}")
@@ -159,7 +159,7 @@ def run_inspections():
         if act_rank != exp_rank:
             errors.append(f"Rank Mismatch for {tid}: Expected '{exp_rank}', found '{act_rank}'")
 
-    print("  • Verified AP rankings match official Week 8 release.")
+    print("  • Verified AP rankings match official Week 9 release.")
 
     # 5. Rosters, Star Players, & Coaching Staffs
     print("\n[4/7] 🏈 Inspecting 2026 Roster, QB, and Coaching Staff Integrity...")
