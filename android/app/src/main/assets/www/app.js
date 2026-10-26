@@ -1728,11 +1728,62 @@ function renderSchedule() {
     }
 
     if (hasFinalScores) {
-      if (!isPredictionCorrect) {
-        card.classList.add('prediction-wrong-card');
-      } else {
-        card.classList.add('prediction-correct-card');
-      }
+      card.className = `game-card completed-game-card ${actualWin ? 'result-win' : 'result-loss'}`;
+      card.innerHTML = `
+        <div class="completed-card-inner">
+          <div class="completed-card-left">
+            <div class="completed-card-meta">
+              <span class="completed-week-lbl">${game.week} • ${formatGameDateWithTime(game)}</span>
+              <span class="completed-venue-lbl">${game.isHome ? 'vs' : '@'} ${game.stadium || (game.isHome ? team.stadium : game.opponent)}</span>
+            </div>
+            <div class="completed-matchup">
+              <div class="completed-team-item ${actualWin ? 'team-winner' : 'team-loser'}">
+                <span class="completed-logo-wrap" style="border: 1.5px solid ${team.colors.primary};">
+                  <img src="${team.logoUrl}" alt="${team.abbr}" class="completed-mini-logo">
+                </span>
+                <span class="completed-abbr">${team.abbr}</span>
+                <span class="completed-score">${actualUt}</span>
+              </div>
+              <span class="completed-dash">-</span>
+              <div class="completed-team-item ${!actualWin ? 'team-winner' : 'team-loser'}">
+                <span class="completed-score">${actualOpp}</span>
+                <span class="completed-abbr">${game.oppAbbr}</span>
+                <span class="completed-logo-wrap" style="border: 1.5px solid ${game.oppColor || '#475569'};">
+                  <img src="${game.oppLogoUrl || ''}" alt="${game.oppAbbr}" class="completed-mini-logo">
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-card-right">
+            <div class="completed-pills-row">
+              <span class="result-pill ${actualWin ? 'win' : 'loss'}">
+                ${actualWin ? 'W' : 'L'} ${actualUt}-${actualOpp}
+              </span>
+              <span class="pred-pill ${isPredictionCorrect ? 'hit' : 'miss'}" title="${isPredictionCorrect ? 'Model straight-up prediction hit (+10 PTS)' : 'Model straight-up prediction missed (0 PTS)'}">
+                <i class="fa-solid ${isPredictionCorrect ? 'fa-check' : 'fa-xmark'}"></i>
+                ${isPredictionCorrect ? 'Pick Hit' : 'Pick Miss'}
+              </span>
+              ${typeof game.vegasSpread === 'number' ? `
+                <span class="ats-pill ${spreadHit ? 'hit' : 'miss'}" title="${spreadCoverText}">
+                  <i class="fa-solid ${spreadHit ? 'fa-bolt' : 'fa-minus'}"></i>
+                  ${spreadHit ? 'Covered' : 'ATS Miss'}
+                </span>
+              ` : ''}
+            </div>
+            <div class="completed-meta-sub">
+              <span class="completed-proj-sub">Proj: ${predUt}-${predOpp}</span>
+              <span class="completed-box-btn">Box Score <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      card.addEventListener('click', () => {
+        openSimModal(game);
+      });
+      grid.appendChild(card);
+      return;
     }
 
     let badgeHtml = `<span>${game.isHome ? 'HOME' : 'AWAY'}</span>`;
