@@ -4435,8 +4435,22 @@ function renderConferenceChampionships(ccgResults) {
 function generate12TeamCfpField(confChamps, evaluatedTeams) {
   // CFP Selection Committee Resume Grading Algorithm
   function calcCommitteeScore(t) {
-    // Official CFP Protocol: Teams participating in CCGs are NOT penalized for an extra 13th game loss
-    const l = t.isCcgRunnerUp ? t.losses : (t.totalLosses !== undefined ? t.totalLosses : t.losses);
+    // FCS Cupcake Penalty: NCAA allows max 1 FCS win for bowl credit; scheduling >= 2 FCS opponents severely dilutes SOS/SOR
+    let fcsCount = 0;
+    if (t.schedule && Array.isArray(t.schedule)) {
+      fcsCount = t.schedule.filter(g => g.oppRank === 'FCS' || g.oppBadge === 'FCS' || (g.opponent && g.opponent.includes('FCS'))).length;
+    } else if (typeof TEAMS_DATABASE !== 'undefined' && TEAMS_DATABASE[t.id]?.schedule) {
+      fcsCount = TEAMS_DATABASE[t.id].schedule.filter(g => g.oppRank === 'FCS' || g.oppBadge === 'FCS' || (g.opponent && g.opponent.includes('FCS'))).length;
+    }
+    const fcsPenalty = fcsCount >= 2 ? 3000 : 0;
+
+    // Official CFP Protocol: CCG runner-up loss protection
+    // Elite teams with <= 1 regular-season loss (11-1 / 12-0) or elite P4 SOS (SEC/Big Ten or baseSpRating >= 16.0 without FCS traps)
+    // are shielded from an extra 13th-game penalty.
+    // However, multi-loss teams with weak non-conf schedules (e.g. 2 regular-season losses + 2 FCS games like SMU) do not receive immunity.
+    const hasFcsTrap = fcsCount >= 2;
+    const isProtectedCcgRunnerUp = t.isCcgRunnerUp && (t.losses <= 1 || (!hasFcsTrap && (t.conf === 'SEC' || t.conf === 'Big Ten' || (t.baseSpRating || 0) >= 16.0)));
+    const l = isProtectedCcgRunnerUp ? t.losses : (t.totalLosses !== undefined ? t.totalLosses : t.losses);
     const w = t.totalWins !== undefined ? t.totalWins : t.wins;
     const apRankStr = t.apRank || '';
     const rMatch = apRankStr.match(/\d+/);
@@ -4447,8 +4461,10 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
     if (l === 0) lossPts = 20000;
     else if (l === 1) lossPts = 15000;
     else if (l === 2) lossPts = 10000;
-    else if (l === 3) lossPts = 1000; // Severe 3-loss penalty; never jumps 1/2 loss teams
-    else lossPts = 0;
+    else if (l === 3) {
+      // Elite 3-loss SEC/Big Ten teams with top-12 AP rankings remain competitive for at-large consideration
+      lossPts = (rNum <= 12 && (t.conf === 'SEC' || t.conf === 'Big Ten')) ? 5500 : 1000;
+    } else lossPts = 0;
 
     // AP Poll prestige tier
     let rankPts = 0;
@@ -4469,7 +4485,7 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
     const sp = t.baseSpRating || 22.0;
     const sumDiff = t.sumDiff || 0;
 
-    return lossPts + rankPts + confPts + (sp * 60) + (sumDiff * 2) + (w * 50);
+    return lossPts + rankPts + confPts + (sp * 60) + (sumDiff * 2) + (w * 50) - fcsPenalty;
   }
 
   // 1. Resolve 5 conference champions
@@ -4521,13 +4537,18 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
   const autoChampIds = new Set([seed1?.id, seed2?.id, seed3?.id, seed4?.id, fifthChamp?.id].filter(Boolean));
 
   // 3. 7 At-Large Bids: strictly Power 4 and Notre Dame (G5 unranked teams cannot earn At-Large bids)
-  // HARD RULE: No team with 3+ regular season losses (e.g. 9-3 TAMU) is eligible for an at-large bid
+  // Eligible teams: <= 2 regular season losses, OR elite 3-loss SEC/Big Ten teams with AP Rank <= 12 and SP+ >= 17.0
   const atLargePool = evaluatedTeams.filter(t => {
     const regLosses = t.losses !== undefined ? t.losses : t.totalLosses;
+    const apRankStr = t.apRank || '';
+    const rMatch = apRankStr.match(/\d+/);
+    const rNum = (apRankStr.includes('#') && rMatch) ? parseInt(rMatch[0], 10) : 99;
+    const isElite3Loss = regLosses === 3 && rNum <= 12 && (t.conf === 'SEC' || t.conf === 'Big Ten') && (t.baseSpRating || 0) >= 17.0;
+
     return t.conf !== 'Mountain West' &&
            !autoChampIds.has(t.id) &&
            t.id !== 'boisestate' &&
-           regLosses <= 2;  // 3-loss teams are categorically excluded
+           (regLosses <= 2 || isElite3Loss);
   });
   atLargePool.sort((a, b) => calcCommitteeScore(b) - calcCommitteeScore(a));
 
