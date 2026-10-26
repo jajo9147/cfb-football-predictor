@@ -466,6 +466,16 @@ body.modal-open {
   overflow: hidden !important;
   height: 100vh !important;
   height: 100dvh !important;
+  padding-bottom: 0 !important;
+}
+
+body.modal-open .mobile-bottom-dock,
+body.modal-open #mobileBottomDock {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(120%) !important;
 }
 
 .container {
@@ -2331,11 +2341,12 @@ select option {
   background: rgba(4, 7, 13, 0.95) !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
-  z-index: 99999 !important;
+  z-index: 100000 !important;
   display: none !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 0.75rem !important;
+  padding-bottom: max(1.25rem, calc(env(safe-area-inset-bottom, 0px) + 0.85rem)) !important;
   box-sizing: border-box !important;
   overflow-x: hidden !important;
   overflow-y: auto !important;
@@ -2355,9 +2366,11 @@ select option {
   width: 100% !important;
   max-width: 800px;
   max-height: 90vh;
+  max-height: 90dvh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding: 1.5rem;
+  padding-bottom: max(1.75rem, calc(env(safe-area-inset-bottom, 0px) + 1.25rem));
   position: relative;
   display: flex;
   flex-direction: column;
@@ -2596,6 +2609,7 @@ select option {
   justify-content: center;
   border-top: 1px solid var(--color-border);
   padding-top: 1rem;
+  padding-bottom: max(0.5rem, calc(env(safe-area-inset-bottom, 0px) + 0.35rem));
   margin-top: 0.5rem;
   flex-shrink: 0;
   width: 100%;
@@ -4124,12 +4138,15 @@ select option {
   /* Responsive Matchup Modal & KPI Sub-Tabs (< 768px) */
   .modal-backdrop {
     padding: 0.5rem;
+    padding-bottom: max(1.5rem, calc(env(safe-area-inset-bottom, 0px) + 1.25rem)) !important;
     align-items: center;
   }
 
   .modal-dialog {
-    padding: 1rem 0.85rem 1.25rem;
-    max-height: 94vh;
+    padding: 1rem 0.85rem;
+    padding-bottom: max(2rem, calc(env(safe-area-inset-bottom, 0px) + 1.75rem)) !important;
+    max-height: 92vh;
+    max-height: calc(100dvh - 2rem);
     border-radius: var(--radius-lg);
     gap: 0.75rem;
   }
@@ -5643,7 +5660,7 @@ select option {
   right: 0 !important;
   width: 100% !important;
   height: 60px !important;
-  z-index: 99999 !important;
+  z-index: 9990 !important;
   background: #090D16 !important;
   border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
   box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.7) !important;
@@ -5652,6 +5669,23 @@ select option {
   justify-content: space-around !important;
   align-items: center !important;
   pointer-events: auto !important;
+  transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* When ANY modal is open, completely suppress and hide the mobile bottom navigation dock */
+body.modal-open .mobile-bottom-dock,
+body.modal-open #mobileBottomDock,
+body:has(.modal-backdrop.open) .mobile-bottom-dock,
+body:has(.modal-backdrop.open) #mobileBottomDock,
+body:has(.modal-backdrop[style*="display: flex"]) .mobile-bottom-dock,
+body:has(.modal-backdrop[style*="display: block"]) .mobile-bottom-dock,
+.modal-backdrop.open ~ .mobile-bottom-dock,
+.modal-backdrop.open ~ * .mobile-bottom-dock {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(120%) !important;
 }
 
 .dock-btn {
@@ -5695,7 +5729,8 @@ select option {
 body {
   padding-bottom: 80px !important;
 }
-  
+
+@media (max-width: 768px) {
   .mobile-playoff-round-tabs {
     display: flex;
   }

@@ -2689,6 +2689,13 @@ function openSimModal(game) {
   const modalEl = document.getElementById('simModal');
   if (!modalEl) return;
 
+  document.body.classList.add('modal-open');
+  const dock = document.getElementById('mobileBottomDock');
+  if (dock) {
+    dock.style.setProperty('display', 'none', 'important');
+    dock.style.setProperty('pointer-events', 'none', 'important');
+  }
+
   try {
     let team1, team2;
     let score1, score2, prob1, isTeam1Win;
@@ -3881,10 +3888,30 @@ function closeSimModal() {
   const modal = document.getElementById('simModal');
   if (modal) modal.classList.remove('open');
   document.body.classList.remove('modal-open');
+  const dock = document.getElementById('mobileBottomDock');
+  if (dock) {
+    dock.style.removeProperty('display');
+    dock.style.removeProperty('pointer-events');
+  }
   recalculateSeason();
 }
 window.closeSimModal = closeSimModal;
 window.closeGameModal = closeSimModal;
+
+function syncUniversalModalDock() {
+  const anyModalOpen = !!document.querySelector('.modal-backdrop.open') || document.body.classList.contains('modal-open');
+  const dock = document.getElementById('mobileBottomDock');
+  if (dock) {
+    if (anyModalOpen) {
+      dock.style.setProperty('display', 'none', 'important');
+      dock.style.setProperty('pointer-events', 'none', 'important');
+    } else {
+      dock.style.removeProperty('display');
+      dock.style.removeProperty('pointer-events');
+    }
+  }
+}
+window.syncUniversalModalDock = syncUniversalModalDock;
 
 function initModalActions() {
   const closeBtn = document.getElementById('closeSimModalBtn');
@@ -3938,6 +3965,26 @@ function initModalActions() {
       window.closeSimModal();
     }
   });
+
+  // Universal guard: observe body class and modal states to ensure dock is suppressed
+  try {
+    const modalObserver = new MutationObserver(() => {
+      syncUniversalModalDock();
+    });
+    modalObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class'],
+      subtree: false
+    });
+    document.querySelectorAll('.modal-backdrop').forEach(m => {
+      modalObserver.observe(m, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+      });
+    });
+  } catch (e) {
+    console.warn('MutationObserver not available for dock guard:', e);
+  }
 }
 
 // ==========================================================================
@@ -5160,6 +5207,7 @@ function closeHypeCardModal() {
   const modal = document.getElementById('hypeCardModal');
   if (modal) modal.classList.remove('open');
   document.body.classList.remove('modal-open');
+  if (typeof syncUniversalModalDock === 'function') syncUniversalModalDock();
 }
 window.closeHypeCardModal = closeHypeCardModal;
 
