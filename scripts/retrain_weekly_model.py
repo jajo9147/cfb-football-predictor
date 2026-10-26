@@ -1877,7 +1877,12 @@ def main():
                     g['mcScoreDistUt'] = mc_sim['scoreDistributionA']
                     g['mcScoreDistOpp'] = mc_sim['scoreDistributionB']
                     if g.get('oddsProvider') == 'CFB Prophet Projected':
-                        g['vegasSpread'] = mc_sim['vegasSpread']
+                        sp_val = mc_sim['vegasSpread']
+                        if adj_ut_score > adj_opp_score and sp_val > 0:
+                            sp_val = -abs(sp_val)
+                        elif adj_ut_score < adj_opp_score and sp_val < 0:
+                            sp_val = abs(sp_val)
+                        g['vegasSpread'] = sp_val
                         g['overUnder'] = mc_sim['vegasTotal']
                     if mc_sim.get('weather'):
                         g['weather'] = mc_sim['weather']

@@ -11575,6 +11575,289 @@
       },
       "unplayedGamesRecalculated": 161,
       "blowoutGamesCalibrated": 5
+    },
+    {
+      "timestamp": "2026-10-26T14:50:17.215994+00:00",
+      "gamesEvaluated": 492,
+      "modelMae": 13.85,
+      "vegasMae": 11.79,
+      "modelBeatVegasPct": 37.4,
+      "ratingShifts": {
+        "byu": {
+          "old": 13.9,
+          "new": 13.9,
+          "delta": 0.0,
+          "offense": 31.7,
+          "defense": 18.1,
+          "specialTeams": 0.3
+        },
+        "texas": {
+          "old": 17.0,
+          "new": 17.0,
+          "delta": 0.0,
+          "offense": 34.4,
+          "defense": 17.8,
+          "specialTeams": 0.4
+        },
+        "michigan": {
+          "old": 6.0,
+          "new": 6.0,
+          "delta": 0.0,
+          "offense": 25.3,
+          "defense": 18.8,
+          "specialTeams": -0.5
+        },
+        "ohiostate": {
+          "old": 27.6,
+          "new": 27.6,
+          "delta": 0.0,
+          "offense": 39.5,
+          "defense": 12.0,
+          "specialTeams": 0.1
+        },
+        "georgia": {
+          "old": 24.9,
+          "new": 24.9,
+          "delta": 0.0,
+          "offense": 37.8,
+          "defense": 13.5,
+          "specialTeams": 0.6
+        },
+        "alabama": {
+          "old": 22.9,
+          "new": 22.9,
+          "delta": 0.0,
+          "offense": 39.6,
+          "defense": 16.3,
+          "specialTeams": -0.4
+        },
+        "oregon": {
+          "old": 12.5,
+          "new": 12.5,
+          "delta": 0.0,
+          "offense": 32.0,
+          "defense": 19.8,
+          "specialTeams": 0.3
+        },
+        "pennstate": {
+          "old": 1.8,
+          "new": 1.8,
+          "delta": 0.0,
+          "offense": 27.3,
+          "defense": 26.1,
+          "specialTeams": 0.6
+        },
+        "notredame": {
+          "old": 26.1,
+          "new": 26.1,
+          "delta": 0.0,
+          "offense": 40.8,
+          "defense": 15.0,
+          "specialTeams": 0.3
+        },
+        "lsu": {
+          "old": 24.8,
+          "new": 24.8,
+          "delta": 0.0,
+          "offense": 38.2,
+          "defense": 13.6,
+          "specialTeams": 0.2
+        },
+        "tennessee": {
+          "old": 17.6,
+          "new": 17.6,
+          "delta": 0.0,
+          "offense": 33.6,
+          "defense": 16.4,
+          "specialTeams": 0.4
+        },
+        "indiana": {
+          "old": 18.2,
+          "new": 18.2,
+          "delta": 0.0,
+          "offense": 31.3,
+          "defense": 13.6,
+          "specialTeams": 0.5
+        },
+        "miami": {
+          "old": 22.2,
+          "new": 22.2,
+          "delta": 0.0,
+          "offense": 37.4,
+          "defense": 15.5,
+          "specialTeams": 0.3
+        },
+        "texasam": {
+          "old": 4.5,
+          "new": 4.5,
+          "delta": 0.0,
+          "offense": 26.2,
+          "defense": 21.4,
+          "specialTeams": -0.3
+        },
+        "olemiss": {
+          "old": 17.9,
+          "new": 17.9,
+          "delta": 0.0,
+          "offense": 38.9,
+          "defense": 21.7,
+          "specialTeams": 0.7
+        },
+        "oklahoma": {
+          "old": 5.8,
+          "new": 5.8,
+          "delta": 0.0,
+          "offense": 25.5,
+          "defense": 20.1,
+          "specialTeams": 0.4
+        },
+        "boisestate": {
+          "old": 5.5,
+          "new": 5.5,
+          "delta": 0.0,
+          "offense": 30.6,
+          "defense": 24.8,
+          "specialTeams": -0.3
+        },
+        "usc": {
+          "old": 9.9,
+          "new": 9.9,
+          "delta": 0.0,
+          "offense": 34.2,
+          "defense": 24.0,
+          "specialTeams": -0.3
+        },
+        "floridastate": {
+          "old": 3.7,
+          "new": 3.7,
+          "delta": 0.0,
+          "offense": 33.6,
+          "defense": 29.6,
+          "specialTeams": -0.3
+        },
+        "clemson": {
+          "old": -3.6,
+          "new": -3.6,
+          "delta": 0.0,
+          "offense": 24.1,
+          "defense": 28.0,
+          "specialTeams": 0.3
+        },
+        "smu": {
+          "old": 10.0,
+          "new": 10.0,
+          "delta": 0.0,
+          "offense": 31.0,
+          "defense": 20.6,
+          "specialTeams": -0.4
+        },
+        "texastech": {
+          "old": 17.5,
+          "new": 17.5,
+          "delta": 0.0,
+          "offense": 35.3,
+          "defense": 18.0,
+          "specialTeams": 0.2
+        },
+        "utah": {
+          "old": 11.5,
+          "new": 11.5,
+          "delta": 0.0,
+          "offense": 32.0,
+          "defense": 20.5,
+          "specialTeams": 0.0
+        },
+        "iowa": {
+          "old": 7.9,
+          "new": 7.9,
+          "delta": 0.0,
+          "offense": 27.7,
+          "defense": 20.4,
+          "specialTeams": 0.6
+        },
+        "missouri": {
+          "old": 12.9,
+          "new": 12.9,
+          "delta": 0.0,
+          "offense": 31.0,
+          "defense": 17.6,
+          "specialTeams": -0.5
+        },
+        "arizona": {
+          "old": 11.1,
+          "new": 11.1,
+          "delta": 0.0,
+          "offense": 32.9,
+          "defense": 21.3,
+          "specialTeams": -0.5
+        },
+        "washington": {
+          "old": 5.9,
+          "new": 5.9,
+          "delta": 0.0,
+          "offense": 29.9,
+          "defense": 23.7,
+          "specialTeams": -0.3
+        },
+        "houston": {
+          "old": 9.0,
+          "new": 9.0,
+          "delta": 0.0,
+          "offense": 31.1,
+          "defense": 21.7,
+          "specialTeams": -0.4
+        },
+        "louisville": {
+          "old": 8.9,
+          "new": 8.9,
+          "delta": 0.0,
+          "offense": 34.3,
+          "defense": 25.6,
+          "specialTeams": 0.2
+        },
+        "colorado": {
+          "old": -13.3,
+          "new": -13.3,
+          "delta": 0.0,
+          "offense": 19.0,
+          "defense": 31.8,
+          "specialTeams": -0.5
+        },
+        "arizonastate": {
+          "old": -4.5,
+          "new": -4.5,
+          "delta": 0.0,
+          "offense": 26.3,
+          "defense": 30.2,
+          "specialTeams": -0.6
+        },
+        "ucla": {
+          "old": 13.4,
+          "new": 13.4,
+          "delta": 0.0,
+          "offense": 33.1,
+          "defense": 19.7,
+          "specialTeams": 0.0
+        },
+        "kentucky": {
+          "old": 11.0,
+          "new": 11.0,
+          "delta": 0.0,
+          "offense": 33.9,
+          "defense": 22.9,
+          "specialTeams": 0.0
+        },
+        "wakeforest": {
+          "old": 6.7,
+          "new": 6.7,
+          "delta": 0.0,
+          "offense": 29.2,
+          "defense": 22.5,
+          "specialTeams": 0.0
+        }
+      },
+      "unplayedGamesRecalculated": 161,
+      "blowoutGamesCalibrated": 5
     }
   ]
 }
