@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-10-26T13:02:09.518003+00:00",
+  "updatedAt": "2026-10-26T13:25:09.526328+00:00",
   "season": 2026,
   "overallStats": {
-    "totalGames": 185,
-    "straightUpWins": 149,
+    "totalGames": 200,
+    "straightUpWins": 164,
     "straightUpLosses": 36,
-    "straightUpPct": 80.5,
-    "atsWins": 165,
-    "atsLosses": 20,
-    "atsPct": 89.2,
-    "brierScore": 0.142,
+    "straightUpPct": 82.0,
+    "atsWins": 179,
+    "atsLosses": 21,
+    "atsPct": 89.5,
+    "brierScore": 0.146,
     "brierGrade": "Good (< 0.150)",
-    "logLoss": 0.44
+    "logLoss": 0.45
   },
   "calibrationBins": [
     {
@@ -22,9 +22,9 @@
     },
     {
       "binRange": "60% - 70%",
-      "predictedProbAvg": 65.9,
-      "actualWinFreq": 47.1,
-      "sampleSize": 17
+      "predictedProbAvg": 65.6,
+      "actualWinFreq": 65.4,
+      "sampleSize": 26
     },
     {
       "binRange": "70% - 80%",
@@ -610,7 +610,7 @@
       "pred": "Alabama (82%)",
       "prob": 0.82,
       "actual": "31 - 20",
-      "spread": -10.4,
+      "spread": -2.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 31,
@@ -2488,6 +2488,201 @@
       "scoreFav": 28,
       "scoreDog": 17,
       "brier": "0.706"
+    },
+    {
+      "week": "WEEK 1",
+      "matchup": "UCLA Bruins vs California Golden Bears",
+      "pred": "UCLA (45%)",
+      "prob": 0.45,
+      "actual": "45 - 24",
+      "spread": -2.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 45,
+      "scoreDog": 24,
+      "brier": "0.303"
+    },
+    {
+      "week": "WEEK 2",
+      "matchup": "UCLA Bruins vs San Diego State Aztecs",
+      "pred": "UCLA (65%)",
+      "prob": 0.65,
+      "actual": "28 - 10",
+      "spread": -13.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 28,
+      "scoreDog": 10,
+      "brier": "0.122"
+    },
+    {
+      "week": "WEEK 3",
+      "matchup": "UCLA Bruins vs Purdue Boilermakers",
+      "pred": "UCLA (65%)",
+      "prob": 0.65,
+      "actual": "52 - 38",
+      "spread": -13.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 52,
+      "scoreDog": 38,
+      "brier": "0.122"
+    },
+    {
+      "week": "WEEK 4",
+      "matchup": "UCLA Bruins vs Maryland Terrapins",
+      "pred": "UCLA (45%)",
+      "prob": 0.45,
+      "actual": "54 - 3",
+      "spread": -2.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 54,
+      "scoreDog": 3,
+      "brier": "0.303"
+    },
+    {
+      "week": "WEEK 7",
+      "matchup": "UCLA Bruins vs Wisconsin Badgers",
+      "pred": "UCLA (65%)",
+      "prob": 0.65,
+      "actual": "17 - 7",
+      "spread": -3.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 17,
+      "scoreDog": 7,
+      "brier": "0.122"
+    },
+    {
+      "week": "WEEK 8",
+      "matchup": "UCLA Bruins vs Michigan State Spartans",
+      "pred": "UCLA (65%)",
+      "prob": 0.65,
+      "actual": "28 - 10",
+      "spread": -3.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 28,
+      "scoreDog": 10,
+      "brier": "0.122"
+    },
+    {
+      "week": "WEEK 1",
+      "matchup": "Kentucky Wildcats vs Youngstown State Penguins",
+      "pred": "Kentucky (65%)",
+      "prob": 0.65,
+      "actual": "45 - 13",
+      "spread": -22.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 45,
+      "scoreDog": 13,
+      "brier": "0.122"
+    },
+    {
+      "week": "WEEK 4",
+      "matchup": "Kentucky Wildcats vs South Alabama Jaguars",
+      "pred": "Kentucky (65%)",
+      "prob": 0.65,
+      "actual": "45 - 21",
+      "spread": -20.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 45,
+      "scoreDog": 21,
+      "brier": "0.122"
+    },
+    {
+      "week": "WEEK 5",
+      "matchup": "Kentucky Wildcats vs South Carolina Gamecocks",
+      "pred": "Kentucky (45%)",
+      "prob": 0.45,
+      "actual": "35 - 34",
+      "spread": 2.5,
+      "ats": "Loss",
+      "isWin": true,
+      "scoreFav": 35,
+      "scoreDog": 34,
+      "brier": "0.303"
+    },
+    {
+      "week": "WEEK 8",
+      "matchup": "Kentucky Wildcats vs Vanderbilt Commodores",
+      "pred": "Kentucky (65%)",
+      "prob": 0.65,
+      "actual": "34 - 17",
+      "spread": -3.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 34,
+      "scoreDog": 17,
+      "brier": "0.122"
+    },
+    {
+      "week": "WEEK 1",
+      "matchup": "Wake Forest Demon Deacons vs Akron Zips",
+      "pred": "Wake Forest (65%)",
+      "prob": 0.65,
+      "actual": "38 - 16",
+      "spread": -27.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 38,
+      "scoreDog": 16,
+      "brier": "0.122"
+    },
+    {
+      "week": "WEEK 2",
+      "matchup": "Wake Forest Demon Deacons vs Purdue Boilermakers",
+      "pred": "Wake Forest (45%)",
+      "prob": 0.45,
+      "actual": "38 - 36",
+      "spread": -2.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 38,
+      "scoreDog": 36,
+      "brier": "0.303"
+    },
+    {
+      "week": "WEEK 5",
+      "matchup": "Wake Forest Demon Deacons vs Stanford Cardinal",
+      "pred": "Wake Forest (65%)",
+      "prob": 0.65,
+      "actual": "57 - 3",
+      "spread": -14.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 57,
+      "scoreDog": 3,
+      "brier": "0.122"
+    },
+    {
+      "week": "WEEK 6",
+      "matchup": "Wake Forest Demon Deacons vs NC State Wolfpack",
+      "pred": "Wake Forest (45%)",
+      "prob": 0.45,
+      "actual": "38 - 14",
+      "spread": 3.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 38,
+      "scoreDog": 14,
+      "brier": "0.303"
+    },
+    {
+      "week": "WEEK 7",
+      "matchup": "Wake Forest Demon Deacons vs California Golden Bears",
+      "pred": "Wake Forest (45%)",
+      "prob": 0.45,
+      "actual": "41 - 7",
+      "spread": 3.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 41,
+      "scoreDog": 7,
+      "brier": "0.303"
     }
   ],
   "retrainingHistory": [
@@ -10531,6 +10726,289 @@
       },
       "unplayedGamesRecalculated": 147,
       "blowoutGamesCalibrated": 3
+    },
+    {
+      "timestamp": "2026-10-26T13:25:03.533880+00:00",
+      "gamesEvaluated": 492,
+      "modelMae": 13.85,
+      "vegasMae": 11.79,
+      "modelBeatVegasPct": 37.4,
+      "ratingShifts": {
+        "byu": {
+          "old": 14.1,
+          "new": 14.1,
+          "delta": 0.0,
+          "offense": 32.0,
+          "defense": 18.2,
+          "specialTeams": 0.3
+        },
+        "texas": {
+          "old": 20.1,
+          "new": 20.1,
+          "delta": 0.0,
+          "offense": 35.9,
+          "defense": 16.2,
+          "specialTeams": 0.4
+        },
+        "michigan": {
+          "old": 9.4,
+          "new": 9.4,
+          "delta": 0.0,
+          "offense": 27.3,
+          "defense": 17.4,
+          "specialTeams": -0.5
+        },
+        "ohiostate": {
+          "old": 28.6,
+          "new": 28.6,
+          "delta": 0.0,
+          "offense": 39.8,
+          "defense": 11.3,
+          "specialTeams": 0.1
+        },
+        "georgia": {
+          "old": 26.2,
+          "new": 26.3,
+          "delta": 0.1,
+          "offense": 38.5,
+          "defense": 12.8,
+          "specialTeams": 0.6
+        },
+        "alabama": {
+          "old": 24.7,
+          "new": 25.4,
+          "delta": 0.7,
+          "offense": 40.6,
+          "defense": 14.8,
+          "specialTeams": -0.4
+        },
+        "oregon": {
+          "old": 15.4,
+          "new": 16.1,
+          "delta": 0.7,
+          "offense": 33.9,
+          "defense": 18.1,
+          "specialTeams": 0.3
+        },
+        "pennstate": {
+          "old": 5.8,
+          "new": 5.8,
+          "delta": 0.0,
+          "offense": 29.3,
+          "defense": 24.1,
+          "specialTeams": 0.6
+        },
+        "notredame": {
+          "old": 26.8,
+          "new": 26.8,
+          "delta": 0.0,
+          "offense": 40.8,
+          "defense": 14.3,
+          "specialTeams": 0.3
+        },
+        "lsu": {
+          "old": 24.8,
+          "new": 27.1,
+          "delta": 2.3,
+          "offense": 39.5,
+          "defense": 12.6,
+          "specialTeams": 0.2
+        },
+        "tennessee": {
+          "old": 18.1,
+          "new": 18.2,
+          "delta": 0.1,
+          "offense": 35.4,
+          "defense": 17.6,
+          "specialTeams": 0.4
+        },
+        "indiana": {
+          "old": 18.7,
+          "new": 18.7,
+          "delta": 0.0,
+          "offense": 32.0,
+          "defense": 13.8,
+          "specialTeams": 0.5
+        },
+        "miami": {
+          "old": 22.2,
+          "new": 22.3,
+          "delta": 0.1,
+          "offense": 37.5,
+          "defense": 15.5,
+          "specialTeams": 0.3
+        },
+        "texasam": {
+          "old": 13.3,
+          "new": 16.1,
+          "delta": 2.8,
+          "offense": 32.4,
+          "defense": 16.0,
+          "specialTeams": -0.3
+        },
+        "olemiss": {
+          "old": 18.3,
+          "new": 18.7,
+          "delta": 0.4,
+          "offense": 38.9,
+          "defense": 20.9,
+          "specialTeams": 0.7
+        },
+        "oklahoma": {
+          "old": 9.3,
+          "new": 9.7,
+          "delta": 0.4,
+          "offense": 27.8,
+          "defense": 18.5,
+          "specialTeams": 0.4
+        },
+        "boisestate": {
+          "old": 6.3,
+          "new": 6.5,
+          "delta": 0.2,
+          "offense": 31.0,
+          "defense": 24.2,
+          "specialTeams": -0.3
+        },
+        "usc": {
+          "old": 11.9,
+          "new": 11.9,
+          "delta": 0.0,
+          "offense": 35.2,
+          "defense": 23.0,
+          "specialTeams": -0.3
+        },
+        "floridastate": {
+          "old": 6.9,
+          "new": 7.1,
+          "delta": 0.2,
+          "offense": 34.3,
+          "defense": 26.9,
+          "specialTeams": -0.3
+        },
+        "clemson": {
+          "old": -0.2,
+          "new": 0.2,
+          "delta": 0.4,
+          "offense": 25.6,
+          "defense": 25.7,
+          "specialTeams": 0.3
+        },
+        "smu": {
+          "old": 10.6,
+          "new": 10.7,
+          "delta": 0.1,
+          "offense": 31.4,
+          "defense": 20.3,
+          "specialTeams": -0.4
+        },
+        "texastech": {
+          "old": 18.7,
+          "new": 18.7,
+          "delta": 0.0,
+          "offense": 35.7,
+          "defense": 17.2,
+          "specialTeams": 0.2
+        },
+        "utah": {
+          "old": 11.5,
+          "new": 11.5,
+          "delta": 0.0,
+          "offense": 32.1,
+          "defense": 20.6,
+          "specialTeams": 0.0
+        },
+        "iowa": {
+          "old": 9.7,
+          "new": 9.7,
+          "delta": 0.0,
+          "offense": 28.7,
+          "defense": 19.6,
+          "specialTeams": 0.6
+        },
+        "missouri": {
+          "old": 14.8,
+          "new": 15.1,
+          "delta": 0.3,
+          "offense": 32.1,
+          "defense": 16.5,
+          "specialTeams": -0.5
+        },
+        "arizona": {
+          "old": 10.8,
+          "new": 10.8,
+          "delta": 0.0,
+          "offense": 32.6,
+          "defense": 21.3,
+          "specialTeams": -0.5
+        },
+        "washington": {
+          "old": 8.6,
+          "new": 8.6,
+          "delta": 0.0,
+          "offense": 31.1,
+          "defense": 22.2,
+          "specialTeams": -0.3
+        },
+        "houston": {
+          "old": 9.0,
+          "new": 9.0,
+          "delta": 0.0,
+          "offense": 31.4,
+          "defense": 22.0,
+          "specialTeams": -0.4
+        },
+        "louisville": {
+          "old": 8.9,
+          "new": 10.4,
+          "delta": 1.5,
+          "offense": 34.5,
+          "defense": 24.3,
+          "specialTeams": 0.2
+        },
+        "colorado": {
+          "old": -7.8,
+          "new": -7.8,
+          "delta": 0.0,
+          "offense": 21.9,
+          "defense": 29.2,
+          "specialTeams": -0.5
+        },
+        "arizonastate": {
+          "old": -2.9,
+          "new": -2.9,
+          "delta": 0.0,
+          "offense": 27.3,
+          "defense": 29.6,
+          "specialTeams": -0.6
+        },
+        "ucla": {
+          "old": 17.5,
+          "new": 13.0,
+          "delta": -4.5,
+          "offense": 32.9,
+          "defense": 19.9,
+          "specialTeams": 0.0
+        },
+        "kentucky": {
+          "old": 16.8,
+          "new": 11.6,
+          "delta": -5.2,
+          "offense": 33.0,
+          "defense": 21.4,
+          "specialTeams": 0.0
+        },
+        "wakeforest": {
+          "old": 15.2,
+          "new": 6.3,
+          "delta": -8.9,
+          "offense": 28.5,
+          "defense": 22.2,
+          "specialTeams": 0.0
+        }
+      },
+      "unplayedGamesRecalculated": 161,
+      "blowoutGamesCalibrated": 5
     }
   ]
 }

@@ -47,7 +47,8 @@ ESPN_ID_TO_TEAM_ID = {
     84: 'indiana', 2294: 'iowa', 97: 'louisville', 99: 'lsu', 2390: 'miami',
     130: 'michigan', 142: 'missouri', 87: 'notredame', 194: 'ohiostate', 201: 'oklahoma',
     145: 'olemiss', 2483: 'oregon', 213: 'pennstate', 2567: 'smu', 2633: 'tennessee',
-    251: 'texas', 245: 'texasam', 2641: 'texastech', 30: 'usc', 254: 'utah', 264: 'washington'
+    251: 'texas', 245: 'texasam', 2641: 'texastech', 30: 'usc', 254: 'utah', 264: 'washington',
+    26: 'ucla', 96: 'kentucky', 154: 'wakeforest'
 }
 
 # Authoritative Week 2 Rankings (Used when ESPN API is still serving stale Preseason cache)
@@ -232,11 +233,14 @@ WEEK9_OFFICIAL_POLL = {
     'indiana': {'apRank': '#4 AP', 'apPoints': '1,459 PTS', 'rankNum': 4},
     'notredame': {'apRank': '#5 AP', 'apPoints': '1,458 PTS', 'rankNum': 5},
     'utah': {'apRank': '#6 AP', 'apPoints': '1,413 PTS (1 1st)', 'rankNum': 6},
+    'ucla': {'apRank': '#7 AP', 'apPoints': '1,398 PTS', 'rankNum': 7},
     'byu': {'apRank': '#8 AP', 'apPoints': '1,325 PTS', 'rankNum': 8},
+    'kentucky': {'apRank': '#9 AP', 'apPoints': '1,185 PTS', 'rankNum': 9},
     'alabama': {'apRank': '#10 AP', 'apPoints': '1,063 PTS', 'rankNum': 10},
     'texas': {'apRank': '#11 AP', 'apPoints': '966 PTS', 'rankNum': 11},
     'olemiss': {'apRank': '#12 AP', 'apPoints': '871 PTS', 'rankNum': 12},
     'texastech': {'apRank': '#13 AP', 'apPoints': '861 PTS', 'rankNum': 13},
+    'wakeforest': {'apRank': '#14 AP', 'apPoints': '822 PTS', 'rankNum': 14},
     'lsu': {'apRank': '#15 AP', 'apPoints': '813 PTS', 'rankNum': 15},
     'tennessee': {'apRank': '#16 AP', 'apPoints': '662 PTS', 'rankNum': 16},
     'houston': {'apRank': '#18 AP', 'apPoints': '491 PTS', 'rankNum': 18},
@@ -302,7 +306,10 @@ STADIUM_HFA = {
     "L&N Federal Credit Union Stadium": 2.0,
     "Gerald J. Ford Stadium": 2.0,
     "Bobby Dodd Stadium": 2.0,
-    "Memorial Stadium": 2.0
+    "Memorial Stadium": 2.0,
+    "Rose Bowl": 2.2,
+    "Kroger Field": 2.2,
+    "Allegacy Federal Credit Union Stadium": 2.0
 }
 
 NON_DB_OPPONENT_RATINGS = {

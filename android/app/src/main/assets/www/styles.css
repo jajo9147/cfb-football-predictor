@@ -388,6 +388,39 @@ body.theme-arizonastate {
   --color-bg-surface: #180B10;
 }
 
+/* 32. UCLA Bruins */
+body.theme-ucla {
+  --color-brand-primary: #2774AE;
+  --color-brand-secondary: #FFD100;
+  --color-brand-accent: #F2A900;
+  --color-brand-glow: rgba(39, 116, 174, 0.55);
+  --color-brand-border: rgba(39, 116, 174, 0.45);
+  --color-bg-base: #040910;
+  --color-bg-surface: #091322;
+}
+
+/* 33. Kentucky Wildcats */
+body.theme-kentucky {
+  --color-brand-primary: #0033A0;
+  --color-brand-secondary: #FFFFFF;
+  --color-brand-accent: #00205B;
+  --color-brand-glow: rgba(0, 51, 160, 0.55);
+  --color-brand-border: rgba(0, 51, 160, 0.45);
+  --color-bg-base: #030611;
+  --color-bg-surface: #070E24;
+}
+
+/* 34. Wake Forest Demon Deacons */
+body.theme-wakeforest {
+  --color-brand-primary: #9E7E38;
+  --color-brand-secondary: #000000;
+  --color-brand-accent: #CEB888;
+  --color-brand-glow: rgba(158, 126, 56, 0.55);
+  --color-brand-border: rgba(158, 126, 56, 0.45);
+  --color-bg-base: #0A0906;
+  --color-bg-surface: #17150E;
+}
+
 /* ==========================================================================
    BASE STYLES & LAYOUT
    ========================================================================== */

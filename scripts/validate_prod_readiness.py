@@ -63,8 +63,8 @@ def run_inspections():
     db = load_db(TEAMS_FILE)
     print(f"✓ Loaded {len(db)} teams from primary database ({TEAMS_FILE})")
 
-    if len(db) < 31:
-        errors.append(f"Expected at least 31 tracked teams, found only {len(db)}")
+    if len(db) < 34:
+        errors.append(f"Expected at least 34 tracked teams, found only {len(db)}")
 
     # 2. Strict 2026 DTG (Date-Time-Group) Inspection
     print("\n[1/7] 📅 Inspecting DTG (Date, Time, Week, Season) Accuracy...")
