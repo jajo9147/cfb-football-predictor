@@ -949,9 +949,13 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
         p_def = float(sp.get('defense', 20.0)) if sp else 20.0
         p_st = float(sp.get('specialTeams', 0.0)) if sp else 0.0
         
-        # Talent Composite grounding
+        # Talent Composite grounding (only grant blue-chip ceiling if team hasn't collapsed on-field with 3+ losses)
         tal = talent_map.get(t_name, talent_map.get(t_short, 650.0))
-        if tal >= 920.0:
+        num_losses = sum(1 for g in t.get('schedule', []) if g.get('isFinal') and (
+            (g.get('finalTeamScore') is not None and g.get('finalOppScore') is not None and g.get('finalTeamScore') < g.get('finalOppScore')) or
+            (g.get('actualScoreUt') is not None and g.get('actualScoreOpp') is not None and g.get('actualScoreUt') < g.get('actualScoreOpp'))
+        ))
+        if tal >= 920.0 and num_losses < 3:
             p_off = max(p_off, 40.0)
             p_def = min(p_def, 11.5)
         elif tal < 750.0:
@@ -1082,10 +1086,12 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
                 obs_def += (unranked_losses * 2.5)
                 obs_off -= (unranked_losses * 1.2)
             if conf_losses >= 2:
-                obs_def += 1.5
-                obs_off -= 1.0
+                penalty = (conf_losses - 1) * 1.5
+                obs_def += penalty
+                obs_off -= penalty
 
-            in_season_weight = 0.65 * sos_cred
+            games_played = len([g for g in t.get('schedule', []) if g.get('isFinal')])
+            in_season_weight = min(0.85, max(0.55, 0.45 + (games_played * 0.05))) * sos_cred
             prior_weight = 1.0 - in_season_weight
             
             blend_off = round(in_season_weight * obs_off + prior_weight * p_off, 1)
@@ -1606,6 +1612,12 @@ def main():
             t['defenseRating'] = u['def']
             t['specialTeamsRating'] = u['st']
 
+    # Update playoff contender ranks using finalized ratings
+    sorted_by_rank = sorted(db.keys(), key=lambda k: get_team_rank_metric(k, db[k]))
+    for idx, k in enumerate(sorted_by_rank):
+        if not args.dry_run:
+            db[k]['playoffContenderRank'] = idx + 1
+
     # 5. Re-project Future Unplayed Games (With Talent Blowout Multiplier & Market Anchoring)
     unplayed_games_recalculated = 0
     blowout_games_calibrated = 0
@@ -1670,13 +1682,17 @@ def main():
             else:
                 hfa = -STADIUM_HFA.get(stadium, 2.5)
 
-            # Talent Gap Blowout Bonus
+            # Talent Gap Blowout Bonus (only apply for teams that have not collapsed with 3+ losses)
             talent_bonus = 0.0
             if cfbd_client:
-                if sp_team >= sp_opp:
-                    talent_bonus = cfbd_client.calculate_talent_blowout_bonus(fav_talent, opp_talent)
-                else:
-                    talent_bonus = -cfbd_client.calculate_talent_blowout_bonus(opp_talent, fav_talent)
+                losses_cnt = sum(1 for x in t.get('schedule', []) if x.get('isFinal') and (
+                    (x.get('finalTeamScore', 0) < x.get('finalOppScore', 0)) or (x.get('actualScoreUt', 0) < x.get('actualScoreOpp', 0))
+                ))
+                if losses_cnt < 3:
+                    if sp_team >= sp_opp:
+                        talent_bonus = cfbd_client.calculate_talent_blowout_bonus(fav_talent, opp_talent)
+                    else:
+                        talent_bonus = -cfbd_client.calculate_talent_blowout_bonus(opp_talent, fav_talent)
 
             raw_margin = (sp_team - sp_opp) + hfa + talent_bonus
 
