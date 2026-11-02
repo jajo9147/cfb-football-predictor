@@ -22,39 +22,42 @@ const state = {
 };
 if (typeof window !== 'undefined') window.state = state;
 
-// Official 2026 Preseason Vegas National Championship Title Odds
+// Live 2026 Season Vegas National Championship Title Odds (Week 10 Consensus)
 const OFFICIAL_TEAM_TITLE_ODDS = {
-  georgia: '+320',
-  ohiostate: '+350',
-  texas: '+450',
-  oregon: '+650',
-  alabama: '+750',
-  pennstate: '+1200',
-  notredame: '+1400',
-  olemiss: '+1500',
-  miami: '+1800',
-  tennessee: '+2200',
+  georgia: '+350',
+  notredame: '+550',
+  miami: '+600',
+  indiana: '+1000',
+  texas: '+1050',
+  alabama: '+1100',
+  ohiostate: '+1200',
+  olemiss: '+1600',
+  byu: '+2200',
   lsu: '+2500',
-  michigan: '+3000',
-  clemson: '+3500',
-  usc: '+4000',
-  texasam: '+4500',
-  oklahoma: '+5000',
-  utah: '+6000',
-  missouri: '+6500',
-  louisville: '+8000',
-  smu: '+9000',
-  iowa: '+10000',
-  boisestate: '+12500',
-  colorado: '+15000',
-  arizona: '+17500',
-  washington: '+20000',
-  texastech: '+25000',
-  floridastate: '+30000',
-  byu: '+35000',
-  indiana: '+40000',
-  arizonastate: '+45000',
-  houston: '+50000'
+  utah: '+3000',
+  kentucky: '+3500',
+  texastech: '+4000',
+  tennessee: '+4500',
+  ucla: '+6500',
+  usc: '+8000',
+  wakeforest: '+10000',
+  missouri: '+10000',
+  houston: '+12500',
+  boisestate: '+15000',
+  iowa: '+15000',
+  arizona: '+20000',
+  oregon: '+25000',
+  louisville: '+25000',
+  smu: '+25000',
+  michigan: '+50000',
+  pennstate: '+50000',
+  oklahoma: '+50000',
+  texasam: '+50000',
+  clemson: '+50000',
+  washington: '+50000',
+  colorado: '+50000',
+  arizonastate: '+50000',
+  floridastate: '+50000'
 };
 
 function getTeamTitleOdds(teamId) {
@@ -333,12 +336,12 @@ function formatGameDateWithTime(game) {
   if (!game) return '';
   let rawDate = game.date || '';
   let timeStr = game.kickoffTime || game.time;
-  
+
   // 1. Authoritative UTC timestamp conversion to US Eastern Time & Day-of-week check
   if (game.utc) {
     try {
       const dt = new Date(game.utc);
-      
+
       // Determine calendar date in US Eastern Time (primary sports broadcasting reference)
       const etDateStr = new Intl.DateTimeFormat('en-US', {
         month: 'short',
@@ -390,7 +393,7 @@ function formatGameDateWithTime(game) {
           timeZone: 'America/New_York'
         }).format(dt) + ' ET';
       }
-    } catch (e) {}
+    } catch (e) { }
   } else if (rawDate) {
     // If no UTC timestamp, check if rawDate matches today
     try {
@@ -405,7 +408,7 @@ function formatGameDateWithTime(game) {
       } else if (rawDate.includes('Sep 5') && todayEtStr.includes('Sep 4')) {
         rawDate = `TOMORROW (Sat, Sep 5)`;
       }
-    } catch (e) {}
+    } catch (e) { }
   }
 
   if (!timeStr) {
@@ -521,16 +524,16 @@ function initPwaServiceWorker() {
         for (const reg of registrations) {
           reg.unregister();
         }
-      }).catch(() => {});
+      }).catch(() => { });
     }
     if ('caches' in window && typeof caches.keys === 'function') {
       caches.keys().then(keys => {
         for (const key of keys) {
           caches.delete(key);
         }
-      }).catch(() => {});
+      }).catch(() => { });
     }
-  } catch (e) {}
+  } catch (e) { }
 }
 
 // ==========================================================================
@@ -648,7 +651,7 @@ function calculateTeamSearchRelevance(tid, t, query) {
   let score = 0;
 
   const aliases = (window.TEAM_SEARCH_ALIASES && window.TEAM_SEARCH_ALIASES[tid]) || (typeof TEAM_SEARCH_ALIASES !== 'undefined' ? TEAM_SEARCH_ALIASES[tid] : null) || [];
-  
+
   // 1. Exact alias or normalized alias match (e.g. 'asu' === 'asu' -> 6000 pts)
   for (let i = 0; i < aliases.length; i++) {
     const a = aliases[i].toLowerCase();
@@ -705,9 +708,9 @@ function initTeamSearch() {
 
   function positionDropdown() {
     const rect = input.closest('.team-search-input-box')?.getBoundingClientRect() || input.getBoundingClientRect();
-    dropdown.style.top    = (rect.bottom + 6) + 'px';
-    dropdown.style.left   = rect.left + 'px';
-    dropdown.style.width  = rect.width + 'px';
+    dropdown.style.top = (rect.bottom + 6) + 'px';
+    dropdown.style.left = rect.left + 'px';
+    dropdown.style.width = rect.width + 'px';
   }
 
   function performSearch(query) {
@@ -869,7 +872,7 @@ function selectTeam(teamId) {
   if (window.location.hash && (window.location.hash.includes('s=') || window.location.hash.includes('sim='))) {
     try {
       history.replaceState(null, document.title, window.location.pathname + (window.location.search ? window.location.search : ''));
-    } catch (e) {}
+    } catch (e) { }
   }
 
   // Update Body Theme Class
@@ -892,7 +895,10 @@ function selectTeam(teamId) {
   const dcEl = document.getElementById('heroDC');
   if (dcEl) dcEl.innerText = `DC: ${team.defensiveCoordinator || 'Staff'}`;
   const starEl = document.getElementById('heroStarPlayer');
-  if (starEl) starEl.innerText = `Star: ${team.starPlayer}`;
+  if (starEl) {
+    const qbInjSuffix = (team.qbStatus && team.qbStatus.starterOut) ? ` • ⚠️ ${team.qbStatus.starterOut} Out` : '';
+    starEl.innerText = `Star: ${team.starPlayer}${qbInjSuffix}`;
+  }
   const stadiumEl = document.getElementById('heroStadium');
   if (stadiumEl) {
     const capacityStr = team.stadiumCapacity ? ` (${team.stadiumCapacity})` : '';
@@ -1788,10 +1794,10 @@ function renderSchedule() {
 
     let badgeHtml = `<span>${game.isHome ? 'HOME' : 'AWAY'}</span>`;
     if (hasFinalScores) {
-      const suBadge = !isPredictionCorrect ? 
-        `<span class="prediction-status-badge wrong" title="Straight Up Missed: 0 of 10 Points"><i class="fa-solid fa-circle-xmark"></i> PREDICTION WRONG (0 PTS)</span>` : 
+      const suBadge = !isPredictionCorrect ?
+        `<span class="prediction-status-badge wrong" title="Straight Up Missed: 0 of 10 Points"><i class="fa-solid fa-circle-xmark"></i> PREDICTION WRONG (0 PTS)</span>` :
         `<span class="prediction-status-badge correct" title="Straight Up Hit: +10 Points"><i class="fa-solid fa-circle-check"></i> PREDICTION HIT (+10 PTS)</span>`;
-      
+
       const atsBadge = (typeof game.vegasSpread === 'number') ? (
         spreadHit ?
           `<span class="prediction-status-badge spread-cover" title="Beat Vegas Line (${game.vegasSpread})"><i class="fa-solid fa-bolt"></i> BEAT VEGAS (COVER)</span>` :
@@ -1855,14 +1861,14 @@ function renderSchedule() {
           </div>
           <div class="score-sub-row">
             ${hasFinalScores ? (
-              `<div class="pred-vs-actual-badge" title="Model Projection vs Official Final">
+        `<div class="pred-vs-actual-badge" title="Model Projection vs Official Final">
                 <span class="pva-proj">PROJ: <strong>${predUt}-${predOpp}</strong></span>
                 <span class="pva-div">|</span>
                 <span class="pva-final">FINAL: <strong>${actualUt}-${actualOpp}</strong></span>
                 <span class="pva-div">•</span>
                 <span class="pva-spread ${spreadHit ? 'hit' : 'miss'}">${spreadCoverText}</span>
               </div>`
-            ) : `<span class="vegas-line" title="${game.oddsProvider || 'DraftKings'} Live Market Line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : (game.vegasSpread === 0 ? 'PICK' : `${game.oppAbbr} -${game.vegasSpread}`)}${hasOu ? ` • O/U ${game.overUnder}` : ''}</span>`}
+      ) : `<span class="vegas-line" title="${game.oddsProvider || 'DraftKings'} Live Market Line">${game.vegasSpread < 0 ? `${team.abbr} ${game.vegasSpread}` : (game.vegasSpread === 0 ? 'PICK' : `${game.oppAbbr} -${game.vegasSpread}`)}${hasOu ? ` • O/U ${game.overUnder}` : ''}</span>`}
             ${(!hasFinalScores && sim.isManualScore) ? `<button class="reset-score-mini-btn" onclick="resetManualScore('${game.id}', event)" title="Reset to AI baseline projection"><i class="fa-solid fa-rotate-left"></i> Reset</button>` : ''}
           </div>
         </div>
@@ -2172,7 +2178,7 @@ function updateGlobalSliderLabels(team) {
         const newVal = parseInt(e.target.value, 10);
         teamSliders[s.key] = newVal;
         const signStr = newVal > 0 ? '+' : '';
-        
+
         // Sync readouts and sliders across all containers
         document.querySelectorAll(`.readout-${s.key}`).forEach(r => {
           r.innerText = `${signStr}${newVal}%`;
@@ -2252,7 +2258,7 @@ function initGlobalPresetButtons() {
   });
 }
 
-window.togglePresetDropdown = function(e) {
+window.togglePresetDropdown = function (e) {
   if (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -2264,7 +2270,7 @@ window.togglePresetDropdown = function(e) {
   const otherMenu = document.getElementById('scheduleFilterDropdownMenu');
   const scheduleSection = document.getElementById('scheduleSection');
   const moreMenu = document.getElementById('moreToolsMenu');
-  
+
   if (otherMenu) otherMenu.classList.remove('show');
   if (otherWrap) otherWrap.classList.remove('open');
   if (scheduleSection) scheduleSection.classList.remove('has-open-dropdown');
@@ -2277,7 +2283,7 @@ window.togglePresetDropdown = function(e) {
   }
 };
 
-window.selectGlobalPreset = function(presetKey, e) {
+window.selectGlobalPreset = function (presetKey, e) {
   if (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -2291,7 +2297,7 @@ window.selectGlobalPreset = function(presetKey, e) {
   if (tuningSection) tuningSection.classList.remove('has-open-dropdown');
 };
 
-window.applyGlobalPreset = function(presetKey) {
+window.applyGlobalPreset = function (presetKey) {
   const presetValues = GLOBAL_PRESETS[presetKey] || GLOBAL_PRESETS['baseline'];
   if (!state.currentTeamId) {
     state.currentTeamId = getTopRankedTeamId() || 'ohiostate';
@@ -2356,7 +2362,7 @@ function toggleCustomSlidersView() {
 }
 window.toggleCustomSlidersView = toggleCustomSlidersView;
 
-window.resetAllToBaseline = function() {
+window.resetAllToBaseline = function () {
   state.teamSliders = {};
   state.teamActivePresets = {};
   state.gameSliders = {};
@@ -2386,7 +2392,7 @@ function resetAllToBaseline() {
   window.resetAllToBaseline();
 }
 
-window.resetAllSliders = function() {
+window.resetAllSliders = function () {
   window.resetAllToBaseline();
 };
 
@@ -2412,7 +2418,7 @@ function showToast(message) {
 window.showToast = showToast;
 window.showCustomToast = showToast;
 
-window.toggleScheduleFilterDropdown = function(e) {
+window.toggleScheduleFilterDropdown = function (e) {
   if (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -2424,7 +2430,7 @@ window.toggleScheduleFilterDropdown = function(e) {
   const otherMenu = document.getElementById('presetDropdownMenu');
   const tuningSection = document.getElementById('tuningSection');
   const moreMenu = document.getElementById('moreToolsMenu');
-  
+
   if (otherMenu) otherMenu.classList.remove('show');
   if (otherWrap) otherWrap.classList.remove('open');
   if (tuningSection) tuningSection.classList.remove('has-open-dropdown');
@@ -2437,7 +2443,7 @@ window.toggleScheduleFilterDropdown = function(e) {
   }
 };
 
-window.selectScheduleFilter = function(filterKey, e) {
+window.selectScheduleFilter = function (filterKey, e) {
   if (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -2451,7 +2457,7 @@ window.selectScheduleFilter = function(filterKey, e) {
   if (scheduleSection) scheduleSection.classList.remove('has-open-dropdown');
 };
 
-window.applyScheduleFilter = function(filterKey) {
+window.applyScheduleFilter = function (filterKey) {
   state.filter = filterKey || 'all';
 
   const filterLabels = {
@@ -2644,13 +2650,13 @@ function updateModalScoreboardLive() {
                  onclick="event.stopPropagation();">
         </div>
         ${(() => {
-          if (game.isFinal) {
-            return `<span class="locked-final-tag" style="margin-top: 3px;"><i class="fa-solid fa-lock"></i> OFFICIAL FINAL</span>`;
-          }
-          const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
-          const rProb2 = 100 - rProb1;
-          const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
-          return `
+        if (game.isFinal) {
+          return `<span class="locked-final-tag" style="margin-top: 3px;"><i class="fa-solid fa-lock"></i> OFFICIAL FINAL</span>`;
+        }
+        const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
+        const rProb2 = 100 - rProb1;
+        const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
+        return `
             <div style="display: flex; align-items: center; gap: 6px;">
               <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
                 WIN PROB: ${rProb1}% - ${rProb2}%
@@ -2659,7 +2665,7 @@ function updateModalScoreboardLive() {
             </div>
             ${edge?.badgeHtml || ''}
           `;
-        })()}
+      })()}
       </div>
 
       <div style="display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end;">
@@ -2677,10 +2683,10 @@ function updateModalScoreboardLive() {
   // Update drive log and radar chart in background
   try {
     renderDriveLogBetween(team1, team2, score1, score2);
-  } catch (e) {}
+  } catch (e) { }
   try {
     drawRadarChartBetween(team1, team2, score1, score2, game.isHome);
-  } catch (e) {}
+  } catch (e) { }
 
   // Synchronize main page background calculations & cards
   recalculateSeason();
@@ -2730,7 +2736,7 @@ function openSimModal(game) {
           isPrimaryHome = isHomeA;
         }
       }
-      
+
       team1 = {
         id: primaryTeam.id || 'teamA',
         name: primaryTeam.name || 'Team A',
@@ -2772,7 +2778,7 @@ function openSimModal(game) {
       // Regular season game for current active team
       const tActive = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
       if (!tActive) return;
-      
+
       team1 = {
         id: tActive.id,
         name: tActive.name,
@@ -2882,13 +2888,13 @@ function openSimModal(game) {
                    onclick="event.stopPropagation();">
           </div>
           ${(() => {
-            if (game.isFinal) {
-              return `<span class="locked-final-tag" style="margin-top: 3px;"><i class="fa-solid fa-lock"></i> OFFICIAL FINAL</span>`;
-            }
-            const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
-            const rProb2 = 100 - rProb1;
-            const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
-            return `
+          if (game.isFinal) {
+            return `<span class="locked-final-tag" style="margin-top: 3px;"><i class="fa-solid fa-lock"></i> OFFICIAL FINAL</span>`;
+          }
+          const rProb1 = Math.min(99, Math.max(1, Math.round(Number(prob1) || 50)));
+          const rProb2 = 100 - rProb1;
+          const edge = calculateVegasEdge(game, { projUt: score1, projOpp: score2 });
+          return `
               <div style="display: flex; align-items: center; gap: 6px;">
                 <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-brand-accent); font-weight: 800;">
                   WIN PROB: ${rProb1}% - ${rProb2}%
@@ -2897,7 +2903,7 @@ function openSimModal(game) {
               </div>
               ${edge?.badgeHtml || ''}
             `;
-          })()}
+        })()}
         </div>
 
         <div style="display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end;">
@@ -2956,7 +2962,7 @@ function openSimModal(game) {
 
 window.openSimModal = openSimModal;
 
-window.openSimModalByGameId = function(gameId) {
+window.openSimModalByGameId = function (gameId) {
   let game = null;
   const team = TEAMS_DATABASE[state.currentTeamId];
   if (team && team.schedule) {
@@ -3001,8 +3007,8 @@ function renderDriveLogBetween(team1, team2, score1, score2) {
     const row = document.createElement('div');
     row.style.cssText = `background: rgba(255, 255, 255, 0.03); border: 1px solid ${d.points > 0 ? 'rgba(16, 185, 129, 0.25)' : 'var(--color-border)'}; border-radius: var(--radius-sm); padding: 0.55rem 0.75rem; display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.4rem;`;
 
-    const teamColor = d.isTeam1 
-      ? (team1.colors?.accent || team1.colors?.primary || '#38BDF8') 
+    const teamColor = d.isTeam1
+      ? (team1.colors?.accent || team1.colors?.primary || '#38BDF8')
       : (team2.colors?.secondary || team2.colors?.primary || '#F59E0B');
 
     const badgeStyle = d.points > 0
@@ -3310,6 +3316,7 @@ function renderScoutReport(game) {
           <div style="color: var(--color-text-dim);">OC: ${team1.offensiveCoordinator || 'Coordinator'}</div>
           <div style="color: var(--color-text-dim);">DC: ${team1.defensiveCoordinator || 'Coordinator'}</div>
           <div style="color: #E2E8F0; margin-top: 0.2rem; font-weight: 600;">⭐ ${team1.starPlayer || team1.confirmedStarterQb || 'Key Star'}</div>
+          ${(TEAMS_DATABASE[team1.id]?.qbStatus?.starterOut) ? `<div style="color: #F59E0B; font-size: 0.68rem; margin-top: 0.15rem; font-weight: 700;">⚠️ QB1 ${TEAMS_DATABASE[team1.id].qbStatus.starterOut} Out (${TEAMS_DATABASE[team1.id].qbStatus.replacement})</div>` : ''}
         </div>
         <div>
           <div style="font-weight: 700; color: ${team2.colors?.primary || '#F59E0B'}; font-size: 0.78rem;">${team2.shortName}</div>
@@ -3317,6 +3324,7 @@ function renderScoutReport(game) {
           <div style="color: var(--color-text-dim);">OC: ${team2.offensiveCoordinator || 'Coordinator'}</div>
           <div style="color: var(--color-text-dim);">DC: ${team2.defensiveCoordinator || 'Coordinator'}</div>
           <div style="color: #E2E8F0; margin-top: 0.2rem; font-weight: 600;">⭐ ${team2.starPlayer || team2.confirmedStarterQb || 'Key Star'}</div>
+          ${(TEAMS_DATABASE[team2.id]?.qbStatus?.starterOut) ? `<div style="color: #F59E0B; font-size: 0.68rem; margin-top: 0.15rem; font-weight: 700;">⚠️ QB1 ${TEAMS_DATABASE[team2.id].qbStatus.starterOut} Out (${TEAMS_DATABASE[team2.id].qbStatus.replacement})</div>` : ''}
         </div>
       </div>
     </div>
@@ -3454,7 +3462,7 @@ function drawRadarChartBetween(team1, team2, score1, score2, isHome) {
   const legendY = h - 12;
   ctx.textAlign = 'left';
   ctx.font = 'bold 11px Outfit, sans-serif';
-  
+
   // Team 1 legend
   ctx.fillStyle = team1.colors?.accent || team1.colors?.primary || '#0062B8';
   ctx.fillRect(centerX - 90, legendY - 8, 10, 10);
@@ -3528,7 +3536,7 @@ function renderGameSlidersInModal(game) {
     crowd: 'Stadium Crowd Noise'
   };
 
-  const venueTitle = (game.isPostseason || game.isDreamMatchup) 
+  const venueTitle = (game.isPostseason || game.isDreamMatchup)
     ? `Neutral Venue Intensity (${game.stadium || 'Championship Stadium'})`
     : (game.isHome ? (labels.crowd || `${game.stadium} Home Crowd`) : `Road Environment (${game.stadium || 'Hostile Stadium'})`);
 
@@ -3566,7 +3574,7 @@ function renderGameSlidersInModal(game) {
       const newVal = parseInt(e.target.value, 10);
       const signStr = newVal > 0 ? '+' : '';
       card.querySelector('.slider-val-readout').innerText = `${signStr}${newVal}%`;
-      
+
       if (!state.gameSliders[game.id]) {
         state.gameSliders[game.id] = { ...currentSliders };
       }
@@ -3609,7 +3617,7 @@ function renderGameSlidersInModal(game) {
   }
 }
 
-window.setGameWeatherCondition = function(weatherType) {
+window.setGameWeatherCondition = function (weatherType) {
   const game = state.activeModalGame;
   if (!game) return;
 
@@ -3649,7 +3657,7 @@ window.setGameWeatherCondition = function(weatherType) {
   showToast(`Applied ${weatherLabels[weatherType] || weatherType}!`);
 };
 
-window.toggleGameInjuryCondition = function() {
+window.toggleGameInjuryCondition = function () {
   const game = state.activeModalGame;
   if (!game) return;
 
@@ -3685,7 +3693,7 @@ window.toggleGameInjuryCondition = function() {
   showToast(currentInjury ? `🩹 Key Starter Injury penalty applied (-6.5 pts)!` : `🩹 Cleared injury penalty!`);
 };
 
-window.switchModalSubTab = function(subtab) {
+window.switchModalSubTab = function (subtab) {
   const tabsContainer = document.querySelector('#simModal .modal-sub-tabs');
   if (tabsContainer) {
     tabsContainer.querySelectorAll('.sub-tab').forEach(t => {
@@ -3728,10 +3736,10 @@ function initModalSubTabs() {
   });
 }
 
-window.applyAndSimulateModalGame = function() {
+window.applyAndSimulateModalGame = function () {
   if (!state.activeModalGame) return;
   const game = state.activeModalGame;
-  
+
   let focusId = state.currentTeamId;
   if (game.isDreamMatchup && game.teamA && game.teamB) {
     focusId = game.teamA.id;
@@ -3767,13 +3775,13 @@ window.applyAndSimulateModalGame = function() {
   recalculateSeason();
   openSimModal(state.activeModalGame);
   window.switchModalSubTab('drives');
-  const title = (game.isDreamMatchup && game.teamA && game.teamB) 
-    ? `${game.teamA.shortName} vs ${game.teamB.shortName}` 
+  const title = (game.isDreamMatchup && game.teamA && game.teamB)
+    ? `${game.teamA.shortName} vs ${game.teamB.shortName}`
     : (game.isPostseason ? game.week : `${game.opponent} matchup`);
   showToast(`⚡ Re-simulated ${title} (10,000 Monte Carlo drives)!`);
 };
 
-window.resetCurrentGameTuning = function() {
+window.resetCurrentGameTuning = function () {
   if (!state.activeModalGame) return;
   const game = state.activeModalGame;
   delete state.gameSliders[game.id];
@@ -3818,7 +3826,7 @@ window.resetCurrentGameTuning = function() {
   showToast(`⚡ Reset matchup to baseline!`);
 };
 
-window.applyGameScenarioPreset = function(presetKey) {
+window.applyGameScenarioPreset = function (presetKey) {
   const presetValues = GAME_PRESETS[presetKey] || GAME_PRESETS['baseline'];
   const game = state.activeModalGame;
   if (!game) return;
@@ -3883,8 +3891,8 @@ window.applyGameScenarioPreset = function(presetKey) {
     'ground-pound': 'Ground & Pound'
   };
   const label = presetLabels[presetKey] || presetKey;
-  const matchupName = (game.isDreamMatchup && game.teamA && game.teamB) 
-    ? `${game.teamA.shortName} vs ${game.teamB.shortName}` 
+  const matchupName = (game.isDreamMatchup && game.teamA && game.teamB)
+    ? `${game.teamA.shortName} vs ${game.teamB.shortName}`
     : (game.opponent ? `${game.opponent} matchup` : 'matchup');
   showToast(`⚡ Applied "${label}" to ${matchupName}!`);
 };
@@ -4250,7 +4258,7 @@ function simulateConferenceChampionships(evaluatedTeams) {
 
   // Mountain West / G5 Championship (Boise, ID)
   const mwcTeam1 = mwcTeams[0] || { id: 'boisestate', name: 'Boise State Broncos', shortName: 'Boise State', abbr: 'BSU', apRank: 'NR', wins: 10, losses: 2, conf: 'Mountain West' };
-  const mwcTeam2 = { id: 'unlv', name: 'UNLV Rebels', shortName: 'UNLV', abbr: 'UNLV', logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['UNLV'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png', apRank: 'NR', wins: 9, losses: 3, conf: 'Mountain West', baseSpRating: 15.5 };
+  const mwcTeam2 = { id: 'unlv', name: 'UNLV Rebels', shortName: 'UNLV', abbr: 'UNLV', logoUrl: (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS['UNLV'] : '') || 'https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png', apRank: 'NR', wins: 9, losses: 3, conf: 'Mountain West', baseSpRating: -2.0 };
   const mwcSim = simulatePostseasonMatchup(mwcTeam1, mwcTeam2, { gameId: 'ccg-mwc', isHomeA: true });
 
   // Save game objects to state.postseasonGames for interactive modal
@@ -4499,10 +4507,14 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
     });
     const sosResumePts = rankedWins > 0 ? (rankedWins * 250) : -400;
 
+    // CFP Selection Committee Protocol Criteria #4: Key Player / Starting QB Unavailability
+    const qbInj = t.qbStatus || (typeof TEAMS_DATABASE !== 'undefined' && TEAMS_DATABASE[t.id]?.qbStatus) || null;
+    const qbAvailabilityPts = (qbInj && qbInj.starterOut) ? (l >= 2 ? -750 : -450) : 0;
+
     const sp = t.baseSpRating || 22.0;
     const sumDiff = t.sumDiff || 0;
 
-    return lossPts + rankPts + confPts + sosResumePts + (sp * 60) + (sumDiff * 2) + (w * 50) - fcsPenalty;
+    return lossPts + rankPts + confPts + sosResumePts + qbAvailabilityPts + (sp * 60) + (sumDiff * 2) + (w * 50) - fcsPenalty;
   }
 
   // 1. Resolve 5 conference champions
@@ -4542,7 +4554,7 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
       totalWins: 11,
       totalLosses: 2,
       conf: 'G5 Auto-Bid',
-      baseSpRating: 14.0,
+      baseSpRating: 4.5,
       stadium: 'Host Campus Stadium',
       stadiumCity: 'Neutral Site',
       colors: { primary: '#4A5568', secondary: '#CBD5E0', accent: '#718096' },
@@ -4563,17 +4575,17 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
     const isElite3Loss = regLosses === 3 && rNum <= 12 && (t.conf === 'SEC' || t.conf === 'Big Ten') && (t.baseSpRating || 0) >= 17.0;
 
     return t.conf !== 'Mountain West' &&
-           !autoChampIds.has(t.id) &&
-           t.id !== 'boisestate' &&
-           (regLosses <= 2 || isElite3Loss);
+      !autoChampIds.has(t.id) &&
+      t.id !== 'boisestate' &&
+      (regLosses <= 2 || isElite3Loss);
   });
   atLargePool.sort((a, b) => calcCommitteeScore(b) - calcCommitteeScore(a));
 
-  const seed5  = atLargePool[0] || null;
-  const seed6  = atLargePool[1] || null;
-  const seed7  = atLargePool[2] || null;
-  const seed8  = atLargePool[3] || null;
-  const seed9  = atLargePool[4] || null;
+  const seed5 = atLargePool[0] || null;
+  const seed6 = atLargePool[1] || null;
+  const seed7 = atLargePool[2] || null;
+  const seed8 = atLargePool[3] || null;
+  const seed9 = atLargePool[4] || null;
   const seed10 = atLargePool[5] || null;
   const seed11 = atLargePool[6] || null;
   const seed12 = fifthChamp;
@@ -5254,8 +5266,8 @@ function downloadHypeCardImage() {
   if (!canvas) return;
   const link = document.createElement('a');
   const g = state.activeModalGame;
-  const slug = (g && g.teamA && g.teamB) 
-    ? `${g.teamA.shortName || 'TeamA'}-vs-${g.teamB.shortName || 'TeamB'}` 
+  const slug = (g && g.teamA && g.teamB)
+    ? `${g.teamA.shortName || 'TeamA'}-vs-${g.teamB.shortName || 'TeamB'}`
     : (state.currentTeamId || 'season');
   link.download = `cfb-prophet-${slug}-matchup.png`;
   link.href = canvas.toDataURL('image/png');
@@ -5397,7 +5409,7 @@ function drawCanvasTextWrapped(ctx, text, x, y, maxWidth, lineHeight, font, colo
   const words = (text || '').split(' ');
   let line = '';
   let lineCount = 0;
-  
+
   for (let n = 0; n < words.length; n++) {
     const testLine = line + words[n] + ' ';
     const metrics = ctx.measureText(testLine);
@@ -5439,7 +5451,7 @@ async function generateHypeCard() {
     if (document.fonts && document.fonts.ready) {
       await document.fonts.ready;
     }
-  } catch (e) {}
+  } catch (e) { }
 
   const logoImg = await loadCanvasImage(team.logoUrl);
 
@@ -5480,7 +5492,7 @@ async function generateHypeCard() {
   ctx.stroke();
 
   drawCanvasTextFitted(ctx, `🏈 CFB PROPHET • 2026 AI SEASON BLUEPRINT`, 56, 60, 600, 'bold 22px "Bebas Neue", "Outfit", sans-serif', '#FFFFFF', 'left');
-  
+
   const venueHeader = `📍 ${(team.stadium || 'Stadium').toUpperCase()} • ${(team.conference || 'CFB')} • 10,000 SIMS`;
   drawCanvasTextFitted(ctx, venueHeader, 1144, 58, 480, '600 13px "JetBrains Mono", monospace', team.colors?.accent || '#F59E0B', 'right');
 
@@ -6174,7 +6186,7 @@ const LiveSyncEngine = {
               year: 'numeric',
               timeZone: 'America/New_York'
             }).format(dt); // e.g. "Sep 4, 2026"
-          } catch (e) {}
+          } catch (e) { }
         }
         let eventTv = comp.broadcast || '';
         if (!eventTv && comp.broadcasts && comp.broadcasts.length > 0) {
@@ -6885,15 +6897,15 @@ function initMonteCarloEngine() {
 // ELEVATION: DREAM MATCHUP COLLIDER (LAUNCHED IN PRIMARY SIM MODAL)
 // ==========================================================================
 
-window.openDreamSandboxModal = function() {
+window.openDreamSandboxModal = function () {
   const modal = document.getElementById('dreamSandboxModal');
   if (!modal) return;
-  
+
   populateSandboxDropdowns();
   modal.classList.add('open');
 };
 
-window.closeDreamSandboxModal = function() {
+window.closeDreamSandboxModal = function () {
   const modal = document.getElementById('dreamSandboxModal');
   if (modal) modal.classList.remove('open');
 };
@@ -6935,7 +6947,7 @@ function populateSandboxDropdowns() {
   selectB.onchange = () => { state.dreamTeamB = selectB.value; };
 }
 
-window.launchDreamMatchupInSimModal = function() {
+window.launchDreamMatchupInSimModal = function () {
   const selectA = document.getElementById('sandboxTeamASelect');
   const selectB = document.getElementById('sandboxTeamBSelect');
   const selectVenue = document.getElementById('sandboxVenueSelect');
@@ -7029,7 +7041,7 @@ window.launchDreamMatchupInSimModal = function() {
 // RECEIPTS & MODEL CALIBRATION HUB
 // ==========================================================================
 
-window.openReceiptsModal = function() {
+window.openReceiptsModal = function () {
   const modal = document.getElementById('receiptsModal');
   if (!modal) return;
   loadReceiptsData();
@@ -7037,13 +7049,13 @@ window.openReceiptsModal = function() {
   modal.classList.add('open');
 };
 
-window.closeReceiptsModal = function() {
+window.closeReceiptsModal = function () {
   const modal = document.getElementById('receiptsModal');
   if (modal) modal.classList.remove('open');
   document.body.classList.remove('modal-open');
 };
 
-window.switchReceiptsTab = function(tabName) {
+window.switchReceiptsTab = function (tabName) {
   document.querySelectorAll('#receiptsModal .sub-tab').forEach(b => {
     b.classList.toggle('active', b.dataset.receiptstab === tabName);
   });
@@ -7102,7 +7114,7 @@ function getWeekSortNum(weekStr) {
   return 99;
 }
 
-window.renderFilteredReceiptsLedger = function() {
+window.renderFilteredReceiptsLedger = function () {
   const tbody = document.getElementById('settledGamesTableBody');
   if (!tbody) return;
 
@@ -7207,13 +7219,13 @@ function loadReceiptsData() {
         const stats = data.overallStats;
         const brierEl = document.getElementById('receiptsBrierScore');
         if (brierEl) brierEl.innerText = stats.brierScore !== undefined ? stats.brierScore.toFixed(3) : '0.076';
-        
+
         const suEl = document.getElementById('receiptsStraightUp');
         if (suEl) suEl.innerText = `${stats.straightUpWins || 41} - ${stats.straightUpLosses || 7}`;
-        
+
         const atsEl = document.getElementById('receiptsAts');
         if (atsEl) atsEl.innerText = `${stats.atsWins || 31} - ${stats.atsLosses || 17}`;
-        
+
         const llEl = document.getElementById('receiptsLogLoss');
         if (llEl) llEl.innerText = stats.logLoss !== undefined ? stats.logLoss.toFixed(3) : '0.285';
       }
@@ -7378,7 +7390,7 @@ function drawOddsTickerChart() {
   const xLabels = ['Preseason', 'Week 0', 'Week 1', 'Week 2'];
   xLabels.forEach((label, idx) => {
     const x = padLeft + (idx / (xLabels.length - 1)) * (w - padLeft - padRight);
-    
+
     // Vertical Grid
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
     ctx.beginPath();
@@ -7442,7 +7454,7 @@ function drawOddsTickerChart() {
   });
 }
 
-window.loadSelectedArchiveSnapshot = function() {
+window.loadSelectedArchiveSnapshot = function () {
   const select = document.getElementById('archiveSnapshotSelect');
   const preview = document.getElementById('archiveJsonPreview');
   if (!select || !preview) return;
@@ -7678,7 +7690,7 @@ function serializeScenario(teamId) {
   }
 }
 
-window.shareCustomScenario = async function() {
+window.shareCustomScenario = async function () {
   const teamId = state.currentTeamId || getTopRankedTeamId() || 'ohiostate';
   const team = TEAMS_DATABASE[teamId] || { name: 'CFB', shortName: 'College Football' };
   const champ = state.lastNationalChampion || (state.lastPlayoffResults && state.lastPlayoffResults.nationalChampion) || team;
@@ -7862,7 +7874,7 @@ function restoreScenarioFromUrl() {
           const imported = saveCurrentProjectionAsBracket(decoded.bn, decoded.cr || 'Shared Coach', decoded.nt || 'Imported via shared device link');
           showCustomToast(`📥 Bracket "${decoded.bn}" automatically saved to this device's Vault!`);
         }
-      } catch (e) {}
+      } catch (e) { }
     }
 
     return true;
@@ -7884,7 +7896,7 @@ async function generateGameHypeCard(game) {
     if (document.fonts && document.fonts.ready) {
       await document.fonts.ready;
     }
-  } catch (e) {}
+  } catch (e) { }
 
   let teamA, teamB, scoreA, scoreB, probA, spreadA, ou;
   if ((game.isPostseason || game.isDreamMatchup) && game.teamA && game.teamB) {
@@ -7900,11 +7912,11 @@ async function generateGameHypeCard(game) {
     teamA = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
     const oppId = getOpponentTeamId(game);
     const dbOpp = (oppId && TEAMS_DATABASE[oppId]) ? TEAMS_DATABASE[oppId] : null;
-    teamB = dbOpp || { 
-      shortName: game.oppAbbr || 'OPP', 
-      name: game.opponent || 'Opponent', 
-      apRank: game.oppRank || 'NR', 
-      logoUrl: game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || '', 
+    teamB = dbOpp || {
+      shortName: game.oppAbbr || 'OPP',
+      name: game.opponent || 'Opponent',
+      apRank: game.oppRank || 'NR',
+      logoUrl: game.oppLogoUrl || (typeof ESPN_LOGOS !== 'undefined' ? ESPN_LOGOS[game.oppAbbr] : '') || '',
       colors: { primary: game.oppColor || '#334155', accent: '#94A3B8' },
       starPlayer: game.scoutReport?.keyMatchup || ''
     };
@@ -8157,7 +8169,7 @@ async function generateGameHypeCard(game) {
       ctx.drawImage(qr.canvas, gQrX + 15, 475, 80, 80);
       ctx.restore();
     }
-  } catch (e) {}
+  } catch (e) { }
 
   ctx.fillStyle = '#080C14';
   ctx.font = 'bold 8px "JetBrains Mono", monospace';
@@ -8300,7 +8312,7 @@ function runCfpMonteCarloSeasonSims(numSims = 10000) {
   return matrixList;
 }
 
-window.openCfpMatrixModal = function() {
+window.openCfpMatrixModal = function () {
   const modal = document.getElementById('cfpMatrixModal');
   if (!modal) return;
 
@@ -8311,12 +8323,12 @@ window.openCfpMatrixModal = function() {
   modal.classList.add('open');
 };
 
-window.closeCfpMatrixModal = function() {
+window.closeCfpMatrixModal = function () {
   const modal = document.getElementById('cfpMatrixModal');
   if (modal) modal.classList.remove('open');
 };
 
-window.filterCfpMatrix = function(conf) {
+window.filterCfpMatrix = function (conf) {
   currentMatrixConfFilter = conf;
   document.querySelectorAll('.conf-filter-btn').forEach(b => {
     if (b.dataset.conf === conf) b.classList.add('active');
@@ -8325,7 +8337,7 @@ window.filterCfpMatrix = function(conf) {
   renderCfpMatrixModal();
 };
 
-window.sortCfpMatrix = function(col) {
+window.sortCfpMatrix = function (col) {
   if (currentMatrixSortCol === col) {
     currentMatrixSortAsc = !currentMatrixSortAsc;
   } else {
@@ -8335,7 +8347,7 @@ window.sortCfpMatrix = function(col) {
   renderCfpMatrixModal();
 };
 
-window.rerunCfpMatrixSims = function() {
+window.rerunCfpMatrixSims = function () {
   showToast('🔥 Simulating 10,000 full seasons...');
   setTimeout(() => {
     runCfpMonteCarloSeasonSims(10000);
@@ -8416,7 +8428,7 @@ function renderCfpMatrixModal() {
 // VIEW SEGMENTED CONTROLLER & MOBILE ERGONOMICS HANDLERS
 // ==========================================================================
 
-window.switchAppView = function(viewName) {
+window.switchAppView = function (viewName) {
   // Update Segmented Nav buttons
   document.querySelectorAll('.segment-btn[data-view]').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.view === viewName);
@@ -8453,7 +8465,7 @@ window.addEventListener('hashchange', () => {
   }
 });
 
-window.scrollToTeamOverview = function() {
+window.scrollToTeamOverview = function () {
   document.querySelectorAll('.dock-btn[data-dock]').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.dock === 'overview');
   });
@@ -8461,7 +8473,7 @@ window.scrollToTeamOverview = function() {
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
-window.toggleMoreToolsMenu = function(e) {
+window.toggleMoreToolsMenu = function (e) {
   if (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -8505,7 +8517,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
-window.switchPlayoffRound = function(roundKey) {
+window.switchPlayoffRound = function (roundKey) {
   document.querySelectorAll('.round-tab-btn[data-round]').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.round === roundKey);
   });
@@ -8539,7 +8551,7 @@ window.switchPlayoffRound = function(roundKey) {
 };
 window.switchMobilePlayoffRound = window.switchPlayoffRound;
 
-window.openHypeCardModal = function(game) {
+window.openHypeCardModal = function (game) {
   const targetGame = game || state.activeModalGame;
   const hypeModal = document.getElementById('hypeCardModal');
   if (hypeModal) {
@@ -8927,7 +8939,7 @@ function getCurrentUser() {
       }
       return u;
     }
-  } catch (e) {}
+  } catch (e) { }
   return null;
 }
 
@@ -8942,7 +8954,7 @@ function setCurrentUser(user) {
       localStorage.removeItem('cfb_prophet_auth_user_v3');
       localStorage.removeItem('cfb_prophet_user_handle');
     }
-  } catch (e) {}
+  } catch (e) { }
   updateAuthUI();
   renderSavedBracketsVault();
 }
@@ -9050,10 +9062,10 @@ function handleFavoriteTeamChange(newTeamId) {
     user.favTeam = newTeamId;
     setCurrentUser(user);
     if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.updateProfile === 'function') {
-      try { window.CFBProphetSupabase.updateProfile({ favTeam: newTeamId }); } catch (e) {}
+      try { window.CFBProphetSupabase.updateProfile({ favTeam: newTeamId }); } catch (e) { }
     }
   }
-  
+
   const favTeam = TEAMS_DATABASE[newTeamId];
   const pTeamName = document.getElementById('authProfileTeamName');
   const pTeamLogo = document.getElementById('authProfileTeamLogo');
@@ -9172,8 +9184,8 @@ async function handleSupabaseGoogleSignIn() {
   if (window.CFBProphetSupabase) {
     const res = await window.CFBProphetSupabase.signInWithGoogle();
     if (res && res.error) {
-      const msg = res.error.message?.includes('provider') 
-        ? "Google OAuth isn't enabled in Supabase Dashboard yet (Auth -> Providers). You can sign in right now with Email & Pass or Magic Link!" 
+      const msg = res.error.message?.includes('provider')
+        ? "Google OAuth isn't enabled in Supabase Dashboard yet (Auth -> Providers). You can sign in right now with Email & Pass or Magic Link!"
         : (res.error.message || 'Google sign-in error.');
       showAuthAlert(msg, 'error');
     }
@@ -9186,8 +9198,8 @@ async function handleSupabaseGitHubSignIn() {
   if (window.CFBProphetSupabase) {
     const res = await window.CFBProphetSupabase.signInWithGitHub();
     if (res && res.error) {
-      const msg = res.error.message?.includes('provider') 
-        ? "GitHub OAuth isn't enabled in Supabase Dashboard yet (Auth -> Providers). You can sign in right now with Email & Pass or Magic Link!" 
+      const msg = res.error.message?.includes('provider')
+        ? "GitHub OAuth isn't enabled in Supabase Dashboard yet (Auth -> Providers). You can sign in right now with Email & Pass or Magic Link!"
         : (res.error.message || 'GitHub sign-in error.');
       showAuthAlert(msg, 'error');
     }
@@ -9212,8 +9224,8 @@ async function handleSupabaseAppleSignIn() {
     showAuthAlert('🍎 Connecting to Apple ID...', 'info');
     const res = await window.CFBProphetSupabase.signInWithApple();
     if (res && res.error) {
-      const msg = res.error.message?.includes('provider') 
-        ? "Apple Sign-In is active in native iOS builds with Apple capability. On web, please use Google, Email, or Guest mode!" 
+      const msg = res.error.message?.includes('provider')
+        ? "Apple Sign-In is active in native iOS builds with Apple capability. On web, please use Google, Email, or Guest mode!"
         : (res.error.message || 'Apple sign-in error.');
       showAuthAlert(msg, 'error');
     }
@@ -9221,7 +9233,7 @@ async function handleSupabaseAppleSignIn() {
 }
 window.handleSupabaseAppleSignIn = handleSupabaseAppleSignIn;
 
-window.handleAppleSignInError = function(errorMsg) {
+window.handleAppleSignInError = function (errorMsg) {
   showAuthAlert(errorMsg || 'Apple Sign-In could not be completed on this device.', 'error');
 };
 
@@ -9452,7 +9464,7 @@ function saveSupabaseConfigInputs() {
 window.saveSupabaseConfigInputs = saveSupabaseConfigInputs;
 
 // Native Swift Bridge Callback for Apple Sign In
-window.handleAppleSignInResult = function(payload) {
+window.handleAppleSignInResult = function (payload) {
   if (!payload || !payload.userId) return;
 
   const appleKey = `cfb_prophet_apple_profile_${payload.userId}`;
@@ -9608,7 +9620,7 @@ async function handleSignOutClick() {
     if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.signOut === 'function') {
       await window.CFBProphetSupabase.signOut();
     }
-  } catch (e) {}
+  } catch (e) { }
 
   try {
     localStorage.removeItem(AUTH_STORAGE_KEY);
@@ -9627,7 +9639,7 @@ async function handleSignOutClick() {
         sessionStorage.removeItem(k);
       }
     });
-  } catch (e) {}
+  } catch (e) { }
 
   if (typeof state !== 'undefined') {
     state.activeSavedBracketId = null;
@@ -9674,7 +9686,7 @@ async function executeDeleteAccount() {
         }
       });
     }
-  } catch (e) {}
+  } catch (e) { }
 
   // 2. Clear bracket storage keys
   try {
@@ -9682,7 +9694,7 @@ async function executeDeleteAccount() {
     localStorage.removeItem('cfb_prophet_saved_brackets_v5');
     localStorage.removeItem('cfb_prophet_saved_brackets_v4');
     localStorage.removeItem('cfb_prophet_saved_brackets_v3');
-  } catch (e) {}
+  } catch (e) { }
 
   // 3. Clear cloud session & auth keys
   try {
@@ -9691,7 +9703,7 @@ async function executeDeleteAccount() {
     } else if (window.CFBProphetSupabase) {
       await window.CFBProphetSupabase.signOut();
     }
-  } catch (e) {}
+  } catch (e) { }
 
   localStorage.removeItem(AUTH_STORAGE_KEY);
   localStorage.removeItem('cfb_prophet_auth_user_v4');
@@ -9712,30 +9724,30 @@ async function runAccountDeletionDemoRecording() {
   console.log("Starting automated Account Deletion demo flow...");
   // Step 1: Initial home view pause
   await new Promise(r => setTimeout(r, 2000));
-  
+
   // Step 2: Open Sign In modal
   openAuthModal();
   await new Promise(r => setTimeout(r, 2200));
-  
+
   // Step 3: Click demo reviewer credentials button
   fillReviewerDemoCredentials();
   await new Promise(r => setTimeout(r, 2500));
-  
+
   // Step 4: Open profile modal
   openAuthModal();
   await new Promise(r => setTimeout(r, 2200));
-  
+
   // Step 5: Smoothly scroll to the Delete Account button
   const triggerBtn = document.getElementById('authDeleteAccountTriggerBtn');
   if (triggerBtn) {
     triggerBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
   await new Promise(r => setTimeout(r, 2200));
-  
+
   // Step 6: Reveal the confirmation dialog
   showDeleteAccountConfirmation();
   await new Promise(r => setTimeout(r, 3200));
-  
+
   // Step 7: Confirm deletion
   await executeDeleteAccount();
   await new Promise(r => setTimeout(r, 4000));
@@ -9750,7 +9762,7 @@ try {
       runAccountDeletionDemoRecording();
     }, 2000);
   }
-} catch (e) {}
+} catch (e) { }
 
 function saveCurrentProjectionAsBracket(name, creator, notes, forceNewId = false) {
   const evaluated = evaluateRegularSeasonAllTeams();
@@ -9845,7 +9857,7 @@ function saveCurrentProjectionAsBracket(name, creator, notes, forceNewId = false
 
   try {
     localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
-  } catch (e) {}
+  } catch (e) { }
 
   if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.saveBracket === 'function') {
     window.CFBProphetSupabase.saveBracket(bracketObj);
@@ -9874,7 +9886,7 @@ function getDeletedBracketIds() {
       protectedIds.forEach(id => set.delete(id));
       return set;
     }
-  } catch (e) {}
+  } catch (e) { }
   return new Set();
 }
 
@@ -9884,7 +9896,7 @@ function addDeletedBracketId(bracketId) {
     const set = getDeletedBracketIds();
     set.add(bracketId);
     localStorage.setItem(DELETED_BRACKETS_KEY, JSON.stringify(Array.from(set)));
-  } catch (e) {}
+  } catch (e) { }
 }
 
 function isBracketOwnedByUser(b, currentUser, isFromLocalSaved = false) {
@@ -10026,7 +10038,7 @@ function getSavedBrackets() {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) localSavedBrackets = parsed;
       }
-    } catch (e) {}
+    } catch (e) { }
     localSavedBrackets.forEach(b => {
       if (isBracketOwnedByUser(b, null, true)) {
         userBracketsMap.set(b.id, b);
@@ -10101,7 +10113,7 @@ function getSavedBrackets() {
   try {
     const comm = getLocalCommunityBrackets();
     if (Array.isArray(comm)) commSources.push(...comm);
-  } catch (e) {}
+  } catch (e) { }
 
   commSources.forEach(b => {
     if (!b || !b.id || b.id === 'bracket_prophet_ai_baseline' || b.id === 'bracket_usc_wins_out_curated' || deletedIds.has(b.id)) return;
@@ -10125,7 +10137,7 @@ function getSavedBrackets() {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) localSources.push(...parsed);
       }
-    } catch (e) {}
+    } catch (e) { }
   });
 
   localSources.forEach(b => {
@@ -10143,12 +10155,12 @@ function getAllKnownBrackets() {
   if (typeof getCommunityBrackets === 'function') {
     try {
       getCommunityBrackets().forEach(b => { if (b && b.id) map.set(b.id, b); });
-    } catch(e) {}
+    } catch (e) { }
   }
   if (typeof getSavedBrackets === 'function') {
     try {
       getSavedBrackets().forEach(b => { if (b && b.id) map.set(b.id, b); });
-    } catch(e) {}
+    } catch (e) { }
   }
   return Array.from(map.values());
 }
@@ -10185,18 +10197,18 @@ function createProphetAiBenchmarkBracket() {
     wins: s?.wins !== undefined ? s.wins : (s?.totalWins || 11),
     losses: s?.losses !== undefined ? s.losses : (s?.totalLosses || 1)
   })) : [
-    { seed: 1,  id: 'georgia',    name: 'Georgia',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png',   wins: 12, losses: 0 },
-    { seed: 2,  id: 'utah',       name: 'Utah',        logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/254.png',  wins: 12, losses: 0 },
-    { seed: 3,  id: 'ohiostate',  name: 'Ohio State',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png',  wins: 11, losses: 1 },
-    { seed: 4,  id: 'miami',      name: 'Miami',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 11, losses: 1 },
-    { seed: 5,  id: 'notredame',  name: 'Notre Dame',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png',   wins: 12, losses: 0 },
-    { seed: 6,  id: 'lsu',        name: 'LSU',         logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/99.png',   wins: 12, losses: 0 },
-    { seed: 7,  id: 'texastech',  name: 'Texas Tech',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png', wins: 12, losses: 0 },
-    { seed: 8,  id: 'indiana',    name: 'Indiana',     logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png',   wins: 11, losses: 1 },
-    { seed: 9,  id: 'louisville', name: 'Louisville',  logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/97.png',   wins: 11, losses: 1 },
-    { seed: 10, id: 'texas',      name: 'Texas',       logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png',  wins: 10, losses: 2 },
-    { seed: 11, id: 'oregon',     name: 'Oregon',      logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 10, losses: 2 },
-    { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png',   wins: 11, losses: 1 }
+    { seed: 1, id: 'georgia', name: 'Georgia', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/61.png', wins: 12, losses: 0 },
+    { seed: 2, id: 'utah', name: 'Utah', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/254.png', wins: 12, losses: 0 },
+    { seed: 3, id: 'ohiostate', name: 'Ohio State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/194.png', wins: 11, losses: 1 },
+    { seed: 4, id: 'miami', name: 'Miami', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png', wins: 11, losses: 1 },
+    { seed: 5, id: 'notredame', name: 'Notre Dame', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/87.png', wins: 12, losses: 0 },
+    { seed: 6, id: 'lsu', name: 'LSU', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/99.png', wins: 12, losses: 0 },
+    { seed: 7, id: 'texastech', name: 'Texas Tech', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png', wins: 12, losses: 0 },
+    { seed: 8, id: 'indiana', name: 'Indiana', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/84.png', wins: 11, losses: 1 },
+    { seed: 9, id: 'louisville', name: 'Louisville', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/97.png', wins: 11, losses: 1 },
+    { seed: 10, id: 'texas', name: 'Texas', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/251.png', wins: 10, losses: 2 },
+    { seed: 11, id: 'oregon', name: 'Oregon', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png', wins: 10, losses: 2 },
+    { seed: 12, id: 'boisestate', name: 'Boise State', logoUrl: 'https://a.espncdn.com/i/teamlogos/ncaa/500/68.png', wins: 11, losses: 1 }
   ];
 
   const scoreA = playoff?.simNatty?.scoreA || playoff?.natty?.sim?.winnerScore || playoff?.natty?.sim?.scoreA || 29;
@@ -10490,7 +10502,7 @@ function getLocalCommunityBrackets() {
         });
       }
     }
-  } catch (e) {}
+  } catch (e) { }
 
   return Array.from(map.values()).filter(b => b && b.id && b.id !== 'bracket_prophet_ai_baseline' && b.id !== 'bracket_usc_wins_out_curated' && !deletedIds.has(b.id));
 }
@@ -10571,7 +10583,7 @@ function autoPublishAllLocalSavedBrackets() {
         publishBracketToCloud(b);
       }
     });
-  } catch(e) {}
+  } catch (e) { }
 }
 window.autoPublishAllLocalSavedBrackets = autoPublishAllLocalSavedBrackets;
 
@@ -10618,7 +10630,7 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
 
     // 3. Real-time ntfy.sh relay
     try {
-      const res = await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}/json?poll=1&since=all`, { 
+      const res = await fetch(`https://ntfy.sh/${COMMUNITY_CLOUD_TOPIC}/json?poll=1&since=all`, {
         cache: 'no-store',
         headers: { 'Accept': 'application/json' }
       });
@@ -10632,7 +10644,7 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
               let b = null;
               try {
                 b = typeof json.message === 'string' ? JSON.parse(json.message) : json.message;
-              } catch(e) {}
+              } catch (e) { }
               if (b) {
                 if (b.action === 'delete_bracket' || b.isDeleted || b.deletedId) {
                   const delId = b.deletedId || b.id;
@@ -10647,7 +10659,7 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
                 }
               }
             }
-          } catch (e) {}
+          } catch (e) { }
         });
       }
     } catch (errNtfy) {
@@ -10663,12 +10675,12 @@ async function syncCommunityBracketsFromCloud(showFeedback = false) {
     });
     const merged = Array.from(map.values()).filter(b => !deletedIds.has(b.id));
     localStorage.setItem(COMMUNITY_BRACKETS_KEY, JSON.stringify(merged));
-    
+
     // Clean saved brackets
     const myLocal = getSavedBrackets().filter(b => !deletedIds.has(b.id));
     try {
       localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myLocal));
-    } catch(e) {}
+    } catch (e) { }
 
     // Update DOM only if modal is actively open to avoid unneeded redraws
     const modal = document.getElementById('bracketVaultModal');
@@ -10701,7 +10713,7 @@ async function publishBracketToCloud(bracketObj) {
     if (window.CFBProphetSupabase && typeof window.CFBProphetSupabase.saveBracketToCloud === 'function') {
       try {
         window.CFBProphetSupabase.saveBracketToCloud(compact);
-      } catch(eSupa) {}
+      } catch (eSupa) { }
     }
 
     // 3. Publish to cloud topic with guaranteed caching (< 1.2 KB)
@@ -10718,7 +10730,7 @@ async function publishBracketToCloud(bracketObj) {
         'Priority': 'default'
       }
     });
-  } catch (e) {}
+  } catch (e) { }
 }
 
 async function publishDeletionTombstoneToCloud(bracketId) {
@@ -10741,7 +10753,7 @@ async function publishDeletionTombstoneToCloud(bracketId) {
         'X-Cache': 'yes'
       }
     });
-  } catch(e) {}
+  } catch (e) { }
 }
 
 function calculateBracketAccuracy(bracket) {
@@ -10911,14 +10923,14 @@ function renderSavedBracketsVault() {
   const isSeasonTab = state.activeVaultTab === 'community';
   const effectiveWeek = isSeasonTab ? 'all' : (state.selectedVaultWeek || 'W1');
   const currentWeekLabel = effectiveWeek === 'all' ? 'FULL 2026 SEASON' : (effectiveWeek === 'W0' ? 'WEEK 0 (LOCKED SLATE)' : (effectiveWeek === 'CCG' ? 'CONF CHAMPIONSHIPS' : (effectiveWeek === 'CFP' ? '12-TEAM CFP PLAYOFF' : `${effectiveWeek} SLATE`)));
-  
+
   const aiWeeklyScore = isTeamFilter ? calculateTeamScoreForUser(aiBracket, state.selectedVaultTeam) : calculateWeeklyScoreForUser(aiBracket, effectiveWeek);
 
   // 1. Generate "YOU vs PROPHET AI" Head-to-Head Banner
   if (isTeamFilter && focusTeam) {
     const userTeamScore = myTopBracket ? calculateTeamScoreForUser(myTopBracket, state.selectedVaultTeam) : null;
     const bannerTitle = `🛡️ ${focusTeam.name.toUpperCase()} PICKS LEADERBOARD`;
-    
+
     if (userTeamScore) {
       const diff = userTeamScore.pts - aiWeeklyScore.pts;
       let statusBadge = diff > 0 ? `<span class="vs-ai-badge win"><i class="fa-solid fa-crown"></i> BEATING PROPHET AI (+${diff} PTS)</span>` : (diff === 0 ? `<span class="vs-ai-badge tie"><i class="fa-solid fa-handshake"></i> TIED WITH PROPHET AI (${userTeamScore.pts} PTS)</span>` : `<span class="vs-ai-badge trail"><i class="fa-solid fa-fire"></i> ${Math.abs(diff)} PTS BEHIND PROPHET AI</span>`);
@@ -11013,7 +11025,7 @@ function renderSavedBracketsVault() {
     const dateStr = b.createdAt ? new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '2026 Season';
     const champ = b.champion || { name: 'Champion', shortName: 'Champs', logoUrl: '' };
     const isActive = state.activeSavedBracketId === b.id;
-    
+
     const userDisplayName = (currentUser?.displayName || '').trim().toLowerCase();
     const userHandle = (currentUser?.handle || '').trim().toLowerCase();
     const userEmail = (currentUser?.email || '').trim().toLowerCase();
@@ -11169,7 +11181,7 @@ function openSubmissionDetailModal(bracketId, e) {
   if (isTeamFilter && focusTeam && teamSection && teamList) {
     teamSection.style.display = 'block';
     if (teamTitle) teamTitle.innerText = `📅 ${focusTeam.name.toUpperCase()} PREDICTED SLATE (${acc.record}):`;
-    
+
     const userPicks = b.simState?.userPicks || {};
     const manualScores = b.simState?.manualScores || {};
     const teamSliders = b.simState?.teamSliders?.[state.selectedVaultTeam] || {};
@@ -11285,11 +11297,11 @@ function copyCommunityBracketToMine(bracketId, e) {
   clone.creatorId = currentUser ? currentUser.id : `guest_${Date.now()}`;
   clone.createdAt = new Date().toISOString();
   clone.mode = 'custom';
-  
+
   myBrackets.unshift(clone);
   try {
     localStorage.setItem(BRACKET_STORAGE_KEY, JSON.stringify(myBrackets));
-  } catch (err) {}
+  } catch (err) { }
 
   showCustomToast(`⭐ Added "${clone.name}" to My Saved Brackets!`);
   renderSavedBracketsVault();
@@ -11427,7 +11439,7 @@ function handleConfirmSaveBracket() {
         const navLabel = document.getElementById('navAuthLabel');
         if (navLabel) navLabel.textContent = cleanCreator;
       }
-    } catch(e) {}
+    } catch (e) { }
   }
   const allKnown = getAllKnownBrackets();
   const activeExisting = state.activeSavedBracketId ? allKnown.find(b => b.id === state.activeSavedBracketId) : null;
@@ -11487,11 +11499,11 @@ function deleteSavedBracket(bracketId, e) {
     if (typeof e.stopPropagation === 'function') e.stopPropagation();
     if (typeof e.preventDefault === 'function') e.preventDefault();
   }
-  
+
   const allKnown = getAllKnownBrackets();
   const target = allKnown.find(b => b.id === bracketId);
   const isAi = (target && (target.isAdminBenchmark || target.id === 'bracket_prophet_ai_baseline' || (target.name && target.name.toLowerCase().includes('prophet ai')))) || bracketId === 'bracket_prophet_ai_baseline';
-  
+
   if (isAi) {
     showCustomToast('🔒 The Prophet AI Benchmark is permanently locked and cannot be deleted.');
     return;
@@ -11528,7 +11540,7 @@ function deleteSavedBracket(bracketId, e) {
           localStorage.setItem(k, JSON.stringify(list));
         }
       }
-    } catch(err) {}
+    } catch (err) { }
   });
 
   const commKeys = [
@@ -11548,7 +11560,7 @@ function deleteSavedBracket(bracketId, e) {
           localStorage.setItem(k, JSON.stringify(list));
         }
       }
-    } catch(err) {}
+    } catch (err) { }
   });
 
   renderSavedBracketsVault();
@@ -11700,7 +11712,7 @@ function openCfpBracketCanvasModal() {
 function openCfpBracketCanvasModalForBracket(bracketId) {
   const allBrackets = getCommunityBrackets();
   const target = allBrackets.find(b => b.id === bracketId) || allBrackets[0] || createProphetAiBenchmarkBracket();
-  
+
   const modal = document.getElementById('bracketCanvasModal');
   if (!modal) return;
 
@@ -11817,7 +11829,7 @@ function renderActiveBracketEditorBar(bracket) {
       const acc = calculateTeamScoreForUser(bracket, state.currentTeamId);
       const isPerfect = acc.pts === acc.maxPts;
       scorePillHtml = `<span class="bracket-banner-score-pill" title="Prediction Points for ${TEAMS_DATABASE[state.currentTeamId]?.shortName || 'Team'}"><i class="fa-solid ${isPerfect ? 'fa-award' : 'fa-chart-pie'}"></i> ${acc.pts}/${acc.maxPts} PTS (${acc.pct}%)</span>`;
-    } catch (e) {}
+    } catch (e) { }
     if (nameEl) nameEl.innerHTML = `"${bracket.name || 'Personal Bracket'}" ${scorePillHtml}`;
     banner.style.display = 'block';
   } else {
@@ -11903,7 +11915,7 @@ function copyBracketShareLink(bracketId, e) {
   if (!target) return;
 
   const url = getBracketShareUrl(target.id);
-  
+
   // Instant Visual Feedback on Clicked Button
   const btn = e?.currentTarget;
   if (btn) {
@@ -11970,7 +11982,7 @@ function openBracketQrModal(bracketId, e) {
       const dynDiv = document.getElementById('dynamicQrBox');
       if (dynDiv) dynDiv.style.display = 'none';
       qrRendered = true;
-    } catch(err) {
+    } catch (err) {
       console.warn('QRious render error:', err);
     }
   }
@@ -12003,7 +12015,7 @@ function openBracketQrModal(bracketId, e) {
         if (imgEl) imgEl.style.display = 'none';
         qrRendered = true;
       }
-    } catch(err) {
+    } catch (err) {
       console.warn('QRCode render error:', err);
     }
   }
@@ -12135,9 +12147,9 @@ function getActiveHypeShareData() {
     } else {
       teamA = TEAMS_DATABASE[state.currentTeamId] || Object.values(TEAMS_DATABASE)[0];
       const oppId = getOpponentTeamId(game);
-      teamB = (oppId && TEAMS_DATABASE[oppId]) ? TEAMS_DATABASE[oppId] : { 
-        shortName: game.oppAbbr || 'Opponent', 
-        name: game.opponent || 'Opponent' 
+      teamB = (oppId && TEAMS_DATABASE[oppId]) ? TEAMS_DATABASE[oppId] : {
+        shortName: game.oppAbbr || 'Opponent',
+        name: game.opponent || 'Opponent'
       };
       const sim = calculateAdjustedMatchup(game);
       scoreA = sim.projUt;
@@ -12213,7 +12225,7 @@ async function shareActiveCanvasToNativeSheet(canvasId, defaultFilename = 'cfb_p
         showCustomToast('📋 Image copied to clipboard! Paste into iMessage or chat.');
         return;
       }
-    } catch (e) {}
+    } catch (e) { }
 
     // Fallback: Download
     const a = document.createElement('a');
@@ -12233,7 +12245,7 @@ function triggerNativeHaptic(type = 'medium') {
     if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.haptic) {
       window.webkit.messageHandlers.haptic.postMessage(type);
     }
-  } catch (e) {}
+  } catch (e) { }
 }
 window.triggerNativeHaptic = triggerNativeHaptic;
 
@@ -12243,7 +12255,7 @@ function triggerNativeShare(title, text, url) {
       window.webkit.messageHandlers.share.postMessage({ title, text, url });
       return true;
     }
-  } catch (e) {}
+  } catch (e) { }
   return false;
 }
 window.triggerNativeShare = triggerNativeShare;
@@ -12297,7 +12309,7 @@ function triggerChaosUpsetSimulator() {
   }
 
   showCustomToast(`🎲 CHAOS UNLEASHED: ${upsetCount} matchup upset${upsetCount > 1 ? 's' : ''} generated! Check your updated CFP bracket!`);
-  
+
   const chaosBtn = document.querySelector('.chaos-mode-action');
   if (chaosBtn) {
     chaosBtn.style.transform = 'scale(1.06)';
@@ -12475,7 +12487,7 @@ function handleTwitterChallengeShare() {
         url: shareUrl
       });
       return;
-    } catch (e) {}
+    } catch (e) { }
   }
 
   // 2. Direct Web Intent
@@ -12570,30 +12582,30 @@ function startApp() {
     selectTeam(defaultTeamId);
   } catch (err) {
     console.error('Error selecting initial team:', err);
-    try { selectTeam('ohiostate'); } catch (e) {}
+    try { selectTeam('ohiostate'); } catch (e) { }
   }
 
   // 2. Initialize secondary subsystems safely
-  try { updateAuthUI(); } catch (e) {}
-  try { initGlobalSliders(); } catch (e) {}
-  try { initGlobalPresetButtons(); } catch (e) {}
-  try { initFilterButtons(); } catch (e) {}
-  try { initModalSubTabs(); } catch (e) {}
-  try { initModalActions(); } catch (e) {}
-  try { initHypeCardExport(); } catch (e) {}
-  try { initPwaInstall(); } catch (e) {}
-  try { startCountdownTicker(); } catch (e) {}
-  try { initLiveSyncEngine(); } catch (e) {}
-  try { initMonteCarloEngine(); } catch (e) {}
-  try { checkIncomingChallengeParams(); } catch (e) {}
-  try { autoPublishAllLocalSavedBrackets(); } catch (e) {}
-  try { syncCommunityBracketsFromCloud(); } catch (e) {}
-  try { initPwaServiceWorker(); } catch (e) {}
+  try { updateAuthUI(); } catch (e) { }
+  try { initGlobalSliders(); } catch (e) { }
+  try { initGlobalPresetButtons(); } catch (e) { }
+  try { initFilterButtons(); } catch (e) { }
+  try { initModalSubTabs(); } catch (e) { }
+  try { initModalActions(); } catch (e) { }
+  try { initHypeCardExport(); } catch (e) { }
+  try { initPwaInstall(); } catch (e) { }
+  try { startCountdownTicker(); } catch (e) { }
+  try { initLiveSyncEngine(); } catch (e) { }
+  try { initMonteCarloEngine(); } catch (e) { }
+  try { checkIncomingChallengeParams(); } catch (e) { }
+  try { autoPublishAllLocalSavedBrackets(); } catch (e) { }
+  try { syncCommunityBracketsFromCloud(); } catch (e) { }
+  try { initPwaServiceWorker(); } catch (e) { }
 
   // 3. Restore scenario from URL permalink hash (#sim=...) - skip on file:// (iOS)
   //    to prevent stale WKWebView hash state from loading wrong team
   if (!isFileProtocol) {
-    try { restoreScenarioFromUrl(); } catch (e) {}
+    try { restoreScenarioFromUrl(); } catch (e) { }
     window.addEventListener('hashchange', restoreScenarioFromUrl);
   }
 
@@ -12602,14 +12614,14 @@ function startApp() {
     try {
       autoPublishAllLocalSavedBrackets();
       syncCommunityBracketsFromCloud();
-    } catch (e) {}
+    } catch (e) { }
   });
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
       try {
         autoPublishAllLocalSavedBrackets();
         syncCommunityBracketsFromCloud();
-      } catch (e) {}
+      } catch (e) { }
     }
   });
 }
@@ -12781,7 +12793,7 @@ function getUserSubmittedBrackets() {
         seenIds.add(b.id);
         brackets.push(b);
       });
-    } catch (e) {}
+    } catch (e) { }
   }
 
   // 2. Scan all known brackets for brackets matching user handle / creator
@@ -12794,14 +12806,14 @@ function getUserSubmittedBrackets() {
         if (b.isAdminBenchmark || b.id === 'bracket_prophet_ai_baseline') return;
         const bCreator = (b.creator || '').toLowerCase().trim();
         const isOwner = (currentUser && typeof isBracketOwnedByUser === 'function' && isBracketOwnedByUser(b, currentUser)) ||
-                        (userHandle && bCreator === userHandle) ||
-                        (bCreator === 'jake johnson');
+          (userHandle && bCreator === userHandle) ||
+          (bCreator === 'jake johnson');
         if (isOwner) {
           seenIds.add(b.id);
           brackets.push(b);
         }
       });
-    } catch (e) {}
+    } catch (e) { }
   }
 
   // 3. Fallback: If still empty, show all non-admin submitted community brackets
@@ -12813,7 +12825,7 @@ function getUserSubmittedBrackets() {
         seenIds.add(b.id);
         brackets.push(b);
       });
-    } catch (e) {}
+    } catch (e) { }
   }
 
   brackets.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
@@ -12865,7 +12877,7 @@ const VEGAS_STACK_WEEKS = [
   'WEEK 13'
 ];
 
-window.openVegasStackModal = function(initialWeek) {
+window.openVegasStackModal = function (initialWeek) {
   const modal = document.getElementById('vegasStackModal');
   if (!modal) return;
 
@@ -12882,7 +12894,7 @@ window.openVegasStackModal = function(initialWeek) {
   renderVegasStack();
 };
 
-window.closeVegasStackModal = function() {
+window.closeVegasStackModal = function () {
   const modal = document.getElementById('vegasStackModal');
   if (modal) modal.classList.remove('open');
   document.body.classList.remove('modal-open');
@@ -12940,7 +12952,7 @@ function syncVegasStackCustomSourceSelect() {
 }
 window.syncVegasStackCustomSourceSelect = syncVegasStackCustomSourceSelect;
 
-window.onVegasStackCustomSourceChange = function(sourceId) {
+window.onVegasStackCustomSourceChange = function (sourceId) {
   vegasStackState.customSourceId = sourceId;
   if (sourceId === 'active') {
     if (typeof showCustomToast === 'function') {
@@ -12959,7 +12971,7 @@ window.onVegasStackCustomSourceChange = function(sourceId) {
   renderVegasStack();
 };
 
-window.setVegasStackMode = function(mode) {
+window.setVegasStackMode = function (mode) {
   vegasStackState.mode = mode;
   const bBtn = document.getElementById('vsModeBaselineBtn');
   const cBtn = document.getElementById('vsModeCustomBtn');
@@ -12970,12 +12982,12 @@ window.setVegasStackMode = function(mode) {
   renderVegasStack();
 };
 
-window.setVegasStackWeek = function(week) {
+window.setVegasStackWeek = function (week) {
   vegasStackState.currentWeek = week;
   renderVegasStack();
 };
 
-window.setVegasStackFilter = function(filter) {
+window.setVegasStackFilter = function (filter) {
   vegasStackState.filter = filter;
   document.querySelectorAll('#vegasStackFilterPills .filter-pill').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.filter === filter);
@@ -12983,7 +12995,7 @@ window.setVegasStackFilter = function(filter) {
   renderVegasStack();
 };
 
-window.onVegasStackSearch = function(query) {
+window.onVegasStackSearch = function (query) {
   vegasStackState.searchQuery = (query || '').toLowerCase().trim();
   renderVegasStack();
 };
@@ -13137,7 +13149,7 @@ function getVegasStackMatchups(weekFilter, isCustom) {
       // High-Fidelity Matchup Gate: Both teams are tracked in TEAMS_DATABASE, Ranked vs Ranked, or intra-conference
       const isTracked = !!(g.oppId && TEAMS_DATABASE[g.oppId]);
       const isRanked = ((homeTeam.apRank && homeTeam.apRank.startsWith('#')) || (homeTeam.rank && homeTeam.rank.startsWith('#'))) &&
-                       ((awayTeam.apRank && awayTeam.apRank.startsWith('#')) || (awayTeam.rank && awayTeam.rank.startsWith('#')));
+        ((awayTeam.apRank && awayTeam.apRank.startsWith('#')) || (awayTeam.rank && awayTeam.rank.startsWith('#')));
       const isConf = !!g.isConf;
       const isHighFidelity = isTracked || isRanked || isConf;
 
@@ -13407,8 +13419,8 @@ function renderVegasStack() {
         const homeAbbr = m.homeTeam.abbr || m.homeTeam.name;
         const scoreStr = `Final: ${awayAbbr} ${m.actAway} - ${homeAbbr} ${m.actHome} (${m.actTotal} pts)`;
 
-        const suTag = m.suResult === 'win' ? 
-          '<span class="vs-badge-grade win"><i class="fa-solid fa-check"></i> SU WIN</span>' : 
+        const suTag = m.suResult === 'win' ?
+          '<span class="vs-badge-grade win"><i class="fa-solid fa-check"></i> SU WIN</span>' :
           '<span class="vs-badge-grade loss"><i class="fa-solid fa-xmark"></i> SU LOSS</span>';
 
         let atsTag = '';
@@ -13556,7 +13568,7 @@ function renderVegasStack() {
 
 window.renderVegasStack = renderVegasStack;
 
-window.scrollVegasStackWeeks = function(direction) {
+window.scrollVegasStackWeeks = function (direction) {
   const weekBar = document.getElementById('vegasStackWeekBar');
   if (!weekBar) return;
   const scrollAmount = 260 * direction;
@@ -13695,7 +13707,7 @@ function generateVegasStackExportText(week, filter) {
   return lines.join('\n');
 }
 
-window.openVegasStackExportModal = function(targetWeek) {
+window.openVegasStackExportModal = function (targetWeek) {
   const modal = document.getElementById('vegasStackExportModal');
   if (!modal) return;
 
@@ -13724,12 +13736,12 @@ window.openVegasStackExportModal = function(targetWeek) {
   document.body.classList.add('modal-open');
 };
 
-window.closeVegasStackExportModal = function() {
+window.closeVegasStackExportModal = function () {
   const modal = document.getElementById('vegasStackExportModal');
   if (modal) modal.classList.remove('open');
 };
 
-window.updateVegasStackExportPreview = function() {
+window.updateVegasStackExportPreview = function () {
   const weekSelect = document.getElementById('vsExportWeekSelect');
   const filterSelect = document.getElementById('vsExportFilterSelect');
   const textarea = document.getElementById('vsExportTextarea');
@@ -13754,7 +13766,7 @@ window.updateVegasStackExportPreview = function() {
   }
 };
 
-window.copyVegasStackPicks = function() {
+window.copyVegasStackPicks = function () {
   const textarea = document.getElementById('vsExportTextarea');
   const btn = document.getElementById('vsExportCopyBtn');
   if (!textarea) return;
@@ -13796,7 +13808,7 @@ window.copyVegasStackPicks = function() {
   }
 };
 
-window.shareVegasStackPicksViaNative = function() {
+window.shareVegasStackPicksViaNative = function () {
   const textarea = document.getElementById('vsExportTextarea');
   const weekSelect = document.getElementById('vsExportWeekSelect');
   const selectedWeek = weekSelect ? weekSelect.value : (vegasStackState.currentWeek || getCFBCurrentWeek());

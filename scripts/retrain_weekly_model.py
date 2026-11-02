@@ -51,6 +51,41 @@ ESPN_ID_TO_TEAM_ID = {
     26: 'ucla', 96: 'kentucky', 154: 'wakeforest'
 }
 
+# Verified 2026 Season-Ending / Indefinite Starting QB Injuries
+# Discounts pre-injury offensive priors & pre-injury game tape while upweighting actual backup QB starts.
+SEASON_QB_INJURIES = {
+    'ohiostate': {
+        'starterOut': 'Julian Sayin',
+        'replacement': 'Luke Fahey',
+        'injuryWeek': 8,  # Injured throwing arm late W7 vs Indiana; true freshman Fahey 1st start W9 at USC (30-18 loss)
+        'status': 'Out Indefinitely / Season (Throwing Arm)',
+        'offDropPts': 7.5,
+        'starPlayer': 'Jeremiah Smith (WR) / Bo Jackson (RB) / Luke Fahey (QB)',
+        'qbSliderLabel': 'Luke Fahey Passing Attack (Sayin Out)',
+        'titleOdds': '+1200'
+    },
+    'ucla': {
+        'starterOut': 'Nico Iamaleava',
+        'replacement': 'Ty Dieffenbach',
+        'injuryWeek': 7,  # Torn ACL W6 vs Oregon; 3rd-stringer Dieffenbach took over W7
+        'status': 'Out for Season (Torn ACL)',
+        'offDropPts': 6.5,
+        'starPlayer': 'Ty Dieffenbach (QB) / Sammy Omosigho (LB)',
+        'qbSliderLabel': 'Ty Dieffenbach Passing Attack (Iamaleava Out)',
+        'titleOdds': '+6500'
+    },
+    'oregon': {
+        'starterOut': 'Dante Moore',
+        'replacement': 'Dylan Raiola',
+        'injuryWeek': 6,  # Concussion W4 vs USC; officially ruled out for remainder of 2026 season
+        'status': 'Out for Season (Concussion)',
+        'offDropPts': 5.5,
+        'starPlayer': 'Dakorien Moore (WR) / Evan Stewart (WR) / Dylan Raiola (QB)',
+        'qbSliderLabel': 'Dylan Raiola Passing Attack (Moore Out)',
+        'titleOdds': '+25000'
+    }
+}
+
 # Authoritative Week 2 Rankings (Used when ESPN API is still serving stale Preseason cache)
 WEEK2_OFFICIAL_POLL = {
     'ohiostate': {'apRank': '#1 AP', 'apPoints': '1,684 PTS (46 1st)', 'rankNum': 1},
@@ -737,7 +772,8 @@ def find_market_line(cur_week_lines, team_id, opp_id, is_home, raw_opp_name, opp
         o_names.add(opp_abbr.lower())
     o_names.discard('')
 
-    for (h, a), l_info in cur_week_lines.items():
+    ordered_lines = sorted(cur_week_lines.items(), key=lambda kv: (0 if kv[1].get('isLiveEspn') else 1))
+    for (h, a), l_info in ordered_lines:
         h_tid = match_team_in_db(db, h)
         a_tid = match_team_in_db(db, a)
         
@@ -750,7 +786,8 @@ def find_market_line(cur_week_lines, team_id, opp_id, is_home, raw_opp_name, opp
                 return {
                     'spread': spread if is_home else -spread,
                     'overUnder': l_info.get('overUnder'),
-                    'provider': l_info.get('provider', 'DraftKings')
+                    'provider': l_info.get('provider', 'DraftKings'),
+                    'isLiveEspn': l_info.get('isLiveEspn', False)
                 }
         
         # Fallback for non-DB opponents
@@ -760,14 +797,14 @@ def find_market_line(cur_week_lines, team_id, opp_id, is_home, raw_opp_name, opp
             if h_matches and a_matches:
                 spread = l_info.get('spread')
                 if spread is not None:
-                    return {'spread': spread, 'overUnder': l_info.get('overUnder'), 'provider': l_info.get('provider', 'DraftKings')}
+                    return {'spread': spread, 'overUnder': l_info.get('overUnder'), 'provider': l_info.get('provider', 'DraftKings'), 'isLiveEspn': l_info.get('isLiveEspn', False)}
         else:
             a_matches = (a_tid == team_id or a in t_names)
             h_matches = (h in o_names or any(w in h for w in o_names if len(w) >= 4))
             if a_matches and h_matches:
                 spread = l_info.get('spread')
                 if spread is not None:
-                    return {'spread': -spread, 'overUnder': l_info.get('overUnder'), 'provider': l_info.get('provider', 'DraftKings')}
+                    return {'spread': -spread, 'overUnder': l_info.get('overUnder'), 'provider': l_info.get('provider', 'DraftKings'), 'isLiveEspn': l_info.get('isLiveEspn', False)}
 
     return None
 
@@ -997,13 +1034,20 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
             and str(g.get('oppRank', '')).startswith('#')
             for g in finals
         )
-        # Only grant elite 920+ blue-chip floor if validated by <3 losses AND at least 1 ranked win
+        qb_inj = SEASON_QB_INJURIES.get(tid) or t.get('qbStatus')
+        # Only grant elite 920+ blue-chip offensive floor if QB1 is healthy, <3 losses, AND >=1 ranked win
         if tal >= 920.0 and num_losses < 3 and has_ranked_win:
-            p_off = max(p_off, 39.0)
+            if not qb_inj:
+                p_off = max(p_off, 39.0)
             p_def = min(p_def, 12.0)
         elif tal < 750.0:
             p_off = min(p_off, 33.5)
             p_def = max(p_def, 15.5)
+
+        # Discount pre-injury season-cumulative offensive prior when confirmed QB1 is out for season
+        if qb_inj and qb_inj.get('offDropPts'):
+            p_off = max(21.0, p_off - float(qb_inj['offDropPts']))
+
         return p_off, p_def, p_st
 
     def resolve_opp_info(raw_name, opp_abbr, opp_id, cur_units):
@@ -1043,6 +1087,10 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
             p_def = priors[tid]['def']
             p_st = priors[tid]['st']
             
+            qb_inj = SEASON_QB_INJURIES.get(tid) or t.get('qbStatus')
+            inj_week = int(qb_inj['injuryWeek']) if (qb_inj and qb_inj.get('injuryWeek')) else None
+            off_drop = float(qb_inj['offDropPts']) if (qb_inj and qb_inj.get('offDropPts')) else 0.0
+
             weighted_implied_off = []
             weighted_implied_def = []
             fbs_opp_nets = []
@@ -1051,6 +1099,7 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
             total_losses = 0
             unranked_losses = 0
             conf_losses = 0
+            post_inj_losses = 0
 
             for g in t.get('schedule', []):
                 if not g.get('isFinal'):
@@ -1061,6 +1110,10 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
                     continue
                 s_team = float(s_team)
                 s_opp = float(s_opp)
+
+                wk_m = re.search(r'\d+', str(g.get('week', '')))
+                g_week = int(wk_m.group(0)) if wk_m else 5
+                recency_mult = 0.78 + (0.045 * min(13, max(1, g_week)))
                 
                 opp_name = g.get('opponent', '')
                 opp_abbr = g.get('oppAbbr', '')
@@ -1106,20 +1159,35 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
                         unranked_losses += 1
                     if g.get('isConf') or check_is_conference_game(t.get('conference'), opp_name, opp_abbr)[0]:
                         conf_losses += 1
+                    if inj_week and g_week >= inj_week:
+                        post_inj_losses += 1
 
                 impl_off = eff_s_team - opp_def + 27.0 - (hfa * 0.5)
                 impl_def = eff_s_opp - opp_off + 27.0 + (hfa * 0.5)
+
+                w_off = w * recency_mult
+                w_def = w * recency_mult
+
+                # Season-ending QB1 regime split: discount pre-injury QB1 starts & upweight live backup QB tape
+                if inj_week is not None and off_drop > 0.0:
+                    if g_week < inj_week:
+                        impl_off -= off_drop
+                        w_off *= 0.45
+                    else:
+                        w_off *= 2.0
+                        w_def *= 1.35
                 
-                weighted_implied_off.append((impl_off, w))
-                weighted_implied_def.append((impl_def, w))
+                weighted_implied_off.append((impl_off, w_off))
+                weighted_implied_def.append((impl_def, w_def))
 
             games_played = len([g for g in t.get('schedule', []) if g.get('isFinal')])
             if weighted_implied_off:
                 w_sum_off = sum(val * w for val, w in weighted_implied_off)
+                w_tot_off = sum(w for _, w in weighted_implied_off)
                 w_sum_def = sum(val * w for val, w in weighted_implied_def)
-                w_tot = sum(w for _, w in weighted_implied_off)
-                obs_off = w_sum_off / max(0.1, w_tot)
-                obs_def = w_sum_def / max(0.1, w_tot)
+                w_tot_def = sum(w for _, w in weighted_implied_def)
+                obs_off = w_sum_off / max(0.1, w_tot_off)
+                obs_def = w_sum_def / max(0.1, w_tot_def)
                 # True unweighted mean FBS opponent rating (never masking cupcakes with tiny weights)
                 fbs_sos = sum(fbs_opp_nets) / max(1, len(fbs_opp_nets))
                 if fcs_games >= 2:
@@ -1145,10 +1213,10 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
             blend_def = in_season_weight * obs_def + prior_weight * p_def
             
             next_units[tid] = {'off': round(blend_off, 2), 'def': round(blend_def, 2), 'st': p_st}
-            sos_stats[tid] = {'sos': fbs_sos, 'rw': ranked_wins, 'losses': total_losses, 'gp': games_played}
+            sos_stats[tid] = {'sos': fbs_sos, 'rw': ranked_wins, 'losses': total_losses, 'gp': games_played, 'post_inj_losses': post_inj_losses}
         cur_units = next_units
 
-    # Stage 2: Post-Convergence True SOS Credibility Shrinkage & Gauntlet Credit
+    # Stage 2: Post-Convergence True SOS Credibility Shrinkage, Gauntlet Credit & Post-Injury Reality Check
     final_units = {}
     for tid, u in cur_units.items():
         st_info = sos_stats[tid]
@@ -1156,7 +1224,9 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
         rw = st_info['rw']
         losses = st_info['losses']
         gp = st_info['gp']
+        post_inj_losses = st_info.get('post_inj_losses', 0)
         off, dfn, st = u['off'], u['def'], u['st']
+        qb_inj = SEASON_QB_INJURIES.get(tid) or db[tid].get('qbStatus')
 
         # 1. Soft-Schedule Downward Shrinkage toward P4 Top-20 Anchor (Off 33.0 / Def 17.5 -> Net +15.5)
         # Never pulls a team upward; strictly shrinks inflated ratings built against weak schedules.
@@ -1173,10 +1243,15 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
             tax = 1.8 if losses >= 1 else 0.8
             off -= tax
             dfn += tax
-        elif fbs_sos >= 6.0 and rw >= 2:
+        elif fbs_sos >= 6.0 and rw >= 2 and not qb_inj:
             bonus = min(2.0, (fbs_sos - 5.5) * 0.25 + min(3, rw) * 0.35)
             off += bonus * 0.5
             dfn -= bonus * 0.5
+
+        # 3. Post-QB1 Injury Loss Reality Check (e.g. Ohio State losing 30-18 at USC with backup QB)
+        if qb_inj and post_inj_losses >= 1:
+            off -= 1.8
+            dfn += 1.2
 
         final_units[tid] = {'off': round(off, 1), 'def': round(dfn, 1), 'st': st}
 
@@ -1665,6 +1740,25 @@ def main():
     print(f"  • Vegas Consensus MAE:             {avg_vegas_mae} pts")
     print(f"  • Model Beat Vegas Rate:            {beat_vegas_pct}% ({model_beats_vegas_count}/{total_evaluated} games)")
 
+    # Sync Season-Ending QB1 Injury Roster Metadata & Starter Status
+    for tid, qb_inj in SEASON_QB_INJURIES.items():
+        if tid in db:
+            db[tid]['confirmedStarterQb'] = qb_inj['replacement']
+            if qb_inj.get('starPlayer'):
+                db[tid]['starPlayer'] = qb_inj['starPlayer']
+            if qb_inj.get('titleOdds'):
+                db[tid]['titleOdds'] = qb_inj['titleOdds']
+            if isinstance(db[tid].get('sliderLabels'), dict) and qb_inj.get('qbSliderLabel'):
+                db[tid]['sliderLabels']['qb'] = qb_inj['qbSliderLabel']
+            db[tid]['qbStatus'] = {
+                'starterOut': qb_inj['starterOut'],
+                'replacement': qb_inj['replacement'],
+                'injuryWeek': qb_inj['injuryWeek'],
+                'status': qb_inj['status'],
+                'offDropPts': qb_inj['offDropPts']
+            }
+            print(f"  ⚠️ QB1 Injury Active ({db[tid].get('shortName', tid)}): {qb_inj['starterOut']} [{qb_inj['status']}] → Active QB: {qb_inj['replacement']}")
+
     # 4. Systemic Dynamic Unit Rating Derivation (Automated Opponent-Adjusted Relaxation Solver)
     print("\n📈 SYSTEMIC TEAM POWER RATINGS (SOLVED FROM 2026 ON-FIELD DATA & RESUME):")
     derived_units = derive_systemic_unit_ratings(db, sp_map_2026, cum_adv_stats, talent_map)
@@ -1685,17 +1779,15 @@ def main():
             'defense': u['def'],
             'specialTeams': u['st']
         }
-        if not args.dry_run:
-            t['baseSpRating'] = new_rating
-            t['offenseRating'] = u['off']
-            t['defenseRating'] = u['def']
-            t['specialTeamsRating'] = u['st']
+        t['baseSpRating'] = new_rating
+        t['offenseRating'] = u['off']
+        t['defenseRating'] = u['def']
+        t['specialTeamsRating'] = u['st']
 
     # Update playoff contender ranks using finalized ratings
     sorted_by_rank = sorted(db.keys(), key=lambda k: get_team_rank_metric(k, db[k]))
     for idx, k in enumerate(sorted_by_rank):
-        if not args.dry_run:
-            db[k]['playoffContenderRank'] = idx + 1
+        db[k]['playoffContenderRank'] = idx + 1
 
     # 5. Re-project Future Unplayed Games (With Talent Blowout Multiplier & Market Anchoring)
     unplayed_games_recalculated = 0
@@ -1703,13 +1795,60 @@ def main():
 
     # Dynamically detect the active upcoming week (earliest week with unfinalized games)
     unplayed_weeks = []
+    upcoming_dates_set = set()
+    today_dt = datetime.date.today()
     for t_obj in db.values():
         for g_obj in t_obj.get('schedule', []):
             if not g_obj.get('isFinal'):
                 wm = re.search(r'\d+', g_obj.get('week', ''))
                 if wm:
-                    unplayed_weeks.append(int(wm.group(0)))
+                    w_int = int(wm.group(0))
+                    unplayed_weeks.append(w_int)
+                try:
+                    g_dt = datetime.datetime.strptime(g_obj.get('date', ''), '%b %d, %Y').date()
+                    if 0 <= (g_dt - today_dt).days <= 7:
+                        upcoming_dates_set.add(g_dt.strftime('%Y%m%d'))
+                except Exception:
+                    pass
     active_upcoming_week = min(unplayed_weeks) if unplayed_weeks else 10
+
+    # Ingest live real-time ESPN DraftKings/ESPN BET sportsbook lines for active_upcoming_week
+    if upcoming_dates_set:
+        if active_upcoming_week not in all_lines_by_week:
+            all_lines_by_week[active_upcoming_week] = {}
+        live_espn_lines_loaded = 0
+        for up_d in sorted(upcoming_dates_set):
+            up_events = fetch_espn_scoreboard(up_d)
+            for ev in up_events:
+                comps = ev.get('competitions', [{}])[0]
+                if ev.get('status', {}).get('type', {}).get('completed', False):
+                    continue
+                odds_list = comps.get('odds', [])
+                if not odds_list:
+                    continue
+                odd = odds_list[0]
+                sp_val = odd.get('spread')
+                if sp_val is None:
+                    continue
+                competitors = comps.get('competitors', [])
+                h_comp = next((c for c in competitors if c.get('homeAway') == 'home'), None)
+                a_comp = next((c for c in competitors if c.get('homeAway') == 'away'), None)
+                if not h_comp or not a_comp:
+                    continue
+                h_name = (h_comp.get('team', {}).get('displayName') or '').lower().strip()
+                a_name = (a_comp.get('team', {}).get('displayName') or '').lower().strip()
+                prov = odd.get('provider', {}).get('name', 'DraftKings')
+                ou_val = odd.get('overUnder')
+                if h_name and a_name:
+                    all_lines_by_week[active_upcoming_week][(h_name, a_name)] = {
+                        'spread': float(sp_val),
+                        'overUnder': float(ou_val) if ou_val is not None else None,
+                        'provider': prov,
+                        'isLiveEspn': True
+                    }
+                    live_espn_lines_loaded += 1
+        if live_espn_lines_loaded:
+            print(f"🎰 Live Sportsbook Sync: Loaded {live_espn_lines_loaded} active Week {active_upcoming_week} DraftKings lines from ESPN")
 
     for tid, t in db.items():
         sp_team = float(t.get('baseSpRating', 22.0))
@@ -1802,12 +1941,13 @@ def main():
             if matched_line and matched_line.get('spread') is not None:
                 spread_val = matched_line['spread']
                 vegas_margin = -spread_val
+                is_live_espn = matched_line.get('isLiveEspn', False)
                 # Strictly filter obsolete preseason summer lookahead lines:
                 # Any market lines beyond the active upcoming week in CFBD are summer lookaheads from July/August.
-                # Even for the active upcoming week, if a line contradicts in-season ratings by > 4.5 points or reverses favorites of a > 2.0 pt model gap, discard it!
+                # Authentic live ESPN sportsbook lines for active_upcoming_week are NEVER discarded!
                 if week_num and week_num > active_upcoming_week:
                     matched_line = None
-                elif week_num == active_upcoming_week:
+                elif week_num == active_upcoming_week and not is_live_espn:
                     if abs(raw_margin - vegas_margin) > 4.5:
                         matched_line = None
                     elif (raw_margin > 2.0 and vegas_margin < -2.0) or (raw_margin < -2.0 and vegas_margin > 2.0):
@@ -1818,8 +1958,11 @@ def main():
                 g['vegasSpread'] = spread_val
                 g['oddsProvider'] = matched_line.get('provider', 'DraftKings')
                 vegas_margin = -spread_val
-                # Week 9 live market blending: 60% model, 40% live Vegas market
-                projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
+                # Active week live sportsbook blending: 55% live Vegas market, 45% calibrated model when live ESPN line present
+                if matched_line.get('isLiveEspn'):
+                    projected_margin = round(0.45 * raw_margin + 0.55 * vegas_margin, 1)
+                else:
+                    projected_margin = round(0.60 * raw_margin + 0.40 * vegas_margin, 1)
             else:
                 # Later weeks or unlined games: Pure model projection grounded in freshly calibrated ratings
                 # For unranked non-conference games without market line, prevent absurd blowouts > 36 pts
@@ -1906,6 +2049,34 @@ def main():
                             adv_b = av
                             break
 
+                ppo_a_val = float(adv_a.get('offensePPO', 3.8))
+                ppo_b_val = float(adv_b.get('offensePPO', 3.8))
+
+                # Discount cumulative season EPA/PPA & Red-Zone PPO when starting QB1 is out for season
+                qb_inj_a = SEASON_QB_INJURIES.get(tid) or t.get('qbStatus')
+                if qb_inj_a and qb_inj_a.get('offDropPts'):
+                    drop_a = float(qb_inj_a['offDropPts'])
+                    ppa_a = max(-0.10, ppa_a - drop_a * 0.012)
+                    ppo_a_val = max(2.6, ppo_a_val - drop_a * 0.09)
+
+                qb_inj_b = (SEASON_QB_INJURIES.get(opp_id) or (db.get(opp_id, {}).get('qbStatus'))) if opp_id else None
+                if qb_inj_b and qb_inj_b.get('offDropPts'):
+                    drop_b = float(qb_inj_b['offDropPts'])
+                    ppa_b = max(-0.10, ppa_b - drop_b * 0.012)
+                    ppo_b_val = max(2.6, ppo_b_val - drop_b * 0.09)
+
+                # Clean stale preseason/early-season AP rank references in unplayed scoutReport summaries
+                if 'scoutReport' in g and isinstance(g['scoutReport'], dict):
+                    cur_opp_rank = g.get('oppRank', 'NR')
+                    sum_txt = g['scoutReport'].get('summary', '')
+                    if re.search(r'#\d+\s*AP', sum_txt):
+                        if str(cur_opp_rank).startswith('#'):
+                            g['scoutReport']['summary'] = re.sub(r'#\d+\s*AP', cur_opp_rank, sum_txt)
+                        else:
+                            g['scoutReport']['summary'] = re.sub(r'#\d+\s*AP\s+', '', sum_txt)
+                    if qb_inj_a and 'quarterback play' in g['scoutReport'].get('keyMatchup', '').lower():
+                        g['scoutReport']['keyMatchup'] = f"{t.get('shortName', tid)} backup QB {qb_inj_a['replacement']} ({qb_inj_a['starterOut']} out) vs {raw_opp_name} secondary."
+
                 mc_sim = monte_carlo_engine.simulate_matchup_10k(
                     team_a_name=t.get('shortName', tid),
                     team_b_name=g.get('oppAbbr') or g.get('opponent', 'OPP'),
@@ -1929,8 +2100,8 @@ def main():
                     line_yards_b=adv_b.get('offenseLineYards', 3.0),
                     havoc_a=adv_a.get('defenseHavoc', 0.15),
                     havoc_b=adv_b.get('defenseHavoc', 0.15),
-                    ppo_a=adv_a.get('offensePPO', 3.8),
-                    ppo_b=adv_b.get('offensePPO', 3.8),
+                    ppo_a=ppo_a_val,
+                    ppo_b=ppo_b_val,
                     projected_spread=-projected_margin,
                     off_a=off_a_val,
                     def_a=def_a_val,
