@@ -986,20 +986,24 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
         p_off = float(sp.get('offense', 28.0)) if sp else 28.0
         p_def = float(sp.get('defense', 20.0)) if sp else 20.0
         p_st = float(sp.get('specialTeams', 0.0)) if sp else 0.0
-        
-        # Talent Composite grounding (only grant blue-chip ceiling if team hasn't collapsed on-field with 3+ losses)
         tal = talent_map.get(t_name, talent_map.get(t_short, 650.0))
-        num_losses = sum(1 for g in t.get('schedule', []) if g.get('isFinal') and (
+        finals = [g for g in t.get('schedule', []) if g.get('isFinal')]
+        num_losses = sum(1 for g in finals if (
             (g.get('finalTeamScore') is not None and g.get('finalOppScore') is not None and g.get('finalTeamScore') < g.get('finalOppScore')) or
             (g.get('actualScoreUt') is not None and g.get('actualScoreOpp') is not None and g.get('actualScoreUt') < g.get('actualScoreOpp'))
         ))
-        if tal >= 920.0 and num_losses < 3:
-            p_off = max(p_off, 40.0)
-            p_def = min(p_def, 11.5)
+        has_ranked_win = any(
+            ((g.get('actualScoreUt', 0) > g.get('actualScoreOpp', 0)) or (g.get('finalTeamScore', 0) > g.get('finalOppScore', 0)))
+            and str(g.get('oppRank', '')).startswith('#')
+            for g in finals
+        )
+        # Only grant elite 920+ blue-chip floor if validated by <3 losses AND at least 1 ranked win
+        if tal >= 920.0 and num_losses < 3 and has_ranked_win:
+            p_off = max(p_off, 39.0)
+            p_def = min(p_def, 12.0)
         elif tal < 750.0:
             p_off = min(p_off, 33.5)
             p_def = max(p_def, 15.5)
-
         return p_off, p_def, p_st
 
     def resolve_opp_info(raw_name, opp_abbr, opp_id, cur_units):
@@ -1030,6 +1034,8 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
         priors[tid] = {'off': p_off, 'def': p_def, 'st': p_st}
         cur_units[tid] = {'off': p_off, 'def': p_def, 'st': p_st}
 
+    # Stage 1: Stable 8-iteration opponent-adjusted relaxation solver
+    sos_stats = {}
     for iteration in range(8):
         next_units = {}
         for tid, t in db.items():
@@ -1039,8 +1045,10 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
             
             weighted_implied_off = []
             weighted_implied_def = []
-            opp_sos_list = []
-            
+            fbs_opp_nets = []
+            fcs_games = 0
+            ranked_wins = 0
+            total_losses = 0
             unranked_losses = 0
             conf_losses = 0
 
@@ -1065,31 +1073,35 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
                 
                 # Anti-stat-padding defense and offense bounds:
                 if tier == 'FCS':
+                    fcs_games += 1
                     w = 0.04
                     eff_s_team = min(35.0, s_team)
                     eff_s_opp = max(17.0, s_opp)  # FCS shutout floor: no artificial boost
                 elif tier == 'G5':
+                    fbs_opp_nets.append(opp_net)
                     w = 0.15
                     eff_s_team = min(35.0, 24.0 + (s_team - 24.0) * 0.35 if s_team > 24.0 else s_team)
                     eff_s_opp = max(12.0, s_opp)  # G5 shutout floor: no artificial boost
                 else:
-                    # Power 4 game scaled by opponent caliber
+                    fbs_opp_nets.append(opp_net)
                     if opp_net >= 20.0:
-                        w = 1.60  # Elite competition
+                        w = 1.65  # Elite competition
                     elif opp_net >= 12.0:
-                        w = 1.30  # Top 25 competition
+                        w = 1.35  # Top 25 competition
                     elif opp_net >= 4.0:
                         w = 1.00  # Mid P4 competition
                     else:
-                        w = 0.70  # Bottom P4 competition
-                        
-                    eff_s_team = s_team
-                    eff_s_opp = s_opp
+                        w = 0.65  # Bottom P4 competition
+                    # Dampen garbage-time stat-padding against cellar-dwelling P4 teams (<2.0 SP+)
+                    eff_s_team = (30.0 + (s_team - 30.0) * 0.45) if (opp_net < 2.0 and s_team > 30.0) else s_team
+                    eff_s_opp = max(10.0, s_opp) if opp_net < 2.0 else s_opp
 
-                # Losses
                 opp_rank = str(g.get('oppRank', 'NR'))
                 is_ranked = opp_rank.startswith('#') or opp_net >= 12.0
-                if s_team < s_opp:
+                if s_team > s_opp and is_ranked and tier != 'FCS':
+                    ranked_wins += 1
+                elif s_team < s_opp:
+                    total_losses += 1
                     if not is_ranked and tier != 'FCS':
                         unranked_losses += 1
                     if g.get('isConf') or check_is_conference_game(t.get('conference'), opp_name, opp_abbr)[0]:
@@ -1100,45 +1112,75 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
                 
                 weighted_implied_off.append((impl_off, w))
                 weighted_implied_def.append((impl_def, w))
-                opp_sos_list.append((opp_net, w))
 
+            games_played = len([g for g in t.get('schedule', []) if g.get('isFinal')])
             if weighted_implied_off:
                 w_sum_off = sum(val * w for val, w in weighted_implied_off)
                 w_sum_def = sum(val * w for val, w in weighted_implied_def)
                 w_tot = sum(w for _, w in weighted_implied_off)
                 obs_off = w_sum_off / max(0.1, w_tot)
                 obs_def = w_sum_def / max(0.1, w_tot)
-                
-                avg_sos = sum(r * w for r, w in opp_sos_list) / max(0.1, sum(w for _, w in opp_sos_list))
+                # True unweighted mean FBS opponent rating (never masking cupcakes with tiny weights)
+                fbs_sos = sum(fbs_opp_nets) / max(1, len(fbs_opp_nets))
+                if fcs_games >= 2:
+                    fbs_sos -= 4.0
             else:
                 obs_off = p_off
                 obs_def = p_def
-                avg_sos = 5.0
+                fbs_sos = 4.0
 
-            # SOS Credibility Shrinkage:
-            # Teams with easy schedules (SOS < 2.0) are regressed toward talent baseline prior
-            sos_cred = min(0.85, max(0.35, (avg_sos + 6.0) / 22.0))
-            
-            # Resume penalties for unranked losses
             if unranked_losses > 0:
-                obs_def += (unranked_losses * 2.5)
-                obs_off -= (unranked_losses * 1.2)
+                obs_def += (unranked_losses * 2.2)
+                obs_off -= (unranked_losses * 1.0)
             if conf_losses >= 2:
-                penalty = (conf_losses - 1) * 1.5
+                penalty = (conf_losses - 1) * 1.3
                 obs_def += penalty
                 obs_off -= penalty
 
-            games_played = len([g for g in t.get('schedule', []) if g.get('isFinal')])
-            in_season_weight = min(0.85, max(0.55, 0.45 + (games_played * 0.05))) * sos_cred
+            # Stable damping inside relaxation loop prevents closed-conference downward spirals
+            in_season_weight = min(0.60, max(0.45, 0.36 + (games_played * 0.03)))
             prior_weight = 1.0 - in_season_weight
             
-            blend_off = round(in_season_weight * obs_off + prior_weight * p_off, 1)
-            blend_def = round(in_season_weight * obs_def + prior_weight * p_def, 1)
+            blend_off = in_season_weight * obs_off + prior_weight * p_off
+            blend_def = in_season_weight * obs_def + prior_weight * p_def
             
-            next_units[tid] = {'off': blend_off, 'def': blend_def, 'st': p_st}
+            next_units[tid] = {'off': round(blend_off, 2), 'def': round(blend_def, 2), 'st': p_st}
+            sos_stats[tid] = {'sos': fbs_sos, 'rw': ranked_wins, 'losses': total_losses, 'gp': games_played}
         cur_units = next_units
 
-    return cur_units
+    # Stage 2: Post-Convergence True SOS Credibility Shrinkage & Gauntlet Credit
+    final_units = {}
+    for tid, u in cur_units.items():
+        st_info = sos_stats[tid]
+        fbs_sos = st_info['sos']
+        rw = st_info['rw']
+        losses = st_info['losses']
+        gp = st_info['gp']
+        off, dfn, st = u['off'], u['def'], u['st']
+
+        # 1. Soft-Schedule Downward Shrinkage toward P4 Top-20 Anchor (Off 33.0 / Def 17.5 -> Net +15.5)
+        # Never pulls a team upward; strictly shrinks inflated ratings built against weak schedules.
+        if fbs_sos < 5.0:
+            floor_cred = 0.80 if (losses == 0 and rw >= 1) else 0.58
+            sos_cred = max(floor_cred, min(1.0, (fbs_sos + 4.5) / 9.5))
+            if off > 33.0:
+                off = 33.0 + (off - 33.0) * sos_cred
+            if dfn < 17.5:
+                dfn = 17.5 - (17.5 - dfn) * sos_cred
+
+        # 2. Zero-Ranked-Win Paper Tiger Tax vs. Battle-Tested Gauntlet Credit
+        if gp >= 6 and rw == 0:
+            tax = 1.8 if losses >= 1 else 0.8
+            off -= tax
+            dfn += tax
+        elif fbs_sos >= 6.0 and rw >= 2:
+            bonus = min(2.0, (fbs_sos - 5.5) * 0.25 + min(3, rw) * 0.35)
+            off += bonus * 0.5
+            dfn -= bonus * 0.5
+
+        final_units[tid] = {'off': round(off, 1), 'def': round(dfn, 1), 'st': st}
+
+    return final_units
 
 def main():
     parser = argparse.ArgumentParser(description="Retrain CFB Prophet weekly models against actual scores & Vegas consensus lines.")

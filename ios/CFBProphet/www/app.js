@@ -4480,17 +4480,29 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
     else if (rNum <= 25) rankPts = 500;
     else rankPts = 0;
 
-    // Conference Strength & SOS weight
+    // Conference Strength & Actual SOS / Ranked Wins weight
     let confPts = 0;
     if (t.conf === 'SEC') confPts = 800;
     else if (t.conf === 'Big Ten') confPts = 700;
-    else if (t.conf === 'Independent') confPts = 500; // Notre Dame national schedule
     else if (t.conf === 'ACC' || t.conf === 'Big 12') confPts = 400;
+    else if (t.conf === 'Independent') confPts = 300; // Must earn standing via ranked wins on schedule
+
+    const schedArr = (t.schedule && Array.isArray(t.schedule)) ? t.schedule : ((typeof TEAMS_DATABASE !== 'undefined' && TEAMS_DATABASE[t.id]?.schedule) || []);
+    let rankedWins = 0;
+    schedArr.forEach(g => {
+      const oppSp = (g.oppId && typeof TEAMS_DATABASE !== 'undefined' && TEAMS_DATABASE[g.oppId]) ? (TEAMS_DATABASE[g.oppId].baseSpRating || 0) : 0;
+      const isRankedOpp = (g.oppRank && String(g.oppRank).startsWith('#')) || oppSp >= 12.0;
+      if (!isRankedOpp) return;
+      const wonFinal = g.isFinal && typeof g.actualScoreUt === 'number' && g.actualScoreUt > g.actualScoreOpp;
+      const wonProj = !g.isFinal && typeof g.projScoreUt === 'number' && g.projScoreUt > g.projScoreOpp;
+      if (wonFinal || wonProj) rankedWins++;
+    });
+    const sosResumePts = rankedWins > 0 ? (rankedWins * 250) : -400;
 
     const sp = t.baseSpRating || 22.0;
     const sumDiff = t.sumDiff || 0;
 
-    return lossPts + rankPts + confPts + (sp * 60) + (sumDiff * 2) + (w * 50) - fcsPenalty;
+    return lossPts + rankPts + confPts + sosResumePts + (sp * 60) + (sumDiff * 2) + (w * 50) - fcsPenalty;
   }
 
   // 1. Resolve 5 conference champions
