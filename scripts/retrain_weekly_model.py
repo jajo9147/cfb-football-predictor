@@ -59,7 +59,7 @@ SEASON_QB_INJURIES = {
         'replacement': 'Luke Fahey',
         'injuryWeek': 8,  # Injured throwing arm late W7 vs Indiana; true freshman Fahey 1st start W9 at USC (30-18 loss)
         'status': 'Out Indefinitely / Season (Throwing Arm)',
-        'offDropPts': 7.5,
+        'offDropPts': 6.0,
         'starPlayer': 'Jeremiah Smith (WR) / Bo Jackson (RB) / Luke Fahey (QB)',
         'qbSliderLabel': 'Luke Fahey Passing Attack (Sayin Out)',
         'titleOdds': '+1200'
@@ -69,7 +69,7 @@ SEASON_QB_INJURIES = {
         'replacement': 'Ty Dieffenbach',
         'injuryWeek': 7,  # Torn ACL W6 vs Oregon; 3rd-stringer Dieffenbach took over W7
         'status': 'Out for Season (Torn ACL)',
-        'offDropPts': 6.5,
+        'offDropPts': 5.5,
         'starPlayer': 'Ty Dieffenbach (QB) / Sammy Omosigho (LB)',
         'qbSliderLabel': 'Ty Dieffenbach Passing Attack (Iamaleava Out)',
         'titleOdds': '+6500'
@@ -79,7 +79,7 @@ SEASON_QB_INJURIES = {
         'replacement': 'Dylan Raiola',
         'injuryWeek': 6,  # Concussion W4 vs USC; officially ruled out for remainder of 2026 season
         'status': 'Out for Season (Concussion)',
-        'offDropPts': 5.5,
+        'offDropPts': 5.0,
         'starPlayer': 'Dakorien Moore (WR) / Evan Stewart (WR) / Dylan Raiola (QB)',
         'qbSliderLabel': 'Dylan Raiola Passing Attack (Moore Out)',
         'titleOdds': '+25000'
@@ -1247,11 +1247,6 @@ def derive_systemic_unit_ratings(db, sp_map_2026=None, cum_adv_stats=None, talen
             bonus = min(2.0, (fbs_sos - 5.5) * 0.25 + min(3, rw) * 0.35)
             off += bonus * 0.5
             dfn -= bonus * 0.5
-
-        # 3. Post-QB1 Injury Loss Reality Check (e.g. Ohio State losing 30-18 at USC with backup QB)
-        if qb_inj and post_inj_losses >= 1:
-            off -= 1.8
-            dfn += 1.2
 
         final_units[tid] = {'off': round(off, 1), 'def': round(dfn, 1), 'st': st}
 

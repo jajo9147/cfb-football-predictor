@@ -4458,22 +4458,23 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
     const fcsPenalty = fcsCount >= 2 ? 3000 : 0;
 
     // Official CFP Protocol: CCG runner-up loss protection
-    // Elite teams with <= 1 regular-season loss (11-1 / 12-0) or elite P4 SOS (SEC/Big Ten or baseSpRating >= 16.0 without FCS traps)
-    // are shielded from an extra 13th-game penalty.
-    // However, multi-loss teams with weak non-conf schedules (e.g. 2 regular-season losses + 2 FCS games like SMU) do not receive immunity.
+    // SEC/Big Ten CCG runners-up or top-8 / elite SP+ (>= 14.5) 11-1 runners-up without FCS traps receive upper-tier protection,
+    // while weak-SOS ACC/Big 12 11-2 CCG losers receive only a modest +500 CCG appearance bonus rather than jumping battle-tested 10-2 SEC/B1G teams.
     const hasFcsTrap = fcsCount >= 2;
-    const isProtectedCcgRunnerUp = t.isCcgRunnerUp && (t.losses <= 1 || (!hasFcsTrap && (t.conf === 'SEC' || t.conf === 'Big Ten' || (t.baseSpRating || 0) >= 16.0)));
-    const l = isProtectedCcgRunnerUp ? t.losses : (t.totalLosses !== undefined ? t.totalLosses : t.losses);
-    const w = t.totalWins !== undefined ? t.totalWins : t.wins;
     const apRankStr = t.apRank || '';
     const rMatch = apRankStr.match(/\d+/);
     const rNum = (apRankStr.includes('#') && rMatch) ? parseInt(rMatch[0], 10) : 99;
+    const sp = t.baseSpRating || 22.0;
+
+    const isEliteCcgRunnerUp = t.isCcgRunnerUp && !hasFcsTrap && (t.conf === 'SEC' || t.conf === 'Big Ten' || sp >= 14.5 || rNum <= 8);
+    const l = isEliteCcgRunnerUp ? t.losses : (t.totalLosses !== undefined ? t.totalLosses : t.losses);
+    const w = t.totalWins !== undefined ? t.totalWins : t.wins;
 
     // Severe loss tier penalties (Committee strictly separates 0/1/2/3 loss tiers)
     let lossPts = 0;
     if (l === 0) lossPts = 20000;
-    else if (l === 1) lossPts = 15000;
-    else if (l === 2) lossPts = 10000;
+    else if (l === 1) lossPts = (t.isCcgRunnerUp ? 13200 : 15000);
+    else if (l === 2) lossPts = (t.isCcgRunnerUp && !hasFcsTrap ? 10500 : 10000);
     else if (l === 3) {
       // Elite 3-loss SEC/Big Ten teams with top-12 AP rankings remain competitive for at-large consideration
       lossPts = (rNum <= 12 && (t.conf === 'SEC' || t.conf === 'Big Ten')) ? 5500 : 1000;
@@ -4509,9 +4510,8 @@ function generate12TeamCfpField(confChamps, evaluatedTeams) {
 
     // CFP Selection Committee Protocol Criteria #4: Key Player / Starting QB Unavailability
     const qbInj = t.qbStatus || (typeof TEAMS_DATABASE !== 'undefined' && TEAMS_DATABASE[t.id]?.qbStatus) || null;
-    const qbAvailabilityPts = (qbInj && qbInj.starterOut) ? (l >= 2 ? -750 : -450) : 0;
+    const qbAvailabilityPts = (qbInj && qbInj.starterOut) ? -250 : 0;
 
-    const sp = t.baseSpRating || 22.0;
     const sumDiff = t.sumDiff || 0;
 
     return lossPts + rankPts + confPts + sosResumePts + qbAvailabilityPts + (sp * 60) + (sumDiff * 2) + (w * 50) - fcsPenalty;

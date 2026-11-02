@@ -1125,7 +1125,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 5.5,
         "overUnder": 47.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 41,
+        "baseWinProb": 40,
         "projScoreUt": 22,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -1136,19 +1136,19 @@ const TEAMS_DATABASE = {
         "oppId": "utah",
         "is_tracked": true,
         "rivalryName": "HOLY WAR",
-        "mcCoverProb": 54.8,
-        "mcOverProb": 46.5,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcCoverProb": 53.3,
+        "mcOverProb": 47.0,
+        "mcRecommendedAts": "BYU +5.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 10,
+          "p10": 9,
           "p25": 14,
           "p50": 21,
           "p75": 28,
-          "p90": 34
+          "p90": 35
         },
         "mcScoreDistOpp": {
-          "p10": 10,
+          "p10": 13,
           "p25": 17,
           "p50": 24,
           "p75": 31,
@@ -1200,7 +1200,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -11.5,
         "overUnder": 57.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 78,
+        "baseWinProb": 81,
         "projScoreUt": 34,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -1210,13 +1210,13 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 49.8,
-        "mcOverProb": 45.4,
+        "mcCoverProb": 51.6,
+        "mcOverProb": 44.4,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 57.5",
         "mcScoreDistUt": {
           "p10": 20,
-          "p25": 27,
+          "p25": 26,
           "p50": 34,
           "p75": 41,
           "p90": 48
@@ -1225,7 +1225,7 @@ const TEAMS_DATABASE = {
           "p10": 10,
           "p25": 16,
           "p50": 22,
-          "p75": 29,
+          "p75": 28,
           "p90": 34
         },
         "preseasonWinProb": 92,
@@ -1274,7 +1274,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -7.0,
         "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 67,
+        "baseWinProb": 66,
         "projScoreUt": 28,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -1284,19 +1284,19 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 46.8,
-        "mcOverProb": 42.0,
+        "mcCoverProb": 46.0,
+        "mcOverProb": 41.4,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 51.5",
         "mcScoreDistUt": {
           "p10": 14,
           "p25": 20,
           "p50": 27,
-          "p75": 35,
-          "p90": 42
+          "p75": 34,
+          "p90": 41
         },
         "mcScoreDistOpp": {
-          "p10": 10,
+          "p10": 9,
           "p25": 14,
           "p50": 21,
           "p75": 28,
@@ -1349,7 +1349,7 @@ const TEAMS_DATABASE = {
         "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 77,
-        "projScoreUt": 30,
+        "projScoreUt": 31,
         "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -1358,12 +1358,12 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 46.2,
-        "mcOverProb": 43.1,
-        "mcRecommendedAts": "CIN +12.3",
+        "mcCoverProb": 47.9,
+        "mcOverProb": 44.3,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 51.5",
         "mcScoreDistUt": {
-          "p10": 17,
+          "p10": 16,
           "p25": 23,
           "p50": 30,
           "p75": 38,
@@ -1373,8 +1373,8 @@ const TEAMS_DATABASE = {
           "p10": 7,
           "p25": 13,
           "p50": 19,
-          "p75": 27,
-          "p90": 33
+          "p75": 26,
+          "p90": 31
         },
         "preseasonWinProb": 92,
         "preseasonProjUt": 36,
@@ -1454,7 +1454,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#0E121C",
       "bgBase": "#07090E"
     },
-    "baseSpRating": 20.3,
+    "baseSpRating": 20.4,
     "playoffContenderRank": 10,
     "sliderLabels": {
       "qb": "Arch Manning & Cam Coleman Passing Attack",
@@ -2071,8 +2071,8 @@ const TEAMS_DATABASE = {
         "vegasSpread": -2.5,
         "overUnder": 43.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 56,
-        "projScoreUt": 22,
+        "baseWinProb": 57,
+        "projScoreUt": 23,
         "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -2081,19 +2081,19 @@ const TEAMS_DATABASE = {
         },
         "oppId": "missouri",
         "is_tracked": true,
-        "mcCoverProb": 51.6,
-        "mcOverProb": 47.6,
+        "mcCoverProb": 52.5,
+        "mcOverProb": 46.8,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 10,
-          "p25": 15,
-          "p50": 21,
-          "p75": 29,
-          "p90": 36
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
         },
         "mcScoreDistOpp": {
-          "p10": 7,
+          "p10": 9,
           "p25": 13,
           "p50": 20,
           "p75": 27,
@@ -2142,12 +2142,12 @@ const TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.4,
+        "vegasSpread": 0.8,
         "overUnder": 46.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 48,
+        "baseWinProb": 46,
         "projScoreUt": 22,
-        "projScoreOpp": 25,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs LSU Tigers secondary.",
@@ -2155,9 +2155,9 @@ const TEAMS_DATABASE = {
         },
         "oppId": "lsu",
         "is_tracked": true,
-        "mcCoverProb": 48.0,
-        "mcOverProb": 42.6,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcCoverProb": 46.3,
+        "mcOverProb": 44.8,
+        "mcRecommendedAts": "LSU +0.1",
         "mcRecommendedOu": "UNDER 46.5",
         "mcScoreDistUt": {
           "p10": 10,
@@ -2169,9 +2169,9 @@ const TEAMS_DATABASE = {
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 16,
-          "p50": 22,
-          "p75": 29,
-          "p90": 35
+          "p50": 23,
+          "p75": 30,
+          "p90": 36
         },
         "preseasonWinProb": 50,
         "preseasonProjUt": 26,
@@ -2216,10 +2216,10 @@ const TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -27.2,
-        "overUnder": 61.5,
+        "vegasSpread": -27.3,
+        "overUnder": 60.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 87,
+        "baseWinProb": 86,
         "projScoreUt": 38,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -2229,23 +2229,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 23.0,
-        "mcOverProb": 44.9,
-        "mcRecommendedAts": "ARK +27.2",
-        "mcRecommendedOu": "UNDER 61.5",
+        "mcCoverProb": 22.6,
+        "mcOverProb": 47.2,
+        "mcRecommendedAts": "ARK +27.3",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 24,
+          "p10": 23,
           "p25": 30,
           "p50": 38,
-          "p75": 46,
-          "p90": 54
+          "p75": 45,
+          "p90": 52
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 14,
           "p50": 21,
           "p75": 28,
-          "p90": 34
+          "p90": 35
         },
         "preseasonWinProb": 98,
         "preseasonProjUt": 41,
@@ -2293,7 +2293,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -9.6,
         "overUnder": 46.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 82,
+        "baseWinProb": 80,
         "projScoreUt": 28,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -2304,21 +2304,21 @@ const TEAMS_DATABASE = {
         "oppId": "texasam",
         "is_tracked": true,
         "rivalryName": "LONE STAR SHOWDOWN",
-        "mcCoverProb": 43.0,
-        "mcOverProb": 44.2,
-        "mcRecommendedAts": "TA&M +14.1",
+        "mcCoverProb": 43.1,
+        "mcOverProb": 43.6,
+        "mcRecommendedAts": "TA&M +14.2",
         "mcRecommendedOu": "UNDER 46.5",
         "mcScoreDistUt": {
           "p10": 14,
           "p25": 20,
-          "p50": 28,
+          "p50": 27,
           "p75": 35,
-          "p90": 41
+          "p90": 42
         },
         "mcScoreDistOpp": {
           "p10": 6,
           "p25": 10,
-          "p50": 14,
+          "p50": 16,
           "p75": 21,
           "p90": 28
         },
@@ -2371,7 +2371,7 @@ const TEAMS_DATABASE = {
       ]
     },
     "offenseRating": 35.3,
-    "defenseRating": 15.4,
+    "defenseRating": 15.3,
     "specialTeamsRating": 0.4
   },
   "michigan": {
@@ -2401,7 +2401,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#0B172A",
       "bgBase": "#050D1A"
     },
-    "baseSpRating": 4.3,
+    "baseSpRating": 4.5,
     "playoffContenderRank": 27,
     "sliderLabels": {
       "qb": "Bryce Underwood Execution",
@@ -3017,8 +3017,8 @@ const TEAMS_DATABASE = {
         "vegasSpread": -12.5,
         "overUnder": 39.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 69,
-        "projScoreUt": 22,
+        "baseWinProb": 70,
+        "projScoreUt": 23,
         "projScoreOpp": 16,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -3027,16 +3027,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 32.9,
-        "mcOverProb": 45.9,
+        "mcCoverProb": 32.7,
+        "mcOverProb": 46.0,
         "mcRecommendedAts": "MSU +12.5",
         "mcRecommendedOu": "UNDER 39.5",
         "mcScoreDistUt": {
           "p10": 10,
           "p25": 16,
-          "p50": 22,
+          "p50": 23,
           "p75": 29,
-          "p90": 36
+          "p90": 35
         },
         "mcScoreDistOpp": {
           "p10": 6,
@@ -3088,12 +3088,12 @@ const TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.4,
-        "overUnder": 36.5,
+        "vegasSpread": 4.8,
+        "overUnder": 37.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 43,
-        "projScoreUt": 17,
-        "projScoreOpp": 20,
+        "baseWinProb": 34,
+        "projScoreUt": 16,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Oregon Ducks secondary.",
@@ -3101,23 +3101,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "oregon",
         "is_tracked": true,
-        "mcCoverProb": 48.1,
-        "mcOverProb": 48.7,
+        "mcCoverProb": 50.3,
+        "mcOverProb": 48.5,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 6,
           "p25": 10,
-          "p50": 17,
-          "p75": 23,
-          "p90": 30
+          "p50": 16,
+          "p75": 22,
+          "p90": 27
         },
         "mcScoreDistOpp": {
-          "p10": 9,
-          "p25": 13,
-          "p50": 19,
-          "p75": 26,
-          "p90": 32
+          "p10": 10,
+          "p25": 15,
+          "p50": 21,
+          "p75": 27,
+          "p90": 34
         },
         "preseasonWinProb": 24,
         "preseasonProjUt": 22,
@@ -3162,12 +3162,12 @@ const TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 2.4,
+        "vegasSpread": 0.8,
         "overUnder": 31.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 48,
+        "baseWinProb": 46,
         "projScoreUt": 15,
-        "projScoreOpp": 18,
+        "projScoreOpp": 16,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Michigan front seven vs UCLA Bruins rushing attack.",
@@ -3175,23 +3175,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "ucla",
         "is_tracked": true,
-        "mcCoverProb": 46.3,
-        "mcOverProb": 44.2,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcCoverProb": 45.8,
+        "mcOverProb": 45.3,
+        "mcRecommendedAts": "UCLA +0.5",
         "mcRecommendedOu": "UNDER 31.5",
         "mcScoreDistUt": {
-          "p10": 3,
+          "p10": 6,
           "p25": 9,
           "p50": 14,
           "p75": 20,
           "p90": 27
         },
         "mcScoreDistOpp": {
-          "p10": 3,
+          "p10": 6,
           "p25": 10,
-          "p50": 14,
+          "p50": 16,
           "p75": 21,
-          "p90": 27
+          "p90": 28
         },
         "preseasonWinProb": 95,
         "preseasonProjUt": 38,
@@ -3236,12 +3236,12 @@ const TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 8.8,
-        "overUnder": 31.5,
+        "vegasSpread": 12.8,
+        "overUnder": 32.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 18,
-        "projScoreUt": 10,
-        "projScoreOpp": 21,
+        "baseWinProb": 10,
+        "projScoreUt": 8,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Ohio State Buckeyes secondary.",
@@ -3250,23 +3250,23 @@ const TEAMS_DATABASE = {
         "oppId": "ohiostate",
         "is_tracked": true,
         "rivalryName": "THE GAME",
-        "mcCoverProb": 48.5,
-        "mcOverProb": 42.4,
+        "mcCoverProb": 49.5,
+        "mcOverProb": 47.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 31.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 0,
           "p25": 3,
-          "p50": 10,
-          "p75": 14,
-          "p90": 20
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
         },
         "mcScoreDistOpp": {
-          "p10": 7,
-          "p25": 14,
-          "p50": 20,
-          "p75": 28,
-          "p90": 34
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
         },
         "preseasonWinProb": 21,
         "preseasonProjUt": 21,
@@ -3317,8 +3317,8 @@ const TEAMS_DATABASE = {
         21
       ]
     },
-    "offenseRating": 23.7,
-    "defenseRating": 18.9,
+    "offenseRating": 23.8,
+    "defenseRating": 18.8,
     "specialTeamsRating": -0.5
   },
   "ohiostate": {
@@ -3348,7 +3348,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#1A1010",
       "bgBase": "#0D0808"
     },
-    "baseSpRating": 12.3,
+    "baseSpRating": 16.6,
     "playoffContenderRank": 11,
     "sliderLabels": {
       "qb": "Luke Fahey Passing Attack (Sayin Out)",
@@ -3964,9 +3964,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": -7.0,
         "overUnder": 48.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 78,
-        "projScoreUt": 25,
-        "projScoreOpp": 15,
+        "baseWinProb": 79,
+        "projScoreUt": 27,
+        "projScoreOpp": 16,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State backup QB Luke Fahey (Julian Sayin out) vs Oregon Ducks secondary.",
@@ -3974,22 +3974,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": "oregon",
         "is_tracked": true,
-        "mcCoverProb": 57.6,
-        "mcOverProb": 25.8,
+        "mcCoverProb": 59.5,
+        "mcOverProb": 30.5,
         "mcRecommendedAts": "Ohio State -7.0",
         "mcRecommendedOu": "UNDER 48.5",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 17,
-          "p50": 24,
-          "p75": 31,
-          "p90": 38
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
         },
         "mcScoreDistOpp": {
           "p10": 6,
           "p25": 10,
-          "p50": 14,
-          "p75": 20,
+          "p50": 15,
+          "p75": 21,
           "p90": 27
         },
         "preseasonWinProb": 64,
@@ -4035,12 +4035,12 @@ const TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -19.0,
-        "overUnder": 35.5,
+        "vegasSpread": -23.3,
+        "overUnder": 37.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 77,
-        "projScoreUt": 22,
-        "projScoreOpp": 13,
+        "baseWinProb": 86,
+        "projScoreUt": 25,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ohio State front seven vs Northwestern Wildcats rushing attack.",
@@ -4048,23 +4048,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 21.2,
-        "mcOverProb": 44.3,
-        "mcRecommendedAts": "NU +19.0",
-        "mcRecommendedOu": "UNDER 35.5",
+        "mcCoverProb": 24.3,
+        "mcOverProb": 45.5,
+        "mcRecommendedAts": "NU +23.3",
+        "mcRecommendedOu": "UNDER 37.5",
         "mcScoreDistUt": {
-          "p10": 10,
-          "p25": 14,
-          "p50": 21,
-          "p75": 28,
-          "p90": 35
+          "p10": 13,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
         },
         "mcScoreDistOpp": {
-          "p10": 3,
-          "p25": 7,
-          "p50": 13,
+          "p10": 0,
+          "p25": 6,
+          "p50": 10,
           "p75": 17,
-          "p90": 24
+          "p90": 21
         },
         "preseasonWinProb": 98,
         "preseasonProjUt": 42,
@@ -4109,12 +4109,12 @@ const TEAMS_DATABASE = {
         "location": "Lincoln, NE",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -9.7,
-        "overUnder": 39.5,
+        "vegasSpread": -14.0,
+        "overUnder": 41.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 54,
-        "projScoreUt": 20,
-        "projScoreOpp": 19,
+        "baseWinProb": 64,
+        "projScoreUt": 23,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ohio State front seven vs Nebraska Cornhuskers rushing attack.",
@@ -4122,20 +4122,20 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 28.4,
-        "mcOverProb": 45.6,
-        "mcRecommendedAts": "NEB +9.7",
-        "mcRecommendedOu": "UNDER 39.5",
+        "mcCoverProb": 22.9,
+        "mcOverProb": 42.9,
+        "mcRecommendedAts": "NEB +14.0",
+        "mcRecommendedOu": "UNDER 41.5",
         "mcScoreDistUt": {
-          "p10": 7,
-          "p25": 13,
-          "p50": 20,
-          "p75": 27,
-          "p90": 34
+          "p10": 10,
+          "p25": 16,
+          "p50": 21,
+          "p75": 29,
+          "p90": 37
         },
         "mcScoreDistOpp": {
           "p10": 7,
-          "p25": 13,
+          "p25": 10,
           "p50": 17,
           "p75": 24,
           "p90": 31
@@ -4183,12 +4183,12 @@ const TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -8.8,
-        "overUnder": 31.5,
+        "vegasSpread": -12.8,
+        "overUnder": 32.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 82,
-        "projScoreUt": 21,
-        "projScoreOpp": 10,
+        "baseWinProb": 90,
+        "projScoreUt": 24,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State backup QB Luke Fahey (Julian Sayin out) vs Michigan Wolverines secondary.",
@@ -4197,23 +4197,23 @@ const TEAMS_DATABASE = {
         "oppId": "michigan",
         "is_tracked": true,
         "rivalryName": "THE GAME",
-        "mcCoverProb": 51.5,
-        "mcOverProb": 42.4,
+        "mcCoverProb": 50.5,
+        "mcOverProb": 47.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 31.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 7,
-          "p25": 14,
-          "p50": 20,
-          "p75": 28,
-          "p90": 34
+          "p10": 10,
+          "p25": 17,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
         },
         "mcScoreDistOpp": {
           "p10": 0,
           "p25": 3,
-          "p50": 10,
-          "p75": 14,
-          "p90": 20
+          "p50": 7,
+          "p75": 13,
+          "p90": 17
         },
         "preseasonWinProb": 79,
         "preseasonProjUt": 32,
@@ -4264,15 +4264,15 @@ const TEAMS_DATABASE = {
         79
       ]
     },
-    "offenseRating": 27.5,
-    "defenseRating": 15.3,
+    "offenseRating": 30.5,
+    "defenseRating": 14.0,
     "specialTeamsRating": 0.1,
     "qbStatus": {
       "starterOut": "Julian Sayin",
       "replacement": "Luke Fahey",
       "injuryWeek": 8,
       "status": "Out Indefinitely / Season (Throwing Arm)",
-      "offDropPts": 7.5
+      "offDropPts": 6.0
     }
   },
   "georgia": {
@@ -4919,7 +4919,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -3.5,
         "overUnder": 56.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 62,
+        "baseWinProb": 64,
         "projScoreUt": 31,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -4929,8 +4929,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": "olemiss",
         "is_tracked": true,
-        "mcCoverProb": 54.4,
-        "mcOverProb": 52.2,
+        "mcCoverProb": 55.4,
+        "mcOverProb": 50.9,
         "mcRecommendedAts": "Georgia -3.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -4944,8 +4944,8 @@ const TEAMS_DATABASE = {
           "p10": 13,
           "p25": 19,
           "p50": 26,
-          "p75": 34,
-          "p90": 41
+          "p75": 33,
+          "p90": 40
         },
         "preseasonWinProb": 59,
         "preseasonProjUt": 28,
@@ -4990,11 +4990,11 @@ const TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -12.8,
+        "vegasSpread": -12.0,
         "overUnder": 42.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 88,
-        "projScoreUt": 29,
+        "baseWinProb": 87,
+        "projScoreUt": 28,
         "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -5003,8 +5003,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": "missouri",
         "is_tracked": true,
-        "mcCoverProb": 52.9,
-        "mcOverProb": 48.0,
+        "mcCoverProb": 51.8,
+        "mcOverProb": 47.7,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -5012,7 +5012,7 @@ const TEAMS_DATABASE = {
           "p25": 21,
           "p50": 28,
           "p75": 36,
-          "p90": 43
+          "p90": 42
         },
         "mcScoreDistOpp": {
           "p10": 3,
@@ -5067,7 +5067,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -22.5,
         "overUnder": 45.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 81,
+        "baseWinProb": 80,
         "projScoreUt": 29,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -5077,14 +5077,14 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 26.7,
-        "mcOverProb": 47.1,
+        "mcCoverProb": 25.4,
+        "mcOverProb": 46.3,
         "mcRecommendedAts": "SC +22.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 14,
           "p25": 21,
-          "p50": 29,
+          "p50": 28,
           "p75": 37,
           "p90": 44
         },
@@ -5141,7 +5141,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -34.3,
         "overUnder": 49.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 97,
+        "baseWinProb": 98,
         "projScoreUt": 37,
         "projScoreOpp": 12,
         "scoutReport": {
@@ -5151,15 +5151,15 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 24.6,
-        "mcOverProb": 46.1,
+        "mcCoverProb": 23.7,
+        "mcOverProb": 45.8,
         "mcRecommendedAts": "GT +34.3",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "UNDER 49.5",
         "mcScoreDistUt": {
-          "p10": 22,
+          "p10": 23,
           "p25": 29,
           "p50": 37,
-          "p75": 45,
+          "p75": 44,
           "p90": 52
         },
         "mcScoreDistOpp": {
@@ -5866,7 +5866,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 5.5,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 53,
+        "baseWinProb": 51,
         "projScoreUt": 27,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -5876,8 +5876,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": "lsu",
         "is_tracked": true,
-        "mcCoverProb": 65.2,
-        "mcOverProb": 37.2,
+        "mcCoverProb": 64.5,
+        "mcOverProb": 37.8,
         "mcRecommendedAts": "Alabama +5.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
@@ -5888,10 +5888,10 @@ const TEAMS_DATABASE = {
           "p90": 38
         },
         "mcScoreDistOpp": {
-          "p10": 12,
+          "p10": 10,
           "p25": 17,
           "p50": 23,
-          "p75": 30,
+          "p75": 31,
           "p90": 37
         },
         "preseasonWinProb": 35,
@@ -5941,7 +5941,7 @@ const TEAMS_DATABASE = {
         "overUnder": 57.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 82,
-        "projScoreUt": 36,
+        "projScoreUt": 35,
         "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -5950,23 +5950,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 29.0,
-        "mcOverProb": 51.0,
+        "mcCoverProb": 26.8,
+        "mcOverProb": 48.6,
         "mcRecommendedAts": "VAN +21.7",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 21,
-          "p25": 28,
+          "p25": 27,
           "p50": 35,
-          "p75": 44,
-          "p90": 51
+          "p75": 43,
+          "p90": 49
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 16,
-          "p50": 22,
-          "p75": 29,
-          "p90": 36
+          "p50": 21,
+          "p75": 28,
+          "p90": 34
         },
         "preseasonWinProb": 91,
         "preseasonProjUt": 36,
@@ -6024,16 +6024,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 18.6,
-        "mcOverProb": 46.2,
+        "mcCoverProb": 19.8,
+        "mcOverProb": 47.2,
         "mcRecommendedAts": "UTC +62.8",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 43,
           "p25": 49,
           "p50": 57,
-          "p75": 64,
-          "p90": 72
+          "p75": 65,
+          "p90": 71
         },
         "mcScoreDistOpp": {
           "p10": 0,
@@ -6088,7 +6088,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -25.1,
         "overUnder": 45.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 87,
+        "baseWinProb": 88,
         "projScoreUt": 30,
         "projScoreOpp": 14,
         "scoutReport": {
@@ -6099,8 +6099,8 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "rivalryName": "IRON BOWL",
-        "mcCoverProb": 24.3,
-        "mcOverProb": 46.4,
+        "mcCoverProb": 22.4,
+        "mcOverProb": 46.5,
         "mcRecommendedAts": "AUB +25.1",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -6197,7 +6197,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#0B1A12",
       "bgBase": "#050F0A"
     },
-    "baseSpRating": 4.2,
+    "baseSpRating": 7.4,
     "playoffContenderRank": 23,
     "sliderLabels": {
       "qb": "Dylan Raiola Passing Attack (Moore Out)",
@@ -6813,9 +6813,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": 7.0,
         "overUnder": 48.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 22,
-        "projScoreUt": 15,
-        "projScoreOpp": 25,
+        "baseWinProb": 21,
+        "projScoreUt": 16,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oregon backup QB Dylan Raiola (Dante Moore out) vs Ohio State Buckeyes secondary.",
@@ -6823,23 +6823,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "ohiostate",
         "is_tracked": true,
-        "mcCoverProb": 42.4,
-        "mcOverProb": 25.8,
+        "mcCoverProb": 40.5,
+        "mcOverProb": 30.5,
         "mcRecommendedAts": "OSU -7.0",
         "mcRecommendedOu": "UNDER 48.5",
         "mcScoreDistUt": {
           "p10": 6,
           "p25": 10,
-          "p50": 14,
-          "p75": 20,
+          "p50": 15,
+          "p75": 21,
           "p90": 27
         },
         "mcScoreDistOpp": {
           "p10": 13,
-          "p25": 17,
-          "p50": 24,
-          "p75": 31,
-          "p90": 38
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 41
         },
         "preseasonWinProb": 36,
         "preseasonProjUt": 24,
@@ -6884,12 +6884,12 @@ const TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.4,
-        "overUnder": 36.5,
+        "vegasSpread": -4.8,
+        "overUnder": 37.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 57,
-        "projScoreUt": 20,
-        "projScoreOpp": 17,
+        "baseWinProb": 66,
+        "projScoreUt": 22,
+        "projScoreOpp": 16,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oregon backup QB Dylan Raiola (Dante Moore out) vs Michigan Wolverines secondary.",
@@ -6897,23 +6897,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "michigan",
         "is_tracked": true,
-        "mcCoverProb": 51.9,
-        "mcOverProb": 48.7,
+        "mcCoverProb": 49.7,
+        "mcOverProb": 48.5,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 9,
-          "p25": 13,
-          "p50": 19,
-          "p75": 26,
-          "p90": 32
+          "p10": 10,
+          "p25": 15,
+          "p50": 21,
+          "p75": 27,
+          "p90": 34
         },
         "mcScoreDistOpp": {
           "p10": 6,
           "p25": 10,
-          "p50": 17,
-          "p75": 23,
-          "p90": 30
+          "p50": 16,
+          "p75": 22,
+          "p90": 27
         },
         "preseasonWinProb": 76,
         "preseasonProjUt": 31,
@@ -6958,12 +6958,12 @@ const TEAMS_DATABASE = {
         "location": "East Lansing, MI",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -0.5,
+        "vegasSpread": -2.7,
         "overUnder": 47.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 50,
-        "projScoreUt": 26,
-        "projScoreOpp": 23,
+        "baseWinProb": 58,
+        "projScoreUt": 25,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Oregon front seven vs Michigan State Spartans rushing attack.",
@@ -6971,23 +6971,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 49.6,
-        "mcOverProb": 43.7,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 47.5",
+        "mcCoverProb": 54.2,
+        "mcOverProb": 47.0,
+        "mcRecommendedAts": "Oregon -2.7",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 10,
-          "p25": 16,
-          "p50": 23,
-          "p75": 29,
-          "p90": 35
+          "p10": 13,
+          "p25": 19,
+          "p50": 24,
+          "p75": 31,
+          "p90": 38
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 16,
-          "p50": 23,
-          "p75": 30,
-          "p90": 37
+          "p50": 22,
+          "p75": 28,
+          "p90": 35
         },
         "preseasonWinProb": 95,
         "preseasonProjUt": 38,
@@ -7032,12 +7032,12 @@ const TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -4.0,
-        "overUnder": 45.5,
+        "vegasSpread": -8.0,
+        "overUnder": 46.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 67,
-        "projScoreUt": 25,
-        "projScoreOpp": 20,
+        "baseWinProb": 77,
+        "projScoreUt": 28,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Oregon backup QB Dylan Raiola (Dante Moore out) vs Washington Huskies secondary.",
@@ -7046,23 +7046,23 @@ const TEAMS_DATABASE = {
         "oppId": "washington",
         "is_tracked": true,
         "rivalryName": "PACIFIC NORTHWEST CLASH",
-        "mcCoverProb": 47.6,
-        "mcOverProb": 47.3,
+        "mcCoverProb": 50.4,
+        "mcOverProb": 45.6,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "UNDER 46.5",
         "mcScoreDistUt": {
-          "p10": 13,
-          "p25": 19,
-          "p50": 25,
-          "p75": 31,
-          "p90": 38
+          "p10": 15,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 40
         },
         "mcScoreDistOpp": {
-          "p10": 9,
-          "p25": 13,
-          "p50": 19,
-          "p75": 26,
-          "p90": 31
+          "p10": 7,
+          "p25": 12,
+          "p50": 17,
+          "p75": 24,
+          "p90": 30
         },
         "preseasonWinProb": 81,
         "preseasonProjUt": 32,
@@ -7113,15 +7113,15 @@ const TEAMS_DATABASE = {
         81
       ]
     },
-    "offenseRating": 26.0,
-    "defenseRating": 22.1,
+    "offenseRating": 28.0,
+    "defenseRating": 20.9,
     "specialTeamsRating": 0.3,
     "qbStatus": {
       "starterOut": "Dante Moore",
       "replacement": "Dylan Raiola",
       "injuryWeek": 6,
       "status": "Out for Season (Concussion)",
-      "offDropPts": 5.5
+      "offDropPts": 5.0
     }
   },
   "pennstate": {
@@ -7768,8 +7768,8 @@ const TEAMS_DATABASE = {
         "overUnder": 44.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 28,
-        "projScoreUt": 19,
-        "projScoreOpp": 27,
+        "projScoreUt": 20,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Penn State quarterback play vs Washington Huskies secondary.",
@@ -7777,21 +7777,21 @@ const TEAMS_DATABASE = {
         },
         "oppId": "washington",
         "is_tracked": true,
-        "mcCoverProb": 32.6,
-        "mcOverProb": 53.3,
+        "mcCoverProb": 33.4,
+        "mcOverProb": 54.7,
         "mcRecommendedAts": "WASH -2.5",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "OVER 44.5",
         "mcScoreDistUt": {
           "p10": 7,
           "p25": 13,
           "p50": 20,
-          "p75": 26,
-          "p90": 31
+          "p75": 27,
+          "p90": 34
         },
         "mcScoreDistOpp": {
           "p10": 16,
           "p25": 20,
-          "p50": 26,
+          "p50": 27,
           "p75": 34,
           "p90": 41
         },
@@ -7841,7 +7841,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 11.1,
         "overUnder": 44.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 24,
+        "baseWinProb": 22,
         "projScoreUt": 16,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -7851,22 +7851,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 54.4,
-        "mcOverProb": 41.2,
-        "mcRecommendedAts": "Penn State +11.1",
+        "mcCoverProb": 53.1,
+        "mcOverProb": 40.4,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 44.5",
         "mcScoreDistUt": {
           "p10": 6,
           "p25": 10,
           "p50": 14,
-          "p75": 23,
+          "p75": 21,
           "p90": 28
         },
         "mcScoreDistOpp": {
           "p10": 13,
           "p25": 19,
           "p50": 26,
-          "p75": 33,
+          "p75": 34,
           "p90": 40
         },
         "preseasonWinProb": 91,
@@ -7915,8 +7915,8 @@ const TEAMS_DATABASE = {
         "vegasSpread": 7.6,
         "overUnder": 59.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 37,
-        "projScoreUt": 27,
+        "baseWinProb": 35,
+        "projScoreUt": 26,
         "projScoreOpp": 32,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -7925,8 +7925,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 55.4,
-        "mcOverProb": 47.9,
+        "mcCoverProb": 56.3,
+        "mcOverProb": 46.4,
         "mcRecommendedAts": "Penn State +7.6",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -7991,7 +7991,7 @@ const TEAMS_DATABASE = {
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 13,
         "projScoreUt": 16,
-        "projScoreOpp": 32,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Penn State front seven vs Maryland Terrapins rushing attack.",
@@ -7999,8 +7999,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 47.6,
-        "mcOverProb": 44.2,
+        "mcCoverProb": 50.0,
+        "mcOverProb": 42.5,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 49.5",
         "mcScoreDistUt": {
@@ -8011,10 +8011,10 @@ const TEAMS_DATABASE = {
           "p90": 28
         },
         "mcScoreDistOpp": {
-          "p10": 19,
+          "p10": 17,
           "p25": 24,
           "p50": 31,
-          "p75": 39,
+          "p75": 38,
           "p90": 45
         },
         "preseasonWinProb": 84,
@@ -8714,7 +8714,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -5.5,
         "overUnder": 57.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 54,
+        "baseWinProb": 52,
         "projScoreUt": 29,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -8724,21 +8724,21 @@ const TEAMS_DATABASE = {
         },
         "oppId": "miami",
         "is_tracked": true,
-        "mcCoverProb": 41.2,
-        "mcOverProb": 48.1,
+        "mcCoverProb": 39.6,
+        "mcOverProb": 47.7,
         "mcRecommendedAts": "MIA +5.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 16,
+          "p10": 15,
           "p25": 21,
-          "p50": 29,
+          "p50": 28,
           "p75": 37,
           "p90": 44
         },
         "mcScoreDistOpp": {
           "p10": 14,
           "p25": 20,
-          "p50": 27,
+          "p50": 28,
           "p75": 35,
           "p90": 42
         },
@@ -8789,8 +8789,8 @@ const TEAMS_DATABASE = {
         "overUnder": 53.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 92,
-        "projScoreUt": 37,
-        "projScoreOpp": 17,
+        "projScoreUt": 36,
+        "projScoreOpp": 16,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Notre Dame front seven vs Boston College Eagles rushing attack.",
@@ -8798,14 +8798,14 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 26.1,
-        "mcOverProb": 48.3,
+        "mcCoverProb": 24.1,
+        "mcOverProb": 45.3,
         "mcRecommendedAts": "BC +29.3",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "UNDER 53.5",
         "mcScoreDistUt": {
-          "p10": 23,
+          "p10": 22,
           "p25": 28,
-          "p50": 37,
+          "p50": 35,
           "p75": 44,
           "p90": 51
         },
@@ -8859,12 +8859,12 @@ const TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -13.6,
+        "vegasSpread": -12.8,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 88,
         "projScoreUt": 34,
-        "projScoreOpp": 17,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Notre Dame quarterback play vs SMU Mustangs secondary.",
@@ -8873,22 +8873,22 @@ const TEAMS_DATABASE = {
         "oppId": "smu",
         "is_tracked": true,
         "mcCoverProb": 52.2,
-        "mcOverProb": 45.0,
+        "mcOverProb": 47.9,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 52.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 20,
           "p25": 27,
           "p50": 34,
-          "p75": 41,
+          "p75": 42,
           "p90": 48
         },
         "mcScoreDistOpp": {
           "p10": 6,
-          "p25": 10,
+          "p25": 12,
           "p50": 17,
           "p75": 23,
-          "p90": 29
+          "p90": 30
         },
         "preseasonWinProb": 72,
         "preseasonProjUt": 30,
@@ -8937,7 +8937,7 @@ const TEAMS_DATABASE = {
         "overUnder": 50.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 84,
-        "projScoreUt": 31,
+        "projScoreUt": 32,
         "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -8946,22 +8946,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 24.6,
-        "mcOverProb": 43.3,
+        "mcCoverProb": 25.5,
+        "mcOverProb": 44.2,
         "mcRecommendedAts": "SYR +23.7",
         "mcRecommendedOu": "UNDER 50.5",
         "mcScoreDistUt": {
           "p10": 17,
-          "p25": 23,
+          "p25": 24,
           "p50": 31,
           "p75": 38,
           "p90": 45
         },
         "mcScoreDistOpp": {
-          "p10": 7,
+          "p10": 6,
           "p25": 10,
           "p50": 17,
-          "p75": 23,
+          "p75": 24,
           "p90": 30
         },
         "preseasonWinProb": 92,
@@ -9660,7 +9660,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -5.5,
         "overUnder": 52.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 47,
+        "baseWinProb": 49,
         "projScoreUt": 24,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -9670,15 +9670,15 @@ const TEAMS_DATABASE = {
         },
         "oppId": "alabama",
         "is_tracked": true,
-        "mcCoverProb": 34.8,
-        "mcOverProb": 37.2,
+        "mcCoverProb": 35.5,
+        "mcOverProb": 37.8,
         "mcRecommendedAts": "ALA +5.5",
         "mcRecommendedOu": "UNDER 52.5",
         "mcScoreDistUt": {
-          "p10": 12,
+          "p10": 10,
           "p25": 17,
           "p50": 23,
-          "p75": 30,
+          "p75": 31,
           "p90": 37
         },
         "mcScoreDistOpp": {
@@ -9731,11 +9731,11 @@ const TEAMS_DATABASE = {
         "location": "Baton Rouge, LA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.4,
+        "vegasSpread": -0.8,
         "overUnder": 46.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 52,
-        "projScoreUt": 25,
+        "baseWinProb": 54,
+        "projScoreUt": 23,
         "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -9744,16 +9744,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": "texas",
         "is_tracked": true,
-        "mcCoverProb": 52.0,
-        "mcOverProb": 42.6,
+        "mcCoverProb": 53.7,
+        "mcOverProb": 44.8,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 46.5",
         "mcScoreDistUt": {
           "p10": 10,
           "p25": 16,
-          "p50": 22,
-          "p75": 29,
-          "p90": 35
+          "p50": 23,
+          "p75": 30,
+          "p90": 36
         },
         "mcScoreDistOpp": {
           "p10": 10,
@@ -9805,12 +9805,12 @@ const TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 1.6,
+        "vegasSpread": 3.2,
         "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 42,
-        "projScoreUt": 23,
-        "projScoreOpp": 25,
+        "projScoreUt": 22,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "LSU quarterback play vs Tennessee Volunteers secondary.",
@@ -9818,23 +9818,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "tennessee",
         "is_tracked": true,
-        "mcCoverProb": 46.6,
-        "mcOverProb": 38.8,
+        "mcCoverProb": 47.6,
+        "mcOverProb": 37.8,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 51.5",
         "mcScoreDistUt": {
           "p10": 10,
           "p25": 16,
           "p50": 22,
-          "p75": 30,
-          "p90": 37
+          "p75": 29,
+          "p90": 36
         },
         "mcScoreDistOpp": {
           "p10": 13,
           "p25": 17,
           "p50": 24,
-          "p75": 31,
-          "p90": 39
+          "p75": 32,
+          "p90": 38
         },
         "preseasonWinProb": 55,
         "preseasonProjUt": 27,
@@ -9884,7 +9884,7 @@ const TEAMS_DATABASE = {
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 79,
         "projScoreUt": 34,
-        "projScoreOpp": 23,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "LSU front seven vs Arkansas Razorbacks rushing attack.",
@@ -9892,8 +9892,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 33.9,
-        "mcOverProb": 44.6,
+        "mcCoverProb": 35.2,
+        "mcOverProb": 43.2,
         "mcRecommendedAts": "ARK +17.7",
         "mcRecommendedOu": "UNDER 58.5",
         "mcScoreDistUt": {
@@ -9906,8 +9906,8 @@ const TEAMS_DATABASE = {
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 16,
-          "p50": 23,
-          "p75": 30,
+          "p50": 22,
+          "p75": 29,
           "p90": 36
         },
         "preseasonWinProb": 93,
@@ -10607,7 +10607,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -6.5,
         "overUnder": 50.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 74,
+        "baseWinProb": 73,
         "projScoreUt": 32,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -10617,16 +10617,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": "kentucky",
         "is_tracked": true,
-        "mcCoverProb": 58.3,
-        "mcOverProb": 58.7,
+        "mcCoverProb": 57.4,
+        "mcOverProb": 57.1,
         "mcRecommendedAts": "Tennessee -6.5",
         "mcRecommendedOu": "OVER 50.5",
         "mcScoreDistUt": {
           "p10": 17,
           "p25": 24,
           "p50": 31,
-          "p75": 38,
-          "p90": 46
+          "p75": 40,
+          "p90": 47
         },
         "mcScoreDistOpp": {
           "p10": 10,
@@ -10681,7 +10681,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -9.6,
         "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 80,
+        "baseWinProb": 81,
         "projScoreUt": 30,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -10691,8 +10691,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": "texasam",
         "is_tracked": true,
-        "mcCoverProb": 52.1,
-        "mcOverProb": 39.8,
+        "mcCoverProb": 52.2,
+        "mcOverProb": 40.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 51.5",
         "mcScoreDistUt": {
@@ -10752,12 +10752,12 @@ const TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -1.6,
+        "vegasSpread": -3.2,
         "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 58,
-        "projScoreUt": 25,
-        "projScoreOpp": 23,
+        "projScoreUt": 26,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Tennessee quarterback play vs LSU Tigers secondary.",
@@ -10765,23 +10765,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "lsu",
         "is_tracked": true,
-        "mcCoverProb": 53.4,
-        "mcOverProb": 38.8,
+        "mcCoverProb": 52.4,
+        "mcOverProb": 37.8,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 51.5",
         "mcScoreDistUt": {
           "p10": 13,
           "p25": 17,
           "p50": 24,
-          "p75": 31,
-          "p90": 39
+          "p75": 32,
+          "p90": 38
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 16,
           "p50": 22,
-          "p75": 30,
-          "p90": 37
+          "p75": 29,
+          "p90": 36
         },
         "preseasonWinProb": 45,
         "preseasonProjUt": 26,
@@ -10839,23 +10839,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 38.6,
-        "mcOverProb": 44.5,
+        "mcCoverProb": 39.1,
+        "mcOverProb": 44.4,
         "mcRecommendedAts": "VAN +12.0",
         "mcRecommendedOu": "UNDER 61.5",
         "mcScoreDistUt": {
           "p10": 20,
-          "p25": 27,
+          "p25": 26,
           "p50": 34,
           "p75": 42,
-          "p90": 50
+          "p90": 48
         },
         "mcScoreDistOpp": {
           "p10": 13,
           "p25": 19,
           "p50": 26,
           "p75": 33,
-          "p90": 39
+          "p90": 40
         },
         "preseasonWinProb": 89,
         "preseasonProjUt": 34,
@@ -10937,7 +10937,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#1A0A0A",
       "bgBase": "#0D0505"
     },
-    "baseSpRating": 11.9,
+    "baseSpRating": 12.1,
     "playoffContenderRank": 6,
     "sliderLabels": {
       "qb": "Josh Hoover Execution",
@@ -11631,7 +11631,7 @@ const TEAMS_DATABASE = {
         "isMarquee": true,
         "isConf": true,
         "vegasSpread": -3.2,
-        "overUnder": 52.5,
+        "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 60,
         "projScoreUt": 28,
@@ -11643,22 +11643,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": "usc",
         "is_tracked": true,
-        "mcCoverProb": 47.4,
-        "mcOverProb": 45.0,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 52.5",
+        "mcCoverProb": 45.4,
+        "mcOverProb": 48.8,
+        "mcRecommendedAts": "USC +5.3",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 14,
+          "p10": 13,
           "p25": 20,
           "p50": 27,
-          "p75": 35,
-          "p90": 42
+          "p75": 34,
+          "p90": 41
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 17,
           "p50": 23,
-          "p75": 30,
+          "p75": 31,
           "p90": 37
         },
         "preseasonWinProb": 58,
@@ -11705,9 +11705,9 @@ const TEAMS_DATABASE = {
         "isMarquee": true,
         "isConf": true,
         "vegasSpread": -6.4,
-        "overUnder": 45.5,
+        "overUnder": 44.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 72,
+        "baseWinProb": 71,
         "projScoreUt": 26,
         "projScoreOpp": 18,
         "scoutReport": {
@@ -11717,20 +11717,20 @@ const TEAMS_DATABASE = {
         },
         "oppId": "washington",
         "is_tracked": true,
-        "mcCoverProb": 43.7,
-        "mcOverProb": 45.1,
-        "mcRecommendedAts": "WASH +9.4",
-        "mcRecommendedOu": "UNDER 45.5",
+        "mcCoverProb": 45.4,
+        "mcOverProb": 45.6,
+        "mcRecommendedAts": "WASH +9.5",
+        "mcRecommendedOu": "UNDER 44.5",
         "mcScoreDistUt": {
           "p10": 13,
           "p25": 17,
-          "p50": 26,
+          "p50": 25,
           "p75": 33,
           "p90": 40
         },
         "mcScoreDistOpp": {
           "p10": 7,
-          "p25": 13,
+          "p25": 10,
           "p50": 17,
           "p75": 24,
           "p90": 30
@@ -11778,12 +11778,12 @@ const TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -18.5,
+        "vegasSpread": -18.7,
         "overUnder": 45.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 84,
+        "baseWinProb": 86,
         "projScoreUt": 29,
-        "projScoreOpp": 16,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Indiana front seven vs Purdue Boilermakers rushing attack.",
@@ -11791,22 +11791,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 34.4,
-        "mcOverProb": 46.1,
-        "mcRecommendedAts": "PUR +18.5",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcCoverProb": 35.4,
+        "mcOverProb": 44.4,
+        "mcRecommendedAts": "PUR +18.7",
+        "mcRecommendedOu": "UNDER 45.5",
         "mcScoreDistUt": {
           "p10": 16,
-          "p25": 22,
-          "p50": 28,
-          "p75": 36,
+          "p25": 21,
+          "p50": 29,
+          "p75": 37,
           "p90": 44
         },
         "mcScoreDistOpp": {
-          "p10": 6,
-          "p25": 10,
+          "p10": 3,
+          "p25": 9,
           "p50": 14,
-          "p75": 21,
+          "p75": 20,
           "p90": 27
         },
         "preseasonWinProb": 95,
@@ -11859,7 +11859,7 @@ const TEAMS_DATABASE = {
       ]
     },
     "offenseRating": 29.4,
-    "defenseRating": 18.0,
+    "defenseRating": 17.8,
     "specialTeamsRating": 0.5
   },
   "miami": {
@@ -12506,7 +12506,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 5.5,
         "overUnder": 57.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 46,
+        "baseWinProb": 48,
         "projScoreUt": 28,
         "projScoreOpp": 29,
         "scoutReport": {
@@ -12516,21 +12516,21 @@ const TEAMS_DATABASE = {
         },
         "oppId": "notredame",
         "is_tracked": true,
-        "mcCoverProb": 58.8,
-        "mcOverProb": 48.1,
+        "mcCoverProb": 60.4,
+        "mcOverProb": 47.7,
         "mcRecommendedAts": "Miami +5.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 14,
           "p25": 20,
-          "p50": 27,
+          "p50": 28,
           "p75": 35,
           "p90": 42
         },
         "mcScoreDistOpp": {
-          "p10": 16,
+          "p10": 15,
           "p25": 21,
-          "p50": 29,
+          "p50": 28,
           "p75": 37,
           "p90": 44
         },
@@ -12590,16 +12590,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 28.4,
-        "mcOverProb": 44.6,
+        "mcCoverProb": 27.4,
+        "mcOverProb": 44.7,
         "mcRecommendedAts": "DUKE +22.4",
         "mcRecommendedOu": "UNDER 64.5",
         "mcScoreDistUt": {
           "p10": 24,
-          "p25": 31,
+          "p25": 30,
           "p50": 38,
           "p75": 47,
-          "p90": 54
+          "p90": 55
         },
         "mcScoreDistOpp": {
           "p10": 13,
@@ -12654,8 +12654,8 @@ const TEAMS_DATABASE = {
         "vegasSpread": -19.4,
         "overUnder": 55.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 76,
-        "projScoreUt": 33,
+        "baseWinProb": 74,
+        "projScoreUt": 32,
         "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -12664,23 +12664,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 28.9,
-        "mcOverProb": 44.5,
+        "mcCoverProb": 25.7,
+        "mcOverProb": 44.9,
         "mcRecommendedAts": "VT +19.4",
         "mcRecommendedOu": "UNDER 55.5",
         "mcScoreDistUt": {
           "p10": 17,
           "p25": 24,
-          "p50": 33,
-          "p75": 41,
+          "p50": 31,
+          "p75": 40,
           "p90": 48
         },
         "mcScoreDistOpp": {
           "p10": 10,
-          "p25": 14,
+          "p25": 16,
           "p50": 21,
-          "p75": 28,
-          "p90": 35
+          "p75": 29,
+          "p90": 36
         },
         "preseasonWinProb": 96,
         "preseasonProjUt": 39,
@@ -12728,7 +12728,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -30.5,
         "overUnder": 56.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 95,
+        "baseWinProb": 96,
         "projScoreUt": 40,
         "projScoreOpp": 16,
         "scoutReport": {
@@ -12738,13 +12738,13 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 31.4,
-        "mcOverProb": 49.2,
+        "mcCoverProb": 33.6,
+        "mcOverProb": 47.6,
         "mcRecommendedAts": "BC +30.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 25,
-          "p25": 31,
+          "p10": 27,
+          "p25": 33,
           "p50": 40,
           "p75": 48,
           "p90": 55
@@ -12753,8 +12753,8 @@ const TEAMS_DATABASE = {
           "p10": 6,
           "p25": 10,
           "p50": 16,
-          "p75": 23,
-          "p90": 28
+          "p75": 21,
+          "p90": 27
         },
         "preseasonWinProb": 96,
         "preseasonProjUt": 39,
@@ -13452,7 +13452,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 7.5,
         "overUnder": 51.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 26,
+        "baseWinProb": 28,
         "projScoreUt": 18,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -13462,8 +13462,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 46.7,
-        "mcOverProb": 32.4,
+        "mcCoverProb": 46.8,
+        "mcOverProb": 32.1,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 51.5",
         "mcScoreDistUt": {
@@ -13474,10 +13474,10 @@ const TEAMS_DATABASE = {
           "p90": 31
         },
         "mcScoreDistOpp": {
-          "p10": 14,
+          "p10": 13,
           "p25": 20,
           "p50": 27,
-          "p75": 35,
+          "p75": 34,
           "p90": 42
         },
         "preseasonWinProb": 91,
@@ -13526,7 +13526,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 9.6,
         "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 20,
+        "baseWinProb": 19,
         "projScoreUt": 18,
         "projScoreOpp": 30,
         "scoutReport": {
@@ -13536,8 +13536,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": "tennessee",
         "is_tracked": true,
-        "mcCoverProb": 47.9,
-        "mcOverProb": 39.8,
+        "mcCoverProb": 47.8,
+        "mcOverProb": 40.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 51.5",
         "mcScoreDistUt": {
@@ -13600,7 +13600,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 1.6,
         "overUnder": 44.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 45,
+        "baseWinProb": 44,
         "projScoreUt": 20,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -13611,12 +13611,12 @@ const TEAMS_DATABASE = {
         "oppId": "oklahoma",
         "is_tracked": true,
         "rivalryName": "RED RIVER RIVALRY",
-        "mcCoverProb": 54.2,
-        "mcOverProb": 41.9,
-        "mcRecommendedAts": "Texas A&M +3.8",
+        "mcCoverProb": 54.0,
+        "mcOverProb": 42.0,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 44.5",
         "mcScoreDistUt": {
-          "p10": 7,
+          "p10": 9,
           "p25": 13,
           "p50": 20,
           "p75": 27,
@@ -13624,10 +13624,10 @@ const TEAMS_DATABASE = {
         },
         "mcScoreDistOpp": {
           "p10": 10,
-          "p25": 15,
-          "p50": 23,
+          "p25": 16,
+          "p50": 22,
           "p75": 29,
-          "p90": 35
+          "p90": 34
         },
         "preseasonWinProb": 42,
         "preseasonProjUt": 25,
@@ -13675,7 +13675,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 9.6,
         "overUnder": 46.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 18,
+        "baseWinProb": 20,
         "projScoreUt": 16,
         "projScoreOpp": 28,
         "scoutReport": {
@@ -13686,23 +13686,23 @@ const TEAMS_DATABASE = {
         "oppId": "texas",
         "is_tracked": true,
         "rivalryName": "LONE STAR SHOWDOWN",
-        "mcCoverProb": 57.0,
-        "mcOverProb": 44.2,
-        "mcRecommendedAts": "Texas A&M +14.1",
+        "mcCoverProb": 56.9,
+        "mcOverProb": 43.6,
+        "mcRecommendedAts": "Texas A&M +14.2",
         "mcRecommendedOu": "UNDER 46.5",
         "mcScoreDistUt": {
           "p10": 6,
           "p25": 10,
-          "p50": 14,
+          "p50": 16,
           "p75": 21,
           "p90": 28
         },
         "mcScoreDistOpp": {
           "p10": 14,
           "p25": 20,
-          "p50": 28,
+          "p50": 27,
           "p75": 35,
-          "p90": 41
+          "p90": 42
         },
         "preseasonWinProb": 44,
         "preseasonProjUt": 25,
@@ -14400,7 +14400,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 3.5,
         "overUnder": 56.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 38,
+        "baseWinProb": 36,
         "projScoreUt": 26,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -14410,16 +14410,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": "georgia",
         "is_tracked": true,
-        "mcCoverProb": 45.6,
-        "mcOverProb": 52.2,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcCoverProb": 44.6,
+        "mcOverProb": 50.9,
+        "mcRecommendedAts": "UGA -3.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 13,
           "p25": 19,
           "p50": 26,
-          "p75": 34,
-          "p90": 41
+          "p75": 33,
+          "p90": 40
         },
         "mcScoreDistOpp": {
           "p10": 17,
@@ -14474,7 +14474,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -12.0,
         "overUnder": 61.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 83,
+        "baseWinProb": 84,
         "projScoreUt": 38,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -14484,8 +14484,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": "oklahoma",
         "is_tracked": true,
-        "mcCoverProb": 50.8,
-        "mcOverProb": 44.4,
+        "mcCoverProb": 52.2,
+        "mcOverProb": 45.3,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 61.5",
         "mcScoreDistUt": {
@@ -14493,7 +14493,7 @@ const TEAMS_DATABASE = {
           "p25": 30,
           "p50": 37,
           "p75": 45,
-          "p90": 52
+          "p90": 53
         },
         "mcScoreDistOpp": {
           "p10": 10,
@@ -14558,8 +14558,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 42.9,
-        "mcOverProb": 31.1,
+        "mcCoverProb": 41.8,
+        "mcOverProb": 29.4,
         "mcRecommendedAts": "WOF +55.7",
         "mcRecommendedOu": "UNDER 68.5",
         "mcScoreDistUt": {
@@ -14624,7 +14624,7 @@ const TEAMS_DATABASE = {
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 89,
         "projScoreUt": 44,
-        "projScoreOpp": 25,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ole Miss front seven vs Mississippi State Bulldogs rushing attack.",
@@ -14633,8 +14633,8 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "rivalryName": "EGG BOWL",
-        "mcCoverProb": 35.0,
-        "mcOverProb": 47.5,
+        "mcCoverProb": 33.7,
+        "mcOverProb": 48.7,
         "mcRecommendedAts": "MSST +25.4",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -15358,8 +15358,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 36.2,
-        "mcOverProb": 37.8,
+        "mcCoverProb": 35.8,
+        "mcOverProb": 38.6,
         "mcRecommendedAts": "FLA -6.0",
         "mcRecommendedOu": "UNDER 45.5",
         "mcScoreDistUt": {
@@ -15371,8 +15371,8 @@ const TEAMS_DATABASE = {
         },
         "mcScoreDistOpp": {
           "p10": 13,
-          "p25": 19,
-          "p50": 26,
+          "p25": 17,
+          "p50": 27,
           "p75": 34,
           "p90": 41
         },
@@ -15422,7 +15422,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 12.0,
         "overUnder": 61.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 17,
+        "baseWinProb": 16,
         "projScoreUt": 23,
         "projScoreOpp": 38,
         "scoutReport": {
@@ -15432,8 +15432,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": "olemiss",
         "is_tracked": true,
-        "mcCoverProb": 49.2,
-        "mcOverProb": 44.4,
+        "mcCoverProb": 47.8,
+        "mcOverProb": 45.3,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 61.5",
         "mcScoreDistUt": {
@@ -15448,7 +15448,7 @@ const TEAMS_DATABASE = {
           "p25": 30,
           "p50": 37,
           "p75": 45,
-          "p90": 52
+          "p90": 53
         },
         "preseasonWinProb": 59,
         "preseasonProjUt": 28,
@@ -15496,7 +15496,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -1.6,
         "overUnder": 44.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 55,
+        "baseWinProb": 56,
         "projScoreUt": 22,
         "projScoreOpp": 20,
         "scoutReport": {
@@ -15507,19 +15507,19 @@ const TEAMS_DATABASE = {
         "oppId": "texasam",
         "is_tracked": true,
         "rivalryName": "RED RIVER RIVALRY",
-        "mcCoverProb": 45.8,
-        "mcOverProb": 41.9,
+        "mcCoverProb": 46.0,
+        "mcOverProb": 42.0,
         "mcRecommendedAts": "TA&M +3.8",
         "mcRecommendedOu": "UNDER 44.5",
         "mcScoreDistUt": {
           "p10": 10,
-          "p25": 15,
-          "p50": 23,
+          "p25": 16,
+          "p50": 22,
           "p75": 29,
-          "p90": 35
+          "p90": 34
         },
         "mcScoreDistOpp": {
-          "p10": 7,
+          "p10": 9,
           "p25": 13,
           "p50": 20,
           "p75": 27,
@@ -15568,11 +15568,11 @@ const TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 8.8,
+        "vegasSpread": 9.6,
         "overUnder": 42.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 19,
-        "projScoreUt": 15,
+        "baseWinProb": 18,
+        "projScoreUt": 14,
         "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -15581,10 +15581,10 @@ const TEAMS_DATABASE = {
         },
         "oppId": "missouri",
         "is_tracked": true,
-        "mcCoverProb": 51.1,
-        "mcOverProb": 46.2,
+        "mcCoverProb": 51.5,
+        "mcOverProb": 43.5,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "UNDER 42.5",
         "mcScoreDistUt": {
           "p10": 3,
           "p25": 9,
@@ -15594,9 +15594,9 @@ const TEAMS_DATABASE = {
         },
         "mcScoreDistOpp": {
           "p10": 13,
-          "p25": 20,
-          "p50": 27,
-          "p75": 34,
+          "p25": 19,
+          "p50": 26,
+          "p75": 33,
           "p90": 40
         },
         "preseasonWinProb": 51,
@@ -16296,9 +16296,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": -17.5,
         "overUnder": 68.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 78,
+        "baseWinProb": 79,
         "projScoreUt": 32,
-        "projScoreOpp": 22,
+        "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Boise State front seven vs Colorado State Rams rushing attack.",
@@ -16306,13 +16306,13 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 30.3,
-        "mcOverProb": 15.9,
+        "mcCoverProb": 31.5,
+        "mcOverProb": 15.4,
         "mcRecommendedAts": "CSU +17.5",
         "mcRecommendedOu": "UNDER 68.5",
         "mcScoreDistUt": {
           "p10": 19,
-          "p25": 24,
+          "p25": 25,
           "p50": 32,
           "p75": 40,
           "p90": 47
@@ -16320,7 +16320,7 @@ const TEAMS_DATABASE = {
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 15,
-          "p50": 21,
+          "p50": 20,
           "p75": 27,
           "p90": 34
         },
@@ -16370,7 +16370,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -7.2,
         "overUnder": 49.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 69,
+        "baseWinProb": 70,
         "projScoreUt": 28,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -16380,19 +16380,19 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 47.0,
-        "mcOverProb": 47.0,
+        "mcCoverProb": 47.8,
+        "mcOverProb": 47.8,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 16,
           "p25": 20,
           "p50": 27,
-          "p75": 34,
-          "p90": 41
+          "p75": 35,
+          "p90": 43
         },
         "mcScoreDistOpp": {
-          "p10": 9,
+          "p10": 10,
           "p25": 14,
           "p50": 20,
           "p75": 27,
@@ -16444,9 +16444,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": -0.8,
         "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 55,
-        "projScoreUt": 27,
-        "projScoreOpp": 25,
+        "baseWinProb": 52,
+        "projScoreUt": 29,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Boise State front seven vs San Diego State Aztecs rushing attack.",
@@ -16454,22 +16454,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 55.2,
-        "mcOverProb": 49.6,
-        "mcRecommendedAts": "Boise State -0.8",
+        "mcCoverProb": 52.4,
+        "mcOverProb": 49.3,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 14,
+          "p10": 13,
           "p25": 20,
           "p50": 26,
           "p75": 34,
-          "p90": 41
+          "p90": 40
         },
         "mcScoreDistOpp": {
-          "p10": 10,
+          "p10": 13,
           "p25": 17,
           "p50": 24,
-          "p75": 31,
+          "p75": 34,
           "p90": 39
         },
         "preseasonWinProb": 89,
@@ -16557,7 +16557,7 @@ const TEAMS_DATABASE = {
       "turnover": "Coliseum Turnover Margin Luck",
       "crowd": "LA Memorial Coliseum Roar"
     },
-    "baseSpRating": 9.1,
+    "baseSpRating": 9.3,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/30.png",
     "badgeText": "USC",
     "schedule": [
@@ -17208,7 +17208,7 @@ const TEAMS_DATABASE = {
         "isMarquee": true,
         "isConf": true,
         "vegasSpread": 3.2,
-        "overUnder": 52.5,
+        "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 40,
         "projScoreUt": 24,
@@ -17220,23 +17220,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "indiana",
         "is_tracked": true,
-        "mcCoverProb": 52.6,
-        "mcOverProb": 45.0,
-        "mcRecommendedAts": "USC +5.3",
-        "mcRecommendedOu": "UNDER 52.5",
+        "mcCoverProb": 54.6,
+        "mcOverProb": 48.8,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 10,
           "p25": 17,
           "p50": 23,
-          "p75": 30,
+          "p75": 31,
           "p90": 37
         },
         "mcScoreDistOpp": {
-          "p10": 14,
+          "p10": 13,
           "p25": 20,
           "p50": 27,
-          "p75": 35,
-          "p90": 42
+          "p75": 34,
+          "p90": 41
         },
         "preseasonWinProb": 42,
         "preseasonProjUt": 25,
@@ -17281,7 +17281,7 @@ const TEAMS_DATABASE = {
         "location": "Los Angeles, CA",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -12.7,
+        "vegasSpread": -12.9,
         "overUnder": 53.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 60,
@@ -17294,16 +17294,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 27.2,
-        "mcOverProb": 45.0,
-        "mcRecommendedAts": "MD +12.7",
+        "mcCoverProb": 27.6,
+        "mcOverProb": 44.0,
+        "mcRecommendedAts": "MD +12.9",
         "mcRecommendedOu": "UNDER 53.5",
         "mcScoreDistUt": {
           "p10": 14,
           "p25": 20,
           "p50": 27,
           "p75": 34,
-          "p90": 42
+          "p90": 41
         },
         "mcScoreDistOpp": {
           "p10": 10,
@@ -17355,12 +17355,12 @@ const TEAMS_DATABASE = {
         "location": "Pasadena, CA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 2.4,
-        "overUnder": 48.5,
+        "vegasSpread": 0.8,
+        "overUnder": 49.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 49,
+        "baseWinProb": 46,
         "projScoreUt": 24,
-        "projScoreOpp": 27,
+        "projScoreOpp": 25,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs UCLA Bruins rushing attack.",
@@ -17369,23 +17369,23 @@ const TEAMS_DATABASE = {
         "oppId": "ucla",
         "is_tracked": true,
         "rivalryName": "BATTLE FOR THE VICTORY BELL",
-        "mcCoverProb": 46.2,
-        "mcOverProb": 46.9,
-        "mcRecommendedAts": "UCLA +1.4",
+        "mcCoverProb": 46.0,
+        "mcOverProb": 46.6,
+        "mcRecommendedAts": "UCLA +0.9",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 10,
-          "p25": 17,
+          "p25": 16,
           "p50": 23,
           "p75": 30,
           "p90": 37
         },
         "mcScoreDistOpp": {
-          "p10": 12,
+          "p10": 13,
           "p25": 17,
           "p50": 24,
           "p75": 31,
-          "p90": 37
+          "p90": 38
         },
         "preseasonWinProb": 91,
         "preseasonProjUt": 36,
@@ -17435,7 +17435,7 @@ const TEAMS_DATABASE = {
       ]
     },
     "offenseRating": 33.8,
-    "defenseRating": 24.4,
+    "defenseRating": 24.2,
     "specialTeamsRating": -0.3
   },
   "floridastate": {
@@ -18075,21 +18075,21 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 30.5,
-        "mcOverProb": 63.8,
+        "mcCoverProb": 29.2,
+        "mcOverProb": 64.0,
         "mcRecommendedAts": "BC +7.0",
         "mcRecommendedOu": "OVER 52.5",
         "mcScoreDistUt": {
           "p10": 16,
           "p25": 21,
-          "p50": 29,
-          "p75": 37,
+          "p50": 28,
+          "p75": 36,
           "p90": 44
         },
         "mcScoreDistOpp": {
           "p10": 16,
-          "p25": 22,
-          "p50": 29,
+          "p25": 23,
+          "p50": 30,
           "p75": 37,
           "p90": 43
         },
@@ -18139,7 +18139,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 13.0,
         "overUnder": 61.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 20,
+        "baseWinProb": 21,
         "projScoreUt": 25,
         "projScoreOpp": 37,
         "scoutReport": {
@@ -18149,12 +18149,12 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 50.7,
-        "mcOverProb": 50.0,
+        "mcCoverProb": 49.1,
+        "mcOverProb": 49.6,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 12,
+          "p10": 13,
           "p25": 17,
           "p50": 24,
           "p75": 31,
@@ -18165,7 +18165,7 @@ const TEAMS_DATABASE = {
           "p25": 30,
           "p50": 37,
           "p75": 45,
-          "p90": 52
+          "p90": 51
         },
         "preseasonWinProb": 90,
         "preseasonProjUt": 35,
@@ -18213,8 +18213,8 @@ const TEAMS_DATABASE = {
         "vegasSpread": 7.8,
         "overUnder": 63.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 30,
-        "projScoreUt": 28,
+        "baseWinProb": 32,
+        "projScoreUt": 29,
         "projScoreOpp": 36,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -18223,21 +18223,21 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 49.7,
-        "mcOverProb": 49.0,
+        "mcCoverProb": 52.1,
+        "mcOverProb": 50.9,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 14,
-          "p25": 20,
-          "p50": 27,
-          "p75": 34,
-          "p90": 41
+          "p10": 16,
+          "p25": 21,
+          "p50": 28,
+          "p75": 35,
+          "p90": 43
         },
         "mcScoreDistOpp": {
           "p10": 22,
-          "p25": 29,
-          "p50": 35,
+          "p25": 28,
+          "p50": 36,
           "p75": 43,
           "p90": 50
         },
@@ -18297,13 +18297,13 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 48.1,
-        "mcOverProb": 48.8,
+        "mcCoverProb": 49.7,
+        "mcOverProb": 48.7,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 7,
-          "p25": 12,
+          "p25": 10,
           "p50": 17,
           "p75": 24,
           "p90": 31
@@ -19010,7 +19010,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -2.5,
         "overUnder": 50.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 34,
+        "baseWinProb": 35,
         "projScoreUt": 21,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -19020,23 +19020,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 31.2,
-        "mcOverProb": 37.9,
+        "mcCoverProb": 30.1,
+        "mcOverProb": 37.5,
         "mcRecommendedAts": "SYR +2.5",
         "mcRecommendedOu": "UNDER 50.5",
         "mcScoreDistUt": {
-          "p10": 10,
-          "p25": 14,
+          "p10": 9,
+          "p25": 13,
           "p50": 20,
           "p75": 27,
-          "p90": 34
+          "p90": 33
         },
         "mcScoreDistOpp": {
           "p10": 13,
           "p25": 19,
-          "p50": 25,
-          "p75": 34,
-          "p90": 41
+          "p50": 26,
+          "p75": 33,
+          "p90": 38
         },
         "preseasonWinProb": 88,
         "preseasonProjUt": 34,
@@ -19084,8 +19084,8 @@ const TEAMS_DATABASE = {
         "vegasSpread": 7.4,
         "overUnder": 49.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 26,
-        "projScoreUt": 20,
+        "baseWinProb": 28,
+        "projScoreUt": 21,
         "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -19094,16 +19094,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 47.9,
-        "mcOverProb": 47.2,
+        "mcCoverProb": 48.8,
+        "mcOverProb": 49.0,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 9,
-          "p25": 13,
+          "p25": 14,
           "p50": 20,
           "p75": 27,
-          "p90": 33
+          "p90": 34
         },
         "mcScoreDistOpp": {
           "p10": 16,
@@ -19158,9 +19158,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": 12.1,
         "overUnder": 57.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 16,
+        "baseWinProb": 14,
         "projScoreUt": 21,
-        "projScoreOpp": 35,
+        "projScoreOpp": 36,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Clemson front seven vs Duke Blue Devils rushing attack.",
@@ -19168,13 +19168,13 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 44.1,
-        "mcOverProb": 45.1,
+        "mcCoverProb": 44.2,
+        "mcOverProb": 45.8,
         "mcRecommendedAts": "DUKE -12.1",
         "mcRecommendedOu": "UNDER 57.5",
         "mcScoreDistUt": {
           "p10": 10,
-          "p25": 13,
+          "p25": 14,
           "p50": 20,
           "p75": 27,
           "p90": 34
@@ -19182,8 +19182,8 @@ const TEAMS_DATABASE = {
         "mcScoreDistOpp": {
           "p10": 23,
           "p25": 29,
-          "p50": 35,
-          "p75": 42,
+          "p50": 36,
+          "p75": 43,
           "p90": 49
         },
         "preseasonWinProb": 88,
@@ -19234,7 +19234,7 @@ const TEAMS_DATABASE = {
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 11,
         "projScoreUt": 14,
-        "projScoreOpp": 32,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Clemson front seven vs South Carolina Gamecocks rushing attack.",
@@ -19243,22 +19243,22 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "rivalryName": "PALMETTO BOWL",
-        "mcCoverProb": 41.3,
-        "mcOverProb": 48.8,
+        "mcCoverProb": 44.3,
+        "mcOverProb": 47.9,
         "mcRecommendedAts": "SC -14.1",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 3,
-          "p25": 7,
+          "p25": 9,
           "p50": 13,
           "p75": 20,
-          "p90": 26
+          "p90": 27
         },
         "mcScoreDistOpp": {
           "p10": 17,
-          "p25": 24,
+          "p25": 23,
           "p50": 31,
-          "p75": 40,
+          "p75": 38,
           "p90": 45
         },
         "preseasonWinProb": 94,
@@ -19956,8 +19956,8 @@ const TEAMS_DATABASE = {
         "vegasSpread": -6.0,
         "overUnder": 55.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 35,
-        "projScoreUt": 23,
+        "baseWinProb": 36,
+        "projScoreUt": 24,
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -19966,22 +19966,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 21.0,
-        "mcOverProb": 36.0,
+        "mcCoverProb": 22.1,
+        "mcOverProb": 37.6,
         "mcRecommendedAts": "VT +6.0",
         "mcRecommendedOu": "UNDER 55.5",
         "mcScoreDistUt": {
           "p10": 12,
           "p25": 16,
           "p50": 23,
-          "p75": 29,
-          "p90": 35
+          "p75": 30,
+          "p90": 36
         },
         "mcScoreDistOpp": {
           "p10": 14,
           "p25": 20,
           "p50": 27,
-          "p75": 34,
+          "p75": 35,
           "p90": 41
         },
         "preseasonWinProb": 94,
@@ -20040,16 +20040,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": "wakeforest",
         "is_tracked": true,
-        "mcCoverProb": 47.9,
-        "mcOverProb": 50.4,
+        "mcCoverProb": 49.4,
+        "mcOverProb": 50.5,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 10,
           "p25": 16,
           "p50": 22,
-          "p75": 29,
-          "p90": 35
+          "p75": 28,
+          "p90": 34
         },
         "mcScoreDistOpp": {
           "p10": 14,
@@ -20101,11 +20101,11 @@ const TEAMS_DATABASE = {
         "location": "Notre Dame, IN",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 13.6,
+        "vegasSpread": 12.8,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 12,
-        "projScoreUt": 17,
+        "projScoreUt": 18,
         "projScoreOpp": 34,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -20115,21 +20115,21 @@ const TEAMS_DATABASE = {
         "oppId": "notredame",
         "is_tracked": true,
         "mcCoverProb": 47.8,
-        "mcOverProb": 45.0,
+        "mcOverProb": 47.9,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 52.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 6,
-          "p25": 10,
+          "p25": 12,
           "p50": 17,
           "p75": 23,
-          "p90": 29
+          "p90": 30
         },
         "mcScoreDistOpp": {
           "p10": 20,
           "p25": 27,
           "p50": 34,
-          "p75": 41,
+          "p75": 42,
           "p90": 48
         },
         "preseasonWinProb": 28,
@@ -20178,7 +20178,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -3.8,
         "overUnder": 44.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 57,
+        "baseWinProb": 56,
         "projScoreUt": 24,
         "projScoreOpp": 21,
         "scoutReport": {
@@ -20188,19 +20188,19 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 47.6,
-        "mcOverProb": 49.5,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcCoverProb": 45.2,
+        "mcOverProb": 49.8,
+        "mcRecommendedAts": "STAN +3.8",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 12,
-          "p25": 17,
+          "p25": 16,
           "p50": 23,
           "p75": 30,
           "p90": 36
         },
         "mcScoreDistOpp": {
-          "p10": 10,
+          "p10": 9,
           "p25": 14,
           "p50": 20,
           "p75": 27,
@@ -20915,23 +20915,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 49.6,
-        "mcOverProb": 30.7,
+        "mcCoverProb": 48.7,
+        "mcOverProb": 31.8,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 63.5",
         "mcScoreDistUt": {
           "p10": 23,
-          "p25": 29,
+          "p25": 30,
           "p50": 37,
           "p75": 44,
-          "p90": 52
+          "p90": 51
         },
         "mcScoreDistOpp": {
           "p10": 9,
           "p25": 13,
-          "p50": 19,
+          "p50": 20,
           "p75": 26,
-          "p90": 32
+          "p90": 33
         },
         "preseasonWinProb": 94,
         "preseasonProjUt": 37,
@@ -20979,7 +20979,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -5.1,
         "overUnder": 59.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 56,
+        "baseWinProb": 59,
         "projScoreUt": 30,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -20990,21 +20990,21 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "rivalryName": "RED RIVER RIVALRY",
-        "mcCoverProb": 42.6,
-        "mcOverProb": 41.9,
+        "mcCoverProb": 46.1,
+        "mcOverProb": 42.0,
         "mcRecommendedAts": "OKST +5.1",
         "mcRecommendedOu": "UNDER 59.5",
         "mcScoreDistUt": {
           "p10": 16,
           "p25": 23,
-          "p50": 29,
+          "p50": 30,
           "p75": 37,
           "p90": 44
         },
         "mcScoreDistOpp": {
           "p10": 13,
           "p25": 20,
-          "p50": 27,
+          "p50": 26,
           "p75": 34,
           "p90": 41
         },
@@ -21054,8 +21054,8 @@ const TEAMS_DATABASE = {
         "vegasSpread": -8.2,
         "overUnder": 67.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 69,
-        "projScoreUt": 36,
+        "baseWinProb": 70,
+        "projScoreUt": 37,
         "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -21064,16 +21064,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 47.7,
-        "mcOverProb": 42.4,
+        "mcCoverProb": 46.9,
+        "mcOverProb": 44.7,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 67.5",
         "mcScoreDistUt": {
-          "p10": 22,
+          "p10": 23,
           "p25": 29,
           "p50": 36,
           "p75": 44,
-          "p90": 50
+          "p90": 51
         },
         "mcScoreDistOpp": {
           "p10": 16,
@@ -21138,20 +21138,20 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 48.8,
-        "mcOverProb": 45.5,
+        "mcCoverProb": 48.4,
+        "mcOverProb": 44.4,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 62.5",
         "mcScoreDistUt": {
           "p10": 20,
-          "p25": 27,
+          "p25": 26,
           "p50": 34,
-          "p75": 42,
+          "p75": 41,
           "p90": 48
         },
         "mcScoreDistOpp": {
-          "p10": 15,
-          "p25": 19,
+          "p10": 14,
+          "p25": 20,
           "p50": 26,
           "p75": 33,
           "p90": 40
@@ -21850,7 +21850,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -5.5,
         "overUnder": 47.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 59,
+        "baseWinProb": 60,
         "projScoreUt": 25,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -21861,23 +21861,23 @@ const TEAMS_DATABASE = {
         "oppId": "byu",
         "is_tracked": true,
         "rivalryName": "HOLY WAR",
-        "mcCoverProb": 45.2,
-        "mcOverProb": 46.5,
-        "mcRecommendedAts": "BYU +5.5",
+        "mcCoverProb": 46.7,
+        "mcOverProb": 47.0,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 10,
+          "p10": 13,
           "p25": 17,
           "p50": 24,
           "p75": 31,
           "p90": 38
         },
         "mcScoreDistOpp": {
-          "p10": 10,
+          "p10": 9,
           "p25": 14,
           "p50": 21,
           "p75": 28,
-          "p90": 34
+          "p90": 35
         },
         "preseasonWinProb": 68,
         "preseasonProjUt": 29,
@@ -21922,11 +21922,11 @@ const TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -5.6,
+        "vegasSpread": -4.8,
         "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 68,
-        "projScoreUt": 29,
+        "baseWinProb": 66,
+        "projScoreUt": 28,
         "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -21935,23 +21935,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "arizona",
         "is_tracked": true,
-        "mcCoverProb": 46.5,
-        "mcOverProb": 46.8,
+        "mcCoverProb": 43.6,
+        "mcOverProb": 43.7,
         "mcRecommendedAts": "ARIZ +7.2",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "UNDER 51.5",
         "mcScoreDistUt": {
           "p10": 14,
-          "p25": 20,
+          "p25": 21,
           "p50": 28,
-          "p75": 36,
-          "p90": 44
+          "p75": 35,
+          "p90": 42
         },
         "mcScoreDistOpp": {
           "p10": 10,
-          "p25": 16,
+          "p25": 15,
           "p50": 21,
-          "p75": 29,
-          "p90": 36
+          "p75": 28,
+          "p90": 37
         },
         "preseasonWinProb": 56,
         "preseasonProjUt": 27,
@@ -21999,7 +21999,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -2.2,
         "overUnder": 53.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 59,
+        "baseWinProb": 60,
         "projScoreUt": 29,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -22009,15 +22009,15 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 52.6,
-        "mcOverProb": 49.0,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcCoverProb": 53.5,
+        "mcOverProb": 50.4,
+        "mcRecommendedAts": "Utah -2.2",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 14,
           "p25": 21,
           "p50": 28,
-          "p75": 35,
+          "p75": 37,
           "p90": 44
         },
         "mcScoreDistOpp": {
@@ -22025,7 +22025,7 @@ const TEAMS_DATABASE = {
           "p25": 19,
           "p50": 25,
           "p75": 32,
-          "p90": 39
+          "p90": 38
         },
         "preseasonWinProb": 89,
         "preseasonProjUt": 35,
@@ -22083,21 +22083,21 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 48.0,
-        "mcOverProb": 46.3,
+        "mcCoverProb": 46.7,
+        "mcOverProb": 46.0,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "UNDER 48.5",
         "mcScoreDistUt": {
-          "p10": 19,
+          "p10": 17,
           "p25": 24,
-          "p50": 32,
+          "p50": 31,
           "p75": 40,
-          "p90": 48
+          "p90": 45
         },
         "mcScoreDistOpp": {
           "p10": 6,
           "p25": 10,
-          "p50": 15,
+          "p50": 14,
           "p75": 21,
           "p90": 27
         },
@@ -22172,7 +22172,7 @@ const TEAMS_DATABASE = {
     "stadium": "Kinnick Stadium",
     "stadiumCapacity": "69,250",
     "stadiumCity": "Iowa City, IA",
-    "baseSpRating": 4.5,
+    "baseSpRating": 4.6,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2294.png",
     "colors": {
       "primary": "#FFE100",
@@ -22797,7 +22797,7 @@ const TEAMS_DATABASE = {
         "oddsProvider": "DraftKings",
         "baseWinProb": 40,
         "projScoreUt": 18,
-        "projScoreOpp": 22,
+        "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Northwestern Wildcats rushing attack.",
@@ -22805,8 +22805,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 46.1,
-        "mcOverProb": 35.0,
+        "mcCoverProb": 46.0,
+        "mcOverProb": 33.0,
         "mcRecommendedAts": "NU -2.5",
         "mcRecommendedOu": "UNDER 44.5",
         "mcScoreDistUt": {
@@ -22814,12 +22814,12 @@ const TEAMS_DATABASE = {
           "p25": 12,
           "p50": 17,
           "p75": 24,
-          "p90": 31
+          "p90": 30
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 14,
-          "p50": 21,
+          "p50": 20,
           "p75": 27,
           "p90": 34
         },
@@ -22866,12 +22866,12 @@ const TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -10.7,
+        "vegasSpread": -10.8,
         "overUnder": 44.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 73,
+        "baseWinProb": 72,
         "projScoreUt": 25,
-        "projScoreOpp": 18,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Purdue Boilermakers rushing attack.",
@@ -22879,14 +22879,14 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 38.9,
-        "mcOverProb": 40.9,
-        "mcRecommendedAts": "PUR +10.7",
+        "mcCoverProb": 40.6,
+        "mcOverProb": 42.1,
+        "mcRecommendedAts": "PUR +10.8",
         "mcRecommendedOu": "UNDER 44.5",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 17,
-          "p50": 24,
+          "p25": 19,
+          "p50": 25,
           "p75": 31,
           "p90": 37
         },
@@ -22894,7 +22894,7 @@ const TEAMS_DATABASE = {
           "p10": 6,
           "p25": 10,
           "p50": 17,
-          "p75": 24,
+          "p75": 23,
           "p90": 30
         },
         "preseasonWinProb": 92,
@@ -22940,12 +22940,12 @@ const TEAMS_DATABASE = {
         "location": "Champaign, IL",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 8.4,
-        "overUnder": 47.5,
+        "vegasSpread": 8.3,
+        "overUnder": 46.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 32,
+        "baseWinProb": 33,
         "projScoreUt": 20,
-        "projScoreOpp": 27,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Illinois Fighting Illini rushing attack.",
@@ -22953,20 +22953,20 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 56.7,
-        "mcOverProb": 46.4,
-        "mcRecommendedAts": "Iowa +8.4",
+        "mcCoverProb": 57.0,
+        "mcOverProb": 48.8,
+        "mcRecommendedAts": "Iowa +8.3",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 9,
           "p25": 13,
           "p50": 20,
-          "p75": 27,
-          "p90": 33
+          "p75": 26,
+          "p90": 32
         },
         "mcScoreDistOpp": {
           "p10": 13,
-          "p25": 20,
+          "p25": 19,
           "p50": 27,
           "p75": 34,
           "p90": 41
@@ -23014,7 +23014,7 @@ const TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 2.4,
+        "vegasSpread": 2.3,
         "overUnder": 43.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 42,
@@ -23027,8 +23027,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 49.0,
-        "mcOverProb": 45.6,
+        "mcCoverProb": 48.9,
+        "mcOverProb": 44.8,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 43.5",
         "mcScoreDistUt": {
@@ -23042,8 +23042,8 @@ const TEAMS_DATABASE = {
           "p10": 10,
           "p25": 14,
           "p50": 21,
-          "p75": 29,
-          "p90": 37
+          "p75": 28,
+          "p90": 35
         },
         "preseasonWinProb": 92,
         "preseasonProjUt": 36,
@@ -23092,7 +23092,7 @@ const TEAMS_DATABASE = {
       ]
     },
     "offenseRating": 26.3,
-    "defenseRating": 22.4,
+    "defenseRating": 22.3,
     "specialTeamsRating": 0.6
   },
   "missouri": {
@@ -23739,9 +23739,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": 2.5,
         "overUnder": 43.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 44,
+        "baseWinProb": 43,
         "projScoreUt": 20,
-        "projScoreOpp": 22,
+        "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Missouri quarterback play vs Texas Longhorns secondary.",
@@ -23749,12 +23749,12 @@ const TEAMS_DATABASE = {
         },
         "oppId": "texas",
         "is_tracked": true,
-        "mcCoverProb": 48.4,
-        "mcOverProb": 47.6,
+        "mcCoverProb": 47.5,
+        "mcOverProb": 46.8,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 7,
+          "p10": 9,
           "p25": 13,
           "p50": 20,
           "p75": 27,
@@ -23762,10 +23762,10 @@ const TEAMS_DATABASE = {
         },
         "mcScoreDistOpp": {
           "p10": 10,
-          "p25": 15,
-          "p50": 21,
-          "p75": 29,
-          "p90": 36
+          "p25": 16,
+          "p50": 23,
+          "p75": 30,
+          "p90": 37
         },
         "preseasonWinProb": 33,
         "preseasonProjUt": 23,
@@ -23810,12 +23810,12 @@ const TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 12.8,
+        "vegasSpread": 12.0,
         "overUnder": 42.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 12,
+        "baseWinProb": 13,
         "projScoreUt": 13,
-        "projScoreOpp": 29,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Missouri quarterback play vs Georgia Bulldogs secondary.",
@@ -23823,8 +23823,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": "georgia",
         "is_tracked": true,
-        "mcCoverProb": 47.1,
-        "mcOverProb": 48.0,
+        "mcCoverProb": 48.2,
+        "mcOverProb": 47.7,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -23839,7 +23839,7 @@ const TEAMS_DATABASE = {
           "p25": 21,
           "p50": 28,
           "p75": 36,
-          "p90": 43
+          "p90": 42
         },
         "preseasonWinProb": 18,
         "preseasonProjUt": 20,
@@ -23884,12 +23884,12 @@ const TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -3.2,
+        "vegasSpread": -4.0,
         "overUnder": 47.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 62,
+        "baseWinProb": 64,
         "projScoreUt": 26,
-        "projScoreOpp": 22,
+        "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Missouri front seven vs Kentucky Wildcats rushing attack.",
@@ -23897,13 +23897,13 @@ const TEAMS_DATABASE = {
         },
         "oppId": "kentucky",
         "is_tracked": true,
-        "mcCoverProb": 49.6,
-        "mcOverProb": 48.9,
+        "mcCoverProb": 49.2,
+        "mcOverProb": 48.7,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 20,
+          "p25": 19,
           "p50": 26,
           "p75": 33,
           "p90": 40
@@ -23958,12 +23958,12 @@ const TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -8.8,
+        "vegasSpread": -9.6,
         "overUnder": 42.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 81,
+        "baseWinProb": 82,
         "projScoreUt": 26,
-        "projScoreOpp": 15,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Missouri quarterback play vs Oklahoma Sooners secondary.",
@@ -23971,15 +23971,15 @@ const TEAMS_DATABASE = {
         },
         "oppId": "oklahoma",
         "is_tracked": true,
-        "mcCoverProb": 48.9,
-        "mcOverProb": 46.2,
+        "mcCoverProb": 48.5,
+        "mcOverProb": 43.5,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "UNDER 42.5",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 20,
-          "p50": 27,
-          "p75": 34,
+          "p25": 19,
+          "p50": 26,
+          "p75": 33,
           "p90": 40
         },
         "mcScoreDistOpp": {
@@ -24683,7 +24683,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -9.5,
         "overUnder": 43.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 59,
+        "baseWinProb": 61,
         "projScoreUt": 28,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -24693,15 +24693,15 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 31.8,
-        "mcOverProb": 70.8,
+        "mcCoverProb": 33.4,
+        "mcOverProb": 69.2,
         "mcRecommendedAts": "TCU +9.5",
         "mcRecommendedOu": "OVER 43.5",
         "mcScoreDistUt": {
           "p10": 14,
           "p25": 20,
           "p50": 27,
-          "p75": 34,
+          "p75": 35,
           "p90": 41
         },
         "mcScoreDistOpp": {
@@ -24754,12 +24754,12 @@ const TEAMS_DATABASE = {
         "location": "Tucson, AZ",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.6,
+        "vegasSpread": 4.8,
         "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 32,
+        "baseWinProb": 34,
         "projScoreUt": 22,
-        "projScoreOpp": 29,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona quarterback play vs Utah Utes secondary.",
@@ -24767,23 +24767,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "utah",
         "is_tracked": true,
-        "mcCoverProb": 53.5,
-        "mcOverProb": 46.8,
+        "mcCoverProb": 56.4,
+        "mcOverProb": 43.7,
         "mcRecommendedAts": "Arizona +7.2",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "UNDER 51.5",
         "mcScoreDistUt": {
           "p10": 10,
-          "p25": 16,
+          "p25": 15,
           "p50": 21,
-          "p75": 29,
-          "p90": 36
+          "p75": 28,
+          "p90": 37
         },
         "mcScoreDistOpp": {
           "p10": 14,
-          "p25": 20,
+          "p25": 21,
           "p50": 28,
-          "p75": 36,
-          "p90": 44
+          "p75": 35,
+          "p90": 42
         },
         "preseasonWinProb": 44,
         "preseasonProjUt": 25,
@@ -24831,9 +24831,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": 8.3,
         "overUnder": 57.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 33,
+        "baseWinProb": 31,
         "projScoreUt": 24,
-        "projScoreOpp": 30,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona front seven vs Kansas State Wildcats rushing attack.",
@@ -24841,21 +24841,21 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 56.6,
-        "mcOverProb": 42.4,
+        "mcCoverProb": 53.8,
+        "mcOverProb": 42.8,
         "mcRecommendedAts": "Arizona +8.3",
         "mcRecommendedOu": "UNDER 57.5",
         "mcScoreDistUt": {
-          "p10": 12,
+          "p10": 10,
           "p25": 17,
-          "p50": 24,
+          "p50": 23,
           "p75": 31,
           "p90": 38
         },
         "mcScoreDistOpp": {
           "p10": 17,
-          "p25": 23,
-          "p50": 30,
+          "p25": 24,
+          "p50": 31,
           "p75": 38,
           "p90": 45
         },
@@ -24916,14 +24916,14 @@ const TEAMS_DATABASE = {
         "oppId": "arizonastate",
         "is_tracked": true,
         "rivalryName": "TERRITORIAL CUP",
-        "mcCoverProb": 47.5,
-        "mcOverProb": 41.7,
+        "mcCoverProb": 48.6,
+        "mcOverProb": 42.4,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 55.5",
         "mcScoreDistUt": {
           "p10": 20,
           "p25": 26,
-          "p50": 33,
+          "p50": 34,
           "p75": 41,
           "p90": 48
         },
@@ -25005,7 +25005,7 @@ const TEAMS_DATABASE = {
     "stadium": "Husky Stadium",
     "stadiumCapacity": "70,138",
     "stadiumCity": "Seattle, WA",
-    "baseSpRating": 0.1,
+    "baseSpRating": 0.2,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/264.png",
     "colors": {
       "primary": "#4B2E83",
@@ -25629,8 +25629,8 @@ const TEAMS_DATABASE = {
         "overUnder": 44.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 72,
-        "projScoreUt": 27,
-        "projScoreOpp": 19,
+        "projScoreUt": 28,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Washington quarterback play vs Penn State Nittany Lions secondary.",
@@ -25638,14 +25638,14 @@ const TEAMS_DATABASE = {
         },
         "oppId": "pennstate",
         "is_tracked": true,
-        "mcCoverProb": 67.4,
-        "mcOverProb": 53.3,
+        "mcCoverProb": 66.6,
+        "mcOverProb": 54.7,
         "mcRecommendedAts": "Washington -2.5",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "OVER 44.5",
         "mcScoreDistUt": {
           "p10": 16,
           "p25": 20,
-          "p50": 26,
+          "p50": 27,
           "p75": 34,
           "p90": 41
         },
@@ -25653,8 +25653,8 @@ const TEAMS_DATABASE = {
           "p10": 7,
           "p25": 13,
           "p50": 20,
-          "p75": 26,
-          "p90": 31
+          "p75": 27,
+          "p90": 34
         },
         "preseasonWinProb": 65,
         "preseasonProjUt": 29,
@@ -25699,10 +25699,10 @@ const TEAMS_DATABASE = {
         "location": "East Lansing, MI",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 4.6,
+        "vegasSpread": 4.5,
         "overUnder": 49.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 41,
+        "baseWinProb": 40,
         "projScoreUt": 22,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -25712,9 +25712,9 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 53.5,
-        "mcOverProb": 44.4,
-        "mcRecommendedAts": "Washington +4.6",
+        "mcCoverProb": 53.2,
+        "mcOverProb": 45.0,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 49.5",
         "mcScoreDistUt": {
           "p10": 10,
@@ -25774,9 +25774,9 @@ const TEAMS_DATABASE = {
         "isMarquee": true,
         "isConf": true,
         "vegasSpread": 6.4,
-        "overUnder": 45.5,
+        "overUnder": 44.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 28,
+        "baseWinProb": 29,
         "projScoreUt": 18,
         "projScoreOpp": 26,
         "scoutReport": {
@@ -25786,13 +25786,13 @@ const TEAMS_DATABASE = {
         },
         "oppId": "indiana",
         "is_tracked": true,
-        "mcCoverProb": 56.3,
-        "mcOverProb": 45.1,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 45.5",
+        "mcCoverProb": 54.6,
+        "mcOverProb": 45.6,
+        "mcRecommendedAts": "Washington +9.5",
+        "mcRecommendedOu": "UNDER 44.5",
         "mcScoreDistUt": {
           "p10": 7,
-          "p25": 13,
+          "p25": 10,
           "p50": 17,
           "p75": 24,
           "p90": 30
@@ -25800,7 +25800,7 @@ const TEAMS_DATABASE = {
         "mcScoreDistOpp": {
           "p10": 13,
           "p25": 17,
-          "p50": 26,
+          "p50": 25,
           "p75": 33,
           "p90": 40
         },
@@ -25847,12 +25847,12 @@ const TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 4.0,
-        "overUnder": 45.5,
+        "vegasSpread": 8.0,
+        "overUnder": 46.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 33,
-        "projScoreUt": 20,
-        "projScoreOpp": 25,
+        "baseWinProb": 23,
+        "projScoreUt": 18,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Washington quarterback play vs Oregon Ducks secondary.",
@@ -25861,23 +25861,23 @@ const TEAMS_DATABASE = {
         "oppId": "oregon",
         "is_tracked": true,
         "rivalryName": "PACIFIC NORTHWEST CLASH",
-        "mcCoverProb": 52.4,
-        "mcOverProb": 47.3,
+        "mcCoverProb": 49.6,
+        "mcOverProb": 45.6,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "UNDER 46.5",
         "mcScoreDistUt": {
-          "p10": 9,
-          "p25": 13,
-          "p50": 19,
-          "p75": 26,
-          "p90": 31
+          "p10": 7,
+          "p25": 12,
+          "p50": 17,
+          "p75": 24,
+          "p90": 30
         },
         "mcScoreDistOpp": {
-          "p10": 13,
-          "p25": 19,
-          "p50": 25,
-          "p75": 31,
-          "p90": 38
+          "p10": 15,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
+          "p90": 40
         },
         "preseasonWinProb": 19,
         "preseasonProjUt": 20,
@@ -25925,7 +25925,7 @@ const TEAMS_DATABASE = {
         19
       ]
     },
-    "offenseRating": 25.8,
+    "offenseRating": 25.9,
     "defenseRating": 25.4,
     "specialTeamsRating": -0.3
   },
@@ -26573,9 +26573,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": -11.5,
         "overUnder": 62.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 65,
+        "baseWinProb": 66,
         "projScoreUt": 30,
-        "projScoreOpp": 25,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Houston front seven vs Cincinnati Bearcats rushing attack.",
@@ -26583,8 +26583,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 34.0,
-        "mcOverProb": 30.0,
+        "mcCoverProb": 33.2,
+        "mcOverProb": 28.3,
         "mcRecommendedAts": "CIN +11.5",
         "mcRecommendedOu": "UNDER 62.5",
         "mcScoreDistUt": {
@@ -26595,7 +26595,7 @@ const TEAMS_DATABASE = {
           "p90": 44
         },
         "mcScoreDistOpp": {
-          "p10": 10,
+          "p10": 12,
           "p25": 17,
           "p50": 24,
           "p75": 31,
@@ -26644,12 +26644,12 @@ const TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -15.2,
+        "vegasSpread": -14.4,
         "overUnder": 49.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 92,
         "projScoreUt": 33,
-        "projScoreOpp": 14,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Houston quarterback play vs Colorado Buffaloes secondary.",
@@ -26657,8 +26657,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": "colorado",
         "is_tracked": true,
-        "mcCoverProb": 51.0,
-        "mcOverProb": 44.0,
+        "mcCoverProb": 49.9,
+        "mcOverProb": 45.4,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 49.5",
         "mcScoreDistUt": {
@@ -26669,11 +26669,11 @@ const TEAMS_DATABASE = {
           "p90": 47
         },
         "mcScoreDistOpp": {
-          "p10": 6,
+          "p10": 3,
           "p25": 9,
           "p50": 14,
           "p75": 20,
-          "p90": 26
+          "p90": 27
         },
         "preseasonWinProb": 49,
         "preseasonProjUt": 26,
@@ -26721,7 +26721,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -4.6,
         "overUnder": 49.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 60,
+        "baseWinProb": 61,
         "projScoreUt": 26,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -26732,7 +26732,7 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "mcCoverProb": 48.4,
-        "mcOverProb": 44.8,
+        "mcOverProb": 45.0,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 49.5",
         "mcScoreDistUt": {
@@ -26740,12 +26740,12 @@ const TEAMS_DATABASE = {
           "p25": 19,
           "p50": 26,
           "p75": 33,
-          "p90": 40
+          "p90": 39
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 16,
-          "p50": 22,
+          "p50": 21,
           "p75": 28,
           "p90": 34
         },
@@ -26795,7 +26795,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -4.0,
         "overUnder": 59.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 64,
+        "baseWinProb": 63,
         "projScoreUt": 31,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -26805,20 +26805,20 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 51.1,
-        "mcOverProb": 44.2,
+        "mcCoverProb": 49.8,
+        "mcOverProb": 44.3,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 59.5",
         "mcScoreDistUt": {
-          "p10": 17,
+          "p10": 18,
           "p25": 23,
           "p50": 30,
-          "p75": 38,
-          "p90": 44
+          "p75": 37,
+          "p90": 45
         },
         "mcScoreDistOpp": {
-          "p10": 15,
-          "p25": 20,
+          "p10": 13,
+          "p25": 19,
           "p50": 26,
           "p75": 33,
           "p90": 40
@@ -27517,9 +27517,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": -14.5,
         "overUnder": 60.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 62,
+        "baseWinProb": 63,
         "projScoreUt": 32,
-        "projScoreOpp": 28,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Louisville front seven vs Georgia Tech Yellow Jackets rushing attack.",
@@ -27527,22 +27527,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 24.0,
-        "mcOverProb": 45.5,
+        "mcCoverProb": 24.6,
+        "mcOverProb": 43.6,
         "mcRecommendedAts": "GT +14.5",
         "mcRecommendedOu": "UNDER 60.5",
         "mcScoreDistUt": {
-          "p10": 19,
+          "p10": 18,
           "p25": 24,
           "p50": 31,
           "p75": 39,
-          "p90": 47
+          "p90": 45
         },
         "mcScoreDistOpp": {
           "p10": 16,
-          "p25": 21,
-          "p50": 27,
-          "p75": 34,
+          "p25": 20,
+          "p50": 26,
+          "p75": 33,
           "p90": 40
         },
         "preseasonWinProb": 84,
@@ -27601,23 +27601,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 48.0,
-        "mcOverProb": 47.0,
+        "mcCoverProb": 47.0,
+        "mcOverProb": 47.5,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 13,
           "p25": 19,
           "p50": 26,
-          "p75": 33,
+          "p75": 34,
           "p90": 40
         },
         "mcScoreDistOpp": {
           "p10": 13,
           "p25": 19,
-          "p50": 24,
+          "p50": 25,
           "p75": 31,
-          "p90": 38
+          "p90": 37
         },
         "preseasonWinProb": 84,
         "preseasonProjUt": 33,
@@ -27665,9 +27665,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": -3.9,
         "overUnder": 59.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 56,
-        "projScoreUt": 32,
-        "projScoreOpp": 29,
+        "baseWinProb": 58,
+        "projScoreUt": 31,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Louisville front seven vs Pittsburgh Panthers rushing attack.",
@@ -27675,12 +27675,12 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 48.2,
-        "mcOverProb": 52.8,
+        "mcCoverProb": 48.5,
+        "mcOverProb": 50.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 19,
+          "p10": 17,
           "p25": 24,
           "p50": 31,
           "p75": 38,
@@ -27689,8 +27689,8 @@ const TEAMS_DATABASE = {
         "mcScoreDistOpp": {
           "p10": 14,
           "p25": 21,
-          "p50": 28,
-          "p75": 37,
+          "p50": 27,
+          "p75": 36,
           "p90": 44
         },
         "preseasonWinProb": 91,
@@ -27736,11 +27736,11 @@ const TEAMS_DATABASE = {
         "location": "Lexington, KY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": 6.4,
+        "vegasSpread": 7.2,
         "overUnder": 60.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 29,
-        "projScoreUt": 27,
+        "projScoreUt": 26,
         "projScoreOpp": 35,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -27749,22 +27749,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": "kentucky",
         "is_tracked": true,
-        "mcCoverProb": 43.6,
-        "mcOverProb": 51.6,
+        "mcCoverProb": 42.3,
+        "mcOverProb": 50.4,
         "mcRecommendedAts": "UK -5.9",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 20,
+          "p25": 19,
           "p50": 26,
           "p75": 34,
-          "p90": 40
+          "p90": 41
         },
         "mcScoreDistOpp": {
           "p10": 20,
           "p25": 27,
           "p50": 34,
-          "p75": 42,
+          "p75": 43,
           "p90": 49
         },
         "preseasonWinProb": 84,
@@ -28463,8 +28463,8 @@ const TEAMS_DATABASE = {
         "vegasSpread": 3.0,
         "overUnder": 49.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 33,
-        "projScoreUt": 23,
+        "baseWinProb": 32,
+        "projScoreUt": 22,
         "projScoreOpp": 29,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -28473,23 +28473,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "arizonastate",
         "is_tracked": true,
-        "mcCoverProb": 42.5,
-        "mcOverProb": 54.6,
+        "mcCoverProb": 40.9,
+        "mcOverProb": 54.3,
         "mcRecommendedAts": "ASU -3.0",
         "mcRecommendedOu": "OVER 49.5",
         "mcScoreDistUt": {
           "p10": 10,
           "p25": 16,
-          "p50": 23,
-          "p75": 30,
-          "p90": 35
+          "p50": 22,
+          "p75": 29,
+          "p90": 36
         },
         "mcScoreDistOpp": {
-          "p10": 14,
+          "p10": 16,
           "p25": 21,
-          "p50": 28,
-          "p75": 37,
-          "p90": 44
+          "p50": 29,
+          "p75": 36,
+          "p90": 43
         },
         "preseasonWinProb": 45,
         "preseasonProjUt": 25,
@@ -28534,11 +28534,11 @@ const TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 15.2,
+        "vegasSpread": 14.4,
         "overUnder": 49.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 8,
-        "projScoreUt": 14,
+        "projScoreUt": 15,
         "projScoreOpp": 33,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -28547,16 +28547,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": "houston",
         "is_tracked": true,
-        "mcCoverProb": 49.0,
-        "mcOverProb": 44.0,
+        "mcCoverProb": 50.1,
+        "mcOverProb": 45.4,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 49.5",
         "mcScoreDistUt": {
-          "p10": 6,
+          "p10": 3,
           "p25": 9,
           "p50": 14,
           "p75": 20,
-          "p90": 26
+          "p90": 27
         },
         "mcScoreDistOpp": {
           "p10": 20,
@@ -28611,9 +28611,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": 20.8,
         "overUnder": 53.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 6,
+        "baseWinProb": 5,
         "projScoreUt": 15,
-        "projScoreOpp": 36,
+        "projScoreOpp": 37,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs Cincinnati Bearcats rushing attack.",
@@ -28621,9 +28621,9 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 46.9,
-        "mcOverProb": 42.2,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcCoverProb": 45.6,
+        "mcOverProb": 42.8,
+        "mcRecommendedAts": "CIN -20.8",
         "mcRecommendedOu": "UNDER 53.5",
         "mcScoreDistUt": {
           "p10": 6,
@@ -28634,7 +28634,7 @@ const TEAMS_DATABASE = {
         },
         "mcScoreDistOpp": {
           "p10": 23,
-          "p25": 29,
+          "p25": 30,
           "p50": 37,
           "p75": 44,
           "p90": 51
@@ -28695,8 +28695,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 42.8,
-        "mcOverProb": 41.5,
+        "mcCoverProb": 43.4,
+        "mcOverProb": 43.1,
         "mcRecommendedAts": "UCF -15.0",
         "mcRecommendedOu": "UNDER 44.5",
         "mcScoreDistUt": {
@@ -28708,7 +28708,7 @@ const TEAMS_DATABASE = {
         },
         "mcScoreDistOpp": {
           "p10": 16,
-          "p25": 22,
+          "p25": 23,
           "p50": 30,
           "p75": 37,
           "p90": 44
@@ -29410,9 +29410,9 @@ const TEAMS_DATABASE = {
         "vegasSpread": -3.0,
         "overUnder": 49.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 67,
+        "baseWinProb": 68,
         "projScoreUt": 29,
-        "projScoreOpp": 23,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Arizona State quarterback play vs Colorado Buffaloes secondary.",
@@ -29420,23 +29420,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "colorado",
         "is_tracked": true,
-        "mcCoverProb": 57.5,
-        "mcOverProb": 54.6,
+        "mcCoverProb": 59.1,
+        "mcOverProb": 54.3,
         "mcRecommendedAts": "Arizona State -3.0",
         "mcRecommendedOu": "OVER 49.5",
         "mcScoreDistUt": {
-          "p10": 14,
+          "p10": 16,
           "p25": 21,
-          "p50": 28,
-          "p75": 37,
-          "p90": 44
+          "p50": 29,
+          "p75": 36,
+          "p90": 43
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 16,
-          "p50": 23,
-          "p75": 30,
-          "p90": 35
+          "p50": 22,
+          "p75": 29,
+          "p90": 36
         },
         "preseasonWinProb": 55,
         "preseasonProjUt": 27,
@@ -29484,7 +29484,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 13.0,
         "overUnder": 47.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 14,
+        "baseWinProb": 15,
         "projScoreUt": 16,
         "projScoreOpp": 31,
         "scoutReport": {
@@ -29494,19 +29494,19 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 41.9,
+        "mcCoverProb": 43.6,
         "mcOverProb": 47.3,
-        "mcRecommendedAts": "UCF -13.0",
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 6,
           "p25": 10,
-          "p50": 16,
-          "p75": 22,
+          "p50": 15,
+          "p75": 21,
           "p90": 28
         },
         "mcScoreDistOpp": {
-          "p10": 17,
+          "p10": 16,
           "p25": 23,
           "p50": 31,
           "p75": 38,
@@ -29559,7 +29559,7 @@ const TEAMS_DATABASE = {
         "overUnder": 54.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 15,
-        "projScoreUt": 19,
+        "projScoreUt": 20,
         "projScoreOpp": 34,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -29568,16 +29568,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 45.8,
-        "mcOverProb": 45.0,
-        "mcRecommendedAts": "OKST -13.7",
-        "mcRecommendedOu": "UNDER 54.5",
+        "mcCoverProb": 47.1,
+        "mcOverProb": 46.4,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 7,
           "p25": 13,
-          "p50": 19,
-          "p75": 26,
-          "p90": 31
+          "p50": 20,
+          "p75": 27,
+          "p90": 33
         },
         "mcScoreDistOpp": {
           "p10": 20,
@@ -29643,8 +29643,8 @@ const TEAMS_DATABASE = {
         "oppId": "arizona",
         "is_tracked": true,
         "rivalryName": "TERRITORIAL CUP",
-        "mcCoverProb": 52.5,
-        "mcOverProb": 41.7,
+        "mcCoverProb": 51.4,
+        "mcOverProb": 42.4,
         "mcRecommendedAts": "ARIZ -14.7",
         "mcRecommendedOu": "UNDER 55.5",
         "mcScoreDistUt": {
@@ -29657,7 +29657,7 @@ const TEAMS_DATABASE = {
         "mcScoreDistOpp": {
           "p10": 20,
           "p25": 26,
-          "p50": 33,
+          "p50": 34,
           "p75": 41,
           "p90": 48
         },
@@ -29732,7 +29732,7 @@ const TEAMS_DATABASE = {
     "stadium": "Rose Bowl",
     "stadiumCapacity": "89,702",
     "stadiumCity": "Pasadena, CA",
-    "baseSpRating": 5.5,
+    "baseSpRating": 6.2,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/26.png",
     "colors": {
       "primary": "#2774AE",
@@ -30121,7 +30121,7 @@ const TEAMS_DATABASE = {
         "overUnder": 39.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 54,
-        "projScoreUt": 18,
+        "projScoreUt": 19,
         "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 10 showdown at Huntington Bank Stadium.",
@@ -30131,21 +30131,21 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "isFinal": false,
-        "mcCoverProb": 37.4,
-        "mcOverProb": 34.7,
+        "mcCoverProb": 39.6,
+        "mcOverProb": 35.8,
         "mcRecommendedAts": "MINN +5.5",
         "mcRecommendedOu": "UNDER 39.5",
         "mcScoreDistUt": {
-          "p10": 6,
-          "p25": 10,
+          "p10": 7,
+          "p25": 13,
           "p50": 17,
           "p75": 24,
-          "p90": 30
+          "p90": 31
         },
         "mcScoreDistOpp": {
           "p10": 6,
           "p25": 10,
-          "p50": 16,
+          "p50": 17,
           "p75": 23,
           "p90": 28
         },
@@ -30188,12 +30188,12 @@ const TEAMS_DATABASE = {
         "location": "Pasadena, CA",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 2.7,
+        "vegasSpread": -2.0,
         "overUnder": 45.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 49,
-        "projScoreUt": 22,
-        "projScoreOpp": 23,
+        "baseWinProb": 54,
+        "projScoreUt": 24,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 11 showdown at Rose Bowl.",
           "keyMatchup": "UCLA line of scrimmage vs Illinois Fighting Illini front seven.",
@@ -30202,23 +30202,23 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "isFinal": false,
-        "mcCoverProb": 54.1,
-        "mcOverProb": 47.4,
-        "mcRecommendedAts": "UCLA +2.7",
+        "mcCoverProb": 57.0,
+        "mcOverProb": 49.7,
+        "mcRecommendedAts": "UCLA +2.0",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 10,
-          "p25": 16,
-          "p50": 22,
+          "p25": 17,
+          "p50": 24,
           "p75": 30,
-          "p90": 35
+          "p90": 37
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 14,
           "p50": 21,
-          "p75": 30,
-          "p90": 37
+          "p75": 28,
+          "p90": 35
         },
         "weather": {
           "temp": 66.3,
@@ -30259,11 +30259,11 @@ const TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.4,
+        "vegasSpread": -0.8,
         "overUnder": 31.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 52,
-        "projScoreUt": 18,
+        "baseWinProb": 54,
+        "projScoreUt": 16,
         "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 12 showdown at Michigan Stadium.",
@@ -30273,19 +30273,19 @@ const TEAMS_DATABASE = {
         "oppId": "michigan",
         "is_tracked": true,
         "isFinal": false,
-        "mcCoverProb": 53.7,
-        "mcOverProb": 44.2,
+        "mcCoverProb": 54.2,
+        "mcOverProb": 45.3,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 31.5",
         "mcScoreDistUt": {
-          "p10": 3,
+          "p10": 6,
           "p25": 10,
-          "p50": 14,
+          "p50": 16,
           "p75": 21,
-          "p90": 27
+          "p90": 28
         },
         "mcScoreDistOpp": {
-          "p10": 3,
+          "p10": 6,
           "p25": 9,
           "p50": 14,
           "p75": 20,
@@ -30334,11 +30334,11 @@ const TEAMS_DATABASE = {
         "location": "Pasadena, CA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.4,
-        "overUnder": 48.5,
+        "vegasSpread": -0.8,
+        "overUnder": 49.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 51,
-        "projScoreUt": 27,
+        "baseWinProb": 54,
+        "projScoreUt": 25,
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 13 showdown at Rose Bowl.",
@@ -30348,20 +30348,20 @@ const TEAMS_DATABASE = {
         "oppId": "usc",
         "is_tracked": true,
         "isFinal": false,
-        "mcCoverProb": 53.8,
-        "mcOverProb": 46.9,
-        "mcRecommendedAts": "UCLA +1.4",
+        "mcCoverProb": 54.0,
+        "mcOverProb": 46.6,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 12,
+          "p10": 13,
           "p25": 17,
           "p50": 24,
           "p75": 31,
-          "p90": 37
+          "p90": 38
         },
         "mcScoreDistOpp": {
           "p10": 10,
-          "p25": 17,
+          "p25": 16,
           "p50": 23,
           "p75": 30,
           "p90": 37
@@ -30391,15 +30391,15 @@ const TEAMS_DATABASE = {
         "preseasonSpread": 18.5
       }
     ],
-    "offenseRating": 25.1,
-    "defenseRating": 19.6,
+    "offenseRating": 25.7,
+    "defenseRating": 19.5,
     "specialTeamsRating": 0.0,
     "qbStatus": {
       "starterOut": "Nico Iamaleava",
       "replacement": "Ty Dieffenbach",
       "injuryWeek": 7,
       "status": "Out for Season (Torn ACL)",
-      "offDropPts": 6.5
+      "offDropPts": 5.5
     }
   },
   "kentucky": {
@@ -30774,7 +30774,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 6.5,
         "overUnder": 50.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 26,
+        "baseWinProb": 27,
         "projScoreUt": 22,
         "projScoreOpp": 32,
         "scoutReport": {
@@ -30785,8 +30785,8 @@ const TEAMS_DATABASE = {
         "oppId": "tennessee",
         "is_tracked": true,
         "isFinal": false,
-        "mcCoverProb": 41.7,
-        "mcOverProb": 58.7,
+        "mcCoverProb": 42.6,
+        "mcOverProb": 57.1,
         "mcRecommendedAts": "TENN -6.5",
         "mcRecommendedOu": "OVER 50.5",
         "mcScoreDistUt": {
@@ -30800,8 +30800,8 @@ const TEAMS_DATABASE = {
           "p10": 17,
           "p25": 24,
           "p50": 31,
-          "p75": 38,
-          "p90": 46
+          "p75": 40,
+          "p90": 47
         },
         "weather": {
           "temp": 62.7,
@@ -30850,8 +30850,8 @@ const TEAMS_DATABASE = {
         "overUnder": 48.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 49,
-        "projScoreUt": 23,
-        "projScoreOpp": 24,
+        "projScoreUt": 24,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 11 showdown at Kroger Field.",
           "keyMatchup": "Kentucky line of scrimmage vs Florida Gators front seven.",
@@ -30860,15 +30860,15 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "isFinal": false,
-        "mcCoverProb": 50.6,
-        "mcOverProb": 43.5,
+        "mcCoverProb": 50.8,
+        "mcOverProb": 45.1,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "UNDER 48.5",
         "mcScoreDistUt": {
           "p10": 10,
-          "p25": 16,
+          "p25": 17,
           "p50": 23,
-          "p75": 30,
+          "p75": 31,
           "p90": 38
         },
         "mcScoreDistOpp": {
@@ -30917,11 +30917,11 @@ const TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 3.2,
+        "vegasSpread": 4.0,
         "overUnder": 47.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 38,
-        "projScoreUt": 22,
+        "baseWinProb": 36,
+        "projScoreUt": 21,
         "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 12 showdown at Memorial Stadium.",
@@ -30931,8 +30931,8 @@ const TEAMS_DATABASE = {
         "oppId": "missouri",
         "is_tracked": true,
         "isFinal": false,
-        "mcCoverProb": 50.4,
-        "mcOverProb": 48.9,
+        "mcCoverProb": 50.8,
+        "mcOverProb": 48.7,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -30944,7 +30944,7 @@ const TEAMS_DATABASE = {
         },
         "mcScoreDistOpp": {
           "p10": 13,
-          "p25": 20,
+          "p25": 19,
           "p50": 26,
           "p75": 33,
           "p90": 40
@@ -30992,12 +30992,12 @@ const TEAMS_DATABASE = {
         "location": "Lexington, KY",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": -6.4,
+        "vegasSpread": -7.2,
         "overUnder": 60.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 71,
         "projScoreUt": 35,
-        "projScoreOpp": 27,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 13 showdown at Kroger Field.",
           "keyMatchup": "Kentucky line of scrimmage vs Louisville Cardinals front seven.",
@@ -31006,23 +31006,23 @@ const TEAMS_DATABASE = {
         "oppId": "louisville",
         "is_tracked": true,
         "isFinal": false,
-        "mcCoverProb": 56.4,
-        "mcOverProb": 51.6,
+        "mcCoverProb": 57.7,
+        "mcOverProb": 50.4,
         "mcRecommendedAts": "Kentucky -5.9",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 20,
           "p25": 27,
           "p50": 34,
-          "p75": 42,
+          "p75": 43,
           "p90": 49
         },
         "mcScoreDistOpp": {
           "p10": 13,
-          "p25": 20,
+          "p25": 19,
           "p50": 26,
           "p75": 34,
-          "p90": 40
+          "p90": 41
         },
         "weather": {
           "temp": 54.0,
@@ -31469,23 +31469,23 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "isFinal": false,
-        "mcCoverProb": 79.1,
-        "mcOverProb": 51.6,
+        "mcCoverProb": 79.5,
+        "mcOverProb": 50.1,
         "mcRecommendedAts": "Wake Forest -34.9",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 35,
           "p25": 41,
           "p50": 48,
-          "p75": 57,
-          "p90": 63
+          "p75": 56,
+          "p90": 62
         },
         "mcScoreDistOpp": {
           "p10": 0,
           "p25": 0,
           "p50": 3,
           "p75": 7,
-          "p90": 10
+          "p90": 13
         },
         "weather": {
           "temp": 66.6,
@@ -31540,8 +31540,8 @@ const TEAMS_DATABASE = {
         "oppId": "smu",
         "is_tracked": true,
         "isFinal": false,
-        "mcCoverProb": 52.1,
-        "mcOverProb": 50.4,
+        "mcCoverProb": 50.6,
+        "mcOverProb": 50.5,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -31555,8 +31555,8 @@ const TEAMS_DATABASE = {
           "p10": 10,
           "p25": 16,
           "p50": 22,
-          "p75": 29,
-          "p90": 35
+          "p75": 28,
+          "p90": 34
         },
         "weather": {
           "temp": 65.8,
@@ -31604,8 +31604,8 @@ const TEAMS_DATABASE = {
         "vegasSpread": -1.5,
         "overUnder": 50.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 58,
-        "projScoreUt": 27,
+        "baseWinProb": 54,
+        "projScoreUt": 26,
         "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 12 showdown at Bobby Dodd Stadium.",
@@ -31615,21 +31615,21 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "isFinal": false,
-        "mcCoverProb": 54.4,
-        "mcOverProb": 47.0,
-        "mcRecommendedAts": "Wake Forest -1.5",
+        "mcCoverProb": 50.8,
+        "mcOverProb": 48.0,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 14,
-          "p25": 20,
-          "p50": 27,
+          "p10": 13,
+          "p25": 19,
+          "p50": 26,
           "p75": 33,
           "p90": 40
         },
         "mcScoreDistOpp": {
           "p10": 13,
-          "p25": 17,
-          "p50": 23,
+          "p25": 18,
+          "p50": 24,
           "p75": 30,
           "p90": 36
         },
@@ -31675,7 +31675,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -5.8,
         "overUnder": 58.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 62,
+        "baseWinProb": 61,
         "projScoreUt": 31,
         "projScoreOpp": 27,
         "scoutReport": {
@@ -31686,19 +31686,19 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "isFinal": false,
-        "mcCoverProb": 46.4,
-        "mcOverProb": 47.1,
+        "mcCoverProb": 46.2,
+        "mcOverProb": 46.0,
         "mcRecommendedAts": "DUKE +5.8",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "UNDER 58.5",
         "mcScoreDistUt": {
           "p10": 17,
           "p25": 23,
           "p50": 30,
-          "p75": 38,
+          "p75": 37,
           "p90": 45
         },
         "mcScoreDistOpp": {
-          "p10": 13,
+          "p10": 14,
           "p25": 20,
           "p50": 26,
           "p75": 33,
