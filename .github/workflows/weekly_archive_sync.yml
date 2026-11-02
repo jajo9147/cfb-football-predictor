@@ -29,15 +29,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
-        uses: setup-python@v5
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Run Weekly Simulation Snapshot
         run: python3 scripts/generate_snapshot.py
-
-      - name: Settle Accuracy & Calculate Brier Score
-        run: python3 scripts/settle_week_accuracy.py
 
       - name: Retrain Model & Recalculate Future Projections
         env:
@@ -47,6 +44,11 @@ jobs:
           # Synchronize updated datasets to mobile web packages
           cp data/teams.js data/teams_v3.js ios/CFBProphet/www/data/ || true
           cp data/teams.js data/teams_v3.js android/app/src/main/assets/www/data/ || true
+          cp app.js styles.css index.html ios/CFBProphet/www/ || true
+          cp app.js styles.css index.html android/app/src/main/assets/www/ || true
+
+      - name: Settle Accuracy & Calculate Brier Score
+        run: python3 scripts/settle_week_accuracy.py
 
       - name: Run Production Pre-Flight Inspection
         run: python3 scripts/validate_prod_readiness.py
@@ -55,10 +57,11 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add archive/ data/ ios/ android/ index.html
+          git add archive/ data/ ios/ android/ index.html app.js styles.css
           if git diff --staged --quiet; then
             echo "No archive or model changes to commit"
           else
             git commit -m "chore(model): automated weekly retraining, calibration, and future projections update"
+            git pull --rebase origin main
             git push origin main
           fi

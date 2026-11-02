@@ -2544,7 +2544,12 @@ function isTeamMatch(t, curId) {
     'arizona': ['arizona', 'arizona wildcats', 'wildcats', 'ariz', 'ua', 'zona'],
     'washington': ['washington', 'washington huskies', 'huskies', 'wash', 'uw'],
     'houston': ['houston', 'houston cougars', 'cougars', 'hou', 'uh'],
-    'louisville': ['louisville', 'louisville cardinals', 'cardinals', 'lou', 'cards', 'uofl']
+    'louisville': ['louisville', 'louisville cardinals', 'cardinals', 'lou', 'cards', 'uofl'],
+    'colorado': ['colorado', 'colorado buffaloes', 'buffs', 'col', 'cu'],
+    'arizonastate': ['arizona state', 'arizona state sun devils', 'asu', 'sun devils'],
+    'ucla': ['ucla', 'ucla bruins', 'bruins'],
+    'kentucky': ['kentucky', 'kentucky wildcats', 'uk'],
+    'wakeforest': ['wake forest', 'wake forest demon deacons', 'wake', 'wf']
   };
 
   const curAliases = aliases[cur] || [cur];
@@ -5937,7 +5942,10 @@ const ESPN_TEAM_MAP = {
   '248': 'houston',
   '97': 'louisville',
   '38': 'colorado',
-  '9': 'arizonastate'
+  '9': 'arizonastate',
+  '26': 'ucla',
+  '96': 'kentucky',
+  '154': 'wakeforest'
 };
 
 const TEAM_TO_ESPN_ID = {
@@ -5971,7 +5979,10 @@ const TEAM_TO_ESPN_ID = {
   houston: '248',
   louisville: '97',
   colorado: '38',
-  arizonastate: '9'
+  arizonastate: '9',
+  ucla: '26',
+  kentucky: '96',
+  wakeforest: '154'
 };
 
 const LiveSyncEngine = {
@@ -5986,16 +5997,33 @@ const LiveSyncEngine = {
       const apPoll = data.rankings?.find(r => r.name?.includes('AP')) || data.rankings?.[0];
       if (!apPoll || !apPoll.ranks) return false;
 
+      const updatedTeamIds = new Set();
       apPoll.ranks.forEach(item => {
         const teamId = ESPN_TEAM_MAP[item.team?.id];
         if (teamId && TEAMS_DATABASE[teamId]) {
           const t = TEAMS_DATABASE[teamId];
           t.apRank = `#${item.current} AP`;
           if (item.points) {
-            t.apPoints = `${item.points.toLocaleString()} PTS`;
+            const firstVotes = item.firstPlaceVotes ? ` (${item.firstPlaceVotes} 1st)` : '';
+            t.apPoints = `${item.points.toLocaleString()} PTS${firstVotes}`;
           }
+          updatedTeamIds.add(teamId);
         }
       });
+
+      if (Array.isArray(apPoll.others)) {
+        apPoll.others.forEach(item => {
+          const teamId = ESPN_TEAM_MAP[item.team?.id];
+          if (teamId && TEAMS_DATABASE[teamId] && !updatedTeamIds.has(teamId)) {
+            const t = TEAMS_DATABASE[teamId];
+            t.apRank = 'RV';
+            if (item.points) {
+              t.apPoints = `${item.points.toLocaleString()} PTS`;
+            }
+            updatedTeamIds.add(teamId);
+          }
+        });
+      }
       return true;
     } catch (err) {
       console.warn('Live rankings sync notice (using baseline snapshot):', err);
@@ -6005,35 +6033,101 @@ const LiveSyncEngine = {
 
   async syncScoreboard() {
     try {
-      const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&limit=150');
-      if (!res.ok) return false;
-      const data = await res.json();
-      if (!data.events || data.events.length === 0) return false;
+      const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&limit=150';
+      const urlsToFetch = [baseUrl];
 
-      const findScheduledGame = (schedule, oppComp, isHome) => {
+      // Also check for any past schedule dates up through today that still have unfinalized games
+      const nowMs = Date.now();
+      const pastUnsettledDates = new Set();
+      Object.values(TEAMS_DATABASE || {}).forEach(t => {
+        (t.schedule || []).forEach(g => {
+          if (!g.isFinal && g.date) {
+            const gDate = new Date(g.date + ' 12:00:00');
+            if (!isNaN(gDate.getTime()) && gDate.getTime() <= nowMs + 12 * 3600 * 1000) {
+              const yyyy = gDate.getFullYear();
+              const mm = String(gDate.getMonth() + 1).padStart(2, '0');
+              const dd = String(gDate.getDate()).padStart(2, '0');
+              pastUnsettledDates.add(`${yyyy}${mm}${dd}`);
+            }
+          }
+        });
+      });
+      Array.from(pastUnsettledDates).slice(-4).forEach(dStr => {
+        urlsToFetch.push(`${baseUrl}&dates=${dStr}`);
+      });
+
+      const responses = await Promise.allSettled(urlsToFetch.map(u => fetch(u).then(r => r.ok ? r.json() : null)));
+      const allEvents = [];
+      const seenEventIds = new Set();
+      responses.forEach(r => {
+        if (r.status === 'fulfilled' && r.value && Array.isArray(r.value.events)) {
+          r.value.events.forEach(ev => {
+            if (ev && ev.id && !seenEventIds.has(ev.id)) {
+              seenEventIds.add(ev.id);
+              allEvents.push(ev);
+            }
+          });
+        }
+      });
+      if (allEvents.length === 0) return false;
+
+      const findScheduledGame = (schedule, oppComp, isHome, eventUtc) => {
         if (!schedule || !oppComp) return null;
         const oppAbbr = (oppComp.team?.abbreviation || '').toUpperCase();
-        const oppDisplay = (oppComp.team?.displayName || '').toLowerCase();
-        const oppShort = (oppComp.team?.shortDisplayName || '').toLowerCase();
-        const oppName = (oppComp.team?.name || '').toLowerCase();
+        const oppDisplay = (oppComp.team?.displayName || '').toLowerCase().trim();
+        const oppLocation = (oppComp.team?.location || oppComp.team?.shortDisplayName || '').toLowerCase().trim();
         const mappedOppId = ESPN_TEAM_MAP[oppComp.id];
 
-        return schedule.find(g => {
-          if (g.isHome !== isHome) return false;
+        let eventMs = NaN;
+        if (eventUtc) {
+          const dt = new Date(eventUtc);
+          if (!isNaN(dt.getTime())) eventMs = dt.getTime();
+        }
+
+        const isDateClose = (g) => {
+          if (isNaN(eventMs) || !g.date) return true;
+          const gd = new Date(g.date + ' 12:00:00');
+          if (isNaN(gd.getTime())) return true;
+          return Math.abs(gd.getTime() - eventMs) <= 4.5 * 86400 * 1000;
+        };
+
+        const matchesOpponent = (g, requireHomeMatch) => {
+          if (requireHomeMatch && g.isHome !== isHome) return false;
           if (g.oppId && mappedOppId && g.oppId === mappedOppId) return true;
           if (g.oppAbbr && oppAbbr && g.oppAbbr.toUpperCase() === oppAbbr) return true;
           if (g.opponent) {
-            const oppLow = g.opponent.toLowerCase();
-            if (oppDisplay && oppLow.includes(oppDisplay)) return true;
-            if (oppShort && oppLow.includes(oppShort)) return true;
-            if (oppName && oppLow.includes(oppName)) return true;
+            const oppLow = g.opponent.toLowerCase().trim();
+            if (oppDisplay && (oppLow === oppDisplay || oppLow.includes(oppDisplay))) return true;
+            if (oppLocation && oppLocation.length >= 3) {
+              // Guard against directional/state substring collisions (e.g. Texas vs Texas State / North Texas)
+              const hasStateMismatch = oppLow.includes('state') !== oppLocation.includes('state');
+              const hasTechMismatch = oppLow.includes('tech') !== oppLocation.includes('tech');
+              const hasAmMismatch = oppLow.includes('a&m') !== oppLocation.includes('a&m');
+              const dirWords = ['north', 'south', 'east', 'west', 'central', 'middle', 'northern', 'southern', 'eastern', 'western'];
+              const hasDirMismatch = dirWords.some(d => oppLow.split(/\s+/).includes(d) !== oppLocation.split(/\s+/).includes(d));
+              if (!hasStateMismatch && !hasTechMismatch && !hasAmMismatch && !hasDirMismatch && oppLow.startsWith(oppLocation)) {
+                return true;
+              }
+            }
           }
           return false;
-        });
+        };
+
+        // 1. Primary pass: date-matched + home/away-matched
+        const datePool = schedule.filter(isDateClose);
+        let found = datePool.find(g => matchesOpponent(g, true));
+        if (found) return found;
+
+        // 2. Secondary pass: date-matched (neutral site / homeAway flip tolerance)
+        found = datePool.find(g => matchesOpponent(g, false));
+        if (found) return found;
+
+        // 3. Fallback pass across full schedule: strict opponent match (never mascot-only)
+        return schedule.find(g => matchesOpponent(g, true)) || null;
       };
 
       let updatedCount = 0;
-      data.events.forEach(event => {
+      allEvents.forEach(event => {
         const comp = event.competitions?.[0];
         if (!comp) return;
 
@@ -6127,7 +6221,7 @@ const LiveSyncEngine = {
 
         // 2. Update home team schedule
         if (homeTeamId && TEAMS_DATABASE[homeTeamId]) {
-          const game = findScheduledGame(TEAMS_DATABASE[homeTeamId].schedule, awayComp, true);
+          const game = findScheduledGame(TEAMS_DATABASE[homeTeamId].schedule, awayComp, true, eventUtc);
           if (game) {
             if (eventUtc) game.utc = eventUtc;
             if (eventDateStr) game.date = eventDateStr;
@@ -6147,6 +6241,9 @@ const LiveSyncEngine = {
               game.isLive = false;
               game.actualScoreUt = parseInt(homeComp.score, 10);
               game.actualScoreOpp = parseInt(awayComp.score, 10);
+              game.finalTeamScore = game.actualScoreUt;
+              game.finalOppScore = game.actualScoreOpp;
+              game.finalWin = game.actualScoreUt > game.actualScoreOpp;
               updatedCount++;
             } else {
               // Update live DraftKings line without altering model predictions
@@ -6164,7 +6261,7 @@ const LiveSyncEngine = {
 
         // 3. Update away team schedule
         if (awayTeamId && TEAMS_DATABASE[awayTeamId]) {
-          const game = findScheduledGame(TEAMS_DATABASE[awayTeamId].schedule, homeComp, false);
+          const game = findScheduledGame(TEAMS_DATABASE[awayTeamId].schedule, homeComp, false, eventUtc);
           if (game) {
             if (eventUtc) game.utc = eventUtc;
             if (eventDateStr) game.date = eventDateStr;
@@ -6184,6 +6281,9 @@ const LiveSyncEngine = {
               game.isLive = false;
               game.actualScoreUt = parseInt(awayComp.score, 10);
               game.actualScoreOpp = parseInt(homeComp.score, 10);
+              game.finalTeamScore = game.actualScoreUt;
+              game.finalOppScore = game.actualScoreOpp;
+              game.finalWin = game.actualScoreUt > game.actualScoreOpp;
               updatedCount++;
             } else {
               // Update live DraftKings line without altering model predictions
@@ -6205,6 +6305,9 @@ const LiveSyncEngine = {
         if (typeof window.renderSchedule === 'function') window.renderSchedule();
         if (typeof updateCountdownTickerForActiveTeam === 'function') updateCountdownTickerForActiveTeam();
         if (typeof window.updateCountdownTickerForActiveTeam === 'function') window.updateCountdownTickerForActiveTeam();
+        if (typeof renderVegasStack === 'function' && document.getElementById('vegasStackModal')?.classList.contains('open')) {
+          renderVegasStack();
+        }
       }
 
       return updatedCount > 0;
@@ -12889,6 +12992,19 @@ function getVegasStackMatchups(weekFilter, isCustom) {
       const canonKey = [tid, oppKey].sort().join('::') + '::' + g.week;
       if (seenPairs.has(canonKey)) return;
       seenPairs.add(canonKey);
+
+      // Reciprocal final score safety: if opponent is tracked and settled, mirror final result
+      if (!g.isFinal && g.oppId && TEAMS_DATABASE[g.oppId]) {
+        const recGame = (TEAMS_DATABASE[g.oppId].schedule || []).find(rg => rg.week === g.week && (rg.oppId === tid || (rg.opponent && rg.opponent.toLowerCase().includes((team.shortName || tid).toLowerCase()))));
+        if (recGame && recGame.isFinal && typeof recGame.actualScoreUt === 'number') {
+          g.isFinal = true;
+          g.actualScoreUt = recGame.actualScoreOpp;
+          g.actualScoreOpp = recGame.actualScoreUt;
+          g.finalTeamScore = g.actualScoreUt;
+          g.finalOppScore = g.actualScoreOpp;
+          g.finalWin = g.actualScoreUt > g.actualScoreOpp;
+        }
+      }
 
       const isHome = !!g.isHome;
       const homeTeam = isHome ? team : (TEAMS_DATABASE[g.oppId] || { name: g.opponent, apRank: g.oppRank || 'NR', logoUrl: g.oppLogoUrl, abbr: g.oppAbbr || 'OPP' });

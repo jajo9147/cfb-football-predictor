@@ -262,13 +262,51 @@ WEEK9_OFFICIAL_POLL = {
     'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
-CURRENT_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
-WEEK8_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
-WEEK7_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
-WEEK6_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
-WEEK5_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
-WEEK4_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
-WEEK3_OFFICIAL_POLL = WEEK9_OFFICIAL_POLL
+# Authoritative Week 10 Official Poll (November 1, 2026 Live Release)
+WEEK10_OFFICIAL_POLL = {
+    'miami': {'apRank': '#1 AP', 'apPoints': '1,740 PTS (62 1st)', 'rankNum': 1},
+    'georgia': {'apRank': '#2 AP', 'apPoints': '1,648 PTS (7 1st)', 'rankNum': 2},
+    'utah': {'apRank': '#3 AP', 'apPoints': '1,540 PTS (1 1st)', 'rankNum': 3},
+    'notredame': {'apRank': '#4 AP', 'apPoints': '1,476 PTS', 'rankNum': 4},
+    'ucla': {'apRank': '#5 AP', 'apPoints': '1,473 PTS', 'rankNum': 5},
+    'indiana': {'apRank': '#6 AP', 'apPoints': '1,446 PTS', 'rankNum': 6},
+    'byu': {'apRank': '#7 AP', 'apPoints': '1,358 PTS', 'rankNum': 7},
+    'kentucky': {'apRank': '#8 AP', 'apPoints': '1,253 PTS', 'rankNum': 8},
+    'alabama': {'apRank': '#9 AP', 'apPoints': '1,107 PTS', 'rankNum': 9},
+    'texas': {'apRank': '#10 AP', 'apPoints': '1,057 PTS', 'rankNum': 10},
+    'ohiostate': {'apRank': '#11 AP', 'apPoints': '1,049 PTS', 'rankNum': 11},
+    'olemiss': {'apRank': '#12 AP', 'apPoints': '953 PTS', 'rankNum': 12},
+    'texastech': {'apRank': '#13 AP', 'apPoints': '931 PTS', 'rankNum': 13},
+    'wakeforest': {'apRank': '#14 AP', 'apPoints': '898 PTS', 'rankNum': 14},
+    'lsu': {'apRank': '#15 AP', 'apPoints': '814 PTS', 'rankNum': 15},
+    'tennessee': {'apRank': '#16 AP', 'apPoints': '719 PTS', 'rankNum': 16},
+    'houston': {'apRank': '#17 AP', 'apPoints': '590 PTS', 'rankNum': 17},
+    'usc': {'apRank': '#18 AP', 'apPoints': '539 PTS', 'rankNum': 18},
+    'missouri': {'apRank': '#19 AP', 'apPoints': '475 PTS', 'rankNum': 19},
+    'boisestate': {'apRank': '#20 AP', 'apPoints': '451 PTS', 'rankNum': 20},
+    'iowa': {'apRank': '#21 AP', 'apPoints': '401 PTS', 'rankNum': 21},
+    'arizona': {'apRank': '#24 AP', 'apPoints': '154 PTS', 'rankNum': 24},
+    'oregon': {'apRank': 'RV', 'apPoints': '55 PTS', 'rankNum': 99},
+    'smu': {'apRank': 'RV', 'apPoints': '27 PTS', 'rankNum': 99},
+    'louisville': {'apRank': 'RV', 'apPoints': '1 PTS', 'rankNum': 99},
+    'texasam': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'oklahoma': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'michigan': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'pennstate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'washington': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
+}
+CURRENT_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
+WEEK9_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
+WEEK8_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
+WEEK7_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
+WEEK6_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
+WEEK5_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
+WEEK4_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
+WEEK3_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
 
 # Stadium Home Field Advantage mapping (points - calibrated to modern college football analytics)
 STADIUM_HFA = {
@@ -1134,9 +1172,9 @@ def main():
             print(f"🔥 CFBD Ingestion: Loaded {len(talent_map)} teams with 2026 247Sports Talent Composite")
             sp_map_2026 = cfbd_client.get_sp_ratings(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(sp_map_2026)} teams with 2026 Official SP+ Ratings")
-            cum_adv_stats = cfbd_client.get_cumulative_advanced_stats(2026, weeks=[0, 1, 2, 3, 4, 5, 6, 7, 8])
-            print(f"🔥 CFBD Ingestion: Loaded cumulative multi-week EPA/PPA for {len(cum_adv_stats)} teams (Weeks 0-8)")
-            drive_eff_metrics = cfbd_client.get_drive_level_efficiency_metrics(2026, weeks=[1, 2, 3, 4, 5, 6, 7, 8])
+            cum_adv_stats = cfbd_client.get_cumulative_advanced_stats(2026, weeks=list(range(0, 15)))
+            print(f"🔥 CFBD Ingestion: Loaded cumulative multi-week EPA/PPA for {len(cum_adv_stats)} teams (Weeks 0-14)")
+            drive_eff_metrics = cfbd_client.get_drive_level_efficiency_metrics(2026, weeks=list(range(1, 15)))
             print(f"🔥 CFBD Ingestion: Loaded drive-level down consistency, PPA, and DQI for {len(drive_eff_metrics)} teams")
             dynamic_fbs_ratings = cfbd_client.get_fbs_opponent_power_ratings(2026)
             print(f"🔥 CFBD Ingestion: Loaded {len(dynamic_fbs_ratings)} dynamic 2026 FBS opponent ratings grounded in SP+ & 2026 records")
@@ -1231,23 +1269,8 @@ def main():
 
     # Update opponent rankings in schedules for unplayed games
     opp_rank_updates_count = 0
-    # Also index all ranked teams from current AP poll for non-db opponents (e.g. UCLA, Kentucky, Wake Forest, Florida, Northwestern, Oklahoma State, Wisconsin)
-    external_ap_ranks = {
-        'ucla': '#7 AP',
-        'ucla bruins': '#7 AP',
-        'kentucky': '#9 AP',
-        'kentucky wildcats': '#9 AP',
-        'wake forest': '#14 AP',
-        'wake forest demon deacons': '#14 AP',
-        'florida': '#17 AP',
-        'florida gators': '#17 AP',
-        'northwestern': '#20 AP',
-        'northwestern wildcats': '#20 AP',
-        'oklahoma state': '#24 AP',
-        'oklahoma state cowboys': '#24 AP',
-        'wisconsin': '#25 AP',
-        'wisconsin badgers': '#25 AP',
-    }
+    # Index all ranked teams from current AP poll for non-db opponents
+    external_ap_ranks = {}
     if ap_poll:
         for r in ap_poll.get('ranks', []):
             rn = r.get('current')
@@ -1257,6 +1280,21 @@ def main():
             if loc: external_ap_ranks[loc] = f"#{rn} AP"
             if abbr: external_ap_ranks[abbr] = f"#{rn} AP"
             if loc and name: external_ap_ranks[f"{loc} {name}"] = f"#{rn} AP"
+    else:
+        external_ap_ranks = {
+            'ucla': '#5 AP',
+            'ucla bruins': '#5 AP',
+            'kentucky': '#8 AP',
+            'kentucky wildcats': '#8 AP',
+            'wake forest': '#14 AP',
+            'wake forest demon deacons': '#14 AP',
+            'new mexico': '#22 AP',
+            'new mexico lobos': '#22 AP',
+            'south carolina': '#23 AP',
+            'south carolina gamecocks': '#23 AP',
+            'florida': '#25 AP',
+            'florida gators': '#25 AP',
+        }
 
     for tid, t in db.items():
         for g in t.get('schedule', []):
@@ -1428,11 +1466,10 @@ def main():
                         name_match = True
 
                     if name_match:
-                        if not args.dry_run:
-                            g['isFinal'] = True
-                            g['finalTeamScore'] = g['actualScoreUt'] = int(s_ut)
-                            g['finalOppScore'] = g['actualScoreOpp'] = int(s_opp)
-                            g['finalWin'] = int(s_ut) > int(s_opp)
+                        g['isFinal'] = True
+                        g['finalTeamScore'] = g['actualScoreUt'] = int(s_ut)
+                        g['finalOppScore'] = g['actualScoreOpp'] = int(s_opp)
+                        g['finalWin'] = int(s_ut) > int(s_opp)
                         if team_id == t1_id:
                             g1_obj = g
                         else:
@@ -1622,6 +1659,16 @@ def main():
     unplayed_games_recalculated = 0
     blowout_games_calibrated = 0
 
+    # Dynamically detect the active upcoming week (earliest week with unfinalized games)
+    unplayed_weeks = []
+    for t_obj in db.values():
+        for g_obj in t_obj.get('schedule', []):
+            if not g_obj.get('isFinal'):
+                wm = re.search(r'\d+', g_obj.get('week', ''))
+                if wm:
+                    unplayed_weeks.append(int(wm.group(0)))
+    active_upcoming_week = min(unplayed_weeks) if unplayed_weeks else 10
+
     for tid, t in db.items():
         sp_team = float(t.get('baseSpRating', 22.0))
         team_name = t.get('name', '').lower()
@@ -1714,12 +1761,11 @@ def main():
                 spread_val = matched_line['spread']
                 vegas_margin = -spread_val
                 # Strictly filter obsolete preseason summer lookahead lines:
-                # In late October (Week 9), any market lines for Week 10 and beyond in CFBD are summer lookaheads from July/August.
-                # Only Week 9 contains active live in-season market lines.
-                # Even for Week 9, if a line contradicts in-season ratings by > 4.5 points or reverses favorites of a > 2.0 pt model gap, discard it!
-                if week_num and week_num >= 10:
+                # Any market lines beyond the active upcoming week in CFBD are summer lookaheads from July/August.
+                # Even for the active upcoming week, if a line contradicts in-season ratings by > 4.5 points or reverses favorites of a > 2.0 pt model gap, discard it!
+                if week_num and week_num > active_upcoming_week:
                     matched_line = None
-                elif week_num == 9:
+                elif week_num == active_upcoming_week:
                     if abs(raw_margin - vegas_margin) > 4.5:
                         matched_line = None
                     elif (raw_margin > 2.0 and vegas_margin < -2.0) or (raw_margin < -2.0 and vegas_margin > 2.0):
