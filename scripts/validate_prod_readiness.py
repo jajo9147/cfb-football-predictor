@@ -23,8 +23,23 @@ IOS_TEAMS_FILE = os.path.join(ROOT_DIR, 'ios', 'CFBProphet', 'www', 'data', 'tea
 ANDROID_TEAMS_FILE = os.path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'assets', 'www', 'data', 'teams.js')
 
 try:
-    from retrain_weekly_model import CURRENT_OFFICIAL_POLL
+    from retrain_weekly_model import CURRENT_OFFICIAL_POLL, fetch_espn_ap_rankings, ESPN_ID_TO_TEAM_ID
     EXPECTED_AP_POLL = {k: v['apRank'] for k, v in CURRENT_OFFICIAL_POLL.items()}
+    live_poll = fetch_espn_ap_rankings()
+    if live_poll and live_poll.get('ranks'):
+        live_map = {k: 'NR' for k in EXPECTED_AP_POLL}
+        for r in live_poll.get('ranks', []):
+            eid = int(r.get('team', {}).get('id', 0))
+            tid = ESPN_ID_TO_TEAM_ID.get(eid)
+            cur = r.get('current')
+            if tid and cur:
+                live_map[tid] = f"#{cur} AP"
+        for o in live_poll.get('others', []):
+            eid = int(o.get('team', {}).get('id', 0))
+            tid = ESPN_ID_TO_TEAM_ID.get(eid)
+            if tid and live_map.get(tid) == 'NR':
+                live_map[tid] = 'RV'
+        EXPECTED_AP_POLL = live_map
 except Exception:
     EXPECTED_AP_POLL = {
         'georgia': '#1 AP', 'notredame': '#2 AP', 'miami': '#3 AP', 'indiana': '#4 AP',

@@ -334,14 +334,52 @@ WEEK10_OFFICIAL_POLL = {
     'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
-CURRENT_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
-WEEK9_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
-WEEK8_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
-WEEK7_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
-WEEK6_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
-WEEK5_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
-WEEK4_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
-WEEK3_OFFICIAL_POLL = WEEK10_OFFICIAL_POLL
+# Authoritative Week 11 Official Poll (November 8, 2026 Live Release)
+WEEK11_OFFICIAL_POLL = {
+    'georgia': {'apRank': '#1 AP', 'apPoints': '1,729 PTS (53 1st)', 'rankNum': 1},
+    'utah': {'apRank': '#2 AP', 'apPoints': '1,675 PTS (12 1st)', 'rankNum': 2},
+    'notredame': {'apRank': '#3 AP', 'apPoints': '1,597 PTS (5 1st)', 'rankNum': 3},
+    'ucla': {'apRank': '#4 AP', 'apPoints': '1,542 PTS', 'rankNum': 4},
+    'miami': {'apRank': '#5 AP', 'apPoints': '1,430 PTS', 'rankNum': 5},
+    'indiana': {'apRank': '#6 AP', 'apPoints': '1,422 PTS', 'rankNum': 6},
+    'alabama': {'apRank': '#7 AP', 'apPoints': '1,334 PTS', 'rankNum': 7},
+    'texas': {'apRank': '#8 AP', 'apPoints': '1,253 PTS', 'rankNum': 8},
+    'tennessee': {'apRank': '#9 AP', 'apPoints': '1,177 PTS', 'rankNum': 9},
+    'texastech': {'apRank': '#10 AP', 'apPoints': '1,082 PTS', 'rankNum': 10},
+    'wakeforest': {'apRank': '#11 AP', 'apPoints': '1,067 PTS', 'rankNum': 11},
+    'byu': {'apRank': '#12 AP', 'apPoints': '1,041 PTS', 'rankNum': 12},
+    'kentucky': {'apRank': '#13 AP', 'apPoints': '897 PTS', 'rankNum': 13},
+    'houston': {'apRank': '#14 AP', 'apPoints': '803 PTS', 'rankNum': 14},
+    'usc': {'apRank': '#15 AP', 'apPoints': '679 PTS', 'rankNum': 15},
+    'iowa': {'apRank': '#16 AP', 'apPoints': '659 PTS', 'rankNum': 16},
+    'boisestate': {'apRank': '#17 AP', 'apPoints': '563 PTS', 'rankNum': 17},
+    'oregon': {'apRank': '#18 AP', 'apPoints': '517 PTS', 'rankNum': 18},
+    'olemiss': {'apRank': '#19 AP', 'apPoints': '415 PTS', 'rankNum': 19},
+    'ohiostate': {'apRank': '#21 AP', 'apPoints': '349 PTS', 'rankNum': 21},
+    'arizona': {'apRank': '#22 AP', 'apPoints': '324 PTS', 'rankNum': 22},
+    'lsu': {'apRank': '#24 AP', 'apPoints': '277 PTS', 'rankNum': 24},
+    'smu': {'apRank': '#25 AP', 'apPoints': '118 PTS', 'rankNum': 25},
+    'missouri': {'apRank': 'RV', 'apPoints': '50 PTS', 'rankNum': 99},
+    'louisville': {'apRank': 'RV', 'apPoints': '1 PTS', 'rankNum': 99},
+    'texasam': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'oklahoma': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'michigan': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'pennstate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'washington': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
+}
+CURRENT_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
+WEEK10_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
+WEEK9_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
+WEEK8_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
+WEEK7_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
+WEEK6_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
+WEEK5_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
+WEEK4_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
+WEEK3_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
 
 # Stadium Home Field Advantage mapping (points - calibrated to modern college football analytics)
 STADIUM_HFA = {
