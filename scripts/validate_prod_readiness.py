@@ -201,12 +201,16 @@ def run_inspections():
             except Exception:
                 g_dt = None
 
-            # Past games (on or before current date) MUST be final and graded with actual scores
-            if g_dt and g_dt <= current_date:
+            # Past games (strictly before current date) MUST be final and graded with actual scores
+            if g_dt and g_dt < current_date:
                 if not g.get('isFinal'):
                     errors.append(f"{gid} ({tid} {g.get('week')} on {d_str}): Past game is not marked isFinal=True!")
                 if g.get('actualScoreUt') is None or g.get('actualScoreOpp') is None:
                     errors.append(f"{gid} ({tid} {g.get('week')} on {d_str}): Past game is missing actual scores!")
+                continue
+            elif g.get('isFinal'):
+                if g.get('actualScoreUt') is None or g.get('actualScoreOpp') is None:
+                    errors.append(f"{gid} ({tid} {g.get('week')} on {d_str}): Final game is missing actual scores!")
                 continue
 
             prob = g.get('baseWinProb')
