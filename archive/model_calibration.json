@@ -1,48 +1,48 @@
 {
-  "updatedAt": "2026-11-14T19:43:36.767181+00:00",
+  "updatedAt": "2026-11-16T13:59:09.530540+00:00",
   "season": 2026,
   "overallStats": {
-    "totalGames": 250,
-    "straightUpWins": 204,
-    "straightUpLosses": 46,
-    "straightUpPct": 81.6,
-    "atsWins": 217,
-    "atsLosses": 33,
-    "atsPct": 86.8,
-    "brierScore": 0.164,
+    "totalGames": 272,
+    "straightUpWins": 221,
+    "straightUpLosses": 51,
+    "straightUpPct": 81.2,
+    "atsWins": 233,
+    "atsLosses": 39,
+    "atsPct": 85.7,
+    "brierScore": 0.166,
     "brierGrade": "Calibrating",
-    "logLoss": 0.501
+    "logLoss": 0.503
   },
   "calibrationBins": [
     {
       "binRange": "50% - 60%",
-      "predictedProbAvg": 54.9,
-      "actualWinFreq": 93.8,
-      "sampleSize": 16
+      "predictedProbAvg": 55.3,
+      "actualWinFreq": 85.0,
+      "sampleSize": 20
     },
     {
       "binRange": "60% - 70%",
-      "predictedProbAvg": 65.4,
-      "actualWinFreq": 72.7,
-      "sampleSize": 33
+      "predictedProbAvg": 65.3,
+      "actualWinFreq": 71.4,
+      "sampleSize": 35
     },
     {
       "binRange": "70% - 80%",
       "predictedProbAvg": 74.1,
-      "actualWinFreq": 68.8,
-      "sampleSize": 32
+      "actualWinFreq": 71.4,
+      "sampleSize": 35
     },
     {
       "binRange": "80% - 90%",
-      "predictedProbAvg": 85.1,
-      "actualWinFreq": 75.8,
-      "sampleSize": 33
+      "predictedProbAvg": 85.2,
+      "actualWinFreq": 76.5,
+      "sampleSize": 34
     },
     {
       "binRange": "90% - 99%",
-      "predictedProbAvg": 97.1,
-      "actualWinFreq": 95.0,
-      "sampleSize": 100
+      "predictedProbAvg": 97.0,
+      "actualWinFreq": 95.2,
+      "sampleSize": 104
     }
   ],
   "snapshots": [
@@ -93,6 +93,12 @@
       "name": "Week 45 Pre-Kickoff Snapshot",
       "date": "Nov 09, 2026",
       "file": "archive/2026_week_45_prekick.json"
+    },
+    {
+      "id": "2026_week_46_prekick",
+      "name": "Week 46 Pre-Kickoff Snapshot",
+      "date": "Nov 16, 2026",
+      "file": "archive/2026_week_46_prekick.json"
     }
   ],
   "settledLedger": [
@@ -154,7 +160,7 @@
       "pred": "BYU (98%)",
       "prob": 0.98,
       "actual": "24 - 10",
-      "spread": -11.5,
+      "spread": -14.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 24,
@@ -167,7 +173,7 @@
       "pred": "BYU (26%)",
       "prob": 0.26,
       "actual": "28 - 24",
-      "spread": 10.5,
+      "spread": 10.0,
       "ats": "Loss",
       "isWin": true,
       "scoreFav": 28,
@@ -206,12 +212,25 @@
       "pred": "BYU (40%)",
       "prob": 0.4,
       "actual": "20 - 28",
-      "spread": 4.0,
+      "spread": 3.0,
       "ats": "Loss",
       "isWin": false,
       "scoreFav": 28,
       "scoreDog": 20,
       "brier": "0.160"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "BYU Cougars vs Baylor Bears",
+      "pred": "BYU (55%)",
+      "prob": 0.55,
+      "actual": "28 - 7",
+      "spread": -8.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 28,
+      "scoreDog": 7,
+      "brier": "0.202"
     },
     {
       "week": "WEEK 1",
@@ -271,7 +290,7 @@
       "pred": "Texas (87%)",
       "prob": 0.87,
       "actual": "24 - 27",
-      "spread": -7.5,
+      "spread": -9.5,
       "ats": "Covered",
       "isWin": false,
       "scoreFav": 27,
@@ -328,6 +347,19 @@
       "isWin": true,
       "scoreFav": 34,
       "scoreDog": 20,
+      "brier": "0.185"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Texas Longhorns vs LSU Tigers",
+      "pred": "Texas (56%)",
+      "prob": 0.57,
+      "actual": "22 - 21",
+      "spread": 4.5,
+      "ats": "Loss",
+      "isWin": true,
+      "scoreFav": 22,
+      "scoreDog": 21,
       "brier": "0.185"
     },
     {
@@ -401,7 +433,7 @@
       "pred": "Michigan (66%)",
       "prob": 0.66,
       "actual": "21 - 18",
-      "spread": -6.0,
+      "spread": -6.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 21,
@@ -414,7 +446,7 @@
       "pred": "Michigan (36%)",
       "prob": 0.36,
       "actual": "6 - 13",
-      "spread": 7.5,
+      "spread": 6.0,
       "ats": "Loss",
       "isWin": false,
       "scoreFav": 13,
@@ -440,12 +472,25 @@
       "pred": "Michigan (70%)",
       "prob": 0.7,
       "actual": "6 - 15",
-      "spread": -14.0,
+      "spread": -16.5,
       "ats": "Covered",
       "isWin": false,
       "scoreFav": 15,
       "scoreDog": 6,
       "brier": "0.490"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Michigan Wolverines vs Oregon Ducks",
+      "pred": "Michigan (13%)",
+      "prob": 0.13,
+      "actual": "7 - 31",
+      "spread": 10.0,
+      "ats": "Loss",
+      "isWin": false,
+      "scoreFav": 31,
+      "scoreDog": 7,
+      "brier": "0.017"
     },
     {
       "week": "WEEK 1",
@@ -518,7 +563,7 @@
       "pred": "Ohio State (78%)",
       "prob": 0.78,
       "actual": "19 - 15",
-      "spread": -3.0,
+      "spread": 1.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 19,
@@ -531,7 +576,7 @@
       "pred": "Ohio State (86%)",
       "prob": 0.86,
       "actual": "18 - 30",
-      "spread": -6.5,
+      "spread": -7.5,
       "ats": "Loss",
       "isWin": false,
       "scoreFav": 30,
@@ -544,12 +589,25 @@
       "pred": "Ohio State (79%)",
       "prob": 0.79,
       "actual": "28 - 41",
-      "spread": -7.5,
+      "spread": -6.0,
       "ats": "Loss",
       "isWin": false,
       "scoreFav": 41,
       "scoreDog": 28,
       "brier": "0.624"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Ohio State Buckeyes vs Northwestern Wildcats",
+      "pred": "Ohio State (44%)",
+      "prob": 0.44,
+      "actual": "28 - 19",
+      "spread": 2.0,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 28,
+      "scoreDog": 19,
+      "brier": "0.314"
     },
     {
       "week": "WEEK 1",
@@ -622,7 +680,7 @@
       "pred": "Georgia (63%)",
       "prob": 0.63,
       "actual": "20 - 17",
-      "spread": 2.5,
+      "spread": -2.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 20,
@@ -635,7 +693,7 @@
       "pred": "Georgia (97%)",
       "prob": 0.97,
       "actual": "24 - 27",
-      "spread": -19.5,
+      "spread": -16.5,
       "ats": "Covered",
       "isWin": false,
       "scoreFav": 27,
@@ -648,7 +706,7 @@
       "pred": "Georgia (83%)",
       "prob": 0.83,
       "actual": "27 - 8",
-      "spread": -11.5,
+      "spread": -12.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 27,
@@ -667,6 +725,19 @@
       "scoreFav": 42,
       "scoreDog": 7,
       "brier": "0.130"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Georgia Bulldogs vs Missouri Tigers",
+      "pred": "Georgia (92%)",
+      "prob": 0.92,
+      "actual": "48 - 21",
+      "spread": -16.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 48,
+      "scoreDog": 21,
+      "brier": "0.006"
     },
     {
       "week": "WEEK 1",
@@ -739,7 +810,7 @@
       "pred": "Alabama (68%)",
       "prob": 0.68,
       "actual": "10 - 26",
-      "spread": -7.5,
+      "spread": -1.5,
       "ats": "Loss",
       "isWin": false,
       "scoreFav": 26,
@@ -752,7 +823,7 @@
       "pred": "Alabama (82%)",
       "prob": 0.82,
       "actual": "31 - 20",
-      "spread": -13.5,
+      "spread": -2.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 31,
@@ -765,12 +836,25 @@
       "pred": "Alabama (51%)",
       "prob": 0.51,
       "actual": "31 - 13",
-      "spread": 6.0,
+      "spread": 3.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 31,
       "scoreDog": 13,
       "brier": "0.240"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Alabama Crimson Tide vs Vanderbilt Commodores",
+      "pred": "Alabama (97%)",
+      "prob": 0.97,
+      "actual": "21 - 6",
+      "spread": -33.6,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 21,
+      "scoreDog": 6,
+      "brier": "0.001"
     },
     {
       "week": "WEEK 1",
@@ -830,7 +914,7 @@
       "pred": "Oregon (89%)",
       "prob": 0.89,
       "actual": "15 - 17",
-      "spread": -10.0,
+      "spread": -12.5,
       "ats": "Covered",
       "isWin": false,
       "scoreFav": 17,
@@ -843,7 +927,7 @@
       "pred": "Oregon (85%)",
       "prob": 0.85,
       "actual": "17 - 14",
-      "spread": -6.5,
+      "spread": -21.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 17,
@@ -947,7 +1031,7 @@
       "pred": "Penn State (67%)",
       "prob": 0.67,
       "actual": "23 - 31",
-      "spread": 1.5,
+      "spread": -1.5,
       "ats": "Loss",
       "isWin": false,
       "scoreFav": 31,
@@ -979,6 +1063,19 @@
       "scoreFav": 28,
       "scoreDog": 25,
       "brier": "0.518"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Penn State Nittany Lions vs Minnesota Golden Gophers",
+      "pred": "Penn State (46%)",
+      "prob": 0.46,
+      "actual": "42 - 14",
+      "spread": -12.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 42,
+      "scoreDog": 14,
+      "brier": "0.292"
     },
     {
       "week": "WEEK 1",
@@ -1077,12 +1174,25 @@
       "pred": "Notre Dame (52%)",
       "prob": 0.52,
       "actual": "31 - 24",
-      "spread": -7.5,
+      "spread": -6.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 31,
       "scoreDog": 24,
       "brier": "0.230"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Notre Dame Fighting Irish vs Boston College Eagles",
+      "pred": "Notre Dame (99%)",
+      "prob": 0.99,
+      "actual": "41 - 7",
+      "spread": -29.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 41,
+      "scoreDog": 7,
+      "brier": "0.000"
     },
     {
       "week": "WEEK 1",
@@ -1155,7 +1265,7 @@
       "pred": "LSU (86%)",
       "prob": 0.86,
       "actual": "34 - 35",
-      "spread": -9.5,
+      "spread": -10.0,
       "ats": "Covered",
       "isWin": false,
       "scoreFav": 35,
@@ -1280,6 +1390,19 @@
       "brier": "0.073"
     },
     {
+      "week": "WEEK 11",
+      "matchup": "Tennessee Volunteers vs Texas A&M Aggies",
+      "pred": "Tennessee (90%)",
+      "prob": 0.9,
+      "actual": "22 - 7",
+      "spread": -1.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 22,
+      "scoreDog": 7,
+      "brier": "0.010"
+    },
+    {
       "week": "WEEK 1",
       "matchup": "Indiana Hoosiers vs North Texas Mean Green",
       "pred": "Indiana (95%)",
@@ -1350,7 +1473,7 @@
       "pred": "Indiana (71%)",
       "prob": 0.71,
       "actual": "20 - 17",
-      "spread": -9.5,
+      "spread": -8.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 20,
@@ -1369,6 +1492,19 @@
       "scoreFav": 23,
       "scoreDog": 16,
       "brier": "0.023"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Indiana Hoosiers vs USC Trojans",
+      "pred": "Indiana (78%)",
+      "prob": 0.78,
+      "actual": "27 - 13",
+      "spread": -9.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 27,
+      "scoreDog": 13,
+      "brier": "0.048"
     },
     {
       "week": "WEEK 1",
@@ -1441,7 +1577,7 @@
       "pred": "Miami (86%)",
       "prob": 0.86,
       "actual": "43 - 35",
-      "spread": -20.5,
+      "spread": -16.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 43,
@@ -1473,6 +1609,19 @@
       "scoreFav": 38,
       "scoreDog": 35,
       "brier": "0.017"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Miami Hurricanes vs Duke Blue Devils",
+      "pred": "Miami (74%)",
+      "prob": 0.74,
+      "actual": "36 - 25",
+      "spread": -14.0,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 36,
+      "scoreDog": 25,
+      "brier": "0.068"
     },
     {
       "week": "WEEK 1",
@@ -1532,7 +1681,7 @@
       "pred": "Texas A&M (62%)",
       "prob": 0.62,
       "actual": "6 - 27",
-      "spread": 4.5,
+      "spread": 1.5,
       "ats": "Loss",
       "isWin": false,
       "scoreFav": 27,
@@ -1642,6 +1791,19 @@
       "scoreFav": 45,
       "scoreDog": 15,
       "brier": "0.068"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Ole Miss Rebels vs Oklahoma Sooners",
+      "pred": "Ole Miss (61%)",
+      "prob": 0.61,
+      "actual": "17 - 24",
+      "spread": -3.2,
+      "ats": "Loss",
+      "isWin": false,
+      "scoreFav": 24,
+      "scoreDog": 17,
+      "brier": "0.372"
     },
     {
       "week": "WEEK 1",
@@ -1826,6 +1988,19 @@
       "brier": "0.044"
     },
     {
+      "week": "WEEK 11",
+      "matchup": "Boise State Broncos vs Oregon State Beavers",
+      "pred": "Boise State (72%)",
+      "prob": 0.72,
+      "actual": "46 - 41",
+      "spread": -16.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 46,
+      "scoreDog": 41,
+      "brier": "0.078"
+    },
+    {
       "week": "WEEK 0",
       "matchup": "USC Trojans vs San Jos\u00e9 State Spartans",
       "pred": "USC (96%)",
@@ -1974,7 +2149,7 @@
       "pred": "Florida State (78%)",
       "prob": 0.78,
       "actual": "24 - 36",
-      "spread": -4.5,
+      "spread": 1.5,
       "ats": "Loss",
       "isWin": false,
       "scoreFav": 36,
@@ -2086,6 +2261,19 @@
       "brier": "0.423"
     },
     {
+      "week": "WEEK 11",
+      "matchup": "Clemson Tigers vs Georgia Tech Yellow Jackets",
+      "pred": "Clemson (57%)",
+      "prob": 0.58,
+      "actual": "6 - 20",
+      "spread": -2.7,
+      "ats": "Loss",
+      "isWin": false,
+      "scoreFav": 20,
+      "scoreDog": 6,
+      "brier": "0.336"
+    },
+    {
       "week": "WEEK 2",
       "matchup": "SMU Mustangs vs UC Davis Aggies",
       "pred": "SMU (98%)",
@@ -2188,6 +2376,19 @@
       "scoreFav": 51,
       "scoreDog": 28,
       "brier": "0.410"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "SMU Mustangs vs Wake Forest Demon Deacons",
+      "pred": "SMU (37%)",
+      "prob": 0.37,
+      "actual": "7 - 49",
+      "spread": 3.2,
+      "ats": "Loss",
+      "isWin": false,
+      "scoreFav": 49,
+      "scoreDog": 7,
+      "brier": "0.137"
     },
     {
       "week": "WEEK 1",
@@ -2307,6 +2508,19 @@
       "brier": "0.014"
     },
     {
+      "week": "WEEK 11",
+      "matchup": "Texas Tech Red Raiders vs Oklahoma State Cowboys",
+      "pred": "Texas Tech (32%)",
+      "prob": 0.32,
+      "actual": "52 - 27",
+      "spread": 3.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 52,
+      "scoreDog": 27,
+      "brier": "0.462"
+    },
+    {
       "week": "WEEK 1",
       "matchup": "Utah Utes vs Idaho Vandals",
       "pred": "Utah (99%)",
@@ -2411,6 +2625,19 @@
       "brier": "0.102"
     },
     {
+      "week": "WEEK 11",
+      "matchup": "Utah Utes vs Arizona Wildcats",
+      "pred": "Utah (65%)",
+      "prob": 0.65,
+      "actual": "40 - 39",
+      "spread": -1.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 40,
+      "scoreDog": 39,
+      "brier": "0.122"
+    },
+    {
       "week": "WEEK 1",
       "matchup": "Iowa Hawkeyes vs Northern Illinois Huskies",
       "pred": "Iowa (91%)",
@@ -2455,7 +2682,7 @@
       "pred": "Iowa (36%)",
       "prob": 0.36,
       "actual": "41 - 24",
-      "spread": 3.0,
+      "spread": 1.5,
       "ats": "Covered",
       "isWin": true,
       "scoreFav": 41,
@@ -2500,6 +2727,19 @@
       "scoreFav": 24,
       "scoreDog": 10,
       "brier": "0.360"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Iowa Hawkeyes vs Purdue Boilermakers",
+      "pred": "Iowa (89%)",
+      "prob": 0.89,
+      "actual": "28 - 7",
+      "spread": -17.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 28,
+      "scoreDog": 7,
+      "brier": "0.012"
     },
     {
       "week": "WEEK 1",
@@ -2749,6 +2989,19 @@
       "brier": "0.423"
     },
     {
+      "week": "WEEK 11",
+      "matchup": "Washington Huskies vs Michigan State Spartans",
+      "pred": "Washington (49%)",
+      "prob": 0.49,
+      "actual": "21 - 14",
+      "spread": -2.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 21,
+      "scoreDog": 14,
+      "brier": "0.260"
+    },
+    {
       "week": "WEEK 1",
       "matchup": "Houston Cougars vs Oregon State Beavers",
       "pred": "Houston (91%)",
@@ -2931,6 +3184,19 @@
       "brier": "0.137"
     },
     {
+      "week": "WEEK 11",
+      "matchup": "Louisville Cardinals vs North Carolina Tar Heels",
+      "pred": "Louisville (49%)",
+      "prob": 0.49,
+      "actual": "16 - 14",
+      "spread": -3.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 16,
+      "scoreDog": 14,
+      "brier": "0.260"
+    },
+    {
       "week": "WEEK 1",
       "matchup": "Colorado Buffaloes vs Georgia Tech Yellow Jackets",
       "pred": "Colorado (78%)",
@@ -3085,6 +3351,19 @@
       "scoreFav": 28,
       "scoreDog": 17,
       "brier": "0.706"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Arizona State Sun Devils vs UCF Knights",
+      "pred": "Arizona State (24%)",
+      "prob": 0.24,
+      "actual": "26 - 13",
+      "spread": 3.5,
+      "ats": "Covered",
+      "isWin": true,
+      "scoreFav": 26,
+      "scoreDog": 13,
+      "brier": "0.578"
     },
     {
       "week": "WEEK 1",
@@ -3254,6 +3533,19 @@
       "scoreFav": 34,
       "scoreDog": 17,
       "brier": "0.122"
+    },
+    {
+      "week": "WEEK 11",
+      "matchup": "Kentucky Wildcats vs Florida Gators",
+      "pred": "Kentucky (57%)",
+      "prob": 0.58,
+      "actual": "14 - 21",
+      "spread": -3.0,
+      "ats": "Loss",
+      "isWin": false,
+      "scoreFav": 21,
+      "scoreDog": 14,
+      "brier": "0.336"
     },
     {
       "week": "WEEK 1",
@@ -15350,6 +15642,289 @@
       },
       "unplayedGamesRecalculated": 97,
       "blowoutGamesCalibrated": 4
+    },
+    {
+      "timestamp": "2026-11-16T13:59:09.408679+00:00",
+      "gamesEvaluated": 650,
+      "modelMae": 13.86,
+      "vegasMae": 11.74,
+      "modelBeatVegasPct": 38.0,
+      "ratingShifts": {
+        "byu": {
+          "old": 10.3,
+          "new": 10.5,
+          "delta": 0.2,
+          "offense": 29.5,
+          "defense": 19.3,
+          "specialTeams": 0.3
+        },
+        "texas": {
+          "old": 17.6,
+          "new": 19.6,
+          "delta": 2.0,
+          "offense": 35.0,
+          "defense": 15.8,
+          "specialTeams": 0.4
+        },
+        "michigan": {
+          "old": -4.1,
+          "new": -2.1,
+          "delta": 2.0,
+          "offense": 21.0,
+          "defense": 22.6,
+          "specialTeams": -0.5
+        },
+        "ohiostate": {
+          "old": 7.8,
+          "new": 13.1,
+          "delta": 5.3,
+          "offense": 30.8,
+          "defense": 17.8,
+          "specialTeams": 0.1
+        },
+        "georgia": {
+          "old": 23.2,
+          "new": 29.4,
+          "delta": 6.2,
+          "offense": 40.3,
+          "defense": 11.5,
+          "specialTeams": 0.6
+        },
+        "alabama": {
+          "old": 25.1,
+          "new": 25.4,
+          "delta": 0.3,
+          "offense": 38.4,
+          "defense": 12.6,
+          "specialTeams": -0.4
+        },
+        "oregon": {
+          "old": 8.7,
+          "new": 11.3,
+          "delta": 2.6,
+          "offense": 31.9,
+          "defense": 20.9,
+          "specialTeams": 0.3
+        },
+        "pennstate": {
+          "old": -9.0,
+          "new": -4.2,
+          "delta": 4.8,
+          "offense": 25.6,
+          "defense": 30.4,
+          "specialTeams": 0.6
+        },
+        "notredame": {
+          "old": 20.8,
+          "new": 21.1,
+          "delta": 0.3,
+          "offense": 36.9,
+          "defense": 16.1,
+          "specialTeams": 0.3
+        },
+        "lsu": {
+          "old": 9.1,
+          "new": 9.6,
+          "delta": 0.5,
+          "offense": 28.5,
+          "defense": 19.1,
+          "specialTeams": 0.2
+        },
+        "tennessee": {
+          "old": 18.3,
+          "new": 19.7,
+          "delta": 1.4,
+          "offense": 35.5,
+          "defense": 16.2,
+          "specialTeams": 0.4
+        },
+        "indiana": {
+          "old": 13.2,
+          "new": 15.0,
+          "delta": 1.8,
+          "offense": 30.6,
+          "defense": 16.1,
+          "specialTeams": 0.5
+        },
+        "miami": {
+          "old": 19.3,
+          "new": 19.2,
+          "delta": -0.1,
+          "offense": 37.0,
+          "defense": 18.1,
+          "specialTeams": 0.3
+        },
+        "texasam": {
+          "old": -4.9,
+          "new": -0.7,
+          "delta": 4.2,
+          "offense": 23.0,
+          "defense": 23.4,
+          "specialTeams": -0.3
+        },
+        "olemiss": {
+          "old": 7.8,
+          "new": 10.1,
+          "delta": 2.3,
+          "offense": 34.3,
+          "defense": 24.9,
+          "specialTeams": 0.7
+        },
+        "oklahoma": {
+          "old": 2.4,
+          "new": 9.7,
+          "delta": 7.3,
+          "offense": 28.5,
+          "defense": 19.2,
+          "specialTeams": 0.4
+        },
+        "boisestate": {
+          "old": 5.4,
+          "new": -1.6,
+          "delta": -7.0,
+          "offense": 28.4,
+          "defense": 29.7,
+          "specialTeams": -0.3
+        },
+        "usc": {
+          "old": 5.6,
+          "new": 7.3,
+          "delta": 1.7,
+          "offense": 31.7,
+          "defense": 24.1,
+          "specialTeams": -0.3
+        },
+        "floridastate": {
+          "old": -5.6,
+          "new": -4.0,
+          "delta": 1.6,
+          "offense": 27.5,
+          "defense": 31.2,
+          "specialTeams": -0.3
+        },
+        "clemson": {
+          "old": -7.9,
+          "new": -8.7,
+          "delta": -0.8,
+          "offense": 19.7,
+          "defense": 28.7,
+          "specialTeams": 0.3
+        },
+        "smu": {
+          "old": 4.1,
+          "new": -3.4,
+          "delta": -7.5,
+          "offense": 27.1,
+          "defense": 30.1,
+          "specialTeams": -0.4
+        },
+        "texastech": {
+          "old": 8.0,
+          "new": 11.4,
+          "delta": 3.4,
+          "offense": 35.2,
+          "defense": 24.0,
+          "specialTeams": 0.2
+        },
+        "utah": {
+          "old": 13.0,
+          "new": 11.8,
+          "delta": -1.2,
+          "offense": 33.3,
+          "defense": 21.5,
+          "specialTeams": 0.0
+        },
+        "iowa": {
+          "old": 9.9,
+          "new": 4.6,
+          "delta": -5.3,
+          "offense": 25.2,
+          "defense": 21.2,
+          "specialTeams": 0.6
+        },
+        "missouri": {
+          "old": 6.4,
+          "new": 7.7,
+          "delta": 1.3,
+          "offense": 30.1,
+          "defense": 21.9,
+          "specialTeams": -0.5
+        },
+        "arizona": {
+          "old": 3.6,
+          "new": 1.7,
+          "delta": -1.9,
+          "offense": 29.6,
+          "defense": 27.4,
+          "specialTeams": -0.5
+        },
+        "washington": {
+          "old": -2.4,
+          "new": -4.3,
+          "delta": -1.9,
+          "offense": 24.1,
+          "defense": 28.1,
+          "specialTeams": -0.3
+        },
+        "houston": {
+          "old": 4.6,
+          "new": -1.3,
+          "delta": -5.9,
+          "offense": 26.6,
+          "defense": 27.5,
+          "specialTeams": -0.4
+        },
+        "louisville": {
+          "old": 6.0,
+          "new": 8.9,
+          "delta": 2.9,
+          "offense": 32.4,
+          "defense": 23.7,
+          "specialTeams": 0.2
+        },
+        "colorado": {
+          "old": -12.7,
+          "new": -15.2,
+          "delta": -2.5,
+          "offense": 18.5,
+          "defense": 33.2,
+          "specialTeams": -0.5
+        },
+        "arizonastate": {
+          "old": -10.0,
+          "new": -7.9,
+          "delta": 2.1,
+          "offense": 22.7,
+          "defense": 30.0,
+          "specialTeams": -0.6
+        },
+        "ucla": {
+          "old": 10.6,
+          "new": 8.7,
+          "delta": -1.9,
+          "offense": 27.8,
+          "defense": 19.1,
+          "specialTeams": 0.0
+        },
+        "kentucky": {
+          "old": 5.4,
+          "new": 5.4,
+          "delta": 0.0,
+          "offense": 28.8,
+          "defense": 23.4,
+          "specialTeams": 0.0
+        },
+        "wakeforest": {
+          "old": 10.5,
+          "new": 13.2,
+          "delta": 2.7,
+          "offense": 32.3,
+          "defense": 19.1,
+          "specialTeams": 0.0
+        }
+      },
+      "unplayedGamesRecalculated": 67,
+      "blowoutGamesCalibrated": 3
     }
   ]
 }

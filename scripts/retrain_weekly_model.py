@@ -1378,7 +1378,7 @@ def main():
                     'rankNum': 99
                 }
     else:
-        print("  • Applying verified official Week 9 Top 25 poll (Miami #1, Ohio State #2, Georgia #3, Indiana #4, Notre Dame #5, Utah #6, UCLA #7, BYU #8)...")
+        print("  • ESPN live AP Poll unavailable; applying verified fallback official AP Poll (CURRENT_OFFICIAL_POLL)...")
         ranking_updates = CURRENT_OFFICIAL_POLL
 
     # Apply rankings to teams in DB
@@ -1480,7 +1480,11 @@ def main():
                 try:
                     dt = datetime.datetime.strptime(d_str, '%b %d, %Y').date()
                     if dt <= today_date:
-                        schedule_dates.add(dt.strftime('%Y%m%d'))
+                        # Include +/-1 day to catch flexed Friday or postponed Sunday games (e.g. Nov 14 -> Nov 15)
+                        for delta in (-1, 0, 1):
+                            cand_dt = dt + datetime.timedelta(days=delta)
+                            if cand_dt <= today_date:
+                                schedule_dates.add(cand_dt.strftime('%Y%m%d'))
                 except Exception:
                     pass
         target_dates = sorted(list(schedule_dates))
@@ -1839,8 +1843,10 @@ def main():
                     unplayed_weeks.append(w_int)
                 try:
                     g_dt = datetime.datetime.strptime(g_obj.get('date', ''), '%b %d, %Y').date()
-                    if 0 <= (g_dt - today_dt).days <= 7:
-                        upcoming_dates_set.add(g_dt.strftime('%Y%m%d'))
+                    for delta in (-1, 0, 1):
+                        cand_dt = g_dt + datetime.timedelta(days=delta)
+                        if 0 <= (cand_dt - today_dt).days <= 7:
+                            upcoming_dates_set.add(cand_dt.strftime('%Y%m%d'))
                 except Exception:
                     pass
     active_upcoming_week = min(unplayed_weeks) if unplayed_weeks else 10
