@@ -371,15 +371,53 @@ WEEK11_OFFICIAL_POLL = {
     'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
-CURRENT_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
-WEEK10_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
-WEEK9_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
-WEEK8_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
-WEEK7_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
-WEEK6_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
-WEEK5_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
-WEEK4_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
-WEEK3_OFFICIAL_POLL = WEEK11_OFFICIAL_POLL
+# Authoritative Week 12 Official Poll (November 16, 2026 Live Release)
+WEEK12_OFFICIAL_POLL = {
+    'georgia': {'apRank': '#1 AP', 'apPoints': '1,734 PTS (58 1st)', 'rankNum': 1},
+    'utah': {'apRank': '#2 AP', 'apPoints': '1,677 PTS (10 1st)', 'rankNum': 2},
+    'notredame': {'apRank': '#3 AP', 'apPoints': '1,584 PTS (2 1st)', 'rankNum': 3},
+    'ucla': {'apRank': '#4 AP', 'apPoints': '1,552 PTS', 'rankNum': 4},
+    'miami': {'apRank': '#5 AP', 'apPoints': '1,426 PTS', 'rankNum': 5},
+    'indiana': {'apRank': '#6 AP', 'apPoints': '1,384 PTS', 'rankNum': 6},
+    'alabama': {'apRank': '#7 AP', 'apPoints': '1,297 PTS', 'rankNum': 7},
+    'texas': {'apRank': '#8 AP', 'apPoints': '1,290 PTS', 'rankNum': 8},
+    'tennessee': {'apRank': '#9 AP', 'apPoints': '1,179 PTS', 'rankNum': 9},
+    'wakeforest': {'apRank': '#10 AP', 'apPoints': '1,134 PTS', 'rankNum': 10},
+    'texastech': {'apRank': '#11 AP', 'apPoints': '1,081 PTS', 'rankNum': 11},
+    'byu': {'apRank': '#12 AP', 'apPoints': '1,038 PTS', 'rankNum': 12},
+    'iowa': {'apRank': '#13 AP', 'apPoints': '861 PTS', 'rankNum': 13},
+    'oregon': {'apRank': '#14 AP', 'apPoints': '820 PTS', 'rankNum': 14},
+    'boisestate': {'apRank': '#15 AP', 'apPoints': '767 PTS', 'rankNum': 15},
+    'ohiostate': {'apRank': '#16 AP', 'apPoints': '661 PTS', 'rankNum': 16},
+    'kentucky': {'apRank': '#17 AP', 'apPoints': '599 PTS', 'rankNum': 17},
+    'usc': {'apRank': '#18 AP', 'apPoints': '546 PTS', 'rankNum': 18},
+    'arizona': {'apRank': '#19 AP', 'apPoints': '404 PTS', 'rankNum': 19},
+    'houston': {'apRank': '#20 AP', 'apPoints': '365 PTS', 'rankNum': 20},
+    'louisville': {'apRank': '#21 AP', 'apPoints': '357 PTS', 'rankNum': 21},
+    'olemiss': {'apRank': '#25 AP', 'apPoints': '103 PTS', 'rankNum': 25},
+    'oklahoma': {'apRank': 'RV', 'apPoints': '95 PTS', 'rankNum': 99},
+    'lsu': {'apRank': 'RV', 'apPoints': '91 PTS', 'rankNum': 99},
+    'smu': {'apRank': 'RV', 'apPoints': '5 PTS', 'rankNum': 99},
+    'missouri': {'apRank': 'RV', 'apPoints': '3 PTS', 'rankNum': 99},
+    'texasam': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'michigan': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'pennstate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'washington': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
+}
+CURRENT_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
+WEEK11_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
+WEEK10_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
+WEEK9_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
+WEEK8_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
+WEEK7_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
+WEEK6_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
+WEEK5_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
+WEEK4_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
+WEEK3_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
 
 # Stadium Home Field Advantage mapping (points - calibrated to modern college football analytics)
 STADIUM_HFA = {
@@ -1432,12 +1470,15 @@ def main():
             if loc and name: external_ap_ranks[f"{loc} {name}"] = f"#{rn} AP"
     else:
         external_ap_ranks = {
-            'south carolina': '#20 AP',
-            'south carolina gamecocks': '#20 AP',
-            'sc': '#20 AP',
-            'new mexico': '#23 AP',
-            'new mexico lobos': '#23 AP',
-            'unm': '#23 AP',
+            'liberty': '#22 AP',
+            'liberty flames': '#22 AP',
+            'lib': '#22 AP',
+            'florida': '#23 AP',
+            'florida gators': '#23 AP',
+            'fla': '#23 AP',
+            'memphis': '#24 AP',
+            'memphis tigers': '#24 AP',
+            'mem': '#24 AP',
         }
 
     for tid, t in db.items():
