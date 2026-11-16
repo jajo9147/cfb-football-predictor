@@ -1432,18 +1432,12 @@ def main():
             if loc and name: external_ap_ranks[f"{loc} {name}"] = f"#{rn} AP"
     else:
         external_ap_ranks = {
-            'ucla': '#5 AP',
-            'ucla bruins': '#5 AP',
-            'kentucky': '#8 AP',
-            'kentucky wildcats': '#8 AP',
-            'wake forest': '#14 AP',
-            'wake forest demon deacons': '#14 AP',
-            'new mexico': '#22 AP',
-            'new mexico lobos': '#22 AP',
-            'south carolina': '#23 AP',
-            'south carolina gamecocks': '#23 AP',
-            'florida': '#25 AP',
-            'florida gators': '#25 AP',
+            'south carolina': '#20 AP',
+            'south carolina gamecocks': '#20 AP',
+            'sc': '#20 AP',
+            'new mexico': '#23 AP',
+            'new mexico lobos': '#23 AP',
+            'unm': '#23 AP',
         }
 
     for tid, t in db.items():

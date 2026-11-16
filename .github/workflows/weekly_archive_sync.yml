@@ -12,8 +12,12 @@ on:
     - cron: '30 19 * * 0'
     # Sunday 23:00 UTC (7:00 PM ET) - Sunday evening final wrap-up & future projections sync
     - cron: '0 23 * * 0'
-    # Monday 06:00 UTC (2:00 AM ET) - Settle any Sunday night marquee games
+    # Monday 06:00 UTC (1:00 AM EST) - Settle any Sunday night marquee games
     - cron: '0 6 * * 1'
+    # Monday 19:30 UTC (2:30 PM EST) - Catch delayed Monday AP Poll releases
+    - cron: '30 19 * * 1'
+    # Monday 20:30 UTC (3:30 PM EST) - Monday AP Poll verification retry
+    - cron: '30 20 * * 1'
   workflow_dispatch:
 
 permissions:
