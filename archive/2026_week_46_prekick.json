@@ -2,7 +2,7 @@
   "season": 2026,
   "snapshotId": "2026_week_46_prekick",
   "name": "Week 46 Pre-Kickoff Projections",
-  "timestamp": "2026-11-17T03:00:50.332032+00:00",
+  "timestamp": "2026-11-21T20:46:15.009420+00:00",
   "totalTeams": 34,
   "teams": [
     {
@@ -10,7 +10,7 @@
       "name": "BYU Cougars",
       "shortName": "BYU",
       "apRank": "#12 AP",
-      "baseSpRating": 12.5,
+      "baseSpRating": 11.7,
       "conference": "Big 12",
       "headCoach": "Kalani Sitake",
       "starterQb": "Bear Bachmeier",
@@ -155,8 +155,8 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "David Booth Kansas Memorial Stadium",
-          "baseWinProb": 67,
-          "projScoreUt": 27,
+          "baseWinProb": 66,
+          "projScoreUt": 26,
           "projScoreOpp": 21
         },
         {
@@ -179,7 +179,7 @@
       "name": "Texas Longhorns",
       "shortName": "Texas",
       "apRank": "#8 AP",
-      "baseSpRating": 18.7,
+      "baseSpRating": 12.8,
       "conference": "SEC",
       "headCoach": "Steve Sarkisian",
       "starterQb": "Arch Manning",
@@ -324,9 +324,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "DKR-Texas Memorial Stadium",
-          "baseWinProb": 95,
-          "projScoreUt": 35,
-          "projScoreOpp": 13
+          "baseWinProb": 90,
+          "projScoreUt": 32,
+          "projScoreOpp": 15
         },
         {
           "id": "tex-w13",
@@ -337,9 +337,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Kyle Field",
-          "baseWinProb": 97,
-          "projScoreUt": 33,
-          "projScoreOpp": 9
+          "baseWinProb": 93,
+          "projScoreUt": 30,
+          "projScoreOpp": 11
         }
       ]
     },
@@ -348,7 +348,7 @@
       "name": "Michigan Wolverines",
       "shortName": "Michigan",
       "apRank": "NR",
-      "baseSpRating": -8.8,
+      "baseSpRating": -9.9,
       "conference": "Big Ten",
       "headCoach": "Kyle Whittingham",
       "starterQb": "Bryce Underwood",
@@ -495,7 +495,7 @@
           "stadium": "Michigan Stadium",
           "baseWinProb": 12,
           "projScoreUt": 9,
-          "projScoreOpp": 22
+          "projScoreOpp": 23
         },
         {
           "id": "mich-w13",
@@ -506,9 +506,9 @@
           "oppRank": "#16 AP",
           "isHome": false,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 3,
-          "projScoreUt": 6,
-          "projScoreOpp": 27
+          "baseWinProb": 5,
+          "projScoreUt": 7,
+          "projScoreOpp": 26
         }
       ]
     },
@@ -517,7 +517,7 @@
       "name": "Ohio State Buckeyes",
       "shortName": "Ohio State",
       "apRank": "#16 AP",
-      "baseSpRating": 9.5,
+      "baseSpRating": 6.6,
       "conference": "Big Ten",
       "headCoach": "Ryan Day",
       "starterQb": "Luke Fahey",
@@ -662,9 +662,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Memorial Stadium (Lincoln, NE)",
-          "baseWinProb": 35,
-          "projScoreUt": 17,
-          "projScoreOpp": 22
+          "baseWinProb": 27,
+          "projScoreUt": 15,
+          "projScoreOpp": 23
         },
         {
           "id": "osu-w13",
@@ -675,9 +675,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 97,
-          "projScoreUt": 27,
-          "projScoreOpp": 6
+          "baseWinProb": 95,
+          "projScoreUt": 26,
+          "projScoreOpp": 7
         }
       ]
     },
@@ -686,7 +686,7 @@
       "name": "Georgia Bulldogs",
       "shortName": "Georgia",
       "apRank": "#1 AP",
-      "baseSpRating": 21.7,
+      "baseSpRating": 15.5,
       "conference": "SEC",
       "headCoach": "Kirby Smart",
       "starterQb": "Gunner Stockton",
@@ -831,9 +831,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Williams-Brice Stadium",
-          "baseWinProb": 79,
-          "projScoreUt": 31,
-          "projScoreOpp": 20
+          "baseWinProb": 68,
+          "projScoreUt": 28,
+          "projScoreOpp": 21
         },
         {
           "id": "uga-w13",
@@ -844,9 +844,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Sanford Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 40,
-          "projScoreOpp": 10
+          "baseWinProb": 97,
+          "projScoreUt": 37,
+          "projScoreOpp": 12
         }
       ]
     },
@@ -855,7 +855,7 @@
       "name": "Alabama Crimson Tide",
       "shortName": "Alabama",
       "apRank": "#7 AP",
-      "baseSpRating": 19.6,
+      "baseSpRating": 14.5,
       "conference": "SEC",
       "headCoach": "Kalen DeBoer",
       "starterQb": "Keelon Russell",
@@ -1001,7 +1001,7 @@
           "isHome": true,
           "stadium": "Bryant-Denny Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 52,
+          "projScoreUt": 51,
           "projScoreOpp": 4
         },
         {
@@ -1013,9 +1013,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 89,
-          "projScoreUt": 30,
-          "projScoreOpp": 14
+          "baseWinProb": 80,
+          "projScoreUt": 28,
+          "projScoreOpp": 16
         }
       ]
     },
@@ -1024,7 +1024,7 @@
       "name": "Oregon Ducks",
       "shortName": "Oregon",
       "apRank": "#14 AP",
-      "baseSpRating": 9.1,
+      "baseSpRating": 8.3,
       "conference": "Big Ten",
       "headCoach": "Dan Lanning",
       "starterQb": "Dylan Raiola",
@@ -1171,7 +1171,7 @@
           "stadium": "Spartan Stadium",
           "baseWinProb": 82,
           "projScoreUt": 27,
-          "projScoreOpp": 15
+          "projScoreOpp": 16
         },
         {
           "id": "ore-w13",
@@ -1182,9 +1182,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 85,
+          "baseWinProb": 83,
           "projScoreUt": 30,
-          "projScoreOpp": 16
+          "projScoreOpp": 17
         }
       ]
     },
@@ -1193,7 +1193,7 @@
       "name": "Penn State Nittany Lions",
       "shortName": "Penn State",
       "apRank": "NR",
-      "baseSpRating": -8.7,
+      "baseSpRating": -8.9,
       "conference": "Big Ten",
       "headCoach": "Matt Campbell",
       "starterQb": "Rocco Becht",
@@ -1339,7 +1339,7 @@
           "isHome": true,
           "stadium": "Beaver Stadium",
           "baseWinProb": 79,
-          "projScoreUt": 33,
+          "projScoreUt": 34,
           "projScoreOpp": 22
         },
         {
@@ -1351,7 +1351,7 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "SECU Stadium",
-          "baseWinProb": 26,
+          "baseWinProb": 24,
           "projScoreUt": 21,
           "projScoreOpp": 31
         }
@@ -1362,7 +1362,7 @@
       "name": "Notre Dame Fighting Irish",
       "shortName": "Notre Dame",
       "apRank": "#3 AP",
-      "baseSpRating": 20.7,
+      "baseSpRating": 18.0,
       "conference": "Independent",
       "headCoach": "Marcus Freeman",
       "starterQb": "CJ Carr",
@@ -1507,8 +1507,8 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Notre Dame Stadium",
-          "baseWinProb": 97,
-          "projScoreUt": 41,
+          "baseWinProb": 96,
+          "projScoreUt": 40,
           "projScoreOpp": 15
         },
         {
@@ -1520,9 +1520,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "JMA Wireless Dome",
-          "baseWinProb": 93,
+          "baseWinProb": 92,
           "projScoreUt": 36,
-          "projScoreOpp": 15
+          "projScoreOpp": 16
         }
       ]
     },
@@ -1531,7 +1531,7 @@
       "name": "LSU Tigers",
       "shortName": "LSU",
       "apRank": "RV",
-      "baseSpRating": 6.8,
+      "baseSpRating": 3.4,
       "conference": "SEC",
       "headCoach": "Lane Kiffin",
       "starterQb": "Sam Leavitt",
@@ -1676,7 +1676,7 @@
           "oppRank": "#9 AP",
           "isHome": false,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 29,
+          "baseWinProb": 26,
           "projScoreUt": 19,
           "projScoreOpp": 27
         },
@@ -1689,9 +1689,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Donald W. Reynolds Razorback Stadium",
-          "baseWinProb": 70,
-          "projScoreUt": 27,
-          "projScoreOpp": 20
+          "baseWinProb": 61,
+          "projScoreUt": 25,
+          "projScoreOpp": 22
         }
       ]
     },
@@ -1700,7 +1700,7 @@
       "name": "Tennessee Volunteers",
       "shortName": "Tennessee",
       "apRank": "#9 AP",
-      "baseSpRating": 14.6,
+      "baseSpRating": 12.3,
       "conference": "SEC",
       "headCoach": "Josh Heupel",
       "starterQb": "Faizon Brandon",
@@ -1845,7 +1845,7 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Neyland Stadium",
-          "baseWinProb": 71,
+          "baseWinProb": 74,
           "projScoreUt": 27,
           "projScoreOpp": 19
         },
@@ -1858,9 +1858,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "FirstBank Stadium",
-          "baseWinProb": 90,
-          "projScoreUt": 32,
-          "projScoreOpp": 15
+          "baseWinProb": 84,
+          "projScoreUt": 31,
+          "projScoreOpp": 17
         }
       ]
     },
@@ -1869,7 +1869,7 @@
       "name": "Indiana Hoosiers",
       "shortName": "Indiana",
       "apRank": "#6 AP",
-      "baseSpRating": 12.8,
+      "baseSpRating": 12.5,
       "conference": "Big Ten",
       "headCoach": "Curt Cignetti",
       "starterQb": "Josh Hoover",
@@ -2014,7 +2014,7 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Husky Stadium",
-          "baseWinProb": 83,
+          "baseWinProb": 82,
           "projScoreUt": 28,
           "projScoreOpp": 16
         },
@@ -2027,9 +2027,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Bloomington, IN)",
-          "baseWinProb": 93,
-          "projScoreUt": 36,
-          "projScoreOpp": 16
+          "baseWinProb": 91,
+          "projScoreUt": 35,
+          "projScoreOpp": 17
         }
       ]
     },
@@ -2038,7 +2038,7 @@
       "name": "Miami Hurricanes",
       "shortName": "Miami",
       "apRank": "#5 AP",
-      "baseSpRating": 20.7,
+      "baseSpRating": 16.3,
       "conference": "ACC",
       "headCoach": "Mario Cristobal",
       "starterQb": "Darian Mensah",
@@ -2183,8 +2183,8 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Hard Rock Stadium",
-          "baseWinProb": 91,
-          "projScoreUt": 40,
+          "baseWinProb": 86,
+          "projScoreUt": 38,
           "projScoreOpp": 22
         },
         {
@@ -2196,9 +2196,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Hard Rock Stadium",
-          "baseWinProb": 99,
-          "projScoreUt": 43,
-          "projScoreOpp": 12
+          "baseWinProb": 97,
+          "projScoreUt": 39,
+          "projScoreOpp": 13
         }
       ]
     },
@@ -2207,7 +2207,7 @@
       "name": "Texas A&M Aggies",
       "shortName": "Texas A&M",
       "apRank": "NR",
-      "baseSpRating": -8.3,
+      "baseSpRating": -9.5,
       "conference": "SEC",
       "headCoach": "Mike Elko",
       "starterQb": "Marcel Reed",
@@ -2352,7 +2352,7 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Memorial Stadium (Norman, OK)",
-          "baseWinProb": 21,
+          "baseWinProb": 19,
           "projScoreUt": 12,
           "projScoreOpp": 23
         },
@@ -2365,9 +2365,9 @@
           "oppRank": "#8 AP",
           "isHome": true,
           "stadium": "Kyle Field",
-          "baseWinProb": 3,
-          "projScoreUt": 9,
-          "projScoreOpp": 33
+          "baseWinProb": 7,
+          "projScoreUt": 11,
+          "projScoreOpp": 30
         }
       ]
     },
@@ -2376,7 +2376,7 @@
       "name": "Ole Miss Rebels",
       "shortName": "Ole Miss",
       "apRank": "#25 AP",
-      "baseSpRating": 3.1,
+      "baseSpRating": 1.0,
       "conference": "SEC",
       "headCoach": "Pete Golding",
       "starterQb": "Trinidad Chambliss",
@@ -2522,8 +2522,8 @@
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
           "baseWinProb": 99,
-          "projScoreUt": 55,
-          "projScoreOpp": 10
+          "projScoreUt": 54,
+          "projScoreOpp": 12
         },
         {
           "id": "miss-w13",
@@ -2534,9 +2534,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 62,
-          "projScoreUt": 35,
-          "projScoreOpp": 30
+          "baseWinProb": 59,
+          "projScoreUt": 34,
+          "projScoreOpp": 31
         }
       ]
     },
@@ -2545,7 +2545,7 @@
       "name": "Oklahoma Sooners",
       "shortName": "Oklahoma",
       "apRank": "RV",
-      "baseSpRating": 2.1,
+      "baseSpRating": 0.8,
       "conference": "SEC",
       "headCoach": "Brent Venables",
       "starterQb": "John Mateer",
@@ -2690,7 +2690,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Norman, OK)",
-          "baseWinProb": 79,
+          "baseWinProb": 81,
           "projScoreUt": 23,
           "projScoreOpp": 12
         },
@@ -2703,7 +2703,7 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 38,
+          "baseWinProb": 39,
           "projScoreUt": 19,
           "projScoreOpp": 23
         }
@@ -2714,7 +2714,7 @@
       "name": "Boise State Broncos",
       "shortName": "Boise State",
       "apRank": "#15 AP",
-      "baseSpRating": 3.8,
+      "baseSpRating": 3.7,
       "conference": "Mountain West",
       "headCoach": "Spencer Danielson",
       "starterQb": "Maddux Madsen",
@@ -2870,7 +2870,7 @@
       "name": "USC Trojans",
       "shortName": "USC",
       "apRank": "#18 AP",
-      "baseSpRating": 3.3,
+      "baseSpRating": 2.2,
       "conference": "Big Ten",
       "headCoach": "Lincoln Riley",
       "starterQb": "Jayden Maiava",
@@ -3015,7 +3015,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Los Angeles Memorial Coliseum",
-          "baseWinProb": 75,
+          "baseWinProb": 76,
           "projScoreUt": 32,
           "projScoreOpp": 23
         },
@@ -3028,7 +3028,7 @@
           "oppRank": "#4 AP",
           "isHome": false,
           "stadium": "Rose Bowl",
-          "baseWinProb": 20,
+          "baseWinProb": 21,
           "projScoreUt": 17,
           "projScoreOpp": 28
         }
@@ -3039,7 +3039,7 @@
       "name": "Florida State Seminoles",
       "shortName": "Florida State",
       "apRank": "NR",
-      "baseSpRating": -5.7,
+      "baseSpRating": -7.0,
       "conference": "ACC",
       "headCoach": "Mike Norvell",
       "starterQb": "Ashton Daniels",
@@ -3184,9 +3184,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Doak Campbell Stadium",
-          "baseWinProb": 56,
-          "projScoreUt": 33,
-          "projScoreOpp": 31
+          "baseWinProb": 53,
+          "projScoreUt": 35,
+          "projScoreOpp": 32
         },
         {
           "id": "fsu-w13",
@@ -3198,7 +3198,7 @@
           "isHome": true,
           "stadium": "Doak Campbell Stadium",
           "baseWinProb": 23,
-          "projScoreUt": 26,
+          "projScoreUt": 25,
           "projScoreOpp": 36
         }
       ]
@@ -3208,7 +3208,7 @@
       "name": "Clemson Tigers",
       "shortName": "Clemson",
       "apRank": "NR",
-      "baseSpRating": -13.4,
+      "baseSpRating": -14.3,
       "conference": "ACC",
       "headCoach": "Dabo Swinney",
       "starterQb": "Christopher Vizzina",
@@ -3367,8 +3367,8 @@
           "isHome": true,
           "stadium": "Memorial Stadium (Clemson, SC)",
           "baseWinProb": 4,
-          "projScoreUt": 11,
-          "projScoreOpp": 33
+          "projScoreUt": 10,
+          "projScoreOpp": 34
         }
       ]
     },
@@ -3377,7 +3377,7 @@
       "name": "SMU Mustangs",
       "shortName": "SMU",
       "apRank": "RV",
-      "baseSpRating": -5.6,
+      "baseSpRating": -6.2,
       "conference": "ACC",
       "headCoach": "Rhett Lashlee",
       "starterQb": "Kevin Jennings",
@@ -3522,9 +3522,9 @@
           "oppRank": "#3 AP",
           "isHome": false,
           "stadium": "Notre Dame Stadium",
-          "baseWinProb": 3,
+          "baseWinProb": 4,
           "projScoreUt": 15,
-          "projScoreOpp": 41
+          "projScoreOpp": 40
         },
         {
           "id": "smu-w13",
@@ -3535,7 +3535,7 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Stanford Stadium",
-          "baseWinProb": 56,
+          "baseWinProb": 54,
           "projScoreUt": 30,
           "projScoreOpp": 29
         }
@@ -3546,7 +3546,7 @@
       "name": "Texas Tech Red Raiders",
       "shortName": "Texas Tech",
       "apRank": "#11 AP",
-      "baseSpRating": 12.2,
+      "baseSpRating": 10.9,
       "conference": "Big 12",
       "headCoach": "Joey McGuire",
       "starterQb": "Will Hammond",
@@ -3691,9 +3691,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "McLane Stadium",
-          "baseWinProb": 52,
-          "projScoreUt": 32,
-          "projScoreOpp": 29
+          "baseWinProb": 49,
+          "projScoreUt": 28,
+          "projScoreOpp": 31
         },
         {
           "id": "ttu-w13",
@@ -3704,8 +3704,8 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Jones AT&T Stadium",
-          "baseWinProb": 72,
-          "projScoreUt": 30,
+          "baseWinProb": 68,
+          "projScoreUt": 28,
           "projScoreOpp": 22
         }
       ]
@@ -3715,7 +3715,7 @@
       "name": "Utah Utes",
       "shortName": "Utah",
       "apRank": "#2 AP",
-      "baseSpRating": 13.4,
+      "baseSpRating": 13.0,
       "conference": "Big 12",
       "headCoach": "Morgan Scalley",
       "starterQb": "Devon Dampier",
@@ -3860,7 +3860,7 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Amon G. Carter Stadium",
-          "baseWinProb": 66,
+          "baseWinProb": 63,
           "projScoreUt": 24,
           "projScoreOpp": 19
         },
@@ -3875,7 +3875,7 @@
           "stadium": "Rice-Eccles Stadium",
           "baseWinProb": 89,
           "projScoreUt": 43,
-          "projScoreOpp": 24
+          "projScoreOpp": 25
         }
       ]
     },
@@ -3884,7 +3884,7 @@
       "name": "Iowa Hawkeyes",
       "shortName": "Iowa",
       "apRank": "#13 AP",
-      "baseSpRating": 5.1,
+      "baseSpRating": 4.8,
       "conference": "Big Ten",
       "headCoach": "Kirk Ferentz",
       "starterQb": "Jeremy Hecklinski",
@@ -4042,9 +4042,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Kinnick Stadium",
-          "baseWinProb": 26,
+          "baseWinProb": 24,
           "projScoreUt": 10,
-          "projScoreOpp": 17
+          "projScoreOpp": 18
         }
       ]
     },
@@ -4053,7 +4053,7 @@
       "name": "Missouri Tigers",
       "shortName": "Missouri",
       "apRank": "RV",
-      "baseSpRating": 3.3,
+      "baseSpRating": 1.8,
       "conference": "SEC",
       "headCoach": "Eli Drinkwitz",
       "starterQb": "Austin Simmons",
@@ -4198,7 +4198,7 @@
           "oppRank": "#17 AP",
           "isHome": true,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 64,
+          "baseWinProb": 63,
           "projScoreUt": 28,
           "projScoreOpp": 23
         },
@@ -4211,7 +4211,7 @@
           "oppRank": "RV",
           "isHome": true,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 62,
+          "baseWinProb": 61,
           "projScoreUt": 23,
           "projScoreOpp": 19
         }
@@ -4222,7 +4222,7 @@
       "name": "Arizona Wildcats",
       "shortName": "Arizona",
       "apRank": "#19 AP",
-      "baseSpRating": 2.7,
+      "baseSpRating": 2.5,
       "conference": "Big 12",
       "headCoach": "Brent Brennan",
       "starterQb": "Noah Fifita",
@@ -4380,7 +4380,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Casino Del Sol Stadium",
-          "baseWinProb": 83,
+          "baseWinProb": 84,
           "projScoreUt": 36,
           "projScoreOpp": 22
         }
@@ -4536,7 +4536,7 @@
           "oppRank": "#6 AP",
           "isHome": true,
           "stadium": "Husky Stadium",
-          "baseWinProb": 17,
+          "baseWinProb": 18,
           "projScoreUt": 16,
           "projScoreOpp": 28
         },
@@ -4549,8 +4549,8 @@
           "oppRank": "#14 AP",
           "isHome": false,
           "stadium": "Autzen Stadium",
-          "baseWinProb": 15,
-          "projScoreUt": 16,
+          "baseWinProb": 17,
+          "projScoreUt": 17,
           "projScoreOpp": 30
         }
       ]
@@ -4560,7 +4560,7 @@
       "name": "Houston Cougars",
       "shortName": "Houston",
       "apRank": "#20 AP",
-      "baseSpRating": 4.0,
+      "baseSpRating": 3.6,
       "conference": "Big 12",
       "headCoach": "Willie Fritz",
       "starterQb": "Conner Weigman",
@@ -4705,8 +4705,8 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Milan Puskar Stadium",
-          "baseWinProb": 68,
-          "projScoreUt": 38,
+          "baseWinProb": 66,
+          "projScoreUt": 37,
           "projScoreOpp": 31
         },
         {
@@ -4718,7 +4718,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "TDECU Stadium",
-          "baseWinProb": 39,
+          "baseWinProb": 36,
           "projScoreUt": 22,
           "projScoreOpp": 26
         }
@@ -4729,7 +4729,7 @@
       "name": "Louisville Cardinals",
       "shortName": "Louisville",
       "apRank": "#21 AP",
-      "baseSpRating": 5.8,
+      "baseSpRating": 5.2,
       "conference": "ACC",
       "headCoach": "Jeff Brohm",
       "starterQb": "Lincoln Kienholz",
@@ -4874,7 +4874,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "L&N Federal Credit Union Stadium",
-          "baseWinProb": 58,
+          "baseWinProb": 59,
           "projScoreUt": 26,
           "projScoreOpp": 23
         },
@@ -4887,9 +4887,9 @@
           "oppRank": "#17 AP",
           "isHome": false,
           "stadium": "Kroger Field",
-          "baseWinProb": 59,
+          "baseWinProb": 60,
           "projScoreUt": 29,
-          "projScoreOpp": 26
+          "projScoreOpp": 25
         }
       ]
     },
@@ -4898,7 +4898,7 @@
       "name": "Colorado Buffaloes",
       "shortName": "Colorado",
       "apRank": "NR",
-      "baseSpRating": -16.1,
+      "baseSpRating": -16.7,
       "conference": "Big 12",
       "headCoach": "Deion Sanders",
       "starterQb": "Julian \"JuJu\" Lewis",
@@ -5043,9 +5043,9 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Nippert Stadium",
-          "baseWinProb": 16,
+          "baseWinProb": 15,
           "projScoreUt": 23,
-          "projScoreOpp": 37
+          "projScoreOpp": 38
         },
         {
           "id": "col-w13",
@@ -5057,7 +5057,7 @@
           "isHome": true,
           "stadium": "Folsom Field",
           "baseWinProb": 14,
-          "projScoreUt": 18,
+          "projScoreUt": 17,
           "projScoreOpp": 32
         }
       ]
@@ -5067,7 +5067,7 @@
       "name": "Arizona State Sun Devils",
       "shortName": "Arizona State",
       "apRank": "NR",
-      "baseSpRating": -8.7,
+      "baseSpRating": -9.0,
       "conference": "Big 12",
       "headCoach": "Kenny Dillingham",
       "starterQb": "Cutter Boley",
@@ -5212,7 +5212,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Mountain America Stadium",
-          "baseWinProb": 15,
+          "baseWinProb": 14,
           "projScoreUt": 25,
           "projScoreOpp": 40
         },
@@ -5225,7 +5225,7 @@
           "oppRank": "#19 AP",
           "isHome": false,
           "stadium": "Casino Del Sol Stadium",
-          "baseWinProb": 17,
+          "baseWinProb": 16,
           "projScoreUt": 22,
           "projScoreOpp": 36
         }
@@ -5236,7 +5236,7 @@
       "name": "UCLA Bruins",
       "shortName": "UCLA",
       "apRank": "#4 AP",
-      "baseSpRating": 10.4,
+      "baseSpRating": 9.6,
       "conference": "Big Ten",
       "headCoach": "Bob Chesney",
       "starterQb": "Ty Dieffenbach",
@@ -5382,7 +5382,7 @@
           "isHome": false,
           "stadium": "Michigan Stadium",
           "baseWinProb": 88,
-          "projScoreUt": 22,
+          "projScoreUt": 23,
           "projScoreOpp": 9
         },
         {
@@ -5394,7 +5394,7 @@
           "oppRank": "#18 AP",
           "isHome": true,
           "stadium": "Rose Bowl",
-          "baseWinProb": 80,
+          "baseWinProb": 79,
           "projScoreUt": 28,
           "projScoreOpp": 17
         }
@@ -5405,7 +5405,7 @@
       "name": "Kentucky Wildcats",
       "shortName": "Kentucky",
       "apRank": "#17 AP",
-      "baseSpRating": 0.3,
+      "baseSpRating": -0.8,
       "conference": "SEC",
       "headCoach": "Will Stein",
       "starterQb": "Kenny Minchey",
@@ -5550,7 +5550,7 @@
           "oppRank": "RV",
           "isHome": false,
           "stadium": "Memorial Stadium",
-          "baseWinProb": 36,
+          "baseWinProb": 37,
           "projScoreUt": 23,
           "projScoreOpp": 28
         },
@@ -5563,8 +5563,8 @@
           "oppRank": "#21 AP",
           "isHome": true,
           "stadium": "Kroger Field",
-          "baseWinProb": 41,
-          "projScoreUt": 26,
+          "baseWinProb": 40,
+          "projScoreUt": 25,
           "projScoreOpp": 29
         }
       ]
@@ -5574,7 +5574,7 @@
       "name": "Wake Forest Demon Deacons",
       "shortName": "Wake Forest",
       "apRank": "#10 AP",
-      "baseSpRating": 17.2,
+      "baseSpRating": 16.8,
       "conference": "ACC",
       "headCoach": "Jake Dickert",
       "starterQb": "Gio Lopez",
@@ -5719,7 +5719,7 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "Bobby Dodd Stadium",
-          "baseWinProb": 94,
+          "baseWinProb": 93,
           "projScoreUt": 37,
           "projScoreOpp": 16
         },
@@ -5833,8 +5833,8 @@
       "teamName": "Texas Longhorns",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 13",
-      "winProb": 97,
-      "projScore": "33-9"
+      "winProb": 93,
+      "projScore": "30-11"
     },
     {
       "teamId": "michigan",
@@ -5881,8 +5881,8 @@
       "teamName": "Michigan Wolverines",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 13",
-      "winProb": 3,
-      "projScore": "6-27"
+      "winProb": 5,
+      "projScore": "7-26"
     },
     {
       "teamId": "ohiostate",
@@ -5929,8 +5929,8 @@
       "teamName": "Ohio State Buckeyes",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 13",
-      "winProb": 97,
-      "projScore": "27-6"
+      "winProb": 95,
+      "projScore": "26-7"
     },
     {
       "teamId": "georgia",
@@ -6017,8 +6017,8 @@
       "teamName": "Alabama Crimson Tide",
       "oppName": "Auburn Tigers",
       "week": "WEEK 13",
-      "winProb": 89,
-      "projScore": "30-14"
+      "winProb": 80,
+      "projScore": "28-16"
     },
     {
       "teamId": "oregon",
@@ -6057,8 +6057,8 @@
       "teamName": "Oregon Ducks",
       "oppName": "Washington Huskies",
       "week": "WEEK 13",
-      "winProb": 85,
-      "projScore": "30-16"
+      "winProb": 83,
+      "projScore": "30-17"
     },
     {
       "teamId": "pennstate",
@@ -6113,8 +6113,8 @@
       "teamName": "Notre Dame Fighting Irish",
       "oppName": "SMU Mustangs",
       "week": "WEEK 12",
-      "winProb": 97,
-      "projScore": "41-15"
+      "winProb": 96,
+      "projScore": "40-15"
     },
     {
       "teamId": "lsu",
@@ -6161,7 +6161,7 @@
       "teamName": "LSU Tigers",
       "oppName": "Tennessee Volunteers",
       "week": "WEEK 12",
-      "winProb": 29,
+      "winProb": 26,
       "projScore": "19-27"
     },
     {
@@ -6193,7 +6193,7 @@
       "teamName": "Tennessee Volunteers",
       "oppName": "LSU Tigers",
       "week": "WEEK 12",
-      "winProb": 71,
+      "winProb": 74,
       "projScore": "27-19"
     },
     {
@@ -6225,7 +6225,7 @@
       "teamName": "Indiana Hoosiers",
       "oppName": "Washington Huskies",
       "week": "WEEK 12",
-      "winProb": 83,
+      "winProb": 82,
       "projScore": "28-16"
     },
     {
@@ -6297,7 +6297,7 @@
       "teamName": "Texas A&M Aggies",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 12",
-      "winProb": 21,
+      "winProb": 19,
       "projScore": "12-23"
     },
     {
@@ -6305,8 +6305,8 @@
       "teamName": "Texas A&M Aggies",
       "oppName": "Texas Longhorns",
       "week": "WEEK 13",
-      "winProb": 3,
-      "projScore": "9-33"
+      "winProb": 7,
+      "projScore": "11-30"
     },
     {
       "teamId": "olemiss",
@@ -6361,8 +6361,8 @@
       "teamName": "Ole Miss Rebels",
       "oppName": "Mississippi State Bulldogs",
       "week": "WEEK 13",
-      "winProb": 62,
-      "projScore": "35-30"
+      "winProb": 59,
+      "projScore": "34-31"
     },
     {
       "teamId": "oklahoma",
@@ -6401,7 +6401,7 @@
       "teamName": "Oklahoma Sooners",
       "oppName": "Texas A&M Aggies",
       "week": "WEEK 12",
-      "winProb": 79,
+      "winProb": 81,
       "projScore": "23-12"
     },
     {
@@ -6409,7 +6409,7 @@
       "teamName": "Oklahoma Sooners",
       "oppName": "Missouri Tigers",
       "week": "WEEK 13",
-      "winProb": 38,
+      "winProb": 39,
       "projScore": "19-23"
     },
     {
@@ -6465,7 +6465,7 @@
       "teamName": "USC Trojans",
       "oppName": "UCLA Bruins",
       "week": "WEEK 13",
-      "winProb": 20,
+      "winProb": 21,
       "projScore": "17-28"
     },
     {
@@ -6514,7 +6514,7 @@
       "oppName": "South Carolina Gamecocks",
       "week": "WEEK 13",
       "winProb": 4,
-      "projScore": "11-33"
+      "projScore": "10-34"
     },
     {
       "teamId": "smu",
@@ -6537,8 +6537,8 @@
       "teamName": "SMU Mustangs",
       "oppName": "Notre Dame Fighting Irish",
       "week": "WEEK 12",
-      "winProb": 3,
-      "projScore": "15-41"
+      "winProb": 4,
+      "projScore": "15-40"
     },
     {
       "teamId": "texastech",
@@ -6673,7 +6673,7 @@
       "teamName": "Missouri Tigers",
       "oppName": "Oklahoma Sooners",
       "week": "WEEK 13",
-      "winProb": 62,
+      "winProb": 61,
       "projScore": "23-19"
     },
     {
@@ -6705,7 +6705,7 @@
       "teamName": "Arizona Wildcats",
       "oppName": "Arizona State Sun Devils",
       "week": "WEEK 13",
-      "winProb": 83,
+      "winProb": 84,
       "projScore": "36-22"
     },
     {
@@ -6737,7 +6737,7 @@
       "teamName": "Washington Huskies",
       "oppName": "Indiana Hoosiers",
       "week": "WEEK 12",
-      "winProb": 17,
+      "winProb": 18,
       "projScore": "16-28"
     },
     {
@@ -6745,8 +6745,8 @@
       "teamName": "Washington Huskies",
       "oppName": "Oregon Ducks",
       "week": "WEEK 13",
-      "winProb": 15,
-      "projScore": "16-30"
+      "winProb": 17,
+      "projScore": "17-30"
     },
     {
       "teamId": "houston",
@@ -6841,7 +6841,7 @@
       "teamName": "Arizona State Sun Devils",
       "oppName": "Arizona Wildcats",
       "week": "WEEK 13",
-      "winProb": 17,
+      "winProb": 16,
       "projScore": "22-36"
     },
     {
@@ -6858,14 +6858,14 @@
       "oppName": "Michigan Wolverines",
       "week": "WEEK 12",
       "winProb": 88,
-      "projScore": "22-9"
+      "projScore": "23-9"
     },
     {
       "teamId": "ucla",
       "teamName": "UCLA Bruins",
       "oppName": "USC Trojans",
       "week": "WEEK 13",
-      "winProb": 80,
+      "winProb": 79,
       "projScore": "28-17"
     },
     {
@@ -6913,7 +6913,7 @@
       "teamName": "Kentucky Wildcats",
       "oppName": "Missouri Tigers",
       "week": "WEEK 12",
-      "winProb": 36,
+      "winProb": 37,
       "projScore": "23-28"
     },
     {
@@ -6921,8 +6921,8 @@
       "teamName": "Kentucky Wildcats",
       "oppName": "Louisville Cardinals",
       "week": "WEEK 13",
-      "winProb": 41,
-      "projScore": "26-29"
+      "winProb": 40,
+      "projScore": "25-29"
     },
     {
       "teamId": "wakeforest",

@@ -546,7 +546,7 @@ const TEAMS_DATABASE = {
     "stadium": "LaVell Edwards Stadium",
     "stadiumCapacity": "63,470",
     "stadiumCity": "Provo, UT",
-    "baseSpRating": 11.7,
+    "baseSpRating": 12.6,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/252.png",
     "colors": {
       "primary": "#002E5D",
@@ -1328,8 +1328,8 @@ const TEAMS_DATABASE = {
         "location": "Lawrence, KS",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -5.5,
-        "overUnder": 47.5,
+        "vegasSpread": -4.5,
+        "overUnder": 46.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 66,
         "projScoreUt": 26,
@@ -1341,13 +1341,13 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 51.3,
-        "mcOverProb": 47.4,
+        "mcCoverProb": 53.1,
+        "mcOverProb": 52.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 19,
+          "p25": 20,
           "p50": 26,
           "p75": 33,
           "p90": 40
@@ -1364,23 +1364,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 19,
         "preseasonSpread": -14,
         "weather": {
-          "temp": 51.8,
-          "windSpeed": 10.6,
-          "windGust": 30.9,
+          "temp": 34.7,
+          "windSpeed": 8.4,
+          "windGust": 20.1,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Lawrence, KS",
-          "desc": "\u2600\ufe0f 52\u00b0F \u2022 11 mph wind"
+          "desc": "\ud83e\udd76 35\u00b0F \u2022 8 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       },
       {
@@ -1402,12 +1402,12 @@ const TEAMS_DATABASE = {
         "location": "Provo, UT",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -16.0,
+        "vegasSpread": -15.5,
         "overUnder": 59.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 82,
+        "baseWinProb": 84,
         "projScoreUt": 36,
-        "projScoreOpp": 23,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "BYU front seven vs Cincinnati Bearcats rushing attack.",
@@ -1415,38 +1415,38 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 42.3,
-        "mcOverProb": 48.4,
-        "mcRecommendedAts": "CIN +16.0",
+        "mcCoverProb": 47.8,
+        "mcOverProb": 46.6,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 23,
           "p25": 29,
           "p50": 36,
-          "p75": 43,
+          "p75": 44,
           "p90": 51
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 16,
-          "p50": 23,
-          "p75": 30,
-          "p90": 37
+          "p50": 22,
+          "p75": 29,
+          "p90": 35
         },
         "preseasonWinProb": 92,
         "preseasonProjUt": 36,
         "preseasonProjOpp": 16,
         "preseasonSpread": -20,
         "weather": {
-          "temp": 34.7,
-          "windSpeed": 7.0,
-          "windGust": 8.1,
-          "precipProb": 6,
+          "temp": 37.0,
+          "windSpeed": 3.0,
+          "windGust": 3.8,
+          "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Provo, UT",
-          "desc": "\ud83e\udd76 35\u00b0F \u2022 7 mph wind"
+          "desc": "\ud83e\udd76 37\u00b0F \u2022 3 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.6,
@@ -1479,8 +1479,8 @@ const TEAMS_DATABASE = {
         92
       ]
     },
-    "offenseRating": 29.9,
-    "defenseRating": 18.8,
+    "offenseRating": 30.4,
+    "defenseRating": 18.4,
     "specialTeamsRating": 0.6
   },
   "texas": {
@@ -1511,7 +1511,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#0E121C",
       "bgBase": "#07090E"
     },
-    "baseSpRating": 12.8,
+    "baseSpRating": 18.8,
     "playoffContenderRank": 8,
     "sliderLabels": {
       "qb": "Arch Manning & Cam Coleman Passing Attack",
@@ -2285,12 +2285,12 @@ const TEAMS_DATABASE = {
         "location": "Austin, TX",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -20.5,
-        "overUnder": 47.5,
-        "oddsProvider": "DraftKings",
-        "baseWinProb": 90,
-        "projScoreUt": 32,
-        "projScoreOpp": 15,
+        "vegasSpread": -32.5,
+        "overUnder": 49.5,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 95,
+        "projScoreUt": 35,
+        "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas front seven vs Arkansas Razorbacks rushing attack.",
@@ -2298,38 +2298,38 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 40.8,
-        "mcOverProb": 48.0,
-        "mcRecommendedAts": "ARK +20.5",
+        "mcCoverProb": 20.5,
+        "mcOverProb": 46.3,
+        "mcRecommendedAts": "ARK +32.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 19,
-          "p25": 25,
-          "p50": 32,
-          "p75": 40,
-          "p90": 46
+          "p10": 22,
+          "p25": 27,
+          "p50": 34,
+          "p75": 43,
+          "p90": 50
         },
         "mcScoreDistOpp": {
-          "p10": 6,
-          "p25": 9,
-          "p50": 14,
-          "p75": 20,
-          "p90": 27
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 19,
+          "p90": 24
         },
         "preseasonWinProb": 98,
         "preseasonProjUt": 41,
         "preseasonProjOpp": 11,
         "preseasonSpread": -30,
         "weather": {
-          "temp": 61.3,
-          "windSpeed": 2.6,
-          "windGust": 5.6,
+          "temp": 54.5,
+          "windSpeed": 7.7,
+          "windGust": 16.8,
           "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Austin, TX",
-          "desc": "\u2600\ufe0f 61\u00b0F \u2022 3 mph wind"
+          "desc": "\u2600\ufe0f 54\u00b0F \u2022 8 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -2359,12 +2359,12 @@ const TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -15.2,
-        "overUnder": 41.5,
+        "vegasSpread": -20.0,
+        "overUnder": 42.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 93,
-        "projScoreUt": 30,
-        "projScoreOpp": 11,
+        "baseWinProb": 98,
+        "projScoreUt": 34,
+        "projScoreOpp": 9,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas quarterback play vs Texas A&M Aggies secondary.",
@@ -2373,38 +2373,38 @@ const TEAMS_DATABASE = {
         "oppId": "texasam",
         "is_tracked": true,
         "rivalryName": "LONE STAR SHOWDOWN",
-        "mcCoverProb": 49.5,
-        "mcOverProb": 46.1,
+        "mcCoverProb": 50.4,
+        "mcOverProb": 47.9,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 16,
-          "p25": 23,
-          "p50": 30,
-          "p75": 37,
-          "p90": 45
+          "p10": 20,
+          "p25": 26,
+          "p50": 33,
+          "p75": 40,
+          "p90": 47
         },
         "mcScoreDistOpp": {
           "p10": 0,
-          "p25": 6,
-          "p50": 10,
-          "p75": 16,
-          "p90": 21
+          "p25": 3,
+          "p50": 7,
+          "p75": 14,
+          "p90": 17
         },
         "preseasonWinProb": 56,
         "preseasonProjUt": 27,
         "preseasonProjOpp": 25,
         "preseasonSpread": -2,
         "weather": {
-          "temp": 56.3,
-          "windSpeed": 4.3,
-          "windGust": 4.0,
-          "precipProb": 0,
+          "temp": 48.3,
+          "windSpeed": 7.5,
+          "windGust": 15.7,
+          "precipProb": 1,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "College Station, TX",
-          "desc": "\u2600\ufe0f 56\u00b0F \u2022 4 mph wind"
+          "desc": "\u2600\ufe0f 48\u00b0F \u2022 8 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -2439,8 +2439,8 @@ const TEAMS_DATABASE = {
         56
       ]
     },
-    "offenseRating": 31.1,
-    "defenseRating": 18.9,
+    "offenseRating": 34.6,
+    "defenseRating": 16.4,
     "specialTeamsRating": 0.6
   },
   "michigan": {
@@ -2470,8 +2470,8 @@ const TEAMS_DATABASE = {
       "bgSurface": "#0B172A",
       "bgBase": "#050D1A"
     },
-    "baseSpRating": -9.9,
-    "playoffContenderRank": 32,
+    "baseSpRating": -8.7,
+    "playoffContenderRank": 30,
     "sliderLabels": {
       "qb": "Bryce Underwood Execution",
       "ground": "Jordan Marshall & Taylor Tatum Ground Attack",
@@ -3243,12 +3243,12 @@ const TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 4.0,
-        "overUnder": 37.5,
-        "oddsProvider": "DraftKings",
-        "baseWinProb": 12,
-        "projScoreUt": 9,
-        "projScoreOpp": 23,
+        "vegasSpread": 12.8,
+        "overUnder": 30.5,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 6,
+        "projScoreUt": 6,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Michigan front seven vs UCLA Bruins rushing attack.",
@@ -3256,46 +3256,46 @@ const TEAMS_DATABASE = {
         },
         "oppId": "ucla",
         "is_tracked": true,
-        "mcCoverProb": 20.7,
-        "mcOverProb": 28.5,
-        "mcRecommendedAts": "UCLA -4.0",
-        "mcRecommendedOu": "UNDER 37.5",
+        "mcCoverProb": 49.6,
+        "mcOverProb": 38.6,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 30.5",
         "mcScoreDistUt": {
           "p10": 0,
-          "p25": 3,
-          "p50": 7,
-          "p75": 13,
-          "p90": 17
+          "p25": 0,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 16,
           "p50": 23,
           "p75": 29,
-          "p90": 35
+          "p90": 34
         },
         "preseasonWinProb": 95,
         "preseasonProjUt": 38,
         "preseasonProjOpp": 15,
         "preseasonSpread": -23.5,
         "weather": {
-          "temp": 42.7,
-          "windSpeed": 8.0,
-          "windGust": 25.1,
-          "precipProb": 0,
+          "temp": 32.2,
+          "windSpeed": 10.0,
+          "windGust": 21.7,
+          "precipProb": 2,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Ann Arbor, MI",
-          "desc": "\u2600\ufe0f 43\u00b0F \u2022 8 mph wind"
+          "desc": "\ud83e\udd76 32\u00b0F \u2022 10 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       },
       {
@@ -3317,12 +3317,12 @@ const TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 15.2,
-        "overUnder": 33.5,
+        "vegasSpread": 16.0,
+        "overUnder": 36.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 5,
-        "projScoreUt": 7,
-        "projScoreOpp": 26,
+        "baseWinProb": 4,
+        "projScoreUt": 8,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Michigan quarterback play vs Ohio State Buckeyes secondary.",
@@ -3331,46 +3331,46 @@ const TEAMS_DATABASE = {
         "oppId": "ohiostate",
         "is_tracked": true,
         "rivalryName": "THE GAME",
-        "mcCoverProb": 49.8,
-        "mcOverProb": 46.6,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcCoverProb": 50.9,
+        "mcOverProb": 45.8,
+        "mcRecommendedAts": "Michigan +20.7",
+        "mcRecommendedOu": "UNDER 36.5",
         "mcScoreDistUt": {
           "p10": 0,
           "p25": 3,
           "p50": 7,
-          "p75": 10,
-          "p90": 14
+          "p75": 12,
+          "p90": 17
         },
         "mcScoreDistOpp": {
-          "p10": 13,
-          "p25": 20,
-          "p50": 26,
-          "p75": 34,
-          "p90": 40
+          "p10": 16,
+          "p25": 21,
+          "p50": 27,
+          "p75": 35,
+          "p90": 42
         },
         "preseasonWinProb": 21,
         "preseasonProjUt": 21,
         "preseasonProjOpp": 32,
         "preseasonSpread": 10.5,
         "weather": {
-          "temp": 47.4,
-          "windSpeed": 4.7,
-          "windGust": 14.1,
+          "temp": 39.1,
+          "windSpeed": 8.9,
+          "windGust": 18.6,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Columbus, OH",
-          "desc": "\u2600\ufe0f 47\u00b0F \u2022 5 mph wind"
+          "desc": "\ud83e\udd76 39\u00b0F \u2022 9 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       }
     ],
@@ -3398,8 +3398,8 @@ const TEAMS_DATABASE = {
         21
       ]
     },
-    "offenseRating": 15.2,
-    "defenseRating": 24.5,
+    "offenseRating": 15.4,
+    "defenseRating": 23.5,
     "specialTeamsRating": -0.6
   },
   "ohiostate": {
@@ -3429,7 +3429,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#1A1010",
       "bgBase": "#0D0808"
     },
-    "baseSpRating": 6.6,
+    "baseSpRating": 9.4,
     "playoffContenderRank": 16,
     "sliderLabels": {
       "qb": "Luke Fahey Passing Attack (Sayin Out)",
@@ -4255,7 +4255,13 @@ const TEAMS_DATABASE = {
           "turnoverMultiplier": 1.0,
           "underAlert": false,
           "summary": "-0.8 pts weather drag"
-        }
+        },
+        "isFinal": true,
+        "finalTeamScore": 28,
+        "actualScoreUt": 28,
+        "finalOppScore": 31,
+        "actualScoreOpp": 31,
+        "finalWin": false
       },
       {
         "id": "osu-w13",
@@ -4276,12 +4282,12 @@ const TEAMS_DATABASE = {
         "location": "Columbus, OH",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -15.2,
-        "overUnder": 33.5,
+        "vegasSpread": -16.0,
+        "overUnder": 36.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 95,
-        "projScoreUt": 26,
-        "projScoreOpp": 7,
+        "baseWinProb": 96,
+        "projScoreUt": 28,
+        "projScoreOpp": 8,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Ohio State backup QB Luke Fahey (Julian Sayin out) vs Michigan Wolverines secondary.",
@@ -4290,46 +4296,46 @@ const TEAMS_DATABASE = {
         "oppId": "michigan",
         "is_tracked": true,
         "rivalryName": "THE GAME",
-        "mcCoverProb": 50.2,
-        "mcOverProb": 46.6,
+        "mcCoverProb": 49.1,
+        "mcOverProb": 45.8,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcRecommendedOu": "UNDER 36.5",
         "mcScoreDistUt": {
-          "p10": 13,
-          "p25": 20,
-          "p50": 26,
-          "p75": 34,
-          "p90": 40
+          "p10": 16,
+          "p25": 21,
+          "p50": 27,
+          "p75": 35,
+          "p90": 42
         },
         "mcScoreDistOpp": {
           "p10": 0,
           "p25": 3,
           "p50": 7,
-          "p75": 10,
-          "p90": 14
+          "p75": 12,
+          "p90": 17
         },
         "preseasonWinProb": 79,
         "preseasonProjUt": 32,
         "preseasonProjOpp": 21,
         "preseasonSpread": -10.5,
         "weather": {
-          "temp": 47.4,
-          "windSpeed": 4.7,
-          "windGust": 14.1,
+          "temp": 39.1,
+          "windSpeed": 8.9,
+          "windGust": 18.6,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Columbus, OH",
-          "desc": "\u2600\ufe0f 47\u00b0F \u2022 5 mph wind"
+          "desc": "\ud83e\udd76 39\u00b0F \u2022 9 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       }
     ],
@@ -4357,8 +4363,8 @@ const TEAMS_DATABASE = {
         79
       ]
     },
-    "offenseRating": 27.5,
-    "defenseRating": 21.0,
+    "offenseRating": 30.6,
+    "defenseRating": 21.3,
     "specialTeamsRating": 0.1,
     "qbStatus": {
       "starterOut": "Julian Sayin",
@@ -4395,7 +4401,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#170C0F",
       "bgBase": "#0A0507"
     },
-    "baseSpRating": 15.5,
+    "baseSpRating": 21.7,
     "playoffContenderRank": 1,
     "sliderLabels": {
       "qb": "Gunner Stockton Execution",
@@ -5169,11 +5175,11 @@ const TEAMS_DATABASE = {
         "location": "Columbia, SC",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -16.5,
-        "overUnder": 50.5,
+        "vegasSpread": -14.5,
+        "overUnder": 51.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 68,
-        "projScoreUt": 28,
+        "baseWinProb": 76,
+        "projScoreUt": 31,
         "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -5182,22 +5188,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 24.4,
-        "mcOverProb": 45.1,
-        "mcRecommendedAts": "SC +16.5",
-        "mcRecommendedOu": "UNDER 50.5",
+        "mcCoverProb": 37.5,
+        "mcOverProb": 48.6,
+        "mcRecommendedAts": "SC +14.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 14,
-          "p25": 20,
-          "p50": 27,
-          "p75": 35,
-          "p90": 41
+          "p10": 19,
+          "p25": 23,
+          "p50": 30,
+          "p75": 38,
+          "p90": 44
         },
         "mcScoreDistOpp": {
-          "p10": 10,
-          "p25": 14,
+          "p10": 9,
+          "p25": 13,
           "p50": 20,
-          "p75": 28,
+          "p75": 27,
           "p90": 34
         },
         "preseasonWinProb": 96,
@@ -5205,15 +5211,15 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 14,
         "preseasonSpread": -24.5,
         "weather": {
-          "temp": 51.5,
-          "windSpeed": 6.5,
-          "windGust": 20.1,
-          "precipProb": 0,
+          "temp": 62.8,
+          "windSpeed": 4.6,
+          "windGust": 11.2,
+          "precipProb": 2,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Columbia, SC",
-          "desc": "\u2600\ufe0f 52\u00b0F \u2022 6 mph wind"
+          "desc": "\u2600\ufe0f 63\u00b0F \u2022 5 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -5243,12 +5249,12 @@ const TEAMS_DATABASE = {
         "location": "Athens, GA",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -26.2,
-        "overUnder": 50.5,
+        "vegasSpread": -39.3,
+        "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 97,
-        "projScoreUt": 37,
-        "projScoreOpp": 12,
+        "baseWinProb": 99,
+        "projScoreUt": 40,
+        "projScoreOpp": 11,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Georgia front seven vs Georgia Tech Yellow Jackets rushing attack.",
@@ -5256,38 +5262,38 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 46.5,
-        "mcOverProb": 44.6,
-        "mcRecommendedAts": "GT +26.2",
-        "mcRecommendedOu": "UNDER 50.5",
+        "mcCoverProb": 21.6,
+        "mcOverProb": 45.7,
+        "mcRecommendedAts": "GT +39.3",
+        "mcRecommendedOu": "UNDER 51.5",
         "mcScoreDistUt": {
-          "p10": 23,
-          "p25": 30,
-          "p50": 37,
-          "p75": 44,
-          "p90": 51
+          "p10": 26,
+          "p25": 33,
+          "p50": 40,
+          "p75": 47,
+          "p90": 54
         },
         "mcScoreDistOpp": {
-          "p10": 3,
+          "p10": 0,
           "p25": 6,
           "p50": 10,
-          "p75": 17,
-          "p90": 23
+          "p75": 16,
+          "p90": 21
         },
         "preseasonWinProb": 98,
         "preseasonProjUt": 42,
         "preseasonProjOpp": 11,
         "preseasonSpread": -30.5,
         "weather": {
-          "temp": 47.6,
-          "windSpeed": 7.0,
-          "windGust": 23.0,
+          "temp": 58.9,
+          "windSpeed": 3.7,
+          "windGust": 6.9,
           "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Athens, GA",
-          "desc": "\u2600\ufe0f 48\u00b0F \u2022 7 mph wind"
+          "desc": "\u2600\ufe0f 59\u00b0F \u2022 4 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -5323,8 +5329,8 @@ const TEAMS_DATABASE = {
         98
       ]
     },
-    "offenseRating": 32.4,
-    "defenseRating": 17.2,
+    "offenseRating": 36.1,
+    "defenseRating": 14.7,
     "specialTeamsRating": 0.3
   },
   "alabama": {
@@ -5354,7 +5360,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#180B0E",
       "bgBase": "#0C0507"
     },
-    "baseSpRating": 14.5,
+    "baseSpRating": 19.6,
     "playoffContenderRank": 7,
     "sliderLabels": {
       "qb": "Keelon Russell Air Attack",
@@ -6128,8 +6134,8 @@ const TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -43.8,
-        "overUnder": 55.5,
+        "vegasSpread": -57.9,
+        "overUnder": 57.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 99,
         "projScoreUt": 51,
@@ -6141,16 +6147,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 61.0,
-        "mcOverProb": 49.8,
-        "mcRecommendedAts": "Alabama -43.8",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcCoverProb": 16.2,
+        "mcOverProb": 39.8,
+        "mcRecommendedAts": "UTC +57.9",
+        "mcRecommendedOu": "UNDER 57.5",
         "mcScoreDistUt": {
-          "p10": 37,
-          "p25": 44,
-          "p50": 51,
+          "p10": 38,
+          "p25": 43,
+          "p50": 50,
           "p75": 58,
-          "p90": 65
+          "p90": 64
         },
         "mcScoreDistOpp": {
           "p10": 0,
@@ -6164,15 +6170,15 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 4,
         "preseasonSpread": -43.5,
         "weather": {
-          "temp": 58.4,
-          "windSpeed": 7.2,
-          "windGust": 27.7,
+          "temp": 54.6,
+          "windSpeed": 7.0,
+          "windGust": 19.2,
           "precipProb": 2,
-          "precipInches": 0.0,
+          "precipInches": 0.02,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Tuscaloosa, AL",
-          "desc": "\u2600\ufe0f 58\u00b0F \u2022 7 mph wind"
+          "desc": "\u2600\ufe0f 55\u00b0F \u2022 7 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -6202,12 +6208,12 @@ const TEAMS_DATABASE = {
         "location": "Tuscaloosa, AL",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -13.5,
-        "overUnder": 44.5,
+        "vegasSpread": -25.8,
+        "overUnder": 45.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 80,
-        "projScoreUt": 28,
-        "projScoreOpp": 16,
+        "baseWinProb": 90,
+        "projScoreUt": 31,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Alabama front seven vs Auburn Tigers rushing attack.",
@@ -6216,38 +6222,38 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "rivalryName": "IRON BOWL",
-        "mcCoverProb": 44.0,
-        "mcOverProb": 45.2,
-        "mcRecommendedAts": "AUB +13.5",
-        "mcRecommendedOu": "UNDER 44.5",
+        "mcCoverProb": 25.6,
+        "mcOverProb": 48.6,
+        "mcRecommendedAts": "AUB +25.8",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 14,
-          "p25": 20,
-          "p50": 27,
-          "p75": 34,
-          "p90": 41
+          "p10": 18,
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 44
         },
         "mcScoreDistOpp": {
-          "p10": 6,
-          "p25": 10,
-          "p50": 16,
-          "p75": 22,
-          "p90": 28
+          "p10": 3,
+          "p25": 7,
+          "p50": 13,
+          "p75": 20,
+          "p90": 24
         },
         "preseasonWinProb": 96,
         "preseasonProjUt": 39,
         "preseasonProjOpp": 14,
         "preseasonSpread": -25,
         "weather": {
-          "temp": 58.4,
-          "windSpeed": 7.2,
-          "windGust": 27.7,
+          "temp": 54.6,
+          "windSpeed": 7.0,
+          "windGust": 19.2,
           "precipProb": 2,
-          "precipInches": 0.0,
+          "precipInches": 0.02,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Tuscaloosa, AL",
-          "desc": "\u2600\ufe0f 58\u00b0F \u2022 7 mph wind"
+          "desc": "\u2600\ufe0f 55\u00b0F \u2022 7 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -6283,8 +6289,8 @@ const TEAMS_DATABASE = {
         96
       ]
     },
-    "offenseRating": 32.1,
-    "defenseRating": 18.1,
+    "offenseRating": 34.9,
+    "defenseRating": 15.8,
     "specialTeamsRating": 0.5
   },
   "oregon": {
@@ -6314,7 +6320,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#0B1A12",
       "bgBase": "#050F0A"
     },
-    "baseSpRating": 8.3,
+    "baseSpRating": 9.1,
     "playoffContenderRank": 14,
     "sliderLabels": {
       "qb": "Dylan Raiola Passing Attack (Moore Out)",
@@ -7140,7 +7146,13 @@ const TEAMS_DATABASE = {
           "turnoverMultiplier": 1.0,
           "underAlert": false,
           "summary": "Neutral weather"
-        }
+        },
+        "isFinal": true,
+        "finalTeamScore": 45,
+        "actualScoreUt": 45,
+        "finalOppScore": 7,
+        "actualScoreOpp": 7,
+        "finalWin": true
       },
       {
         "id": "ore-w13",
@@ -7161,11 +7173,11 @@ const TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -10.4,
+        "vegasSpread": -11.2,
         "overUnder": 48.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 83,
-        "projScoreUt": 30,
+        "baseWinProb": 86,
+        "projScoreUt": 31,
         "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -7175,46 +7187,46 @@ const TEAMS_DATABASE = {
         "oppId": "washington",
         "is_tracked": true,
         "rivalryName": "PACIFIC NORTHWEST CLASH",
-        "mcCoverProb": 48.6,
-        "mcOverProb": 44.7,
+        "mcCoverProb": 49.4,
+        "mcOverProb": 47.0,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 48.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 17,
-          "p25": 23,
+          "p10": 19,
+          "p25": 24,
           "p50": 30,
-          "p75": 37,
-          "p90": 43
+          "p75": 38,
+          "p90": 44
         },
         "mcScoreDistOpp": {
           "p10": 6,
           "p25": 10,
-          "p50": 17,
-          "p75": 24,
-          "p90": 30
+          "p50": 16,
+          "p75": 23,
+          "p90": 28
         },
         "preseasonWinProb": 81,
         "preseasonProjUt": 32,
         "preseasonProjOpp": 20,
         "preseasonSpread": -11.5,
         "weather": {
-          "temp": 36.1,
-          "windSpeed": 1.6,
-          "windGust": 1.3,
-          "precipProb": 1,
+          "temp": 46.8,
+          "windSpeed": 2.4,
+          "windGust": 3.4,
+          "precipProb": 32,
           "precipInches": 0.0,
-          "condition": "Cold / Crisp",
+          "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Eugene, OR",
-          "desc": "\ud83e\udd76 36\u00b0F \u2022 2 mph wind"
+          "desc": "\u2600\ufe0f 47\u00b0F \u2022 2 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.6,
+          "totalPointsDrag": 0.0,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "-0.6 pts weather drag"
+          "summary": "Neutral weather"
         }
       }
     ],
@@ -7242,8 +7254,8 @@ const TEAMS_DATABASE = {
         81
       ]
     },
-    "offenseRating": 28.9,
-    "defenseRating": 20.9,
+    "offenseRating": 29.3,
+    "defenseRating": 20.5,
     "specialTeamsRating": 0.3,
     "qbStatus": {
       "starterOut": "Dante Moore",
@@ -7280,8 +7292,8 @@ const TEAMS_DATABASE = {
       "bgSurface": "#0C1626",
       "bgBase": "#050B14"
     },
-    "baseSpRating": -8.9,
-    "playoffContenderRank": 29,
+    "baseSpRating": -8.7,
+    "playoffContenderRank": 31,
     "sliderLabels": {
       "qb": "Rocco Becht Air Attack",
       "ground": "Quinton Martin Jr. & James Peoples Ground Attack",
@@ -8053,12 +8065,12 @@ const TEAMS_DATABASE = {
         "location": "University Park, PA",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -24.5,
-        "overUnder": 50.5,
-        "oddsProvider": "DraftKings",
-        "baseWinProb": 79,
-        "projScoreUt": 34,
-        "projScoreOpp": 22,
+        "vegasSpread": -5.1,
+        "overUnder": 58.5,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 64,
+        "projScoreUt": 31,
+        "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Penn State front seven vs Rutgers Scarlet Knights rushing attack.",
@@ -8066,38 +8078,38 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 18.7,
-        "mcOverProb": 61.2,
-        "mcRecommendedAts": "RUTG +24.5",
-        "mcRecommendedOu": "OVER 50.5",
+        "mcCoverProb": 50.8,
+        "mcOverProb": 45.3,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 58.5",
         "mcScoreDistUt": {
-          "p10": 20,
-          "p25": 26,
-          "p50": 33,
-          "p75": 41,
-          "p90": 48
+          "p10": 17,
+          "p25": 24,
+          "p50": 30,
+          "p75": 38,
+          "p90": 44
         },
         "mcScoreDistOpp": {
-          "p10": 10,
-          "p25": 16,
-          "p50": 21,
-          "p75": 28,
-          "p90": 34
+          "p10": 13,
+          "p25": 19,
+          "p50": 26,
+          "p75": 33,
+          "p90": 40
         },
         "preseasonWinProb": 91,
         "preseasonProjUt": 36,
         "preseasonProjOpp": 17,
         "preseasonSpread": -19,
         "weather": {
-          "temp": 39.2,
-          "windSpeed": 2.5,
-          "windGust": 2.0,
+          "temp": 34.0,
+          "windSpeed": 4.7,
+          "windGust": 4.9,
           "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Cold / Crisp",
           "isDome": false,
           "city": "University Park, PA",
-          "desc": "\ud83e\udd76 39\u00b0F \u2022 2 mph wind"
+          "desc": "\ud83e\udd76 34\u00b0F \u2022 5 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.6,
@@ -8127,7 +8139,7 @@ const TEAMS_DATABASE = {
         "location": "College Park, MD",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 10.5,
+        "vegasSpread": 10.3,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 24,
@@ -8140,12 +8152,12 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 53.7,
-        "mcOverProb": 48.6,
-        "mcRecommendedAts": "Penn State +10.5",
+        "mcCoverProb": 52.7,
+        "mcOverProb": 48.4,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 9,
+          "p10": 10,
           "p25": 14,
           "p50": 20,
           "p75": 27,
@@ -8153,7 +8165,7 @@ const TEAMS_DATABASE = {
         },
         "mcScoreDistOpp": {
           "p10": 18,
-          "p25": 23,
+          "p25": 24,
           "p50": 30,
           "p75": 37,
           "p90": 44
@@ -8163,15 +8175,15 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 20,
         "preseasonSpread": -13,
         "weather": {
-          "temp": 51.3,
-          "windSpeed": 2.9,
-          "windGust": 3.1,
+          "temp": 49.1,
+          "windSpeed": 9.5,
+          "windGust": 23.0,
           "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "College Park, MD",
-          "desc": "\u2600\ufe0f 51\u00b0F \u2022 3 mph wind"
+          "desc": "\u2600\ufe0f 49\u00b0F \u2022 10 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -8207,8 +8219,8 @@ const TEAMS_DATABASE = {
         84
       ]
     },
-    "offenseRating": 22.2,
-    "defenseRating": 30.9,
+    "offenseRating": 22.3,
+    "defenseRating": 30.8,
     "specialTeamsRating": -0.2
   },
   "notredame": {
@@ -8238,7 +8250,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#0E1724",
       "bgBase": "#060B12"
     },
-    "baseSpRating": 18.0,
+    "baseSpRating": 20.7,
     "playoffContenderRank": 3,
     "sliderLabels": {
       "qb": "CJ Carr Execution",
@@ -9013,11 +9025,11 @@ const TEAMS_DATABASE = {
         "isMarquee": true,
         "isConf": false,
         "vegasSpread": -20.5,
-        "overUnder": 56.5,
+        "overUnder": 55.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 96,
+        "baseWinProb": 98,
         "projScoreUt": 40,
-        "projScoreOpp": 15,
+        "projScoreOpp": 14,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Notre Dame quarterback play vs SMU Mustangs secondary.",
@@ -9025,46 +9037,46 @@ const TEAMS_DATABASE = {
         },
         "oppId": "smu",
         "is_tracked": true,
-        "mcCoverProb": 60.4,
-        "mcOverProb": 43.2,
+        "mcCoverProb": 65.9,
+        "mcOverProb": 47.3,
         "mcRecommendedAts": "Notre Dame -20.5",
-        "mcRecommendedOu": "UNDER 56.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 26,
           "p25": 33,
-          "p50": 39,
+          "p50": 40,
           "p75": 47,
           "p90": 54
         },
         "mcScoreDistOpp": {
           "p10": 3,
-          "p25": 9,
+          "p25": 7,
           "p50": 14,
           "p75": 20,
-          "p90": 27
+          "p90": 26
         },
         "preseasonWinProb": 72,
         "preseasonProjUt": 30,
         "preseasonProjOpp": 22,
         "preseasonSpread": -7.5,
         "weather": {
-          "temp": 47.6,
-          "windSpeed": 11.6,
-          "windGust": 34.7,
-          "precipProb": 0,
+          "temp": 34.0,
+          "windSpeed": 6.6,
+          "windGust": 17.4,
+          "precipProb": 1,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "South Bend, IN",
-          "desc": "\u2600\ufe0f 48\u00b0F \u2022 12 mph wind"
+          "desc": "\ud83e\udd76 34\u00b0F \u2022 7 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.8,
-          "passEffMultiplier": 0.96,
-          "fgSuccessMultiplier": 0.94,
+          "totalPointsDrag": 0.6,
+          "passEffMultiplier": 1.0,
+          "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "-0.8 pts weather drag"
+          "summary": "-0.6 pts weather drag"
         }
       },
       {
@@ -9086,12 +9098,12 @@ const TEAMS_DATABASE = {
         "location": "Syracuse, NY",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -20.3,
+        "vegasSpread": -29.5,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 92,
-        "projScoreUt": 36,
-        "projScoreOpp": 16,
+        "baseWinProb": 94,
+        "projScoreUt": 37,
+        "projScoreOpp": 15,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Notre Dame front seven vs Syracuse Orange rushing attack.",
@@ -9099,23 +9111,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 46.9,
-        "mcOverProb": 46.8,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcCoverProb": 28.9,
+        "mcOverProb": 48.4,
+        "mcRecommendedAts": "SYR +29.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 22,
-          "p25": 27,
-          "p50": 34,
-          "p75": 43,
-          "p90": 50
+          "p10": 23,
+          "p25": 30,
+          "p50": 37,
+          "p75": 44,
+          "p90": 51
         },
         "mcScoreDistOpp": {
           "p10": 6,
           "p25": 10,
-          "p50": 16,
-          "p75": 23,
-          "p90": 28
+          "p50": 14,
+          "p75": 21,
+          "p90": 27
         },
         "preseasonWinProb": 92,
         "preseasonProjUt": 36,
@@ -9166,8 +9178,8 @@ const TEAMS_DATABASE = {
         92
       ]
     },
-    "offenseRating": 34.5,
-    "defenseRating": 17.1,
+    "offenseRating": 36.0,
+    "defenseRating": 15.9,
     "specialTeamsRating": 0.6
   },
   "lsu": {
@@ -9197,7 +9209,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#191124",
       "bgBase": "#0E0914"
     },
-    "baseSpRating": 3.4,
+    "baseSpRating": 6.9,
     "playoffContenderRank": 24,
     "sliderLabels": {
       "qb": "Sam Leavitt Execution",
@@ -9970,12 +9982,12 @@ const TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -1.5,
-        "overUnder": 46.5,
-        "oddsProvider": "DraftKings",
-        "baseWinProb": 26,
-        "projScoreUt": 19,
-        "projScoreOpp": 27,
+        "vegasSpread": 8.0,
+        "overUnder": 47.5,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 23,
+        "projScoreUt": 18,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "LSU quarterback play vs Tennessee Volunteers secondary.",
@@ -9983,38 +9995,38 @@ const TEAMS_DATABASE = {
         },
         "oppId": "tennessee",
         "is_tracked": true,
-        "mcCoverProb": 24.2,
-        "mcOverProb": 46.6,
-        "mcRecommendedAts": "TENN +1.5",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcCoverProb": 49.9,
+        "mcOverProb": 44.9,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 47.5",
         "mcScoreDistUt": {
-          "p10": 7,
-          "p25": 13,
+          "p10": 6,
+          "p25": 10,
           "p50": 17,
           "p75": 24,
-          "p90": 31
+          "p90": 30
         },
         "mcScoreDistOpp": {
-          "p10": 13,
-          "p25": 20,
-          "p50": 27,
-          "p75": 34,
-          "p90": 41
+          "p10": 16,
+          "p25": 21,
+          "p50": 28,
+          "p75": 36,
+          "p90": 42
         },
         "preseasonWinProb": 55,
         "preseasonProjUt": 27,
         "preseasonProjOpp": 26,
         "preseasonSpread": -1.5,
         "weather": {
-          "temp": 42.6,
-          "windSpeed": 1.4,
-          "windGust": 1.8,
-          "precipProb": 0,
+          "temp": 52.2,
+          "windSpeed": 6.5,
+          "windGust": 14.8,
+          "precipProb": 1,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Knoxville, TN",
-          "desc": "\u2600\ufe0f 43\u00b0F \u2022 1 mph wind"
+          "desc": "\u2600\ufe0f 52\u00b0F \u2022 6 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -10044,12 +10056,12 @@ const TEAMS_DATABASE = {
         "location": "Fayetteville, AR",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -2.1,
-        "overUnder": 47.5,
+        "vegasSpread": -5.6,
+        "overUnder": 48.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 61,
-        "projScoreUt": 25,
-        "projScoreOpp": 22,
+        "baseWinProb": 67,
+        "projScoreUt": 27,
+        "projScoreOpp": 21,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "LSU front seven vs Arkansas Razorbacks rushing attack.",
@@ -10057,22 +10069,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 56.2,
-        "mcOverProb": 46.5,
-        "mcRecommendedAts": "LSU -2.1",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcCoverProb": 52.3,
+        "mcOverProb": 45.4,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 48.5",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 17,
-          "p50": 24,
-          "p75": 32,
+          "p25": 20,
+          "p50": 27,
+          "p75": 34,
           "p90": 40
         },
         "mcScoreDistOpp": {
-          "p10": 10,
-          "p25": 16,
-          "p50": 21,
-          "p75": 28,
+          "p10": 9,
+          "p25": 14,
+          "p50": 20,
+          "p75": 27,
           "p90": 34
         },
         "preseasonWinProb": 93,
@@ -10080,23 +10092,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 16,
         "preseasonSpread": -21,
         "weather": {
-          "temp": 49.7,
-          "windSpeed": 5.7,
-          "windGust": 11.9,
+          "temp": 33.3,
+          "windSpeed": 7.1,
+          "windGust": 23.5,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Fayetteville, AR",
-          "desc": "\u2600\ufe0f 50\u00b0F \u2022 6 mph wind"
+          "desc": "\ud83e\udd76 33\u00b0F \u2022 7 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       }
     ],
@@ -10124,8 +10136,8 @@ const TEAMS_DATABASE = {
         93
       ]
     },
-    "offenseRating": 27.3,
-    "defenseRating": 23.4,
+    "offenseRating": 29.3,
+    "defenseRating": 21.9,
     "specialTeamsRating": -0.5
   },
   "tennessee": {
@@ -10155,7 +10167,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#1A1007",
       "bgBase": "#0D0803"
     },
-    "baseSpRating": 12.3,
+    "baseSpRating": 14.6,
     "playoffContenderRank": 9,
     "sliderLabels": {
       "qb": "Faizon Brandon Pinpoint Air Attack",
@@ -10929,12 +10941,12 @@ const TEAMS_DATABASE = {
         "location": "Knoxville, TN",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 1.5,
-        "overUnder": 46.5,
-        "oddsProvider": "DraftKings",
-        "baseWinProb": 74,
-        "projScoreUt": 27,
-        "projScoreOpp": 19,
+        "vegasSpread": -8.0,
+        "overUnder": 47.5,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 77,
+        "projScoreUt": 28,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Tennessee quarterback play vs LSU Tigers secondary.",
@@ -10942,38 +10954,38 @@ const TEAMS_DATABASE = {
         },
         "oppId": "lsu",
         "is_tracked": true,
-        "mcCoverProb": 75.8,
-        "mcOverProb": 46.6,
-        "mcRecommendedAts": "Tennessee +1.5",
-        "mcRecommendedOu": "PASS (Fair Total)",
+        "mcCoverProb": 50.1,
+        "mcOverProb": 44.9,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 47.5",
         "mcScoreDistUt": {
-          "p10": 13,
-          "p25": 20,
-          "p50": 27,
-          "p75": 34,
-          "p90": 41
+          "p10": 16,
+          "p25": 21,
+          "p50": 28,
+          "p75": 36,
+          "p90": 42
         },
         "mcScoreDistOpp": {
-          "p10": 7,
-          "p25": 13,
+          "p10": 6,
+          "p25": 10,
           "p50": 17,
           "p75": 24,
-          "p90": 31
+          "p90": 30
         },
         "preseasonWinProb": 45,
         "preseasonProjUt": 26,
         "preseasonProjOpp": 27,
         "preseasonSpread": 1.5,
         "weather": {
-          "temp": 42.6,
-          "windSpeed": 1.4,
-          "windGust": 1.8,
-          "precipProb": 0,
+          "temp": 52.2,
+          "windSpeed": 6.5,
+          "windGust": 14.8,
+          "precipProb": 1,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Knoxville, TN",
-          "desc": "\u2600\ufe0f 43\u00b0F \u2022 1 mph wind"
+          "desc": "\u2600\ufe0f 52\u00b0F \u2022 6 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -11003,12 +11015,12 @@ const TEAMS_DATABASE = {
         "location": "Nashville, TN",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -14.2,
-        "overUnder": 48.5,
+        "vegasSpread": -20.6,
+        "overUnder": 47.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 84,
-        "projScoreUt": 31,
-        "projScoreOpp": 17,
+        "baseWinProb": 88,
+        "projScoreUt": 32,
+        "projScoreOpp": 16,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Tennessee front seven vs Vanderbilt Commodores rushing attack.",
@@ -11016,38 +11028,38 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 49.8,
-        "mcOverProb": 48.0,
-        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcCoverProb": 34.5,
+        "mcOverProb": 48.1,
+        "mcRecommendedAts": "VAN +20.6",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 17,
-          "p25": 23,
+          "p10": 19,
+          "p25": 24,
           "p50": 31,
           "p75": 38,
-          "p90": 46
+          "p90": 45
         },
         "mcScoreDistOpp": {
           "p10": 6,
           "p25": 10,
           "p50": 16,
-          "p75": 23,
-          "p90": 29
+          "p75": 21,
+          "p90": 28
         },
         "preseasonWinProb": 89,
         "preseasonProjUt": 34,
         "preseasonProjOpp": 18,
         "preseasonSpread": -16.5,
         "weather": {
-          "temp": 51.2,
-          "windSpeed": 3.8,
-          "windGust": 10.1,
+          "temp": 45.1,
+          "windSpeed": 9.4,
+          "windGust": 27.1,
           "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Nashville, TN",
-          "desc": "\u2600\ufe0f 51\u00b0F \u2022 4 mph wind"
+          "desc": "\u2600\ufe0f 45\u00b0F \u2022 9 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -11083,8 +11095,8 @@ const TEAMS_DATABASE = {
         89
       ]
     },
-    "offenseRating": 29.4,
-    "defenseRating": 17.7,
+    "offenseRating": 30.1,
+    "defenseRating": 16.1,
     "specialTeamsRating": 0.6
   },
   "indiana": {
@@ -11114,7 +11126,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#1A0A0A",
       "bgBase": "#0D0505"
     },
-    "baseSpRating": 12.5,
+    "baseSpRating": 12.8,
     "playoffContenderRank": 6,
     "sliderLabels": {
       "qb": "Josh Hoover Execution",
@@ -11887,12 +11899,12 @@ const TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -8.5,
-        "overUnder": 43.5,
+        "vegasSpread": -9.5,
+        "overUnder": 44.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 82,
+        "baseWinProb": 81,
         "projScoreUt": 28,
-        "projScoreOpp": 16,
+        "projScoreOpp": 17,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Indiana quarterback play vs Washington Huskies secondary.",
@@ -11900,23 +11912,23 @@ const TEAMS_DATABASE = {
         },
         "oppId": "washington",
         "is_tracked": true,
-        "mcCoverProb": 60.8,
-        "mcOverProb": 47.7,
-        "mcRecommendedAts": "Indiana -8.5",
+        "mcCoverProb": 56.6,
+        "mcOverProb": 49.0,
+        "mcRecommendedAts": "Indiana -9.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 16,
-          "p25": 20,
+          "p25": 21,
           "p50": 27,
-          "p75": 34,
+          "p75": 36,
           "p90": 41
         },
         "mcScoreDistOpp": {
           "p10": 6,
           "p25": 10,
-          "p50": 14,
-          "p75": 21,
-          "p90": 27
+          "p50": 16,
+          "p75": 23,
+          "p90": 28
         },
         "preseasonWinProb": 50,
         "preseasonProjUt": 26,
@@ -11924,14 +11936,14 @@ const TEAMS_DATABASE = {
         "preseasonSpread": -4.5,
         "weather": {
           "temp": 42.6,
-          "windSpeed": 5.0,
-          "windGust": 8.1,
-          "precipProb": 2,
-          "precipInches": 0.0,
+          "windSpeed": 2.0,
+          "windGust": 7.6,
+          "precipProb": 53,
+          "precipInches": 0.03,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Seattle, WA",
-          "desc": "\u2600\ufe0f 43\u00b0F \u2022 5 mph wind"
+          "desc": "\u2600\ufe0f 43\u00b0F \u2022 2 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -11961,10 +11973,10 @@ const TEAMS_DATABASE = {
         "location": "Bloomington, IN",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -20.9,
+        "vegasSpread": -20.8,
         "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 91,
+        "baseWinProb": 92,
         "projScoreUt": 35,
         "projScoreOpp": 17,
         "scoutReport": {
@@ -11974,16 +11986,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 44.2,
-        "mcOverProb": 46.9,
-        "mcRecommendedAts": "PUR +20.9",
+        "mcCoverProb": 44.4,
+        "mcOverProb": 46.6,
+        "mcRecommendedAts": "PUR +20.8",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 22,
-          "p25": 27,
-          "p50": 34,
+          "p25": 29,
+          "p50": 35,
           "p75": 43,
-          "p90": 50
+          "p90": 49
         },
         "mcScoreDistOpp": {
           "p10": 6,
@@ -11997,23 +12009,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 14,
         "preseasonSpread": -24,
         "weather": {
-          "temp": 43.8,
-          "windSpeed": 6.5,
-          "windGust": 21.7,
+          "temp": 33.6,
+          "windSpeed": 8.1,
+          "windGust": 22.6,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Bloomington, IN",
-          "desc": "\u2600\ufe0f 44\u00b0F \u2022 6 mph wind"
+          "desc": "\ud83e\udd76 34\u00b0F \u2022 8 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       }
     ],
@@ -12041,8 +12053,8 @@ const TEAMS_DATABASE = {
         95
       ]
     },
-    "offenseRating": 29.7,
-    "defenseRating": 17.0,
+    "offenseRating": 29.8,
+    "defenseRating": 16.8,
     "specialTeamsRating": -0.2
   },
   "miami": {
@@ -12072,7 +12084,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#0B1710",
       "bgBase": "#050F0A"
     },
-    "baseSpRating": 16.3,
+    "baseSpRating": 21.1,
     "playoffContenderRank": 5,
     "sliderLabels": {
       "qb": "Darian Mensah Accurate Air Attack",
@@ -12849,8 +12861,8 @@ const TEAMS_DATABASE = {
         "vegasSpread": -20.5,
         "overUnder": 61.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 86,
-        "projScoreUt": 38,
+        "baseWinProb": 92,
+        "projScoreUt": 41,
         "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -12859,20 +12871,20 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 37.9,
-        "mcOverProb": 42.7,
-        "mcRecommendedAts": "VT +20.5",
-        "mcRecommendedOu": "UNDER 61.5",
+        "mcCoverProb": 47.0,
+        "mcOverProb": 53.4,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 24,
-          "p25": 30,
-          "p50": 37,
-          "p75": 45,
-          "p90": 51
+          "p10": 28,
+          "p25": 34,
+          "p50": 41,
+          "p75": 49,
+          "p90": 55
         },
         "mcScoreDistOpp": {
           "p10": 10,
-          "p25": 14,
+          "p25": 16,
           "p50": 21,
           "p75": 28,
           "p90": 34
@@ -12882,23 +12894,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 14,
         "preseasonSpread": -25.5,
         "weather": {
-          "temp": 76.0,
-          "windSpeed": 14.5,
-          "windGust": 22.1,
-          "precipProb": 36,
-          "precipInches": 0.09,
-          "condition": "Light Rain",
+          "temp": 76.1,
+          "windSpeed": 6.7,
+          "windGust": 8.9,
+          "precipProb": 7,
+          "precipInches": 0.0,
+          "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Miami Gardens, FL",
-          "desc": "\ud83c\udf26\ufe0f 76\u00b0F \u2022 14 mph wind"
+          "desc": "\u2600\ufe0f 76\u00b0F \u2022 7 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 1.8,
-          "passEffMultiplier": 0.902,
-          "fgSuccessMultiplier": 0.94,
-          "turnoverMultiplier": 1.15,
+          "totalPointsDrag": 0.0,
+          "passEffMultiplier": 1.0,
+          "fgSuccessMultiplier": 1.0,
+          "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "-1.8 pts weather drag"
+          "summary": "Neutral weather"
         }
       },
       {
@@ -12920,11 +12932,11 @@ const TEAMS_DATABASE = {
         "location": "Miami Gardens, FL",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -28.8,
-        "overUnder": 53.5,
+        "vegasSpread": -38.0,
+        "overUnder": 57.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 97,
-        "projScoreUt": 39,
+        "baseWinProb": 99,
+        "projScoreUt": 44,
         "projScoreOpp": 13,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -12933,16 +12945,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 42.2,
-        "mcOverProb": 45.0,
-        "mcRecommendedAts": "BC +28.8",
-        "mcRecommendedOu": "UNDER 53.5",
+        "mcCoverProb": 27.0,
+        "mcOverProb": 45.4,
+        "mcRecommendedAts": "BC +38.0",
+        "mcRecommendedOu": "UNDER 57.5",
         "mcScoreDistUt": {
-          "p10": 25,
-          "p25": 31,
-          "p50": 39,
-          "p75": 47,
-          "p90": 54
+          "p10": 30,
+          "p25": 37,
+          "p50": 43,
+          "p75": 51,
+          "p90": 58
         },
         "mcScoreDistOpp": {
           "p10": 3,
@@ -12956,23 +12968,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 14,
         "preseasonSpread": -25.5,
         "weather": {
-          "temp": 76.0,
-          "windSpeed": 14.5,
-          "windGust": 22.1,
-          "precipProb": 36,
-          "precipInches": 0.09,
-          "condition": "Light Rain",
+          "temp": 76.1,
+          "windSpeed": 6.7,
+          "windGust": 8.9,
+          "precipProb": 7,
+          "precipInches": 0.0,
+          "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Miami Gardens, FL",
-          "desc": "\ud83c\udf26\ufe0f 76\u00b0F \u2022 14 mph wind"
+          "desc": "\u2600\ufe0f 76\u00b0F \u2022 7 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 1.8,
-          "passEffMultiplier": 0.902,
-          "fgSuccessMultiplier": 0.94,
-          "turnoverMultiplier": 1.15,
+          "totalPointsDrag": 0.0,
+          "passEffMultiplier": 1.0,
+          "fgSuccessMultiplier": 1.0,
+          "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "-1.8 pts weather drag"
+          "summary": "Neutral weather"
         }
       }
     ],
@@ -13000,8 +13012,8 @@ const TEAMS_DATABASE = {
         96
       ]
     },
-    "offenseRating": 37.0,
-    "defenseRating": 21.2,
+    "offenseRating": 41.3,
+    "defenseRating": 20.7,
     "specialTeamsRating": 0.5
   },
   "texasam": {
@@ -13031,8 +13043,8 @@ const TEAMS_DATABASE = {
       "bgSurface": "#140707",
       "bgBase": "#0A0404"
     },
-    "baseSpRating": -9.5,
-    "playoffContenderRank": 31,
+    "baseSpRating": -8.3,
+    "playoffContenderRank": 29,
     "sliderLabels": {
       "qb": "Marcel Reed Dual-Threat Attack",
       "ground": "Rueben Owens II & Tiger Riden Ground Attack",
@@ -13804,12 +13816,12 @@ const TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 7.5,
-        "overUnder": 38.5,
+        "vegasSpread": 7.0,
+        "overUnder": 36.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 19,
         "projScoreUt": 12,
-        "projScoreOpp": 23,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Oklahoma Sooners secondary.",
@@ -13818,46 +13830,46 @@ const TEAMS_DATABASE = {
         "oppId": "oklahoma",
         "is_tracked": true,
         "rivalryName": "RED RIVER RIVALRY",
-        "mcCoverProb": 40.7,
-        "mcOverProb": 39.2,
-        "mcRecommendedAts": "OU -7.5",
-        "mcRecommendedOu": "UNDER 38.5",
+        "mcCoverProb": 43.4,
+        "mcOverProb": 40.2,
+        "mcRecommendedAts": "OU -7.0",
+        "mcRecommendedOu": "UNDER 36.5",
         "mcScoreDistUt": {
           "p10": 3,
-          "p25": 7,
-          "p50": 13,
+          "p25": 6,
+          "p50": 10,
           "p75": 17,
           "p90": 23
         },
         "mcScoreDistOpp": {
-          "p10": 12,
+          "p10": 10,
           "p25": 16,
-          "p50": 23,
-          "p75": 30,
-          "p90": 37
+          "p50": 21,
+          "p75": 28,
+          "p90": 34
         },
         "preseasonWinProb": 42,
         "preseasonProjUt": 25,
         "preseasonProjOpp": 28,
         "preseasonSpread": 2.5,
         "weather": {
-          "temp": 50.7,
-          "windSpeed": 8.8,
-          "windGust": 21.3,
+          "temp": 39.1,
+          "windSpeed": 11.3,
+          "windGust": 26.4,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Norman, OK",
-          "desc": "\u2600\ufe0f 51\u00b0F \u2022 9 mph wind"
+          "desc": "\ud83e\udd76 39\u00b0F \u2022 11 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
-          "passEffMultiplier": 1.0,
-          "fgSuccessMultiplier": 1.0,
+          "totalPointsDrag": 1.4,
+          "passEffMultiplier": 0.96,
+          "fgSuccessMultiplier": 0.94,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-1.4 pts weather drag"
         }
       },
       {
@@ -13879,12 +13891,12 @@ const TEAMS_DATABASE = {
         "location": "College Station, TX",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 15.2,
-        "overUnder": 41.5,
+        "vegasSpread": 20.0,
+        "overUnder": 42.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 7,
-        "projScoreUt": 11,
-        "projScoreOpp": 30,
+        "baseWinProb": 2,
+        "projScoreUt": 9,
+        "projScoreOpp": 34,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Texas A&M quarterback play vs Texas Longhorns secondary.",
@@ -13893,38 +13905,38 @@ const TEAMS_DATABASE = {
         "oppId": "texas",
         "is_tracked": true,
         "rivalryName": "LONE STAR SHOWDOWN",
-        "mcCoverProb": 50.5,
-        "mcOverProb": 46.1,
+        "mcCoverProb": 49.6,
+        "mcOverProb": 47.9,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 0,
-          "p25": 6,
-          "p50": 10,
-          "p75": 16,
-          "p90": 21
+          "p25": 3,
+          "p50": 7,
+          "p75": 14,
+          "p90": 17
         },
         "mcScoreDistOpp": {
-          "p10": 16,
-          "p25": 23,
-          "p50": 30,
-          "p75": 37,
-          "p90": 45
+          "p10": 20,
+          "p25": 26,
+          "p50": 33,
+          "p75": 40,
+          "p90": 47
         },
         "preseasonWinProb": 44,
         "preseasonProjUt": 25,
         "preseasonProjOpp": 27,
         "preseasonSpread": 2,
         "weather": {
-          "temp": 56.3,
-          "windSpeed": 4.3,
-          "windGust": 4.0,
-          "precipProb": 0,
+          "temp": 48.3,
+          "windSpeed": 7.5,
+          "windGust": 15.7,
+          "precipProb": 1,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "College Station, TX",
-          "desc": "\u2600\ufe0f 56\u00b0F \u2022 4 mph wind"
+          "desc": "\u2600\ufe0f 48\u00b0F \u2022 8 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -13960,8 +13972,8 @@ const TEAMS_DATABASE = {
         44
       ]
     },
-    "offenseRating": 16.9,
-    "defenseRating": 26.9,
+    "offenseRating": 17.5,
+    "defenseRating": 26.3,
     "specialTeamsRating": 0.5
   },
   "olemiss": {
@@ -13991,7 +14003,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#140A0D",
       "bgBase": "#0A0507"
     },
-    "baseSpRating": 1.0,
+    "baseSpRating": 3.1,
     "playoffContenderRank": 22,
     "sliderLabels": {
       "qb": "Trinidad Chambliss Explosive Air Raid",
@@ -14817,7 +14829,13 @@ const TEAMS_DATABASE = {
           "turnoverMultiplier": 1.0,
           "underAlert": false,
           "summary": "Neutral weather"
-        }
+        },
+        "isFinal": true,
+        "finalTeamScore": 59,
+        "actualScoreUt": 59,
+        "finalOppScore": 17,
+        "actualScoreOpp": 17,
+        "finalWin": true
       },
       {
         "id": "miss-w13",
@@ -14838,12 +14856,12 @@ const TEAMS_DATABASE = {
         "location": "Oxford, MS",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -2.6,
+        "vegasSpread": -4.7,
         "overUnder": 65.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 59,
-        "projScoreUt": 34,
-        "projScoreOpp": 31,
+        "baseWinProb": 62,
+        "projScoreUt": 35,
+        "projScoreOpp": 30,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Ole Miss front seven vs Mississippi State Bulldogs rushing attack.",
@@ -14852,38 +14870,38 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "rivalryName": "EGG BOWL",
-        "mcCoverProb": 54.3,
-        "mcOverProb": 49.5,
-        "mcRecommendedAts": "Ole Miss -2.6",
+        "mcCoverProb": 50.4,
+        "mcOverProb": 48.5,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 20,
-          "p25": 26,
+          "p25": 27,
           "p50": 34,
-          "p75": 41,
-          "p90": 49
+          "p75": 42,
+          "p90": 50
         },
         "mcScoreDistOpp": {
           "p10": 17,
-          "p25": 24,
+          "p25": 23,
           "p50": 30,
-          "p75": 38,
-          "p90": 45
+          "p75": 37,
+          "p90": 44
         },
         "preseasonWinProb": 96,
         "preseasonProjUt": 38,
         "preseasonProjOpp": 14,
         "preseasonSpread": -24.5,
         "weather": {
-          "temp": 52.4,
-          "windSpeed": 6.0,
-          "windGust": 25.1,
+          "temp": 47.3,
+          "windSpeed": 9.4,
+          "windGust": 24.4,
           "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Oxford, MS",
-          "desc": "\u2600\ufe0f 52\u00b0F \u2022 6 mph wind"
+          "desc": "\u2600\ufe0f 47\u00b0F \u2022 9 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -14919,8 +14937,8 @@ const TEAMS_DATABASE = {
         96
       ]
     },
-    "offenseRating": 30.4,
-    "defenseRating": 30.1,
+    "offenseRating": 31.4,
+    "defenseRating": 29.0,
     "specialTeamsRating": 0.7
   },
   "oklahoma": {
@@ -14950,7 +14968,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#140A0A",
       "bgBase": "#0A0505"
     },
-    "baseSpRating": 0.8,
+    "baseSpRating": 2.1,
     "playoffContenderRank": 23,
     "sliderLabels": {
       "qb": "John Mateer Dual-Threat Execution",
@@ -15724,11 +15742,11 @@ const TEAMS_DATABASE = {
         "location": "Norman, OK",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -7.5,
-        "overUnder": 38.5,
+        "vegasSpread": -7.0,
+        "overUnder": 36.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 81,
-        "projScoreUt": 23,
+        "projScoreUt": 22,
         "projScoreOpp": 12,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -15738,21 +15756,21 @@ const TEAMS_DATABASE = {
         "oppId": "texasam",
         "is_tracked": true,
         "rivalryName": "RED RIVER RIVALRY",
-        "mcCoverProb": 59.3,
-        "mcOverProb": 39.2,
-        "mcRecommendedAts": "Oklahoma -7.5",
-        "mcRecommendedOu": "UNDER 38.5",
+        "mcCoverProb": 56.6,
+        "mcOverProb": 40.2,
+        "mcRecommendedAts": "Oklahoma -7.0",
+        "mcRecommendedOu": "UNDER 36.5",
         "mcScoreDistUt": {
-          "p10": 12,
+          "p10": 10,
           "p25": 16,
-          "p50": 23,
-          "p75": 30,
-          "p90": 37
+          "p50": 21,
+          "p75": 28,
+          "p90": 34
         },
         "mcScoreDistOpp": {
           "p10": 3,
-          "p25": 7,
-          "p50": 13,
+          "p25": 6,
+          "p50": 10,
           "p75": 17,
           "p90": 23
         },
@@ -15761,23 +15779,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 25,
         "preseasonSpread": -2.5,
         "weather": {
-          "temp": 50.7,
-          "windSpeed": 8.8,
-          "windGust": 21.3,
+          "temp": 39.1,
+          "windSpeed": 11.3,
+          "windGust": 26.4,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Norman, OK",
-          "desc": "\u2600\ufe0f 51\u00b0F \u2022 9 mph wind"
+          "desc": "\ud83e\udd76 39\u00b0F \u2022 11 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
-          "passEffMultiplier": 1.0,
-          "fgSuccessMultiplier": 1.0,
+          "totalPointsDrag": 1.4,
+          "passEffMultiplier": 0.96,
+          "fgSuccessMultiplier": 0.94,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-1.4 pts weather drag"
         }
       },
       {
@@ -15799,11 +15817,11 @@ const TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 3.2,
+        "vegasSpread": 2.4,
         "overUnder": 42.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 39,
-        "projScoreUt": 19,
+        "baseWinProb": 41,
+        "projScoreUt": 20,
         "projScoreOpp": 23,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -15812,15 +15830,15 @@ const TEAMS_DATABASE = {
         },
         "oppId": "missouri",
         "is_tracked": true,
-        "mcCoverProb": 49.2,
-        "mcOverProb": 46.9,
+        "mcCoverProb": 52.1,
+        "mcOverProb": 49.4,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 7,
           "p25": 13,
           "p50": 19,
-          "p75": 25,
+          "p75": 26,
           "p90": 31
         },
         "mcScoreDistOpp": {
@@ -15828,30 +15846,30 @@ const TEAMS_DATABASE = {
           "p25": 16,
           "p50": 23,
           "p75": 30,
-          "p90": 35
+          "p90": 36
         },
         "preseasonWinProb": 51,
         "preseasonProjUt": 26,
         "preseasonProjOpp": 29,
         "preseasonSpread": -7.1,
         "weather": {
-          "temp": 50.1,
-          "windSpeed": 9.9,
-          "windGust": 32.7,
+          "temp": 34.0,
+          "windSpeed": 8.8,
+          "windGust": 22.1,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Columbia, MO",
-          "desc": "\u2600\ufe0f 50\u00b0F \u2022 10 mph wind"
+          "desc": "\ud83e\udd76 34\u00b0F \u2022 9 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       }
     ],
@@ -15879,8 +15897,8 @@ const TEAMS_DATABASE = {
         51
       ]
     },
-    "offenseRating": 21.7,
-    "defenseRating": 21.3,
+    "offenseRating": 22.3,
+    "defenseRating": 20.6,
     "specialTeamsRating": 0.4
   },
   "boisestate": {
@@ -15917,7 +15935,7 @@ const TEAMS_DATABASE = {
       "turnover": "Blue Turf Turnover Luck",
       "crowd": "Albertsons Stadium Blue Turf Roar"
     },
-    "baseSpRating": 3.7,
+    "baseSpRating": 3.8,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/68.png",
     "badgeText": "BSU",
     "schedule": [
@@ -16684,10 +16702,10 @@ const TEAMS_DATABASE = {
         "location": "Boise, ID",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": -16.5,
-        "overUnder": 61.5,
+        "vegasSpread": -20.5,
+        "overUnder": 60.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 82,
+        "baseWinProb": 83,
         "projScoreUt": 38,
         "projScoreOpp": 24,
         "scoutReport": {
@@ -16697,21 +16715,21 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 42.4,
-        "mcOverProb": 49.6,
-        "mcRecommendedAts": "SDSU +16.5",
+        "mcCoverProb": 33.2,
+        "mcOverProb": 50.9,
+        "mcRecommendedAts": "SDSU +20.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 23,
           "p25": 30,
           "p50": 37,
-          "p75": 45,
+          "p75": 44,
           "p90": 51
         },
         "mcScoreDistOpp": {
-          "p10": 12,
-          "p25": 17,
-          "p50": 24,
+          "p10": 10,
+          "p25": 16,
+          "p50": 23,
           "p75": 31,
           "p90": 37
         },
@@ -16720,23 +16738,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 18,
         "preseasonSpread": -17,
         "weather": {
-          "temp": 41.9,
-          "windSpeed": 7.2,
-          "windGust": 26.4,
-          "precipProb": 68,
+          "temp": 39.7,
+          "windSpeed": 4.7,
+          "windGust": 12.1,
+          "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Light Rain",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Boise, ID",
-          "desc": "\ud83c\udf26\ufe0f 42\u00b0F \u2022 7 mph wind"
+          "desc": "\ud83e\udd76 40\u00b0F \u2022 5 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       }
     ],
@@ -16763,7 +16781,7 @@ const TEAMS_DATABASE = {
       ]
     },
     "offenseRating": 32.2,
-    "defenseRating": 28.9,
+    "defenseRating": 28.8,
     "specialTeamsRating": 0.4
   },
   "usc": {
@@ -16800,7 +16818,7 @@ const TEAMS_DATABASE = {
       "turnover": "Coliseum Turnover Margin Luck",
       "crowd": "LA Memorial Coliseum Roar"
     },
-    "baseSpRating": 2.2,
+    "baseSpRating": 3.3,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/30.png",
     "badgeText": "USC",
     "schedule": [
@@ -17534,8 +17552,8 @@ const TEAMS_DATABASE = {
         "overUnder": 57.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 76,
-        "projScoreUt": 32,
-        "projScoreOpp": 23,
+        "projScoreUt": 33,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs Maryland Terrapins rushing attack.",
@@ -17543,21 +17561,21 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 27.6,
-        "mcOverProb": 40.6,
+        "mcCoverProb": 31.3,
+        "mcOverProb": 41.7,
         "mcRecommendedAts": "MD +17.5",
         "mcRecommendedOu": "UNDER 57.5",
         "mcScoreDistUt": {
           "p10": 19,
-          "p25": 25,
-          "p50": 32,
+          "p25": 26,
+          "p50": 33,
           "p75": 40,
-          "p90": 46
+          "p90": 47
         },
         "mcScoreDistOpp": {
           "p10": 10,
           "p25": 16,
-          "p50": 23,
+          "p50": 22,
           "p75": 29,
           "p90": 35
         },
@@ -17566,15 +17584,15 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 14,
         "preseasonSpread": -24.5,
         "weather": {
-          "temp": 62.3,
-          "windSpeed": 3.4,
-          "windGust": 4.5,
-          "precipProb": 65,
+          "temp": 63.3,
+          "windSpeed": 3.1,
+          "windGust": 2.7,
+          "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Light Rain",
+          "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Los Angeles, CA",
-          "desc": "\ud83c\udf26\ufe0f 62\u00b0F \u2022 3 mph wind"
+          "desc": "\u2600\ufe0f 63\u00b0F \u2022 3 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -17604,12 +17622,12 @@ const TEAMS_DATABASE = {
         "location": "Pasadena, CA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 8.8,
-        "overUnder": 45.5,
+        "vegasSpread": 7.2,
+        "overUnder": 44.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 21,
-        "projScoreUt": 17,
-        "projScoreOpp": 28,
+        "baseWinProb": 24,
+        "projScoreUt": 18,
+        "projScoreOpp": 27,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "USC front seven vs UCLA Bruins rushing attack.",
@@ -17618,38 +17636,38 @@ const TEAMS_DATABASE = {
         "oppId": "ucla",
         "is_tracked": true,
         "rivalryName": "BATTLE FOR THE VICTORY BELL",
-        "mcCoverProb": 45.6,
-        "mcOverProb": 47.0,
-        "mcRecommendedAts": "UCLA -9.6",
+        "mcCoverProb": 50.6,
+        "mcOverProb": 47.7,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 6,
           "p25": 10,
-          "p50": 16,
-          "p75": 23,
+          "p50": 17,
+          "p75": 24,
           "p90": 30
         },
         "mcScoreDistOpp": {
-          "p10": 15,
+          "p10": 13,
           "p25": 20,
           "p50": 27,
-          "p75": 35,
-          "p90": 41
+          "p75": 33,
+          "p90": 40
         },
         "preseasonWinProb": 91,
         "preseasonProjUt": 36,
         "preseasonProjOpp": 17,
         "preseasonSpread": -18.5,
         "weather": {
-          "temp": 58.2,
-          "windSpeed": 2.9,
-          "windGust": 8.5,
-          "precipProb": 60,
+          "temp": 60.1,
+          "windSpeed": 5.2,
+          "windGust": 6.3,
+          "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Pasadena, CA",
-          "desc": "\u2600\ufe0f 58\u00b0F \u2022 3 mph wind"
+          "desc": "\u2600\ufe0f 60\u00b0F \u2022 5 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -17683,8 +17701,8 @@ const TEAMS_DATABASE = {
         91
       ]
     },
-    "offenseRating": 28.4,
-    "defenseRating": 26.0,
+    "offenseRating": 29.2,
+    "defenseRating": 25.7,
     "specialTeamsRating": -0.2
   },
   "floridastate": {
@@ -17721,7 +17739,7 @@ const TEAMS_DATABASE = {
       "turnover": "Doak Campbell Turnover Luck",
       "crowd": "Doak Campbell War Chant Roar"
     },
-    "baseSpRating": -7.0,
+    "baseSpRating": -5.6,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/52.png",
     "badgeText": "FSU",
     "schedule": [
@@ -18471,12 +18489,12 @@ const TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -9.5,
-        "overUnder": 55.5,
-        "oddsProvider": "DraftKings",
-        "baseWinProb": 53,
-        "projScoreUt": 35,
-        "projScoreOpp": 32,
+        "vegasSpread": 1.7,
+        "overUnder": 67.5,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 44,
+        "projScoreUt": 33,
+        "projScoreOpp": 35,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Florida State front seven vs NC State Wolfpack rushing attack.",
@@ -18484,38 +18502,38 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 28.5,
-        "mcOverProb": 69.5,
-        "mcRecommendedAts": "NCSU +9.5",
-        "mcRecommendedOu": "OVER 55.5",
+        "mcCoverProb": 46.8,
+        "mcOverProb": 48.4,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 19,
-          "p25": 25,
+          "p25": 26,
           "p50": 33,
           "p75": 40,
           "p90": 47
         },
         "mcScoreDistOpp": {
-          "p10": 19,
-          "p25": 24,
-          "p50": 31,
-          "p75": 39,
-          "p90": 45
+          "p10": 21,
+          "p25": 27,
+          "p50": 34,
+          "p75": 42,
+          "p90": 49
         },
         "preseasonWinProb": 95,
         "preseasonProjUt": 38,
         "preseasonProjOpp": 14,
         "preseasonSpread": -23.5,
         "weather": {
-          "temp": 63.8,
-          "windSpeed": 9.9,
-          "windGust": 30.4,
-          "precipProb": 23,
+          "temp": 65.2,
+          "windSpeed": 3.0,
+          "windGust": 3.6,
+          "precipProb": 3,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Tallahassee, FL",
-          "desc": "\u2600\ufe0f 64\u00b0F \u2022 10 mph wind"
+          "desc": "\u2600\ufe0f 65\u00b0F \u2022 3 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -18545,11 +18563,11 @@ const TEAMS_DATABASE = {
         "location": "Tallahassee, FL",
         "isMarquee": false,
         "isConf": false,
-        "vegasSpread": 11.4,
+        "vegasSpread": 10.0,
         "overUnder": 61.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 23,
-        "projScoreUt": 25,
+        "baseWinProb": 25,
+        "projScoreUt": 26,
         "projScoreOpp": 36,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -18558,38 +18576,38 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 51.4,
-        "mcOverProb": 48.7,
+        "mcCoverProb": 47.8,
+        "mcOverProb": 47.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 17,
-          "p50": 24,
-          "p75": 31,
-          "p90": 38
+          "p25": 18,
+          "p50": 26,
+          "p75": 33,
+          "p90": 40
         },
         "mcScoreDistOpp": {
-          "p10": 23,
-          "p25": 29,
-          "p50": 36,
-          "p75": 44,
-          "p90": 51
+          "p10": 22,
+          "p25": 28,
+          "p50": 35,
+          "p75": 43,
+          "p90": 50
         },
         "preseasonWinProb": 95,
         "preseasonProjUt": 38,
         "preseasonProjOpp": 14,
         "preseasonSpread": -23.5,
         "weather": {
-          "temp": 63.8,
-          "windSpeed": 9.9,
-          "windGust": 30.4,
-          "precipProb": 23,
+          "temp": 65.2,
+          "windSpeed": 3.0,
+          "windGust": 3.6,
+          "precipProb": 3,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Tallahassee, FL",
-          "desc": "\u2600\ufe0f 64\u00b0F \u2022 10 mph wind"
+          "desc": "\u2600\ufe0f 65\u00b0F \u2022 3 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -18623,8 +18641,8 @@ const TEAMS_DATABASE = {
         95
       ]
     },
-    "offenseRating": 27.0,
-    "defenseRating": 34.4,
+    "offenseRating": 27.6,
+    "defenseRating": 33.6,
     "specialTeamsRating": 0.4
   },
   "clemson": {
@@ -18661,7 +18679,7 @@ const TEAMS_DATABASE = {
       "turnover": "Memorial Stadium Turnover Luck",
       "crowd": "Memorial Stadium (Death Valley) Roar"
     },
-    "baseSpRating": -14.3,
+    "baseSpRating": -10.2,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/228.png",
     "badgeText": "CLEM",
     "schedule": [
@@ -19481,7 +19499,13 @@ const TEAMS_DATABASE = {
           "turnoverMultiplier": 1.0,
           "underAlert": false,
           "summary": "-0.8 pts weather drag"
-        }
+        },
+        "isFinal": true,
+        "finalTeamScore": 20,
+        "actualScoreUt": 20,
+        "finalOppScore": 10,
+        "actualScoreOpp": 10,
+        "finalWin": true
       },
       {
         "id": "clem-w13",
@@ -19502,12 +19526,12 @@ const TEAMS_DATABASE = {
         "location": "Clemson, SC",
         "isMarquee": true,
         "isConf": false,
-        "vegasSpread": 23.1,
-        "overUnder": 45.5,
+        "vegasSpread": 19.0,
+        "overUnder": 43.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 4,
-        "projScoreUt": 10,
-        "projScoreOpp": 34,
+        "baseWinProb": 6,
+        "projScoreUt": 12,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Clemson front seven vs South Carolina Gamecocks rushing attack.",
@@ -19516,38 +19540,38 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "rivalryName": "PALMETTO BOWL",
-        "mcCoverProb": 48.6,
-        "mcOverProb": 45.2,
+        "mcCoverProb": 47.4,
+        "mcOverProb": 46.6,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 45.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 3,
-          "p25": 6,
+          "p25": 7,
           "p50": 10,
-          "p75": 14,
-          "p90": 20
+          "p75": 17,
+          "p90": 23
         },
         "mcScoreDistOpp": {
-          "p10": 20,
-          "p25": 26,
-          "p50": 34,
-          "p75": 41,
-          "p90": 49
+          "p10": 17,
+          "p25": 23,
+          "p50": 30,
+          "p75": 38,
+          "p90": 45
         },
         "preseasonWinProb": 94,
         "preseasonProjUt": 37,
         "preseasonProjOpp": 15,
         "preseasonSpread": -22.5,
         "weather": {
-          "temp": 45.8,
-          "windSpeed": 5.6,
-          "windGust": 13.9,
-          "precipProb": 0,
+          "temp": 58.4,
+          "windSpeed": 5.1,
+          "windGust": 17.2,
+          "precipProb": 4,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Clemson, SC",
-          "desc": "\u2600\ufe0f 46\u00b0F \u2022 6 mph wind"
+          "desc": "\u2600\ufe0f 58\u00b0F \u2022 5 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -19581,8 +19605,8 @@ const TEAMS_DATABASE = {
         94
       ]
     },
-    "offenseRating": 14.8,
-    "defenseRating": 29.7,
+    "offenseRating": 15.9,
+    "defenseRating": 26.7,
     "specialTeamsRating": 0.6
   },
   "smu": {
@@ -19619,7 +19643,7 @@ const TEAMS_DATABASE = {
       "turnover": "Ford Stadium Turnover Luck",
       "crowd": "Gerald J. Ford Stadium Roar"
     },
-    "baseSpRating": -6.2,
+    "baseSpRating": -5.8,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2567.png",
     "badgeText": "SMU",
     "schedule": [
@@ -20387,10 +20411,10 @@ const TEAMS_DATABASE = {
         "isMarquee": true,
         "isConf": false,
         "vegasSpread": 20.5,
-        "overUnder": 56.5,
+        "overUnder": 55.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 4,
-        "projScoreUt": 15,
+        "baseWinProb": 2,
+        "projScoreUt": 14,
         "projScoreOpp": 40,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -20399,21 +20423,21 @@ const TEAMS_DATABASE = {
         },
         "oppId": "notredame",
         "is_tracked": true,
-        "mcCoverProb": 39.6,
-        "mcOverProb": 43.2,
+        "mcCoverProb": 34.1,
+        "mcOverProb": 47.3,
         "mcRecommendedAts": "ND -20.5",
-        "mcRecommendedOu": "UNDER 56.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 3,
-          "p25": 9,
+          "p25": 7,
           "p50": 14,
           "p75": 20,
-          "p90": 27
+          "p90": 26
         },
         "mcScoreDistOpp": {
           "p10": 26,
           "p25": 33,
-          "p50": 39,
+          "p50": 40,
           "p75": 47,
           "p90": 54
         },
@@ -20422,23 +20446,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 30,
         "preseasonSpread": 7.5,
         "weather": {
-          "temp": 47.6,
-          "windSpeed": 11.6,
-          "windGust": 34.7,
-          "precipProb": 0,
+          "temp": 34.0,
+          "windSpeed": 6.6,
+          "windGust": 17.4,
+          "precipProb": 1,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "South Bend, IN",
-          "desc": "\u2600\ufe0f 48\u00b0F \u2022 12 mph wind"
+          "desc": "\ud83e\udd76 34\u00b0F \u2022 7 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.8,
-          "passEffMultiplier": 0.96,
-          "fgSuccessMultiplier": 0.94,
+          "totalPointsDrag": 0.6,
+          "passEffMultiplier": 1.0,
+          "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "-0.8 pts weather drag"
+          "summary": "-0.6 pts weather drag"
         }
       },
       {
@@ -20460,12 +20484,12 @@ const TEAMS_DATABASE = {
         "location": "Stanford, CA",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -0.6,
+        "vegasSpread": -1.0,
         "overUnder": 58.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 54,
+        "baseWinProb": 55,
         "projScoreUt": 30,
-        "projScoreOpp": 29,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "SMU front seven vs Stanford Cardinal rushing attack.",
@@ -20473,12 +20497,12 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 54.2,
-        "mcOverProb": 48.4,
-        "mcRecommendedAts": "SMU -0.6",
+        "mcCoverProb": 52.0,
+        "mcOverProb": 48.8,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 16,
+          "p10": 17,
           "p25": 23,
           "p50": 30,
           "p75": 37,
@@ -20487,24 +20511,24 @@ const TEAMS_DATABASE = {
         "mcScoreDistOpp": {
           "p10": 16,
           "p25": 21,
-          "p50": 28,
-          "p75": 36,
-          "p90": 43
+          "p50": 27,
+          "p75": 35,
+          "p90": 42
         },
         "preseasonWinProb": 87,
         "preseasonProjUt": 34,
         "preseasonProjOpp": 18,
         "preseasonSpread": -15.5,
         "weather": {
-          "temp": 55.4,
-          "windSpeed": 10.6,
-          "windGust": 25.5,
-          "precipProb": 89,
-          "precipInches": 0.01,
-          "condition": "Light Rain",
+          "temp": 53.1,
+          "windSpeed": 3.5,
+          "windGust": 5.1,
+          "precipProb": 1,
+          "precipInches": 0.0,
+          "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Stanford, CA",
-          "desc": "\ud83c\udf26\ufe0f 55\u00b0F \u2022 11 mph wind"
+          "desc": "\u2600\ufe0f 53\u00b0F \u2022 4 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -20538,8 +20562,8 @@ const TEAMS_DATABASE = {
         87
       ]
     },
-    "offenseRating": 25.7,
-    "defenseRating": 31.8,
+    "offenseRating": 26.0,
+    "defenseRating": 31.7,
     "specialTeamsRating": -0.1
   },
   "texastech": {
@@ -20566,7 +20590,7 @@ const TEAMS_DATABASE = {
     "conference": "Big 12",
     "apRank": "#11 AP",
     "apPoints": "1,081 PTS",
-    "baseSpRating": 10.9,
+    "baseSpRating": 12.1,
     "playoffContenderRank": 11,
     "themeClass": "theme-texastech",
     "colors": {
@@ -21348,12 +21372,12 @@ const TEAMS_DATABASE = {
         "location": "Waco, TX",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -3.5,
+        "vegasSpread": -5.5,
         "overUnder": 57.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 49,
-        "projScoreUt": 28,
-        "projScoreOpp": 31,
+        "baseWinProb": 53,
+        "projScoreUt": 30,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Texas Tech front seven vs Baylor Bears rushing attack.",
@@ -21361,22 +21385,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 40.5,
-        "mcOverProb": 45.4,
-        "mcRecommendedAts": "BAY +3.5",
-        "mcRecommendedOu": "UNDER 57.5",
+        "mcCoverProb": 39.2,
+        "mcOverProb": 50.0,
+        "mcRecommendedAts": "BAY +5.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 14,
-          "p25": 20,
-          "p50": 27,
-          "p75": 35,
-          "p90": 42
+          "p10": 16,
+          "p25": 22,
+          "p50": 29,
+          "p75": 37,
+          "p90": 44
         },
         "mcScoreDistOpp": {
           "p10": 16,
           "p25": 21,
-          "p50": 27,
-          "p75": 35,
+          "p50": 28,
+          "p75": 36,
           "p90": 43
         },
         "preseasonWinProb": 88,
@@ -21384,15 +21408,15 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 18,
         "preseasonSpread": -16.5,
         "weather": {
-          "temp": 55.9,
-          "windSpeed": 3.2,
-          "windGust": 3.6,
+          "temp": 47.9,
+          "windSpeed": 7.5,
+          "windGust": 16.1,
           "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Waco, TX",
-          "desc": "\u2600\ufe0f 56\u00b0F \u2022 3 mph wind"
+          "desc": "\u2600\ufe0f 48\u00b0F \u2022 8 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -21422,11 +21446,11 @@ const TEAMS_DATABASE = {
         "location": "Lubbock, TX",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -7.7,
-        "overUnder": 50.5,
+        "vegasSpread": -9.4,
+        "overUnder": 52.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 68,
-        "projScoreUt": 28,
+        "baseWinProb": 70,
+        "projScoreUt": 30,
         "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -21435,38 +21459,38 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 46.0,
-        "mcOverProb": 46.5,
-        "mcRecommendedAts": "TCU +7.7",
+        "mcCoverProb": 46.8,
+        "mcOverProb": 49.9,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 16,
-          "p25": 20,
-          "p50": 27,
-          "p75": 36,
-          "p90": 43
+          "p25": 23,
+          "p50": 30,
+          "p75": 37,
+          "p90": 45
         },
         "mcScoreDistOpp": {
           "p10": 10,
-          "p25": 14,
-          "p50": 21,
-          "p75": 28,
-          "p90": 35
+          "p25": 16,
+          "p50": 22,
+          "p75": 29,
+          "p90": 36
         },
         "preseasonWinProb": 94,
         "preseasonProjUt": 37,
         "preseasonProjOpp": 15,
         "preseasonSpread": -22.5,
         "weather": {
-          "temp": 53.0,
-          "windSpeed": 8.8,
-          "windGust": 18.3,
-          "precipProb": 0,
+          "temp": 41.9,
+          "windSpeed": 10.7,
+          "windGust": 17.7,
+          "precipProb": 2,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Lubbock, TX",
-          "desc": "\u2600\ufe0f 53\u00b0F \u2022 9 mph wind"
+          "desc": "\u2600\ufe0f 42\u00b0F \u2022 11 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -21499,8 +21523,8 @@ const TEAMS_DATABASE = {
         94
       ]
     },
-    "offenseRating": 34.0,
-    "defenseRating": 23.7,
+    "offenseRating": 35.4,
+    "defenseRating": 23.9,
     "specialTeamsRating": 0.6
   },
   "utah": {
@@ -21524,7 +21548,7 @@ const TEAMS_DATABASE = {
     "stadium": "Rice-Eccles Stadium",
     "stadiumCapacity": "51,444",
     "stadiumCity": "Salt Lake City, UT",
-    "baseSpRating": 13.0,
+    "baseSpRating": 13.2,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/254.png",
     "colors": {
       "primary": "#CC0000",
@@ -22305,7 +22329,7 @@ const TEAMS_DATABASE = {
         "location": "Fort Worth, TX",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -7.0,
+        "vegasSpread": -8.5,
         "overUnder": 46.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 63,
@@ -22318,14 +22342,14 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 41.2,
-        "mcOverProb": 39.9,
-        "mcRecommendedAts": "TCU +7.0",
+        "mcCoverProb": 38.6,
+        "mcOverProb": 39.6,
+        "mcRecommendedAts": "TCU +8.5",
         "mcRecommendedOu": "UNDER 46.5",
         "mcScoreDistUt": {
-          "p10": 10,
+          "p10": 12,
           "p25": 17,
-          "p50": 24,
+          "p50": 23,
           "p75": 30,
           "p90": 37
         },
@@ -22334,22 +22358,22 @@ const TEAMS_DATABASE = {
           "p25": 13,
           "p50": 19,
           "p75": 26,
-          "p90": 31
+          "p90": 33
         },
         "preseasonWinProb": 89,
         "preseasonProjUt": 35,
         "preseasonProjOpp": 18,
         "preseasonSpread": -17,
         "weather": {
-          "temp": 57.9,
-          "windSpeed": 4.5,
-          "windGust": 9.6,
+          "temp": 49.2,
+          "windSpeed": 8.4,
+          "windGust": 15.0,
           "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Fort Worth, TX",
-          "desc": "\u2600\ufe0f 58\u00b0F \u2022 4 mph wind"
+          "desc": "\u2600\ufe0f 49\u00b0F \u2022 8 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -22379,10 +22403,10 @@ const TEAMS_DATABASE = {
         "location": "Salt Lake City, UT",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -20.0,
+        "vegasSpread": -18.9,
         "overUnder": 68.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 89,
+        "baseWinProb": 90,
         "projScoreUt": 43,
         "projScoreOpp": 25,
         "scoutReport": {
@@ -22392,16 +22416,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 45.3,
-        "mcOverProb": 46.2,
+        "mcCoverProb": 51.0,
+        "mcOverProb": 47.8,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 29,
-          "p25": 35,
+          "p25": 36,
           "p50": 43,
           "p75": 51,
-          "p90": 58
+          "p90": 57
         },
         "mcScoreDistOpp": {
           "p10": 13,
@@ -22415,15 +22439,15 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 15,
         "preseasonSpread": -23,
         "weather": {
-          "temp": 39.2,
-          "windSpeed": 4.1,
-          "windGust": 16.3,
-          "precipProb": 10,
+          "temp": 38.6,
+          "windSpeed": 0.7,
+          "windGust": 2.2,
+          "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Salt Lake City, UT",
-          "desc": "\ud83e\udd76 39\u00b0F \u2022 4 mph wind"
+          "desc": "\ud83e\udd76 39\u00b0F \u2022 1 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.6,
@@ -22456,8 +22480,8 @@ const TEAMS_DATABASE = {
         95
       ]
     },
-    "offenseRating": 33.5,
-    "defenseRating": 20.5,
+    "offenseRating": 33.6,
+    "defenseRating": 20.4,
     "specialTeamsRating": 0.0
   },
   "iowa": {
@@ -22481,7 +22505,7 @@ const TEAMS_DATABASE = {
     "stadium": "Kinnick Stadium",
     "stadiumCapacity": "69,250",
     "stadiumCity": "Iowa City, IA",
-    "baseSpRating": 4.8,
+    "baseSpRating": 5.1,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/2294.png",
     "colors": {
       "primary": "#FFE100",
@@ -23261,12 +23285,12 @@ const TEAMS_DATABASE = {
         "location": "Champaign, IL",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -8.5,
-        "overUnder": 40.5,
-        "oddsProvider": "DraftKings",
-        "baseWinProb": 52,
-        "projScoreUt": 23,
-        "projScoreOpp": 20,
+        "vegasSpread": 4.3,
+        "overUnder": 39.5,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 39,
+        "projScoreUt": 18,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Illinois Fighting Illini rushing attack.",
@@ -23274,46 +23298,46 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 28.8,
-        "mcOverProb": 47.4,
-        "mcRecommendedAts": "ILL +8.5",
+        "mcCoverProb": 54.0,
+        "mcOverProb": 49.0,
+        "mcRecommendedAts": "Iowa +4.3",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 9,
-          "p25": 13,
-          "p50": 20,
-          "p75": 27,
-          "p90": 33
+          "p10": 7,
+          "p25": 10,
+          "p50": 17,
+          "p75": 24,
+          "p90": 31
         },
         "mcScoreDistOpp": {
-          "p10": 9,
-          "p25": 13,
-          "p50": 20,
-          "p75": 26,
-          "p90": 31
+          "p10": 10,
+          "p25": 15,
+          "p50": 21,
+          "p75": 27,
+          "p90": 34
         },
         "preseasonWinProb": 84,
         "preseasonProjUt": 33,
         "preseasonProjOpp": 20,
         "preseasonSpread": -13.5,
         "weather": {
-          "temp": 47.7,
-          "windSpeed": 9.8,
-          "windGust": 29.3,
+          "temp": 32.2,
+          "windSpeed": 10.8,
+          "windGust": 21.3,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Champaign, IL",
-          "desc": "\u2600\ufe0f 48\u00b0F \u2022 10 mph wind"
+          "desc": "\ud83e\udd76 32\u00b0F \u2022 11 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       },
       {
@@ -23335,12 +23359,12 @@ const TEAMS_DATABASE = {
         "location": "Iowa City, IA",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 9.6,
-        "overUnder": 32.5,
+        "vegasSpread": 9.3,
+        "overUnder": 31.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 24,
-        "projScoreUt": 10,
-        "projScoreOpp": 18,
+        "projScoreUt": 11,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Iowa front seven vs Nebraska Cornhuskers rushing attack.",
@@ -23348,46 +23372,46 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 54.2,
-        "mcOverProb": 32.1,
-        "mcRecommendedAts": "Iowa +9.6",
-        "mcRecommendedOu": "UNDER 32.5",
+        "mcCoverProb": 52.0,
+        "mcOverProb": 44.5,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 31.5",
         "mcScoreDistUt": {
-          "p10": 0,
-          "p25": 3,
-          "p50": 9,
-          "p75": 14,
-          "p90": 20
+          "p10": 3,
+          "p25": 6,
+          "p50": 10,
+          "p75": 16,
+          "p90": 21
         },
         "mcScoreDistOpp": {
-          "p10": 6,
-          "p25": 10,
-          "p50": 17,
-          "p75": 23,
-          "p90": 30
+          "p10": 9,
+          "p25": 13,
+          "p50": 20,
+          "p75": 26,
+          "p90": 31
         },
         "preseasonWinProb": 92,
         "preseasonProjUt": 36,
         "preseasonProjOpp": 16,
         "preseasonSpread": -19.5,
         "weather": {
-          "temp": 52.5,
-          "windSpeed": 15.6,
-          "windGust": 39.1,
+          "temp": 28.6,
+          "windSpeed": 7.9,
+          "windGust": 18.1,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Iowa City, IA",
-          "desc": "\u2600\ufe0f 52\u00b0F \u2022 16 mph wind (Under Alert)"
+          "desc": "\ud83e\udd76 29\u00b0F \u2022 8 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 2.4,
-          "passEffMultiplier": 0.9,
-          "fgSuccessMultiplier": 0.85,
+          "totalPointsDrag": 1.8,
+          "passEffMultiplier": 1.0,
+          "fgSuccessMultiplier": 0.88,
           "turnoverMultiplier": 1.0,
-          "underAlert": true,
-          "summary": "-2.4 pts weather drag"
+          "underAlert": false,
+          "summary": "-1.8 pts weather drag"
         }
       }
     ],
@@ -23412,8 +23436,8 @@ const TEAMS_DATABASE = {
         92
       ]
     },
-    "offenseRating": 24.2,
-    "defenseRating": 19.7,
+    "offenseRating": 24.3,
+    "defenseRating": 19.5,
     "specialTeamsRating": 0.3
   },
   "missouri": {
@@ -23437,7 +23461,7 @@ const TEAMS_DATABASE = {
     "stadium": "Faurot Field at Memorial Stadium",
     "stadiumCapacity": "62,621",
     "stadiumCity": "Columbia, MO",
-    "baseSpRating": 1.8,
+    "baseSpRating": 3.4,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/142.png",
     "colors": {
       "primary": "#F1B82D",
@@ -24217,12 +24241,12 @@ const TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -5.5,
-        "overUnder": 48.5,
+        "vegasSpread": -4.5,
+        "overUnder": 49.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 63,
         "projScoreUt": 28,
-        "projScoreOpp": 23,
+        "projScoreOpp": 24,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Missouri front seven vs Kentucky Wildcats rushing attack.",
@@ -24230,16 +24254,16 @@ const TEAMS_DATABASE = {
         },
         "oppId": "kentucky",
         "is_tracked": true,
-        "mcCoverProb": 48.8,
-        "mcOverProb": 55.9,
+        "mcCoverProb": 50.4,
+        "mcOverProb": 55.6,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "OVER 48.5",
+        "mcRecommendedOu": "OVER 49.5",
         "mcScoreDistUt": {
           "p10": 16,
           "p25": 20,
           "p50": 27,
-          "p75": 34,
-          "p90": 41
+          "p75": 35,
+          "p90": 42
         },
         "mcScoreDistOpp": {
           "p10": 10,
@@ -24253,23 +24277,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 16,
         "preseasonSpread": -21.5,
         "weather": {
-          "temp": 50.1,
-          "windSpeed": 9.9,
-          "windGust": 32.7,
+          "temp": 34.0,
+          "windSpeed": 8.8,
+          "windGust": 22.1,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Columbia, MO",
-          "desc": "\u2600\ufe0f 50\u00b0F \u2022 10 mph wind"
+          "desc": "\ud83e\udd76 34\u00b0F \u2022 9 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       },
       {
@@ -24291,12 +24315,12 @@ const TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -3.2,
+        "vegasSpread": -2.4,
         "overUnder": 42.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 61,
+        "baseWinProb": 59,
         "projScoreUt": 23,
-        "projScoreOpp": 19,
+        "projScoreOpp": 20,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Missouri quarterback play vs Oklahoma Sooners secondary.",
@@ -24304,8 +24328,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": "oklahoma",
         "is_tracked": true,
-        "mcCoverProb": 50.8,
-        "mcOverProb": 46.9,
+        "mcCoverProb": 47.9,
+        "mcOverProb": 49.4,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -24313,13 +24337,13 @@ const TEAMS_DATABASE = {
           "p25": 16,
           "p50": 23,
           "p75": 30,
-          "p90": 35
+          "p90": 36
         },
         "mcScoreDistOpp": {
           "p10": 7,
           "p25": 13,
           "p50": 19,
-          "p75": 25,
+          "p75": 26,
           "p90": 31
         },
         "preseasonWinProb": 49,
@@ -24327,23 +24351,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 26,
         "preseasonSpread": 7.1,
         "weather": {
-          "temp": 50.1,
-          "windSpeed": 9.9,
-          "windGust": 32.7,
+          "temp": 34.0,
+          "windSpeed": 8.8,
+          "windGust": 22.1,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Columbia, MO",
-          "desc": "\u2600\ufe0f 50\u00b0F \u2022 10 mph wind"
+          "desc": "\ud83e\udd76 34\u00b0F \u2022 9 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       }
     ],
@@ -24368,8 +24392,8 @@ const TEAMS_DATABASE = {
         49
       ]
     },
-    "offenseRating": 27.7,
-    "defenseRating": 25.6,
+    "offenseRating": 28.6,
+    "defenseRating": 24.9,
     "specialTeamsRating": -0.3
   },
   "arizona": {
@@ -24393,7 +24417,7 @@ const TEAMS_DATABASE = {
     "stadium": "Arizona Stadium",
     "stadiumCapacity": "50,782",
     "stadiumCity": "Tucson, AZ",
-    "baseSpRating": 2.5,
+    "baseSpRating": 2.7,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/12.png",
     "colors": {
       "primary": "#CC0033",
@@ -25173,12 +25197,12 @@ const TEAMS_DATABASE = {
         "location": "Manhattan, KS",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -7.0,
-        "overUnder": 52.5,
+        "vegasSpread": -10.0,
+        "overUnder": 53.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 49,
-        "projScoreUt": 28,
-        "projScoreOpp": 29,
+        "baseWinProb": 52,
+        "projScoreUt": 29,
+        "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona front seven vs Kansas State Wildcats rushing attack.",
@@ -25186,46 +25210,46 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 28.0,
-        "mcOverProb": 61.2,
-        "mcRecommendedAts": "KSU +7.0",
-        "mcRecommendedOu": "OVER 52.5",
+        "mcCoverProb": 25.1,
+        "mcOverProb": 58.5,
+        "mcRecommendedAts": "KSU +10.0",
+        "mcRecommendedOu": "OVER 53.5",
         "mcScoreDistUt": {
           "p10": 16,
-          "p25": 20,
-          "p50": 27,
+          "p25": 22,
+          "p50": 28,
           "p75": 36,
-          "p90": 42
+          "p90": 43
         },
         "mcScoreDistOpp": {
           "p10": 16,
-          "p25": 22,
-          "p50": 29,
+          "p25": 21,
+          "p50": 28,
           "p75": 36,
-          "p90": 43
+          "p90": 42
         },
         "preseasonWinProb": 82,
         "preseasonProjUt": 32,
         "preseasonProjOpp": 20,
         "preseasonSpread": -12,
         "weather": {
-          "temp": 53.5,
-          "windSpeed": 14.7,
-          "windGust": 33.3,
-          "precipProb": 1,
+          "temp": 35.1,
+          "windSpeed": 7.4,
+          "windGust": 17.9,
+          "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Manhattan, KS",
-          "desc": "\u2600\ufe0f 54\u00b0F \u2022 15 mph wind"
+          "desc": "\ud83e\udd76 35\u00b0F \u2022 7 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.8,
-          "passEffMultiplier": 0.96,
-          "fgSuccessMultiplier": 0.94,
+          "totalPointsDrag": 0.6,
+          "passEffMultiplier": 1.0,
+          "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "-0.8 pts weather drag"
+          "summary": "-0.6 pts weather drag"
         }
       },
       {
@@ -25250,7 +25274,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": -11.2,
         "overUnder": 58.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 84,
+        "baseWinProb": 83,
         "projScoreUt": 36,
         "projScoreOpp": 22,
         "scoutReport": {
@@ -25261,22 +25285,22 @@ const TEAMS_DATABASE = {
         "oppId": "arizonastate",
         "is_tracked": true,
         "rivalryName": "TERRITORIAL CUP",
-        "mcCoverProb": 45.8,
-        "mcOverProb": 47.0,
+        "mcCoverProb": 47.6,
+        "mcOverProb": 47.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 22,
-          "p25": 28,
+          "p10": 23,
+          "p25": 29,
           "p50": 36,
           "p75": 43,
           "p90": 50
         },
         "mcScoreDistOpp": {
           "p10": 10,
-          "p25": 16,
+          "p25": 15,
           "p50": 21,
-          "p75": 29,
+          "p75": 28,
           "p90": 35
         },
         "preseasonWinProb": 54,
@@ -25284,23 +25308,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 24,
         "preseasonSpread": -1.5,
         "weather": {
-          "temp": 49.0,
-          "windSpeed": 5.7,
-          "windGust": 6.5,
+          "temp": 32.8,
+          "windSpeed": 6.5,
+          "windGust": 13.0,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "",
-          "desc": "\u2600\ufe0f 49\u00b0F \u2022 6 mph wind"
+          "desc": "\ud83e\udd76 33\u00b0F \u2022 6 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       }
     ],
@@ -25325,8 +25349,8 @@ const TEAMS_DATABASE = {
         69
       ]
     },
-    "offenseRating": 30.8,
-    "defenseRating": 28.3,
+    "offenseRating": 30.5,
+    "defenseRating": 27.8,
     "specialTeamsRating": 0.0
   },
   "washington": {
@@ -26130,11 +26154,11 @@ const TEAMS_DATABASE = {
         "location": "Seattle, WA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 8.5,
-        "overUnder": 43.5,
+        "vegasSpread": 9.5,
+        "overUnder": 44.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 18,
-        "projScoreUt": 16,
+        "baseWinProb": 19,
+        "projScoreUt": 17,
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
@@ -26143,22 +26167,22 @@ const TEAMS_DATABASE = {
         },
         "oppId": "indiana",
         "is_tracked": true,
-        "mcCoverProb": 39.2,
-        "mcOverProb": 47.7,
-        "mcRecommendedAts": "IU -8.5",
+        "mcCoverProb": 43.4,
+        "mcOverProb": 49.0,
+        "mcRecommendedAts": "IU -9.5",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 6,
           "p25": 10,
-          "p50": 14,
-          "p75": 21,
-          "p90": 27
+          "p50": 16,
+          "p75": 23,
+          "p90": 28
         },
         "mcScoreDistOpp": {
           "p10": 16,
-          "p25": 20,
+          "p25": 21,
           "p50": 27,
-          "p75": 34,
+          "p75": 36,
           "p90": 41
         },
         "preseasonWinProb": 50,
@@ -26167,14 +26191,14 @@ const TEAMS_DATABASE = {
         "preseasonSpread": 4.5,
         "weather": {
           "temp": 42.6,
-          "windSpeed": 5.0,
-          "windGust": 8.1,
-          "precipProb": 2,
-          "precipInches": 0.0,
+          "windSpeed": 2.0,
+          "windGust": 7.6,
+          "precipProb": 53,
+          "precipInches": 0.03,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Seattle, WA",
-          "desc": "\u2600\ufe0f 43\u00b0F \u2022 5 mph wind"
+          "desc": "\u2600\ufe0f 43\u00b0F \u2022 2 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -26204,12 +26228,12 @@ const TEAMS_DATABASE = {
         "location": "Eugene, OR",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 10.4,
+        "vegasSpread": 11.2,
         "overUnder": 48.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 17,
+        "baseWinProb": 14,
         "projScoreUt": 17,
-        "projScoreOpp": 30,
+        "projScoreOpp": 31,
         "scoutReport": {
           "xFactor": "Turnover margin, third-down conversion rate, and red-zone execution.",
           "keyMatchup": "Washington quarterback play vs Oregon Ducks secondary.",
@@ -26218,46 +26242,46 @@ const TEAMS_DATABASE = {
         "oppId": "oregon",
         "is_tracked": true,
         "rivalryName": "PACIFIC NORTHWEST CLASH",
-        "mcCoverProb": 51.4,
-        "mcOverProb": 44.7,
+        "mcCoverProb": 50.6,
+        "mcOverProb": 47.0,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 48.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 6,
           "p25": 10,
-          "p50": 17,
-          "p75": 24,
-          "p90": 30
+          "p50": 16,
+          "p75": 23,
+          "p90": 28
         },
         "mcScoreDistOpp": {
-          "p10": 17,
-          "p25": 23,
+          "p10": 19,
+          "p25": 24,
           "p50": 30,
-          "p75": 37,
-          "p90": 43
+          "p75": 38,
+          "p90": 44
         },
         "preseasonWinProb": 19,
         "preseasonProjUt": 20,
         "preseasonProjOpp": 32,
         "preseasonSpread": 11.5,
         "weather": {
-          "temp": 36.1,
-          "windSpeed": 1.6,
-          "windGust": 1.3,
-          "precipProb": 1,
+          "temp": 46.8,
+          "windSpeed": 2.4,
+          "windGust": 3.4,
+          "precipProb": 32,
           "precipInches": 0.0,
-          "condition": "Cold / Crisp",
+          "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Eugene, OR",
-          "desc": "\ud83e\udd76 36\u00b0F \u2022 2 mph wind"
+          "desc": "\u2600\ufe0f 47\u00b0F \u2022 2 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.6,
+          "totalPointsDrag": 0.0,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "-0.6 pts weather drag"
+          "summary": "Neutral weather"
         }
       }
     ],
@@ -26307,7 +26331,7 @@ const TEAMS_DATABASE = {
     "stadium": "TDECU Stadium",
     "stadiumCapacity": "40,000",
     "stadiumCity": "Houston, TX",
-    "baseSpRating": 3.6,
+    "baseSpRating": 3.7,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png",
     "colors": {
       "primary": "#C8102E",
@@ -27087,12 +27111,12 @@ const TEAMS_DATABASE = {
         "location": "Morgantown, WV",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -7.5,
-        "overUnder": 70.5,
+        "vegasSpread": -6.5,
+        "overUnder": 71.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 66,
+        "baseWinProb": 62,
         "projScoreUt": 37,
-        "projScoreOpp": 31,
+        "projScoreOpp": 32,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Houston front seven vs West Virginia Mountaineers rushing attack.",
@@ -27100,46 +27124,46 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 45.6,
-        "mcOverProb": 43.7,
-        "mcRecommendedAts": "WVU +7.5",
-        "mcRecommendedOu": "UNDER 70.5",
+        "mcCoverProb": 44.0,
+        "mcOverProb": 41.4,
+        "mcRecommendedAts": "WVU +6.5",
+        "mcRecommendedOu": "UNDER 71.5",
         "mcScoreDistUt": {
           "p10": 23,
-          "p25": 30,
+          "p25": 29,
           "p50": 37,
           "p75": 44,
           "p90": 51
         },
         "mcScoreDistOpp": {
-          "p10": 17,
-          "p25": 23,
-          "p50": 31,
-          "p75": 38,
-          "p90": 45
+          "p10": 19,
+          "p25": 24,
+          "p50": 32,
+          "p75": 40,
+          "p90": 47
         },
         "preseasonWinProb": 83,
         "preseasonProjUt": 32,
         "preseasonProjOpp": 20,
         "preseasonSpread": -12.5,
         "weather": {
-          "temp": 42.2,
-          "windSpeed": 3.2,
-          "windGust": 2.7,
+          "temp": 33.9,
+          "windSpeed": 1.6,
+          "windGust": 2.5,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Morgantown, WV",
-          "desc": "\u2600\ufe0f 42\u00b0F \u2022 3 mph wind"
+          "desc": "\ud83e\udd76 34\u00b0F \u2022 2 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       },
       {
@@ -27161,11 +27185,11 @@ const TEAMS_DATABASE = {
         "location": "Houston, TX",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 5.1,
+        "vegasSpread": 5.0,
         "overUnder": 48.5,
         "oddsProvider": "CFB Prophet Projected",
         "baseWinProb": 36,
-        "projScoreUt": 22,
+        "projScoreUt": 21,
         "projScoreOpp": 26,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
@@ -27174,21 +27198,21 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 49.6,
-        "mcOverProb": 46.3,
+        "mcCoverProb": 47.1,
+        "mcOverProb": 47.4,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 10,
           "p25": 14,
           "p50": 21,
-          "p75": 28,
+          "p75": 27,
           "p90": 34
         },
         "mcScoreDistOpp": {
           "p10": 13,
           "p25": 20,
-          "p50": 26,
+          "p50": 27,
           "p75": 33,
           "p90": 40
         },
@@ -27197,15 +27221,15 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 17,
         "preseasonSpread": -18.5,
         "weather": {
-          "temp": 64.0,
-          "windSpeed": 4.0,
-          "windGust": 7.4,
-          "precipProb": 0,
+          "temp": 60.4,
+          "windSpeed": 6.8,
+          "windGust": 15.4,
+          "precipProb": 2,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Houston, TX",
-          "desc": "\u2600\ufe0f 64\u00b0F \u2022 4 mph wind"
+          "desc": "\u2600\ufe0f 60\u00b0F \u2022 7 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -27238,8 +27262,8 @@ const TEAMS_DATABASE = {
         91
       ]
     },
-    "offenseRating": 28.5,
-    "defenseRating": 25.3,
+    "offenseRating": 28.4,
+    "defenseRating": 25.1,
     "specialTeamsRating": 0.4
   },
   "louisville": {
@@ -27263,7 +27287,7 @@ const TEAMS_DATABASE = {
     "stadium": "L&N Federal Credit Union Stadium",
     "stadiumCapacity": "60,800",
     "stadiumCity": "Louisville, KY",
-    "baseSpRating": 5.2,
+    "baseSpRating": 5.6,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/97.png",
     "colors": {
       "primary": "#C90000",
@@ -28043,10 +28067,10 @@ const TEAMS_DATABASE = {
         "location": "Louisville, KY",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -13.5,
+        "vegasSpread": -11.5,
         "overUnder": 50.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 59,
+        "baseWinProb": 57,
         "projScoreUt": 26,
         "projScoreOpp": 23,
         "scoutReport": {
@@ -28056,14 +28080,14 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 22.6,
-        "mcOverProb": 42.5,
-        "mcRecommendedAts": "PITT +13.5",
+        "mcCoverProb": 26.5,
+        "mcOverProb": 43.1,
+        "mcRecommendedAts": "PITT +11.5",
         "mcRecommendedOu": "UNDER 50.5",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 18,
-          "p50": 24,
+          "p25": 19,
+          "p50": 26,
           "p75": 33,
           "p90": 40
         },
@@ -28072,30 +28096,30 @@ const TEAMS_DATABASE = {
           "p25": 16,
           "p50": 23,
           "p75": 30,
-          "p90": 37
+          "p90": 36
         },
         "preseasonWinProb": 91,
         "preseasonProjUt": 36,
         "preseasonProjOpp": 17,
         "preseasonSpread": -19,
         "weather": {
-          "temp": 50.0,
-          "windSpeed": 3.4,
-          "windGust": 8.9,
+          "temp": 39.9,
+          "windSpeed": 8.0,
+          "windGust": 21.7,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Louisville, KY",
-          "desc": "\u2600\ufe0f 50\u00b0F \u2022 3 mph wind"
+          "desc": "\ud83e\udd76 40\u00b0F \u2022 8 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       },
       {
@@ -28130,8 +28154,8 @@ const TEAMS_DATABASE = {
         },
         "oppId": "kentucky",
         "is_tracked": true,
-        "mcCoverProb": 50.5,
-        "mcOverProb": 46.4,
+        "mcCoverProb": 49.7,
+        "mcOverProb": 47.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
@@ -28143,9 +28167,9 @@ const TEAMS_DATABASE = {
         },
         "mcScoreDistOpp": {
           "p10": 13,
-          "p25": 18,
-          "p50": 24,
-          "p75": 31,
+          "p25": 19,
+          "p50": 25,
+          "p75": 32,
           "p90": 38
         },
         "preseasonWinProb": 84,
@@ -28153,23 +28177,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 20,
         "preseasonSpread": -13,
         "weather": {
-          "temp": 43.6,
-          "windSpeed": 6.4,
-          "windGust": 6.3,
-          "precipProb": 0,
+          "temp": 52.0,
+          "windSpeed": 11.0,
+          "windGust": 14.3,
+          "precipProb": 10,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Late Fall Breeze",
           "isDome": false,
           "city": "Lexington, KY",
-          "desc": "\u2600\ufe0f 44\u00b0F \u2022 6 mph wind"
+          "desc": "\u2600\ufe0f 52\u00b0F \u2022 11 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
-          "passEffMultiplier": 1.0,
-          "fgSuccessMultiplier": 1.0,
+          "totalPointsDrag": 0.8,
+          "passEffMultiplier": 0.96,
+          "fgSuccessMultiplier": 0.94,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.8 pts weather drag"
         }
       }
     ],
@@ -28194,8 +28218,8 @@ const TEAMS_DATABASE = {
         84
       ]
     },
-    "offenseRating": 29.8,
-    "defenseRating": 24.3,
+    "offenseRating": 30.1,
+    "defenseRating": 24.2,
     "specialTeamsRating": -0.3
   },
   "colorado": {
@@ -28227,7 +28251,7 @@ const TEAMS_DATABASE = {
       "bgSurface": "#171510",
       "bgBase": "#0B0A08"
     },
-    "baseSpRating": -16.7,
+    "baseSpRating": -20.1,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/38.png",
     "badgeText": "COL",
     "sliderLabels": {
@@ -29054,7 +29078,13 @@ const TEAMS_DATABASE = {
           "turnoverMultiplier": 1.0,
           "underAlert": false,
           "summary": "Neutral weather"
-        }
+        },
+        "isFinal": true,
+        "finalTeamScore": 28,
+        "actualScoreUt": 28,
+        "finalOppScore": 35,
+        "actualScoreOpp": 35,
+        "finalWin": false
       },
       {
         "id": "col-w13",
@@ -29075,12 +29105,12 @@ const TEAMS_DATABASE = {
         "location": "Boulder, CO",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 15.2,
+        "vegasSpread": 18.6,
         "overUnder": 50.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 14,
-        "projScoreUt": 17,
-        "projScoreOpp": 32,
+        "baseWinProb": 9,
+        "projScoreUt": 16,
+        "projScoreOpp": 34,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Colorado front seven vs UCF Knights rushing attack.",
@@ -29088,38 +29118,38 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 53.0,
-        "mcOverProb": 44.8,
+        "mcCoverProb": 47.8,
+        "mcOverProb": 46.7,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 50.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 6,
           "p25": 10,
-          "p50": 17,
-          "p75": 23,
-          "p90": 30
+          "p50": 14,
+          "p75": 21,
+          "p90": 27
         },
         "mcScoreDistOpp": {
           "p10": 20,
-          "p25": 24,
-          "p50": 31,
-          "p75": 39,
-          "p90": 45
+          "p25": 27,
+          "p50": 34,
+          "p75": 41,
+          "p90": 48
         },
         "preseasonWinProb": 57,
         "preseasonProjUt": 28,
         "preseasonProjOpp": 25,
         "preseasonSpread": -2.5,
         "weather": {
-          "temp": 36.4,
-          "windSpeed": 7.8,
-          "windGust": 6.5,
-          "precipProb": 0,
+          "temp": 33.0,
+          "windSpeed": 0.6,
+          "windGust": 0.9,
+          "precipProb": 7,
           "precipInches": 0.0,
           "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Boulder, CO",
-          "desc": "\ud83e\udd76 36\u00b0F \u2022 8 mph wind"
+          "desc": "\ud83e\udd76 33\u00b0F \u2022 1 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.6,
@@ -29152,8 +29182,8 @@ const TEAMS_DATABASE = {
         57
       ]
     },
-    "offenseRating": 18.1,
-    "defenseRating": 34.2,
+    "offenseRating": 16.5,
+    "defenseRating": 36.0,
     "specialTeamsRating": -0.6
   },
   "arizonastate": {
@@ -29166,7 +29196,7 @@ const TEAMS_DATABASE = {
     "conference": "Big 12",
     "apRank": "NR",
     "apPoints": "",
-    "playoffContenderRank": 30,
+    "playoffContenderRank": 32,
     "headCoach": "Kenny Dillingham",
     "offensiveCoordinator": "Marcus Arroyo",
     "defensiveCoordinator": "Brian Ward",
@@ -29186,7 +29216,7 @@ const TEAMS_DATABASE = {
       "bgBase": "#0D0508",
       "border": "rgba(140, 29, 64, 0.45)"
     },
-    "baseSpRating": -9.0,
+    "baseSpRating": -8.9,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/9.png",
     "badgeText": "ASU",
     "sliderLabels": {
@@ -29960,12 +29990,12 @@ const TEAMS_DATABASE = {
         "location": "Tempe, AZ",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": 3.0,
-        "overUnder": 61.5,
+        "vegasSpread": 2.5,
+        "overUnder": 59.5,
         "oddsProvider": "DraftKings",
-        "baseWinProb": 14,
+        "baseWinProb": 16,
         "projScoreUt": 25,
-        "projScoreOpp": 40,
+        "projScoreOpp": 39,
         "scoutReport": {
           "xFactor": "Explosive play generation and stopping the run on early downs.",
           "keyMatchup": "Arizona State front seven vs Oklahoma State Cowboys rushing attack.",
@@ -29973,13 +30003,13 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "mcCoverProb": 18.2,
-        "mcOverProb": 58.2,
-        "mcRecommendedAts": "OKST -3.0",
-        "mcRecommendedOu": "OVER 61.5",
+        "mcCoverProb": 19.6,
+        "mcOverProb": 62.8,
+        "mcRecommendedAts": "OKST -2.5",
+        "mcRecommendedOu": "OVER 59.5",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 17,
+          "p25": 18,
           "p50": 24,
           "p75": 31,
           "p90": 38
@@ -29989,22 +30019,22 @@ const TEAMS_DATABASE = {
           "p25": 32,
           "p50": 40,
           "p75": 47,
-          "p90": 54
+          "p90": 53
         },
         "preseasonWinProb": 86,
         "preseasonProjUt": 34,
         "preseasonProjOpp": 19,
         "preseasonSpread": -14.5,
         "weather": {
-          "temp": 65.2,
-          "windSpeed": 1.7,
-          "windGust": 1.3,
+          "temp": 62.3,
+          "windSpeed": 2.7,
+          "windGust": 2.2,
           "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Tempe, AZ",
-          "desc": "\u2600\ufe0f 65\u00b0F \u2022 2 mph wind"
+          "desc": "\u2600\ufe0f 62\u00b0F \u2022 3 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -30037,7 +30067,7 @@ const TEAMS_DATABASE = {
         "vegasSpread": 11.2,
         "overUnder": 58.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 16,
+        "baseWinProb": 17,
         "projScoreUt": 22,
         "projScoreOpp": 36,
         "scoutReport": {
@@ -30048,20 +30078,20 @@ const TEAMS_DATABASE = {
         "oppId": "arizona",
         "is_tracked": true,
         "rivalryName": "TERRITORIAL CUP",
-        "mcCoverProb": 54.2,
-        "mcOverProb": 47.0,
+        "mcCoverProb": 52.4,
+        "mcOverProb": 47.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 10,
-          "p25": 16,
+          "p25": 15,
           "p50": 21,
-          "p75": 29,
+          "p75": 28,
           "p90": 35
         },
         "mcScoreDistOpp": {
-          "p10": 22,
-          "p25": 28,
+          "p10": 23,
+          "p25": 29,
           "p50": 36,
           "p75": 43,
           "p90": 50
@@ -30071,23 +30101,23 @@ const TEAMS_DATABASE = {
         "preseasonProjOpp": 27,
         "preseasonSpread": 1.5,
         "weather": {
-          "temp": 49.0,
-          "windSpeed": 5.7,
-          "windGust": 6.5,
+          "temp": 32.8,
+          "windSpeed": 6.5,
+          "windGust": 13.0,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "",
-          "desc": "\u2600\ufe0f 49\u00b0F \u2022 6 mph wind"
+          "desc": "\ud83e\udd76 33\u00b0F \u2022 6 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         }
       }
     ],
@@ -30112,7 +30142,7 @@ const TEAMS_DATABASE = {
         31
       ]
     },
-    "offenseRating": 22.3,
+    "offenseRating": 22.4,
     "defenseRating": 31.2,
     "specialTeamsRating": -0.1
   },
@@ -30137,7 +30167,7 @@ const TEAMS_DATABASE = {
     "stadium": "Rose Bowl",
     "stadiumCapacity": "89,702",
     "stadiumCity": "Pasadena, CA",
-    "baseSpRating": 9.6,
+    "baseSpRating": 10.4,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/26.png",
     "colors": {
       "primary": "#2774AE",
@@ -30674,12 +30704,12 @@ const TEAMS_DATABASE = {
         "location": "Ann Arbor, MI",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -4.0,
-        "overUnder": 37.5,
-        "oddsProvider": "DraftKings",
-        "baseWinProb": 88,
-        "projScoreUt": 23,
-        "projScoreOpp": 9,
+        "vegasSpread": -12.8,
+        "overUnder": 30.5,
+        "oddsProvider": "CFB Prophet Projected",
+        "baseWinProb": 94,
+        "projScoreUt": 22,
+        "projScoreOpp": 6,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 12 showdown at Michigan Stadium.",
           "keyMatchup": "UCLA line of scrimmage vs Michigan Wolverines front seven.",
@@ -30688,42 +30718,42 @@ const TEAMS_DATABASE = {
         "oppId": "michigan",
         "is_tracked": true,
         "isFinal": false,
-        "mcCoverProb": 79.3,
-        "mcOverProb": 28.5,
-        "mcRecommendedAts": "UCLA -4.0",
-        "mcRecommendedOu": "UNDER 37.5",
+        "mcCoverProb": 50.4,
+        "mcOverProb": 38.6,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
+        "mcRecommendedOu": "UNDER 30.5",
         "mcScoreDistUt": {
           "p10": 10,
           "p25": 16,
           "p50": 23,
           "p75": 29,
-          "p90": 35
+          "p90": 34
         },
         "mcScoreDistOpp": {
           "p10": 0,
-          "p25": 3,
-          "p50": 7,
-          "p75": 13,
-          "p90": 17
+          "p25": 0,
+          "p50": 6,
+          "p75": 10,
+          "p90": 14
         },
         "weather": {
-          "temp": 42.7,
-          "windSpeed": 8.0,
-          "windGust": 25.1,
-          "precipProb": 0,
+          "temp": 32.2,
+          "windSpeed": 10.0,
+          "windGust": 21.7,
+          "precipProb": 2,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Ann Arbor, MI",
-          "desc": "\u2600\ufe0f 43\u00b0F \u2022 8 mph wind"
+          "desc": "\ud83e\udd76 32\u00b0F \u2022 10 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         },
         "preseasonProjUt": 15,
         "preseasonProjOpp": 38,
@@ -30749,12 +30779,12 @@ const TEAMS_DATABASE = {
         "location": "Pasadena, CA",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": -8.8,
-        "overUnder": 45.5,
+        "vegasSpread": -7.2,
+        "overUnder": 44.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 79,
-        "projScoreUt": 28,
-        "projScoreOpp": 17,
+        "baseWinProb": 76,
+        "projScoreUt": 27,
+        "projScoreOpp": 18,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 13 showdown at Rose Bowl.",
           "keyMatchup": "UCLA line of scrimmage vs USC Trojans front seven.",
@@ -30763,34 +30793,34 @@ const TEAMS_DATABASE = {
         "oppId": "usc",
         "is_tracked": true,
         "isFinal": false,
-        "mcCoverProb": 54.4,
-        "mcOverProb": 47.0,
-        "mcRecommendedAts": "UCLA -9.6",
+        "mcCoverProb": 49.4,
+        "mcOverProb": 47.7,
+        "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
-          "p10": 15,
+          "p10": 13,
           "p25": 20,
           "p50": 27,
-          "p75": 35,
-          "p90": 41
+          "p75": 33,
+          "p90": 40
         },
         "mcScoreDistOpp": {
           "p10": 6,
           "p25": 10,
-          "p50": 16,
-          "p75": 23,
+          "p50": 17,
+          "p75": 24,
           "p90": 30
         },
         "weather": {
-          "temp": 58.2,
-          "windSpeed": 2.9,
-          "windGust": 8.5,
-          "precipProb": 60,
+          "temp": 60.1,
+          "windSpeed": 5.2,
+          "windGust": 6.3,
+          "precipProb": 0,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Pasadena, CA",
-          "desc": "\u2600\ufe0f 58\u00b0F \u2022 3 mph wind"
+          "desc": "\u2600\ufe0f 60\u00b0F \u2022 5 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -30807,7 +30837,7 @@ const TEAMS_DATABASE = {
       }
     ],
     "offenseRating": 27.2,
-    "defenseRating": 17.6,
+    "defenseRating": 16.8,
     "specialTeamsRating": 0.0,
     "qbStatus": {
       "starterOut": "Nico Iamaleava",
@@ -30838,7 +30868,7 @@ const TEAMS_DATABASE = {
     "stadium": "Kroger Field",
     "stadiumCapacity": "61,000",
     "stadiumCity": "Lexington, KY",
-    "baseSpRating": -0.8,
+    "baseSpRating": 0.3,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/96.png",
     "colors": {
       "primary": "#0033A0",
@@ -31342,11 +31372,11 @@ const TEAMS_DATABASE = {
         "location": "Columbia, MO",
         "isMarquee": true,
         "isConf": true,
-        "vegasSpread": 5.5,
-        "overUnder": 48.5,
+        "vegasSpread": 4.5,
+        "overUnder": 49.5,
         "oddsProvider": "DraftKings",
         "baseWinProb": 37,
-        "projScoreUt": 23,
+        "projScoreUt": 24,
         "projScoreOpp": 28,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 12 showdown at Memorial Stadium.",
@@ -31356,10 +31386,10 @@ const TEAMS_DATABASE = {
         "oppId": "missouri",
         "is_tracked": true,
         "isFinal": false,
-        "mcCoverProb": 51.2,
-        "mcOverProb": 55.9,
+        "mcCoverProb": 49.6,
+        "mcOverProb": 55.6,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "OVER 48.5",
+        "mcRecommendedOu": "OVER 49.5",
         "mcScoreDistUt": {
           "p10": 10,
           "p25": 16,
@@ -31371,27 +31401,27 @@ const TEAMS_DATABASE = {
           "p10": 16,
           "p25": 20,
           "p50": 27,
-          "p75": 34,
-          "p90": 41
+          "p75": 35,
+          "p90": 42
         },
         "weather": {
-          "temp": 50.1,
-          "windSpeed": 9.9,
-          "windGust": 32.7,
+          "temp": 34.0,
+          "windSpeed": 8.8,
+          "windGust": 22.1,
           "precipProb": 0,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Cold / Crisp",
           "isDome": false,
           "city": "Columbia, MO",
-          "desc": "\u2600\ufe0f 50\u00b0F \u2022 10 mph wind"
+          "desc": "\ud83e\udd76 34\u00b0F \u2022 9 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
+          "totalPointsDrag": 0.6,
           "passEffMultiplier": 1.0,
           "fgSuccessMultiplier": 1.0,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.6 pts weather drag"
         },
         "preseasonProjUt": 16,
         "preseasonProjOpp": 37,
@@ -31431,15 +31461,15 @@ const TEAMS_DATABASE = {
         "oppId": "louisville",
         "is_tracked": true,
         "isFinal": false,
-        "mcCoverProb": 49.5,
-        "mcOverProb": 46.4,
+        "mcCoverProb": 50.3,
+        "mcOverProb": 47.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
         "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 13,
-          "p25": 18,
-          "p50": 24,
-          "p75": 31,
+          "p25": 19,
+          "p50": 25,
+          "p75": 32,
           "p90": 38
         },
         "mcScoreDistOpp": {
@@ -31450,23 +31480,23 @@ const TEAMS_DATABASE = {
           "p90": 42
         },
         "weather": {
-          "temp": 43.6,
-          "windSpeed": 6.4,
-          "windGust": 6.3,
-          "precipProb": 0,
+          "temp": 52.0,
+          "windSpeed": 11.0,
+          "windGust": 14.3,
+          "precipProb": 10,
           "precipInches": 0.0,
-          "condition": "Clear / Optimal",
+          "condition": "Late Fall Breeze",
           "isDome": false,
           "city": "Lexington, KY",
-          "desc": "\u2600\ufe0f 44\u00b0F \u2022 6 mph wind"
+          "desc": "\u2600\ufe0f 52\u00b0F \u2022 11 mph wind"
         },
         "weatherImpact": {
-          "totalPointsDrag": 0.0,
-          "passEffMultiplier": 1.0,
-          "fgSuccessMultiplier": 1.0,
+          "totalPointsDrag": 0.8,
+          "passEffMultiplier": 0.96,
+          "fgSuccessMultiplier": 0.94,
           "turnoverMultiplier": 1.0,
           "underAlert": false,
-          "summary": "Neutral weather"
+          "summary": "-0.8 pts weather drag"
         },
         "preseasonProjUt": 20,
         "preseasonProjOpp": 33,
@@ -31474,8 +31504,8 @@ const TEAMS_DATABASE = {
         "preseasonSpread": 13
       }
     ],
-    "offenseRating": 27.0,
-    "defenseRating": 27.4,
+    "offenseRating": 27.6,
+    "defenseRating": 26.9,
     "specialTeamsRating": -0.4
   },
   "wakeforest": {
@@ -31499,7 +31529,7 @@ const TEAMS_DATABASE = {
     "stadium": "Allegacy Federal Credit Union Stadium",
     "stadiumCapacity": "31,500",
     "stadiumCity": "Winston-Salem, NC",
-    "baseSpRating": 16.8,
+    "baseSpRating": 16.4,
     "logoUrl": "https://a.espncdn.com/i/teamlogos/ncaa/500/154.png",
     "colors": {
       "primary": "#9E7E38",
@@ -32053,7 +32083,7 @@ const TEAMS_DATABASE = {
         },
         "oppId": null,
         "is_tracked": false,
-        "isFinal": false,
+        "isFinal": true,
         "mcCoverProb": 49.5,
         "mcOverProb": 41.2,
         "mcRecommendedAts": "PASS (Fair Market Line)",
@@ -32090,7 +32120,12 @@ const TEAMS_DATABASE = {
           "turnoverMultiplier": 1.0,
           "underAlert": false,
           "summary": "Neutral weather"
-        }
+        },
+        "finalTeamScore": 50,
+        "actualScoreUt": 50,
+        "finalOppScore": 29,
+        "actualScoreOpp": 29,
+        "finalWin": true
       },
       {
         "id": "wakeforest-w13",
@@ -32111,12 +32146,12 @@ const TEAMS_DATABASE = {
         "location": "Winston-Salem, NC",
         "isMarquee": false,
         "isConf": true,
-        "vegasSpread": -9.5,
+        "vegasSpread": -7.5,
         "overUnder": 51.5,
         "oddsProvider": "CFB Prophet Projected",
-        "baseWinProb": 72,
+        "baseWinProb": 68,
         "projScoreUt": 29,
-        "projScoreOpp": 21,
+        "projScoreOpp": 22,
         "scoutReport": {
           "xFactor": "Third down efficiency and turnover margin in WEEK 13 showdown at Allegacy Federal Credit Union Stadium.",
           "keyMatchup": "Wake Forest line of scrimmage vs Duke Blue Devils front seven.",
@@ -32125,34 +32160,34 @@ const TEAMS_DATABASE = {
         "oppId": null,
         "is_tracked": false,
         "isFinal": false,
-        "mcCoverProb": 48.3,
-        "mcOverProb": 45.3,
+        "mcCoverProb": 46.9,
+        "mcOverProb": 48.7,
         "mcRecommendedAts": "PASS (Fair Market Line)",
-        "mcRecommendedOu": "UNDER 51.5",
+        "mcRecommendedOu": "PASS (Fair Total)",
         "mcScoreDistUt": {
           "p10": 16,
           "p25": 22,
-          "p50": 30,
-          "p75": 37,
-          "p90": 44
+          "p50": 29,
+          "p75": 36,
+          "p90": 43
         },
         "mcScoreDistOpp": {
           "p10": 10,
-          "p25": 14,
-          "p50": 20,
-          "p75": 27,
-          "p90": 34
+          "p25": 16,
+          "p50": 22,
+          "p75": 29,
+          "p90": 35
         },
         "weather": {
-          "temp": 48.3,
-          "windSpeed": 0.8,
-          "windGust": 1.3,
-          "precipProb": 0,
+          "temp": 52.2,
+          "windSpeed": 5.9,
+          "windGust": 8.7,
+          "precipProb": 1,
           "precipInches": 0.0,
           "condition": "Clear / Optimal",
           "isDome": false,
           "city": "Winston-Salem, NC",
-          "desc": "\u2600\ufe0f 48\u00b0F \u2022 1 mph wind"
+          "desc": "\u2600\ufe0f 52\u00b0F \u2022 6 mph wind"
         },
         "weatherImpact": {
           "totalPointsDrag": 0.0,
@@ -32165,7 +32200,7 @@ const TEAMS_DATABASE = {
       }
     ],
     "offenseRating": 33.9,
-    "defenseRating": 17.7,
+    "defenseRating": 18.1,
     "specialTeamsRating": 0.6
   }
 };
