@@ -2,7 +2,7 @@
   "season": 2026,
   "snapshotId": "2026_week_47_prekick",
   "name": "Week 47 Pre-Kickoff Projections",
-  "timestamp": "2026-11-23T00:24:10.513309+00:00",
+  "timestamp": "2026-11-23T03:39:12.321976+00:00",
   "totalTeams": 34,
   "teams": [
     {
@@ -168,7 +168,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "LaVell Edwards Stadium",
-          "baseWinProb": 82,
+          "baseWinProb": 84,
           "projScoreUt": 36,
           "projScoreOpp": 22
         }
@@ -506,7 +506,7 @@
           "oppRank": "#25 AP",
           "isHome": false,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 7,
+          "baseWinProb": 6,
           "projScoreUt": 10,
           "projScoreOpp": 28
         }
@@ -675,7 +675,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Ohio Stadium",
-          "baseWinProb": 93,
+          "baseWinProb": 94,
           "projScoreUt": 28,
           "projScoreOpp": 10
         }
@@ -1013,8 +1013,8 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Bryant-Denny Stadium",
-          "baseWinProb": 88,
-          "projScoreUt": 31,
+          "baseWinProb": 87,
+          "projScoreUt": 30,
           "projScoreOpp": 15
         }
       ]
@@ -1183,8 +1183,8 @@
           "isHome": true,
           "stadium": "Autzen Stadium",
           "baseWinProb": 84,
-          "projScoreUt": 30,
-          "projScoreOpp": 18
+          "projScoreUt": 31,
+          "projScoreOpp": 17
         }
       ]
     },
@@ -1353,7 +1353,7 @@
           "stadium": "SECU Stadium",
           "baseWinProb": 30,
           "projScoreUt": 22,
-          "projScoreOpp": 29
+          "projScoreOpp": 30
         }
       ]
     },
@@ -1520,7 +1520,7 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "JMA Wireless Dome",
-          "baseWinProb": 95,
+          "baseWinProb": 96,
           "projScoreUt": 37,
           "projScoreOpp": 14
         }
@@ -1858,8 +1858,8 @@
           "oppRank": "NR",
           "isHome": false,
           "stadium": "FirstBank Stadium",
-          "baseWinProb": 87,
-          "projScoreUt": 30,
+          "baseWinProb": 88,
+          "projScoreUt": 31,
           "projScoreOpp": 15
         }
       ]
@@ -2027,7 +2027,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Memorial Stadium (Bloomington, IN)",
-          "baseWinProb": 90,
+          "baseWinProb": 91,
           "projScoreUt": 35,
           "projScoreOpp": 17
         }
@@ -2197,7 +2197,7 @@
           "isHome": true,
           "stadium": "Hard Rock Stadium",
           "baseWinProb": 98,
-          "projScoreUt": 42,
+          "projScoreUt": 41,
           "projScoreOpp": 13
         }
       ]
@@ -2534,7 +2534,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Vaught-Hemingway Stadium",
-          "baseWinProb": 74,
+          "baseWinProb": 75,
           "projScoreUt": 36,
           "projScoreOpp": 26
         }
@@ -3028,7 +3028,7 @@
           "oppRank": "#10 AP",
           "isHome": false,
           "stadium": "Rose Bowl",
-          "baseWinProb": 42,
+          "baseWinProb": 43,
           "projScoreUt": 21,
           "projScoreOpp": 24
         }
@@ -3197,7 +3197,7 @@
           "oppRank": "#20 AP",
           "isHome": true,
           "stadium": "Doak Campbell Stadium",
-          "baseWinProb": 23,
+          "baseWinProb": 22,
           "projScoreUt": 24,
           "projScoreOpp": 35
         }
@@ -3367,8 +3367,8 @@
           "isHome": true,
           "stadium": "Memorial Stadium (Clemson, SC)",
           "baseWinProb": 12,
-          "projScoreUt": 13,
-          "projScoreOpp": 28
+          "projScoreUt": 14,
+          "projScoreOpp": 29
         }
       ]
     },
@@ -3704,7 +3704,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Jones AT&T Stadium",
-          "baseWinProb": 77,
+          "baseWinProb": 76,
           "projScoreUt": 29,
           "projScoreOpp": 19
         }
@@ -3873,7 +3873,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Rice-Eccles Stadium",
-          "baseWinProb": 93,
+          "baseWinProb": 92,
           "projScoreUt": 44,
           "projScoreOpp": 24
         }
@@ -4042,7 +4042,7 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "Kinnick Stadium",
-          "baseWinProb": 38,
+          "baseWinProb": 39,
           "projScoreUt": 15,
           "projScoreOpp": 19
         }
@@ -4550,8 +4550,8 @@
           "isHome": false,
           "stadium": "Autzen Stadium",
           "baseWinProb": 16,
-          "projScoreUt": 18,
-          "projScoreOpp": 30
+          "projScoreUt": 17,
+          "projScoreOpp": 31
         }
       ]
     },
@@ -4718,9 +4718,9 @@
           "oppRank": "NR",
           "isHome": true,
           "stadium": "TDECU Stadium",
-          "baseWinProb": 45,
+          "baseWinProb": 46,
           "projScoreUt": 24,
-          "projScoreOpp": 26
+          "projScoreOpp": 25
         }
       ]
     },
@@ -4888,7 +4888,7 @@
           "isHome": false,
           "stadium": "Kroger Field",
           "baseWinProb": 72,
-          "projScoreUt": 32,
+          "projScoreUt": 31,
           "projScoreOpp": 23
         }
       ]
@@ -5394,7 +5394,7 @@
           "oppRank": "#15 AP",
           "isHome": true,
           "stadium": "Rose Bowl",
-          "baseWinProb": 58,
+          "baseWinProb": 57,
           "projScoreUt": 24,
           "projScoreOpp": 21
         }
@@ -5565,7 +5565,7 @@
           "stadium": "Kroger Field",
           "baseWinProb": 28,
           "projScoreUt": 23,
-          "projScoreOpp": 32
+          "projScoreOpp": 31
         }
       ]
     },
@@ -5881,7 +5881,7 @@
       "teamName": "Michigan Wolverines",
       "oppName": "Ohio State Buckeyes",
       "week": "WEEK 13",
-      "winProb": 7,
+      "winProb": 6,
       "projScore": "10-28"
     },
     {
@@ -5929,7 +5929,7 @@
       "teamName": "Ohio State Buckeyes",
       "oppName": "Michigan Wolverines",
       "week": "WEEK 13",
-      "winProb": 93,
+      "winProb": 94,
       "projScore": "28-10"
     },
     {
@@ -6017,8 +6017,8 @@
       "teamName": "Alabama Crimson Tide",
       "oppName": "Auburn Tigers",
       "week": "WEEK 13",
-      "winProb": 88,
-      "projScore": "31-15"
+      "winProb": 87,
+      "projScore": "30-15"
     },
     {
       "teamId": "oregon",
@@ -6058,7 +6058,7 @@
       "oppName": "Washington Huskies",
       "week": "WEEK 13",
       "winProb": 84,
-      "projScore": "30-18"
+      "projScore": "31-17"
     },
     {
       "teamId": "pennstate",
@@ -6361,7 +6361,7 @@
       "teamName": "Ole Miss Rebels",
       "oppName": "Mississippi State Bulldogs",
       "week": "WEEK 13",
-      "winProb": 74,
+      "winProb": 75,
       "projScore": "36-26"
     },
     {
@@ -6465,7 +6465,7 @@
       "teamName": "USC Trojans",
       "oppName": "UCLA Bruins",
       "week": "WEEK 13",
-      "winProb": 42,
+      "winProb": 43,
       "projScore": "21-24"
     },
     {
@@ -6514,7 +6514,7 @@
       "oppName": "South Carolina Gamecocks",
       "week": "WEEK 13",
       "winProb": 12,
-      "projScore": "13-28"
+      "projScore": "14-29"
     },
     {
       "teamId": "smu",
@@ -6746,7 +6746,7 @@
       "oppName": "Oregon Ducks",
       "week": "WEEK 13",
       "winProb": 16,
-      "projScore": "18-30"
+      "projScore": "17-31"
     },
     {
       "teamId": "houston",
@@ -6865,7 +6865,7 @@
       "teamName": "UCLA Bruins",
       "oppName": "USC Trojans",
       "week": "WEEK 13",
-      "winProb": 58,
+      "winProb": 57,
       "projScore": "24-21"
     },
     {
@@ -6922,7 +6922,7 @@
       "oppName": "Louisville Cardinals",
       "week": "WEEK 13",
       "winProb": 28,
-      "projScore": "23-32"
+      "projScore": "23-31"
     },
     {
       "teamId": "wakeforest",
