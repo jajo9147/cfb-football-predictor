@@ -15,6 +15,10 @@ import math
 import datetime
 import urllib.request
 import argparse
+try:
+    from zoneinfo import ZoneInfo
+except ImportError:
+    ZoneInfo = None
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEAMS_FILE = os.path.join(ROOT_DIR, 'data', 'teams.js')
@@ -408,16 +412,54 @@ WEEK12_OFFICIAL_POLL = {
     'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
     'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
 }
-CURRENT_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
-WEEK11_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
-WEEK10_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
-WEEK9_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
-WEEK8_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
-WEEK7_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
-WEEK6_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
-WEEK5_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
-WEEK4_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
-WEEK3_OFFICIAL_POLL = WEEK12_OFFICIAL_POLL
+# Authoritative Week 13 Official Poll (November 22, 2026 Live Release)
+WEEK13_OFFICIAL_POLL = {
+    'georgia': {'apRank': '#1 AP', 'apPoints': '1,711 PTS (56 1st)', 'rankNum': 1},
+    'utah': {'apRank': '#2 AP', 'apPoints': '1,662 PTS (12 1st)', 'rankNum': 2},
+    'notredame': {'apRank': '#3 AP', 'apPoints': '1,591 PTS (1 1st)', 'rankNum': 3},
+    'miami': {'apRank': '#4 AP', 'apPoints': '1,491 PTS', 'rankNum': 4},
+    'texas': {'apRank': '#5 AP', 'apPoints': '1,392 PTS', 'rankNum': 5},
+    'alabama': {'apRank': '#6 AP', 'apPoints': '1,352 PTS', 'rankNum': 6},
+    'tennessee': {'apRank': '#7 AP', 'apPoints': '1,317 PTS', 'rankNum': 7},
+    'wakeforest': {'apRank': '#8 AP', 'apPoints': '1,264 PTS', 'rankNum': 8},
+    'texastech': {'apRank': '#9 AP', 'apPoints': '1,166 PTS', 'rankNum': 9},
+    'ucla': {'apRank': '#10 AP', 'apPoints': '1,156 PTS', 'rankNum': 10},
+    'byu': {'apRank': '#11 AP', 'apPoints': '1,030 PTS', 'rankNum': 11},
+    'indiana': {'apRank': '#12 AP', 'apPoints': '958 PTS', 'rankNum': 12},
+    'iowa': {'apRank': '#13 AP', 'apPoints': '912 PTS', 'rankNum': 13},
+    'oregon': {'apRank': '#14 AP', 'apPoints': '865 PTS', 'rankNum': 14},
+    'usc': {'apRank': '#15 AP', 'apPoints': '699 PTS', 'rankNum': 15},
+    'arizona': {'apRank': '#16 AP', 'apPoints': '665 PTS', 'rankNum': 16},
+    'houston': {'apRank': '#17 AP', 'apPoints': '570 PTS', 'rankNum': 17},
+    'louisville': {'apRank': '#18 AP', 'apPoints': '565 PTS', 'rankNum': 18},
+    'oklahoma': {'apRank': '#19 AP', 'apPoints': '341 PTS', 'rankNum': 19},
+    'boisestate': {'apRank': '#22 AP', 'apPoints': '207 PTS', 'rankNum': 22},
+    'olemiss': {'apRank': '#23 AP', 'apPoints': '200 PTS', 'rankNum': 23},
+    'missouri': {'apRank': '#24 AP', 'apPoints': '125 PTS', 'rankNum': 24},
+    'ohiostate': {'apRank': '#25 AP', 'apPoints': '112 PTS', 'rankNum': 25},
+    'kentucky': {'apRank': 'RV', 'apPoints': '62 PTS', 'rankNum': 99},
+    'washington': {'apRank': 'RV', 'apPoints': '39 PTS', 'rankNum': 99},
+    'lsu': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'smu': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'michigan': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'floridastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'arizonastate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'clemson': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'pennstate': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'texasam': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999},
+    'colorado': {'apRank': 'NR', 'apPoints': '', 'rankNum': 999}
+}
+CURRENT_OFFICIAL_POLL = WEEK13_OFFICIAL_POLL
+WEEK12_OFFICIAL_POLL = WEEK13_OFFICIAL_POLL
+WEEK11_OFFICIAL_POLL = WEEK13_OFFICIAL_POLL
+WEEK10_OFFICIAL_POLL = WEEK13_OFFICIAL_POLL
+WEEK9_OFFICIAL_POLL = WEEK13_OFFICIAL_POLL
+WEEK8_OFFICIAL_POLL = WEEK13_OFFICIAL_POLL
+WEEK7_OFFICIAL_POLL = WEEK13_OFFICIAL_POLL
+WEEK6_OFFICIAL_POLL = WEEK13_OFFICIAL_POLL
+WEEK5_OFFICIAL_POLL = WEEK13_OFFICIAL_POLL
+WEEK4_OFFICIAL_POLL = WEEK13_OFFICIAL_POLL
+WEEK3_OFFICIAL_POLL = WEEK13_OFFICIAL_POLL
 
 # Stadium Home Field Advantage mapping (points - calibrated to modern college football analytics)
 STADIUM_HFA = {
@@ -822,20 +864,16 @@ def calculate_win_prob_from_margin(margin):
     prob = 1.0 / (1.0 + math.exp(-k * margin))
     return int(round(prob * 100))
 
-def find_market_line(cur_week_lines, team_id, opp_id, is_home, raw_opp_name, opp_abbr, db):
-    """
-    Safely finds the consensus market line for team_id vs opp_id from CFBD DraftKings data.
-    Guarantees no substring confusion (e.g. Texas vs Texas A&M).
-    Returns dict with 'spread', 'overUnder', and 'provider' or None.
-    """
-    if not cur_week_lines:
+def _find_matching_entry(entries_map, team_id, opp_id, is_home, raw_opp_name, opp_abbr, db, require_spread=False):
+    """Shared safe matcher for (home, away) ESPN/CFBD maps without substring collisions."""
+    if not entries_map:
         return None
 
     t_obj = db.get(team_id, {})
     o_obj = db.get(opp_id, {}) if opp_id else {}
     t_names = {team_id, (t_obj.get('shortName') or '').lower(), (t_obj.get('name') or '').lower()}
     t_names.discard('')
-    
+
     o_names = set()
     if opp_id and opp_id in db:
         o_names.update([opp_id, (o_obj.get('shortName') or '').lower(), (o_obj.get('name') or '').lower()])
@@ -848,41 +886,47 @@ def find_market_line(cur_week_lines, team_id, opp_id, is_home, raw_opp_name, opp
         o_names.add(opp_abbr.lower())
     o_names.discard('')
 
-    ordered_lines = sorted(cur_week_lines.items(), key=lambda kv: (0 if kv[1].get('isLiveEspn') else 1))
-    for (h, a), l_info in ordered_lines:
+    ordered_entries = sorted(entries_map.items(), key=lambda kv: (0 if kv[1].get('isLiveEspn') else 1))
+    for (h, a), info in ordered_entries:
+        if require_spread and info.get('spread') is None:
+            continue
         h_tid = match_team_in_db(db, h)
         a_tid = match_team_in_db(db, a)
-        
-        # Exact team ID match between DB teams
+
         if h_tid and a_tid:
             if (is_home and h_tid == team_id and a_tid == opp_id) or (not is_home and a_tid == team_id and h_tid == opp_id):
-                spread = l_info.get('spread')
-                if spread is None:
-                    continue
-                return {
-                    'spread': spread if is_home else -spread,
-                    'overUnder': l_info.get('overUnder'),
-                    'provider': l_info.get('provider', 'DraftKings'),
-                    'isLiveEspn': l_info.get('isLiveEspn', False)
-                }
-        
-        # Fallback for non-DB opponents
+                return info
+
         if is_home:
             h_matches = (h_tid == team_id or h in t_names)
             a_matches = (a in o_names or any(w in a for w in o_names if len(w) >= 4))
             if h_matches and a_matches:
-                spread = l_info.get('spread')
-                if spread is not None:
-                    return {'spread': spread, 'overUnder': l_info.get('overUnder'), 'provider': l_info.get('provider', 'DraftKings'), 'isLiveEspn': l_info.get('isLiveEspn', False)}
+                return info
         else:
             a_matches = (a_tid == team_id or a in t_names)
             h_matches = (h in o_names or any(w in h for w in o_names if len(w) >= 4))
             if a_matches and h_matches:
-                spread = l_info.get('spread')
-                if spread is not None:
-                    return {'spread': -spread, 'overUnder': l_info.get('overUnder'), 'provider': l_info.get('provider', 'DraftKings'), 'isLiveEspn': l_info.get('isLiveEspn', False)}
+                return info
 
     return None
+
+
+def find_market_line(cur_week_lines, team_id, opp_id, is_home, raw_opp_name, opp_abbr, db):
+    """
+    Safely finds the consensus market line for team_id vs opp_id from CFBD DraftKings data.
+    Guarantees no substring confusion (e.g. Texas vs Texas A&M).
+    Returns dict with 'spread', 'overUnder', and 'provider' or None.
+    """
+    info = _find_matching_entry(cur_week_lines, team_id, opp_id, is_home, raw_opp_name, opp_abbr, db, require_spread=True)
+    if not info:
+        return None
+    spread = info.get('spread')
+    return {
+        'spread': spread if is_home else -spread,
+        'overUnder': info.get('overUnder'),
+        'provider': info.get('provider', 'DraftKings'),
+        'isLiveEspn': info.get('isLiveEspn', False)
+    }
 
 def enforce_head_to_head_symmetry(db):
     """
@@ -1470,15 +1514,12 @@ def main():
             if loc and name: external_ap_ranks[f"{loc} {name}"] = f"#{rn} AP"
     else:
         external_ap_ranks = {
-            'liberty': '#22 AP',
-            'liberty flames': '#22 AP',
-            'lib': '#22 AP',
-            'florida': '#23 AP',
-            'florida gators': '#23 AP',
-            'fla': '#23 AP',
-            'memphis': '#24 AP',
-            'memphis tigers': '#24 AP',
-            'mem': '#24 AP',
+            'florida': '#20 AP',
+            'florida gators': '#20 AP',
+            'fla': '#20 AP',
+            'liberty': '#21 AP',
+            'liberty flames': '#21 AP',
+            'lib': '#21 AP',
         }
 
     for tid, t in db.items():
@@ -1886,23 +1927,18 @@ def main():
                     pass
     active_upcoming_week = min(unplayed_weeks) if unplayed_weeks else 10
 
-    # Ingest live real-time ESPN DraftKings/ESPN BET sportsbook lines for active_upcoming_week
+    # Ingest live real-time ESPN DraftKings/ESPN BET sportsbook lines & kickoff/TV metadata for active_upcoming_week
+    live_espn_schedule = {}
     if upcoming_dates_set:
         if active_upcoming_week not in all_lines_by_week:
             all_lines_by_week[active_upcoming_week] = {}
         live_espn_lines_loaded = 0
+        live_espn_sched_loaded = 0
         for up_d in sorted(upcoming_dates_set):
             up_events = fetch_espn_scoreboard(up_d)
             for ev in up_events:
                 comps = ev.get('competitions', [{}])[0]
                 if ev.get('status', {}).get('type', {}).get('completed', False):
-                    continue
-                odds_list = comps.get('odds', [])
-                if not odds_list:
-                    continue
-                odd = odds_list[0]
-                sp_val = odd.get('spread')
-                if sp_val is None:
                     continue
                 competitors = comps.get('competitors', [])
                 h_comp = next((c for c in competitors if c.get('homeAway') == 'home'), None)
@@ -1911,18 +1947,55 @@ def main():
                     continue
                 h_name = (h_comp.get('team', {}).get('displayName') or '').lower().strip()
                 a_name = (a_comp.get('team', {}).get('displayName') or '').lower().strip()
+                if not h_name or not a_name:
+                    continue
+
+                # Extract official kickoff time, Eastern date, UTC timestamp, and TV broadcast
+                sched_meta = {}
+                utc_str = ev.get('date')
+                if utc_str and comps.get('timeValid'):
+                    try:
+                        utc_dt = datetime.datetime.fromisoformat(utc_str.replace('Z', '+00:00'))
+                        if ZoneInfo:
+                            et_dt = utc_dt.astimezone(ZoneInfo('America/New_York'))
+                        else:
+                            et_dt = utc_dt - datetime.timedelta(hours=5)
+                        sched_meta['utc'] = utc_str
+                        sched_meta['date'] = f"{et_dt.strftime('%b')} {et_dt.day}, {et_dt.year}"
+                        sched_meta['kickoffTime'] = f"{et_dt.strftime('%I:%M %p').lstrip('0')} ET"
+                    except Exception:
+                        pass
+                b_list = comps.get('broadcasts', [])
+                if b_list and b_list[0].get('names'):
+                    tv_name = str(b_list[0]['names'][0]).strip()
+                    if tv_name.lower() == 'fox':
+                        tv_name = 'FOX'
+                    if tv_name:
+                        sched_meta['tv'] = tv_name
+                if sched_meta:
+                    live_espn_schedule[(h_name, a_name)] = sched_meta
+                    live_espn_sched_loaded += 1
+
+                odds_list = comps.get('odds', [])
+                if not odds_list:
+                    continue
+                odd = odds_list[0]
+                sp_val = odd.get('spread')
+                if sp_val is None:
+                    continue
                 prov = odd.get('provider', {}).get('name', 'DraftKings')
                 ou_val = odd.get('overUnder')
-                if h_name and a_name:
-                    all_lines_by_week[active_upcoming_week][(h_name, a_name)] = {
-                        'spread': float(sp_val),
-                        'overUnder': float(ou_val) if ou_val is not None else None,
-                        'provider': prov,
-                        'isLiveEspn': True
-                    }
-                    live_espn_lines_loaded += 1
+                all_lines_by_week[active_upcoming_week][(h_name, a_name)] = {
+                    'spread': float(sp_val),
+                    'overUnder': float(ou_val) if ou_val is not None else None,
+                    'provider': prov,
+                    'isLiveEspn': True
+                }
+                live_espn_lines_loaded += 1
         if live_espn_lines_loaded:
             print(f"🎰 Live Sportsbook Sync: Loaded {live_espn_lines_loaded} active Week {active_upcoming_week} DraftKings lines from ESPN")
+        if live_espn_sched_loaded:
+            print(f"📺 Live Kickoff/TV Sync: Loaded {live_espn_sched_loaded} active Week {active_upcoming_week} kickoff & TV assignments from ESPN")
 
     for tid, t in db.items():
         sp_team = float(t.get('baseSpRating', 22.0))
@@ -2009,6 +2082,14 @@ def main():
             team_short = (t.get('shortName') or tid).lower()
             opp_abbr = (g.get('oppAbbr') or '').lower()
             opp_school = MASCOT_REGEX.sub('', opp_clean).strip()
+
+            # Sync live kickoffTime, TV network, and date/UTC for active_upcoming_week before weather/Monte Carlo simulation
+            if week_num == active_upcoming_week and live_espn_schedule:
+                sched_meta = _find_matching_entry(live_espn_schedule, tid, g.get('oppId'), g.get('isHome', True), raw_opp_name, opp_abbr, db, require_spread=False)
+                if sched_meta:
+                    for k in ('utc', 'date', 'kickoffTime', 'tv'):
+                        if k in sched_meta:
+                            g[k] = sched_meta[k]
 
             matched_line = find_market_line(cur_week_lines, tid, g.get('oppId'), g.get('isHome', True), raw_opp_name, opp_abbr, db)
 
